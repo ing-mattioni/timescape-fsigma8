@@ -29,3 +29,16 @@ exec = [
     "nbclient",
     "ipykernel",
 ]
+test = [
+    "pytest",
+]
+
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
