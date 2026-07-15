@@ -4,8 +4,14 @@
 # Upstream-derived artifacts (contain upstream source; license unclear — keep local only)
 artifacts/upstream/
 
+# Our regenerable outputs; the oracle-comparison stats and the D2 forensic
+# figure embed upstream-derived numerical data, so keep all local (all
+# artifacts/ files are reproducible from the committed scripts).
+artifacts/independent/
+
 # Python
 .venv/
+.venv311/
 __pycache__/
 *.pyc
 *.egg-info/

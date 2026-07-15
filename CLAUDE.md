@@ -9,10 +9,13 @@ Scientific reproducibility project for Timescape linear perturbations
 
 - **Phase 1A (done):** audit + reproduce the authors' `ACPT_Timescape.ipynb`
   unchanged → `reports/upstream_reproducibility.md`.
-- **Phase 1B (done):** independent, equation-audited Timescape tracker
-  **background** (`src/timescape_fsigma8/background.py`), validated against
-  the upstream oracle → `reports/background_equation_audit.md`. Key audit
-  findings (documented deviations, await author/human confirmation):
+- **Phase 1B (done, incl. compliance gap closure):** independent,
+  equation-audited Timescape tracker **background**
+  (`src/timescape_fsigma8/background/` package + `units.py`, `presets.py`),
+  validated against the upstream oracle →
+  `reports/background_equation_audit.md`, `reports/background_validation.md`.
+  Key audit findings (documented deviations, await author/human
+  confirmation):
   (D1) paper Eq. (5.7) has a spurious f_v0^(-2/3) in <R>_D (correct:
   -6 f_v/t²); (D2) upstream notebook `dQDdt` (cell 6) has `term1 = A1*A2`
   where the quotient rule needs `A1/A2`, corrupting `cs2Eff` (upstream
@@ -53,11 +56,17 @@ Scientific reproducibility project for Timescape linear perturbations
 ## Key commands
 
 ```
-# Full validation suite (49 tests; oracle tests auto-skip if oracle absent)
+# Full validation suite (177 tests; oracle tests auto-skip if oracle absent)
 .venv\Scripts\python -m pytest -q
 
 # Regenerate the upstream comparison oracle (needs .reference/ clone)
 .venv\Scripts\python scripts\extract_upstream_oracle.py
+
+# Oracle error statistics -> artifacts/independent/oracle_comparison_stats.json
+.venv\Scripts\python scripts\compare_to_oracle.py
+
+# Independent Fig.-1 reproduction + D2 forensic figure -> artifacts/independent/
+.venv\Scripts\python scripts\make_independent_fig1.py
 
 # Re-run the upstream notebook audit (clean kernel, nonzero exit on failure)
 .venv\Scripts\python scripts\execute_upstream_notebook.py

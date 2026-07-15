@@ -435,3 +435,31 @@ demonstrably equivalent).
 
 *No changes were made to any existing file. This report is the audit's
 sole output.*
+
+---
+
+## Addendum — gap-closure status (2026-07-15, later the same day)
+
+The historical findings above are preserved unchanged. A dedicated
+gap-closure task subsequently addressed the open items; current status
+(evidence in `reports/background_validation.md`):
+
+| Item | Was | Now |
+|---|---|---|
+| 5 (τ_w, a_w named functions) | PARTIAL | **CLOSED** — `background/observables.py`: `a_w`, `tau_w`, `dtau_w_dt`, `dgamma_w_dt`, `H_dressed`, all cited and tested |
+| 6 (immutable presets) | MISSING | **CLOSED** — `presets.py`: `PAPER_REFERENCE`, `NOTEBOOK_REFERENCE` (frozen; H_D0 always derived) |
+| 8 (audited unit constants) | PARTIAL | **CLOSED** — `units.py` from IAU/exact primaries; upstream 9.778 retained as documented comparison only |
+| 12 (redshift equivalence test) | PARTIAL | **CLOSED** — `test_redshift_is_inverse_dressed_scale_factor`, `test_redshift_matches_W09_38` |
+| 13/14 (both-preset epochs) | PARTIAL | **CLOSED** — `tests/test_epochs.py`, both presets, documented brentq |
+| 17 (full error statistics) | PARTIAL | **CLOSED** — `scripts/compare_to_oracle.py` → `artifacts/independent/oracle_comparison_stats.json` |
+| 18 (Fig. 1 reproduction) | MISSING | **CLOSED** — `scripts/make_independent_fig1.py`, both presets + D2 forensic figure (corrected c²_s,eff, labelled) |
+| 20 (second Python config) | MISSING | **CLOSED** — suite run under 3.14.3 and 3.11.x (validation report §7) |
+| 22 (background_validation.md) | MISSING | **CLOSED** — created with the ten specified sections |
+| 26 (modular layout) | DEVIATED | **CLOSED** — `background/` package split; equivalence pinned by `tests/test_refactor_equivalence.py` (golden values from the pre-split module) |
+| B (docstring nit, D1 markers) | — | **CLOSED** — oracle-test docstring corrected to the measured ≤ 1.5e−15; `[D1]` markers added to the four pinning tests |
+| — (t ≤ 0 handling) | — | **CLOSED** — domain validation with `tests/test_domain_validation.py` |
+
+Section C (scientific findings requiring human verification) is
+unaffected: D1, D2, the H0 fork, the z = 20 timing question, IC
+provenance, and upstream solver tolerances still await human/author
+review.

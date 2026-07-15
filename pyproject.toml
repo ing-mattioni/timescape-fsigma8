@@ -14,7 +14,7 @@
 [project]
 name = "timescape-fsigma8"
 version = "0.1.0"
-description = "Reproducibility audit of the Timescape linear-perturbation notebook from arXiv:2511.17160 (Phase 1A: upstream reproduction only)"
+description = "Independent, equation-audited reproduction of the Timescape background from arXiv:2511.17160 (Phase 1A: upstream audit; Phase 1B: independent background implementation)"
 requires-python = ">=3.11"
 dependencies = [
     "numpy",

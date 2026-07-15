@@ -9,8 +9,9 @@ through algebraically different routes (upstream composes generic
 expressions; we use tracker-reduced closed forms), so agreement is a
 meaningful cross-check, not a tautology. Tolerance for equivalent
 quantities: RTOL_ORACLE = 1e-9 (both sides are closed-form double
-arithmetic; observed differences are ~1e-13, dominated by rounding in
-different orders of operations).
+arithmetic; measured differences are <= 1.5e-15 relative — see
+artifacts/independent/oracle_comparison_stats.json — dominated by
+rounding in different orders of operations).
 
 Two upstream quantities are NOT equivalent by design:
 
@@ -76,7 +77,7 @@ def test_oracle_constants_consistency(oracle, oparams):
     (bg.a_D, "a", False),
     (bg.da_D_dt, "daDdt", False),
     (bg.Theta, "Theta", False),
-    (bg.R_D, "RD", False),
+    (bg.R_D, "RD", False),   # [D1] regression: upstream RD has no f_v0^(-2/3)
     (bg.Q_D, "QD", False),
     (bg.dR_D_dt, "dRDdt", False),
     (bg.rho_d, "rhod", True),

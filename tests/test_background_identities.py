@@ -30,7 +30,10 @@ def num_deriv(f, t, rel_step=1e-6):
 # ---------------------------------------------------------------------
 
 def test_hamiltonian_constraint_3_8(params, tgrid):
-    """3 H_D^2 = 8 pi G rho_d - <R>_D/2 - Q_D/2  (Lambda = 0), [GM] (3.8)."""
+    """3 H_D^2 = 8 pi G rho_d - <R>_D/2 - Q_D/2  (Lambda = 0), [GM] (3.8).
+
+    [D1] regression: fails if <R>_D carried the f_v0^(-2/3) prefactor
+    printed in [GM] Eq. (5.7) (documented deviation D1)."""
     lhs = 3.0 * bg.H_D(tgrid, params) ** 2
     rhs = (8.0 * np.pi * G * bg.rho_d(tgrid, params, G)
            - 0.5 * bg.R_D(tgrid, params) - 0.5 * bg.Q_D(tgrid, params))
@@ -141,7 +144,10 @@ def test_analytic_derivatives_with_G(params, tgrid, func, deriv):
 # ---------------------------------------------------------------------
 
 def test_omega_definitions_3_18(params, tgrid):
-    """Closed-form Omegas equal their definitions [GM] (3.18)."""
+    """Closed-form Omegas equal their definitions [GM] (3.18).
+
+    [D1] regression: the Omega_R row fails if <R>_D carried the printed
+    f_v0^(-2/3) prefactor of [GM] Eq. (5.7)."""
     H2 = bg.H_D(tgrid, params) ** 2
     np.testing.assert_allclose(
         bg.Omega_m(tgrid, params),
@@ -155,7 +161,10 @@ def test_omega_definitions_3_18(params, tgrid):
 
 
 def test_omega_sum_is_unity(params, tgrid):
-    """Omega_m + Omega_R + Omega_Q = 1 (Lambda = 0), [GM] (3.18)."""
+    """Omega_m + Omega_R + Omega_Q = 1 (Lambda = 0), [GM] (3.18).
+
+    [D1] regression: closure fails if <R>_D carried the printed
+    f_v0^(-2/3) prefactor of [GM] Eq. (5.7)."""
     total = (bg.Omega_m(tgrid, params) + bg.Omega_R(tgrid, params)
              + bg.Omega_Q(tgrid, params))
     np.testing.assert_allclose(total, 1.0, rtol=RTOL_EXACT)

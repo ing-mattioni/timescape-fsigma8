@@ -10,11 +10,12 @@ cosmological model, based on:
 
 - **Phase 1A (done):** audit + clean-room re-execution of the authors'
   `ACPT_Timescape.ipynb` → `reports/upstream_reproducibility.md`.
-- **Phase 1B (done):** equation-audited independent implementation of the
-  Timescape **tracker background** (`src/timescape_fsigma8/background.py`),
-  validated against the Buchert identities, published reference values, and
-  the upstream notebook as a numerical oracle →
-  `reports/background_equation_audit.md`. The audit found one typo in the
+- **Phase 1B (done, incl. gap closure):** equation-audited independent
+  implementation of the Timescape **tracker background**
+  (`src/timescape_fsigma8/background/`), validated against the Buchert
+  identities, published reference values, and the upstream notebook as a
+  numerical oracle → `reports/background_equation_audit.md` and
+  `reports/background_validation.md`. The audit found one typo in the
   paper (Eq. 5.7) and one algebra error in the upstream notebook (`dQDdt`)
   affecting the published c²_s,eff; both are documented, not "fixed"
   upstream.
@@ -30,13 +31,20 @@ cosmological model, based on:
 |---|---|
 | `UPSTREAM.lock` | Exact upstream repo URL, branch, commit SHA, retrieval date |
 | `.reference/` | Read-only clone of the upstream repository (git-ignored) |
-| `src/timescape_fsigma8/background.py` | Independent tracker-background implementation, every function cites its paper equation |
-| `tests/` | Validation suite: Buchert identities, limits, reference values, upstream-oracle comparison |
+| `src/timescape_fsigma8/background/` | Independent tracker-background package (`parameters`, `tracker`, `effective_fluid`, `observables`); every function cites its paper equation |
+| `src/timescape_fsigma8/units.py` | Audited unit conversions from primary constants (IAU parsec, Julian year) |
+| `src/timescape_fsigma8/presets.py` | Immutable parameter presets `PAPER_REFERENCE` (H0 = 73.03) and `NOTEBOOK_REFERENCE` (H0 = 73.23) |
+| `tests/` | Validation suite: Buchert identities, limits, reference values, refactor equivalence, wall/dressed observables, epochs, domain validation, upstream-oracle comparison |
 | `scripts/execute_upstream_notebook.py` | Executes the upstream notebook from a clean kernel |
 | `scripts/extract_upstream_oracle.py` | Samples upstream background functions into the comparison oracle |
+| `scripts/compare_to_oracle.py` | Full error statistics vs the oracle → `artifacts/independent/oracle_comparison_stats.json` |
+| `scripts/make_independent_fig1.py` | Independent Fig.-1 reproduction (both presets) + D2 forensic figure |
 | `artifacts/upstream/` | Executed notebook copy, figures, logs, oracle (git-ignored: upstream-derived content with unclear licensing) |
+| `artifacts/independent/` | Outputs of our own implementation: comparison statistics, reproduced figures |
 | `reports/upstream_reproducibility.md` | Phase 1A reproducibility report |
-| `reports/background_equation_audit.md` | Phase 1B equation audit + validation report |
+| `reports/background_equation_audit.md` | Phase 1B equation audit |
+| `reports/background_validation.md` | Phase 1B validation report (metrics, figures, environments, readiness) |
+| `reports/phase1b_compliance_audit.md` | Compliance audit of Phase 1B (+ gap-closure addendum) |
 | `AGENTS.md` | Permanent project rules (scientific-integrity constraints) |
 | `pyproject.toml` | Package + minimal dependency declaration |
 
