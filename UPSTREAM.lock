@@ -1,0 +1,15 @@
+# UPSTREAM.lock — pinned upstream reference (read-only)
+# This file records the exact upstream state audited in Phase 1A.
+# Do not update without re-running the reproducibility audit.
+
+url        = https://github.com/MarcoGaloppo/Linear-Perturbations-in-averaged-cosmological-models
+branch     = main
+commit     = 590c6fd5332acb15f5683ebf392a0d7ce54983c5
+commit_date = 2025-12-09 06:45:48 +0000
+retrieved  = 2026-07-15
+notebook   = ACPT_Timescape.ipynb   (repository root)
+local_path = .reference/Linear-Perturbations-in-averaged-cosmological-models/ACPT_Timescape.ipynb
+paper      = arXiv:2511.17160v2 (Galoppo & Mourier, JCAP 02 (2026) 066)
+license    = NONE FOUND in upstream repository — treat as all-rights-reserved,
+             reference-only. Do not copy upstream source into files intended
+             for publication or redistribution.

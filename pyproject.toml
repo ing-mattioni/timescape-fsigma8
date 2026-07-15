@@ -1,0 +1,31 @@
+# Minimal reproducible environment for Phase 1A: executing the upstream
+# ACPT_Timescape.ipynb notebook (see UPSTREAM.lock).
+#
+# Dependency policy: the notebook imports only numpy, scipy and matplotlib.
+# nbformat/nbclient/ipykernel are needed solely to execute the notebook from
+# a clean kernel. Versions are intentionally left unpinned (the notebook has
+# no known version-sensitive behaviour); the exact resolved versions of each
+# run are recorded in artifacts/upstream/execution_log.json and in
+# reports/upstream_reproducibility.md.
+#
+# The upstream authors ran Python 3.13.5 (notebook metadata). Any modern
+# CPython >= 3.11 is expected to be equivalent for this code.
+
+[project]
+name = "timescape-fsigma8"
+version = "0.1.0"
+description = "Reproducibility audit of the Timescape linear-perturbation notebook from arXiv:2511.17160 (Phase 1A: upstream reproduction only)"
+requires-python = ">=3.11"
+dependencies = [
+    "numpy",
+    "scipy",
+    "matplotlib",
+]
+
+[project.optional-dependencies]
+# Needed only to execute the upstream notebook (scripts/execute_upstream_notebook.py)
+exec = [
+    "nbformat",
+    "nbclient",
+    "ipykernel",
+]

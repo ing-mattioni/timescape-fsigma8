@@ -1,0 +1,16 @@
+# Upstream reference clone (read-only, unlicensed — never commit)
+.reference/
+
+# Upstream-derived artifacts (contain upstream source; license unclear — keep local only)
+artifacts/upstream/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+build/
+dist/
+
+# Jupyter
+.ipynb_checkpoints/
