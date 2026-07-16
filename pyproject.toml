@@ -14,7 +14,7 @@
 [project]
 name = "timescape-fsigma8"
 version = "0.1.0"
-description = "Independent, equation-audited reproduction of the Timescape background from arXiv:2511.17160 (Phase 1A: upstream audit; Phase 1B: independent background implementation)"
+description = "Equation-audited Timescape background and clean Mészáros/comoving perturbation reproduction from arXiv:2511.17160"
 requires-python = ">=3.11"
 dependencies = [
     "numpy",

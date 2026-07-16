@@ -21,8 +21,14 @@ Scientific reproducibility project for Timescape linear perturbations
   where the quotient rule needs `A1/A2`, corrupting `cs2Eff` (upstream
   -0.3452 today vs correct -0.3912) and the published Fig. 1 right panel +
   Fig. 3 barotropic runs.
-- Later phases (not started): perturbation equations ([GM] Sec. 4), fσ8
-  predictions. Do not begin these without explicit instruction.
+- **Phase 1C-A (done):** equation-level perturbation audit →
+  `reports/phase1c_perturbation_equation_audit.md` and
+  `reports/phase1c_equation_inventory.json`.
+- **Phase 1C-B1 (done):** D2-free/D3-free Mészáros and comoving systems,
+  explicit IC/epoch scenarios, oracle reproduction, convergence, and Fig. 2
+  → `src/timescape_fsigma8/perturbations/` and
+  `reports/phase1c_b1_clean_systems_validation.md`.
+- Not implemented: barotropic systems/D3 branches, fσ8, likelihoods.
 
 ## Hard constraints
 
@@ -56,7 +62,7 @@ Scientific reproducibility project for Timescape linear perturbations
 ## Key commands
 
 ```
-# Full validation suite (177 tests; oracle tests auto-skip if oracle absent)
+# Full validation suite (203 tests; oracle tests auto-skip if local oracles are absent)
 .venv\Scripts\python -m pytest -q
 
 # Regenerate the upstream comparison oracle (needs .reference/ clone)
@@ -67,6 +73,15 @@ Scientific reproducibility project for Timescape linear perturbations
 
 # Independent Fig.-1 reproduction + D2 forensic figure -> artifacts/independent/
 .venv\Scripts\python scripts\make_independent_fig1.py
+
+# Extract clean Mészáros/comoving oracle (read-only upstream cells)
+.venv\Scripts\python scripts\extract_upstream_perturbation_oracle.py
+
+# Clean-system comparison, convergence, and scenario effects
+.venv\Scripts\python scripts\validate_clean_perturbations.py
+
+# Independent Fig.-2 reproduction + forensic numerical overlay
+.venv\Scripts\python scripts\make_clean_fig2.py
 
 # Re-run the upstream notebook audit (clean kernel, nonzero exit on failure)
 .venv\Scripts\python scripts\execute_upstream_notebook.py
