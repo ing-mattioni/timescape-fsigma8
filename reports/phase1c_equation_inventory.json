@@ -1,0 +1,229 @@
+{
+  "$schema_note": "Machine-readable equation inventory for Phase 1C-A. Companion to reports/phase1c_perturbation_equation_audit.md. All equation numbers refer to arXiv:2511.17160v2 (Galoppo & Mourier, JCAP 02 (2026) 066). All cell numbers refer to the pinned upstream ACPT_Timescape.ipynb (see UPSTREAM.lock).",
+  "date_utc": "2026-07-16",
+  "sources": {
+    "paper": {
+      "id": "arXiv:2511.17160v2",
+      "sections_audited": ["2.1", "2.2", "2.3", "4.1", "4.2", "4.3", "4.4", "5.1.1", "5.1.2", "A", "B"],
+      "extraction": "pypdf 6.x text extraction, cross-checked with pdfminer.six on every sign-critical equation"
+    },
+    "notebooks": {
+      "primary": "ACPT_Timescape.ipynb (20 cells, pinned in UPSTREAM.lock)",
+      "corroborating": ["ACPT_RZA.ipynb", "ACPT_GMC.ipynb", "ACPT_GMP.ipynb"],
+      "corroborating_role": "read-only provenance evidence for shared initial conditions and for the rescaled-tilt variant of the barotropic system; not oracles for this audit"
+    },
+    "references_resolved": {
+      "[1]": "Kodama & Sasaki 1984 (LCDM growing mode context)",
+      "[3]": "Planck 2018 (Aghanim et al. 2020, A&A 641 A6): Omega_m=0.315, h=0.674 as used in ACPT_RZA.ipynb",
+      "[27]": "Buchert 2000 (dust averaging)",
+      "[50]": "Dunsby, Bruni & Ellis 1992, ApJ 395, 54 (source of Eqs. (2.22)-(2.24); full text NOT independently inspected in Phase 1C-A - explicit external adjudication dependency for finding F1)",
+      "[65]": "Meszaros 1974",
+      "[67]": "Wiltshire 2009, PRD 80 123512 (W09, Phase 1B background reference)",
+      "[80]": "Seifert et al. 2025, MNRAS Lett 537 L55 (f_v0=0.737, H_0=73.03 km/s/Mpc)"
+    }
+  },
+  "conventions": {
+    "independent_variable": "volume-average (bare) time t, in 'HT' units where the dressed H_0 = 1; GyrstoHT = h/9.778 with h = 0.7323 (notebook) / 0.7303 (paper values)",
+    "derivative": "overdot = d/dt along the dust frame (n^mu nabla_mu); notebook systems are dv/dt = A(t) v",
+    "scale_factor": "a(t) = a_D(t), volume-average scale factor, normalised so a_w,0 = 1, hence a_D(t0) = a0 = 1 + f_v0/2 = 1.3685 (NOT 1)",
+    "laplacian_eigenvalue": "(3)Delta -> -k^2/a_D^2 (paper footnote 8); k constant per mode",
+    "expansion_perturbation": "Z := a D^mu (a D_mu Theta), so row 1 gives dDelta_d/dt = -Z, i.e. Z = -dDelta_d/dt",
+    "units_of_k": "1/HL with HL = 3000/h Mpc (h = 0.7323 in the Timescape notebook); see finding F7 for the normalisation discrepancy vs the paper caption",
+    "c": 1,
+    "Lambda": 0,
+    "solver": "scipy.integrate.solve_ivp with ALL defaults (RK45, rtol=1e-3, atol=1e-6); t_eval = linspace(0.218*GyrstoHT, t0, 1000)"
+  },
+  "state_vectors": {
+    "barotropic_cell12": ["Delta_d (dust CGI density scalar, Eq. 2.20)", "Z (expansion-gradient scalar, Eq. 2.21)", "Delta_eff (effective-fluid CGI density scalar)", "V_eff (UNRESCALED tilt scalar; = Vtilde/(1+w_eff) with Vtilde of Eq. (4.10) ff.)"],
+    "comoving_cell13": ["Delta_d", "Z", "Delta_eff"],
+    "meszaros_cell14": ["Delta_d", "dDelta_d/dt  (note IC sign flip ic_new = [ic[0], -ic[1]] because Z = -dDelta_d/dt)"]
+  },
+  "systems": {
+    "meszaros": {
+      "notebook_cell": 14,
+      "equation": "ddot(Delta_d) = 4 pi G rho_d Delta_d - 2 H dot(Delta_d), H = Theta/3",
+      "paper_equation": "(4.27)",
+      "status": "VERIFIED_EXACT",
+      "background_dependencies": ["Theta(t) (tracker)", "rho_d(t) (tracker)"],
+      "d2_affected": false,
+      "d3_affected": false,
+      "notes": "Paper Sec. 5.1 states the Meszaros approximation is formally inapplicable in timescape (w_eff<0, cs2_eff<0) and is shown for comparison only."
+    },
+    "comoving": {
+      "notebook_cell": 13,
+      "paper_equations": ["(4.21)", "(4.22)", "(4.23)"],
+      "closure": "(4.20): V_eff = 0 identically, which forces Ptilde_eff = 0 via (4.12)",
+      "status": "VERIFIED_EXACT",
+      "scale_independent": true,
+      "d2_affected": false,
+      "d3_affected": false,
+      "matrix": [
+        {"entry": "A12", "upstream": "-1", "paper_eq": "(4.21)", "status": "VERIFIED"},
+        {"entry": "A21", "upstream": "-4*pi*G*rhod(t)", "paper_eq": "(4.23)", "status": "VERIFIED"},
+        {"entry": "A22", "upstream": "-(2/3)*Theta(t)", "paper_eq": "(4.23)", "status": "VERIFIED"},
+        {"entry": "A23", "upstream": "-4*pi*G*rhoEff(t)", "paper_eq": "(4.23)", "status": "VERIFIED"},
+        {"entry": "A32", "upstream": "-(1+wEff(t))", "paper_eq": "(4.22)", "status": "VERIFIED"},
+        {"entry": "A33", "upstream": "wEff(t)*Theta(t)", "paper_eq": "(4.22)", "status": "VERIFIED"}
+      ],
+      "consistency_checks": {
+        "(4.24) from (4.21)+(4.23)": "PASS (sympy)",
+        "(4.25) from system + background rules": "PASS with standard Raychaudhuri (-Lambda); printed (2.12) '-2*Lambda' fails (finding F5); Lambda=0 for timescape",
+        "(4.26) from system": "PASS (same Lambda caveat)"
+      },
+      "notes": "Cell 13 comment says '4x4' but the matrix is 3x3 (cosmetic). ic[:-1] drops the tilt IC, consistent with (4.20)."
+    },
+    "barotropic": {
+      "notebook_cell": 12,
+      "paper_equations": ["(4.14)", "(4.15)", "(4.16)", "(4.17) via (4.8)+closure in unrescaled tilt"],
+      "closure": "(4.13): Ptilde_eff = cs2_eff * Delta_eff",
+      "tilt_variable": "UNRESCALED V_eff = Vtilde_eff/(1+w_eff). Equivalence with the paper's rescaled system (4.14)-(4.17) is EXACT given the background identity wdot = -Theta(1+w)(cs2-w), which follows from (3.17) and cs2 := pdot/rhodot (sympy-verified). ACPT_RZA/GMC implement the rescaled Vtilde form verbatim instead; both forms are algebraically equivalent.",
+      "status": "MAPPED; A33 branch: INTERNAL INCONSISTENCY CONFIRMED, INTENDED BRANCH UNRESOLVED (finding F1 / D3)",
+      "d2_affected": true,
+      "d3_affected": true,
+      "matrix": [
+        {"entry": "A12", "upstream": "-1", "paper_eq": "(4.14)", "status": "VERIFIED", "d2": false},
+        {"entry": "A21", "upstream": "-4*pi*G*rhod(t)", "paper_eq": "(4.16)", "status": "VERIFIED", "d2": false},
+        {"entry": "A22", "upstream": "-(2/3)*Theta(t)", "paper_eq": "(4.16)", "status": "VERIFIED", "d2": false},
+        {"entry": "A23", "upstream": "-4*pi*G*rhoEff(t)*(1+3*cs2Eff(t))", "paper_eq": "(4.16)", "status": "VERIFIED", "d2": true},
+        {"entry": "A32", "upstream": "-(1+wEff(t))", "paper_eq": "(4.15)", "status": "VERIFIED", "d2": false},
+        {"entry": "A33", "upstream": "(wEff(t)+cs2Eff(t))*Theta(t)", "paper_eq": "(4.15) as printed", "status": "MATCHES_PRINTED_4.15; INTERNAL INCONSISTENCY CONFIRMED: (4.10)+(4.13) imply (wEff-cs2Eff)*Theta; INTENDED BRANCH UNRESOLVED (F1)", "d2": true, "d3": "branch labels: printed_4_15 = (wEff+cs2Eff)*Theta; derived_4_10 = (wEff-cs2Eff)*Theta; neither designated correct pending author feedback or verification against [50]"},
+        {"entry": "A34", "upstream": "(k^2/a(t))*(1+wEff(t))", "paper_eq": "(4.15) in unrescaled tilt (paper form: k^2/a on Vtilde)", "status": "VERIFIED", "d2": false},
+        {"entry": "A43", "upstream": "-cs2Eff(t)/(a(t)*(1+wEff(t)))", "paper_eq": "(4.8) + (4.13); equals (4.17) in unrescaled tilt", "status": "VERIFIED", "d2": true},
+        {"entry": "A44", "upstream": "(Theta(t)/3)*(3*cs2Eff(t)-1)", "paper_eq": "(4.8); equals (4.17) [(Theta/3)(3w-1) on Vtilde] under the wdot identity", "status": "VERIFIED", "d2": true}
+      ],
+      "consistency_checks": {
+        "(4.16) from (4.11)+(4.13)": "PASS",
+        "(4.17) from (4.12)+(4.13)": "PASS",
+        "(4.15) from (4.10)+(4.13)": "FAIL: residual 2*cs2*Theta*Delta_eff (finding F1)",
+        "(4.19) from {(4.14),(4.15)printed,(4.16),(4.17)}": "PASS for Lambda=0 (general Lambda requires standard Raychaudhuri, finding F5)",
+        "upstream V-form == paper Vtilde-form": "PASS (sympy, rows 3 and 4)",
+        "A34*A43 = -cs2*k^2/a^2": "PASS (Laplacian term recombines independently of tilt normalisation)"
+      }
+    }
+  },
+  "d2_propagation": {
+    "definition": "D2 = upstream dQDdt defect (cell 6: term1 = A1*A2 instead of A1/A2), corrupting cs2Eff = dpEffdt/drhoEffdt (Phase 1B).",
+    "corrupted_upstream_functions": ["dQDdt", "dKDdt", "drhoEffdt", "dpEffdt", "cs2Eff"],
+    "clean_upstream_functions_used_by_matrices": ["rhod", "Theta", "a", "rhoEff", "wEff (= pEff/rhoEff, algebraic, no time derivative)"],
+    "matrix_entries_corrupted": {"barotropic": ["A23", "A33", "A43", "A44"], "comoving": [], "meszaros": []},
+    "figures_affected": {"Fig2_All_Perturbations (comoving+meszaros)": false, "Fig3_Bar_Dusts/Bar_Eff (barotropic)": true},
+    "cs2_closed_forms_on_tracker": {
+      "correct": "cs2 = -(2 + 2 f_v - f_v^2)/(2 + f_v)^2   [Phase 1B, re-verified]",
+      "upstream_corrupted": "cs2_bug = (18 f^6 - 54 f^5 + 54 f^4 - 18 f^3 - f^2 - 2)/(18 f^6 - 54 f^5 + 54 f^4 - 18 f^3 - f^2 + 6 f + 4)   [derived this audit; same limits -1/2 (f->0), -1/3 (f->1) as the correct form]"
+    },
+    "quantitative_at_key_epochs": [
+      {"epoch": "t = 0.218 Gyr (f_v = 0.03820)", "w_eff": -0.49287, "cs2_correct": -0.49947, "cs2_upstream": -0.47372, "cs2_rel_err": 0.0516, "one_plus_3cs2_correct": -0.49842, "one_plus_3cs2_upstream": -0.42116},
+      {"epoch": "t = 0.196 Gyr (f_v = 0.03449)", "w_eff": -0.49356, "cs2_correct": -0.49957, "cs2_upstream": -0.47606, "cs2_rel_err": 0.0471, "one_plus_3cs2_correct": -0.49871, "one_plus_3cs2_upstream": -0.42817},
+      {"epoch": "t = t0 (f_v = 0.737)", "w_eff": -0.37347, "cs2_correct": -0.39124, "cs2_upstream": -0.34516, "cs2_rel_err": 0.1178, "one_plus_3cs2_correct": -0.17371, "one_plus_3cs2_upstream": -0.03549}
+    ]
+  },
+  "d1_relevance": {
+    "definition": "D1 = spurious f_v0^(-2/3) prefactor in paper Eq. (5.7) for <R>_D (Phase 1B; correct: -6 f_v/t^2).",
+    "notebook_affected": false,
+    "phase1c_relevance": "An implementation transcribing paper (5.7) verbatim would corrupt rho_eff, p_eff, w_eff, cs2_eff and thus every effective-fluid matrix entry (A23, A32, A33, A34, A43, A44). Use the Phase 1B D1-corrected background."
+  },
+  "initial_conditions": {
+    "upstream_values": [0.0031427229788258105, -0.16974050039281288, 0.0, 0.0],
+    "assignment": ["Delta_d(t_i)", "Z(t_i)", "Delta_eff(t_i)", "V_eff(t_i)"],
+    "provenance": {
+      "status": "CONFIRMED_BIT_EXACT",
+      "recipe": "ic[0] = 6.6e-2 * qplus(20); ic[1] = -6.6e-2 * qplus_dot(20), where qplus is the closed-form flat-LCDM growing mode D+(z) (incomplete-beta form) with Omega_m = 0.315, Omega_L = 0.685, H0 = 1 (h = 0.674 time units), qplus_prime the forward finite difference with eps = 1e-5, and qplus_dot = qplus_prime * (-(1+z) H(z)). Exact float64 equality with both upstream values. Source code of the recipe: ACPT_RZA.ipynb cells 2-4 and 16; identical hard-coded values in ACPT_GMC.ipynb cell 19.",
+      "paper_consistency": "6.6e-2*qplus(1090) = 6.049e-5, matching the paper's 'typical amplitude 6e-5 at the CMB epoch' (Sec. 5.1.2); qplus(20)/qplus(1100) = 52.43 (growth from CMB to z=20)."
+    },
+    "z_ic_sign_convention": "Z(t_i) = -dDelta_d/dt(t_i) < 0 for a growing mode; Meszaros solver flips it back (ic_new = [ic[0], -ic[1]]). VERIFIED consistent across all four notebooks (RZA/GMC additionally divide by dz/dt for z-space integration).",
+    "unit_question": {
+      "status": "UNRESOLVED (finding F3)",
+      "detail": "ic[1] is numerically -0.169741 in units of H0_LCDM (h = 0.674) but is injected unchanged into the Timescape notebook whose time unit is 1/H0_dressed (h = 0.7323). The unit-consistent value would be -0.169741 * (0.674/0.7323) = -0.156227. The paper's own text 'Z(t_i) ~ -0.16 H0' matches the CONVERTED value (-0.156 rounds to -0.16) better than the value actually used (-0.170). Magnitude of the injected initial contraction rate is therefore 8.65% larger than the LCDM-matched physical rate under the conversion reading."
+    },
+    "delta_eff_and_tilt": "Delta_eff(t_i) = 0 and Vtilde_eff(t_i) = 0 stated explicitly in Sec. 5.1.2; V_eff = Vtilde_eff/(1+w_eff) = 0 equivalently (1+w_eff(t_i)) = 0.507 != 0."
+  },
+  "epochs": {
+    "cell9_fig1_start": {
+      "value": "0.18 Gyr",
+      "interpretation": "CONSISTENT with the flat-LCDM (Planck 2018) age at z = 20: t_LCDM(20) = 0.17906 Gyr (analytic arcsinh form, ACPT_RZA cell 3). Timescape dressed redshift at 0.18 Gyr is z = 21.23 (NOTEBOOK preset), so 'starting from z=20' (Fig. 1 caption) holds only in the LCDM-age reading.",
+      "status": "PLAUSIBLE_INTERPRETATION"
+    },
+    "cell15_fig23_start": {
+      "value": "0.218 Gyr",
+      "candidates_tested": {
+        "timescape dressed z=20 (NOTEBOOK preset)": "0.19620 Gyr (z at 0.218 Gyr is 18.586)",
+        "timescape dressed z=20 (PAPER preset)": "0.19674 Gyr",
+        "timescape bare zbar=20": "0.30330 Gyr",
+        "LCDM Planck age at z=20": "0.17906 Gyr",
+        "LCDM h=0.7323 age at z=20": "0.16480 Gyr",
+        "volume time whose wall time equals t_LCDM(z=20)": "0.18050 Gyr",
+        "wall time at 0.218 Gyr": "0.21592 Gyr (not 0.179 or 0.196)",
+        "LCDM age(z=20)=0.218 requires": "Omega_m = 0.213 (h=0.674) ... 0.180 (h=0.7323) - no canonical parameter set"
+      },
+      "status": "UNEXPLAINED (finding F4); author input needed. The paper states ICs are set at z = 20; an independent implementation from the paper should use t_i = t(z_dressed = 20) = 0.19620 Gyr (NOTEBOOK preset) and treat upstream's 0.218 Gyr as a documented deviation."
+    }
+  },
+  "wavenumbers": {
+    "values": ["2*pi", "5*pi", "10*pi"],
+    "paper_caption_claim": "k in units of the present-day inverse Hubble length H0/c evaluated in LCDM (Planck 2018); k = 2*pi called 'horizon scale'",
+    "realisation_in_RZA_GMC": "exact (a0 = 1, h = 0.674 units)",
+    "realisation_in_timescape_notebook": {
+      "eigenvalue": "k^2/a_D(t)^2 with a_D(t0) = 1.3685 and k in HL(h=0.7323)^-1 units",
+      "physical_wavelength_today": {"k=2pi": "5606 Mpc = 1.2596 c/H0_LCDM", "k=5pi": "2243 Mpc = 0.5038 c/H0_LCDM", "k=10pi": "1121 Mpc = 0.2519 c/H0_LCDM"},
+      "discrepancy_factor": "a_D,0 x h_TS/h_LCDM = 1.3685 x 0.9204 = 1.2596 relative to the caption's claim",
+      "status": "DISCREPANT (finding F7): the same numeric k values are reused from the a0=1, h=0.674 convention into the a_D,0=1.3685, h=0.7323 convention without rescaling"
+    },
+    "notebook_comment_150Mpc_h": "The cell 15 comment 'co-moving scale of 150 Mpc/h' is inconsistent with both the paper text (c/H0 = 4451 Mpc) and the k values; classified as stale/erroneous comment (finding F8)."
+  },
+  "findings": [
+    {"id": "F1 (candidate D3)", "severity": "major", "classification": "INTERNAL INCONSISTENCY CONFIRMED; INTENDED BRANCH UNRESOLVED", "confirmed_fact": "Eqs. (4.10)+(4.13) imply the Delta_eff coefficient (w_eff - cs2_eff)*Theta, while printed Eq. (4.15) [and hence (4.19), Appendix A, and ALL FOUR notebooks' A33] uses (w_eff + cs2_eff)*Theta; symbolic residual exactly 2*cs2*Theta*Delta_eff. The Meszaros-section Eq. (4.29) is sympy-verified to sit on the (4.10) branch (exact match; the (4.15)-branch derivation fails). Every sign involved was double-extracted with two independent PDF tools. Numerical impact on A33 at early times: (w+c2) = -0.992 vs (w-c2) = +0.007; at t0: -0.765 vs +0.018.", "unresolved_question": "Which branch the authors intended, and which upstream reference equation is authoritative: the paper's (2.22) is quoted from the multifluid CGI reference [50] (Dunsby-Bruni-Ellis 1992), whose full text was NOT independently inspected in Phase 1C-A and remains an explicit external adjudication dependency.", "branch_labels": {"printed_4_15": "(w_eff + cs2_eff)*Theta - printed (4.15)/(4.19)/App. A, implemented by all notebooks", "derived_4_10": "(w_eff - cs2_eff)*Theta - implied by (2.22)->(4.10) with closure (4.13), consistent with (4.29)"}, "affects": ["paper (4.15)", "paper (4.19)", "paper App. A", "notebook cell 12 A33", "Fig. 3"], "action": "author input or verification against [50] needed; Phase 1C-B must expose the branch as a MANDATORY explicit argument with labels 'printed_4_15' / 'derived_4_10', with NO default, and neither label named 'correct' in the public API until author feedback or independent verification against Dunsby-Bruni-Ellis (1992)"},
+    {"id": "F2", "severity": "established (Phase 1B D2)", "summary": "Upstream cs2Eff is corrupted by the dQDdt defect; propagates ONLY to barotropic entries A23, A33, A43, A44. Comoving and Meszaros systems and Fig. 2 are D2-free; Fig. 3 is D2-affected in all curves.", "affects": ["notebook cell 12", "Fig. 3", "published Fig. 1 right panel"]},
+    {"id": "F3", "severity": "moderate/unresolved", "summary": "ic[1] = -0.16974 is expressed in H0(h=0.674) units but injected into the h=0.7323 Timescape run without conversion (8.65% too large under the unit-consistent reading, which matches the paper's quoted '-0.16 H0').", "affects": ["cell 15", "Figs. 2-3 amplitudes"], "action": "author input needed; quantify both readings in Phase 1C-B"},
+    {"id": "F4", "severity": "moderate/unresolved", "summary": "t_i = 0.218 Gyr (cells 15-19) does not correspond to z = 20 under any tested definition (dressed z = 18.59 there; dressed z = 20 is at 0.19620 Gyr). Provenance unexplained.", "affects": ["cells 15-19", "Figs. 2-3"], "action": "author input needed"},
+    {"id": "F5", "severity": "minor (Lambda=0 here)", "summary": "Printed (2.12) has '-2*Lambda' where the standard Raychaudhuri (and the paper's own derived (4.19)/(4.25)/(4.26), sympy-verified) require '-Lambda'; printed (2.13) has '-2*Lambda' where the standard Hamiltonian constraint requires '+2*Lambda'; the printed pair is mutually inconsistent for Lambda != 0 (consistency demands the (2.13) coefficient equal twice the (2.12) coefficient with matching sign). No effect on any Timescape (Lambda=0) result and no effect on GMC/GMP numerics (Lambda enters only their backgrounds, computed independently).", "affects": ["paper (2.12)", "paper (2.13)"]},
+    {"id": "F6", "severity": "established (Phase 1A 11.2)", "summary": "Published Fig. 3 right panel plots Delta_eff/k^2 (y-range 1e-5..1e0); notebook cell 19 plots raw Delta_eff (y-range 1e-4..1e0).", "affects": ["Fig. 3 right vs Bar_Eff_Timescape.pdf"]},
+    {"id": "F7", "severity": "moderate", "summary": "Wavenumber normalisation: paper caption's 'k in LCDM H0/c units, k=2pi = horizon' is exactly realised only in RZA/GMC (a0=1, h=0.674). In the Timescape notebook the same k values act on k^2/a_D^2 with a_D,0 = 1.3685 and h = 0.7323, so the k=2pi mode has present-day physical wavelength 1.26 x c/H0_LCDM.", "affects": ["cell 18-19", "Fig. 3 scale labels"]},
+    {"id": "F8", "severity": "minor", "summary": "Cell 15 comment '150 Mpc/h' contradicts both the paper text (c/H0 amplitude normalisation) and the confirmed qplus provenance; stale comment. Also cell 13 comment says '4x4' for a 3x3 matrix.", "affects": ["comments only"]}
+  ],
+  "verified_derivations": [
+    "wdot = -Theta(1+w)(cs2-w) from the conservation law (3.17) and cs2 := pdot/rhodot [sympy PASS]",
+    "(4.12) == (4.8) under Vtilde = (1+w)V, Ptilde = (1+w)P [sympy PASS]",
+    "upstream cell 12 rows 3-4 == paper (4.15)+(4.17) under Vtilde = (1+w)V [sympy PASS]",
+    "(4.16) == (4.11)+(4.13) [sympy PASS]",
+    "(4.17) == (4.12)+(4.13) [sympy PASS]",
+    "(4.18) from (4.14)+(4.16) [sympy PASS]",
+    "(4.19) from {(4.14),(4.15)printed,(4.16),(4.17)} for Lambda=0 [sympy PASS]",
+    "(4.24) from (4.21)+(4.23) [sympy PASS]",
+    "(4.25),(4.26) from comoving system for Lambda=0 [sympy PASS]",
+    "(4.28) from (4.9)+(4.11)+adiabatic closure [sympy PASS]",
+    "(4.29) from (4.10)-branch with w=cs2=const [sympy PASS, exact]; (4.15)-branch derivation FAILS -> evidence for F1",
+    "w_eff = (f_v-4)/(f_v+8), cs2_correct = -(2+2f_v-f_v^2)/(2+f_v)^2 on the tracker [re-verified]",
+    "cs2_upstream_bug(f_v) closed form derived [this audit]",
+    "ic[0], ic[1] reproduced bit-exactly from the qplus recipe [float64 equality]"
+  ],
+  "not_verified": [
+    "Appendix A coefficients (A.2)-(A.5): derivation from (4.18)+(4.19) not repeated symbolically (heavy; sits on the (4.15) branch, not used by the notebook)",
+    "Appendix B system (B.3)-(B.5): not implemented in any notebook; out of reproduction scope",
+    "Eqs. (2.22)-(2.24) against their literature source [50] (Dunsby-Bruni-Ellis 1992): the full text of [50] was NOT independently inspected in Phase 1C-A (not available locally); it remains an explicit external adjudication dependency for F1"
+  ],
+  "implementation_plan_next_checkpoint": {
+    "scope": "Phase 1C-B: independent implementation + numerical validation of the three closed systems on the Phase 1B tracker background. No fsigma8, no likelihoods.",
+    "modules": [
+      "src/timescape_fsigma8/perturbations/systems.py: pure RHS builders meszaros_rhs, comoving_rhs, barotropic_rhs(params, k, branch, tilt_form, k_convention); branch is a MANDATORY explicit argument with NO default, in {'printed_4_15' (A33=(w+c2)Theta), 'derived_4_10' (A33=(w-c2)Theta)}; neither label is named 'correct' in the public API until author feedback or independent verification against Dunsby-Bruni-Ellis (1992); tilt_form in {'unrescaled-V' (upstream), 'rescaled-Vtilde' (paper)} with equivalence tests; the wavenumber convention (F7) is likewise a mandatory explicit argument wherever k enters",
+      "src/timescape_fsigma8/perturbations/ics.py: qplus-recipe ICs with MANDATORY explicit choices and NO defaults: rate_units in {'upstream_unconverted', 'lcdm_to_timescape_converted'} (F3) and epoch in {'upstream_0p218_gyr', 'dressed_z20'} (F4)",
+      "scripts/extract_upstream_perturbation_oracle.py: execute a patched COPY of the notebook under artifacts/upstream/ to dump sol_comoving/sol_mezaros/sol_bar arrays as JSON oracle",
+      "scripts/compare_perturbations_to_oracle.py: reproduce upstream trajectories using (i) the D2-corrupted cs2 REIMPLEMENTED ONLY inside this forensic comparison harness (never in the scientific package; Phase 1B ground rule preserved) and branch='printed_4_15' passed explicitly, then quantify D2-only, D3-branch-only, IC-unit-only and epoch-only deltas"
+    ],
+    "api_policy": "No silent scientific defaults are permitted: the barotropic branch (F1), the IC rate units (F3), the initial epoch (F4) and the wavenumber convention (F7) must each be spelled out explicitly at every call site. The D2-corrupted sound speed exists only in the forensic comparison harness, never in the scientific package.",
+    "validation": [
+      "solver-convergence study: solve_ivp defaults vs tight tolerances (rtol<=1e-10) vs Radau/LSODA; upstream used defaults (rtol=1e-3), so oracle comparison must match tolerances before comparing physics",
+      "tilt-form equivalence: V vs Vtilde runs agree to tolerance with the CORRECT cs2 (they must NOT agree with the corrupted cs2 - the wdot identity fails; this is itself a D2 diagnostic)",
+      "early-time checks: comoving == meszaros while Delta_eff negligible; EdS growing-mode limit Delta_d ~ t^(2/3) as f_v -> 0",
+      "equation-residual tests: numerical trajectories satisfy (4.18)/(4.24) second-order forms to tolerance",
+      "regression tests pinning all reproduced trajectories; both Python 3.14 and 3.11"
+    ],
+    "gates": ["The F1/D3 branch argument is mandatory with no default and no 'correct' label until author feedback or independent verification against Dunsby-Bruni-Ellis (1992) [50], whose full text was not inspected in Phase 1C-A (explicit external adjudication dependency); ship both branches with the discrepancy documented", "Same mandatory-explicit-argument rule for F3 rate units, F4 epoch, and F7 wavenumber convention", "No commits/pushes without explicit instruction"]
+  },
+  "compliance": {
+    "phase1b_code_modified": false,
+    "upstream_modified": false,
+    "artifacts_modified": false,
+    "new_files": ["reports/phase1c_perturbation_equation_audit.md", "reports/phase1c_equation_inventory.json"],
+    "committed": false
+  }
+}
