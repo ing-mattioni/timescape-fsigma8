@@ -1,14 +1,34 @@
-"""Clean Timescape perturbation systems implemented in Phase 1C-B1.
+"""Independently implemented Timescape perturbation systems.
 
-This package deliberately contains only the D2-free and D3-free systems:
+The package contains the validated Phase 1C-B1 clean systems:
 
 * the effective Mészáros approximation, Eq. (4.27) of arXiv:2511.17160;
 * the comoving effective-fluid closure, Eqs. (4.20)-(4.23) of the same paper.
 
-The barotropic closure, the D2-corrupted upstream sound speed, the unresolved
-D3 branch, f-sigma-8 observables, and likelihoods are outside this package's
-scope.  The validated Phase 1B background is consumed read-only.
+Phase 1C-B2 adds the barotropic closure, Eqs. (4.13)-(4.17), with both
+unresolved D3 equation branches and both tilt variables exposed explicitly.
+Only the corrected Phase 1B sound speed is available here.  The upstream D2
+defect remains isolated in a non-exported forensic script.  F-sigma-8,
+normalisation, likelihoods, and parameter fitting remain outside scope.
 """
+
+from timescape_fsigma8.perturbations.barotropic import (
+    D3Branch,
+    ResolvedWavenumber,
+    TiltForm,
+    WavenumberConvention,
+    barotropic_matrix,
+    barotropic_rhs,
+    resolve_wavenumber,
+    tilt_state_transform,
+    tilt_state_transform_dot,
+    transform_barotropic_state,
+)
+from timescape_fsigma8.perturbations.barotropic_solver import (
+    BarotropicScenario,
+    BarotropicSolution,
+    solve_barotropic,
+)
 
 from timescape_fsigma8.perturbations.initial_conditions import (
     PLANCK_2018_QPLUS_RECIPE,
@@ -53,6 +73,19 @@ from timescape_fsigma8.perturbations.systems import (
 )
 
 __all__ = [
+    "D3Branch",
+    "ResolvedWavenumber",
+    "TiltForm",
+    "WavenumberConvention",
+    "barotropic_matrix",
+    "barotropic_rhs",
+    "resolve_wavenumber",
+    "tilt_state_transform",
+    "tilt_state_transform_dot",
+    "transform_barotropic_state",
+    "BarotropicScenario",
+    "BarotropicSolution",
+    "solve_barotropic",
     "PLANCK_2018_QPLUS_RECIPE",
     "InitialConditionScenario",
     "LCDMGrowthRecipe",
