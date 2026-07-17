@@ -28,7 +28,14 @@ Scientific reproducibility project for Timescape linear perturbations
   explicit IC/epoch scenarios, oracle reproduction, convergence, and Fig. 2
   → `src/timescape_fsigma8/perturbations/` and
   `reports/phase1c_b1_clean_systems_validation.md`.
-- Not implemented: barotropic systems/D3 branches, fσ8, likelihoods.
+- **Phase 1C-B2 (done):** barotropic system (Eqs. 4.13–4.17) with **both**
+  unresolved D3 branches (`printed_4_15`, `derived_4_10`) and both tilt
+  forms as mandatory explicit choices — neither branch adjudicated; upstream
+  Fig.-3 trajectories reproduced via an isolated forensic harness (D2 code
+  never in the package) → `perturbations/barotropic*.py` and
+  `reports/phase1c_b2_barotropic_validation.md`.
+- Not implemented: fσ8, σ8 normalisation, likelihoods; D3/IC-unit/epoch/k
+  conventions remain unresolved pending author input (see 1C-A audit).
 
 ## Hard constraints
 
@@ -62,7 +69,8 @@ Scientific reproducibility project for Timescape linear perturbations
 ## Key commands
 
 ```
-# Full validation suite (203 tests; oracle tests auto-skip if local oracles are absent)
+# Full validation suite (268 tests; oracle/artifact tests auto-skip if local
+# oracles or generated artifacts are absent)
 .venv\Scripts\python -m pytest -q
 
 # Regenerate the upstream comparison oracle (needs .reference/ clone)
@@ -82,6 +90,18 @@ Scientific reproducibility project for Timescape linear perturbations
 
 # Independent Fig.-2 reproduction + forensic numerical overlay
 .venv\Scripts\python scripts\make_clean_fig2.py
+
+# Extract barotropic Fig.-3 oracle (in-memory, read-only upstream cells)
+.venv\Scripts\python scripts\extract_upstream_barotropic_oracle.py
+
+# Barotropic oracle comparison, convergence, D2/D3 factorial, scenario effects
+.venv\Scripts\python scripts\validate_barotropic_perturbations.py
+
+# Corrected-cs2 Fig.-3 variants (both D3 branches, raw + /k^2)
+.venv\Scripts\python scripts\make_barotropic_fig3.py
+
+# Forensic (D2-corrupted, upstream-reproduction) Fig.-3 variants
+.venv\Scripts\python scripts\make_barotropic_fig3_forensic.py
 
 # Re-run the upstream notebook audit (clean kernel, nonzero exit on failure)
 .venv\Scripts\python scripts\execute_upstream_notebook.py
