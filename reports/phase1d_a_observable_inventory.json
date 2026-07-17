@@ -1,0 +1,353 @@
+{
+  "schema_note": "Phase 1D-A observable-definition audit inventory, v1. Every object under a *_conclusion key (and every entry of conclusions arrays) carries exactly: classification, source, assumptions, derivation_summary, convention_dependencies, implementation_consequence. Classifications are exactly one of: VERIFIED_FROM_PRIMARY_SOURCE, DERIVED_FROM_VERIFIED_DEFINITIONS, NUMERICALLY_CORROBORATED, CONVENTION_DEPENDENT, PROVISIONAL, UNRESOLVED_EXTERNAL_DEPENDENCY, NOT_JUSTIFIED_FOR_OBSERVABLE_USE, FORBIDDEN_AS_A_SILENT_DEFAULT. Evidence levels are never merged; where several apply, the primary one is given and the others are listed in convention_dependencies or assumptions. Companion prose: reports/phase1d_a_growth_observable_audit.md.",
+  "date_utc": "2026-07-17",
+  "repository_checkpoint": {
+    "branch": "phase-1c-perturbations",
+    "head": "c6ea04f48ecfbe0ea5477fa137fb9ab39555c72d",
+    "frozen_scientific_checkpoint": "9ec3bcc36bd9d7cc5defe4305c63d44d201a9971",
+    "tag": "phase-1c-b2-barotropic-v1",
+    "head_vs_tag": "HEAD is a documentation-only descendant of the tag (CLAUDE.md, README.md, tests/test_b2_artifact_schema.py); deviation reported at preflight and explicitly approved by the user before any work",
+    "upstream_commit": "590c6fd5332acb15f5683ebf392a0d7ce54983c5",
+    "upstream_notebook_sha256": "86d2534db9e9b3169835e4ce223ee8f3bff6d03b47e5677d3937fed4adafe55a",
+    "working_tree_at_start": "clean",
+    "files_created_by_phase": [
+      "reports/phase1d_a_growth_observable_audit.md",
+      "reports/phase1d_a_observable_inventory.json"
+    ]
+  },
+  "source_inventory": {
+    "primary_specification": {
+      "citation": "M. Galoppo, P. Mourier, arXiv:2511.17160v2, JCAP 02 (2026) 066",
+      "local_pdf_sha256": "856bd78db8f86e46c0f5d21414ad0c1d136b176c6ac1b45418dbeebc38e920dd",
+      "passages_inspected_verbatim": ["Sec. 2.1-2.3 (Eqs. 2.2-2.24)", "Sec. 4.1-4.4 (Eqs. 4.5-4.29, footnotes 7-8)", "Sec. 5 intro + 5.1 (Eqs. 5.5-5.7, Figs. 1-3 captions, IC text)", "Sec. 5.2-5.3 fsigma8 mentions", "conclusions"]
+    },
+    "validated_local_evidence": [
+      "Phase 1B background package + reports (tracker, observables: gamma_w, a_w, H_dressed, redshift; all tests passing at checkpoint)",
+      "Phase 1C-A equation audit (reports/phase1c_perturbation_equation_audit.md, reports/phase1c_equation_inventory.json)",
+      "Phase 1C-B1 clean-systems validation, Phase 1C-B2 barotropic validation + generated artifacts (read-only)"
+    ],
+    "external_sources": [
+      {"ref": "[GM 48]", "citation": "M. Bruni, P.K.S. Dunsby, G.F.R. Ellis, ApJ 395 (1992) 34-53", "access": "bibliographic identity confirmed (ADS, author page); full text image-only scan; content NOT independently inspected", "status": "UNRESOLVED_EXTERNAL_DEPENDENCY"},
+      {"ref": "[GM 50]", "citation": "P.K.S. Dunsby, M. Bruni, G.F.R. Ellis, ApJ 395 (1992) 54", "access": "same as [GM 48]; remains the D3 adjudication dependency; no D3 adjudication performed or implied in this phase", "status": "UNRESOLVED_EXTERNAL_DEPENDENCY"},
+      {"ref": "[GM 47]", "citation": "G.F.R. Ellis, M. Bruni, J. Hwang, Phys. Rev. D 42 (1990) 1035", "access": "not inspected", "status": "UNRESOLVED_EXTERNAL_DEPENDENCY"},
+      {"ref": "[GM 1]", "citation": "H. Kodama, M. Sasaki, Prog. Theor. Phys. Suppl. 78 (1984) 1", "access": "not inspected; qplus IC recipe already reproduced bit-exactly in Phase 1C-A from the pinned sibling notebook", "status": "UNRESOLVED_EXTERNAL_DEPENDENCY (non-blocking)"},
+      {"ref": "[GM 65]", "citation": "P. Meszaros, Astron. Astrophys. 37 (1974) 225", "access": "not inspected; Eq. (4.27) audited against [GM] directly", "status": "UNRESOLVED_EXTERNAL_DEPENDENCY (non-blocking)"},
+      {"ref": "[W09]", "citation": "D.L. Wiltshire, arXiv:0909.0749", "access": "local PDF sha256 e37321e9d6021c6f5eb6bc5084ad331f4fca9dc0bc426097d1c5ce5ce7b2a8aa; Eqs. (28), (38), (B2), (B6)-(B8), (B12) already validated in Phase 1B", "status": "inspected"},
+      {"ref": "Percival-White", "citation": "W.J. Percival, M. White, Testing cosmological structure formation using redshift-space distortions, MNRAS 393 (2009) 297, arXiv:0808.0003v2", "access": "full primary text inspected, especially Secs. 2.1-2.3 Eqs. (1)-(14), Sec. 3, and Sec. 6; supports the conditional FLRW linear redshift-space mapping, deterministic linear galaxy bias, no-velocity-bias assumption, and f*sigma_8 normalisation statement; does NOT provide a Timescape dressed mapping or a general survey fiducial/AP conversion", "status": "inspected (full-text primary source)"}
+    ],
+    "policy": "nothing reconstructed from secondary summaries; inaccessible sources marked unresolved"
+  },
+  "variable_definitions": {
+    "D_mu_i": "comoving fractional density gradient, D_mu^(i) := (a/rho^(i)) D_mu rho^(i)  [GM (2.2)]; local scale factor a defined by adot/a := Theta/3 along the observer congruence, with ARBITRARY initialisation on a slice (GM p.5, verbatim)",
+    "Delta_d": "Delta^(d) := a D^mu D_mu^(d)  [GM (2.20)]; Delta ~= (a^2/rho) (3)Lap rho  [GM (2.19)]; 'proportional to 3-Laplacians of local source fields ... normalised to the local comoving length scale via a^2' (GM p.10 verbatim)",
+    "Z": "Z := a D^mu Z_mu with Z_mu := a D_mu Theta [GM (2.4),(2.21)]; in the documented solver harmonic convention Z_k = -k_code^2 (deltaTheta)_k; in volume-average coordinates the same factor is (k_com_D c/H0_TS)^2 or (k_phys0_D a_D0 c/H0_TS)^2 under the matching parametrisation; exactly Z = -dDelta_d/dt [GM (4.14)]",
+    "Delta_eff": "same construction for the effective fluid; scales quadratically with the harmonic label k_code in frequency space (GM p.21 statement)",
+    "V_eff_tilt": "V^(i) := a D^mu V_mu^(i) [GM (2.20)]: a-scaled divergence of the tilt velocity of the effective fluid RELATIVE TO THE DUST FRAME; Vtilde = (1+w_eff)V; scales linearly with k (GM p.21); no galaxy-peculiar-velocity meaning",
+    "delta_m": "conventional linear matter density contrast deltarho_d/rhobar_d in the dust frame (defined here, used for the mapping)",
+    "Delta_d_conclusion": {
+      "classification": "VERIFIED_FROM_PRIMARY_SOURCE",
+      "source": "[GM] Eqs. (2.2), (2.19), (2.20); p.10 and p.27 verbatim statements",
+      "assumptions": "linear perturbation scheme (GM's own ~= convention)",
+      "derivation_summary": "Delta_d is the a^2-normalised spatial 3-Laplacian of the fractional dust density: NOT a local density contrast; at linear order Delta_d ~= a_D^2 (3)Lap delta_m; in code harmonics it is dimensionless because k_code is dimensionless; dimensional volume-average forms require k_com_D with c/H0_TS or k_phys0_D with a_D0 c/H0_TS; same definition for all three closures; dust-frame quantity; first-order gauge-invariant (vanishes in background)",
+      "convention_dependencies": "harmonic sign; k_code versus volume-average k_com_D or k_phys0_D; unresolved mapping to observational/dressed k_com_obs; unresolved upstream_timescape_k versus paper_lcdm_hubble_k interpretation; arbitrary scale-factor normalisation",
+      "implementation_consequence": "the notebook variable Delta_dust must never be fed to a spectrum/sigma_8 formula as if it were delta_m"
+    }
+  },
+  "frame_and_gauge": {
+    "observer_frame": "dust energy frame, V^(d)=0 [GM Sec. 4, pp. 15-16 verbatim: interpret CGI density perturbations as gradients in the observed density field; same foliation as the Buchert averaging (footnote 7)]",
+    "gauge_invariance": "all CGI variables vanish identically at FLRW background level, hence first-order gauge-invariant (Stewart-Walker); no gauge fixing anywhere",
+    "bardeen_correspondence_conclusion": {
+      "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "source": "[GM] (2.19)-(2.20) + footnote 8; attribution to [GM 48]/[GM 50] not verifiable locally",
+      "assumptions": "linear order; scalar sector",
+      "derivation_summary": "per harmonic mode Delta_d,k = -k_code^2 delta_m,k in the documented solver convention, equivalently -(k_com_D c/H0_TS)^2 delta_m,k or -(k_phys0_D a_D0 c/H0_TS)^2 delta_m,k in the volume-average-coordinate parametrisations; the identification of delta_m with the Bardeen comoving-gauge density contrast is standard but its original-reference attribution ([GM 48]) was not independently inspected",
+      "convention_dependencies": "harmonic sign; k_code/k_com_D/k_phys0_D units; volume-average versus unresolved observational/dressed comoving frame; F7 wavenumber convention",
+      "implementation_consequence": "growth rates and ratios transfer exactly without resolving the dimensional spatial mapping because the constant harmonic factor cancels; absolute amplitudes require one dimensionally complete matching factor and a documented sign"
+    }
+  },
+  "harmonic_conventions": {
+    "eigenvalue": "(3)Lap Q_k = -(k_code^2/a_D^2) Q_k, with k_code := ResolvedWavenumber.matrix_k; [GM] footnote 8 gives the k^2/a^2 magnitude; negative sign as implemented in (4.10) and audited in Phase 1C-A",
+    "flat_background": "KD = 0 chosen in [GM] Sec. 5: eigenfunctions are ordinary Fourier modes; k_code is a constant dimensionless harmonic label",
+    "k_units": {
+      "dimensionless_solver_label": "k_code is the dimensionless matrix label; exact solver mapping uses Delta_d,k = -k_code^2 delta_m,k",
+      "volume_average_comoving_wavenumber": "k_com_D := k_code H0_TS/c is the dimensional comoving wavenumber associated with the volume-average spatial coordinates; k_code = k_com_D(c/H0_TS)",
+      "volume_average_physical_wavenumber": "k_phys_D(t) := k_com_D/a_D(t) is the physical volume-average wavenumber at time t",
+      "present_volume_average_physical_wavenumber": "k_phys0_D := k_phys_D(t0) = k_code H0_TS/(a_D0 c); k_code = k_phys0_D(a_D0 c/H0_TS)",
+      "observational_dressed_comoving_wavenumber": "k_com_obs (or k_com_dressed) is the future observational/dressed comoving wavenumber; its mapping from the volume-average harmonic coordinate is unresolved",
+      "reciprocal_unit_rule": "each wavenumber must be paired only with its specifically associated reciprocal length: Mpc^-1 with Mpc, or numerical h Mpc^-1 with h^-1 Mpc",
+      "upstream_timescape_k": "supplied k equals k_code",
+      "paper_lcdm_hubble_k": "supplied k_paper = k_phys0_D c/H0_LCDM; solver resolves k_code=k_paper*a_D0*H0_LCDM/H0_TS, preserving k_phys0_D between the two numerical conventions but not deriving k_com_obs",
+      "unresolved_F7": "whether the published numerical values {2pi,5pi,10pi} are upstream matrix labels or paper Hubble-length labels; conversion factor a_D0*h_lcdm/h_ts=1.259551; neither fork is ranked"
+    },
+    "scaling_corroboration": "[GM] p.21 verbatim: 'Vtilde^(eff) scales linearly with k, while Delta^(eff) exhibits a quadratic scaling'"
+  },
+  "delta_mapping": {
+    "result_code": "Delta_d(k_code,t) = -k_code^2 delta_m(k_code,t), exact for the documented negative-Laplacian harmonic convention",
+    "result_volume_average_comoving": "Delta_d(k_com_D,t) = -(k_com_D c/H0_TS)^2 delta_m(k_com_D,t)",
+    "result_present_volume_average_physical": "Delta_d(k_phys0_D,t) = -(k_phys0_D a_D0 c/H0_TS)^2 delta_m(k_phys0_D,t)",
+    "equation_chain": "Delta_d = a D^mu[(a/rho_d) D_mu rho_d] = (a^2/rhobar_d)(3)Lap(rhobar_d delta_m) + O(2) = a_D^2 (3)Lap delta_m -> a_D^2 * (-k_code^2/a_D^2) * delta_m,k = -k_code^2 delta_m,k = -(k_com_D c/H0_TS)^2 delta_m,k = -(k_phys0_D a_D0 c/H0_TS)^2 delta_m,k; a_D powers cancel exactly; no background-density factor; no frame/gauge transformation",
+    "sympy_checks": "S1 (formal epsilon-expansion), S2a (log-growth equality), S2b (time-dependent-C correction = dlnC/dlna): all PASS (scratchpad phase1d_symbolic.py)",
+    "closure_validity": "definitional, holds identically for meszaros/comoving/barotropic and for both D3 branches and both tilt forms",
+    "wavenumber_convention_validity": "algebra is identical after resolution; upstream_timescape_k supplies k_code directly, while paper_lcdm_hubble_k supplies k_paper=k_phys0_D c/H0_LCDM and the solver converts it to k_code by factor a_D0*h_lcdm/h_ts=1.259551; this preserves the intended present physical volume-average mode but does not derive k_com_obs",
+    "mapping_conclusion": {
+      "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "source": "[GM] (2.2), (2.19), (2.20), footnote 8; Sec. 5 KD=0",
+      "assumptions": "linear order; same scalar harmonic mode; constant dimensionless k_code; nonzero reference amplitude for a ratio; explicit sign/crossing policy",
+      "derivation_summary": "C=-k_code^2=-(k_com_D c/H0_TS)^2=-(k_phys0_D a_D0 c/H0_TS)^2 is time-independent and scale-dependent; therefore d ln|Delta_d,k|/dx = d ln|delta_m,k|/dx wherever amplitudes are nonzero",
+      "convention_dependencies": "amplitude sign changes if the harmonic/eigenvalue sign convention changes; |C|, growth ratios/rates, and spectra are sign-invariant; dimensional volume-average scales depend on the named parametrisation and F7; observational k_com_obs remains unresolved",
+      "implementation_consequence": "growth ratios/rates transfer per mode without resolving the dimensional spatial map because C cancels; absolute amplitude, spectra, sigma_R/sigma_8, and observational k-bin comparisons require explicit matching wavenumber/frame metadata"
+    }
+  },
+  "power_spectrum_mapping": {
+    "fourier_convention": "in one declared comoving frame X, delta(x_X) = int d^3k_com_X/(2pi)^3 delta_k_com_X e^{ik_com_X x_X}; <delta_k_com_X delta_k'_com_X*> = (2pi)^3 deltaD(k_com_X-k'_com_X) P_delta(k_com_X)",
+    "result_code": "P_Delta(k_code,t) = k_code^4 P_delta(k_code,t); Delta^2_Delta = k_code^4 Delta^2_delta for a common dimensionless harmonic label",
+    "result_volume_average_comoving": "P_Delta(k_com_D,t) = (k_com_D c/H0_TS)^4 P_delta(k_com_D,t), and likewise for dimensionless power, when both spectra use one common volume-average comoving Fourier/statistical normalisation",
+    "result_present_volume_average_physical": "P_Delta(k_phys0_D,t) = (k_phys0_D a_D0 c/H0_TS)^4 P_delta(k_phys0_D,t), and likewise for dimensionless power, only when both spectra use the same present physical volume-average parametrisation; this a_D0 form is not the comoving-Mpc^-1 formula",
+    "equal_deterministic_ic_meaning": "the notebook's equal deterministic Delta_d amplitudes define selected trajectory comparisons only, not an ensemble or P_Delta; conditionally, if interpreted as equal RMS amplitudes under one common statistical mode normalisation, the mapping would imply P_delta proportional to k_code^-4; that condition is not supplied by the notebook",
+    "spectrum_conclusion": {
+      "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "source": "mapping above + stated Fourier convention",
+      "assumptions": "statistical homogeneity/isotropy; fixed Fourier convention; one common k parametrisation and spatial coordinate frame; the conditional equal-RMS inference requires an additional statistical mode normalisation absent upstream",
+      "derivation_summary": "P_Delta=|C|^2 P_delta gives k_code^4, (k_com_D c/H0_TS)^4, or (k_phys0_D a_D0 c/H0_TS)^4 in the corresponding parametrisation; sign changes cancel",
+      "convention_dependencies": "Fourier normalisation; k_code versus k_com_D versus k_phys0_D units; F7; unresolved k_com_obs mapping; harmonic sign does not affect power",
+      "implementation_consequence": "sigma_R must convert Delta_d with the complete fourth-power factor in a matched comoving frame; equal deterministic upstream ICs cannot seed or normalise a spectrum"
+    }
+  },
+  "growth_definitions": {
+    "growth_factor": "G(k_code,t;t_ref) = Delta_d(k_code,t)/Delta_d(k_code,t_ref) = delta_m(k_code,t)/delta_m(k_code,t_ref) for the same harmonic mode (C cancels); defined iff reference amplitude is nonzero and subject to the explicit sign/crossing policy; no dimensional spatial mapping is required for this relative ratio; reference epoch must state value AND coordinate (bare time vs dressed redshift) - no default",
+    "scale_independent_D_conditions": "(i) k-free evolution operator: TRUE for comoving ([GM] p.19 verbatim) and Meszaros (4.27); FALSE for barotropic (k^2/a coupling, both D3 branches, [GM] p.22); (ii) k-independent initial mode-mixture Z(t_i)/Delta_d(t_i) (and Delta_eff IC): satisfied by upstream identical ICs; for physical spectra requires growing-mode dominance at t_i - must be stated explicitly",
+    "f_bare": "f_bare := d ln D/d ln a_D = -3 Z_k/(Theta Delta_d,k) exactly (sympy S4 PASS); no numerical differentiation needed",
+    "wall_scale_normalisation": "original notation: 1+z_dressed=a_w0/a_w and a_obs:=1/(1+z_dressed)=a_w/a_w0; define a_w_rescaled:=a_w/a_w0 and a_D_rescaled:=a_D/a_w0 before writing a_obs=a_w_rescaled=a_D_rescaled/gamma_w; frozen Phase 1B functions named a_w and a_D return these rescaled quantities",
+    "f_dressed": "f_dressed := d ln D/d ln a_obs = -(1+z_dressed) d ln D/dz_dressed with a_obs=a_w/a_w0=a_w_rescaled; the constant a_w0 cancels from logarithmic derivatives",
+    "chain_rule": "f_dressed = f_bare * H_D/(H_D - gammadot_w/gamma_w) = f_bare * gamma_w H_D/H_dressed = f_bare * (2+f_v)^2/(4+f_v+4f_v^2) (tracker exact; sympy S3b-S3f PASS; numeric N2 to <1e-8)",
+    "chain_factor_values": {"dressed_z20": 1.02475, "upstream_0p218_gyr": 1.02726, "today": 1.08416},
+    "lapse_role": "gamma_w enters through the abscissa a_w_rescaled=a_D_rescaled/gamma_w; f is invariant under the clock choice and under constant a_w0 rescaling because it is a ratio of logarithmic derivatives",
+    "paper_and_upstream_usage": "[GM] defines no growth rate f; Figs. 2-3 plot against bare a_D/a_w0, so the upstream presentation coordinate is implicitly bare_aD; surveys quote dressed z",
+    "growth_coordinate_conclusion": {
+      "classification": "CONVENTION_DEPENDENT",
+      "source": "[GM] p.25 redshift relation (VERIFIED_FROM_PRIMARY_SOURCE, validated Phase 1B); [GM] figure axes; derivation chain D3 in the report",
+      "assumptions": "tracker background; z is the dressed observational redshift",
+      "derivation_summary": "both f_bare and f_dressed are mathematically available and exactly interconvertible; a_obs=a_w/a_w0, and constant a_w0 cancels; neither coordinate is specified for a growth rate by the paper; the audited tracker conversion factor differs from unity by 2.5-8.4% at the tabulated epochs",
+      "convention_dependencies": "future mandatory labels bare_aD / dressed_redshift; NO DEFAULT (FORBIDDEN_AS_A_SILENT_DEFAULT applies to any silent choice)",
+      "implementation_consequence": "growth_coordinate must be a mandatory explicit argument of any f or fsigma8-like quantity"
+    }
+  },
+  "zero_crossing_policy": {
+    "analytic_f": "f_bare(k,t) = -3Z_k/(Theta Delta_d,k); poles where Delta_d,k=0 with Z_k!=0; zeros where Z_k=0; dD/dlna_D = -3Z_k/Theta finite everywhere",
+    "crossing_provenance": {
+      "status": "sampled_grid_brackets_not_root_refined",
+      "artifact": "artifacts/independent/phase1c_b2_convergence.json",
+      "validator_definition": "first_strict_zero_crossing_time is t[i], the left sample for which y[i]*y[i+1] < 0; it is not a root",
+      "grid": {"samples": 1000, "t_start_code": 0.016326590304765798, "t_end_code": 1.1516126666666666, "dt_code": 0.0011364224988607632, "dt_Gyr": 0.015174025937266892},
+      "solver_evidence": "all seven B2 solver configurations place each first sign change in the same sampled bin; this is not an exact-root precision claim",
+      "root_refinement": "not performed; precise roots remain a Phase 1D-B implementation task"
+    },
+    "crossing_brackets_code_Gyr_dressed_z": {
+      "printed_4_15_2pi": {"Delta_d": {"status": "none_sampled"}, "Z": {"status": "none_sampled"}},
+      "printed_4_15_5pi": {"Delta_d": {"code_time": [0.22770117509286744, 0.2288375975917282], "Gyr": [3.0403688243316376, 3.055542850268904], "dressed_z": [2.4183490591080035, 2.4066555636248155]}, "Z": {"code_time": [0.1401966426805888, 0.14133306517944957], "Gyr": [1.8719688271620885, 1.8871428530993557], "dressed_z": [3.7459025894641114, 3.720398459448475]}},
+      "printed_4_15_10pi": {"Delta_d": {"code_time": [0.07769340524324692, 0.07882982774210769], "Gyr": [1.0373974006124107, 1.0525714265496777], "dressed_z": [6.012496767254251, 5.945834933342511]}, "Z": {"code_time": [0.05723780026375321, 0.058374222762613975], "Gyr": [0.7642649337416072, 0.7794389596788741], "dressed_z": [7.57187587782961, 7.4618926819803715]}},
+      "derived_4_10_2pi": {"Delta_d": {"code_time": [0.7845481995346406, 0.7856846220335013], "Gyr": [10.475641533592404, 10.490815559529668], "dressed_z": [0.3705069071937752, 0.3689196984977263]}, "Z": {"code_time": [0.3390705799812221, 0.34020700248008284], "Gyr": [4.527423366183791, 4.542597392121057], "dressed_z": [1.58538162164509, 1.5791910365520399]}},
+      "derived_4_10_5pi": {"Delta_d": {"code_time": [0.15042444517033565, 0.1515608676691964], "Gyr": [2.0085350605974903, 2.0237090865347573], "dressed_z": [3.527714040259931, 3.504952652113011]}, "Z": {"code_time": [0.09701258772387987, 0.09814901022274063], "Gyr": [1.2953558415459476, 1.3105298674832144], "dressed_z": [5.058294498745839, 5.011914564341175]}},
+      "derived_4_10_10pi": {"Delta_d": {"code_time": [0.06746560275350007, 0.06860202525236082], "Gyr": [0.9008311671770091, 0.9160051931142759], "dressed_z": [6.694332532249386, 6.610336192720717]}, "Z": {"code_time": [0.05041926527058864, 0.0515556877694494], "Gyr": [0.673220778118006, 0.6883948040552729], "dressed_z": [8.316680995885559, 8.181255922980766]}}
+    },
+    "clean_systems": "Meszaros and comoving with upstream-convention ICs: zero sign changes in any component over [t_i, t0] (in-memory check on the frozen package, tight DOP853); f globally defined there",
+    "policy_items": [
+      "never evaluate log of a signed amplitude silently; log only of |D| with sign tracked",
+      "detect and record every strict sign change of Delta_d, Z (and Delta_eff, tilt) with root refinement",
+      "report maximal intervals of validity of d ln D/d ln a; attach every f value to its interval",
+      "always retain the non-logarithmic derivative dD/dlna = -3Z/Theta (and dressed counterpart), finite through crossings",
+      "distinguish d ln|D|/d ln a from d ln D/d ln a",
+      "no interpolation/smoothing/plotting across a singularity without explicit annotation"
+    ],
+    "zero_crossing_conclusion": {
+      "classification": "NUMERICALLY_CORROBORATED",
+      "source": "artifacts/independent/phase1c_b2_convergence.json sampled sign-change bins; frozen validator trajectory_diagnostics definition; in-memory clean-system scan; bracket conversions via frozen bg.redshift",
+      "assumptions": "upstream-convention baseline scenario (printed/derived branches, unrescaled_V, upstream rate/epoch/k)",
+      "derivation_summary": "sampled B2 trajectories show Delta_d sign changes for printed 5pi/10pi and derived 2pi/5pi/10pi; Z changes sign in an earlier sampled bin for each; Delta_d crossings imply logarithmic-rate poles and Z crossings imply zeros; no root-refined locations are claimed; clean baselines show no sign crossing on the audited interval",
+      "convention_dependencies": "brackets depend on D3 branch, epoch, rate units, and k convention; values have only the 1000-point grid provenance stated above",
+      "implementation_consequence": "f must be reported piecewise; Phase 1D-B must root-refine sign changes with documented tolerances before publishing precise locations"
+    }
+  },
+  "sigma_R_definition": {
+    "equation_chain": "in one fixed spatial coordinate frame X, sigma_R^2(z) = <(delta_m * W_R)^2> = int d^3k_com_X/(2pi)^3 P_delta(k_com_X,z) W^2(k_com_X R_com_X) = (1/2pi^2) int dk_com_X k_com_X^2 P_delta W^2(k_com_X R_com_X) = int dlnk_com_X Delta^2_delta(k_com_X,z) W^2(k_com_X R_com_X); W(x) = 3(sin x - x cos x)/x^3; Delta^2_delta := k_com_X^3 P_delta/(2pi^2)",
+    "sigma8": "observational sigma_8 := sigma_R at observational/dressed comoving R_com_obs = R_8 = 8 h^-1 Mpc, paired with reciprocal observational/dressed comoving k_com_obs",
+    "frame_pairing_rule": "k_com_D may be paired only with a volume-average comoving radius R_com_D; observational R_8 requires k_com_obs and R_com_obs; the map from the volume-average harmonic coordinate to the dressed observational comoving coordinate is not derived; k_phys0_D cannot be inserted directly into k_com_obs R_com_obs merely because it is dimensional",
+    "three_modes_cannot_give_sigma8": {
+      "reasons": [
+        "sigma_R is an integral over a continuous lnk measure; three isolated modes supply neither the measure nor a justified quadrature/interpolation rule",
+        "equal deterministic trajectory amplitudes do not define an ensemble, P_Delta, P_delta, spectrum shape, or amplitude",
+        "the positions of the volume-average modes in an observational k_com_obs R_com_obs kernel are unknown because the volume-average-to-dressed comoving coordinate map is unresolved",
+        "a continuous statistical spectrum in one declared comoving coordinate frame, explicit amplitude/shape and reciprocal units, and a convergence-demonstrated integration domain are required"
+      ],
+      "withdrawn_illustrations": "the previous Planck-like kernel-peak range, comparison to it, and prescribed [1e-2,1e1] h/Mpc domain were removed because they were not sourced or established by a documented convergence calculation"
+    },
+    "sigma_R_conclusion": {
+      "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "source": "standard convolution derivation with the Fourier convention stated in power_spectrum_mapping",
+      "assumptions": "linear P_delta; top-hat window; stated Fourier convention; comoving wavenumber and radius defined in the same spatial coordinate system with reciprocal units",
+      "derivation_summary": "full sigma_R chain with all numerical factors; three-mode inadequacy follows from missing continuous statistical spectrum and explicit matched-frame comoving-unit conventions, without relying on an illustrative kernel-peak estimate",
+      "convention_dependencies": "h choice (timescape_dressed_h vs lcdm_reference_h), matched comoving spatial frame of k and R, F7 wavenumber convention, unresolved volume-average-to-dressed comoving map",
+      "implementation_consequence": "no observational sigma_R/sigma_8 code path may exist in 1D-B without an external spectrum input, explicit unit choices, and a derived k_com_D-to-k_com_obs spatial mapping"
+    }
+  },
+  "radius_and_h_conventions": {
+    "R8_values": {"lcdm_reference_h": {"h": 0.674, "R8_Mpc": 11.869, "c_over_H0_Mpc": 4448.0}, "timescape_dressed_h": {"h": 0.7323, "R8_Mpc": 10.924, "c_over_H0_Mpc": 4093.8}},
+    "spatial_unit_frame_of_R": "must additionally be declared dressed / bare-volume-average / wall / reference-LCDM comoving; k_com_X and R_com_X must use the same frame and reciprocal units; the dressed observational mapping is not derived in [GM] and is an explicit blocker, not a default",
+    "scale_factor_and_wavenumber_normalisation": "original notation retains a_w0 explicitly: 1+z=a_w0/a_w and a_obs=a_w/a_w0; frozen Phase 1B a_w and a_D are rescaled by a_w0, so a_w_rescaled(t0)=1 and a_D_rescaled(t0)=gamma_w0~1.3685; k_com_D=k_code H0_TS/c, k_phys_D(t)=k_com_D/a_D(t), k_phys0_D=k_code H0_TS/(a_D0 c), and lambda_phys0_D=2pi a_D0 c/(H0_TS k_code); paper input instead uses k_paper=k_phys0_D c/H0_LCDM before F7 conversion, which preserves k_phys0_D but does not derive k_com_obs",
+    "h_convention_conclusion": {
+      "classification": "FORBIDDEN_AS_A_SILENT_DEFAULT",
+      "source": "[GM] Fig. 3 caption (lcdm H0/c units) vs [GM] p.25 (H0 dressed 'directly extracted by observations'); Phase 1C-A F7",
+      "assumptions": "none - this is a pure convention fork",
+      "derivation_summary": "both h choices are self-consistent and move R_8 by 8.6%; a dimensionless window argument is h-invariant only when k_com_X and R_com_X are expressed in reciprocal h units within the same spatial coordinate frame",
+      "convention_dependencies": "interacts with wavenumber_convention and with the matched comoving spatial frame of k and R",
+      "implementation_consequence": "sigma_radius_h_convention in {timescape_dressed_h, lcdm_reference_h} must be a mandatory explicit argument; no default"
+    }
+  },
+  "spectrum_requirements": {
+    "upstream_amplitude_defines": {"equal_deterministic_selected_mode_amplitudes": true, "statistical_mode_normalisation": false, "ensemble_power_spectrum": false, "power_spectrum_amplitude": false, "sigma8_at_initial_epoch": false, "conditional_inference": "only if equal deterministic amplitudes were additionally interpreted as equal RMS amplitudes under one common statistical mode normalisation would D2 imply P_delta proportional to k_code^-4; the notebook does not define that ensemble"},
+    "validity_for_spectrum_normalisation": "NOT scientifically valid: fixes one number at an unspecified effective scale; sigma_8 requires amplitude AND shape over the kernel support",
+    "strategies": {
+      "external_linear_pk_at_zref": {"classification": "PROVISIONAL", "qualification": "implementable only with an external transfer/linear P(k); imports LCDM-calibrated shape and amplitude at z_ref"},
+      "sigma8_anchor_at_zref": {"classification": "PROVISIONAL", "qualification": "normalisation-only, not predictive; shape-free for scale-independent growth, but scale-dependent growth additionally requires a spectrum shape"},
+      "primordial_As_ns_external_transfer": {"classification": "PROVISIONAL", "qualification": "requires an external transfer function and assumes its early-universe applicability"},
+      "upstream_equal_deterministic_Delta_amplitude": {"classification": "NOT_JUSTIFIED_FOR_OBSERVABLE_USE", "qualification": "valid only for relative selected-mode comparisons; silent use is FORBIDDEN_AS_A_SILENT_DEFAULT"}
+    },
+    "ic_amplitude_conclusion": {
+      "classification": "NOT_JUSTIFIED_FOR_OBSERVABLE_USE",
+      "source": "[GM] Fig. 3 caption ('same values for all scales for direct comparison') + p.27 'compensating' sentence; Phase 1C-A qplus provenance (bit-exact)",
+      "assumptions": "the confirmed upstream statement is deterministic comparison normalisation; a k^-4 density-power inference would require the additional equal-RMS/common-statistical-mode-normalisation assumptions not made upstream",
+      "derivation_summary": "Delta_d(t_i)=0.0031427229788258105 is an equal deterministic selected-mode comparison amplitude; it defines no ensemble P_Delta or P_delta and cannot normalise a continuous spectrum or sigma_8",
+      "convention_dependencies": "F3 rate units, F4 epoch afflict the companion Z IC",
+      "implementation_consequence": "normalization_strategy=upstream_equal_deterministic_Delta_amplitude must be rejected at the API level for any sigma_8 code path; no default strategy anywhere"
+    }
+  },
+  "scale_independent_identity": {
+    "identity": "sigma_8(z) = D(z) sigma_8(z_ref); f(z) sigma_8(z) = d sigma_8/d ln a (same a-coordinate on both sides)",
+    "assumptions": ["A1 linearity", "A2 scale-independent growth over the matched-frame kernel support (k-free operator AND k-independent initial mode-mixture)", "A3 fixed spectrum shape at z_ref", "A4 fixed smoothing convention with k_com_X and R_com_X in the same spatial frame and reciprocal units", "A5 D(z)>0 and differentiable", "A6 consistent reference normalisation sigma_8(z_ref)"],
+    "per_system": {
+      "meszaros": "A2 holds mathematically ((4.27) k-free + upstream k-independent ICs); A5 corroborated (no crossings); identity evaluable - but physical validity NOT inferred: [GM] p.26 states the approximation 'should not be applicable in the timescape framework'",
+      "comoving": "A2 holds under the same IC caveat ([GM] p.19); A5 corroborated; identity evaluable with the same external-normalisation caveat",
+      "barotropic_printed_4_15": "A2 fails (scale-dependent); A5 fails at 5pi,10pi (crossings); identity unavailable",
+      "barotropic_derived_4_10": "A2 fails; A5 fails at all three modes; identity unavailable"
+    },
+    "identity_conclusion": {
+      "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "source": "derivation chains D5-D6 (report Secs. 10, 12); sympy S5 PASS",
+      "assumptions": "A1-A6 as listed",
+      "derivation_summary": "sigma_8(z)=D sigma_8(z_ref) and f sigma_8 = d sigma_8/dlna follow directly from the sigma_R integral when D is k-independent, positive and differentiable; the bare/dressed coordinate choice rescales f sigma_8 by 1.025-1.084",
+      "convention_dependencies": "growth_coordinate; sigma8 anchor source; h and radius conventions",
+      "implementation_consequence": "evaluable in 1D-B only for the clean systems under an explicit anchor, labelled as a conditional diagnostic, never as predicted observational fsigma8"
+    }
+  },
+  "scale_dependent_generalization": {
+    "equations": "in one fixed spatial frame X, sigma_R^2(z) = int dlnk_com_X Delta^2_delta(k_com_X,z_ref) D^2(k_com_X,z) W^2(k_com_X R_com_X); F_R(z) := d sigma_R/d ln a = (1/sigma_R) int dlnk_com_X Delta^2_delta(k_com_X,z) f(k_com_X,z) W^2(k_com_X R_com_X); f_R_eff := F_R/sigma_R = kernel-weighted mean of the spectral growth rate with weights Delta^2_delta(k_com_X,z) W^2(k_com_X R_com_X)/sigma_R^2",
+    "finiteness": "the F_R integrand Delta^2(k,z_ref) D dD/dlna W^2 stays finite through individual mode zero crossings (D*D' finite even where ln D is singular); only sigma_R = 0 would be singular; differentiation under the integral requires dominated convergence (explicit assumption given rapidly growing high-k barotropic modes)",
+    "labels": ["spectral_growth_rate", "sigma_R", "d_sigma_R_d_lna", "sigma_R_weighted_growth_rate"],
+    "naming_rule": "d_sigma8_d_lna must NOT be automatically labelled f-sigma-8 in a scale-dependent model",
+    "generalization_conclusion": {
+      "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "source": "derivation chains D7-D8 (report Sec. 13); sympy S6 PASS (discrete-sum formal check)",
+      "assumptions": "linearity; external spectrum shape at z_ref; k_com_X and R_com_X in the same spatial frame and reciprocal units; dominated convergence for differentiation under the integral",
+      "derivation_summary": "f_R_eff is the Delta^2 W^2-weighted mean of f(k,z), distinct from the standard scale-independent f(z), coinciding with it only under A2",
+      "convention_dependencies": "all sigma_R conventions plus growth_coordinate; weights depend on the evolved spectrum, hence on the normalisation strategy",
+      "implementation_consequence": "any barotropic sigma-level growth quantity must use these weighted definitions and cautious labels"
+    }
+  },
+  "rsd_interpretation": {
+    "primary_source_basis": {
+      "source": "Percival & White, arXiv:0808.0003v2, full primary text",
+      "verified_passages": [
+        "Sec. 2 Eqs. (1)-(4): real-to-redshift-space position map, number/mass-conservation Jacobian, distant-observer and irrotational-velocity assumptions",
+        "Sec. 2.1 Eqs. (5)-(8): linear redshift-space overdensity/power decomposition and conditional linear-theory velocity relation",
+        "Sec. 2.2 Eqs. (9)-(10): scale-independent deterministic local linear galaxy bias; Eq. (11): conditional no-velocity-bias relation; Eq. (12): resulting Kaiser form",
+        "Sec. 2.3 Eqs. (13)-(14): top-hat RMS normalisation and b*sigma8/f*sigma8 combinations"
+      ],
+      "not_supported_by_this_source_for_timescape": "a dressed Timescape redshift-space mapping; a survey-specific Alcock-Paczynski/fiducial conversion; a universal fitted k range"
+    },
+    "what_rsd_constrains": "within the inspected Percival-White FLRW/plane-parallel linear model, redshift-space anisotropy conditionally constrains f*sigma_8 after imposing its velocity, deterministic linear-bias, no-velocity-bias, and normalisation assumptions; this does not establish applicability to Timescape",
+    "external_dependency_classifications": {
+      "standard_linear_RSD_model": "VERIFIED_FROM_PRIMARY_SOURCE",
+      "application_to_Timescape_state_variables": "NOT_JUSTIFIED_FOR_OBSERVABLE_USE",
+      "dressed_redshift_space_mapping": "UNRESOLVED_EXTERNAL_DEPENDENCY",
+      "bias_and_velocity_mapping_for_Timescape": "UNRESOLVED_EXTERNAL_DEPENDENCY",
+      "survey_fiducial_and_AP_conversion": "UNRESOLVED_EXTERNAL_DEPENDENCY",
+      "universal_fitted_k_range": "NOT_JUSTIFIED_FOR_OBSERVABLE_USE"
+    },
+    "identifications": {
+      "Delta_d": "related to delta_m by -k_code^2, equivalently -(k_com_D c/H0_TS)^2 or -(k_phys0_D a_D0 c/H0_TS)^2 in the matching volume-average parametrisation, and to delta_g only through an additional bias model; not directly identifiable",
+      "Z": "Z_k=-k_code^2(deltaTheta)_k, with deltaTheta the dust-congruence expansion fluctuation; exact CGI continuity deltadot_m=-(deltaTheta) follows; correspondence to the FLRW RSD velocity divergence is PROVISIONAL and direct observable identification is NOT_JUSTIFIED_FOR_OBSERVABLE_USE without a dressed mapping, velocity-bias analysis, continuity interpretation, and explicit H normalisation",
+      "V_eff_Vtilde_eff": "effective-fluid tilt relative to dust; no automatic galaxy-velocity interpretation",
+      "d_sigma8_d_lna": "density-derived; equals RSD-inferred fsigma8 only under Secs. 12-13 assumptions + (a)-(d) + a normalisation"
+    },
+    "headline_claim_classification": "NOT_JUSTIFIED_FOR_OBSERVABLE_USE",
+    "rsd_conclusion": {
+      "classification": "NOT_JUSTIFIED_FOR_OBSERVABLE_USE",
+      "source": "[GM] definitions (2.4), (2.20), (4.14); [GM] conclusions (fsigma8 only as 'a natural extension of this work'); Percival-White full text Secs. 2.1-2.3 Eqs. (1)-(14); derivation chain D9",
+      "assumptions": "linear order throughout",
+      "derivation_summary": "no state variable is directly the observed RSD velocity-growth combination; Percival-White verifies the conditional standard FLRW chain but not its Timescape applicability; missing links include normalisation, a continuous statistical spectrum in the observational comoving frame, the volume-average-to-dressed comoving map, dressed redshift-space mapping, bias/velocity interpretation, fiducial/AP conversion, and unresolved conventions; [GM] makes no fsigma8 prediction",
+      "convention_dependencies": "D3 branch, rate units, epoch, k convention, h convention, growth coordinate - all propagate into any would-be fsigma8",
+      "implementation_consequence": "no RSD dataset, likelihood, covariance, fiducial correction, or fit may be implemented; the classification is about current evidence, not the framework's potential"
+    }
+  },
+  "scenario_dimensions": {
+    "no_silent_default_rule": "every field below is a mandatory explicit argument; not_applicable, where listed, must itself be passed explicitly",
+    "fields": {
+      "perturbation_system": {"values": ["meszaros", "comoving", "barotropic"], "meaning": "closure choice", "applicability": "always", "unresolved": false, "explicit_not_applicable": false, "interactions": "gates d3_branch/tilt_form/wavenumber_convention applicability", "affects": ["time_evolution", "observable_interpretation", "shape (barotropic only)"]},
+      "background_preset": {"values": ["paper_reference", "notebook_reference"], "meaning": "frozen Phase 1B parameter sets (H0=73.03 vs 73.23, fv0=0.737)", "applicability": "always", "unresolved": false, "explicit_not_applicable": false, "interactions": "unit conversions, epochs, chain factor", "affects": ["amplitude", "time_evolution", "physical_scale"]},
+      "d3_branch": {"values": ["not_applicable", "printed_4_15", "derived_4_10"], "meaning": "unresolved (4.15) A33 provenance (1C-A F1)", "applicability": "barotropic only; not_applicable must be explicit for meszaros/comoving", "unresolved": true, "explicit_not_applicable": true, "interactions": "crossing times, f poles, all endpoints", "affects": ["time_evolution", "observable_interpretation"]},
+      "tilt_form": {"values": ["not_applicable", "unrescaled_V", "rescaled_Vtilde"], "meaning": "tilt state normalisation (exactly equivalent for corrected cs2)", "applicability": "barotropic only", "unresolved": false, "explicit_not_applicable": true, "interactions": "none beyond bookkeeping", "affects": ["none (representation only)"]},
+      "rate_unit_convention": {"values": ["upstream_unconverted", "lcdm_to_timescape_converted"], "meaning": "units of initial Z (1C-A F3; [GM] '-0.16 H0' ambiguous)", "applicability": "always (ICs)", "unresolved": true, "explicit_not_applicable": false, "interactions": "epoch_choice (both set the IC state)", "affects": ["amplitude", "time_evolution"]},
+      "epoch_choice": {"values": ["upstream_0p218_gyr", "dressed_z20"], "meaning": "initial epoch (1C-A F4); also applies to any growth reference epoch", "applicability": "always", "unresolved": true, "explicit_not_applicable": false, "interactions": "rate_unit_convention; growth_coordinate (reference must state its coordinate)", "affects": ["amplitude", "time_evolution"]},
+      "wavenumber_convention": {"values": ["not_applicable", "upstream_timescape_k", "paper_lcdm_hubble_k"], "meaning": "numerical meaning of k (1C-A F7; factor 1.259551); B2 conversion preserves intended k_phys0_D but does not derive k_com_obs", "applicability": "barotropic and any sigma_R integral; not_applicable explicit for scale-independent growth-only runs", "unresolved": true, "explicit_not_applicable": true, "interactions": "sigma_radius_h_convention and unresolved volume-average-to-dressed comoving map", "affects": ["physical_scale", "time_evolution (high k)", "shape"]},
+      "growth_coordinate": {"values": ["bare_aD", "dressed_redshift"], "meaning": "abscissa of D and f (this audit, Sec. 7)", "applicability": "any growth-rate or fsigma8-like output", "unresolved": true, "explicit_not_applicable": false, "interactions": "multiplies f and d sigma/dlna by (2+f_v)^2/(4+f_v+4f_v^2)", "affects": ["observable_interpretation", "amplitude of f (2.5-8.4%)"]},
+      "density_contrast_mapping": {"values": ["keep_Delta_d", "map_to_delta_m_via_minus_k_code2"], "meaning": "retain the CGI Laplacian variable or convert by D1b-code/D1b-com-D/D1b-phys0-D", "applicability": "any amplitude/spectrum output; relative per-mode growth ratios are mapping-invariant and need no dimensional spatial map", "unresolved": false, "explicit_not_applicable": false, "interactions": "absolute or spectral outputs require k_code, k_com_D, or k_phys0_D with its matching complete factor; observational spectra additionally require k_com_obs; sign, frame, and units documented", "affects": ["shape", "amplitude", "observable_interpretation"]},
+      "initial_spectrum_model": {"values": ["upstream_equal_deterministic_Delta_modes", "external_linear_pk_at_zref", "primordial_As_ns_external_transfer"], "meaning": "carrier of statistical k-shape; upstream option explicitly carries none and is comparison-only", "applicability": "any sigma_R/spectrum output; upstream deterministic option is invalid for sigma_R", "unresolved": true, "explicit_not_applicable": false, "interactions": "normalization_strategy (an external P(k) source provides shape and amplitude)", "affects": ["shape", "amplitude"]},
+      "normalization_strategy": {"values": ["external_linear_pk_at_zref", "sigma8_anchor_at_zref", "primordial_As_ns_external_transfer", "upstream_equal_deterministic_Delta_amplitude"], "meaning": "amplitude fixing (Sec. 11 classifications; last option deterministic and forbidden for sigma_8)", "applicability": "any absolute-amplitude output", "unresolved": true, "explicit_not_applicable": false, "interactions": "initial_spectrum_model; sigma_radius_h_convention", "affects": ["amplitude"]},
+      "sigma_radius_h_convention": {"values": ["timescape_dressed_h", "lcdm_reference_h"], "meaning": "which h defines R_8 and the k-unit chain; k_com_X and R_com_X must also share one declared comoving spatial frame", "applicability": "any sigma_R output", "unresolved": true, "explicit_not_applicable": false, "interactions": "wavenumber_convention and unresolved k_com_D-to-k_com_obs map", "affects": ["physical_scale", "amplitude"]}
+    }
+  },
+  "implementation_gates": {
+    "go": [
+      "per-mode signed growth histories D(k,t)/D(t) with built-in crossing scan",
+      "analytic f_bare and f_dressed via -3Z/(Theta Delta_d) and the exact tracker chain factor; growth_coordinate mandatory",
+      "per-mode delta_m mapping layer (D1b-code/D1b-com-D/D1b-phys0-D) as a documented pure conversion with explicit k_code, k_com_D, or k_phys0_D plus harmonic sign and wavenumber convention; no dressed comoving spectrum mapping",
+      "CONDITIONAL: fsigma8-shaped diagnostic f*D*sigma8(z_ref) for the two scale-independent closures under explicit sigma8_anchor_at_zref, labelled conditional, never 'predicted fsigma8'"
+    ],
+    "no_go": [
+      "absolute observational sigma_8/sigma_R (blocked: external spectrum + continuous k-domain + unresolved volume-average-to-dressed comoving coordinate map)",
+      "any barotropic fsigma8 number (blocked: scale dependence + sampled Delta_d crossings/logarithmic poles; only Sec.-13 weighted quantities are mathematically meaningful)",
+      "any RSD data comparison, likelihood, covariance, or fit (blocked: Sec.-14 interpretation chain)"
+    ],
+    "standing_gates": "all Phase 1C mandatory-explicit arguments preserved; D2 forensic-only; both D3 branches always side by side; no default for branch/coordinate/h/spectrum/normalisation; controlled validation design (5 tiers, no uncontrolled Cartesian product); uncertainty taxonomy: numerical vs solver vs spectrum-normalisation vs unresolved-convention spread vs model/closure dependence; a convention-spread envelope must never be described as a statistical confidence interval"
+  },
+  "unresolved_dependencies": [
+    "D3 branch (printed_4_15 vs derived_4_10): [GM 50] full text remains the adjudication dependency; not inspected; no adjudication performed here",
+    "[GM 48] full text: attribution of the linear-order comoving-density identification",
+    "F3 rate units: which H0 in [GM]'s 'Z(t_i) ~= -0.16 H0'",
+    "F4 epoch: 0.218 Gyr vs dressed z=20 (0.19621 Gyr)",
+    "F7 wavenumber convention and the KD background-curvature choice; the existing B2 conversion preserves intended k_phys0_D but does not derive observational/dressed k_com_obs",
+    "RSD application: Percival-White verifies the standard FLRW linear chain, but a dressed Timescape redshift-space mapping, bias/velocity interpretation, and survey fiducial/AP conversion remain unresolved external dependencies",
+    "external spectrum/transfer or anchor for any absolute sigma_8 (PROVISIONAL imports)",
+    "h and matched comoving wavenumber/radius-frame conventions for sigma_R, including the unresolved k_com_D-to-k_com_obs map",
+    "[GM 1] Kodama-Sasaki growing-mode content (non-blocking; recipe reproduced bit-exactly in 1C-A)"
+  ],
+  "observable_readiness": {
+    "relative_Delta_d_growth_history": "YES",
+    "relative_delta_m_growth_history": "YES, CONDITIONALLY (same harmonic mode; nonzero reference amplitude; linear mapping; explicit sign/crossing policy; dimensional spatial mapping is not required because the constant harmonic factor cancels)",
+    "f_bare": "YES, CONDITIONALLY (crossing policy; piecewise for barotropic)",
+    "f_dressed": "YES, CONDITIONALLY (same + exact validated chain factor; coordinate explicit)",
+    "sigma_8": "NO, MISSING NORMALIZATION (also missing spectrum shape, continuous k-domain, and observational/dressed comoving k-radius mapping)",
+    "d_sigma8_d_lna": "NO, MISSING NORMALIZATION (inherits all sigma_8 spectrum/frame blockers; conditional diagnostic possible for clean systems under explicit anchor)",
+    "standard_observational_fsigma8": "NO, MISSING RSD INTERPRETATION (also missing normalization and the observational/dressed comoving mapping)"
+  },
+  "compliance": {
+    "not_done": ["commit", "tag", "push", "stage", "publish", "author contact", "growth package", "power-spectrum integrator", "sigma_8 computation", "fsigma8 pipeline", "likelihood", "fit", "data comparison", "D3 adjudication"],
+    "frozen_files_modified": "none; frozen packages imported read-only; B1/B2 artifacts read only",
+    "temporary_work_location": "no scratch file created by this corrective revision; original Phase 1D-A provenance records in-memory/ignored scratch calculations",
+    "corrective_revision_files_modified": ["reports/phase1d_a_growth_observable_audit.md", "reports/phase1d_a_observable_inventory.json"],
+    "corrective_revision_other_files_created_modified_deleted_or_renamed": false,
+    "deliverables_left_untracked": true,
+    "labels_preserved_verbatim": ["printed_4_15", "derived_4_10", "unrescaled_V", "rescaled_Vtilde", "upstream_unconverted", "lcdm_to_timescape_converted", "upstream_0p218_gyr", "dressed_z20", "upstream_timescape_k", "paper_lcdm_hubble_k"],
+    "d2_rule": "the D2-corrupted sound speed was not used for any observable definition and remains forensic-only"
+  }
+}
