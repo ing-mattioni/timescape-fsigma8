@@ -34,8 +34,23 @@ Scientific reproducibility project for Timescape linear perturbations
   Fig.-3 trajectories reproduced via an isolated forensic harness (D2 code
   never in the package) → `perturbations/barotropic*.py` and
   `reports/phase1c_b2_barotropic_validation.md`.
-- Not implemented: fσ8, σ8 normalisation, likelihoods; D3/IC-unit/epoch/k
-  conventions remain unresolved pending author input (see 1C-A audit).
+- **Phase 1D-A (done):** equation-level growth/observable audit — exact
+  Δ_d ↔ δ_m harmonic mapping (Δ_d,k = −k_code² δ_m,k), bare vs dressed
+  growth coordinates (exact chain factor (2+f_v)²/(4+f_v+4f_v²)),
+  zero-crossing policy, σ_R/σ_8/fσ8 blockers, RSD interpretation →
+  `reports/phase1d_a_growth_observable_audit.md` + `..._inventory.json`.
+- **Phase 1D-B (done):** growth pipeline `src/timescape_fsigma8/growth/` —
+  signed relative growth histories, exact analytic f_bare/f_dressed via
+  −3Z/(ΘΔ_d) (no numerical differentiation), non-logarithmic derivatives,
+  root-refined crossings + piecewise validity intervals, optional
+  solver-harmonic δ_m mapping. Δ_d is a CGI Laplacian scalar, NOT the
+  local density contrast; rates are piecewise across amplitude crossings;
+  both D3 branches remain unresolved →
+  `reports/phase1d_b_growth_pipeline_validation.md`.
+- Not implemented: power spectra, σ_R, σ8, fσ8 (incl. any "fσ8-shaped"
+  diagnostic), RSD/Kaiser mappings, likelihoods; D3/IC-unit/epoch/k/h/
+  coordinate conventions remain unresolved pending author input (see the
+  1C-A and 1D-A audits). D2 stays forensic-only.
 
 ## Hard constraints
 
@@ -69,7 +84,7 @@ Scientific reproducibility project for Timescape linear perturbations
 ## Key commands
 
 ```
-# Full validation suite (268 tests; oracle/artifact tests auto-skip if local
+# Full validation suite (337 tests; oracle/artifact tests auto-skip if local
 # oracles or generated artifacts are absent)
 .venv\Scripts\python -m pytest -q
 
@@ -102,6 +117,10 @@ Scientific reproducibility project for Timescape linear perturbations
 
 # Forensic (D2-corrupted, upstream-reproduction) Fig.-3 variants
 .venv\Scripts\python scripts\make_barotropic_fig3_forensic.py
+
+# Growth-pipeline validation (crossings vs frozen 1D-A brackets, identities,
+# solver/root convergence, one-factor studies) -> artifacts/independent/
+.venv\Scripts\python scripts\validate_growth_pipeline.py
 
 # Re-run the upstream notebook audit (clean kernel, nonzero exit on failure)
 .venv\Scripts\python scripts\execute_upstream_notebook.py

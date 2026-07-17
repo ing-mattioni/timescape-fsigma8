@@ -6,7 +6,7 @@ cosmological model, based on:
 > M. Galoppo & P. Mourier, *Cosmological perturbations on an averaged
 > background*, JCAP 02 (2026) 066, arXiv:2511.17160.
 
-## Current status: Phase 1C-B2 — barotropic perturbation systems validated
+## Current status: Phase 1D-B — growth pipeline validated
 
 - **Phase 1A (done):** audit + clean-room re-execution of the authors'
   `ACPT_Timescape.ipynb` → `reports/upstream_reproducibility.md`.
@@ -35,12 +35,32 @@ cosmological model, based on:
   through an isolated forensic harness (the D2-corrupted sound speed never
   enters the scientific package) →
   `reports/phase1c_b2_barotropic_validation.md`.
-- **Not implemented:** fσ8 predictions, σ8 normalisation, or likelihoods.
+- **Phase 1D-A (done):** equation-level audit of the observable meaning of
+  the CGI perturbation variables: exact harmonic mapping
+  Δ_d,k = −k_code²·δ_m,k, bare/dressed growth coordinates with the exact
+  tracker chain factor, zero-crossing policy, and the blockers separating
+  the present variables from σ_R/σ_8/observational fσ8 →
+  `reports/phase1d_a_growth_observable_audit.md`.
+- **Phase 1D-B (done):** independent typed **growth pipeline**
+  (`src/timescape_fsigma8/growth/`): signed relative growth histories,
+  exact analytic bare and dressed growth rates via −3Z/(ΘΔ_d) (no
+  numerical differentiation), non-logarithmic derivatives, root-refined
+  zero crossings with maximal piecewise validity intervals, and an
+  optional solver-harmonic δ_m coefficient mapping →
+  `reports/phase1d_b_growth_pipeline_validation.md`.
+- **Not implemented:** power spectra, transfer functions, σ_R, σ8,
+  fσ8 (including any "fσ8-shaped" diagnostic), RSD/Kaiser mappings,
+  galaxy bias, likelihoods, or fitting.
 
-> **Validation scope now covers the background plus the Mészáros, comoving,
-> and barotropic perturbation systems.** fσ8 remains outside the validated
-> scope. Neither D3 branch is adjudicated, and the documented D1/D2/D3
-> findings and IC-unit/epoch/wavenumber ambiguities await scientific review.
+> **Read this before using the growth layer:** `Delta_d` is the CGI
+> Laplacian density scalar, **not** the ordinary local density contrast;
+> mapped `delta_m` values are solver-harmonic coefficients only. Relative
+> growth and logarithmic rates are invariant under the fixed harmonic
+> conversion. Growth rates are **piecewise** for trajectories with
+> amplitude crossings (the barotropic rate has poles inside the observable
+> window). Both D3 branches remain unresolved and are always reported side
+> by side. No observational fσ8, σ8, spectrum, or RSD quantity has been
+> implemented. D2 remains excluded from the scientific package.
 
 ## Layout
 
@@ -65,6 +85,8 @@ cosmological model, based on:
 | `scripts/make_barotropic_fig3.py` | Corrected-c²ₛ Fig.-3 variants for both D3 branches (raw and /k²) |
 | `scripts/make_barotropic_fig3_forensic.py` | Forensic (D2-corrupted, upstream-reproduction) Fig.-3 variants |
 | `scripts/_phase1c_b2_forensic.py` | Isolated forensic harness holding the D2-corrupted sound speed (never imported by the scientific package) |
+| `src/timescape_fsigma8/growth/` | Phase 1D-B growth layer: mandatory-explicit scenarios, dust-mode histories, exact analytic rates, root-refined crossings/validity intervals, solver-harmonic δ_m mapping |
+| `scripts/validate_growth_pipeline.py` | Growth-pipeline validation: frozen-bracket crossing checks, analytic identities, solver/root convergence, tilt equivalence, one-factor studies |
 | `artifacts/upstream/` | Executed notebook copy, figures, logs, oracles (git-ignored: upstream-derived content with unclear licensing) |
 | `artifacts/independent/` | Outputs of our own implementation: comparison statistics, reproduced figures |
 | `reports/upstream_reproducibility.md` | Phase 1A reproducibility report |
@@ -75,6 +97,8 @@ cosmological model, based on:
 | `reports/phase1c_equation_inventory.json` | Machine-readable Phase 1C-A equation inventory |
 | `reports/phase1c_b1_clean_systems_validation.md` | Phase 1C-B1 implementation, comparison, convergence, scenario, and readiness report |
 | `reports/phase1c_b2_barotropic_validation.md` | Phase 1C-B2 barotropic implementation, upstream reproduction, D2/D3 factorial, and sensitivity report |
+| `reports/phase1d_a_growth_observable_audit.md` | Phase 1D-A observable-definition audit (+ machine-readable `phase1d_a_observable_inventory.json`) |
+| `reports/phase1d_b_growth_pipeline_validation.md` | Phase 1D-B growth-pipeline implementation and validation report |
 | `AGENTS.md` | Permanent project rules (scientific-integrity constraints) |
 | `pyproject.toml` | Package + minimal dependency declaration |
 
