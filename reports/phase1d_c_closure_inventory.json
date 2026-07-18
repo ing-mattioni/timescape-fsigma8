@@ -1,0 +1,367 @@
+{
+  "schema_note": "Phase 1D-C observable-closure audit inventory, v1.1 (post-compliance-audit non-scientific cleanup). Every object under a *_conclusion key (and every entry of conclusion arrays) carries exactly: classification, source, assumptions, derivation_summary, convention_dependencies, implementation_consequence, evidence_needed_to_change_status. Classifications are exactly one of: VERIFIED_FROM_PRIMARY_SOURCE, DERIVED_FROM_VERIFIED_DEFINITIONS, NUMERICALLY_CORROBORATED, PROVISIONAL_MODEL_IMPORT, CONVENTION_DEPENDENT, REQUIRES_AUTHOR_INPUT, UNRESOLVED_EXTERNAL_DEPENDENCY, NOT_JUSTIFIED_FOR_OBSERVABLE_USE, FORBIDDEN_AS_A_SILENT_DEFAULT, NOT_APPLICABLE. Evidence levels are never merged; supporting qualifications are listed inside convention_dependencies or assumptions. The top-level unresolved_dependencies category holds machine-readable reference records (id, dependency, status_summary, authoritative_paths) pointing to the authoritative conclusion objects elsewhere in this file or in the frozen phase inventories; reference records are not conclusion objects and deliberately carry no classification field, so no conclusion is duplicated or reclassified. Verbatim-quote records carry verbatim_status (descriptive source-record metadata), never classification. Companion prose: reports/phase1d_c_observable_closure_audit.md.",
+  "date_utc": "2026-07-17",
+  "repository_checkpoint": {
+    "branch_created": "phase-1d-c-observable-closure-audit",
+    "start_branch": "phase-1d-b-growth-pipeline",
+    "head": "93d956d0020f0edec34a44cd9d19f30c085aecc7",
+    "base_tag": "phase-1d-b-growth-pipeline-v1",
+    "frozen_tags": [
+      "phase-1b-background-v1",
+      "phase-1c-a-equation-audit-v1",
+      "phase-1c-b1-clean-systems-v1",
+      "phase-1c-b2-barotropic-v1",
+      "phase-1d-a-growth-observable-audit-v1",
+      "phase-1d-b-growth-pipeline-v1"
+    ],
+    "upstream_commit": "590c6fd5332acb15f5683ebf392a0d7ce54983c5",
+    "upstream_notebook_sha256": "86d2534db9e9b3169835e4ce223ee8f3bff6d03b47e5677d3937fed4adafe55a",
+    "preflight_tests": {"python_3_14_3": "337 passed", "python_3_11_9": "337 passed", "git_diff_check": "clean"},
+    "files_created_by_phase": [
+      "reports/phase1d_c_observable_closure_audit.md",
+      "reports/phase1d_c_closure_inventory.json"
+    ],
+    "not_done": ["commit", "stage", "tag", "push", "pull request", "author contact", "any implementation of spectra, sigma_R, sigma_8, f-sigma-8, RSD, likelihoods, fitting, data ingestion, transfer functions, or new scientific APIs"]
+  },
+  "source_inventory": {
+    "local_primary": [
+      {"id": "GM", "citation": "M. Galoppo, P. Mourier, Linear perturbations in averaged cosmological models, arXiv:2511.17160v2, JCAP 02 (2026) 066", "arxiv": "2511.17160v2", "scratch_sha256": "856bd78db8f86e46c0f5d21414ad0c1d136b176c6ac1b45418dbeebc38e920dd", "hash_matches_frozen_1da_provenance": true, "inspection": "full text extracted (pdfminer.six); pages 9, 16, 17 (and eq-bearing pages 15, 19-21, 35, 37 located) rendered to images; Eqs. (2.19)-(2.24), (4.5)-(4.18) read visually; Secs. 5.1-5.3, Fig. 3 caption, conclusions read from extracted text", "content_actually_inspected": true},
+      {"id": "W09", "citation": "D.L. Wiltshire, Average observational quantities in the timescape cosmology, Phys. Rev. D 80 (2009) 123512, arXiv:0909.0749", "arxiv": "0909.0749", "scratch_sha256": "e37321e9d6021c6f5eb6bc5084ad331f4fca9dc0bc426097d1c5ce5ce7b2a8aa", "hash_matches_frozen_1da_provenance": true, "inspection": "full text extracted; Sec. II.4 Eqs. (22)-(27) dressed-geometry construction read verbatim; ar5iv HTML rendition also inspected", "content_actually_inspected": true},
+      {"id": "frozen_local", "citation": "Phase 1B/1C-A/1C-B1/1C-B2/1D-A/1D-B reports, inventories, packages, and the generated 1D-B artifact (read-only), all at 93d956d", "inspection": "1D-A audit and inventory read in full; 1D-B validation report, compliance audit, seven growth modules, artifact taxonomy fields inspected", "content_actually_inspected": true}
+    ],
+    "external_sources": [
+      {"id": "DBE92", "gm_ref": "[GM 50]", "citation": "P.K.S. Dunsby, M. Bruni, G.F.R. Ellis, Covariant Perturbations in a Multifluid Cosmological Medium, ApJ 395 (1992) 54-74", "doi": "10.1086/171629", "version_date": "1992 August 10", "access_route": "ADS scanned article PDF (articles.adsabs.harvard.edu), image-only JBIG2/JPX, downloaded to session tool-results and rendered to 21 page images (pypdfium2, scratchpad-isolated)", "scan_sha256": "3a082920b358872ec64a3706001e1a10a61a51f2e5140cf29662aa1a04b72f20", "sections_inspected": "pp. 54 (title/abstract), 58, 59, 60: Eqs. (26)-(36), (42)-(55); esp. (32), (34), (46), (47)-(49), (54), (55)", "access_outcome": "INSPECTED visually (first time in this project); no machine-readable text layer exists", "content_actually_inspected": true, "conclusion_supported": "original multifluid component equations: general form self-coupling w_i*Theta with c_s(i)^2 inside F^(i) (Eq. 46); own barotropic no-interaction reduction self-coupling (w_i - c_s(i)^2)*Theta (Eqs. 49/55); no (w_i + c_s(i)^2) structure anywhere inspected; c_s^2 = pdot/mudot stated p. 58; abstract asserts harmonic equivalence to Bardeen and Kodama-Sasaki"},
+      {"id": "BDE92", "gm_ref": "[GM 48]", "citation": "M. Bruni, P.K.S. Dunsby, G.F.R. Ellis, Cosmological Perturbations and the Physical Meaning of Gauge-Invariant Variables, ApJ 395 (1992) 34-53", "doi": "10.1086/171628", "version_date": "1992 August 10", "access_route": "ADS scanned article PDF, image-only, downloaded and rendered to 20 page images", "scan_sha256": "eaa273fa5982689cd55eaba7530103e8e9d77199d4b34d3d173c1e9201075b6c", "sections_inspected": "pp. 34 (title/abstract), 45 (Sec. 5 opening, Eqs. 75-79), 47 (Eqs. 96-112), 48 (Sec. 5.2.3, Eqs. 113-133, esp. 119-120)", "access_outcome": "INSPECTED visually (first time in this project)", "content_actually_inspected": true, "conclusion_supported": "Eqs. (119)-(120): D_alpha = a*eps_m|alpha - 3a'(1+w)V_C_alpha = -k*a*eps_m(eta)*Y^(0)_alpha - 3a'(1+w)V_C(eta)*Y^(1)_alpha; the density-gradient scalar-harmonic coefficient is proportional to Bardeen's gauge-invariant matter-frame density contrast eps_m; abstract: Bardeen's variables recovered as first-order terms; upgrades the 1D-A attribution item to VERIFIED_FROM_PRIMARY_SOURCE"},
+      {"id": "PW", "citation": "W.J. Percival, M. White, Testing cosmological structure formation using redshift-space distortions, MNRAS 393 (2009) 297", "arxiv": "0808.0003v2", "access_outcome": "full text inspected in frozen Phase 1D-A (Secs. 2.1-2.3, Eqs. (1)-(14), Secs. 3, 6); conclusions carried forward unchanged this phase", "content_actually_inspected": true, "conclusion_supported": "the standard FLRW linear RSD chain and its assumptions; no Timescape dressed mapping; no general AP/fiducial prescription"},
+      {"id": "HBW20", "citation": "A. Heinesen, C. Blake, D.L. Wiltshire, Quantifying the accuracy of the Alcock-Paczynski scaling of baryon acoustic oscillation measurements, JCAP 01 (2020) 038", "arxiv": "1908.11508", "access_outcome": "abstract inspected verbatim this phase (arxiv.org abstract page)", "content_actually_inspected": "abstract only", "conclusion_supported": "primary Timescape-adjacent literature on survey fiducial conversion addresses BACKGROUND AP scaling of the BAO scale (~1% systematics when true and fiducial models differ strongly); it supplies no perturbative RSD mapping"},
+      {"id": "NW15", "citation": "M.A. Nazer, D.L. Wiltshire, Cosmic microwave background anisotropies in the timescape cosmology, Phys. Rev. D 91 (2015) 063519", "arxiv": "1410.3470", "access_outcome": "abstract inspected verbatim this phase", "content_actually_inspected": "abstract only", "conclusion_supported": "timescape CMB fits adapt existing FLRW codes matched to the timescape expansion history (background matching); no Buchert-to-dressed spatial Fourier-coordinate mapping is supplied"},
+      {"id": "CAMB_docs", "citation": "CAMB official Python documentation, results module, camb.readthedocs.io/en/latest/results.html", "access_outcome": "inspected this phase", "content_actually_inspected": true, "conclusion_supported": "get_matter_power_spectrum returns kh,z,PK with hubble_units (default True: (Mpc/h)^3) and k_hunit (default True: k/h in Mpc^-1); get_matter_power_interpolator PK.P(z,kh); get_sigma8/get_sigma8_0 for 8 h^-1 Mpc spheres; get_matter_transfer_data (normalized transfer entries); multi-redshift output; halofit optional"},
+      {"id": "CLASS_docs", "citation": "CLASS official explanatory.ini, github.com/lesgourg/class_public (master)", "access_outcome": "inspected this phase (raw file)", "content_actually_inspected": true, "conclusion_supported": "output=mPk/dTk/vTk; z_pk list; P_k_max_h/Mpc vs P_k_max_1/Mpc; primordial via A_s (or ln_A_s_1e10) OR sigma8/S8 by shooting; n_s, alpha_s; non_linear blank(default)/halofit/hmcode"},
+      {"id": "ADS_abstract_attempt", "citation": "ui.adsabs.harvard.edu/abs/1992ApJ...395...54D/abstract", "access_outcome": "FAILED: fetch returned empty content (script-rendered page); superseded by direct scan download", "content_actually_inspected": false},
+      {"id": "GM_html_attempt", "citation": "arxiv.org/html/2511.17160v2 (native HTML)", "access_outcome": "PARTIAL: content retrieved only through Sec. 4.2; superseded by local PDF full text", "content_actually_inspected": "partial"},
+      {"id": "DOI_redirect_attempt", "citation": "doi.org/10.1086/171629", "access_outcome": "redirect to adsabs.harvard.edu only; no content; superseded by scan download", "content_actually_inspected": false}
+    ],
+    "policy": "primary sources only; nothing reconstructed from secondary summaries; inaccessible or partial accesses recorded as such; downloads kept in the ignored session scratchpad / tool-results, outside tracked paths"
+  },
+  "frozen_conclusions": [
+    "Delta_d,k = -k_code^2 delta_m,k in the documented harmonic convention",
+    "relative growth ratios of Delta_d and delta_m are identical per fixed mode",
+    "absolute amplitudes, spectra, and sigma statistics require complete dimensional and frame mappings",
+    "f_bare = -3 Z / (Theta Delta_d)",
+    "f_dressed = f_bare (2+f_v)^2/(4+f_v+4f_v^2)",
+    "Delta_d crossings produce logarithmic-rate poles; Z crossings produce rate zeros",
+    "Meszaros and comoving growth are scale independent only under k-independent initial mode mixtures",
+    "barotropic growth is scale dependent",
+    "both D3 branches remain mandatory: printed_4_15 and derived_4_10",
+    "D2 remains forensic-only",
+    "no D3, tilt, rate-unit, epoch, wavenumber, background, h, growth coordinate, spectrum, normalisation, frame, bias, or RSD choice has a scientific default",
+    "the three upstream modes are deterministic trajectory comparisons and do not define a spectrum",
+    "Phase 1D-B contains no spectrum, sigma, f-sigma-8, or RSD observable",
+    "barotropic large-amplitude results are numerically converged but cannot automatically be treated as physically linear",
+    "no current state variable is directly an observed galaxy peculiar velocity or an observed RSD quantity"
+  ],
+  "proposed_evidence_upgrades_reported_not_silently_adopted": [
+    {"item": "GM-48 Bardeen attribution (1D-A Sec. 3 item 5 supporting status)", "old_status": "UNRESOLVED_EXTERNAL_DEPENDENCY", "new_status": "VERIFIED_FROM_PRIMARY_SOURCE", "evidence": "BDE92 Eqs. (119)-(120) and Sec. 5 statements, visually inspected"},
+    {"item": "D3 branch characterization", "old_status": "unresolved; original source uninspected", "new_status": "unresolved; original source inspected; derived_4_10 structurally corroborated by DBE92 (46)+(49)/(55); printed_4_15 has no counterpart structure in the inspected pages; both branches remain mandatory", "evidence": "Sec. 24 of the report; symbolic checks 1-4"}
+  ],
+  "unresolved_dependencies": {
+    "note": "Consolidated reference index of every unresolved dependency recorded in this inventory (required category; added in the post-compliance-audit cleanup). Entries are reference records, not conclusion objects: each points to the authoritative conclusion object(s) via stable JSON paths (this file unless prefixed by a frozen-report path) and restates the status without changing any classification.",
+    "entries": [
+      {"id": "d3_frame_transformation", "dependency": "formal total-matter-frame -> dust-energy-frame transformation of DBE92 (46)+(54) into GM's dust-frame two-fluid barotropic system", "status_summary": "missing derivation; the sole remaining adjudication path for D3 besides author confirmation; REQUIRES_AUTHOR_INPUT per the authoritative conclusion", "authoritative_paths": ["/d3_investigation/d3_conclusion", "/new_theoretical_work_questions[1]"]},
+      {"id": "volume_average_to_dressed_spatial_map", "dependency": "volume-average -> dressed observational comoving spatial Fourier map (k_com_D -> k_com_obs)", "status_summary": "no map found in the searched sources; missing geometric object identified; candidate constant/time-dependent rescalings NOT_JUSTIFIED_FOR_OBSERVABLE_USE per the authoritative conclusions", "authoritative_paths": ["/wavenumber_definitions/k_com_obs", "/candidate_spatial_mappings", "/spatial_frames/dressed_observational", "/new_theoretical_work_questions[0]"]},
+      {"id": "dressed_redshift_space_and_velocity_mapping", "dependency": "dressed redshift-space Jacobian and peculiar-velocity/velocity-divergence interpretation on the dressed geometry", "status_summary": "UNRESOLVED_EXTERNAL_DEPENDENCY at every perturbative link; central missing physics for any RSD-comparable output", "authoritative_paths": ["/rsd_links/2_peculiar_velocity_divergence_in_effective_background", "/rsd_links/6_real_to_redshift_space_mapping", "/rsd_links/9_dressed_light_propagation_perturbed", "/new_theoretical_work_questions[2]"]},
+      {"id": "galaxy_density_and_velocity_bias", "dependency": "galaxy density bias against <rho_d>_D and velocity-bias statement for a Timescape velocity observable", "status_summary": "UNRESOLVED_EXTERNAL_DEPENDENCY; silent unbiased assumption forbidden", "authoritative_paths": ["/bias_requirements", "/rsd_links/4_velocity_bias", "/rsd_links/5_galaxy_density_bias", "/new_theoretical_work_questions[5]"]},
+      {"id": "survey_fiducial_ap_mapping", "dependency": "survey-fiducial / Alcock-Paczynski conversion at perturbation level", "status_summary": "background-level conversion PROVISIONAL_MODEL_IMPORT once specified; perturbation-level conversion UNRESOLVED_EXTERNAL_DEPENDENCY", "authoritative_paths": ["/ap_fiducial_requirements", "/rsd_links/10_ap_fiducial_conversion"]},
+      {"id": "external_continuous_spectrum_and_ensemble_normalisation", "dependency": "external continuous statistical spectrum and the ensemble interpretation of CGI perturbations on an averaged background", "status_summary": "all continuous carriers are PROVISIONAL_MODEL_IMPORT; the ensemble interpretation is new theoretical work; upstream deterministic amplitudes remain NOT_JUSTIFIED_FOR_OBSERVABLE_USE", "authoritative_paths": ["/spectrum_input_strategies/carriers", "/normalization_strategies/upstream_equal_deterministic_Delta_amplitude", "/new_theoretical_work_questions[3]"]},
+      {"id": "barotropic_continuous_k_domain", "dependency": "continuous k-grid of independently solved barotropic trajectories with convergence-fixed k_min/k_max", "status_summary": "prerequisite inventory defined; nothing satisfied today; three deterministic modes never a quadrature", "authoritative_paths": ["/barotropic_requirements", "/high_k_and_linearity/three_modes_rule"]},
+      {"id": "barotropic_high_k_regularisation_and_linearity", "dependency": "physical high-k regularisation / linear-validity criterion for the barotropic closure (c_s^2 < 0 instability)", "status_summary": "unresolved; sigma_R integral divergent, cutoff-dominated, or outside the linear regime without new physical regularisation; no cutoff invented", "authoritative_paths": ["/high_k_and_linearity/negative_sound_speed", "/high_k_and_linearity/gm_unphysicality", "/new_theoretical_work_questions[4]"]},
+      {"id": "d3_branch", "dependency": "D3 branch choice (printed_4_15 vs derived_4_10)", "status_summary": "REQUIRES_AUTHOR_INPUT; structurally corroborated toward derived_4_10 by the inspected original source but not adjudicated; both branches mandatory", "authoritative_paths": ["/d3_investigation/d3_conclusion", "/author_input_questions[0]"]},
+      {"id": "f3_rate_units", "dependency": "F3 initial-rate units: which H0 in 'Z(t_i) ~= -0.16 H0'", "status_summary": "unresolved convention fork (frozen 1C-A/1D-A); both readings implemented as mandatory explicit choices", "authoritative_paths": ["/propagation_graph/choices/rate_unit_convention_F3", "/author_input_questions[1]", "reports/phase1d_a_observable_inventory.json#/scenario_dimensions/fields/rate_unit_convention"]},
+      {"id": "f4_initial_epoch", "dependency": "F4 initial epoch: 0.218 Gyr vs dressed z=20 (0.19621 Gyr)", "status_summary": "unresolved convention fork; also afflicts any growth-reference epoch", "authoritative_paths": ["/propagation_graph/choices/epoch_choice_F4", "/author_input_questions[2]", "reports/phase1d_a_observable_inventory.json#/scenario_dimensions/fields/epoch_choice"]},
+      {"id": "f7_wavenumber_interpretation", "dependency": "F7 wavenumber interpretation of the published {2pi, 5pi, 10pi} labels", "status_summary": "unresolved convention fork; the existing conversion preserves k_phys0_D but does not supply k_com_obs", "authoritative_paths": ["/wavenumber_definitions/F7_conversion_note", "/propagation_graph/choices/wavenumber_convention_F7", "/author_input_questions[3]", "reports/phase1d_a_observable_inventory.json#/scenario_dimensions/fields/wavenumber_convention"]},
+      {"id": "h_convention", "dependency": "h convention for R_8 and the k-unit chain (timescape_dressed_h vs lcdm_reference_h)", "status_summary": "unresolved convention fork; FORBIDDEN_AS_A_SILENT_DEFAULT per the frozen 1D-A conclusion", "authoritative_paths": ["/propagation_graph/choices/h_convention", "/api_design/fields/sigma_radius_h_convention", "reports/phase1d_a_observable_inventory.json#/radius_and_h_conventions/h_convention_conclusion"]},
+      {"id": "spatial_frame_convention", "dependency": "declared spatial frame for any k, R, spectrum, or sigma quantity", "status_summary": "volume_average_D is the only constructible frame; dressed_observational and wall are blocked; mismatched k-R frames rejected at API level", "authoritative_paths": ["/spatial_frames", "/api_design/fields/spatial_frame", "/api_design/incompatibility_matrix[2]"]},
+      {"id": "spectrum_carrier", "dependency": "spectrum-shape carrier choice (upstream deterministic modes / external linear P(k) / primordial + external transfer)", "status_summary": "no carrier selected; external carriers PROVISIONAL_MODEL_IMPORT; upstream modes NOT_JUSTIFIED_FOR_OBSERVABLE_USE as a spectrum", "authoritative_paths": ["/spectrum_input_strategies/carriers", "/api_design/fields/spectrum_input_kind"]},
+      {"id": "normalization_strategy", "dependency": "amplitude-normalisation strategy (external P(k) / sigma8 anchor / primordial+transfer / upstream amplitude)", "status_summary": "no strategy selected; all admissible strategies are PROVISIONAL_MODEL_IMPORT; upstream amplitude rejected for sigma-level targets", "authoritative_paths": ["/normalization_strategies", "/api_design/fields/normalization_strategy", "/api_design/incompatibility_matrix[0]"]}
+    ]
+  },
+  "observable_chain": {
+    "nodes": ["per_mode_growth_validated", "statistical_matter_spectrum", "sigma_R_sigma_8", "density_growth_derivative", "observational_rsd_fsigma8"],
+    "edges": [
+      {"from": "per_mode_growth_validated", "to": "statistical_matter_spectrum", "status": "open", "blockers": ["external spectrum import (PROVISIONAL_MODEL_IMPORT)", "ensemble interpretation on averaged background (new theory)", "F7/h/frame conventions"], "conditional_diagnostics": ["deterministic three-mode comparisons only"]},
+      {"from": "statistical_matter_spectrum", "to": "sigma_R_sigma_8", "status": "open", "blockers": ["k_com_D to k_com_obs spatial map MISSING (no global dressed spatial coordinate exists in primary sources)", "h convention", "matched k-R frame"], "conditional_diagnostics": ["model-internal sigma_R_D_volume_average with declared same-frame import"]},
+      {"from": "sigma_R_sigma_8", "to": "density_growth_derivative", "status": "closed_conditionally", "conditions": ["A1-A6", "explicit sigma8 anchor (A6)", "growth_coordinate explicit", "scale-independent systems only; strict A2 cancels kernel, frame, and shape"], "note": "the anchored diagnostic does NOT require the missing spatial map under strict A2"},
+      {"from": "density_growth_derivative", "to": "observational_rsd_fsigma8", "status": "open", "blockers": ["dressed redshift-space mapping (missing physics)", "velocity interpretation", "galaxy and velocity bias", "survey fiducial/AP at perturbation level", "normalisation provenance"], "conditional_diagnostics": []}
+    ]
+  },
+  "spatial_frames": {
+    "volume_average_D": "Buchert volume-average spatial coordinates; the frame of k_code, k_com_D, k_phys_D(t), k_phys0_D; the only frame in which the solver harmonics are defined",
+    "wall": "local wall geometry; W09: 'not a global geometry' (verbatim); no global Fourier labels",
+    "dressed_observational": "W09 Eqs. (22)-(26): average effective geometry, spherically symmetric but NOT homogeneous, not an exact EFE solution, constructed by conformally matching radial null geodesics for a central observer; defines time and radial distance-redshift observables only; NO spatial Fourier decomposition exists in any inspected source",
+    "reference_lcdm_fiducial": "a different model's comoving coordinates; admissible only as an explicitly declared fiducial import with AP-style conversion; never a Timescape frame"
+  },
+  "wavenumber_definitions": {
+    "k_code": "dimensionless solver harmonic label; (3)Lap Q_k = -(k_code^2/a_D^2) Q_k",
+    "k_com_D": "k_code * H0_TS/c (volume-average comoving)",
+    "k_phys_D_t": "k_com_D / a_D(t)",
+    "k_phys0_D": "k_code * H0_TS/(a_D0 c)",
+    "wall_comoving": "undefined globally (wall geometry not global; W09 verbatim)",
+    "k_com_obs": "NOT DEFINED by any frozen relation or any inspected primary source; the missing geometric object is a homogeneous dressed spatial 3-geometry off the light cone",
+    "F7_conversion_note": "paper_lcdm_hubble_k conversion factor a_D0*h_lcdm/h_ts = 1.259551 converts between numerical conventions for the SAME volume-average mode; it preserves k_phys0_D and does not supply k_com_obs"
+  },
+  "candidate_spatial_mappings": [
+    {"candidate": "constant rescaling by gamma_w0 (= a_D0/a_w0 = 1.3685)", "conclusion": {"classification": "NOT_JUSTIFIED_FOR_OBSERVABLE_USE", "source": "W09 Sec. II.4 (inspected): dressed geometry inhomogeneous, light-cone constructed; no source derives a spatial harmonic rescaling", "assumptions": "would assume the dressed geometry admits a global comoving 3-metric differing by a constant scale, contradicting W09's inhomogeneity statement", "derivation_summary": "no derivation exists; choice among gamma_w0, a_D0, H0 ratios is undirected", "convention_dependencies": "time dependence of gamma_w(t) (1 -> 1.3685) makes any non-fixed-epoch version time dependent; light-cone/survey dependence", "implementation_consequence": "may enter a future API only as an explicitly labelled PROVISIONAL_MODEL_IMPORT with alternatives reported side by side; never as a claimed observational map", "evidence_needed_to_change_status": "a primary-source derivation of a dressed spatial Fourier correspondence (new theoretical work item 1)"}},
+    {"candidate": "time-dependent conformal rescaling by gamma_w(t)", "conclusion": {"classification": "NOT_JUSTIFIED_FOR_OBSERVABLE_USE", "source": "same as above", "assumptions": "same, plus commuting the rescaling with growth", "derivation_summary": "a time-dependent lambda(t) mixes coordinate change with growth (Sec. 9 Jacobian); undefined off the light cone", "convention_dependencies": "time, light-cone", "implementation_consequence": "rejected", "evidence_needed_to_change_status": "same as above"}},
+    {"candidate": "promotion of the redshift relation 1+z = a_w0/a_w to a spatial Fourier map", "conclusion": {"classification": "NOT_JUSTIFIED_FOR_OBSERVABLE_USE", "source": "task rule + W09/GM: the relation is a time/radial observable dressing only", "assumptions": "none admissible", "derivation_summary": "a time/redshift relation contains no spatial harmonic information; explicitly forbidden without derivation", "convention_dependencies": "none", "implementation_consequence": "rejected at API level", "evidence_needed_to_change_status": "a derivation, which no inspected source contains"}}
+  ],
+  "coordinate_jacobians": {
+    "constant_rescaling_x_new_eq_lambda_x_old": {
+      "k": "k_new = k_old/lambda",
+      "fourier_amplitude": "delta_k_new(k_new) = lambda^3 delta_k_old(lambda k_new)",
+      "dirac_delta": "delta_D(k_new - k'_new) = lambda^3 delta_D(k_old - k'_old)",
+      "power_spectrum": "P_new(k_new) = lambda^3 P_old(lambda k_new) [value AND units change]",
+      "dimensionless_power": "Delta2_new(k_new) = Delta2_old(lambda k_new) [argument remap only]",
+      "sigma_R": "invariant iff k and R are transformed together in the same frame (matched-frame rule)",
+      "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS"
+    }
+  },
+  "spectrum_input_strategies": {
+    "carriers": {
+      "upstream_equal_deterministic_Delta_modes": {"continuous_shape": false, "amplitude": "deterministic comparison only", "native_frame": "volume-average harmonic labels (F7-ambiguous)", "units": "dimensionless k_code", "imports": "none", "use_class": "comparative/illustrative only", "clean_growth_compatible": "as trajectory comparisons only", "barotropic_compatible": "as trajectory comparisons only", "needs_k_com_obs": "n/a", "valid_internal_sigma_R_D": false, "valid_observational_sigma8": false, "future_api_must_reject_as_spectrum": true, "classification": "NOT_JUSTIFIED_FOR_OBSERVABLE_USE"},
+      "external_linear_pk_at_zref": {"continuous_shape": true, "amplitude": true, "native_frame": "reference-FLRW comoving (provider)", "units": "CAMB: P in (Mpc/h)^3 or Mpc^3 via hubble_units, k or k/h via k_hunit; CLASS: k grid via P_k_max_h/Mpc or P_k_max_1/Mpc", "h_convention": "provider parameter; explicit metadata", "redshift_convention": "provider z grid (z_pk / PK_redshifts)", "imports": "reference-LCDM transfer physics: baryons, radiation, neutrinos, primordial tilt+running, BAO wiggles; halofit only if not disabled (must be rejected)", "use_class": "calibrated/anchored", "clean_growth_compatible": true, "barotropic_compatible": "formally", "needs_k_com_obs": "for observational use yes; for declared internal frame use no", "valid_internal_sigma_R_D": "yes with explicit frame-declaration import", "valid_observational_sigma8": false, "future_api_must_reject_as_spectrum": false, "classification": "PROVISIONAL_MODEL_IMPORT"},
+      "primordial_As_ns_external_transfer": {"continuous_shape": true, "amplitude": "predictive within the imported model", "native_frame": "reference-FLRW comoving", "units": "provider transfer normalisation (CAMB get_matter_transfer_data; CLASS dTk)", "imports": "early-universe assumptions plus everything in the transfer", "use_class": "predictive within the imported model", "clean_growth_compatible": true, "barotropic_compatible": "formally", "needs_k_com_obs": "same as above", "valid_internal_sigma_R_D": "yes with declared frame", "valid_observational_sigma8": false, "future_api_must_reject_as_spectrum": false, "classification": "PROVISIONAL_MODEL_IMPORT"}
+    },
+    "gm_own_envisaged_route": {"quote": "Another natural extension of this work would be the development of a consistent scheme for the growth of BAO ... the perturbations in the dust/radiation mixture fluid could be treated in the standard approach ... the acoustic peaks in the dust perturbations would grow in a scale-independent way, as in the LCDM framework, yet with a modified growth rate ... with a comoving parametrisation of its perturbations", "source": "GM conclusions, verbatim, full text re-extracted this phase", "verbatim_status": "VERIFIED_FROM_PRIMARY_SOURCE (descriptive source-record metadata: verbatim quote confirmed against the hashed primary text; not a formal conclusion object)"},
+    "interface_input_modes_design": {"modes": ["dimensional_pk", "dimensionless_delta2", "transfer_plus_primordial", "sigma8_anchor_only"], "decision": "more than one explicit input mode must be accepted, each with its own mandatory metadata (units, h, frame declaration, linear-only flag, provider provenance, redshift grid) and tested conversions; no implementation in this phase"}
+  },
+  "normalization_strategies": {
+    "external_linear_pk_at_zref": {"supplies": "shape+amplitude", "classification": "PROVISIONAL_MODEL_IMPORT"},
+    "sigma8_anchor_at_zref": {"supplies": "amplitude only", "shape_free_under_strict_A2": true, "needs_spatial_map_for_anchored_diagnostic": false, "classification": "PROVISIONAL_MODEL_IMPORT"},
+    "primordial_As_ns_external_transfer": {"supplies": "shape+amplitude (predictive within imported model)", "classification": "PROVISIONAL_MODEL_IMPORT"},
+    "upstream_equal_deterministic_Delta_amplitude": {"supplies": "deterministic comparison value only", "sigma8_normalisation_valid": false, "classification": "NOT_JUSTIFIED_FOR_OBSERVABLE_USE", "silent_use": "FORBIDDEN_AS_A_SILENT_DEFAULT", "note": "no new evidence establishing an ensemble or spectrum normalisation was found in the GM full text this phase"}
+  },
+  "a1_a6_matrix": {
+    "identity": "sigma_8(z) = D(z;z_ref) sigma_8(z_ref); d sigma_8/d ln a = f(z) D(z;z_ref) sigma_8(z_ref), same a-coordinate both sides",
+    "key_new_derivation": {"statement": "under strict A2 the kernel weight cancels identically for every R and every frame: sigma_R(z) = D(z) sigma_R(z_ref) for all R; hence the anchored evolution requires neither the k_com_obs spatial map nor a spectrum shape", "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS", "conditionality": "collapses the moment A2 is relaxed"},
+    "meszaros": {
+      "A1": {"status": "assumed; physically unverifiable without amplitude normalisation", "imported": true},
+      "A2": {"status": "holds mathematically (GM (4.27) k-free + k-independent IC mixture assumption)", "imported": "IC-mixture assumption explicit"},
+      "A3": {"status": "implied by A2 for evolution; externally imported for any shape statement", "imported": true},
+      "A4": {"status": "cancels under strict A2; anchor's own convention metadata must still be declared", "imported": "anchor metadata"},
+      "A5": {"status": "verified for audited scenarios: zero refined roots, whole-domain validity intervals (frozen 1D-B)", "imported": false},
+      "A6": {"status": "external anchor import; LCDM-pipeline-reduced observational number", "imported": true},
+      "physical_applicability": {"classification": "VERIFIED_FROM_PRIMARY_SOURCE", "source": "GM p. 25 verbatim: 'we conclude that the Meszaros approximation should not be applicable in the timescape framework'", "assumptions": "none", "derivation_summary": "identity evaluable but the primary source rejects the closure's physical applicability to timescape; permissible only as a comparison baseline", "convention_dependencies": "none", "implementation_consequence": "mandatory caveat on every Meszaros anchored output; never presented as the timescape prediction", "evidence_needed_to_change_status": "a primary-source retraction or new derivation of applicability"}
+    },
+    "comoving": {
+      "A1": {"status": "assumed; physically unverifiable without amplitude normalisation", "imported": true},
+      "A2": {"status": "holds (GM p. 19 verbatim scale-independence) under the explicit IC-mixture assumption", "imported": "IC-mixture assumption explicit"},
+      "A3": {"status": "as Meszaros", "imported": true},
+      "A4": {"status": "as Meszaros", "imported": "anchor metadata"},
+      "A5": {"status": "verified for audited scenarios (frozen 1D-B: zero crossings)", "imported": false},
+      "A6": {"status": "external anchor import", "imported": true},
+      "physical_applicability": {"classification": "VERIFIED_FROM_PRIMARY_SOURCE", "source": "GM p. 19 scale-independence; GM conclusions adopt the comoving parametrisation in their future-BAO sketch", "assumptions": "linear scheme; closure ansatz status per GM ('only one particular ansatz' applies to barotropic; comoving is GM's highlighted scale-independent closure)", "derivation_summary": "the comoving system is the primary carrier for any conditional anchored diagnostic", "convention_dependencies": "F3/F4 ICs, preset, growth coordinate, anchor", "implementation_consequence": "Candidate A primary carrier", "evidence_needed_to_change_status": "author input contradicting the closure's status"}
+    },
+    "barotropic_both_branches": {"A2": "fails (scale-dependent)", "A5": "fails at modes with crossings", "identity": "unavailable; only the scale-dependent weighted quantities exist"},
+    "bare_dressed_derivative_distinction": {"chain_factor_t0": 1.084156, "chain_factor_dressed_z20": 1.02475, "classification": "CONVENTION_DEPENDENT", "rule": "growth_coordinate mandatory on any derivative"}
+  },
+  "anchored_diagnostic_names": {
+    "anchored_sigma8_evolution": "D(z;z_ref)*sigma8_anchor under A1-A6 with declared anchor metadata; an anchored evolution of the anchor, not a measured sigma_8(z)",
+    "d_sigma8_dln_a_anchored": "f(z)*D(z;z_ref)*sigma8_anchor in the declared growth coordinate; deliberately spells the derivative, not f-sigma-8",
+    "anchored_density_growth_diagnostic": "umbrella public label for the pair; RECOMMENDED primary name because it contains neither sigma_8(z) nor any f*sigma8 juxtaposition",
+    "forbidden_name_tokens_for_these_quantities": ["fsigma8", "f_sigma8", "RSD"],
+    "mandatory_caveat_block": ["A1-A6 statement", "anchor provenance", "growth coordinate", "system + Meszaros-inapplicability caveat where relevant", "non-RSD statement"]
+  },
+  "scale_dependent_equations": {
+    "sigma_R2": "sigma_R^2(z) = int dlnk Delta2_delta(k, z_ref) D^2(k,z) W^2(kR), one declared frame X",
+    "d_sigma_R_dln_a": "(1/sigma_R) int dlnk Delta2_delta(k,z_ref) D(k,z) [dD(k,z)/dln a] W^2(kR)",
+    "f_R_eff": "(1/sigma_R) d sigma_R/d ln a",
+    "crossing_safety": {"classification": "DERIVED_FROM_VERIFIED_DEFINITIONS", "source": "frozen 1D-A D7-D8 chains; symbolic finiteness statement re-affirmed; no numerical integral evaluated this phase", "assumptions": "dominated convergence for differentiation under the integral", "derivation_summary": "integrand contains D*dD/dlna, finite at individual Delta_d crossings (non-logarithmic derivative -3Z/Theta finite everywhere); only sigma_R = 0 is singular", "convention_dependencies": "all sigma_R conventions plus growth coordinate", "implementation_consequence": "sigma-level derivatives always via the non-logarithmic form; crossing locus tabulated, never smoothed", "evidence_needed_to_change_status": "n/a (mathematical)"}
+  },
+  "barotropic_requirements": ["continuous spectrum at z_ref in declared frame (import)", "continuous k-grid of independently solved trajectories; k-interpolation only with separately validated error budget and categorically excluded across crossing-bearing k-windows", "convergence-tested quadrature", "k_min/k_max from demonstrated kernel-capture convergence, never convention; no universal cutoff invented", "root-refined crossing locus k -> t_cross(k)", "both D3 branches side by side", "both tilt labels with equivalence check", "explicit rate-unit/epoch/preset/F7/h/coordinate/frame choices", "linearity policy (five-level mask)", "dominated-convergence check", "log-domain accumulation for the >= 1e14 dynamic range; overflow policy", "explicit policy for modes leaving the declared linear regime", "flagging of sign-changing D contributions", "d_sigma_R_dln_a and f_R_eff never named f-sigma-8"],
+  "high_k_and_linearity": {
+    "negative_sound_speed": {"classification": "VERIFIED_FROM_PRIMARY_SOURCE", "source": "GM Fig. 1 discussion verbatim ('both the EoS parameter and the squared sound speed of the effective fluid remain negative throughout') + frozen 1B corrected cs2_eff from -1/2 to -0.3912", "assumptions": "corrected (non-D2) sound speed", "derivation_summary": "cs2 < 0 makes the barotropic k^2 coupling destabilising (A34*A43 = -cs2 k^2/a^2 > 0) with growth rate increasing without bound in k, on both D3 branches", "convention_dependencies": "D3 branch changes trajectories, not the instability's existence", "implementation_consequence": "sigma_R integral against any standard damped linear spectrum is divergent, cutoff-dominated, or dominated by modes outside the linear regime", "evidence_needed_to_change_status": "a primary-source physical regularisation or validity criterion (none found)"},
+    "frozen_numerical_endpoints": {"classification": "NUMERICALLY_CORROBORATED", "source": "frozen 1D-B: baseline printed_4_15 relative-growth endpoints +4.73 / -2.6e4 / -5.2e14 at 2pi/5pi/10pi", "assumptions": "baseline conventions", "derivation_summary": "super-polynomial k-growth over a factor 5 in k", "convention_dependencies": "F7 dominant at high k", "implementation_consequence": "log-domain numerics mandatory; cutoff-dominance diagnostic mandatory", "evidence_needed_to_change_status": "n/a"},
+    "gm_unphysicality": {"classification": "VERIFIED_FROM_PRIMARY_SOURCE", "source": "GM conclusions verbatim: growth 'too fast to be reasonably compatible with the observed structure formation in our Universe, and even more unphysical reversals in the density contrast sign over time occur in many cases'; 'unexpected departure of the system from the linear regime while the dust perturbations are still very small'", "assumptions": "none", "derivation_summary": "the primary source itself flags sub-horizon barotropic growth as unphysical and linearly inconsistent", "convention_dependencies": "none", "implementation_consequence": "barotropic sigma_R classified unresolved/undefined without new physical regularisation", "evidence_needed_to_change_status": "new primary-source regularisation"},
+    "three_modes_rule": "the modes {2pi, 5pi, 10pi} are never interpolated into a spectrum or used as a quadrature rule (frozen)",
+    "linearity_ladder": ["linear equations (true by construction)", "numerically converged solutions (established)", "linear-amplitude regime (requires normalisation - not establishable now)", "physically plausible growth (GM negative for barotropic sub-horizon)", "observational validity (blocked)"],
+    "delta_d_criterion_rule": {"classification": "DERIVED_FROM_VERIFIED_DEFINITIONS", "source": "Delta_d,k = -k_code^2 delta_m,k", "assumptions": "linear mapping", "derivation_summary": "a fixed |Delta_d| threshold is scale-dependent by k^2; no conventional |Delta_d| << 1 criterion may be imposed without derivation", "convention_dependencies": "harmonic convention", "implementation_consequence": "linearity mask thresholds must be defined on delta_m under a declared normalisation, never on Delta_d directly", "evidence_needed_to_change_status": "n/a (mathematical)"},
+    "missing_for_absolute_mask": ["statistical normalisation (spectrum or anchor)", "spatial-frame scale assignment"],
+    "validity_mask_design": {"levels": ["numerical_validity", "equation_linearisation_validity", "amplitude_normalisation_validity", "physical_model_validity", "observational_validity"], "rule": "levels independently reported, never collapsed; not implemented in this phase"}
+  },
+  "rsd_links": {
+    "1_dust_congruence_expansion_perturbation": {"status": "available", "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS"},
+    "2_peculiar_velocity_divergence_in_effective_background": {"status": "no Timescape definition exists", "classification": "UNRESOLVED_EXTERNAL_DEPENDENCY"},
+    "3_galaxy_velocity": {"status": "requires galaxy model on averaged background", "classification": "UNRESOLVED_EXTERNAL_DEPENDENCY"},
+    "4_velocity_bias": {"status": "even the unbiased statement undefined until link 2", "classification": "NOT_JUSTIFIED_FOR_OBSERVABLE_USE"},
+    "5_galaxy_density_bias": {"status": "needs averaging-consistent galaxy-field definition vs <rho_d>_D", "classification": "UNRESOLVED_EXTERNAL_DEPENDENCY"},
+    "6_real_to_redshift_space_mapping": {"status": "central missing piece; requires perturbed light propagation on the dressed geometry", "classification": "UNRESOLVED_EXTERNAL_DEPENDENCY"},
+    "7_line_of_sight_distant_observer": {"status": "definable only after link 6", "classification": "NOT_APPLICABLE"},
+    "8_dressed_clock_and_H_normalisation": {"status": "available and exact (frozen chain factor)", "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS"},
+    "9_dressed_light_propagation_perturbed": {"status": "background exists (W09/1B); perturbed does not", "classification": "UNRESOLVED_EXTERNAL_DEPENDENCY"},
+    "10_ap_fiducial_conversion": {"status": "background-level treated by HBW20 (~1% BAO-scale systematics); perturbation-level absent", "classification": "UNRESOLVED_EXTERNAL_DEPENDENCY"},
+    "11_survey_window_estimator": {"status": "meaningful only after links 6-10", "classification": "NOT_APPLICABLE"},
+    "12_nonlinear_scale_cuts": {"status": "estimator-specific (PW Sec. 6, frozen withdrawal of universal range); Timescape cuts undefined pending linearity normalisation", "classification": "UNRESOLVED_EXTERNAL_DEPENDENCY"}
+  },
+  "rsd_source_supply": {
+    "W09": {"background_distance_redshift": true, "real_space_spatial_map": false, "perturbative_velocity_map": false, "rsd_jacobian": false, "galaxy_bias": false, "survey_fiducial_conversion": false},
+    "NW15": {"background_distance_redshift": true, "real_space_spatial_map": false, "perturbative_velocity_map": false, "rsd_jacobian": false, "galaxy_bias": false, "survey_fiducial_conversion": "CMB-level matching only"},
+    "HBW20": {"background_distance_redshift": true, "real_space_spatial_map": false, "perturbative_velocity_map": false, "rsd_jacobian": false, "galaxy_bias": false, "survey_fiducial_conversion": "background BAO/AP scaling only"},
+    "GM": {"background_distance_redshift": true, "real_space_spatial_map": false, "perturbative_velocity_map": false, "rsd_jacobian": false, "galaxy_bias": false, "survey_fiducial_conversion": false},
+    "rule": "successful background fits (SNe, BAO, CMB) are not evidence of a perturbative RSD mapping"
+  },
+  "rsd_label_ranking": [
+    {"label": "density_growth_derivative", "justified": true, "rank": 1},
+    {"label": "anchored_density_growth_diagnostic", "justified": "conditionally (A1-A6 + anchor + naming rules)", "rank": 2},
+    {"label": "theoretical_f_sigma8", "justified": false, "rank": 3, "reason": "sigma_8 frame-blocked; name invites RSD reading"},
+    {"label": "observational_f_sigma8", "justified": false, "rank": 4},
+    {"label": "RSD_prediction", "justified": false, "rank": 5, "rule": "identical algebraic units or notation confer no observational status"}
+  ],
+  "bias_requirements": {"galaxy_density_bias": "explicit model import defined against <rho_d>_D (GM Sec. 5.2.2 criticises other reference densities); UNRESOLVED_EXTERNAL_DEPENDENCY", "velocity_bias": "statement undefined until a Timescape velocity observable exists; UNRESOLVED_EXTERNAL_DEPENDENCY", "silent_unbiased_assumption": "forbidden"},
+  "ap_fiducial_requirements": {"background_conversion": "PROVISIONAL_MODEL_IMPORT once specified (dressed distance-redshift exists, frozen 1B)", "perturbation_level_conversion": "UNRESOLVED_EXTERNAL_DEPENDENCY", "hbw20_warning": "systematic errors ~1% in BAO-scale recovery when the true model is distant from the fiducial; 'caution must be taken with the error budget when extrapolating' (abstract, verbatim)", "survey_sigma8_convention": "embedded in reported fsigma8 points; explicit import step"},
+  "d3_investigation": {
+    "access": {"DBE92": "obtained and inspected (ADS scan rendered to page images; sha256 3a082920b358872ec64a3706001e1a10a61a51f2e5140cf29662aa1a04b72f20)", "BDE92": "obtained and inspected (sha256 eaa273fa5982689cd55eaba7530103e8e9d77199d4b34d3d173c1e9201075b6c)"},
+    "notation_map": {"DBE_D_a_i": "GM D_mu^(i) (comoving fractional density gradient; identical construction)", "DBE_Zcal_a": "GM Z_mu = a D_mu Theta, scalarised", "DBE_cs2": "pdot/mudot (p. 58 verbatim) = GM (4.13) cs2 'equivalently dp/drho or pdot/rhodot'", "DBE_Theta": "3H", "DBE_F_i_perfect_fluid": "Psi_i = V_i; F_i = Vdot_i + (1/3 - cs2_i)*Theta*V_i = GM (2.20) F^(i)", "laplacian_sign": "does not enter the Theta-self-coupling comparison", "metric_signature": "shared Ellis-school conventions; continuity mudot = -3H(mu+p) in both"},
+    "equations_inspected": {
+      "DBE_32": "total fluid: self-coupling +3Hw (= w*Theta); cs2 absent from it",
+      "DBE_46": "component, total-matter frame: self-coupling w_i*Theta; cs2_i inside F^(i)",
+      "DBE_49_55": "useful form (55 = no interactions): self-coupling (w_i - cs2_i)*Theta",
+      "GM_2_22": "faithful scalarization of DBE (46), term by term (visual check); introduced citing [50]",
+      "GM_4_10": "dust frame, frequency space: -w_eff*Theta*Delta_eff + Theta*Ptilde_eff - (k^2/a)*Vtilde_eff",
+      "GM_4_13": "Ptilde_eff = cs2_eff*Delta_eff, any observer frame",
+      "GM_4_15_printed": "-(w_eff + cs2_eff)*Theta*Delta_eff"
+    },
+    "symbolic_checks": {"script": "scratchpad phase1dc_d3_symbolic.py (sympy; scratchpad-isolated)", "check1": "PASS: GM (4.10)+(4.13) => self-coupling (w_eff - cs2)*Theta", "check2": "PASS: printed (4.15) - derived = +2*cs2*Theta*Delta_eff", "check3": "PASS: DBE (46)+(54), barotropic non-interacting component => 3H(w_i - cs2_i) = (w_i - cs2_i)*Theta, reproducing DBE (55) as printed", "check4": "PASS: no (w_i + cs2_i) combination arises from any inspected DBE reduction"},
+    "sign_transformations_recorded": ["moving DBE LHS -3(w_i - cs2_i)H*D_i to RHS gives +(w_i - cs2_i)*Theta self-coupling", "GM (2.22) F-term -a*Theta*(1+w_i)*F^(i) maps to DBE (46) RHS +3a(1+w_i)H*F^(i) after side change", "GM (4.8) F^(eff) = -(1/a)*P^(eff) substitution produces +Theta*(1+w)*P^(eff) in (4.6)", "barotropic closure substitution leaves +Theta*cs2*Delta_eff, i.e. -(w_eff - cs2)*Theta self-coupling"],
+    "d3_conclusion": {
+      "classification": "REQUIRES_AUTHOR_INPUT",
+      "source": "DBE92 Eqs. (32), (46), (49), (54), (55) and GM Eqs. (2.20)-(2.24), (4.5)-(4.17), all visually inspected this phase; symbolic checks 1-4",
+      "assumptions": "structural comparison across frames (DBE component equations: total-matter rest frame; GM Sec. 4: dust energy frame with P + aF = 0); barotropic component entropy perturbation zero",
+      "derivation_summary": "the original source structurally supports the derived_4_10 combination: its own barotropic reduction produces (w - cs2)*Theta and its general equation matches GM (2.22) from which derived_4_10 follows; no (w + cs2)*Theta structure appears anywhere in the inspected pages; a sign slip when collecting -w*Theta*Delta + Theta*cs2*Delta is a plausible mechanical origin of the printed form (hypothesis, not fact)",
+      "convention_dependencies": "residual gaps preventing adjudication: (i) full total-frame -> dust-frame transformation of DBE (46)/(54) not executed (can reshuffle cs2 terms between density and tilt rows); (ii) DBE92 does not print GM's dust+effective two-fluid barotropic system verbatim",
+      "implementation_consequence": "both branches remain mandatory; no branch is called correct/canonical/preferred/physical/recommended/intended/default; no Phase 1C or 1D-B code changed",
+      "evidence_needed_to_change_status": "author confirmation of the intended (4.15) sign, or the complete formal frame-mapping derivation (new theoretical work item 2)"
+    },
+    "gm48_attribution_conclusion": {
+      "classification": "VERIFIED_FROM_PRIMARY_SOURCE",
+      "source": "BDE92 abstract and Sec. 5.2.3 Eqs. (119)-(120) (p. 48, visual); DBE92 abstract (Bardeen and Kodama-Sasaki equivalence)",
+      "assumptions": "linear order, scalar sector",
+      "derivation_summary": "D_alpha = a*eps_m|alpha - 3a'(1+w)V_C_alpha with scalar-harmonic coefficient -k*a*eps_m(eta): the CGI density-gradient's harmonic coefficient is proportional to Bardeen's matter-frame density contrast, verifying the attribution the frozen 1D-A audit had derived internally but could not attribute",
+      "convention_dependencies": "BDE92 Y-harmonics vs covariant Q-harmonics (their footnote 22); does not affect the attribution statement",
+      "implementation_consequence": "1D-A Sec. 3 item 5 supporting status upgrades from UNRESOLVED_EXTERNAL_DEPENDENCY to VERIFIED_FROM_PRIMARY_SOURCE; no frozen equation or code affected",
+      "evidence_needed_to_change_status": "n/a (verified)"
+    }
+  },
+  "propagation_graph": {
+    "effect_classes": ["cancels", "amplitude", "shape", "physical_scale", "time_evolution", "interpretation"],
+    "choices": {
+      "d3_branch": {"per_mode_D": "time_evolution (sign reversals)", "per_mode_f": "time_evolution (poles move)", "mapped_delta_m": "time_evolution", "spectrum_shape": "shape (via D(k))", "spectrum_amplitude": "amplitude", "sigma_R": "shape+amplitude", "sigma_8": "shape+amplitude", "d_sigma_R_dln_a": "shape+amplitude", "anchored_diagnostic": "not_applicable (clean systems; explicit not_applicable)", "rsd_interpretation": "interpretation (if ever reached)", "likelihood_comparability": "yes", "frozen_one_factor_delta": "-230.2% signed endpoint-growth delta spanning a sign reversal (never an uncertainty magnitude)"},
+      "rate_unit_convention_F3": {"per_mode_D": "amplitude+time_evolution", "per_mode_f": "time_evolution", "anchored_diagnostic": "amplitude (via D)", "frozen_one_factor_delta": "-0.70% G_end"},
+      "epoch_choice_F4": {"per_mode_D": "amplitude+time_evolution", "anchored_diagnostic": "amplitude (also afflicts z_ref)", "frozen_one_factor_delta": "-1.40% G_end"},
+      "wavenumber_convention_F7": {"per_mode_D": "time_evolution (barotropic only; dominant high k)", "sigma_R": "physical_scale (kernel placement)", "anchored_diagnostic": "cancels under strict A2", "frozen_one_factor_delta": "-32.4% G_end and endpoint-rate sign flip (+0.14661 -> -0.91992)"},
+      "background_preset": {"all_downstream": "amplitude+time_evolution+physical_scale", "frozen_one_factor_delta": "-0.042% G_end"},
+      "tilt_form": {"all_downstream": "cancels (representation only; <= 3e-14%)"},
+      "growth_coordinate": {"per_mode_D": "cancels (history unchanged)", "per_mode_f": "amplitude x1.025-1.084156", "d_sigma_R_dln_a": "amplitude", "rsd_interpretation": "interpretation"},
+      "h_convention": {"sigma_R": "physical_scale (R_8: 10.92 vs 11.87 Mpc)", "anchored_diagnostic": "anchor metadata only under strict A2"},
+      "spatial_frame": {"spectrum_shape": "argument remap + value (Jacobian)", "sigma_R": "physical_scale", "anchored_diagnostic": "cancels under strict A2", "rsd_interpretation": "interpretation"},
+      "spectrum_source": {"spectrum_shape": "shape", "spectrum_amplitude": "amplitude", "anchored_diagnostic": "cancels (anchor-only path)"},
+      "normalization_strategy": {"spectrum_amplitude": "amplitude", "anchored_diagnostic": "amplitude (anchor value)"}
+    },
+    "envelope_rule": "an envelope over these alternatives is a convention or model spread, never a statistical confidence interval"
+  },
+  "future_scenario_fields": {
+    "inherited_unchanged": ["perturbation_system", "background_preset", "d3_branch", "tilt_form", "rate_unit_convention", "epoch_choice", "wavenumber_convention", "growth_coordinate", "density_contrast_mapping", "initial_spectrum_model", "normalization_strategy", "sigma_radius_h_convention"],
+    "new_in_1d_c": ["observable_target", "spatial_frame", "spectrum_input_kind", "smoothing_radius_definition", "growth_reference", "linearity_policy", "rsd_interpretation", "bias_model", "survey_fiducial_mapping"],
+    "rule": "every field mandatory-explicit; not_applicable must be passed explicitly where marked; no scientific default anywhere"
+  },
+  "api_design": {
+    "constructor": "one frozen ObservableClosureSpec-style object; exhaustive validation at construction time; serialization = flat JSON of explicit labels plus provenance blocks; no implementation in this phase",
+    "fields": {
+      "observable_target": {"labels": ["per_mode_growth", "anchored_density_growth_diagnostic", "internal_sigma_R_D_volume_average", "barotropic_sigma_R_D_weighted_growth", "observational_sigma8", "rsd_fsigma8"], "note": "last two constructible only as explicit blocked-status objects", "default": "NONE"},
+      "perturbation_system": {"labels": ["meszaros", "comoving", "barotropic"], "default": "NONE"},
+      "background_preset": {"labels": ["paper_reference", "notebook_reference"], "default": "NONE"},
+      "d3_branch": {"labels": ["not_applicable", "printed_4_15", "derived_4_10"], "explicit_not_applicable": true, "default": "NONE"},
+      "tilt_form": {"labels": ["not_applicable", "unrescaled_V", "rescaled_Vtilde"], "explicit_not_applicable": true, "default": "NONE"},
+      "rate_unit_convention": {"labels": ["upstream_unconverted", "lcdm_to_timescape_converted"], "default": "NONE"},
+      "epoch_choice": {"labels": ["upstream_0p218_gyr", "dressed_z20"], "default": "NONE"},
+      "wavenumber_convention": {"labels": ["not_applicable", "upstream_timescape_k", "paper_lcdm_hubble_k"], "explicit_not_applicable": true, "default": "NONE"},
+      "growth_coordinate": {"labels": ["bare_aD", "dressed_redshift"], "default": "NONE"},
+      "density_contrast_mapping": {"labels": ["keep_Delta_d", "map_to_delta_m_via_minus_k_code2"], "default": "NONE"},
+      "spatial_frame": {"labels": ["volume_average_D", "dressed_observational", "wall", "reference_lcdm_fiducial_import", "not_applicable"], "blocked_labels": ["dressed_observational", "wall"], "explicit_not_applicable": true, "default": "NONE"},
+      "spectrum_input_kind": {"labels": ["dimensional_pk", "dimensionless_delta2", "transfer_plus_primordial", "sigma8_anchor_only", "not_applicable"], "explicit_not_applicable": true, "default": "NONE"},
+      "normalization_strategy": {"labels": ["external_linear_pk_at_zref", "sigma8_anchor_at_zref", "primordial_As_ns_external_transfer", "upstream_equal_deterministic_Delta_amplitude"], "rejected_for_sigma_targets": ["upstream_equal_deterministic_Delta_amplitude"], "default": "NONE"},
+      "sigma_radius_h_convention": {"labels": ["timescape_dressed_h", "lcdm_reference_h", "not_applicable"], "explicit_not_applicable": true, "default": "NONE"},
+      "smoothing_radius_definition": {"content": "dimensional radius + declared frame token + h pairing; frame token must equal the k frame", "default": "NONE"},
+      "growth_reference": {"content": "epoch value + coordinate label (bare time vs dressed redshift)", "default": "NONE"},
+      "linearity_policy": {"content": "five-level mask policy object (Sec. 17 of report)", "default": "NONE"},
+      "rsd_interpretation": {"labels": ["none_density_statistic_only", "blocked_missing_dressed_mapping"], "note": "no affirmative value exists", "default": "NONE"},
+      "bias_model": {"labels": ["not_applicable", "blocked_undefined_for_timescape"], "explicit_not_applicable": true, "default": "NONE"},
+      "survey_fiducial_mapping": {"labels": ["not_applicable", "blocked_background_only_evidence"], "explicit_not_applicable": true, "default": "NONE"}
+    },
+    "incompatibility_matrix": [
+      {"rule": 1, "reject": "normalization_strategy=upstream_equal_deterministic_Delta_amplitude with any sigma-level target"},
+      {"rule": 2, "reject": "initial three-mode input presented as a continuous spectrum for any sigma_R target"},
+      {"rule": 3, "reject": "mismatched k and R spatial frame tokens"},
+      {"rule": 4, "reject": "observable_target=observational_sigma8 without dressed observational frame metadata; since that frame is blocked, the target is only constructible as an explicit blocked-status object"},
+      {"rule": 5, "reject": "barotropic sigma_R without a continuous spectrum AND a continuous-k solver domain declaration"},
+      {"rule": 6, "reject": "standard f-sigma-8 naming (fsigma8/f_sigma8) for scale-dependent weighted growth targets"},
+      {"rule": 7, "reject": "RSD-labelled output while rsd_interpretation has no validated affirmative value"},
+      {"rule": 8, "reject": "any request naming a canonical/preferred/default D3 branch"},
+      {"rule": 9, "reject": "silent h, coordinate, epoch, or H0 choices (missing mandatory field = constructor error)"},
+      {"rule": 10, "reject": "interpolation through a logarithmic pole (detected via crossing-interval metadata)"},
+      {"rule": 11, "reject": "any D2-corrupted sound-speed path (reserved-rejected defensively)"}
+    ],
+    "tests_needed": ["one rejection test per incompatibility rule", "one acceptance test per legitimately constructible target", "serialization round-trips", "metadata completeness checks"]
+  },
+  "validation_tiers": {
+    "tier1_algebra_units": ["top-hat window limits", "Fourier normalisation self-consistency", "P(k) dimensional units and (Mpc/h)^3 <-> Mpc^3 conversions", "P <-> Delta^2 conversion", "matched k-R reciprocal units", "coordinate-rescaling Jacobians (P value+argument, Delta^2 argument-only, matched sigma_R invariance)", "sigma_R positivity", "scale-independent identity under A1-A6 on synthetic growth", "scale-dependent derivative identity on synthetic D(k,z)", "invariance under constant harmonic sign"],
+    "tier2_imported_spectrum": ["schema and metadata validation (units, h, frame declaration, linear-only, provenance, z grid)", "P(k) vs Delta^2(k) vs transfer+primordial round trips", "h-unit conversions vs provider documentation", "interpolation convergence on refined grids", "external-provider provenance", "no extrapolation without explicit policy", "shape/amplitude separation"],
+    "tier3_clean_anchored_diagnostic": ["Meszaros and comoving separately", "both growth coordinates (chain-factor tests at multiple epochs)", "multiple explicit anchors", "analytic derivative identity to solver tolerance", "reference-epoch consistency (compensated z_ref shifts)", "no spectrum dependency under pure sigma8 anchor (shape-injection invariance)", "explicit non-RSD naming asserted in outputs"],
+    "tier4_scale_dependent_internal_sigma_R": ["independent solve at every k (no interpolation baseline)", "k-grid refinement", "integration-rule refinement", "k-domain expansion with kernel-capture or explicit divergence reporting", "crossing-aware non-logarithmic derivative + crossing-locus tabulation", "D3 side-by-side", "tilt equivalence", "cutoff-dominance diagnostics (d sigma_R/d k_max)", "dominated-convergence diagnostics", "linear-validity mask attached to every output"],
+    "tier5_observational_rsd": {"status": "BLOCKED unless a future audit verifies a derived dressed redshift-space mapping", "tests_if_unblocked": ["perturbed dressed light-propagation consistency vs derived Jacobian", "velocity-observable identification (deltaTheta -> mapped divergence)", "bias injection/recovery", "AP/fiducial round-trip on synthetic surveys with known truth", "window/estimator convolution", "scale-cut sensitivity", "end-to-end vs one published fsigma8 point only after all of the above"]},
+    "error_separation": ["solver error", "k-grid error", "quadrature error", "spectrum-source uncertainty", "normalisation uncertainty", "unresolved convention spread (spread, never a confidence interval)", "closure/model dependence", "observational-systematics uncertainty (tier 5 only)"]
+  },
+  "uncertainty_taxonomy": {
+    "classes": ["numerical_sampling_quadrature", "solver_method_tolerance", "k_grid_domain", "spectrum_source", "normalisation_anchor", "unresolved_convention_spread", "closure_model_dependence", "observational_systematics"],
+    "rule": "every future reported number names which classes its uncertainties contain; convention spreads are never described as statistical confidence intervals"
+  },
+  "candidate_readiness": {
+    "A_conditional_anchored_sigma8_evolution_and_density_growth_derivative_scale_independent_only": {"verdict": "GO_ONLY_AS_CONDITIONAL_DIAGNOSTIC", "other_blockers": ["anchor import A6", "F3/F4 fork propagation", "mandatory Meszaros physical-inapplicability caveat", "mandatory Sec.-14 naming rules"]},
+    "B_model_internal_volume_average_sigma_R_D_with_external_same_frame_spectrum": {"verdict": "BLOCKED_BY_EXTERNAL_INPUT", "other_blockers": ["no provider emits a volume-average-frame spectrum; the frame declaration is itself a PROVISIONAL_MODEL_IMPORT"], "conditional_note": "with an explicit declared-frame import it could run as GO_ONLY_AS_INTERNAL_MODEL_QUANTITY"},
+    "C_scale_dependent_barotropic_sigma_R_D_and_weighted_growth_continuous_k": {"verdict": "BLOCKED_BY_LINEARITY_OR_K_DOMAIN", "other_blockers": ["BLOCKED_BY_EXTERNAL_INPUT (spectrum)", "D3 dual-branch spread", "GM's own unphysicality assessment"]},
+    "D_observational_dressed_sigma8": {"verdict": "BLOCKED_BY_MISSING_SPATIAL_MAP", "other_blockers": ["external spectrum/anchor", "h convention"]},
+    "E_rsd_comparable_observational_fsigma8": {"verdict": "BLOCKED_BY_MISSING_RSD_MAPPING", "other_blockers": ["missing spatial map", "normalisation", "bias", "survey fiducial"]}
+  },
+  "minimal_next_phase_recommendation": {
+    "phase": "Phase 1D-D implementing Candidate A only",
+    "content": ["anchored_density_growth_diagnostic per Sec. 14 names and caveat blocks", "comoving system as primary carrier; Meszaros as GM-sanctioned comparison baseline with mandatory inapplicability caveat", "both growth coordinates", "explicit anchors with provenance", "full A1-A6 caveat propagation", "Sec.-27 rejection rules for everything else"],
+    "parallel_pure_theory_no_code": "formal D3 frame-mapping derivation (new theoretical work item 2)",
+    "risk_assessment": "Candidate A not assumed; value outweighs RSD-misreading risk only because the naming and rejection rules make misreading structurally difficult; without those rules the assessment would reverse"
+  },
+  "explicit_forbidden_implementations": ["spectrum reader", "transfer-function wrapper", "CAMB or CLASS integration (ahead of the phase that legitimately needs it)", "top-hat numerical integrator", "sigma_R or sigma_8 function", "anchored sigma8 function (in THIS phase)", "f-sigma-8-shaped function", "continuous-k perturbation solver", "interpolation over k", "RSD or Kaiser mapping", "bias model", "AP conversion", "dataset loader", "covariance or likelihood code", "fitting or inference code", "figures displaying predicted sigma_8 or f-sigma-8 curves", "public-package placeholders for any of the above"],
+  "author_input_questions": [
+    "D3: which self-coupling sign is intended in (4.15), given (4.10)+(4.13) and DBE92 (49)/(55) both yield (w_eff - cs2_eff)*Theta, and is the printed form the one used for the published figures?",
+    "F3: which H0 in 'Z(t_i) ~= -0.16 H0' (dressed 73.03/73.23 vs bare H_D,0 ~= 58.01 km/s/Mpc)?",
+    "F4: initial epoch 0.218 Gyr vs dressed z=20 (0.19621 Gyr); provenance of 0.218?",
+    "F7: are {2pi, 5pi, 10pi} timescape matrix labels or LCDM-Hubble-length labels per the Fig. 3 caption?",
+    "Spatial map: is any volume-average-to-dressed comoving wavenumber correspondence envisaged (e.g. for the planned BAO scheme), or acknowledged open?",
+    "RSD: does any unpublished dressed perturbative light-propagation / redshift-space construction exist?",
+    "Linearity: what amplitude normalisation, if any, is regarded as physical for the Fig. 2-3 trajectories?"
+  ],
+  "new_theoretical_work_questions": [
+    "dressed spatial Fourier correspondence (or impossibility proof, or statistical light-cone substitute)",
+    "formal D3 frame mapping: transform DBE92 (46)+(54) from the total-matter frame to the dust frame for the dust+effective system and reduce with the barotropic closure, tracking every sign",
+    "dressed redshift-space Jacobian (perturbed light propagation on the dressed geometry incl. deltaTheta line-of-sight terms)",
+    "ensemble interpretation of CGI perturbations on an averaged background",
+    "physical high-k regularisation or validity criterion for the barotropic closure (or proof that no linear barotropic sigma_R exists)",
+    "galaxy bias definition against <rho_d>_D"
+  ],
+  "compliance": {
+    "only_files_created": ["reports/phase1d_c_observable_closure_audit.md", "reports/phase1d_c_closure_inventory.json"],
+    "frozen_files_modified": "none; README.md and CLAUDE.md untouched; 1D-B artifact read only",
+    "scratch_locations": "all downloads, rendered page images, extracted texts, and the symbolic-check script live in the ignored session scratchpad / tool-results; auxiliary libraries (pdfminer.six, pypdfium2, sympy) installed into a scratchpad-only --target directory leaving .venv and .venv311 unmodified",
+    "upstream_untouched": true,
+    "authors_not_contacted": true,
+    "labels_preserved_verbatim": ["printed_4_15", "derived_4_10", "unrescaled_V", "rescaled_Vtilde", "upstream_unconverted", "lcdm_to_timescape_converted", "upstream_0p218_gyr", "dressed_z20", "upstream_timescape_k", "paper_lcdm_hubble_k", "bare_aD", "dressed_redshift", "keep_Delta_d", "map_to_delta_m_via_minus_k_code2"],
+    "d2_rule": "the D2-corrupted sound speed was not used anywhere; forensic-only status unchanged"
+  }
+}
