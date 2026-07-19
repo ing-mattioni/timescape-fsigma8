@@ -13,18 +13,31 @@ reports/phase1d_a_growth_observable_audit.md):
 * Growth rates are piecewise for trajectories with amplitude crossings:
   logarithmic rates are undefined at ``Delta_d`` roots and are reported
   per maximal validity interval, never joined across a pole.
-* Both D3 branches (``printed_4_15``, ``derived_4_10``) remain unresolved;
-  neither is canonical, preferred, physical, corrected, recommended,
-  intended, or a default.
-* No observational f-sigma-8, sigma_8, sigma_R, power spectrum, transfer
-  function, RSD, likelihood, or fitting quantity is implemented anywhere
-  in this package.
+* The equation-level D3 verdict is ``RESOLVED_DERIVED_4_10``:
+  ``derived_4_10`` is derivation-backed within the audited GM framework,
+  while ``printed_4_15`` remains mandatory for historical paper/notebook
+  reproduction.  Both runtime branches remain explicit and mandatory; no
+  runtime default is selected, and neither branch is removed or deprecated.
+* No sigma_8 integral or Timescape sigma_8 normalization is predicted, and
+  no standard observational f-sigma-8 is computed.  Candidate A may consume
+  an explicitly external anchor; no power spectrum, transfer function,
+  sigma_R, RSD, likelihood, or fitting quantity is implemented here.
 * The D2-corrupted upstream sound speed remains excluded from the
   scientific package (forensic scripts only).
 
 Every scientific choice is a mandatory explicit argument; non-applicable
 fields must be passed as explicit ``not_applicable`` values.
 """
+
+from timescape_fsigma8.growth.anchored_diagnostic import (
+    AnchorProvenanceKind,
+    AnchoredDensityGrowthDiagnosticResult,
+    AnchoredDiagnosticAssumptions,
+    AnchoredDiagnosticClassification,
+    AnchoredGrowthModelRole,
+    ExternalDensityAmplitudeAnchor,
+    anchored_density_growth_diagnostic,
+)
 
 from timescape_fsigma8.growth.crossings import (
     CrossingAnalysis,
@@ -93,6 +106,13 @@ from timescape_fsigma8.growth.scenarios import (
 )
 
 __all__ = [
+    "AnchorProvenanceKind",
+    "AnchoredDensityGrowthDiagnosticResult",
+    "AnchoredDiagnosticAssumptions",
+    "AnchoredDiagnosticClassification",
+    "AnchoredGrowthModelRole",
+    "ExternalDensityAmplitudeAnchor",
+    "anchored_density_growth_diagnostic",
     "CrossingAnalysis",
     "DenseDustSolution",
     "DUST_COMPONENT",
