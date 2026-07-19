@@ -1,0 +1,241 @@
+{
+  "schema_note": "Phase 1D-D-t D3 frame-mapping inventory v1.0. Companion to reports/phase1d_d_t_d3_frame_mapping_audit.md. Formal conclusion objects carry the seven mandatory fields (classification, source, assumptions, derivation_summary, convention_dependencies, implementation_consequence, evidence_needed_to_change_status). Records without a 'classification' key are reference/metadata records, not conclusions. Equation numbers are as printed in each source; GM = arXiv:2511.17160v2 (JCAP 02 (2026) 066); DBE = Dunsby, Bruni & Ellis, ApJ 395 (1992) 54; BDE = Bruni, Dunsby & Ellis, ApJ 395 (1992) 34 (Paper I). Signature (-,+,+,+) unless stated.",
+  "date_utc": "2026-07-18",
+  "repository_checkpoint": {
+    "starting_branch": "phase-1d-c-observable-closure-audit",
+    "starting_head": "81148eb6be8add842b538e2a21c5cf9782f9e49e",
+    "base_tag": "phase-1d-c-observable-closure-audit-v1",
+    "work_branch": "phase-1d-d-t-d3-frame-mapping",
+    "work_branch_pushed": false,
+    "preflight": "all 12 checks passed (branch, HEAD, tag, 7 ancestor tags, clean tree/index, upstream clean+pinned, notebook sha256 match, 337 tests passing on 3.14.3 and 3.11.9, git diff --check clean)"
+  },
+  "frozen_tags_and_hashes": {
+    "tags": ["phase-1b-background-v1", "phase-1c-a-equation-audit-v1", "phase-1c-b1-clean-systems-v1", "phase-1c-b2-barotropic-v1", "phase-1d-a-growth-observable-audit-v1", "phase-1d-b-growth-pipeline-v1", "phase-1d-c-observable-closure-audit-v1"],
+    "upstream_commit": "590c6fd5332acb15f5683ebf392a0d7ce54983c5",
+    "notebook_sha256": "86d2534db9e9b3169835e4ce223ee8f3bff6d03b47e5677d3937fed4adafe55a"
+  },
+  "primary_source_inventory": [
+    {"id": "GM", "citation": "M. Galoppo, P. Mourier, arXiv:2511.17160v2 / JCAP 02 (2026) 066", "file": "scratchpad gm_2511.17160v2.pdf", "sha256": "856bd78db8f86e46c0f5d21414ad0c1d136b176c6ac1b45418dbeebc38e920dd", "access": "full born-digital PDF; pages rendered at 300 dpi (pypdfium2) and read visually", "pages_inspected_this_phase_pdf": [6, 7, 8, 9, 10, 15, 16, 17, 18, 19, 20, 21], "pages_inspected_this_phase_printed": [5, 6, 7, 8, 9, 14, 15, 16, 17, 18, 19, 20], "compliance_audit_additional_visual_inspection": {"pdf_page": 52, "printed_page": 51, "content": "Appendix A opening; confirms dependence on (4.18)/(4.19)"}},
+    {"id": "DBE", "citation": "P.K.S. Dunsby, M. Bruni, G.F.R. Ellis, ApJ 395 (1992) 54", "file": "ADS full-journal image-only scan, 21 pages", "sha256": "3a082920b358872ec64a3706001e1a10a61a51f2e5140cf29662aa1a04b72f20", "access": "rendered pages read visually; no text layer; OCR never used as authority", "pages_inspected_this_phase_journal": [55, 56, 57, 58, 59, 60, 61], "newly_inspected_first_time": [55, 56, 57, 61], "closing_1dc_gap": "journal pp. 56-57 (scan p03-p04) explicitly required by the specification"},
+    {"id": "BDE", "citation": "M. Bruni, P.K.S. Dunsby, G.F.R. Ellis, ApJ 395 (1992) 34 (Paper I)", "file": "ADS full-journal image-only scan, 20 pages", "sha256": "eaa273fa5982689cd55eaba7530103e8e9d77199d4b34d3d173c1e9201075b6c", "access": "rendered pages read visually", "pages_inspected_this_phase_journal": [38, 39, 41, 42, 43, 44, 45, 48], "newly_inspected_first_time": [38, 39, 41, 42, 43, 44, 45], "source_completeness_correction": "BDE (74), footnote 21, and footnote 22 were added after the independent compliance audit; this does not alter A33"}
+  ],
+  "scan_page_journal_page_map": {
+    "DBE": "scan pNN maps to journal page 53+NN (p01=54 title/abstract ... p08=61); inspected this phase: p02=55, p03=56, p04=57, p05=58, p06=59, p07=60, p08=61",
+    "BDE": "scan pNN maps to journal page 33+NN (p01=34); inspected this phase: p05=38, p06=39, p08=41, p09=42, p10=43, p11=44, p12=45, p15=48",
+    "GM": "PDF page N = printed page N-1 (footer markers '- N -'); e.g. PDF 17 = printed 16 (Eq. 4.10)"
+  },
+  "source_hashes": {
+    "gm_pdf": "856bd78db8f86e46c0f5d21414ad0c1d136b176c6ac1b45418dbeebc38e920dd",
+    "dbe_scan": "3a082920b358872ec64a3706001e1a10a61a51f2e5140cf29662aa1a04b72f20",
+    "bde_scan": "eaa273fa5982689cd55eaba7530103e8e9d77199d4b34d3d173c1e9201075b6c",
+    "note": "GM hash bit-identical to the frozen 1D-A record; scan hashes identical to the 1D-C records"
+  },
+  "inspected_equation_inventory": {
+    "GM": ["(2.2)", "(2.3)", "(2.4)", "(2.5)", "(2.6)", "(2.7)", "(2.8)", "(2.9)", "(2.10)", "(2.11)", "(2.12)", "(2.13)", "(2.14)", "(2.15)", "(2.16)", "(2.17)", "(2.18)", "(2.19)", "(2.20)", "(2.21)", "(2.22)", "(2.23)", "(2.24)", "(4.1)", "(4.2)", "(4.3)", "(4.4)", "(4.5)", "(4.6)", "(4.7)", "(4.8)", "(4.9)", "(4.10)", "(4.11)", "(4.12)", "(4.13)", "(4.14)", "(4.15)", "(4.16)", "(4.17)", "(4.18)", "(4.19)", "(4.20)", "(4.21)", "(4.22)", "(4.23)", "(4.24)", "(4.25)", "(4.26)", "(4.27)", "(4.28)", "(4.29)"],
+    "DBE": ["(1)-(4)", "(5)", "(6)", "(7)", "(8)", "(9)", "(10)", "(11)-(14)", "(15)", "(16)", "(17)", "(18)", "(19)", "(20)", "(21)", "(22)", "(23)", "(24)", "(25)", "(26)", "(27)", "(28)", "(29)", "(30)", "(31)", "(32)", "(33)", "(34)", "(35)-(41)", "(42)", "(43)", "(44)", "(45)", "(46)", "(47)", "(48)", "(49)", "(50)", "(51)", "(52)", "(53)", "(54)", "(55)", "(56)-(66)"],
+    "BDE": ["(14)", "(15)", "(16)", "(17)", "(18)", "(19)", "(20)", "(21)", "(22)", "(23)", "(24)", "(25)", "(26)", "(27)", "(28)", "(29)", "(40)", "(41)", "(42)", "(43)", "(44)", "(45)", "(46)", "(47)", "(48)", "(49)", "(50)-(60)", "(61)", "(62)", "(63)", "(64)", "(65)", "(66)", "(67)", "(74)", "(117)", "(118)", "(119)", "(120)", "footnote 14", "footnote 15", "footnote 21", "footnote 22"]
+  },
+  "ambiguous_symbol_inventory": [
+    {"id": "bde_19_typo", "location": "BDE (19), journal p. 38", "printed": "mudot + 3*mu*H*(mu + p) = 0", "issue": "dimensionally inconsistent as printed (spurious mu, or (mu+p) for (1+w)); zoom-verified", "resolution": "standard form printed as BDE (45) and DBE (28); non-propagating", "d3_relevant": false},
+    {"id": "gm_2_21_subscript", "location": "GM (2.21), printed p. 9", "printed": "combined-fluid F ~= Vdot + (1/3 - c_s(i)^2) Theta V with a component subscript s(i)", "issue": "combined-fluid c_s^2 expected (cf. (2.11) text); zoom-verified", "resolution": "combined F not used in the dust-frame two-fluid chain; non-propagating", "d3_relevant": false},
+    {"id": "gm_2_5_sign", "location": "GM (2.5), printed p. 6", "printed": "Theta ~= Theta^(i) + nabla^mu V_mu^(i)", "issue": "exact first-order coordinate computation (check C3b, both signatures) gives Theta = Theta^(i) - nabla.V^(i)", "resolution": "new documented observation; (2.5) is not used in the (2.14)->(4.15) chain; non-propagating for D3", "d3_relevant": false},
+    {"id": "gm_2_12_2_13_lambda", "location": "GM (2.12)/(2.13), printed p. 7", "printed": "-2*Lambda in both", "issue": "known finding F5 (frozen 1C-A); DBE (31)/BDE (20) print the standard -Lambda", "resolution": "Lambda=0 in timescape; S6 used standard Raychaudhuri", "d3_relevant": false},
+    {"id": "dbe_49_interaction_bookkeeping", "location": "DBE (49), journal p. 60", "printed": "useful form with interaction terms", "issue": "reconciling (46)+(47) with (49) with interactions ON requires substituting the total momentum equation (29)+(34); exact after that substitution (check S8)", "resolution": "not an ambiguity of the printed signs; interactions are zero in GM anyway", "d3_relevant": false}
+  ],
+  "frame_definitions": [
+    {"id": "F1_generic_observer", "four_velocity": "n^mu", "condition": "any covariantly defined unit timelike field coinciding with u_E in the background (BDE fn.14/(44) text; DBE p. 57 text)", "source": "GM Sec. 2 (kept unspecified, p. 8); BDE p. 38/41; DBE p. 56-57"},
+    {"id": "F2_dust_energy_frame", "four_velocity": "u_d^mu", "condition": "V^(d) = 0; geodesic at first order (derived); GM Sec. 4 choice (4.20 context)", "source": "GM printed p. 15-16; coordinate check C5"},
+    {"id": "F3_eff_energy_frame", "four_velocity": "u_e^mu", "condition": "effective fluid perfect in this frame (GM (2.6) line 1)", "source": "GM printed p. 6"},
+    {"id": "F4_total_energy_frame", "four_velocity": "u_E^mu", "condition": "total q_mu = 0, i.e. Sum_i h_i V^(i) = 0 (DBE (18))", "source": "DBE p. 56-57"},
+    {"id": "F5_total_matter_rest_frame", "four_velocity": "u_N^mu", "condition": "total particle drift j^mu = 0 (DBE (19)); DBE Sec. 3.2 default ('in the total matter rest frame (u^a = u_N^a)', p. 59)", "source": "DBE p. 56, 59"},
+    {"id": "F6_buchert_foliation", "four_velocity": "normal = u_d^mu", "condition": "flow-orthogonal slicing of the irrotational dust; averaging domain comoving with dust (GM Sec. 3)", "source": "GM printed p. 14; frozen Phase 1B"},
+    {"id": "F7_wall_dressed_observer", "four_velocity": "wall clocks (W09)", "condition": "not needed at first order for D3; perturbation systems live on F2/F6 in volume time (frozen 1D-A)", "source": "frozen 1D-A audit"}
+  ],
+  "four_velocity_map": {"DBE_u": "u^a (unfixed Sec. 2; u_N in Sec. 3.2)", "BDE_u": "u^a = u_N default, fn. 14 generic", "GM_n": "n^mu unspecified Sec. 2; = u_d^mu in Sec. 4", "component": "u^(i)_mu = (-n^nu u^(i)_nu)(n_mu + V^(i)_mu), n.V = 0 (GM p. 5; DBE (11)-(14))"},
+  "projector_map": {"papers_signature": "h_mu_nu = g_mu_nu + n_mu n_nu; mixed h_mu^nu = delta + n_mu n^nu", "flipped_signature": "h_mu^nu = delta - n_mu n^nu (documented in the coordinate script)", "note": "mixed projector is what enters D_mu; its form fixes the signature dependence of the commutator acceleration term"},
+  "derivative_map": {"dot": "X_dot = n^mu nabla_mu X along the stated congruence (DBE p. 55; GM p. 5 'observer-frame covariant evolution operator')", "spatial": "D_mu = h_mu^nu nabla_nu ((3)nabla in DBE/BDE)", "commutator": "h_mu^nu (D_nu f)_dot = D_mu f_dot + f_dot a_mu - (Theta/3) D_mu f + O(2) in (-,+,+,+); the f_dot*a_mu term flips sign in (+,-,-,-) [checks C1]", "background_dots": "all first-order-tilted congruences share the background time derivative at first order (frame difference acts as xi . spatial gradient of background = 0)"},
+  "stress_energy_transformation": {
+    "decomposition": "T^(i)_munu = (rho^(i)+p^(i)) u^(i)_mu u^(i)_nu + p^(i) g_munu ~= (rho^(i)+p^(i)) n_mu n_nu + p^(i) g_munu + 2 q^(i)_(mu n_nu), q^(i)_mu = h^(i) V^(i)_mu [GM (2.6); DBE (9) with intrinsic q=pi=0]",
+    "boost_direction_convention": "xi^a := u_destination^a - u_source^a",
+    "first_order_boost": {"rho": "rho[destination] = rho[source] at first order (BDE (14); C6a)", "p": "p[destination] = p[source] at first order (BDE (14))", "pi": "pi[destination] = pi[source] at first order (BDE (14)); zero here", "q": "q_i[destination] = q_i[source] - h_i xi", "V": "V_i[destination] = V_i[source] - xi", "Theta": "Theta[destination] = Theta[source] + D_a xi^a", "acceleration": "A_a[destination] = A_a[source] + xi_dot_a + (Theta/3) xi_a", "density_gradient": "D_i[destination] = D_i[source] - a*Theta*(1+w_i)*xi [BDE (25)-(26); DBE (27) at eps=0; C6c]", "pressure_gradient": "P_i[destination] = P_i[source] - a*Theta*c_si^2*xi [C6d]", "expansion_gradient": "Zcal shifts by a*Theta_dot*xi + a*D(div xi) terms", "projected_time_derivatives": "first-order quantities are invariant at first order", "discarded_products": "only first-order x first-order products discarded; never background x first-order"},
+    "source_notation_reconciliation": {"DBE_15": "DBE writes the component-own-frame flux boosted to the observer as q_tilde_i=q_i+h_i V_i; reversing to the declared source-to-destination direction gives q_i[destination]=q_i[source]-h_i xi", "DBE_27": "u_N -> u_i uses xi=V_i[N], hence D_i[u_i]=D_i[N]-3aH(1+w_i)V_i when eps_i=0", "BDE_25_26": "u_N -> u_E uses xi=-^E V^N, hence D_E=D_N+3aH(1+w)^E V^N"},
+    "explicit_boosts": [
+      {"source": "arbitrary observer n", "destination": "dust frame u_d", "xi": "V_d[n]", "result": "q_d[u_d]=0; V_eff[u_d]=V_eff[n]-V_d[n]"},
+      {"source": "arbitrary observer n", "destination": "effective-fluid rest frame u_eff", "xi": "V_eff[n]", "result": "q_eff[u_eff]=0"},
+      {"source": "u_N", "destination": "component rest frame u_i", "xi": "V_i[N]", "result": "D_i[u_i]=D_i[N]-3aH(1+w_i)V_i; DBE (27), eps_i=0"},
+      {"source": "u_N", "destination": "u_E", "xi": "-^E V^N", "result": "D_E=D_N+3aH(1+w)^E V^N; BDE (25)-(26)"},
+      {"source": "dust frame", "destination": "Buchert dust foliation", "xi": "0", "result": "identity; foliation normal is u_d"}
+    ]
+  },
+  "component_total_variable_map": {
+    "dbe_32_bde_61": "total-fluid density gradient, fundamental frame; self-coupling 3Hw; total c_s^2 absent",
+    "dbe_46": "individual component measured in the total matter rest frame u_N; self-coupling 3H w_i; c_si^2 only inside F^(i)",
+    "dbe_26_27": "own-frame component gradient ^N D^(i) and the conversion law (27)",
+    "dbe_49_55": "(46) after eliminating F^(i) via momentum equations (29)+(43)/(54); self-coupling 3(w_i - c_si^2)H. When the total gradient is retained as an independent total variable, (3H/h)(1+w_i)(c_s^2 mu Dcal + p Ecal) is total-to-component cross-coupling. If mu Dcal = Sum_j mu_j Dcal_j is expanded, it can contain a term proportional to Dcal_i. This representation issue does not modify the independently derived GM dust-frame A33 coefficient (check S8)",
+    "sound_speeds_tracked": {"total": "c_s^2 = pdot/mudot = (1/h) Sum h_i c_si^2 [DBE (51)]", "component": "c_si^2 = pdot_i/mudot_i", "adiabatic": "(dp/dmu)_s, equal to pdot/mudot for the standard background [BDE (29)]", "gm_effective": "c_s,eff^2 = pdot_eff/rhodot_eff -- a component sound speed in this taxonomy"},
+    "applicability_conclusion": "the DBE reduction is not merely analogous: the general-frame component equation is derived from first principles for an arbitrary admissible observer, so the GM dust-frame system follows directly; the only assumption is GM's own effective-fluid postulate"
+  },
+  "pressure_variable_map": {"coordinate_delta_p": "coordinate pressure perturbation delta p_i; gauge/frame dependent and not itself a CGI gradient", "entropy_nonadiabatic": "nonadiabatic pressure is the part not fixed by the background adiabatic derivative; represented covariantly by the entropy variable E_i in GM (2.18)/DBE (48)", "DBE_component": "Y_a^(i) = (3)nabla_a p_i; decomposition aY_a^(i) = c_si^2 mu_i Dcal_a^(i) + p_i Ecal_a^(i) [DBE (48)]", "BDE": "P_a = (a/p)(3)nabla_a p (pressure-normalised) [BDE (27)]", "GM": "P_mu^(i) = (a/h^(i)) D_mu p^(i) (CGI enthalpy-normalised; GM (2.2) + footnote 2 marking the deliberate change from refs [45-50])", "identity": "GM (2.18) (1+w_i)P^(i) = c_si^2 D^(i) + w_i E^(i) is exactly DBE (48) divided by h_i (verified algebraically)", "rescaled": "Ptilde_i := (1+w_i) P_i [GM p. 16]", "gm_closure": "Ptilde_eff = c_s,eff^2 Delta_eff [GM (4.13)]; barotropic/adiabatic closure used for the effective component"},
+  "sound_speed_definitions": {"total_background": "total-fluid c_s^2 = pdot/mudot [DBE p. 58; DBE (51)]", "component_background_adiabatic": "c_si^2 = pdot_i/mudot_i [DBE p. 58; BDE (29)]", "GM_effective_component": "c_s,eff^2 = pdot_eff/rhodot_eff at background order [GM (2.9), (4.13)]", "rest_frame_perturbative": "coefficient relating pressure and density perturbations in the component rest frame; need not equal pdot/drhodot in a general nonadiabatic model", "DBE": "c_s^2 = pdot/mudot (p. 58 verbatim)", "BDE": "(29) c_s^2 = pdot/mudot = (dp/dmu)_s", "GM": "(2.9) text and (4.13) text: c_s(i)^2 := pdot^(i)/rhodot^(i), background ('at zeroth order'); (4.13) 'equivalently as dp/drho or as pdot/rhodot'", "conclusion_frame": "same background dot in every first-order-tilted frame at first order; no frame ambiguity; no wdot generated in the density equation", "closure_invariant_combination": "(1+w_i)P_i-c_si^2 D_i is frame-invariant at first order only; this is not a nonlinear identity"},
+  "tilt_variable_map": {"DBE": "V_a^(i) (14); Psi_a^(i) = q_tilde^(i)/h_i = V^(i) for perfect components (45)", "GM_vector": "V_mu^(i) from the tilt decomposition", "GM_scalar": "V^(i) = a D^mu V^(i)_mu (2.20)", "GM_rescaled": "Vtilde^(eff) := (1+w_eff) V^(eff) (p. 16)", "phase1c_state": "v[3] = V (unrescaled_V, Timescape/GMP notebooks) or Vtilde (rescaled_Vtilde, RZA/GMC + paper)"},
+  "scalarisation_map": {"operator": "scalar X := a D^mu X_mu (GM (2.20)-(2.21); BDE (40))", "commutation": "BDE (63): a(3)nabla_a Vdot_b = (a(3)nabla_a V_b)dot for first-order vectors/tensors -- scalarisation commutes with evolution at first order; no new terms, no sign", "harmonic_eigenvalue": "BDE (74): (3)nabla^2 Q = -(k^2/a^2)Q in the relevant FLRW scalar-harmonic convention; footnote 21 classifies scalar/vector/tensor harmonics and footnote 22 distinguishes the conformal operator from the physical Laplacian and supplies the a^-2 factor", "z_relation": "dust row (2.14)|dust,i=d gives Delta_d_dot + Zcal ~= 0 (printed (4.5)/(4.9)/(4.14)); Z = -Delta_d_dot as frozen since 1C-A", "state_ordering": "(Delta_d, Z, Delta_eff, tilt) exactly as Phase 1C", "source_completeness_effect": "adding BDE (74), footnote 21, and footnote 22 completes the citation chain but does not change A33"},
+  "harmonic_conventions": {"eigenvalue": "(3)nabla^2 Q = -(k^2/a^2)Q [BDE (74), journal p. 44; GM footnote 8, printed p. 16]", "tilt_term": "a(1+w)(3)Lap V^(eff) -> -(k^2/a) Vtilde^(eff); powers of a and k verified (check S2)", "bde_harmonics": "BDE footnote 21 classifies scalar/vector/tensor harmonics; footnote 22 distinguishes the conformal spatial operator from the physical Laplacian and explains the a^-2; BDE Sec. 5.2 (117)-(120) re-verified", "self_coupling": "the Theta self-coupling carries no Laplacian; the Laplacian sign convention cannot affect D3", "correction_status": "source-completeness correction only; A33 unchanged"},
+  "dbe_bde_equations": [
+    {"eq": "DBE (15)", "scan_page": "p04", "journal_page": 57, "frame": "arbitrary u^a", "content": "q_tilde_a^(i) = q_a^(i) + (mu_i+p_i) V_a^(i)", "type": "flux boost", "pressure_signs": "n/a"},
+    {"eq": "DBE (25)", "scan_page": "p04", "journal_page": 57, "frame": "u_N (stated: 'total matter rest frame, taken to be u^a = u_N^a')", "content": "Dcal_a^(i) = a X_a^(i)/mu_i, X^(i) = h^b_a mu_i;b", "type": "definition"},
+    {"eq": "DBE (26)", "scan_page": "p05", "journal_page": 58, "frame": "component own frame", "content": "^N Dcal_a^(i) = a ^N X_a^(i)/mu_i", "type": "definition"},
+    {"eq": "DBE (27)", "scan_page": "p05", "journal_page": 58, "frame": "u_N <-> own frame", "content": "^N Dcal^(i) = Dcal^(i) - 3Ha(1+w_i)V^(i) + (a/mu_i) eps_i V^(i)", "type": "frame law; eps_i = interaction energy-transfer rate (zero here)"},
+    {"eq": "DBE (28)-(31)", "scan_page": "p05", "journal_page": 58, "frame": "arbitrary u^a", "content": "total conservation, F/Psi/Pi definitions, Raychaudhuri with standard -Lambda", "type": "conservation"},
+    {"eq": "DBE (32)", "scan_page": "p05", "journal_page": 58, "frame": "arbitrary u^a", "content": "Dcal_dot - 3Hw Dcal + (1+w) Zcal = 3a(1+w)H(F+Pi) - a(1+w)(3)nabla(3)nabla.Psi", "type": "total density equation; self-coupling +3Hw; c_s^2 absent", "pressure_signs": "no explicit pressure gradient (absorbed in F via (29))"},
+    {"eq": "DBE (34)", "scan_page": "p05", "journal_page": 58, "frame": "n/a", "content": "aY_a = c_s^2 mu Dcal_a + p Ecal_a; c_s^2 = pdot/mudot", "type": "pressure decomposition"},
+    {"eq": "DBE (42)-(45)", "scan_page": "p06", "journal_page": 59, "frame": "u_N (Sec. 3.2 opening verbatim)", "content": "component conservation with interactions; F^(i) def; Psi^(i) = q_tilde/h_i = V^(i) for perfect components", "type": "conservation"},
+    {"eq": "DBE (46)", "scan_page": "p07", "journal_page": 60, "frame": "u_N", "content": "component density equation; LHS self-coupling -3Hw_i; interaction terms incl. (a/mu_i) eps_i a_a; tilt Laplacian -a(1+w_i)(3)nabla(3)nabla.Psi^(i)", "type": "component density equation", "pressure_signs": "c_si^2 only inside F^(i)"},
+    {"eq": "DBE (47)", "scan_page": "p07", "journal_page": 60, "frame": "u_N ('relative to the frame u_N^a')", "content": "Psi^(i) momentum equation with total-fluid coupling (1/(a h h_i)) (h_i c_s^2 mu Dcal - h c_si^2 mu_i Dcal^(i) + h_i p Ecal - h p_i Ecal^(i))", "type": "momentum", "pressure_signs": "-h c_si^2 mu_i Dcal^(i) inside the bracket"},
+    {"eq": "DBE (48)", "scan_page": "p07", "journal_page": 60, "frame": "n/a", "content": "aY_a^(i) = c_si^2 mu_i Dcal_a^(i) + p_i Ecal_a^(i)", "type": "component pressure decomposition"},
+    {"eq": "DBE (49)", "scan_page": "p07", "journal_page": 60, "frame": "u_N", "content": "useful form; LHS self-coupling -3(w_i - c_si^2)H; total coupling (1/(mu_i h))(3Hh_i - eps_i)(c_s^2 mu Dcal + p Ecal); -3Hw_i Ecal^(i)", "type": "component density equation, F eliminated", "pressure_signs": "minus combination as printed"},
+    {"eq": "DBE (54)/(55)", "scan_page": "p07", "journal_page": 60, "frame": "u_N", "content": "no-interaction forms; (55) self-coupling -3(w_i - c_si^2)H as printed", "type": "as (47)/(49) with eps=f=0"},
+    {"eq": "DBE (56)-(66)", "scan_page": "p08", "journal_page": 61, "frame": "u_N", "content": "relative variables S^(ij), Psi^(ij) and their evolution; no further density self-coupling structure", "type": "completeness inspection"},
+    {"eq": "BDE (14)-(16)", "scan_page": "p05", "journal_page": 38, "frame": "u <-> n tilted", "content": "first-order invariance of mu, p, n, pi; frame-invariant flux/drift combinations", "type": "boost laws"},
+    {"eq": "BDE (19)", "scan_page": "p05", "journal_page": 38, "frame": "background", "content": "printed 'mudot + 3 mu H (mu+p) = 0' -- typographical slip (see ambiguous_symbol_inventory)", "type": "background continuity"},
+    {"eq": "BDE (20)-(23)", "scan_page": "p05", "journal_page": 38, "frame": "background", "content": "Raychaudhuri standard -Lambda; Friedmann; FLRW metric with explicit (-,+,+,+)", "type": "background"},
+    {"eq": "BDE (24)-(29)", "scan_page": "p06", "journal_page": 39, "frame": "EF/PF/general", "content": "Dcal/Zcal definitions; gradient frame-change law (25); Dcal^E = Dcal^N + 3aH(1+w) ^EV^N (26); fn. 15 arbitrary-frame law; P_a (pressure-normalised); c_s^2 = pdot/mudot", "type": "definitions + frame laws"},
+    {"eq": "BDE (44)-(48)", "scan_page": "p08", "journal_page": 41, "frame": "any admissible covariant u^a (text)", "content": "conservation equations and definitions; frame-generality statement", "type": "conservation"},
+    {"eq": "BDE (61)-(62)", "scan_page": "p10", "journal_page": 43, "frame": "any admissible covariant u^a", "content": "single-fluid Dcal/Zcal propagation equations (structure identical to DBE (32)-(33))", "type": "density equation"},
+    {"eq": "BDE (63)", "scan_page": "p10", "journal_page": 43, "frame": "n/a", "content": "a(3)nabla_a Vdot_b = (a(3)nabla_a V_b)dot for first-order vector/tensor -- scalarisation identities", "type": "commutation"},
+    {"eq": "BDE (74)", "scan_page": "p11", "journal_page": 44, "frame": "FLRW harmonic basis", "content": "(3)nabla^2 Q = -(k^2/a^2) Q", "type": "scalar harmonic eigenvalue", "footnotes": "footnote 21 classifies scalar/vector/tensor harmonics; footnote 22 on journal p. 45 clarifies conformal-versus-physical Laplacians and the a^-2 factor", "d3_effect": "source-completeness correction only; A33 unchanged"},
+    {"eq": "BDE (117)-(120)", "scan_page": "p15", "journal_page": 48, "frame": "harmonic", "content": "GI gradient expansion; Dcal_alpha = a eps_m|alpha - 3a'(1+w)V_C alpha = -k a eps_m Y^(0) - 3a'(1+w)V_C Y^(1) (re-verified; identical to 1D-C record)", "type": "harmonic expansion / Bardeen link"}
+  ],
+  "gm_equations": [
+    {"eq": "GM (2.2)", "printed_page": 5, "content": "D^(i) = (a/rho_i) D_mu rho_i; P^(i) = (a/h_i) D_mu p_i; Z^(i) = a D_mu Theta^(i); enthalpy normalisation (fn. 2)"},
+    {"eq": "GM (2.6)", "printed_page": 6, "content": "component EMT perfect in own frame; observer-frame flux q^(i) = h^(i) V^(i)"},
+    {"eq": "GM (2.7)", "printed_page": 6, "content": "separate conservation (non-interacting)"},
+    {"eq": "GM (2.8)", "printed_page": 6, "content": "rhodot^(i) ~= -h^(i) Theta - h^(i) D.V^(i)"},
+    {"eq": "GM (2.9)", "printed_page": 6, "content": "a_mu ~= -(1/a) P^(i)_mu - F^(i)_mu; F^(i) := Vdot^(i) + (1/3 - c_si^2) Theta V^(i); c_si^2 := pdot/rhodot background"},
+    {"eq": "GM (2.14)", "printed_page": 7, "content": "Dcaldot^(i) - w_i Theta Dcal^(i) + (1+w_i) Zcal - a Theta (1+w_i) F^(i) + a(1+w_i) D_mu D^alpha V^(i)_alpha ~= 0; derived with n^mu unspecified"},
+    {"eq": "GM (2.17)", "printed_page": 8, "content": "relative tilt evolution (difference of the two (2.9) realisations)"},
+    {"eq": "GM (2.18)", "printed_page": 8, "content": "(1+w_i) P^(i) = c_si^2 D^(i) + w_i E^(i)"},
+    {"eq": "GM (2.20)-(2.24)", "printed_page": 9, "content": "scalar CGI variables and the scalar ODE system (2.22)-(2.24) 'employed in this work [50]'"},
+    {"eq": "GM (4.1)-(4.4)", "printed_page": "14-15", "content": "two-fluid specialisation (general frame)"},
+    {"eq": "GM (4.5)-(4.8)", "printed_page": 16, "content": "dust-frame system; V^(d)=F^(d)=0; P + aF = 0 from vanishing dust-frame acceleration (text)"},
+    {"eq": "GM (4.9)-(4.12)", "printed_page": 16, "content": "frequency space; Vtilde/Ptilde rescaled; (4.10) with +Theta Ptilde^(eff); (4.12) c_s^2-free tilt equation"},
+    {"eq": "GM (4.13)", "printed_page": 17, "content": "Ptilde^(eff) = c_s(eff)^2 Delta^(eff), 'in any observer frame n^mu'"},
+    {"eq": "GM (4.15) printed", "printed_page": 17, "content": "Deltadot^(eff) - (w_eff + c_s(eff)^2) Theta Delta^(eff) + (1+w_eff) Zcal - (k^2/a) Vtilde^(eff) ~= 0 -- the disputed sign, re-verified visually"},
+    {"eq": "GM (4.16)-(4.18)", "printed_page": 17, "content": "Z-row with (3c^2+1) source; closure tilt row; dust second-order equation"},
+    {"eq": "GM (4.19)", "printed_page": 18, "content": "second-order Delta_eff equation (full transcription incl. (4piG rho_d - Lambda)(w+c^2) and -Theta (c^2)dot terms)"},
+    {"eq": "GM (4.29)", "printed_page": 20, "content": "Meszaros-section second-order equation; GM text: derived from '(4.9)-(4.10)' with Ptilde = w Delta"}
+  ],
+  "frame_transformation_derivation_steps": [
+    "1. declare xi^a := u_destination^a-u_source^a and decompose T^(i) w.r.t. arbitrary observer n (explicit source-to-destination boost table, report Sec. 9; DBE (15)/BDE (14)-(15) source-oriented anchors reconciled)",
+    "2. derive the linear commutator h(D f)dot = D fdot + fdot a - (Theta/3) D f (coordinate check C1)",
+    "3. assemble Dcaldot^(i) from gradient of energy conservation + commutator + momentum equation => GM (2.14) for ARBITRARY admissible n (symbol check S1; coordinate check C4 proves it from raw conservation with arbitrary gauge AND arbitrary observer velocity)",
+    "4. frame-shift laws for each variable (C6a-C6e): Delta shift -a Theta (1+w) xi; P shift -a Theta c^2 xi; closure combination exactly frame-invariant at first order (C6e) -- the c_s^2 reshuffling feared in 1D-C cancels within first-order perturbation theory",
+    "5. specialise n = u_d: dust geodesic (C5) => F^(eff) = -(1/a) P^(eff) => (4.6) with +Theta(1+w)P^(eff)",
+    "6. scalarise (BDE (63)) and use BDE (74), footnotes 21-22, plus GM footnote 8 to go to frequency space with Vtilde/Ptilde rescaling => printed (4.10) exactly (S2)",
+    "7. impose the closure combination that is frame-invariant at first order, Eq. (4.13), => self-coupling (w_eff - c_s(eff)^2) Theta with no extra terms (S3)"
+  ],
+  "conservation_law_derivation": {
+    "classification": "SYMBOLICALLY_VERIFIED",
+    "source": "displayed reconstruction in Markdown Sec. 28 and independent compliance audit Secs. 5-6; the inaccessible scratch script is provenance only, not primary evidence",
+    "assumptions": "linear perturbation theory about flat FLRW; both components perfect fluids in their own frames; separate conservation; background c_s^2 := pdot/rhodot",
+    "derivation_summary": "the displayed flat-FLRW scalar coordinate calculation and abstract covariant assembly are two realizations of the same component-conservation derivation; GM and DBE are two independent primary-source transcription paths sharing that physical premise; GM (4.29) is a partially independent internal consistency check downstream of (4.10). Together they give the dust-frame self-coupling (w_eff-c_s(eff)^2)Theta. Closure-combination invariance is asserted at first order only",
+    "convention_dependencies": "signature (-,+,+,+) primary; flipped signature rerun documents covector sign flips without changing the self-coupling; Laplacian convention not involved",
+    "implementation_consequence": "supplies one of four agreeing realizations with an explicit dependency graph; no code change",
+    "evidence_needed_to_change_status": "an error found in the coordinate encoding, or a demonstration that the effective fluid cannot be treated as a conserved tilted perfect fluid at first order within GM's framework"
+  },
+  "candidate_a33_expressions": {
+    "derived": "(w_eff - c_s(eff)^2) * Theta [obtained by four agreeing realizations with documented dependencies; Z coeff -(1+w), Vtilde coeff k^2/a, Delta_d coeff 0, no wdot/c2dot/acceleration/flux terms]",
+    "printed": "(w_eff + c_s(eff)^2) * Theta [printed (4.15); not reproducible from its inspected parent equation chain]",
+    "rhs_a33_coefficient_difference_printed_minus_derived": "+2 c_s(eff)^2 Theta",
+    "printed_lhs_residual_on_derived_solution": "-2 c_s(eff)^2 Theta Delta^(eff)",
+    "new_expression_with_extra_terms": "EXCLUDED by the coefficient inventory (check S3)"
+  },
+  "symbolic_checks": [
+    {"id": "C1", "script": "phase1ddt_coordinate_check.py", "content": "linear commutator, papers + flipped signature", "inputs": "geometry only", "assumptions": "first order", "expected": "0", "actual": "0 both signatures (acceleration-term sign flips with signature, documented)", "transcription_independently_verified": true, "assumes_tested_sign": false},
+    {"id": "C2", "script": "phase1ddt_coordinate_check.py", "content": "GM (2.8) == n-projected conservation", "inputs": "raw nabla T = 0", "expected": "0", "actual": "0 both signatures", "transcription_independently_verified": true, "assumes_tested_sign": false},
+    {"id": "C3", "script": "phase1ddt_coordinate_check.py", "content": "GM (2.9) == h-projected conservation", "inputs": "raw nabla T = 0", "expected": "exact GM form in papers' signature", "actual": "exact (A +, F +, overall +); flipped signature: (A -, F -, overall -) pattern documented", "transcription_independently_verified": true, "assumes_tested_sign": false},
+    {"id": "C3b", "script": "phase1ddt_coordinate_check.py", "content": "GM (2.5) sign audit", "inputs": "geometry", "expected": "-", "actual": "exact relation Theta = Theta^(i) - div V^(i) (both signatures); printed (2.5) '+' inconsistent", "transcription_independently_verified": true, "assumes_tested_sign": false},
+    {"id": "C4", "script": "phase1ddt_coordinate_check.py (provenance only)", "displayed_evidence": "Markdown Sec. 28 and independent compliance audit Secs. 5-6", "content": "GM (2.14) for an arbitrary first-order observer in the flat-FLRW scalar sector from conservation only", "inputs": "ds^2=-(1+2phi)dt^2+2a B_,x dt dx+a^2(1-2psi)delta_ij dx^i dx^j; n^mu=(1-phi,v_n/a,0,0); u_i^mu=(1-phi,v_i/a,0,0); raw projected nabla_b T_i^{ab}=0", "expected": "the complete GM (2.14) residual displayed in Markdown Sec. 28 is identically zero", "actual": "R_C4,x=0; this 1D flat scalar calculation does not prove vector, tensor, curved-space, or global Buchert claims", "transcription_independently_verified": true, "assumes_tested_sign": false},
+    {"id": "C5", "script": "phase1ddt_coordinate_check.py", "content": "dust-frame geodesy + zero dust tilt", "inputs": "dust conservation", "expected": "0", "actual": "0 both signatures", "transcription_independently_verified": true, "assumes_tested_sign": false},
+    {"id": "C6a-C6e", "script": "phase1ddt_coordinate_check.py (provenance only)", "displayed_evidence": "Markdown Secs. 9, 19, 28 and independent compliance audit Secs. 6, 8", "content": "two-observer laws: rho invariance, directed flux boost, Delta shift, P shift, closure-combination frame invariance at first order", "inputs": "geometry with two arbitrary first-order observers", "expected": "0 each at first order", "actual": "0 each (C6b papers' signature only; shift signs signature-aware)", "transcription_independently_verified": true, "assumes_tested_sign": false},
+    {"id": "S1", "script": "phase1ddt_system_checks.py (provenance only)", "displayed_evidence": "Markdown Sec. 22 and independent compliance audit Sec. 5", "content": "abstract covariant assembly == GM (2.14) structure; a second realization of the same conservation-law premise as C4", "inputs": "commutator + component conservation + momentum equation as rules", "expected": "0", "actual": "0", "transcription_independently_verified": true, "assumes_tested_sign": false},
+    {"id": "S2", "script": "phase1ddt_system_checks.py", "content": "(4.6) -> (4.10) rescaling + harmonics; powers of a, k", "inputs": "visual transcriptions", "expected": "0", "actual": "0", "transcription_independently_verified": true, "assumes_tested_sign": false},
+    {"id": "S3", "script": "phase1ddt_system_checks.py (provenance only)", "displayed_evidence": "Markdown Secs. 24, 29 and independent compliance audit Sec. 11", "content": "(4.10)+(4.13) => A33; full coefficient inventory; distinguish coefficient difference from equation residual", "inputs": "visual transcriptions", "expected": "A33=(w-c2)Theta; A33_printed-A33_derived=+2c2Theta; R_printed_on_derived=-2c2Theta Delta_eff", "actual": "all as expected", "transcription_independently_verified": true, "assumes_tested_sign": false},
+    {"id": "S4", "script": "phase1ddt_system_checks.py", "content": "wdot = -Theta(1+w)(c2-w) from conservation + c2 := pdot/rhodot", "expected": "0", "actual": "0", "transcription_independently_verified": true, "assumes_tested_sign": false},
+    {"id": "S5", "script": "phase1ddt_system_checks.py", "content": "V <-> Vtilde exact matrix equivalence, all 16 entries, both branches", "expected": "0 all entries", "actual": "0 all entries, both branches", "transcription_independently_verified": true, "assumes_tested_sign": false},
+    {"id": "S6", "script": "phase1ddt_system_checks.py (provenance only)", "displayed_evidence": "complete equation and residual in Markdown Sec. 30; independent compliance audit Secs. 13-14", "content": "printed (4.19) on-shell from printed-branch system", "inputs": "printed (4.14)-(4.17), background conservation, wdot=-Theta(1+w)(c2-w), standard Raychaudhuri with general Lambda; complete second-order equation displayed in Sec. 30", "expected": "R_S6=LHS_printed_4.19-RHS_printed_4.19=0", "actual": "0; only internal consistency with printed (4.15), hence non-discriminating; Appendix A is downstream", "transcription_independently_verified": true, "assumes_tested_sign": false},
+    {"id": "S7", "script": "phase1ddt_system_checks.py (provenance only)", "displayed_evidence": "complete assumptions and residuals in Markdown Sec. 31; independent compliance audit Secs. 13-14", "content": "GM (4.29) from (4.9)-(4.12) with adiabatic constant-w closure; printed-(4.15)-chain variant", "inputs": "GM (4.9)-(4.12), Ptilde=w Delta, c2=w constant, component background conservation, Friedmann/Raychaudhuri substitutions shown in Sec. 31", "expected": "derived-chain residual 0; printed-chain nonzero", "actual": "derived residual 0; printed residual = -(2w/3)[-3D Lambda-D Theta^2+3D(4piG)rho_d+9D(4piG)rho_eff w+3D(4piG)rho_eff-3 Ddot Theta]; partially independent because downstream of (4.10)", "transcription_independently_verified": true, "assumes_tested_sign": false},
+    {"id": "S8", "script": "phase1ddt_system_checks.py (provenance only)", "displayed_evidence": "Markdown Sec. 13 and independent compliance audit Sec. 9", "content": "DBE (46)+(47) => (49); eps->0 => (55); self-coupling 3(w_i-c_i^2)H; interactions-ON exact after (29)+(34)", "expected": "all pass", "actual": "all pass. With the total gradient retained independently, its pressure term is total-to-component cross-coupling; expanding mu Dcal=Sum_j mu_j Dcal_j can expose a Dcal_i-proportional contribution, without changing the independently derived GM A33", "transcription_independently_verified": true, "assumes_tested_sign": false}
+  ],
+  "consistency_equation_classifications": [
+    {"equation": "GM (4.19)", "classification_of_test": "dependent consistency check", "reason": "explicitly derived from printed (4.15) (GM p. 17 text); cannot adjudicate D3; re-derived exactly on the printed branch (S6)"},
+    {"equation": "GM Appendix A", "classification_of_test": "dependent consistency check", "reason": "derived from (4.18)+(4.19); on the printed branch by construction; not re-derived (frozen 1C-A not_verified status unchanged)"},
+    {"equation": "GM (4.29)", "classification_of_test": "partially independent discriminator", "reason": "GM derives it from (4.9)-(4.10), so it is downstream of (4.10) rather than fully independent; exact on the derived chain and fails on the printed chain (S7)"},
+    {"equation": "GM (4.18)/(4.24)", "classification_of_test": "non-discriminating", "reason": "dust-row second-order equations; no A33 content (frozen 1C-A/1C-B validations unchanged)"},
+    {"equation": "DBE (49)/(55)", "classification_of_test": "independent primary-source transcription path with shared conservation premise", "reason": "independent source transcription in its own frame, while sharing component conservation as the physical premise; minus combination as printed (S8)"},
+    {"equation": "commutator acceleration term", "classification_of_test": "convention dependent", "reason": "sign flips with metric signature (C1); does not affect the self-coupling"}
+  ],
+  "resolution_criteria": [
+    {"n": 1, "criterion": "every relevant frame explicitly defined", "met": true, "evidence": "report Sec. 7 (7 frames); equation-level criterion met"},
+    {"n": 2, "criterion": "complete first-order frame transformation performed", "met": true, "evidence": "Sec. 9 explicit destination-minus-source table; Secs. 16-19; C6 laws; documentation direction defect corrected after compliance audit"},
+    {"n": 3, "criterion": "component and total variables distinguished", "met": true, "evidence": "Sec. 13; S8; total-gradient expansion qualification corrected after compliance audit"},
+    {"n": 4, "criterion": "pressure and sound-speed definitions mapped", "met": true, "evidence": "Secs. 11, 19, 20, 24; complete taxonomy and first-order invariance qualifier added after compliance audit"},
+    {"n": 5, "criterion": "scalarisation explicit", "met": true, "evidence": "Sec. 25; BDE (63), (74), footnotes 21-22; S2; source-completeness omission corrected after compliance audit"},
+    {"n": 6, "criterion": "both tilt normalisations checked", "met": true, "evidence": "Secs. 26-27; S5 (16 entries, both branches)"},
+    {"n": 7, "criterion": "conservation-law derivation is reproducibly corroborated", "met": true, "evidence": "Secs. 22 and 28 display two realizations of the same conservation-law premise; C4 inputs and residual are now displayed without reliance on scratch scripts"},
+    {"n": 8, "criterion": "all sign-critical source equations visually unambiguous", "met": true, "evidence": "Secs. 5, 10, 33; the three ambiguous items found are non-propagating and outside the D3 chain"},
+    {"n": 9, "criterion": "no uninspected source equation still required", "met": true, "evidence": "Sec. 4 inventories now include BDE (74), footnote 21, and footnote 22; derivation closes from displayed first principles and inspected pages"},
+    {"n": 10, "criterion": "no unresolved convention can reverse the result", "met": true, "evidence": "Sec. 24 dependence audit; both signatures; C6e closure-combination invariance at first order"}
+  ],
+  "unmet_resolution_criteria": {"list": [], "note": "all ten equation-level criteria support a resolved verdict. The independent compliance audit found documentation and source-completeness defects; this correction revision closes those defects. The pre-correction documents did not already satisfy every documentation requirement, and no runtime consequence follows automatically"},
+  "final_d3_verdict": {
+    "verdict": "RESOLVED_DERIVED_4_10",
+    "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+    "source": "visually inspected GM (2.2)-(2.24), (4.1)-(4.19), (4.29), and Appendix A opening; DBE pp. 55-61; BDE pp. 38-45, 48 including (74), footnote 21, and footnote 22; displayed Markdown Secs. 22 and 28-31; independent compliance audit; scratch ledgers are corroborating provenance only; frozen 1C-A/1C-B2/1D-C records are historical context",
+    "assumptions": "GM's own framework: two non-interacting perfect fluids (irrotational pressureless dust + effective barotropic perfect fluid treated as a separately conserved tilted perfect fluid at first order -- GM's stated perturbative postulate), dust-energy-frame observer, CGI linear perturbations about the averaged background, closure (4.13) with background c_s,eff^2 = pdot_eff/rhodot_eff",
+    "derivation_summary": "Four agreeing realizations, with a shared component-conservation premise, two independent primary-source transcriptions, and one partially independent internal GM consistency check, yield A33=(w_eff-c_s(eff)^2)Theta. The coordinate and abstract covariant calculations realize the same conservation law; GM and DBE are independent transcriptions sharing that premise; GM (4.29) is downstream of (4.10). The RHS coefficient difference is A33_printed-A33_derived=+2c_s(eff)^2Theta; the printed LHS residual on a derived solution is -2c_s(eff)^2Theta Delta_eff. GM (4.19)/Appendix A depend on printed (4.15)",
+    "convention_dependencies": "verified robust against metric signature, Laplacian eigenvalue sign, tilt normalisation, pressure-variable normalisation, Z definition, declared flux-boost direction, and background sound-speed derivative convention. The closure combination is frame-invariant at first order only",
+    "implementation_consequence": "NONE in this phase: both branches remain implemented and mandatory; no runtime default is selected; historical reproduction of Fig. 3/notebooks still requires printed_4_15; any documentation or API change requires a separate reviewed implementation phase; authorial intent/erratum status remains REQUIRES_AUTHOR_INPUT as a separate item",
+    "evidence_needed_to_change_status": "a demonstrated error in the displayed derivation or independently reproduced checks; or author clarification revealing a different intended framework (for example a different closure or variable definition) in which printed (4.15) is derivable",
+    "unresolved_authorial_intent": "REQUIRES_AUTHOR_INPUT: which coefficient the authors intended and whether an erratum will be issued; this does not reopen the equation-level verdict",
+    "physical_framework_caveat": "GM's perturbative treatment of Buchert backreaction as a separately conserved tilted perfect effective component is an explicit postulate; its physical adequacy is outside this equation-level adjudication",
+    "historical_reproduction_requirement": "printed_4_15 remains mandatory and available for exact paper/notebook reproduction; neither runtime branch is removed, ranked as a default, or changed"
+  },
+  "downstream_implications": {
+    "frozen_dual_branch_b2": "unchanged; must remain dual-branch (printed_4_15 indispensable for reproducing the published record); no default",
+    "phase_1d_b_growth_results": "all frozen per-branch results remain valid as labelled; no number changes",
+    "published_record_discrepancy": "the inconsistent equation record is called a published-record discrepancy, not unresolved theoretical uncertainty",
+    "forensic_reproduction_spread": "numerical differences between printed_4_15 historical reproduction and derived_4_10 are a forensic reproduction spread",
+    "publication_systematic": "may be propagated only when deliberately treating the inconsistent published record as a systematic",
+    "candidate_a_diagnostic": "unaffected: clean comoving/Meszaros systems contain no c_s^2 in any matrix entry and are D3-independent; no modification recommended",
+    "future_barotropic_continuous_k": "both branches still required while the published record stands; derived_4_10 now has a derivation-backed basis for scientific analyses, subject to the separate reviewed-phase rule",
+    "fig3_reproduction": "unchanged: printed_4_15 (+ forensic D2 sound speed) remains the reproduction configuration",
+    "author_communication": "courtesy question available with a complete derivation; non-blocking"
+  },
+  "author_input_question": {
+    "status": "non-blocking courtesy verification; not sent (user/agent process declaration, not a repository-proven external fact)",
+    "d3_question": "Dear Dr. Galoppo and Dr. Mourier, Eq. (4.10) plus closure (4.13) gives A33=(w_eff-c_s,eff^2)Theta, whereas printed Eq. (4.15) carries (w_eff+c_s,eff^2)Theta. Thus A33_printed-A33_derived=+2c_s,eff^2Theta, and the printed left-hand-side residual evaluated on a derived-branch solution is -2c_s,eff^2Theta Delta_eff. The displayed first-order frame transformation and closure-combination invariance at first order, the DBE/BDE component mapping, and GM (4.29) agree with the derived coefficient; GM (4.19) and Appendix A are internally consistent descendants of printed (4.15). Could you confirm which coefficient was intended? This is distinct from exact historical Fig. 3/notebook reproduction, which retains printed_4_15.",
+    "unrelated_items": {"items": ["BDE (19)", "GM (2.5)", "GM (2.21)", "GM (2.12)/(2.13)"], "d3_evidentiary_role": "none", "communication_policy": "omit from the self-contained D3 question; if human-approved later, place in a clearly separate optional appendix or preferably a separate communication; never present as cumulative D3 support"}
+  },
+  "forbidden_actions_confirmed": {
+    "modified_source_or_code": false,
+    "staged": false,
+    "committed": false,
+    "tagged": false,
+    "pushed": false,
+    "merged": false,
+    "published": false,
+    "author_contact": false,
+    "modified_frozen_dual_branch_implementation": false,
+    "deleted_or_deprecated_a_d3_label": false,
+    "selected_runtime_default": false,
+    "modified_phase_1c_1da_1db_1dc_reports": false,
+    "implemented_candidate_a": false,
+    "implemented_spectra_or_sigma_statistics": false,
+    "created_continuous_k_solver": false,
+    "implemented_rsd": false,
+    "contacted_authors": false,
+    "committed_or_pushed": false,
+    "introduced_executable_code_or_api_placeholders": false,
+    "evidence_scope": "Git verifies current repository/index/ref state. No publication and no author contact are user/agent process declarations; this record does not claim Git can prove all external communications or historically deleted remote events"
+  }
+}
