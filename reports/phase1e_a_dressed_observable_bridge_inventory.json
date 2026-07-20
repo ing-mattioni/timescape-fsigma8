@@ -1,0 +1,868 @@
+{
+  "schema_note": {
+    "name": "phase1e_a_dressed_observable_bridge_inventory",
+    "version": 1,
+    "encoding": "UTF-8",
+    "ordering": "Top-level and nested key order is fixed by this reviewed serialization; deterministic sorted-key reserialization is checked independently.",
+    "formal_conclusion_required_fields": [
+      "classification",
+      "source",
+      "assumptions",
+      "derivation_summary",
+      "coordinate_dependencies",
+      "frame_dependencies",
+      "implementation_consequence",
+      "observational_consequence",
+      "evidence_needed_to_change_status"
+    ]
+  },
+  "date_utc": "2026-07-20",
+  "repository_checkpoint": {
+    "repository": "ing-mattioni/timescape-fsigma8",
+    "starting_branch": "main",
+    "work_branch": "phase-1e-a-dressed-observable-bridge-audit",
+    "starting_head": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+    "final_head_expected_unchanged": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+    "base_tag": "phase-1d-d-anchored-density-growth-v1",
+    "base_tag_object": "d42519aff3f6028c8d71eb7ef478b79201e422c3",
+    "base_tag_peeled_commit": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+    "origin_main_at_preflight": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+    "work_branch_pushed": false
+  },
+  "frozen_tags_and_hashes": {
+    "frozen_tags": [
+      "phase-1b-background-v1",
+      "phase-1c-a-equation-audit-v1",
+      "phase-1c-b1-clean-systems-v1",
+      "phase-1c-b2-barotropic-v1",
+      "phase-1d-a-growth-observable-audit-v1",
+      "phase-1d-b-growth-pipeline-v1",
+      "phase-1d-c-observable-closure-audit-v1",
+      "phase-1d-d-t-d3-frame-mapping-v1",
+      "phase-1d-d-anchored-density-growth-v1"
+    ],
+    "all_ancestor_of_checkpoint_at_preflight": true,
+    "upstream_commit": "590c6fd5332acb15f5683ebf392a0d7ce54983c5",
+    "upstream_clean_at_preflight": true,
+    "notebook_path": ".reference/Linear-Perturbations-in-averaged-cosmological-models/ACPT_Timescape.ipynb",
+    "notebook_sha256": "86d2534db9e9b3169835e4ce223ee8f3bff6d03b47e5677d3937fed4adafe55a",
+    "d3_equation_verdict": "RESOLVED_DERIVED_4_10",
+    "runtime_d3_branches": [
+      "derived_4_10",
+      "printed_4_15"
+    ],
+    "runtime_d3_default": null
+  },
+  "local_evidence_inventory": [
+    {
+      "path": "reports/phase1d_a_growth_observable_audit.md",
+      "commit": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+      "role": "density-variable, wavenumber, growth, sigma_R and RSD readiness audit"
+    },
+    {
+      "path": "reports/phase1d_a_observable_inventory.json",
+      "commit": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+      "role": "machine-readable Phase 1D-A definitions and gates"
+    },
+    {
+      "path": "reports/phase1d_b_growth_pipeline_validation.md",
+      "commit": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+      "role": "signed growth, reference, rate and crossing validation"
+    },
+    {
+      "path": "reports/phase1d_b_compliance_audit.md",
+      "commit": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+      "role": "independent Phase 1D-B compliance evidence"
+    },
+    {
+      "path": "reports/phase1d_c_observable_closure_audit.md",
+      "commit": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+      "role": "spectrum/smoothing and spatial-frame closure audit"
+    },
+    {
+      "path": "reports/phase1d_c_closure_inventory.json",
+      "commit": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+      "role": "machine-readable closure inventory"
+    },
+    {
+      "path": "reports/phase1d_c_compliance_audit.md",
+      "commit": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+      "role": "independent closure compliance evidence"
+    },
+    {
+      "path": "reports/phase1d_d_t_d3_frame_mapping_audit.md",
+      "commit": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+      "role": "dust/effective frame equations and D3 adjudication"
+    },
+    {
+      "path": "reports/phase1d_d_t_d3_frame_mapping_inventory.json",
+      "commit": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+      "role": "machine-readable frame and D3 inventory"
+    },
+    {
+      "path": "reports/phase1d_d_t_compliance_audit.md",
+      "commit": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+      "role": "independent D3/frame compliance evidence"
+    },
+    {
+      "path": "reports/phase1d_d_anchored_density_growth_validation.md",
+      "commit": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+      "role": "frozen Candidate A scientific and numerical definition"
+    },
+    {
+      "path": "src/timescape_fsigma8/growth/anchored_diagnostic.py",
+      "commit": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+      "role": "Candidate A implementation"
+    },
+    {
+      "path": "src/timescape_fsigma8/growth/__init__.py",
+      "commit": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+      "role": "frozen public growth API and caveats"
+    },
+    {
+      "path": "src/timescape_fsigma8/growth/histories.py",
+      "commit": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+      "role": "signed relative-history construction"
+    },
+    {
+      "path": "src/timescape_fsigma8/growth/rates.py",
+      "commit": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+      "role": "bare/dressed analytic rate chain"
+    },
+    {
+      "path": "src/timescape_fsigma8/growth/crossings.py",
+      "commit": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+      "role": "signed zero-crossing policy"
+    },
+    {
+      "path": "src/timescape_fsigma8/growth/mapping.py",
+      "commit": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+      "role": "Delta_d to delta_m harmonic mapping"
+    },
+    {
+      "path": "src/timescape_fsigma8/growth/pipeline.py",
+      "commit": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+      "role": "signed history/reference/rate provenance"
+    },
+    {
+      "path": "src/timescape_fsigma8/growth/scenarios.py",
+      "commit": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+      "role": "mandatory growth scenario choices"
+    },
+    {
+      "path": "src/timescape_fsigma8/background/observables.py",
+      "commit": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+      "role": "lapse, wall scale factor, dressed H and redshift"
+    },
+    {
+      "path": "src/timescape_fsigma8/background/tracker.py",
+      "commit": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+      "role": "a_D, H_D, Theta and tracker functions"
+    },
+    {
+      "path": "src/timescape_fsigma8/perturbations/systems.py",
+      "commit": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+      "role": "frozen clean perturbation state/equation conventions"
+    },
+    {
+      "path": "tests/test_anchored_density_growth.py",
+      "commit": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+      "role": "Candidate A caveat and identity enforcement"
+    },
+    {
+      "path": "tests/growth_test_utils.py",
+      "commit": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+      "role": "explicit frozen growth validation configurations"
+    },
+    {
+      "path": "tests/test_growth_histories_rates.py",
+      "commit": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+      "role": "sign and rate-coordinate tests"
+    },
+    {
+      "path": "tests/test_growth_crossings.py",
+      "commit": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+      "role": "crossing and logarithmic-rate domain tests"
+    },
+    {
+      "path": "tests/test_growth_convergence_purity.py",
+      "commit": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+      "role": "solver inheritance and growth-pipeline purity tests"
+    },
+    {
+      "path": "tests/test_growth_scenarios.py",
+      "commit": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+      "role": "mandatory scenario and mapping tests"
+    },
+    {
+      "path": "tests/test_wall_observables.py",
+      "commit": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+      "role": "wall lapse, scale factor, dressed H and redshift identities"
+    },
+    {
+      "path": "tests/test_clean_perturbation_systems.py",
+      "commit": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+      "role": "clean-system signs, equations and residual tests"
+    }
+  ],
+  "primary_source_inventory": [
+    {
+      "id": "GM_v2",
+      "citation": "Galoppo and Mourier, arXiv:2511.17160v2, JCAP 02 (2026) 066",
+      "access": "arXiv PDF downloaded and visually inspected",
+      "equations_or_sections": ["2.2", "2.5", "2.19-2.24", "4.9", "4.20-4.23", "5.4-5.7", "Secs. 5.1 and 6"]
+    },
+    {
+      "id": "W09",
+      "citation": "D. L. Wiltshire, Average observational quantities in the timescape cosmology, arXiv:0909.0749v2, Phys. Rev. D 80, 123512",
+      "access": "arXiv PDF downloaded and visually inspected",
+      "equations_or_sections": ["22-28", "36-38", "51", "Appendix B"]
+    },
+    {
+      "id": "W07",
+      "citation": "D. L. Wiltshire, Exact solution to the averaging problem in cosmology, arXiv:0709.0732v2",
+      "access": "arXiv PDF downloaded and visually inspected",
+      "equations_or_sections": ["1-8", "19-22"]
+    },
+    {
+      "id": "DBE_BDE_1992",
+      "citation": "Dunsby, Bruni and Ellis, ApJ 395 (1992) 54; Bruni, Dunsby and Ellis, ApJ 395 (1992) 34",
+      "access": "primary equations and page images previously inspected and frozen in Phase 1D-C/1D-D-t reports",
+      "equations_or_sections": ["CGI frame transformations", "component variables", "scalar harmonics"]
+    },
+    {
+      "id": "Kaiser_1987",
+      "citation": "N. Kaiser, Clustering in real space and in redshift space, MNRAS 227 (1987) 1-21",
+      "access": "NASA ADS primary scan opened in PDF viewer; direct local download timed out",
+      "equations_or_sections": ["Sec. 3.1", "3.1-3.8"]
+    },
+    {
+      "id": "PercivalWhite_2008",
+      "citation": "W. J. Percival and M. White, arXiv:0808.0003v2",
+      "access": "arXiv PDF downloaded and visually inspected",
+      "equations_or_sections": ["1-14", "20-21", "Secs. 2.1-2.6"]
+    },
+    {
+      "id": "AlcockPaczynski_1979",
+      "citation": "C. Alcock and B. Paczynski, Nature 281 (1979) 358-359, DOI 10.1038/281358a0",
+      "access": "publisher abstract/metadata only; full body inaccessible",
+      "equations_or_sections": ["abstract"]
+    },
+    {
+      "id": "BOSS_DR12_2016",
+      "citation": "F. Beutler et al., arXiv:1607.03150v1",
+      "access": "arXiv PDF downloaded and visually inspected",
+      "equations_or_sections": ["23-25", "42-49", "Secs. 2, 4, 5, 6"]
+    },
+    {
+      "id": "eBOSS_LRG_2020",
+      "citation": "J. E. Bautista et al., arXiv:2007.08993v2",
+      "access": "arXiv PDF downloaded and visually inspected",
+      "equations_or_sections": ["4", "7-8", "36-42", "Secs. 2.5, 3.1-3.4, 4.2"]
+    },
+    {
+      "id": "eBOSS_cosmology_2020",
+      "citation": "S. Alam et al., arXiv:2007.08991",
+      "access": "arXiv PDF downloaded and inspected for consensus-method context",
+      "equations_or_sections": ["methodology and likelihood-compression context"]
+    }
+  ],
+  "inaccessible_source_inventory": [
+    {
+      "citation": "C. Alcock and B. Paczynski, Nature 281 (1979) 358-359",
+      "attempted_access": [
+        "Nature PDF URL returned a cookie/access HTML response rather than the article PDF",
+        "ADS direct download timed out",
+        "publisher abstract and bibliographic page inspected"
+      ],
+      "exact_missing_content": "full two-page article body and original displayed construction",
+      "blocking": false,
+      "reason_not_blocking": "No exact equation is attributed to the inaccessible body. W09 Eq. (51) and primary BOSS/eBOSS AP formulae establish the background and survey scalings needed for this no-go.",
+      "evidence_required": "a stable primary scan or publisher PDF for source-completeness verification"
+    },
+    {
+      "citation": "N. Kaiser, MNRAS 227 (1987) 1-21",
+      "attempted_access": [
+        "NASA ADS PDF opened and page text inspected",
+        "direct local download timed out"
+      ],
+      "exact_missing_content": "reproducible local PDF byte hash only; scientific pages were accessible",
+      "blocking": false,
+      "reason_not_blocking": "Sec. 3.1 was available in the primary ADS PDF and the load-bearing explicit Jacobian is independently available in Percival-White Eqs. (1)-(6).",
+      "evidence_required": "stable downloadable ADS or journal PDF to add a local hash"
+    }
+  ],
+  "source_hashes": {
+    "GM_v2_pdf_sha256": "856bd78db8f86e46c0f5d21414ad0c1d136b176c6ac1b45418dbeebc38e920dd",
+    "W09_pdf_sha256": "e37321e9d6021c6f5eb6bc5084ad331f4fca9dc0bc426097d1c5ce5ce7b2a8aa",
+    "W07_pdf_sha256": "3abcc64ad95b95cf655f687515c8d85f38d6d0bfcebec1e0133a460b425db04f",
+    "PercivalWhite_pdf_sha256": "99be19eb2893b1b7936563e9189cd0e47839b6a35f285bfc612b6feb122b9adc",
+    "BOSS_DR12_pdf_sha256": "bd0ec6ecb85b4fd015cfbaa2fcf7f19ef94ecda4d2022d327e5dec25e38da742",
+    "eBOSS_LRG_pdf_sha256": "825f25cd55140db25b390ad0947a421aca1c4bc1814eb4301e83931ea0ff9118",
+    "eBOSS_cosmology_pdf_sha256": "b5c04e71129ff94401d472449f43428a86a1d7a9b028312efea32fac0fa0df1e",
+    "Kaiser_1987_pdf_sha256": null,
+    "AlcockPaczynski_1979_pdf_sha256": null
+  },
+  "inspected_page_inventory": [
+    {"source": "GM_v2", "pdf_pages": [9, 21, 25, 27], "additional_equations_read": ["2.2", "2.5", "2.19-2.24", "4.9", "4.20-4.23", "5.4-5.7"]},
+    {"source": "W09", "printed_or_pdf_pages": [6, 8, 14], "equations": ["22-28", "36-38", "51"]},
+    {"source": "W07", "pdf_pages": [2, 4], "equations": ["1-8", "19-22"]},
+    {"source": "Kaiser_1987", "journal_pages": [7, 8, 9], "pdf_pages_zero_based": [6, 7, 8], "equations": ["3.1-3.8"]},
+    {"source": "PercivalWhite_2008", "printed_pages": [2, 3, 4], "equations": ["1-14", "20-21"]},
+    {"source": "BOSS_DR12_2016", "printed_pages": [3, 8, 9, 10, 11], "equations": ["23-25", "42-53"]},
+    {"source": "eBOSS_LRG_2020", "printed_pages": [6, 8, 9, 11, 12], "equations": ["4", "7-8", "36-42"]},
+    {"source": "AlcockPaczynski_1979", "printed_pages": null, "equations": null}
+  ],
+  "evidence_classification_policy": {
+    "allowed": [
+      "VERIFIED_FROM_PRIMARY_SOURCE",
+      "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "SYMBOLICALLY_VERIFIED",
+      "NUMERICALLY_CORROBORATED",
+      "CONVENTION_DEPENDENT",
+      "REQUIRES_AUTHOR_INPUT",
+      "UNRESOLVED_EXTERNAL_DEPENDENCY",
+      "NOT_APPLICABLE",
+      "NOT_JUSTIFIED"
+    ],
+    "single_primary_classification_required": true,
+    "symbolic_scope": "Only the encoded identities are proved.",
+    "numerical_scope": "Numerical agreement cannot establish a missing frame or observable transformation."
+  },
+  "relation_classification_vocabulary": {
+    "allowed": [
+      "IDENTICAL",
+      "IDENTICAL_UNDER_EXPLICIT_ASSUMPTIONS",
+      "PROXY_WITH_CONVENTION_DEPENDENCE",
+      "REQUIRES_SURVEY_REANALYSIS",
+      "NOT_MAPPABLE_WITH_CURRENT_THEORY"
+    ]
+  },
+  "frame_dictionary": [
+    {"id": "buchert_volume_average_dust", "four_velocity_or_operation": "Buchert dust-orthogonal averaging foliation", "clock": "volume-average time t", "scale_factor": "a_D", "expansion": "Theta=3 H_D", "spatial_projector_coordinates": "dust projector and volume-average averaging slice", "peculiar_velocity": "none relative to its own foliation", "density": "averaged dust plus CGI perturbation", "order": "background plus first order"},
+    {"id": "dust_energy_frame", "four_velocity_or_operation": "u_d^a with q_d^a=0 and geodesic dust", "clock": "t", "scale_factor": "a_D", "expansion": "Theta plus deltaTheta", "spatial_projector_coordinates": "h_ab(u_d), volume-average harmonics", "peculiar_velocity": "zero by frame choice", "density": "Delta_d and delta_m coefficients", "order": "first order"},
+    {"id": "effective_fluid_rest_frame", "four_velocity_or_operation": "u_eff^a with effective rest-frame flux zero", "clock": "component-frame proper time at first order", "scale_factor": "volume-average background", "expansion": "component/frame dependent", "spatial_projector_coordinates": "component projector", "peculiar_velocity": "GM tilt relative to dust/general frame", "density": "effective-fluid CGI density", "order": "first order; excluded from Candidate A"},
+    {"id": "wall_dressed_observer", "four_velocity_or_operation": "finite-infinity wall observer", "clock": "tau_w with dt=gamma_w d tau_w", "scale_factor": "a_w; a_obs=a_w/a_w0", "expansion": "dressed H", "spatial_projector_coordinates": "W09 observer-centred dressed metric", "peculiar_velocity": "no perturbative dust-to-wall definition supplied", "density": "no derived dressed matter perturbation variable", "order": "background observable geometry"},
+    {"id": "observed_redshift_observer", "four_velocity_or_operation": "central wall observer receiving matched radial null rays", "clock": "tau_w", "scale_factor": "1+z=a_w0/a_w", "expansion": "dressed H in distance-redshift law", "spatial_projector_coordinates": "past light cone and angular sky", "peculiar_velocity": "peculiar-redshift perturbation not derived", "density": "inferred tracer distribution", "order": "observational"},
+    {"id": "galaxy_tracer_rest_frame", "four_velocity_or_operation": "u_g^a", "clock": "galaxy proper time / survey redshift", "scale_factor": "survey-model dependent", "expansion": "tracer velocity divergence", "spatial_projector_coordinates": "survey coordinates", "peculiar_velocity": "v_g", "density": "delta_g", "order": "observationally inferred; absent from Timescape perturbation system"},
+    {"id": "total_matter_frame", "four_velocity_or_operation": "total matter energy or particle frame, definition dependent", "clock": "frame proper time", "scale_factor": "model dependent", "expansion": "total-frame expansion", "spatial_projector_coordinates": "total-frame projector", "peculiar_velocity": "component relative velocities", "density": "total matter contrast", "order": "first order where used"},
+    {"id": "survey_fiducial_flrw", "four_velocity_or_operation": "algorithmic FLRW coordinate assignment", "clock": "fiducial cosmic time", "scale_factor": "a_fid=1/(1+z)", "expansion": "H_fid(z)", "spatial_projector_coordinates": "fiducial comoving coordinates from angles and redshifts", "peculiar_velocity": "template velocity in Hubble units", "density": "fitted tracer template", "order": "survey-model inferred"}
+  ],
+  "time_and_clock_dictionary": {
+    "definitions": {
+      "t": "volume-average time",
+      "tau_w": "wall proper time",
+      "gamma_w": "dt/dtau_w",
+      "a_D": "volume-average scale factor",
+      "a_obs": "a_w/a_w0=1/(1+z)",
+      "H_D": "d ln a_D/dt=Theta/3",
+      "H_dressed": "d ln a_w/dtau_w=gamma_w H_D-dot(gamma_w)"
+    },
+    "chain_equation": "f_dressed/f_bare=gamma_w*H_D/H_dressed=(2+f_v)^2/(4+f_v+4*f_v^2)",
+    "conclusion": {
+      "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "source": "W09 Eqs. (23)-(28), (38); frozen rates.py and Phase 1D-A Sec. 7",
+      "assumptions": ["tracker background", "same density history", "background lapse only"],
+      "derivation_summary": "d ln a_obs/dt=H_dressed/gamma_w and d ln a_D/dt=H_D give the exact derivative chain.",
+      "coordinate_dependencies": ["t", "tau_w", "a_D", "a_obs"],
+      "frame_dependencies": ["volume-average background", "wall background"],
+      "implementation_consequence": "retain the frozen explicit bare/dressed coordinate choice",
+      "observational_consequence": "the chain alone is not a peculiar-velocity or RSD transformation",
+      "evidence_needed_to_change_status": "none for the background chain; a perturbative wall-frame derivation is separately required"
+    }
+  },
+  "spatial_coordinate_dictionary": {
+    "k_code": "constant dimensionless eigenvalue label on the volume-average harmonic basis",
+    "k_com_D": "k_code H0_TS/c in volume-average comoving coordinates",
+    "k_phys_D_t": "k_com_D/a_D(t)",
+    "k_phys0_D": "k_code H0_TS/(a_D0 c)",
+    "k_com_obs": null,
+    "k_com_obs_status": "unresolved, not empty or not applicable",
+    "survey_k_fid": "fiducial FLRW Fourier wavenumber obtained from observed angles/redshifts",
+    "mu": "cosine between the survey wavevector and explicitly selected line of sight"
+  },
+  "wavenumber_mapping": {
+    "volume_average_equations": [
+      "(3)Laplacian Q_k=-(k_code^2/a_D^2) Q_k",
+      "k_com_D=k_code H0_TS/c",
+      "k_phys_D(t)=k_com_D/a_D(t)"
+    ],
+    "dressed_geometry_fact": "W09 Eq. (26) is spherically symmetric and not homogeneous.",
+    "relative_growth_cancellation": "[-Delta_d(t)/k_code^2]/[-Delta_d(t_ref)/k_code^2]=Delta_d(t)/Delta_d(t_ref)",
+    "conclusion": {
+      "classification": "UNRESOLVED_EXTERNAL_DEPENDENCY",
+      "source": "W09 Eqs. (24)-(26), (36)-(38); Phase 1D-A D1; Phase 1D-C Secs. 10-12",
+      "assumptions": ["no unproved global translation invariance", "same harmonic for the cancellation"],
+      "derivation_summary": "The dressed metric supplies observer-centred radial/null distances but no global Fourier isomorphism from the Buchert slice.",
+      "coordinate_dependencies": ["volume-average harmonic coordinates", "dressed radial light-cone coordinates", "survey fiducial coordinates"],
+      "frame_dependencies": ["dust averaging slice", "wall observer", "survey fiducial frame"],
+      "implementation_consequence": "do not implement a k_code-to-k_com_obs conversion",
+      "observational_consequence": "relative same-mode growth is safe, but absolute spectra, bins, mu, smoothing and RSD are not mapped",
+      "evidence_needed_to_change_status": "a derived local or global dressed spatial harmonic/statistical map with domain and Jacobian"
+    }
+  },
+  "smoothing_radius_and_h_conventions": {
+    "standard_pairing_rule": "comoving k and comoving R must use reciprocal units in one spatial coordinate system",
+    "volume_average_pairing": "k_com_D may pair only with a volume-average comoving radius",
+    "observational_pairing": "observational R8 requires a survey/dressed observational comoving wavenumber and its h convention",
+    "eboss_specific_example": "Bautista et al. Eq. (36) and Sec. 3.2.4 use fiducial P_lin and R=8 alpha h^-1 Mpc for reported f sigma8",
+    "conclusion": {
+      "classification": "CONVENTION_DEPENDENT",
+      "source": "Percival-White Eq. (13); Bautista et al. Eq. (36), Sec. 3.2.4; Phase 1D-A Sec. 10",
+      "assumptions": ["one common Fourier/statistical normalization", "matched coordinate frame"],
+      "derivation_summary": "R8 is inseparable from the spectrum's h and spatial-coordinate convention; Candidate A records but does not construct it.",
+      "coordinate_dependencies": ["comoving smoothing frame", "reciprocal k units"],
+      "frame_dependencies": ["survey/model matter frame", "unresolved dressed spatial frame"],
+      "implementation_consequence": "no sigma_R or R8 implementation is authorized",
+      "observational_consequence": "an external anchor is not shown to equal the survey's sigma8 normalization",
+      "evidence_needed_to_change_status": "explicit dressed/survey spatial map and matched anchor convention"
+    }
+  },
+  "density_variable_chain": {
+    "equations": [
+      "Delta_d,k=-k_code^2 delta_m,k",
+      "Z_k=-k_code^2 deltaTheta_k",
+      "dot(Delta_d,k)+Z_k=0",
+      "dot(delta_m,k)=-deltaTheta_k",
+      "f_bare=-deltaTheta/(H_D delta_m)=-3Z/(Theta Delta_d)"
+    ],
+    "conclusion": {
+      "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "source": "GM Eqs. (2.2), (2.20)-(2.24), (4.9), (4.20)-(4.23); Phase 1D-A D1-D4",
+      "assumptions": ["linear scalar perturbations", "documented harmonic sign", "k_code nonzero", "dust frame"],
+      "derivation_summary": "The common -k_code^2 harmonic factor converts both density and expansion gradients and cancels in the continuity equation.",
+      "coordinate_dependencies": ["volume-average time", "volume-average harmonics"],
+      "frame_dependencies": ["dust energy frame", "Buchert foliation"],
+      "implementation_consequence": "retain the frozen signed growth and analytic bare rate",
+      "observational_consequence": "deltaTheta is a dust expansion perturbation, not automatically a galaxy velocity divergence",
+      "evidence_needed_to_change_status": "none for the dust chain; a separate dressed/tracer transfer is needed"
+    }
+  },
+  "velocity_variable_chain": {
+    "definitions": {
+      "theta_D": "deltaTheta/H_D=-f_bare delta_m",
+      "theta_clock": "gamma_w deltaTheta/H_dressed=-f_dressed delta_m",
+      "theta_survey": "Percival-White divergence of galaxy velocity in Hubble-velocity units"
+    },
+    "conclusion": {
+      "classification": "NOT_JUSTIFIED",
+      "source": "GM dust chain; W09 Eqs. (23)-(28); Percival-White Eqs. (1), (4)-(6), (11)",
+      "assumptions": ["the first two identities retain the dust coefficient", "no unproved tracer equivalence"],
+      "derivation_summary": "Clock rescaling creates an algebraic candidate but does not transform the spatial velocity, observer, or tracer congruence.",
+      "coordinate_dependencies": ["volume-average harmonic", "dressed clock", "survey LOS coordinates"],
+      "frame_dependencies": ["dust", "wall", "galaxy/tracer", "fiducial survey"],
+      "implementation_consequence": "do not expose theta_clock as an RSD velocity",
+      "observational_consequence": "Z determines dust deltaTheta but not the velocity entering observed redshift-space displacement",
+      "evidence_needed_to_change_status": "a first-order dust-to-wall-to-tracer velocity and spatial transformation"
+    }
+  },
+  "redshift_space_mapping": {
+    "flrw_reference_chain": [
+      "s=x-u_parallel n_hat",
+      "number conservation plus the exact real/redshift-space Jacobian",
+      "plane-parallel and linear limits",
+      "delta_g^s=delta_g-mu^2 theta",
+      "theta=-f delta_m"
+    ],
+    "missing_timescape_objects": [
+      "perturbed observed-redshift relation",
+      "dressed real-space tracer position",
+      "dust-to-wall/tracer velocity transfer",
+      "line-of-sight velocity displacement",
+      "dressed three-dimensional Jacobian",
+      "common spatial Fourier basis",
+      "control of lapse, light-cone, wide-angle and relativistic terms"
+    ],
+    "conclusion": {
+      "classification": "NOT_JUSTIFIED",
+      "source": "Percival-White Eqs. (1)-(6); Kaiser Sec. 3.1; W09 Eqs. (24)-(28), (36)-(38)",
+      "assumptions": ["none of the FLRW mapping is silently imported into Timescape"],
+      "derivation_summary": "The FLRW Jacobian is explicit, whereas the dressed Timescape sources stop at a background radial-null and distance-redshift construction.",
+      "coordinate_dependencies": ["real-space tracer coordinates", "observed redshift space", "LOS", "dressed radial distance"],
+      "frame_dependencies": ["wall observer", "dust", "tracer", "survey fiducial"],
+      "implementation_consequence": "no dressed redshift-space API or Jacobian may be implemented",
+      "observational_consequence": "Candidate A cannot currently be inserted into an RSD template",
+      "evidence_needed_to_change_status": "a covariant or coordinate first-order dressed light-cone redshift-space derivation"
+    }
+  },
+  "kaiser_assessment": {
+    "conditional_equations": [
+      "delta_g=b delta_m",
+      "v_g=v_m",
+      "theta=-f delta_m",
+      "delta_g^s=(b+f mu^2) delta_m",
+      "P_g^s=(b+f mu^2)^2 P_m"
+    ],
+    "timescape_growth_rate_selected": null,
+    "conclusion": {
+      "classification": "NOT_JUSTIFIED",
+      "source": "Kaiser Sec. 3.1; Percival-White Eqs. (5), (6), (10)-(12); missing bridge inventory",
+      "assumptions": ["linearity", "plane parallel", "irrotational flow", "deterministic density bias", "zero velocity bias", "common Fourier frame"],
+      "derivation_summary": "The Kaiser factor follows under FLRW assumptions, but no source proves whether f_bare, f_dressed, or another combination multiplies mu^2 in dressed Timescape.",
+      "coordinate_dependencies": ["common real/redshift Fourier coordinates", "mu and LOS"],
+      "frame_dependencies": ["matter", "galaxy", "observer"],
+      "implementation_consequence": "do not implement a Kaiser-like Timescape template",
+      "observational_consequence": "Q_anchor_dressed is at most a conditional FLRW-like proxy",
+      "evidence_needed_to_change_status": "derive the dressed Jacobian and show its controlled limit has a unique growth coefficient"
+    }
+  },
+  "power_and_multipole_definitions": {
+    "conditional_equations": {
+      "P_s": "(b+f mu^2)^2 P_m",
+      "P0_coefficient": "b^2+(2/3)bf+(1/5)f^2",
+      "P2_coefficient": "(4/3)bf+(4/7)f^2",
+      "P4_coefficient": "(8/35)f^2",
+      "amplitude_form": "[b sigma8+f sigma8 mu^2]^2 times one unit-normalized common shape"
+    },
+    "evaluated_numerically": false,
+    "conclusion": {
+      "classification": "SYMBOLICALLY_VERIFIED",
+      "source": "Percival-White Eqs. (12)-(14), (22); independent SymPy Legendre integration",
+      "assumptions": ["Kaiser form", "statistical isotropy", "same spectrum shape and sigma8 convention"],
+      "derivation_summary": "Exact Legendre integration reproduced the monopole, quadrupole and hexadecapole coefficients.",
+      "coordinate_dependencies": ["one Fourier frame", "one LOS convention"],
+      "frame_dependencies": ["common galaxy/matter statistical frame"],
+      "implementation_consequence": "definitions may be documented but no power or multipole code is authorized",
+      "observational_consequence": "algebraic amplitude cancellation does not establish Timescape field identity",
+      "evidence_needed_to_change_status": "not needed for algebra; physical bridge and spectrum convention remain separately required"
+    }
+  },
+  "bias_assumptions": {
+    "density_bias": "delta_g=b delta_m only for deterministic local linear bias (r=1 in Percival-White)",
+    "velocity_bias": "v_g=v_m is an additional assumption; BOSS explicitly assumes theta_g=theta",
+    "modern_nuisance_terms": ["nonlinear bias", "stochastic/noise", "velocity dispersion", "damping", "nonlinear density-velocity spectra"],
+    "conclusion": {
+      "classification": "UNRESOLVED_EXTERNAL_DEPENDENCY",
+      "source": "Percival-White Eqs. (9)-(12), Secs. 2.2-2.3; BOSS Eqs. (23)-(25), Sec. 5",
+      "assumptions": ["survey- and scale-dependent tracer model"],
+      "derivation_summary": "Neither density bias nor zero velocity bias follows from Candidate A or the Timescape dust equations.",
+      "coordinate_dependencies": ["survey fit range and estimator"],
+      "frame_dependencies": ["dust/matter", "galaxy/tracer"],
+      "implementation_consequence": "no bias or velocity-bias code in Phase 1E-A",
+      "observational_consequence": "published f sigma8 is conditional on the survey tracer model",
+      "evidence_needed_to_change_status": "a Timescape tracer model or explicit empirically validated bias assumptions"
+    }
+  },
+  "alcock_paczynski_mapping": {
+    "boss_definitions": {
+      "alpha_parallel": "H_fid(z) r_s,fid/[H(z) r_s]",
+      "alpha_perpendicular": "D_A(z) r_s,fid/[D_A,fid(z) r_s]",
+      "k_parallel_true": "k_parallel_fid/alpha_parallel",
+      "k_perpendicular_true": "k_perpendicular_fid/alpha_perpendicular",
+      "volume_factor": "1/(alpha_perpendicular^2 alpha_parallel) subject to the cited sound-horizon convention"
+    },
+    "timescape_background_input": "W09 Eq. (51) and dressed D_A/H provide a background AP function",
+    "conclusion": {
+      "classification": "NOT_JUSTIFIED",
+      "source": "W09 Eq. (51); BOSS Eqs. (42)-(49); eBOSS Eqs. (7)-(8); symbolic determinant check",
+      "assumptions": ["thin survey bin", "specified sound-horizon convention", "background distance mapping"],
+      "derivation_summary": "AP maps background radial/transverse fiducial dilation; it neither supplies the dynamical RSD velocity nor a global dressed Fourier field.",
+      "coordinate_dependencies": ["fiducial and model radial/transverse coordinates"],
+      "frame_dependencies": ["wall background observer", "survey fiducial frame"],
+      "implementation_consequence": "AP conversion alone does not authorize observational comparison",
+      "observational_consequence": "published f sigma8 is not made directly reusable by alpha conversion",
+      "evidence_needed_to_change_status": "complete dressed RSD forward model followed by survey-specific AP validation"
+    }
+  },
+  "survey_methodology_inventory": {
+    "BOSS_DR12_Fourier": {
+      "fiducial_coordinates": true,
+      "fitted_objects": ["P0", "P2", "P4"],
+      "joint_parameters": ["f sigma8", "alpha_parallel", "alpha_perpendicular"],
+      "template": "TNS with nonlinear density/velocity spectra",
+      "bias_and_nuisance": ["b1 sigma8", "b2 sigma8", "sigma_v", "noise", "nonlocal bias terms"],
+      "window": "survey-window convolution",
+      "covariance": "MultiDark-Patchy mocks",
+      "scale_cuts": "k=0.01-0.15 h Mpc^-1 for monopole/quadrupole; 0.01-0.10 h Mpc^-1 for hexadecapole"
+    },
+    "eBOSS_DR16_LRG_configuration": {
+      "fiducial_coordinates": true,
+      "fitted_objects": ["correlation monopole", "quadrupole", "hexadecapole"],
+      "joint_parameters": ["f sigma8", "alpha_parallel", "alpha_perpendicular"],
+      "templates": ["TNS", "CLPT-GS", "fiducial CAMB P_lin"],
+      "bias_and_nuisance": ["linear/nonlinear bias", "FoG", "damping", "broadband terms where applicable"],
+      "covariance": "1000 EZmocks and method cross-covariances",
+      "scale_cuts": "TNS: 20-130 h^-1 Mpc for xi0/xi2 and 25-130 for xi4; CLPT-GS: 25-130 h^-1 Mpc",
+      "sigma8_radius_rule": "R=8 alpha h^-1 Mpc in Sec. 3.2.4 unless otherwise stated",
+      "compression": "posterior in (alpha_perpendicular, alpha_parallel, f sigma8), then correlated method combination"
+    },
+    "reuse_conclusion": {
+      "classification": "UNRESOLVED_EXTERNAL_DEPENDENCY",
+      "source": "BOSS Secs. 2, 4-6; eBOSS Secs. 2.5, 3.1-3.4, 4.2",
+      "assumptions": ["representative surveys demonstrate method dependence", "no observational values ingested"],
+      "derivation_summary": "Reported amplitudes are likelihood compressions of survey multipoles under fiducial, template, bias, window, covariance and scale-cut choices.",
+      "coordinate_dependencies": ["survey fiducial cosmology", "AP parameters", "fit bins"],
+      "frame_dependencies": ["survey tracer and fiducial FLRW frame"],
+      "implementation_consequence": "a future comparison starts from multipoles/correlation functions and a dressed forward model",
+      "observational_consequence": "compressed points are not directly reusable at the current theory stage",
+      "evidence_needed_to_change_status": "an exact bridge plus proof that a survey compression remains sufficient, or reanalysis with public likelihood/data products"
+    }
+  },
+  "candidate_a_relation_matrix": [
+    {
+      "from": "Q_anchor_bare",
+      "to": "Q_anchor_dressed",
+      "relation_classification": "IDENTICAL_UNDER_EXPLICIT_ASSUMPTIONS",
+      "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "source": "Phase 1D-A Eq. D5 and Candidate A identity; W09 Eqs. (23)-(28)",
+      "assumptions": ["same clean history", "same reference", "same external anchor", "tracker background"],
+      "derivation_summary": "Q_dressed=(gamma_w H_D/H) Q_bare.",
+      "coordinate_dependencies": ["bare_aD", "dressed_redshift"],
+      "frame_dependencies": ["volume-average background", "wall background"],
+      "implementation_consequence": "retain both explicit coordinate outputs",
+      "observational_consequence": "the relation changes a density derivative coordinate only",
+      "evidence_needed_to_change_status": "none for the tracker chain"
+    },
+    {
+      "from": "Q_anchor_dressed",
+      "to": "clock_rescaled_dust_expansion_diagnostic",
+      "relation_classification": "IDENTICAL_UNDER_EXPLICIT_ASSUMPTIONS",
+      "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "source": "GM dust continuity and W09 clock chain",
+      "assumptions": ["same volume-average harmonic density and dust expansion coefficients", "no spatial or frame reinterpretation"],
+      "derivation_summary": "f_dressed delta_m=-gamma_w deltaTheta/H.",
+      "coordinate_dependencies": ["volume-average harmonic", "wall clock"],
+      "frame_dependencies": ["dust coefficient retained", "wall background only"],
+      "implementation_consequence": "do not rename the result as a velocity observable",
+      "observational_consequence": "identity stops before tracer velocity",
+      "evidence_needed_to_change_status": "none for the algebraic clock-rescaled diagnostic"
+    },
+    {
+      "from": "Q_anchor_dressed",
+      "to": "putative_dressed_rsd_velocity_growth",
+      "relation_classification": "NOT_MAPPABLE_WITH_CURRENT_THEORY",
+      "classification": "NOT_JUSTIFIED",
+      "source": "frame, velocity, spatial and Jacobian audits in Markdown Secs. 8-17",
+      "assumptions": ["no silent zero-velocity-bias or FLRW Jacobian"],
+      "derivation_summary": "The background clock factor does not provide the missing wall/tracer velocity and spatial transformation.",
+      "coordinate_dependencies": ["dressed real and redshift space"],
+      "frame_dependencies": ["dust", "wall", "tracer"],
+      "implementation_consequence": "no dressed RSD quantity can be implemented",
+      "observational_consequence": "no current physical identification",
+      "evidence_needed_to_change_status": "derive the perturbative dressed velocity transfer and redshift-space Jacobian"
+    },
+    {
+      "from": "Q_anchor_dressed",
+      "to": "ideal_flrw_like_f_sigma8_algebra",
+      "relation_classification": "PROXY_WITH_CONVENTION_DEPENDENCE",
+      "classification": "CONVENTION_DEPENDENT",
+      "source": "Percival-White Eqs. (5)-(14) plus Candidate A definition",
+      "assumptions": ["all conditions in necessary_conditions", "Kaiser form", "matched anchor and smoothing"],
+      "derivation_summary": "The symbols have the same product form after external assumptions; field identity is not proved.",
+      "coordinate_dependencies": ["assumed common Fourier and smoothing frame"],
+      "frame_dependencies": ["assumed dust/matter/tracer equivalence"],
+      "implementation_consequence": "at most document a conditional proxy; no implementation in this phase",
+      "observational_consequence": "must not be quoted as measured or predicted standard f sigma8",
+      "evidence_needed_to_change_status": "satisfy and validate the full sufficient condition set"
+    },
+    {
+      "from": "Q_anchor_dressed",
+      "to": "published_survey_f_sigma8",
+      "relation_classification": "REQUIRES_SURVEY_REANALYSIS",
+      "classification": "NOT_JUSTIFIED",
+      "source": "BOSS and eBOSS methodology inventories plus missing dressed forward model",
+      "assumptions": ["current frozen theory only"],
+      "derivation_summary": "AP, template, bias, window, scale-cut and covariance dependence remains after the theoretical velocity gap.",
+      "coordinate_dependencies": ["survey fiducial and model coordinates"],
+      "frame_dependencies": ["tracer", "observer", "fiducial survey"],
+      "implementation_consequence": "do not ingest compressed points",
+      "observational_consequence": "reanalysis of multipoles/correlation functions is required once a forward model exists",
+      "evidence_needed_to_change_status": "derived bridge and survey-specific compression-sufficiency study"
+    }
+  ],
+  "necessary_conditions": {
+    "mathematical": [
+      "linear evolution",
+      "scale-independent growth over matched fit/smoothing support",
+      "k-independent mode mixture",
+      "fixed spectrum shape apart from common growth",
+      "matched spatial frame and reciprocal units",
+      "positive differentiable signed history on the interval",
+      "anchor at the exact same reference and smoothing convention",
+      "derived dust-to-dressed density and velocity transfer",
+      "derived dressed observed-redshift and real/redshift-space Jacobian"
+    ],
+    "empirical": [
+      "specified deterministic/stochastic density bias",
+      "zero or calibrated velocity bias",
+      "valid irrotational and distant-observer approximations",
+      "controlled nonlinear, wide-angle, light-cone and relativistic effects"
+    ],
+    "conventions": [
+      "matched R8 and h",
+      "matched spectrum normalization",
+      "explicit LOS and mu",
+      "explicit AP and sound-horizon conventions"
+    ],
+    "survey_specific": [
+      "template and nonlinear model",
+      "bias and damping nuisance model",
+      "window and reconstruction",
+      "scale cuts",
+      "covariance and likelihood sufficiency"
+    ]
+  },
+  "sufficient_conditions": {
+    "condition": "All necessary conditions plus a proof that the dressed Jacobian reduces on the chosen scales to delta_g^s=(b+f_dressed mu^2)delta_m with the same sigma8 normalization and a survey-valid forward model.",
+    "currently_satisfied": false,
+    "blocking_items": [
+      "dressed perturbative spatial map",
+      "dust-to-wall-to-tracer velocity transfer",
+      "perturbed observed-redshift Jacobian",
+      "matched observational sigma8 convention",
+      "survey forward-model validation"
+    ],
+    "conclusion": {
+      "classification": "NOT_JUSTIFIED",
+      "source": "necessary-condition audit and primary RSD/survey equations",
+      "assumptions": ["a sufficient mapping cannot omit any load-bearing arrow"],
+      "derivation_summary": "At least the spatial, velocity and redshift-space Jacobian arrows are absent.",
+      "coordinate_dependencies": ["volume-average", "dressed", "survey fiducial"],
+      "frame_dependencies": ["dust", "wall", "tracer", "observer"],
+      "implementation_consequence": "no observational implementation is authorized",
+      "observational_consequence": "Candidate A is not likelihood-ready",
+      "evidence_needed_to_change_status": "construct and validate every listed blocker"
+    }
+  },
+  "uncertainty_taxonomy": {
+    "numerical": "frozen solver/reference errors; not the observable blocker",
+    "solver": "frozen Candidate A convergence; not the observable blocker",
+    "external_anchor_normalisation": "imported and not predicted",
+    "convention_scenario": "clock, background, epoch, frame, smoothing and fiducial choices; not statistical uncertainty",
+    "model_approximation": "bias, velocity bias, nonlinear RSD, scale cuts and approximations",
+    "structural_unresolved_dependencies": "missing dressed spatial/velocity/Jacobian theory; blockers rather than an error band",
+    "forbidden_interpretations": ["confidence interval from convention spread", "statistical error from bare/dressed difference", "theory uncertainty band from missing mapping"]
+  },
+  "scientific_completion_answers": {
+    "1_observational_scale_for_k_code": "none uniquely derived",
+    "2_k_com_obs_from_existing_geometry": "no global map; background radial/transverse distances only",
+    "3_h_for_R8": "the chosen survey/model spectrum h; matching to Timescape is unresolved",
+    "4_scale_factor_for_observable_derivative": "a_obs for the dressed density derivative, conditional on a future RSD derivation",
+    "5_meaning_of_deltaTheta": "dust-frame expansion-scalar perturbation harmonic coefficient",
+    "6_does_Z_determine_RSD_velocity": "no; it determines dust deltaTheta for the same volume-average harmonic",
+    "7_hubble_normalisation": "H_D for dust CGI, H for clock-rescaled candidate, H_fid for survey coordinates; RSD identification unresolved",
+    "8_dust_equals_galaxy_velocity": "only with explicit tracer-congruence/zero-velocity-bias assumptions",
+    "9_dressed_kaiser_formula": "not derived",
+    "10_growth_rate_in_kaiser": "none selected; f_dressed is only a conditional proxy candidate",
+    "11_Q_dressed_identical_to_observational": "no",
+    "12_published_points_directly_reusable": "no",
+    "13_AP_conversion_sufficient": "no",
+    "14_reanalysis_required": "yes, multipoles/correlation functions after a dressed forward model; possibly likelihood/catalogue infrastructure",
+    "15_missing_information": ["dressed perturbative spatial map", "velocity transfer", "observed-redshift Jacobian", "bias/tracer model", "normalization match", "survey forward model"],
+    "16_next_justified_work": "Phase 1E-B - Dressed light-cone and velocity-transfer derivation",
+    "conclusion": {
+      "classification": "NOT_JUSTIFIED",
+      "source": "Markdown Secs. 8-26 and the corresponding inventory conclusions",
+      "assumptions": ["the frozen Candidate A and presently audited primary sources"],
+      "derivation_summary": "All sixteen completion answers follow from the exact dust/background chain and the demonstrated absence of a dressed spatial, tracer-velocity and redshift-space Jacobian bridge.",
+      "coordinate_dependencies": ["volume-average harmonic", "dressed light cone", "survey fiducial coordinates"],
+      "frame_dependencies": ["dust", "wall", "tracer", "observed-redshift observer"],
+      "implementation_consequence": "perform derivation-only bridge work; do not implement an observable",
+      "observational_consequence": "Candidate A and published survey points are not directly comparable",
+      "evidence_needed_to_change_status": "a complete dressed perturbative and survey-forward mapping"
+    }
+  },
+  "overall_verdict": {
+    "token": "NOT_JUSTIFIED_FOR_OBSERVATIONAL_USE",
+    "conditional_subverdict": "CONDITIONAL_FLRW_LIKE_PROXY_ONLY under the full explicit assumption set",
+    "classification": "NOT_JUSTIFIED",
+    "source": "displayed Timescape frame/spatial/velocity audit, Percival-White Jacobian, and BOSS/eBOSS compression audit",
+    "assumptions": ["Candidate A frozen", "no unproved frame or velocity identification", "no observational data ingestion"],
+    "derivation_summary": "The exact bare/dressed density-derivative chain stops before the dressed tracer velocity and real/redshift-space Jacobian; AP background distances do not close those arrows.",
+    "coordinate_dependencies": ["volume-average harmonics", "dressed light cone", "survey fiducial coordinates"],
+    "frame_dependencies": ["dust", "wall", "galaxy/tracer", "observed-redshift observer", "survey fiducial"],
+    "implementation_consequence": "stop observational implementation at Candidate A and perform derivation-only bridge work next",
+    "observational_consequence": "Q_anchor_dressed is not standard observational f sigma8 and published points are not directly reusable",
+    "evidence_needed_to_change_status": "derive and validate a dressed perturbative spatial/velocity/redshift-space map and demonstrate survey-template compatibility"
+  },
+  "implementation_go_no_go": {
+    "decision": "NO_GO_OBSERVATIONAL_IMPLEMENTATION",
+    "classification": "NOT_JUSTIFIED",
+    "source": "overall_verdict and exact_next_step_matrix",
+    "assumptions": ["current frozen theory and sources only"],
+    "derivation_summary": "No exact or sufficiently closed conditional observational mapping exists to implement without silently importing FLRW structure.",
+    "coordinate_dependencies": ["unresolved dressed spatial and redshift-space coordinates"],
+    "frame_dependencies": ["unresolved wall/tracer transfer"],
+    "implementation_consequence": "no RSD, AP, bias, spectrum, sigma8, likelihood or data code",
+    "observational_consequence": "no data comparison or published-point ingestion",
+    "evidence_needed_to_change_status": "successful completion of the recommended derivation phase"
+  },
+  "exact_next_step_matrix": {
+    "selected": "C",
+    "selected_name": "Phase 1E-B - Dressed light-cone and velocity-transfer derivation",
+    "options": [
+      {"id": "A", "name": "Phase 1E-B - Dressed RSD observable implementation", "trigger": "exact sufficient bridge derived", "required_inputs": ["complete spatial/velocity/Jacobian bridge", "survey convention"], "permitted_scope": "audited observable implementation", "forbidden_interpretation": "no assumed prerequisite", "validation": ["FLRW limit", "frame/unit tests", "survey forward checks"]},
+      {"id": "B", "name": "Phase 1E-B - Conditional RSD proxy implementation", "trigger": "human explicitly accepts every proxy assumption", "required_inputs": ["immutable assumption record"], "permitted_scope": "separately named conditional proxy", "forbidden_interpretation": "not observational f sigma8 or likelihood-ready", "validation": ["algebraic identity", "assumption rejection"]},
+      {"id": "C", "name": "Phase 1E-B - Dressed light-cone and velocity-transfer derivation", "trigger": "current structural blockers", "required_inputs": ["perturbed dressed metric/redshift", "dust-wall-tracer transfer", "LOS Jacobian"], "permitted_scope": "report and symbolic derivation only", "forbidden_interpretation": "no observational API or data comparison", "validation": ["covariant/coordinate agreement", "gauge/frame consistency", "FLRW and zero-lapse limits"]},
+      {"id": "D", "name": "Stop at Candidate A", "trigger": "required theory cannot be derived", "required_inputs": [], "permitted_scope": "document blocker", "forbidden_interpretation": "do not relabel Candidate A", "validation": ["preservation audit"]}
+    ],
+    "phase_started": false,
+    "recommendation_conclusion": {
+      "classification": "UNRESOLVED_EXTERNAL_DEPENDENCY",
+      "source": "overall_verdict and blockers in Markdown Secs. 10-17",
+      "assumptions": ["no next phase begins in this audit"],
+      "derivation_summary": "Option C addresses the first missing theoretical arrows without prematurely implementing an observational proxy.",
+      "coordinate_dependencies": ["dressed light cone", "volume-average-to-wall spatial transfer"],
+      "frame_dependencies": ["dust", "wall", "tracer", "observer"],
+      "implementation_consequence": "recommend Phase 1E-B - Dressed light-cone and velocity-transfer derivation",
+      "observational_consequence": "no survey comparison is authorized until that derivation succeeds",
+      "evidence_needed_to_change_status": "an already complete exact bridge would trigger option A; an explicit proxy-only authorization would trigger option B"
+    }
+  },
+  "symbolic_and_numerical_checks": {
+    "software": {
+      "symbolic_python": "3.14.3",
+      "sympy": "1.14.0",
+      "numerical_python": "3.14.3",
+      "numpy": "2.5.1",
+      "scipy": "1.18.0"
+    },
+    "symbolic": [
+      {"name": "tracker_chain", "encoded": "gamma=(2+fv)/2 and H/H_D=(4+fv+4fv^2)/[2(2+fv)]", "result": "gamma H_D/H=(2+fv)^2/(4+fv+4fv^2)", "status": "exact zero residual"},
+      {"name": "harmonic_growth_cancellation", "encoded": "delta_m=-Delta_d/k_code^2 at t and t_ref", "result": "G_delta_m-G_Delta_d=0", "status": "exact zero residual"},
+      {"name": "kaiser_multipoles", "encoded": "Legendre integrals of (b+f mu^2)^2 for ell=0,2,4", "result": ["b^2+2bf/3+f^2/5", "4bf/3+4f^2/7", "8f^2/35"], "status": "exact"},
+      {"name": "AP_Jacobian", "encoded": "diag(alpha_perpendicular,alpha_perpendicular,alpha_parallel)", "result": ["real-space determinant=alpha_perpendicular^2 alpha_parallel", "Fourier determinant reciprocal"], "status": "exact"}
+    ],
+    "numerical": {
+      "background_preset": "notebook_reference",
+      "root_solver": "scipy.optimize.brentq",
+      "root_xtol": 1e-14,
+      "root_rtol": 1e-14,
+      "chain_values": [
+        {"dressed_z": 20.0, "f_v": 0.034522304409842275, "factor": 1.0247547361125238},
+        {"dressed_z": 10.0, "f_v": 0.08700059862858432, "factor": 1.0578767186459543},
+        {"dressed_z": 1.0, "f_v": 0.5395264903289412, "factor": 1.130667673788129},
+        {"dressed_z": 0.0, "f_v": 0.737, "factor": 1.084156333813626}
+      ],
+      "interpretation": "corroborates time dependence and the frozen background identity only; does not prove an RSD mapping"
+    }
+  },
+  "test_environments": {
+    "preflight": [
+      {"python": "3.14.3", "numpy": "2.5.1", "scipy": "1.18.0", "pytest": "9.1.1", "pluggy": "1.6.0", "passed": 379, "failed": 0, "skipped": 0, "xfailed": 0, "warnings": 0, "duration_seconds": 14.61},
+      {"python": "3.11.9", "numpy": "2.4.6", "scipy": "1.17.1", "pytest": "9.1.1", "pluggy": "1.6.0", "passed": 379, "failed": 0, "skipped": 0, "xfailed": 0, "warnings": 0, "duration_seconds": 11.55}
+    ],
+    "final_validation": [
+      {"python": "3.14.3", "numpy": "2.5.1", "scipy": "1.18.0", "pytest": "9.1.1", "pluggy": "1.6.0", "passed": 379, "failed": 0, "skipped": 0, "xfailed": 0, "warnings": 0, "duration_seconds": 14.75},
+      {"python": "3.11.9", "numpy": "2.4.6", "scipy": "1.17.1", "pytest": "9.1.1", "pluggy": "1.6.0", "passed": 379, "failed": 0, "skipped": 0, "xfailed": 0, "warnings": 0, "duration_seconds": 15.21}
+    ]
+  },
+  "repository_preservation_statement": {
+    "allowed_created_tracked_files": [
+      "reports/phase1e_a_dressed_observable_bridge_audit.md",
+      "reports/phase1e_a_dressed_observable_bridge_inventory.json"
+    ],
+    "preexisting_tracked_files_modified": [],
+    "staged": false,
+    "committed": false,
+    "tagged": false,
+    "pushed": false,
+    "merged": false,
+    "pull_request": false,
+    "published": false,
+    "author_contact": false,
+    "phase1e_b_started": false,
+    "scratch_policy": "downloads, renders, extraction, symbolic and numerical outputs are ignored scratch only",
+    "final_validation": "complete: JSON/schema, two 379-test suites, Git preservation, upstream and notebook checks"
+  }
+}
