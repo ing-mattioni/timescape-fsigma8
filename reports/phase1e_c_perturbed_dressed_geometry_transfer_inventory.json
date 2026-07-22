@@ -1,0 +1,2693 @@
+{
+  "schema_note": {
+    "phase": "Phase 1E-C",
+    "title": "Perturbed dressed geometry and dust-to-wall transfer closure reassessment",
+    "purpose": "Two-axis ontology, equation-counting, route, falsification, and verdict inventory.",
+    "markdown_companion": "reports/phase1e_c_perturbed_dressed_geometry_transfer_closure.md",
+    "top_level_key_count_required": 31,
+    "formal_conclusion_fields": [
+      "classification",
+      "source",
+      "assumptions",
+      "derivation_summary",
+      "coordinate_dependencies",
+      "frame_dependencies",
+      "implementation_consequence",
+      "observational_consequence",
+      "evidence_needed_to_change_status"
+    ]
+  },
+  "date_utc": "2026-07-22",
+  "repository_checkpoint": {
+    "repository": "ing-mattioni/timescape-fsigma8",
+    "branch": "phase-1e-c-perturbed-dressed-geometry-transfer-closure",
+    "starting_head": "8634f14a35c22983413672075fa7f37f03fd663d",
+    "final_head_required": "8634f14a35c22983413672075fa7f37f03fd663d",
+    "origin_main": "8634f14a35c22983413672075fa7f37f03fd663d",
+    "base_tag": "phase-1e-b-dressed-lightcone-velocity-derivation-v1",
+    "base_tag_object": "a08230b0ab275993d9e8645d55532a1336c5f637",
+    "base_tag_peeled_commit": "8634f14a35c22983413672075fa7f37f03fd663d",
+    "base_tag_correction_note": "The exact existing tag name was authorized; no tag or ref was created, renamed, moved, or deleted.",
+    "upstream_commit": "590c6fd5332acb15f5683ebf392a0d7ce54983c5",
+    "upstream_notebook_path": ".reference/Linear-Perturbations-in-averaged-cosmological-models/ACPT_Timescape.ipynb",
+    "upstream_notebook_sha256": "86d2534db9e9b3169835e4ce223ee8f3bff6d03b47e5677d3937fed4adafe55a",
+    "preflight_status": "PASS"
+  },
+  "frozen_result_boundary": {
+    "phase1e_a": "NOT_JUSTIFIED_FOR_OBSERVATIONAL_USE",
+    "phase1e_b": "PARTIAL_BRIDGE_NEW_DYNAMICS_REQUIRED",
+    "candidate_a": "Candidate A is an externally anchored conditional density-growth diagnostic; not observational f-sigma-8.",
+    "d3_equation_verdict": "RESOLVED_DERIVED_4_10",
+    "d3_runtime_policy": "derived_4_10 and printed_4_15 remain explicit mandatory choices; neither is removed, deprecated, or selected automatically.",
+    "harmonic_relation": "Delta_d,k = -k_code^2 delta_m,k in the frozen volume-average convention.",
+    "unchanged_blockers": [
+      "No solved dust-to-wall velocity transfer.",
+      "No observational Fourier map.",
+      "No perturbed dressed redshift-space Jacobian.",
+      "No observational sigma_8 normalization is predicted."
+    ]
+  },
+  "vocabularies": {
+    "overall_status": [
+      "EXACT_DRESSED_TRANSFER_CLOSURE_DERIVED",
+      "CONDITIONAL_DRESSED_TRANSFER_CLOSURE_DERIVED",
+      "PARTIAL_CLOSURE_NEW_DYNAMICS_REQUIRED",
+      "NOT_DERIVABLE_FROM_CURRENT_TIMESCAPE_THEORY"
+    ],
+    "relation_status": [
+      "EXACTLY_DERIVED",
+      "DERIVED_UNDER_EXPLICIT_APPROXIMATIONS",
+      "REQUIRES_NEW_DYNAMICAL_INPUT",
+      "REQUIRES_EMPIRICAL_ASSUMPTION",
+      "NOT_MAPPABLE_WITH_CURRENT_THEORY",
+      "NOT_APPLICABLE"
+    ],
+    "evidence_classification": [
+      "VERIFIED_FROM_PRIMARY_SOURCE",
+      "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "SYMBOLICALLY_VERIFIED",
+      "NUMERICALLY_CORROBORATED",
+      "CONVENTION_DEPENDENT",
+      "REQUIRES_AUTHOR_INPUT",
+      "UNRESOLVED_EXTERNAL_DEPENDENCY",
+      "NOT_APPLICABLE",
+      "NOT_JUSTIFIED"
+    ],
+    "current_theory_definition_state": [
+      "NOT_DEFINED_IN_CURRENT_THEORY",
+      "BACKGROUND_DEFINED",
+      "KINEMATICALLY_DEFINED",
+      "DERIVED_IF_CURRENT_THEORY_DEPENDENCIES_KNOWN",
+      "DYNAMICALLY_DETERMINED",
+      "AMBIGUOUS_PENDING_SOURCE_AUDIT"
+    ],
+    "generic_GR_parameterizability": [
+      "PARAMETERIZABLE_WITHOUT_NEW_OBJECT_TYPE",
+      "PARAMETERIZABLE_ONLY_AFTER_NEW_EMBEDDING_OR_FIELD",
+      "NOT_YET_PARAMETERIZED",
+      "NOT_APPLICABLE"
+    ],
+    "gate_outcome": [
+      "PASS",
+      "PASS_UNDER_APPROXIMATIONS",
+      "DEFINED_BUT_UNDERDETERMINED",
+      "FAIL_NOT_DEFINED",
+      "FAIL_INCONSISTENT",
+      "NOT_APPLICABLE",
+      "SOURCE_SEARCH_INCOMPLETE"
+    ],
+    "test_status": [
+      "PASS",
+      "FAIL",
+      "NOT_RUN",
+      "NOT_APPLICABLE"
+    ],
+    "deficit_count_kind": [
+      "EXACT",
+      "LOWER_BOUND",
+      "NOT_COUNTABLE",
+      "NOT_APPLICABLE",
+      "BIFURCATED"
+    ],
+    "source_completeness": [
+      "PASS",
+      "SOURCE_SEARCH_INCOMPLETE"
+    ]
+  },
+  "evidence_policy": {
+    "primary_source_rule": "Load-bearing claims use the paper or official arXiv version; rendered pages control signs and indices.",
+    "two_axis_rule": "Current-theory membership and generic-GR parameterizability are recorded separately.",
+    "admissibility_rule": [
+      "Explicitly defined in a current Timescape primary source.",
+      "An unambiguous perturbation or variation of a current-theory field, metric, congruence, domain, or map.",
+      "Derived from current-theory objects through verified definitions.",
+      "Contained in frozen GM/CGI without introducing a new physical object type."
+    ],
+    "not_sufficient": [
+      "A generic GR tensor type.",
+      "A symbol without a source object.",
+      "A missing equation relabelled as a definition.",
+      "A background clock relation used as a spatial or boost map."
+    ],
+    "rank_policy": "Only finite established lower bounds are reported before a detailed gauge and source choice.",
+    "negative_search_scope": "Bounded to accessible primary literature and stated search routes; no claim about unpublished work."
+  },
+  "local_evidence_inventory": [
+    {
+      "path": "reports/phase1d_a_growth_observable_audit.md",
+      "commit": "8634f14a35c22983413672075fa7f37f03fd663d",
+      "read_scope": "Relevant variable, frame, harmonic, and observable-readiness sections inspected; no full-file-read claim for this correction pass.",
+      "role": "Frozen Delta_d, Z, harmonic, and observable-definition audit."
+    },
+    {
+      "path": "reports/phase1d_a_observable_inventory.json",
+      "commit": "8634f14a35c22983413672075fa7f37f03fd663d",
+      "read_scope": "Relevant machine-readable variable, wavenumber, and readiness records inspected.",
+      "role": "Machine-readable Phase 1D-A provenance."
+    },
+    {
+      "path": "reports/phase1d_b_growth_pipeline_validation.md",
+      "commit": "8634f14a35c22983413672075fa7f37f03fd663d",
+      "read_scope": "Relevant signed-growth, rate, reference, and crossing sections inspected.",
+      "role": "Frozen growth-pipeline definitions."
+    },
+    {
+      "path": "reports/phase1d_b_compliance_audit.md",
+      "commit": "8634f14a35c22983413672075fa7f37f03fd663d",
+      "read_scope": "Relevant preservation and scientific-scope conclusions inspected.",
+      "role": "Independent Phase 1D-B compliance evidence."
+    },
+    {
+      "path": "reports/phase1d_c_observable_closure_audit.md",
+      "commit": "8634f14a35c22983413672075fa7f37f03fd663d",
+      "read_scope": "Relevant closure, frame, and missing-dependency sections inspected.",
+      "role": "Frozen observable-closure specification."
+    },
+    {
+      "path": "reports/phase1d_c_closure_inventory.json",
+      "commit": "8634f14a35c22983413672075fa7f37f03fd663d",
+      "read_scope": "Relevant machine-readable closure and dependency records inspected.",
+      "role": "Machine-readable Phase 1D-C provenance."
+    },
+    {
+      "path": "reports/phase1d_c_compliance_audit.md",
+      "commit": "8634f14a35c22983413672075fa7f37f03fd663d",
+      "read_scope": "Relevant evidence-classification and preservation findings inspected.",
+      "role": "Independent Phase 1D-C compliance evidence."
+    },
+    {
+      "path": "reports/phase1e_a_dressed_observable_bridge_audit.md",
+      "commit": "8634f14a35c22983413672075fa7f37f03fd663d",
+      "read_scope": "Relevant frame, spatial-map, velocity, RSD, and no-go sections inspected.",
+      "role": "Frozen observable bridge no-go and frame/spatial blockers."
+    },
+    {
+      "path": "reports/phase1e_a_dressed_observable_bridge_inventory.json",
+      "commit": "8634f14a35c22983413672075fa7f37f03fd663d",
+      "read_scope": "Relevant machine-readable bridge and source records inspected.",
+      "role": "Machine-readable Phase 1E-A provenance."
+    },
+    {
+      "path": "reports/phase1e_b_dressed_lightcone_velocity_derivation.md",
+      "commit": "8634f14a35c22983413672075fa7f37f03fd663d",
+      "read_scope": "Relevant dressed-geometry, frame-transfer, light-cone, and bridge-status sections inspected.",
+      "role": "Frozen partial bridge and local light-cone dependency inventory."
+    },
+    {
+      "path": "reports/phase1e_b_dressed_lightcone_velocity_inventory.json",
+      "commit": "8634f14a35c22983413672075fa7f37f03fd663d",
+      "read_scope": "Relevant machine-readable geometry, transfer, and light-cone records inspected.",
+      "role": "Machine-readable Phase 1E-B provenance."
+    },
+    {
+      "path": "reports/phase1d_d_t_d3_frame_mapping_audit.md",
+      "commit": "8634f14a35c22983413672075fa7f37f03fd663d",
+      "read_scope": "Relevant source-to-destination boost, frame, and scalarization sections inspected.",
+      "role": "Frozen first-order frame identities and direction convention."
+    },
+    {
+      "path": "reports/phase1d_d_t_d3_frame_mapping_inventory.json",
+      "commit": "8634f14a35c22983413672075fa7f37f03fd663d",
+      "read_scope": "Relevant machine-readable frame and transformation records inspected.",
+      "role": "Machine-readable Phase 1D-D-t provenance."
+    },
+    {
+      "path": "reports/phase1d_d_t_compliance_audit.md",
+      "commit": "8634f14a35c22983413672075fa7f37f03fd663d",
+      "read_scope": "Relevant frame-mapping and evidence-independence findings inspected.",
+      "role": "Independent Phase 1D-D-t compliance evidence."
+    },
+    {
+      "path": "reports/phase1d_d_anchored_density_growth_validation.md",
+      "commit": "8634f14a35c22983413672075fa7f37f03fd663d",
+      "read_scope": "Relevant definition, anchor, frame, and limitations sections inspected.",
+      "role": "Frozen Candidate A scope and limitations."
+    },
+    {
+      "path": "src/timescape_fsigma8/background/tracker.py",
+      "commit": "8634f14a35c22983413672075fa7f37f03fd663d",
+      "read_scope": "Relevant tracker background and lapse definitions inspected; no source modification.",
+      "role": "Background a_D, f_v, and tracker relations."
+    },
+    {
+      "path": "src/timescape_fsigma8/background/observables.py",
+      "commit": "8634f14a35c22983413672075fa7f37f03fd663d",
+      "read_scope": "Relevant dressed redshift, scale-factor, and Hubble definitions inspected.",
+      "role": "Frozen dressed-background observable coordinates."
+    },
+    {
+      "path": "src/timescape_fsigma8/background/effective_fluid.py",
+      "commit": "8634f14a35c22983413672075fa7f37f03fd663d",
+      "read_scope": "Relevant effective-fluid background definitions inspected.",
+      "role": "Frozen GM effective-fluid background dependencies."
+    },
+    {
+      "path": "src/timescape_fsigma8/perturbations/systems.py",
+      "commit": "8634f14a35c22983413672075fa7f37f03fd663d",
+      "read_scope": "Relevant clean-system state ordering and equations inspected.",
+      "role": "Frozen Delta_d and Z evolution provenance."
+    },
+    {
+      "path": "src/timescape_fsigma8/perturbations/barotropic.py",
+      "commit": "8634f14a35c22983413672075fa7f37f03fd663d",
+      "read_scope": "Relevant explicit D3-branch metadata inspected; no branch selected.",
+      "role": "Frozen dual D3 runtime-branch provenance."
+    },
+    {
+      "path": "src/timescape_fsigma8/growth/scenarios.py",
+      "commit": "8634f14a35c22983413672075fa7f37f03fd663d",
+      "read_scope": "Relevant system, coordinate, and scenario metadata inspected.",
+      "role": "Frozen growth scenario definitions."
+    },
+    {
+      "path": "src/timescape_fsigma8/growth/mapping.py",
+      "commit": "8634f14a35c22983413672075fa7f37f03fd663d",
+      "read_scope": "Relevant Delta_d-to-delta_m mapping definitions inspected.",
+      "role": "Frozen density-basis mapping."
+    },
+    {
+      "path": "src/timescape_fsigma8/growth/rates.py",
+      "commit": "8634f14a35c22983413672075fa7f37f03fd663d",
+      "read_scope": "Relevant bare/dressed rate and chain-factor definitions inspected.",
+      "role": "Frozen growth-rate coordinate conversion."
+    },
+    {
+      "path": "src/timescape_fsigma8/growth/pipeline.py",
+      "commit": "8634f14a35c22983413672075fa7f37f03fd663d",
+      "read_scope": "Relevant signed-history and resolved-reference result fields inspected.",
+      "role": "Frozen growth-pipeline result provenance."
+    },
+    {
+      "path": "src/timescape_fsigma8/growth/anchored_diagnostic.py",
+      "commit": "8634f14a35c22983413672075fa7f37f03fd663d",
+      "read_scope": "Relevant public result, classification, caveat, and provenance fields inspected.",
+      "role": "Read-only Candidate A implementation provenance."
+    }
+  ],
+  "primary_source_inventory": [
+    {
+      "id": "SRC-GM",
+      "citation": "M. Galoppo and P. Mourier, Cosmological perturbations on an averaged background, arXiv:2511.17160v2, JCAP 02 (2026) 066",
+      "version": "arXiv v2, 2025-12-09",
+      "access_route": "official arXiv born-digital PDF; rendered pages inspected",
+      "local_file_status": "retained_in_ignored_scratch_during_audit",
+      "sha256": "856bd78db8f86e46c0f5d21414ad0c1d136b176c6ac1b45418dbeebc38e920dd",
+      "inspected_pages_equations": [
+        "PDF pp. 4-12, Eqs. (2.2), (2.5)-(2.24), (3.2)-(3.18)",
+        "PDF pp. 13-21, Eqs. (4.1)-(4.29)",
+        "PDF pp. 22-25, Eqs. (5.1)-(5.7), footnotes 9-10",
+        "PDF pp. 43-44"
+      ],
+      "role": "Separates general CGI, averaged effective-fluid perturbations, Timescape background application, and the formal but unspecified matching domain."
+    },
+    {
+      "id": "SRC-W07",
+      "citation": "D. L. Wiltshire, Exact solution to the averaging problem in cosmology, arXiv:0709.0732v2",
+      "version": "arXiv v2, 2007-11-01",
+      "access_route": "official arXiv born-digital PDF",
+      "local_file_status": "retained_in_ignored_scratch_during_audit",
+      "sha256": "3abcc64ad95b95cf655f687515c8d85f38d6d0bfcebec1e0133a460b425db04f",
+      "inspected_pages_equations": [
+        "PDF pp. 1-4, Eqs. (1)-(8), (19)-(22)"
+      ],
+      "role": "Two-scale background, regional clocks, and tracker observables."
+    },
+    {
+      "id": "SRC-W08",
+      "citation": "D. L. Wiltshire, Cosmological equivalence principle and the weak-field limit, arXiv:0809.1183v2",
+      "version": "arXiv v2",
+      "access_route": "official arXiv born-digital PDF",
+      "local_file_status": "retained_in_ignored_scratch_during_audit",
+      "sha256": "e07c62b35476382277fe23496b810ebc15db6cd27f38abd023e25ccbc3e72326",
+      "inspected_pages_equations": [
+        "PDF pp. 7-12, Eqs. (10)-(14), (19)-(27)"
+      ],
+      "role": "Clock calibration, background frames, and explicit future-formalism caveats."
+    },
+    {
+      "id": "SRC-W09",
+      "citation": "D. L. Wiltshire, Average observational quantities in the timescape cosmology, arXiv:0909.0749v2",
+      "version": "arXiv v2, 2009-12-11",
+      "access_route": "official arXiv born-digital PDF; rendered pages inspected",
+      "local_file_status": "retained_in_ignored_scratch_during_audit",
+      "sha256": "e37321e9d6021c6f5eb6bc5084ad331f4fca9dc0bc426097d1c5ce5ce7b2a8aa",
+      "inspected_pages_equations": [
+        "PDF pp. 1-4, Eqs. (6)-(21)",
+        "PDF pp. 4-6, Eqs. (22)-(28)",
+        "PDF pp. 7-8, Eqs. (36)-(38)",
+        "PDF p. 14, Eq. (51)"
+      ],
+      "role": "Defines regional FLRW backgrounds and an explicit four-dimensional dressed background metric by radial-null matching."
+    },
+    {
+      "id": "SRC-BAL13",
+      "citation": "H. Balasin, Timescape realized, arXiv:1310.3124v1",
+      "version": "arXiv v1, 2013-10-11",
+      "access_route": "official arXiv born-digital PDF; all 15 pages inspected",
+      "local_file_status": "not_retained_locally",
+      "sha256": null,
+      "inspected_pages_equations": [
+        "PDF pp. 5-7, Eqs. (3)-(5): static to conformally static map and inverse",
+        "PDF pp. 7-11, Eqs. (7), (9), (11): observers, Einstein tensor, redshift",
+        "PDF pp. 12-13: geodesic matter versus accelerated expansion observer",
+        "PDF p. 13 conclusion: first preliminary step"
+      ],
+      "role": "Generic-GR conformally-static comparator; it does not supply the GM/Buchert wall/void perturbative transfer.",
+      "reproducibility_note": "The official arXiv identifier and complete page/equation inventory reproduce the access; no local hash is claimed."
+    },
+    {
+      "id": "SRC-B00",
+      "citation": "T. Buchert, On average properties of inhomogeneous fluids in general relativity I, arXiv:gr-qc/9906015v2",
+      "version": "arXiv v2, 1999-12-27",
+      "access_route": "official arXiv born-digital PDF",
+      "local_file_status": "retained_in_ignored_scratch_during_audit",
+      "sha256": "13f41a52f6e36fdbd4be39d570ecd728d921b5c20aeb04f3c74264347b69f36d",
+      "inspected_pages_equations": [
+        "PDF pp. 2-7, Eqs. (1)-(10c), especially (9f)"
+      ],
+      "role": "Scalar averaging and non-commutation from supplied local fields."
+    },
+    {
+      "id": "SRC-B01",
+      "citation": "T. Buchert, On average properties of inhomogeneous fluids in general relativity II, arXiv:gr-qc/0102049v2",
+      "version": "arXiv v2, 2001-07-31",
+      "access_route": "official arXiv born-digital PDF",
+      "local_file_status": "retained_in_ignored_scratch_during_audit",
+      "sha256": "5db93c67ff7398ebd4f51647ab26538dc5163e09053ee1e19f7b270b88ca1b5b",
+      "inspected_pages_equations": [
+        "PDF pp. 5-8, Eqs. (7)-(12g)"
+      ],
+      "role": "Lapse-weighted perfect-fluid averaging."
+    },
+    {
+      "id": "SRC-BC-REG",
+      "citation": "T. Buchert and M. Carfora, Regional averaging and scaling in relativistic cosmology, arXiv:gr-qc/0210037v2",
+      "version": "arXiv v2, 2002-11-29",
+      "access_route": "official arXiv born-digital PDF",
+      "local_file_status": "retained_in_ignored_scratch_during_audit",
+      "sha256": "8f2d11f71b17ab9263e203fbd01ef4756f8e41cc39d8fa00b756782e3fa8f568",
+      "inspected_pages_equations": [
+        "PDF pp. 5-10",
+        "PDF pp. 19-36, Eqs. (48)-(86)",
+        "PDF pp. 44-47"
+      ],
+      "role": "Regional smoothing and diffeomorphism machinery; not a selected Timescape transfer."
+    },
+    {
+      "id": "SRC-BC-DRESS",
+      "citation": "T. Buchert and M. Carfora, Cosmological parameters are dressed, arXiv:gr-qc/0210045v1",
+      "version": "arXiv v1, 2002-10-15",
+      "access_route": "official arXiv born-digital PDF",
+      "local_file_status": "retained_in_ignored_scratch_during_audit",
+      "sha256": "f3d867ac3eecb22a309b454e27d76dbe5cae2ccdab6f5e6ed1df1b8c02afaabf",
+      "inspected_pages_equations": [
+        "PDF pp. 1-4"
+      ],
+      "role": "Dressed averaged parameters, not local first-order wall transfer."
+    },
+    {
+      "id": "SRC-RB12",
+      "citation": "X. Roy and T. Buchert, Relativistic cosmological perturbation scheme on a general background, arXiv:1202.5766v2",
+      "version": "arXiv v2, 2012-05-10",
+      "access_route": "official arXiv born-digital PDF",
+      "local_file_status": "retained_in_ignored_scratch_during_audit",
+      "sha256": "fbeeaea6a26bee7453d9441d9e7e91f7dce82e8262f00d7c13055a8338f61b88",
+      "inspected_pages_equations": [
+        "PDF pp. 2-14, Eqs. (1)-(10)"
+      ],
+      "role": "Exact deviations conditional on a supplied local dust spacetime."
+    },
+    {
+      "id": "SRC-BMR20",
+      "citation": "T. Buchert, P. Mourier and X. Roy, On average properties of inhomogeneous fluids in general relativity III, arXiv:1912.04213v2",
+      "version": "arXiv v2, 2020-03-13",
+      "access_route": "official arXiv born-digital PDF",
+      "local_file_status": "retained_in_ignored_scratch_during_audit",
+      "sha256": "672efe5246aa081fe2afc4048b8ac4e6d55cc77989b1cbfbefaf000b7962aabd",
+      "inspected_pages_equations": [
+        "PDF pp. 3-7, Eqs. (2.1)-(2.15)",
+        "PDF pp. 10-18",
+        "PDF pp. 22-32",
+        "PDF pp. 51-63"
+      ],
+      "role": "Common-spacetime lapse, shift, tilt, mapping, and boundary machinery after inputs are supplied."
+    },
+    {
+      "id": "SRC-MH24",
+      "citation": "P. Mourier and A. Heinesen, Splitting the spacetime: a systematic analysis of foliation dependence in cosmic averaging, arXiv:2401.09170v2",
+      "version": "arXiv v2, 2024-02-29",
+      "access_route": "official arXiv born-digital PDF",
+      "local_file_status": "retained_in_ignored_scratch_during_audit",
+      "sha256": "cb5596800bc79430f82a39fffe6f7186dc4b93b755ecf9100d669c7e0d63931d",
+      "inspected_pages_equations": [
+        "PDF Sections 2-4 and conclusion"
+      ],
+      "role": "Foliation changes require substantive geometric data."
+    },
+    {
+      "id": "SRC-DBE",
+      "citation": "P. K. S. Dunsby, M. Bruni and G. F. R. Ellis, Covariant perturbations in a multifluid cosmological medium, ApJ 395 (1992) 54",
+      "version": "journal scan",
+      "access_route": "NASA ADS image PDF; sign-critical pages visually inspected in frozen D3 audit",
+      "local_file_status": "retained_in_ignored_scratch_during_frozen_audit",
+      "sha256": "3a082920b358872ec64a3706001e1a10a61a51f2e5140cf29662aa1a04b72f20",
+      "inspected_pages_equations": [
+        "journal pp. 56-60, Eqs. (14)-(15), (18)-(21), (25)-(34), (42)-(55)"
+      ],
+      "role": "First-order same-spacetime frame identities."
+    },
+    {
+      "id": "SRC-BDE",
+      "citation": "M. Bruni, P. K. S. Dunsby and G. F. R. Ellis, Cosmological perturbations and the physical meaning of gauge-invariant variables, ApJ 395 (1992) 34",
+      "version": "journal scan",
+      "access_route": "NASA ADS image PDF; sign-critical pages visually inspected in frozen D3 audit",
+      "local_file_status": "retained_in_ignored_scratch_during_frozen_audit",
+      "sha256": "eaa273fa5982689cd55eaba7530103e8e9d77199d4b34d3d173c1e9201075b6c",
+      "inspected_pages_equations": [
+        "journal pp. 38-45, Eqs. (14)-(16), (24)-(29), (40), (44)-(48), (61), (63), (74), footnotes 14-15 and 21-22"
+      ],
+      "role": "Frame, scalarization, and harmonic identities."
+    },
+    {
+      "id": "SRC-WMS24",
+      "citation": "M. J. Williams et al., First investigation of void statistics in numerical relativity simulations, arXiv:2403.15134v2",
+      "version": "arXiv v2, 2024-12-16",
+      "access_route": "official arXiv born-digital PDF",
+      "local_file_status": "retained_in_ignored_scratch_during_audit",
+      "sha256": "4de36ab6b2926560d67cf12cc406299ecabb2064918d4ee010491c6a6e3f1eb1",
+      "inspected_pages_equations": [
+        "PDF pp. 1-4, method, and conclusion"
+      ],
+      "role": "Comparator showing local expansion is computable after a full metric is evolved."
+    },
+    {
+      "id": "SRC-NW15",
+      "citation": "M. A. Nazer and D. L. Wiltshire, Cosmic microwave background anisotropies in the timescape cosmology, arXiv:1410.3470v3",
+      "version": "arXiv v3",
+      "access_route": "official arXiv born-digital PDF",
+      "local_file_status": "retained_in_ignored_scratch_during_audit",
+      "sha256": "e7d695d58b0d6b3c5b3924f07aaaca700d5a387c9d6178cf1a1c5145fff62c93",
+      "inspected_pages_equations": [
+        "auxiliary-FLRW matching method sections"
+      ],
+      "role": "Early-time matching comparator."
+    },
+    {
+      "id": "SRC-CL11",
+      "citation": "A. Challinor and A. Lewis, The linear power spectrum of observed source number counts, arXiv:1105.5292v2",
+      "version": "arXiv v2",
+      "access_route": "official arXiv born-digital PDF; rendered pages inspected in Phase 1E-B",
+      "local_file_status": "not_retained_locally",
+      "sha256": null,
+      "inspected_pages_equations": [
+        "PDF pp. 2-6, Eqs. (1)-(18), (25), (30), (37), (39)"
+      ],
+      "role": "General photon, redshift, Jacobi, and observed-count dependency inventory.",
+      "reproducibility_note": "Official arXiv identifier and page/equation list are retained; no local file hash is asserted."
+    },
+    {
+      "id": "SRC-BD11",
+      "citation": "C. Bonvin and R. Durrer, What galaxy surveys really measure, arXiv:1105.5280v3",
+      "version": "arXiv v3",
+      "access_route": "official arXiv born-digital PDF; rendered pages inspected in Phase 1E-B",
+      "local_file_status": "not_retained_locally",
+      "sha256": null,
+      "inspected_pages_equations": [
+        "PDF pp. 2-4 and 8-10, Eqs. (5)-(17), (29)-(31), (37)"
+      ],
+      "role": "Independent light-cone and volume-distortion dependency inventory.",
+      "reproducibility_note": "Official arXiv identifier and page/equation list are retained; no local file hash is asserted."
+    },
+    {
+      "id": "SRC-V15",
+      "citation": "M. Visser, Conformally Friedmann-Lemaitre-Robertson-Walker cosmologies, arXiv:1502.02758v3",
+      "version": "arXiv v3, 2015-04-29",
+      "access_route": "official arXiv born-digital PDF",
+      "local_file_status": "retained_in_ignored_scratch_during_audit",
+      "sha256": "98635f752af01c6beee984424e407fc54fe276ab26f5ce56370ce6f6f4c417bf",
+      "inspected_pages_equations": [
+        "PDF pp. 1-4, Eqs. (2.1)-(2.4)"
+      ],
+      "role": "Phenomenological conformal-FLRW comparator, not Timescape dynamics."
+    }
+  ],
+  "source_search_ledger": [
+    {
+      "id": "SEARCH-01",
+      "topic": "perturbed dressed Timescape metric",
+      "search_date_utc": "2026-07-22",
+      "query_family": [
+        "timescape perturbed dressed metric",
+        "Wiltshire dressed metric perturbation",
+        "Galoppo Mourier wall perturbation"
+      ],
+      "search_system_database": [
+        "arXiv title/abstract search",
+        "official arXiv records",
+        "in-PDF reference chaining"
+      ],
+      "primary_results_opened": [
+        "SRC-W09",
+        "SRC-GM",
+        "SRC-W08"
+      ],
+      "exclusion_rationale": "Records were excluded as closures when they supplied only a background dressed metric, generic observer formalism, or future-work discussion without perturbative field/source equations.",
+      "routes": [
+        "arXiv title/full-text",
+        "Wiltshire and GM citation chains"
+      ],
+      "outcome": "W09 supplies the explicit background metric; no Timescape perturbative dynamics/source closure was found."
+    },
+    {
+      "id": "SEARCH-02",
+      "topic": "wall observer congruence",
+      "search_date_utc": "2026-07-22",
+      "query_family": [
+        "timescape wall observer congruence four velocity",
+        "finite infinity observer field u_w",
+        "Galoppo Mourier arbitrary observer wall frame"
+      ],
+      "search_system_database": [
+        "arXiv title/abstract search",
+        "official arXiv full text",
+        "Timescape primary-paper reference chains"
+      ],
+      "primary_results_opened": [
+        "SRC-W07",
+        "SRC-W08",
+        "SRC-W09",
+        "SRC-GM"
+      ],
+      "exclusion_rationale": "Background wall proper-time observers and generic CGI observers were retained as definitions but excluded as a solved transfer because no wall-congruence perturbation equation or GM-to-wall event map was supplied.",
+      "routes": [
+        "W07-W09 full text",
+        "GM arbitrary-observer and Timescape sections"
+      ],
+      "outcome": "A background wall congruence is defined; no perturbative evolution or GM-to-wall transfer was found."
+    },
+    {
+      "id": "SEARCH-03",
+      "topic": "pointwise local lapse perturbation",
+      "routes": [
+        "Timescape full text",
+        "general averaging comparators"
+      ],
+      "outcome": "Generic parameterization exists; no local Timescape equation was found."
+    },
+    {
+      "id": "SEARCH-04",
+      "topic": "regional phenomenological lapse perturbation",
+      "routes": [
+        "W07-W09",
+        "GM Eqs. (5.3)-(5.7)"
+      ],
+      "outcome": "The background regional lapse is defined; its perturbation equation is absent."
+    },
+    {
+      "id": "SEARCH-05",
+      "topic": "W09 finite-infinity boundary versus GM formal matching domain",
+      "search_date_utc": "2026-07-22",
+      "query_family": [
+        "finite infinity perturbations Wiltshire",
+        "finite infinity boundary perturbation timescape",
+        "Galoppo Mourier wall void matching domain single spacetime"
+      ],
+      "search_system_database": [
+        "arXiv title/abstract search",
+        "official arXiv full text",
+        "GM and Wiltshire reference chaining"
+      ],
+      "primary_results_opened": [
+        "SRC-W09",
+        "SRC-GM",
+        "SRC-W07"
+      ],
+      "exclusion_rationale": "W09 finite infinity and the GM zero-measure formal matching domain were retained as distinct background concepts; no source-derived identification, perturbed embedding, or displacement law was found.",
+      "routes": [
+        "W09 Eq. (6)",
+        "GM p. 22",
+        "citation chaining"
+      ],
+      "outcome": "W09 finite infinity is a candidate physical realization, not an identified synonym for the GM formal domain; the GM embedding, displacement, and BCs are unspecified."
+    },
+    {
+      "id": "SEARCH-06",
+      "topic": "regional wall and void perturbations",
+      "search_date_utc": "2026-07-22",
+      "query_family": [
+        "timescape regional wall void perturbations",
+        "two scale Buchert wall void linear perturbation",
+        "Galoppo Mourier regional perturbations"
+      ],
+      "search_system_database": [
+        "arXiv title/abstract search",
+        "official arXiv full text",
+        "GM and numerical-relativity reference chains"
+      ],
+      "primary_results_opened": [
+        "SRC-GM",
+        "SRC-W09",
+        "SRC-WMS24",
+        "SRC-RB12"
+      ],
+      "exclusion_rationale": "Regional background metrics and generic local-deviation or numerical-relativity systems were retained as machinery/comparators but excluded as a Timescape closure absent a coupled wall/void perturbation state, gauge, and matching system.",
+      "routes": [
+        "GM",
+        "Timescape bibliography",
+        "numerical-relativity comparators"
+      ],
+      "outcome": "Regional background metrics/dust are defined; no coupled perturbation IBVP was found."
+    },
+    {
+      "id": "SEARCH-07",
+      "topic": "Timescape peculiar velocity",
+      "routes": [
+        "author bibliography",
+        "arXiv synonyms"
+      ],
+      "outcome": "No dust-to-wall perturbative velocity transfer law was found."
+    },
+    {
+      "id": "SEARCH-08",
+      "topic": "relative momentum or tilt dynamics",
+      "routes": [
+        "GM CGI",
+        "DBE/BDE",
+        "BMR20"
+      ],
+      "outcome": "General same-spacetime machinery exists; no wall-specific boost equation was found."
+    },
+    {
+      "id": "SEARCH-09",
+      "topic": "dressed harmonics and local wavevector",
+      "routes": [
+        "Timescape full text",
+        "GM harmonic definitions"
+      ],
+      "outcome": "No k_code-to-local-wall mode map was found."
+    },
+    {
+      "id": "SEARCH-10",
+      "topic": "dressed observed number counts and RSD",
+      "routes": [
+        "Timescape bibliography",
+        "CL11 and BD11 comparators"
+      ],
+      "outcome": "No Timescape perturbed observable Jacobian was found."
+    },
+    {
+      "id": "SEARCH-11",
+      "topic": "averaged perturbations",
+      "search_date_utc": "2026-07-22",
+      "query_family": [
+        "covariant perturbations averaged cosmological background",
+        "Buchert averaged perturbations local reconstruction",
+        "Galoppo Mourier averaged perturbation wall mapping"
+      ],
+      "search_system_database": [
+        "official arXiv records",
+        "arXiv title/abstract search",
+        "Buchert and GM reference chains"
+      ],
+      "primary_results_opened": [
+        "SRC-GM",
+        "SRC-B00",
+        "SRC-B01",
+        "SRC-RB12"
+      ],
+      "exclusion_rationale": "Average evolution and exact-deviation formalisms were excluded as inverse reconstruction theorems because they either evolve averaged variables or start from a supplied local spacetime.",
+      "routes": [
+        "GM",
+        "Buchert literature"
+      ],
+      "outcome": "GM supplies the frozen average system but not local wall reconstruction."
+    },
+    {
+      "id": "SEARCH-12",
+      "topic": "exact-deviation perturbations",
+      "routes": [
+        "Roy-Buchert primary paper and citations"
+      ],
+      "outcome": "Requires a supplied local spacetime and does not select the Timescape regional state."
+    },
+    {
+      "id": "SEARCH-13",
+      "topic": "arbitrary lapse shift tilt averaging",
+      "routes": [
+        "BMR20",
+        "MH24"
+      ],
+      "outcome": "Machinery exists after geometric inputs are supplied."
+    },
+    {
+      "id": "SEARCH-14",
+      "topic": "GM formal wall-void matching-domain dynamics and junction data",
+      "search_date_utc": "2026-07-22",
+      "query_family": [
+        "Galoppo Mourier wall void matching domain perturbation",
+        "timescape wall void junction conditions",
+        "Buchert regional boundary matching perturbations"
+      ],
+      "search_system_database": [
+        "arXiv title/abstract search",
+        "official arXiv full text",
+        "regional-averaging reference chains"
+      ],
+      "primary_results_opened": [
+        "SRC-GM",
+        "SRC-BMR20",
+        "SRC-BC-REG",
+        "SRC-W09"
+      ],
+      "exclusion_rationale": "Generic boundary/map machinery was excluded as a selected junction law, and W09 finite infinity was excluded as an automatic identification with the GM formal domain.",
+      "routes": [
+        "GM p. 22",
+        "regional averaging literature"
+      ],
+      "outcome": "No Timescape-specific GM matching-domain embedding evolution, boundary data, or geometry plus matter/averaging junction system was found."
+    },
+    {
+      "id": "SEARCH-15",
+      "topic": "local Fermi construction",
+      "routes": [
+        "primary generic-GR literature",
+        "Timescape citations"
+      ],
+      "outcome": "Generic construction requires a local metric/worldline and is downstream."
+    },
+    {
+      "id": "SEARCH-16",
+      "topic": "WKB or short-wave construction",
+      "routes": [
+        "primary generic-GR literature",
+        "Timescape citations"
+      ],
+      "outcome": "No Timescape-specific averaged-to-local amplitude transfer was found."
+    },
+    {
+      "id": "SEARCH-17",
+      "topic": "early-time auxiliary matching",
+      "routes": [
+        "NW15 and citations"
+      ],
+      "outcome": "Auxiliary FLRW matching does not close the late-time wall transfer."
+    },
+    {
+      "id": "SEARCH-18",
+      "topic": "general light-cone and Jacobi formalism",
+      "routes": [
+        "CL11",
+        "BD11",
+        "primary references"
+      ],
+      "outcome": "General propagation is defined if metric, tetrads, velocities, curvature, and optical data are supplied."
+    },
+    {
+      "id": "SEARCH-19",
+      "topic": "Balasin Timescape realized direct audit",
+      "search_date_utc": "2026-07-22",
+      "query_family": [
+        "arXiv:1310.3124",
+        "Herbert Balasin Timescape realized",
+        "static conformally static geometry observer redshift"
+      ],
+      "search_system_database": [
+        "official arXiv record",
+        "official born-digital arXiv PDF"
+      ],
+      "primary_results_opened": [
+        "SRC-BAL13"
+      ],
+      "exclusion_rationale": "Excluded as a GM/Timescape transfer closure because it lacks Buchert two-scale variables, W09 wall/void dressing, GM Delta_d/Z, and the GM formal matching domain.",
+      "routes": [
+        "official arXiv:1310.3124v1, complete PDF"
+      ],
+      "outcome": "Invertible conformally-static map and observer/redshift dynamics found; no GM/Buchert wall-transfer closure."
+    },
+    {
+      "id": "SEARCH-20",
+      "topic": "Balasin citation chain and conformally-static Timescape follow-up",
+      "search_date_utc": "2026-07-22",
+      "query_family": [
+        "exact title Timescape realized",
+        "arXiv:1310.3124 citations",
+        "Herbert Balasin conformally static timescape observers",
+        "relative matter expansion frame Timescape"
+      ],
+      "search_system_database": [
+        "arXiv search",
+        "SciRate citation index",
+        "web scholarly metadata search",
+        "Timescape bibliography/reference chaining"
+      ],
+      "primary_results_opened": [
+        "SRC-BAL13",
+        "SRC-W09",
+        "SRC-GM"
+      ],
+      "exclusion_rationale": "Non-primary summaries, unrelated conformal cosmologies, and records without an explicit GM/Buchert wall-transfer derivation were excluded.",
+      "routes": [
+        "exact title",
+        "arXiv ID",
+        "author",
+        "citation index",
+        "observer/conformal synonyms"
+      ],
+      "outcome": "No relevant primary follow-up connecting Balasin to GM wall/void perturbative transfer was found."
+    },
+    {
+      "id": "SEARCH-21",
+      "topic": "wall tetrad and projector",
+      "search_date_utc": "2026-07-22",
+      "query_family": [
+        "timescape wall observer tetrad",
+        "finite infinity orthonormal tetrad",
+        "wall metric projector perturbation"
+      ],
+      "search_system_database": [
+        "arXiv title/abstract search",
+        "official W09 full text",
+        "DBE/BDE/GM primary-source tracing"
+      ],
+      "primary_results_opened": [
+        "SRC-W09",
+        "SRC-DBE",
+        "SRC-BDE",
+        "SRC-GM"
+      ],
+      "exclusion_rationale": "Generic tetrad/frame identities were excluded as a solved Timescape wall tetrad perturbation because the metric, congruence, Lorentz gauge, and transfer remain underdetermined.",
+      "routes": [
+        "W09 Eq. (6)",
+        "DBE/BDE/GM observer machinery"
+      ],
+      "outcome": "A background tetrad is derivable from the wall metric; its perturbation depends on metric, congruence, and Lorentz gauge."
+    },
+    {
+      "id": "SEARCH-22",
+      "topic": "three-dimensional spatial pullback",
+      "search_date_utc": "2026-07-22",
+      "query_family": [
+        "timescape dressed spatial pullback",
+        "wall void common spacetime embedding",
+        "Buchert averaging spatial map pullback",
+        "W09 radial matching three dimensional map"
+      ],
+      "search_system_database": [
+        "arXiv title/abstract search",
+        "official arXiv full text",
+        "BMR20 and Buchert-Carfora reference chains"
+      ],
+      "primary_results_opened": [
+        "SRC-W09",
+        "SRC-GM",
+        "SRC-BMR20",
+        "SRC-BC-REG"
+      ],
+      "exclusion_rationale": "The one-dimensional W09 radial-null match and generic map machinery were excluded as a determined three-dimensional GM-to-wall pullback.",
+      "routes": [
+        "W09 radial match",
+        "GM formal boundary",
+        "BMR20 maps",
+        "Buchert-Carfora"
+      ],
+      "outcome": "A finite map can be parameterized from current domains, but no determining Timescape equation/data were found."
+    },
+    {
+      "id": "SEARCH-23",
+      "topic": "perturbed null geodesic, Jacobi, and optical variables",
+      "search_date_utc": "2026-07-22",
+      "query_family": [
+        "Timescape perturbed null geodesics",
+        "Timescape Jacobi map perturbation",
+        "dressed light cone metric perturbation",
+        "covariant observed redshift Jacobi number counts"
+      ],
+      "search_system_database": [
+        "arXiv title/abstract search",
+        "official arXiv full text",
+        "CL11 and BD11 primary-reference tracing"
+      ],
+      "primary_results_opened": [
+        "SRC-CL11",
+        "SRC-BD11",
+        "SRC-W09",
+        "SRC-GM"
+      ],
+      "exclusion_rationale": "General photon/Jacobi equations were retained as dependency-known objects but excluded as Timescape solutions because the perturbed metric, tetrads, endpoint velocities, curvature, and optical data are absent.",
+      "routes": [
+        "CL11",
+        "BD11",
+        "Timescape light-propagation citations"
+      ],
+      "outcome": "General variables/equations are defined; the Timescape-specific perturbed metric and endpoint/optical inputs are missing."
+    }
+  ],
+  "source_completeness_assessment": {
+    "initial_reassessment_state": "SOURCE_SEARCH_INCOMPLETE",
+    "final_status": "PASS",
+    "original_topic_count": 18,
+    "targeted_additions": [
+      "SEARCH-19",
+      "SEARCH-20",
+      "SEARCH-21",
+      "SEARCH-22",
+      "SEARCH-23"
+    ],
+    "load_bearing_search_ids": [
+      "SEARCH-01",
+      "SEARCH-02",
+      "SEARCH-05",
+      "SEARCH-06",
+      "SEARCH-11",
+      "SEARCH-14",
+      "SEARCH-19",
+      "SEARCH-20",
+      "SEARCH-21",
+      "SEARCH-22",
+      "SEARCH-23"
+    ],
+    "load_bearing_metadata_complete": true,
+    "balasin_disposition": "Comparator only; not a viable GM/Timescape transfer route.",
+    "citation_chain_result": "No relevant primary follow-up deriving the missing transfer was found.",
+    "scope_limit": "Accessible published primary sources and recorded searches; no claim about unpublished material.",
+    "blocking_inaccessible_sources": []
+  },
+  "target_definition": {
+    "source_state": [
+      "tracker background",
+      "Delta_d",
+      "Z"
+    ],
+    "target_state": [
+      "wall density perturbation",
+      "wall expansion perturbation",
+      "local wall peculiar-velocity divergence",
+      "perturbed dressed or regional wall metric",
+      "wall tetrad/projector",
+      "three-dimensional spatial/mode pullback",
+      "Timescape-specific photon/redshift/Jacobi solution"
+    ],
+    "closure_requirements": [
+      "admissible object state",
+      "independent dynamics and constraints",
+      "gauge",
+      "initial data",
+      "boundary data",
+      "matching functions"
+    ],
+    "not_part_of_target": [
+      "runtime implementation",
+      "observable f-sigma-8",
+      "sigma_8 spectrum integral",
+      "survey likelihood"
+    ]
+  },
+  "dependency_graph": {
+    "route_universe": [
+      "APPROACH-A",
+      "APPROACH-B",
+      "APPROACH-C",
+      "APPROACH-D",
+      "finite_parameterization_challenge"
+    ],
+    "route_inclusion_rule": "Begins with frozen GM/Timescape objects and targets the same wall transfer.",
+    "edge_semantics": {
+      "CURRENT_THEORY_VARIATION": "Definition or variation satisfying the admissibility rule.",
+      "EXTENDED_THEORY_INPUT": "New embedding, field ontology, or physical identification not present as a current-theory object/variation."
+    },
+    "path_completeness": "Every target dependency is represented; equations need not yet be supplied.",
+    "candidate_coverage_sets": [
+      {
+        "id": "CUT-CANDIDATE-1",
+        "objects": [
+          "metric_or_regional_fields",
+          "wall_congruence",
+          "matching_map"
+        ],
+        "coverage": [
+          "APPROACH-A",
+          "APPROACH-B",
+          "APPROACH-C",
+          "APPROACH-D"
+        ],
+        "minimality_claimed": false
+      },
+      {
+        "id": "CUT-CANDIDATE-2",
+        "objects": [
+          "spatial_pullback",
+          "lightcone_inputs"
+        ],
+        "coverage": [
+          "observational_descendants"
+        ],
+        "minimality_claimed": false
+      }
+    ],
+    "completeness_claimed": false,
+    "f17_result": "A and C survive with N_undef=0; the old universal no-derivation claim is falsified."
+  },
+  "ontology_inventory": {
+    "axis_rule": "Both current_theory_definition_state and generic_GR_parameterizability are mandatory for each disputed object.",
+    "objects": [
+      {
+        "id": "ONT-01",
+        "object": "delta g_ab^dressed",
+        "layer": "DRESSED_BACKGROUND to PERTURBATIVE_TRANSFER",
+        "current_theory_definition_state": "KINEMATICALLY_DEFINED",
+        "generic_GR_parameterizability": "PARAMETERIZABLE_WITHOUT_NEW_OBJECT_TYPE",
+        "admissible_for_n_undef_zero": true,
+        "reason": "Unambiguous symmetric-tensor variation of the explicit W09 four-dimensional dressed metric; source, gauge, and dynamics remain missing.",
+        "source_ids": [
+          "SRC-W09",
+          "SEARCH-01"
+        ]
+      },
+      {
+        "id": "ONT-02",
+        "object": "perturbed wall four-velocity",
+        "layer": "LOCAL_SPACETIME",
+        "current_theory_definition_state": "KINEMATICALLY_DEFINED",
+        "generic_GR_parameterizability": "PARAMETERIZABLE_WITHOUT_NEW_OBJECT_TYPE",
+        "admissible_for_n_undef_zero": true,
+        "reason": "Normalized variation of the background comoving congruence defined by the wall proper-time metric; no evolution/transfer is supplied.",
+        "source_ids": [
+          "SRC-W09",
+          "SRC-GM",
+          "SEARCH-02"
+        ]
+      },
+      {
+        "id": "ONT-03",
+        "object": "perturbation of wall tetrad",
+        "layer": "LOCAL_SPACETIME",
+        "current_theory_definition_state": "DERIVED_IF_CURRENT_THEORY_DEPENDENCIES_KNOWN",
+        "generic_GR_parameterizability": "PARAMETERIZABLE_WITHOUT_NEW_OBJECT_TYPE",
+        "admissible_for_n_undef_zero": true,
+        "reason": "Derived from wall metric and congruence after Lorentz-gauge choice.",
+        "source_ids": [
+          "SRC-W09",
+          "SRC-DBE",
+          "SRC-BDE",
+          "SEARCH-21"
+        ]
+      },
+      {
+        "id": "ONT-04",
+        "object": "delta bar-gamma_w",
+        "layer": "REGIONAL_AVERAGE",
+        "current_theory_definition_state": "KINEMATICALLY_DEFINED",
+        "generic_GR_parameterizability": "PARAMETERIZABLE_WITHOUT_NEW_OBJECT_TYPE",
+        "admissible_for_n_undef_zero": true,
+        "reason": "Variation of the dynamically determined regional background lapse; its perturbation equation is missing.",
+        "source_ids": [
+          "SRC-W07",
+          "SRC-W09",
+          "SRC-GM",
+          "SEARCH-04"
+        ]
+      },
+      {
+        "id": "ONT-05",
+        "object": "local metric lapse and shift",
+        "layer": "LOCAL_SPACETIME",
+        "current_theory_definition_state": "DERIVED_IF_CURRENT_THEORY_DEPENDENCIES_KNOWN",
+        "generic_GR_parameterizability": "PARAMETERIZABLE_WITHOUT_NEW_OBJECT_TYPE",
+        "admissible_for_n_undef_zero": true,
+        "reason": "ADM components of an admitted metric perturbation; gauge-dependent but not separate ontology classes.",
+        "source_ids": [
+          "SRC-BMR20",
+          "SRC-W09",
+          "SEARCH-03"
+        ]
+      },
+      {
+        "id": "ONT-06",
+        "object": "perturbation of radial-null matching",
+        "layer": "PERTURBATIVE_TRANSFER",
+        "current_theory_definition_state": "DERIVED_IF_CURRENT_THEORY_DEPENDENCIES_KNOWN",
+        "generic_GR_parameterizability": "PARAMETERIZABLE_WITHOUT_NEW_OBJECT_TYPE",
+        "admissible_for_n_undef_zero": true,
+        "reason": "Variation of W09 background matching after endpoint metrics and rays are perturbed; not a full 3D map.",
+        "source_ids": [
+          "SRC-W09",
+          "SEARCH-23"
+        ]
+      },
+      {
+        "id": "ONT-07",
+        "object": "general three-dimensional spatial pullback",
+        "layer": "PERTURBATIVE_TRANSFER",
+        "current_theory_definition_state": "DERIVED_IF_CURRENT_THEORY_DEPENDENCIES_KNOWN",
+        "generic_GR_parameterizability": "PARAMETERIZABLE_WITHOUT_NEW_OBJECT_TYPE",
+        "admissible_for_n_undef_zero": true,
+        "reason": "A finite map between charts/domains follows after parameterizing GM's formal common-spacetime domain embeddings; determining equations are absent.",
+        "source_ids": [
+          "SRC-GM",
+          "SRC-BMR20",
+          "SRC-BC-REG",
+          "SEARCH-22"
+        ]
+      },
+      {
+        "id": "ONT-08",
+        "object": "GM formal wall-void matching-domain embedding",
+        "layer": "PERTURBATIVE_TRANSFER",
+        "current_theory_definition_state": "KINEMATICALLY_DEFINED",
+        "generic_GR_parameterizability": "PARAMETERIZABLE_WITHOUT_NEW_OBJECT_TYPE",
+        "admissible_for_n_undef_zero": true,
+        "reason": "Embedding of the formal zero-measure matching domain introduced by GM; its value and law are unspecified.",
+        "source_ids": [
+          "SRC-GM",
+          "SEARCH-14"
+        ]
+      },
+      {
+        "id": "ONT-09",
+        "object": "GM formal wall-void matching-domain displacement",
+        "layer": "PERTURBATIVE_TRANSFER",
+        "current_theory_definition_state": "KINEMATICALLY_DEFINED",
+        "generic_GR_parameterizability": "PARAMETERIZABLE_WITHOUT_NEW_OBJECT_TYPE",
+        "admissible_for_n_undef_zero": true,
+        "reason": "Variation of the current GM formal domain/embedding; requires BC and matching dynamics.",
+        "source_ids": [
+          "SRC-GM",
+          "SEARCH-14"
+        ]
+      },
+      {
+        "id": "ONT-10",
+        "object": "regional wall and void metric/dust perturbations",
+        "layer": "REGIONAL_AVERAGE",
+        "current_theory_definition_state": "KINEMATICALLY_DEFINED",
+        "generic_GR_parameterizability": "PARAMETERIZABLE_WITHOUT_NEW_OBJECT_TYPE",
+        "admissible_for_n_undef_zero": true,
+        "reason": "Variations of the regional dust-sourced FLRW spacetimes stated by GM/W09; evolution and averaging closure are missing.",
+        "source_ids": [
+          "SRC-GM",
+          "SRC-W09",
+          "SEARCH-06"
+        ]
+      },
+      {
+        "id": "ONT-11",
+        "object": "photon wavevector and redshift variable",
+        "layer": "LIGHT_CONE",
+        "current_theory_definition_state": "DERIVED_IF_CURRENT_THEORY_DEPENDENCIES_KNOWN",
+        "generic_GR_parameterizability": "PARAMETERIZABLE_WITHOUT_NEW_OBJECT_TYPE",
+        "admissible_for_n_undef_zero": true,
+        "reason": "General covariant definitions are known once the metric, tetrads, and endpoint velocities are supplied.",
+        "source_ids": [
+          "SRC-CL11",
+          "SRC-BD11",
+          "SEARCH-23"
+        ]
+      },
+      {
+        "id": "ONT-12",
+        "object": "null-geodesic propagation",
+        "layer": "LIGHT_CONE",
+        "current_theory_definition_state": "DERIVED_IF_CURRENT_THEORY_DEPENDENCIES_KNOWN",
+        "generic_GR_parameterizability": "PARAMETERIZABLE_WITHOUT_NEW_OBJECT_TYPE",
+        "admissible_for_n_undef_zero": true,
+        "reason": "General propagation equation is defined; Timescape perturbed metric and endpoint data are missing.",
+        "source_ids": [
+          "SRC-CL11",
+          "SRC-BD11",
+          "SEARCH-23"
+        ]
+      },
+      {
+        "id": "ONT-13",
+        "object": "Jacobi map and optical variables",
+        "layer": "LIGHT_CONE",
+        "current_theory_definition_state": "DERIVED_IF_CURRENT_THEORY_DEPENDENCIES_KNOWN",
+        "generic_GR_parameterizability": "PARAMETERIZABLE_WITHOUT_NEW_OBJECT_TYPE",
+        "admissible_for_n_undef_zero": true,
+        "reason": "General optics are defined if curvature perturbations and optical initial data are supplied.",
+        "source_ids": [
+          "SRC-CL11",
+          "SRC-BD11",
+          "SEARCH-18",
+          "SEARCH-23"
+        ]
+      },
+      {
+        "id": "ONT-14",
+        "object": "Balasin conformally-static observer construction",
+        "layer": "LOCAL_SPACETIME",
+        "current_theory_definition_state": "NOT_DEFINED_IN_CURRENT_THEORY",
+        "generic_GR_parameterizability": "PARAMETERIZABLE_WITHOUT_NEW_OBJECT_TYPE",
+        "admissible_for_n_undef_zero": false,
+        "reason": "It is a distinct generic-GR comparator, not the GM/Buchert regional/dressed construction.",
+        "source_ids": [
+          "SRC-BAL13",
+          "SEARCH-19",
+          "SEARCH-20"
+        ]
+      },
+      {
+        "id": "ONT-15",
+        "object": "regional backreaction and deformation perturbations",
+        "layer": "REGIONAL_AVERAGE to GLOBAL_DOMAIN_AVERAGE",
+        "current_theory_definition_state": "KINEMATICALLY_DEFINED",
+        "generic_GR_parameterizability": "PARAMETERIZABLE_WITHOUT_NEW_OBJECT_TYPE",
+        "admissible_for_n_undef_zero": true,
+        "reason": "Variations of current Buchert/GM averaged kinematical and curvature variables; their regional closure and relation to the GM perturbation state are missing.",
+        "source_ids": [
+          "SRC-GM",
+          "SRC-B00",
+          "SRC-B01",
+          "SEARCH-11"
+        ]
+      },
+      {
+        "id": "ONT-16",
+        "object": "regional junction and matching data",
+        "layer": "PERTURBATIVE_TRANSFER",
+        "current_theory_definition_state": "DERIVED_IF_CURRENT_THEORY_DEPENDENCIES_KNOWN",
+        "generic_GR_parameterizability": "PARAMETERIZABLE_WITHOUT_NEW_OBJECT_TYPE",
+        "admissible_for_n_undef_zero": true,
+        "reason": "Finite data/functions on the existing GM formal matching domain after its embedding, induced geometry, and regional fields are parameterized; no specific junction law is assumed.",
+        "source_ids": [
+          "SRC-GM",
+          "SRC-BMR20",
+          "SEARCH-14",
+          "SEARCH-22"
+        ]
+      },
+      {
+        "id": "ONT-17",
+        "object": "W09 finite-infinity boundary as a candidate physical realization",
+        "layer": "REGIONAL_AVERAGE",
+        "current_theory_definition_state": "BACKGROUND_DEFINED",
+        "generic_GR_parameterizability": "NOT_APPLICABLE",
+        "admissible_for_n_undef_zero": false,
+        "reason": "W09 defines finite infinity operationally as a wall-region boundary/background notion. No derivation identifies it with GM's distinct zero-measure formal matching domain, so it is not substituted into selected Approach C.",
+        "source_ids": [
+          "SRC-W09",
+          "SRC-GM",
+          "SEARCH-05"
+        ]
+      }
+    ],
+    "triple_lapse_records": [
+      {
+        "id": "LAPSE-01",
+        "object": "gamma(tau,x)",
+        "layer": "LOCAL_SPACETIME clock ratio",
+        "current_theory_definition_state": "NOT_DEFINED_IN_CURRENT_THEORY",
+        "generic_GR_parameterizability": "PARAMETERIZABLE_WITHOUT_NEW_OBJECT_TYPE",
+        "gauge_status": "Scalar only after two local clock congruences/slicings are supplied.",
+        "dependencies": [
+          "local average/reference clock",
+          "local wall clock"
+        ],
+        "determining_equation": null,
+        "independent": true,
+        "relation_to_others": "The current theory defines the regional background bar-gamma_w, not this pointwise field. It is a possible generic parameterization and is not identified with delta bar-gamma_w, delta N_D, or delta N_w.",
+        "source_ids": [
+          "SRC-W08",
+          "SEARCH-03"
+        ]
+      },
+      {
+        "id": "LAPSE-02",
+        "object": "bar-gamma_w(t)",
+        "layer": "REGIONAL_AVERAGE",
+        "current_theory_definition_state": "DYNAMICALLY_DETERMINED",
+        "generic_GR_parameterizability": "NOT_APPLICABLE",
+        "gauge_status": "Background clock convention fixed by the Timescape construction.",
+        "dependencies": [
+          "tracker background"
+        ],
+        "determining_equation": "dt/dtau_w and tracker background relations",
+        "independent": true,
+        "relation_to_others": "Background regional ratio only.",
+        "source_ids": [
+          "SRC-W07",
+          "SRC-W09",
+          "SRC-GM",
+          "SEARCH-04"
+        ]
+      },
+      {
+        "id": "LAPSE-03",
+        "object": "delta bar-gamma_w(t)",
+        "layer": "REGIONAL_AVERAGE perturbation",
+        "current_theory_definition_state": "KINEMATICALLY_DEFINED",
+        "generic_GR_parameterizability": "PARAMETERIZABLE_WITHOUT_NEW_OBJECT_TYPE",
+        "gauge_status": "Depends on perturbed regional time parameterization.",
+        "dependencies": [
+          "bar-gamma_w",
+          "regional perturbation state"
+        ],
+        "determining_equation": null,
+        "independent": true,
+        "relation_to_others": "Variation of background regional lapse, not pointwise delta gamma.",
+        "source_ids": [
+          "SRC-GM",
+          "SEARCH-04"
+        ]
+      },
+      {
+        "id": "LAPSE-04",
+        "object": "delta gamma(tau,x)",
+        "layer": "LOCAL_SPACETIME transfer",
+        "current_theory_definition_state": "KINEMATICALLY_DEFINED",
+        "generic_GR_parameterizability": "PARAMETERIZABLE_WITHOUT_NEW_OBJECT_TYPE",
+        "gauge_status": "Slicing and clock-congruence dependent.",
+        "dependencies": [
+          "gamma(tau,x)",
+          "local clocks"
+        ],
+        "determining_equation": null,
+        "independent": true,
+        "relation_to_others": "Pointwise variation; not equal to delta bar-gamma_w without averaging/identification.",
+        "source_ids": [
+          "SRC-BMR20",
+          "SEARCH-03"
+        ]
+      },
+      {
+        "id": "LAPSE-05",
+        "object": "delta N_D",
+        "layer": "GLOBAL_DOMAIN_AVERAGE metric/ADM",
+        "current_theory_definition_state": "DERIVED_IF_CURRENT_THEORY_DEPENDENCIES_KNOWN",
+        "generic_GR_parameterizability": "PARAMETERIZABLE_WITHOUT_NEW_OBJECT_TYPE",
+        "gauge_status": "ADM gauge dependent.",
+        "dependencies": [
+          "perturbed reference/average metric",
+          "chosen slicing"
+        ],
+        "determining_equation": "metric constraints after a state/gauge choice",
+        "independent": true,
+        "relation_to_others": "If gamma=N_D/N_w is chosen, enters delta ln gamma with positive sign.",
+        "source_ids": [
+          "SRC-BMR20",
+          "SEARCH-03"
+        ]
+      },
+      {
+        "id": "LAPSE-06",
+        "object": "delta N_w",
+        "layer": "LOCAL_SPACETIME wall metric/ADM",
+        "current_theory_definition_state": "DERIVED_IF_CURRENT_THEORY_DEPENDENCIES_KNOWN",
+        "generic_GR_parameterizability": "PARAMETERIZABLE_WITHOUT_NEW_OBJECT_TYPE",
+        "gauge_status": "ADM gauge dependent.",
+        "dependencies": [
+          "delta g_ab^dressed or regional wall metric",
+          "chosen slicing"
+        ],
+        "determining_equation": "wall metric constraints after a state/gauge choice",
+        "independent": true,
+        "relation_to_others": "If gamma=N_D/N_w is chosen, enters delta ln gamma with negative sign.",
+        "source_ids": [
+          "SRC-W09",
+          "SRC-BMR20",
+          "SEARCH-03",
+          "SEARCH-21"
+        ]
+      }
+    ],
+    "lightcone_dependency_separation": {
+      "general_objects": [
+        "photon wavevector",
+        "redshift",
+        "null-geodesic propagation",
+        "Jacobi map",
+        "optical expansion/shear"
+      ],
+      "general_state": "DERIVED_IF_CURRENT_THEORY_DEPENDENCIES_KNOWN",
+      "missing_timescape_inputs": [
+        "perturbed dressed or regional metric",
+        "source and observer tetrads",
+        "endpoint velocities",
+        "optical initial data",
+        "curvature perturbations",
+        "source evolution and selection"
+      ],
+      "old_entire_lightcone_undefined_classification": "withdrawn"
+    }
+  },
+  "independent_equation_inventory": [
+    {
+      "id": "EQ-01",
+      "status": "available",
+      "type": "EVOLUTION_EQUATION",
+      "content": "Frozen GM volume-average perturbation evolution.",
+      "sources": [
+        "SRC-GM"
+      ]
+    },
+    {
+      "id": "EQ-02",
+      "status": "available",
+      "type": "EVOLUTION_AND_INTEGRABILITY",
+      "content": "Buchert scalar-average background equations.",
+      "sources": [
+        "SRC-B00",
+        "SRC-B01"
+      ]
+    },
+    {
+      "id": "EQ-03",
+      "status": "available",
+      "type": "BACKGROUND_CLOSURE",
+      "content": "Timescape tracker and dressing background.",
+      "sources": [
+        "SRC-W07",
+        "SRC-W09",
+        "SRC-GM"
+      ]
+    },
+    {
+      "id": "EQ-04",
+      "status": "available",
+      "type": "BACKGROUND_MATCHING",
+      "content": "W09 radial-null matching.",
+      "sources": [
+        "SRC-W09"
+      ]
+    },
+    {
+      "id": "EQ-05",
+      "status": "dependent_identity",
+      "type": "FRAME_TRANSFORMATION_IDENTITY",
+      "content": "D_a rho wall shift under xi_dw.",
+      "sources": [
+        "SRC-DBE",
+        "SRC-BDE"
+      ]
+    },
+    {
+      "id": "EQ-06",
+      "status": "dependent_identity",
+      "type": "FRAME_TRANSFORMATION_IDENTITY",
+      "content": "Theta_w = Theta_d + D_a xi_dw^a.",
+      "sources": [
+        "SRC-DBE",
+        "SRC-BDE"
+      ]
+    },
+    {
+      "id": "EQ-07",
+      "status": "dependent_identity",
+      "type": "KINEMATIC_IDENTITY",
+      "content": "delta ln gamma = delta ln N_D - delta ln N_w if gamma=N_D/N_w.",
+      "sources": [
+        "SRC-BMR20"
+      ]
+    },
+    {
+      "id": "EQ-08",
+      "status": "missing_finite_block",
+      "type": "EVOLUTION_EQUATION",
+      "content": "Wall congruence or boost evolution/constraint.",
+      "sources": [
+        "SEARCH-07",
+        "SEARCH-08"
+      ]
+    },
+    {
+      "id": "EQ-09",
+      "status": "missing_finite_block",
+      "type": "EVOLUTION_AND_CONSTRAINT",
+      "content": "Perturbed dressed or regional wall/void metric/source equations.",
+      "sources": [
+        "SEARCH-01",
+        "SEARCH-06"
+      ]
+    },
+    {
+      "id": "EQ-10",
+      "status": "missing_finite_block",
+      "type": "BOUNDARY_AND_MATCHING",
+      "content": "GM formal matching-domain evolution and geometry/matter/averaging matching.",
+      "sources": [
+        "SEARCH-05",
+        "SEARCH-14"
+      ]
+    },
+    {
+      "id": "EQ-11",
+      "status": "missing_finite_block",
+      "type": "GAUGE_AND_CONSTRAINT",
+      "content": "Regional/wall perturbation gauge closure.",
+      "sources": [
+        "SEARCH-03",
+        "SEARCH-06"
+      ]
+    },
+    {
+      "id": "EQ-12",
+      "status": "missing_finite_block",
+      "type": "SPATIAL_MATCHING",
+      "content": "Three-dimensional pullback and mode transfer.",
+      "sources": [
+        "SEARCH-09",
+        "SEARCH-22"
+      ]
+    },
+    {
+      "id": "EQ-13",
+      "status": "available_if_dependencies_known",
+      "type": "DOWNSTREAM_PROPAGATION",
+      "content": "General photon, redshift, and Jacobi equations.",
+      "sources": [
+        "SRC-CL11",
+        "SRC-BD11",
+        "SEARCH-23"
+      ]
+    }
+  ],
+  "equation_dependency_audit": {
+    "kinematic_not_dynamic": [
+      "EQ-05",
+      "EQ-06",
+      "EQ-07"
+    ],
+    "available_background_not_perturbative_transfer": [
+      "EQ-02",
+      "EQ-03",
+      "EQ-04"
+    ],
+    "finite_missing_blocks_selected_route": [
+      "EQ-09",
+      "EQ-10",
+      "EQ-11",
+      "EQ-12"
+    ],
+    "downstream_only": [
+      "EQ-13"
+    ],
+    "rank_statement": "Exact rank awaits a source/gauge choice; finite conservative lower bounds are nevertheless available for A and C.",
+    "no_double_counting": "Metric lapse and shift are components of the metric state and are not separate ontology deficits."
+  },
+  "closure_counting_method": {
+    "vector_order": [
+      "N_undef",
+      "Delta_dyn",
+      "Delta_IC",
+      "Delta_BC",
+      "Delta_match",
+      "Delta_emp"
+    ],
+    "partial_rule": "At least one viable route has N_undef=0 under the current-theory admissibility rule and finite positive remaining deficits.",
+    "not_derivable_rule": "Every viable route retains an indispensable object requiring a new embedding, field ontology, matching-domain ontology, or physical identification beyond current-theory variations.",
+    "lower_bound_rule": "A >=n entry counts at least n independent missing blocks and does not claim exact physical degrees of freedom.",
+    "selected_route": "APPROACH-C"
+  },
+  "candidate_approaches": [
+    {
+      "id": "APPROACH-A",
+      "name": "direct dressed-metric perturbation",
+      "current_theory_basis": [
+        "SRC-W09 explicit four-dimensional dressed background metric"
+      ],
+      "state": [
+        "h_ab^dressed",
+        "metric lapse/shift",
+        "wall congruence/tetrad",
+        "source perturbations"
+      ],
+      "admissibility": "All state object types are variations or decompositions of current-theory background objects.",
+      "deficit": {
+        "N_undef": {
+          "kind": "EXACT",
+          "value": 0
+        },
+        "Delta_dyn": {
+          "kind": "LOWER_BOUND",
+          "value": 1
+        },
+        "Delta_IC": {
+          "kind": "LOWER_BOUND",
+          "value": 1
+        },
+        "Delta_BC": {
+          "kind": "NOT_APPLICABLE",
+          "value": null
+        },
+        "Delta_match": {
+          "kind": "LOWER_BOUND",
+          "value": 1
+        },
+        "Delta_emp": {
+          "kind": "NOT_APPLICABLE",
+          "value": null
+        }
+      },
+      "best_status_ceiling": "PARTIAL_CLOSURE_NEW_DYNAMICS_REQUIRED",
+      "reason": "Metric tangent is defined; field/source equations, gauge, data, and GM matching are not."
+    },
+    {
+      "id": "APPROACH-B",
+      "name": "covariant scalar dust-to-wall boost",
+      "current_theory_basis": [
+        "SRC-GM formal single-spacetime matching",
+        "SRC-DBE",
+        "SRC-BDE"
+      ],
+      "state": [
+        "xi_dw^a = D^a chi_dw",
+        "wall density shift",
+        "wall expansion shift"
+      ],
+      "admissibility": "Bifurcated: N_undef=0 only if GM's formal single-spacetime matching domain supplies the eventwise comparison arena; N_undef>=1 if a distinct eventwise embedding must first be introduced. No boost solution is implied.",
+      "deficit": {
+        "N_undef": {
+          "kind": "BIFURCATED",
+          "value": null,
+          "branches": [
+            {
+              "condition": "GM formal single-spacetime matching domain accepted as eventwise comparison arena",
+              "kind": "EXACT",
+              "value": 0
+            },
+            {
+              "condition": "distinct eventwise embedding must first be introduced",
+              "kind": "LOWER_BOUND",
+              "value": 1
+            }
+          ]
+        },
+        "Delta_dyn": {
+          "kind": "LOWER_BOUND",
+          "value": 1
+        },
+        "Delta_IC": {
+          "kind": "LOWER_BOUND",
+          "value": 1
+        },
+        "Delta_BC": {
+          "kind": "NOT_APPLICABLE",
+          "value": null
+        },
+        "Delta_match": {
+          "kind": "LOWER_BOUND",
+          "value": 1
+        },
+        "Delta_emp": {
+          "kind": "NOT_APPLICABLE",
+          "value": null
+        }
+      },
+      "best_status_ceiling": "PARTIAL_CLOSURE_NEW_DYNAMICS_REQUIRED",
+      "selected_viable_path": false,
+      "reason": "Kinematic identities reduce the scalar sector to one unknown function but do not evolve or match it; the ontology branch remains explicit."
+    },
+    {
+      "id": "APPROACH-C",
+      "name": "regional wall/void and GM formal matching-domain closure",
+      "current_theory_basis": [
+        "SRC-GM wall/void dust FLRW domains and formal matching domain",
+        "SRC-W09 regional metrics"
+      ],
+      "state": [
+        "wall metric/dust perturbations",
+        "void metric/dust perturbations",
+        "GM formal wall-void matching-domain embedding/displacement",
+        "regional lapse variations",
+        "geometry matching data",
+        "matter/averaging matching data"
+      ],
+      "admissibility": "All state objects are variations of current-theory metrics, dust sources, averaging variables, or the formal matching domain.",
+      "deficit": {
+        "N_undef": {
+          "kind": "EXACT",
+          "value": 0
+        },
+        "Delta_dyn": {
+          "kind": "LOWER_BOUND",
+          "value": 1,
+          "sector_note": "Wall and void are distinct regional field sectors requiring separate or coupled treatment; this does not yet prove two gauge-reduced independent equations."
+        },
+        "Delta_IC": {
+          "kind": "LOWER_BOUND",
+          "value": 1,
+          "sector_note": "The two regional sectors require an explicit initial-data construction, but no gauge-reduced analysis yet proves two independent initial functions."
+        },
+        "Delta_BC": {
+          "kind": "LOWER_BOUND",
+          "value": 1
+        },
+        "Delta_match": {
+          "kind": "LOWER_BOUND",
+          "value": 2
+        },
+        "Delta_emp": {
+          "kind": "NOT_APPLICABLE",
+          "value": null
+        }
+      },
+      "best_status_ceiling": "PARTIAL_CLOSURE_NEW_DYNAMICS_REQUIRED",
+      "selected_viable_path": true,
+      "reason": "Finite state exists, but regional dynamics, data, gauge, and two matching blocks are absent; sector multiplicity is recorded separately from equation rank."
+    },
+    {
+      "id": "APPROACH-D",
+      "name": "local tetrad/Fermi/WKB patch downstream of A or C",
+      "current_theory_basis": [
+        "admitted wall metric/congruence state",
+        "generic local construction"
+      ],
+      "state": [
+        "wall tetrad",
+        "local wavevector",
+        "locality/short-wave approximation"
+      ],
+      "admissibility": "The object types are derived if upstream wall metric/congruence and spatial pullback are known.",
+      "deficit": {
+        "N_undef": {
+          "kind": "EXACT",
+          "value": 0
+        },
+        "Delta_dyn": {
+          "kind": "LOWER_BOUND",
+          "value": 1
+        },
+        "Delta_IC": {
+          "kind": "LOWER_BOUND",
+          "value": 1
+        },
+        "Delta_BC": {
+          "kind": "NOT_APPLICABLE",
+          "value": null
+        },
+        "Delta_match": {
+          "kind": "LOWER_BOUND",
+          "value": 2
+        },
+        "Delta_emp": {
+          "kind": "NOT_APPLICABLE",
+          "value": null
+        }
+      },
+      "best_status_ceiling": "PARTIAL_CLOSURE_NEW_DYNAMICS_REQUIRED",
+      "reason": "Local coordinates do not determine the upstream transfer."
+    },
+    {
+      "id": "APPROACH-E",
+      "name": "bounded dependency and finite-parameterization challenge",
+      "route_universe": [
+        "APPROACH-A",
+        "APPROACH-B",
+        "APPROACH-C",
+        "APPROACH-D",
+        "finite_parameterization_challenge"
+      ],
+      "completeness_claimed": false,
+      "minimal_cut_set_claimed": false,
+      "finite_parameterization_result": "PASS",
+      "surviving_routes": [
+        "APPROACH-A",
+        "APPROACH-C"
+      ],
+      "best_status_ceiling": "PARTIAL_CLOSURE_NEW_DYNAMICS_REQUIRED",
+      "reason": "A and C attain N_undef=0 without importing a new physical object type."
+    }
+  ],
+  "closure_rank_matrix": {
+    "columns": [
+      "approach",
+      "N_undef",
+      "Delta_dyn",
+      "Delta_IC",
+      "Delta_BC",
+      "Delta_match",
+      "Delta_emp",
+      "best_status_ceiling"
+    ],
+    "rows": [
+      [
+        "APPROACH-A",
+        "0 exact",
+        ">=1",
+        ">=1",
+        "N/A",
+        ">=1",
+        "N/A",
+        "PARTIAL_CLOSURE_NEW_DYNAMICS_REQUIRED"
+      ],
+      [
+        "APPROACH-B",
+        "BIFURCATED: 0 if GM formal domain is the eventwise arena; >=1 if a distinct embedding is required",
+        ">=1",
+        ">=1",
+        "N/A",
+        ">=1",
+        "N/A",
+        "PARTIAL_CLOSURE_NEW_DYNAMICS_REQUIRED"
+      ],
+      [
+        "APPROACH-C",
+        "0 exact",
+        ">=1",
+        ">=1",
+        ">=1",
+        ">=2",
+        "N/A",
+        "PARTIAL_CLOSURE_NEW_DYNAMICS_REQUIRED"
+      ],
+      [
+        "APPROACH-D",
+        "0 exact downstream of admitted A/C state",
+        ">=1",
+        ">=1",
+        "N/A",
+        ">=2",
+        "N/A",
+        "PARTIAL_CLOSURE_NEW_DYNAMICS_REQUIRED"
+      ],
+      [
+        "APPROACH-E",
+        "0 on A/C",
+        "finite",
+        "finite",
+        "route-dependent",
+        "finite",
+        "N/A",
+        "PARTIAL_CLOSURE_NEW_DYNAMICS_REQUIRED"
+      ]
+    ],
+    "selected_vector": {
+      "approach": "APPROACH-C",
+      "N_undef": 0,
+      "Delta_dyn_lower_bound": 1,
+      "Delta_IC_lower_bound": 1,
+      "Delta_BC_lower_bound": 1,
+      "Delta_match_lower_bound": 2,
+      "Delta_emp": null,
+      "exact_rank_known": false,
+      "regional_sector_note": "Wall and void are two distinct regional field sectors and require separate or coupled dynamical treatment; their existence is not counted as a proven two-equation or two-initial-function rank."
+    }
+  },
+  "verdict_gates": [
+    {
+      "id": "V0",
+      "question": "Frozen inputs preserved?",
+      "outcome": "PASS",
+      "evidence": "Repository and frozen-result boundary."
+    },
+    {
+      "id": "V1",
+      "question": "Renewed scoped source search complete?",
+      "outcome": "PASS",
+      "evidence": "SEARCH-01, SEARCH-02, SEARCH-05, SEARCH-06, SEARCH-11, SEARCH-14, and SEARCH-19 through SEARCH-23 carry the load-bearing dated query/database/result/exclusion records; the remaining ledger records are supporting scope checks."
+    },
+    {
+      "id": "V2",
+      "question": "Common spacetime/pullback status?",
+      "outcome": "DEFINED_BUT_UNDERDETERMINED",
+      "evidence": "GM formal common-spacetime matching domain; embeddings/maps unspecified."
+    },
+    {
+      "id": "V3",
+      "question": "Perturbed dressed metric status?",
+      "outcome": "DEFINED_BUT_UNDERDETERMINED",
+      "evidence": "ONT-01 and APPROACH-A."
+    },
+    {
+      "id": "V4",
+      "question": "Perturbed wall congruence status?",
+      "outcome": "DEFINED_BUT_UNDERDETERMINED",
+      "evidence": "ONT-02 and SEARCH-02."
+    },
+    {
+      "id": "V5",
+      "question": "Six lapse objects distinguished and determined?",
+      "outcome": "DEFINED_BUT_UNDERDETERMINED",
+      "evidence": "LAPSE-01 through LAPSE-06."
+    },
+    {
+      "id": "V6",
+      "question": "Dust-to-wall boost determined?",
+      "outcome": "DEFINED_BUT_UNDERDETERMINED",
+      "evidence": "APPROACH-B and EQ-08."
+    },
+    {
+      "id": "V7",
+      "question": "Regional GM formal matching-domain relations determined?",
+      "outcome": "DEFINED_BUT_UNDERDETERMINED",
+      "evidence": "ONT-08 through ONT-10 and EQ-10."
+    },
+    {
+      "id": "V8",
+      "question": "Spatial/harmonic transfer determined?",
+      "outcome": "DEFINED_BUT_UNDERDETERMINED",
+      "evidence": "ONT-07 and EQ-12."
+    },
+    {
+      "id": "V9",
+      "question": "General light-cone ontology separated from missing Timescape inputs?",
+      "outcome": "DEFINED_BUT_UNDERDETERMINED",
+      "evidence": "ONT-11 through ONT-13 and EQ-13."
+    },
+    {
+      "id": "V10",
+      "question": "Finite independent-equation rank available?",
+      "outcome": "DEFINED_BUT_UNDERDETERMINED",
+      "evidence": "Finite lower bounds for A/C; exact rank awaits state/gauge choice."
+    },
+    {
+      "id": "V11",
+      "question": "Sufficient IC/BC/matching data specified?",
+      "outcome": "DEFINED_BUT_UNDERDETERMINED",
+      "evidence": "Selected Approach C positive deficits."
+    },
+    {
+      "id": "V12",
+      "question": "Approximations explicit?",
+      "outcome": "PASS",
+      "evidence": "Approach B common-spacetime reading and D locality assumptions are explicit."
+    },
+    {
+      "id": "V13",
+      "question": "Algebra, dimensions, frames, and limits consistent?",
+      "outcome": "PASS",
+      "evidence": "SC-01 through SC-07 and L-01 through L-16."
+    }
+  ],
+  "bridge_relation_matrix": [
+    {
+      "id": "BR-01",
+      "from": "Delta_d,Z",
+      "to": "volume-average delta_m and expansion-gradient variables",
+      "status": "EXACTLY_DERIVED",
+      "limitation": "Frozen harmonic and frame only."
+    },
+    {
+      "id": "BR-02",
+      "from": "bare time t",
+      "to": "wall proper time tau_w",
+      "status": "EXACTLY_DERIVED",
+      "limitation": "Background lapse only."
+    },
+    {
+      "id": "BR-03",
+      "from": "bar-gamma_w",
+      "to": "lapse perturbations",
+      "status": "REQUIRES_NEW_DYNAMICAL_INPUT",
+      "limitation": "Six-object lapse dictionary and gauge required."
+    },
+    {
+      "id": "BR-04",
+      "from": "u_d",
+      "to": "u_w",
+      "status": "REQUIRES_NEW_DYNAMICAL_INPUT",
+      "limitation": "Matching and wall-congruence dynamics."
+    },
+    {
+      "id": "BR-05",
+      "from": "dust density gradient",
+      "to": "wall density gradient",
+      "status": "REQUIRES_NEW_DYNAMICAL_INPUT",
+      "limitation": "Conditional boost and pullback."
+    },
+    {
+      "id": "BR-06",
+      "from": "Z",
+      "to": "wall expansion perturbation",
+      "status": "REQUIRES_NEW_DYNAMICAL_INPUT",
+      "limitation": "Conditional congruence identity; xi_dw not evolved."
+    },
+    {
+      "id": "BR-07",
+      "from": "Z",
+      "to": "local wall peculiar-velocity divergence",
+      "status": "REQUIRES_NEW_DYNAMICAL_INPUT",
+      "limitation": "Additionally needs wall slicing, velocity definition, background subtraction, boost, and local mode map."
+    },
+    {
+      "id": "BR-08",
+      "from": "k_code",
+      "to": "k_local,w and mu",
+      "status": "REQUIRES_NEW_DYNAMICAL_INPUT",
+      "limitation": "Three-dimensional pullback underdetermined."
+    },
+    {
+      "id": "BR-09",
+      "from": "general photon/redshift/Jacobi variables",
+      "to": "Timescape perturbed light cone",
+      "status": "REQUIRES_NEW_DYNAMICAL_INPUT",
+      "limitation": "Metric, tetrads, endpoint velocities, optical data, curvature, and source evolution missing."
+    },
+    {
+      "id": "BR-10",
+      "from": "Candidate A Q_anchor,dressed",
+      "to": "local wall velocity amplitude",
+      "status": "NOT_MAPPABLE_WITH_CURRENT_THEORY",
+      "limitation": "Transfer is parameterizable but unsolved."
+    },
+    {
+      "id": "BR-11",
+      "from": "local matter",
+      "to": "tracer/galaxy",
+      "status": "REQUIRES_EMPIRICAL_ASSUMPTION",
+      "limitation": "Density/velocity bias and selection."
+    },
+    {
+      "id": "BR-12",
+      "from": "frozen outputs",
+      "to": "observational f-sigma-8",
+      "status": "NOT_MAPPABLE_WITH_CURRENT_THEORY",
+      "limitation": "All preceding transfer, smoothing, and survey dependencies."
+    }
+  ],
+  "falsification_suite": [
+    {
+      "id": "F1",
+      "challenge": "Treat W09 metric perturbation as ontologically absent.",
+      "status": "PASS",
+      "result": "Corrected: its tensor tangent is admissible; equations remain missing."
+    },
+    {
+      "id": "F2",
+      "challenge": "Conflate gauge and frame boost.",
+      "status": "PASS",
+      "result": "Rejected."
+    },
+    {
+      "id": "F3",
+      "challenge": "Reverse boost direction silently.",
+      "status": "PASS",
+      "result": "Rejected by signed round trip."
+    },
+    {
+      "id": "F4",
+      "challenge": "Set xi_dw=0.",
+      "status": "PASS",
+      "result": "Exposed as extra assumption."
+    },
+    {
+      "id": "F5",
+      "challenge": "Identify all lapse perturbations.",
+      "status": "PASS",
+      "result": "Six-object audit rejects it."
+    },
+    {
+      "id": "F6",
+      "challenge": "Infer spatial transfer from the time chain.",
+      "status": "PASS",
+      "result": "Rejected."
+    },
+    {
+      "id": "F7",
+      "challenge": "Commute averaging and evolution.",
+      "status": "PASS",
+      "result": "Rejected by Buchert commutator."
+    },
+    {
+      "id": "F8",
+      "challenge": "Hold the GM formal matching domain fixed.",
+      "status": "PASS",
+      "result": "Exposed as a BC."
+    },
+    {
+      "id": "F9",
+      "challenge": "Identify k_code with local wall k.",
+      "status": "PASS",
+      "result": "Rejected."
+    },
+    {
+      "id": "F10",
+      "challenge": "Patch local charts uniquely without matching.",
+      "status": "PASS",
+      "result": "Rejected."
+    },
+    {
+      "id": "F11",
+      "challenge": "Infer perturbed light cone from background distance.",
+      "status": "PASS",
+      "result": "General variables and missing Timescape inputs separated."
+    },
+    {
+      "id": "F12",
+      "challenge": "Replace dynamics with one algebraic identity.",
+      "status": "PASS",
+      "result": "Rejected."
+    },
+    {
+      "id": "F13",
+      "challenge": "Count kinematic identities as dynamics.",
+      "status": "PASS",
+      "result": "Rejected."
+    },
+    {
+      "id": "F14",
+      "challenge": "Initial data without evolution.",
+      "status": "PASS",
+      "result": "Insufficient."
+    },
+    {
+      "id": "F15",
+      "challenge": "Promote FLRW/Fermi/WKB limit.",
+      "status": "PASS",
+      "result": "Rejected outside its domain."
+    },
+    {
+      "id": "F16",
+      "challenge": "Promote Candidate A to observable.",
+      "status": "PASS",
+      "result": "Rejected."
+    },
+    {
+      "id": "F17",
+      "challenge": "Can every disputed object be represented as an admissible current-theory variation with finite equation/data deficits?",
+      "status": "PASS",
+      "result": "Approaches A and C attain N_undef=0 without a new physical object type; the old NOT_DERIVABLE verdict is falsified.",
+      "distinctions": {
+        "current_theory_admissible": [
+          "APPROACH-A",
+          "APPROACH-C"
+        ],
+        "generic_GR_only": [
+          "SRC-BAL13 comparator"
+        ],
+        "mere_symbolic_naming": "rejected"
+      }
+    }
+  ],
+  "limit_checks": [
+    {
+      "id": "L-01",
+      "name": "FLRW",
+      "status": "PASS",
+      "result": "Standard perturbation problem only in the limit."
+    },
+    {
+      "id": "L-02",
+      "name": "gamma_w to one",
+      "status": "PASS",
+      "result": "Background clocks coincide; transfer dynamics remain."
+    },
+    {
+      "id": "L-03",
+      "name": "delta bar-gamma_w to zero",
+      "status": "PASS",
+      "result": "Local lapse perturbations do not all vanish."
+    },
+    {
+      "id": "L-04",
+      "name": "xi_dw to zero",
+      "status": "PASS",
+      "result": "Conditional frame shifts vanish."
+    },
+    {
+      "id": "L-05",
+      "name": "zero metric perturbation",
+      "status": "PASS",
+      "result": "Deletes the target."
+    },
+    {
+      "id": "L-06",
+      "name": "zero peculiar velocity",
+      "status": "PASS",
+      "result": "Deletes Doppler/RSD terms."
+    },
+    {
+      "id": "L-07",
+      "name": "zero wall/void contrast",
+      "status": "PASS",
+      "result": "Homogeneous limit."
+    },
+    {
+      "id": "L-08",
+      "name": "local Fermi",
+      "status": "PASS",
+      "result": "Requires supplied metric/worldline."
+    },
+    {
+      "id": "L-09",
+      "name": "WKB",
+      "status": "PASS",
+      "result": "Requires local mode map."
+    },
+    {
+      "id": "L-10",
+      "name": "distant observer",
+      "status": "PASS",
+      "result": "Downstream approximation."
+    },
+    {
+      "id": "L-11",
+      "name": "zero shear",
+      "status": "PASS",
+      "result": "Does not determine lapse/acceleration."
+    },
+    {
+      "id": "L-12",
+      "name": "zero acceleration",
+      "status": "PASS",
+      "result": "Extra wall-geodesic assumption."
+    },
+    {
+      "id": "L-13",
+      "name": "dust only",
+      "status": "PASS",
+      "result": "Does not close averaging/matching."
+    },
+    {
+      "id": "L-14",
+      "name": "regional wall",
+      "status": "PASS",
+      "result": "Regional fields remain nonlocal averages."
+    },
+    {
+      "id": "L-15",
+      "name": "dimensional",
+      "status": "PASS",
+      "result": "k_code needs frame-specific reciprocal length."
+    },
+    {
+      "id": "L-16",
+      "name": "matched frame and units",
+      "status": "PASS",
+      "result": "Necessary, not sufficient."
+    }
+  ],
+  "symbolic_checks": [
+    {
+      "id": "SC-01",
+      "software": "SymPy 1.14.0",
+      "encoded_identity": "D_w rho - D_d rho = dot(rho) xi; dot(rho)=-Theta(rho+p)",
+      "residual": "(Dcal_w-Dcal_d)+a Theta (1+w) xi = 0",
+      "scope": "First-order normalized density-gradient sign only."
+    },
+    {
+      "id": "SC-02",
+      "software": "SymPy 1.14.0",
+      "encoded_identity": "xi_d_to_w=-xi_w_to_d",
+      "residual": "round trip = 0",
+      "scope": "Direction convention."
+    },
+    {
+      "id": "SC-03",
+      "software": "SymPy 1.14.0",
+      "encoded_identity": "gamma=N_D/N_w",
+      "residual": "delta ln gamma - delta ln N_D + delta ln N_w = 0",
+      "scope": "Does not identify regional and pointwise lapse perturbations."
+    },
+    {
+      "id": "SC-04",
+      "software": "SymPy 1.14.0",
+      "encoded_identity": "Theta'=div(u+xi)",
+      "residual": "Theta'-Theta-D_a xi^a = 0",
+      "scope": "First-order same-spacetime kinematics."
+    },
+    {
+      "id": "SC-05",
+      "software": "SymPy 1.14.0",
+      "encoded_identity": "two shifts as linear operators on one chi_dw",
+      "result": "Jacobian rank 1",
+      "scope": "One missing evolution law and initial function are a lower bound."
+    },
+    {
+      "id": "SC-06",
+      "software": "SymPy 1.14.0",
+      "encoded_identity": "one radial condition on a generic 3x3 Jacobian",
+      "result": "algebraic rank 1, nullity 8 before symmetry/gauge reduction",
+      "scope": "Underdetermination demonstration, not physical degree count."
+    },
+    {
+      "id": "SC-07",
+      "software": "SymPy 1.14.0",
+      "encoded_identity": "Delta_d,k=-k_code^2 delta_m,k in a same-mode ratio",
+      "residual": "0 after constant harmonic cancellation",
+      "scope": "Relative growth only."
+    }
+  ],
+  "formal_conclusions": [
+    {
+      "classification": "VERIFIED_FROM_PRIMARY_SOURCE",
+      "source": "SRC-BAL13; SEARCH-19; SEARCH-20",
+      "assumptions": [
+        "Official arXiv:1310.3124v1 is the audited version."
+      ],
+      "derivation_summary": "Balasin gives an invertible conformally-static map, observer/redshift construction, matter-versus-expansion motion, and dynamics, but not the GM/Buchert wall/void transfer.",
+      "coordinate_dependencies": [
+        "Balasin static and conformally static coordinates"
+      ],
+      "frame_dependencies": [
+        "conformal-Killing expansion observer",
+        "geodesic matter observer"
+      ],
+      "implementation_consequence": "Do not use Balasin as a Timescape transfer implementation.",
+      "observational_consequence": "Its redshift construction is a comparator, not Candidate A's observable bridge.",
+      "evidence_needed_to_change_status": "A primary derivation explicitly connecting its geometry and variables to GM/Timescape wall, void, and perturbation objects."
+    },
+    {
+      "classification": "VERIFIED_FROM_PRIMARY_SOURCE",
+      "source": "SEARCH-01, SEARCH-02, SEARCH-05, SEARCH-06, SEARCH-11, SEARCH-14, SEARCH-19 through SEARCH-23, and primary_source_inventory",
+      "assumptions": [
+        "Bounded accessible-published-primary-source scope."
+      ],
+      "derivation_summary": "The reconciled search includes Balasin, its citation chain, wall tetrads, spatial pullbacks, and perturbed optical propagation; no relevant GM wall-transfer closure was found.",
+      "coordinate_dependencies": [],
+      "frame_dependencies": [],
+      "implementation_consequence": "V1 may return to PASS.",
+      "observational_consequence": "No new observable mapping is supplied by the renewed search.",
+      "evidence_needed_to_change_status": "A newly identified primary source within scope or correction to a recorded access result."
+    },
+    {
+      "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "source": "SRC-W09 Eqs. (22)-(28); ONT-01; APPROACH-A",
+      "assumptions": [
+        "A perturbation is a tangent to the explicit four-dimensional background metric.",
+        "No gauge or source law is silently chosen."
+      ],
+      "derivation_summary": "delta g_ab^dressed is kinematically defined; lapse and shift are components, while dynamics, source interpretation, initial data, and GM matching are missing.",
+      "coordinate_dependencies": [
+        "W09 dressed background coordinates",
+        "future gauge"
+      ],
+      "frame_dependencies": [
+        "background wall congruence",
+        "future perturbed wall congruence"
+      ],
+      "implementation_consequence": "Approach A has N_undef=0 and a finite positive deficit, but no runtime is justified.",
+      "observational_consequence": "No gravitational, Doppler, or lensing perturbation is yet calculable.",
+      "evidence_needed_to_change_status": "Perturbative field/source equations, constraints, gauge, data, and matching."
+    },
+    {
+      "classification": "UNRESOLVED_EXTERNAL_DEPENDENCY",
+      "source": "SRC-GM p. 22; SRC-DBE; SRC-BDE; APPROACH-B",
+      "assumptions": [
+        "GM's formal single-spacetime matching is used as the eventwise comparison arena.",
+        "First order.",
+        "xi_dw^a=D^a chi_dw."
+      ],
+      "derivation_summary": "The density and expansion identities are fixed operators on one boost scalar but do not determine it. N_undef is bifurcated: 0 if GM's formal matching domain is accepted as the eventwise arena, and >=1 if a distinct eventwise embedding must first be introduced. At least one dynamics block, one initial function, and one matching block remain.",
+      "coordinate_dependencies": [
+        "declared common event map",
+        "common spatial derivative"
+      ],
+      "frame_dependencies": [
+        "u_d",
+        "u_w"
+      ],
+      "implementation_consequence": "Approach B remains unselected and bifurcated, not a solved transfer.",
+      "observational_consequence": "Z is not thereby identified with a wall peculiar-velocity divergence.",
+      "evidence_needed_to_change_status": "A sourced wall-congruence/boost equation, initial data, and explicit matching."
+    },
+    {
+      "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "source": "SRC-GM p. 22 and Eqs. (5.1)-(5.7); SRC-W09 Eqs. (6)-(28); APPROACH-C",
+      "assumptions": [
+        "Regional metrics/dust and the formal matching domain are treated as current-theory objects.",
+        "No junction law is silently selected."
+      ],
+      "derivation_summary": "Regional metric/dust perturbations and the GM formal wall-void matching-domain embedding/displacement are admissible variations, yielding N_undef=0 with conservative lower bounds Delta_dyn>=1, Delta_IC>=1, Delta_BC>=1, Delta_match>=2. Wall and void are distinct sectors, but their separate existence is not a proved equation rank.",
+      "coordinate_dependencies": [
+        "regional charts",
+        "future GM formal matching-domain embedding and pullback"
+      ],
+      "frame_dependencies": [
+        "wall and void dust congruences",
+        "formal matching-domain normal after parameterization"
+      ],
+      "implementation_consequence": "Approach C is the selected finite partial route for the next derivation phase.",
+      "observational_consequence": "No local wall or light-cone observable exists until the deficits are closed.",
+      "evidence_needed_to_change_status": "A gauge-reduced regional state establishing the independent equation/initial-data rank, plus regional evolution/constraints, boundary data, and geometry plus matter/averaging matching."
+    },
+    {
+      "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "source": "ONT-11 through ONT-13; SRC-CL11; SRC-BD11",
+      "assumptions": [
+        "General first-order photon and optical theory.",
+        "Timescape-specific inputs are not inferred."
+      ],
+      "derivation_summary": "Photon wavevector, redshift, null propagation, Jacobi map, and optical variables are defined if dependencies are known; the missing items are the Timescape perturbed metric, tetrads, endpoint velocities, curvature, optical data, and source evolution.",
+      "coordinate_dependencies": [
+        "chosen perturbed light-cone coordinates"
+      ],
+      "frame_dependencies": [
+        "source and observer tetrads"
+      ],
+      "implementation_consequence": "Do not classify the entire light-cone concept as undefined; do not implement until its Timescape inputs are solved.",
+      "observational_consequence": "No perturbed redshift or volume distortion is available.",
+      "evidence_needed_to_change_status": "A solved Timescape perturbed metric and complete endpoint/optical input set."
+    },
+    {
+      "classification": "SYMBOLICALLY_VERIFIED",
+      "source": "SC-03 and LAPSE-01 through LAPSE-06",
+      "assumptions": [
+        "The pointwise local gamma(tau,x) is not a current-theory field and is introduced only conditionally in a declared common 3+1 construction.",
+        "gamma=N_D/N_w only in that declared common 3+1 construction.",
+        "First order."
+      ],
+      "derivation_summary": "LAPSE-01 is NOT_DEFINED_IN_CURRENT_THEORY because current Timescape supplies bar-gamma_w rather than a pointwise local clock-ratio field. If a local gamma=N_D/N_w is introduced, delta ln gamma=delta ln N_D-delta ln N_w; background, regional-variation, pointwise, and two ADM lapse perturbations remain distinct.",
+      "coordinate_dependencies": [
+        "chosen time slicing"
+      ],
+      "frame_dependencies": [
+        "reference and wall normals"
+      ],
+      "implementation_consequence": "No pair of lapse variables may be identified without a derivation.",
+      "observational_consequence": "Background gamma_w does not supply local gravitational-redshift terms.",
+      "evidence_needed_to_change_status": "A derived common-spacetime lapse dictionary and perturbation dynamics."
+    },
+    {
+      "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "source": "BR-06; EQ-06",
+      "assumptions": [
+        "Declared same-spacetime event map.",
+        "First order."
+      ],
+      "derivation_summary": "Z can enter a conditional relation to a wall expansion perturbation only after the dust-to-wall boost is known.",
+      "coordinate_dependencies": [
+        "common spatial derivative"
+      ],
+      "frame_dependencies": [
+        "dust and wall congruences"
+      ],
+      "implementation_consequence": "Keep wall expansion transfer separate from peculiar-velocity transfer.",
+      "observational_consequence": "No RSD velocity is identified.",
+      "evidence_needed_to_change_status": "Solved xi_dw and a mapping from the GM expansion-gradient coefficient to the local wall expansion scalar."
+    },
+    {
+      "classification": "UNRESOLVED_EXTERNAL_DEPENDENCY",
+      "source": "BR-07; SEARCH-07; SEARCH-09; SEARCH-22",
+      "assumptions": [
+        "No zero velocity bias or spatial map is assumed."
+      ],
+      "derivation_summary": "A local wall peculiar-velocity divergence additionally requires wall slicing, a velocity definition, background subtraction, boost dynamics, and a spatial/mode map.",
+      "coordinate_dependencies": [
+        "wall spatial slicing",
+        "local mode map"
+      ],
+      "frame_dependencies": [
+        "wall observer",
+        "dust observer",
+        "future tracer observer"
+      ],
+      "implementation_consequence": "No wall-velocity API is permitted.",
+      "observational_consequence": "Z is not the survey RSD velocity divergence.",
+      "evidence_needed_to_change_status": "A complete local velocity and spatial-transfer derivation."
+    },
+    {
+      "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "source": "APPROACH-E; F17",
+      "assumptions": [
+        "Declared route universe A-D plus finite_parameterization_challenge.",
+        "No completeness or cut minimality claim."
+      ],
+      "derivation_summary": "A and C survive the admissibility challenge with N_undef=0 and finite positive deficits; therefore the old universal NOT_DERIVABLE claim is false.",
+      "coordinate_dependencies": [
+        "route-specific maps remain underdetermined"
+      ],
+      "frame_dependencies": [
+        "route-specific wall congruence remains underdetermined"
+      ],
+      "implementation_consequence": "Select PARTIAL, not NOT_DERIVABLE.",
+      "observational_consequence": "Partial ontology closure does not create an observable.",
+      "evidence_needed_to_change_status": "Show that every surviving route necessarily introduces a genuinely new physical object type, or close all selected-route deficits."
+    },
+    {
+      "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "source": "APPROACH-C; closure_rank_matrix; V0-V13; F17",
+      "assumptions": [
+        "Current-theory admissibility rule.",
+        "Conservative finite lower bounds.",
+        "No silent junction/gauge choice."
+      ],
+      "derivation_summary": "Approach C has N_undef=0 and finite positive deficits, satisfying the decisive rule for PARTIAL_CLOSURE_NEW_DYNAMICS_REQUIRED.",
+      "coordinate_dependencies": [
+        "regional charts",
+        "underdetermined GM formal matching-domain embedding and spatial pullback"
+      ],
+      "frame_dependencies": [
+        "regional wall and void dust frames",
+        "underdetermined local wall frame"
+      ],
+      "implementation_consequence": "Only a next equation-level regional wall/void and GM formal matching-domain dynamics derivation is permitted.",
+      "observational_consequence": "Candidate A remains non-observational; compressed f-sigma-8 points remain unusable.",
+      "evidence_needed_to_change_status": "For exact/conditional closure, solve and verify the missing equations/data; for NOT_DERIVABLE, invalidate every N_undef=0 route under the admissibility rule."
+    },
+    {
+      "classification": "NOT_JUSTIFIED",
+      "source": "V2-V11 and BR-03 through BR-12",
+      "assumptions": [],
+      "derivation_summary": "No metric, transfer, spatial, light-cone, RSD, sigma_8, likelihood, or observational implementation follows from a partial finite-state result.",
+      "coordinate_dependencies": [
+        "unsolved wall and light-cone mappings"
+      ],
+      "frame_dependencies": [
+        "unsolved wall, source, observer, and tracer frames"
+      ],
+      "implementation_consequence": "Keep scientific runtime unchanged.",
+      "observational_consequence": "Do not reinterpret Q_anchor as observational f-sigma-8.",
+      "evidence_needed_to_change_status": "A complete independently validated transfer and observable derivation."
+    }
+  ],
+  "overall_verdict": {
+    "status": "PARTIAL_CLOSURE_NEW_DYNAMICS_REQUIRED",
+    "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+    "source": "APPROACH-C, closure_rank_matrix, V0-V13, and F17",
+    "assumptions": [
+      "The explicit regional metrics/dust and formal GM matching domain are current-theory objects.",
+      "Their perturbations, embeddings, and displacements are admissible variations.",
+      "No junction rule, gauge, or dynamics is silently supplied."
+    ],
+    "derivation_summary": "Approach C reaches N_undef=0 with finite positive conservative lower-bound deficits (0,>=1,>=1,>=1,>=2,N/A); F17 therefore falsifies the previous NOT_DERIVABLE verdict. Wall and void remain distinct field sectors without a pre-claimed two-equation rank.",
+    "coordinate_dependencies": [
+      "regional coordinates",
+      "unsolved GM formal matching-domain embedding",
+      "unsolved three-dimensional pullback"
+    ],
+    "frame_dependencies": [
+      "regional dust congruences",
+      "unsolved local wall congruence"
+    ],
+    "implementation_consequence": "Proceed only to an equation-level regional wall/void perturbation and GM formal matching-domain dynamics phase.",
+    "observational_consequence": "No observational mapping, f-sigma-8 use, or survey comparison is authorized.",
+    "evidence_needed_to_change_status": "Close all finite deficits for a stronger verdict, or demonstrate that every N_undef=0 route necessarily adds a new physical object type for the stronger no-go.",
+    "tie_breaker_applied": "At least one viable route has N_undef=0 and finite positive deficits, so PARTIAL is mandatory under the stated rule."
+  },
+  "minimum_new_input": {
+    "selected_route": "APPROACH-C",
+    "deficit_vector": {
+      "N_undef": 0,
+      "Delta_dyn_lower_bound": 1,
+      "Delta_IC_lower_bound": 1,
+      "Delta_BC_lower_bound": 1,
+      "Delta_match_lower_bound": 2,
+      "Delta_emp": null
+    },
+    "regional_sector_note": "Wall and void are two distinct regional field sectors requiring separate or coupled dynamical treatment; the exact gauge-reduced equation and initial-function rank is not yet proved.",
+    "ordered_requirements": [
+      "At least one regional perturbation evolution/constraint block with gauge; determine whether wall and void dynamics are separate or coupled.",
+      "At least one regional initial-data block; derive the sector-specific independent data count.",
+      "GM formal wall-void matching-domain embedding/displacement boundary data.",
+      "Geometry matching conditions.",
+      "Matter/averaging compatibility conditions.",
+      "Relations from regional averages/deformations to frozen GM Delta_d and Z.",
+      "Derived wall tetrad and three-dimensional spatial/mode pullback only after upstream closure."
+    ],
+    "exact_rank_known": false,
+    "not_sufficient": [
+      "background gamma_w",
+      "background radial-null matching",
+      "fixed GM formal matching domain",
+      "xi_dw=0",
+      "generic Fermi coordinates",
+      "Balasin comparator",
+      "FLRW limit"
+    ]
+  },
+  "implementation_consequence": {
+    "status": "NO_GO_FOR_SCIENTIFIC_RUNTIME_IMPLEMENTATION",
+    "permitted_now": [
+      "report-only equation derivation",
+      "source audit",
+      "state/gauge specification",
+      "independent symbolic checks"
+    ],
+    "not_permitted_now": [
+      "perturbed metric module",
+      "transfer solver",
+      "wall velocity API",
+      "local wavevector conversion",
+      "light-cone or RSD runtime",
+      "observational interpretation"
+    ],
+    "runtime_unchanged": true
+  },
+  "observational_consequence": {
+    "candidate_a_status": "Externally anchored conditional density-growth diagnostic only.",
+    "q_anchor_bare": "not observational f-sigma-8",
+    "q_anchor_dressed": "not observational f-sigma-8",
+    "sigma8_integral_computed": false,
+    "rsd_mapping_derived": false,
+    "survey_points_reusable": false,
+    "uncertainty_rule": "Missing definitions, conventions, and dynamics are not statistical error bars."
+  },
+  "permitted_next_phase": {
+    "formal_name": "Phase 1E-D — Regional wall/void perturbation and GM formal matching-domain dynamics",
+    "selected_route": "APPROACH-C",
+    "scope": [
+      "Define the regional wall and void perturbation state and gauge.",
+      "Derive or source independent evolution and constraint blocks.",
+      "Parameterize the existing GM formal wall-void matching-domain embedding and displacement without identifying it with W09 finite infinity.",
+      "Derive geometry and matter/averaging matching alternatives.",
+      "Recompute the exact equation, IC, BC, and matching rank.",
+      "Stop before numerical and observational implementation."
+    ],
+    "entry_gate": "Human approval for every new physical closure or junction assumption.",
+    "exit_gate": "Closed or explicitly conditional transfer state with independently verified equations.",
+    "forbidden_interpretation": "The phase does not retroactively make Candidate A observational."
+  },
+  "forbidden_implementations": [
+    "perturbed dressed metric runtime",
+    "dust-to-wall transfer solver",
+    "wall velocity API",
+    "k_code-to-wall/dressed/observational Fourier conversion",
+    "Kaiser or RSD API",
+    "observational f-sigma-8 API",
+    "power spectrum or transfer function",
+    "sigma_R or sigma_8 integral",
+    "bias or AP adapter",
+    "dataset, covariance, likelihood, fit, or inference",
+    "Candidate A or D3 runtime change",
+    "silent FLRW, zero-boost, zero-lapse, fixed-GM-matching-domain, deterministic-bias, or zero-velocity-bias assumption"
+  ],
+  "repository_preservation": {
+    "allowed_created_paths": [
+      "reports/phase1e_c_perturbed_dressed_geometry_transfer_closure.md",
+      "reports/phase1e_c_perturbed_dressed_geometry_transfer_inventory.json"
+    ],
+    "pre_existing_tracked_files_modified": [],
+    "staged_paths": [],
+    "commits_created": 0,
+    "tags_created_moved_or_deleted": 0,
+    "refs_created_moved_or_deleted": 0,
+    "pushes": 0,
+    "merges": 0,
+    "pull_requests": 0,
+    "author_contacts": 0,
+    "source_code_changes": 0,
+    "test_changes": 0,
+    "upstream_changes": 0,
+    "test_environments": [
+      {
+        "python": "3.14.3",
+        "numpy": "2.5.1",
+        "scipy": "1.18.0",
+        "pytest": "9.1.1",
+        "pluggy": "1.6.0",
+        "result": "379 passed, 0 failed, 0 skipped, 0 xfailed, 0 warnings in 14.37 s"
+      },
+      {
+        "python": "3.11.9",
+        "numpy": "2.4.6",
+        "scipy": "1.17.1",
+        "pytest": "9.1.1",
+        "pluggy": "1.6.0",
+        "result": "379 passed, 0 failed, 0 skipped, 0 xfailed, 0 warnings in 15.91 s"
+      }
+    ],
+    "same_tracked_source_tree": "8634f14a35c22983413672075fa7f37f03fd663d",
+    "final_validation_state": "PASS: structural, semantic, two-environment test, and repository-preservation checks completed"
+  }
+}
