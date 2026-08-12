@@ -1,0 +1,2209 @@
+{
+  "schema_note": {
+    "title": "Phase 1E-E transfer realization selection inventory",
+    "schema_version": "1.0.0",
+    "determinism": "UTF-8 JSON; arrays ordered by stable identifiers; unknown ranks and deficits use explicit tokens rather than zero.",
+    "formal_conclusion_rule": "Each object under formal_conclusions has exactly the nine mandatory fields.",
+    "delivery_repair": "Corrected inventory regenerated after stale-download SHA mismatch; audited corrections are applied in this file."
+  },
+  "date_utc": "2026-07-30T21:24:00Z",
+  "repository_checkpoint": {
+    "repository": "ing-mattioni/timescape-fsigma8",
+    "required_branch": "phase-1e-e-transfer-realization-selection",
+    "declared_branch_state": "clean, local-only, unpushed, no upstream",
+    "required_starting_head": "2fd3ed2006821bc162fb740bd773f2d0b6e5e0b4",
+    "declared_main": "2fd3ed2006821bc162fb740bd773f2d0b6e5e0b4",
+    "declared_origin_main": "2fd3ed2006821bc162fb740bd773f2d0b6e5e0b4",
+    "phase1e_d_tag": "phase-1e-d-regional-matching-dynamics-v1",
+    "pinned_upstream_commit": "590c6fd5332acb15f5683ebf392a0d7ce54983c5",
+    "pinned_notebook_sha256": "86d2534db9e9b3169835e4ce223ee8f3bff6d03b47e5677d3937fed4adafe55a",
+    "last_reported_tests": {
+      "python_3_14_3": "379 passed",
+      "python_3_11_9": "379 passed"
+    },
+    "verification_status": "DECLARED_FROZEN_CHECKPOINT_NOT_GIT_VERIFIED_IN_ARTIFACT_SANDBOX",
+    "verification_limitation": "The artifact workspace contains supplied reports but is not the user PC Git checkout; branch, worktree, refs, tags and test environments were not independently inspected here."
+  },
+  "frozen_result_boundary": [
+    {
+      "id": "FROZEN-01",
+      "statement": "For each regional exact FLRW dust geometry and intrinsic nonzero scalar mode, X_r=(Delta_r,Z_r) has rank two with dDelta_r/dtau_r=-Z_r and dZ_r/dtau_r=-2H_r Z_r-4piG rho_r Delta_r.",
+      "classification": "VERIFIED_FROM_PRIMARY_SOURCE"
+    },
+    {
+      "id": "FROZEN-02",
+      "statement": "The wall-plus-void intrinsic bulk rank is four; the metric 6-2-2 count is only a heuristic cross-check.",
+      "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS"
+    },
+    {
+      "id": "FROZEN-03",
+      "statement": "k_code, k_w, k_v, carrier, dressed and survey wavenumbers remain distinct.",
+      "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS"
+    },
+    {
+      "id": "FROZEN-04",
+      "statement": "The GM formal zero-measure domain, finite infinity, radial-null matching and a 3D spatial carrier remain distinct.",
+      "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS"
+    },
+    {
+      "id": "FROZEN-05",
+      "statement": "Regional dust velocity, wall velocity, tracer velocity, CGI Z and observational velocity divergence remain distinct.",
+      "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS"
+    },
+    {
+      "id": "FROZEN-06",
+      "statement": "Candidate A remains external, conditional, clean-only, theoretical and non-predictive in normalization.",
+      "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS"
+    },
+    {
+      "id": "FROZEN-07",
+      "statement": "D3 remains RESOLVED_DERIVED_4_10 with explicit derived_4_10 and printed_4_15 branches and no default.",
+      "classification": "SYMBOLICALLY_VERIFIED"
+    },
+    {
+      "id": "FROZEN-08",
+      "statement": "Compatibility retains C_Delta, C_Z and C_eff; C_P is separate.",
+      "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS"
+    },
+    {
+      "id": "FROZEN-09",
+      "statement": "Component count is not rank; matching rank remains not countable before a concrete transfer.",
+      "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS"
+    },
+    {
+      "id": "FROZEN-10",
+      "statement": "T_r=L_D P_r G_r is only a formal pattern until spaces, domains, maps, kernels and data are defined.",
+      "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS"
+    },
+    {
+      "id": "FROZEN-11",
+      "statement": "Inverse uniqueness and nonuniqueness remain unresolved before a concrete admissible transfer is selected.",
+      "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS"
+    },
+    {
+      "id": "FROZEN-12",
+      "statement": "Current Timescape machinery does not supply the complete common carrier and regional-to-GM transfer.",
+      "classification": "VERIFIED_FROM_PRIMARY_SOURCE"
+    }
+  ],
+  "phase_scope": {
+    "activity": "REPORT_ONLY_AUTHORING",
+    "scientific_runtime": "FORBIDDEN",
+    "observational_bridge": "FORBIDDEN",
+    "repository_integration": "NOT_PERFORMED_IN_SANDBOX"
+  },
+  "scientific_question": "Select and specify the least unsupported common-carrier and regional-to-GM transfer architecture while preserving all frozen Timescape boundaries.",
+  "vocabularies": {
+    "evidence_classification": [
+      "VERIFIED_FROM_PRIMARY_SOURCE",
+      "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "SYMBOLICALLY_VERIFIED",
+      "NUMERICALLY_CORROBORATED",
+      "CONVENTION_DEPENDENT",
+      "REQUIRES_AUTHOR_INPUT",
+      "UNRESOLVED_EXTERNAL_DEPENDENCY",
+      "NOT_APPLICABLE",
+      "NOT_JUSTIFIED"
+    ],
+    "framework_classification": [
+      "CURRENT_TIMESCAPE_MACHINERY",
+      "COMPATIBLE_IMPORTED_DYNAMICS",
+      "OPTIONAL_MODEL_EXTENSION",
+      "INAPPLICABLE"
+    ],
+    "definition_state": [
+      "NOT_DEFINED_IN_CURRENT_THEORY",
+      "BACKGROUND_DEFINED",
+      "KINEMATICALLY_DEFINED",
+      "DERIVED_IF_CURRENT_THEORY_DEPENDENCIES_KNOWN",
+      "DYNAMICALLY_DETERMINED",
+      "AMBIGUOUS_PENDING_SOURCE_AUDIT"
+    ],
+    "gate_verdicts": [
+      "PASS",
+      "PASS_AT_CLASS_LEVEL_ONLY",
+      "PASS_AT_TEMPLATE_LEVEL",
+      "PASS_AT_POLICY_LEVEL",
+      "PASS_LOCAL_ONLY",
+      "PASS_UNDER_EXPLICIT_ASSUMPTIONS",
+      "PASS_UNDER_SELECTED_BRANCH",
+      "PASS_UNDER_MEAN_ZERO_ASSUMPTIONS",
+      "PASS_UNDER_LAGRANGIAN_RESTRICTION",
+      "PASS_UNDER_SELECTED_PARTITION_LAW",
+      "PASS_UNDER_HOMOGENEOUS_CLOCK_RESTRICTION",
+      "DEFINED_BUT_UNDERDETERMINED",
+      "FAIL_NOT_DEFINED",
+      "FAIL_NOT_ESTABLISHED",
+      "FAIL_NONINJECTIVE",
+      "FAIL_PROPAGATION_NOT_CLOSED",
+      "FAIL_DYNAMICS_AND_DATA_MISSING",
+      "PARTIAL_CONDITIONAL_ONLY",
+      "PARTIAL_REDUCED_FORWARD_ONLY",
+      "SENSITIVITY_REQUIRED",
+      "NOT_APPLICABLE",
+      "NOT_APPLICABLE_GLOBALLY",
+      "NOT_YET_ASSESSED"
+    ],
+    "deficit_tokens": [
+      "EXACT",
+      "LOWER_BOUND",
+      "BIFURCATED",
+      "NOT_COUNTABLE_BEFORE_BRANCH_SELECTION",
+      "NOT_COUNTABLE_BEFORE_CONCRETE_TRANSFER",
+      "NOT_COUNTABLE_BEFORE_CONCRETE_OPERATOR_LINEARIZATION",
+      "NOT_APPLICABLE"
+    ],
+    "selection_status": [
+      "PRIMARY_SELECTED_CONDITIONALLY",
+      "MANDATORY_SECONDARY_COMPARATOR",
+      "REDUCED_TARGET_COMPARATOR",
+      "LOCAL_DIAGNOSTIC_COMPARATOR",
+      "OPTIONAL_MODEL_EXTENSION",
+      "REJECTED",
+      "DEMOTED_TO_REPRESENTATION_LAYER"
+    ]
+  },
+  "evidence_policy": {
+    "one_evidence_classification_per_formal_conclusion": true,
+    "generic_GR_or_functional_analysis_is_not_current_timescape": true,
+    "unknown_rank_as_zero_forbidden": true
+  },
+  "primary_source_inventory": [
+    {
+      "id": "SRC-1E-D-CLOSURE",
+      "path": "/mnt/data/phase1e_d_regional_matching_dynamics_closure.md",
+      "role": "frozen regional dynamics and matching closure",
+      "status": "AVAILABLE_LOCAL_COPY"
+    },
+    {
+      "id": "SRC-1E-D-INVENTORY",
+      "path": "/mnt/data/phase1e_d_regional_matching_dynamics_inventory(1).json",
+      "role": "machine-readable frozen inventory",
+      "status": "AVAILABLE_LOCAL_COPY"
+    },
+    {
+      "id": "SRC-1E-D-AUDIT",
+      "path": "/mnt/data/phase1e_d_regional_matching_dynamics_adversarial_audit.md",
+      "role": "independent adversarial audit",
+      "status": "AVAILABLE_LOCAL_COPY"
+    },
+    {
+      "id": "SRC-1E-C-CLOSURE",
+      "path": "/mnt/data/phase1e_c_perturbed_dressed_geometry_transfer_closure(1).md",
+      "role": "perturbed dressed geometry transfer boundary",
+      "status": "AVAILABLE_LOCAL_COPY"
+    },
+    {
+      "id": "SRC-1E-C-INVENTORY",
+      "path": "/mnt/data/phase1e_c_perturbed_dressed_geometry_transfer_inventory(1).json",
+      "role": "Phase 1E-C inventory",
+      "status": "AVAILABLE_LOCAL_COPY"
+    },
+    {
+      "id": "SRC-1E-B-DERIVATION",
+      "path": "/mnt/data/phase1e_b_dressed_lightcone_velocity_derivation(1).md",
+      "role": "dressed light-cone velocity boundary",
+      "status": "AVAILABLE_LOCAL_COPY"
+    },
+    {
+      "id": "SRC-1E-A-AUDIT",
+      "path": "/mnt/data/phase1e_a_dressed_observable_bridge_audit(1).md",
+      "role": "dressed observable bridge boundary",
+      "status": "AVAILABLE_LOCAL_COPY"
+    },
+    {
+      "id": "SRC-P0-P8-CHAT",
+      "path": "conversation scientific definition P0-P8",
+      "role": "Phase 1E-E architecture design and selection",
+      "status": "AVAILABLE_IN_CURRENT_CONVERSATION"
+    },
+    {
+      "id": "SRC-P2-EXACT-LEDGER",
+      "path": "exact P2 decision ledger",
+      "role": "exact historical wording",
+      "status": "UNRESOLVED_EXTERNAL_DEPENDENCY"
+    }
+  ],
+  "distinction_ledger": {
+    "selection_vs_specification": "distinct",
+    "specification_vs_closure": "distinct",
+    "closure_vs_implementation": "distinct",
+    "forward_vs_inverse": "distinct",
+    "injectivity_vs_stability": "distinct",
+    "boundary_vs_zero_mode": "distinct",
+    "definition_vs_dynamics": "distinct"
+  },
+  "realization_meta_model": {
+    "formula": "R=(C,F,O,S,T,D,B,K)",
+    "layers": [
+      "carrier",
+      "formulation",
+      "operator",
+      "scale",
+      "target",
+      "dynamics",
+      "data",
+      "compatibility"
+    ]
+  },
+  "common_realization_record_schema": [
+    "id",
+    "title",
+    "parent_families",
+    "scientific_role",
+    "target_scope",
+    "framework_status",
+    "selection_status",
+    "carrier_geometry",
+    "regional_maps",
+    "clock_branch",
+    "functional_spaces",
+    "operator_factorization",
+    "zero_mode_policy",
+    "dynamical_inputs",
+    "initial_data",
+    "boundary_or_interface_data",
+    "compatibility_system",
+    "constraint_system",
+    "forward_status",
+    "inverse_status",
+    "approximation_status",
+    "information_loss_status",
+    "gate_results",
+    "deficit_vector",
+    "falsification_conditions",
+    "implementation_readiness"
+  ],
+  "common_object_dictionary": [
+    {
+      "id": "OBJ-REG-STATE-r",
+      "object": "X_r=(Delta_r,Z_r)",
+      "framework": "COMPATIBLE_IMPORTED_DYNAMICS",
+      "state": "DYNAMICALLY_DETERMINED",
+      "notes": "rank-two regional nonzero-mode scalar state"
+    },
+    {
+      "id": "OBJ-REG-TIME-r",
+      "object": "tau_r",
+      "framework": "CURRENT_TIMESCAPE_MACHINERY",
+      "state": "BACKGROUND_DEFINED",
+      "notes": "regional proper time"
+    },
+    {
+      "id": "OBJ-REG-LAP-r",
+      "object": "-D_r^2",
+      "framework": "COMPATIBLE_IMPORTED_DYNAMICS",
+      "state": "KINEMATICALLY_DEFINED",
+      "notes": "domain and zero mode remain branch-dependent"
+    },
+    {
+      "id": "OBJ-CAR-MAN",
+      "object": "Sigma_C",
+      "framework": "COMPATIBLE_IMPORTED_DYNAMICS",
+      "state": "KINEMATICALLY_DEFINED",
+      "notes": "S1 selects only a compact connected orientable boundaryless class"
+    },
+    {
+      "id": "OBJ-CAR-GEO",
+      "object": "h_C",
+      "framework": "OPTIONAL_MODEL_EXTENSION",
+      "state": "KINEMATICALLY_DEFINED",
+      "notes": "convex blend template; exact extensions absent"
+    },
+    {
+      "id": "OBJ-CAR-MEASURE",
+      "object": "dmu_C",
+      "framework": "COMPATIBLE_IMPORTED_DYNAMICS",
+      "state": "DERIVED_IF_CURRENT_THEORY_DEPENDENCIES_KNOWN",
+      "notes": "derived from h_C"
+    },
+    {
+      "id": "OBJ-CAR-TIME",
+      "object": "t_D",
+      "framework": "CURRENT_TIMESCAPE_MACHINERY",
+      "state": "BACKGROUND_DEFINED",
+      "notes": "selected S1 carrier time"
+    },
+    {
+      "id": "OBJ-MAP-EMB-r",
+      "object": "iota_r",
+      "framework": "COMPATIBLE_IMPORTED_DYNAMICS",
+      "state": "NOT_DEFINED_IN_CURRENT_THEORY",
+      "notes": "exact embeddings absent"
+    },
+    {
+      "id": "OBJ-MAP-CLOCK-r",
+      "object": "tau_r(t_D)",
+      "framework": "CURRENT_TIMESCAPE_MACHINERY",
+      "state": "BACKGROUND_DEFINED",
+      "notes": "homogeneous reparameterization only"
+    },
+    {
+      "id": "OBJ-PART-SMOOTH-r",
+      "object": "chi_r",
+      "framework": "OPTIONAL_MODEL_EXTENSION",
+      "state": "KINEMATICALLY_DEFINED",
+      "notes": "smooth Lagrangian-fixed partition of unity"
+    },
+    {
+      "id": "OBJ-PART-IFACE",
+      "object": "Gamma",
+      "framework": "OPTIONAL_MODEL_EXTENSION",
+      "state": "KINEMATICALLY_DEFINED",
+      "notes": "H1 comparator only"
+    },
+    {
+      "id": "OBJ-OP-GREEN-r",
+      "object": "G_r",
+      "framework": "COMPATIBLE_IMPORTED_DYNAMICS",
+      "state": "NOT_DEFINED_IN_CURRENT_THEORY",
+      "notes": "regional elliptic inverse remains branch-dependent until topology, boundary/decay conditions, full kernel and operator domains are selected"
+    },
+    {
+      "id": "OBJ-OP-LAP-C",
+      "object": "mathcal L_C",
+      "framework": "COMPATIBLE_IMPORTED_DYNAMICS",
+      "state": "NOT_DEFINED_IN_CURRENT_THEORY",
+      "notes": "normalized carrier scalarization; -D_C^2 is only a conditional compact-boundaryless subbranch after sign, dimensions, scale and metric convention are fixed"
+    },
+    {
+      "id": "OBJ-OP-Q-C",
+      "object": "Q_C",
+      "framework": "COMPATIBLE_IMPORTED_DYNAMICS",
+      "state": "KINEMATICALLY_DEFINED",
+      "notes": "optional output mean-zero range check; redundant after a compact-boundaryless Laplacian scalarization whose range is already mean-zero"
+    },
+    {
+      "id": "OBJ-OP-T-EFF",
+      "object": "T_eff",
+      "framework": "COMPATIBLE_IMPORTED_DYNAMICS",
+      "state": "NOT_DEFINED_IN_CURRENT_THEORY",
+      "notes": "primary unresolved S1 block"
+    },
+    {
+      "id": "OBJ-COMP-DELTA",
+      "object": "C_Delta",
+      "framework": "COMPATIBLE_IMPORTED_DYNAMICS",
+      "state": "DERIVED_IF_CURRENT_THEORY_DEPENDENCIES_KNOWN",
+      "notes": "density mismatch"
+    },
+    {
+      "id": "OBJ-COMP-Z",
+      "object": "C_Z",
+      "framework": "COMPATIBLE_IMPORTED_DYNAMICS",
+      "state": "DERIVED_IF_CURRENT_THEORY_DEPENDENCIES_KNOWN",
+      "notes": "expansion mismatch"
+    },
+    {
+      "id": "OBJ-COMP-EFF",
+      "object": "C_eff",
+      "framework": "COMPATIBLE_IMPORTED_DYNAMICS",
+      "state": "DERIVED_IF_CURRENT_THEORY_DEPENDENCIES_KNOWN",
+      "notes": "load-bearing effective-density mismatch"
+    },
+    {
+      "id": "OBJ-COMP-P",
+      "object": "C_P=mathscr W-3 mathscr Q",
+      "framework": "CURRENT_TIMESCAPE_MACHINERY",
+      "state": "KINEMATICALLY_DEFINED",
+      "notes": "inherited clean-comoving target closure C_P(t)=0; regional reconstruction/evaluation remains missing"
+    }
+  ],
+  "geometry_dictionary": {
+    "S1": {
+      "carrier_class": "COMPACT_CONNECTED_ORIENTABLE_BOUNDARYLESS_REFERENCE_3_MANIFOLD",
+      "exact_topology": "UNSELECTED",
+      "regional_cover": "U_w union U_v = Sigma_C",
+      "partition": "smooth partition of unity",
+      "metric_template": "h_C=chi_w htilde_w+chi_v htilde_v",
+      "volume_constraint": "K_f=0",
+      "outer_boundary": "NOT_APPLICABLE"
+    },
+    "H1": {
+      "carrier_class": "same compact reference class",
+      "exact_topology": "UNSELECTED",
+      "regional_domains": "Omega_w, Omega_v",
+      "interface": "Lipschitz-or-better Gamma",
+      "metric": "piecewise smooth",
+      "transmission": "SH-1 source-free comparator",
+      "outer_boundary": "NOT_APPLICABLE"
+    },
+    "M1": {
+      "geometry": "inherited from S1 or H1",
+      "target": "finite carrier moments"
+    },
+    "L1": {
+      "geometry": "local patch U_alpha",
+      "global_geometry": "NOT_APPLICABLE"
+    }
+  },
+  "clock_frame_dictionary": [
+    {
+      "id": "CLK-S1",
+      "carrier_time": "t_D",
+      "regional_time": "tau_r(t_D)",
+      "rate": "alpha_r=d tau_r/d t_D > 0",
+      "spatial_dependence": "EXCLUDED",
+      "perturbative_lapse": "NOT_DEFINED"
+    },
+    {
+      "id": "CLK-H1",
+      "carrier_time": "t_D",
+      "regional_time": "tau_r(t_D)",
+      "rate": "homogeneous",
+      "spatial_dependence": "EXCLUDED",
+      "perturbative_lapse": "NOT_DEFINED"
+    },
+    {
+      "id": "CLK-L1",
+      "carrier_time": "local inherited time",
+      "regional_time": "local restriction",
+      "rate": "UNDERDETERMINED",
+      "spatial_dependence": "local branch only"
+    }
+  ],
+  "spectral_scale_dictionary": [
+    {
+      "id": "K-CODE",
+      "meaning": "implementation/notebook label",
+      "identification_policy": "distinct"
+    },
+    {
+      "id": "K-W",
+      "meaning": "wall regional eigenvalue or wavenumber",
+      "identification_policy": "distinct"
+    },
+    {
+      "id": "K-V",
+      "meaning": "void regional eigenvalue or wavenumber",
+      "identification_policy": "distinct"
+    },
+    {
+      "id": "K-C",
+      "meaning": "carrier spectral label",
+      "identification_policy": "distinct"
+    },
+    {
+      "id": "K-DRESSED",
+      "meaning": "dressed theoretical label",
+      "identification_policy": "distinct"
+    },
+    {
+      "id": "K-SURVEY",
+      "meaning": "observational label",
+      "identification_policy": "outside Phase 1E-E"
+    },
+    {
+      "id": "KERNEL-RC",
+      "meaning": "regional-to-carrier spectral kernel K_nm^(r)",
+      "identification_policy": "non-diagonal mode mixing allowed"
+    }
+  ],
+  "candidate_family_matrix": [
+    {
+      "id": "R1",
+      "name": "smooth partition carrier",
+      "layer": "carrier/localization",
+      "standalone": false,
+      "status": "retained"
+    },
+    {
+      "id": "R2",
+      "name": "sharp interface carrier",
+      "layer": "carrier/interface",
+      "standalone": false,
+      "status": "retained comparator"
+    },
+    {
+      "id": "R3",
+      "name": "weak or finite-volume formulation",
+      "layer": "formulation",
+      "standalone": false,
+      "status": "retained"
+    },
+    {
+      "id": "R4",
+      "name": "spectral representation",
+      "layer": "representation/operator",
+      "standalone": false,
+      "status": "DEMOTED_TO_REPRESENTATION_LAYER"
+    },
+    {
+      "id": "R5",
+      "name": "Green operator",
+      "layer": "operator",
+      "standalone": false,
+      "status": "DEMOTED_TO_REPRESENTATION_LAYER"
+    },
+    {
+      "id": "R6",
+      "name": "auxiliary-FLRW carrier",
+      "layer": "alternative carrier",
+      "standalone": false,
+      "status": "background-only rejected; full field extension only"
+    },
+    {
+      "id": "R7",
+      "name": "local patch or WKB",
+      "layer": "local approximation",
+      "standalone": false,
+      "status": "local comparator"
+    },
+    {
+      "id": "R8",
+      "name": "direct moments",
+      "layer": "target reduction",
+      "standalone": false,
+      "status": "reduced target only"
+    }
+  ],
+  "compound_candidate_matrix": [
+    {
+      "id": "CR-1",
+      "composition": [
+        "R1",
+        "R3",
+        "R5"
+      ],
+      "target": "global weak/full field",
+      "normalized_to": "S1"
+    },
+    {
+      "id": "CR-2",
+      "composition": [
+        "R1",
+        "R4",
+        "R5"
+      ],
+      "target": "global spectral/full field",
+      "normalized_to": "spectral variant of S1"
+    },
+    {
+      "id": "CR-3",
+      "composition": [
+        "R2",
+        "R3",
+        "R5"
+      ],
+      "target": "global sharp weak field",
+      "normalized_to": "H1"
+    },
+    {
+      "id": "CR-4",
+      "composition": [
+        "R2",
+        "R3",
+        "R8"
+      ],
+      "target": "sharp finite moments",
+      "normalized_to": "M1 parent H1"
+    },
+    {
+      "id": "CR-5",
+      "composition": [
+        "R1",
+        "R3",
+        "R8"
+      ],
+      "target": "smooth finite moments",
+      "normalized_to": "M1 parent S1"
+    },
+    {
+      "id": "CR-6",
+      "composition": [
+        "R6",
+        "R4/R5"
+      ],
+      "target": "auxiliary effective/full field",
+      "normalized_to": "X1 extension"
+    },
+    {
+      "id": "CR-7",
+      "composition": [
+        "R7",
+        "local R3/R4/R5"
+      ],
+      "target": "local patch state",
+      "normalized_to": "L1"
+    }
+  ],
+  "normalized_candidate_classes": [
+    {
+      "id": "P6-C1",
+      "packet": "S1",
+      "class": "global smooth full-field",
+      "status": "PRIMARY_SELECTED_CONDITIONALLY"
+    },
+    {
+      "id": "P6-C2",
+      "packet": "H1",
+      "class": "global sharp weak full-field",
+      "status": "MANDATORY_SECONDARY_COMPARATOR"
+    },
+    {
+      "id": "P6-C3",
+      "packet": "M1",
+      "class": "reduced moment target",
+      "status": "REDUCED_TARGET_COMPARATOR"
+    },
+    {
+      "id": "P6-C4",
+      "packet": "L1",
+      "class": "local WKB",
+      "status": "LOCAL_DIAGNOSTIC_COMPARATOR"
+    },
+    {
+      "id": "P6-X1",
+      "packet": "X1",
+      "class": "auxiliary full-field extension",
+      "status": "OPTIONAL_MODEL_EXTENSION"
+    }
+  ],
+  "functional_space_inventory": [
+    {
+      "id": "FS-REG",
+      "space": "BRANCHWISE_REGIONAL_SOURCE_SPACES",
+      "domain": "compact mean-zero, finite-patch boundary-value, noncompact weighted-decay or another explicit elliptic branch",
+      "packet": "S1/H1",
+      "status": "DEFINED_BUT_UNDERDETERMINED"
+    },
+    {
+      "id": "FS-S1",
+      "space": "L2_0(Sigma_C)",
+      "domain": "H2_perp0(Sigma_C):=H2(Sigma_C) intersect L2_0(Sigma_C)",
+      "packet": "S1 carrier subbranch",
+      "status": "selected conditionally"
+    },
+    {
+      "id": "FS-H1",
+      "space": "H1(Omega_w) direct-sum H1(Omega_v)",
+      "domain": "coupled transmission domain",
+      "packet": "H1",
+      "status": "selected comparator"
+    },
+    {
+      "id": "FS-M1",
+      "space": "R^(3N)",
+      "domain": "inherited parent fields",
+      "packet": "M1",
+      "status": "finite reduced target"
+    },
+    {
+      "id": "FS-L1",
+      "space": "H^s_loc(U_alpha) or local distribution space",
+      "domain": "local parametrix domain",
+      "packet": "L1",
+      "status": "local only"
+    }
+  ],
+  "operator_inventory": [
+    {
+      "id": "OP-U-r",
+      "operator": "homogeneous clock transport",
+      "domain": "regional state at tau_r",
+      "codomain": "regional state at t_D",
+      "kernel_status": "not load-bearing if alpha_r>0",
+      "status": "selected conditionally"
+    },
+    {
+      "id": "OP-G-r",
+      "operator": "regional Green inverse",
+      "domain": "unselected regional elliptic source space",
+      "codomain": "unselected regional potential domain",
+      "kernel_status": "full kernel unresolved; constants are only one compact-branch possibility",
+      "status": "DEFINED_BUT_UNDERDETERMINED"
+    },
+    {
+      "id": "OP-E-r",
+      "operator": "regional lifting",
+      "domain": "D(G_r) after regional branch selection",
+      "codomain": "carrier regularity space selected for mathcal L_C",
+      "kernel_status": "must be injective or declared quotient",
+      "status": "not concretely defined"
+    },
+    {
+      "id": "OP-M-chi",
+      "operator": "partition multiplication",
+      "domain": "carrier Sobolev space",
+      "codomain": "same carrier space under sufficient multiplier regularity",
+      "kernel_status": "support-dependent",
+      "status": "selected class"
+    },
+    {
+      "id": "OP-L-C",
+      "operator": "normalized carrier scalarization mathcal L_C",
+      "domain": "unselected scalarization domain",
+      "codomain": "unselected carrier target space",
+      "kernel_status": "sign, dimensions, scale and kernel unresolved",
+      "status": "NOT_DEFINED_IN_CURRENT_THEORY"
+    },
+    {
+      "id": "OP-Q-C",
+      "operator": "output mean-zero range check",
+      "domain": "L2(Sigma_C)",
+      "codomain": "L2_0(Sigma_C)",
+      "kernel_status": "constants",
+      "status": "range check only; redundant after a compact Laplacian output"
+    },
+    {
+      "id": "OP-A-GAMMA",
+      "operator": "coupled transmission operator",
+      "domain": "broken H1 with SH-1 conditions",
+      "codomain": "dual weak space",
+      "kernel_status": "unresolved",
+      "status": "H1 comparator"
+    },
+    {
+      "id": "OP-MOM",
+      "operator": "finite moment projection",
+      "domain": "parent field space",
+      "codomain": "R^(3N)",
+      "kernel_status": "nontrivial infinite-dimensional field kernel",
+      "status": "M1"
+    },
+    {
+      "id": "OP-PARAM",
+      "operator": "local parametrix",
+      "domain": "local patch source space",
+      "codomain": "local patch state",
+      "kernel_status": "local branch",
+      "status": "L1"
+    }
+  ],
+  "elliptic_classes": [
+    {
+      "id": "E1",
+      "name": "compact boundaryless mean-zero",
+      "status": "selected conditionally for the S1 carrier subbranch only",
+      "solvability": "mean-zero range or quotient by constants after operator normalization"
+    },
+    {
+      "id": "E2",
+      "name": "bounded Dirichlet",
+      "status": "regional or carrier branch not selected",
+      "solvability": "conditional"
+    },
+    {
+      "id": "E3",
+      "name": "bounded Neumann",
+      "status": "regional or carrier branch not selected",
+      "solvability": "flux compatibility plus normalization"
+    },
+    {
+      "id": "E4",
+      "name": "coercive Robin",
+      "status": "not selected",
+      "solvability": "coefficient and coercivity required"
+    },
+    {
+      "id": "E5",
+      "name": "noncompact weighted decay",
+      "status": "regional branch possible but not selected",
+      "solvability": "decay and zero-resonance control unresolved"
+    },
+    {
+      "id": "E6",
+      "name": "sharp coupled transmission",
+      "status": "selected for H1 comparator",
+      "solvability": "underdefined coupled kernel"
+    },
+    {
+      "id": "E7",
+      "name": "local parametrix",
+      "status": "selected for L1 comparator",
+      "solvability": "local only"
+    }
+  ],
+  "data_inventory": {
+    "bulk_initial_data": [
+      "Delta_w,i",
+      "Z_w,i",
+      "Delta_v,i",
+      "Z_v,i"
+    ],
+    "carrier_structural_data": [
+      "topology class",
+      "orientation",
+      "regional cover",
+      "metric-extension prescription"
+    ],
+    "clock_data": [
+      "tau_r(t_D)",
+      "alpha_r(t_D)>0"
+    ],
+    "partition_data": [
+      "chi_v(x)",
+      "chi_w=1-chi_v",
+      "fixed Lagrangian transport"
+    ],
+    "sharp_interface_data": [
+      "Gamma_i",
+      "SH-1 trace continuity",
+      "SH-1 conormal flux continuity"
+    ],
+    "elliptic_data": [
+      "carrier mean-zero range compatibility for the selected compact carrier subbranch",
+      "regional topology/full kernel/boundary-or-decay conditions/operator domains unresolved",
+      "coupled-kernel data for H1"
+    ],
+    "constitutive_data": [
+      "T_eff unresolved",
+      "inherited target closure C_P=mathscr W-3 mathscr Q=0",
+      "regional reconstruction/evaluation of mathscr W and mathscr Q unresolved"
+    ],
+    "initial_compatibility": [
+      "C_Delta=0",
+      "C_Z=0",
+      "C_eff=0",
+      "K_f=0"
+    ],
+    "forbidden_as_current_outputs": [
+      "tracer or survey mapping",
+      "power-spectrum normalization",
+      "likelihood"
+    ]
+  },
+  "zero_mode_branches": [
+    {
+      "id": "ZM-REG",
+      "description": "select the regional inverse zero-mode/full-kernel policy after choosing the regional elliptic branch",
+      "status": "DEFINED_BUT_UNDERDETERMINED"
+    },
+    {
+      "id": "ZM-S1",
+      "description": "project each regional contribution before assembly",
+      "status": "not selected"
+    },
+    {
+      "id": "ZM-S2",
+      "description": "use Q_C only as an explicit output range check",
+      "status": "selected as a range check; not load-bearing"
+    },
+    {
+      "id": "ZM-S3",
+      "description": "impose total carrier-source compatibility without projection",
+      "status": "not selected"
+    },
+    {
+      "id": "ZM-S4",
+      "description": "retain a separate homogeneous GM sector",
+      "status": "not selected"
+    }
+  ],
+  "mismatch_system": {
+    "state": [
+      "C_Delta",
+      "C_Z",
+      "C_eff"
+    ],
+    "constitutive_residual": "C_P=mathscr W-3 mathscr Q",
+    "compatibility_manifold": "C_Delta=C_Z=C_eff=0",
+    "transfer_residual": "R_T=dot(T)+T A_reg-A_GM T",
+    "evolution": "dot(C)=M_C C+B_P C_P-R_T_vector",
+    "density_component": "dot(C_Delta)=-C_Z-R_Delta",
+    "invariance_status": "NOT_PROVED_INVARIANT",
+    "rank_status": "NOT_COUNTABLE_BEFORE_CONCRETE_OPERATOR_LINEARIZATION",
+    "constitutive_target_condition": "C_P(t)=0",
+    "missing_constitutive_block": "regional-to-target reconstruction/evaluation of mathscr W and mathscr Q",
+    "effective_component": "dot(C_eff)=w Theta C_eff-(1+w) C_Z-R_eff",
+    "expansion_component": "dot(C_Z)=-(2/3) Theta C_Z-4 pi G rho_d C_Delta-4 pi G rho_eff C_eff+(1/4) C_P-R_Z"
+  },
+  "constraint_inventory": [
+    {
+      "id": "K1",
+      "type": "regional bulk evolution identities",
+      "status": "frozen"
+    },
+    {
+      "id": "K2",
+      "type": "regional CGI admissibility and zero-mode restrictions",
+      "status": "branch-dependent"
+    },
+    {
+      "id": "K3",
+      "type": "elliptic range constraints",
+      "status": "carrier mean-zero range selected conditionally; regional elliptic range constraints unresolved"
+    },
+    {
+      "id": "K4",
+      "type": "transfer compatibility constraints",
+      "status": "not propagated"
+    },
+    {
+      "id": "K5",
+      "type": "interface or boundary constraints",
+      "status": "H1 comparator only"
+    },
+    {
+      "id": "K-INTERTWINE",
+      "type": "K_GM T = S_K K_reg",
+      "status": "not demonstrated"
+    }
+  ],
+  "well_posedness_assessment": {
+    "forward_levels": {
+      "FW1": "KINEMATICALLY_DEFINED_SNAPSHOT",
+      "FW2": "CONDITIONALLY_WELL_POSED_WITH_ALL_TIME_INPUT",
+      "FW3": "PREDICTIVELY_FORWARD_CLOSED"
+    },
+    "S1": {
+      "snapshot": "CONDITIONAL",
+      "predictive": "NOT_CLOSED",
+      "continuous_dependence": "NOT_ESTABLISHED",
+      "inverse": "UNRESOLVED"
+    },
+    "H1": {
+      "snapshot": "CONDITIONAL",
+      "predictive": "NOT_CLOSED",
+      "continuous_dependence": "NOT_ESTABLISHED",
+      "inverse": "UNRESOLVED"
+    },
+    "M1": {
+      "reduced_forward": "PARTIAL",
+      "field_inverse": "NONINJECTIVE_PROVED",
+      "field_reconstruction": "NOT_APPLICABLE"
+    },
+    "L1": {
+      "local_forward": "PARTIAL",
+      "global_forward": "NOT_APPLICABLE",
+      "global_inverse": "NOT_APPLICABLE"
+    },
+    "stable_injectivity": "beta_T=inf_{||y||=1} ||Ty|| > 0",
+    "two_region_injectivity": "ker(T_w)=ker(T_v)={0} and Ran(T_w) intersect Ran(T_v)={0}"
+  },
+  "approximation_hierarchy": [
+    {
+      "id": "A-ELL",
+      "name": "finite smooth-scale family",
+      "readiness": "AR0 pass; AR1 partial; no error bound"
+    },
+    {
+      "id": "A-SHARP",
+      "name": "smooth-to-sharp limit",
+      "readiness": "SL0-SL5 required; not established"
+    },
+    {
+      "id": "A-N",
+      "name": "spectral truncation",
+      "readiness": "finite truncation creates field kernel; no tail bound"
+    },
+    {
+      "id": "A-M",
+      "name": "moment truncation",
+      "readiness": "finite-moment field information loss proved; hierarchy not closed"
+    },
+    {
+      "id": "A-WKB",
+      "name": "local WKB",
+      "readiness": "parameter identified; no error bound"
+    }
+  ],
+  "realization_packets": {
+    "S1-LAGRANGIAN-SMOOTH-COMPACT-MEANZERO": {
+      "id": "S1-LAGRANGIAN-SMOOTH-COMPACT-MEANZERO",
+      "title": "Global smooth Lagrangian partition carrier with regional-potential reconstruction",
+      "parent_families": [
+        "R1",
+        "R3",
+        "R5"
+      ],
+      "scientific_role": "GLOBAL_CANDIDATE_CARRIER_REPRESENTATION_FOR_GM_TARGET",
+      "target_scope": "GLOBAL_CANDIDATE_CARRIER_SCALAR_REPRESENTATION_FOR_GM_TARGET",
+      "framework_status": [
+        "COMPATIBLE_IMPORTED_DYNAMICS",
+        "OPTIONAL_MODEL_EXTENSION"
+      ],
+      "selection_status": "PRIMARY_SELECTED_CONDITIONALLY",
+      "carrier_geometry": {
+        "carrier_class": "COMPACT_CONNECTED_ORIENTABLE_BOUNDARYLESS_REFERENCE_3_MANIFOLD",
+        "exact_topology": "UNSELECTED",
+        "regional_cover": "U_w union U_v = Sigma_C",
+        "partition": "smooth partition of unity",
+        "metric_template": "conditional h_C=chi_w htilde_w+chi_v htilde_v; extension existence/regularity unproved",
+        "volume_constraint": "K_f=0",
+        "outer_boundary": "NOT_APPLICABLE_FOR_CARRIER_ONLY"
+      },
+      "regional_maps": "finite-domain versus whole-slice choice unresolved; exact embeddings unselected",
+      "clock_branch": "homogeneous background reparameterization only",
+      "functional_spaces": "carrier L2_0 with H2_perp0; regional elliptic spaces branchwise and underdetermined",
+      "operator_factorization": "T_r^(a)=mathcal L_C M_chi_r E_r U_r G_r Q_r; Q_C is only an optional output range check",
+      "zero_mode_policy": "regional inverse zero-mode/full-kernel branch unresolved; output Q_C non-load-bearing",
+      "dynamical_inputs": [
+        "fixed partition",
+        "background regional evolution",
+        "metric/measure/operator transport unresolved",
+        "effective-sector dynamics missing",
+        "inherited C_P=mathscr W-3 mathscr Q=0 target closure with missing regional reconstruction"
+      ],
+      "initial_data": [
+        "regional X_w,X_v",
+        "initial partition profile",
+        "metric-extension-compatible carrier data"
+      ],
+      "boundary_or_interface_data": [
+        "carrier outer boundary not applicable",
+        "regional boundary/decay data and full-kernel policy unresolved"
+      ],
+      "compatibility_system": "MISMATCH-SYSTEM",
+      "constraint_system": [
+        "K1",
+        "K2",
+        "K3",
+        "K4",
+        "K5",
+        "K-INTERTWINE"
+      ],
+      "forward_status": {
+        "snapshot": "CONDITIONAL",
+        "predictive": "NOT_CLOSED",
+        "continuous_dependence": "NOT_ESTABLISHED",
+        "inverse": "UNRESOLVED"
+      },
+      "inverse_status": "INVERSE_UNIQUENESS_UNRESOLVED_FOR_SELECTED_S1",
+      "approximation_status": "finite smooth model; partition and metric-extension sensitivity required",
+      "information_loss_status": "regional kernels, range overlap and candidate scalarization losses unresolved",
+      "gate_results": {
+        "G0": "PASS_UNDER_EXPLICIT_ASSUMPTIONS",
+        "G1": "PASS_AT_CLASS_LEVEL_ONLY",
+        "G2": "DEFINED_BUT_UNDERDETERMINED",
+        "G3": "PASS_AT_TEMPLATE_LEVEL",
+        "G4": "DEFINED_BUT_UNDERDETERMINED",
+        "G5": "DEFINED_BUT_UNDERDETERMINED",
+        "G6": "PASS_UNDER_SELECTED_PARTITION_LAW",
+        "G7": "FAIL_PROPAGATION_NOT_CLOSED",
+        "G8": "DEFINED_BUT_UNDERDETERMINED",
+        "G9": "PASS_UNDER_HOMOGENEOUS_CLOCK_RESTRICTION",
+        "G10": "PASS_AT_POLICY_LEVEL",
+        "G11": "PARTIAL_CONDITIONAL_ONLY",
+        "G12": "FAIL_NOT_ESTABLISHED",
+        "G13": "SENSITIVITY_REQUIRED",
+        "G14": "PASS",
+        "G15": "FAIL_NOT_ESTABLISHED"
+      },
+      "deficit_vector": {
+        "N_undef": "LOWER_BOUND",
+        "Delta_dyn": "LOWER_BOUND",
+        "Delta_IC": "LOWER_BOUND",
+        "Delta_BC": "BIFURCATED",
+        "Delta_match": "NOT_COUNTABLE_BEFORE_CONCRETE_OPERATOR_LINEARIZATION",
+        "Delta_emp": "NOT_APPLICABLE"
+      },
+      "falsification_conditions": [
+        "FS1",
+        "FS2",
+        "FS3",
+        "FS4",
+        "FS5",
+        "FS6",
+        "FS7",
+        "FS8",
+        "FS9",
+        "FS10"
+      ],
+      "implementation_readiness": "REPORT_ONLY_MUST_CONTINUE",
+      "selection_evidence": "CONVENTION_DEPENDENT_PROVISIONAL_AUTHOR_BASELINE"
+    },
+    "H1-LAGRANGIAN-SHARP-COMPACT-TRANSMISSION": {
+      "id": "H1-LAGRANGIAN-SHARP-COMPACT-TRANSMISSION",
+      "title": "Global sharp Lagrangian carrier with source-free weak transmission",
+      "parent_families": [
+        "R2",
+        "R3",
+        "R5"
+      ],
+      "scientific_role": "GLOBAL_WEAK_FIELD_TRANSFER",
+      "target_scope": "GLOBAL_WEAK_PIECEWISE_GM_FIELD",
+      "framework_status": [
+        "COMPATIBLE_IMPORTED_DYNAMICS",
+        "OPTIONAL_MODEL_EXTENSION"
+      ],
+      "selection_status": "MANDATORY_SECONDARY_COMPARATOR",
+      "carrier_geometry": {
+        "carrier_class": "same compact reference class",
+        "exact_topology": "UNSELECTED",
+        "regional_domains": "Omega_w, Omega_v",
+        "interface": "Lipschitz-or-better Gamma",
+        "metric": "piecewise smooth",
+        "transmission": "SH-1 source-free comparator",
+        "outer_boundary": "NOT_APPLICABLE"
+      },
+      "regional_maps": "EXACT_EMBEDDINGS_UNSELECTED",
+      "clock_branch": "CLK-H1",
+      "functional_spaces": "broken H1 with coupled transmission domain",
+      "operator_factorization": "T_sharp=L_GM G_Gamma Q_Gamma J_Gamma U_reg",
+      "zero_mode_policy": "coupled mean-zero policy",
+      "dynamical_inputs": [
+        "fixed reference interface",
+        "SH-1 transmission",
+        "effective-sector dynamics missing"
+      ],
+      "initial_data": [
+        "regional X_w,X_v",
+        "initial Gamma",
+        "transmission-compatible data"
+      ],
+      "boundary_or_interface_data": [
+        "[psi]_Gamma=0",
+        "[a D_n psi]_Gamma=0",
+        "surface source zero as comparator assumption"
+      ],
+      "compatibility_system": "MISMATCH-SYSTEM",
+      "constraint_system": [
+        "K1",
+        "K2",
+        "K3",
+        "K4",
+        "K5",
+        "K-INTERTWINE"
+      ],
+      "forward_status": {
+        "snapshot": "CONDITIONAL",
+        "predictive": "NOT_CLOSED",
+        "continuous_dependence": "NOT_ESTABLISHED",
+        "inverse": "UNRESOLVED"
+      },
+      "inverse_status": "FIXED_INTERFACE_INJECTIVITY_UNRESOLVED",
+      "approximation_status": "exact sharp comparator; no smooth-limit claim",
+      "information_loss_status": "joint state/interface inverse unresolved",
+      "gate_results": {
+        "G0": "PASS_UNDER_EXPLICIT_ASSUMPTIONS",
+        "G1": "PASS_AT_CLASS_LEVEL_ONLY",
+        "G2": "PASS_UNDER_EXPLICIT_ASSUMPTIONS",
+        "G3": "PASS_AT_TEMPLATE_LEVEL",
+        "G4": "DEFINED_BUT_UNDERDETERMINED",
+        "G5": "PASS_UNDER_LAGRANGIAN_RESTRICTION",
+        "G6": "PASS_UNDER_SELECTED_BRANCH",
+        "G7": "FAIL_PROPAGATION_NOT_CLOSED",
+        "G8": "DEFINED_BUT_UNDERDETERMINED",
+        "G9": "PASS_UNDER_HOMOGENEOUS_CLOCK_RESTRICTION",
+        "G10": "PASS_AT_POLICY_LEVEL",
+        "G11": "PARTIAL_CONDITIONAL_ONLY",
+        "G12": "FAIL_NOT_ESTABLISHED",
+        "G13": "NOT_APPLICABLE",
+        "G14": "PASS",
+        "G15": "FAIL_NOT_ESTABLISHED"
+      },
+      "deficit_vector": {
+        "N_undef": "LOWER_BOUND",
+        "Delta_dyn": "LOWER_BOUND",
+        "Delta_IC": "LOWER_BOUND",
+        "Delta_BC": "BIFURCATED",
+        "Delta_match": "NOT_COUNTABLE_BEFORE_CONCRETE_OPERATOR_LINEARIZATION",
+        "Delta_emp": "NOT_APPLICABLE"
+      },
+      "falsification_conditions": [
+        "FS7",
+        "FS8",
+        "FS9",
+        "FS10"
+      ],
+      "implementation_readiness": "REPORT_ONLY_MUST_CONTINUE"
+    },
+    "M1-FINITE-CARRIER-MOMENTS": {
+      "id": "M1-FINITE-CARRIER-MOMENTS",
+      "title": "Finite generalized moments of a selected global parent realization",
+      "parent_families": [
+        "R8",
+        "S1_OR_H1_PARENT"
+      ],
+      "scientific_role": "GLOBAL_MOMENT_TRANSFER",
+      "target_scope": "FINITE_DIMENSIONAL_GM_STATE",
+      "framework_status": [
+        "COMPATIBLE_IMPORTED_DYNAMICS"
+      ],
+      "selection_status": "REDUCED_TARGET_COMPARATOR",
+      "carrier_geometry": "inherited from S1 or H1",
+      "regional_maps": "EXACT_EMBEDDINGS_UNSELECTED",
+      "clock_branch": "inherited from parent",
+      "functional_spaces": "R^(3N) target with inherited parent field spaces",
+      "operator_factorization": "finite carrier moment projection",
+      "zero_mode_policy": "inherited",
+      "dynamical_inputs": [
+        "moment hierarchy closure missing"
+      ],
+      "initial_data": [
+        "parent initial data",
+        "moment set"
+      ],
+      "boundary_or_interface_data": [
+        "inherited"
+      ],
+      "compatibility_system": "moment mismatch blocks after moment-set selection",
+      "constraint_system": [
+        "K1",
+        "K2",
+        "K3",
+        "K4",
+        "K5",
+        "K-INTERTWINE"
+      ],
+      "forward_status": {
+        "reduced_forward": "PARTIAL",
+        "field_inverse": "NONINJECTIVE_PROVED",
+        "field_reconstruction": "NOT_APPLICABLE"
+      },
+      "inverse_status": "FIELD_RECONSTRUCTION_NOT_APPLICABLE",
+      "approximation_status": "finite moment truncation; no closure bound",
+      "information_loss_status": "FIELD_INFORMATION_LOSS_PROVED_FOR_FINITE_LINEAR_MOMENT_MAP",
+      "gate_results": {
+        "G0": "PASS_UNDER_SELECTED_BRANCH",
+        "G1": "PASS_UNDER_SELECTED_BRANCH",
+        "G2": "PASS",
+        "G3": "PASS_AT_TEMPLATE_LEVEL",
+        "G4": "PASS_UNDER_SELECTED_BRANCH",
+        "G5": "PASS_UNDER_SELECTED_BRANCH",
+        "G6": "PASS_UNDER_SELECTED_BRANCH",
+        "G7": "FAIL_PROPAGATION_NOT_CLOSED",
+        "G8": "DEFINED_BUT_UNDERDETERMINED",
+        "G9": "PASS_UNDER_SELECTED_BRANCH",
+        "G10": "PASS_AT_POLICY_LEVEL",
+        "G11": "PARTIAL_REDUCED_FORWARD_ONLY",
+        "G12": "NOT_APPLICABLE",
+        "G13": "FAIL_NOT_ESTABLISHED",
+        "G14": "PASS",
+        "G15": "FAIL_NOT_ESTABLISHED"
+      },
+      "deficit_vector": {
+        "N_undef": "LOWER_BOUND",
+        "Delta_dyn": "LOWER_BOUND",
+        "Delta_IC": "LOWER_BOUND",
+        "Delta_BC": "BIFURCATED",
+        "Delta_match": "NOT_COUNTABLE_BEFORE_CONCRETE_TRANSFER",
+        "Delta_emp": "BIFURCATED"
+      },
+      "falsification_conditions": [
+        "P6-F10"
+      ],
+      "implementation_readiness": "REPORT_ONLY_MUST_CONTINUE"
+    },
+    "L1-LOCAL-WKB-CARRIER-PATCH": {
+      "id": "L1-LOCAL-WKB-CARRIER-PATCH",
+      "title": "Local frozen-coefficient carrier transfer comparator",
+      "parent_families": [
+        "R7",
+        "S1_OR_H1_PARENT"
+      ],
+      "scientific_role": "LOCAL_PATCH_TRANSFER",
+      "target_scope": "LOCAL_GM_PATCH_STATE",
+      "framework_status": [
+        "COMPATIBLE_IMPORTED_DYNAMICS"
+      ],
+      "selection_status": "LOCAL_DIAGNOSTIC_COMPARATOR",
+      "carrier_geometry": {
+        "geometry": "local patch U_alpha",
+        "global_geometry": "NOT_APPLICABLE"
+      },
+      "regional_maps": "EXACT_EMBEDDINGS_UNSELECTED",
+      "clock_branch": "CLK-L1",
+      "functional_spaces": "local Sobolev or distribution spaces",
+      "operator_factorization": "local elliptic parametrix",
+      "zero_mode_policy": "local normalization",
+      "dynamical_inputs": [
+        "patch transport and overlap consistency missing"
+      ],
+      "initial_data": [
+        "local regional data",
+        "patch data"
+      ],
+      "boundary_or_interface_data": [
+        "artificial patch boundary or compact-support policy"
+      ],
+      "compatibility_system": "local compatibility only",
+      "constraint_system": [
+        "K1",
+        "K2",
+        "K3",
+        "K4",
+        "K5",
+        "K-INTERTWINE"
+      ],
+      "forward_status": {
+        "local_forward": "PARTIAL",
+        "global_forward": "NOT_APPLICABLE",
+        "global_inverse": "NOT_APPLICABLE"
+      },
+      "inverse_status": "GLOBAL_INVERSE_NOT_APPLICABLE",
+      "approximation_status": "epsilon_WKB identified; no error bound",
+      "information_loss_status": "GLOBAL_INFORMATION_NOT_IN_CODOMAIN",
+      "gate_results": {
+        "G0": "PASS_LOCAL_ONLY",
+        "G1": "PASS_LOCAL_ONLY",
+        "G2": "PASS_LOCAL_ONLY",
+        "G3": "PASS_LOCAL_ONLY",
+        "G4": "PASS_LOCAL_ONLY",
+        "G5": "DEFINED_BUT_UNDERDETERMINED",
+        "G6": "DEFINED_BUT_UNDERDETERMINED",
+        "G7": "DEFINED_BUT_UNDERDETERMINED",
+        "G8": "DEFINED_BUT_UNDERDETERMINED",
+        "G9": "DEFINED_BUT_UNDERDETERMINED",
+        "G10": "PASS_AT_POLICY_LEVEL",
+        "G11": "PARTIAL_CONDITIONAL_ONLY",
+        "G12": "NOT_APPLICABLE_GLOBALLY",
+        "G13": "FAIL_NOT_ESTABLISHED",
+        "G14": "PASS",
+        "G15": "FAIL_NOT_ESTABLISHED"
+      },
+      "deficit_vector": {
+        "N_undef": "LOWER_BOUND",
+        "Delta_dyn": "LOWER_BOUND",
+        "Delta_IC": "LOWER_BOUND",
+        "Delta_BC": "BIFURCATED",
+        "Delta_match": "NOT_COUNTABLE_BEFORE_CONCRETE_TRANSFER",
+        "Delta_emp": "NOT_APPLICABLE"
+      },
+      "falsification_conditions": [
+        "P6-F13"
+      ],
+      "implementation_readiness": "REPORT_ONLY_MUST_CONTINUE"
+    },
+    "X1-AUXILIARY-FULL-FIELD-EXTENSION": {
+      "id": "X1-AUXILIARY-FULL-FIELD-EXTENSION",
+      "title": "Explicit full auxiliary-field transfer extension",
+      "parent_families": [
+        "R6",
+        "R4_OR_R5"
+      ],
+      "scientific_role": "AUXILIARY_EFFECTIVE_TRANSFER",
+      "target_scope": "AUXILIARY_FULL_FIELD_TO_GM",
+      "framework_status": [
+        "OPTIONAL_MODEL_EXTENSION"
+      ],
+      "selection_status": "OPTIONAL_MODEL_EXTENSION",
+      "carrier_geometry": "UNSELECTED_AUXILIARY_CARRIER",
+      "regional_maps": "EXACT_EMBEDDINGS_UNSELECTED",
+      "clock_branch": "UNSELECTED",
+      "functional_spaces": "UNSELECTED",
+      "operator_factorization": "(X_w,X_v)->X_aux->X_GM must be explicit",
+      "zero_mode_policy": "UNSELECTED",
+      "dynamical_inputs": [
+        "new auxiliary dynamics required"
+      ],
+      "initial_data": [
+        "UNSELECTED"
+      ],
+      "boundary_or_interface_data": [
+        "UNSELECTED"
+      ],
+      "compatibility_system": "UNSELECTED",
+      "constraint_system": [
+        "K1",
+        "K2",
+        "K3",
+        "K4",
+        "K5",
+        "K-INTERTWINE"
+      ],
+      "forward_status": "NOT_EVALUABLE_BEFORE_MODEL_EXTENSION",
+      "inverse_status": "UNRESOLVED",
+      "approximation_status": "UNRESOLVED",
+      "information_loss_status": "no-substitution proof required",
+      "gate_results": {
+        "G0": "NOT_YET_ASSESSED",
+        "G1": "NOT_YET_ASSESSED",
+        "G2": "NOT_YET_ASSESSED",
+        "G3": "NOT_YET_ASSESSED",
+        "G4": "NOT_YET_ASSESSED",
+        "G5": "NOT_YET_ASSESSED",
+        "G6": "NOT_YET_ASSESSED",
+        "G7": "NOT_YET_ASSESSED",
+        "G8": "NOT_YET_ASSESSED",
+        "G9": "NOT_YET_ASSESSED",
+        "G10": "NOT_YET_ASSESSED",
+        "G11": "NOT_YET_ASSESSED",
+        "G12": "NOT_YET_ASSESSED",
+        "G13": "NOT_YET_ASSESSED",
+        "G14": "NOT_YET_ASSESSED",
+        "G15": "NOT_YET_ASSESSED"
+      },
+      "deficit_vector": {
+        "N_undef": "LOWER_BOUND",
+        "Delta_dyn": "LOWER_BOUND",
+        "Delta_IC": "LOWER_BOUND",
+        "Delta_BC": "BIFURCATED",
+        "Delta_match": "NOT_COUNTABLE_BEFORE_BRANCH_SELECTION",
+        "Delta_emp": "BIFURCATED"
+      },
+      "falsification_conditions": [
+        "P6-F14"
+      ],
+      "implementation_readiness": "REPORT_ONLY_MUST_CONTINUE"
+    }
+  },
+  "gate_definitions": {
+    "G0": "ontology completeness",
+    "G1": "carrier geometry completeness",
+    "G2": "functional spaces and domains",
+    "G3": "operator existence",
+    "G4": "elliptic solvability",
+    "G5": "temporal transport",
+    "G6": "partition or interface closure",
+    "G7": "compatibility propagation",
+    "G8": "constraint preservation",
+    "G9": "clock and frame consistency",
+    "G10": "spectral consistency",
+    "G11": "forward well-posedness",
+    "G12": "inverse well-posedness",
+    "G13": "approximation and error control",
+    "G14": "observational firewall",
+    "G15": "prototype readiness"
+  },
+  "gate_audit": {
+    "S1": {
+      "G0": "PASS_UNDER_EXPLICIT_ASSUMPTIONS",
+      "G1": "PASS_AT_CLASS_LEVEL_ONLY",
+      "G2": "DEFINED_BUT_UNDERDETERMINED",
+      "G3": "PASS_AT_TEMPLATE_LEVEL",
+      "G4": "DEFINED_BUT_UNDERDETERMINED",
+      "G5": "DEFINED_BUT_UNDERDETERMINED",
+      "G6": "PASS_UNDER_SELECTED_PARTITION_LAW",
+      "G7": "FAIL_PROPAGATION_NOT_CLOSED",
+      "G8": "DEFINED_BUT_UNDERDETERMINED",
+      "G9": "PASS_UNDER_HOMOGENEOUS_CLOCK_RESTRICTION",
+      "G10": "PASS_AT_POLICY_LEVEL",
+      "G11": "PARTIAL_CONDITIONAL_ONLY",
+      "G12": "FAIL_NOT_ESTABLISHED",
+      "G13": "SENSITIVITY_REQUIRED",
+      "G14": "PASS",
+      "G15": "FAIL_NOT_ESTABLISHED"
+    },
+    "H1": {
+      "G0": "PASS_UNDER_EXPLICIT_ASSUMPTIONS",
+      "G1": "PASS_AT_CLASS_LEVEL_ONLY",
+      "G2": "PASS_UNDER_EXPLICIT_ASSUMPTIONS",
+      "G3": "PASS_AT_TEMPLATE_LEVEL",
+      "G4": "DEFINED_BUT_UNDERDETERMINED",
+      "G5": "PASS_UNDER_LAGRANGIAN_RESTRICTION",
+      "G6": "PASS_UNDER_SELECTED_BRANCH",
+      "G7": "FAIL_PROPAGATION_NOT_CLOSED",
+      "G8": "DEFINED_BUT_UNDERDETERMINED",
+      "G9": "PASS_UNDER_HOMOGENEOUS_CLOCK_RESTRICTION",
+      "G10": "PASS_AT_POLICY_LEVEL",
+      "G11": "PARTIAL_CONDITIONAL_ONLY",
+      "G12": "FAIL_NOT_ESTABLISHED",
+      "G13": "NOT_APPLICABLE",
+      "G14": "PASS",
+      "G15": "FAIL_NOT_ESTABLISHED"
+    },
+    "M1": {
+      "G0": "PASS_UNDER_SELECTED_BRANCH",
+      "G1": "PASS_UNDER_SELECTED_BRANCH",
+      "G2": "PASS",
+      "G3": "PASS_AT_TEMPLATE_LEVEL",
+      "G4": "PASS_UNDER_SELECTED_BRANCH",
+      "G5": "PASS_UNDER_SELECTED_BRANCH",
+      "G6": "PASS_UNDER_SELECTED_BRANCH",
+      "G7": "FAIL_PROPAGATION_NOT_CLOSED",
+      "G8": "DEFINED_BUT_UNDERDETERMINED",
+      "G9": "PASS_UNDER_SELECTED_BRANCH",
+      "G10": "PASS_AT_POLICY_LEVEL",
+      "G11": "PARTIAL_REDUCED_FORWARD_ONLY",
+      "G12": "NOT_APPLICABLE",
+      "G13": "FAIL_NOT_ESTABLISHED",
+      "G14": "PASS",
+      "G15": "FAIL_NOT_ESTABLISHED"
+    },
+    "L1": {
+      "G0": "PASS_LOCAL_ONLY",
+      "G1": "PASS_LOCAL_ONLY",
+      "G2": "PASS_LOCAL_ONLY",
+      "G3": "PASS_LOCAL_ONLY",
+      "G4": "PASS_LOCAL_ONLY",
+      "G5": "DEFINED_BUT_UNDERDETERMINED",
+      "G6": "DEFINED_BUT_UNDERDETERMINED",
+      "G7": "DEFINED_BUT_UNDERDETERMINED",
+      "G8": "DEFINED_BUT_UNDERDETERMINED",
+      "G9": "DEFINED_BUT_UNDERDETERMINED",
+      "G10": "PASS_AT_POLICY_LEVEL",
+      "G11": "PARTIAL_CONDITIONAL_ONLY",
+      "G12": "NOT_APPLICABLE_GLOBALLY",
+      "G13": "FAIL_NOT_ESTABLISHED",
+      "G14": "PASS",
+      "G15": "FAIL_NOT_ESTABLISHED"
+    }
+  },
+  "adversarial_objections": [
+    {
+      "id": "AA-01",
+      "challenge": "preserve frozen Phase 1E-D boundary",
+      "status": "MANDATORY"
+    },
+    {
+      "id": "AA-02",
+      "challenge": "do not classify generic functional analysis as current Timescape machinery",
+      "status": "MANDATORY"
+    },
+    {
+      "id": "AA-03",
+      "challenge": "component counts are not ranks",
+      "status": "MANDATORY"
+    },
+    {
+      "id": "AA-04",
+      "challenge": "definitions and constraints are not evolution equations",
+      "status": "MANDATORY"
+    },
+    {
+      "id": "AA-05",
+      "challenge": "metric convexity requires common tangent space and positive extensions",
+      "status": "MANDATORY"
+    },
+    {
+      "id": "AA-06",
+      "challenge": "audit metric-extension sensitivity",
+      "status": "MANDATORY"
+    },
+    {
+      "id": "AA-07",
+      "challenge": "distinguish imposed from derived K_f=0",
+      "status": "MANDATORY"
+    },
+    {
+      "id": "AA-08",
+      "challenge": "background lapse is not perturbative lapse",
+      "status": "MANDATORY"
+    },
+    {
+      "id": "AA-09",
+      "challenge": "state Green domains, codomains and kernels",
+      "status": "MANDATORY"
+    },
+    {
+      "id": "AA-10",
+      "challenge": "do not assume [L_C,M_chi]=0",
+      "status": "MANDATORY"
+    },
+    {
+      "id": "AA-11",
+      "challenge": "do not identify regional and carrier modes",
+      "status": "MANDATORY"
+    },
+    {
+      "id": "AA-12",
+      "challenge": "retain C_eff",
+      "status": "MANDATORY"
+    },
+    {
+      "id": "AA-13",
+      "challenge": "retain separate C_P",
+      "status": "MANDATORY"
+    },
+    {
+      "id": "AA-14",
+      "challenge": "initial compatibility is not propagation",
+      "status": "MANDATORY"
+    },
+    {
+      "id": "AA-15",
+      "challenge": "no unsupported inverse claim",
+      "status": "MANDATORY"
+    },
+    {
+      "id": "AA-16",
+      "challenge": "M1 is not full field",
+      "status": "MANDATORY"
+    },
+    {
+      "id": "AA-17",
+      "challenge": "L1 is not global",
+      "status": "MANDATORY"
+    },
+    {
+      "id": "AA-18",
+      "challenge": "auxiliary branch must transfer rather than replace regional state",
+      "status": "MANDATORY"
+    },
+    {
+      "id": "AA-19",
+      "challenge": "preserve observational firewall",
+      "status": "MANDATORY"
+    },
+    {
+      "id": "AA-20",
+      "challenge": "preserve prototype firewall",
+      "status": "MANDATORY"
+    }
+  ],
+  "falsification_matrix": {
+    "FS1": {
+      "name": "Volume-fraction inconsistency",
+      "condition": "K_f(t) cannot be made zero for admissible metric extensions",
+      "consequence": "reject or modify S1"
+    },
+    "FS2": {
+      "name": "Carrier-metric failure",
+      "condition": "no positive regular h_C satisfying regional restrictions",
+      "consequence": "reject S1"
+    },
+    "FS3": {
+      "name": "Unbounded lifting",
+      "condition": "E_r is not bounded in selected spaces",
+      "consequence": "reject concrete realization"
+    },
+    "FS4": {
+      "name": "Uncontrolled partition dependence",
+      "condition": "equally admissible partitions yield incompatible targets",
+      "consequence": "reopen selection"
+    },
+    "FS5": {
+      "name": "Regional cancellation kernel",
+      "condition": "load-bearing overlap of Ran(T_w) and Ran(T_v)",
+      "consequence": "revise target or inverse claims"
+    },
+    "FS6": {
+      "name": "Homogeneous-clock insufficiency",
+      "condition": "spatial clock gradients are unavoidable",
+      "consequence": "reject S1 clock branch"
+    },
+    "FS7": {
+      "name": "Effective-sector no-go",
+      "condition": "no admissible T_eff exists",
+      "consequence": "reject or redesign S1"
+    },
+    "FS8": {
+      "name": "Compatibility no-go",
+      "condition": "R_T cannot be controlled",
+      "consequence": "no forward-closure claim"
+    },
+    "FS9": {
+      "name": "Constraint failure",
+      "condition": "CGI source identities are not preserved",
+      "consequence": "reject realization"
+    },
+    "FS10": {
+      "name": "Sharp-comparator dominance",
+      "condition": "H1 closes with lower burden and less arbitrariness",
+      "consequence": "reopen primary selection"
+    }
+  },
+  "rejected_and_demoted_branches": [
+    {
+      "id": "R6-BACKGROUND-ONLY-AUXILIARY",
+      "status": "REJECTED",
+      "reason": "regional perturbation state is absent from the auxiliary map"
+    },
+    {
+      "id": "SHORTCUT-K-EQUALITY",
+      "status": "REJECTED",
+      "reason": "no default identification k_w=k_v=k_C"
+    },
+    {
+      "id": "SHORTCUT-DIAGONAL-KERNEL",
+      "status": "REJECTED",
+      "reason": "mode-diagonal transfer requires proof"
+    },
+    {
+      "id": "SHORTCUT-FULL-L2-INVERSE",
+      "status": "REJECTED",
+      "reason": "compact Laplacian requires zero-mode treatment"
+    },
+    {
+      "id": "SHORTCUT-SHARP-DIRECT-SUM",
+      "status": "REJECTED",
+      "reason": "coupled transmission is not G_w direct-sum G_v"
+    },
+    {
+      "id": "SHORTCUT-SMOOTH-SHARP",
+      "status": "REJECTED",
+      "reason": "pointwise partition convergence is insufficient"
+    },
+    {
+      "id": "SHORTCUT-MOMENT-FIELD",
+      "status": "REJECTED",
+      "reason": "finite moments are not a full field"
+    },
+    {
+      "id": "SHORTCUT-TRUNCATED-INVERSE",
+      "status": "REJECTED",
+      "reason": "finite spectral truncation creates a field kernel"
+    },
+    {
+      "id": "SHORTCUT-LOCAL-GLOBAL",
+      "status": "REJECTED",
+      "reason": "local WKB cannot be promoted globally without gluing"
+    },
+    {
+      "id": "SHORTCUT-INITIAL-ALLTIME",
+      "status": "REJECTED",
+      "reason": "initial compatibility is not all-time compatibility"
+    },
+    {
+      "id": "SHORTCUT-CP-ABSORPTION",
+      "status": "REJECTED",
+      "reason": "C_P remains separate from C_eff"
+    }
+  ],
+  "deficit_vector": {
+    "S1": {
+      "N_undef": "LOWER_BOUND",
+      "Delta_dyn": "LOWER_BOUND",
+      "Delta_IC": "LOWER_BOUND",
+      "Delta_BC": "BIFURCATED",
+      "Delta_match": "NOT_COUNTABLE_BEFORE_CONCRETE_OPERATOR_LINEARIZATION",
+      "Delta_emp": "NOT_APPLICABLE"
+    },
+    "H1": {
+      "N_undef": "LOWER_BOUND",
+      "Delta_dyn": "LOWER_BOUND",
+      "Delta_IC": "LOWER_BOUND",
+      "Delta_BC": "BIFURCATED",
+      "Delta_match": "NOT_COUNTABLE_BEFORE_CONCRETE_OPERATOR_LINEARIZATION",
+      "Delta_emp": "NOT_APPLICABLE"
+    },
+    "M1": {
+      "N_undef": "LOWER_BOUND",
+      "Delta_dyn": "LOWER_BOUND",
+      "Delta_IC": "LOWER_BOUND",
+      "Delta_BC": "BIFURCATED",
+      "Delta_match": "NOT_COUNTABLE_BEFORE_CONCRETE_TRANSFER",
+      "Delta_emp": "BIFURCATED"
+    },
+    "L1": {
+      "N_undef": "LOWER_BOUND",
+      "Delta_dyn": "LOWER_BOUND",
+      "Delta_IC": "LOWER_BOUND",
+      "Delta_BC": "BIFURCATED",
+      "Delta_match": "NOT_COUNTABLE_BEFORE_CONCRETE_TRANSFER",
+      "Delta_emp": "NOT_APPLICABLE"
+    },
+    "rank_policy": "no numeric universal vector"
+  },
+  "decision_ledger": {
+    "P0": {
+      "range": "P0-D01..P0-D20",
+      "status": "PARTIALLY_RECONSTRUCTED_FROM_CURRENT_CONVERSATION",
+      "preserved_core": [
+        "R1-R8 are heterogeneous layers",
+        "forward existence and inverse injectivity are separate",
+        "R8 may be valid only for an explicit reduced target",
+        "no family selected at P0"
+      ]
+    },
+    "P1": {
+      "range": "P1-D21..P1-D38",
+      "status": "AVAILABLE_IN_CURRENT_CONVERSATION",
+      "summary": [
+        "Common Realization Record mandatory",
+        "compound candidates CR-1..CR-7 retained",
+        "G2 not concretely passed",
+        "no realization selected"
+      ]
+    },
+    "P2": {
+      "range": "exact IDs unavailable",
+      "status": "UNRESOLVED_EXTERNAL_DEPENDENCY",
+      "summary": [
+        "geometry, embedding and clock branches were classified and inherited by P3"
+      ],
+      "rule": "do not invent missing exact wording"
+    },
+    "P3": {
+      "range": "P3-D39..P3-D58",
+      "status": "AVAILABLE_IN_CURRENT_CONVERSATION",
+      "summary": [
+        "ambient/domain/admissible spaces separated",
+        "zero-mode policy load-bearing",
+        "elliptic classes E1..E7 retained"
+      ]
+    },
+    "P4": {
+      "range": "P4-D59..P4-D81",
+      "status": "AVAILABLE_IN_CURRENT_CONVERSATION",
+      "summary": [
+        "smooth and sharp operator templates defined",
+        "SL0..SL5 required",
+        "invalid shortcuts rejected"
+      ]
+    },
+    "P5": {
+      "range": "P5-D82..P5-D104",
+      "status": "AVAILABLE_IN_CURRENT_CONVERSATION",
+      "summary": [
+        "data categories separated",
+        "compatibility manifold defined",
+        "G7 fails",
+        "regional-to-GM forward not closed"
+      ]
+    },
+    "P6": {
+      "range": "P6-D105..P6-D132",
+      "status": "AVAILABLE_IN_CURRENT_CONVERSATION",
+      "summary": [
+        "forward/inverse distinctions fixed",
+        "moment and finite truncation noninjectivity proved",
+        "shortlist normalized"
+      ]
+    },
+    "P7": {
+      "range": "P7-D133..P7-D163",
+      "status": "AVAILABLE_IN_CURRENT_CONVERSATION",
+      "summary": [
+        "S1 selected conditionally",
+        "H1/M1/L1 mandatory comparators",
+        "no packet prototype-ready"
+      ]
+    },
+    "P8": {
+      "range": "P8-D164..P8-D179",
+      "status": "FINAL",
+      "summary": [
+        "deliverable and audit specifications frozen",
+        "report-only activity approved",
+        "implementation not authorized"
+      ]
+    }
+  },
+  "formal_conclusions": {
+    "FC-1E-E-001": {
+      "assumptions": [
+        "exact regional FLRW dust",
+        "intrinsic nonzero scalar modes"
+      ],
+      "classification": "VERIFIED_FROM_PRIMARY_SOURCE",
+      "coordinate_dependencies": "regional harmonic decomposition",
+      "derivation_summary": "Each region has the first-order Delta_r,Z_r system and rank two.",
+      "evidence_needed_to_change_status": "a primary-source contradiction or corrected derivation",
+      "frame_dependencies": "regional dust frame",
+      "implementation_consequence": "preserve rank-two regional state",
+      "observational_consequence": "none; theoretical bulk only",
+      "source": [
+        "SRC-1E-D-CLOSURE"
+      ]
+    },
+    "FC-1E-E-002": {
+      "assumptions": [
+        "frozen Phase 1E-D boundary"
+      ],
+      "classification": "VERIFIED_FROM_PRIMARY_SOURCE",
+      "coordinate_dependencies": "none",
+      "derivation_summary": "Current Timescape does not supply the complete 3D common carrier and transfer package.",
+      "evidence_needed_to_change_status": "an explicit source construction of the complete carrier and transfer",
+      "frame_dependencies": "distinguishes regional, GM, wall and tracer frames",
+      "implementation_consequence": "new imported structure is required",
+      "observational_consequence": "no direct observable follows",
+      "source": [
+        "SRC-1E-D-CLOSURE"
+      ]
+    },
+    "FC-1E-E-003": {
+      "assumptions": [
+        "R1-R8 taxonomy"
+      ],
+      "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "coordinate_dependencies": "none",
+      "derivation_summary": "R1-R8 occupy carrier, formulation, operator, scale and target layers rather than one flat alternative set.",
+      "evidence_needed_to_change_status": "a complete standalone construction for every family",
+      "frame_dependencies": "none",
+      "implementation_consequence": "evaluate compound architectures, not isolated labels",
+      "observational_consequence": "none",
+      "source": [
+        "SRC-P0-P8-CHAT"
+      ]
+    },
+    "FC-1E-E-004": {
+      "assumptions": [
+        "project-governance selection criteria SC-1..SC-10; weights are not mathematically fixed"
+      ],
+      "classification": "CONVENTION_DEPENDENT",
+      "coordinate_dependencies": "Lagrangian reference carrier coordinates",
+      "derivation_summary": "S1 is retained conditionally as the provisional author-selected baseline; no minimum-extension theorem over H1 is claimed.",
+      "evidence_needed_to_change_status": "an adversarial result satisfying FS10, a fixed quantitative selection functional, or another falsification condition",
+      "frame_dependencies": "homogeneous regional clock branch",
+      "implementation_consequence": "retain S1 as report-only provisional baseline and H1 as mandatory comparator",
+      "observational_consequence": "the target remains theoretical",
+      "source": [
+        "SRC-P0-P8-CHAT"
+      ]
+    },
+    "FC-1E-E-005": {
+      "assumptions": [
+        "S1 packet after adversarial corrections"
+      ],
+      "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "coordinate_dependencies": "carrier-class and regional elliptic-branch dependent",
+      "derivation_summary": "Exact topology, metric extensions, embeddings, regional elliptic realization, partition profile, normalized carrier scalarization, T_eff and regional reconstruction of C_P remain unselected.",
+      "evidence_needed_to_change_status": "complete definitions plus G7,G8,G11 closure",
+      "frame_dependencies": "homogeneous regional clocks only",
+      "implementation_consequence": "no runtime or prototype",
+      "observational_consequence": "no observational use",
+      "source": [
+        "SRC-P0-P8-CHAT"
+      ]
+    },
+    "FC-1E-E-006": {
+      "assumptions": [
+        "project-governance comparator policy"
+      ],
+      "classification": "CONVENTION_DEPENDENT",
+      "coordinate_dependencies": "sharp carrier/interface branch",
+      "derivation_summary": "H1 is retained by project governance as the sharp adversarial comparator.",
+      "evidence_needed_to_change_status": "a branch-independent proof that H1 is mathematically inapplicable or a later explicit project decision",
+      "frame_dependencies": "homogeneous regional clock branch in the current comparator packet",
+      "implementation_consequence": "retain H1 in audits; no runtime implementation authorized",
+      "observational_consequence": "the target remains theoretical",
+      "source": [
+        "SRC-P0-P8-CHAT"
+      ]
+    },
+    "FC-1E-E-007": {
+      "assumptions": [
+        "infinite-dimensional parent field space",
+        "finite linear moment map"
+      ],
+      "classification": "SYMBOLICALLY_VERIFIED",
+      "coordinate_dependencies": "parent-carrier dependent",
+      "derivation_summary": "A finite-dimensional linear moment target has a nontrivial field kernel.",
+      "evidence_needed_to_change_status": "restriction to a proven finite-dimensional source ansatz",
+      "frame_dependencies": "parent-frame dependent",
+      "implementation_consequence": "M1 cannot be used as field reconstruction",
+      "observational_consequence": "reduced target only",
+      "source": [
+        "SRC-P0-P8-CHAT"
+      ]
+    },
+    "FC-1E-E-008": {
+      "assumptions": [
+        "local patch target"
+      ],
+      "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "coordinate_dependencies": "patch coordinates",
+      "derivation_summary": "L1 provides only a local GM patch state without global gluing.",
+      "evidence_needed_to_change_status": "a global atlas and reconstruction theorem",
+      "frame_dependencies": "local frame/tetrad",
+      "implementation_consequence": "no global runtime claim",
+      "observational_consequence": "no survey mapping",
+      "source": [
+        "SRC-P0-P8-CHAT"
+      ]
+    },
+    "FC-1E-E-009": {
+      "assumptions": [
+        "background-only auxiliary map ignores X_w,X_v perturbations"
+      ],
+      "classification": "SYMBOLICALLY_VERIFIED",
+      "coordinate_dependencies": "background coordinates",
+      "derivation_summary": "All regional perturbations lie in the kernel of a map explicitly defined to depend only on background inputs.",
+      "evidence_needed_to_change_status": "an explicit full auxiliary-field transfer of the regional perturbations",
+      "frame_dependencies": "background frame only",
+      "implementation_consequence": "reject as perturbation transfer",
+      "observational_consequence": "none",
+      "source": [
+        "SRC-P0-P8-CHAT"
+      ]
+    },
+    "FC-1E-E-010": {
+      "assumptions": [
+        "effective-density target retained"
+      ],
+      "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "coordinate_dependencies": "carrier/target dependent",
+      "derivation_summary": "C_eff is a load-bearing mismatch block and cannot be dropped by component counting.",
+      "evidence_needed_to_change_status": "a derivation proving dependence or redundancy on the admissible transfer domain",
+      "frame_dependencies": "GM effective sector",
+      "implementation_consequence": "T_eff must be defined before closure",
+      "observational_consequence": "no direct observable",
+      "source": [
+        "SRC-1E-D-CLOSURE",
+        "SRC-P0-P8-CHAT"
+      ]
+    },
+    "FC-1E-E-011": {
+      "assumptions": [
+        "inherited clean-comoving GM constitutive branch"
+      ],
+      "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "coordinate_dependencies": "target constitutive sector",
+      "derivation_summary": "The inherited clean-comoving closure is C_P=mathscr W-3 mathscr Q=0; it remains separate from C_eff, while regional reconstruction is missing.",
+      "evidence_needed_to_change_status": "a derivation changing the target branch or identifying a closed regional reconstruction without conflating C_P with C_eff",
+      "frame_dependencies": "GM clean-comoving effective sector",
+      "implementation_consequence": "retain exact target closure and separately define regional reconstruction before closure claims",
+      "observational_consequence": "none",
+      "source": [
+        "SRC-1E-D-CLOSURE",
+        "SRC-P0-P8-CHAT"
+      ]
+    },
+    "FC-1E-E-012": {
+      "assumptions": [
+        "corrected mismatch evolution system"
+      ],
+      "classification": "SYMBOLICALLY_VERIFIED",
+      "coordinate_dependencies": "time-transport dependent",
+      "derivation_summary": "Initial compatibility propagates only if transfer residuals and the exact +C_P/4 forcing in dot(C_Z) are controlled.",
+      "evidence_needed_to_change_status": "a concrete invariant-manifold or controlled-residual proof including the exact constitutive forcing",
+      "frame_dependencies": "regional and GM frames connected by selected transfer",
+      "implementation_consequence": "G7 fails until residual and constitutive reconstruction closure is supplied",
+      "observational_consequence": "none",
+      "source": [
+        "SRC-P0-P8-CHAT"
+      ]
+    },
+    "FC-1E-E-013": {
+      "assumptions": [
+        "concrete transfer not selected"
+      ],
+      "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "coordinate_dependencies": "operator-domain dependent",
+      "derivation_summary": "Three named mismatch blocks do not determine Frechet rank.",
+      "evidence_needed_to_change_status": "a concrete operator linearization and independence analysis",
+      "frame_dependencies": "frame-map dependent",
+      "implementation_consequence": "use explicit unknown-rank token",
+      "observational_consequence": "none",
+      "source": [
+        "SRC-1E-D-CLOSURE"
+      ]
+    },
+    "FC-1E-E-014": {
+      "assumptions": [
+        "S1 operator package incomplete"
+      ],
+      "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "coordinate_dependencies": "S1 carrier dependent",
+      "derivation_summary": "Regional inverse kernels, lifting kernels, range overlap and candidate scalarization prevent an inverse verdict.",
+      "evidence_needed_to_change_status": "kernel and lower-bound analysis on the admissible space",
+      "frame_dependencies": "homogeneous clock branch",
+      "implementation_consequence": "no inverse algorithm",
+      "observational_consequence": "none",
+      "source": [
+        "SRC-P0-P8-CHAT"
+      ]
+    },
+    "FC-1E-E-015": {
+      "assumptions": [
+        "distinct regional and carrier operators"
+      ],
+      "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "coordinate_dependencies": "spectral-basis dependent",
+      "derivation_summary": "Mode mixing is permitted and diagonal mode matching is not a default.",
+      "evidence_needed_to_change_status": "an intertwining theorem yielding diagonal transfer",
+      "frame_dependencies": "spatial carrier dependent",
+      "implementation_consequence": "implementations must retain non-diagonal kernels unless proved otherwise",
+      "observational_consequence": "no direct survey identification",
+      "source": [
+        "SRC-1E-D-CLOSURE",
+        "SRC-P0-P8-CHAT"
+      ]
+    },
+    "FC-1E-E-016": {
+      "assumptions": [
+        "SL0..SL5 criteria"
+      ],
+      "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "coordinate_dependencies": "limit-chart dependent",
+      "derivation_summary": "Partition-value convergence alone does not establish operator or target convergence.",
+      "evidence_needed_to_change_status": "controlled geometry, source, resolvent and target convergence",
+      "frame_dependencies": "same declared frame on both branches",
+      "implementation_consequence": "no sharp-limit claim in S1",
+      "observational_consequence": "none",
+      "source": [
+        "SRC-P0-P8-CHAT"
+      ]
+    },
+    "FC-1E-E-017": {
+      "assumptions": [
+        "S1/H1 gate audit"
+      ],
+      "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "coordinate_dependencies": "carrier dependent",
+      "derivation_summary": "Effective transfer, regional reconstruction of C_P, temporal operator transport and compatibility dynamics remain missing.",
+      "evidence_needed_to_change_status": "new equations/data that close G7,G8,G11 without silently identifying carrier and regional operators",
+      "frame_dependencies": "regional-to-GM transfer dependent",
+      "implementation_consequence": "report-only work must continue",
+      "observational_consequence": "no observational prediction",
+      "source": [
+        "SRC-1E-D-CLOSURE",
+        "SRC-P0-P8-CHAT"
+      ]
+    },
+    "FC-1E-E-018": {
+      "assumptions": [
+        "G15 criteria"
+      ],
+      "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "coordinate_dependencies": "all candidate coordinate branches",
+      "derivation_summary": "No packet has concrete geometry, closed compatibility and forward well-posedness.",
+      "evidence_needed_to_change_status": "successful independent audit and explicit G15 reassessment",
+      "frame_dependencies": "all candidate frame branches",
+      "implementation_consequence": "prototype authorization remains absent",
+      "observational_consequence": "none",
+      "source": [
+        "SRC-P0-P8-CHAT"
+      ]
+    },
+    "FC-1E-E-019": {
+      "assumptions": [
+        "Phase 1E-E scope"
+      ],
+      "classification": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "coordinate_dependencies": "no survey-coordinate map",
+      "derivation_summary": "The S1 output remains a candidate carrier scalar representation intended for the GM target; observational mappings remain outside scope.",
+      "evidence_needed_to_change_status": "a separately authorized downstream bridge phase",
+      "frame_dependencies": "no tracer-frame identification",
+      "implementation_consequence": "do not add observational modules",
+      "observational_consequence": "no f-sigma8 or data claim",
+      "source": [
+        "SRC-P0-P8-CHAT"
+      ]
+    },
+    "FC-1E-E-020": {
+      "assumptions": [
+        "human artifact-scope authorization"
+      ],
+      "classification": "NOT_APPLICABLE",
+      "coordinate_dependencies": "none",
+      "derivation_summary": "Human authorization governs artifact scope and does not constitute a scientific derivation.",
+      "evidence_needed_to_change_status": "not a scientific-status question; a later explicit human authorization may change only operational scope",
+      "frame_dependencies": "none",
+      "implementation_consequence": "do not infer runtime authorization from report-authoring approval",
+      "observational_consequence": "none",
+      "source": [
+        "SRC-P0-P8-CHAT"
+      ]
+    }
+  },
+  "final_selection": {
+    "primary_realization_id": "S1-LAGRANGIAN-SMOOTH-COMPACT-MEANZERO",
+    "selection_level": "ARCHITECTURE_CLASS",
+    "primary_verdict": "PRIMARY_REALIZATION_CLASS_SELECTED_CONDITIONALLY",
+    "overall_verdict": "PARTIAL_REALIZATION_DEFICITS_REMAIN",
+    "theory_consequence": "NEW_DYNAMICS_REQUIRED",
+    "readiness": "REPORT_ONLY_MUST_CONTINUE",
+    "mandatory_comparators": [
+      "H1-LAGRANGIAN-SHARP-COMPACT-TRANSMISSION",
+      "M1-FINITE-CARRIER-MOMENTS",
+      "L1-LOCAL-WKB-CARRIER-PATCH"
+    ],
+    "extension_only": "X1-AUXILIARY-FULL-FIELD-EXTENSION",
+    "implementation_authorization": "NOT_GRANTED",
+    "prototype_authorization": "NOT_GRANTED",
+    "selection_basis": "CONVENTION_DEPENDENT_PROVISIONAL_AUTHOR_BASELINE",
+    "target_scope": "GLOBAL_CANDIDATE_CARRIER_SCALAR_REPRESENTATION_FOR_GM_TARGET",
+    "minimum_extension_claim": "NOT_JUSTIFIED"
+  },
+  "implementation_boundary": {
+    "allowed_files": [
+      "phase1e_e_transfer_realization_selection.md",
+      "phase1e_e_transfer_realization_inventory.json"
+    ],
+    "source_code": "FORBIDDEN",
+    "tests": "FORBIDDEN",
+    "prototype": "FORBIDDEN",
+    "commit_tag_push": "NOT_PERFORMED",
+    "implementation_authorization": "NOT_GRANTED"
+  },
+  "cross_file_consistency": {
+    "primary_id": "S1-LAGRANGIAN-SMOOTH-COMPACT-MEANZERO",
+    "primary_verdict": "PRIMARY_REALIZATION_CLASS_SELECTED_CONDITIONALLY",
+    "overall_verdict": "PARTIAL_REALIZATION_DEFICITS_REMAIN",
+    "readiness": "REPORT_ONLY_MUST_CONTINUE",
+    "implementation_authorization": "NOT_GRANTED",
+    "selection_basis": "CONVENTION_DEPENDENT_PROVISIONAL_AUTHOR_BASELINE",
+    "target_scope": "GLOBAL_CANDIDATE_CARRIER_SCALAR_REPRESENTATION_FOR_GM_TARGET",
+    "minimum_extension_claim": "NOT_JUSTIFIED",
+    "S1_G2": "DEFINED_BUT_UNDERDETERMINED",
+    "S1_G4": "DEFINED_BUT_UNDERDETERMINED",
+    "S1_G5": "DEFINED_BUT_UNDERDETERMINED",
+    "S1_Delta_BC": "BIFURCATED",
+    "C_P_definition": "C_P=mathscr W-3 mathscr Q",
+    "C_P_target_condition": "C_P(t)=0"
+  }
+}
