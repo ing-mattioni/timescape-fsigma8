@@ -1,0 +1,384 @@
+{
+  "schema_version": "1.0.0",
+  "realization_id": "H1-1E-F-CLEAN-NONDEGENERATE-TRANSMISSION-V1",
+  "framework_status": {
+    "classification": "COMPATIBLE_IMPORTED_DYNAMICS",
+    "scientific_status": "CONDITIONALLY_CLOSED",
+    "observational_status": "NON_OBSERVATIONAL",
+    "fsigma8_status": "NOT_FSIGMA8",
+    "acceptance_status": "ALL_SCIENTIFIC_AND_SOFTWARE_GATES_PASSED"
+  },
+  "architecture": {
+    "carrier_reference_topology": "Sigma_C = T^3",
+    "regional_domains": [
+      "Omega_w",
+      "Omega_v"
+    ],
+    "interface": "Gamma = boundary(Omega_w) = boundary(Omega_v)",
+    "interface_role": "MATHEMATICAL_CARRIER_TRANSFER_INTERFACE",
+    "interface_coordinates": "FIXED_LAGRANGIAN_REFERENCE_COORDINATES",
+    "interface_displacement_state": "ABSENT",
+    "backend_role": "NONPHYSICAL_MATRIX_OPERATOR_CONTRACT_REFERENCE_BACKEND",
+    "s1_fallback": "ABSENT"
+  },
+  "branch_assumptions": [
+    "0 < f_v < 1",
+    "f_w = 1 - f_v",
+    "f_v*f_w >= partition_product_min > 0",
+    "|A_P| >= A_P_min > 0",
+    "|Q_bar+W_bar| >= effective_denominator_min > 0",
+    "|rho_d| >= rho_d_min > 0",
+    "c_Gamma >= coercivity_min > 0 on the declared realization interval",
+    "alpha_w > 0",
+    "alpha_v > 0",
+    "operator_time_regularity = C2_COMMON_TIME",
+    "fixed_reference_constraints = true",
+    "Theta_r = 3 H_r through second declared derivative order",
+    "all tolerances and thresholds are explicit"
+  ],
+  "differential_state": {
+    "variables": [
+      "Delta_w",
+      "Z_w",
+      "Delta_v",
+      "Z_v"
+    ],
+    "rank": 4,
+    "regional_rank": 2,
+    "equations": {
+      "Delta_r_dot": "-alpha_r Z_r",
+      "Z_r_dot": "-2 alpha_r H_r Z_r - 4 pi G alpha_r rho_r Delta_r"
+    },
+    "source": "GM Eqs. (2.22)-(2.23), dust specialization, plus authorized common-time chain rule"
+  },
+  "algebraic_variables": {
+    "F_v": "-(C_R_Gamma + B_P E_DeltaTheta_Gamma)/A_P",
+    "J_Xi": "(F_v_dot - A_f F_v - f_v f_w E_DeltaXi_0_Gamma - J_f_Gamma)/(f_v f_w)",
+    "independent_differential_states_added": 0
+  },
+  "derived_variables": {
+    "regional_curvature": "mathscr_R_r = -(4/3) Theta_r Z_r + 16 pi G rho_r Delta_r",
+    "target_expansion": "Z = -d Delta_d/dt_D by analytic operator differentiation",
+    "target_curvature": "R_GM = -(4/3) Theta Z + 16 pi G (rho_d Delta_d + rho_eff Delta_eff)",
+    "effective_normalization_failure": "H1EffectiveNormalizationError retains only unnormalized F_v, mathscr_Q, mathscr_W, C_P, and background Q_bar+W_bar diagnostics",
+    "target_only_inverse": "ABSENT"
+  },
+  "operator_contracts": {
+    "space": "V_Gamma,0: continuous trace and one global carrier mean removed",
+    "operator": "A_Gamma(t): V_Gamma,0 -> V_Gamma,0*",
+    "inverse": "G_Gamma(t) = A_Gamma(t)^(-1)",
+    "inverse_derivative": "G_Gamma_dot = -G_Gamma A_Gamma_dot G_Gamma",
+    "solution_derivative": "u_dot = G_Gamma(s_dot-A_Gamma_dot u)",
+    "solution_second_derivative": "u_ddot = G_Gamma(s_ddot-A_Gamma_ddot u-2 A_Gamma_dot u_dot)",
+    "global_mean_constraints": 1,
+    "independent_regional_constant_projections": 0,
+    "required_effective_operators": [
+      "E_DeltaTheta_Gamma",
+      "E_DeltaXi_0_Gamma"
+    ],
+    "required_partition_term": "J_f_Gamma",
+    "time_independent_partition_rule": "J_f_Gamma must be explicitly zero"
+  },
+  "transmission_conditions": {
+    "value": "[u]_Gamma = 0",
+    "conormal_flux": "[A D_n u]_Gamma = 0",
+    "surface_source": "FORBIDDEN",
+    "wall_provenance": "PRESERVED",
+    "void_provenance": "PRESERVED",
+    "roundtrip_claim": "admissible regional dual source -> transmission solution -> coupled operator -> same admissible regional dual source through second derivative order"
+  },
+  "nondegeneracy_conditions": {
+    "required_configuration_fields": [
+      "A_P_min",
+      "effective_denominator_min",
+      "coercivity_min",
+      "C_P_tolerance",
+      "R_Delta_tolerance",
+      "R_Z_tolerance",
+      "R_eff_tolerance",
+      "K_GM_tolerance",
+      "transmission_value_tolerance",
+      "transmission_flux_tolerance"
+    ],
+    "additional_explicit_fields": [
+      "partition_product_min",
+      "rho_d_min",
+      "source_roundtrip_tolerance",
+      "background_identity_tolerance"
+    ],
+    "hidden_scientific_defaults": "NONE",
+    "failure_policy": "FAIL_CLOSED_BEFORE_DIVISION",
+    "effective_denominator_failure": "Delta_eff and w_eff are not evaluated; explicitly unnormalized diagnostics remain attached to the normalization error"
+  },
+  "effective_sector_equations": {
+    "d_Theta": "Theta_v-Theta_w",
+    "A_W": "R_bar_v-R_bar_w",
+    "A_Q": "(2/3)(1-2 f_v)d_Theta^2",
+    "B_Q": "(4/3)f_v f_w d_Theta",
+    "A_P": "A_W-3 A_Q = A_W-2(1-2 f_v)d_Theta^2",
+    "B_P": "-3 B_Q = -4 f_v f_w d_Theta",
+    "C_R_Gamma": "f_w T_w_Gamma[mathscr_R_w] + f_v T_v_Gamma[mathscr_R_v]",
+    "mathscr_Q": "A_Q F_v + B_Q E_DeltaTheta_Gamma",
+    "mathscr_W": "C_R_Gamma + A_W F_v",
+    "C_P": "mathscr_W-3 mathscr_Q",
+    "rho_d": "f_w rho_w+f_v rho_v",
+    "Delta_d": "m_w T_w_Gamma[Delta_w]+m_v T_v_Gamma[Delta_v]+d_F F_v",
+    "rho_eff": "-(Q_bar+W_bar)/(16 pi G)",
+    "p_eff": "-Q_bar/(16 pi G)+W_bar/(48 pi G)",
+    "Delta_eff": "(mathscr_Q+mathscr_W)/(Q_bar+W_bar)",
+    "P_tilde_eff": "-C_P/[3(Q_bar+W_bar)]"
+  },
+  "compatibility_residuals": {
+    "canonical": [
+      "R_Delta = Delta_d_dot+Z",
+      "R_Z = Z_dot+(2/3)Theta Z+4 pi G(rho_d Delta_d+rho_eff Delta_eff)+12 pi G rho_eff P_tilde_eff",
+      "R_eff = Delta_eff_dot-w_eff Theta Delta_eff+(1+w_eff)Z+Theta P_tilde_eff"
+    ],
+    "mismatch_states": [
+      "C_Delta",
+      "C_Z",
+      "C_eff"
+    ],
+    "constitutive_residual": "C_P is separate",
+    "fourth_mismatch_state": "ABSENT",
+    "clean_zero_propagation": {
+      "C_Delta_dot": "-C_Z",
+      "C_Z_dot": "-(2/3)Theta C_Z-4 pi G rho_d C_Delta-4 pi G rho_eff C_eff",
+      "C_eff_dot": "w_eff Theta C_eff-(1+w_eff)C_Z"
+    }
+  },
+  "constraint_equations": {
+    "R_GM": "-(4/3)Theta Z+16 pi G(rho_d Delta_d+rho_eff Delta_eff)",
+    "K_GM": "R_GM+(4/3)Theta Z-16 pi G(rho_d Delta_d+rho_eff Delta_eff)",
+    "classification": "DERIVED_CONSTRAINT_RESIDUAL",
+    "independent_target_curvature_state": "ABSENT"
+  },
+  "gates": [
+    {
+      "id": "G0",
+      "name": "repository_preflight",
+      "status": "PASS"
+    },
+    {
+      "id": "G1",
+      "name": "regional_rank_four",
+      "status": "DIRECT_HARNESS_PASS"
+    },
+    {
+      "id": "G2",
+      "name": "single_global_zero_mode",
+      "status": "DIRECT_HARNESS_PASS"
+    },
+    {
+      "id": "G3",
+      "name": "transmission_continuity",
+      "status": "DIRECT_HARNESS_PASS"
+    },
+    {
+      "id": "G4",
+      "name": "conormal_continuity",
+      "status": "DIRECT_HARNESS_PASS"
+    },
+    {
+      "id": "G5",
+      "name": "uniform_coercivity_contract",
+      "status": "DIRECT_HARNESS_PASS"
+    },
+    {
+      "id": "G6",
+      "name": "nondegenerate_constitutive_solve",
+      "status": "DIRECT_HARNESS_PASS"
+    },
+    {
+      "id": "G7",
+      "name": "analytic_common_time_derivative",
+      "status": "DIRECT_HARNESS_PASS"
+    },
+    {
+      "id": "G8",
+      "name": "clean_C_P",
+      "status": "DIRECT_HARNESS_PASS"
+    },
+    {
+      "id": "G9",
+      "name": "canonical_GM_residuals",
+      "status": "DIRECT_HARNESS_PASS"
+    },
+    {
+      "id": "G10",
+      "name": "derived_GM_constraint",
+      "status": "DIRECT_HARNESS_PASS"
+    },
+    {
+      "id": "G11",
+      "name": "provenance_roundtrip",
+      "status": "DIRECT_HARNESS_PASS"
+    },
+    {
+      "id": "G12",
+      "name": "D3_firewall",
+      "status": "DIRECT_HARNESS_PASS"
+    },
+    {
+      "id": "G13",
+      "name": "observational_firewall",
+      "status": "DIRECT_HARNESS_PASS"
+    },
+    {
+      "id": "G14",
+      "name": "targeted_pytest",
+      "status": "PASS"
+    },
+    {
+      "id": "G15",
+      "name": "full_two_interpreter_regression",
+      "status": "PASS"
+    }
+  ],
+  "validation_tests": [
+    {"id": "V1", "name": "regional exact equations", "status": "DIRECT_HARNESS_PASS"},
+    {"id": "V2", "name": "global zero mode", "status": "DIRECT_HARNESS_PASS"},
+    {"id": "V3", "name": "transmission continuity", "status": "DIRECT_HARNESS_PASS"},
+    {"id": "V4", "name": "conormal continuity", "status": "DIRECT_HARNESS_PASS"},
+    {"id": "V5", "name": "coercivity guard", "status": "DIRECT_HARNESS_PASS"},
+    {"id": "V6", "name": "equal-region clean limit", "status": "DIRECT_HARNESS_PASS"},
+    {"id": "V7", "name": "wall/void relabelling", "status": "DIRECT_HARNESS_PASS"},
+    {"id": "V8", "name": "single-region endpoints", "status": "DIRECT_HARNESS_PASS"},
+    {"id": "V9", "name": "normalized effective degeneracy", "status": "DIRECT_HARNESS_PASS"},
+    {"id": "V10", "name": "constitutive closure", "status": "DIRECT_HARNESS_PASS"},
+    {"id": "V11", "name": "density compatibility", "status": "DIRECT_HARNESS_PASS"},
+    {"id": "V12", "name": "expansion compatibility", "status": "DIRECT_HARNESS_PASS"},
+    {"id": "V13", "name": "effective compatibility", "status": "DIRECT_HARNESS_PASS"},
+    {"id": "V14", "name": "GM Hamiltonian", "status": "DIRECT_HARNESS_PASS"},
+    {"id": "V15", "name": "compatibility propagation", "status": "DIRECT_HARNESS_PASS"},
+    {"id": "V16", "name": "broken transmission detection", "status": "DIRECT_HARNESS_PASS"},
+    {"id": "V17", "name": "broken C_P separation", "status": "DIRECT_HARNESS_PASS"},
+    {"id": "V18", "name": "spectral firewall", "status": "DIRECT_HARNESS_PASS"},
+    {"id": "V19", "name": "observational firewall", "status": "DIRECT_HARNESS_PASS"},
+    {"id": "V20", "name": "provenance roundtrip", "status": "DIRECT_HARNESS_PASS"}
+  ],
+  "observational_firewall": {
+    "fsigma8": "NOT_IMPLEMENTED",
+    "sigma8": "NOT_IMPLEMENTED",
+    "RSD": "NOT_IMPLEMENTED",
+    "tracer_dynamics": "NOT_IMPLEMENTED",
+    "bias": "NOT_IMPLEMENTED",
+    "dressed_lightcone": "NOT_IMPLEMENTED",
+    "survey_mapping": "NOT_IMPLEMENTED",
+    "likelihood": "NOT_IMPLEMENTED",
+    "Candidate_A": "UNCHANGED_EXTERNAL_ANCHOR_NON_OBSERVATIONAL"
+  },
+  "d3_firewall": {
+    "adjudication": "RESOLVED_DERIVED_4_10",
+    "runtime_labels": [
+      "derived_4_10",
+      "printed_4_15"
+    ],
+    "default": "NONE",
+    "existing_behavior_modified": false
+  },
+  "wavenumber_firewall": {
+    "distinct_roles": [
+      "k_code",
+      "k_w",
+      "k_v",
+      "k_C_or_k_D",
+      "k_dressed",
+      "k_observational"
+    ],
+    "generic_k_api": "ABSENT",
+    "mode_diagonal_assumption": false
+  },
+  "frame_firewall": {
+    "target_state": [
+      "Delta_d",
+      "Z",
+      "Delta_eff"
+    ],
+    "forbidden_identifications": [
+      "regional dust Z = wall velocity",
+      "regional dust Z = tracer velocity",
+      "regional dust Z = peculiar velocity divergence",
+      "regional dust Z = observational RSD divergence"
+    ]
+  },
+  "implementation_authorization": {
+    "scientific_implementation": "GRANTED",
+    "prototype": "GRANTED_FOR_CONDITIONAL_H1_RESEARCH_RUNTIME_ONLY",
+    "observational_implementation": "NOT_GRANTED",
+    "dressed_lightcone_implementation": "NOT_GRANTED",
+    "RSD_implementation": "NOT_GRANTED",
+    "fsigma8_implementation": "NOT_GRANTED",
+    "scientific_implementation_result": "SATISFIED",
+    "completion_claim": "H1_CLEAN_NONDEGENERATE_TRANSMISSION_REALIZATION_IMPLEMENTED_CONDITIONALLY"
+  },
+  "modified_files": [
+    "src/timescape_fsigma8/transfer/__init__.py",
+    "src/timescape_fsigma8/transfer/h1_realization.py",
+    "src/timescape_fsigma8/transfer/matrix_backend.py",
+    "tests/test_phase1e_f_h1_transfer.py",
+    "reports/phase1e_f_h1_transfer_realization.md",
+    "reports/phase1e_f_h1_transfer_realization_inventory.json",
+    "reports/phase1e_f_h1_transfer_realization_validation.md",
+    "reports/phase1e_f_h1_transfer_realization_adversarial_audit.md"
+  ],
+  "test_results": {
+    "direct_python_3_14_3_harness": {
+      "result": "37 passed",
+      "scope": "all new Phase 1E-F test functions and parameter cases",
+      "formal_pytest": false
+    },
+    "python_3_14_3_targeted_pytest": {
+      "result": "37 passed in 0.24s",
+      "failed": 0,
+      "skipped": 0,
+      "xfailed": 0,
+      "warnings": 0
+    },
+    "python_3_11_9_targeted_pytest": {
+      "result": "37 passed in 0.25s",
+      "failed": 0,
+      "skipped": 0,
+      "xfailed": 0,
+      "warnings": 0
+    },
+    "python_3_14_3_full_pytest": {
+      "python": "3.14.3",
+      "numpy": "2.5.1",
+      "scipy": "1.18.0",
+      "matplotlib": "3.11.0",
+      "pytest": "9.1.1",
+      "pluggy": "1.6.0",
+      "setuptools": "84.0.0",
+      "packaging": "26.3",
+      "result": "416 passed in 31.19s",
+      "failed": 0,
+      "skipped": 0,
+      "xfailed": 0,
+      "warnings": 0
+    },
+    "python_3_11_9_full_pytest": {
+      "python": "3.11.9",
+      "numpy": "2.4.6",
+      "scipy": "1.17.1",
+      "matplotlib": "3.11.0",
+      "pytest": "9.1.1",
+      "pluggy": "1.6.0",
+      "setuptools": "65.5.0",
+      "packaging": "26.3",
+      "result": "416 passed in 24.50s",
+      "failed": 0,
+      "skipped": 0,
+      "xfailed": 0,
+      "warnings": 0
+    },
+    "environment_recovery": {
+      "root_cause": "both prior virtual environments were incomplete package-directory skeletons with missing pip/package files and metadata; Python 3.11 also retained a broken distutils-precedence.pth reference",
+      "repair": "corrupt environments moved to timestamped external backups and exact interpreter paths recreated",
+      "repository_dependency_files_changed": false,
+      "phase1e_f_worktree_hashes_preserved_during_repair": true
+    },
+    "legacy_baseline": "379 passed per interpreter before Phase 1E-F",
+    "commit_tag_push_allowed": true
+  }
+}
