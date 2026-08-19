@@ -1,0 +1,369 @@
+{
+  "realization_id": "H1-1E-G-COMOVING-CGI-ELLIPTIC-TRANSMISSION-V1",
+  "phase": "Phase 1E-G",
+  "role": "CONTINUUM_GEOMETRIC_REALIZATION_OF_1E_F_H1_CONTRACT",
+  "framework_status": [
+    "COMPATIBLE_IMPORTED_DYNAMICS",
+    "EXPLICIT_MODEL_EXTENSION"
+  ],
+  "scientific_status": "CONDITIONALLY_DERIVED_CONTINUUM_REALIZATION",
+  "implementation_status": "CONDITIONAL_RESEARCH_RUNTIME",
+  "architecture": "CONDITIONAL_CONTINUUM_GEOMETRIC_CLOSURE",
+  "frozen_parent_phase": {
+    "phase": "Phase 1E-F",
+    "commit": "1e0a1772aa01ef312a9c3cae6d3e65c8b4f9cbdd",
+    "realization": "H1-1E-F-CLEAN-NONDEGENERATE-TRANSMISSION-V1",
+    "differential_state": ["Delta_w", "Z_w", "Delta_v", "Z_v"],
+    "differential_rank": 4,
+    "scientific_core_modified": false
+  },
+  "provenance_layers": {
+    "derived_from_timescape_cgi_input": [
+      "regional_background",
+      "regional_CGI_sources",
+      "regional_rank_two_dust_evolution",
+      "derived_regional_curvature",
+      "frozen_Phase_1E_F_downstream_contract"
+    ],
+    "explicit_phase_1e_g_model_extension": [
+      "reference_carrier",
+      "morphology",
+      "pullback_maps",
+      "weak_transmission_operator",
+      "homogeneous_clock_branch"
+    ],
+    "numerical_reference_discretization": [
+      "periodic_structured_grid",
+      "conservative_face_flux",
+      "harmonic_scalar_transmissibility",
+      "sparse_constrained_solve"
+    ]
+  },
+  "carrier": {
+    "reference_topology": "PERIODIC_REFERENCE_TORUS",
+    "reference_scientific_topology": "Sigma_C=T3",
+    "supported_reference_dimensions": [1, 2, 3],
+    "periodicity_required": true,
+    "target_scalarization": "L_D=Delta_gamma_D"
+  },
+  "carrier_physical_status": "COMPUTATIONAL_REFERENCE_CARRIER_ONLY",
+  "morphology_contract": {
+    "required": true,
+    "members": ["Omega_w", "Omega_v", "Gamma", "Phi_w", "Phi_v"],
+    "provenance_required": [
+      "morphology_id",
+      "wall_domain",
+      "void_domain",
+      "interface",
+      "metric_pullbacks",
+      "orientation",
+      "reference_measure",
+      "source_injections"
+    ],
+    "reference_comparators": [
+      "layered/slab",
+      "connected interior island"
+    ]
+  },
+  "morphology_status": "REQUIRED_EXTERNAL_MODEL_INPUT",
+  "regional_geometries": {
+    "wall": "flat comoving reference class",
+    "void": "negative-curvature comoving class with documented Poincare validation patch",
+    "physical_completeness_claim": "NOT_GRANTED"
+  },
+  "target_geometry": {
+    "metric": "gamma_D",
+    "reference_branch": "flat periodic",
+    "K_D": 0,
+    "separate_scalarization_name_required": true
+  },
+  "metric_pullback_contract": {
+    "metric": "gamma_hat_r=Phi_r^* gamma_r",
+    "inverse": "gamma_hat_r^{ij}",
+    "tensor_density": "K_r^{ij}=J_r gamma_hat_r^{ij}",
+    "required_properties": ["symmetric", "positive_definite", "time_independent"]
+  },
+  "reference_measure_contract": {
+    "metric_volume_ratio": "J_r=dmu_gamma_hat_r/dmu_0",
+    "weak_source_load": "J_r s_r dmu_0",
+    "source_measure_factor_mandatory": true
+  },
+  "function_spaces": {
+    "broken": "H1(Omega_w) direct_sum H1(Omega_v)",
+    "continuous_trace": "V_Gamma={[u]_Gamma=0}",
+    "normalized": "V_Gamma,0={global dmu_0 mean=0}",
+    "regional_mean_projections": 0,
+    "global_mean_constraints": 1
+  },
+  "weak_operator": {
+    "continuum": "sum_r integral K_r^{ij} partial_i u_r partial_j v_r dmu_0",
+    "strong_regional": "-J_r^{-1} partial_i(J_r gamma_hat_r^{ij} partial_j u_r)",
+    "surface_source": false,
+    "penalty_is_continuum_definition": false
+  },
+  "source_functional": "-sum_r integral J_r s_r v_r dmu_0",
+  "source_projection": {
+    "space": "dual/source",
+    "condition": "<Q_Gamma b,1>=0",
+    "distinct_from_solution_normalization": true,
+    "base_mean_before": 1.0,
+    "base_mean_after": 0.0
+  },
+  "transmission_conditions": {
+    "value": "[u]_Gamma=0",
+    "common_normal": "n_Gamma wall_to_void",
+    "flux": "q_w-q_v=0",
+    "outward_equivalent": "j_w_out+j_v_out=0",
+    "interface_status": "MATHEMATICAL_TRANSFER_INTERFACE"
+  },
+  "kernel_structure": {
+    "before_normalization": "span{1}",
+    "dimension": 1,
+    "after_normalization": 0
+  },
+  "coercivity_conditions": {
+    "continuum": [
+      "connected carrier",
+      "Lipschitz domains/interface",
+      "positive bounded metric volume density",
+      "uniform ellipticity",
+      "global Poincare inequality"
+    ],
+    "continuum_status": "CONDITIONALLY_PROVED",
+    "reference_assumption_bound": 0.1,
+    "base_discrete_spectral_bound": 4.6862915010152335,
+    "finite_grid_is_not_general_continuum_proof": true
+  },
+  "transfer_operator": {
+    "potential": "Psi_r=-G_Gamma Q_Gamma J_source,r[s_r]",
+    "transfer": "T_r^Gamma=L_D Psi_r",
+    "metric_J_and_source_injection_names_are_distinct": true,
+    "mode_diagonal_assumption": false
+  },
+  "equal_geometry_identity": {
+    "classification": "TRANSFER_EQUAL_GEOMETRY_IDENTITY",
+    "condition": "gamma_hat_w=gamma_hat_v=gamma_D and source admissible",
+    "result": "T^Gamma[s]=s",
+    "tolerance": 2e-10,
+    "full_equal_region_constitutive_status": "FAIL_CLOSED_DEGENERATE_ONTOLOGY_REDUCTION"
+  },
+  "effective_sector_equations": {
+    "C_R_Gamma": "f_w T_w[mathscr_R_w]+f_v T_v[mathscr_R_v]",
+    "regional_curvature": "-(4/3)Theta_r Z_r+16 pi G rho_r Delta_r",
+    "E_DeltaTheta_Gamma": "T_v[Z_v]-T_w[Z_w]",
+    "external_E_DeltaTheta_allowed": false,
+    "downstream_constitutive_closure": "unchanged Phase 1E-F"
+  },
+  "common_time_contract": {
+    "branch": "HOMOGENEOUS_BACKGROUND_CLOCK_MAP",
+    "volume": "V_r=V_r_i a_r^3",
+    "derived_Xi": "Xi_r=alpha_r Theta_r",
+    "E_DeltaXi_0_Gamma": "alpha_v T_v[Z_v]-alpha_w T_w[Z_w]",
+    "universal_timescape_identity_claim": false
+  },
+  "partition_commutator": {
+    "J_f_Gamma": 0,
+    "status": "DERIVED_ZERO_ON_SELECTED_FIXED_REFERENCE_BRANCH",
+    "required_assumptions": [
+      "FIXED_REFERENCE_PARTITION",
+      "FIXED_INTERFACE",
+      "FIXED_COMOVING_PULLBACK_GEOMETRIES",
+      "FIXED_TARGET_SCALARIZATION",
+      "HOMOGENEOUS_CLOCK_BRANCH"
+    ],
+    "hidden_default": false
+  },
+  "time_derivative_contract": {
+    "A_dot": 0,
+    "A_ddot": 0,
+    "G_dot": 0,
+    "G_ddot": 0,
+    "first_transfer": "T[s_dot]",
+    "second_transfer": "T[s_ddot]",
+    "canonical_finite_difference": false
+  },
+  "volume_fraction_consistency": {
+    "geometry": "f_v_geom=V_v/(V_v+V_w)",
+    "background": "f_v_TS explicit input",
+    "diagnostic": "K_f=f_v_geom-f_v_TS",
+    "base_residual": 0.0,
+    "fail_closed": true,
+    "coordinate_cell_fraction_is_physical_fraction": false
+  },
+  "morphology_sensitivity": {
+    "normalization": "explicit unit L2 norm",
+    "interpretation": "model-closure sensitivity, not numerical error",
+    "layer_vs_island": {
+      "transferred_wall_density": 6.32455532033675,
+      "transferred_void_density": 3.1622776601683755,
+      "E_DeltaTheta_Gamma": 18.97366596101025,
+      "C_R_Gamma": 286.11614205492737,
+      "F_v": 143.05807102746368,
+      "Delta_d": 5.692099788303076,
+      "Delta_eff": 0.0
+    }
+  },
+  "discretization_contract": {
+    "type": "FLUX_CONSERVATIVE_STRUCTURED_REFERENCE_DISCRETIZATION",
+    "continuum_definition": false,
+    "coefficient_support": "isotropic/conformal SPD",
+    "interface_flux": "harmonic normal transmissibility",
+    "anisotropic_full_tensor_support": false,
+    "convergence": {
+      "resolutions": [16, 32, 64],
+      "l2_errors": [0.009157560828470501, 0.0022761515839789027, 0.0005682152262932033],
+      "energy_errors": [0.057169647709074956, 0.014278519629965552, 0.003568767957969284],
+      "l2_rates": [2.0083667395260436, 2.0020872428176935],
+      "energy_rates": [2.001402988906066, 2.0003484059954397]
+    }
+  },
+  "fail_closed_conditions": [
+    "morphology missing",
+    "region overlap or incomplete coverage",
+    "malformed or absent interface",
+    "unsupported topology",
+    "invalid common-normal convention",
+    "nonpositive metric volume density",
+    "non-SPD metric or coefficient",
+    "ellipticity below configured minimum",
+    "unexpected extra kernel modes",
+    "source compatibility projection failure",
+    "global normalization failure",
+    "transmission tolerance failure",
+    "volume-fraction inconsistency",
+    "moving interface or partition",
+    "time-dependent pullback/comoving metric/target scalarization",
+    "spatially varying clock lapse",
+    "unsupported anisotropic discretization",
+    "downstream Phase 1E-F nondegeneracy failure"
+  ],
+  "validation_tests": [
+    {"id": "V1", "name": "flat wall operator", "status": "PASS"},
+    {"id": "V2", "name": "negative-curvature void metric and measure", "status": "PASS"},
+    {"id": "V3", "name": "single global kernel", "status": "PASS"},
+    {"id": "V4", "name": "no regional constant projection", "status": "PASS"},
+    {"id": "V5", "name": "one global normalization", "status": "PASS"},
+    {"id": "V6", "name": "ellipticity bounds", "status": "PASS"},
+    {"id": "V7", "name": "continuum/discrete coercivity distinction", "status": "PASS"},
+    {"id": "V8", "name": "value continuity", "status": "PASS"},
+    {"id": "V9", "name": "conormal continuity", "status": "PASS"},
+    {"id": "V10", "name": "flux-sign adversarial", "status": "PASS"},
+    {"id": "V11", "name": "source compatibility", "status": "PASS"},
+    {"id": "V12", "name": "constrained provenance roundtrip", "status": "PASS"},
+    {"id": "V13", "name": "equal-geometry transfer identity", "status": "PASS"},
+    {"id": "V14", "name": "full equal-region degeneracy", "status": "PASS"},
+    {"id": "V15", "name": "wall injection linearity", "status": "PASS"},
+    {"id": "V16", "name": "void injection linearity", "status": "PASS"},
+    {"id": "V17", "name": "wall/void superposition", "status": "PASS"},
+    {"id": "V18", "name": "derived curvature bridge", "status": "PASS"},
+    {"id": "V19", "name": "derived E_DeltaTheta", "status": "PASS"},
+    {"id": "V20", "name": "derived E_DeltaXi_0", "status": "PASS"},
+    {"id": "V21", "name": "branch-derived J_f", "status": "PASS"},
+    {"id": "V22", "name": "fixed-branch operator derivatives", "status": "PASS"},
+    {"id": "V23", "name": "analytic transfer derivative commutation", "status": "PASS"},
+    {"id": "V24", "name": "volume fraction consistency", "status": "PASS"},
+    {"id": "V25", "name": "wall/void relabel covariance", "status": "PASS"},
+    {"id": "V26", "name": "endpoint ontology reduction", "status": "PASS"},
+    {"id": "V27", "name": "generic-k firewall", "status": "PASS"},
+    {"id": "V28", "name": "heterogeneous mode mixing", "status": "PASS"},
+    {"id": "V29", "name": "morphology sensitivity", "status": "PASS"},
+    {"id": "V30", "name": "structured-discretization convergence", "status": "PASS"},
+    {"id": "V31", "name": "discrete/Phase 1E-F contract consistency", "status": "PASS"},
+    {"id": "V32", "name": "Phase 1E-F downstream compatibility", "status": "PASS"},
+    {"id": "V33", "name": "D3 firewall", "status": "PASS"},
+    {"id": "V34", "name": "observational firewall", "status": "PASS"}
+  ],
+  "gates": [
+    {"id": "G0", "status": "PASS", "name": "regional geometric provenance"},
+    {"id": "G1", "status": "PASS_UNDER_EXPLICIT_MORPHOLOGY_CLOSURE", "name": "carrier/maps"},
+    {"id": "G2", "status": "PASS_AS_SELECTED_CGI_GEOMETRIC_CLOSURE_NOT_UNIQUE_TIMESCAPE_DERIVATION", "name": "A_Gamma provenance"},
+    {"id": "G3", "status": "PASS", "name": "source injection"},
+    {"id": "G4", "status": "PASS_FROM_WEAK_FORM", "name": "transmission derivation"},
+    {"id": "G5", "status": "PASS", "name": "kernel"},
+    {"id": "G6", "status": "PASS_UNDER_UNIFORM_ELLIPTICITY_AND_POINCARE", "name": "existence/coercivity"},
+    {"id": "G7", "status": "PASS_TIME_INDEPENDENT_OPERATOR", "name": "temporal regularity"},
+    {"id": "G8", "status": "PASS_A_DOT_A_DDOT_ZERO_ON_SELECTED_BRANCH", "name": "operator derivatives"},
+    {"id": "G9", "status": "PASS_UNDER_HOMOGENEOUS_CLOCK_BRANCH", "name": "effective-sector operators"},
+    {"id": "G10", "status": "PASS", "name": "reproduction of Phase 1E-F contract"},
+    {"id": "G11", "status": "PASS_IF_NUMERICAL_CONVERGENCE_VALIDATED", "name": "discretization convergence"},
+    {"id": "G12", "status": "PASS", "name": "relabel/limits"},
+    {"id": "G13", "status": "PASS", "name": "interface firewall"},
+    {"id": "G14", "status": "PASS", "name": "spectral/frame firewall"},
+    {"id": "G15", "status": "PASS", "name": "observational firewall"}
+  ],
+  "spectral_firewall": {
+    "generic_k_api": false,
+    "heterogeneous_mode_diagonal_assumption": false,
+    "allowed_label": "lambda_Gamma_n"
+  },
+  "frame_firewall": {
+    "regional_Z_is_observational_velocity": false,
+    "tracer_or_dressed_velocity_transfer": false
+  },
+  "observational_firewall": {
+    "status": "NON_OBSERVATIONAL",
+    "fsigma8": false,
+    "sigma8": false,
+    "RSD": false,
+    "tracer": false,
+    "survey_likelihood": false
+  },
+  "d3_firewall": {
+    "adjudication": "RESOLVED_DERIVED_4_10",
+    "variants": ["derived_4_10", "printed_4_15"],
+    "default": null,
+    "modified": false
+  },
+  "residual_classification": {
+    "CONSTRUCTED_IDENTITY_CHECK": ["C_P", "R_Delta", "K_GM"],
+    "DYNAMIC_COMPATIBILITY_CHECK": ["R_Z", "R_eff"]
+  },
+  "scientific_authorization": {
+    "continuum_research_runtime": "GRANTED_FOR_THIS_CONDITIONAL_REALIZATION",
+    "unique_timescape_prediction": "NOT_GRANTED",
+    "physical_interface_claim": "NOT_GRANTED"
+  },
+  "implementation_authorization": {
+    "phase_1e_g": "GRANTED",
+    "observational": "NOT_GRANTED",
+    "fsigma8": "NOT_GRANTED"
+  },
+  "limitations": [
+    "morphology and maps are externally supplied closure data",
+    "structured backend is isotropic/conformal rather than general anisotropic FEM",
+    "continuum proof is conditional on explicit regularity, ellipticity and Poincare assumptions",
+    "reference torus and interface have no automatic physical interpretation",
+    "morphology sensitivity may be large",
+    "no observational bridge is implemented"
+  ],
+  "modified_files": [
+    "src/timescape_fsigma8/transfer/continuum_geometry.py",
+    "src/timescape_fsigma8/transfer/continuum_backend.py",
+    "src/timescape_fsigma8/transfer/continuum_bridge.py",
+    "src/timescape_fsigma8/transfer/__init__.py",
+    "tests/test_phase1e_g_continuum_h1.py",
+    "reports/phase1e_g_continuum_h1_realization.md",
+    "reports/phase1e_g_continuum_h1_realization_inventory.json",
+    "reports/phase1e_g_continuum_h1_realization_validation.md",
+    "reports/phase1e_g_continuum_h1_realization_adversarial_audit.md"
+  ],
+  "test_results": {
+    "phase_1e_g_targeted_count": 48,
+    "phase_1e_f_plus_1e_g_count": 90,
+    "complete_count": 469,
+    "release_gate_python_3_14_3": {
+      "targeted": "48 passed in 0.73s",
+      "combined_transfer": "90 passed in 0.87s",
+      "complete": "469 passed in 10.89s"
+    },
+    "release_gate_python_3_11_9": {
+      "targeted": "48 passed in 0.79s",
+      "combined_transfer": "90 passed in 0.91s",
+      "complete": "469 passed in 12.26s"
+    },
+    "failures": 0,
+    "skips": 0,
+    "xfails": 0,
+    "warnings": 0
+  }
+}

@@ -1,10 +1,51 @@
 """Non-observational regional-to-GM transfer research runtimes.
 
-Phase 1E-F adds only the conditionally closed H1 transmission realization.
+Phase 1E-G adds a conditional continuum-geometric implementation over the frozen Phase 1E-F realization.
 No S1 fallback, dressed-lightcone, RSD, tracer, survey, sigma8, or fsigma8
 surface is exported from this package.
 """
 
+from timescape_fsigma8.transfer.continuum_backend import (
+    ContinuumH1Operator,
+    ContinuumPhase1EBackendAdapter,
+    ContinuumTransfer,
+    ContinuumTransferJetResponse,
+    ContinuumTransferResponse,
+    InterfaceDiagnostics,
+    InterfaceFace,
+    SourceProjectionDiagnostics,
+    normalized_difference,
+    require_no_generic_spectral_label,
+)
+from timescape_fsigma8.transfer.continuum_bridge import (
+    ContinuumBridgeFields,
+    ContinuumH1RealizationResult,
+    EffectiveSectorContinuumBridge,
+    compare_morphology_results,
+)
+from timescape_fsigma8.transfer.continuum_geometry import (
+    CARRIER_PHYSICAL_STATUS,
+    COMMON_REFERENCE_NORMAL_WALL_TO_VOID_1E_G,
+    FIXED_REFERENCE_BRANCH,
+    FRAMEWORK_STATUS_1E_G,
+    HOMOGENEOUS_CLOCK_BRANCH,
+    IMPLEMENTATION_STATUS_1E_G,
+    INTERFACE_PHYSICAL_STATUS,
+    REALIZATION_ID_1E_G,
+    ROLE_1E_G,
+    SCIENTIFIC_STATUS_1E_G,
+    ContinuumCarrierSpec,
+    ContinuumContractError,
+    ContinuumDegeneracyError,
+    ContinuumEllipticClosureConfig,
+    FixedReferenceBranchSpec,
+    MorphologySpec,
+    RegionalGeometrySpec,
+    conformal_regional_geometry,
+    flat_regional_geometry,
+    island_morphology,
+    layered_morphology,
+)
 from timescape_fsigma8.transfer.h1_realization import (
     CARRIER_REFERENCE_TOPOLOGY,
     FRAMEWORK_STATUS,
@@ -50,6 +91,41 @@ from timescape_fsigma8.transfer.matrix_backend import (
 )
 
 __all__ = [
+    'CARRIER_PHYSICAL_STATUS',
+    'COMMON_REFERENCE_NORMAL_WALL_TO_VOID_1E_G',
+    'FIXED_REFERENCE_BRANCH',
+    'FRAMEWORK_STATUS_1E_G',
+    'HOMOGENEOUS_CLOCK_BRANCH',
+    'IMPLEMENTATION_STATUS_1E_G',
+    'INTERFACE_PHYSICAL_STATUS',
+    'REALIZATION_ID_1E_G',
+    'ROLE_1E_G',
+    'SCIENTIFIC_STATUS_1E_G',
+    'ContinuumBridgeFields',
+    'ContinuumCarrierSpec',
+    'ContinuumContractError',
+    'ContinuumDegeneracyError',
+    'ContinuumEllipticClosureConfig',
+    'ContinuumH1Operator',
+    'ContinuumH1RealizationResult',
+    'ContinuumPhase1EBackendAdapter',
+    'ContinuumTransfer',
+    'ContinuumTransferJetResponse',
+    'ContinuumTransferResponse',
+    'EffectiveSectorContinuumBridge',
+    'FixedReferenceBranchSpec',
+    'InterfaceDiagnostics',
+    'InterfaceFace',
+    'MorphologySpec',
+    'RegionalGeometrySpec',
+    'SourceProjectionDiagnostics',
+    'compare_morphology_results',
+    'conformal_regional_geometry',
+    'flat_regional_geometry',
+    'island_morphology',
+    'layered_morphology',
+    'normalized_difference',
+    'require_no_generic_spectral_label',
     "CARRIER_REFERENCE_TOPOLOGY",
     "COMMON_REFERENCE_NORMAL_WALL_TO_VOID",
     "FRAMEWORK_STATUS",
