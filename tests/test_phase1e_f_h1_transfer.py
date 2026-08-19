@@ -17,6 +17,7 @@ import pytest
 
 import timescape_fsigma8.transfer as transfer
 from timescape_fsigma8.transfer import (
+    COMMON_REFERENCE_NORMAL_WALL_TO_VOID,
     DenseCarrierOperator,
     DenseH1TransmissionBackend,
     EffectiveSectorContract,
@@ -66,6 +67,9 @@ def make_backend(
     interval_bound: float = 1.0,
     reverse_regions: bool = False,
     operator_value: np.ndarray | None = None,
+    wall_source_injection: np.ndarray | None = None,
+    void_source_injection: np.ndarray | None = None,
+    flux_normal_convention: str = COMMON_REFERENCE_NORMAL_WALL_TO_VOID,
 ) -> DenseH1TransmissionBackend:
     """Build a synthetic coupled, constrained operator-contract fixture."""
     identity = np.eye(N)
@@ -75,8 +79,16 @@ def make_backend(
         scale_first * identity,
         scale_second * identity,
     )
-    wall = np.eye(N)[0]
-    void = np.eye(N)[-1]
+    wall = (
+        np.eye(N)[0]
+        if wall_source_injection is None
+        else np.asarray(wall_source_injection, dtype=np.float64)
+    )
+    void = (
+        np.eye(N)[-1]
+        if void_source_injection is None
+        else np.asarray(void_source_injection, dtype=np.float64)
+    )
     value_jump = np.array([[0.0, 0.0, 1.0, -1.0, 0.0, 0.0]])
     flux_jump = np.array([[0.0, 1.0, 0.0, 0.0, -1.0, 0.0]])
     if reverse_regions:
@@ -90,6 +102,7 @@ def make_backend(
         void_source_injection=void,
         value_jump_operator=value_jump,
         flux_jump_operator=flux_jump,
+        flux_normal_convention=flux_normal_convention,
         global_mean_weights=np.ones(N),
         constraint_rank_tolerance=1e-12,
         symmetry_tolerance=1e-12,
@@ -181,6 +194,153 @@ def make_result(
     )
 
 
+MANUFACTURED_PHI = np.array([5.0, -1.0, -1.0, -1.0, -1.0, -1.0]) / 6.0
+
+
+def make_nontrivial_dynamic_arguments(
+    *,
+    operator_second_shift: float = 0.0,
+    delta_eff_first_shift: float = 0.0,
+) -> tuple[dict[str, object], dict[str, object]]:
+    """Build an independently specified nontrivial GM-compatible trajectory.
+
+    The target jets below are manufactured before the realization is called.
+    They satisfy the human-approved Phase 1E-F R_Z and R_eff equations with
+    nonzero clean-branch terms. The effective-sector input is then solved
+    algebraically so the real H1 realization must reproduce those target jets.
+    """
+    G = 1.0 / (4.0 * np.pi)
+    background = make_background(
+        f_v=scalar(0.4),
+        rho_w=scalar(1.0),
+        rho_v=scalar(1.0),
+        Theta_w=scalar(0.6),
+        Theta_v=scalar(1.2),
+        H_w=scalar(0.2),
+        H_v=scalar(0.4),
+        R_bar_w=scalar(0.0),
+        R_bar_v=scalar(2.0),
+        Q_bar=scalar(-5.0),
+        W_bar=scalar(-3.0),
+        Theta=scalar(0.84),
+        G=G,
+    )
+    regional_bulk = RegionalBulkState(
+        Delta_w=1.0,
+        Z_w=0.4,
+        Delta_v=1.0,
+        Z_v=0.8,
+    )
+    backend = make_backend(
+        scale=1.0,
+        scale_second=operator_second_shift,
+        interval_bound=0.5,
+        wall_source_injection=MANUFACTURED_PHI,
+        void_source_injection=MANUFACTURED_PHI,
+    )
+
+    target_Delta_d = 1.0
+    target_Z = 0.56
+    target_Z_dot = -1.352 + operator_second_shift * target_Delta_d
+    target_Delta_eff = 0.0192
+    target_Delta_eff_dot = -0.831936 + delta_eff_first_shift
+    target_Delta_eff_second = 0.3
+
+    wall = regional_evolution(
+        regional_bulk.Delta_w,
+        regional_bulk.Z_w,
+        alpha=background.alpha_w,
+        H=background.H_w,
+        rho=background.rho_w,
+        Theta=background.Theta_w,
+        G=background.G,
+    )
+    void = regional_evolution(
+        regional_bulk.Delta_v,
+        regional_bulk.Z_v,
+        alpha=background.alpha_v,
+        H=background.H_v,
+        rho=background.rho_v,
+        Theta=background.Theta_v,
+        G=background.G,
+    )
+    curvature_state = backend.solve_joint(
+        wall.curvature,
+        void.curvature,
+        source_name="manufactured-curvature",
+    )
+    C_R = VectorJet(
+        0.6 * curvature_state.wall.field.value
+        + 0.4 * curvature_state.void.field.value,
+        0.6 * curvature_state.wall.field.first
+        + 0.4 * curvature_state.void.field.first,
+        0.6 * curvature_state.wall.field.second
+        + 0.4 * curvature_state.void.field.second,
+    )
+    coefficients = two_region_coefficients(background)
+    target_effective = VectorJet(
+        MANUFACTURED_PHI * target_Delta_eff,
+        MANUFACTURED_PHI * target_Delta_eff_dot,
+        MANUFACTURED_PHI * target_Delta_eff_second,
+    )
+    S_eff = background.Q_bar.value + background.W_bar.value
+    target_Q = VectorJet(
+        (S_eff / 4.0) * target_effective.value,
+        (S_eff / 4.0) * target_effective.first,
+        (S_eff / 4.0) * target_effective.second,
+    )
+    effective_scale = coefficients.B_Q.value * coefficients.A_W.value
+    E_delta_theta = VectorJet(
+        (
+            coefficients.A_P.value * target_Q.value
+            + coefficients.A_Q.value * C_R.value
+        )
+        / effective_scale,
+        (
+            coefficients.A_P.value * target_Q.first
+            + coefficients.A_Q.value * C_R.first
+        )
+        / effective_scale,
+        (
+            coefficients.A_P.value * target_Q.second
+            + coefficients.A_Q.value * C_R.second
+        )
+        / effective_scale,
+    )
+    identity_operator = DenseCarrierOperator(matrix_jet(np.eye(N)))
+    zero_operator = DenseCarrierOperator(matrix_jet(np.zeros((N, 1))))
+    effective_sector = EffectiveSectorContract(
+        delta_theta_operator=identity_operator,
+        delta_theta_inputs=E_delta_theta,
+        delta_xi0_operator=zero_operator,
+        delta_xi0_inputs=VectorJet(np.zeros(1), np.zeros(1), np.zeros(1)),
+        J_f_Gamma=VectorJet(np.zeros(N), np.zeros(N), np.zeros(N)),
+        partition_time_independent=True,
+    )
+    configuration = make_configuration()
+    arguments: dict[str, object] = {
+        "regional_bulk": regional_bulk,
+        "background": background,
+        "backend": backend,
+        "effective_sector": effective_sector,
+        "configuration": configuration,
+    }
+    expected: dict[str, object] = {
+        "phi": MANUFACTURED_PHI,
+        "Delta_d": target_Delta_d,
+        "Z": target_Z,
+        "Z_dot": target_Z_dot,
+        "Delta_eff": target_Delta_eff,
+        "Delta_eff_dot": target_Delta_eff_dot,
+        "rho_d": 1.0,
+        "rho_eff": 2.0,
+        "w_eff": 0.5,
+        "Theta": 0.84,
+        "configuration": configuration,
+    }
+    return arguments, expected
+
+
 def test_v1_regional_exact_equations_include_common_time_alpha() -> None:
     regional_cases = (
         (0.3, -0.4, 1.7, 0.2, 0.8, 0.9),
@@ -233,7 +393,7 @@ def test_v5_coercivity_guard_fails_closed() -> None:
         make_result(configuration=make_configuration(coercivity_min=1.1))
 
 
-def test_v6_equal_region_clean_limit_and_exact_degeneracy() -> None:
+def test_v6_equal_region_is_fail_closed_degenerate_with_special_zero_numerator_path() -> None:
     bulk = RegionalBulkState(0.0, 0.0, 0.0, 0.0)
     equal_background = make_background(R_bar_v=ZERO)
     equal_coefficients = two_region_coefficients(equal_background)
@@ -252,6 +412,8 @@ def test_v6_equal_region_clean_limit_and_exact_degeneracy() -> None:
             background=make_background(R_bar_v=scalar(contrast)),
         )
         np.testing.assert_allclose(result.F_v.value, 0.0, atol=1e-14)
+        # This is only the special numerator-identically-zero path 0/contrast.
+        # No generic equal-region limit is inferred.
     with pytest.raises(H1DegeneracyError, match=r"A_P"):
         make_result(
             regional_bulk=bulk,
@@ -319,6 +481,95 @@ def test_v11_v12_v13_all_three_canonical_gm_residuals_vanish() -> None:
     np.testing.assert_allclose(result.R_Z, 0.0, atol=1e-14)
     np.testing.assert_allclose(result.R_eff, 0.0, atol=1e-14)
     np.testing.assert_allclose(result.P_tilde_eff, 0.0, atol=1e-14)
+
+
+def test_nontrivial_manufactured_r_z_and_r_eff_cancellations() -> None:
+    arguments, expected = make_nontrivial_dynamic_arguments()
+    result = evaluate_h1_realization(**arguments)
+    phi = expected["phi"]
+
+    np.testing.assert_allclose(result.Delta_d.value, expected["Delta_d"] * phi)
+    np.testing.assert_allclose(result.Z, expected["Z"] * phi)
+    np.testing.assert_allclose(-result.Delta_d.second, expected["Z_dot"] * phi)
+    np.testing.assert_allclose(result.Delta_eff.value, expected["Delta_eff"] * phi)
+    np.testing.assert_allclose(
+        result.Delta_eff.first,
+        expected["Delta_eff_dot"] * phi,
+    )
+    assert result.rho_d == pytest.approx(expected["rho_d"])
+    assert result.rho_eff == pytest.approx(expected["rho_eff"])
+    assert result.w_eff == pytest.approx(expected["w_eff"])
+    assert result.w_eff not in (-1.0, 0.0)
+    np.testing.assert_allclose(result.C_P, 0.0, atol=1e-13)
+
+    R_Z_terms = (
+        -result.Delta_d.second,
+        (2.0 / 3.0) * expected["Theta"] * result.Z,
+        4.0 * np.pi * arguments["background"].G * result.rho_d * result.Delta_d.value,
+        4.0
+        * np.pi
+        * arguments["background"].G
+        * result.rho_eff
+        * result.Delta_eff.value,
+    )
+    assert all(np.max(np.abs(term)) > 1e-4 for term in R_Z_terms)
+    independently_reconstructed_R_Z = sum(
+        R_Z_terms,
+        np.zeros_like(result.R_Z),
+    )
+    np.testing.assert_allclose(
+        independently_reconstructed_R_Z,
+        result.R_Z,
+        atol=2e-13,
+    )
+    np.testing.assert_allclose(independently_reconstructed_R_Z, 0.0, atol=2e-13)
+
+    R_eff_terms = (
+        result.Delta_eff.first,
+        -result.w_eff
+        * expected["Theta"]
+        * result.Delta_eff.value,
+        (1.0 + result.w_eff) * result.Z,
+    )
+    assert all(np.max(np.abs(term)) > 1e-4 for term in R_eff_terms)
+    independently_reconstructed_R_eff = sum(
+        R_eff_terms,
+        np.zeros_like(result.R_eff),
+    )
+    np.testing.assert_allclose(
+        independently_reconstructed_R_eff,
+        result.R_eff,
+        atol=2e-13,
+    )
+    np.testing.assert_allclose(independently_reconstructed_R_eff, 0.0, atol=2e-13)
+
+
+def test_adversarial_second_density_jet_produces_predictable_r_z_failure() -> None:
+    shift = 0.12
+    arguments, expected = make_nontrivial_dynamic_arguments(
+        operator_second_shift=shift,
+    )
+    expected_increment = shift * expected["Delta_d"] * expected["phi"]
+    tolerance = expected["configuration"].R_Z_tolerance
+    assert np.max(np.abs(expected_increment)) > tolerance
+    with pytest.raises(H1ClosureError, match=r"^R_Z=") as error:
+        evaluate_h1_realization(**arguments)
+    measured_magnitude = float(str(error.value).split("=", 1)[1].split()[0])
+    assert measured_magnitude == pytest.approx(np.max(np.abs(expected_increment)))
+
+
+def test_adversarial_effective_first_jet_produces_predictable_r_eff_failure() -> None:
+    shift = -0.07
+    arguments, expected = make_nontrivial_dynamic_arguments(
+        delta_eff_first_shift=shift,
+    )
+    expected_increment = shift * expected["phi"]
+    tolerance = expected["configuration"].R_eff_tolerance
+    assert np.max(np.abs(expected_increment)) > tolerance
+    with pytest.raises(H1ClosureError, match=r"^R_eff=") as error:
+        evaluate_h1_realization(**arguments)
+    measured_magnitude = float(str(error.value).split("=", 1)[1].split()[0])
+    assert measured_magnitude == pytest.approx(np.max(np.abs(expected_increment)))
 
 
 def test_v14_gm_curvature_is_derived_and_constraint_residual_vanishes() -> None:
@@ -603,6 +854,101 @@ def test_analytic_operator_derivative_matches_independent_finite_difference() ->
     )
 
 
+def test_analytic_second_derivative_matches_independent_finite_difference() -> None:
+    phi = MANUFACTURED_PHI
+
+    def operator_scale(time: float) -> float:
+        return 2.0 + 0.3 * time + 0.2 * time**2
+
+    def source_scale(time: float) -> float:
+        return 1.1 - 0.4 * time + 0.15 * time**2
+
+    analytic_backend = make_backend(
+        scale=operator_scale(0.0),
+        scale_first=0.3,
+        scale_second=0.4,
+        interval_bound=1.0,
+    )
+    analytic = analytic_backend.solve_source_jet(
+        VectorJet(phi * 1.1, phi * -0.4, phi * 0.3),
+        provenance="manufactured-second-derivative",
+    )
+
+    errors: list[float] = []
+    finite_difference = np.zeros_like(phi)
+    for step in (0.02, 0.01, 0.005):
+        values = []
+        for time in (step, 0.0, -step):
+            backend = make_backend(
+                scale=operator_scale(time),
+                interval_bound=1.0,
+            )
+            solution = backend.solve_source_jet(
+                VectorJet(
+                    phi * source_scale(time),
+                    np.zeros(N),
+                    np.zeros(N),
+                ),
+                provenance="finite-difference-value-solve",
+            )
+            values.append(solution.field.value)
+        finite_difference = (values[0] - 2.0 * values[1] + values[2]) / step**2
+        errors.append(float(np.max(np.abs(finite_difference - analytic.field.second))))
+
+    assert errors[1] < errors[0]
+    assert errors[2] < errors[1]
+    np.testing.assert_allclose(
+        finite_difference,
+        analytic.field.second,
+        rtol=2e-5,
+        atol=2e-9,
+    )
+
+
+def test_common_reference_normal_matches_opposite_outward_fluxes() -> None:
+    wall_outward = np.array([-1.0, 1.0, 0.0, 0.0])
+    void_outward = np.array([0.0, 0.0, 1.0, -1.0])
+    void_common_reference = -void_outward
+    common_reference_jump = wall_outward - void_common_reference
+    value_jump = np.array([[0.0, 1.0, -1.0, 0.0]])
+    state = np.array([-1.0, 0.0, 0.0, 1.0])
+
+    backend = DenseH1TransmissionBackend(
+        operator=matrix_jet(2.0 * np.eye(4)),
+        wall_source_injection=np.eye(4)[0],
+        void_source_injection=np.eye(4)[-1],
+        value_jump_operator=value_jump,
+        flux_jump_operator=common_reference_jump[np.newaxis, :],
+        flux_normal_convention=COMMON_REFERENCE_NORMAL_WALL_TO_VOID,
+        global_mean_weights=np.ones(4),
+        constraint_rank_tolerance=1e-12,
+        symmetry_tolerance=1e-12,
+        operator_time_regularity="C2_COMMON_TIME",
+        fixed_reference_constraints=True,
+        interval_coercivity_lower_bound=1.0,
+    )
+    solution = backend.solve_source_jet(
+        VectorJet(2.0 * state, np.zeros(4), np.zeros(4)),
+        provenance="one-dimensional-oriented-interface",
+    )
+    np.testing.assert_allclose(solution.field.value, state, atol=1e-14)
+
+    j_wall_out = wall_outward @ state
+    j_void_out = void_outward @ state
+    q_wall = j_wall_out
+    q_void = void_common_reference @ state
+    assert j_wall_out == pytest.approx(1.0)
+    assert j_void_out == pytest.approx(-1.0)
+    assert q_wall == pytest.approx(1.0)
+    assert q_void == pytest.approx(1.0)
+    assert j_wall_out + j_void_out == pytest.approx(0.0)
+    assert q_wall - q_void == pytest.approx(0.0)
+    np.testing.assert_allclose(backend.flux_jump(state), 0.0, atol=1e-14)
+
+    wrong_same_outward_sign = wall_outward + void_common_reference
+    assert wrong_same_outward_sign @ state == pytest.approx(2.0)
+
+
 def test_single_common_constant_null_mode_is_removed_by_global_normalization() -> None:
     constant_projector = np.ones((N, N)) / N
     operator = np.eye(N) - constant_projector
@@ -634,9 +980,18 @@ def test_operator_regularities_and_fixed_lagrangian_constraints_are_explicit() -
     assert signature.parameters[
         "interval_coercivity_lower_bound"
     ].default is inspect.Parameter.empty
+    assert signature.parameters[
+        "flux_normal_convention"
+    ].default is inspect.Parameter.empty
     backend = make_backend()
     assert backend.operator_time_regularity == "C2_COMMON_TIME"
     assert backend.fixed_reference_constraints is True
+    assert (
+        backend.flux_normal_convention
+        == COMMON_REFERENCE_NORMAL_WALL_TO_VOID
+    )
+    with pytest.raises(ValueError, match="flux_normal_convention"):
+        make_backend(flux_normal_convention="REGIONAL_OUTWARD_NORMALS")
     configuration_signature = inspect.signature(H1Configuration)
     assert all(
         parameter.default is inspect.Parameter.empty

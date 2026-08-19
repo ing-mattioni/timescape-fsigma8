@@ -2,119 +2,191 @@
 
 ## Verdict
 
-ALL_SCIENTIFIC_AND_SOFTWARE_GATES_PASSED
+ALL_STRENGTHENED_SCIENTIFIC_AND_SOFTWARE_GATES_PASSED
 
-The conditional H1 operator-contract research runtime satisfies the specified
-scientific acceptance gates and the complete repository regression suite.
+The conditional H1 operator-contract runtime satisfies the v2 scientific
+validation correction without changing its selected equations or state rank.
 
     H1_CLEAN_NONDEGENERATE_TRANSMISSION_REALIZATION_IMPLEMENTED_CONDITIONALLY
     SCIENTIFIC_IMPLEMENTATION_AUTHORIZATION: SATISFIED
     OBSERVATIONAL_IMPLEMENTATION_AUTHORIZATION: NOT_GRANTED
 
-## Static checks
+## Residual classification
 
-- Python AST parse: PASS for all three transfer modules and the test module.
-- JSON parse: PASS for the Phase 1E-F inventory.
-- Git whitespace checks: PASS.
-- New third-party dependency: NONE.
-- Existing scientific behavior outside the new transfer package: UNCHANGED.
-- Phase 1E-F paths: exactly three source modules, one test module, and four reports.
+The following are mandatory implementation and wiring diagnostics:
 
-## Environment recovery
+    CONSTRUCTED_IDENTITY_CHECK:
+        C_P
+        R_Delta
+        K_GM
 
-Before repair, both established virtual environments contained incomplete
-package directory skeletons. Pip and several package metadata records were
-missing; pytest, NumPy, SciPy, and pluggy resolved as namespace packages with
-no module file. Python 3.11.9 additionally loaded a broken
-distutils-precedence.pth that called the missing _distutils_hack.add_shim.
+They are not independent dynamic evidence.
 
-The disposable environments were moved to recoverable backup directories and
-recreated at their original paths with the same interpreter versions. Exact
-previously documented scientific/test versions were installed as binary
-wheels. No repository dependency declaration was changed.
+For C_P, A_P=A_W-3A_Q and B_P=-3B_Q give:
 
-Python 3.14.3 after recovery:
+    C_P = W-3Q
+        = C_R + A_P F_v + B_P E
+        = 0
 
-    executable: C:/Users/Claudio/AppData/Local/Temp/timescape-phase1ed-envs/py314/Scripts/python.exe
-    pip 25.3; pytest 9.1.1; setuptools 84.0.0; packaging 26.3
-    NumPy 2.5.1; SciPy 1.18.0; pluggy 1.6.0; matplotlib 3.11.0
-    pip check: No broken requirements found.
+after substituting F_v=-(C_R+B_P E)/A_P. R_Delta vanishes because
+Z=-Delta_d_dot. K_GM reconstructs the equation used to define R_GM.
 
-Python 3.11.9 after recovery:
+The independently exercised dynamic residuals are:
 
-    executable: C:/Users/Claudio/AppData/Local/Temp/timescape-phase1ed-envs/py311/Scripts/python.exe
-    pip 24.0; pytest 9.1.1; setuptools 65.5.0; packaging 26.3
-    NumPy 2.4.6; SciPy 1.17.1; pluggy 1.6.0; matplotlib 3.11.0
-    pip check: No broken requirements found.
+    DYNAMIC_COMPATIBILITY_CHECK:
+        R_Z
+        R_eff
 
-SHA-256 checks of all eight Phase 1E-F working-tree files matched before and
-after environment recovery. The scientific working tree was therefore
-preserved during remediation.
+## Nontrivial manufactured compatibility fixture
 
-## Direct scientific harness
+The manufactured trajectory passes through evaluate_h1_realization and has:
 
-The direct Python 3.14.3 harness executed every test function and parameter
-case from the Phase 1E-F test module.
+- Delta_d = 1;
+- Z = 0.56;
+- Z_dot = -1.352;
+- Theta = 0.84;
+- Delta_eff = 0.0192;
+- Delta_eff_dot = -0.831936;
+- rho_d = 1;
+- rho_eff = 2;
+- w_eff = 0.5.
 
-    Result: 37 passed
+All values multiply a nonzero admissible carrier field. C_P remains zero by
+the clean constitutive identity.
 
-This debugging result was followed by, and is not a substitute for, normal
-pytest execution.
+The independently reconstructed scalar R_Z contributions are:
 
-## Targeted pytest gates
+    -1.352 + 0.3136 + 1.0 + 0.0384 = 0
 
-Canonical targeted command in each environment:
+All four clean terms are individually nonzero. The independently reconstructed
+R_eff contributions are:
 
-    $env:PYTHONPATH="$PWD/src"
-    python -m pytest -q -p no:cacheprovider tests/test_phase1e_f_h1_transfer.py --basetemp <external-temp>
+    -0.831936 - 0.008064 + 0.84 = 0
 
-Results:
+All three terms are individually nonzero. The runtime residual arrays agree
+with these independent term-by-term reconstructions.
 
-- Python 3.14.3: 37 passed in 0.24s.
-- Python 3.11.9: 37 passed in 0.25s.
-- Failures, skips, xfails, and warnings: none reported.
+Adversarial cases retain 1e-10 configured tolerances:
 
-## Complete regression gates
+- A second-operator-jet shift of +0.12 changes Z_dot predictably and produces
+  R_Z magnitude 0.10000000000000028; the runtime fails closed on R_Z.
+- An effective first-jet shift of -0.07 produces R_eff magnitude
+  0.058333333333333334; the runtime fails closed on R_eff.
 
-Canonical full-suite command in each environment:
+No tolerance was relaxed.
 
-    $env:PYTHONPATH="$PWD/src"
+## Analytic second derivative
+
+The unchanged runtime formula is:
+
+    u_dot = A^-1 (b_dot - A_dot u)
+    u_ddot = A^-1 (b_ddot - A_ddot u - 2 A_dot u_dot)
+
+A test-only manufactured quadratic A(t) and b(t) compares u.second with
+central finite differences from independent value solves. Maximum errors are:
+
+| Step h | Maximum error |
+| ---: | ---: |
+| 0.02 | 6.047445224088843e-06 |
+| 0.01 | 1.511909388296484e-06 |
+| 0.005 | 3.7797144475382183e-07 |
+
+The approximately fourfold reduction per halving is the expected second-order
+central-difference convergence. Finite differencing is not used by runtime
+science.
+
+## Equal-region branch
+
+Exact equality gives:
+
+    d_Theta=A_W=A_Q=B_Q=A_P=B_P=0
+
+and is outside |A_P|>=A_P_min. Its classification is:
+
+    FAIL_CLOSED_DEGENERATE_ONTOLOGY_REDUCTION
+
+The existing epsilon sequence is explicitly only the special
+zero-numerator path F_v=0/epsilon=0. A finite general limit requires
+C_R^Gamma+B_P E_DeltaTheta_Gamma=O(A_P), and the limiting ratio remains
+path-dependent without additional structure.
+
+## Flux orientation
+
+The backend requires:
+
+    flux_normal_convention =
+        COMMON_REFERENCE_NORMAL_WALL_TO_VOID
+
+The common reference normal n_Gamma points wall-to-void:
+
+    q_w=A_w grad(u_w).n_Gamma
+    q_v=A_v grad(u_v).n_Gamma
+    q_w-q_v=0
+
+Since n_w_out=n_Gamma and n_v_out=-n_Gamma, this is exactly
+j_w_out+j_v_out=0.
+
+The independent one-dimensional fixture uses nonconstant state
+(-1,0,0,1). It obtains q_w=q_v=1 and outward fluxes +1 and -1. The correct
+diagnostic is zero; reversing the required sign gives 2. Unsupported normal
+conventions fail closed.
+
+## Coercivity qualification
+
+The instantaneous constrained spectral value is computed from:
+
+    A_r=Q^T A Q
+    lambda_min=eigmin((A_r+A_r^T)/2)
+
+The exposed interval lower bound is caller-declared, positive, and checked not
+to exceed the instantaneous constrained value. Matrix tests do not prove
+uniform coercivity over an arbitrary continuum interval; that remains an
+explicit validity contract.
+
+## Provenance qualification
+
+The validated roundtrip is:
+
+    raw b -> P b -> constrained solve -> coupled operator -> P b
+
+It is a solver/operator/provenance consistency identity, including the joint
+interface and one global normalization. It is neither arbitrary raw-source
+recovery nor a target-only or physical inverse.
+
+## Environment and static checks
+
+The established repaired environments remain:
+
+- Python 3.14.3: NumPy 2.5.1, SciPy 1.18.0, pytest 9.1.1.
+- Python 3.11.9: NumPy 2.4.6, SciPy 1.17.1, pytest 9.1.1.
+
+No dependency declaration or third-party dependency changed. Python AST,
+inventory JSON, Git whitespace, D3, spectral, frame, S1, and observational
+firewall checks pass.
+
+## Test results
+
+Canonical targeted invocation:
+
+    python -m pytest -q -p no:cacheprovider
+        tests/test_phase1e_f_h1_transfer.py --basetemp <external-temp>
+
+- Python 3.14.3: 42 passed in 0.21s.
+- Python 3.11.9: 42 passed in 0.21s.
+
+Canonical full invocation:
+
     python -m pytest -q -p no:cacheprovider --basetemp <external-temp>
 
-Results:
-
-- Python 3.14.3: 416 passed in 31.19s.
-- Python 3.11.9: 416 passed in 24.50s.
+- Python 3.14.3: 421 passed in 12.58s.
+- Python 3.11.9: 421 passed in 12.98s.
 - Failures, skips, xfails, and warnings: none reported.
 
-The previous 379-test frozen baseline remains intact; the increase is exactly
-the 37 new Phase 1E-F cases.
-
-## Scientific acceptance matrix
-
-| Criterion | Status |
-| --- | --- |
-| Regional FLRW equations unchanged | PASS |
-| Joint H1 transmission solve | PASS |
-| One global constant removed | PASS |
-| Value and conormal-flux continuity | PASS |
-| Coercivity and nondegeneracy guards | PASS |
-| Algebraic F_v and analytically derived J_Xi | PASS |
-| Analytic operator time derivative | PASS |
-| C_P, R_Delta, R_Z, R_eff, and K_GM gates | PASS |
-| Three-state compatibility propagation | PASS |
-| Provenance/source roundtrip | PASS |
-| D3, spectral, frame, and observational firewalls | PASS |
-| Absence of S1 fallback | PASS |
-| Targeted and complete pytest gates | PASS |
-
-Measured reference-fixture maxima were zero for both transmission jumps,
-C_P, R_Delta, R_Z, R_eff, and K_GM. The provenance roundtrip maximum error
-was 7.105427357601002e-15, and the coercivity lower bound was 1.0.
+The increase from the v1 total of 416 is exactly the five new validation
+cases. The prior 379-test pre-Phase-1E-F baseline remains intact.
 
 ## Scope boundary
 
-The validated backend is a finite-dimensional analogue of the continuum
-operator contract, not a physical spatial discretization of Timescape. It is
-non-observational, not f sigma 8, and authorizes no RSD, tracer, survey,
-light-cone, normalization, or inference machinery.
+The backend remains a finite-dimensional analogue of the continuum operator
+contract, not a physical Timescape discretization. It remains
+non-observational and not f sigma 8.

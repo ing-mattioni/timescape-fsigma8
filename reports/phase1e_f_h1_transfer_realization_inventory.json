@@ -18,6 +18,7 @@
     "interface_role": "MATHEMATICAL_CARRIER_TRANSFER_INTERFACE",
     "interface_coordinates": "FIXED_LAGRANGIAN_REFERENCE_COORDINATES",
     "interface_displacement_state": "ABSENT",
+    "flux_normal_convention": "COMMON_REFERENCE_NORMAL_WALL_TO_VOID",
     "backend_role": "NONPHYSICAL_MATRIX_OPERATOR_CONTRACT_REFERENCE_BACKEND",
     "s1_fallback": "ABSENT"
   },
@@ -33,6 +34,7 @@
     "alpha_v > 0",
     "operator_time_regularity = C2_COMMON_TIME",
     "fixed_reference_constraints = true",
+    "n_Gamma is explicitly wall-to-void and used by both stored conormal traces",
     "Theta_r = 3 H_r through second declared derivative order",
     "all tolerances and thresholds are explicit"
   ],
@@ -70,6 +72,9 @@
     "inverse_derivative": "G_Gamma_dot = -G_Gamma A_Gamma_dot G_Gamma",
     "solution_derivative": "u_dot = G_Gamma(s_dot-A_Gamma_dot u)",
     "solution_second_derivative": "u_ddot = G_Gamma(s_ddot-A_Gamma_ddot u-2 A_Gamma_dot u_dot)",
+    "instantaneous_coercivity_verification": "minimum eigenvalue of symmetrized Q^T A_Gamma Q",
+    "interval_coercivity_status": "positive caller declaration checked at the instantaneous matrix point; uniform continuum interval coercivity is not numerically proved",
+    "flux_normal_convention": "COMMON_REFERENCE_NORMAL_WALL_TO_VOID",
     "global_mean_constraints": 1,
     "independent_regional_constant_projections": 0,
     "required_effective_operators": [
@@ -81,7 +86,8 @@
   },
   "transmission_conditions": {
     "value": "[u]_Gamma = 0",
-    "conormal_flux": "[A D_n u]_Gamma = 0",
+    "conormal_flux": "q_w-q_v=0 using one common wall-to-void n_Gamma",
+    "outward_flux_equivalence": "n_w_out=n_Gamma and n_v_out=-n_Gamma imply q_w-q_v=j_w_out+j_v_out=0",
     "surface_source": "FORBIDDEN",
     "wall_provenance": "PRESERVED",
     "void_provenance": "PRESERVED",
@@ -134,6 +140,22 @@
       "R_Z = Z_dot+(2/3)Theta Z+4 pi G(rho_d Delta_d+rho_eff Delta_eff)+12 pi G rho_eff P_tilde_eff",
       "R_eff = Delta_eff_dot-w_eff Theta Delta_eff+(1+w_eff)Z+Theta P_tilde_eff"
     ],
+    "classification": {
+      "C_P": "CONSTRUCTED_IDENTITY_CHECK",
+      "R_Delta": "CONSTRUCTED_IDENTITY_CHECK",
+      "R_Z": "DYNAMIC_COMPATIBILITY_CHECK",
+      "R_eff": "DYNAMIC_COMPATIBILITY_CHECK",
+      "K_GM": "CONSTRUCTED_IDENTITY_CHECK"
+    },
+    "constructed_identity_reason": {
+      "C_P": "A_P=A_W-3A_Q, B_P=-3B_Q, and the selected F_v solve imply C_P=0",
+      "R_Delta": "Z is defined as -Delta_d_dot",
+      "K_GM": "R_GM is defined by the GM Hamiltonian relation reconstructed by K_GM"
+    },
+    "dynamic_validation": {
+      "R_Z": "nontrivial manufactured four-term cancellation plus predictable second-density-jet failure",
+      "R_eff": "nontrivial manufactured three-term cancellation plus predictable effective-first-jet failure"
+    },
     "mismatch_states": [
       "C_Delta",
       "C_Z",
@@ -150,7 +172,8 @@
   "constraint_equations": {
     "R_GM": "-(4/3)Theta Z+16 pi G(rho_d Delta_d+rho_eff Delta_eff)",
     "K_GM": "R_GM+(4/3)Theta Z-16 pi G(rho_d Delta_d+rho_eff Delta_eff)",
-    "classification": "DERIVED_CONSTRAINT_RESIDUAL",
+    "classification": "DERIVED_TARGET_CURVATURE_WITH_CONSTRUCTED_IDENTITY_CHECK",
+    "K_GM_classification": "CONSTRUCTED_IDENTITY_CHECK",
     "independent_target_curvature_state": "ABSENT"
   },
   "gates": [
@@ -162,67 +185,67 @@
     {
       "id": "G1",
       "name": "regional_rank_four",
-      "status": "DIRECT_HARNESS_PASS"
+      "status": "PASS"
     },
     {
       "id": "G2",
       "name": "single_global_zero_mode",
-      "status": "DIRECT_HARNESS_PASS"
+      "status": "PASS"
     },
     {
       "id": "G3",
       "name": "transmission_continuity",
-      "status": "DIRECT_HARNESS_PASS"
+      "status": "PASS"
     },
     {
       "id": "G4",
-      "name": "conormal_continuity",
-      "status": "DIRECT_HARNESS_PASS"
+      "name": "explicit_common_normal_conormal_continuity",
+      "status": "PASS"
     },
     {
       "id": "G5",
-      "name": "uniform_coercivity_contract",
-      "status": "DIRECT_HARNESS_PASS"
+      "name": "instantaneous_spectral_check_and_declared_interval_coercivity_contract",
+      "status": "PASS"
     },
     {
       "id": "G6",
       "name": "nondegenerate_constitutive_solve",
-      "status": "DIRECT_HARNESS_PASS"
+      "status": "PASS"
     },
     {
       "id": "G7",
-      "name": "analytic_common_time_derivative",
-      "status": "DIRECT_HARNESS_PASS"
+      "name": "analytic_common_time_derivatives_with_independent_second_FD_check",
+      "status": "PASS"
     },
     {
       "id": "G8",
-      "name": "clean_C_P",
-      "status": "DIRECT_HARNESS_PASS"
+      "name": "constructed_C_P_wiring_identity",
+      "status": "PASS"
     },
     {
       "id": "G9",
-      "name": "canonical_GM_residuals",
-      "status": "DIRECT_HARNESS_PASS"
+      "name": "nontrivial_dynamic_R_Z_and_R_eff_validation",
+      "status": "PASS"
     },
     {
       "id": "G10",
-      "name": "derived_GM_constraint",
-      "status": "DIRECT_HARNESS_PASS"
+      "name": "derived_GM_constraint_identity",
+      "status": "PASS"
     },
     {
       "id": "G11",
-      "name": "provenance_roundtrip",
-      "status": "DIRECT_HARNESS_PASS"
+      "name": "constrained_projected_provenance_roundtrip",
+      "status": "PASS"
     },
     {
       "id": "G12",
       "name": "D3_firewall",
-      "status": "DIRECT_HARNESS_PASS"
+      "status": "PASS"
     },
     {
       "id": "G13",
       "name": "observational_firewall",
-      "status": "DIRECT_HARNESS_PASS"
+      "status": "PASS"
     },
     {
       "id": "G14",
@@ -236,26 +259,31 @@
     }
   ],
   "validation_tests": [
-    {"id": "V1", "name": "regional exact equations", "status": "DIRECT_HARNESS_PASS"},
-    {"id": "V2", "name": "global zero mode", "status": "DIRECT_HARNESS_PASS"},
-    {"id": "V3", "name": "transmission continuity", "status": "DIRECT_HARNESS_PASS"},
-    {"id": "V4", "name": "conormal continuity", "status": "DIRECT_HARNESS_PASS"},
-    {"id": "V5", "name": "coercivity guard", "status": "DIRECT_HARNESS_PASS"},
-    {"id": "V6", "name": "equal-region clean limit", "status": "DIRECT_HARNESS_PASS"},
-    {"id": "V7", "name": "wall/void relabelling", "status": "DIRECT_HARNESS_PASS"},
-    {"id": "V8", "name": "single-region endpoints", "status": "DIRECT_HARNESS_PASS"},
-    {"id": "V9", "name": "normalized effective degeneracy", "status": "DIRECT_HARNESS_PASS"},
-    {"id": "V10", "name": "constitutive closure", "status": "DIRECT_HARNESS_PASS"},
-    {"id": "V11", "name": "density compatibility", "status": "DIRECT_HARNESS_PASS"},
-    {"id": "V12", "name": "expansion compatibility", "status": "DIRECT_HARNESS_PASS"},
-    {"id": "V13", "name": "effective compatibility", "status": "DIRECT_HARNESS_PASS"},
-    {"id": "V14", "name": "GM Hamiltonian", "status": "DIRECT_HARNESS_PASS"},
-    {"id": "V15", "name": "compatibility propagation", "status": "DIRECT_HARNESS_PASS"},
-    {"id": "V16", "name": "broken transmission detection", "status": "DIRECT_HARNESS_PASS"},
-    {"id": "V17", "name": "broken C_P separation", "status": "DIRECT_HARNESS_PASS"},
-    {"id": "V18", "name": "spectral firewall", "status": "DIRECT_HARNESS_PASS"},
-    {"id": "V19", "name": "observational firewall", "status": "DIRECT_HARNESS_PASS"},
-    {"id": "V20", "name": "provenance roundtrip", "status": "DIRECT_HARNESS_PASS"}
+    {"id": "V1", "name": "regional exact equations", "status": "PASS"},
+    {"id": "V2", "name": "global zero mode", "status": "PASS"},
+    {"id": "V3", "name": "transmission continuity", "status": "PASS"},
+    {"id": "V4", "name": "common-reference conormal continuity wiring", "status": "PASS"},
+    {"id": "V5", "name": "coercivity guard", "status": "PASS"},
+    {"id": "V6", "name": "equal region fail-closed degeneracy with special zero-numerator path", "status": "PASS"},
+    {"id": "V7", "name": "wall/void relabelling", "status": "PASS"},
+    {"id": "V8", "name": "single-region endpoints", "status": "PASS"},
+    {"id": "V9", "name": "normalized effective degeneracy", "status": "PASS"},
+    {"id": "V10", "name": "constructed constitutive identity wiring", "status": "PASS"},
+    {"id": "V11", "name": "constructed density identity wiring", "status": "PASS"},
+    {"id": "V12", "name": "dynamic expansion compatibility", "status": "PASS"},
+    {"id": "V13", "name": "dynamic effective compatibility", "status": "PASS"},
+    {"id": "V14", "name": "constructed GM Hamiltonian identity", "status": "PASS"},
+    {"id": "V15", "name": "compatibility propagation", "status": "PASS"},
+    {"id": "V16", "name": "broken transmission detection", "status": "PASS"},
+    {"id": "V17", "name": "broken C_P separation", "status": "PASS"},
+    {"id": "V18", "name": "spectral firewall", "status": "PASS"},
+    {"id": "V19", "name": "observational firewall", "status": "PASS"},
+    {"id": "V20", "name": "constrained provenance roundtrip", "status": "PASS"},
+    {"id": "V21", "name": "nontrivial manufactured R_Z and R_eff cancellation", "status": "PASS"},
+    {"id": "V22", "name": "adversarial predictable R_Z failure", "status": "PASS"},
+    {"id": "V23", "name": "adversarial predictable R_eff failure", "status": "PASS"},
+    {"id": "V24", "name": "independent second-derivative finite-difference convergence", "status": "PASS"},
+    {"id": "V25", "name": "opposite-outward-normal flux orientation equivalence", "status": "PASS"}
   ],
   "observational_firewall": {
     "fsigma8": "NOT_IMPLEMENTED",
@@ -323,20 +351,20 @@
     "reports/phase1e_f_h1_transfer_realization_adversarial_audit.md"
   ],
   "test_results": {
-    "direct_python_3_14_3_harness": {
+    "historical_v1_direct_python_3_14_3_harness": {
       "result": "37 passed",
-      "scope": "all new Phase 1E-F test functions and parameter cases",
+      "scope": "historical v1 cases before the additive v2 correction",
       "formal_pytest": false
     },
     "python_3_14_3_targeted_pytest": {
-      "result": "37 passed in 0.24s",
+      "result": "42 passed in 0.21s",
       "failed": 0,
       "skipped": 0,
       "xfailed": 0,
       "warnings": 0
     },
     "python_3_11_9_targeted_pytest": {
-      "result": "37 passed in 0.25s",
+      "result": "42 passed in 0.21s",
       "failed": 0,
       "skipped": 0,
       "xfailed": 0,
@@ -351,7 +379,7 @@
       "pluggy": "1.6.0",
       "setuptools": "84.0.0",
       "packaging": "26.3",
-      "result": "416 passed in 31.19s",
+      "result": "421 passed in 12.58s",
       "failed": 0,
       "skipped": 0,
       "xfailed": 0,
@@ -366,11 +394,26 @@
       "pluggy": "1.6.0",
       "setuptools": "65.5.0",
       "packaging": "26.3",
-      "result": "416 passed in 24.50s",
+      "result": "421 passed in 12.98s",
       "failed": 0,
       "skipped": 0,
       "xfailed": 0,
       "warnings": 0
+    },
+    "v2_scientific_validation": {
+      "manufactured_R_Z_scalar_terms": [-1.352, 0.3136, 1.0, 0.0384],
+      "manufactured_R_eff_scalar_terms": [-0.831936, -0.008064, 0.84],
+      "adversarial_R_Z_magnitude": 0.10000000000000028,
+      "adversarial_R_eff_magnitude": 0.058333333333333334,
+      "configured_residual_tolerance": 1e-10,
+      "second_derivative_FD_errors": {
+        "h_0.02": 6.047445224088843e-06,
+        "h_0.01": 1.511909388296484e-06,
+        "h_0.005": 3.7797144475382183e-07
+      },
+      "equal_region_status": "FAIL_CLOSED_DEGENERATE_ONTOLOGY_REDUCTION",
+      "generic_equal_region_limit_claimed": false,
+      "flux_orientation_wrong_sign_diagnostic": 2.0
     },
     "environment_recovery": {
       "root_cause": "both prior virtual environments were incomplete package-directory skeletons with missing pip/package files and metadata; Python 3.11 also retained a broken distutils-precedence.pth reference",
@@ -378,7 +421,7 @@
       "repository_dependency_files_changed": false,
       "phase1e_f_worktree_hashes_preserved_during_repair": true
     },
-    "legacy_baseline": "379 passed per interpreter before Phase 1E-F",
+    "legacy_baseline": "379 passed per interpreter before Phase 1E-F; v1 Phase 1E-F total was 416",
     "commit_tag_push_allowed": true
   }
 }

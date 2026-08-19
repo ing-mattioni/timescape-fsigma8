@@ -67,18 +67,36 @@ requires explicit declarations of:
 - a positive interval coercivity lower bound;
 - constraint-rank and symmetry tolerances.
 
+The matrix backend computes the instantaneous minimum eigenvalue of
+Q^T A_Gamma Q on the constrained space and checks the caller-declared
+interval lower bound against it. This is an instantaneous spectral
+verification plus an explicit interval contract; it is not a numerical proof
+of uniform coercivity over an arbitrary time interval.
+
 Every transmission solution satisfies, to configured tolerance:
 
     [u]_Gamma = 0
     [A D_n u]_Gamma = 0
 
+The normal convention is explicit and mandatory. A common reference normal
+n_Gamma points wall-to-void, and both stored traces use it:
+
+    q_w = A_w grad(u_w) . n_Gamma
+    q_v = A_v grad(u_v) . n_Gamma
+    q_w - q_v = 0
+
+With outward normals n_w_out=n_Gamma and n_v_out=-n_Gamma, this is equivalent
+to j_w_out+j_v_out=0. Unsupported or omitted conventions fail closed.
+
 No surface-source input exists. The analytic solve derivative is the
 authorized Phase 1E-F operator identity:
 
     u_dot = G_Gamma (s_dot - A_Gamma_dot u)
+    u_ddot = G_Gamma (s_ddot - A_Gamma_ddot u
+                      - 2 A_Gamma_dot u_dot)
 
-The second derivative follows by differentiating this identity. Finite
-differences are used only as an independent test.
+The second derivative is independently checked with three central
+finite-difference step sizes. Finite differences remain test-only.
 
 The matrix backend is a finite-dimensional analogue of this contract. Its
 matrices and jump rows are synthetic validation objects, not a physical
@@ -130,8 +148,12 @@ branch:
     mathscr_W = C_R^Gamma + A_W F_v
     C_P = mathscr_W - 3 mathscr_Q
 
-F_v is algebraically slaved. C_P is verified independently and is never
-absorbed into C_eff.
+F_v is algebraically slaved. Because A_P=A_W-3A_Q and B_P=-3B_Q,
+
+    C_P = C_R^Gamma + A_P F_v + B_P E_DeltaTheta_Gamma = 0
+
+is a CONSTRUCTED_IDENTITY_CHECK. It remains mandatory as a wiring diagnostic
+and is never absorbed into C_eff, but it is not independent dynamic evidence.
 
 ## 6. Effective fluid, analytic Z, and partition closure
 
@@ -177,6 +199,23 @@ The target curvature and Hamiltonian check are derived quantities:
     K_GM = R_GM + (4/3)Theta Z
          - 16 pi G(rho_d Delta_d + rho_eff Delta_eff)
 
+The residual classifications are:
+
+    CONSTRUCTED_IDENTITY_CHECK:
+        C_P
+        R_Delta, because Z = -Delta_d_dot
+        K_GM, because R_GM is defined by the displayed relation
+
+    DYNAMIC_COMPATIBILITY_CHECK:
+        R_Z
+        R_eff
+
+The constructed checks detect implementation or wiring faults but are not
+independent dynamic evidence. R_Z and R_eff are validated with a nontrivial
+manufactured trajectory and independent term-by-term reconstruction. Separate
+second-density-jet and effective-first-jet corruptions produce predictable
+fail-closed residuals.
+
 The clean mismatch system contains exactly C_Delta, C_Z, and C_eff. C_P is
 separate. Zero mismatch has zero propagation RHS when all clean gates hold.
 
@@ -196,6 +235,16 @@ Evaluation is rejected before division unless all conditions hold:
 Every scientific tolerance is supplied explicitly by H1Configuration. No
 scientifically meaningful default threshold exists.
 
+At exact regional equality, d_Theta=A_W=A_Q=B_Q=A_P=B_P=0. The point is
+outside the nondegenerate A_P branch and is classified:
+
+    FAIL_CLOSED_DEGENERATE_ONTOLOGY_REDUCTION
+
+The tested near-equal path has a numerator identically equal to zero and only
+establishes F_v=0/epsilon=0 along that special path. A finite general limit
+would require C_R^Gamma+B_P E_DeltaTheta_Gamma=O(A_P); even then the ratio is
+path-dependent without additional structure. No equal-region branch is added.
+
 If the effective denominator fails, H1EffectiveNormalizationError exposes
 only the already-computed unnormalized F_v, mathscr_Q, mathscr_W, C_P, and
 background Q_bar+W_bar diagnostics. Delta_eff and w_eff are not evaluated.
@@ -203,19 +252,34 @@ background Q_bar+W_bar diagnostics. Delta_eff and w_eff are not evaluated.
 ## 9. Provenance and inverse boundary
 
 The result retains wall/void injection responses, transmitted fields, raw and
-admissible dual sources, and analytic derivative jets. Applying the coupled
-operator reconstructs each admissible regional dual source through second
-common-time order. This is the only inverse/roundtrip claim.
+admissible dual sources, and analytic derivative jets. The precise roundtrip
+is:
+
+    raw source b
+        -> admissible projected source P b
+        -> constrained H1 solution
+        -> coupled operator
+        -> recovered admissible source P b
+
+This is a solver/operator/provenance consistency identity through second
+common-time order, not independent evidence of physical invertibility.
 
 There is no target-only inverse from (Delta_d,Z,Delta_eff) to the regional
 bulk state.
 
 ## 10. Validation status and limitations
 
-All 37 new scientific cases pass the direct Python 3.14.3 execution harness.
-The same 37 cases pass through normal pytest under Python 3.14.3 and Python
-3.11.9. The complete repository suite passes 416 tests in each environment,
+The historical v1 direct harness covered 37 cases. The strengthened v2 suite
+contains 42 normal-pytest cases under both Python 3.14.3 and Python 3.11.9.
+The complete repository suite passes 421 tests in each environment,
 with no failures, skips, xfails, or warnings reported.
+
+The manufactured clean cancellation uses nonzero Delta_d, Z, Z_dot, Theta,
+Delta_eff, Delta_eff_dot, rho_d, and rho_eff, with w_eff=0.5. Its scalar
+R_Z contributions are -1.352, 0.3136, 1.0, and 0.0384; its R_eff
+contributions are -0.831936, -0.008064, and 0.84. Adversarial perturbations
+produce R_Z magnitude 0.10000000000000028 and R_eff magnitude
+0.058333333333333334 against 1e-10 tolerances.
 
 The two corrupted external validation environments were recreated without
 changing repository dependencies or any Phase 1E-F bytes. The established

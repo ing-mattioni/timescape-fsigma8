@@ -20,6 +20,7 @@ from numpy.typing import ArrayLike, NDArray
 
 
 FloatArray = NDArray[np.float64]
+COMMON_REFERENCE_NORMAL_WALL_TO_VOID = "COMMON_REFERENCE_NORMAL_WALL_TO_VOID"
 
 
 def _readonly_vector(values: ArrayLike, name: str) -> FloatArray:
@@ -118,6 +119,15 @@ class DenseH1TransmissionBackend:
     The fixed admissible subspace is the null space of the explicitly supplied
     value-jump rows, conormal-flux-jump rows, and exactly one global mean row.
     No wall-only or void-only constant projection exists.  On that subspace,
+    the Phase 1E-F correction contract freezes one reference normal n_Gamma
+    directed wall-to-void. Stored conormal traces use that same normal on both
+    sides: q_w=A_w grad(u_w).n_Gamma and q_v=A_v grad(u_v).n_Gamma. The
+    supplied flux row therefore represents q_w-q_v. With regional outward
+    normals n_w_out=n_Gamma and n_v_out=-n_Gamma, this is exactly the
+    source-free condition j_w_out+j_v_out=0. No alternative sign convention
+    is accepted implicitly.
+
+    On the constrained subspace,
     ``A_reduced = Q.T @ A @ Q`` represents ``A_Gamma`` and is solved jointly.
 
     Source: user-approved Phase 1E-F specification
@@ -135,6 +145,7 @@ class DenseH1TransmissionBackend:
         void_source_injection: ArrayLike,
         value_jump_operator: ArrayLike,
         flux_jump_operator: ArrayLike,
+        flux_normal_convention: str,
         global_mean_weights: ArrayLike,
         constraint_rank_tolerance: float,
         symmetry_tolerance: float,
@@ -155,6 +166,11 @@ class DenseH1TransmissionBackend:
         if fixed_reference_constraints is not True:
             raise ValueError(
                 "this backend requires explicitly fixed Lagrangian interface constraints"
+            )
+        if flux_normal_convention != COMMON_REFERENCE_NORMAL_WALL_TO_VOID:
+            raise ValueError(
+                "flux_normal_convention must explicitly be "
+                "COMMON_REFERENCE_NORMAL_WALL_TO_VOID"
             )
         if (
             not np.isfinite(interval_coercivity_lower_bound)
@@ -231,6 +247,7 @@ class DenseH1TransmissionBackend:
         self._void_injection = void
         self._value_jump = value_jump
         self._flux_jump = flux_jump
+        self._flux_normal_convention = flux_normal_convention
         self._mean = mean
         self._basis = np.array(basis, dtype=np.float64, copy=True)
         self._basis.setflags(write=False)
@@ -283,6 +300,11 @@ class DenseH1TransmissionBackend:
     @property
     def fixed_reference_constraints(self) -> bool:
         return self._fixed_reference_constraints
+
+    @property
+    def flux_normal_convention(self) -> str:
+        """Return the explicit common wall-to-void reference-normal convention."""
+        return self._flux_normal_convention
 
     def project_source(self, source: ArrayLike) -> FloatArray:
         """Project a source into ``V_Gamma,0*`` using the joint basis."""
@@ -424,6 +446,11 @@ class DenseH1TransmissionBackend:
         return self._value_jump @ vector
 
     def flux_jump(self, field: ArrayLike) -> FloatArray:
+        """Return q_w-q_v, equivalently j_w_out+j_v_out.
+
+        Source: the human-approved Phase 1E-F validation-correction contract,
+        section EXPLICIT CONORMAL-FLUX CONVENTION.
+        """
         vector = _readonly_vector(field, "field")
         if vector.shape != (self.size,):
             raise ValueError("field must match backend size")

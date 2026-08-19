@@ -39,6 +39,7 @@ from timescape_fsigma8.transfer.h1_realization import (
     validate_clean_diagnostics,
 )
 from timescape_fsigma8.transfer.matrix_backend import (
+    COMMON_REFERENCE_NORMAL_WALL_TO_VOID,
     DenseCarrierOperator,
     DenseH1TransmissionBackend,
     JointTransmissionState,
@@ -50,6 +51,7 @@ from timescape_fsigma8.transfer.matrix_backend import (
 
 __all__ = [
     "CARRIER_REFERENCE_TOPOLOGY",
+    "COMMON_REFERENCE_NORMAL_WALL_TO_VOID",
     "FRAMEWORK_STATUS",
     "DRESSED_LIGHTCONE_IMPLEMENTATION_AUTHORIZATION",
     "FSIGMA8_IMPLEMENTATION_AUTHORIZATION",
