@@ -21,6 +21,7 @@ from scipy.sparse import linalg as sparse_linalg
 
 from timescape_fsigma8.transfer.continuum_geometry import (
     COMMON_REFERENCE_NORMAL_WALL_TO_VOID_1E_G,
+    DERIVED_FROM_NORMALIZED_METRIC,
     ContinuumCarrierSpec,
     ContinuumContractError,
     ContinuumDegeneracyError,
@@ -77,6 +78,19 @@ class SourceProjectionDiagnostics:
 
 
 @dataclass(frozen=True)
+class MetricNormalizationDiagnostics:
+    """Construction/provenance check for one normalized comoving metric."""
+
+    region_id: str
+    normalization_id: str
+    volume_provenance: str
+    consistency_classification: str
+    metric_reference_volume: float
+    declared_reference_volume: float
+    relative_residual: float
+
+
+@dataclass(frozen=True)
 class InterfaceDiagnostics:
     value_jump: FloatArray
     flux_jump: FloatArray
@@ -100,6 +114,8 @@ class ContinuumTransferResponse:
 
     provenance: str
     region: str
+    raw_source_provenance: str
+    projected_admissible_source_support: str
     raw_source_density: FloatArray
     raw_source_load: FloatArray
     projected_source_load: FloatArray
@@ -145,6 +161,10 @@ class ContinuumH1Operator:
         continuum_coercivity_bound: float,
     ) -> None:
         branch.validate_selected_branch()
+        if not carrier.target_geometry.metric_time_independent:
+            raise ContinuumContractError(
+                "time-dependent target metric/scalarization is unsupported"
+            )
         if morphology.wall_domain.shape != carrier.grid_shape:
             raise ContinuumContractError("morphology does not match carrier grid")
         for geometry, name in (
@@ -208,6 +228,19 @@ class ContinuumH1Operator:
         self._target_volume_ratio = (
             carrier.target_geometry.metric_volume_ratio.reshape(-1)
         )
+        self.metric_normalization_diagnostics = {
+            "wall": self._validate_metric_normalization(
+                wall_geometry, self._wall_mask, "wall"
+            ),
+            "void": self._validate_metric_normalization(
+                void_geometry, self._void_mask, "void"
+            ),
+            "target": self._validate_metric_normalization(
+                carrier.target_geometry,
+                np.ones(self.size, dtype=np.bool_),
+                "target",
+            ),
+        }
 
         inverse_min = min(
             wall_geometry.inverse_metric_eigenvalue_bounds[0],
@@ -246,13 +279,32 @@ class ContinuumH1Operator:
             )
         basis = scipy_linalg.null_space(self._weights[np.newaxis, :])
         reduced = basis.T @ dense @ basis
-        self.discrete_spectral_lower_bound = float(
+        self.ordinary_euclidean_constrained_stiffness_eigenvalue = float(
             np.min(np.linalg.eigvalsh(0.5 * (reduced + reduced.T)))
         )
-        if self.discrete_spectral_lower_bound <= configuration.kernel_tolerance:
+        if (
+            self.ordinary_euclidean_constrained_stiffness_eigenvalue
+            <= configuration.kernel_tolerance
+        ):
             raise ContinuumDegeneracyError(
                 "constrained discrete operator is not coercive"
             )
+        mass = np.diag(self._weights * self._metric_volume_ratio)
+        reduced_mass = basis.T @ mass @ basis
+        # Human-approved Phase 1E-G v2 numerical diagnostic K x=lambda M x;
+        # no paper equation number and no continuum-coercivity proof claim.
+        generalized = scipy_linalg.eigvalsh(
+            0.5 * (reduced + reduced.T),
+            0.5 * (reduced_mass + reduced_mass.T),
+        )
+        self.generalized_mass_weighted_laplacian_eigenvalue = float(
+            np.min(generalized)
+        )
+        # Backward-compatible v1 name: explicitly an ordinary Euclidean
+        # stiffness diagnostic, never a continuum coercivity constant.
+        self.discrete_spectral_lower_bound = (
+            self.ordinary_euclidean_constrained_stiffness_eigenvalue
+        )
         self._mean_basis = basis
 
     @property
@@ -290,6 +342,14 @@ class ContinuumH1Operator:
         return result
 
     @property
+    def target_measure_weights(self) -> FloatArray:
+        """Return ``w_i J_D,i`` for target-metric discrete L2 diagnostics."""
+        result = self._weights * self._target_volume_ratio
+        result = np.array(result, dtype=np.float64, copy=True)
+        result.setflags(write=False)
+        return result
+
+    @property
     def operator_first_derivative(self) -> sparse.csr_matrix:
         """Return A_dot=0 from the fixed-comoving branch, not a hidden default."""
         self.branch.validate_selected_branch()
@@ -300,6 +360,63 @@ class ContinuumH1Operator:
         """Return A_ddot=0 from Phase 1E-G section 19 branch metadata."""
         self.branch.validate_selected_branch()
         return sparse.csr_matrix(self._stiffness.shape, dtype=np.float64)
+
+    @property
+    def target_scalarization_first_derivative(self) -> sparse.csr_matrix:
+        """Return ``L_D_dot=0`` only on the fixed-target selected branch."""
+        self.branch.validate_selected_branch()
+        if not self.carrier.target_geometry.metric_time_independent:
+            raise ContinuumContractError("target scalarization is time dependent")
+        return sparse.csr_matrix(self._target_stiffness.shape, dtype=np.float64)
+
+    @property
+    def target_scalarization_second_derivative(self) -> sparse.csr_matrix:
+        """Return ``L_D_ddot=0`` only on the fixed-target selected branch."""
+        self.branch.validate_selected_branch()
+        if not self.carrier.target_geometry.metric_time_independent:
+            raise ContinuumContractError("target scalarization is time dependent")
+        return sparse.csr_matrix(self._target_stiffness.shape, dtype=np.float64)
+
+    def _validate_metric_normalization(
+        self,
+        geometry: RegionalGeometrySpec,
+        domain_mask: NDArray[np.bool_],
+        role: str,
+    ) -> MetricNormalizationDiagnostics:
+        """Compare the metric-derived and explicitly declared reference volume.
+
+        This is the human-approved Phase 1E-G v2 construction consistency
+        equation, not an independent Timescape prediction and not a solver
+        rescaling operation.
+        """
+        metric_volume = float(
+            np.sum(
+                self._weights
+                * geometry.metric_volume_ratio.reshape(-1)
+                * domain_mask
+            )
+        )
+        declared = float(geometry.normalization.reference_comoving_volume)
+        relative = abs(metric_volume - declared) / max(metric_volume, declared)
+        if relative > geometry.normalization.consistency_tolerance:
+            raise ContinuumContractError(
+                f"{role} normalized metric/reference-volume consistency failed"
+            )
+        classification = (
+            "CONSTRUCTION_CONSISTENCY_CHECK"
+            if geometry.normalization.volume_provenance
+            == DERIVED_FROM_NORMALIZED_METRIC
+            else "EXTERNAL_REFERENCE_VOLUME_CONSISTENCY_CHECK"
+        )
+        return MetricNormalizationDiagnostics(
+            region_id=role,
+            normalization_id=geometry.normalization.normalization_id,
+            volume_provenance=geometry.normalization.volume_provenance,
+            consistency_classification=classification,
+            metric_reference_volume=metric_volume,
+            declared_reference_volume=declared,
+            relative_residual=relative,
+        )
 
     def _isotropic_tensor_density(
         self, geometry: RegionalGeometrySpec, name: str
@@ -582,15 +699,27 @@ class ContinuumH1Operator:
             raise ContinuumContractError("explicit interface traces must have paired shapes")
         return wall_value - void_value, wall_flux - void_flux
 
-    def regional_comoving_volumes(self) -> tuple[float, float]:
+    def metric_derived_regional_comoving_volumes(self) -> tuple[float, float]:
+        """Integrate ``dmu_gamma_r`` over the configured regional domains."""
         wall_ratio = self.wall_geometry.metric_volume_ratio.reshape(-1)
         void_ratio = self.void_geometry.metric_volume_ratio.reshape(-1)
         wall_volume = float(np.sum(self._weights * wall_ratio * self._wall_mask))
         void_volume = float(np.sum(self._weights * void_ratio * self._void_mask))
         return wall_volume, void_volume
 
+    def regional_comoving_volumes(self) -> tuple[float, float]:
+        """Return explicitly declared normalized ``V_w,i`` and ``V_v,i``."""
+        return (
+            self.wall_geometry.normalization.reference_comoving_volume,
+            self.void_geometry.normalization.reference_comoving_volume,
+        )
+
     def geometric_void_fraction(self, *, a_w: float, a_v: float) -> float:
-        """Evaluate V_v/(V_v+V_w), Phase 1E-G section 22 closure equation."""
+        """Evaluate ``V_v/(V_v+V_w)`` from the declared normalized volumes.
+
+        This is the human-approved Phase 1E-G section 22 closure equation,
+        not an independently predicted Timescape volume fraction.
+        """
         if not np.isfinite(a_w) or not np.isfinite(a_v) or a_w <= 0.0 or a_v <= 0.0:
             raise ContinuumContractError("regional scale factors must be positive")
         wall_initial, void_initial = self.regional_comoving_volumes()
@@ -622,6 +751,18 @@ class ContinuumTransfer:
         )
         raw_load = self.operator.source_load(raw_source, region=region)
         projected, projection = self.operator.project_dual_source(raw_load)
+        if region == "wall":
+            raw_mask = self.operator.morphology.wall_domain.reshape(-1)
+        elif region == "void":
+            raw_mask = self.operator.morphology.void_domain.reshape(-1)
+        else:
+            raw_mask = np.ones(self.operator.size, dtype=np.bool_)
+        outside_support = _max_abs(projected[~raw_mask]) if np.any(~raw_mask) else 0.0
+        projected_support = (
+            "GLOBAL_AFTER_CONSTANT_COMPATIBILITY_CORRECTION"
+            if outside_support > self.operator.configuration.source_compatibility_tolerance
+            else "UNCHANGED_RAW_SUPPORT"
+        )
         potential = self.operator.solve_projected_load(projected)
         transferred = self.operator.target_scalarization(potential)
         interface = self.operator.interface_diagnostics(potential)
@@ -642,6 +783,8 @@ class ContinuumTransfer:
         return ContinuumTransferResponse(
             provenance=provenance,
             region=region,
+            raw_source_provenance=region,
+            projected_admissible_source_support=projected_support,
             raw_source_density=raw_source,
             raw_source_load=raw_load,
             projected_source_load=projected,
@@ -662,9 +805,11 @@ class ContinuumTransfer:
     ) -> ContinuumTransferJetResponse:
         """Use ``T[s]``, ``T[s_dot]``, ``T[s_ddot]`` analytically.
 
-        This derivative commutation follows from ``A_dot=A_ddot=0`` on the
-        selected fixed-comoving branch (Phase 1E-G sections 19--20; no paper
-        equation number).  Canonical runtime finite differences are absent.
+        This derivative commutation follows from
+        ``A_dot=A_ddot=L_D_dot=L_D_ddot=0`` on the selected fixed-comoving
+        branch (Phase 1E-G sections 19--20 plus the human-approved v2 target
+        guard; no paper equation number). Canonical runtime finite differences
+        are absent.
         """
         components = tuple(
             self.transfer_source(
@@ -803,13 +948,47 @@ class ContinuumPhase1EBackendAdapter:
 def normalized_difference(
     first: ArrayLike, second: ArrayLike, *, normalization: float
 ) -> float:
-    """Return an explicit-normalisation morphology sensitivity diagnostic."""
+    """Return the legacy finite-grid Euclidean diagnostic, explicitly named.
+
+    This v1 compatibility helper is not the primary Phase 1E-G v2 scientific
+    morphology measure.
+    """
     if not np.isfinite(normalization) or normalization <= 0.0:
         raise ContinuumContractError("sensitivity normalization must be positive")
     difference = np.asarray(first, dtype=np.float64) - np.asarray(
         second, dtype=np.float64
     )
     return float(np.linalg.norm(difference) / normalization)
+
+
+def target_metric_weighted_l2_difference(
+    first: ArrayLike,
+    second: ArrayLike,
+    *,
+    target_measure_weights: ArrayLike,
+    reference_scale: float,
+    normalization_floor: float,
+) -> float:
+    """Approximate ``||Y1-Y2||_L2(dmu_D)`` with explicit normalization.
+
+    The norm is the human-approved Phase 1E-G v2 morphology diagnostic; no
+    paper equation number exists.  It is morphology sensitivity, not error.
+    """
+    weights = np.asarray(target_measure_weights, dtype=np.float64).reshape(-1)
+    difference = np.asarray(first, dtype=np.float64).reshape(-1) - np.asarray(
+        second, dtype=np.float64
+    ).reshape(-1)
+    if weights.shape != difference.shape or np.any(weights <= 0.0):
+        raise ContinuumContractError("target L2 weights must be positive and aligned")
+    if (
+        not np.isfinite(reference_scale)
+        or reference_scale <= 0.0
+        or not np.isfinite(normalization_floor)
+        or normalization_floor <= 0.0
+    ):
+        raise ContinuumContractError("morphology L2 normalization must be positive")
+    numerator = float(np.sqrt(np.sum(weights * difference**2)))
+    return numerator / max(float(reference_scale), float(normalization_floor))
 
 
 def require_no_generic_spectral_label(labels: Iterable[str]) -> None:

@@ -30,6 +30,13 @@ NOT_GRANTED
   inferred from Timescape or hidden as a private default.
 - **PASS:** regional and target Laplacians are separately metric-derived and
   separately named. No arbitrary unlabeled Laplacian was introduced.
+- **PASS:** wall, void and target metrics require explicit normalization
+  provenance tying `gamma_r`, a reference `a_r`, and declared `V_r,i`.
+  Metric/reference-volume disagreement and stale constant rescaling reject;
+  the runtime performs no hidden metric rescaling.
+- **PASS:** a time-dependent target metric fails before transfer. The fixed
+  branch now establishes both `A_Gamma_dot=A_Gamma_ddot=0` and
+  `L_D_dot=L_D_ddot=0`; derivative commutation is not used otherwise.
 - **PASS:** the source load is `J_r s_r dmu_0`. A nonconstant-`J` adversarial
   oracle detects omission of the metric volume weight.
 - **PASS:** no Ricci-flow smoothing dynamics were introduced.
@@ -66,16 +73,31 @@ NOT_GRANTED
 - **PASS:** source compatibility projection and solution normalization have
   separate APIs and diagnostics.
 - **PASS:** continuum ellipticity/coercivity assumptions are distinguished
-  from the discrete constrained spectral lower bound.
+  from both the ordinary Euclidean constrained stiffness eigenvalue and the
+  generalized mass-weighted discrete Laplacian eigenvalue. Neither is called
+  a mesh-independent continuum gap.
 - **PASS:** interface traces use the frozen wall-to-void common normal;
   opposite outward-normal equivalence and wrong-sign sensitivity are tested.
 - **PASS:** the provenance roundtrip recovers only the admissible projected
   source through the constrained operator chain. It is not a target-only
   inverse or arbitrary raw-source inversion.
+- **PASS:** raw regional provenance is distinct from projected support. The
+  global compatibility correction can make a wall- or void-originating
+  projected source globally supported.
 - **PASS:** heterogeneous morphology is not assumed Fourier diagonal. A
   numerical fixture demonstrates mode mixing.
-- **PASS:** two equal-volume morphologies give resolved sensitivity. The
-  difference is reported as model-closure sensitivity, not numerical error.
+- **PASS:** morphology sensitivity uses target-metric weighted L2 with an
+  explicit reference scale and floor, not an unweighted Euclidean norm.
+- **PASS:** the compared layer/island sources are documented as
+  `COMMON_LATENT_MANUFACTURED_FIELD`. Their flat stiffness matrices are
+  identical, so their difference is mask/source-support sensitivity followed
+  by projection, Green response, target scalarization and constitutive
+  amplification--not heterogeneous-operator sensitivity.
+- **PASS:** shifted-layer 16/32/64 refinement resolves the reported transfer
+  diagnostic and is classified `MORPHOLOGY_DIAGNOSTIC_CONVERGED`.
+- **LIMITATION:** the 2-D Poincare fixture has Gaussian/scalar curvature
+  `-1/-2` and `J gamma^{ij}=delta^{ij}`. It validates metric/source provenance,
+  not heterogeneous stiffness or a physical 3-D Timescape void.
 
 ## Phase 1E-F inheritance audit
 
@@ -85,6 +107,10 @@ NOT_GRANTED
 - **PASS:** the residual classification remains:
   `C_P/R_Delta/K_GM = CONSTRUCTED_IDENTITY_CHECK` and
   `R_Z/R_eff = DYNAMIC_COMPATIBILITY_CHECK`.
+- **PASS:** the continuum-derived dynamic fixture has four nonzero `R_Z`
+  terms and three nonzero `R_eff` terms; independent `alpha_w.first` and
+  `Q_bar.first` perturbations produce predicted signed failures at the
+  inherited `1e-10` tolerance.
 - **PASS:** no fourth mismatch state was introduced.
 - **PASS:** `F_v` and `J_Xi` remain algebraic/derived.
 
@@ -104,7 +130,10 @@ NOT_GRANTED
 ## Residual risk and limitations
 
 The morphology and maps are scientifically underdetermined external closure
-inputs. The structured backend is not a full anisotropic FEM solver. The
+inputs. The metric/scale-factor/reference-volume normalization convention is
+also explicit closure provenance, and the volume-fraction agreement in the
+reference test is manufactured consistency rather than a Timescape
+prediction. The structured backend is not a full anisotropic FEM solver. The
 continuum existence/uniqueness statement is conditional on declared
 regularity, connectedness, uniform ellipticity and Poincare assumptions.
 Morphology sensitivity can be large and has no observational interpretation

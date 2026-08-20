@@ -75,13 +75,53 @@
     "metric": "gamma_D",
     "reference_branch": "flat periodic",
     "K_D": 0,
-    "separate_scalarization_name_required": true
+    "separate_scalarization_name_required": true,
+    "metric_time_independent_required": true
+  },
+  "target_metric_time_contract": {
+    "selected_branch": "FIXED_TARGET_COMOVING_METRIC_AND_SCALARIZATION",
+    "gamma_D_time_independent": true,
+    "L_D_dot": 0,
+    "L_D_ddot": 0,
+    "time_dependent_target_status": "FAIL_CLOSED_UNSUPPORTED",
+    "derivative_commutation": ["T_dot[s]=T[s_dot]", "T_ddot[s]=T[s_ddot]"]
   },
   "metric_pullback_contract": {
     "metric": "gamma_hat_r=Phi_r^* gamma_r",
     "inverse": "gamma_hat_r^{ij}",
     "tensor_density": "K_r^{ij}=J_r gamma_hat_r^{ij}",
     "required_properties": ["symmetric", "positive_definite", "time_independent"]
+  },
+  "metric_normalization_contract": {
+    "required": true,
+    "members": [
+      "normalization_id",
+      "scale_factor_reference_epoch",
+      "scale_factor_reference_value",
+      "metric_scale_convention",
+      "reference_comoving_volume",
+      "volume_provenance",
+      "consistency_tolerance"
+    ],
+    "runtime_metric_rescaling": false,
+    "stale_constant_rescaling_status": "FAIL_CLOSED",
+    "scientific_status": "EXPLICIT_PHASE_1E_G_MODEL_EXTENSION"
+  },
+  "regional_reference_volume_provenance": {
+    "allowed": [
+      "DERIVED_FROM_NORMALIZED_METRIC",
+      "EXTERNALLY_SUPPLIED_REFERENCE_VOLUME"
+    ],
+    "metric_integral": "V_r_i_metric=integral_Omega_r J_r dmu_0",
+    "declared_comparison_required": true,
+    "agreement_classification": "CONSTRUCTION_OR_EXTERNAL_REFERENCE_CONSISTENCY_CHECK_NOT_TIMESCAPE_PREDICTION"
+  },
+  "scale_factor_normalization_provenance": {
+    "relation": "h_r=a_r^2 gamma_r",
+    "reference_epoch_and_value_required": true,
+    "constant_rescaling_rule": "gamma_r_prime=c_r^2 gamma_r; a_r_prime=a_r/c_r; V_r_i_prime=c_r^3 V_r_i",
+    "silent_equivalence": false,
+    "distinct_normalization_id_required": true
   },
   "reference_measure_contract": {
     "metric_volume_ratio": "J_r=dmu_gamma_hat_r/dmu_0",
@@ -107,7 +147,10 @@
     "condition": "<Q_Gamma b,1>=0",
     "distinct_from_solution_normalization": true,
     "base_mean_before": 1.0,
-    "base_mean_after": 0.0
+    "base_mean_after": 0.0,
+    "raw_source_provenance": "wall_or_void_region_is_retained",
+    "projected_source_support_semantics": "GLOBAL_AFTER_CONSTANT_COMPATIBILITY_CORRECTION_WHEN_RAW_MEAN_NONZERO",
+    "projected_source_is_spatially_region_only": false
   },
   "transmission_conditions": {
     "value": "[u]_Gamma=0",
@@ -131,7 +174,13 @@
     ],
     "continuum_status": "CONDITIONALLY_PROVED",
     "reference_assumption_bound": 0.1,
-    "base_discrete_spectral_bound": 4.6862915010152335,
+    "geometric_ellipticity_bound": "SEPARATELY_RECORDED",
+    "measure_equivalence_assumption": true,
+    "poincare_assumption": true,
+    "ordinary_discrete_stiffness_diagnostic": 4.6862915010152335,
+    "generalized_discrete_laplacian_spectral_diagnostic": 37.49033200812189,
+    "ordinary_is_mesh_independent_gap": false,
+    "generalized_is_continuum_coercivity_proof": false,
     "finite_grid_is_not_general_continuum_proof": true
   },
   "transfer_operator": {
@@ -178,6 +227,8 @@
     "A_ddot": 0,
     "G_dot": 0,
     "G_ddot": 0,
+    "L_D_dot": 0,
+    "L_D_ddot": 0,
     "first_transfer": "T[s_dot]",
     "second_transfer": "T[s_ddot]",
     "canonical_finite_difference": false
@@ -188,19 +239,43 @@
     "diagnostic": "K_f=f_v_geom-f_v_TS",
     "base_residual": 0.0,
     "fail_closed": true,
-    "coordinate_cell_fraction_is_physical_fraction": false
+    "coordinate_cell_fraction_is_physical_fraction": false,
+    "internal_normalization_consistency": "metric_integral_vs_declared_V_r_i",
+    "background_consistency": "f_v_geom_vs_supplied_f_v_background",
+    "manufactured_volume_fraction_fixture_status": "MANUFACTURED_BACKGROUND_CONSISTENCY_FIXTURE",
+    "independent_timescape_prediction": false
   },
   "morphology_sensitivity": {
-    "normalization": "explicit unit L2 norm",
+    "morphology_source_correspondence": "COMMON_LATENT_MANUFACTURED_FIELD",
+    "sources": ["s_w^M=Delta_w chi_w^M", "s_v^M=Delta_v chi_v^M"],
+    "inputs_separately_unit_l2_normalized": false,
+    "morphology_norm_definition": "sqrt(sum_i w_i J_D_i |Y_M1-Y_M2|^2)/max(reference_scale,floor)",
+    "reference_scale": 1.0,
+    "normalization_floor": 1e-12,
     "interpretation": "model-closure sensitivity, not numerical error",
+    "operator_matrices_equal_for_layer_island_fixture": true,
+    "sensitivity_decomposition": [
+      "source_mask_change",
+      "global_compatibility_projection",
+      "Green_operator_response",
+      "target_scalarization",
+      "downstream_constitutive_amplification"
+    ],
     "layer_vs_island": {
-      "transferred_wall_density": 6.32455532033675,
-      "transferred_void_density": 3.1622776601683755,
-      "E_DeltaTheta_Gamma": 18.97366596101025,
-      "C_R_Gamma": 286.11614205492737,
-      "F_v": 143.05807102746368,
-      "Delta_d": 5.692099788303076,
+      "transferred_wall_density": 0.6324555320336751,
+      "transferred_void_density": 0.31622776601683755,
+      "E_DeltaTheta_Gamma": 1.897366596101025,
+      "C_R_Gamma": 28.61161420549274,
+      "F_v": 14.30580710274637,
+      "Delta_d": 0.5692099788303076,
       "Delta_eff": 0.0
+    },
+    "morphology_convergence_results": {
+      "resolutions": [16, 32, 64],
+      "transferred_wall_density": [0.7071067811865477, 0.707106781186547, 0.707106781186546],
+      "transferred_void_density": [0.35355339059327384, 0.3535533905932735, 0.353553390593273],
+      "status": "MORPHOLOGY_DIAGNOSTIC_CONVERGED",
+      "physical_morphology_convergence_claim": false
     }
   },
   "discretization_contract": {
@@ -215,7 +290,28 @@
       "energy_errors": [0.057169647709074956, 0.014278519629965552, 0.003568767957969284],
       "l2_rates": [2.0083667395260436, 2.0020872428176935],
       "energy_rates": [2.001402988906066, 2.0003484059954397]
-    }
+    },
+    "ordinary_euclidean_stiffness_refinement": [2.4358549596388337, 1.2297420541932433, 0.616354985958756],
+    "generalized_mass_weighted_spectrum_refinement": [38.97367935422097, 39.351745734182444, 39.4467191013632],
+    "generalized_flat_limit": "4*pi^2"
+  },
+  "continuum_dynamic_validation": {
+    "fixture": "CONTINUUM_DERIVED_MANUFACTURED_NONTRIVIAL_GM_TRAJECTORY",
+    "Delta_d": 0.2,
+    "Z": -0.08,
+    "Z_dot": -0.04,
+    "Theta": 0.84,
+    "Delta_eff": -0.0576,
+    "Delta_eff_dot": 0.095808,
+    "rho_d": 1.0,
+    "rho_eff": 2.0,
+    "w_eff": 0.5,
+    "R_Z_terms": [-0.04, -0.0448, 0.2, -0.1152],
+    "R_eff_terms": [0.095808, 0.024192, -0.12],
+    "R_Z_adversarial_increment": "0.24*delta(alpha_w.first)*phi",
+    "R_eff_adversarial_increment": "-0.0072*delta(Q_bar.first)*phi",
+    "downstream_tolerance": 1e-10,
+    "runtime_residual_formula_used_to_construct_expected_sum": false
   },
   "fail_closed_conditions": [
     "morphology missing",
@@ -225,6 +321,9 @@
     "invalid common-normal convention",
     "nonpositive metric volume density",
     "non-SPD metric or coefficient",
+    "missing metric-normalization provenance",
+    "metric/reference-volume normalization inconsistency",
+    "constant metric rescaling with stale normalization contract",
     "ellipticity below configured minimum",
     "unexpected extra kernel modes",
     "source compatibility projection failure",
@@ -232,7 +331,7 @@
     "transmission tolerance failure",
     "volume-fraction inconsistency",
     "moving interface or partition",
-    "time-dependent pullback/comoving metric/target scalarization",
+    "time-dependent pullback/regional comoving metric/target metric or scalarization",
     "spatially varying clock lapse",
     "unsupported anisotropic discretization",
     "downstream Phase 1E-F nondegeneracy failure"
@@ -262,16 +361,34 @@
     {"id": "V22", "name": "fixed-branch operator derivatives", "status": "PASS"},
     {"id": "V23", "name": "analytic transfer derivative commutation", "status": "PASS"},
     {"id": "V24", "name": "volume fraction consistency", "status": "PASS"},
-    {"id": "V25", "name": "wall/void relabel covariance", "status": "PASS"},
+    {"id": "V25", "name": "equal-geometry mask and source-injection relabel covariance of transfer", "status": "PASS"},
     {"id": "V26", "name": "endpoint ontology reduction", "status": "PASS"},
     {"id": "V27", "name": "generic-k firewall", "status": "PASS"},
     {"id": "V28", "name": "heterogeneous mode mixing", "status": "PASS"},
-    {"id": "V29", "name": "morphology sensitivity", "status": "PASS"},
+    {"id": "V29", "name": "target-metric L2 morphology sensitivity and refinement", "status": "PASS"},
     {"id": "V30", "name": "structured-discretization convergence", "status": "PASS"},
     {"id": "V31", "name": "discrete/Phase 1E-F contract consistency", "status": "PASS"},
-    {"id": "V32", "name": "Phase 1E-F downstream compatibility", "status": "PASS"},
+    {"id": "V32", "name": "nontrivial continuum-derived Phase 1E-F dynamic compatibility", "status": "PASS"},
     {"id": "V33", "name": "D3 firewall", "status": "PASS"},
     {"id": "V34", "name": "observational firewall", "status": "PASS"}
+  ],
+  "v2_correction_tests": [
+    {"id": "N1", "name": "time-dependent target rejected", "status": "PASS"},
+    {"id": "N2", "name": "normalization provenance required", "status": "PASS"},
+    {"id": "N3", "name": "declared metric volume inconsistency rejected", "status": "PASS"},
+    {"id": "N4", "name": "stale constant metric scaling rejected", "status": "PASS"},
+    {"id": "N5", "name": "consistent scale-metric-volume transformation explicit", "status": "PASS"},
+    {"id": "N6", "name": "manufactured volume consistency labelled", "status": "PASS"},
+    {"id": "N7", "name": "nontrivial continuum R_Z cancellation", "status": "PASS"},
+    {"id": "N8", "name": "nontrivial continuum R_eff cancellation", "status": "PASS"},
+    {"id": "N9", "name": "adversarial R_Z sensitivity", "status": "PASS"},
+    {"id": "N10", "name": "adversarial R_eff sensitivity", "status": "PASS"},
+    {"id": "N11", "name": "metric-weighted morphology L2", "status": "PASS"},
+    {"id": "N12", "name": "morphology diagnostic refinement", "status": "PASS"},
+    {"id": "N13", "name": "raw wall provenance and global projected support", "status": "PASS"},
+    {"id": "N14", "name": "raw void provenance and global projected support", "status": "PASS"},
+    {"id": "N15", "name": "ordinary/generalized spectrum distinction", "status": "PASS"},
+    {"id": "N16", "name": "narrowed V25 relabel claim", "status": "PASS"}
   ],
   "gates": [
     {"id": "G0", "status": "PASS", "name": "regional geometric provenance"},
@@ -348,18 +465,18 @@
     "reports/phase1e_g_continuum_h1_realization_adversarial_audit.md"
   ],
   "test_results": {
-    "phase_1e_g_targeted_count": 48,
-    "phase_1e_f_plus_1e_g_count": 90,
-    "complete_count": 469,
+    "phase_1e_g_targeted_count": 62,
+    "phase_1e_f_plus_1e_g_count": 104,
+    "complete_count": 483,
     "release_gate_python_3_14_3": {
-      "targeted": "48 passed in 0.73s",
-      "combined_transfer": "90 passed in 0.87s",
-      "complete": "469 passed in 10.89s"
+      "targeted": "62 passed in 1.57s",
+      "combined_transfer": "104 passed in 1.74s",
+      "complete": "483 passed in 19.29s"
     },
     "release_gate_python_3_11_9": {
-      "targeted": "48 passed in 0.79s",
-      "combined_transfer": "90 passed in 0.91s",
-      "complete": "469 passed in 12.26s"
+      "targeted": "62 passed in 1.68s",
+      "combined_transfer": "104 passed in 1.92s",
+      "complete": "483 passed in 20.92s"
     },
     "failures": 0,
     "skips": 0,

@@ -23,7 +23,8 @@ from timescape_fsigma8.transfer.continuum_backend import (
     ContinuumPhase1EBackendAdapter,
     ContinuumTransfer,
     ContinuumTransferJetResponse,
-    normalized_difference,
+    MetricNormalizationDiagnostics,
+    target_metric_weighted_l2_difference,
 )
 from timescape_fsigma8.transfer.continuum_geometry import (
     FRAMEWORK_STATUS_1E_G,
@@ -124,7 +125,10 @@ class ContinuumH1RealizationResult:
     ellipticity_lower_bound: float
     ellipticity_upper_bound: float
     continuum_coercivity_bound_or_assumption: float
-    discrete_spectral_lower_bound: float
+    ordinary_euclidean_constrained_stiffness_eigenvalue: float
+    generalized_mass_weighted_laplacian_eigenvalue: float
+    regional_metric_normalization: Mapping[str, MetricNormalizationDiagnostics]
+    target_metric_time_contract: str
     global_kernel_dimension: int
     source_mean_before_projection: float
     source_mean_after_projection: float
@@ -135,6 +139,7 @@ class ContinuumH1RealizationResult:
     f_v_geom: float
     f_v_background: float
     volume_fraction_consistency_residual: float
+    volume_fraction_consistency_classification: str
     transferred_wall_density: np.ndarray
     transferred_void_density: np.ndarray
     E_DeltaTheta_Gamma: VectorJet
@@ -142,6 +147,10 @@ class ContinuumH1RealizationResult:
     C_R_Gamma: VectorJet
     J_f_Gamma: VectorJet
     morphology_sensitivity_diagnostics: Mapping[str, float]
+    morphology_norm_definition: str
+    morphology_normalization_reference_scale: float
+    morphology_normalization_floor: float
+    target_measure_weights: np.ndarray
     discretization_resolution: tuple[int, ...]
     discretization_convergence_metrics: Mapping[str, float]
     bridge_fields: ContinuumBridgeFields
@@ -354,9 +363,17 @@ class EffectiveSectorContinuumBridge:
         a_w: float,
         a_v: float,
         equal_geometry_probe: ArrayLike | None,
+        volume_fraction_consistency_classification: str,
         morphology_sensitivity_diagnostics: Mapping[str, float],
         discretization_convergence_metrics: Mapping[str, float],
     ) -> ContinuumH1RealizationResult:
+        if (
+            not isinstance(volume_fraction_consistency_classification, str)
+            or not volume_fraction_consistency_classification.strip()
+        ):
+            raise ContinuumContractError(
+                "volume-fraction consistency classification is required"
+            )
         if not 0.0 < background.f_v.value < 1.0:
             raise H1DegeneracyError(
                 'SINGLE_REGION_ONTOLOGY_REDUCTION_REQUIRED: '
@@ -439,8 +456,17 @@ class EffectiveSectorContinuumBridge:
             continuum_coercivity_bound_or_assumption=(
                 self.operator.continuum_coercivity_assumption
             ),
-            discrete_spectral_lower_bound=(
-                self.operator.discrete_spectral_lower_bound
+            ordinary_euclidean_constrained_stiffness_eigenvalue=(
+                self.operator.ordinary_euclidean_constrained_stiffness_eigenvalue
+            ),
+            generalized_mass_weighted_laplacian_eigenvalue=(
+                self.operator.generalized_mass_weighted_laplacian_eigenvalue
+            ),
+            regional_metric_normalization=dict(
+                self.operator.metric_normalization_diagnostics
+            ),
+            target_metric_time_contract=(
+                "FIXED_GAMMA_D_WITH_L_D_DOT_AND_L_D_DDOT_ZERO"
             ),
             global_kernel_dimension=self.operator.global_kernel_dimension,
             source_mean_before_projection=source_before,
@@ -452,6 +478,9 @@ class EffectiveSectorContinuumBridge:
             f_v_geom=f_v_geom,
             f_v_background=f_v_background,
             volume_fraction_consistency_residual=volume_residual,
+            volume_fraction_consistency_classification=(
+                volume_fraction_consistency_classification
+            ),
             transferred_wall_density=fields.density_wall.transferred_field.value,
             transferred_void_density=fields.density_void.transferred_field.value,
             E_DeltaTheta_Gamma=fields.E_DeltaTheta_Gamma,
@@ -461,6 +490,16 @@ class EffectiveSectorContinuumBridge:
             morphology_sensitivity_diagnostics=dict(
                 morphology_sensitivity_diagnostics
             ),
+            morphology_norm_definition=(
+                self.configuration.morphology_sensitivity_norm
+            ),
+            morphology_normalization_reference_scale=(
+                self.configuration.morphology_sensitivity_reference_scale
+            ),
+            morphology_normalization_floor=(
+                self.configuration.morphology_sensitivity_floor
+            ),
+            target_measure_weights=self.operator.target_measure_weights,
             discretization_resolution=self.operator.carrier.grid_shape,
             discretization_convergence_metrics=dict(
                 discretization_convergence_metrics
@@ -473,46 +512,63 @@ class EffectiveSectorContinuumBridge:
 def compare_morphology_results(
     first: ContinuumH1RealizationResult,
     second: ContinuumH1RealizationResult,
-    *,
-    normalization: float,
 ) -> dict[str, float]:
-    """Return explicit-normalisation morphology sensitivity, not error."""
+    """Return target-metric L2 morphology sensitivity, never numerical error."""
+    if first.morphology_norm_definition != second.morphology_norm_definition:
+        raise ContinuumContractError("morphology norm definitions differ")
+    if not np.allclose(
+        first.target_measure_weights,
+        second.target_measure_weights,
+        rtol=0.0,
+        atol=0.0,
+    ):
+        raise ContinuumContractError("target measures differ across morphologies")
+    scale = first.morphology_normalization_reference_scale
+    floor = first.morphology_normalization_floor
+    if (
+        scale != second.morphology_normalization_reference_scale
+        or floor != second.morphology_normalization_floor
+    ):
+        raise ContinuumContractError("morphology normalization contracts differ")
+
+    def difference(left: ArrayLike, right: ArrayLike) -> float:
+        return target_metric_weighted_l2_difference(
+            left,
+            right,
+            target_measure_weights=first.target_measure_weights,
+            reference_scale=scale,
+            normalization_floor=floor,
+        )
+
     first_downstream = first.downstream_phase1e_f
     second_downstream = second.downstream_phase1e_f
     return {
-        "transferred_wall_density": normalized_difference(
+        "transferred_wall_density": difference(
             first.transferred_wall_density,
             second.transferred_wall_density,
-            normalization=normalization,
         ),
-        "transferred_void_density": normalized_difference(
+        "transferred_void_density": difference(
             first.transferred_void_density,
             second.transferred_void_density,
-            normalization=normalization,
         ),
-        "E_DeltaTheta_Gamma": normalized_difference(
+        "E_DeltaTheta_Gamma": difference(
             first.E_DeltaTheta_Gamma.value,
             second.E_DeltaTheta_Gamma.value,
-            normalization=normalization,
         ),
-        "C_R_Gamma": normalized_difference(
+        "C_R_Gamma": difference(
             first.C_R_Gamma.value,
             second.C_R_Gamma.value,
-            normalization=normalization,
         ),
-        "F_v": normalized_difference(
+        "F_v": difference(
             first_downstream.F_v.value,
             second_downstream.F_v.value,
-            normalization=normalization,
         ),
-        "Delta_d": normalized_difference(
+        "Delta_d": difference(
             first_downstream.Delta_d.value,
             second_downstream.Delta_d.value,
-            normalization=normalization,
         ),
-        "Delta_eff": normalized_difference(
+        "Delta_eff": difference(
             first_downstream.Delta_eff.value,
             second_downstream.Delta_eff.value,
-            normalization=normalization,
         ),
     }

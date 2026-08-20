@@ -100,11 +100,25 @@ inverse metric. The structured backend is explicitly restricted to
 isotropic/conformal tensors; unsupported anisotropic discretization fails
 closed. The continuum contract itself remains the broader SPD tensor form.
 
+Every wall, void and target geometry now requires a
+`RegionalMetricNormalization` record. It binds a named metric-scale
+convention to a reference epoch, explicit `a_r(t_ref)`, declared `V_r,i`,
+volume provenance and consistency tolerance. The backend independently
+integrates `J_r dmu_0` over the configured domain and compares it with the
+declared reference volume. It never rescales `gamma_r` to force agreement.
+For constructed fixtures this is a `CONSTRUCTION_CONSISTENCY_CHECK`, not an
+independent Timescape prediction. A stale constant metric rescaling is
+rejected; a consistently transformed `gamma_r'=c_r^2 gamma_r`,
+`a_r'=a_r/c_r`, `V_r,i'=c_r^3 V_r,i` uses a distinct normalization ID and
+preserves the instantaneous physical volume in the three-dimensional test.
+
 The negative-curvature oracle uses the documented two-dimensional Poincare
 metric `ds^2=4(dx^2+dy^2)/(1-r^2)^2`, of Gaussian curvature `-1`, on a
-regional patch. In two dimensions its nonconstant `J` and inverse metric give
-the positive tensor density `K=I`. This is a geometry/measure test, not a
-complete physical void model.
+regional patch. Its scalar curvature is `-2`. In two dimensions its
+nonconstant `J` and inverse metric give the positive tensor density `K=I`.
+This validates negative-curvature provenance, source-measure weighting and
+SPD data. It does not test heterogeneous stiffness, a three-dimensional
+physical void, or a complete Timescape void discretization.
 
 ## Weak form and source measure
 
@@ -144,12 +158,22 @@ It never subtracts regional means separately. For the base fixture the raw
 source mean is `1.0`, the projected mean is `0.0`, the solution mean is
 `2.17e-19`, and the kernel dimension is one.
 
+Raw provenance and projected support are distinct. A raw wall-only source is
+recorded as wall provenance, but the one global compatibility projection can
+add a constant correction on void cells; its admissible projected support is
+therefore global. The same statement holds with wall and void exchanged.
+
 Continuum existence and uniqueness are conditional on connected Lipschitz
 domains/interface, positive bounded `J_r`, uniform ellipticity and a global
-Poincare inequality. The caller-declared continuum coercivity assumption is
-`0.1` in the reference fixture. The independently computed constrained-grid
-spectral lower bound is `4.6862915010`. The latter validates the discrete
-fixture; it does not prove an arbitrary-domain uniform continuum bound.
+Poincare inequality. These are separately recorded as geometric ellipticity,
+measure-equivalence and Poincare assumptions and their conditional continuum
+coercivity consequence. The caller-declared continuum coercivity assumption
+is `0.1` in the reference fixture. The ordinary Euclidean constrained
+stiffness eigenvalue is `4.6862915010`; it is a mesh-scaled algebraic
+positivity diagnostic. The mass-weighted generalized Laplacian eigenvalue is
+`37.4903320081` on the eight-cell fixture and approaches `4 pi^2` under
+16/32/64-cell flat refinement (`38.9737`, `39.3517`, `39.4467`). Neither
+finite-grid diagnostic proves arbitrary-domain continuum coercivity.
 
 ## Green transfer and equal-geometry identity
 
@@ -207,51 +231,81 @@ target scalarization and homogeneous clock. Therefore
 
 \[
 \dot A_\Gamma=\ddot A_\Gamma=\dot G_\Gamma=\ddot G_\Gamma=0,
+\qquad \dot L_D=\ddot L_D=0,
 \qquad J_f^\Gamma=0.
 \]
 
-Unsupported moving/time-dependent geometry fails closed. Transfer jets use
+Regional and target metrics must all be time independent. A target
+`metric_time_independent=False` now fails before transfer evaluation;
+supporting it would require explicit `L_D_dot` and `L_D_ddot`, which is out
+of scope. Unsupported moving/time-dependent geometry fails closed. Transfer jets use
 `T[s_dot]` and `T[s_ddot]` analytically; finite differences appear only as
 independent tests.
 
-The bridge invokes the existing Phase 1E-F evaluator unchanged. Its base
-fixture gives zero `C_P`, `R_Delta`, `R_Z`, `R_eff`, and `K_GM`. The inherited
+The bridge invokes the existing Phase 1E-F evaluator unchanged. A nontrivial
+continuum-derived manufactured trajectory has scalar coefficients
+`Delta_d=0.2`, `Z=-0.08`, `Z_dot=-0.04`, `Delta_eff=-0.0576`, and
+`Delta_eff_dot=0.095808`, with `Theta=0.84`, `rho_d=1`, `rho_eff=2`, and
+`w_eff=0.5`. Its four clean `R_Z` terms are
+`(-0.04,-0.0448,0.2,-0.1152)` and its three `R_eff` terms are
+`(0.095808,0.024192,-0.12)`: every term is nonzero and each sum vanishes.
+Independent perturbations produce the predicted nonzero increments
+`0.24 delta(alpha_w_dot) phi` and `-0.0072 delta(Q_bar_dot) phi` and fail
+closed at the inherited `1e-10` tolerances. The inherited
 classification remains: `C_P`, `R_Delta`, `K_GM` are constructed identity
 checks; `R_Z`, `R_eff` are dynamic compatibility checks.
 
 ## Volume fraction consistency
 
-The geometry supplies initial comoving volumes from regional metric measures:
+The normalized geometry supplies declared initial comoving volumes whose
+metric-measure consistency has already passed:
 
 \[
 V_r(t)=V_{r,i}a_r^3,\qquad
 f_{v,\rm geom}=\frac{V_v}{V_v+V_w}.
 \]
 
-The runtime compares this with explicit background `f_v` and fails closed on
-disagreement. The base fixture has `0.5-0.5=0`. A nonconstant metric-volume
+The runtime then separately compares this with explicit background `f_v` and
+fails closed on disagreement. The base case is explicitly labelled
+`MANUFACTURED_BACKGROUND_CONSISTENCY_FIXTURE`; its `0.5-0.5=0` is not an
+independent prediction of `f_v`. A nonconstant metric-volume
 fixture demonstrates that a 50% coordinate-cell fraction can represent a
 physical measure fraction of `2/3`.
 
 ## Morphology sensitivity
 
 Two explicit equal-volume comparators were tested at fixed background data:
-a layered 20%-void partition and a connected interior island. With explicit
-unit L2 normalization, measured differences were:
+a layered 20%-void partition and a connected interior island. The primary
+diagnostic is the target-measure norm
+`sqrt(sum_i w_i J_D,i |Y_1-Y_2|^2)` divided by the explicitly configured
+reference scale `1.0` (floor `1e-12`). Measured differences were:
 
 | Quantity | `delta_morph` |
 |---|---:|
-| `T_w[Delta_w]` | 6.3245553203 |
-| `T_v[Delta_v]` | 3.1622776602 |
-| `E_DeltaTheta_Gamma` | 18.9736659610 |
-| `C_R_Gamma` | 286.1161420549 |
-| `F_v` | 143.0580710275 |
-| `Delta_d` | 5.6920997883 |
+| `T_w[Delta_w]` | 0.6324555320 |
+| `T_v[Delta_v]` | 0.3162277660 |
+| `E_DeltaTheta_Gamma` | 1.8973665961 |
+| `C_R_Gamma` | 28.6116142055 |
+| `F_v` | 14.3058071027 |
+| `Delta_d` | 0.5692099788 |
 | `Delta_eff` | 0.0 |
 
+The source correspondence is `COMMON_LATENT_MANUFACTURED_FIELD`:
+`s_w^M=Delta_w chi_w^M` and `s_v^M=Delta_v chi_v^M`; these inputs are not
+separately unit-L2 normalized. Both comparators use the same flat operator
+matrix, so this fixture measures supported-source/mask-placement change,
+global compatibility projection, Green response, target scalarization and
+downstream constitutive amplification--not heterogeneous-operator change.
 The resolved zero in `Delta_eff` is specific to the clean manufactured
 fixture. Morphology sensitivity is model-closure sensitivity, not numerical
 error, and was not tuned away.
+
+A separate 16/32/64-cell shifted-layer refinement gives stable target-L2
+values `0.7071067812` for `T_w[Delta_w]` and `0.3535533906` for
+`T_v[Delta_v]` at every listed resolution. It is classified
+`MORPHOLOGY_DIAGNOSTIC_CONVERGED` for these two common-latent-field
+comparators. This convergence resolves the diagnostic, not the physical
+morphology.
 
 ## Structured discretization and convergence
 
@@ -267,6 +321,8 @@ rates are not asserted at arbitrary discontinuous interfaces.
 ## Limitations and authorization
 
 - Morphology and pullbacks remain required external model inputs.
+- Metric/scale-factor/reference-volume normalization is an explicit closure
+  convention, not independently fixed by current Timescape input.
 - The backend supports isotropic/conformal structured coefficients, not a
   general anisotropic FEM realization.
 - A structured grid does not establish a physical interface, global

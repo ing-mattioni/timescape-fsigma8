@@ -37,6 +37,11 @@ COMMON_REFERENCE_NORMAL_WALL_TO_VOID_1E_G = (
 )
 FIXED_REFERENCE_BRANCH = "FIXED_LAGRANGIAN_REFERENCE_DOMAINS"
 HOMOGENEOUS_CLOCK_BRANCH = "HOMOGENEOUS_BACKGROUND_CLOCK_MAP"
+DERIVED_FROM_NORMALIZED_METRIC = "DERIVED_FROM_NORMALIZED_METRIC"
+EXTERNALLY_SUPPLIED_REFERENCE_VOLUME = (
+    "EXTERNALLY_SUPPLIED_REFERENCE_VOLUME"
+)
+MORPHOLOGY_NORM_TARGET_METRIC_L2 = "TARGET_METRIC_WEIGHTED_L2"
 
 
 class ContinuumContractError(ValueError):
@@ -64,6 +69,61 @@ def _readonly_bool(values: ArrayLike, name: str) -> BoolArray:
 
 
 @dataclass(frozen=True)
+class RegionalMetricNormalization:
+    """Required provenance tying ``gamma_r``, ``a_r`` and ``V_r,i``.
+
+    This is the human-approved Phase 1E-G v2 normalization closure.  It has
+    no paper equation number and is not inferred from Timescape.  The runtime
+    never rescales a metric to satisfy this record.
+    """
+
+    normalization_id: str
+    scale_factor_reference_epoch: str
+    scale_factor_reference_value: float
+    metric_scale_convention: str
+    reference_comoving_volume: float
+    volume_provenance: str
+    consistency_tolerance: float
+
+    def __post_init__(self) -> None:
+        required = (
+            self.normalization_id,
+            self.scale_factor_reference_epoch,
+            self.metric_scale_convention,
+        )
+        if not all(isinstance(value, str) and value.strip() for value in required):
+            raise ContinuumContractError(
+                "metric normalization provenance identifiers are required"
+            )
+        if (
+            not np.isfinite(self.scale_factor_reference_value)
+            or self.scale_factor_reference_value <= 0.0
+        ):
+            raise ContinuumContractError(
+                "scale_factor_reference_value must be finite and positive"
+            )
+        if (
+            not np.isfinite(self.reference_comoving_volume)
+            or self.reference_comoving_volume <= 0.0
+        ):
+            raise ContinuumContractError(
+                "reference_comoving_volume must be finite and positive"
+            )
+        if self.volume_provenance not in {
+            DERIVED_FROM_NORMALIZED_METRIC,
+            EXTERNALLY_SUPPLIED_REFERENCE_VOLUME,
+        }:
+            raise ContinuumContractError("unsupported reference-volume provenance")
+        if (
+            not np.isfinite(self.consistency_tolerance)
+            or self.consistency_tolerance < 0.0
+        ):
+            raise ContinuumContractError(
+                "normalization consistency_tolerance must be finite and nonnegative"
+            )
+
+
+@dataclass(frozen=True)
 class RegionalGeometrySpec:
     """A regional comoving pullback metric on the reference carrier.
 
@@ -81,6 +141,7 @@ class RegionalGeometrySpec:
     pullback_provenance: str
     metric_time_independent: bool
     isotropic_reference_backend: bool
+    normalization: RegionalMetricNormalization
     metadata: Mapping[str, str]
 
     def __post_init__(self) -> None:
@@ -114,6 +175,10 @@ class RegionalGeometrySpec:
         if not isinstance(self.isotropic_reference_backend, bool):
             raise ContinuumContractError(
                 "isotropic_reference_backend must be declared explicitly"
+            )
+        if not isinstance(self.normalization, RegionalMetricNormalization):
+            raise ContinuumContractError(
+                "regional metric-normalization provenance is required"
             )
         object.__setattr__(self, "metric_inverse", inverse)
         object.__setattr__(self, "metric_volume_ratio", ratio)
@@ -327,7 +392,10 @@ class ContinuumEllipticClosureConfig:
     equal_geometry_identity_tolerance: float
     convergence_l2_min_rate: float
     convergence_energy_min_rate: float
-    morphology_sensitivity_normalization: float
+    morphology_sensitivity_norm: str
+    morphology_sensitivity_reference_scale: float
+    morphology_sensitivity_floor: float
+    morphology_convergence_tolerance: float
     kernel_tolerance: float
     symmetry_tolerance: float
     downstream_configuration: H1Configuration
@@ -336,7 +404,8 @@ class ContinuumEllipticClosureConfig:
         positive = (
             "ellipticity_min",
             "coercivity_min",
-            "morphology_sensitivity_normalization",
+            "morphology_sensitivity_reference_scale",
+            "morphology_sensitivity_floor",
             "kernel_tolerance",
         )
         nonnegative = (
@@ -349,6 +418,7 @@ class ContinuumEllipticClosureConfig:
             "convergence_l2_min_rate",
             "convergence_energy_min_rate",
             "symmetry_tolerance",
+            "morphology_convergence_tolerance",
         )
         for name in positive:
             value = float(getattr(self, name))
@@ -360,6 +430,10 @@ class ContinuumEllipticClosureConfig:
                 raise ContinuumContractError(f"{name} must be finite and nonnegative")
         if not isinstance(self.downstream_configuration, H1Configuration):
             raise ContinuumContractError("explicit Phase 1E-F configuration is required")
+        if self.morphology_sensitivity_norm != MORPHOLOGY_NORM_TARGET_METRIC_L2:
+            raise ContinuumContractError(
+                "unsupported morphology sensitivity norm definition"
+            )
 
 
 def conformal_regional_geometry(
@@ -369,6 +443,7 @@ def conformal_regional_geometry(
     dimension: int,
     curvature_class: str,
     pullback_provenance: str,
+    normalization: RegionalMetricNormalization,
     metadata: Mapping[str, str],
 ) -> RegionalGeometrySpec:
     """Construct ``gamma=lambda^2 I``, ``J=lambda^d``, and its inverse.
@@ -395,6 +470,7 @@ def conformal_regional_geometry(
         pullback_provenance=pullback_provenance,
         metric_time_independent=True,
         isotropic_reference_backend=True,
+        normalization=normalization,
         metadata=metadata,
     )
 
@@ -404,6 +480,7 @@ def flat_regional_geometry(
     region_id: str,
     grid_shape: tuple[int, ...],
     pullback_provenance: str,
+    normalization: RegionalMetricNormalization,
     metadata: Mapping[str, str],
 ) -> RegionalGeometrySpec:
     """Return the unit flat comoving metric (Phase 1E-G section 7 closure)."""
@@ -413,6 +490,7 @@ def flat_regional_geometry(
         dimension=len(grid_shape),
         curvature_class="FLAT_COMOVING",
         pullback_provenance=pullback_provenance,
+        normalization=normalization,
         metadata=metadata,
     )
 
