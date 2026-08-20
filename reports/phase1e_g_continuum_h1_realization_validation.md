@@ -79,6 +79,28 @@ rejected, not renormalized.
 | D6 | PASS | N5 remains `PHYSICAL_NORMALIZATION_COVARIANCE` in `d=3` for base `(1/3,2/3)`, transformed `V_v'=c^3V_v`, and `a_v'=a_v/c`. |
 | D7 | PASS | All public metric-derived/declaration/assembly/fraction methods and the continuum-to-Phase-1E-F bridge are dimension guarded. |
 
+## Additive v4 post-assembly integrity matrix I1--I12
+
+| Gate | Result | Evidence |
+|---|---|---|
+| I1 | PASS | Ordinary carrier reassignment raises `ContinuumStateIntegrityError`. |
+| I2 | PASS | Low-level 1-D-to-3-D carrier replacement is detected before physical regional-volume evaluation. |
+| I3 | PASS | The same replacement is detected before physical `f_v`. |
+| I4 | PASS | The same replacement is detected before continuum-to-Phase-1E-F bridge evaluation. |
+| I5 | PASS | Regional normalization replacement is rejected normally and detected after representative low-level tampering. |
+| I6 | PASS | Immutable cached normalization diagnostics cannot authorize changed normalization state. |
+| I7 | PASS | Replaced time-dependent target metadata is detected by target derivatives and `transfer_jet`. |
+| I8 | PASS | The same target-time replacement is detected before downstream bridge evaluation. |
+| I9 | PASS | `EXTERNALLY_SUPPLIED_REFERENCE_VOLUME` cannot turn a tampered reduced-dimensional operator into a physical carrier. |
+| I10 | PASS | Public geometry/mask arrays are read-only, matrices are defensive copies, and private sparse-matrix mutation is fingerprint-detected. |
+| I11 | PASS | An untouched 3-D operator still completes transfer, physical volume and downstream realization. |
+| I12 | PASS | An untouched 1-D operator still performs mathematical transfer while physical `f_v` remains forbidden. |
+
+The integrity mechanism is not a claim of resistance to an attacker who
+rewrites every private field and the private expected snapshot. It closes
+normal public mutation and representative isolated Python-level tampering,
+so no result is returned from state different from the validated assembly.
+
 No reduced-dimensional effective-3-D lift, transverse-area closure, padding,
 embedding, or silent dimensional promotion exists.
 
@@ -190,12 +212,12 @@ All of the following fail closed or produce a nonzero diagnostic:
 Development checkpoints:
 
 ```text
-Python 3.14.3 targeted Phase 1E-G: 71 passed in 1.37s
-Python 3.11.9 targeted Phase 1E-G: 71 passed in 1.39s
-Python 3.14.3 combined Phase 1E-F + 1E-G: 113 passed in 1.53s
-Python 3.11.9 combined Phase 1E-F + 1E-G: 113 passed in 1.45s
-Python 3.14.3 complete repository (post-report gate): 492 passed in 18.93s
-Python 3.11.9 complete repository (post-report gate): 492 passed in 20.65s
+Python 3.14.3 targeted Phase 1E-G: 83 passed in 9.50s
+Python 3.11.9 targeted Phase 1E-G: 83 passed in 11.23s
+Python 3.14.3 combined Phase 1E-F + 1E-G: 125 passed in 9.16s
+Python 3.11.9 combined Phase 1E-F + 1E-G: 125 passed in 9.29s
+Python 3.14.3 complete repository: 504 passed in 23.63s
+Python 3.11.9 complete repository: 504 passed in 22.59s
 ```
 
 All release-gate runs reported zero failures, skips, xfails and warnings.

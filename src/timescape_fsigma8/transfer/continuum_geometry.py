@@ -12,6 +12,7 @@ from the unlicensed upstream notebook.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from types import MappingProxyType
 from typing import Mapping
 
 import numpy as np
@@ -61,6 +62,10 @@ class ContinuumDegeneracyError(ContinuumContractError):
 
 class ContinuumDimensionalContractError(ContinuumContractError):
     """A reduced-dimensional measure was requested as a physical 3-volume."""
+
+
+class ContinuumStateIntegrityError(ContinuumContractError):
+    """Validated continuum scientific state changed after operator assembly."""
 
 
 def _readonly_float(values: ArrayLike, name: str) -> FloatArray:
@@ -196,7 +201,9 @@ class RegionalGeometrySpec:
             )
         object.__setattr__(self, "metric_inverse", inverse)
         object.__setattr__(self, "metric_volume_ratio", ratio)
-        object.__setattr__(self, "metadata", dict(self.metadata))
+        object.__setattr__(
+            self, "metadata", MappingProxyType(dict(self.metadata))
+        )
 
     @property
     def grid_shape(self) -> tuple[int, ...]:
@@ -371,7 +378,9 @@ class MorphologySpec:
         object.__setattr__(self, "wall_domain", wall)
         object.__setattr__(self, "void_domain", void)
         object.__setattr__(
-            self, "source_injection_provenance", dict(self.source_injection_provenance)
+            self,
+            "source_injection_provenance",
+            MappingProxyType(dict(self.source_injection_provenance)),
         )
 
 

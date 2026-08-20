@@ -36,6 +36,7 @@ from timescape_fsigma8.transfer import (
     ContinuumEllipticClosureConfig,
     ContinuumH1Operator,
     ContinuumPhase1EBackendAdapter,
+    ContinuumStateIntegrityError,
     ContinuumTransfer,
     EffectiveSectorContinuumBridge,
     FixedReferenceBranchSpec,
@@ -1557,3 +1558,189 @@ def test_dimensional_covariance_factor_is_c_to_d_minus_three(
     )
     assert scale ** (dimension - 3) == pytest.approx(expected_factor)
     assert (dimension == 3) is (expected_factor == 1.0)
+
+
+def test_i1_ordinary_carrier_reassignment_is_rejected() -> None:
+    operator_1d = make_operator(shape=(8,))
+    operator_3d = make_operator(shape=(4, 3, 3))
+    with pytest.raises(ContinuumStateIntegrityError, match="immutable"):
+        operator_1d.carrier = operator_3d.carrier
+    transfer_runtime = ContinuumTransfer(operator_1d)
+    with pytest.raises(ContinuumStateIntegrityError, match="immutably"):
+        transfer_runtime.operator = operator_3d
+    bridge = EffectiveSectorContinuumBridge(
+        operator=operator_1d,
+        branch=operator_1d.branch,
+        configuration=operator_1d.configuration,
+    )
+    with pytest.raises(ContinuumStateIntegrityError, match="immutably"):
+        bridge.operator = operator_3d
+    assert operator_1d.carrier.dimension == 1
+
+
+def test_i2_low_level_carrier_tamper_fails_before_physical_volume() -> None:
+    operator_1d = make_operator(shape=(8,))
+    operator_3d = make_operator(shape=(4, 3, 3))
+    object.__setattr__(operator_1d, "carrier", operator_3d.carrier)
+    with pytest.raises(ContinuumStateIntegrityError, match="validated assembly"):
+        operator_1d.physical_regional_volumes(a_w=1.0, a_v=1.0)
+
+
+def test_i3_low_level_carrier_tamper_fails_before_physical_void_fraction() -> None:
+    operator_1d = make_operator(shape=(8,))
+    operator_3d = make_operator(shape=(4, 3, 3))
+    object.__setattr__(operator_1d, "carrier", operator_3d.carrier)
+    with pytest.raises(ContinuumStateIntegrityError, match="validated assembly"):
+        operator_1d.geometric_void_fraction(a_w=1.0, a_v=1.0)
+
+
+def test_i4_low_level_carrier_tamper_fails_before_phase1e_f_bridge() -> None:
+    bridge = make_bridge(shape=(8,))
+    operator_3d = make_operator(shape=(4, 3, 3))
+    object.__setattr__(bridge.operator, "carrier", operator_3d.carrier)
+    with pytest.raises(ContinuumStateIntegrityError, match="validated assembly"):
+        bridge.derive_fields(
+            regional_bulk=RegionalBulkState(0.0, 1.0, 0.0, 2.0),
+            background=make_background(),
+        )
+
+
+def test_i5_normalization_replacement_is_rejected_or_detected() -> None:
+    operator = make_operator(shape=(4, 3, 3))
+    changed = replace(
+        operator.wall_geometry,
+        normalization=replace(
+            operator.wall_geometry.normalization,
+            normalization_id="tampered-wall-normalization",
+            reference_comoving_volume=0.25,
+        ),
+    )
+    with pytest.raises(ContinuumStateIntegrityError, match="immutable"):
+        operator.wall_geometry = changed
+    object.__setattr__(operator, "wall_geometry", changed)
+    with pytest.raises(ContinuumStateIntegrityError, match="validated assembly"):
+        operator.physical_regional_volumes(a_w=1.0, a_v=1.0)
+
+
+def test_i6_cached_normalization_diagnostic_cannot_authorize_changed_state() -> None:
+    operator = make_operator(shape=(4, 3, 3))
+    assert operator.metric_normalization_diagnostics["wall"].relative_residual == 0.0
+    changed = replace(
+        operator.wall_geometry,
+        normalization=replace(
+            operator.wall_geometry.normalization,
+            normalization_id="stale-diagnostic-attack",
+            reference_comoving_volume=0.25,
+        ),
+    )
+    object.__setattr__(operator, "wall_geometry", changed)
+    with pytest.raises(ContinuumStateIntegrityError, match="validated assembly"):
+        _ = operator.metric_normalization_diagnostics
+    with pytest.raises(ContinuumStateIntegrityError, match="validated assembly"):
+        operator.geometric_void_fraction(a_w=1.0, a_v=1.0)
+
+
+def test_i7_time_dependent_target_tamper_fails_transfer_jet() -> None:
+    operator = make_operator(shape=(4, 3, 3))
+    transfer_runtime = ContinuumTransfer(operator)
+    jet = VectorJet(
+        np.ones(operator.size), np.zeros(operator.size), np.zeros(operator.size)
+    )
+    changed_target = replace(
+        operator.carrier.target_geometry, metric_time_independent=False
+    )
+    changed_carrier = replace(operator.carrier, target_geometry=changed_target)
+    object.__setattr__(operator, "carrier", changed_carrier)
+    with pytest.raises(ContinuumStateIntegrityError, match="validated assembly"):
+        _ = operator.target_scalarization_first_derivative
+    with pytest.raises(ContinuumStateIntegrityError, match="validated assembly"):
+        transfer_runtime.transfer_jet(
+            jet, region="global", provenance="target-time-tamper"
+        )
+
+
+def test_i8_time_dependent_target_tamper_fails_bridge_evaluation() -> None:
+    bridge = make_bridge(shape=(4, 3, 3))
+    changed_target = replace(
+        bridge.operator.carrier.target_geometry, metric_time_independent=False
+    )
+    changed_carrier = replace(
+        bridge.operator.carrier, target_geometry=changed_target
+    )
+    object.__setattr__(bridge.operator, "carrier", changed_carrier)
+    with pytest.raises(ContinuumStateIntegrityError, match="validated assembly"):
+        make_result(bridge=bridge)
+
+
+def test_i9_external_volume_lower_dimensional_carrier_spoof_fails_closed() -> None:
+    base = make_operator(shape=(8,))
+
+    def externalized(geometry: RegionalGeometrySpec) -> RegionalGeometrySpec:
+        return replace(
+            geometry,
+            normalization=replace(
+                geometry.normalization,
+                normalization_id=f"{geometry.region_id}-external-integrity",
+                volume_provenance=EXTERNALLY_SUPPLIED_REFERENCE_VOLUME,
+            ),
+        )
+
+    operator = make_operator(
+        shape=(8,),
+        morphology=base.morphology,
+        wall_geometry=externalized(base.wall_geometry),
+        void_geometry=externalized(base.void_geometry),
+        target_geometry=externalized(base.carrier.target_geometry),
+    )
+    operator_3d = make_operator(shape=(4, 3, 3))
+    object.__setattr__(operator, "carrier", operator_3d.carrier)
+    with pytest.raises(ContinuumStateIntegrityError, match="validated assembly"):
+        operator.physical_regional_volumes(a_w=1.0, a_v=1.0)
+
+
+def test_i10_nested_array_mutation_is_prevented_or_detected() -> None:
+    operator = make_operator(shape=(4, 3, 3))
+    with pytest.raises(ValueError, match="read-only"):
+        operator.carrier.reference_measure_weights.flat[0] = 2.0
+    with pytest.raises(ValueError, match="read-only"):
+        operator.morphology.wall_domain.flat[0] = False
+    with pytest.raises(TypeError):
+        operator.wall_geometry.metadata["tamper"] = "forbidden"
+
+    exposed_copy = operator.stiffness_matrix
+    exposed_copy.data[0] += 1.0
+    assert operator.source_load(np.ones(operator.size), region="global").shape == (
+        operator.size,
+    )
+
+    operator._stiffness.data[0] += 1.0
+    with pytest.raises(ContinuumStateIntegrityError, match="validated assembly"):
+        operator.source_load(np.ones(4 * 3 * 3), region="global")
+
+
+def test_i11_legitimate_untouched_three_dimensional_operator_remains_usable() -> None:
+    operator = make_operator(shape=(4, 3, 3))
+    transfer_response = ContinuumTransfer(operator).transfer_source(
+        np.ones(operator.size), region="wall", provenance="untouched-3d"
+    )
+    assert np.all(np.isfinite(transfer_response.transferred_field))
+    assert operator.physical_regional_volumes(a_w=1.0, a_v=1.0) == pytest.approx(
+        (0.5, 0.5)
+    )
+    assert make_result(bridge=make_bridge(shape=(4, 3, 3))).realization_id == (
+        "H1-1E-G-COMOVING-CGI-ELLIPTIC-TRANSMISSION-V1"
+    )
+
+
+def test_i12_untouched_reduced_dimensional_operator_remains_mathematical() -> None:
+    operator = make_operator(shape=(8,))
+    coordinate = np.arange(operator.size, dtype=np.float64) / operator.size
+    response = ContinuumTransfer(operator).transfer_source(
+        np.sin(2.0 * np.pi * coordinate),
+        region="global",
+        provenance="untouched-1d-mathematical",
+    )
+    assert np.max(np.abs(response.transferred_field)) > 0.0
+    assert operator.global_kernel_dimension == 1
+    with pytest.raises(ContinuumDimensionalContractError, match="dimension 1"):
+        operator.geometric_void_fraction(a_w=1.0, a_v=1.0)

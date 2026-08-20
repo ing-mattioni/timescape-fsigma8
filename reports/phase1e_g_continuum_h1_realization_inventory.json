@@ -90,6 +90,32 @@
     "time_dependent_target_status": "FAIL_CLOSED_UNSUPPORTED",
     "derivative_commutation": ["T_dot[s]=T[s_dot]", "T_ddot[s]=T[s_ddot]"]
   },
+  "assembled_state_integrity": {
+    "status": "FAIL_CLOSED_POST_ASSEMBLY_INTEGRITY",
+    "normal_public_replacement": "REJECTED",
+    "changed_state_policy": "CONSTRUCT_NEW_OPERATOR",
+    "immutable_dependencies": [
+      "carrier",
+      "regional_and_target_geometries",
+      "morphology_and_interface",
+      "branch_and_configuration",
+      "normalization_records_and_diagnostics",
+      "reference_weights_and_source_masks",
+      "assembled_operator_matrices"
+    ],
+    "snapshot": "DETACHED_OBJECT_IDENTITIES_AND_CANONICAL_NUMERICAL_DIGESTS",
+    "operation_time_validation": [
+      "reference_and_physical_volume_access",
+      "physical_volume_fraction",
+      "continuum_transfer",
+      "continuum_transfer_jet",
+      "target_scalarization_derivatives",
+      "Phase_1E_F_adapter",
+      "downstream_continuum_bridge"
+    ],
+    "integrity_exception": "ContinuumStateIntegrityError",
+    "silent_rebuild_or_revalidation": false
+  },
   "metric_pullback_contract": {
     "metric": "gamma_hat_r=Phi_r^* gamma_r",
     "inverse": "gamma_hat_r^{ij}",
@@ -279,7 +305,7 @@
       "global_compatibility_projection",
       "Green_operator_response",
       "target_scalarization",
-      "downstream_constitutive_amplification"
+      "downstream_constitutive_amplification_NOT_EVALUATED"
     ],
     "layer_vs_island": {
       "transferred_wall_density": 0.6324555320336751,
@@ -430,6 +456,20 @@
     {"id": "D6", "name": "three-dimensional N5 physical normalization covariance preserved", "status": "PASS"},
     {"id": "D7", "name": "all physical volume and downstream bridge paths dimension guarded", "status": "PASS"}
   ],
+  "v4_post_assembly_integrity_tests": [
+    {"id": "I1", "name": "ordinary carrier reassignment rejected", "status": "PASS"},
+    {"id": "I2", "name": "low-level carrier tamper detected before physical volume", "status": "PASS"},
+    {"id": "I3", "name": "low-level carrier tamper detected before physical f_v", "status": "PASS"},
+    {"id": "I4", "name": "low-level carrier tamper detected before Phase 1E-F bridge", "status": "PASS"},
+    {"id": "I5", "name": "normalization replacement detected", "status": "PASS"},
+    {"id": "I6", "name": "stale normalization diagnostic cannot authorize changed state", "status": "PASS"},
+    {"id": "I7", "name": "time-dependent target replacement detected by transfer jet", "status": "PASS"},
+    {"id": "I8", "name": "time-dependent target replacement detected by bridge", "status": "PASS"},
+    {"id": "I9", "name": "external-volume reduced-dimensional spoof rejected", "status": "PASS"},
+    {"id": "I10", "name": "nested array mutation prevented or detected", "status": "PASS"},
+    {"id": "I11", "name": "untouched three-dimensional operator remains usable", "status": "PASS"},
+    {"id": "I12", "name": "untouched reduced-dimensional mathematical operator remains usable", "status": "PASS"}
+  ],
   "gates": [
     {"id": "G0", "status": "PASS", "name": "regional geometric provenance"},
     {"id": "G1", "status": "PASS_UNDER_EXPLICIT_MORPHOLOGY_CLOSURE", "name": "carrier/maps"},
@@ -506,18 +546,18 @@
     "reports/phase1e_g_continuum_h1_realization_adversarial_audit.md"
   ],
   "test_results": {
-    "phase_1e_g_targeted_count": 71,
-    "phase_1e_f_plus_1e_g_count": 113,
-    "complete_count": 492,
+    "phase_1e_g_targeted_count": 83,
+    "phase_1e_f_plus_1e_g_count": 125,
+    "complete_count": 504,
     "release_gate_python_3_14_3": {
-      "targeted": "71 passed in 1.37s",
-      "combined_transfer": "113 passed in 1.53s",
-      "complete": "492 passed in 18.93s post-report gate"
+      "targeted": "83 passed in 9.50s",
+      "combined_transfer": "125 passed in 9.16s",
+      "complete": "504 passed in 23.63s"
     },
     "release_gate_python_3_11_9": {
-      "targeted": "71 passed in 1.39s",
-      "combined_transfer": "113 passed in 1.45s",
-      "complete": "492 passed in 20.65s post-report gate"
+      "targeted": "83 passed in 11.23s",
+      "combined_transfer": "125 passed in 9.29s",
+      "complete": "504 passed in 22.59s"
     },
     "failures": 0,
     "skips": 0,

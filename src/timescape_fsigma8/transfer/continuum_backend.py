@@ -10,7 +10,10 @@ number because they are explicit Phase 1E-G model-extension equations.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+import hashlib
+from collections.abc import Mapping
+from dataclasses import dataclass, fields, is_dataclass
+from types import MappingProxyType
 from typing import Iterable
 
 import numpy as np
@@ -28,6 +31,7 @@ from timescape_fsigma8.transfer.continuum_geometry import (
     ContinuumContractError,
     ContinuumDegeneracyError,
     ContinuumEllipticClosureConfig,
+    ContinuumStateIntegrityError,
     FixedReferenceBranchSpec,
     MorphologySpec,
     RegionalGeometrySpec,
@@ -41,6 +45,66 @@ from timescape_fsigma8.transfer.matrix_backend import (
 
 
 FloatArray = NDArray[np.float64]
+
+
+def _array_fingerprint(values: NDArray[np.generic]) -> tuple[object, ...]:
+    """Return a detached deterministic description of one numerical array."""
+    array = np.ascontiguousarray(values)
+    digest = hashlib.sha256(array.view(np.uint8)).hexdigest()
+    return (array.dtype.str, tuple(array.shape), digest)
+
+
+def _sparse_fingerprint(matrix: sparse.spmatrix) -> tuple[object, ...]:
+    """Return a detached deterministic description of one sparse matrix."""
+    csr = matrix.tocsr(copy=False)
+    return (
+        tuple(csr.shape),
+        _array_fingerprint(csr.indptr),
+        _array_fingerprint(csr.indices),
+        _array_fingerprint(csr.data),
+    )
+
+
+def _canonical_state(value: object) -> object:
+    """Detach dataclass/configuration state from all live mutable references."""
+    if isinstance(value, np.ndarray):
+        return ("array",) + _array_fingerprint(value)
+    if sparse.issparse(value):
+        return ("sparse",) + _sparse_fingerprint(value)
+    if is_dataclass(value) and not isinstance(value, type):
+        return (
+            type(value).__module__,
+            type(value).__qualname__,
+            tuple(
+                (field.name, _canonical_state(getattr(value, field.name)))
+                for field in fields(value)
+            ),
+        )
+    if isinstance(value, Mapping):
+        return tuple(
+            sorted(
+                (
+                    (_canonical_state(key), _canonical_state(item))
+                    for key, item in value.items()
+                ),
+                key=repr,
+            )
+        )
+    if isinstance(value, (tuple, list)):
+        return tuple(_canonical_state(item) for item in value)
+    if isinstance(value, np.generic):
+        return value.item()
+    if isinstance(value, (str, int, float, bool, type(None))):
+        return value
+    raise TypeError(f"unsupported assembled-state value {type(value)!r}")
+
+
+@dataclass(frozen=True, slots=True)
+class _AssemblyStateSnapshot:
+    """Immutable validated assembly identity and detached numerical content."""
+
+    object_identities: tuple[int, ...]
+    state: tuple[object, ...]
 
 
 def _readonly_vector(values: ArrayLike, name: str, size: int) -> FloatArray:
@@ -154,6 +218,15 @@ class ContinuumH1Operator:
 
     scientific_role = "FLUX_CONSERVATIVE_STRUCTURED_REFERENCE_DISCRETIZATION"
 
+    def __setattr__(self, name: str, value: object) -> None:
+        """Seal validated scientific dependencies after successful assembly."""
+        if self.__dict__.get("_assembly_sealed", False):
+            raise ContinuumStateIntegrityError(
+                "assembled continuum scientific state is immutable; "
+                "construct a new ContinuumH1Operator"
+            )
+        object.__setattr__(self, name, value)
+
     def __init__(
         self,
         *,
@@ -233,19 +306,21 @@ class ContinuumH1Operator:
         self._target_volume_ratio = (
             carrier.target_geometry.metric_volume_ratio.reshape(-1)
         )
-        self.metric_normalization_diagnostics = {
-            "wall": self._validate_metric_normalization(
-                wall_geometry, self._wall_mask, "wall"
-            ),
-            "void": self._validate_metric_normalization(
-                void_geometry, self._void_mask, "void"
-            ),
-            "target": self._validate_metric_normalization(
-                carrier.target_geometry,
-                np.ones(self.size, dtype=np.bool_),
-                "target",
-            ),
-        }
+        self._metric_normalization_diagnostics = MappingProxyType(
+            {
+                "wall": self._validate_metric_normalization(
+                    wall_geometry, self._wall_mask, "wall"
+                ),
+                "void": self._validate_metric_normalization(
+                    void_geometry, self._void_mask, "void"
+                ),
+                "target": self._validate_metric_normalization(
+                    carrier.target_geometry,
+                    np.ones(self.size, dtype=np.bool_),
+                    "target",
+                ),
+            }
+        )
 
         inverse_min = min(
             wall_geometry.inverse_metric_eigenvalue_bounds[0],
@@ -311,37 +386,161 @@ class ContinuumH1Operator:
             self.ordinary_euclidean_constrained_stiffness_eigenvalue
         )
         self._mean_basis = basis
+        self._assembly_snapshot = self._capture_assembled_state()
+        self._assembly_sealed = True
+        self._validate_assembled_state_integrity()
+
+    def _capture_assembled_state(self) -> _AssemblyStateSnapshot:
+        """Capture scientific identities and detached content validated here.
+
+        The snapshot deliberately contains no aliases to mutable numerical
+        state.  Object identities make isolated replacement detectable even
+        when a replacement happens to have equal values, while numerical
+        digests detect representative in-place tampering.
+        """
+        identities = tuple(
+            id(value)
+            for value in (
+                self.carrier,
+                self.carrier.target_geometry,
+                self.carrier.target_geometry.normalization,
+                self.carrier.reference_measure_weights,
+                self.wall_geometry,
+                self.wall_geometry.normalization,
+                self.wall_geometry.metric_inverse,
+                self.wall_geometry.metric_volume_ratio,
+                self.void_geometry,
+                self.void_geometry.normalization,
+                self.void_geometry.metric_inverse,
+                self.void_geometry.metric_volume_ratio,
+                self.morphology,
+                self.morphology.wall_domain,
+                self.morphology.void_domain,
+                self.branch,
+                self.configuration,
+                self.configuration.downstream_configuration,
+                self._weights,
+                self._wall_mask,
+                self._void_mask,
+                self._regional_coefficient,
+                self._target_coefficient,
+                self._metric_volume_ratio,
+                self._target_volume_ratio,
+                self._stiffness,
+                self._target_stiffness,
+                self._mean_basis,
+                self._metric_normalization_diagnostics,
+            )
+        )
+        state = (
+            ("carrier", _canonical_state(self.carrier)),
+            ("wall_geometry", _canonical_state(self.wall_geometry)),
+            ("void_geometry", _canonical_state(self.void_geometry)),
+            ("morphology", _canonical_state(self.morphology)),
+            ("branch", _canonical_state(self.branch)),
+            ("configuration", _canonical_state(self.configuration)),
+            (
+                "normalization_diagnostics",
+                _canonical_state(self._metric_normalization_diagnostics),
+            ),
+            (
+                "internal_arrays",
+                tuple(
+                    _canonical_state(value)
+                    for value in (
+                        self._weights,
+                        self._wall_mask,
+                        self._void_mask,
+                        self._regional_coefficient,
+                        self._target_coefficient,
+                        self._metric_volume_ratio,
+                        self._target_volume_ratio,
+                        self._mean_basis,
+                    )
+                ),
+            ),
+            ("regional_stiffness", _canonical_state(self._stiffness)),
+            ("target_stiffness", _canonical_state(self._target_stiffness)),
+            ("interface_faces", _canonical_state(self._faces)),
+            (
+                "assembly_scalars",
+                (
+                    self._size,
+                    self.continuum_coercivity_assumption,
+                    self.ellipticity_lower_bound,
+                    self.ellipticity_upper_bound,
+                    self.global_kernel_dimension,
+                    self.ordinary_euclidean_constrained_stiffness_eigenvalue,
+                    self.generalized_mass_weighted_laplacian_eigenvalue,
+                    self.discrete_spectral_lower_bound,
+                    tuple(self._stiffness.shape),
+                    tuple(self._target_stiffness.shape),
+                ),
+            ),
+        )
+        return _AssemblyStateSnapshot(object_identities=identities, state=state)
+
+    def _validate_assembled_state_integrity(self) -> None:
+        """Fail closed if live scientific state differs from validated assembly."""
+        if not self.__dict__.get("_assembly_sealed", False):
+            return
+        expected = self.__dict__.get("_assembly_snapshot")
+        try:
+            current = self._capture_assembled_state()
+        except Exception as exc:
+            raise ContinuumStateIntegrityError(
+                "assembled continuum state cannot be validated"
+            ) from exc
+        if current != expected:
+            raise ContinuumStateIntegrityError(
+                "live continuum scientific state differs from validated assembly"
+            )
 
     @property
     def size(self) -> int:
+        self._validate_assembled_state_integrity()
         return self._size
 
     @property
+    def metric_normalization_diagnostics(
+        self,
+    ) -> Mapping[str, MetricNormalizationDiagnostics]:
+        """Return immutable diagnostics for the exact validated normalizations."""
+        self._validate_assembled_state_integrity()
+        return self._metric_normalization_diagnostics
+
+    @property
     def stiffness_matrix(self) -> sparse.csr_matrix:
+        self._validate_assembled_state_integrity()
         return self._stiffness.copy()
 
     @property
     def target_stiffness_matrix(self) -> sparse.csr_matrix:
+        self._validate_assembled_state_integrity()
         return self._target_stiffness.copy()
 
     @property
     def interface_faces(self) -> tuple[InterfaceFace, ...]:
+        self._validate_assembled_state_integrity()
         return self._faces
 
     @property
     def reference_weights(self) -> FloatArray:
+        self._validate_assembled_state_integrity()
         result = self._weights.copy()
         result.setflags(write=False)
         return result
 
     @property
     def metric_volume_ratio(self) -> FloatArray:
+        self._validate_assembled_state_integrity()
         result = self._metric_volume_ratio.copy()
         result.setflags(write=False)
         return result
 
     @property
     def target_volume_ratio(self) -> FloatArray:
+        self._validate_assembled_state_integrity()
         result = self._target_volume_ratio.copy()
         result.setflags(write=False)
         return result
@@ -349,6 +548,7 @@ class ContinuumH1Operator:
     @property
     def target_measure_weights(self) -> FloatArray:
         """Return ``w_i J_D,i`` for target-metric discrete L2 diagnostics."""
+        self._validate_assembled_state_integrity()
         result = self._weights * self._target_volume_ratio
         result = np.array(result, dtype=np.float64, copy=True)
         result.setflags(write=False)
@@ -357,18 +557,21 @@ class ContinuumH1Operator:
     @property
     def operator_first_derivative(self) -> sparse.csr_matrix:
         """Return A_dot=0 from the fixed-comoving branch, not a hidden default."""
+        self._validate_assembled_state_integrity()
         self.branch.validate_selected_branch()
         return sparse.csr_matrix(self._stiffness.shape, dtype=np.float64)
 
     @property
     def operator_second_derivative(self) -> sparse.csr_matrix:
         """Return A_ddot=0 from Phase 1E-G section 19 branch metadata."""
+        self._validate_assembled_state_integrity()
         self.branch.validate_selected_branch()
         return sparse.csr_matrix(self._stiffness.shape, dtype=np.float64)
 
     @property
     def target_scalarization_first_derivative(self) -> sparse.csr_matrix:
         """Return ``L_D_dot=0`` only on the fixed-target selected branch."""
+        self._validate_assembled_state_integrity()
         self.branch.validate_selected_branch()
         if not self.carrier.target_geometry.metric_time_independent:
             raise ContinuumContractError("target scalarization is time dependent")
@@ -377,6 +580,7 @@ class ContinuumH1Operator:
     @property
     def target_scalarization_second_derivative(self) -> sparse.csr_matrix:
         """Return ``L_D_ddot=0`` only on the fixed-target selected branch."""
+        self._validate_assembled_state_integrity()
         self.branch.validate_selected_branch()
         if not self.carrier.target_geometry.metric_time_independent:
             raise ContinuumContractError("target scalarization is time dependent")
@@ -531,6 +735,7 @@ class ContinuumH1Operator:
         The production API has no branch that omits ``J_r``. The deliberately
         wrong unweighted oracle is constructed independently in the tests.
         """
+        self._validate_assembled_state_integrity()
         source = _readonly_vector(source_density, "source_density", self.size)
         if region == "wall":
             mask = self._wall_mask
@@ -555,6 +760,7 @@ class ContinuumH1Operator:
         Phase 1E-G specification section 13; explicit model extension, no
         paper equation number.  This is not solution mean normalisation.
         """
+        self._validate_assembled_state_integrity()
         raw = _readonly_vector(raw_load, "raw_load", self.size)
         volume = float(np.sum(self._weights))
         raw_integral = float(np.sum(raw))
@@ -576,6 +782,7 @@ class ContinuumH1Operator:
     def _solve_mean_zero(
         self, matrix: sparse.csr_matrix, right_hand_side: ArrayLike
     ) -> FloatArray:
+        self._validate_assembled_state_integrity()
         rhs = _readonly_vector(right_hand_side, "right_hand_side", self.size)
         weights_column = sparse.csr_matrix(self._weights[:, np.newaxis])
         kkt = sparse.bmat(
@@ -602,6 +809,7 @@ class ContinuumH1Operator:
         ``A=-Delta_gamma`` and the authorised reconstruction equation
         ``A psi=-s``; no upstream source code is used.
         """
+        self._validate_assembled_state_integrity()
         projected = _readonly_vector(projected_load, "projected_load", self.size)
         if abs(float(np.sum(projected))) > (
             self.configuration.source_compatibility_tolerance
@@ -610,11 +818,13 @@ class ContinuumH1Operator:
         return self._solve_mean_zero(self._stiffness, -projected)
 
     def global_mean(self, field: ArrayLike) -> float:
+        self._validate_assembled_state_integrity()
         vector = _readonly_vector(field, "field", self.size)
         return float(self._weights @ vector / np.sum(self._weights))
 
     def target_scalarization(self, potential: ArrayLike) -> FloatArray:
         """Apply separately named ``L_D=Delta_gamma_D`` (section 12)."""
+        self._validate_assembled_state_integrity()
         field = _readonly_vector(potential, "potential", self.size)
         result = -(
             self._target_stiffness @ field
@@ -625,12 +835,14 @@ class ContinuumH1Operator:
 
     def recover_potential_from_transfer(self, transferred: ArrayLike) -> FloatArray:
         """Invert target scalarization only on its global mean-zero range."""
+        self._validate_assembled_state_integrity()
         field = _readonly_vector(transferred, "transferred", self.size)
         rhs = -(self._weights * self._target_volume_ratio * field)
         rhs, _ = self.project_dual_source(rhs)
         return self._solve_mean_zero(self._target_stiffness, rhs)
 
     def apply_weak_operator(self, potential: ArrayLike) -> FloatArray:
+        self._validate_assembled_state_integrity()
         field = _readonly_vector(potential, "potential", self.size)
         result = np.asarray(self._stiffness @ field, dtype=np.float64)
         result.setflags(write=False)
@@ -644,6 +856,7 @@ class ContinuumH1Operator:
         ``j_w_out+j_v_out=0`` because ``n_v_out=-n_Gamma`` (Phase 1E-G
         specification section 5; no paper equation number).
         """
+        self._validate_assembled_state_integrity()
         field = _readonly_vector(potential, "potential", self.size)
         value_jumps: list[float] = []
         flux_jumps: list[float] = []
@@ -718,6 +931,7 @@ class ContinuumH1Operator:
 
     def metric_derived_regional_reference_measures(self) -> tuple[float, float]:
         """Integrate literal ``dmu_gamma_r`` measures in the carrier dimension."""
+        self._validate_assembled_state_integrity()
         wall_ratio = self.wall_geometry.metric_volume_ratio.reshape(-1)
         void_ratio = self.void_geometry.metric_volume_ratio.reshape(-1)
         wall_measure = float(np.sum(self._weights * wall_ratio * self._wall_mask))
@@ -726,10 +940,12 @@ class ContinuumH1Operator:
 
     def require_physical_volume_dimension(self, *, context: str) -> None:
         """Delegate the explicit Phase 1E-G v3 ``d==3`` physical-volume guard."""
+        self._validate_assembled_state_integrity()
         self.carrier.require_physical_volume_semantics(context=context)
 
     def metric_derived_regional_comoving_volumes(self) -> tuple[float, float]:
         """Return metric-derived physical ``V_w,i,V_v,i`` only for ``d==3``."""
+        self._validate_assembled_state_integrity()
         self.require_physical_volume_dimension(
             context="metric-derived regional comoving volumes"
         )
@@ -742,6 +958,7 @@ class ContinuumH1Operator:
         provenance for a valid three-dimensional geometry. It is not a
         reduced-dimensional lift and cannot bypass this guard.
         """
+        self._validate_assembled_state_integrity()
         self.require_physical_volume_dimension(
             context="declared regional comoving volumes"
         )
@@ -758,6 +975,7 @@ class ContinuumH1Operator:
         This is the human-approved Phase 1E-G section 22/v3 closure equation;
         it has no paper equation number. No length/area promotion is defined.
         """
+        self._validate_assembled_state_integrity()
         self.require_physical_volume_dimension(
             context="physical regional volume assembly V_r=V_r,i*a_r^3"
         )
@@ -772,6 +990,7 @@ class ContinuumH1Operator:
         This is the human-approved Phase 1E-G section 22 closure equation,
         not an independently predicted Timescape volume fraction.
         """
+        self._validate_assembled_state_integrity()
         wall_volume, void_volume = self.physical_regional_volumes(a_w=a_w, a_v=a_v)
         return float(void_volume / (void_volume + wall_volume))
 
@@ -784,8 +1003,25 @@ class ContinuumTransfer:
     ``regional_source_injection`` remain distinct concepts in the API.
     """
 
+    def __setattr__(self, name: str, value: object) -> None:
+        if self.__dict__.get("_assembly_sealed", False):
+            raise ContinuumStateIntegrityError(
+                "continuum transfer is bound immutably to its assembled operator"
+            )
+        object.__setattr__(self, name, value)
+
     def __init__(self, operator: ContinuumH1Operator) -> None:
+        operator._validate_assembled_state_integrity()
         self.operator = operator
+        self._operator_identity = id(operator)
+        self._assembly_sealed = True
+
+    def _validate_assembled_state_integrity(self) -> None:
+        if id(self.operator) != self._operator_identity:
+            raise ContinuumStateIntegrityError(
+                "continuum transfer operator differs from validated assembly"
+            )
+        self.operator._validate_assembled_state_integrity()
 
     def transfer_source(
         self,
@@ -794,6 +1030,7 @@ class ContinuumTransfer:
         region: str,
         provenance: str,
     ) -> ContinuumTransferResponse:
+        self._validate_assembled_state_integrity()
         raw_source = _readonly_vector(
             source_density, "source_density", self.operator.size
         )
@@ -828,7 +1065,7 @@ class ContinuumTransfer:
             self.operator.configuration.downstream_configuration.source_roundtrip_tolerance
         ):
             raise ContinuumContractError("continuum provenance roundtrip failed")
-        return ContinuumTransferResponse(
+        response = ContinuumTransferResponse(
             provenance=provenance,
             region=region,
             raw_source_provenance=region,
@@ -843,6 +1080,8 @@ class ContinuumTransfer:
             interface=interface,
             provenance_roundtrip_error=roundtrip_error,
         )
+        self._validate_assembled_state_integrity()
+        return response
 
     def transfer_jet(
         self,
@@ -859,6 +1098,7 @@ class ContinuumTransfer:
         guard; no paper equation number). Canonical runtime finite differences
         are absent.
         """
+        self._validate_assembled_state_integrity()
         components = tuple(
             self.transfer_source(
                 values,
@@ -871,7 +1111,7 @@ class ContinuumTransfer:
                 strict=True,
             )
         )
-        return ContinuumTransferJetResponse(
+        response = ContinuumTransferJetResponse(
             provenance=provenance,
             region=region,
             potential=VectorJet(*(item.potential for item in components)),
@@ -880,6 +1120,8 @@ class ContinuumTransfer:
             ),
             components=components,
         )
+        self._validate_assembled_state_integrity()
+        return response
 
     def transfer_regional_amplitude(
         self,
@@ -888,6 +1130,7 @@ class ContinuumTransfer:
         region: str,
         provenance: str,
     ) -> ContinuumTransferJetResponse:
+        self._validate_assembled_state_integrity()
         if region == "wall":
             injection = self.operator.morphology.wall_domain.reshape(-1).astype(float)
         elif region == "void":
@@ -915,20 +1158,40 @@ class ContinuumPhase1EBackendAdapter:
     solver/operator identity with preserved source provenance.
     """
 
+    def __setattr__(self, name: str, value: object) -> None:
+        if self.__dict__.get("_assembly_sealed", False):
+            raise ContinuumStateIntegrityError(
+                "Phase 1E-F adapter is bound immutably to its continuum transfer"
+            )
+        object.__setattr__(self, name, value)
+
     def __init__(self, transfer: ContinuumTransfer) -> None:
+        transfer._validate_assembled_state_integrity()
         self.transfer = transfer
+        self._transfer_identity = id(transfer)
+        self._assembly_sealed = True
+
+    def _validate_assembled_state_integrity(self) -> None:
+        if id(self.transfer) != self._transfer_identity:
+            raise ContinuumStateIntegrityError(
+                "Phase 1E-F adapter transfer differs from validated assembly"
+            )
+        self.transfer._validate_assembled_state_integrity()
 
     @property
     def size(self) -> int:
+        self._validate_assembled_state_integrity()
         return self.transfer.operator.size
 
     @property
     def coercivity_lower_bound(self) -> float:
+        self._validate_assembled_state_integrity()
         return self.transfer.operator.continuum_coercivity_assumption
 
     def _solution(
         self, amplitude: ScalarJet, *, region: str, provenance: str
     ) -> TransmissionSolution:
+        self._validate_assembled_state_integrity()
         response = self.transfer.transfer_regional_amplitude(
             amplitude, region=region, provenance=provenance
         )
@@ -952,6 +1215,7 @@ class ContinuumPhase1EBackendAdapter:
         *,
         source_name: str,
     ) -> JointTransmissionState:
+        self._validate_assembled_state_integrity()
         wall = self._solution(
             wall_amplitude, region="wall", provenance=source_name
         )
@@ -966,19 +1230,23 @@ class ContinuumPhase1EBackendAdapter:
         return JointTransmissionState(wall=wall, void=void, carrier_field=carrier)
 
     def _potential(self, transferred: ArrayLike) -> FloatArray:
+        self._validate_assembled_state_integrity()
         return self.transfer.operator.recover_potential_from_transfer(transferred)
 
     def value_jump(self, transferred: ArrayLike) -> FloatArray:
+        self._validate_assembled_state_integrity()
         return self.transfer.operator.interface_diagnostics(
             self._potential(transferred)
         ).value_jump
 
     def flux_jump(self, transferred: ArrayLike) -> FloatArray:
+        self._validate_assembled_state_integrity()
         return self.transfer.operator.interface_diagnostics(
             self._potential(transferred)
         ).flux_jump
 
     def apply_coupled_operator_jet(self, field: VectorJet) -> VectorJet:
+        self._validate_assembled_state_integrity()
         recovered: list[FloatArray] = []
         for transferred in (field.value, field.first, field.second):
             potential = self._potential(transferred)
@@ -986,10 +1254,12 @@ class ContinuumPhase1EBackendAdapter:
         return VectorJet(*recovered)
 
     def project_source(self, source: ArrayLike) -> FloatArray:
+        self._validate_assembled_state_integrity()
         projected, _ = self.transfer.operator.project_dual_source(source)
         return projected
 
     def global_mean(self, field: ArrayLike) -> float:
+        self._validate_assembled_state_integrity()
         return self.transfer.operator.global_mean(field)
 
 

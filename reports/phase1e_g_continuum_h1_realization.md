@@ -337,6 +337,26 @@ comparison; the resolved effect is mask/source placement followed by
 projection, Green response and target scalarization. This convergence does
 not establish a physical morphology or a physical volume fraction.
 
+## Post-assembly scientific-state integrity
+
+The v4 runtime binds every public scientific calculation to the exact state
+validated at assembly. `ContinuumH1Operator`, `ContinuumTransfer`, the
+Phase 1E-F adapter and `EffectiveSectorContinuumBridge` reject normal
+post-construction replacement. Geometry and morphology arrays are defensive
+read-only copies, metadata mappings are immutable, and sparse matrices are
+returned only as copies.
+
+An immutable detached assembly snapshot records object identities plus
+canonical numerical digests for carrier/target/regional dimensions and
+grids, metrics and measures, normalization provenance, morphology and masks,
+branch/configuration data, interface faces, projections and assembled
+matrices. Every public volume, transfer, derivative and downstream bridge
+operation rechecks the live state. Isolated low-level replacement or
+in-place tampering raises `ContinuumStateIntegrityError`; it never triggers a
+silent rebuild or revalidation. A scientifically changed geometry,
+normalization or configuration therefore requires construction of a new
+operator.
+
 ## Structured discretization and convergence
 
 The numerical backend uses a periodic cell-centered conservative stiffness

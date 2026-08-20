@@ -72,6 +72,18 @@ NOT_GRANTED
   time-dependent branches reject; zero is not a hidden default.
 - **PASS:** full equal-region `A_P=0` remains fail-closed. The separate
   equal-geometry transfer identity is not misrepresented as an `F_v` limit.
+- **PASS:** successful assembly seals the operator, transfer, Phase 1E-F
+  adapter and bridge bindings against ordinary replacement. A detached
+  identity/content snapshot covers carrier, geometries, normalization,
+  morphology, configuration, masks, measures and assembled matrices.
+- **PASS:** every public scientific operator/transfer/bridge path checks the
+  live dependency graph against that snapshot. Representative
+  `object.__setattr__` replacement and private-array mutation raise
+  `ContinuumStateIntegrityError`; changed scientific state requires a new
+  operator construction.
+- **PASS:** cached normalization diagnostics are immutable and cannot
+  authorize replaced normalization records. Transfer jets and downstream
+  bridge evaluation enforce the same fixed-target time contract.
 
 ## Elliptic and numerical audit
 
@@ -103,8 +115,9 @@ NOT_GRANTED
 - **PASS:** the compared layer/island sources are documented as
   `COMMON_LATENT_MANUFACTURED_FIELD`. Their flat stiffness matrices are
   identical, so their difference is mask/source-support sensitivity followed
-  by projection, Green response, target scalarization and constitutive
-  amplification--not heterogeneous-operator sensitivity.
+  by projection, Green response and target scalarization--not
+  heterogeneous-operator sensitivity. No downstream Phase 1E-F constitutive
+  evaluation was performed for this reduced-dimensional fixture.
 - **PASS:** shifted-layer 16/32/64 refinement resolves the reported transfer
   diagnostic and is classified
   `CONVERGED_EQUAL_GEOMETRY_MASK_PLACEMENT_DIAGNOSTIC`. Its identical

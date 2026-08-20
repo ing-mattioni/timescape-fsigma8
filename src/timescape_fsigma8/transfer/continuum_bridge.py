@@ -35,6 +35,7 @@ from timescape_fsigma8.transfer.continuum_geometry import (
     SCIENTIFIC_STATUS_1E_G,
     ContinuumContractError,
     ContinuumEllipticClosureConfig,
+    ContinuumStateIntegrityError,
     FixedReferenceBranchSpec,
 )
 from timescape_fsigma8.transfer.h1_realization import (
@@ -162,6 +163,13 @@ class ContinuumH1RealizationResult:
 class EffectiveSectorContinuumBridge:
     """Derive continuum H1 inputs and invoke the frozen Phase 1E-F evaluator."""
 
+    def __setattr__(self, name: str, value: object) -> None:
+        if self.__dict__.get("_assembly_sealed", False):
+            raise ContinuumStateIntegrityError(
+                "continuum bridge is bound immutably to validated assembly state"
+            )
+        object.__setattr__(self, name, value)
+
     def __init__(
         self,
         *,
@@ -169,13 +177,39 @@ class EffectiveSectorContinuumBridge:
         branch: FixedReferenceBranchSpec,
         configuration: ContinuumEllipticClosureConfig,
     ) -> None:
+        operator._validate_assembled_state_integrity()
         branch.validate_selected_branch()
         if operator.branch != branch:
             raise ContinuumContractError("operator/bridge branch metadata differ")
+        if operator.configuration != configuration:
+            raise ContinuumContractError(
+                "operator/bridge continuum configurations differ"
+            )
         self.operator = operator
         self.transfer = ContinuumTransfer(operator)
         self.branch = branch
         self.configuration = configuration
+        self._operator_identity = id(operator)
+        self._transfer_identity = id(self.transfer)
+        self._branch_identity = id(branch)
+        self._configuration_identity = id(configuration)
+        self._assembly_sealed = True
+
+    def _validate_assembled_state_integrity(self) -> None:
+        bindings = (
+            id(self.operator) == self._operator_identity,
+            id(self.transfer) == self._transfer_identity,
+            id(self.branch) == self._branch_identity,
+            id(self.configuration) == self._configuration_identity,
+            self.operator.branch is self.branch,
+            self.operator.configuration is self.configuration,
+        )
+        if not all(bindings):
+            raise ContinuumStateIntegrityError(
+                "continuum bridge bindings differ from validated assembly"
+            )
+        self.operator._validate_assembled_state_integrity()
+        self.transfer._validate_assembled_state_integrity()
 
     @staticmethod
     def _regional_states(
@@ -209,6 +243,7 @@ class EffectiveSectorContinuumBridge:
         not claimed as a universal Timescape identity and has no paper
         equation number.
         """
+        self._validate_assembled_state_integrity()
         tolerance = (
             self.configuration.downstream_configuration.background_identity_tolerance
         )
@@ -240,6 +275,7 @@ class EffectiveSectorContinuumBridge:
         regional_bulk: RegionalBulkState,
         background: H1Background,
     ) -> ContinuumBridgeFields:
+        self._validate_assembled_state_integrity()
         self.branch.validate_selected_branch()
         self.operator.require_physical_volume_dimension(
             context=(
@@ -291,7 +327,7 @@ class EffectiveSectorContinuumBridge:
             np.zeros(self.operator.size),
             np.zeros(self.operator.size),
         )
-        return ContinuumBridgeFields(
+        result = ContinuumBridgeFields(
             regional_wall=wall,
             regional_void=void,
             density_wall=density_wall,
@@ -305,10 +341,13 @@ class EffectiveSectorContinuumBridge:
             E_DeltaXi_0_Gamma=E_delta_xi0,
             J_f_Gamma=J_f,
         )
+        self._validate_assembled_state_integrity()
+        return result
 
     def _effective_contract(
         self, fields: ContinuumBridgeFields
     ) -> EffectiveSectorContract:
+        self._validate_assembled_state_integrity()
         identity = np.eye(self.operator.size, dtype=np.float64)
         zero = np.zeros_like(identity)
         identity_operator = DenseCarrierOperator(MatrixJet(identity, zero, zero))
@@ -328,6 +367,7 @@ class EffectiveSectorContinuumBridge:
         Phase 1E-F full equal-region constitutive point, where ``A_P=0`` and
         the downstream realization remains fail-closed.
         """
+        self._validate_assembled_state_integrity()
         wall = self.operator.wall_geometry
         void = self.operator.void_geometry
         target = self.operator.carrier.target_geometry
@@ -361,6 +401,7 @@ class EffectiveSectorContinuumBridge:
         )
         if residual > self.configuration.equal_geometry_identity_tolerance:
             raise ContinuumContractError("equal-geometry transfer identity failed")
+        self._validate_assembled_state_integrity()
         return residual
 
     def evaluate(
@@ -375,6 +416,7 @@ class EffectiveSectorContinuumBridge:
         morphology_sensitivity_diagnostics: Mapping[str, float],
         discretization_convergence_metrics: Mapping[str, float],
     ) -> ContinuumH1RealizationResult:
+        self._validate_assembled_state_integrity()
         if (
             not isinstance(volume_fraction_consistency_classification, str)
             or not volume_fraction_consistency_classification.strip()
@@ -438,7 +480,7 @@ class EffectiveSectorContinuumBridge:
         flux_jump = max(
             response.interface.maximum_flux_jump for response in scalar_responses
         )
-        return ContinuumH1RealizationResult(
+        result = ContinuumH1RealizationResult(
             realization_id=REALIZATION_ID_1E_G,
             role=ROLE_1E_G,
             framework_status=FRAMEWORK_STATUS_1E_G,
@@ -516,6 +558,8 @@ class EffectiveSectorContinuumBridge:
             bridge_fields=fields,
             downstream_phase1e_f=downstream,
         )
+        self._validate_assembled_state_integrity()
+        return result
 
 
 def compare_morphology_results(
