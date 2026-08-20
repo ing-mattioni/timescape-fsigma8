@@ -35,12 +35,12 @@ the Phase 1E-F implementation.
 | V21 `J_f` | PASS | Zero only after fixed-branch metadata validation; moving branch rejects. |
 | V22 operator derivatives | PASS | `A_dot=A_ddot=L_D_dot=L_D_ddot=0` follows from explicit fixed regional and target metadata. |
 | V23 derivative commutation | PASS | Analytic transfer jets agree with independent centered finite differences. |
-| V24 volume fraction | PASS | Manufactured background consistency residual is `0`; metric normalization and background agreement are separate gates. |
+| V24 volume fraction | PASS | A `d=3` manufactured background consistency residual is `0`; metric normalization and background agreement are separate gates. |
 | V25 narrowed relabel | PASS | `EQUAL_GEOMETRY_MASK_AND_SOURCE_INJECTION_RELABEL_COVARIANCE_OF_TRANSFER`; no full physical wall/void symmetry is claimed. |
 | V26 endpoints | PASS | `f_v=0,1` invoke downstream ontology reduction before division. |
 | V27 spectral API | PASS | No public generic `k`; explicit adversarial label rejects. |
 | V28 mode mixing | PASS | Heterogeneous coefficient generates resolved non-source Fourier content. |
-| V29 morphology sensitivity | PASS | Target-metric L2 layer/island diagnostic plus 16/32/64 shifted-layer refinement; common latent source prescription is explicit. |
+| V29 morphology sensitivity | PASS | Reduced-dimensional operator-level target-metric L2 layer/island diagnostic plus 16/32/64 shifted-layer refinement; no physical volume is formed. |
 | V30 convergence | PASS | Nested smooth oracle rates exceed explicit `1.8/0.8` L2/energy gates. |
 | V31 discrete/contract consistency | PASS | Adapter recovers the admissible projected source jet. |
 | V32 Phase 1E-F compatibility | PASS | Continuum-derived `R_Z/R_eff` fixture has nonzero termwise cancellations and predictable adversarial failures. |
@@ -60,6 +60,28 @@ The production `J s w_0` load reconstructed `u` within `2e-10`. An
 independent deliberately incorrect load omitting `J` differed by more than
 `1e-3`. This directly validates the weak-source measure transformation.
 
+## Additive v3 physical-volume dimensional matrix D1--D7
+
+The carrier retains `d in {1,2,3}` for mathematical operator validation, but
+physical Timescape volume semantics are `PHYSICAL_TIMESCAPE_THREE_VOLUME_ONLY`.
+For `gamma'=c^2 gamma`, the literal measure obeys `mu_d'=c^d mu_d`; with
+`a'=a/c`, `mu_d'(a')^3=c^(d-3)mu_d a^3`. The reproduced factors for `c=2`
+are `1/4`, `1/2`, and `1` for `d=1,2,3`, respectively. The first two are
+rejected, not renormalized.
+
+| Gate | Result | Evidence |
+|---|---|---|
+| D1 | PASS | Complete physical-volume/downstream path accepts a valid `d=3` carrier and returns `(V_w,V_v)=(0.5,0.5)`. |
+| D2 | PASS | `d=1` literal measures remain available, while all physical `V_r`/`f_v` APIs raise `ContinuumDimensionalContractError`. |
+| D3 | PASS | The same fail-closed contract holds in `d=2`. |
+| D4 | PASS | `EXTERNALLY_SUPPLIED_REFERENCE_VOLUME` in `d=1,2` remains a measure-consistency provenance mode and cannot bypass the dimension guard. |
+| D5 | PASS | Dedicated 1-D weighted and 2-D periodic transfer fixtures still exercise projection, solve, and target scalarization. |
+| D6 | PASS | N5 remains `PHYSICAL_NORMALIZATION_COVARIANCE` in `d=3` for base `(1/3,2/3)`, transformed `V_v'=c^3V_v`, and `a_v'=a_v/c`. |
+| D7 | PASS | All public metric-derived/declaration/assembly/fraction methods and the continuum-to-Phase-1E-F bridge are dimension guarded. |
+
+No reduced-dimensional effective-3-D lift, transverse-area closure, padding,
+embedding, or silent dimensional promotion exists.
+
 ## Morphology metric and refinement
 
 The primary sensitivity norm is
@@ -72,8 +94,10 @@ not heterogeneous-operator sensitivity.
 For shifted versus unshifted half-domain families the 16/32/64-cell
 `T_w[Delta_w]` values are all `0.7071067812`, and the `T_v[Delta_v]` values
 are all `0.3535533906`. Classification:
-`MORPHOLOGY_DIAGNOSTIC_CONVERGED`. This does not make either morphology a
-physical Timescape prediction.
+`CONVERGED_EQUAL_GEOMETRY_MASK_PLACEMENT_DIAGNOSTIC`. The compared stiffness
+operators are identical: this is mask/source placement followed by
+projection, Green response and target scalarization. It does not make either
+morphology or any reduced-dimensional measure a physical Timescape volume.
 
 ## Discrete spectral diagnostics
 
@@ -112,8 +136,11 @@ The existing nontrivial and adversarial Phase 1E-F dynamic-residual tests
 remain part of the combined transfer suite. Phase 1E-G now additionally uses
 the real continuum bridge. In units of its common carrier shape, the
 independently manufactured `R_Z` terms are
-`(-0.04,-0.0448,0.2,-0.1152)` and the `R_eff` terms are
-`(0.095808,0.024192,-0.12)`. All are nonzero. Perturbing `alpha_w.first` by
+`(-0.04,-0.0448,0.2,-0.1152,pressure)`. The pressure term is analytically
+zero and has reproduced numerical maximum `2.7755575616e-17`. The `R_eff`
+terms are `(0.095808,0.024192,-0.12,pressure)`; its analytically zero pressure
+term has reproduced maximum `3.8857805862e-18`. All non-pressure terms are
+nonzero. Perturbing `alpha_w.first` by
 `0.05` produces exactly `0.012 phi`; perturbing `Q_bar.first` by `0.5`
 produces exactly `-0.0036 phi`. Both exceed `1e-10` and fail closed.
 
@@ -123,16 +150,16 @@ produces exactly `-0.0036 phi`. Both exceed `1e-10` and fail closed.
 |---|---|---|
 | N1 | PASS | Time-dependent target metric rejects before transfer. |
 | N2 | PASS | Regional metric-normalization provenance is required. |
-| N3 | PASS | Declared/reference metric-volume mismatch rejects. |
+| N3 | PASS | Declared/reference metric-measure mismatch rejects. |
 | N4 | PASS | Constant metric rescaling with stale volume contract rejects. |
-| N5 | PASS | Consistently transformed `gamma/a/V_i` uses a distinct ID and preserves the 3-D physical-volume diagnostic. |
+| N5 | PASS | `PHYSICAL_NORMALIZATION_COVARIANCE`: consistently transformed `gamma/a/V_i` uses a distinct ID and preserves the 3-D physical volumes and `f_v`. |
 | N6 | PASS | Base volume comparison is labelled `MANUFACTURED_BACKGROUND_CONSISTENCY_FIXTURE`. |
 | N7 | PASS | Continuum-derived nontrivial `R_Z` cancellation. |
 | N8 | PASS | Continuum-derived nontrivial `R_eff` cancellation. |
 | N9 | PASS | Predictable continuum-derived `R_Z` adversarial increment. |
 | N10 | PASS | Predictable continuum-derived `R_eff` adversarial increment. |
 | N11 | PASS | Target-metric weighted L2 differs from Euclidean norm on nonuniform weights. |
-| N12 | PASS | 16/32/64 morphology metric is `MORPHOLOGY_DIAGNOSTIC_CONVERGED`. |
+| N12 | PASS | 16/32/64 morphology metric is `CONVERGED_EQUAL_GEOMETRY_MASK_PLACEMENT_DIAGNOSTIC`. |
 | N13 | PASS | Raw wall provenance survives global projected support. |
 | N14 | PASS | Raw void provenance survives global projected support. |
 | N15 | PASS | Ordinary and generalized spectra are separately exposed. |
@@ -151,6 +178,8 @@ All of the following fail closed or produce a nonzero diagnostic:
 - incompatible unprojected source;
 - broken interface values, fluxes and normal convention;
 - inconsistent background/geometric volume fraction;
+- attempted `d=1` or `d=2` promotion to physical regional volumes or `f_v`,
+  including external-reference-volume provenance;
 - incorrect source-measure load;
 - independent regional mean projection;
 - nontrivial continuum-derived `R_Z/R_eff` dynamic corruption;
@@ -161,12 +190,12 @@ All of the following fail closed or produce a nonzero diagnostic:
 Development checkpoints:
 
 ```text
-Python 3.14.3 targeted Phase 1E-G: 62 passed in 1.57s
-Python 3.11.9 targeted Phase 1E-G: 62 passed in 1.68s
-Python 3.14.3 combined Phase 1E-F + 1E-G: 104 passed in 1.74s
-Python 3.11.9 combined Phase 1E-F + 1E-G: 104 passed in 1.92s
-Python 3.14.3 complete repository: 483 passed in 19.29s
-Python 3.11.9 complete repository: 483 passed in 20.92s
+Python 3.14.3 targeted Phase 1E-G: 71 passed in 1.37s
+Python 3.11.9 targeted Phase 1E-G: 71 passed in 1.39s
+Python 3.14.3 combined Phase 1E-F + 1E-G: 113 passed in 1.53s
+Python 3.11.9 combined Phase 1E-F + 1E-G: 113 passed in 1.45s
+Python 3.14.3 complete repository (post-report gate): 492 passed in 18.93s
+Python 3.11.9 complete repository (post-report gate): 492 passed in 20.65s
 ```
 
 All release-gate runs reported zero failures, skips, xfails and warnings.

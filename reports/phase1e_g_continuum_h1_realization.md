@@ -63,6 +63,14 @@ scientific reference topology). Its status is
 `COMPUTATIONAL_REFERENCE_CARRIER_ONLY`; it is not a claim about physical
 cosmological topology.
 
+Dimensions one and two are available only for mathematical operator,
+projection, Green-response, spectral, convergence and morphology validation.
+`PHYSICAL_TIMESCAPE_THREE_VOLUME_ONLY` is a separate fail-closed contract:
+literal carrier measures may be interpreted as regional reference comoving
+volumes, assembled as `V_r=V_r,i a_r^3`, or used to form physical `f_v` only
+when `spatial_dimension == 3`. No reduced-dimensional effective-3-D lift or
+transverse-area prescription is implemented.
+
 `MorphologySpec` requires `Omega_w`, `Omega_v`, `Gamma`, `Phi_w`, `Phi_v`,
 orientation and source-injection provenance. A mask is accepted only as part
 of this explicit object. `Gamma` is a `MATHEMATICAL_TRANSFER_INTERFACE`, not
@@ -105,12 +113,23 @@ Every wall, void and target geometry now requires a
 convention to a reference epoch, explicit `a_r(t_ref)`, declared `V_r,i`,
 volume provenance and consistency tolerance. The backend independently
 integrates `J_r dmu_0` over the configured domain and compares it with the
-declared reference volume. It never rescales `gamma_r` to force agreement.
+declared reference measure. In `d<3`, the historically named
+`reference_comoving_volume` field is explicitly only that literal
+reduced-dimensional measure. It never rescales `gamma_r` to force agreement.
 For constructed fixtures this is a `CONSTRUCTION_CONSISTENCY_CHECK`, not an
 independent Timescape prediction. A stale constant metric rescaling is
 rejected; a consistently transformed `gamma_r'=c_r^2 gamma_r`,
 `a_r'=a_r/c_r`, `V_r,i'=c_r^3 V_r,i` uses a distinct normalization ID and
 preserves the instantaneous physical volume in the three-dimensional test.
+
+The dimensional reason is explicit. A literal metric measure transforms as
+`mu_d'=c^d mu_d`, hence with `a'=a/c`,
+`mu_d'(a')^3=c^(d-3)mu_d a^3`. The factor is `1` only for `d=3`; it is
+`c^-1` in `d=2` and `c^-2` in `d=1`. Those reduced-dimensional cases are
+rejected rather than normalized away. `EXTERNALLY_SUPPLIED_REFERENCE_VOLUME`
+does not bypass the guard: it remains useful normalization provenance for a
+valid 3-D geometry, but no reduced-dimensional lift provenance exists in this
+runtime.
 
 The negative-curvature oracle uses the documented two-dimensional Poincare
 metric `ds^2=4(dx^2+dy^2)/(1-r^2)^2`, of Gaussian curvature `-1`, on a
@@ -119,6 +138,8 @@ nonconstant `J` and inverse metric give the positive tensor density `K=I`.
 This validates negative-curvature provenance, source-measure weighting and
 SPD data. It does not test heterogeneous stiffness, a three-dimensional
 physical void, or a complete Timescape void discretization.
+It is an operator/source-measure fixture and is never promoted to a physical
+regional three-volume or physical `f_v`.
 
 ## Weak form and source measure
 
@@ -246,19 +267,23 @@ The bridge invokes the existing Phase 1E-F evaluator unchanged. A nontrivial
 continuum-derived manufactured trajectory has scalar coefficients
 `Delta_d=0.2`, `Z=-0.08`, `Z_dot=-0.04`, `Delta_eff=-0.0576`, and
 `Delta_eff_dot=0.095808`, with `Theta=0.84`, `rho_d=1`, `rho_eff=2`, and
-`w_eff=0.5`. Its four clean `R_Z` terms are
-`(-0.04,-0.0448,0.2,-0.1152)` and its three `R_eff` terms are
-`(0.095808,0.024192,-0.12)`: every term is nonzero and each sum vanishes.
+`w_eff=0.5`. The complete clean `R_Z` term list is
+`(-0.04,-0.0448,0.2,-0.1152,pressure)`, where the pressure contribution is
+analytically zero and has reproduced numerical maximum
+`2.7755575616e-17`. The complete `R_eff` list is
+`(0.095808,0.024192,-0.12,pressure)`, with analytically zero pressure and
+reproduced numerical maximum `3.8857805862e-18`. Every non-pressure term is
+nonzero and each complete sum vanishes.
 Independent perturbations produce the predicted nonzero increments
 `0.24 delta(alpha_w_dot) phi` and `-0.0072 delta(Q_bar_dot) phi` and fail
 closed at the inherited `1e-10` tolerances. The inherited
 classification remains: `C_P`, `R_Delta`, `K_GM` are constructed identity
 checks; `R_Z`, `R_eff` are dynamic compatibility checks.
 
-## Volume fraction consistency
+## Physical-volume dimensional contract and volume-fraction consistency
 
-The normalized geometry supplies declared initial comoving volumes whose
-metric-measure consistency has already passed:
+Only a three-dimensional normalized geometry supplies declared physical
+initial comoving volumes whose metric-measure consistency has already passed:
 
 \[
 V_r(t)=V_{r,i}a_r^3,\qquad
@@ -268,14 +293,21 @@ f_{v,\rm geom}=\frac{V_v}{V_v+V_w}.
 The runtime then separately compares this with explicit background `f_v` and
 fails closed on disagreement. The base case is explicitly labelled
 `MANUFACTURED_BACKGROUND_CONSISTENCY_FIXTURE`; its `0.5-0.5=0` is not an
-independent prediction of `f_v`. A nonconstant metric-volume
-fixture demonstrates that a 50% coordinate-cell fraction can represent a
-physical measure fraction of `2/3`.
+independent prediction of `f_v`. The complete continuum-to-Phase-1E-F bridge
+is likewise guarded at `d=3` because its `f_w/f_v` weighting has physical
+regional-volume semantics.
+
+The former 1-D fixture with wall length `0.5`, void length `1`, and algebraic
+ratio `2/3` now records only literal one-dimensional metric measures. Its
+transfer/operator calculation remains valid, but every physical-volume or
+physical-`f_v` request raises `ContinuumDimensionalContractError`. The same
+policy is tested in two dimensions, including external-reference-volume mode.
 
 ## Morphology sensitivity
 
-Two explicit equal-volume comparators were tested at fixed background data:
-a layered 20%-void partition and a connected interior island. The primary
+Two explicit reduced-dimensional operator comparators were tested at fixed
+latent amplitudes: a layered 20%-void partition and a connected interior
+island. The primary
 diagnostic is the target-measure norm
 `sqrt(sum_i w_i J_D,i |Y_1-Y_2|^2)` divided by the explicitly configured
 reference scale `1.0` (floor `1e-12`). Measured differences were:
@@ -285,27 +317,25 @@ reference scale `1.0` (floor `1e-12`). Measured differences were:
 | `T_w[Delta_w]` | 0.6324555320 |
 | `T_v[Delta_v]` | 0.3162277660 |
 | `E_DeltaTheta_Gamma` | 1.8973665961 |
-| `C_R_Gamma` | 28.6116142055 |
-| `F_v` | 14.3058071027 |
-| `Delta_d` | 0.5692099788 |
-| `Delta_eff` | 0.0 |
 
 The source correspondence is `COMMON_LATENT_MANUFACTURED_FIELD`:
 `s_w^M=Delta_w chi_w^M` and `s_v^M=Delta_v chi_v^M`; these inputs are not
 separately unit-L2 normalized. Both comparators use the same flat operator
 matrix, so this fixture measures supported-source/mask-placement change,
-global compatibility projection, Green response, target scalarization and
-downstream constitutive amplification--not heterogeneous-operator change.
-The resolved zero in `Delta_eff` is specific to the clean manufactured
-fixture. Morphology sensitivity is model-closure sensitivity, not numerical
-error, and was not tuned away.
+global compatibility projection, Green response and target scalarization--not
+heterogeneous-operator change and not a physical-volume comparison. No
+Phase 1E-F constitutive quantity is formed from this 2-D fixture. Morphology
+sensitivity is model-closure sensitivity, not numerical error, and was not
+tuned away.
 
 A separate 16/32/64-cell shifted-layer refinement gives stable target-L2
 values `0.7071067812` for `T_w[Delta_w]` and `0.3535533906` for
 `T_v[Delta_v]` at every listed resolution. It is classified
-`MORPHOLOGY_DIAGNOSTIC_CONVERGED` for these two common-latent-field
-comparators. This convergence resolves the diagnostic, not the physical
-morphology.
+`CONVERGED_EQUAL_GEOMETRY_MASK_PLACEMENT_DIAGNOSTIC` for these two
+common-latent-field comparators. The stiffness/operator is identical at each
+comparison; the resolved effect is mask/source placement followed by
+projection, Green response and target scalarization. This convergence does
+not establish a physical morphology or a physical volume fraction.
 
 ## Structured discretization and convergence
 
@@ -323,6 +353,8 @@ rates are not asserted at arbitrary discontinuous interfaces.
 - Morphology and pullbacks remain required external model inputs.
 - Metric/scale-factor/reference-volume normalization is an explicit closure
   convention, not independently fixed by current Timescape input.
+- Physical regional volumes and `f_v` require `d=3`; reduced-dimensional
+  effective-3-D lift provenance is not implemented.
 - The backend supports isotropic/conformal structured coefficients, not a
   general anisotropic FEM realization.
 - A structured grid does not establish a physical interface, global

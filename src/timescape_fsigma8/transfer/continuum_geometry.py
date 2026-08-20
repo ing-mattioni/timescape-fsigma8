@@ -42,6 +42,13 @@ EXTERNALLY_SUPPLIED_REFERENCE_VOLUME = (
     "EXTERNALLY_SUPPLIED_REFERENCE_VOLUME"
 )
 MORPHOLOGY_NORM_TARGET_METRIC_L2 = "TARGET_METRIC_WEIGHTED_L2"
+PHYSICAL_VOLUME_DIMENSION = 3
+PHYSICAL_VOLUME_SEMANTICS = "PHYSICAL_TIMESCAPE_THREE_VOLUME_ONLY"
+REDUCED_DIMENSIONAL_MEASURE_ONLY = "REDUCED_DIMENSIONAL_METRIC_MEASURE_ONLY"
+PHYSICAL_NORMALIZATION_COVARIANCE = "PHYSICAL_NORMALIZATION_COVARIANCE"
+CONVERGED_EQUAL_GEOMETRY_MASK_PLACEMENT_DIAGNOSTIC = (
+    "CONVERGED_EQUAL_GEOMETRY_MASK_PLACEMENT_DIAGNOSTIC"
+)
 
 
 class ContinuumContractError(ValueError):
@@ -50,6 +57,10 @@ class ContinuumContractError(ValueError):
 
 class ContinuumDegeneracyError(ContinuumContractError):
     """The requested data lie outside the selected nondegenerate branch."""
+
+
+class ContinuumDimensionalContractError(ContinuumContractError):
+    """A reduced-dimensional measure was requested as a physical 3-volume."""
 
 
 def _readonly_float(values: ArrayLike, name: str) -> FloatArray:
@@ -72,9 +83,12 @@ def _readonly_bool(values: ArrayLike, name: str) -> BoolArray:
 class RegionalMetricNormalization:
     """Required provenance tying ``gamma_r``, ``a_r`` and ``V_r,i``.
 
-    This is the human-approved Phase 1E-G v2 normalization closure.  It has
+    This is the human-approved Phase 1E-G v2/v3 normalization closure. It has
     no paper equation number and is not inferred from Timescape.  The runtime
-    never rescales a metric to satisfy this record.
+    never rescales a metric to satisfy this record. The historically named
+    ``reference_comoving_volume`` stores a literal metric reference measure
+    during reduced-dimensional operator validation; it acquires physical
+    regional three-volume semantics only when the carrier dimension is three.
     """
 
     normalization_id: str
@@ -272,6 +286,26 @@ class ContinuumCarrierSpec:
         if not self.target_scalarization_id:
             raise ContinuumContractError("target scalarization must be separately named")
         object.__setattr__(self, "reference_measure_weights", weights)
+
+    @property
+    def physical_volume_semantics_authorized(self) -> bool:
+        """Whether literal metric measure may represent a physical 3-volume."""
+        return self.dimension == PHYSICAL_VOLUME_DIMENSION
+
+    def require_physical_volume_semantics(self, *, context: str) -> None:
+        """Fail closed unless physical Timescape three-volume semantics apply.
+
+        Under the human-approved Phase 1E-G v3 dimensional contract
+        ``gamma'=c^2 gamma`` gives ``mu'_d=c^d mu_d``. With ``a'=a/c``,
+        ``mu'_d (a')^3=c^(d-3) mu_d a^3``. There is no paper equation number:
+        this is the explicit v3 model-extension guard supplied by the user.
+        """
+        if not self.physical_volume_semantics_authorized:
+            raise ContinuumDimensionalContractError(
+                f"{context} requires spatial_dimension == 3; dimension "
+                f"{self.dimension} supplies only a literal reduced-dimensional "
+                "metric measure and has no validated 3-D lift provenance"
+            )
 
 
 @dataclass(frozen=True)

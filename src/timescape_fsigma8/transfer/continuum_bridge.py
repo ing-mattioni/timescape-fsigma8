@@ -29,6 +29,7 @@ from timescape_fsigma8.transfer.continuum_backend import (
 from timescape_fsigma8.transfer.continuum_geometry import (
     FRAMEWORK_STATUS_1E_G,
     IMPLEMENTATION_STATUS_1E_G,
+    PHYSICAL_VOLUME_SEMANTICS,
     REALIZATION_ID_1E_G,
     ROLE_1E_G,
     SCIENTIFIC_STATUS_1E_G,
@@ -118,6 +119,7 @@ class ContinuumH1RealizationResult:
     framework_status: str
     scientific_status: str
     implementation_status: str
+    physical_volume_semantics: str
     continuum_geometry: Mapping[str, object]
     morphology_id: str
     regional_metric_metadata: Mapping[str, Mapping[str, str]]
@@ -239,6 +241,12 @@ class EffectiveSectorContinuumBridge:
         background: H1Background,
     ) -> ContinuumBridgeFields:
         self.branch.validate_selected_branch()
+        self.operator.require_physical_volume_dimension(
+            context=(
+                "continuum-to-Phase-1E-F bridge fields requiring physical "
+                "regional volume fractions"
+            )
+        )
         self._validate_common_time_branch(background)
         wall, void = self._regional_states(regional_bulk, background)
         density_wall = self.transfer.transfer_regional_amplitude(
@@ -436,6 +444,7 @@ class EffectiveSectorContinuumBridge:
             framework_status=FRAMEWORK_STATUS_1E_G,
             scientific_status=SCIENTIFIC_STATUS_1E_G,
             implementation_status=IMPLEMENTATION_STATUS_1E_G,
+            physical_volume_semantics=PHYSICAL_VOLUME_SEMANTICS,
             continuum_geometry={
                 "topology": self.operator.carrier.topology,
                 "physical_status": self.operator.carrier.physical_status,

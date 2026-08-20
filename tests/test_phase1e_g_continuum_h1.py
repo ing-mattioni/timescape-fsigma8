@@ -20,14 +20,19 @@ import timescape_fsigma8.transfer as transfer
 from timescape_fsigma8.transfer import (
     CARRIER_PHYSICAL_STATUS,
     COMMON_REFERENCE_NORMAL_WALL_TO_VOID_1E_G,
+    CONVERGED_EQUAL_GEOMETRY_MASK_PLACEMENT_DIAGNOSTIC,
     DERIVED_FROM_NORMALIZED_METRIC,
     EXTERNALLY_SUPPLIED_REFERENCE_VOLUME,
     FIXED_REFERENCE_BRANCH,
     INTERFACE_PHYSICAL_STATUS,
     MORPHOLOGY_NORM_TARGET_METRIC_L2,
+    PHYSICAL_NORMALIZATION_COVARIANCE,
+    PHYSICAL_VOLUME_SEMANTICS,
+    REDUCED_DIMENSIONAL_MEASURE_ONLY,
     ContinuumCarrierSpec,
     ContinuumContractError,
     ContinuumDegeneracyError,
+    ContinuumDimensionalContractError,
     ContinuumEllipticClosureConfig,
     ContinuumH1Operator,
     ContinuumPhase1EBackendAdapter,
@@ -44,7 +49,6 @@ from timescape_fsigma8.transfer import (
     RegionalMetricNormalization,
     ScalarJet,
     VectorJet,
-    compare_morphology_results,
     conformal_regional_geometry,
     flat_regional_geometry,
     island_morphology,
@@ -268,7 +272,10 @@ def make_result(
     a_v: float = 1.0,
     equal_probe: np.ndarray | None = None,
 ):
-    selected = bridge or make_bridge()
+    # Full continuum-to-Phase-1E-F evaluation has physical three-volume
+    # semantics and therefore uses an explicit d=3 fixture. Reduced-dimensional
+    # operator fixtures use ContinuumTransfer directly below.
+    selected = bridge or make_bridge(shape=(4, 3, 3))
     return selected.evaluate(
         regional_bulk=regional_bulk or RegionalBulkState(0.0, 1.0, 0.0, 2.0),
         background=background or make_background(),
@@ -450,9 +457,8 @@ def test_v12_constrained_provenance_roundtrip_recovers_projected_load() -> None:
 def test_v13_equal_geometry_transfer_identity_exercises_full_backend() -> None:
     bridge = make_bridge(shape=(16,))
     source = np.sin(2.0 * np.pi * np.arange(16) / 16.0)
-    result = make_result(bridge=bridge, equal_probe=source)
-    assert result.equal_geometry_identity_residual is not None
-    assert result.equal_geometry_identity_residual <= 2e-10
+    residual = bridge.equal_geometry_identity_residual(source)
+    assert residual <= 2e-10
 
 
 def test_v14_full_equal_region_constitutive_point_still_fails_closed() -> None:
@@ -492,7 +498,7 @@ def test_v15_v16_v17_regional_injection_linearity_and_superposition() -> None:
 
 
 def test_v18_curvature_bridge_uses_only_derived_regional_curvature() -> None:
-    bridge = make_bridge()
+    bridge = make_bridge(shape=(4, 3, 3))
     background = make_background(
         Theta_w=scalar(0.3), H_w=scalar(0.1),
         Theta_v=scalar(0.6), H_v=scalar(0.2),
@@ -509,7 +515,7 @@ def test_v18_curvature_bridge_uses_only_derived_regional_curvature() -> None:
 
 
 def test_v19_e_delta_theta_is_derived_from_transferred_expansions() -> None:
-    fields_value = make_bridge().derive_fields(
+    fields_value = make_bridge(shape=(4, 3, 3)).derive_fields(
         regional_bulk=RegionalBulkState(0.0, 1.0, 0.0, 2.0),
         background=make_background(),
     )
@@ -522,7 +528,7 @@ def test_v19_e_delta_theta_is_derived_from_transferred_expansions() -> None:
 
 def test_v20_e_delta_xi0_uses_homogeneous_clock_factors() -> None:
     background = make_background(alpha_w=scalar(0.8), alpha_v=scalar(1.2))
-    fields_value = make_bridge().derive_fields(
+    fields_value = make_bridge(shape=(4, 3, 3)).derive_fields(
         regional_bulk=RegionalBulkState(0.0, 1.0, 0.0, 2.0),
         background=background,
     )
@@ -534,7 +540,7 @@ def test_v20_e_delta_xi0_uses_homogeneous_clock_factors() -> None:
 
 
 def test_v21_j_f_zero_is_branch_derived_and_unsupported_branch_fails() -> None:
-    fields_value = make_bridge().derive_fields(
+    fields_value = make_bridge(shape=(4, 3, 3)).derive_fields(
         regional_bulk=RegionalBulkState(0.0, 1.0, 0.0, 2.0),
         background=make_background(),
     )
@@ -672,7 +678,6 @@ def test_v28_heterogeneous_geometry_mixes_target_fourier_modes() -> None:
 
 def test_v29_two_explicit_morphologies_have_resolved_sensitivity() -> None:
     shape = (10, 10)
-    nonzero_bulk = RegionalBulkState(1.0, 1.0, -0.5, 2.0)
     layer = layered_morphology(
         morphology_id="layer-20-percent-void",
         grid_shape=shape,
@@ -689,20 +694,50 @@ def test_v29_two_explicit_morphologies_have_resolved_sensitivity() -> None:
         wall_pullback_id="Phi_w_island",
         void_pullback_id="Phi_v_island",
     )
-    first = make_result(
-        bridge=make_bridge(shape=shape, morphology=layer),
-        background=make_background(f_v=0.2),
-        regional_bulk=nonzero_bulk,
+    operators = (
+        make_operator(shape=shape, morphology=layer),
+        make_operator(shape=shape, morphology=island),
     )
-    second = make_result(
-        bridge=make_bridge(shape=shape, morphology=island),
-        background=make_background(f_v=0.2),
-        regional_bulk=nonzero_bulk,
+
+    def fields(operator: ContinuumH1Operator) -> tuple[np.ndarray, ...]:
+        continuum = ContinuumTransfer(operator)
+        wall_density = continuum.transfer_regional_amplitude(
+            scalar(1.0), region="wall", provenance="common-latent-density"
+        ).transferred_field.value
+        void_density = continuum.transfer_regional_amplitude(
+            scalar(-0.5), region="void", provenance="common-latent-density"
+        ).transferred_field.value
+        wall_expansion = continuum.transfer_regional_amplitude(
+            scalar(1.0), region="wall", provenance="common-latent-expansion"
+        ).transferred_field.value
+        void_expansion = continuum.transfer_regional_amplitude(
+            scalar(2.0), region="void", provenance="common-latent-expansion"
+        ).transferred_field.value
+        return wall_density, void_density, void_expansion - wall_expansion
+
+    first_fields, second_fields = (fields(operator) for operator in operators)
+    names = (
+        "transferred_wall_density",
+        "transferred_void_density",
+        "E_DeltaTheta_Gamma",
     )
-    diagnostics = compare_morphology_results(first, second)
+    diagnostics = {
+        name: target_metric_weighted_l2_difference(
+            first,
+            second,
+            target_measure_weights=operators[0].target_measure_weights,
+            reference_scale=continuum_configuration().morphology_sensitivity_reference_scale,
+            normalization_floor=continuum_configuration().morphology_sensitivity_floor,
+        )
+        for name, first, second in zip(
+            names, first_fields, second_fields, strict=True
+        )
+    }
     assert diagnostics["transferred_wall_density"] > 1e-3
     assert diagnostics["E_DeltaTheta_Gamma"] > 1e-3
-    assert diagnostics["Delta_d"] > 1e-3
+    assert operators[0].carrier.dimension == 2
+    with pytest.raises(ContinuumDimensionalContractError, match="dimension 2"):
+        operators[0].geometric_void_fraction(a_w=1.0, a_v=1.0)
 
 
 def _convergence_errors(resolution: int) -> tuple[float, float]:
@@ -977,13 +1012,13 @@ def test_wrong_normal_convention_fails_closed() -> None:
 
 def test_spatial_clock_or_xi_identity_cannot_be_silently_changed() -> None:
     with pytest.raises(ContinuumContractError, match="Xi_wall"):
-        make_bridge().derive_fields(
+        make_bridge(shape=(4, 3, 3)).derive_fields(
             regional_bulk=RegionalBulkState(0.0, 1.0, 0.0, 2.0),
             background=make_background(Xi_w=scalar(0.1)),
         )
 
 
-def test_volume_fraction_uses_metric_measure_not_cell_count() -> None:
+def test_d5_one_dimensional_weighted_operator_survives_without_volume_promotion() -> None:
     factor = np.ones(8)
     factor[4:] = 2.0
     void = conformal_regional_geometry(
@@ -1000,7 +1035,18 @@ def test_volume_fraction_uses_metric_measure_not_cell_count() -> None:
     )
     operator = make_operator(void_geometry=void)
     assert np.mean(operator.morphology.void_domain) == pytest.approx(0.5)
-    assert operator.geometric_void_fraction(a_w=1.0, a_v=1.0) == pytest.approx(2.0 / 3.0)
+    wall_measure, void_measure = operator.metric_derived_regional_reference_measures()
+    assert wall_measure == pytest.approx(0.5)
+    assert void_measure == pytest.approx(1.0)
+    assert operator.metric_normalization_diagnostics["void"].measure_semantics == (
+        REDUCED_DIMENSIONAL_MEASURE_ONLY
+    )
+    response = ContinuumTransfer(operator).transfer_source(
+        np.arange(8.0), region="void", provenance="one-dimensional-operator-only"
+    )
+    assert np.max(np.abs(response.transferred_field)) > 0.0
+    with pytest.raises(ContinuumDimensionalContractError, match="dimension 1"):
+        operator.geometric_void_fraction(a_w=1.0, a_v=1.0)
 
 
 def test_phase1e_g_result_status_and_no_fifth_state() -> None:
@@ -1051,7 +1097,7 @@ def test_n3_inconsistent_declared_reference_volume_fails_closed() -> None:
             reference_comoving_volume=0.4,
         ),
     )
-    with pytest.raises(ContinuumContractError, match="reference-volume"):
+    with pytest.raises(ContinuumContractError, match="reference-measure"):
         make_operator(void_geometry=stale)
 
 
@@ -1089,7 +1135,7 @@ def test_n4_constant_metric_rescaling_with_stale_contract_is_rejected() -> None:
         normalization_id="stale-original-normalization",
         scale_factor_reference_value=1.0,
     )
-    with pytest.raises(ContinuumContractError, match="reference-volume"):
+    with pytest.raises(ContinuumContractError, match="reference-measure"):
         make_operator(shape=shape, void_geometry=stale)
 
 
@@ -1111,6 +1157,10 @@ def test_n5_consistent_metric_scale_factor_volume_transform_is_explicit() -> Non
     assert alternative.geometric_void_fraction(a_w=1.0, a_v=0.5) == pytest.approx(
         base.geometric_void_fraction(a_w=1.0, a_v=1.0)
     )
+    assert PHYSICAL_NORMALIZATION_COVARIANCE == "PHYSICAL_NORMALIZATION_COVARIANCE"
+    base_physical = base.physical_regional_volumes(a_w=1.0, a_v=1.0)
+    transformed_physical = alternative.physical_regional_volumes(a_w=1.0, a_v=0.5)
+    assert transformed_physical == pytest.approx(base_physical)
 
 
 def test_n6_volume_fraction_fixture_is_labelled_manufactured_consistency() -> None:
@@ -1132,7 +1182,7 @@ def _continuum_dynamic_fixture(
     """Independently specified continuum-derived nontrivial GM trajectory."""
     morphology = layered_morphology(
         morphology_id="continuum-dynamic-one-wall-cell",
-        grid_shape=(6,),
+        grid_shape=(6, 3, 3),
         axis=0,
         wall_cell_count=1,
         wall_pullback_id="Phi_w_dynamic",
@@ -1146,7 +1196,7 @@ def _continuum_dynamic_fixture(
         )
     )
     bridge = make_bridge(
-        shape=(6,),
+        shape=(6, 3, 3),
         morphology=morphology,
         configuration=continuum_configuration(
             downstream_configuration=downstream
@@ -1196,25 +1246,33 @@ def test_n7_n8_continuum_derived_r_z_and_r_eff_cancel_nontrivially() -> None:
     assert np.max(np.abs(downstream.Delta_eff.value)) > 1e-3
     assert np.max(np.abs(downstream.Delta_eff.first)) > 1e-3
 
-    r_z_terms = (
+    r_z_nonpressure_terms = (
         -downstream.Delta_d.second,
         (2.0 / 3.0) * background.Theta.value * downstream.Z,
         4.0 * np.pi * background.G * downstream.rho_d * downstream.Delta_d.value,
         4.0 * np.pi * background.G * downstream.rho_eff * downstream.Delta_eff.value,
     )
-    assert all(np.max(np.abs(term)) > 1e-3 for term in r_z_terms)
+    assert all(np.max(np.abs(term)) > 1e-3 for term in r_z_nonpressure_terms)
+    r_z_pressure_term = (
+        12.0 * np.pi * background.G * downstream.rho_eff * downstream.P_tilde_eff
+    )
+    assert np.max(np.abs(r_z_pressure_term)) < 1e-12
+    r_z_terms = r_z_nonpressure_terms + (r_z_pressure_term,)
     independent_r_z = sum(r_z_terms, np.zeros_like(downstream.R_Z))
     np.testing.assert_allclose(independent_r_z, 0.0, atol=1e-12)
     np.testing.assert_allclose(downstream.R_Z, independent_r_z, atol=1e-13)
 
-    r_eff_terms = (
+    r_eff_nonpressure_terms = (
         downstream.Delta_eff.first,
         -downstream.w_eff
         * background.Theta.value
         * downstream.Delta_eff.value,
         (1.0 + downstream.w_eff) * downstream.Z,
     )
-    assert all(np.max(np.abs(term)) > 1e-3 for term in r_eff_terms)
+    assert all(np.max(np.abs(term)) > 1e-3 for term in r_eff_nonpressure_terms)
+    r_eff_pressure_term = background.Theta.value * downstream.P_tilde_eff
+    assert np.max(np.abs(r_eff_pressure_term)) < 1e-12
+    r_eff_terms = r_eff_nonpressure_terms + (r_eff_pressure_term,)
     independent_r_eff = sum(r_eff_terms, np.zeros_like(downstream.R_eff))
     np.testing.assert_allclose(independent_r_eff, 0.0, atol=1e-12)
     np.testing.assert_allclose(downstream.R_eff, independent_r_eff, atol=1e-13)
@@ -1227,7 +1285,7 @@ def test_n9_continuum_derived_adversarial_r_z_increment_is_predictable() -> None
         alpha_w_first=shift,
         relaxed_residuals=True,
     )
-    phi = np.array([5.0, -1.0, -1.0, -1.0, -1.0, -1.0]) / 6.0
+    phi = baseline.bridge_fields.density_wall.transferred_field.value
     expected_increment = 0.24 * shift * phi
     np.testing.assert_allclose(
         corrupted.downstream_phase1e_f.R_Z
@@ -1246,7 +1304,7 @@ def test_n10_continuum_derived_adversarial_r_eff_increment_is_predictable() -> N
         q_bar_first_shift=shift,
         relaxed_residuals=True,
     )
-    phi = np.array([5.0, -1.0, -1.0, -1.0, -1.0, -1.0]) / 6.0
+    phi = baseline.bridge_fields.density_wall.transferred_field.value
     expected_increment = -0.0072 * shift * phi
     np.testing.assert_allclose(
         corrupted.downstream_phase1e_f.R_eff
@@ -1304,22 +1362,54 @@ def test_n12_morphology_metric_refinement_converges_to_resolved_diagnostic() -> 
             wall_pullback_id="Phi_w_unshifted_half",
             void_pullback_id="Phi_v_unshifted_half",
         )
-        bulk = RegionalBulkState(1.0, 1.0, -0.5, 2.0)
-        first = make_result(
-            bridge=make_bridge(shape=(resolution,), morphology=first_morphology),
-            regional_bulk=bulk,
+        first_operator = make_operator(
+            shape=(resolution,), morphology=first_morphology
         )
-        second = make_result(
-            bridge=make_bridge(
-                shape=(resolution,), morphology=_shifted_half_morphology(resolution)
-            ),
-            regional_bulk=bulk,
+        second_operator = make_operator(
+            shape=(resolution,), morphology=_shifted_half_morphology(resolution)
         )
-        diagnostics.append(compare_morphology_results(first, second))
+        first_transfer = ContinuumTransfer(first_operator)
+        second_transfer = ContinuumTransfer(second_operator)
+        first_wall = first_transfer.transfer_regional_amplitude(
+            scalar(1.0), region="wall", provenance="common-latent-wall"
+        ).transferred_field.value
+        second_wall = second_transfer.transfer_regional_amplitude(
+            scalar(1.0), region="wall", provenance="common-latent-wall"
+        ).transferred_field.value
+        first_void = first_transfer.transfer_regional_amplitude(
+            scalar(-0.5), region="void", provenance="common-latent-void"
+        ).transferred_field.value
+        second_void = second_transfer.transfer_regional_amplitude(
+            scalar(-0.5), region="void", provenance="common-latent-void"
+        ).transferred_field.value
+        config = continuum_configuration()
+        diagnostics.append(
+            {
+                "transferred_wall_density": target_metric_weighted_l2_difference(
+                    first_wall,
+                    second_wall,
+                    target_measure_weights=first_operator.target_measure_weights,
+                    reference_scale=config.morphology_sensitivity_reference_scale,
+                    normalization_floor=config.morphology_sensitivity_floor,
+                ),
+                "transferred_void_density": target_metric_weighted_l2_difference(
+                    first_void,
+                    second_void,
+                    target_measure_weights=first_operator.target_measure_weights,
+                    reference_scale=config.morphology_sensitivity_reference_scale,
+                    normalization_floor=config.morphology_sensitivity_floor,
+                ),
+            }
+        )
     for key in ("transferred_wall_density", "transferred_void_density"):
         values = [item[key] for item in diagnostics]
         assert values[-1] > 1e-3
-        assert abs(values[-1] - values[-2]) <= continuum_configuration().morphology_convergence_tolerance
+        assert abs(values[-1] - values[-2]) <= (
+            continuum_configuration().morphology_convergence_tolerance
+        )
+    assert CONVERGED_EQUAL_GEOMETRY_MASK_PLACEMENT_DIAGNOSTIC == (
+        "CONVERGED_EQUAL_GEOMETRY_MASK_PLACEMENT_DIAGNOSTIC"
+    )
 
 
 @pytest.mark.parametrize("region", ["wall", "void"])
@@ -1357,3 +1447,113 @@ def test_n15_ordinary_stiffness_and_generalized_mass_spectrum_are_distinct() -> 
         generalized[0] - 4.0 * np.pi**2
     )
     assert generalized[-1] == pytest.approx(4.0 * np.pi**2, rel=4e-3)
+
+
+def test_d1_three_dimensional_physical_volume_path_is_accepted() -> None:
+    result = make_result()
+    operator = make_operator(shape=(4, 3, 3))
+    assert result.continuum_geometry["dimension"] == 3
+    assert result.physical_volume_semantics == PHYSICAL_VOLUME_SEMANTICS
+    assert operator.physical_regional_volumes(a_w=1.0, a_v=1.0) == pytest.approx(
+        (0.5, 0.5)
+    )
+    assert operator.geometric_void_fraction(a_w=1.0, a_v=1.0) == pytest.approx(0.5)
+
+
+@pytest.mark.parametrize(
+    ("shape", "dimension"),
+    [((8,), 1), ((6, 6), 2)],
+)
+def test_d2_d3_d7_reduced_dimension_rejects_every_physical_volume_path(
+    shape: tuple[int, ...], dimension: int
+) -> None:
+    operator = make_operator(shape=shape)
+    assert operator.carrier.dimension == dimension
+    assert all(
+        measure > 0.0
+        for measure in operator.metric_derived_regional_reference_measures()
+    )
+    for operation in (
+        operator.metric_derived_regional_comoving_volumes,
+        operator.regional_comoving_volumes,
+        lambda: operator.physical_regional_volumes(a_w=1.0, a_v=1.0),
+        lambda: operator.geometric_void_fraction(a_w=1.0, a_v=1.0),
+    ):
+        with pytest.raises(
+            ContinuumDimensionalContractError,
+            match=rf"spatial_dimension == 3; dimension {dimension}",
+        ):
+            operation()
+    bridge = EffectiveSectorContinuumBridge(
+        operator=operator,
+        branch=operator.branch,
+        configuration=operator.configuration,
+    )
+    with pytest.raises(ContinuumDimensionalContractError, match=f"dimension {dimension}"):
+        bridge.derive_fields(
+            regional_bulk=RegionalBulkState(0.0, 1.0, 0.0, 2.0),
+            background=make_background(),
+        )
+
+
+@pytest.mark.parametrize("shape", [(8,), (6, 6)])
+def test_d4_external_reference_volume_mode_cannot_bypass_dimension_guard(
+    shape: tuple[int, ...],
+) -> None:
+    base = make_operator(shape=shape)
+
+    def externalized(geometry: RegionalGeometrySpec) -> RegionalGeometrySpec:
+        return replace(
+            geometry,
+            normalization=replace(
+                geometry.normalization,
+                normalization_id=f"{geometry.region_id}-external-measure",
+                volume_provenance=EXTERNALLY_SUPPLIED_REFERENCE_VOLUME,
+            ),
+        )
+
+    operator = make_operator(
+        shape=shape,
+        morphology=base.morphology,
+        wall_geometry=externalized(base.wall_geometry),
+        void_geometry=externalized(base.void_geometry),
+        target_geometry=externalized(base.carrier.target_geometry),
+    )
+    assert operator.metric_normalization_diagnostics["wall"].volume_provenance == (
+        EXTERNALLY_SUPPLIED_REFERENCE_VOLUME
+    )
+    assert operator.metric_normalization_diagnostics["wall"].measure_semantics == (
+        REDUCED_DIMENSIONAL_MEASURE_ONLY
+    )
+    with pytest.raises(ContinuumDimensionalContractError, match="dimension"):
+        operator.physical_regional_volumes(a_w=1.0, a_v=1.0)
+
+
+def test_d5_two_dimensional_operator_fixture_survives_without_volume_promotion() -> None:
+    operator = make_operator(shape=(6, 6))
+    coordinates = np.indices((6, 6), dtype=float)
+    source = np.sin(2.0 * np.pi * coordinates[0] / 6.0).reshape(-1)
+    response = ContinuumTransfer(operator).transfer_source(
+        source, region="global", provenance="two-dimensional-operator-only"
+    )
+    assert np.max(np.abs(response.transferred_field)) > 0.0
+    assert operator.global_kernel_dimension == 1
+    with pytest.raises(ContinuumDimensionalContractError, match="dimension 2"):
+        operator.geometric_void_fraction(a_w=1.0, a_v=1.0)
+
+
+@pytest.mark.parametrize(
+    ("dimension", "expected_factor"),
+    [(1, 0.25), (2, 0.5), (3, 1.0)],
+)
+def test_dimensional_covariance_factor_is_c_to_d_minus_three(
+    dimension: int, expected_factor: float
+) -> None:
+    scale = 2.0
+    literal_measure_scaling = scale**dimension
+    scale_factor_cubic_scaling = (1.0 / scale) ** 3
+    assert literal_measure_scaling * scale_factor_cubic_scaling == pytest.approx(
+        scale ** (dimension - 3)
+    )
+    assert scale ** (dimension - 3) == pytest.approx(expected_factor)
+    assert (dimension == 3) is (expected_factor == 1.0)

@@ -43,6 +43,10 @@
     "reference_topology": "PERIODIC_REFERENCE_TORUS",
     "reference_scientific_topology": "Sigma_C=T3",
     "supported_reference_dimensions": [1, 2, 3],
+    "reduced_dimension_status": "MATHEMATICAL_OPERATOR_VALIDATION_ONLY",
+    "physical_volume_dimension_required": 3,
+    "physical_volume_semantics": "PHYSICAL_TIMESCAPE_THREE_VOLUME_ONLY",
+    "reduced_dimensional_effective_3d_lift": "NOT_IMPLEMENTED",
     "periodicity_required": true,
     "target_scalarization": "L_D=Delta_gamma_D"
   },
@@ -104,6 +108,8 @@
       "consistency_tolerance"
     ],
     "runtime_metric_rescaling": false,
+    "legacy_reference_comoving_volume_field_semantics": "LITERAL_D_DIMENSIONAL_REFERENCE_MEASURE_UNLESS_D_EQUALS_3",
+    "physical_volume_semantics_require_d_equals_3": true,
     "stale_constant_rescaling_status": "FAIL_CLOSED",
     "scientific_status": "EXPLICIT_PHASE_1E_G_MODEL_EXTENSION"
   },
@@ -112,21 +118,29 @@
       "DERIVED_FROM_NORMALIZED_METRIC",
       "EXTERNALLY_SUPPLIED_REFERENCE_VOLUME"
     ],
-    "metric_integral": "V_r_i_metric=integral_Omega_r J_r dmu_0",
+    "literal_metric_reference_measure": "mu_r_i_metric=integral_Omega_r J_r dmu_0",
+    "physical_V_r_i_name_authorized_only_if_dimension": 3,
     "declared_comparison_required": true,
-    "agreement_classification": "CONSTRUCTION_OR_EXTERNAL_REFERENCE_CONSISTENCY_CHECK_NOT_TIMESCAPE_PREDICTION"
+    "agreement_classification": "CONSTRUCTION_OR_EXTERNAL_REFERENCE_CONSISTENCY_CHECK_NOT_TIMESCAPE_PREDICTION",
+    "external_mode_bypasses_dimension_guard": false,
+    "reduced_dimension_semantics": "REDUCED_DIMENSIONAL_METRIC_MEASURE_ONLY",
+    "effective_3d_lift_provenance": "NOT_IMPLEMENTED"
   },
   "scale_factor_normalization_provenance": {
     "relation": "h_r=a_r^2 gamma_r",
     "reference_epoch_and_value_required": true,
     "constant_rescaling_rule": "gamma_r_prime=c_r^2 gamma_r; a_r_prime=a_r/c_r; V_r_i_prime=c_r^3 V_r_i",
+    "literal_measure_rule": "mu_d_prime=c_r^d mu_d; mu_d_prime*(a_r_prime)^3=c_r^(d-3)*mu_d*a_r^3",
+    "dimensional_factors_for_c_equals_2": {"d1": 0.25, "d2": 0.5, "d3": 1.0},
+    "physical_normalization_covariance_classification": "PHYSICAL_NORMALIZATION_COVARIANCE",
     "silent_equivalence": false,
     "distinct_normalization_id_required": true
   },
   "reference_measure_contract": {
     "metric_volume_ratio": "J_r=dmu_gamma_hat_r/dmu_0",
     "weak_source_load": "J_r s_r dmu_0",
-    "source_measure_factor_mandatory": true
+    "source_measure_factor_mandatory": true,
+    "literal_measure_is_physical_three_volume_only_if_dimension": 3
   },
   "function_spaces": {
     "broken": "H1(Omega_w) direct_sum H1(Omega_v)",
@@ -206,6 +220,7 @@
   "common_time_contract": {
     "branch": "HOMOGENEOUS_BACKGROUND_CLOCK_MAP",
     "volume": "V_r=V_r_i a_r^3",
+    "physical_volume_dimension_required": 3,
     "derived_Xi": "Xi_r=alpha_r Theta_r",
     "E_DeltaXi_0_Gamma": "alpha_v T_v[Z_v]-alpha_w T_w[Z_w]",
     "universal_timescape_identity_claim": false
@@ -239,6 +254,11 @@
     "diagnostic": "K_f=f_v_geom-f_v_TS",
     "base_residual": 0.0,
     "fail_closed": true,
+    "physical_volume_dimension_required": 3,
+    "dimension_1_status": "FAIL_CLOSED_PHYSICAL_PROMOTION",
+    "dimension_2_status": "FAIL_CLOSED_PHYSICAL_PROMOTION",
+    "dimension_3_status": "PHYSICAL_VOLUME_PATH_ELIGIBLE_UNDER_NORMALIZATION_CONTRACT",
+    "external_reference_volume_reduced_dimension_status": "NO_BYPASS",
     "coordinate_cell_fraction_is_physical_fraction": false,
     "internal_normalization_consistency": "metric_integral_vs_declared_V_r_i",
     "background_consistency": "f_v_geom_vs_supplied_f_v_background",
@@ -264,17 +284,17 @@
     "layer_vs_island": {
       "transferred_wall_density": 0.6324555320336751,
       "transferred_void_density": 0.31622776601683755,
-      "E_DeltaTheta_Gamma": 1.897366596101025,
-      "C_R_Gamma": 28.61161420549274,
-      "F_v": 14.30580710274637,
-      "Delta_d": 0.5692099788303076,
-      "Delta_eff": 0.0
+      "E_DeltaTheta_Gamma": 1.897366596101025
     },
+    "layer_vs_island_dimension": 2,
+    "layer_vs_island_physical_volume_semantics": false,
+    "layer_vs_island_downstream_phase1e_f_evaluation": false,
     "morphology_convergence_results": {
       "resolutions": [16, 32, 64],
       "transferred_wall_density": [0.7071067811865477, 0.707106781186547, 0.707106781186546],
       "transferred_void_density": [0.35355339059327384, 0.3535533905932735, 0.353553390593273],
-      "status": "MORPHOLOGY_DIAGNOSTIC_CONVERGED",
+      "status": "CONVERGED_EQUAL_GEOMETRY_MASK_PLACEMENT_DIAGNOSTIC",
+      "operator_matrices_equal": true,
       "physical_morphology_convergence_claim": false
     }
   },
@@ -306,8 +326,17 @@
     "rho_d": 1.0,
     "rho_eff": 2.0,
     "w_eff": 0.5,
-    "R_Z_terms": [-0.04, -0.0448, 0.2, -0.1152],
-    "R_eff_terms": [0.095808, 0.024192, -0.12],
+    "R_Z_nonpressure_terms": [-0.04, -0.0448, 0.2, -0.1152],
+    "R_Z_pressure_term": {
+      "analytic_value": 0.0,
+      "reproduced_numerical_maximum": 2.7755575615628914e-17
+    },
+    "R_eff_nonpressure_terms": [0.095808, 0.024192, -0.12],
+    "R_eff_pressure_term": {
+      "analytic_value": 0.0,
+      "reproduced_numerical_maximum": 3.8857805861880475e-18
+    },
+    "complete_pressure_terms_included": true,
     "R_Z_adversarial_increment": "0.24*delta(alpha_w.first)*phi",
     "R_eff_adversarial_increment": "-0.0072*delta(Q_bar.first)*phi",
     "downstream_tolerance": 1e-10,
@@ -322,7 +351,7 @@
     "nonpositive metric volume density",
     "non-SPD metric or coefficient",
     "missing metric-normalization provenance",
-    "metric/reference-volume normalization inconsistency",
+    "metric/reference-measure normalization inconsistency",
     "constant metric rescaling with stale normalization contract",
     "ellipticity below configured minimum",
     "unexpected extra kernel modes",
@@ -330,6 +359,8 @@
     "global normalization failure",
     "transmission tolerance failure",
     "volume-fraction inconsistency",
+    "physical regional-volume or f_v request with spatial_dimension not equal to 3",
+    "reduced-dimensional external reference volume used as a physical-volume bypass",
     "moving interface or partition",
     "time-dependent pullback/regional comoving metric/target metric or scalarization",
     "spatially varying clock lapse",
@@ -360,12 +391,12 @@
     {"id": "V21", "name": "branch-derived J_f", "status": "PASS"},
     {"id": "V22", "name": "fixed-branch operator derivatives", "status": "PASS"},
     {"id": "V23", "name": "analytic transfer derivative commutation", "status": "PASS"},
-    {"id": "V24", "name": "volume fraction consistency", "status": "PASS"},
+    {"id": "V24", "name": "three-dimensional manufactured volume fraction consistency", "status": "PASS"},
     {"id": "V25", "name": "equal-geometry mask and source-injection relabel covariance of transfer", "status": "PASS"},
     {"id": "V26", "name": "endpoint ontology reduction", "status": "PASS"},
     {"id": "V27", "name": "generic-k firewall", "status": "PASS"},
     {"id": "V28", "name": "heterogeneous mode mixing", "status": "PASS"},
-    {"id": "V29", "name": "target-metric L2 morphology sensitivity and refinement", "status": "PASS"},
+    {"id": "V29", "name": "reduced-dimensional operator-level target-metric L2 morphology sensitivity and refinement", "status": "PASS"},
     {"id": "V30", "name": "structured-discretization convergence", "status": "PASS"},
     {"id": "V31", "name": "discrete/Phase 1E-F contract consistency", "status": "PASS"},
     {"id": "V32", "name": "nontrivial continuum-derived Phase 1E-F dynamic compatibility", "status": "PASS"},
@@ -375,7 +406,7 @@
   "v2_correction_tests": [
     {"id": "N1", "name": "time-dependent target rejected", "status": "PASS"},
     {"id": "N2", "name": "normalization provenance required", "status": "PASS"},
-    {"id": "N3", "name": "declared metric volume inconsistency rejected", "status": "PASS"},
+    {"id": "N3", "name": "declared metric reference-measure inconsistency rejected", "status": "PASS"},
     {"id": "N4", "name": "stale constant metric scaling rejected", "status": "PASS"},
     {"id": "N5", "name": "consistent scale-metric-volume transformation explicit", "status": "PASS"},
     {"id": "N6", "name": "manufactured volume consistency labelled", "status": "PASS"},
@@ -389,6 +420,15 @@
     {"id": "N14", "name": "raw void provenance and global projected support", "status": "PASS"},
     {"id": "N15", "name": "ordinary/generalized spectrum distinction", "status": "PASS"},
     {"id": "N16", "name": "narrowed V25 relabel claim", "status": "PASS"}
+  ],
+  "v3_dimensional_contract_tests": [
+    {"id": "D1", "name": "three-dimensional physical volume accepted", "status": "PASS"},
+    {"id": "D2", "name": "one-dimensional physical promotion rejected", "status": "PASS"},
+    {"id": "D3", "name": "two-dimensional physical promotion rejected", "status": "PASS"},
+    {"id": "D4", "name": "external reference volume does not bypass dimension guard", "status": "PASS"},
+    {"id": "D5", "name": "one- and two-dimensional mathematical operator fixtures survive", "status": "PASS"},
+    {"id": "D6", "name": "three-dimensional N5 physical normalization covariance preserved", "status": "PASS"},
+    {"id": "D7", "name": "all physical volume and downstream bridge paths dimension guarded", "status": "PASS"}
   ],
   "gates": [
     {"id": "G0", "status": "PASS", "name": "regional geometric provenance"},
@@ -451,6 +491,7 @@
     "continuum proof is conditional on explicit regularity, ellipticity and Poincare assumptions",
     "reference torus and interface have no automatic physical interpretation",
     "morphology sensitivity may be large",
+    "reduced-dimensional effective-3D volume lift provenance is not implemented",
     "no observational bridge is implemented"
   ],
   "modified_files": [
@@ -465,18 +506,18 @@
     "reports/phase1e_g_continuum_h1_realization_adversarial_audit.md"
   ],
   "test_results": {
-    "phase_1e_g_targeted_count": 62,
-    "phase_1e_f_plus_1e_g_count": 104,
-    "complete_count": 483,
+    "phase_1e_g_targeted_count": 71,
+    "phase_1e_f_plus_1e_g_count": 113,
+    "complete_count": 492,
     "release_gate_python_3_14_3": {
-      "targeted": "62 passed in 1.57s",
-      "combined_transfer": "104 passed in 1.74s",
-      "complete": "483 passed in 19.29s"
+      "targeted": "71 passed in 1.37s",
+      "combined_transfer": "113 passed in 1.53s",
+      "complete": "492 passed in 18.93s post-report gate"
     },
     "release_gate_python_3_11_9": {
-      "targeted": "62 passed in 1.68s",
-      "combined_transfer": "104 passed in 1.92s",
-      "complete": "483 passed in 20.92s"
+      "targeted": "71 passed in 1.39s",
+      "combined_transfer": "113 passed in 1.45s",
+      "complete": "492 passed in 20.65s post-report gate"
     },
     "failures": 0,
     "skips": 0,

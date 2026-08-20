@@ -22,6 +22,8 @@ from scipy.sparse import linalg as sparse_linalg
 from timescape_fsigma8.transfer.continuum_geometry import (
     COMMON_REFERENCE_NORMAL_WALL_TO_VOID_1E_G,
     DERIVED_FROM_NORMALIZED_METRIC,
+    PHYSICAL_VOLUME_SEMANTICS,
+    REDUCED_DIMENSIONAL_MEASURE_ONLY,
     ContinuumCarrierSpec,
     ContinuumContractError,
     ContinuumDegeneracyError,
@@ -79,14 +81,17 @@ class SourceProjectionDiagnostics:
 
 @dataclass(frozen=True)
 class MetricNormalizationDiagnostics:
-    """Construction/provenance check for one normalized comoving metric."""
+    """Construction/provenance check for one literal metric reference measure."""
 
     region_id: str
     normalization_id: str
     volume_provenance: str
     consistency_classification: str
-    metric_reference_volume: float
-    declared_reference_volume: float
+    spatial_dimension: int
+    measure_semantics: str
+    physical_three_volume_authorized: bool
+    metric_reference_measure: float
+    declared_reference_measure: float
     relative_residual: float
 
 
@@ -383,13 +388,15 @@ class ContinuumH1Operator:
         domain_mask: NDArray[np.bool_],
         role: str,
     ) -> MetricNormalizationDiagnostics:
-        """Compare the metric-derived and explicitly declared reference volume.
+        """Compare the metric-derived and explicitly declared reference measure.
 
-        This is the human-approved Phase 1E-G v2 construction consistency
+        This is the human-approved Phase 1E-G v2/v3 construction consistency
         equation, not an independent Timescape prediction and not a solver
-        rescaling operation.
+        rescaling operation. For ``d<3`` both operands remain literal
+        reduced-dimensional measures; agreement never grants physical-volume
+        semantics or an effective-three-dimensional lift.
         """
-        metric_volume = float(
+        metric_measure = float(
             np.sum(
                 self._weights
                 * geometry.metric_volume_ratio.reshape(-1)
@@ -397,24 +404,34 @@ class ContinuumH1Operator:
             )
         )
         declared = float(geometry.normalization.reference_comoving_volume)
-        relative = abs(metric_volume - declared) / max(metric_volume, declared)
+        relative = abs(metric_measure - declared) / max(metric_measure, declared)
         if relative > geometry.normalization.consistency_tolerance:
             raise ContinuumContractError(
-                f"{role} normalized metric/reference-volume consistency failed"
+                f"{role} normalized metric/reference-measure consistency failed"
             )
-        classification = (
-            "CONSTRUCTION_CONSISTENCY_CHECK"
-            if geometry.normalization.volume_provenance
-            == DERIVED_FROM_NORMALIZED_METRIC
-            else "EXTERNAL_REFERENCE_VOLUME_CONSISTENCY_CHECK"
-        )
+        if self.carrier.physical_volume_semantics_authorized:
+            classification = (
+                "CONSTRUCTION_CONSISTENCY_CHECK"
+                if geometry.normalization.volume_provenance
+                == DERIVED_FROM_NORMALIZED_METRIC
+                else "EXTERNAL_REFERENCE_VOLUME_CONSISTENCY_CHECK"
+            )
+            semantics = PHYSICAL_VOLUME_SEMANTICS
+        else:
+            classification = "REDUCED_DIMENSIONAL_MEASURE_CONSISTENCY_CHECK"
+            semantics = REDUCED_DIMENSIONAL_MEASURE_ONLY
         return MetricNormalizationDiagnostics(
             region_id=role,
             normalization_id=geometry.normalization.normalization_id,
             volume_provenance=geometry.normalization.volume_provenance,
             consistency_classification=classification,
-            metric_reference_volume=metric_volume,
-            declared_reference_volume=declared,
+            spatial_dimension=self.carrier.dimension,
+            measure_semantics=semantics,
+            physical_three_volume_authorized=(
+                self.carrier.physical_volume_semantics_authorized
+            ),
+            metric_reference_measure=metric_measure,
+            declared_reference_measure=declared,
             relative_residual=relative,
         )
 
@@ -699,20 +716,55 @@ class ContinuumH1Operator:
             raise ContinuumContractError("explicit interface traces must have paired shapes")
         return wall_value - void_value, wall_flux - void_flux
 
-    def metric_derived_regional_comoving_volumes(self) -> tuple[float, float]:
-        """Integrate ``dmu_gamma_r`` over the configured regional domains."""
+    def metric_derived_regional_reference_measures(self) -> tuple[float, float]:
+        """Integrate literal ``dmu_gamma_r`` measures in the carrier dimension."""
         wall_ratio = self.wall_geometry.metric_volume_ratio.reshape(-1)
         void_ratio = self.void_geometry.metric_volume_ratio.reshape(-1)
-        wall_volume = float(np.sum(self._weights * wall_ratio * self._wall_mask))
-        void_volume = float(np.sum(self._weights * void_ratio * self._void_mask))
-        return wall_volume, void_volume
+        wall_measure = float(np.sum(self._weights * wall_ratio * self._wall_mask))
+        void_measure = float(np.sum(self._weights * void_ratio * self._void_mask))
+        return wall_measure, void_measure
+
+    def require_physical_volume_dimension(self, *, context: str) -> None:
+        """Delegate the explicit Phase 1E-G v3 ``d==3`` physical-volume guard."""
+        self.carrier.require_physical_volume_semantics(context=context)
+
+    def metric_derived_regional_comoving_volumes(self) -> tuple[float, float]:
+        """Return metric-derived physical ``V_w,i,V_v,i`` only for ``d==3``."""
+        self.require_physical_volume_dimension(
+            context="metric-derived regional comoving volumes"
+        )
+        return self.metric_derived_regional_reference_measures()
 
     def regional_comoving_volumes(self) -> tuple[float, float]:
-        """Return explicitly declared normalized ``V_w,i`` and ``V_v,i``."""
+        """Return declared physical ``V_w,i,V_v,i`` only for ``d==3``.
+
+        ``EXTERNALLY_SUPPLIED_REFERENCE_VOLUME`` remains normalization
+        provenance for a valid three-dimensional geometry. It is not a
+        reduced-dimensional lift and cannot bypass this guard.
+        """
+        self.require_physical_volume_dimension(
+            context="declared regional comoving volumes"
+        )
         return (
             self.wall_geometry.normalization.reference_comoving_volume,
             self.void_geometry.normalization.reference_comoving_volume,
         )
+
+    def physical_regional_volumes(
+        self, *, a_w: float, a_v: float
+    ) -> tuple[float, float]:
+        """Evaluate physical ``V_r=V_r,i a_r^3`` on the 3-D branch only.
+
+        This is the human-approved Phase 1E-G section 22/v3 closure equation;
+        it has no paper equation number. No length/area promotion is defined.
+        """
+        self.require_physical_volume_dimension(
+            context="physical regional volume assembly V_r=V_r,i*a_r^3"
+        )
+        if not np.isfinite(a_w) or not np.isfinite(a_v) or a_w <= 0.0 or a_v <= 0.0:
+            raise ContinuumContractError("regional scale factors must be positive")
+        wall_initial, void_initial = self.regional_comoving_volumes()
+        return wall_initial * a_w**3, void_initial * a_v**3
 
     def geometric_void_fraction(self, *, a_w: float, a_v: float) -> float:
         """Evaluate ``V_v/(V_v+V_w)`` from the declared normalized volumes.
@@ -720,11 +772,7 @@ class ContinuumH1Operator:
         This is the human-approved Phase 1E-G section 22 closure equation,
         not an independently predicted Timescape volume fraction.
         """
-        if not np.isfinite(a_w) or not np.isfinite(a_v) or a_w <= 0.0 or a_v <= 0.0:
-            raise ContinuumContractError("regional scale factors must be positive")
-        wall_initial, void_initial = self.regional_comoving_volumes()
-        wall_volume = wall_initial * a_w**3
-        void_volume = void_initial * a_v**3
+        wall_volume, void_volume = self.physical_regional_volumes(a_w=a_w, a_v=a_v)
         return float(void_volume / (void_volume + wall_volume))
 
 

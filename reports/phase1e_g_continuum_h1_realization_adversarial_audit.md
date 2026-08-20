@@ -31,9 +31,21 @@ NOT_GRANTED
 - **PASS:** regional and target Laplacians are separately metric-derived and
   separately named. No arbitrary unlabeled Laplacian was introduced.
 - **PASS:** wall, void and target metrics require explicit normalization
-  provenance tying `gamma_r`, a reference `a_r`, and declared `V_r,i`.
-  Metric/reference-volume disagreement and stale constant rescaling reject;
+  provenance tying `gamma_r`, a reference `a_r`, and a declared reference
+  measure. That measure is named physical `V_r,i` only in `d=3`.
+  Metric/reference-measure disagreement and stale constant rescaling reject;
   the runtime performs no hidden metric rescaling.
+- **PASS:** physical regional comoving volumes, `V_r=V_r,i a_r^3`, physical
+  `f_v`, and the downstream continuum-to-Phase-1E-F bridge now require
+  `spatial_dimension == 3`. One- and two-dimensional literal metric measures
+  remain mathematical only and raise `ContinuumDimensionalContractError` on
+  promotion.
+- **PASS:** `EXTERNALLY_SUPPLIED_REFERENCE_VOLUME` cannot bypass the
+  dimensional guard. No effective-3-D lift or transverse-area provenance is
+  implemented.
+- **PASS:** the scaling audit gives
+  `mu_d'(a')^3=c^(d-3)mu_d a^3`: invariant for `d=3`, residual `c^-1` for
+  `d=2`, and residual `c^-2` for `d=1`. The latter two reject.
 - **PASS:** a time-dependent target metric fails before transfer. The fixed
   branch now establishes both `A_Gamma_dot=A_Gamma_ddot=0` and
   `L_D_dot=L_D_ddot=0`; derivative commutation is not used otherwise.
@@ -94,7 +106,10 @@ NOT_GRANTED
   by projection, Green response, target scalarization and constitutive
   amplification--not heterogeneous-operator sensitivity.
 - **PASS:** shifted-layer 16/32/64 refinement resolves the reported transfer
-  diagnostic and is classified `MORPHOLOGY_DIAGNOSTIC_CONVERGED`.
+  diagnostic and is classified
+  `CONVERGED_EQUAL_GEOMETRY_MASK_PLACEMENT_DIAGNOSTIC`. Its identical
+  stiffness matrices establish mask/source-placement sensitivity, not
+  heterogeneous-operator or physical-volume sensitivity.
 - **LIMITATION:** the 2-D Poincare fixture has Gaussian/scalar curvature
   `-1/-2` and `J gamma^{ij}=delta^{ij}`. It validates metric/source provenance,
   not heterogeneous stiffness or a physical 3-D Timescape void.
@@ -107,8 +122,11 @@ NOT_GRANTED
 - **PASS:** the residual classification remains:
   `C_P/R_Delta/K_GM = CONSTRUCTED_IDENTITY_CHECK` and
   `R_Z/R_eff = DYNAMIC_COMPATIBILITY_CHECK`.
-- **PASS:** the continuum-derived dynamic fixture has four nonzero `R_Z`
-  terms and three nonzero `R_eff` terms; independent `alpha_w.first` and
+- **PASS:** the continuum-derived dynamic fixture has four nonzero
+  non-pressure `R_Z` terms and three nonzero non-pressure `R_eff` terms.
+  Their complete lists include the analytically zero pressure contributions,
+  reproduced at maxima `2.7755575616e-17` and `3.8857805862e-18`;
+  independent `alpha_w.first` and
   `Q_bar.first` perturbations produce predicted signed failures at the
   inherited `1e-10` tolerance.
 - **PASS:** no fourth mismatch state was introduced.
@@ -134,6 +152,8 @@ inputs. The metric/scale-factor/reference-volume normalization convention is
 also explicit closure provenance, and the volume-fraction agreement in the
 reference test is manufactured consistency rather than a Timescape
 prediction. The structured backend is not a full anisotropic FEM solver. The
+reduced-dimensional reference backends have no implemented physical 3-D lift.
+The
 continuum existence/uniqueness statement is conditional on declared
 regularity, connectedness, uniform ellipticity and Poincare assumptions.
 Morphology sensitivity can be large and has no observational interpretation
