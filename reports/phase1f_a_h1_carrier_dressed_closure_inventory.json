@@ -1,0 +1,310 @@
+{
+  "repository_checkpoint": {
+    "repository": "ing-mattioni/timescape-fsigma8",
+    "parent_commit": "d262099ce3fe977af628ff233abed411e70a3c85",
+    "implementation_branch": "phase-1f-a-h1-broken-density-spectral-boost",
+    "pinned_upstream_commit": "590c6fd5332acb15f5683ebf392a0d7ce54983c5",
+    "pinned_notebook_sha256": "86d2534db9e9b3169835e4ce223ee8f3bff6d03b47e5677d3937fed4adafe55a"
+  },
+  "frozen_tags_hashes": {
+    "phase_1e_g_v1": {
+      "tag_object": "064963b54a2e7eac242bf5296b83f14b0821a4bb",
+      "peeled_commit": "75d4f30ae7c63c05e1f0998f5e7e62f4ed3728f1"
+    },
+    "phase_1e_g_v2": {
+      "tag_object": "668c73e9e3ef864bb20ee61783a4088ca2acbe73",
+      "peeled_commit": "8fa4ab8fe28c3b4a5598b13b3289f65b83a7f1ca"
+    },
+    "phase_1e_g_v3": {
+      "tag_object": "7f7b1a72770cb2efbe90976c2ac7b17df885a331",
+      "peeled_commit": "94c5f8349849628f1533ab69f56d626e16cb4910"
+    },
+    "phase_1e_g_v4": {
+      "tag_object": "97c66c812fcbca6c7612fb220970a60cb340f9d4",
+      "peeled_commit": "d262099ce3fe977af628ff233abed411e70a3c85"
+    }
+  },
+  "realization": {
+    "id": "H1-1F-A-BROKEN-DENSITY-SPECTRAL-LONGITUDINAL-BOOST-V1",
+    "role": "CONDITIONAL_THEORETICAL_FORWARD_REALIZATION",
+    "scientific_status": "PRIMARY_1F_A_REALIZATION_SELECTED_CONDITIONALLY",
+    "implementation_status": "IMPLEMENTED_CONDITIONALLY",
+    "unique_timescape_prediction": "NOT_GRANTED"
+  },
+  "variable_ontology": {
+    "differential_state": ["Delta_w", "Z_w", "Delta_v", "Z_v"],
+    "differential_rank": 4,
+    "elliptic_auxiliaries_are_differential_states": false,
+    "regional_matter_contrast": ["delta_m_wall", "delta_m_void"],
+    "carrier_physical_density": "rho_C",
+    "carrier_matter_contrast": "delta_m_C",
+    "regional_expansion_perturbation": "deltaTheta_r",
+    "longitudinal_relative_velocity": "longitudinal_relative_dust_to_wall_velocity",
+    "transverse_velocity_status": "TRANSVERSE_SECTOR_UNRESOLVED"
+  },
+  "frame_ontology": {
+    "regional_density": "REGIONAL_COMOVING_DUST_FRAME",
+    "regional_expansion": "REGIONAL_COMOVING_DUST_FRAME",
+    "carrier_density": "H1_PHYSICAL_CARRIER_DENSITY_FRAME",
+    "boost_source": "EXPLICIT_CALLER_DECLARED_DUST_FRAME",
+    "boost_destination": "EXPLICIT_CALLER_DECLARED_WALL_FRAME",
+    "dressed_destination": "EXPLICIT_DRESSED_MAP_DESTINATION",
+    "forbidden_equalities": [
+      "Delta_d != delta_m by default",
+      "Z != velocity_divergence by default",
+      "dust_velocity != wall_velocity by default",
+      "wall_velocity != tracer_velocity by default"
+    ]
+  },
+  "density_definitions": {
+    "paper_provenance": "GM Eqs. (2.2), (2.19)-(2.24), arXiv:2511.17160v2",
+    "regional_relation": "Delta_r=Delta_gamma_r delta_m_r",
+    "regional_density": "rho_r=rho_bar_r(1+delta_m_r)",
+    "carrier_density": "rho_C=chi_w rho_w+chi_v rho_v",
+    "carrier_mean": "rho_bar_C=f_w rho_bar_w+f_v rho_bar_v",
+    "carrier_contrast": "delta_m_C=rho_C/rho_bar_C-1",
+    "regional_carrier_formula": "delta_m_C|r=(b_r-1)+b_r delta_m_r",
+    "background_offset_retained": true,
+    "h1_transmission_potential_is_density": false
+  },
+  "zero_mode_closures": {
+    "required": true,
+    "condition": "REGIONAL_METRIC_MEAN_ZERO",
+    "measure": "a_r^3 dmu_gamma_r",
+    "classification": "EXPLICIT_EXTERNAL_NORMALIZATION_CLOSURE",
+    "provenance_required": true,
+    "implicit_default": false,
+    "regional_constant_modes_removed": 1
+  },
+  "regional_background_density_definitions": {
+    "wall": "explicit positive rho_bar_w input",
+    "void": "explicit positive rho_bar_v input",
+    "b_r": "rho_bar_r/rho_bar_C",
+    "unequal_backgrounds_supported": true
+  },
+  "carrier_density_assembly": {
+    "source": "PHYSICAL_REGIONAL_DENSITIES",
+    "partition": "EXACT_VALIDATED_PHASE_1E_G_MORPHOLOGY_OBJECT",
+    "density_jump_allowed": true,
+    "density_continuity_imposed": false,
+    "density_flux_condition_imposed": false,
+    "global_mean_required": true,
+    "frozen_Delta_hat_comparison": "NOT_EVALUABLE_WITHOUT_CODOMAIN_ADAPTER"
+  },
+  "spatial_measures": {
+    "regional_comoving": "dmu_gamma_r",
+    "regional_physical": "a_r^3 dmu_gamma_r",
+    "carrier_physical_volume": "V_w+V_v",
+    "metric_volume_ratio_inherited": "J_r=dmu_gamma_r/dmu_0"
+  },
+  "dimensional_contract": {
+    "physical_dimension_required": 3,
+    "d1_status": "MATHEMATICAL_OPERATOR_FIXTURE_ONLY",
+    "d2_status": "MATHEMATICAL_OPERATOR_FIXTURE_ONLY",
+    "d3_status": "CONDITIONAL_3D_ONLY",
+    "reduced_dimensional_lift": "NOT_IMPLEMENTED",
+    "post_assembly_integrity_inherited": "FAIL_CLOSED"
+  },
+  "broken_operator_definitions": {
+    "regional_positive_weak_operator": "K_r=-M_r Delta_gamma_r",
+    "strong_operator": "L_r=-M_r^-1 K_r=Delta_gamma_r",
+    "boundary_policy": "NO_FLUX_REGIONAL_INTERFACE_PERIODIC_CARRIER",
+    "interface_crossing_faces_in_density_operator": false,
+    "global_laplacian_across_density_jump": false
+  },
+  "intertwining_identity": {
+    "equation": "L_r delta_m_C|r=b_r Delta_r",
+    "strong_broken_form": "L_r P_rho=P_Delta_rho L_reg",
+    "regionwise_validation": true,
+    "tautological_inverse_transfer_definition_forbidden": true,
+    "classification": "DERIVED_UNDER_SELECTED_NORMALIZATION"
+  },
+  "spectral_definitions": {
+    "regional": "K_r q=lambda_r M_r q",
+    "regional_physical_scale": "sqrt(lambda_r)/a_r",
+    "carrier": "K_C q=lambda_C M_C q",
+    "carrier_labels": "lambda_Gamma_n",
+    "ordinary_stiffness_distinct": true,
+    "observational_fourier_interpretation": "NOT_GRANTED"
+  },
+  "transfer_kernel_definitions": {
+    "equation": "U_mn^(r_to_C)=<phi_m^C,T_r phi_n^r>_C",
+    "mass_weighted_projection": true,
+    "mode_diagonal_assumed": false,
+    "global_dressed_fourier_map": "NOT_DERIVED"
+  },
+  "expansion_reconstruction": {
+    "paper_provenance": "GM Eqs. (2.20)-(2.24), arXiv:2511.17160v2",
+    "equation": "Delta_gamma_r deltaTheta_r=Z_r",
+    "zero_mode_closure_required": true,
+    "classification": "DUST_EXPANSION_FIELD_RECONSTRUCTED_CONDITIONALLY",
+    "velocity_alias": false
+  },
+  "boost_closures": {
+    "allowed": [
+      "ExternalBoostDivergenceClosure",
+      "ExternalBoostPotentialClosure"
+    ],
+    "boost_prediction": "NOT_DERIVED",
+    "zero_boost_class": "NOT_IMPLEMENTED",
+    "implicit_default": false,
+    "required_metadata": [
+      "source_frame",
+      "destination_frame",
+      "time_coordinate",
+      "spatial_metric_identity",
+      "units",
+      "domain",
+      "normalization_closure_id",
+      "provenance",
+      "classification"
+    ],
+    "longitudinal_equations": [
+      "Delta_gamma psi_dw=vartheta_dw",
+      "v_dw_L^a=gamma^ab partial_b psi_dw"
+    ]
+  },
+  "transverse_limitation": {
+    "status": "TRANSVERSE_SECTOR_UNRESOLVED",
+    "full_vector_wall_velocity": "NOT_GRANTED",
+    "divergence_free_component_constrained": false
+  },
+  "dressed_map_closures": {
+    "required": true,
+    "implicit_default": false,
+    "physical_dimension_required": 3,
+    "map_order": [
+      "map rho_C",
+      "compute destination mean using destination measure",
+      "form delta_m_dressed"
+    ],
+    "direct_delta_contrast_transfer": false,
+    "timescape_unique_map": "NOT_DERIVED"
+  },
+  "residual_definitions": {
+    "regional_density": "R_rho_r=L_r delta_m_r-Delta_r",
+    "regional_density_mean": "R_mean_r=<delta_m_r>_r",
+    "carrier_mean": "R_rho_C=integral delta_m_C dV_C/integral dV_C",
+    "intertwining": "R_intertwine_r=L_r delta_m_C-b_r Delta_r",
+    "regional_expansion": "R_Theta_r=L_r deltaTheta_r-Z_r",
+    "boost": "R_boost=Delta_gamma psi_dw-vartheta_dw"
+  },
+  "numerical_tolerances": {
+    "elliptic_residual_tolerance": 2e-10,
+    "mean_tolerance": 2e-11,
+    "source_compatibility_tolerance": 2e-11,
+    "volume_consistency_tolerance": 2e-11,
+    "carrier_mean_tolerance": 2e-10,
+    "intertwining_tolerance": 5e-10,
+    "eigenpair_tolerance": 2e-9,
+    "basis_normalization_tolerance": 2e-10,
+    "boost_residual_tolerance": 2e-10,
+    "dressed_mean_tolerance": 2e-11,
+    "residual_norm_floor": 1e-14,
+    "maximum_condition_number": 1000000000000.0
+  },
+  "validation_metrics": {
+    "density_wall_max_error": 1.7694179454963432e-16,
+    "density_void_max_error": 9.020562075079397e-17,
+    "carrier_global_mean_residual": -1.5612511283791264e-17,
+    "maximum_interface_density_jump": 1.175,
+    "wall_intertwining_residual": 2.398081733190338e-14,
+    "void_intertwining_residual": 9.769962616701378e-15,
+    "expansion_max_error": 5.551115123125783e-16,
+    "regional_max_eigenpair_residual": 9.28495029404201e-15,
+    "carrier_max_eigenpair_residual": 2.2904798482912645e-14,
+    "kernel_max_off_diagonal": 0.6206389035552144,
+    "boost_residual": 2.5979218776228663e-14,
+    "dressed_destination_mean_residual": -6.943283854099497e-17,
+    "convergence_l2": [
+      {"resolution": 4, "error": 0.17033708320536098},
+      {"resolution": 6, "error": 0.07042529764302478, "rate": 2.1783052558628384},
+      {"resolution": 8, "error": 0.038651403086977024, "rate": 2.085529550969287}
+    ]
+  },
+  "scientific_invariants": {
+    "I1_differential_rank_4": "PASS",
+    "I2_zero_modes_not_inferred": "PASS",
+    "I3_normalization_explicit": "PASS",
+    "I4_physical_density_not_h1_potential": "PASS",
+    "I5_density_jump_allowed": "PASS",
+    "I6_no_density_junction_law": "PASS",
+    "I7_regionwise_intertwining": "PASS",
+    "I8_no_global_sharp_density_laplacian": "PASS",
+    "I9_physical_density_d3_only": "PASS",
+    "I10_morphology_external": "PASS",
+    "I11_normalization_external": "PASS",
+    "I12_boost_external": "PASS",
+    "I13_dressed_map_external": "PASS",
+    "I14_transverse_unresolved": "PASS",
+    "I15_generalized_mass_spectrum": "PASS",
+    "I16_nondiagonal_modes": "PASS",
+    "I17_no_observational_spectral_label": "PASS",
+    "I18_no_tracer_promotion": "PASS",
+    "I19_no_observable_authorization": "PASS",
+    "I20_no_scientific_defaults": "PASS"
+  },
+  "falsification_gates": {
+    "nonzero_regional_source_mean": "FAIL_CLOSED",
+    "missing_zero_mode_closure": "FAIL_CLOSED",
+    "wrong_boundary_policy": "FAIL_CLOSED",
+    "d1_or_d2_physical_density": "FAIL_CLOSED",
+    "volume_mismatch": "FAIL_CLOSED",
+    "state_mutation": "FAIL_CLOSED",
+    "missing_boost_closure": "FAIL_CLOSED",
+    "boost_metric_or_frame_mismatch": "FAIL_CLOSED",
+    "missing_dressed_map": "FAIL_CLOSED",
+    "dressed_frame_or_dimension_mismatch": "FAIL_CLOSED"
+  },
+  "authorization_matrix": {
+    "regional_density_nonzero_modes": "GRANTED",
+    "regional_full_density": "CONDITIONAL",
+    "physical_h1_carrier_density": "CONDITIONAL",
+    "broken_density_intertwining": "GRANTED_UNDER_SELECTED_NORMALIZATION",
+    "physical_3d_carrier_semantics": "CONDITIONAL_3D_ONLY",
+    "regional_physical_scale": "CONDITIONAL",
+    "h1_generalized_spectrum": "GRANTED_THEORETICAL",
+    "regional_carrier_spectral_kernel": "GRANTED_THEORETICAL",
+    "global_dressed_fourier_k": "NOT_GRANTED",
+    "regional_expansion_reconstruction": "CONDITIONAL",
+    "timescape_predicted_dust_wall_boost": "NOT_GRANTED",
+    "external_longitudinal_boost_realization": "CONDITIONAL",
+    "full_vector_wall_velocity": "NOT_GRANTED",
+    "dressed_density_from_timescape_alone": "NOT_GRANTED",
+    "dressed_density_with_explicit_external_map": "CONDITIONAL",
+    "tracer_velocity": "NOT_GRANTED",
+    "matter_power_spectrum": "NOT_GRANTED",
+    "smoothed_density_variance": "NOT_GRANTED",
+    "redshift_space_mapping": "NOT_GRANTED",
+    "observational_growth_observable": "NOT_GRANTED",
+    "likelihood_data_comparison": "NOT_GRANTED"
+  },
+  "test_results": {
+    "preimplementation_python_3_14_3": "504 passed",
+    "preimplementation_python_3_11_9": "504 passed",
+    "phase1f_a_targeted_python_3_14_3": "35 passed",
+    "phase1f_a_targeted_python_3_11_9": "35 passed",
+    "final_python_3_14_3": "539 passed; 0 failures; 0 skips; 0 xfails; 0 warnings",
+    "final_python_3_11_9": "539 passed; 0 failures; 0 skips; 0 xfails; 0 warnings"
+  },
+  "final_verdict": {
+    "scientific_realization_readiness": "IMPLEMENTED_CONDITIONALLY",
+    "density_carrier_closure": "CONDITIONALLY_DERIVED",
+    "broken_density_intertwining": "DERIVED",
+    "spatial_scale_closure": "LAPLACE_BELTRAMI_AND_SPECTRAL_KERNEL_CLOSED",
+    "global_dressed_fourier_map": "NOT_DERIVED",
+    "dust_expansion_reconstruction": "CONDITIONALLY_DERIVED",
+    "dust_to_wall_boost_prediction": "NOT_DERIVED",
+    "longitudinal_wall_velocity": "CONDITIONALLY_CLOSED_WITH_EXPLICIT_BOOST_INPUT",
+    "dressed_density": "CONDITIONAL_ON_EXPLICIT_DRESSED_SPACETIME_MAP",
+    "differential_state_rank": 4,
+    "morphology": "REQUIRED_EXTERNAL_INPUT",
+    "normalization": "REQUIRED_EXTERNAL_CLOSURE_INPUT",
+    "boost": "REQUIRED_EXTERNAL_CLOSURE_INPUT",
+    "dressed_map": "REQUIRED_EXTERNAL_CLOSURE_INPUT",
+    "unique_timescape_prediction": "NOT_GRANTED",
+    "physical_interface_claim": "NOT_GRANTED",
+    "observational_authorization": "NOT_GRANTED",
+    "fsigma8_authorization": "NOT_GRANTED"
+  }
+}
