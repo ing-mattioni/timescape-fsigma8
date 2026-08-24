@@ -7,6 +7,9 @@
 - Pinned scientific upstream: `590c6fd5332acb15f5683ebf392a0d7ce54983c5`.
 - Pinned `ACPT_Timescape.ipynb` SHA-256: `86d2534db9e9b3169835e4ce223ee8f3bff6d03b47e5677d3937fed4adafe55a`.
 - Frozen pre-implementation regression: 504 passed on Python 3.14.3 and 504 passed on Python 3.11.9.
+- Independent read-only audit:
+  `phase1f_a_h1_carrier_dressed_closure_independent_audit.md`, SHA-256
+  `77059a2911abbf6d309e72cd6729bd8a0760fc7b5d9aa7cbf9ddbfb5866c78d6`.
 
 ## 2. Frozen-result boundary
 
@@ -25,9 +28,11 @@ growth equation, or any Phase 1E-F/G equation. There is no S1 fallback.
 
 Role: `CONDITIONAL_THEORETICAL_FORWARD_REALIZATION`.
 
-It is not a unique Timescape prediction. Morphology, regional homogeneous
-density/expansion normalization, longitudinal dust-to-wall boost, and dressed
-spacetime map remain explicit external closure inputs.
+It is not a unique Timescape prediction. Morphology, the provenance-bearing
+declaration of the explicitly selected V1 regional mean-zero normalization,
+longitudinal dust-to-wall boost, and dressed spacetime map remain required
+caller inputs. Timescape does not uniquely predict the normalization choice,
+and V1 does not expose arbitrary runtime normalization physics.
 
 ## 4. Implementation inventory
 
@@ -99,12 +104,24 @@ The Laplacian source does not determine a regional constant. V1 therefore
 requires an immutable `RegionalZeroModeClosure` carrying the exact spatial
 measure identity `a_r^3 dmu_gamma_r`, scale factor, domain, frame,
 classification, and provenance. The selected closure is
-`EXPLICIT_EXTERNAL_NORMALIZATION_CLOSURE`, not a Timescape prediction.
+`EXPLICIT_REQUIRED_MEAN_ZERO_NORMALIZATION_CLOSURE`. Its declaration and
+provenance are required caller inputs, while the admitted V1 runtime
+realization is specifically the regional metric mean-zero condition rather
+than an arbitrary normalization choice. `NORMALIZATION_PREDICTED_BY_TIMESCAPE`
+is `NOT_GRANTED`.
 
-The manufactured solution and the solution shifted by 3 have the same CGI
-source. The runtime refuses reconstruction without a closure and rejects a
-source with forbidden nonzero regional mean. Reconstructed mean residuals
-were `8.57e-18` (wall) and `2.66e-18` (void).
+The recorded `zero_mode_shift_demonstration = 3.0` is only the magnitude of
+the applied homogeneous shift. It is not evidence by itself that the source
+is invariant. The mathematical identity
+`Delta_gamma_r(delta_m,r + C_r) = Delta_gamma_r delta_m,r` follows because
+the regional constant is in the Laplace--Beltrami kernel; the independent
+read-only audit additionally verified `L_r(constant) = 0.0` exactly and the
+shifted-source invariance to floating-point precision. The resulting evidence
+classification is `ZERO_MODE_NONIDENTIFIABILITY:
+DERIVED_AND_INDEPENDENTLY_VERIFIED`. The runtime refuses reconstruction
+without the explicitly selected mean-zero closure and rejects a source with
+forbidden nonzero regional mean. Reconstructed mean residuals were `8.57e-18`
+(wall) and `2.66e-18` (void).
 
 ## 9. Physical carrier-density assembly
 
@@ -139,7 +156,28 @@ L_r = Delta_gamma_r on Omega_r
 The wall and void maximum residuals were `2.40e-14` and `9.77e-15`. The
 implementation does not define carrier density by an inverse carrier CGI
 operator applied to transferred `Delta`; the public density module has no
-such call path.
+such call path. The mathematical identity is valid under the selected
+regional mean-zero normalization, the declared no-flux broken operator, and
+the affine carrier-density definition. Its scientific classification is
+`BROKEN_DENSITY_INTERTWINING:
+DERIVED_ONLY_UNDER_ADDITIONAL_CONDITIONS`.
+
+For regionally constant `b_r`, linearity and `L_r(b_r-1)=0` give
+
+```text
+R_intertwine,r = b_r R_elliptic,r.
+```
+
+The independent audit measured the difference between these two sides at
+approximately `1.4e-14`. Consequently the runtime intertwining residual is a
+mandatory region-locality and coefficient-bookkeeping gate, but it is not an
+independent numerical check of the regional elliptic solve and it cannot
+detect removal of the constant `b_r-1` term. The evidence tokens are
+`BROKEN_DENSITY_INTERTWINING_NUMERICAL_GATE:
+NOT_INDEPENDENT_OF_REGIONAL_ELLIPTIC_RESIDUAL` and
+`BACKGROUND_OFFSET_TERM:
+INDEPENDENTLY_PROTECTED_BY_PHYSICAL_CARRIER_ASSEMBLY`. The unequal-background
+carrier-assembly checks in Section 9 protect that offset directly.
 
 ## 11. Interface-density firewall
 
@@ -179,7 +217,10 @@ The regional problem solves `K_r q=lambda_r M_r q`; its explicitly normalized
 physical regional scale is `sqrt(lambda_r)/a_r`. The carrier solves
 `K_C q=lambda_C M_C q`, using the mass matrix, not the ordinary Euclidean
 stiffness spectrum. The first ordinary stiffness value was `0.5`, whereas the
-first mass-weighted eigenvalue was `32.0`.
+first mass-weighted eigenvalue was `32.0`. In this flat uniform-mass fixture
+the two values differ only by the constant mass factor `1/64`; the pair alone
+does not establish a deeper general physical distinction. The architectural
+requirement to solve the generalized mass-weighted problem remains valid.
 
 The maximum eigenpair residuals were `9.28e-15` (regional) and `2.29e-14`
 (carrier). Carrier modes are labelled `lambda_Gamma_n`, not by a generic or
@@ -193,10 +234,14 @@ The transfer kernel is evaluated as
 U_mn^(r->C) = <phi_m^C, T_r phi_n^r>_C.
 ```
 
-No diagonal assumption exists. In the layered synthetic fixture the maximum
-off-diagonal magnitude was `0.6206389035552144`, demonstrating retained mode
-mixing. This is not a map from regional or carrier labels to a dressed or
-observational Fourier coordinate.
+No diagonal assumption exists. In the layered synthetic fixture the recorded
+maximum off-diagonal magnitude was `0.6206389035552144`. That scalar depends
+on the selected truncated bases inside degenerate eigenspaces and is not a
+basis-invariant diagnostic. The independent audit instead obtained
+eigenvalue-block Frobenius norms approximately `sqrt(2)` and `0.787`; the
+nonzero block coupling different eigenvalues independently confirms genuine
+mode mixing. This is not a map from regional or carrier labels to a dressed
+or observational Fourier coordinate.
 
 ## 16. Boost closure semantics
 
@@ -258,8 +303,13 @@ regional reference solver gave:
 | 6 | 0.07042529764 | 2.1783 |
 | 8 | 0.03865140309 | 2.0855 |
 
-These are validation-discretization rates for this smooth fixture, not a
-universal rate across a sharp physical interface.
+These rates match the closed-form single-mode stencil error
+`[(pi h/sin(pi h))^2-1] |exact|` to ratio `1.000000`, including independent
+extensions at resolutions 10 and 12. They support second-order convergence
+for this manufactured smooth single-mode stencil test. The interface axis is
+not refined, so this study does not independently validate interface
+refinement order and is not a universal rate across a sharp physical
+interface.
 
 ## 22. State-integrity validation
 
@@ -325,7 +375,12 @@ Final machine verdict:
 H1-1F-A-BROKEN-DENSITY-SPECTRAL-LONGITUDINAL-BOOST-V1
 SCIENTIFIC_REALIZATION_READINESS: IMPLEMENTED_CONDITIONALLY
 DENSITY_CARRIER_CLOSURE: CONDITIONALLY_DERIVED
-BROKEN_DENSITY_INTERTWINING: DERIVED
+BROKEN_DENSITY_INTERTWINING: DERIVED_ONLY_UNDER_ADDITIONAL_CONDITIONS
+BROKEN_DENSITY_INTERTWINING_NUMERICAL_GATE: NOT_INDEPENDENT_OF_REGIONAL_ELLIPTIC_RESIDUAL
+BACKGROUND_OFFSET_TERM: INDEPENDENTLY_PROTECTED_BY_PHYSICAL_CARRIER_ASSEMBLY
+ZERO_MODE_NONIDENTIFIABILITY: DERIVED_AND_INDEPENDENTLY_VERIFIED
+NORMALIZATION_CLOSURE: EXPLICIT_REQUIRED_MEAN_ZERO_NORMALIZATION_CLOSURE
+NORMALIZATION_PREDICTED_BY_TIMESCAPE: NOT_GRANTED
 SPATIAL_SCALE_CLOSURE: LAPLACE_BELTRAMI_AND_SPECTRAL_KERNEL_CLOSED
 GLOBAL_DRESSED_FOURIER_MAP: NOT_DERIVED
 DUST_EXPANSION_RECONSTRUCTION: CONDITIONALLY_DERIVED
@@ -333,9 +388,11 @@ DUST_TO_WALL_BOOST_PREDICTION: NOT_DERIVED
 LONGITUDINAL_WALL_VELOCITY: CONDITIONALLY_CLOSED_WITH_EXPLICIT_BOOST_INPUT
 DRESSED_DENSITY: CONDITIONAL_ON_EXPLICIT_DRESSED_SPACETIME_MAP
 DIFFERENTIAL_STATE_RANK: 4
+MORPHOLOGY: REQUIRED_EXTERNAL_INPUT
+BOOST: REQUIRED_EXTERNAL_CLOSURE_INPUT
+DRESSED_MAP: REQUIRED_EXTERNAL_CLOSURE_INPUT
 UNIQUE_TIMESCAPE_PREDICTION: NOT_GRANTED
+PHYSICAL_INTERFACE_CLAIM: NOT_GRANTED
 OBSERVATIONAL_AUTHORIZATION: NOT_GRANTED
 FSIGMA8_AUTHORIZATION: NOT_GRANTED
 ```
-density jump of `2.75`. Gamma remains a mathematical transfer interface and
-density jump of `1.175`. Gamma remains a mathematical transfer interface and
