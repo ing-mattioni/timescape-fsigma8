@@ -13,6 +13,11 @@ from pathlib import Path
 
 import numpy as np
 
+from timescape_fsigma8.phase1f_a.operators import (
+    apply_regional_laplace_beltrami,
+    assemble_regional_elliptic_system,
+)
+
 from validate_phase1f_a_h1_closure import (
     boundary as phase1f_a_boundary,
     domain,
@@ -23,9 +28,18 @@ from validate_phase1f_a_h1_closure import (
     zero_mode,
 )
 from timescape_fsigma8.phase1f_b import (
+    BOOST_BOUNDARY_RUNTIME_ENFORCEMENT,
     BOOST_SPECIFIC_BOUNDARY_MODEL,
+    EXPLICIT_EXTERNAL_NO_PENETRATION_CLOSURE,
+    EXPANSION_COMPATIBILITY_EVIDENCE,
+    HARMONIC_VECTOR_SECTOR_EXCLUDED,
+    HARMONIC_VECTOR_ZERO_NOT_GRANTED,
     PERTURBATIVE_WALL_LAPSE_POTENTIAL,
+    PROPAGATION_CONSTRUCTION_DIAGNOSTIC,
     SYNTHETIC_VALIDATION_ONLY,
+    TIME_INTEGRATOR_CONVERGENCE_CLASSIFICATION,
+    WALL_BACKGROUND_SHEAR_EXCLUDED,
+    WALL_PROPER_TIME_RATE_ROLE,
     BoostBoundaryKernelPolicy,
     BoostBoundaryKind,
     BoostGeometryProvenance,
@@ -40,6 +54,7 @@ from timescape_fsigma8.phase1f_b import (
     ScalarBoostSector,
     ScalarDustWallBoostNumerics,
     ScalarDustWallBoostScenario,
+    WallBackgroundGeometrySector,
     propagate_scalar_dust_wall_boost,
 )
 
@@ -59,6 +74,12 @@ def numerics(
         lapse_mean_tolerance=2e-11,
         scale_factor_rate_tolerance=2e-11,
         off_domain_tolerance=2e-14,
+        boundary_normal_velocity_tolerance=2e-11,
+        boundary_normal_acceleration_tolerance=2e-11,
+        boundary_normal_velocity_tolerance_units=(
+            "REFERENCE_LENGTH_PER_COMMON_TIME"
+        ),
+        boundary_normal_acceleration_tolerance_units="INVERSE_COMMON_TIME",
         linear_velocity_ratio_threshold=linear_threshold,
         speed_of_light=1.0,
         speed_of_light_units="REFERENCE_LENGTH_PER_COMMON_TIME",
@@ -75,7 +96,10 @@ def boost_boundary() -> BoostBoundaryKernelPolicy:
         compatibility_condition="WALL_SOURCE_MEAN_ZERO",
         provenance="EXPLICIT_VALIDATION_BOOST_BOUNDARY",
         classification=BOOST_SPECIFIC_BOUNDARY_MODEL,
+        physical_boundary_condition=EXPLICIT_EXTERNAL_NO_PENETRATION_CLOSURE,
+        derived_from_timescape=False,
         inherited_from_h1_density_transmission=False,
+        physical_interface_claim="NOT_GRANTED",
     )
 
 
@@ -138,6 +162,7 @@ def scenario(
         wall_scale_factor=scale_factor,
         wall_hubble_rate=hubble,
         wall_proper_time_rate=np.ones(time.size),
+        wall_proper_time_rate_role=WALL_PROPER_TIME_RATE_ROLE,
         wall_expansion_perturbation=wall,
         wall_lapse_perturbation=lapse,
         lapse_driver_kind=PERTURBATIVE_WALL_LAPSE_POTENTIAL,
@@ -149,9 +174,13 @@ def scenario(
         unit_system="GEOMETRIZED_C_EQUALS_ONE",
         interpolation_policy="PIECEWISE_LINEAR_NO_EXTRAPOLATION",
         provenance=BoostGeometryProvenance.SYNTHETIC_VALIDATION_ONLY,
+        selected_background_geometry_sector=(
+            WallBackgroundGeometrySector.SHEAR_FREE_QUASI_FLRW_COMMON_SPACETIME
+        ),
         scalar_hypersurface_orthogonal=True,
         vorticity_dust_zero=True,
         vorticity_wall_zero=True,
+        wall_background_shear_free=True,
         normalization_kernel_identity=boost_zero_mode.provenance,
         scientific_classification=SYNTHETIC_VALIDATION_ONLY,
     )
@@ -180,6 +209,129 @@ def scenario(
         requested_sector=ScalarBoostSector.SCALAR_LONGITUDINAL_HYPERSURFACE_ORTHOGONAL,
         scientific_classification=SYNTHETIC_VALIDATION_ONLY,
     )
+
+
+def normal_varying_scenario(
+    *, initial_profile: np.ndarray, lapse_profile: np.ndarray
+) -> tuple[ScalarDustWallBoostScenario, np.ndarray, float]:
+    """Create the genuine 3-D normal-varying boundary validation fixture."""
+    shape = (8, 4, 4)
+    time = np.array([0.0, 0.25, 0.5], dtype=np.float64)
+    runtime = make_realization(shape)
+    wall_domain = domain(runtime, "wall")
+    mask_grid = wall_domain.mask.reshape(shape)
+    wall_x = np.flatnonzero(np.any(mask_grid, axis=(1, 2)))
+    initial_grid = np.zeros(shape, dtype=np.float64)
+    lapse_grid = np.zeros(shape, dtype=np.float64)
+    initial_grid[wall_x, :, :] = initial_profile[:, None, None]
+    lapse_grid[wall_x, :, :] = lapse_profile[:, None, None]
+    initial_full = (0.002 * initial_grid).reshape(-1)
+    lapse_amplitude = np.array([0.0, 1.0e-4, 2.0e-4], dtype=np.float64)
+    lapse_full = lapse_amplitude[:, None] * lapse_grid.reshape(1, -1)
+    potential_full = np.empty_like(lapse_full)
+    potential_full[0] = initial_full
+    for index, step in enumerate(np.diff(time)):
+        potential_full[index + 1] = potential_full[index] - 0.5 * step * (
+            lapse_full[index] + lapse_full[index + 1]
+        )
+
+    dust_history = expansion_history(runtime, np.full(time.size, 0.01))
+    system = assemble_regional_elliptic_system(
+        domain=wall_domain,
+        boundary_policy=phase1f_a_boundary("wall"),
+        numerics=phase1f_a_numerics(),
+    )
+    wall_expansion = np.zeros_like(lapse_full)
+    for index, expansion in enumerate(dust_history):
+        laplacian = apply_regional_laplace_beltrami(
+            system=system,
+            field=potential_full[index, system.regional_indices],
+        )
+        wall_expansion[index, system.regional_indices] = (
+            expansion.regional_values - laplacian
+        )
+    boost_zero_mode = zero_mode("wall")
+    closure = CommonSpacetimeWallGeometryClosure(
+        wall_domain=wall_domain,
+        common_spacetime_id="SYNTHETIC_NORMAL_VARYING_COMMON_SPACETIME",
+        wall_congruence_id="SYNTHETIC_NORMAL_WALL_OBSERVER",
+        regional_wall_dust_congruence_id="REGIONAL_WALL_DUST_CONGRUENCE",
+        h1_wall_embedding_id=(
+            runtime.scientific_state.operator.morphology.wall_pullback_id
+        ),
+        common_time_coordinate_id="SYNTHETIC_COMMON_TIME_T",
+        wall_proper_time_mapping_id="EXPLICIT_SYNTHETIC_DTAU_W_DT",
+        spatial_geometry_operator_id="wall-validation",
+        dust_expansion_background_identity="bar_Theta_d,w=3H_d,w",
+        domain_id="wall",
+        time_grid=time,
+        wall_scale_factor=np.ones(time.size),
+        wall_hubble_rate=np.zeros(time.size),
+        wall_proper_time_rate=np.ones(time.size),
+        wall_proper_time_rate_role=WALL_PROPER_TIME_RATE_ROLE,
+        wall_expansion_perturbation=wall_expansion,
+        wall_lapse_perturbation=lapse_full,
+        lapse_driver_kind=PERTURBATIVE_WALL_LAPSE_POTENTIAL,
+        common_time_units="COMMON_TIME",
+        wall_expansion_units="INVERSE_COMMON_TIME",
+        wall_hubble_units="INVERSE_COMMON_TIME",
+        wall_scale_factor_units="DIMENSIONLESS",
+        wall_lapse_units="DIMENSIONLESS_PERTURBATION",
+        unit_system="GEOMETRIZED_C_EQUALS_ONE",
+        interpolation_policy="PIECEWISE_LINEAR_NO_EXTRAPOLATION",
+        provenance=BoostGeometryProvenance.SYNTHETIC_VALIDATION_ONLY,
+        selected_background_geometry_sector=(
+            WallBackgroundGeometrySector.SHEAR_FREE_QUASI_FLRW_COMMON_SPACETIME
+        ),
+        scalar_hypersurface_orthogonal=True,
+        vorticity_dust_zero=True,
+        vorticity_wall_zero=True,
+        wall_background_shear_free=True,
+        normalization_kernel_identity=boost_zero_mode.provenance,
+        scientific_classification=SYNTHETIC_VALIDATION_ONLY,
+    )
+    item = ScalarDustWallBoostScenario(
+        geometry_closure=closure,
+        dust_expansion_history=dust_history,
+        dust_expansion_time_grid=time,
+        dust_expansion_time_coordinate_id="SYNTHETIC_COMMON_TIME_T",
+        regional_elliptic_numerics=phase1f_a_numerics(),
+        initialization_mode=BoostInitializationMode.SUPPLIED_INITIAL_BOOST,
+        initial_scalar_potential=initial_full,
+        initial_potential_provenance="SUPPLIED_NORMAL_VARYING_INITIAL_BOOST",
+        initial_potential_units="REFERENCE_LENGTH_SQUARED_PER_COMMON_TIME",
+        boundary_policy=boost_boundary(),
+        zero_mode_closure=boost_zero_mode,
+        lapse_kernel_mode=LapseKernelMode.REQUIRE_MEAN_ZERO,
+        requested_sector=(
+            ScalarBoostSector.SCALAR_LONGITUDINAL_HYPERSURFACE_ORTHOGONAL
+        ),
+        scientific_classification=SYNTHETIC_VALIDATION_ONLY,
+    )
+    field = potential_full[0].reshape(shape)
+    unbroken = np.zeros(shape, dtype=np.float64)
+    for axis, spacing in enumerate(
+        runtime.scientific_state.operator.carrier.grid_spacing
+    ):
+        unbroken += (
+            np.roll(field, 1, axis=axis)
+            - 2.0 * field
+            + np.roll(field, -1, axis=axis)
+        ) / spacing**2
+    broken = np.zeros(np.prod(shape), dtype=np.float64)
+    broken[system.regional_indices] = apply_regional_laplace_beltrami(
+        system=system,
+        field=potential_full[0, system.regional_indices],
+    )
+    distinction = float(
+        np.max(
+            np.abs(
+                broken[wall_domain.mask]
+                - unbroken.reshape(-1)[wall_domain.mask]
+            )
+        )
+    )
+    return item, potential_full, distinction
 
 
 def _rejected(callable_) -> bool:
@@ -406,6 +558,45 @@ def validate() -> dict[str, object]:
         )
     )
 
+    admissible_profile = np.array([-1.0, -1.0, 1.0, 1.0])
+    penetrating_profile = np.array([-1.5, -0.5, 0.5, 1.5])
+    normal_admissible, expected_normal, broken_unbroken_difference = (
+        normal_varying_scenario(
+            initial_profile=admissible_profile,
+            lapse_profile=admissible_profile,
+        )
+    )
+    normal_result = propagate_scalar_dust_wall_boost(
+        scenario=normal_admissible, numerics=numerics()
+    )
+    normal_potential_error = float(
+        np.max(np.abs(normal_result.scalar_potential - expected_normal))
+    )
+    normal_bad_initial, _, _ = normal_varying_scenario(
+        initial_profile=penetrating_profile,
+        lapse_profile=np.zeros(4),
+    )
+    boundary_initial_rejected = _rejected(
+        lambda: propagate_scalar_dust_wall_boost(
+            scenario=normal_bad_initial, numerics=numerics()
+        )
+    )
+    normal_bad_driver, _, _ = normal_varying_scenario(
+        initial_profile=admissible_profile,
+        lapse_profile=penetrating_profile,
+    )
+    boundary_driver_rejected = _rejected(
+        lambda: propagate_scalar_dust_wall_boost(
+            scenario=normal_bad_driver, numerics=numerics()
+        )
+    )
+    nonzero_shear_rejected = _rejected(
+        lambda: replace(
+            manufactured.geometry_closure,
+            wall_background_shear_free=False,
+        )
+    )
+
     convergence: list[dict[str, float | int]] = []
     for intervals in (4, 8, 16, 32):
         grid = np.linspace(0.0, 1.0, intervals + 1)
@@ -489,7 +680,39 @@ def validate() -> dict[str, object]:
             "scale_factor": 2.0,
             "compatibility_max_abs": scale_result.diagnostics.expansion_compatibility_max_abs,
         },
-        "convergence": convergence,
+        "convergence": {
+            "classification": TIME_INTEGRATOR_CONVERGENCE_CLASSIFICATION,
+            "independent_physical_validation": "NO",
+            "interpretation": (
+                "CLOSED_FORM_TRAPEZOIDAL_TRUNCATION_SCALING_OF_THE_"
+                "IMPLEMENTED_RULE"
+            ),
+            "sequence": convergence,
+        },
+        "normal_varying_boundary": {
+            "fixture_classification": "SYNTHETIC_VALIDATION_ONLY",
+            "spatial_dimension": 3,
+            "initial_normal_velocity_max_abs": (
+                normal_result.diagnostics.initial_boundary_normal_velocity_max_abs
+            ),
+            "driver_normal_acceleration_max_abs": (
+                normal_result.diagnostics.driver_boundary_normal_acceleration_max_abs
+            ),
+            "propagated_normal_velocity_max_abs": (
+                normal_result.diagnostics.propagated_boundary_normal_velocity_max_abs
+            ),
+            "normal_velocity_tolerance": (
+                normal_result.diagnostics.initial_boundary_normal_velocity_tolerance
+            ),
+            "normal_acceleration_tolerance": (
+                normal_result.diagnostics.driver_boundary_normal_acceleration_tolerance
+            ),
+            "potential_max_error": normal_potential_error,
+            "broken_vs_unbroken_laplacian_max_difference": (
+                broken_unbroken_difference
+            ),
+            "admissible_initial_and_driver_passed": True,
+        },
         "fail_closed": {
             "expansion_perturbation_rejected": compatibility_rejected,
             "reversed_sign_rejected": sign_reversed_rejected,
@@ -503,9 +726,22 @@ def validate() -> dict[str, object]:
             "post_construction_mutation_rejected": mutation_rejected,
             "propagation_residual_failure_rejected": propagation_residual_rejected,
             "wrong_operator_scale_factor_rejected": wrong_scale_factor_rejected,
+            "normal_varying_initial_boundary_rejected": boundary_initial_rejected,
+            "normal_varying_driver_boundary_rejected": boundary_driver_rejected,
+            "nonzero_background_shear_rejected": nonzero_shear_rejected,
         },
         "evidence_classification": {
+            "expansion_compatibility": EXPANSION_COMPATIBILITY_EVIDENCE,
+            "propagation": PROPAGATION_CONSTRUCTION_DIAGNOSTIC,
             "curl": "CONSTRUCTION_INVARIANT_NOT_INDEPENDENT_NUMERICAL_EVIDENCE",
+            "boundary": BOOST_SPECIFIC_BOUNDARY_MODEL,
+            "boundary_runtime_enforcement": BOOST_BOUNDARY_RUNTIME_ENFORCEMENT,
+            "wall_proper_time_rate": WALL_PROPER_TIME_RATE_ROLE,
+            "wall_background_shear": WALL_BACKGROUND_SHEAR_EXCLUDED,
+            "harmonic_vector_sector": HARMONIC_VECTOR_SECTOR_EXCLUDED,
+            "harmonic_vector_zero_as_timescape_prediction": (
+                HARMONIC_VECTOR_ZERO_NOT_GRANTED
+            ),
             "geometry": "SYNTHETIC_VALIDATION_ONLY",
             "prediction": "NOT_GRANTED",
             "observational_authorization": "NOT_GRANTED",

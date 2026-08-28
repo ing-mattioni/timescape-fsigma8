@@ -19,19 +19,34 @@ from phase1f_a_test_utils import (
     zero_mode,
 )
 import timescape_fsigma8.phase1f_b as phase1f_b
+from timescape_fsigma8.phase1f_a.operators import (
+    apply_regional_laplace_beltrami,
+    assemble_regional_elliptic_system,
+)
 from timescape_fsigma8.phase1f_b import (
+    BOOST_BOUNDARY_RUNTIME_ENFORCEMENT,
     BOOST_SPECIFIC_BOUNDARY_MODEL,
     CONDITIONAL_SCALAR_DUST_TO_WALL_BOOST,
+    EXPLICIT_EXTERNAL_NO_PENETRATION_CLOSURE,
+    EXPANSION_COMPATIBILITY_EVIDENCE,
+    HARMONIC_VECTOR_SECTOR_EXCLUDED,
+    HARMONIC_VECTOR_ZERO_NOT_GRANTED,
     MATHEMATICAL_OPERATOR_FIXTURE_ONLY,
     PERTURBATIVE_WALL_LAPSE_POTENTIAL,
+    PROPAGATION_CONSTRUCTION_DIAGNOSTIC,
     SYNTHETIC_VALIDATION_ONLY,
+    TIME_INTEGRATOR_CONVERGENCE_CLASSIFICATION,
     TRANSVERSE_SECTOR_EXCLUDED,
+    WALL_BACKGROUND_SHEAR_EXCLUDED,
+    WALL_PROPER_TIME_RATE_ROLE,
+    WALL_SHEAR_ZERO_NOT_GRANTED,
     BoostBoundaryKernelPolicy,
     BoostBoundaryKind,
     BoostGeometryProvenance,
     BoostInitializationMode,
     CommonSpacetimeWallGeometryClosure,
     LapseKernelMode,
+    Phase1FBBoundaryCompatibilityError,
     Phase1FBCompatibilityError,
     Phase1FBContractError,
     Phase1FBGeometryClosureError,
@@ -42,6 +57,7 @@ from timescape_fsigma8.phase1f_b import (
     ScalarBoostSector,
     ScalarDustWallBoostNumerics,
     ScalarDustWallBoostScenario,
+    WallBackgroundGeometrySector,
     propagate_scalar_dust_wall_boost,
 )
 
@@ -58,6 +74,12 @@ def boost_numerics(
         lapse_mean_tolerance=2e-11,
         scale_factor_rate_tolerance=2e-11,
         off_domain_tolerance=2e-14,
+        boundary_normal_velocity_tolerance=2e-11,
+        boundary_normal_acceleration_tolerance=2e-11,
+        boundary_normal_velocity_tolerance_units=(
+            "REFERENCE_LENGTH_PER_COMMON_TIME"
+        ),
+        boundary_normal_acceleration_tolerance_units="INVERSE_COMMON_TIME",
         linear_velocity_ratio_threshold=linear_threshold,
         speed_of_light=1.0,
         speed_of_light_units="REFERENCE_LENGTH_PER_COMMON_TIME",
@@ -74,7 +96,10 @@ def boost_boundary() -> BoostBoundaryKernelPolicy:
         compatibility_condition="WALL_SOURCE_MEAN_ZERO",
         provenance="EXPLICIT_PHASE1F_B_WALL_INTERIOR_BOOST_BOUNDARY",
         classification=BOOST_SPECIFIC_BOUNDARY_MODEL,
+        physical_boundary_condition=EXPLICIT_EXTERNAL_NO_PENETRATION_CLOSURE,
+        derived_from_timescape=False,
         inherited_from_h1_density_transmission=False,
+        physical_interface_claim="NOT_GRANTED",
     )
 
 
@@ -179,6 +204,7 @@ def make_case(
         wall_scale_factor=scale_factor,
         wall_hubble_rate=hubble,
         wall_proper_time_rate=np.ones(nt),
+        wall_proper_time_rate_role=WALL_PROPER_TIME_RATE_ROLE,
         wall_expansion_perturbation=wall_expansion,
         wall_lapse_perturbation=lapse,
         lapse_driver_kind=PERTURBATIVE_WALL_LAPSE_POTENTIAL,
@@ -190,9 +216,13 @@ def make_case(
         unit_system="GEOMETRIZED_C_EQUALS_ONE",
         interpolation_policy="PIECEWISE_LINEAR_NO_EXTRAPOLATION",
         provenance=BoostGeometryProvenance.SYNTHETIC_VALIDATION_ONLY,
+        selected_background_geometry_sector=(
+            WallBackgroundGeometrySector.SHEAR_FREE_QUASI_FLRW_COMMON_SPACETIME
+        ),
         scalar_hypersurface_orthogonal=True,
         vorticity_dust_zero=True,
         vorticity_wall_zero=True,
+        wall_background_shear_free=True,
         normalization_kernel_identity=zero_mode("wall", scale_factor[0]).provenance,
         scientific_classification=SYNTHETIC_VALIDATION_ONLY,
     )
@@ -222,6 +252,70 @@ def make_case(
         scientific_classification=SYNTHETIC_VALIDATION_ONLY,
     )
     return realization, scenario, scalar, laplacian
+
+
+def normal_varying_case(
+    *,
+    initial_profile: np.ndarray,
+    lapse_profile: np.ndarray,
+) -> tuple[object, ScalarDustWallBoostScenario, np.ndarray]:
+    """Build a genuine 3-D wall-interior boundary fixture.
+
+    The field varies along the layer normal.  Its evolution follows the
+    Phase 1F-B scalar law derived from BDE Eqs. (14)--(16), while the
+    no-penetration trace is the explicit external boost closure approved for
+    v2 rather than a Timescape interface equation.
+    """
+    shape = (8, 4, 4)
+    time = np.array([0.0, 0.25, 0.5], dtype=np.float64)
+    realization, base, _, _ = make_case(shape=shape, time=time)
+    mask_grid = base.geometry_closure.wall_domain.mask.reshape(shape)
+    wall_x = np.flatnonzero(np.any(mask_grid, axis=(1, 2)))
+    if initial_profile.shape != wall_x.shape or lapse_profile.shape != wall_x.shape:
+        raise ValueError("normal profiles must cover the wall-layer x cells")
+    initial_grid = np.zeros(shape, dtype=np.float64)
+    lapse_grid = np.zeros(shape, dtype=np.float64)
+    initial_grid[wall_x, :, :] = initial_profile[:, None, None]
+    lapse_grid[wall_x, :, :] = lapse_profile[:, None, None]
+    initial_full = (0.002 * initial_grid).reshape(-1)
+    lapse_amplitude = np.array([0.0, 1.0e-4, 2.0e-4], dtype=np.float64)
+    lapse_full = lapse_amplitude[:, None] * lapse_grid.reshape(1, -1)
+    potential_full = np.empty_like(lapse_full)
+    potential_full[0] = initial_full
+    for index, step in enumerate(np.diff(time)):
+        potential_full[index + 1] = potential_full[index] - 0.5 * step * (
+            lapse_full[index] + lapse_full[index + 1]
+        )
+
+    wall_domain = base.geometry_closure.wall_domain
+    system = assemble_regional_elliptic_system(
+        domain=wall_domain,
+        boundary_policy=boundary("wall"),
+        numerics=phase1f_a_numerics(),
+    )
+    dust_regional = np.stack(
+        [item.regional_values for item in base.dust_expansion_history]
+    )
+    wall_expansion = np.zeros_like(lapse_full)
+    for index in range(time.size):
+        laplacian = apply_regional_laplace_beltrami(
+            system=system,
+            field=potential_full[index, system.regional_indices],
+        )
+        wall_expansion[index, system.regional_indices] = (
+            dust_regional[index] - laplacian
+        )
+    closure = replace(
+        base.geometry_closure,
+        wall_expansion_perturbation=wall_expansion,
+        wall_lapse_perturbation=lapse_full,
+    )
+    scenario = replace(
+        base,
+        geometry_closure=closure,
+        initial_scalar_potential=initial_full,
+    )
+    return realization, scenario, potential_full
 
 
 def test_v1_zero_driver_preserves_nonzero_initial_scalar_boost() -> None:
@@ -451,7 +545,7 @@ def test_expansion_matched_initialization_solves_sign_correct_constraint() -> No
     )
 
 
-def test_independent_propagation_residual_can_fail_closed() -> None:
+def test_propagation_construction_diagnostic_can_fail_its_numerical_gate() -> None:
     time = np.array([0.0, 1.0])
     scale = np.exp(time)
     _, scenario, _, _ = make_case(
@@ -467,6 +561,162 @@ def test_independent_propagation_residual_can_fail_closed() -> None:
             scenario=scenario,
             numerics=boost_numerics(propagation_tolerance=1e-12),
         )
+
+
+def test_supplied_normal_varying_no_penetration_potential_is_accepted() -> None:
+    _, scenario, _ = normal_varying_case(
+        initial_profile=np.array([-1.0, -1.0, 1.0, 1.0]),
+        lapse_profile=np.zeros(4),
+    )
+    result = propagate_scalar_dust_wall_boost(
+        scenario=scenario, numerics=boost_numerics()
+    )
+    diagnostics = result.diagnostics
+    assert diagnostics.initial_boundary_normal_velocity_max_abs <= 2e-11
+    assert diagnostics.propagated_boundary_normal_velocity_max_abs <= 2e-11
+    assert diagnostics.boundary_condition_classification == BOOST_SPECIFIC_BOUNDARY_MODEL
+    assert diagnostics.boundary_runtime_enforcement == BOOST_BOUNDARY_RUNTIME_ENFORCEMENT
+
+
+def test_supplied_normal_varying_penetrating_potential_is_rejected() -> None:
+    _, scenario, _ = normal_varying_case(
+        initial_profile=np.array([-1.5, -0.5, 0.5, 1.5]),
+        lapse_profile=np.zeros(4),
+    )
+    with pytest.raises(
+        Phase1FBBoundaryCompatibilityError, match="initial scalar boost"
+    ):
+        propagate_scalar_dust_wall_boost(
+            scenario=scenario, numerics=boost_numerics()
+        )
+
+
+def test_boundary_incompatible_time_dependent_lapse_driver_is_rejected() -> None:
+    _, scenario, _ = normal_varying_case(
+        initial_profile=np.array([-1.0, -1.0, 1.0, 1.0]),
+        lapse_profile=np.array([-1.5, -0.5, 0.5, 1.5]),
+    )
+    with pytest.raises(
+        Phase1FBBoundaryCompatibilityError, match="wall lapse driver"
+    ):
+        propagate_scalar_dust_wall_boost(
+            scenario=scenario, numerics=boost_numerics()
+        )
+
+
+def test_boundary_compatible_driver_preserves_no_penetration_for_all_times() -> None:
+    _, scenario, expected = normal_varying_case(
+        initial_profile=np.array([-1.0, -1.0, 1.0, 1.0]),
+        lapse_profile=np.array([-1.0, -1.0, 1.0, 1.0]),
+    )
+    result = propagate_scalar_dust_wall_boost(
+        scenario=scenario, numerics=boost_numerics()
+    )
+    np.testing.assert_allclose(result.scalar_potential, expected, atol=2e-14)
+    assert result.diagnostics.driver_boundary_normal_acceleration_max_abs <= 2e-11
+    assert result.diagnostics.propagated_boundary_normal_velocity_max_abs <= 2e-11
+
+
+def test_normal_varying_fixture_distinguishes_broken_and_unbroken_operators() -> None:
+    _, scenario, expected = normal_varying_case(
+        initial_profile=np.array([-1.0, -1.0, 1.0, 1.0]),
+        lapse_profile=np.zeros(4),
+    )
+    result = propagate_scalar_dust_wall_boost(
+        scenario=scenario, numerics=boost_numerics()
+    )
+    shape = scenario.geometry_closure.wall_domain.operator.carrier.grid_shape
+    spacing = scenario.geometry_closure.wall_domain.operator.carrier.grid_spacing
+    field = expected[0].reshape(shape)
+    unbroken = np.zeros(shape, dtype=np.float64)
+    for axis, step in enumerate(spacing):
+        unbroken += (
+            np.roll(field, 1, axis=axis)
+            - 2.0 * field
+            + np.roll(field, -1, axis=axis)
+        ) / step**2
+    wall_mask = scenario.geometry_closure.wall_domain.mask
+    difference = np.max(
+        np.abs(result.physical_laplacian_of_potential[0, wall_mask] - unbroken.reshape(-1)[wall_mask])
+    )
+    assert difference == pytest.approx(0.128)
+
+
+def test_shear_free_sector_is_explicit_and_nonzero_shear_is_rejected() -> None:
+    _, scenario, _, _ = make_case()
+    assert scenario.geometry_closure.wall_background_shear_free is True
+    with pytest.raises(Phase1FBGeometryClosureError, match="shear-free"):
+        replace(scenario.geometry_closure, wall_background_shear_free=False)
+    with pytest.raises(Phase1FBGeometryClosureError, match="shear-free"):
+        replace(  # type: ignore[arg-type]
+            scenario.geometry_closure,
+            selected_background_geometry_sector="NONZERO_WALL_SHEAR",
+        )
+
+
+def test_harmonic_vector_sector_is_excluded_not_normalized_to_zero() -> None:
+    _, scenario, _, _ = make_case()
+    result = propagate_scalar_dust_wall_boost(
+        scenario=scenario, numerics=boost_numerics()
+    )
+    assert result.harmonic_vector_sector_status == HARMONIC_VECTOR_SECTOR_EXCLUDED
+    assert (
+        result.harmonic_vector_zero_as_timescape_prediction
+        == HARMONIC_VECTOR_ZERO_NOT_GRANTED
+    )
+    assert not hasattr(result, "harmonic_vector_velocity")
+
+
+def test_residual_evidence_hierarchy_is_explicit() -> None:
+    _, scenario, _, _ = make_case()
+    result = propagate_scalar_dust_wall_boost(
+        scenario=scenario, numerics=boost_numerics()
+    )
+    assert (
+        result.diagnostics.expansion_compatibility_evidence_classification
+        == EXPANSION_COMPATIBILITY_EVIDENCE
+    )
+    assert (
+        result.diagnostics.propagation_evidence_classification
+        == PROPAGATION_CONSTRUCTION_DIAGNOSTIC
+    )
+    assert "CONSTRUCTION_INVARIANT" in result.diagnostics.curl_status
+
+
+def test_wall_proper_time_rate_is_explicit_provenance_only_metadata() -> None:
+    _, scenario, _, _ = make_case()
+    changed_closure = replace(
+        scenario.geometry_closure,
+        wall_proper_time_rate=np.full(3, 2.0),
+    )
+    changed = replace(scenario, geometry_closure=changed_closure)
+    original_result = propagate_scalar_dust_wall_boost(
+        scenario=scenario, numerics=boost_numerics()
+    )
+    changed_result = propagate_scalar_dust_wall_boost(
+        scenario=changed, numerics=boost_numerics()
+    )
+    np.testing.assert_array_equal(
+        original_result.scalar_potential, changed_result.scalar_potential
+    )
+    assert changed_result.wall_proper_time_rate_role == WALL_PROPER_TIME_RATE_ROLE
+
+
+def test_boundary_closure_is_external_and_never_a_physical_interface_claim() -> None:
+    policy = boost_boundary()
+    assert policy.physical_boundary_condition == EXPLICIT_EXTERNAL_NO_PENETRATION_CLOSURE
+    assert policy.derived_from_timescape is False
+    assert policy.inherited_from_h1_density_transmission is False
+    assert policy.physical_interface_claim == "NOT_GRANTED"
+    with pytest.raises(Phase1FBContractError, match="not derived from Timescape"):
+        replace(policy, derived_from_timescape=True)
+
+
+def test_evidence_only_convergence_classification_is_public() -> None:
+    assert (
+        TIME_INTEGRATOR_CONVERGENCE_CLASSIFICATION
+        == "SECOND_ORDER_NUMERICAL_SELF_CONVERGENCE_OF_THE_IMPLEMENTED_TIME_INTEGRATOR"
+    )
 
 
 def test_nonzero_hubble_homogeneous_propagation_passes_when_resolved() -> None:

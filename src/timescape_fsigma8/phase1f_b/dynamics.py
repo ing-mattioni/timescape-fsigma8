@@ -3,10 +3,10 @@
 Implemented scientific chain:
 
 * ``Z_w = Delta_gamma_w deltaTheta_d,w`` from GM Eqs. (2.20)--(2.24);
-* ``Theta_W = Theta_d + D_a xi^a`` under the destination-minus-source
-  convention audited against BDE Eqs. (14)--(16) and DBE Eqs. (14)--(15),
-  so ``D^2 psi = deltaTheta_d,w - deltaTheta_W`` for
-  ``u_d = u_W + D psi``;
+* ``Theta_d = Theta_W + D_a v_d|W^a`` under the convention
+  ``u_d=u_W+v_d|W`` audited against BDE Eqs. (14)--(16) and DBE
+  Eqs. (14)--(15), so
+  ``D^2 psi = deltaTheta_d,w - deltaTheta_W``;
 * ``A_W + dot(v) + H_W v = 0`` from the same first-order acceleration
   transformation with dust geodesicity from GM Eq. (2.9);
 * ``dot(psi) = -Q0 nu_W`` in the explicitly approved scalar-normal
@@ -37,13 +37,23 @@ from timescape_fsigma8.phase1f_a.operators import (
     solve_regional_laplace_beltrami,
 )
 from timescape_fsigma8.phase1f_b.models import (
+    BOOST_BOUNDARY_RUNTIME_ENFORCEMENT,
+    BOOST_SPECIFIC_BOUNDARY_MODEL,
     CONDITIONAL_SCALAR_DUST_TO_WALL_BOOST,
+    EXPANSION_COMPATIBILITY_EVIDENCE,
+    HARMONIC_VECTOR_SECTOR_EXCLUDED,
+    HARMONIC_VECTOR_ZERO_NOT_GRANTED,
     MATHEMATICAL_OPERATOR_FIXTURE_ONLY,
+    PROPAGATION_CONSTRUCTION_DIAGNOSTIC,
     REALIZATION_ID,
     TRANSVERSE_SECTOR_EXCLUDED,
     TRANSVERSE_ZERO_NOT_GRANTED,
+    WALL_BACKGROUND_SHEAR_EXCLUDED,
+    WALL_PROPER_TIME_RATE_ROLE,
+    WALL_SHEAR_ZERO_NOT_GRANTED,
     BoostInitializationMode,
     LapseKernelMode,
+    Phase1FBBoundaryCompatibilityError,
     Phase1FBCompatibilityError,
     Phase1FBContractError,
     Phase1FBGeometryClosureError,
@@ -110,6 +120,91 @@ def _physical_orthonormal_gradient(
     result /= scale_factor
     result[~domain.mask, :] = 0.0
     return result
+
+
+def _interface_normal_components(
+    *, domain, scalar_field: np.ndarray, scale_factor: float
+) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """Return the supported one-sided physical normal trace on wall faces.
+
+    BDE Eq. (74) fixes the physical/comoving spatial-derivative conversion.
+    For a coordinate face with outward sign ``s`` and reference inverse
+    metric ``gamma^ij``, the explicit boundary trace is
+    ``D_n f=s gamma^aj partial_j f / (a sqrt(gamma^aa))``.  The
+    one-sided derivatives are those of the frozen regional-gradient
+    implementation.  This trace implements the user-approved external
+    ``D_n psi=0`` boost closure; it is not a Timescape or H1 interface law.
+    """
+    reference_gradient = _regional_gradient(
+        domain=domain, potential_full=scalar_field
+    )
+    operator = domain.operator
+    shape = operator.carrier.grid_shape
+    mask = domain.mask.reshape(shape)
+    dimension = operator.carrier.dimension
+    inverse_metric = domain.geometry.metric_inverse.reshape(
+        (operator.size, dimension, dimension)
+    )
+    components: list[float] = []
+    spatial_indices: list[int] = []
+    axes: list[int] = []
+    for index in np.ndindex(shape):
+        if not mask[index]:
+            continue
+        flat = int(np.ravel_multi_index(index, shape))
+        for axis in range(dimension):
+            for offset, outward_sign in ((-1, -1.0), (1, 1.0)):
+                neighbor = list(index)
+                neighbor[axis] = (neighbor[axis] + offset) % shape[axis]
+                if mask[tuple(neighbor)]:
+                    continue
+                normalization = scale_factor * np.sqrt(
+                    inverse_metric[flat, axis, axis]
+                )
+                if not np.isfinite(normalization) or normalization <= 0.0:
+                    raise Phase1FBBoundaryCompatibilityError(
+                        "boundary normal has an invalid metric normalization"
+                    )
+                components.append(
+                    outward_sign
+                    * float(reference_gradient[flat, axis])
+                    / float(normalization)
+                )
+                spatial_indices.append(flat)
+                axes.append(axis)
+    if not components:
+        raise Phase1FBBoundaryCompatibilityError(
+            "the explicit wall-interior boundary closure has no boundary faces"
+        )
+    return (
+        np.asarray(components, dtype=np.float64),
+        np.asarray(spatial_indices, dtype=np.int64),
+        np.asarray(axes, dtype=np.int64),
+    )
+
+
+def _boundary_history_diagnostic(
+    *, domain, fields: np.ndarray, scale_factors: np.ndarray, time: np.ndarray
+) -> tuple[float, float, int, int]:
+    """Measure the explicit boost-boundary trace over its full time support."""
+    worst_value = -1.0
+    worst_time = float(time[0])
+    worst_spatial_index = -1
+    worst_axis = -1
+    for time_index, field in enumerate(fields):
+        values, spatial_indices, axes = _interface_normal_components(
+            domain=domain,
+            scalar_field=field,
+            scale_factor=float(scale_factors[time_index]),
+        )
+        local = int(np.argmax(np.abs(values)))
+        value = float(abs(values[local]))
+        if value > worst_value:
+            worst_value = value
+            worst_time = float(time[time_index])
+            worst_spatial_index = int(spatial_indices[local])
+            worst_axis = int(axes[local])
+    return worst_value, worst_time, worst_spatial_index, worst_axis
 
 
 def propagate_scalar_dust_wall_boost(
@@ -185,6 +280,27 @@ def propagate_scalar_dust_wall_boost(
             projected_lapse[index] = lapse_regional[index]
         else:
             projected_lapse[index] = lapse_regional[index] - raw_means[index]
+    projected_lapse_full = np.stack(
+        [
+            embed_regional_field(system=system, regional_field=row)
+            for row in projected_lapse
+        ]
+    )
+    (
+        driver_boundary_max,
+        driver_boundary_time,
+        driver_boundary_spatial_index,
+        driver_boundary_axis,
+    ) = _boundary_history_diagnostic(
+        domain=domain,
+        fields=projected_lapse_full,
+        scale_factors=scale,
+        time=time,
+    )
+    if driver_boundary_max > numerics.boundary_normal_acceleration_tolerance:
+        raise Phase1FBBoundaryCompatibilityError(
+            "wall lapse driver violates the external no-penetration boundary closure"
+        )
 
     dust_regional = np.stack(
         [item.regional_values for item in scenario.dust_expansion_history]
@@ -224,6 +340,24 @@ def propagate_scalar_dust_wall_boost(
             raise Phase1FBKernelCompatibilityError(
                 "expansion-matched initial source violates boost kernel contract"
             ) from exc
+    initial_potential_full = embed_regional_field(
+        system=system, regional_field=potential[0]
+    )
+    (
+        initial_boundary_max,
+        _,
+        initial_boundary_spatial_index,
+        initial_boundary_axis,
+    ) = _boundary_history_diagnostic(
+        domain=domain,
+        fields=initial_potential_full[np.newaxis, :],
+        scale_factors=scale[:1],
+        time=time[:1],
+    )
+    if initial_boundary_max > numerics.boundary_normal_velocity_tolerance:
+        raise Phase1FBBoundaryCompatibilityError(
+            "initial scalar boost violates the external no-penetration boundary closure"
+        )
     for index, step in enumerate(dt):
         potential[index + 1] = potential[index] - 0.5 * step * (
             projected_lapse[index] + projected_lapse[index + 1]
@@ -248,11 +382,23 @@ def propagate_scalar_dust_wall_boost(
     potential_full = np.stack(
         [embed_regional_field(system=system, regional_field=row) for row in potential]
     )
+    (
+        propagated_boundary_max,
+        propagated_boundary_time,
+        propagated_boundary_spatial_index,
+        propagated_boundary_axis,
+    ) = _boundary_history_diagnostic(
+        domain=domain,
+        fields=potential_full,
+        scale_factors=scale,
+        time=time,
+    )
+    if propagated_boundary_max > numerics.boundary_normal_velocity_tolerance:
+        raise Phase1FBBoundaryCompatibilityError(
+            "propagated scalar boost violates the external no-penetration boundary closure"
+        )
     potential_dot_full = np.stack(
         [embed_regional_field(system=system, regional_field=row) for row in potential_dot_regional]
-    )
-    projected_lapse_full = np.stack(
-        [embed_regional_field(system=system, regional_field=row) for row in projected_lapse]
     )
     physical_laplacian_full = np.stack(
         [embed_regional_field(system=system, regional_field=row) for row in physical_laplacian_regional]
@@ -327,11 +473,15 @@ def propagate_scalar_dust_wall_boost(
         else MATHEMATICAL_OPERATOR_FIXTURE_ONLY
     )
     diagnostics = ScalarDustWallBoostDiagnostics(
+        expansion_compatibility_evidence_classification=(
+            EXPANSION_COMPATIBILITY_EVIDENCE
+        ),
         expansion_compatibility_max_abs=compatibility_max,
         expansion_compatibility_normalized_linf=compatibility_normalized,
         expansion_compatibility_tolerance=numerics.expansion_compatibility_tolerance,
         expansion_compatibility_worst_time=float(time[compatibility_where[0]]),
         expansion_compatibility_worst_spatial_index=int(regional[compatibility_where[1]]),
+        propagation_evidence_classification=PROPAGATION_CONSTRUCTION_DIAGNOSTIC,
         propagation_residual_max_abs=propagation_max,
         propagation_residual_normalized_linf=propagation_normalized,
         propagation_residual_tolerance=numerics.propagation_residual_tolerance,
@@ -339,6 +489,30 @@ def propagate_scalar_dust_wall_boost(
             0.5 * (time[propagation_where[0]] + time[propagation_where[0] + 1])
         ),
         propagation_worst_spatial_index=int(regional[propagation_where[1]]),
+        initial_boundary_normal_velocity_max_abs=initial_boundary_max,
+        initial_boundary_normal_velocity_tolerance=(
+            numerics.boundary_normal_velocity_tolerance
+        ),
+        initial_boundary_worst_spatial_index=initial_boundary_spatial_index,
+        initial_boundary_worst_axis=initial_boundary_axis,
+        driver_boundary_normal_acceleration_max_abs=driver_boundary_max,
+        driver_boundary_normal_acceleration_tolerance=(
+            numerics.boundary_normal_acceleration_tolerance
+        ),
+        driver_boundary_worst_time=driver_boundary_time,
+        driver_boundary_worst_spatial_index=driver_boundary_spatial_index,
+        driver_boundary_worst_axis=driver_boundary_axis,
+        propagated_boundary_normal_velocity_max_abs=propagated_boundary_max,
+        propagated_boundary_normal_velocity_tolerance=(
+            numerics.boundary_normal_velocity_tolerance
+        ),
+        propagated_boundary_worst_time=propagated_boundary_time,
+        propagated_boundary_worst_spatial_index=(
+            propagated_boundary_spatial_index
+        ),
+        propagated_boundary_worst_axis=propagated_boundary_axis,
+        boundary_condition_classification=BOOST_SPECIFIC_BOUNDARY_MODEL,
+        boundary_runtime_enforcement=BOOST_BOUNDARY_RUNTIME_ENFORCEMENT,
         potential_mean_max_abs=potential_mean_max,
         lapse_raw_mean_max_abs=float(np.max(np.abs(raw_means))),
         lapse_q0_correction_max_abs=(
@@ -373,6 +547,13 @@ def propagate_scalar_dust_wall_boost(
         scientific_classification=classification,
         transverse_sector_status=TRANSVERSE_SECTOR_EXCLUDED,
         transverse_zero_as_timescape_prediction=TRANSVERSE_ZERO_NOT_GRANTED,
+        harmonic_vector_sector_status=HARMONIC_VECTOR_SECTOR_EXCLUDED,
+        harmonic_vector_zero_as_timescape_prediction=(
+            HARMONIC_VECTOR_ZERO_NOT_GRANTED
+        ),
+        wall_background_shear_status=WALL_BACKGROUND_SHEAR_EXCLUDED,
+        wall_shear_zero_as_timescape_prediction=WALL_SHEAR_ZERO_NOT_GRANTED,
+        wall_proper_time_rate_role=WALL_PROPER_TIME_RATE_ROLE,
         conditional_forward_uniqueness="GRANTED",
         unique_from_frozen_y_alone="NOT_GRANTED",
         unique_timescape_prediction="NOT_GRANTED",

@@ -51,7 +51,30 @@ TRANSVERSE_SECTOR_EXCLUDED = (
     "EXCLUDED_BY_EXPLICIT_SCALAR_MODEL_RESTRICTION"
 )
 TRANSVERSE_ZERO_NOT_GRANTED = "NOT_GRANTED"
-BOOST_SPECIFIC_BOUNDARY_MODEL = "EXPLICIT_BOOST_SPECIFIC_BOUNDARY_MODEL"
+HARMONIC_VECTOR_SECTOR_EXCLUDED = (
+    "EXCLUDED_BY_EXPLICIT_SCALAR_MODEL_RESTRICTION"
+)
+HARMONIC_VECTOR_ZERO_NOT_GRANTED = "NOT_GRANTED"
+WALL_BACKGROUND_SHEAR_EXCLUDED = (
+    "EXCLUDED_BY_EXPLICIT_SELECTED_GEOMETRIC_SECTOR"
+)
+WALL_SHEAR_ZERO_NOT_GRANTED = "NOT_GRANTED"
+BOOST_SPECIFIC_BOUNDARY_MODEL = "EXPLICIT_EXTERNAL_BOOST_BOUNDARY_CLOSURE"
+EXPLICIT_EXTERNAL_NO_PENETRATION_CLOSURE = (
+    "EXPLICIT_EXTERNAL_NO_PENETRATION_CLOSURE"
+)
+BOOST_BOUNDARY_RUNTIME_ENFORCEMENT = "FAIL_CLOSED"
+PHYSICAL_INTERFACE_NOT_GRANTED = "NOT_GRANTED"
+PROPAGATION_CONSTRUCTION_DIAGNOSTIC = (
+    "CONSTRUCTION_INVARIANT_WITH_TIME_DISCRETIZATION_ERROR"
+)
+EXPANSION_COMPATIBILITY_EVIDENCE = (
+    "INDEPENDENT_SCIENTIFIC_COMPATIBILITY_GATE"
+)
+TIME_INTEGRATOR_CONVERGENCE_CLASSIFICATION = (
+    "SECOND_ORDER_NUMERICAL_SELF_CONVERGENCE_OF_THE_IMPLEMENTED_TIME_INTEGRATOR"
+)
+WALL_PROPER_TIME_RATE_ROLE = "PROVENANCE_ONLY_NON_DYNAMICAL_METADATA"
 H1_DENSITY_TRANSMISSION_BC_TO_BOOST_BC = "FORBIDDEN_INHERITANCE"
 PERTURBATIVE_WALL_LAPSE_POTENTIAL = "PERTURBATIVE_WALL_LAPSE_POTENTIAL"
 COMMON_TIME_GRID_EVALUATION_ONLY = "COMMON_TIME_GRID_EVALUATION_ONLY"
@@ -81,7 +104,11 @@ class Phase1FBCompatibilityError(Phase1FBContractError):
 
 
 class Phase1FBPropagationError(Phase1FBContractError):
-    """The independent dust-geodesic/boost propagation residual failed."""
+    """The propagation construction/time-discretisation diagnostic failed."""
+
+
+class Phase1FBBoundaryCompatibilityError(Phase1FBContractError):
+    """The explicit external no-penetration boost closure failed."""
 
 
 class Phase1FBLinearRegimeError(Phase1FBContractError):
@@ -110,6 +137,12 @@ class LapseKernelMode(Enum):
 class ScalarBoostSector(Enum):
     SCALAR_LONGITUDINAL_HYPERSURFACE_ORTHOGONAL = (
         "SCALAR_LONGITUDINAL_HYPERSURFACE_ORTHOGONAL"
+    )
+
+
+class WallBackgroundGeometrySector(Enum):
+    SHEAR_FREE_QUASI_FLRW_COMMON_SPACETIME = (
+        "SHEAR_FREE_QUASI_FLRW_COMMON_SPACETIME"
     )
 
 
@@ -158,6 +191,10 @@ class ScalarDustWallBoostNumerics:
     lapse_mean_tolerance: float
     scale_factor_rate_tolerance: float
     off_domain_tolerance: float
+    boundary_normal_velocity_tolerance: float
+    boundary_normal_acceleration_tolerance: float
+    boundary_normal_velocity_tolerance_units: str
+    boundary_normal_acceleration_tolerance_units: str
     linear_velocity_ratio_threshold: float
     speed_of_light: float
     speed_of_light_units: str
@@ -170,12 +207,28 @@ class ScalarDustWallBoostNumerics:
             if item.name in {
                 "integration_method",
                 "speed_of_light_units",
+                "boundary_normal_velocity_tolerance_units",
+                "boundary_normal_acceleration_tolerance_units",
                 "_integrity_token",
             }:
                 continue
             _require_positive(float(getattr(self, item.name)), item.name)
         if self.speed_of_light_units != "REFERENCE_LENGTH_PER_COMMON_TIME":
             raise Phase1FBContractError("speed_of_light_units mismatch")
+        if (
+            self.boundary_normal_velocity_tolerance_units
+            != "REFERENCE_LENGTH_PER_COMMON_TIME"
+        ):
+            raise Phase1FBContractError(
+                "boundary normal-velocity tolerance units mismatch"
+            )
+        if (
+            self.boundary_normal_acceleration_tolerance_units
+            != "INVERSE_COMMON_TIME"
+        ):
+            raise Phase1FBContractError(
+                "boundary normal-acceleration tolerance units mismatch"
+            )
         if self.integration_method != "EXPLICIT_TRAPEZOIDAL_COMMON_TIME_GRID":
             raise Phase1FBContractError(
                 "V1 supports only EXPLICIT_TRAPEZOIDAL_COMMON_TIME_GRID"
@@ -195,11 +248,14 @@ class ScalarDustWallBoostNumerics:
 
 @dataclass(frozen=True, slots=True, kw_only=True)
 class BoostBoundaryKernelPolicy:
-    """Boost-specific wall-interior boundary and constant-kernel contract.
+    """External wall-interior no-penetration and constant-kernel contract.
 
     The numerical no-flux realization reuses the Phase 1F-A regional matrix,
     but this record is a new explicit boost modeling choice.  It is never
-    inherited from the H1 density/transmission interface.
+    inherited from the H1 density/transmission interface and does not make
+    that mathematical interface a physical material wall.  The spatial
+    derivative convention follows BDE Eq. (74); ``D_n psi=0`` is the explicit
+    human-approved Phase 1F-B boundary closure, not a Timescape prediction.
     """
 
     domain_id: str
@@ -208,7 +264,10 @@ class BoostBoundaryKernelPolicy:
     compatibility_condition: str
     provenance: str
     classification: str
+    physical_boundary_condition: str
+    derived_from_timescape: bool
     inherited_from_h1_density_transmission: bool
+    physical_interface_claim: str
     _integrity_token: object = field(init=False, repr=False, compare=False)
 
     def __post_init__(self) -> None:
@@ -224,6 +283,21 @@ class BoostBoundaryKernelPolicy:
             raise Phase1FBContractError("V1 requires wall source mean zero")
         if self.classification != BOOST_SPECIFIC_BOUNDARY_MODEL:
             raise Phase1FBContractError("boost boundary must be explicitly classified")
+        if (
+            self.physical_boundary_condition
+            != EXPLICIT_EXTERNAL_NO_PENETRATION_CLOSURE
+        ):
+            raise Phase1FBContractError(
+                "boost boundary must declare the external no-penetration closure"
+            )
+        if not isinstance(self.derived_from_timescape, bool):
+            raise Phase1FBContractError(
+                "Timescape boundary-derivation status must be an explicit boolean"
+            )
+        if self.derived_from_timescape:
+            raise Phase1FBContractError(
+                "boost no-penetration boundary is not derived from Timescape"
+            )
         if not isinstance(self.inherited_from_h1_density_transmission, bool):
             raise Phase1FBContractError(
                 "boundary inheritance status must be an explicit boolean"
@@ -231,6 +305,10 @@ class BoostBoundaryKernelPolicy:
         if self.inherited_from_h1_density_transmission:
             raise Phase1FBContractError(
                 "H1 density/transmission boundary inheritance is forbidden"
+            )
+        if self.physical_interface_claim != PHYSICAL_INTERFACE_NOT_GRANTED:
+            raise Phase1FBContractError(
+                "explicit boost boundary does not grant a physical interface claim"
             )
         _seal(self, self._live_state())
 
@@ -242,7 +320,10 @@ class BoostBoundaryKernelPolicy:
             self.compatibility_condition,
             self.provenance,
             self.classification,
+            self.physical_boundary_condition,
+            self.derived_from_timescape,
             self.inherited_from_h1_density_transmission,
+            self.physical_interface_claim,
         )
 
     def validate_integrity(self) -> None:
@@ -274,6 +355,7 @@ class CommonSpacetimeWallGeometryClosure:
     wall_scale_factor: FloatArray
     wall_hubble_rate: FloatArray
     wall_proper_time_rate: FloatArray
+    wall_proper_time_rate_role: str
     wall_expansion_perturbation: FloatArray
     wall_lapse_perturbation: FloatArray
     lapse_driver_kind: str
@@ -285,9 +367,11 @@ class CommonSpacetimeWallGeometryClosure:
     unit_system: str
     interpolation_policy: str
     provenance: BoostGeometryProvenance
+    selected_background_geometry_sector: WallBackgroundGeometrySector
     scalar_hypersurface_orthogonal: bool
     vorticity_dust_zero: bool
     vorticity_wall_zero: bool
+    wall_background_shear_free: bool
     normalization_kernel_identity: str
     scientific_classification: str
     _integrity_token: object = field(init=False, repr=False, compare=False)
@@ -314,6 +398,7 @@ class CommonSpacetimeWallGeometryClosure:
             "wall_scale_factor_units",
             "wall_lapse_units",
             "unit_system",
+            "wall_proper_time_rate_role",
             "normalization_kernel_identity",
             "scientific_classification",
         ):
@@ -342,10 +427,22 @@ class CommonSpacetimeWallGeometryClosure:
             raise Phase1FBGeometryClosureError(
                 "V1 requires explicit piecewise-linear no-extrapolation policy"
             )
+        if self.wall_proper_time_rate_role != WALL_PROPER_TIME_RATE_ROLE:
+            raise Phase1FBGeometryClosureError(
+                "wall_proper_time_rate is provenance-only non-dynamical metadata"
+            )
+        if not isinstance(
+            self.selected_background_geometry_sector,
+            WallBackgroundGeometrySector,
+        ):
+            raise Phase1FBGeometryClosureError(
+                "the explicit shear-free quasi-FLRW background sector is required"
+            )
         restrictions = (
             self.scalar_hypersurface_orthogonal,
             self.vorticity_dust_zero,
             self.vorticity_wall_zero,
+            self.wall_background_shear_free,
         )
         if not all(isinstance(value, bool) for value in restrictions):
             raise Phase1FBGeometryClosureError(
@@ -356,10 +453,11 @@ class CommonSpacetimeWallGeometryClosure:
                 self.scalar_hypersurface_orthogonal,
                 self.vorticity_dust_zero,
                 self.vorticity_wall_zero,
+                self.wall_background_shear_free,
             )
         ):
             raise Phase1FBGeometryClosureError(
-                "V1 requires the explicit scalar hypersurface-orthogonal sector"
+                "V1 requires the explicit scalar, vorticity-free, shear-free sector"
             )
         arrays = {
             "time_grid": _readonly_float(self.time_grid, "time_grid"),
@@ -430,6 +528,7 @@ class CommonSpacetimeWallGeometryClosure:
             self.wall_scale_factor,
             self.wall_hubble_rate,
             self.wall_proper_time_rate,
+            self.wall_proper_time_rate_role,
             self.wall_expansion_perturbation,
             self.wall_lapse_perturbation,
             self.lapse_driver_kind,
@@ -441,9 +540,11 @@ class CommonSpacetimeWallGeometryClosure:
             self.unit_system,
             self.interpolation_policy,
             self.provenance,
+            self.selected_background_geometry_sector,
             self.scalar_hypersurface_orthogonal,
             self.vorticity_dust_zero,
             self.vorticity_wall_zero,
+            self.wall_background_shear_free,
             self.normalization_kernel_identity,
             self.scientific_classification,
         )
@@ -621,16 +722,34 @@ class ScalarDustWallBoostScenario:
 
 @dataclass(frozen=True, slots=True, kw_only=True)
 class ScalarDustWallBoostDiagnostics:
+    expansion_compatibility_evidence_classification: str
     expansion_compatibility_max_abs: float
     expansion_compatibility_normalized_linf: float
     expansion_compatibility_tolerance: float
     expansion_compatibility_worst_time: float
     expansion_compatibility_worst_spatial_index: int
+    propagation_evidence_classification: str
     propagation_residual_max_abs: float
     propagation_residual_normalized_linf: float
     propagation_residual_tolerance: float
     propagation_worst_time: float
     propagation_worst_spatial_index: int
+    initial_boundary_normal_velocity_max_abs: float
+    initial_boundary_normal_velocity_tolerance: float
+    initial_boundary_worst_spatial_index: int
+    initial_boundary_worst_axis: int
+    driver_boundary_normal_acceleration_max_abs: float
+    driver_boundary_normal_acceleration_tolerance: float
+    driver_boundary_worst_time: float
+    driver_boundary_worst_spatial_index: int
+    driver_boundary_worst_axis: int
+    propagated_boundary_normal_velocity_max_abs: float
+    propagated_boundary_normal_velocity_tolerance: float
+    propagated_boundary_worst_time: float
+    propagated_boundary_worst_spatial_index: int
+    propagated_boundary_worst_axis: int
+    boundary_condition_classification: str
+    boundary_runtime_enforcement: str
     potential_mean_max_abs: float
     lapse_raw_mean_max_abs: float
     lapse_q0_correction_max_abs: float
@@ -661,6 +780,11 @@ class ScalarDustWallBoostResult:
     scientific_classification: str
     transverse_sector_status: str
     transverse_zero_as_timescape_prediction: str
+    harmonic_vector_sector_status: str
+    harmonic_vector_zero_as_timescape_prediction: str
+    wall_background_shear_status: str
+    wall_shear_zero_as_timescape_prediction: str
+    wall_proper_time_rate_role: str
     conditional_forward_uniqueness: str
     unique_from_frozen_y_alone: str
     unique_timescape_prediction: str
@@ -689,6 +813,25 @@ class ScalarDustWallBoostResult:
             raise Phase1FBContractError("transverse sector must remain explicitly excluded")
         if self.transverse_zero_as_timescape_prediction != TRANSVERSE_ZERO_NOT_GRANTED:
             raise Phase1FBContractError("transverse zero prediction is not granted")
+        if self.harmonic_vector_sector_status != HARMONIC_VECTOR_SECTOR_EXCLUDED:
+            raise Phase1FBContractError(
+                "harmonic vector sector must remain outside the scalar-gradient state"
+            )
+        if (
+            self.harmonic_vector_zero_as_timescape_prediction
+            != HARMONIC_VECTOR_ZERO_NOT_GRANTED
+        ):
+            raise Phase1FBContractError("harmonic-vector zero prediction is not granted")
+        if self.wall_background_shear_status != WALL_BACKGROUND_SHEAR_EXCLUDED:
+            raise Phase1FBContractError(
+                "wall background shear must be excluded by the selected sector"
+            )
+        if self.wall_shear_zero_as_timescape_prediction != WALL_SHEAR_ZERO_NOT_GRANTED:
+            raise Phase1FBContractError("wall-shear zero prediction is not granted")
+        if self.wall_proper_time_rate_role != WALL_PROPER_TIME_RATE_ROLE:
+            raise Phase1FBContractError(
+                "wall proper-time rate must remain provenance-only metadata"
+            )
         if self.scalar_potential_units != "REFERENCE_LENGTH_SQUARED_PER_COMMON_TIME":
             raise Phase1FBContractError("result scalar-potential units mismatch")
         if self.velocity_units != "REFERENCE_LENGTH_PER_COMMON_TIME":
@@ -722,6 +865,11 @@ class ScalarDustWallBoostResult:
             self.scientific_classification,
             self.transverse_sector_status,
             self.transverse_zero_as_timescape_prediction,
+            self.harmonic_vector_sector_status,
+            self.harmonic_vector_zero_as_timescape_prediction,
+            self.wall_background_shear_status,
+            self.wall_shear_zero_as_timescape_prediction,
+            self.wall_proper_time_rate_role,
             self.conditional_forward_uniqueness,
             self.unique_from_frozen_y_alone,
             self.unique_timescape_prediction,

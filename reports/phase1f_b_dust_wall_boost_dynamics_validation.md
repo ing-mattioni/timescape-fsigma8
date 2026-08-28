@@ -19,6 +19,12 @@ authorized for carry-forward into the Phase 1F-B branch and final commit.
 The untouched pre-implementation baseline passed as 539 tests on both Python
 3.14.3 and Python 3.11.9, with zero failures, skips, xfails, or warnings.
 
+The independent v1 adversarial audit is preserved as
+`phase1f_b_dust_wall_boost_dynamics_adversarial_audit.md` (SHA-256
+`7ef51fcd89ecdce68673791e4905a79e6db2ba5e1d2d1d3e37fb8ac3cab543ed`).
+Its historical verdict is `TARGETED_CORRECTIONS_REQUIRED`; it found no
+blocking scientific defect and is the provenance for the v2 corrections.
+
 ## 2. Frozen Phase 1F-A boundary
 
 Phase 1F-B does not alter density reconstruction, the carrier density
@@ -90,11 +96,14 @@ is inferred from \(\gamma_w(t)\).
 - a strictly increasing common-time grid with no extrapolation;
 - a detached dust-expansion time grid and time-coordinate ID that must match
   the common-spacetime grid and coordinate exactly;
-- \(a_w\), \(H_{\mathcal W}\), and the positive wall proper-time rate;
+- \(a_w\), \(H_{\mathcal W}\), and the positive wall proper-time rate, whose
+  role is explicitly `PROVENANCE_ONLY_NON_DYNAMICAL_METADATA` because the
+  implemented derivative is with respect to declared common time;
 - \(\delta\Theta_{\mathcal W}\) and the perturbative lapse potential
   \(\nu_{\mathcal W}\);
 - the explicit `GEOMETRIZED_C_EQUALS_ONE` unit system and all field units;
-- scalar/hypersurface-orthogonal and zero-vorticity model restrictions;
+- scalar/hypersurface-orthogonal, zero-vorticity, and explicit
+  `SHEAR_FREE_QUASI_FLRW_COMMON_SPACETIME` model restrictions;
 - explicit normalization/kernel provenance;
 - `EXTERNAL_GEOMETRIC_CLOSURE` or `SYNTHETIC_VALIDATION_ONLY` provenance.
 
@@ -193,18 +202,37 @@ The runtime accepts only the enum value
 No transverse velocity field is returned and no vector-theory rank is
 assigned.
 
+Non-gradient harmonic vector modes are likewise outside the scalar-potential
+state. On a topology such as \(T^3\), a constant vector can have zero
+divergence and curl while remaining invisible to \(\psi_{dw}\). Thus
+`HARMONIC_VECTOR_SECTOR: EXCLUDED_BY_EXPLICIT_SCALAR_MODEL_RESTRICTION` and
+`HARMONIC_VECTOR_ZERO_AS_TIMESCAPE_PREDICTION: NOT_GRANTED`. Mean-zero
+normalization of the scalar potential does not resolve that vector sector.
+
 The mean-zero representative removes one regional constant. Lapse data must
 either already satisfy `REQUIRE_MEAN_ZERO` or the caller must explicitly
 select `EXPLICIT_Q0_PROJECTION`. No projection is implicit.
 
 ## 12. Interface firewall
 
-The regional matrix is reused only after the caller supplies
-`EXPLICIT_BOOST_SPECIFIC_BOUNDARY_MODEL` with
-`BOOST_WALL_INTERIOR_NO_FLUX_PERIODIC_TANGENTIAL`. The model records
-`inherited_from_h1_density_transmission=False`; setting it true is rejected.
-No physical wall, no-penetration condition, velocity continuity, or mass-flux
-junction follows from the H1 transmission interface.
+The regional matrix is reused only after the caller supplies the explicit
+boost-specific boundary classification
+`EXPLICIT_EXTERNAL_BOOST_BOUNDARY_CLOSURE` with the mathematical condition
+
+\[
+ D_n\psi_{dw}|_\Gamma=v_{d|\mathcal W}^a n_a|_\Gamma=0.
+\]
+
+This is an `EXPLICIT_EXTERNAL_NO_PENETRATION_CLOSURE` for the selected
+wall-interior realization. It is not derived from Timescape, is not inherited
+from H1 density transmission, does not turn \(\Gamma\) into a physical
+material wall, and leaves `PHYSICAL_INTERFACE_CLAIM: NOT_GRANTED`.
+
+Runtime enforcement is `FAIL_CLOSED`: the supplied or elliptically
+reconstructed initial potential, the full supplied lapse-driver history
+through \(D_n\nu_{\mathcal W}|_\Gamma=0\), and every propagated potential are
+checked independently against explicit `2e-11` boundary tolerances. No
+incompatible field is projected into the boundary model.
 
 ## 13. Differential state rank
 
@@ -231,19 +259,27 @@ For the manufactured 3-D fixture:
 - worst carrier index: `1`.
 
 Perturbing only \(\delta\Theta_{\mathcal W}\) by `1e-4` fails closed.
+Its evidence classification is
+`INDEPENDENT_SCIENTIFIC_COMPATIBILITY_GATE`; it is not aggregated with the
+construction diagnostics below.
 
-## 15. Propagation/geodesicity residual
+## 15. Propagation/geodesicity construction diagnostic
 
-The independently evaluated interval residual is the Crank--Nicolson
-diagnostic form of
+The interval residual is the Crank--Nicolson diagnostic form of
 
 \[
  R_A=A_{\mathcal W}+\dot v+H_{\mathcal W}v.
 \]
 
-It is evaluated from physical gradient components, independently of
-\(C_\Theta\). Finite differences are used only for this validation residual;
-they do not define the propagation law. The manufactured values are:
+It is evaluated separately from \(C_\Theta\), but it is not independent
+physical validation in this scalar construction: \(v=D\psi\),
+\(A_{\mathcal W}=D\nu_{\mathcal W}\), and
+\(\dot\psi=-Q_0\nu_{\mathcal W}\) make it a construction identity up to the
+implemented time-discretization error and selected commutator. Its machine
+classification is
+`CONSTRUCTION_INVARIANT_WITH_TIME_DISCRETIZATION_ERROR`. Finite differences
+are used only for this diagnostic; they do not define the propagation law.
+The manufactured values are:
 
 - maximum absolute residual: `5.204170427930421e-18`;
 - normalized L-infinity residual: `1.2621967275337053e-15`;
@@ -294,6 +330,11 @@ coordinate-component norm.
 | V10 | excessive velocity rejected by the linear gate |
 | V11 | correct \(a_w^2\) conversion passes; wrong factor rejected |
 | V12 | embedding, metric, domain/frame identity mismatches rejected |
+| V13 | 3-D normal-varying admissible initial/driver fields pass all boundary gates |
+| V14 | mean-zero but boundary-penetrating supplied potential rejected |
+| V15 | boundary-incompatible time-dependent lapse driver rejected |
+| V16 | broken wall-interior and unbroken periodic Laplacians differ by `0.128` |
+| V17 | explicit nonzero-background-shear declaration rejected |
 
 All integrated scientific validation uses a genuine 3-D synthetic carrier.
 The reduced-dimensional test is explicitly
@@ -311,9 +352,12 @@ trapezoidal common-time refinement gives:
 | 16 | `4.882812500001631e-07` | `1.9999999999993594` |
 | 32 | `1.2207031250014919e-07` | `1.9999999999987186` |
 
-This establishes second-order time-integration convergence for that smooth
-synthetic scalar fixture. It is not an interface-refinement or physical-
-Timescape convergence theorem.
+This is classified
+`SECOND_ORDER_NUMERICAL_SELF_CONVERGENCE_OF_THE_IMPLEMENTED_TIME_INTEGRATOR`.
+The script reimplements the same trapezoidal update and measures its
+closed-form truncation scaling, so it is numerical implementation evidence,
+not independent validation of the physical propagation law. It is not an
+interface-refinement or physical-Timescape convergence theorem.
 
 ## 20. Fail-closed behavior and state integrity
 
@@ -345,7 +389,9 @@ It remains:
 | gate | value | measured worst | reason |
 |---|---:|---:|---|
 | compatibility max abs | `5e-10` | `5.55e-17` | independently reconstructed Phase 1F-A expansion plus elliptic application |
-| propagation max abs | `2e-10` | `5.20e-18` | independent interval vector residual |
+| propagation max abs | `2e-10` | `5.20e-18` | construction/time-discretization diagnostic |
+| initial/propagated boundary normal velocity | `2e-11` | `0` | external no-penetration closure; reference length/common time |
+| driver boundary normal acceleration | `2e-11` | `0` | boundary preservation; inverse common time |
 | potential mean | `2e-11` | `1.63e-19` | explicit constant-kernel representative |
 | lapse mean | `2e-11` | `2.63e-20` | require/project Q0 policy |
 | scale-factor/H rate | `2e-11` | `0` | \(H=d\ln a/dt\) alignment |
@@ -354,9 +400,13 @@ It remains:
 
 No historical tolerance was changed.
 
-The final clean test matrix collected 26 focused Phase 1F-B tests and 565
+The regenerated deterministic validation artifact has SHA-256
+`961e491497b7c960ab4cd0a091f23a98dfdc9e2034ed3e5efeb3f4396069dce6`.
+Python 3.14.3 and Python 3.11.9 regeneration produced byte-identical JSON.
+
+The corrected test matrix collected 37 focused Phase 1F-B tests and 576
 repository tests in each supported environment. Python 3.14.3 used NumPy
-2.5.1, SciPy 1.18.0, and pytest 9.1.1; Python 3.11.9 used NumPy 2.4.6,
+2.5.2, SciPy 1.18.1, and pytest 9.1.1; Python 3.11.9 used NumPy 2.4.6,
 SciPy 1.17.1, and pytest 9.1.1. Both runs had zero failures, skips, xfails,
 or warnings.
 
@@ -373,6 +423,10 @@ dataset, covariance, likelihood, fit, or inference is implemented.
 The unresolved next problem is the missing perturbed wall/common-spacetime
 geometry itself. The transverse boost remains nonidentifiable from the frozen
 scalar state and is excluded, not set to zero as a prediction.
+
+The simplified propagation equation also requires the explicitly selected
+shear-free quasi-FLRW background sector. Wall shear is excluded by this model
+restriction; it is not predicted to vanish by Timescape.
 
 ## 24. Final machine verdict
 
@@ -407,6 +461,24 @@ NONIDENTIFIABLE_FROM_FROZEN_SCALAR_STATE
 TRANSVERSE_SECTOR_RUNTIME:
 EXCLUDED_BY_EXPLICIT_SCALAR_MODEL_RESTRICTION
 
+TRANSVERSE_VECTOR_SECTOR:
+EXCLUDED_BY_EXPLICIT_SCALAR_MODEL_RESTRICTION
+
+HARMONIC_VECTOR_SECTOR:
+EXCLUDED_BY_EXPLICIT_SCALAR_MODEL_RESTRICTION
+
+HARMONIC_VECTOR_ZERO_AS_TIMESCAPE_PREDICTION:
+NOT_GRANTED
+
+WALL_BACKGROUND_SHEAR:
+EXCLUDED_BY_EXPLICIT_SELECTED_GEOMETRIC_SECTOR
+
+WALL_SHEAR_PREDICTED_ZERO_BY_TIMESCAPE:
+NOT_GRANTED
+
+WALL_PROPER_TIME_RATE_ROLE:
+PROVENANCE_ONLY_NON_DYNAMICAL_METADATA
+
 BACKGROUND_WALL_LAPSE_TO_BOOST:
 NOT_DERIVABLE
 
@@ -424,6 +496,24 @@ REQUIRED_OR_EXPLICITLY_ELLIPTICALLY_RECONSTRUCTED
 
 BOOST_INTERFACE_CONDITIONS:
 NOT_DERIVED
+
+BOOST_BOUNDARY_CONDITION:
+EXPLICIT_EXTERNAL_NO_PENETRATION_CLOSURE
+
+BOOST_BOUNDARY_CONDITION_DERIVED_FROM_TIMESCAPE:
+NO
+
+BOOST_BOUNDARY_CONDITION_INHERITED_FROM_H1_DENSITY_TRANSMISSION:
+NO
+
+BOOST_BOUNDARY_CONDITION_RUNTIME_ENFORCEMENT:
+FAIL_CLOSED
+
+EXPANSION_COMPATIBILITY_RESIDUAL:
+INDEPENDENT_SCIENTIFIC_COMPATIBILITY_GATE
+
+PROPAGATION_CONSTRUCTION_DIAGNOSTIC:
+CONSTRUCTION_INVARIANT_WITH_TIME_DISCRETIZATION_ERROR
 
 FROZEN_DIFFERENTIAL_STATE_RANK:
 4

@@ -11,6 +11,12 @@
       "pre_phase_sha256": "27fc001a755f98f2bdb18a6cdfb7a578b12b09eb1b41a240a7bfcad212d317ce",
       "classification": "AUTHORIZED_PREEXISTING_USER_MODIFICATION",
       "created_by_phase1f_b": false
+    },
+    "v1_independent_adversarial_audit": {
+      "path": "reports/phase1f_b_dust_wall_boost_dynamics_adversarial_audit.md",
+      "sha256": "7ef51fcd89ecdce68673791e4905a79e6db2ba5e1d2d1d3e37fb8ac3cab543ed",
+      "historical_verdict": "TARGETED_CORRECTIONS_REQUIRED",
+      "blocking_scientific_defect": false
     }
   },
   "frozen_tags": {
@@ -33,6 +39,7 @@
       "LONGITUDINAL",
       "HYPERSURFACE_ORTHOGONAL",
       "LINEAR",
+      "SHEAR_FREE_QUASI_FLRW_BACKGROUND",
       "COMMON_SPACETIME",
       "WALL_INTERIOR_OR_EXPLICIT_BOUNDARY"
     ],
@@ -143,12 +150,17 @@
       "wall_scale_factor",
       "wall_hubble_rate",
       "wall_proper_time_rate",
+      "wall_proper_time_rate_role",
       "wall_expansion_perturbation",
       "wall_lapse_perturbation"
     ],
     "lapse_driver_kind": "PERTURBATIVE_WALL_LAPSE_POTENTIAL",
     "unit_system": "GEOMETRIZED_C_EQUALS_ONE",
     "interpolation": "PIECEWISE_LINEAR_NO_EXTRAPOLATION",
+    "wall_proper_time_rate_role": "PROVENANCE_ONLY_NON_DYNAMICAL_METADATA",
+    "selected_background_geometry_sector": "SHEAR_FREE_QUASI_FLRW_COMMON_SPACETIME",
+    "wall_background_shear": "EXCLUDED_BY_EXPLICIT_SELECTED_GEOMETRIC_SECTOR",
+    "wall_shear_predicted_zero_by_timescape": "NOT_GRANTED",
     "dust_expansion_time_binding": "EXACT_GRID_AND_TIME_COORDINATE_IDENTITY_REQUIRED",
     "timescape_predicted_provenance": "NOT_IMPLEMENTED"
   },
@@ -172,10 +184,24 @@
     "silent_projection": "FORBIDDEN",
     "normalization_provenance": "REQUIRED"
   },
+  "vector_sector_ontology": {
+    "transverse_vector_sector": "EXCLUDED_BY_EXPLICIT_SCALAR_MODEL_RESTRICTION",
+    "harmonic_vector_sector": "EXCLUDED_BY_EXPLICIT_SCALAR_MODEL_RESTRICTION",
+    "harmonic_vector_zero_as_timescape_prediction": "NOT_GRANTED",
+    "scalar_mean_zero_eliminates_harmonic_vector_modes": false,
+    "vector_solver": "NOT_IMPLEMENTED"
+  },
   "boundary_and_interface": {
     "runtime_boundary": "BOOST_WALL_INTERIOR_NO_FLUX_PERIODIC_TANGENTIAL",
-    "classification": "EXPLICIT_BOOST_SPECIFIC_BOUNDARY_MODEL",
+    "classification": "EXPLICIT_EXTERNAL_BOOST_BOUNDARY_CLOSURE",
+    "physical_boundary_condition": "EXPLICIT_EXTERNAL_NO_PENETRATION_CLOSURE",
+    "condition": "D_n psi_dw|Gamma=v_d|W^a n_a|Gamma=0",
+    "driver_preservation_condition": "D_n nu_W|Gamma=0 over complete supported time grid",
+    "derived_from_timescape": false,
     "h1_density_transmission_bc_to_boost_bc": "FORBIDDEN_INHERITANCE",
+    "inherited_from_h1_density_transmission": false,
+    "runtime_enforcement": "FAIL_CLOSED",
+    "physical_material_wall_claim": "NOT_GRANTED",
     "physical_interface_claim": "NOT_GRANTED",
     "velocity_matching_claim": "NOT_GRANTED",
     "flux_matching_claim": "NOT_GRANTED"
@@ -184,13 +210,16 @@
     "expansion_compatibility": {
       "definition": "C_Theta=deltaTheta_d,w-deltaTheta_W-D_w^2 psi_dw",
       "implemented": "C_Theta=deltaTheta_d,w-deltaTheta_W-L_w psi_dw/a_w^2",
+      "evidence_classification": "INDEPENDENT_SCIENTIFIC_COMPATIBILITY_GATE",
       "independent_of_propagation_residual": true
     },
     "propagation_geodesic": {
       "definition": "R_A=A_W+dot(v_d|W)+H_W v_d|W",
       "discretization": "interval Crank-Nicolson diagnostic over physical gradient components",
       "scientific_law_discretization": "psi update is explicit trapezoidal; finite differencing is diagnostic only",
-      "independent_of_expansion_compatibility": true
+      "evaluated_separately_from_expansion_compatibility": true,
+      "independent_physical_validation": false,
+      "evidence_classification": "CONSTRUCTION_INVARIANT_WITH_TIME_DISCRETIZATION_ERROR"
     },
     "curl": {
       "definition": "C_omega=D_[a v_b]",
@@ -230,6 +259,19 @@
       "units": "field_specific",
       "measured_worst": 0.0
     },
+    "boundary_normal_velocity": {
+      "value": 2e-11,
+      "units": "reference_length_per_common_time",
+      "measured_initial_worst": 0.0,
+      "measured_propagated_worst": 0.0,
+      "gate": "EXPLICIT_EXTERNAL_NO_PENETRATION_CLOSURE"
+    },
+    "boundary_normal_acceleration": {
+      "value": 2e-11,
+      "units": "inverse_common_time",
+      "measured_driver_worst": 0.0,
+      "gate": "DRIVER_PRESERVES_EXTERNAL_NO_PENETRATION_CLOSURE"
+    },
     "linear_velocity_ratio": {
       "threshold": 0.1,
       "measured_worst": 0.01154469575172945,
@@ -241,11 +283,24 @@
     "integration_method": "EXPLICIT_TRAPEZOIDAL_COMMON_TIME_GRID"
   },
   "validation_metrics": {
+    "deterministic_artifact_sha256": "961e491497b7c960ab4cd0a091f23a98dfdc9e2034ed3e5efeb3f4396069dce6",
+    "cross_python_artifact_byte_identity": true,
     "zero_driver_nonzero_initial_velocity_max": 0.00824621125123532,
     "zero_driver_potential_change_max": 0.0,
     "manufactured_potential_max_error": 8.673617379884035e-19,
     "expansion_matched_initial_potential_max_error": 1.3010426069826053e-18,
     "scale_factor_two_compatibility_max_abs": 1.0408340855860843e-17,
+    "normal_varying_boundary": {
+      "spatial_dimension": 3,
+      "classification": "SYNTHETIC_VALIDATION_ONLY",
+      "initial_normal_velocity_max_abs": 0.0,
+      "driver_normal_acceleration_max_abs": 0.0,
+      "propagated_normal_velocity_max_abs": 0.0,
+      "potential_max_error": 0.0,
+      "broken_vs_unbroken_laplacian_max_difference": 0.128
+    },
+    "convergence_classification": "SECOND_ORDER_NUMERICAL_SELF_CONVERGENCE_OF_THE_IMPLEMENTED_TIME_INTEGRATOR",
+    "convergence_independent_physical_validation": false,
     "convergence": [
       {
         "intervals": 4,
@@ -282,16 +337,21 @@
     "V10": "LINEAR_REGIME_FAILURE_REJECTED",
     "V11": "OPERATOR_SCALE_FACTOR_AND_WRONG_FACTOR_ADVERSARY_PASS",
     "V12": "COMMON_SPACETIME_ALIGNMENT_REJECTION_PASS",
+    "V13": "NORMAL_VARYING_ADMISSIBLE_BOUNDARY_PASS",
+    "V14": "NORMAL_VARYING_INITIAL_PENETRATION_REJECTED",
+    "V15": "NORMAL_VARYING_DRIVER_BOUNDARY_INCOMPATIBILITY_REJECTED",
+    "V16": "BROKEN_AND_UNBROKEN_OPERATOR_DISTINCTION_PASS",
+    "V17": "NONZERO_BACKGROUND_SHEAR_DECLARATION_REJECTED",
     "integrated_3d": "SYNTHETIC_VALIDATION_ONLY",
     "reduced_dimension": "MATHEMATICAL_OPERATOR_FIXTURE_ONLY"
   },
   "test_matrix": {
-    "phase1f_b_targeted_count": 26,
+    "phase1f_b_targeted_count": 37,
     "python_3_14_3": {
-      "numpy": "2.5.1",
-      "scipy": "1.18.0",
+      "numpy": "2.5.2",
+      "scipy": "1.18.1",
       "pytest": "9.1.1",
-      "full_passed": 565,
+      "full_passed": 576,
       "failures": 0,
       "skips": 0,
       "xfails": 0,
@@ -301,7 +361,7 @@
       "numpy": "2.4.6",
       "scipy": "1.17.1",
       "pytest": "9.1.1",
-      "full_passed": 565,
+      "full_passed": 576,
       "failures": 0,
       "skips": 0,
       "xfails": 0,
@@ -323,11 +383,13 @@
     "ScalarBoostSector",
     "BoostBoundaryKind",
     "BoostBoundaryKernelPolicy",
+    "WallBackgroundGeometrySector",
     "CommonSpacetimeWallGeometryClosure",
     "ScalarDustWallBoostNumerics",
     "ScalarDustWallBoostScenario",
     "ScalarDustWallBoostDiagnostics",
     "ScalarDustWallBoostResult",
+    "Phase1FBBoundaryCompatibilityError",
     "propagate_scalar_dust_wall_boost"
   ],
   "conditional_uniqueness": {
@@ -353,12 +415,22 @@
     "longitudinal_boost_reconstruction": "CONDITIONALLY_DERIVED",
     "transverse_boost": "NONIDENTIFIABLE_FROM_FROZEN_SCALAR_STATE",
     "transverse_sector_runtime": "EXCLUDED_BY_EXPLICIT_SCALAR_MODEL_RESTRICTION",
+    "transverse_vector_sector": "EXCLUDED_BY_EXPLICIT_SCALAR_MODEL_RESTRICTION",
+    "harmonic_vector_sector": "EXCLUDED_BY_EXPLICIT_SCALAR_MODEL_RESTRICTION",
+    "harmonic_vector_zero_as_timescape_prediction": "NOT_GRANTED",
+    "wall_background_shear": "EXCLUDED_BY_EXPLICIT_SELECTED_GEOMETRIC_SECTOR",
+    "wall_shear_predicted_zero_by_timescape": "NOT_GRANTED",
+    "wall_proper_time_rate_role": "PROVENANCE_ONLY_NON_DYNAMICAL_METADATA",
     "background_wall_lapse_to_boost": "NOT_DERIVABLE",
     "perturbative_wall_lapse": "REQUIRED_EXTERNAL_GEOMETRIC_DRIVER_OR_EQUIVALENT",
     "full_external_boost_history": "NOT_REQUIRED_IN_SELECTED_REALIZATION",
     "wall_geometry_driver": "REQUIRED_EXTERNAL_CLOSURE_INPUT",
     "initial_boost_data": "REQUIRED_OR_EXPLICITLY_ELLIPTICALLY_RECONSTRUCTED",
     "boost_interface_conditions": "NOT_DERIVED",
+    "boost_boundary_condition": "EXPLICIT_EXTERNAL_NO_PENETRATION_CLOSURE",
+    "boost_boundary_condition_derived_from_timescape": "NO",
+    "boost_boundary_condition_inherited_from_h1_density_transmission": "NO",
+    "boost_boundary_condition_runtime_enforcement": "FAIL_CLOSED",
     "conditional_forward_uniqueness": "GRANTED",
     "unique_from_frozen_y_alone": "NOT_GRANTED",
     "unique_timescape_prediction": "NOT_GRANTED",
@@ -381,12 +453,24 @@
     "LONGITUDINAL_BOOST_RECONSTRUCTION": "CONDITIONALLY_DERIVED",
     "TRANSVERSE_BOOST": "NONIDENTIFIABLE_FROM_FROZEN_SCALAR_STATE",
     "TRANSVERSE_SECTOR_RUNTIME": "EXCLUDED_BY_EXPLICIT_SCALAR_MODEL_RESTRICTION",
+    "TRANSVERSE_VECTOR_SECTOR": "EXCLUDED_BY_EXPLICIT_SCALAR_MODEL_RESTRICTION",
+    "HARMONIC_VECTOR_SECTOR": "EXCLUDED_BY_EXPLICIT_SCALAR_MODEL_RESTRICTION",
+    "HARMONIC_VECTOR_ZERO_AS_TIMESCAPE_PREDICTION": "NOT_GRANTED",
+    "WALL_BACKGROUND_SHEAR": "EXCLUDED_BY_EXPLICIT_SELECTED_GEOMETRIC_SECTOR",
+    "WALL_SHEAR_PREDICTED_ZERO_BY_TIMESCAPE": "NOT_GRANTED",
+    "WALL_PROPER_TIME_RATE_ROLE": "PROVENANCE_ONLY_NON_DYNAMICAL_METADATA",
     "BACKGROUND_WALL_LAPSE_TO_BOOST": "NOT_DERIVABLE",
     "PERTURBATIVE_WALL_LAPSE": "REQUIRED_EXTERNAL_GEOMETRIC_DRIVER_OR_EQUIVALENT",
     "FULL_EXTERNAL_BOOST_HISTORY": "NOT_REQUIRED_IN_SELECTED_REALIZATION",
     "WALL_GEOMETRY_DRIVER": "REQUIRED_EXTERNAL_CLOSURE_INPUT",
     "INITIAL_BOOST_DATA": "REQUIRED_OR_EXPLICITLY_ELLIPTICALLY_RECONSTRUCTED",
     "BOOST_INTERFACE_CONDITIONS": "NOT_DERIVED",
+    "BOOST_BOUNDARY_CONDITION": "EXPLICIT_EXTERNAL_NO_PENETRATION_CLOSURE",
+    "BOOST_BOUNDARY_CONDITION_DERIVED_FROM_TIMESCAPE": "NO",
+    "BOOST_BOUNDARY_CONDITION_INHERITED_FROM_H1_DENSITY_TRANSMISSION": "NO",
+    "BOOST_BOUNDARY_CONDITION_RUNTIME_ENFORCEMENT": "FAIL_CLOSED",
+    "EXPANSION_COMPATIBILITY_RESIDUAL": "INDEPENDENT_SCIENTIFIC_COMPATIBILITY_GATE",
+    "PROPAGATION_CONSTRUCTION_DIAGNOSTIC": "CONSTRUCTION_INVARIANT_WITH_TIME_DISCRETIZATION_ERROR",
     "FROZEN_DIFFERENTIAL_STATE_RANK": 4,
     "SELECTED_SCALAR_REALIZATION_DIFFERENTIAL_STATE_RANK": 5,
     "CONDITIONAL_FORWARD_UNIQUENESS": "GRANTED",
