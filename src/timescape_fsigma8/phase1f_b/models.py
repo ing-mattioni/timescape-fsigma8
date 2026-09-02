@@ -74,7 +74,12 @@ EXPANSION_COMPATIBILITY_EVIDENCE = (
 TIME_INTEGRATOR_CONVERGENCE_CLASSIFICATION = (
     "SECOND_ORDER_NUMERICAL_SELF_CONVERGENCE_OF_THE_IMPLEMENTED_TIME_INTEGRATOR"
 )
-WALL_PROPER_TIME_RATE_ROLE = "PROVENANCE_ONLY_NON_DYNAMICAL_METADATA"
+WALL_PROPER_TIME_RATE_ROLE = "LOAD_BEARING_TIME_CONVERSION"
+WALL_PROPER_TIME_RATE_PROVENANCE = (
+    "REQUIRED_EXTERNAL_COMMON_SPACETIME_CLOCK_CLOSURE"
+)
+COMMON_TIME_PROPAGATION = "CHAIN_RULE_CONVERTED_FROM_WALL_PROPER_TIME"
+WALL_HUBBLE_TIME_CONVENTION = "COMMON_TIME_LOGARITHMIC_SCALE_FACTOR_RATE"
 H1_DENSITY_TRANSMISSION_BC_TO_BOOST_BC = "FORBIDDEN_INHERITANCE"
 PERTURBATIVE_WALL_LAPSE_POTENTIAL = "PERTURBATIVE_WALL_LAPSE_POTENTIAL"
 COMMON_TIME_GRID_EVALUATION_ONLY = "COMMON_TIME_GRID_EVALUATION_ONLY"
@@ -339,6 +344,18 @@ class CommonSpacetimeWallGeometryClosure:
     geodesicity from GM Eq. (2.9).  The local lapse perturbation is external;
     the background Timescape lapse ``gamma_w=dt/dtau_w`` ([W09] Eq. (B7))
     cannot populate this record.
+
+    Two clocks are declared explicitly.  ``t`` is the common evolution
+    coordinate of the runtime grid and ``tau_W`` is wall-observer proper
+    time; ``wall_proper_time_rate`` is the strictly positive, spatially
+    homogeneous conversion ``alpha_W(t)=dtau_W/dt``.  It is a load-bearing
+    coefficient of the common-time propagation law, not metadata.  Its
+    provenance is an explicit external common-spacetime clock closure: this
+    phase never identifies ``alpha_W`` with ``1/gamma_w`` or with any other
+    Timescape-predicted clock relation.  ``wall_hubble_rate`` is by contrast
+    already stored per common time as ``H_W=d ln(a_w)/dt`` (units
+    ``INVERSE_COMMON_TIME``, cross-checked against ``wall_scale_factor``), so
+    it carries no further ``alpha_W`` conversion.
     """
 
     wall_domain: RegionalDomainSpec
@@ -356,6 +373,7 @@ class CommonSpacetimeWallGeometryClosure:
     wall_hubble_rate: FloatArray
     wall_proper_time_rate: FloatArray
     wall_proper_time_rate_role: str
+    wall_proper_time_rate_provenance: str
     wall_expansion_perturbation: FloatArray
     wall_lapse_perturbation: FloatArray
     lapse_driver_kind: str
@@ -399,6 +417,7 @@ class CommonSpacetimeWallGeometryClosure:
             "wall_lapse_units",
             "unit_system",
             "wall_proper_time_rate_role",
+            "wall_proper_time_rate_provenance",
             "normalization_kernel_identity",
             "scientific_classification",
         ):
@@ -429,7 +448,12 @@ class CommonSpacetimeWallGeometryClosure:
             )
         if self.wall_proper_time_rate_role != WALL_PROPER_TIME_RATE_ROLE:
             raise Phase1FBGeometryClosureError(
-                "wall_proper_time_rate is provenance-only non-dynamical metadata"
+                "wall_proper_time_rate is the load-bearing dtau_W/dt conversion"
+            )
+        if self.wall_proper_time_rate_provenance != WALL_PROPER_TIME_RATE_PROVENANCE:
+            raise Phase1FBGeometryClosureError(
+                "the wall/common clock map must be an explicit external closure; "
+                "no Timescape-predicted clock driver is derived here"
             )
         if not isinstance(
             self.selected_background_geometry_sector,
@@ -529,6 +553,7 @@ class CommonSpacetimeWallGeometryClosure:
             self.wall_hubble_rate,
             self.wall_proper_time_rate,
             self.wall_proper_time_rate_role,
+            self.wall_proper_time_rate_provenance,
             self.wall_expansion_perturbation,
             self.wall_lapse_perturbation,
             self.lapse_driver_kind,
@@ -750,6 +775,11 @@ class ScalarDustWallBoostDiagnostics:
     propagated_boundary_worst_axis: int
     boundary_condition_classification: str
     boundary_runtime_enforcement: str
+    wall_proper_time_rate_role: str
+    wall_proper_time_rate_min: float
+    wall_proper_time_rate_max: float
+    wall_hubble_time_convention: str
+    common_time_propagation: str
     potential_mean_max_abs: float
     lapse_raw_mean_max_abs: float
     lapse_q0_correction_max_abs: float
@@ -785,6 +815,7 @@ class ScalarDustWallBoostResult:
     wall_background_shear_status: str
     wall_shear_zero_as_timescape_prediction: str
     wall_proper_time_rate_role: str
+    common_time_propagation: str
     conditional_forward_uniqueness: str
     unique_from_frozen_y_alone: str
     unique_timescape_prediction: str
@@ -830,7 +861,11 @@ class ScalarDustWallBoostResult:
             raise Phase1FBContractError("wall-shear zero prediction is not granted")
         if self.wall_proper_time_rate_role != WALL_PROPER_TIME_RATE_ROLE:
             raise Phase1FBContractError(
-                "wall proper-time rate must remain provenance-only metadata"
+                "wall proper-time rate must remain the load-bearing time conversion"
+            )
+        if self.common_time_propagation != COMMON_TIME_PROPAGATION:
+            raise Phase1FBContractError(
+                "common-time propagation must remain chain-rule converted"
             )
         if self.scalar_potential_units != "REFERENCE_LENGTH_SQUARED_PER_COMMON_TIME":
             raise Phase1FBContractError("result scalar-potential units mismatch")
@@ -870,6 +905,7 @@ class ScalarDustWallBoostResult:
             self.wall_background_shear_status,
             self.wall_shear_zero_as_timescape_prediction,
             self.wall_proper_time_rate_role,
+            self.common_time_propagation,
             self.conditional_forward_uniqueness,
             self.unique_from_frozen_y_alone,
             self.unique_timescape_prediction,

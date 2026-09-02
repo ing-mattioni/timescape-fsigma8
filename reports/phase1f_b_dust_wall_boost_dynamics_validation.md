@@ -19,6 +19,12 @@ authorized for carry-forward into the Phase 1F-B branch and final commit.
 The untouched pre-implementation baseline passed as 539 tests on both Python
 3.14.3 and Python 3.11.9, with zero failures, skips, xfails, or warnings.
 
+The independent v2 adversarial audit is preserved as
+`phase1f_b_dust_wall_boost_dynamics_v2_adversarial_audit.md`. Its historical
+verdict is `TARGETED_V3_CORRECTIONS_REQUIRED` with no core scientific blocker;
+it is the provenance for the v3 wall-clock correction recorded below. Neither
+audit report is modified.
+
 The independent v1 adversarial audit is preserved as
 `phase1f_b_dust_wall_boost_dynamics_adversarial_audit.md` (SHA-256
 `7ef51fcd89ecdce68673791e4905a79e6db2ba5e1d2d1d3e37fb8ac3cab543ed`).
@@ -96,9 +102,12 @@ is inferred from \(\gamma_w(t)\).
 - a strictly increasing common-time grid with no extrapolation;
 - a detached dust-expansion time grid and time-coordinate ID that must match
   the common-spacetime grid and coordinate exactly;
-- \(a_w\), \(H_{\mathcal W}\), and the positive wall proper-time rate, whose
-  role is explicitly `PROVENANCE_ONLY_NON_DYNAMICAL_METADATA` because the
-  implemented derivative is with respect to declared common time;
+- \(a_w\); \(H_{\mathcal W}\), stored per **common time** as
+  \(H_{\mathcal W}=d\ln a_w/dt\) (`INVERSE_COMMON_TIME`, cross-checked against
+  \(a_w\) on the same grid); and the strictly positive wall proper-time rate
+  \(\alpha_{\mathcal W}(t)=d\tau_{\mathcal W}/dt\), whose role is
+  `LOAD_BEARING_TIME_CONVERSION` with provenance
+  `REQUIRED_EXTERNAL_COMMON_SPACETIME_CLOCK_CLOSURE`;
 - \(\delta\Theta_{\mathcal W}\) and the perturbative lapse potential
   \(\nu_{\mathcal W}\);
 - the explicit `GEOMETRIZED_C_EQUALS_ONE` unit system and all field units;
@@ -169,13 +178,72 @@ then yields the gradient class
  D_a(\dot\psi_{dw}+\nu_{\mathcal W})=0.
 \]
 
-With the explicit mean-zero representative this is
+With the explicit mean-zero representative this is the **wall-proper-time**
+law
 
 \[
- \boxed{\dot\psi_{dw}=-Q_0\nu_{\mathcal W}}.
+ \boxed{\frac{d\psi_{dw}}{d\tau_{\mathcal W}}=-Q_0\nu_{\mathcal W}}.
 \]
 
-The V1 implementation uses an explicit trapezoidal common-time update.
+### Two clocks and the common-time runtime law
+
+The frame law above is written along the wall congruence, so its derivative is
+with respect to wall proper time \(\tau_{\mathcal W}\). The runtime grid is the
+declared common evolution coordinate \(t\)
+(`common_time_units: COMMON_TIME`). The closure supplies the strictly
+positive, spatially homogeneous clock map
+
+\[
+ \alpha_{\mathcal W}(t)\equiv\frac{d\tau_{\mathcal W}}{dt}>0,
+\]
+
+so the chain rule \(d\psi/dt=(d\tau_{\mathcal W}/dt)(d\psi/d\tau_{\mathcal W})\)
+gives the **implemented runtime equation**
+
+\[
+ \boxed{\partial_t\psi_{dw}=-\alpha_{\mathcal W}\,Q_0\nu_{\mathcal W}}.
+\]
+
+The v1/v2 behaviour \(\partial_t\psi=-Q_0\nu_{\mathcal W}\) is exactly the
+special gauge \(\alpha_{\mathcal W}\equiv1\); v3 no longer assumes it. Because
+\(\alpha_{\mathcal W}=\alpha_{\mathcal W}(t)\) is spatially homogeneous,
+\(\alpha_{\mathcal W}Q_0\nu=Q_0(\alpha_{\mathcal W}\nu)\), so every kernel and
+mean-zero policy is unchanged; this identity is **not** generalized to a
+spatially varying rate, and a `wall_proper_time_rate` with spatial structure
+fails the `(nt,)` shape contract.
+
+`wall_proper_time_rate` is therefore a load-bearing coefficient, not metadata.
+Its provenance is an explicit external common-spacetime clock closure. Phase
+1F-B never identifies \(\alpha_{\mathcal W}\) with \(1/\gamma_w\) or with any
+other Timescape-predicted clock relation, and
+`BACKGROUND_WALL_LAPSE_TO_BOOST: NOT_DERIVABLE` is unchanged.
+
+### Time convention of \(H_{\mathcal W}\) (no double conversion)
+
+The vector law in wall proper time is
+\(dv_a/d\tau_{\mathcal W}+H^{\tau}_{\mathcal W}v_a=-D_a\nu_{\mathcal W}\).
+Converting to common time gives
+\(\partial_t v_a+\alpha_{\mathcal W}H^{\tau}_{\mathcal W}v_a
+=-\alpha_{\mathcal W}D_a\nu_{\mathcal W}\). The frozen runtime
+`wall_hubble_rate` is **already** the common-time rate: it is declared
+`INVERSE_COMMON_TIME` and is validated against
+\(H_{\mathcal W}=d\ln a_w/dt\) on the common-time grid, i.e. it equals
+\(\alpha_{\mathcal W}H^{\tau}_{\mathcal W}\). Its classification is
+`WALL_HUBBLE_TIME_CONVENTION: COMMON_TIME_LOGARITHMIC_SCALE_FACTOR_RATE`.
+Consequently the implemented common-time vector law is
+
+\[
+ \partial_t v_a+H_{\mathcal W}v_a=-\alpha_{\mathcal W}D_a\nu_{\mathcal W},
+\]
+
+with **no** further \(\alpha_{\mathcal W}\) applied to \(H_{\mathcal W}\).
+
+The kinematic constraint \(D^2\psi=\delta\Theta_{d,w}-\delta\Theta_{\mathcal W}\)
+contains no time derivative and both expansion perturbations are declared
+`INVERSE_COMMON_TIME`, so it carries no \(\alpha_{\mathcal W}\) factor and is
+unchanged from v2.
+
+The implementation uses an explicit trapezoidal common-time update.
 Interpolation is declared `PIECEWISE_LINEAR_NO_EXTRAPOLATION`; no evaluation
 outside the supplied time grid is exposed.
 
@@ -234,6 +302,27 @@ through \(D_n\nu_{\mathcal W}|_\Gamma=0\), and every propagated potential are
 checked independently against explicit `2e-11` boundary tolerances. No
 incompatible field is projected into the boundary model.
 
+Under the v3 two-clock law the gate is applied to the quantity that actually
+drives the evolution, \(\alpha_{\mathcal W}Q_0\nu_{\mathcal W}\). Since
+\(\alpha_{\mathcal W}>0\) is spatially homogeneous,
+\(D_n(\alpha_{\mathcal W}\nu_{\mathcal W})|_\Gamma
+=\alpha_{\mathcal W}D_n\nu_{\mathcal W}|_\Gamma\), so the v2 condition
+\(D_n\nu_{\mathcal W}|_\Gamma=0\) remains exactly the admissibility criterion
+and remains sufficient to preserve \(D_n\psi|_\Gamma=0\) for a non-unit clock.
+
+**Finite-resolution limitation.** The no-penetration gate is enforced through
+the *discrete strong-form* boundary-normal trace, i.e. the one-sided
+derivative of the frozen regional-gradient implementation. A profile that
+satisfies the intended continuum Neumann behaviour can therefore still exceed
+the declared tolerance at finite resolution: the v1/v2 independent audit
+exhibited a smooth cosine normal profile whose continuum normal derivative
+vanishes at both faces while its discrete one-sided trace was approximately
+`0.00866`, and it was rejected. Such a rejection is a conservative
+fail-closed **numerical** restriction of the current realization; it is not
+evidence that the corresponding continuum profile violates the physical or
+model boundary condition. The tolerance is deliberately not weakened to admit
+such fixtures, and the boundary model itself is unchanged in v3.
+
 ## 13. Differential state rank
 
 The frozen Phase 1F-A differential rank remains four for
@@ -271,7 +360,11 @@ The interval residual is the Crank--Nicolson diagnostic form of
  R_A=A_{\mathcal W}+\dot v+H_{\mathcal W}v.
 \]
 
-It is evaluated separately from \(C_\Theta\), but it is not independent
+It is evaluated on a single consistent clock: a common-time numerical
+derivative, the common-time \(H_{\mathcal W}=d\ln a_w/dt\), and the
+common-time source \(\alpha_{\mathcal W}D_a\nu_{\mathcal W}\), in units of
+reference length per common time squared. It is evaluated separately from
+\(C_\Theta\), but it is not independent
 physical validation in this scalar construction: \(v=D\psi\),
 \(A_{\mathcal W}=D\nu_{\mathcal W}\), and
 \(\dot\psi=-Q_0\nu_{\mathcal W}\) make it a construction identity up to the
@@ -335,6 +428,9 @@ coordinate-component norm.
 | V15 | boundary-incompatible time-dependent lapse driver rejected |
 | V16 | broken wall-interior and unbroken periodic Laplacians differ by `0.128` |
 | V17 | explicit nonzero-background-shear declaration rejected |
+| V18 | two-clock study: \(\alpha_{\mathcal W}=1,2,0.5\) reproduce the analytic integral and give distinct evolutions |
+| V19 | time-dependent \(\alpha_{\mathcal W}(t)=1+t\) matches its analytic integral; chain-rule term `5e-4` |
+| V20 | non-positive clock rate and Timescape-predicted clock provenance rejected |
 
 All integrated scientific validation uses a genuine 3-D synthetic carrier.
 The reduced-dimensional test is explicitly
@@ -391,7 +487,7 @@ It remains:
 | compatibility max abs | `5e-10` | `5.55e-17` | independently reconstructed Phase 1F-A expansion plus elliptic application |
 | propagation max abs | `2e-10` | `5.20e-18` | construction/time-discretization diagnostic |
 | initial/propagated boundary normal velocity | `2e-11` | `0` | external no-penetration closure; reference length/common time |
-| driver boundary normal acceleration | `2e-11` | `0` | boundary preservation; inverse common time |
+| driver boundary normal acceleration | `2e-11` | `0` | boundary preservation of \(\alpha_{\mathcal W}Q_0\nu_{\mathcal W}\); inverse common time |
 | potential mean | `2e-11` | `1.63e-19` | explicit constant-kernel representative |
 | lapse mean | `2e-11` | `2.63e-20` | require/project Q0 policy |
 | scale-factor/H rate | `2e-11` | `0` | \(H=d\ln a/dt\) alignment |
@@ -401,10 +497,13 @@ It remains:
 No historical tolerance was changed.
 
 The regenerated deterministic validation artifact has SHA-256
-`961e491497b7c960ab4cd0a091f23a98dfdc9e2034ed3e5efeb3f4396069dce6`.
-Python 3.14.3 and Python 3.11.9 regeneration produced byte-identical JSON.
+`30aba6abeb8f42adec771cfd26c4951bcf489b9d472a82bc6d56852a61812e71`.
+Python 3.14.3 and Python 3.11.9 regeneration produced byte-identical JSON, and
+repeated regeneration on one interpreter is byte-stable. The frozen Phase 1F-A
+artifact regenerates unchanged at
+`ed3fcdc4aa544eaa7732a6923965b57c73ec7397200096b0e2ebc87b34f0be47`.
 
-The corrected test matrix collected 37 focused Phase 1F-B tests and 576
+The corrected test matrix collected 49 focused Phase 1F-B tests and 588
 repository tests in each supported environment. Python 3.14.3 used NumPy
 2.5.2, SciPy 1.18.1, and pytest 9.1.1; Python 3.11.9 used NumPy 2.4.6,
 SciPy 1.17.1, and pytest 9.1.1. Both runs had zero failures, skips, xfails,
@@ -476,8 +575,20 @@ EXCLUDED_BY_EXPLICIT_SELECTED_GEOMETRIC_SECTOR
 WALL_SHEAR_PREDICTED_ZERO_BY_TIMESCAPE:
 NOT_GRANTED
 
-WALL_PROPER_TIME_RATE_ROLE:
-PROVENANCE_ONLY_NON_DYNAMICAL_METADATA
+WALL_PROPER_TIME_RATE:
+REQUIRED_EXTERNAL_COMMON_SPACETIME_CLOCK_CLOSURE
+
+WALL_PROPER_TIME_RATE_RUNTIME_ROLE:
+LOAD_BEARING_TIME_CONVERSION
+
+COMMON_TIME_PROPAGATION:
+CHAIN_RULE_CONVERTED_FROM_WALL_PROPER_TIME
+
+WALL_HUBBLE_TIME_CONVENTION:
+COMMON_TIME_LOGARITHMIC_SCALE_FACTOR_RATE
+
+BOOST_BOUNDARY_TRACE_ENFORCEMENT:
+DISCRETE_STRONG_FORM_CONSERVATIVE_FAIL_CLOSED
 
 BACKGROUND_WALL_LAPSE_TO_BOOST:
 NOT_DERIVABLE

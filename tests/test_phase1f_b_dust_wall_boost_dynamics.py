@@ -38,8 +38,10 @@ from timescape_fsigma8.phase1f_b import (
     TIME_INTEGRATOR_CONVERGENCE_CLASSIFICATION,
     TRANSVERSE_SECTOR_EXCLUDED,
     WALL_BACKGROUND_SHEAR_EXCLUDED,
+    WALL_PROPER_TIME_RATE_PROVENANCE,
     WALL_PROPER_TIME_RATE_ROLE,
     WALL_SHEAR_ZERO_NOT_GRANTED,
+    COMMON_TIME_PROPAGATION,
     BoostBoundaryKernelPolicy,
     BoostBoundaryKind,
     BoostGeometryProvenance,
@@ -146,6 +148,7 @@ def make_case(
     initialization_mode: BoostInitializationMode = BoostInitializationMode.SUPPLIED_INITIAL_BOOST,
     lapse_kernel_mode: LapseKernelMode = LapseKernelMode.REQUIRE_MEAN_ZERO,
     reverse_expansion_sign: bool = False,
+    proper_time_rate: np.ndarray | None = None,
 ):
     realization = make_realization(shape)
     time = np.array([0.0, 0.25, 0.5], dtype=float) if time is None else np.asarray(time, dtype=float)
@@ -203,8 +206,12 @@ def make_case(
         time_grid=time,
         wall_scale_factor=scale_factor,
         wall_hubble_rate=hubble,
-        wall_proper_time_rate=np.ones(nt),
+        wall_proper_time_rate=(
+            np.ones(nt) if proper_time_rate is None
+            else np.asarray(proper_time_rate, dtype=float)
+        ),
         wall_proper_time_rate_role=WALL_PROPER_TIME_RATE_ROLE,
+        wall_proper_time_rate_provenance=WALL_PROPER_TIME_RATE_PROVENANCE,
         wall_expansion_perturbation=wall_expansion,
         wall_lapse_perturbation=lapse,
         lapse_driver_kind=PERTURBATIVE_WALL_LAPSE_POTENTIAL,
@@ -258,6 +265,7 @@ def normal_varying_case(
     *,
     initial_profile: np.ndarray,
     lapse_profile: np.ndarray,
+    proper_time_rate: np.ndarray | None = None,
 ) -> tuple[object, ScalarDustWallBoostScenario, np.ndarray]:
     """Build a genuine 3-D wall-interior boundary fixture.
 
@@ -268,7 +276,13 @@ def normal_varying_case(
     """
     shape = (8, 4, 4)
     time = np.array([0.0, 0.25, 0.5], dtype=np.float64)
-    realization, base, _, _ = make_case(shape=shape, time=time)
+    realization, base, _, _ = make_case(
+        shape=shape, time=time, proper_time_rate=proper_time_rate
+    )
+    alpha = (
+        np.ones(time.size) if proper_time_rate is None
+        else np.asarray(proper_time_rate, dtype=float)
+    )
     mask_grid = base.geometry_closure.wall_domain.mask.reshape(shape)
     wall_x = np.flatnonzero(np.any(mask_grid, axis=(1, 2)))
     if initial_profile.shape != wall_x.shape or lapse_profile.shape != wall_x.shape:
@@ -280,11 +294,12 @@ def normal_varying_case(
     initial_full = (0.002 * initial_grid).reshape(-1)
     lapse_amplitude = np.array([0.0, 1.0e-4, 2.0e-4], dtype=np.float64)
     lapse_full = lapse_amplitude[:, None] * lapse_grid.reshape(1, -1)
+    driver_full = alpha[:, None] * lapse_full
     potential_full = np.empty_like(lapse_full)
     potential_full[0] = initial_full
     for index, step in enumerate(np.diff(time)):
         potential_full[index + 1] = potential_full[index] - 0.5 * step * (
-            lapse_full[index] + lapse_full[index + 1]
+            driver_full[index] + driver_full[index + 1]
         )
 
     wall_domain = base.geometry_closure.wall_domain
@@ -683,23 +698,159 @@ def test_residual_evidence_hierarchy_is_explicit() -> None:
     assert "CONSTRUCTION_INVARIANT" in result.diagnostics.curl_status
 
 
-def test_wall_proper_time_rate_is_explicit_provenance_only_metadata() -> None:
+def _clock_case(alpha: np.ndarray, amplitude: np.ndarray, time: np.ndarray):
+    """Manufacture a scenario whose analytic psi amplitude is ``amplitude``."""
+    return make_case(
+        time=time,
+        potential_amplitudes=amplitude,
+        lapse_amplitudes=-0.001 + 0.0004 * time,
+        proper_time_rate=alpha,
+        lapse_kernel_mode=LapseKernelMode.EXPLICIT_Q0_PROJECTION,
+    )
+
+
+def test_t1_unit_clock_rate_reproduces_the_wall_proper_time_evolution() -> None:
+    # alpha_W=1: d psi/dt = -Q0 nu, integral of (-0.001+0.0004 t).
+    time = np.linspace(0.0, 1.0, 5)
+    analytic = 0.002 + 0.001 * time - 0.0002 * time**2
+    _, scenario, scalar, _ = _clock_case(np.ones(time.size), analytic, time)
+    result = propagate_scalar_dust_wall_boost(scenario=scenario, numerics=boost_numerics())
+    mask = scenario.geometry_closure.wall_domain.mask
+    np.testing.assert_allclose(
+        result.scalar_potential[:, mask],
+        analytic[:, None] * scalar.reshape(-1)[mask],
+        atol=2e-12,
+    )
+    assert result.diagnostics.wall_proper_time_rate_min == 1.0
+    assert result.common_time_propagation == COMMON_TIME_PROPAGATION
+
+
+@pytest.mark.parametrize("rate", [2.0, 0.5])
+def test_t2_t3_constant_non_unit_clock_rate_scales_the_evolution(rate: float) -> None:
+    # d psi/dt = -alpha Q0 nu; analytic integral, never the production loop.
+    time = np.linspace(0.0, 1.0, 5)
+    analytic = 0.002 + rate * (0.001 * time - 0.0002 * time**2)
+    _, scenario, scalar, _ = _clock_case(np.full(time.size, rate), analytic, time)
+    result = propagate_scalar_dust_wall_boost(scenario=scenario, numerics=boost_numerics())
+    mask = scenario.geometry_closure.wall_domain.mask
+    np.testing.assert_allclose(
+        result.scalar_potential[:, mask],
+        analytic[:, None] * scalar.reshape(-1)[mask],
+        atol=2e-12,
+    )
+    unit = 0.002 + 0.001 * time - 0.0002 * time**2
+    assert np.max(np.abs(analytic - unit)) > 1e-4
+    assert result.diagnostics.wall_proper_time_rate_max == rate
+
+
+def test_t4_time_dependent_clock_rate_matches_the_analytic_integral() -> None:
+    # alpha_W(t)=1+t with a constant lapse amplitude keeps the driver linear in
+    # t, so the analytic integral -int (1+s)(-0.001) ds is exact here.
+    time = np.linspace(0.0, 1.0, 5)
+    alpha = 1.0 + time
+    analytic = 0.002 + 0.001 * (time + 0.5 * time**2)
+    _, scenario, scalar, _ = make_case(
+        time=time,
+        potential_amplitudes=analytic,
+        lapse_amplitudes=np.full(time.size, -0.001),
+        proper_time_rate=alpha,
+        lapse_kernel_mode=LapseKernelMode.EXPLICIT_Q0_PROJECTION,
+    )
+    result = propagate_scalar_dust_wall_boost(scenario=scenario, numerics=boost_numerics())
+    mask = scenario.geometry_closure.wall_domain.mask
+    np.testing.assert_allclose(
+        result.scalar_potential[:, mask],
+        analytic[:, None] * scalar.reshape(-1)[mask],
+        atol=2e-12,
+    )
+    # The 0.5 t^2 term is exactly the chain-rule contribution of alpha_W(t).
+    assert np.max(np.abs(analytic - (0.002 + 0.001 * time))) == pytest.approx(0.0005)
+
+
+@pytest.mark.parametrize("bad", [0.0, -1.0, np.nan, np.inf])
+def test_t5_invalid_clock_rate_fails_closed(bad: float) -> None:
     _, scenario, _, _ = make_case()
-    changed_closure = replace(
-        scenario.geometry_closure,
-        wall_proper_time_rate=np.full(3, 2.0),
+    rate = np.ones(3); rate[1] = bad
+    with pytest.raises(Phase1FBContractError):
+        replace(scenario.geometry_closure, wall_proper_time_rate=rate)
+
+
+def test_t5_spatially_varying_clock_rate_is_rejected() -> None:
+    _, scenario, _, _ = make_case()
+    size = scenario.geometry_closure.wall_domain.operator.size
+    with pytest.raises(Phase1FBGeometryClosureError, match="match time_grid"):
+        replace(scenario.geometry_closure, wall_proper_time_rate=np.ones((3, size)))
+
+
+def test_t5_clock_provenance_must_be_the_external_closure() -> None:
+    _, scenario, _, _ = make_case()
+    assert (
+        scenario.geometry_closure.wall_proper_time_rate_provenance
+        == WALL_PROPER_TIME_RATE_PROVENANCE
     )
-    changed = replace(scenario, geometry_closure=changed_closure)
-    original_result = propagate_scalar_dust_wall_boost(
-        scenario=scenario, numerics=boost_numerics()
+    with pytest.raises(Phase1FBGeometryClosureError, match="external closure"):
+        replace(
+            scenario.geometry_closure,
+            wall_proper_time_rate_provenance="TIMESCAPE_PREDICTED_CLOCK_DRIVER",
+        )
+
+
+def test_t6_non_unit_clock_preserves_no_penetration_boundary() -> None:
+    alpha = np.array([1.5, 1.5, 1.5])
+    _, scenario, expected = normal_varying_case(
+        initial_profile=np.array([-1.0, -1.0, 1.0, 1.0]),
+        lapse_profile=np.array([-1.0, -1.0, 1.0, 1.0]),
+        proper_time_rate=alpha,
     )
-    changed_result = propagate_scalar_dust_wall_boost(
-        scenario=changed, numerics=boost_numerics()
+    result = propagate_scalar_dust_wall_boost(scenario=scenario, numerics=boost_numerics())
+    np.testing.assert_allclose(result.scalar_potential, expected, atol=2e-14)
+    assert result.diagnostics.propagated_boundary_normal_velocity_max_abs <= 2e-11
+    assert result.diagnostics.driver_boundary_normal_acceleration_max_abs <= 2e-11
+    _, unit_scenario, unit_expected = normal_varying_case(
+        initial_profile=np.array([-1.0, -1.0, 1.0, 1.0]),
+        lapse_profile=np.array([-1.0, -1.0, 1.0, 1.0]),
     )
-    np.testing.assert_array_equal(
-        original_result.scalar_potential, changed_result.scalar_potential
+    assert np.max(np.abs(expected[-1] - unit_expected[-1])) > 0.0
+
+
+def test_wall_proper_time_rate_is_load_bearing_not_metadata() -> None:
+    # A nonzero lapse driver is required for the clock rate to act at all: the
+    # v2 invariance claim held only because alpha_W multiplied a zero driver.
+    time = np.linspace(0.0, 1.0, 5)
+    analytic = 0.002 + 0.001 * time - 0.0002 * time**2
+    _, scenario, scalar, _ = _clock_case(np.ones(time.size), analytic, time)
+    original = propagate_scalar_dust_wall_boost(scenario=scenario, numerics=boost_numerics())
+    changed = replace(
+        scenario,
+        geometry_closure=replace(
+            scenario.geometry_closure,
+            wall_proper_time_rate=np.full(time.size, 2.0),
+        ),
     )
-    assert changed_result.wall_proper_time_rate_role == WALL_PROPER_TIME_RATE_ROLE
+    with pytest.raises(Phase1FBCompatibilityError):
+        # The fixture's wall expansion is built for alpha_W=1, so doubling the
+        # clock rate must change the evolution and break compatibility.
+        propagate_scalar_dust_wall_boost(scenario=changed, numerics=boost_numerics())
+    assert original.wall_proper_time_rate_role == WALL_PROPER_TIME_RATE_ROLE
+    assert original.diagnostics.wall_hubble_time_convention == (
+        "COMMON_TIME_LOGARITHMIC_SCALE_FACTOR_RATE"
+    )
+
+
+def test_zero_driver_evolution_is_clock_rate_independent() -> None:
+    # With nu_W=0 the chain-rule factor multiplies zero, so a non-unit clock
+    # legitimately leaves psi unchanged.  This is the only regime in which the
+    # superseded v2 invariance assertion was true.
+    _, scenario, _, _ = make_case()
+    changed = replace(
+        scenario,
+        geometry_closure=replace(
+            scenario.geometry_closure, wall_proper_time_rate=np.full(3, 2.0)
+        ),
+    )
+    baseline = propagate_scalar_dust_wall_boost(scenario=scenario, numerics=boost_numerics())
+    scaled = propagate_scalar_dust_wall_boost(scenario=changed, numerics=boost_numerics())
+    np.testing.assert_array_equal(baseline.scalar_potential, scaled.scalar_potential)
 
 
 def test_boundary_closure_is_external_and_never_a_physical_interface_claim() -> None:

@@ -39,7 +39,10 @@ from timescape_fsigma8.phase1f_b import (
     SYNTHETIC_VALIDATION_ONLY,
     TIME_INTEGRATOR_CONVERGENCE_CLASSIFICATION,
     WALL_BACKGROUND_SHEAR_EXCLUDED,
+    WALL_PROPER_TIME_RATE_PROVENANCE,
     WALL_PROPER_TIME_RATE_ROLE,
+    COMMON_TIME_PROPAGATION,
+    WALL_HUBBLE_TIME_CONVENTION,
     BoostBoundaryKernelPolicy,
     BoostBoundaryKind,
     BoostGeometryProvenance,
@@ -130,6 +133,7 @@ def scenario(
     initialization_mode: BoostInitializationMode,
     lapse_kernel_mode: LapseKernelMode,
     reverse_sign: bool = False,
+    proper_time_rate: np.ndarray | None = None,
 ):
     runtime = make_realization((4, 4, 4))
     scalar, laplacian, _ = fields((4, 4, 4))
@@ -161,8 +165,12 @@ def scenario(
         time_grid=time,
         wall_scale_factor=scale_factor,
         wall_hubble_rate=hubble,
-        wall_proper_time_rate=np.ones(time.size),
+        wall_proper_time_rate=(
+            np.ones(time.size) if proper_time_rate is None
+            else np.asarray(proper_time_rate, dtype=float)
+        ),
         wall_proper_time_rate_role=WALL_PROPER_TIME_RATE_ROLE,
+        wall_proper_time_rate_provenance=WALL_PROPER_TIME_RATE_PROVENANCE,
         wall_expansion_perturbation=wall,
         wall_lapse_perturbation=lapse,
         lapse_driver_kind=PERTURBATIVE_WALL_LAPSE_POTENTIAL,
@@ -269,6 +277,7 @@ def normal_varying_scenario(
         wall_hubble_rate=np.zeros(time.size),
         wall_proper_time_rate=np.ones(time.size),
         wall_proper_time_rate_role=WALL_PROPER_TIME_RATE_ROLE,
+        wall_proper_time_rate_provenance=WALL_PROPER_TIME_RATE_PROVENANCE,
         wall_expansion_perturbation=wall_expansion,
         wall_lapse_perturbation=lapse_full,
         lapse_driver_kind=PERTURBATIVE_WALL_LAPSE_POTENTIAL,
@@ -597,6 +606,72 @@ def validate() -> dict[str, object]:
         )
     )
 
+    # Two-clock study.  Each expected amplitude is the ANALYTIC integral
+    # psi(t)=psi_i-int alpha_W Q0 nu_W ds, never the production integrator.
+    clock_lapse = -0.001 + 0.0004 * time
+    clock_studies: list[dict[str, object]] = []
+    for label, alpha, analytic in (
+        ("unit", np.ones(time.size), 0.002 + 0.001 * time - 0.0002 * time**2),
+        ("constant_2.0", np.full(time.size, 2.0),
+         0.002 + 2.0 * (0.001 * time - 0.0002 * time**2)),
+        ("constant_0.5", np.full(time.size, 0.5),
+         0.002 + 0.5 * (0.001 * time - 0.0002 * time**2)),
+    ):
+        item = scenario(
+            time=time,
+            potential_amplitudes=analytic,
+            lapse_amplitudes=clock_lapse,
+            dust_amplitudes=np.full(time.size, 0.01),
+            scale_factor=np.ones(time.size),
+            hubble=np.zeros(time.size),
+            initialization_mode=BoostInitializationMode.SUPPLIED_INITIAL_BOOST,
+            lapse_kernel_mode=LapseKernelMode.EXPLICIT_Q0_PROJECTION,
+            proper_time_rate=alpha,
+        )
+        clock_result = propagate_scalar_dust_wall_boost(scenario=item, numerics=numerics())
+        clock_studies.append({
+            "clock_rate": label,
+            "alpha_min": clock_result.diagnostics.wall_proper_time_rate_min,
+            "alpha_max": clock_result.diagnostics.wall_proper_time_rate_max,
+            "analytic_oracle_max_error": float(np.max(np.abs(
+                clock_result.scalar_potential[:, mask]
+                - analytic[:, None] * scalar.reshape(-1)[mask]
+            ))),
+            "final_amplitude": float(analytic[-1]),
+        })
+    # Time-dependent alpha_W(t)=1+t with a constant lapse amplitude keeps the
+    # common-time driver linear, so the analytic integral is exact.
+    alpha_t = 1.0 + time
+    analytic_t = 0.002 + 0.001 * (time + 0.5 * time**2)
+    varying = scenario(
+        time=time,
+        potential_amplitudes=analytic_t,
+        lapse_amplitudes=np.full(time.size, -0.001),
+        dust_amplitudes=np.full(time.size, 0.01),
+        scale_factor=np.ones(time.size),
+        hubble=np.zeros(time.size),
+        initialization_mode=BoostInitializationMode.SUPPLIED_INITIAL_BOOST,
+        lapse_kernel_mode=LapseKernelMode.EXPLICIT_Q0_PROJECTION,
+        proper_time_rate=alpha_t,
+    )
+    varying_result = propagate_scalar_dust_wall_boost(scenario=varying, numerics=numerics())
+    varying_error = float(np.max(np.abs(
+        varying_result.scalar_potential[:, mask]
+        - analytic_t[:, None] * scalar.reshape(-1)[mask]
+    )))
+    invalid_clock_rejected = _rejected(
+        lambda: replace(
+            manufactured.geometry_closure,
+            wall_proper_time_rate=np.concatenate(([0.0], np.ones(time.size - 1))),
+        )
+    )
+    timescape_clock_provenance_rejected = _rejected(
+        lambda: replace(
+            manufactured.geometry_closure,
+            wall_proper_time_rate_provenance="TIMESCAPE_PREDICTED_CLOCK_DRIVER",
+        )
+    )
+
     convergence: list[dict[str, float | int]] = []
     for intervals in (4, 8, 16, 32):
         grid = np.linspace(0.0, 1.0, intervals + 1)
@@ -689,6 +764,24 @@ def validate() -> dict[str, object]:
             ),
             "sequence": convergence,
         },
+        "two_clock_propagation": {
+            "runtime_time_coordinate": "COMMON_TIME",
+            "wall_proper_time_rate_role": WALL_PROPER_TIME_RATE_ROLE,
+            "wall_proper_time_rate_provenance": WALL_PROPER_TIME_RATE_PROVENANCE,
+            "wall_hubble_time_convention": WALL_HUBBLE_TIME_CONVENTION,
+            "common_time_propagation": COMMON_TIME_PROPAGATION,
+            "runtime_equation": "d psi/dt = -alpha_W Q0 nu_W",
+            "wall_proper_time_equation": "d psi/d tau_W = -Q0 nu_W",
+            "oracle": "ANALYTIC_INTEGRAL_NOT_PRODUCTION_INTEGRATOR",
+            "constant_rate_studies": clock_studies,
+            "time_dependent_rate": {
+                "alpha_of_t": "1+t",
+                "analytic_oracle_max_error": varying_error,
+                "chain_rule_term_vs_unit_clock": float(
+                    np.max(np.abs(analytic_t - (0.002 + 0.001 * time)))
+                ),
+            },
+        },
         "normal_varying_boundary": {
             "fixture_classification": "SYNTHETIC_VALIDATION_ONLY",
             "spatial_dimension": 3,
@@ -729,6 +822,10 @@ def validate() -> dict[str, object]:
             "normal_varying_initial_boundary_rejected": boundary_initial_rejected,
             "normal_varying_driver_boundary_rejected": boundary_driver_rejected,
             "nonzero_background_shear_rejected": nonzero_shear_rejected,
+            "nonpositive_clock_rate_rejected": invalid_clock_rejected,
+            "timescape_clock_provenance_rejected": (
+                timescape_clock_provenance_rejected
+            ),
         },
         "evidence_classification": {
             "expansion_compatibility": EXPANSION_COMPATIBILITY_EVIDENCE,
@@ -737,6 +834,11 @@ def validate() -> dict[str, object]:
             "boundary": BOOST_SPECIFIC_BOUNDARY_MODEL,
             "boundary_runtime_enforcement": BOOST_BOUNDARY_RUNTIME_ENFORCEMENT,
             "wall_proper_time_rate": WALL_PROPER_TIME_RATE_ROLE,
+            "wall_proper_time_rate_provenance": WALL_PROPER_TIME_RATE_PROVENANCE,
+            "common_time_propagation": COMMON_TIME_PROPAGATION,
+            "two_clock_analytic_oracle": (
+                "INDEPENDENT_ANALYTIC_INTEGRAL_NOT_PRODUCTION_INTEGRATOR"
+            ),
             "wall_background_shear": WALL_BACKGROUND_SHEAR_EXCLUDED,
             "harmonic_vector_sector": HARMONIC_VECTOR_SECTOR_EXCLUDED,
             "harmonic_vector_zero_as_timescape_prediction": (

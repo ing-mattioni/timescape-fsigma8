@@ -8,13 +8,26 @@ Implemented scientific chain:
   Eqs. (14)--(15), so
   ``D^2 psi = deltaTheta_d,w - deltaTheta_W``;
 * ``A_W + dot(v) + H_W v = 0`` from the same first-order acceleration
-  transformation with dust geodesicity from GM Eq. (2.9);
-* ``dot(psi) = -Q0 nu_W`` in the explicitly approved scalar-normal
-  representative.
+  transformation with dust geodesicity from GM Eq. (2.9), written along the
+  wall congruence, so ``d psi/d tau_W = -Q0 nu_W`` in the explicitly approved
+  scalar-normal representative;
+* the runtime grid is the declared common time ``t``, so with the external
+  clock closure ``alpha_W(t)=d tau_W/dt>0`` the chain rule gives the
+  implemented law ``d psi/dt = -alpha_W Q0 nu_W``.
 
-The common spacetime, wall congruence, lapse perturbation, wall expansion,
-boundary model, normalization, and initial data are external closures.  No
-background Timescape lapse or observational velocity enters this module.
+``wall_hubble_rate`` is already stored per common time as ``H_W=d ln(a_w)/dt``
+and is cross-checked against ``wall_scale_factor`` on the same grid, so the
+common-time vector law is ``d v/dt + H_W v = -alpha_W D nu_W`` with no further
+conversion of ``H_W``.  The kinematic constraint
+``D^2 psi = deltaTheta_d,w - deltaTheta_W`` involves no time derivative and
+both expansion perturbations are declared ``INVERSE_COMMON_TIME``, so it
+carries no ``alpha_W`` factor.
+
+The common spacetime, wall congruence, wall/common clock map, lapse
+perturbation, wall expansion, boundary model, normalization, and initial data
+are external closures.  No background Timescape lapse or observational
+velocity enters this module, and ``alpha_W`` is never identified with
+``1/gamma_w``.
 """
 
 from __future__ import annotations
@@ -39,8 +52,10 @@ from timescape_fsigma8.phase1f_a.operators import (
 from timescape_fsigma8.phase1f_b.models import (
     BOOST_BOUNDARY_RUNTIME_ENFORCEMENT,
     BOOST_SPECIFIC_BOUNDARY_MODEL,
+    COMMON_TIME_PROPAGATION,
     CONDITIONAL_SCALAR_DUST_TO_WALL_BOOST,
     EXPANSION_COMPATIBILITY_EVIDENCE,
+    WALL_HUBBLE_TIME_CONVENTION,
     HARMONIC_VECTOR_SECTOR_EXCLUDED,
     HARMONIC_VECTOR_ZERO_NOT_GRANTED,
     MATHEMATICAL_OPERATOR_FIXTURE_ONLY,
@@ -218,9 +233,11 @@ def propagate_scalar_dust_wall_boost(
     ``L_w=a_w^2 D_w^2=Delta_gamma_w`` (GM Eqs. (2.2),
     (2.20)--(2.24), with the physical/comoving harmonic distinction in BDE
     Eq. (74) and footnote 22).  Therefore the sign-sensitive constraint is
-    ``L_w psi=a_w^2(deltaTheta_d,w-deltaTheta_W)``.  The time update uses
-    the approved normalized scalar law ``dot(psi)=-Q0 nu_W`` derived from
-    the BDE Eqs. (14)--(16) frame law and GM Eq. (2.9) dust geodesicity.
+    ``L_w psi=a_w^2(deltaTheta_d,w-deltaTheta_W)``.  The wall-proper-time law
+    ``d psi/d tau_W=-Q0 nu_W`` follows from the BDE Eqs. (14)--(16) frame law
+    and GM Eq. (2.9) dust geodesicity; the runtime integrates its chain-rule
+    common-time form ``d psi/dt=-alpha_W Q0 nu_W`` on the declared common-time
+    grid, with ``alpha_W=d tau_W/dt`` supplied by the external clock closure.
     """
     if not isinstance(scenario, ScalarDustWallBoostScenario):
         raise Phase1FBContractError("explicit ScalarDustWallBoostScenario required")
@@ -280,12 +297,28 @@ def propagate_scalar_dust_wall_boost(
             projected_lapse[index] = lapse_regional[index]
         else:
             projected_lapse[index] = lapse_regional[index] - raw_means[index]
+    # Chain rule for the declared two-clock map: the frame law is written along
+    # the wall congruence as d psi/d tau_W=-Q0 nu_W, and alpha_W=d tau_W/dt is
+    # the external clock closure, so the common-time driver is alpha_W Q0 nu_W.
+    # alpha_W is spatially homogeneous by contract (shape (nt,)), hence
+    # alpha_W Q0 nu = Q0(alpha_W nu) and the kernel policy is unaffected.
+    alpha = closure.wall_proper_time_rate
+    driver_regional = alpha[:, np.newaxis] * projected_lapse
     projected_lapse_full = np.stack(
         [
             embed_regional_field(system=system, regional_field=row)
             for row in projected_lapse
         ]
     )
+    driver_full = np.stack(
+        [
+            embed_regional_field(system=system, regional_field=row)
+            for row in driver_regional
+        ]
+    )
+    # The gate is applied to the quantity that actually drives the evolution.
+    # Because alpha_W>0 is spatially homogeneous, D_n(alpha_W nu_W)|Gamma=0 is
+    # equivalent to the v2 condition D_n nu_W|Gamma=0.
     (
         driver_boundary_max,
         driver_boundary_time,
@@ -293,7 +326,7 @@ def propagate_scalar_dust_wall_boost(
         driver_boundary_axis,
     ) = _boundary_history_diagnostic(
         domain=domain,
-        fields=projected_lapse_full,
+        fields=driver_full,
         scale_factors=scale,
         time=time,
     )
@@ -360,10 +393,10 @@ def propagate_scalar_dust_wall_boost(
         )
     for index, step in enumerate(dt):
         potential[index + 1] = potential[index] - 0.5 * step * (
-            projected_lapse[index] + projected_lapse[index + 1]
+            driver_regional[index] + driver_regional[index + 1]
         )
 
-    potential_dot_regional = -projected_lapse
+    potential_dot_regional = -driver_regional
     laplacian_regional = np.stack(
         [apply_regional_laplace_beltrami(system=system, field=row) for row in potential]
     )
@@ -415,11 +448,13 @@ def propagate_scalar_dust_wall_boost(
             for index in range(nt)
         ]
     )
+    # Single-clock diagnostic: a common-time numerical derivative, the
+    # common-time H_W=d ln(a_w)/dt, and the common-time source alpha_W D nu_W.
     acceleration = np.stack(
         [
             _physical_orthonormal_gradient(
                 domain=domain,
-                scalar_field=projected_lapse_full[index],
+                scalar_field=driver_full[index],
                 scale_factor=scale[index],
             )
             for index in range(nt)
@@ -513,6 +548,11 @@ def propagate_scalar_dust_wall_boost(
         propagated_boundary_worst_axis=propagated_boundary_axis,
         boundary_condition_classification=BOOST_SPECIFIC_BOUNDARY_MODEL,
         boundary_runtime_enforcement=BOOST_BOUNDARY_RUNTIME_ENFORCEMENT,
+        wall_proper_time_rate_role=WALL_PROPER_TIME_RATE_ROLE,
+        wall_proper_time_rate_min=float(np.min(alpha)),
+        wall_proper_time_rate_max=float(np.max(alpha)),
+        wall_hubble_time_convention=WALL_HUBBLE_TIME_CONVENTION,
+        common_time_propagation=COMMON_TIME_PROPAGATION,
         potential_mean_max_abs=potential_mean_max,
         lapse_raw_mean_max_abs=float(np.max(np.abs(raw_means))),
         lapse_q0_correction_max_abs=(
@@ -554,6 +594,7 @@ def propagate_scalar_dust_wall_boost(
         wall_background_shear_status=WALL_BACKGROUND_SHEAR_EXCLUDED,
         wall_shear_zero_as_timescape_prediction=WALL_SHEAR_ZERO_NOT_GRANTED,
         wall_proper_time_rate_role=WALL_PROPER_TIME_RATE_ROLE,
+        common_time_propagation=COMMON_TIME_PROPAGATION,
         conditional_forward_uniqueness="GRANTED",
         unique_from_frozen_y_alone="NOT_GRANTED",
         unique_timescape_prediction="NOT_GRANTED",
