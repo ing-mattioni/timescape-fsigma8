@@ -1,0 +1,388 @@
+{
+  "repository_checkpoint": {
+    "base_main": "d2f150222cb08565aa9d0822747250309d8aaa67",
+    "origin_main_at_start": "d2f150222cb08565aa9d0822747250309d8aaa67",
+    "previous_main": "87af7976b82b0b38e2c3e77dfc9458e664034c5d",
+    "pinned_upstream": "590c6fd5332acb15f5683ebf392a0d7ce54983c5",
+    "pinned_notebook_sha256": "86d2534db9e9b3169835e4ce223ee8f3bff6d03b47e5677d3937fed4adafe55a",
+    "authorized_preserved_untracked_file": {
+      "path": "reports/phase1f_b_dust_wall_boost_dynamics_v3_final_audit.md",
+      "sha256": "08c30893e8df88818760a91d85c9839770d7234f263c226446b634fddc216930",
+      "phase1f_c_deliverable": false,
+      "staged_or_modified": false
+    },
+    "preflight_full_suite": {
+      "python_3_14_3": "588 passed; 0 failures; 0 skips; 0 xfails; 0 warnings",
+      "python_3_11_9": "588 passed; 0 failures; 0 skips; 0 xfails; 0 warnings"
+    }
+  },
+  "frozen_phase1f_b_tags": {
+    "v1": {
+      "object": "d784074049148fad65632fe91848eada8923bb7a",
+      "peeled": "27fd65fd2a05c5b990508d948703897f433b566e"
+    },
+    "v2": {
+      "object": "bd1facf1fce246ef6fb42d02f03c5da6c2eef3a0",
+      "peeled": "16440e1a682c8d62d1e1b1d15fe8fad9290fa66a"
+    },
+    "v3": {
+      "object": "61dc9cf7602908b563158554d1b991a8d7059ab7",
+      "peeled": "d2f150222cb08565aa9d0822747250309d8aaa67"
+    }
+  },
+  "realization": {
+    "phase": "1F-C",
+    "id": "H1-1F-C-CLOCK-ANCHORED-SCALAR-NORMAL-KINEMATIC-GEOMETRY-V1",
+    "short_id": "H1-1F-C-CA-SNKG-V1",
+    "scientific_realization_readiness": "READY_FOR_CONDITIONAL_IMPLEMENTATION",
+    "scientific_verdict": "PARTIAL_GEOMETRIC_CLOSURE_DERIVED_NEW_PERTURBED_GEOMETRIC_DYNAMICS_REQUIRED",
+    "role": "CONDITIONAL_THEORETICAL_FORWARD_REALIZATION"
+  },
+  "evidence_classifications": [
+    "DERIVED_FROM_FROZEN_TIMESCAPE",
+    "DERIVED_FROM_GENERIC_GR",
+    "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+    "EXTERNAL_CLOSURE_INPUT",
+    "GAUGE_CHOICE",
+    "MODEL_SECTOR_RESTRICTION",
+    "NOT_DERIVED",
+    "REJECTED_UNSUPPORTED"
+  ],
+  "frozen_boundary": {
+    "phase1f_b_realization": "UNCHANGED",
+    "phase1f_b_scalar_rank": 5,
+    "phase1f_a_density_science": "UNCHANGED",
+    "phase1e_g_integrity": "REUSED_FAIL_CLOSED",
+    "d3_equation_verdict": "RESOLVED_DERIVED_4_10",
+    "d3_runtime_branches": [
+      "derived_4_10",
+      "printed_4_15"
+    ],
+    "d3_default": "NOT_GRANTED",
+    "s1_fallback": "NOT_PRESENT",
+    "candidate_a": "UNCHANGED_CONDITIONAL_NONOBSERVATIONAL"
+  },
+  "clock_ontology": {
+    "timescape_background_lapse": {
+      "symbol": "gamma_w=dt/dtau_w",
+      "source": "W09 Eq. (B7)",
+      "classification": "DERIVED_FROM_FROZEN_TIMESCAPE"
+    },
+    "selected_clock_branch": {
+      "token": "TIMESCAPE_COMMON_TIME_TO_BACKGROUND_WALL_PROPER_TIME",
+      "identifications": [
+        "t_common=t_Timescape",
+        "bar(tau_W)=tau_w"
+      ],
+      "equation": "bar(alpha_W)=1/gamma_w",
+      "classification": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION"
+    },
+    "adm_wall_lapse": "N_W(t,x)=bar(alpha_W)(1+nu_W) at first order",
+    "relative_lorentz_factor": "gamma_dW=-u_d,w.u_W=1+O(v^2)",
+    "objects_identified": false,
+    "perturbative_lapse_inferred_from_background_gamma": false
+  },
+  "congruence_ontology": {
+    "regional_wall_dust": "u_d,w",
+    "wall_observer": "u_W",
+    "identification_forbidden": "u_d,w=u_W",
+    "relative_velocity_convention": "u_d,w=u_W+v_d|W+O(v^2)",
+    "wall_normal_relation": {
+      "statement": "u_W=n",
+      "classification": "MODEL_SECTOR_RESTRICTION"
+    }
+  },
+  "selected_sector": {
+    "components": [
+      "SCALAR",
+      "LONGITUDINAL",
+      "HYPERSURFACE_NORMAL",
+      "ZERO_SHIFT",
+      "SHEAR_FREE",
+      "LINEAR",
+      "LOCAL_WALL_PATCH"
+    ],
+    "signature": "(-,+,+,+)",
+    "extrinsic_curvature_sign": "K_ij=-(1/2)L_n h_ij; Theta_W=-K",
+    "zero_shift_classification": "GAUGE_CHOICE",
+    "shear_free_classification": "MODEL_SECTOR_RESTRICTION",
+    "vorticity_zero_classification": "DERIVED_FROM_GENERIC_GR",
+    "global_w09_metric_identification": "REJECTED_UNSUPPORTED"
+  },
+  "spatial_pullback_contract": {
+    "public_type": "H1ToWallSpatialPullback",
+    "classification": "EXTERNAL_CLOSURE_INPUT",
+    "silent_identity_default": false,
+    "silent_h1_laplacian_reuse": false,
+    "required": [
+      "sealed H1 wall domain",
+      "explicit pullback matrix",
+      "wall reference gradient matrices",
+      "wall reference Laplace-Beltrami matrix",
+      "wall measure weights",
+      "wall grid shape and actual spatial dimension",
+      "H1 and wall geometry identities",
+      "morphology identity",
+      "boundary and domain realization",
+      "units and scale-factor relation",
+      "explicit local wall scale-factor and Hubble mapping identities",
+      "provenance and constant-kernel tolerance"
+    ],
+    "operator_relation": "D_W=a_W^-1 D_gamma_W; D_W^2=a_W^-2 Delta_gamma_W",
+    "scale_factor_mapping_classification": "EXTERNAL_CLOSURE_INPUT",
+    "operator_source": "BDE Eq. (74)",
+    "interface_interpretation": "NOT_DERIVED"
+  },
+  "lapse_closure": {
+    "public_type": "ExternalWallLapsePerturbationClosure",
+    "field": "nu_W(t,x)",
+    "classification": "EXTERNAL_CLOSURE_INPUT",
+    "allowed_provenance": [
+      "EXTERNAL_GEOMETRIC_CLOSURE",
+      "SYNTHETIC_VALIDATION_ONLY"
+    ],
+    "scientific_default": "NONE",
+    "zero_fallback": false,
+    "background_gamma_fallback": false,
+    "cmc_fallback": false,
+    "einstein_equation_fallback": false
+  },
+  "implemented_equations": {
+    "background_clock": {
+      "equation": "bar(alpha_W)=1/gamma_w",
+      "source": "W09 Eq. (B7), selected clock-map assumption",
+      "classification": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION"
+    },
+    "adm_lapse": {
+      "equation": "N_W=bar(alpha_W)(1+nu_W)",
+      "source": "first-order split of BMR Eq. (2.5)",
+      "classification": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION"
+    },
+    "wall_acceleration": {
+      "equation": "A_W,i=D_W,i nu_W",
+      "source": "BMR Eq. (2.6)",
+      "classification": "DERIVED_FROM_GENERIC_GR"
+    },
+    "wall_vorticity": {
+      "equation": "omega_W,ij=0 for u_W=n",
+      "source": "BMR Eq. (2.34)",
+      "classification": "DERIVED_FROM_GENERIC_GR"
+    },
+    "wall_expansion": {
+      "equation": "deltaTheta_W=deltaTheta_d,w-D_W^2 psi_dw",
+      "source": "BDE Eqs. (14)-(16), frozen Phase 1F-B sign",
+      "classification": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION"
+    },
+    "boost_clock": {
+      "equation": "partial_t psi_dw=-alpha_W Q0 nu_W",
+      "source": "BMR Eqs. (2.29)-(2.30), frozen Phase 1F-B v3",
+      "classification": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION"
+    },
+    "optional_metric_trace": {
+      "equation": "partial_t C_W=H_W^(t)nu_W+alpha_W deltaTheta_W/3",
+      "source": "BMR Eq. (3.1), Eqs. (2.37)-(2.39), selected scalar metric",
+      "classification": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "initial_data": "EXTERNAL_CLOSURE_INPUT"
+    }
+  },
+  "state_accounting": {
+    "frozen_phase1f_b_differential_state_rank": 5,
+    "phase1f_c_driver_only_new_variables": 0,
+    "driver_only_differential_state_rank": 5,
+    "optional_metric_reconstruction_differential_rank": 1,
+    "augmented_full_metric_runtime_rank": 6,
+    "full_vector_rank": "NOT_DERIVED"
+  },
+  "public_api": {
+    "records": [
+      "TimescapeWallClockBridge",
+      "H1ToWallSpatialPullback",
+      "ExternalWallLapsePerturbationClosure",
+      "ClockAnchoredWallGeometryScenario",
+      "Phase1FCNumerics",
+      "WallKinematicGeometryResult",
+      "ScalarMetricTraceInitialData",
+      "ScalarMetricTraceResult"
+    ],
+    "functions": [
+      "derive_clock_anchored_wall_kinematic_geometry",
+      "reconstruct_optional_scalar_metric_trace"
+    ],
+    "scientific_arguments_keyword_only": true,
+    "scientific_defaults": "NONE"
+  },
+  "numerical_tolerances": {
+    "clock_alignment": {
+      "value": 2e-13,
+      "normalization": "maximum absolute dimensionless rate difference",
+      "measured_worst": 0.0
+    },
+    "lapse_alignment": {
+      "value": 2e-13,
+      "normalization": "maximum absolute dimensionless lapse difference",
+      "measured_worst": 0.0
+    },
+    "boost_clock": {
+      "value": 2e-11,
+      "normalization": "maximum absolute potential time-derivative residual",
+      "measured_worst": 5.421010862427522e-20
+    },
+    "expansion_compatibility": {
+      "value": 5e-10,
+      "normalization": "maximum absolute inverse-common-time residual",
+      "measured_worst": 6.938893903907228e-17
+    },
+    "lapse_linear_regime": {
+      "value": 0.05,
+      "normalization": "maximum absolute dimensionless nu_W",
+      "measured_worst": 0.00125
+    },
+    "metric_trace_mean": {
+      "value": 2e-11,
+      "normalization": "wall-measure weighted mean",
+      "measured_worst": 8.673617379884035e-19
+    },
+    "metric_trace_integrator": {
+      "value": 2e-13,
+      "normalization": "maximum absolute trapezoidal update residual",
+      "measured_worst": 1.3877787807814457e-17
+    },
+    "pullback_constant_preservation": {
+      "value": 2e-13,
+      "normalization": "maximum absolute operator action on unit constant",
+      "measured_worst": 0.0
+    },
+    "wall_operator_symmetry": {
+      "value": 2e-13,
+      "normalization": "maximum absolute weighted negative-Laplacian antisymmetry",
+      "measured_worst": 0.0
+    },
+    "wall_operator_kernel": {
+      "value": 2e-12,
+      "normalization": "absolute generalized scalar-kernel eigenvalue",
+      "measured_kernel_dimension": 1
+    },
+    "wall_operator_coercivity": {
+      "value": 1e-8,
+      "normalization": "minimum positive weighted negative-Laplacian eigenvalue",
+      "measured_minimum": 0.9999999999999997,
+      "measured_maximum": 6.0,
+      "status": "CLOSED"
+    }
+  },
+  "validation_metrics": {
+    "clock_alignment_max_abs": 0.0,
+    "lapse_alignment_max_abs": 0.0,
+    "boost_clock_residual_unit_alpha": 2.710505431213761e-20,
+    "boost_clock_residual_nonunit_alpha": 5.421010862427522e-20,
+    "expansion_compatibility_max_abs": 6.938893903907228e-17,
+    "expansion_compatibility_normalized_linf": 5.064886061246151e-16,
+    "acceleration_max_abs": 0.004,
+    "metric_trace_integrator_residual": 1.3877787807814457e-17,
+    "metric_trace_mean_drift": 8.673617379884035e-19,
+    "a_w_equals_2_operator_residual": 0.0,
+    "omitted_a_w_squared_factor_difference": 0.08400000000000006,
+    "fixture_classification": "SYNTHETIC_VALIDATION_ONLY",
+    "fixture_spatial_dimension": 3,
+    "targeted_tests": {
+      "python_3_14_3": "26 passed",
+      "python_3_11_9": "26 passed"
+    },
+    "full_repository_tests": {
+      "python_3_14_3": {
+        "result": "614 passed; 0 failures; 0 skips; 0 xfails; 0 warnings",
+        "numpy": "2.5.2",
+        "scipy": "1.18.1",
+        "pytest": "9.1.1"
+      },
+      "python_3_11_9": {
+        "result": "614 passed; 0 failures; 0 skips; 0 xfails; 0 warnings",
+        "numpy": "2.4.6",
+        "scipy": "1.17.1",
+        "pytest": "9.1.1"
+      }
+    }
+  },
+  "integrity": {
+    "normal_assignment": "REJECTED_BY_FROZEN_RECORDS",
+    "nested_arrays": "DEFENSIVE_READ_ONLY_COPIES",
+    "low_level_tamper": "DETECTED_BY_CANONICAL_OPERATION_TIME_FINGERPRINT",
+    "changed_closure_policy": "CONSTRUCT_NEW_SCENARIO"
+  },
+  "generic_gr_firewall": {
+    "kinematic_identities": "DERIVED_FROM_GENERIC_GR",
+    "local_einstein_dressed_source": "NOT_DERIVED",
+    "hamiltonian_as_lapse_closure": "REJECTED_UNSUPPORTED",
+    "momentum_as_lapse_closure": "REJECTED_UNSUPPORTED",
+    "raychaudhuri_as_lapse_closure": "REJECTED_UNSUPPORTED",
+    "cmc_default": "REJECTED_UNSUPPORTED"
+  },
+  "interface_and_morphology_firewall": {
+    "morphology": "EXTERNAL_CLOSURE_INPUT",
+    "boundary_domain": "EXTERNAL_CLOSURE_INPUT",
+    "h1_transmission_to_metric_junction": "REJECTED_UNSUPPORTED",
+    "physical_gamma_junction": "NOT_DERIVED",
+    "physical_interface_claim": "NOT_GRANTED"
+  },
+  "adversarial_self_audit": {
+    "frozen_repository_boundary": "COMPLETE",
+    "selected_clock_branch": "COMPLETE",
+    "lapse_and_lorentz_ontology": "COMPLETE",
+    "scalar_normal_adm_sector": "COMPLETE",
+    "spatial_pullback_and_operator": "COMPLETE",
+    "external_perturbative_lapse": "COMPLETE",
+    "wall_kinematic_derivations": "COMPLETE",
+    "wall_expansion_sign_and_compatibility": "COMPLETE",
+    "clock_factor_placement": "COMPLETE",
+    "optional_metric_trace_and_state_count": "COMPLETE",
+    "post_assembly_integrity": "COMPLETE",
+    "generic_gr_timescape_interface_firewalls": "COMPLETE",
+    "observational_d3_candidate_a_firewalls": "COMPLETE",
+    "load_bearing_partial_or_missing_items": 0
+  },
+  "authorization": {
+    "unique_from_frozen_y_alone": "NOT_GRANTED",
+    "unique_timescape_prediction": "NOT_GRANTED",
+    "full_geometric_closure_derived": "NO",
+    "new_perturbed_geometric_dynamics_required": "YES",
+    "physical_interface_claim": "NOT_GRANTED",
+    "observational_authorization": "NOT_GRANTED",
+    "rsd_authorization": "NOT_GRANTED",
+    "sigma8_authorization": "NOT_GRANTED",
+    "fsigma8_authorization": "NOT_GRANTED"
+  },
+  "required_machine_verdict": {
+    "PHASE": "1F-C",
+    "SCIENTIFIC_REALIZATION": "H1-1F-C-CLOCK-ANCHORED-SCALAR-NORMAL-KINEMATIC-GEOMETRY-V1",
+    "SCIENTIFIC_REALIZATION_READINESS": "READY_FOR_CONDITIONAL_IMPLEMENTATION",
+    "PHASE_1F_C_SCIENTIFIC_VERDICT": "PARTIAL_GEOMETRIC_CLOSURE_DERIVED_NEW_PERTURBED_GEOMETRIC_DYNAMICS_REQUIRED",
+    "COMMON_BACKGROUND_CLOCK": "CONDITIONALLY_CLOSED",
+    "COMMON_BACKGROUND_CLOCK_RATE": "alpha_W_EQUALS_INVERSE_gamma_w_UNDER_SELECTED_CLOCK_MAP",
+    "COMMON_PERTURBED_4D_SPACETIME": "CONDITIONALLY_PARAMETERIZED_LOCALLY",
+    "GLOBAL_PERTURBED_DRESSED_SPACETIME": "NOT_DERIVED",
+    "PERTURBED_WALL_CONGRUENCE": "CONDITIONALLY_DEFINED_AS_HYPERSURFACE_NORMAL",
+    "WALL_ADM_LAPSE_BACKGROUND": "CONDITIONALLY_DERIVED",
+    "WALL_LAPSE_PERTURBATION": "NOT_DERIVED_FROM_FROZEN_TIMESCAPE",
+    "WALL_ACCELERATION": "CONDITIONALLY_DERIVED_FROM_LAPSE_PERTURBATION",
+    "WALL_EXPANSION_PERTURBATION": "CONDITIONALLY_DERIVED_FROM_FROZEN_COMPATIBILITY",
+    "WALL_VORTICITY": "ZERO_IN_SELECTED_NORMAL_BRANCH",
+    "WALL_SHEAR": "ZERO_BY_MODEL_SECTOR_RESTRICTION",
+    "H1_TO_WALL_SPATIAL_PULLBACK": "REQUIRED_EXTERNAL_CLOSURE_INPUT",
+    "WALL_GEOMETRY_DRIVER": "PARTIALLY_DERIVED_REDUCED_EXTERNAL_GEOMETRIC_CLOSURE_REQUIRED",
+    "IRREDUCIBLE_GEOMETRIC_INPUT": "PERTURBED_WALL_CONGRUENCE_LAPSE_PLUS_SPATIAL_PULLBACK",
+    "FROZEN_PHASE_1F_B_DIFFERENTIAL_STATE_RANK": 5,
+    "DRIVER_ONLY_DIFFERENTIAL_STATE_RANK": 5,
+    "OPTIONAL_METRIC_RECONSTRUCTION_DIFFERENTIAL_RANK": 1,
+    "AUGMENTED_FULL_METRIC_RUNTIME_RANK": 6,
+    "CONDITIONAL_FORWARD_UNIQUENESS": "GRANTED",
+    "UNIQUE_FROM_FROZEN_Y_ALONE": "NOT_GRANTED",
+    "UNIQUE_TIMESCAPE_PREDICTION": "NOT_GRANTED",
+    "FULL_GEOMETRIC_CLOSURE_DERIVED": "NO",
+    "NEW_PERTURBED_GEOMETRIC_DYNAMICS_REQUIRED": "YES",
+    "PHYSICAL_INTERFACE_CLAIM": "NOT_GRANTED",
+    "OBSERVATIONAL_AUTHORIZATION": "NOT_GRANTED",
+    "RSD_AUTHORIZATION": "NOT_GRANTED",
+    "SIGMA8_AUTHORIZATION": "NOT_GRANTED",
+    "FSIGMA8_AUTHORIZATION": "NOT_GRANTED"
+  }
+}
