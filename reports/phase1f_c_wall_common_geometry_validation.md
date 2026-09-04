@@ -44,6 +44,28 @@ The exact realization is
 `READY_FOR_CONDITIONAL_IMPLEMENTATION`; its scientific verdict is
 `PARTIAL_GEOMETRIC_CLOSURE_DERIVED_NEW_PERTURBED_GEOMETRIC_DYNAMICS_REQUIRED`.
 
+### Phase 1F-C v2 correction scope
+
+The independent v1 adversarial audit at
+`reports/phase1f_c_wall_common_geometry_adversarial_audit.md` (SHA-256
+`345417fdecf5ce686988a128a04a788263a5a51c2831f3cfd3c0511dfd15df3c`)
+returned `REQUIRES_TARGETED_CORRECTIONS` while confirming every scientific
+equation and verdict. V2 changes only the spatial-operator input contract and
+the discriminating regression evidence:
+
+```text
+PHASE_1F_C_V2_CORRECTION_SCOPE: SPATIAL_OPERATOR_CONTRACT_AND_REGRESSION_HARDENING
+SPATIAL_OPERATOR_INPUT_SEMANTICS: REFERENCE_COMOVING
+PHYSICAL_LAPLACIAN_SCALING: APPLIED_BY_PHASE_1F_C
+OPAQUE_CALLBACK_SEMANTIC_VERIFICATION: NOT_POSSIBLE_IN_GENERAL
+DOUBLE_SCALING_PREVENTION: TYPED_CONTRACT_PLUS_ADVERSARIAL_REGRESSION
+METRIC_TRACE_NONZERO_H_REGRESSION: ENFORCED
+COMPATIBILITY_NO_CLOCK_FACTOR_BEHAVIORAL_REGRESSION: ENFORCED
+```
+
+No scientific realization identifier, equation, sign, clock relation,
+rank, external-closure boundary, or authorization changes in v2.
+
 ## 4. Clock ontology
 
 The implementation keeps four objects distinct:
@@ -88,7 +110,9 @@ The external spatial realization records, rather than assumes, the relation
 \]
 
 following the physical/comoving harmonic distinction in BDE Eq. (74). The
-pullback requires explicit `wall_scale_factor_mapping_id` and
+pullback accepts only explicitly declared `REFERENCE_COMOVING` operators;
+Phase 1F-C applies the physical \(a_W^{-1}\) and \(a_W^{-2}\) factors. It also
+requires explicit `wall_scale_factor_mapping_id` and
 `wall_hubble_mapping_id` tokens classified `EXTERNAL_CLOSURE_INPUT`; it does
 not identify the H1 regional, finite-infinity, and local dressed-wall scale
 factors globally. In a synthetic \(a_W=2\) check, the implemented
@@ -112,8 +136,10 @@ hypersurface normality (BMR Eq. (2.34)). None is a new Timescape prediction.
 ## 8. Spatial pullback contract
 
 `H1ToWallSpatialPullback` requires an explicit matrix from the sealed H1 wall
-domain to a separately identified local wall grid, explicit reference
-gradient and Laplace--Beltrami matrices, positive measure weights, dimension,
+domain to a separately identified local wall grid, a mandatory typed
+`SpatialOperatorInputSemantics.REFERENCE_COMOVING` declaration, explicit
+reference/comoving gradient and Laplace--Beltrami matrices, positive measure
+weights, dimension,
 metric/measure IDs, morphology ID, boundary/domain realization, units,
 scale-factor relation, provenance, and a constant-preservation tolerance.
 No identity map or H1 regional Laplacian is a default. The constructor checks
@@ -124,6 +150,16 @@ kernel, and positive coercivity off that kernel using explicit tolerances.
 This is `EXTERNAL_CLOSURE_INPUT`. Its boundary realization is mathematical
 input only: no H1 transmission condition becomes a gravitational junction or
 physical statement about \(\Gamma\).
+
+The enum also names `WALL_PHYSICAL` so that this unsupported input space is
+rejected explicitly rather than silently selected. The enforcement is
+structural: an opaque matrix or callback cannot be inspected to prove whether
+its numerical implementation secretly includes \(a_W^{-1}\) or \(a_W^{-2}\).
+Falsely declaring an already-physical operator as `REFERENCE_COMOVING` is an
+`ALREADY_PHYSICAL_OPERATOR_AS_REFERENCE_INPUT: CALLER_CONTRACT_VIOLATION`,
+not a runtime-verifiable property. The adversarial \(a_W=2\) regression shows
+that such misrepresentation would turn the correct \(L/4\) into \(L/16\),
+while the typed API prevents accidental `WALL_PHYSICAL` selection.
 
 ## 9. External lapse/congruence closure
 
@@ -173,7 +209,12 @@ Phase 1F-B boost admissible. Its worst residual was
 `5e-10`. Reversing the sign fails closed. A nonzero Laplacian fixture verifies
 \(\delta\Theta_W\ne\delta\Theta_{d,w}\).
 
-The compatibility equation contains no \(\alpha_W\).
+The compatibility equation contains no \(\alpha_W\). V2 verifies this
+behaviorally with two materially different clock rates while holding the
+spatial pullback, boost potential, and dust expansion fixed. Both evaluations
+equal the independently constructed
+`deltaTheta_d,w - D_W^2 psi_dw`; a spurious clock factor is separated by more
+than `1e-3`.
 
 ## 12. Boost clock consistency
 
@@ -211,6 +252,15 @@ multiplied by a second \(\alpha_W\). Explicit trapezoidal integration yielded
 a `1.3877787807814457e-17` update residual and
 `8.673617379884035e-19` maximum weighted-mean drift. This local trace is not
 the complete global W09 dressed metric.
+
+V2 adds a direct numerical regression with
+\(H_W^{(t)}=0.05\), \(a_W=\exp(0.05t)\),
+\(\alpha_W=1+0.2t\), and nonzero \(\nu_W\). The production derivative agrees
+with the independently assembled correct expression to the `2e-15` absolute
+test tolerance and differs from the double-alpha adversary by more than
+`1e-7` (measured separation `7.499999999990153e-07`; correct-expression
+residual `0.0`). This replaces source-text evidence as the load-bearing
+regression.
 
 ## 14. State/rank accounting
 
@@ -270,17 +320,18 @@ precision. Numerical gates are explicit:
 | wall-operator scalar kernel | `2e-12` | dimension 1 | closed |
 | wall-operator coercivity floor | `1e-8` | minimum `0.9999999999999997` | closed |
 
-The Phase 1F-C targeted family passed 26 tests on each supported stack. The
-complete repository suite passed 614 tests under Python 3.14.3 (NumPy 2.5.2,
-SciPy 1.18.1, pytest 9.1.1) and Python 3.11.9 (NumPy 2.4.6, SciPy 1.17.1,
-pytest 9.1.1), with zero failures, skips, xfails, or warnings.
+The corrected Phase 1F-C targeted family passed 29 tests on each supported
+stack. The complete repository suite passed 617 tests under Python 3.14.3
+(NumPy 2.5.2, SciPy 1.18.1, pytest 9.1.1) and Python 3.11.9 (NumPy 2.4.6,
+SciPy 1.17.1, pytest 9.1.1), with zero failures, skips, xfails, or warnings.
 
 ## 18. Forbidden-shortcut verification
 
 Tests and source review close the following routes: implicit clock branch;
 nonpositive/nonfinite background lapse; inferred or default \(\nu_W\);
-identity-map default; H1 Laplacian alias; opposite expansion sign; extra
-\(\alpha_W\) on compatibility or common-time Hubble; equal dust/wall
+identity-map default; H1 Laplacian alias; missing or unsupported typed
+operator-space declaration; opposite expansion sign; extra \(\alpha_W\) on
+compatibility or common-time Hubble; equal dust/wall
 congruence IDs; unsupported vector sector; missing \(C_W\) initial data or
 split; low-level state tampering; CMC/Einstein/interface predictive APIs; and
 observational or tracer APIs. D3 and Candidate A files are untouched.
@@ -301,11 +352,11 @@ sector, unique prediction, and every observational bridge remain ungranted.
 | explicit selected clock branch | COMPLETE | reciprocal, positivity, identity, non-unit-clock tests |
 | four-object lapse/Lorentz ontology | COMPLETE | separate types and forbidden inference paths |
 | scalar-normal ADM sign and sector | COMPLETE | typed sector/gauge and exact sign tokens |
-| explicit spatial pullback/operator | COMPLETE | no default, identity, shape, support, kernel, symmetry and coercivity gates |
+| explicit spatial pullback/operator | COMPLETE | typed `REFERENCE_COMOVING` contract; no default, identity, shape, support, kernel, symmetry or coercivity bypass |
 | external perturbative lapse | COMPLETE | required typed closure; only external/synthetic provenance |
 | acceleration and vorticity kinematics | COMPLETE | generic-GR classifications and analytic tests |
 | wall expansion compatibility/sign | COMPLETE | independent frozen-field residual and opposite-sign adversary |
-| clock factor placement | COMPLETE | non-unit clock and no-second-alpha regressions |
+| clock factor placement | COMPLETE | behavioral alpha-independence plus nonzero-H, nonunit-alpha no-double-alpha regressions |
 | optional metric trace and state counting | COMPLETE | mandatory initial data/split; rank 5/5/+1/6 tests |
 | post-assembly integrity | COMPLETE | defensive copies, frozen records, operation-time fingerprints |
 | generic-GR/Timescape/interface firewalls | COMPLETE | no predictive source or junction path |
@@ -315,6 +366,15 @@ sector, unique prediction, and every observational bridge remain ungranted.
 No load-bearing requirement is `PARTIAL`, `MISSING`, or unjustifiably
 deviated. The statuses `NOT_DERIVED` and `EXTERNAL_CLOSURE_INPUT` are intended
 scientific boundaries, not implementation omissions.
+
+Focused v2 self-audit: the operator callback returns a reference/comoving
+action; Phase 1F-C alone applies \(a_W^{-2}\); no operator-space default exists;
+all contradictory wording that described inputs as wall-physical was removed
+from the public contract; and no runtime introspection guarantee is claimed
+for deliberate semantic mislabelling. The metric-trace test has both nonzero \(H_W^{(t)}\)
+and nonunit \(\alpha_W\), the correct expression passes, and the double-alpha
+expression fails. Compatibility is value-tested across two clock rates and a
+spurious-alpha expression fails.
 
 ## 21. Final verdict
 

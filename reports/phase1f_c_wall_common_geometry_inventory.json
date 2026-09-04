@@ -30,6 +30,23 @@
       "peeled": "d2f150222cb08565aa9d0822747250309d8aaa67"
     }
   },
+  "phase1f_c_v2_correction": {
+    "v1_audit": {
+      "path": "reports/phase1f_c_wall_common_geometry_adversarial_audit.md",
+      "sha256": "345417fdecf5ce686988a128a04a788263a5a51c2831f3cfd3c0511dfd15df3c",
+      "verdict": "REQUIRES_TARGETED_CORRECTIONS",
+      "committed": false
+    },
+    "PHASE_1F_C_V2_CORRECTION_SCOPE": "SPATIAL_OPERATOR_CONTRACT_AND_REGRESSION_HARDENING",
+    "SPATIAL_OPERATOR_INPUT_SEMANTICS": "REFERENCE_COMOVING",
+    "PHYSICAL_LAPLACIAN_SCALING": "APPLIED_BY_PHASE_1F_C",
+    "OPAQUE_CALLBACK_SEMANTIC_VERIFICATION": "NOT_POSSIBLE_IN_GENERAL",
+    "DOUBLE_SCALING_PREVENTION": "TYPED_CONTRACT_PLUS_ADVERSARIAL_REGRESSION",
+    "METRIC_TRACE_NONZERO_H_REGRESSION": "ENFORCED",
+    "COMPATIBILITY_NO_CLOCK_FACTOR_BEHAVIORAL_REGRESSION": "ENFORCED",
+    "scientific_realization_changed": false,
+    "scientific_equations_changed": false
+  },
   "realization": {
     "phase": "1F-C",
     "id": "H1-1F-C-CLOCK-ANCHORED-SCALAR-NORMAL-KINEMATIC-GEOMETRY-V1",
@@ -112,6 +129,17 @@
   "spatial_pullback_contract": {
     "public_type": "H1ToWallSpatialPullback",
     "classification": "EXTERNAL_CLOSURE_INPUT",
+    "operator_input_semantics_type": "SpatialOperatorInputSemantics",
+    "operator_input_semantics": "REFERENCE_COMOVING",
+    "physical_laplacian": "D_W^2 = a_W^-2 Delta_reference",
+    "caller_operator_space_declaration": "MANDATORY_TYPED_CONTRACT",
+    "silent_operator_space_default": "FORBIDDEN",
+    "wall_physical_operator_input": "REJECTED_UNSUPPORTED",
+    "physical_laplacian_scaling": "APPLIED_BY_PHASE_1F_C",
+    "callback_numerical_semantics_verifiable_at_runtime": "NO",
+    "already_physical_operator_as_reference_input": "CALLER_CONTRACT_VIOLATION",
+    "contract_enforcement": "STRUCTURAL_CONTRACT_ENFORCEMENT",
+    "opaque_implementation_semantics": "SEMANTIC_TRUST_IN_CALLER_IMPLEMENTATION",
     "silent_identity_default": false,
     "silent_h1_laplacian_reuse": false,
     "required": [
@@ -197,6 +225,7 @@
     "records": [
       "TimescapeWallClockBridge",
       "H1ToWallSpatialPullback",
+      "SpatialOperatorInputSemantics",
       "ExternalWallLapsePerturbationClosure",
       "ClockAnchoredWallGeometryScenario",
       "Phase1FCNumerics",
@@ -282,21 +311,28 @@
     "metric_trace_mean_drift": 8.673617379884035e-19,
     "a_w_equals_2_operator_residual": 0.0,
     "omitted_a_w_squared_factor_difference": 0.08400000000000006,
+    "mislabelled_already_physical_double_scaling_ratio_at_a_w_2": 0.25,
+    "mislabelled_already_physical_separation_at_a_w_2": 0.021000000000000015,
+    "metric_trace_nonzero_h_correct_expression_tolerance": 2e-15,
+    "metric_trace_nonzero_h_correct_expression_residual": 0.0,
+    "metric_trace_double_alpha_adversary_separation": 7.499999999990153e-7,
+    "compatibility_alpha_variation_difference": 0.0,
+    "compatibility_spurious_alpha_adversary_separation": 0.1120000000000001,
     "fixture_classification": "SYNTHETIC_VALIDATION_ONLY",
     "fixture_spatial_dimension": 3,
     "targeted_tests": {
-      "python_3_14_3": "26 passed",
-      "python_3_11_9": "26 passed"
+      "python_3_14_3": "29 passed",
+      "python_3_11_9": "29 passed"
     },
     "full_repository_tests": {
       "python_3_14_3": {
-        "result": "614 passed; 0 failures; 0 skips; 0 xfails; 0 warnings",
+        "result": "617 passed; 0 failures; 0 skips; 0 xfails; 0 warnings",
         "numpy": "2.5.2",
         "scipy": "1.18.1",
         "pytest": "9.1.1"
       },
       "python_3_11_9": {
-        "result": "614 passed; 0 failures; 0 skips; 0 xfails; 0 warnings",
+        "result": "617 passed; 0 failures; 0 skips; 0 xfails; 0 warnings",
         "numpy": "2.4.6",
         "scipy": "1.17.1",
         "pytest": "9.1.1"
@@ -329,11 +365,11 @@
     "selected_clock_branch": "COMPLETE",
     "lapse_and_lorentz_ontology": "COMPLETE",
     "scalar_normal_adm_sector": "COMPLETE",
-    "spatial_pullback_and_operator": "COMPLETE",
+    "spatial_pullback_and_operator": "COMPLETE_TYPED_REFERENCE_COMOVING_CONTRACT",
     "external_perturbative_lapse": "COMPLETE",
     "wall_kinematic_derivations": "COMPLETE",
     "wall_expansion_sign_and_compatibility": "COMPLETE",
-    "clock_factor_placement": "COMPLETE",
+    "clock_factor_placement": "COMPLETE_BEHAVIORAL_NONZERO_H_REGRESSION",
     "optional_metric_trace_and_state_count": "COMPLETE",
     "post_assembly_integrity": "COMPLETE",
     "generic_gr_timescape_interface_firewalls": "COMPLETE",

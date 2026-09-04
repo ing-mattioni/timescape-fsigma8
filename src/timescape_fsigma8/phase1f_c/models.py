@@ -65,6 +65,14 @@ WALL_EXPANSION_PERTURBATION = (
 WALL_VORTICITY = "ZERO_IN_SELECTED_NORMAL_BRANCH"
 WALL_SHEAR = "ZERO_BY_MODEL_SECTOR_RESTRICTION"
 H1_TO_WALL_SPATIAL_PULLBACK = "REQUIRED_EXTERNAL_CLOSURE_INPUT"
+SPATIAL_OPERATOR_INPUT_SEMANTICS = "REFERENCE_COMOVING"
+PHYSICAL_LAPLACIAN_SCALING = "APPLIED_BY_PHASE_1F_C"
+# Physical/reference derivative relation from BDE Eq. (74).
+PHYSICAL_LAPLACIAN = "D_W^2 = a_W^-2 Delta_reference"
+CALLBACK_NUMERICAL_SEMANTICS_VERIFIABLE_AT_RUNTIME = "NO"
+CALLER_OPERATOR_SPACE_DECLARATION = "MANDATORY_TYPED_CONTRACT"
+SILENT_OPERATOR_SPACE_DEFAULT = "FORBIDDEN"
+ALREADY_PHYSICAL_OPERATOR_AS_REFERENCE_INPUT = "CALLER_CONTRACT_VIOLATION"
 WALL_GEOMETRY_DRIVER = (
     "PARTIALLY_DERIVED_REDUCED_EXTERNAL_GEOMETRIC_CLOSURE_REQUIRED"
 )
@@ -126,6 +134,19 @@ class ClockMapBranch(Enum):
 class SpatialClosureProvenance(Enum):
     EXTERNAL_GEOMETRIC_CLOSURE = "EXTERNAL_GEOMETRIC_CLOSURE"
     SYNTHETIC_VALIDATION_ONLY = "SYNTHETIC_VALIDATION_ONLY"
+
+
+class SpatialOperatorInputSemantics(Enum):
+    """Declared metric/coordinate space of supplied wall operators.
+
+    Phase 1F-C accepts only ``REFERENCE_COMOVING`` operators.  The
+    ``WALL_PHYSICAL`` member exists so an unsupported declaration is explicit
+    and rejected rather than coerced.  There is no implicit operator-space
+    default.
+    """
+
+    REFERENCE_COMOVING = "REFERENCE_COMOVING"
+    WALL_PHYSICAL = "WALL_PHYSICAL"
 
 
 class LapseClosureProvenance(Enum):
@@ -260,13 +281,23 @@ class H1ToWallSpatialPullback:
 
     The dense matrices are an intentionally explicit operator contract.  No
     identity pullback and no H1 regional Laplacian are supplied by default.
-    Their units implement the physical/reference derivative distinction in
-    BDE Eq. (74); construction must provide the already wall-physical
-    gradient and Laplace--Beltrami operators.
+    The supplied gradient and Laplace--Beltrami matrices MUST be operators on
+    the declared reference/comoving wall geometry.  Phase 1F-C, not the
+    caller, applies ``D_W=a_W^-1 D_gamma_W`` and
+    ``D_W^2=a_W^-2 Delta_gamma_W`` following BDE Eq. (74).  Already-physical
+    operators are unsupported inputs because they would be scaled twice.
+
+    This typed declaration is structural contract enforcement.  Numerical
+    matrices (and, more generally, opaque operator implementations) cannot be
+    inspected to prove that a caller did not secretly include ``a_W^-1`` or
+    ``a_W^-2``.  Falsely declaring an already-physical operator as
+    ``REFERENCE_COMOVING`` is therefore a caller contract violation, not a
+    runtime-detectable scientific state.
     """
 
     h1_wall_domain: RegionalDomainSpec
     pullback_matrix: FloatArray
+    operator_input_semantics: SpatialOperatorInputSemantics
     wall_reference_gradient_operators: FloatArray
     wall_reference_laplace_beltrami_operator: FloatArray
     wall_measure_weights: FloatArray
@@ -309,6 +340,14 @@ class H1ToWallSpatialPullback:
             raise Phase1FCSpatialClosureError("H1 morphology identity mismatch")
         if not isinstance(self.provenance, SpatialClosureProvenance):
             raise Phase1FCSpatialClosureError("explicit spatial provenance required")
+        if (
+            not isinstance(self.operator_input_semantics, SpatialOperatorInputSemantics)
+            or self.operator_input_semantics
+            is not SpatialOperatorInputSemantics.REFERENCE_COMOVING
+        ):
+            raise Phase1FCSpatialClosureError(
+                "only explicitly declared REFERENCE_COMOVING wall operators are supported"
+            )
         if self.scientific_classification != EXTERNAL_CLOSURE_INPUT:
             raise Phase1FCSpatialClosureError("spatial pullback is an external closure")
         for name in (
@@ -441,6 +480,7 @@ class H1ToWallSpatialPullback:
         return (
             id(self.h1_wall_domain),
             self.pullback_matrix,
+            self.operator_input_semantics,
             self.wall_reference_gradient_operators,
             self.wall_reference_laplace_beltrami_operator,
             self.wall_measure_weights,

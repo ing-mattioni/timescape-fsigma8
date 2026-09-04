@@ -46,6 +46,7 @@ from timescape_fsigma8.phase1f_c import (
     ScalarMetricTraceInitialData,
     ShiftGauge,
     SpatialClosureProvenance,
+    SpatialOperatorInputSemantics,
     TimescapeWallClockBridge,
     WallNormalSector,
     derive_clock_anchored_wall_kinematic_geometry,
@@ -91,16 +92,42 @@ def _periodic_reference_operators(
 
 
 @cache
-def make_case(scale_factor_value: float = 1.0, alpha_values: tuple[float, ...] | None = None):
-    time = np.linspace(0.0, 1.0, 5)
+def make_case(
+    scale_factor_value: float = 1.0,
+    alpha_values: tuple[float, ...] | None = None,
+    time_values: tuple[float, ...] | None = None,
+    scale_factor_values: tuple[float, ...] | None = None,
+    hubble_values: tuple[float, ...] | None = None,
+    lapse_amplitude_values: tuple[float, ...] | None = None,
+    initial_potential_amplitude: float = 0.002,
+):
+    time = (
+        np.linspace(0.0, 1.0, 5)
+        if time_values is None
+        else np.asarray(time_values, dtype=np.float64)
+    )
     alpha = (
         np.ones(time.size)
         if alpha_values is None
         else np.asarray(alpha_values, dtype=np.float64)
     )
-    lapse_amplitude = -0.001 + 0.0004 * time
+    lapse_amplitude = (
+        -0.001 + 0.0004 * time
+        if lapse_amplitude_values is None
+        else np.asarray(lapse_amplitude_values, dtype=np.float64)
+    )
+    scale_factor = (
+        np.full(time.size, scale_factor_value)
+        if scale_factor_values is None
+        else np.asarray(scale_factor_values, dtype=np.float64)
+    )
+    hubble = (
+        np.zeros(time.size)
+        if hubble_values is None
+        else np.asarray(hubble_values, dtype=np.float64)
+    )
     potential_amplitude = np.empty(time.size, dtype=np.float64)
-    potential_amplitude[0] = 0.002
+    potential_amplitude[0] = initial_potential_amplitude
     driver = alpha * lapse_amplitude
     for index, dt in enumerate(np.diff(time), start=1):
         potential_amplitude[index] = potential_amplitude[index - 1] - 0.5 * dt * (
@@ -111,8 +138,8 @@ def make_case(scale_factor_value: float = 1.0, alpha_values: tuple[float, ...] |
         potential_amplitudes=potential_amplitude,
         lapse_amplitudes=lapse_amplitude,
         proper_time_rate=alpha,
-        scale_factor=np.full(time.size, scale_factor_value),
-        hubble=np.zeros(time.size),
+        scale_factor=scale_factor,
+        hubble=hubble,
         lapse_kernel_mode=LapseKernelMode.EXPLICIT_Q0_PROJECTION,
     )
     boost = propagate_scalar_dust_wall_boost(
@@ -130,6 +157,9 @@ def make_case(scale_factor_value: float = 1.0, alpha_values: tuple[float, ...] |
     pullback = H1ToWallSpatialPullback(
         h1_wall_domain=source_domain,
         pullback_matrix=selector,
+        operator_input_semantics=(
+            SpatialOperatorInputSemantics.REFERENCE_COMOVING
+        ),
         wall_reference_gradient_operators=gradient,
         wall_reference_laplace_beltrami_operator=laplacian,
         wall_measure_weights=np.full(wall_indices.size, 1.0 / wall_indices.size),
@@ -272,12 +302,58 @@ def test_validation_lapse_is_external_and_synthetic_only() -> None:
     assert "gamma" not in closure.provider_id.lower()
 
 
-def test_phase1f_b_clock_chain_rule_and_no_second_hubble_factor() -> None:
-    scenario, result = make_case()
-    assert result.diagnostics.boost_clock_residual_max_abs <= 2e-11
-    source = inspect.getsource(reconstruct_optional_scalar_metric_trace)
-    assert "hubble_common[:, np.newaxis] * geometry.perturbative_wall_lapse" in source
-    assert "alpha_W * hubble" not in source
+def test_metric_trace_nonzero_hubble_has_no_double_alpha_factor() -> None:
+    """Numerically distinguish the frozen BMR metric-trace equation.
+
+    The independent expected arrays implement BMR Eq. (3.1) and BMR
+    Eqs. (2.37)--(2.39); ``H_W^(t)`` is already a common-time rate.
+    """
+
+    time = np.linspace(0.0, 1.0, 101)
+    alpha = 1.0 + 0.2 * time
+    hubble = np.full(time.size, 0.05)
+    scale_factor = np.exp(0.05 * time)
+    lapse_amplitude = -0.0001 + 0.00004 * time
+    _, geometry = make_case(
+        alpha_values=tuple(alpha),
+        time_values=tuple(time),
+        scale_factor_values=tuple(scale_factor),
+        hubble_values=tuple(hubble),
+        lapse_amplitude_values=tuple(lapse_amplitude),
+        initial_potential_amplitude=0.0002,
+    )
+    initial = ScalarMetricTraceInitialData(
+        initial_metric_trace=np.zeros(geometry.scenario.spatial_pullback.wall_size),
+        initial_time=float(geometry.time_grid[0]),
+        background_split_policy=(
+            MetricTraceBackgroundSplit.EXPLICIT_WEIGHTED_MEAN_ZERO_PERTURBATION
+        ),
+        spatial_measure_id=geometry.scenario.spatial_pullback.wall_measure_id,
+        frame_id=geometry.scenario.wall_congruence_id,
+        provenance="SYNTHETIC_NONZERO_H_METRIC_TRACE_REGRESSION",
+        scientific_classification=EXTERNAL_CLOSURE_INPUT,
+    )
+    result = reconstruct_optional_scalar_metric_trace(
+        geometry=geometry, initial_data=initial, numerics=numerics()
+    )
+    lapse = geometry.perturbative_wall_lapse
+    expansion = geometry.wall_expansion_perturbation
+    correct = hubble[:, None] * lapse + alpha[:, None] * expansion / 3.0
+    double_alpha_adversary = (
+        alpha[:, None] * hubble[:, None] * lapse
+        + alpha[:, None] * expansion / 3.0
+    )
+    np.testing.assert_allclose(
+        result.metric_trace_time_derivative, correct, rtol=0.0, atol=2e-15
+    )
+    assert (
+        np.max(
+            np.abs(
+                result.metric_trace_time_derivative - double_alpha_adversary
+            )
+        )
+        > 1e-7
+    )
 
 
 def test_nonunit_clock_rate_is_load_bearing_and_first_order_consistent() -> None:
@@ -310,6 +386,39 @@ def test_explicit_spatial_pullback_has_no_default_or_h1_operator_alias() -> None
         replace(pullback, spatial_dimension=2, wall_grid_shape=(4, 8))
 
 
+def test_spatial_operator_semantics_are_mandatory_typed_and_reference_only() -> None:
+    pullback = make_case()[0].spatial_pullback
+    parameter = inspect.signature(H1ToWallSpatialPullback).parameters[
+        "operator_input_semantics"
+    ]
+    assert parameter.default is inspect.Parameter.empty
+    assert (
+        pullback.operator_input_semantics
+        is SpatialOperatorInputSemantics.REFERENCE_COMOVING
+    )
+    assert phase1f_c.SPATIAL_OPERATOR_INPUT_SEMANTICS == "REFERENCE_COMOVING"
+    assert phase1f_c.PHYSICAL_LAPLACIAN_SCALING == "APPLIED_BY_PHASE_1F_C"
+    assert phase1f_c.PHYSICAL_LAPLACIAN == "D_W^2 = a_W^-2 Delta_reference"
+    assert (
+        phase1f_c.CALLER_OPERATOR_SPACE_DECLARATION
+        == "MANDATORY_TYPED_CONTRACT"
+    )
+    assert phase1f_c.SILENT_OPERATOR_SPACE_DEFAULT == "FORBIDDEN"
+    assert (
+        phase1f_c.CALLBACK_NUMERICAL_SEMANTICS_VERIFIABLE_AT_RUNTIME == "NO"
+    )
+    with pytest.raises(Phase1FCSpatialClosureError, match="REFERENCE_COMOVING"):
+        replace(
+            pullback,
+            operator_input_semantics=SpatialOperatorInputSemantics.WALL_PHYSICAL,
+        )
+    with pytest.raises(Phase1FCSpatialClosureError, match="REFERENCE_COMOVING"):
+        replace(
+            pullback,
+            operator_input_semantics="REFERENCE_COMOVING",  # type: ignore[arg-type]
+        )
+
+
 def test_reference_to_physical_operator_uses_exact_scale_factor_powers() -> None:
     scenario, result = make_case(2.0)
     reference_laplacian = (
@@ -335,6 +444,61 @@ def test_reference_to_physical_operator_uses_exact_scale_factor_powers() -> None
     assert np.max(np.abs(reference_acceleration - result.wall_acceleration_covector)) > 1.0e-4
     with pytest.raises(Phase1FCSpatialClosureError, match="scale-factor"):
         replace(scenario.spatial_pullback, scale_factor_relation="D_W^2=Delta_gamma_W")
+
+
+def test_reference_operator_stays_comoving_across_wall_scale_factors() -> None:
+    base_scenario, base_result = make_case(1.0)
+    reference = (
+        base_scenario.spatial_pullback.wall_reference_laplace_beltrami_operator
+    )
+    for scale_factor in (2.0, 3.0):
+        scenario, result = make_case(scale_factor)
+        np.testing.assert_array_equal(
+            scenario.spatial_pullback.wall_reference_laplace_beltrami_operator,
+            reference,
+        )
+        np.testing.assert_allclose(
+            result.wall_laplacian_of_boost_potential,
+            base_result.wall_laplacian_of_boost_potential / scale_factor**2,
+            rtol=0.0,
+            atol=2e-14,
+        )
+
+
+def test_falsely_labelled_physical_operator_is_a_caller_contract_violation() -> None:
+    """Expose the opaque-operator limit without promising introspection.
+
+    At ``a_W=2`` an already-physical ``L_ref/4`` matrix falsely declared
+    ``REFERENCE_COMOVING`` is deliberate caller misrepresentation.  The typed
+    contract prevents accidental selection of ``WALL_PHYSICAL`` but cannot
+    inspect arbitrary numerical semantics.  Phase 1F-C therefore applies the
+    BDE Eq. (74) factor again, producing ``L_ref/16`` rather than ``L_ref/4``.
+    """
+
+    scenario, _ = make_case(2.0)
+    pullback = scenario.spatial_pullback
+    reference = pullback.wall_reference_laplace_beltrami_operator
+    deliberately_mislabelled = replace(
+        pullback,
+        operator_input_semantics=SpatialOperatorInputSemantics.REFERENCE_COMOVING,
+        wall_reference_laplace_beltrami_operator=reference / 4.0,
+    )
+    potential = deliberately_mislabelled.pullback(
+        scenario.boost_result.scalar_potential
+    )
+    correct_physical = potential @ reference.T / 4.0
+    double_scaled = (
+        potential
+        @ deliberately_mislabelled.wall_reference_laplace_beltrami_operator.T
+        / 4.0
+    )
+    np.testing.assert_allclose(double_scaled, correct_physical / 4.0, atol=2e-15)
+    assert np.max(np.abs(double_scaled - correct_physical)) > 1e-3
+    with pytest.raises(Phase1FCCompatibilityError, match="incompatible"):
+        derive_clock_anchored_wall_kinematic_geometry(
+            scenario=replace(scenario, spatial_pullback=deliberately_mislabelled),
+            numerics=numerics(),
+        )
 
 
 def test_acceleration_is_wall_gradient_of_external_lapse() -> None:
@@ -411,17 +575,75 @@ def test_opposite_expansion_sign_fails_closed() -> None:
 
 
 def test_compatibility_constraint_contains_no_clock_factor() -> None:
-    _, result = make_case()
-    expected = (
-        result.wall_laplacian_of_boost_potential
-        - result.wall_expansion_perturbation
-        - result.wall_laplacian_of_boost_potential
+    """Behaviorally enforce the frozen BDE constraint's clock independence."""
+
+    time = np.linspace(0.0, 1.0, 5)
+    lapse_a = -0.001 + 0.0004 * time
+    alpha_a = np.ones(time.size)
+    alpha_b = np.full(time.size, 2.0)
+    # Keeping alpha*nu fixed keeps the frozen psi history fixed while changing
+    # alpha materially; the compatibility equation itself contains no alpha.
+    lapse_b = lapse_a / 2.0
+    scenario_a, result_a = make_case(
+        alpha_values=tuple(alpha_a),
+        lapse_amplitude_values=tuple(lapse_a),
     )
-    # Algebraically isolates that the result relation has no alpha_W factor.
-    assert expected.shape == result.wall_expansion_perturbation.shape
-    source = inspect.getsource(derive_clock_anchored_wall_kinematic_geometry)
-    line = "wall_expansion = dust - laplacian"
-    assert line in source
+    scenario_b, result_b = make_case(
+        alpha_values=tuple(alpha_b),
+        lapse_amplitude_values=tuple(lapse_b),
+    )
+    np.testing.assert_allclose(
+        scenario_a.boost_result.scalar_potential,
+        scenario_b.boost_result.scalar_potential,
+        rtol=0.0,
+        atol=2e-15,
+    )
+    np.testing.assert_array_equal(
+        scenario_a.spatial_pullback.pullback_matrix,
+        scenario_b.spatial_pullback.pullback_matrix,
+    )
+    np.testing.assert_array_equal(
+        scenario_a.spatial_pullback.wall_reference_laplace_beltrami_operator,
+        scenario_b.spatial_pullback.wall_reference_laplace_beltrami_operator,
+    )
+    dust_a = np.stack(
+        [
+            scenario_a.spatial_pullback.pullback(item.delta_theta)
+            for item in scenario_a.boost_result.scenario.dust_expansion_history
+        ]
+    )
+    dust_b = np.stack(
+        [
+            scenario_b.spatial_pullback.pullback(item.delta_theta)
+            for item in scenario_b.boost_result.scenario.dust_expansion_history
+        ]
+    )
+    np.testing.assert_allclose(dust_a, dust_b, rtol=0.0, atol=2e-15)
+    expected_a = dust_a - result_a.wall_laplacian_of_boost_potential
+    expected_b = dust_b - result_b.wall_laplacian_of_boost_potential
+    np.testing.assert_allclose(
+        result_a.wall_expansion_perturbation, expected_a, rtol=0.0, atol=2e-15
+    )
+    np.testing.assert_allclose(
+        result_b.wall_expansion_perturbation, expected_b, rtol=0.0, atol=2e-15
+    )
+    np.testing.assert_allclose(
+        result_a.wall_expansion_perturbation,
+        result_b.wall_expansion_perturbation,
+        rtol=0.0,
+        atol=2e-15,
+    )
+    spurious_alpha_adversary = (
+        dust_b - alpha_b[:, None] * result_b.wall_laplacian_of_boost_potential
+    )
+    assert (
+        np.max(
+            np.abs(
+                result_b.wall_expansion_perturbation - spurious_alpha_adversary
+            )
+        )
+        > 1e-3
+    )
 
 
 def test_metric_trace_requires_explicit_initial_data_and_split() -> None:
