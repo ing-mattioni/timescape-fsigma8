@@ -110,7 +110,12 @@ def test_t5_unequal_backgrounds_preserve_regional_offset_term() -> None:
     np.testing.assert_allclose(result.delta_m_carrier[void_mask], expected_void, atol=2e-12, rtol=0.0)
     assert result.b_wall == pytest.approx(4.0 / 3.0, rel=2e-12, abs=1e-14)
     assert result.b_void == pytest.approx(2.0 / 3.0, rel=2e-12, abs=1e-14)
-    assert result.delta_m_carrier[wall_mask][0] != pytest.approx(wall.delta_m[wall_mask][0], rel=2e-12, abs=1e-14)
+    # This separation proves the unequal-background carrier offset survives.
+    # A narrower equality window would weaken this negative assertion, so keep
+    # the parent's effective rel=1e-6, abs=1e-12 budget explicitly.
+    assert result.delta_m_carrier[wall_mask][0] != pytest.approx(
+        wall.delta_m[wall_mask][0], rel=1e-6, abs=1e-12
+    )
 
 
 def test_t6_carrier_global_mean_and_background_assembly() -> None:

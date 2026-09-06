@@ -398,11 +398,14 @@ def test_v7_ordinary_generalized_and_continuum_coercivity_are_distinct() -> None
     assert operator.ordinary_euclidean_constrained_stiffness_eigenvalue > 0.0
     assert operator.generalized_mass_weighted_laplacian_eigenvalue > 0.0
     assert operator.continuum_coercivity_assumption == pytest.approx(0.1, rel=2e-12, abs=1e-14)
+    # These are separation predicates: shrinking pytest.approx's equality
+    # window would weaken the required distinction.  Preserve the parent's
+    # effective rel=1e-6, abs=1e-12 separation budget explicitly.
     assert operator.ordinary_euclidean_constrained_stiffness_eigenvalue != pytest.approx(
-        operator.continuum_coercivity_assumption, rel=2e-12, abs=1e-14
+        operator.continuum_coercivity_assumption, rel=1e-6, abs=1e-12
     )
     assert operator.generalized_mass_weighted_laplacian_eigenvalue != pytest.approx(
-        operator.ordinary_euclidean_constrained_stiffness_eigenvalue, rel=2e-12, abs=1e-14
+        operator.ordinary_euclidean_constrained_stiffness_eigenvalue, rel=1e-6, abs=1e-12
     )
 
 
@@ -1339,7 +1342,11 @@ def test_n11_morphology_difference_uses_target_metric_weighted_l2() -> None:
         normalization_floor=1e-12,
     )
     assert value == pytest.approx(np.sqrt(3.0) / 2.0, rel=2e-12, abs=1e-14)
-    assert value != pytest.approx(np.linalg.norm(first) / 2.0, rel=2e-12, abs=1e-14)
+    # This must separate target-metric weighting from the Euclidean norm.
+    # A narrower equality window would make this negative assertion weaker.
+    assert value != pytest.approx(
+        np.linalg.norm(first) / 2.0, rel=1e-6, abs=1e-12
+    )
 
 
 def _shifted_half_morphology(resolution: int) -> MorphologySpec:

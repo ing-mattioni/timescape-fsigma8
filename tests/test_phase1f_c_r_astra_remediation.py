@@ -5,6 +5,7 @@ Equation sources: BMR (2.5)--(2.7), (3.1), arXiv:1912.04213v2;
 Short--Coles growth Eq. (3), astro-ph/0605013v2; the authorized A01 contract.
 """
 
+import ast
 from dataclasses import replace
 from pathlib import Path
 import sys
@@ -214,3 +215,71 @@ def test_a06_no_implicit_scientific_test_comparison_tolerances():
         assert not [record for record in audit(Path("tests")) if record["missing"]]
     finally:
         sys.path.pop(0)
+
+
+@pytest.mark.parametrize(
+    ("path", "test_name", "predicate_index", "near_actual", "near_expected"),
+    [
+        (
+            "tests/test_phase1e_g_continuum_h1.py",
+            "test_v7_ordinary_generalized_and_continuum_coercivity_are_distinct",
+            0, 0.10000005, 0.1,
+        ),
+        (
+            "tests/test_phase1e_g_continuum_h1.py",
+            "test_v7_ordinary_generalized_and_continuum_coercivity_are_distinct",
+            1, 0.1000001, 0.10000005,
+        ),
+        (
+            "tests/test_phase1e_g_continuum_h1.py",
+            "test_n11_morphology_difference_uses_target_metric_weighted_l2",
+            0, 0.10000005, 0.1,
+        ),
+        (
+            "tests/test_phase1f_a_density.py",
+            "test_t5_unequal_backgrounds_preserve_regional_offset_term",
+            0, 0.10000005, 0.1,
+        ),
+    ],
+)
+def test_a06_v2_negative_separation_budgets_restore_parent_semantics(
+    path, test_name, predicate_index, near_actual, near_expected
+):
+    """Negative approximate predicates retain the parent's separation window."""
+    tree = ast.parse(Path(path).read_text(encoding="utf-8"))
+    function = next(
+        node for node in tree.body
+        if isinstance(node, ast.FunctionDef) and node.name == test_name
+    )
+    predicates = sorted(
+        (
+            node.comparators[0]
+            for node in ast.walk(function)
+            if isinstance(node, ast.Compare)
+            and len(node.ops) == 1
+            and isinstance(node.ops[0], ast.NotEq)
+            and len(node.comparators) == 1
+            and isinstance(node.comparators[0], ast.Call)
+            and ast.unparse(node.comparators[0].func) == "pytest.approx"
+        ),
+        key=lambda node: node.lineno,
+    )
+    predicate = predicates[predicate_index]
+    tolerances = {
+        keyword.arg: ast.literal_eval(keyword.value)
+        for keyword in predicate.keywords
+    }
+    assert tolerances == {"rel": 1e-6, "abs": 1e-12}
+
+    # The flawed v1 equality window lets this near-equality adversary escape,
+    # whereas the restored parent-effective window rejects it as separation.
+    assert near_actual != pytest.approx(near_expected, rel=2e-12, abs=1e-14)
+    corrected_accepts_separation = near_actual != pytest.approx(
+        near_expected, rel=1e-6, abs=1e-12
+    )
+    assert not corrected_accepts_separation
+    separation = max(1e-12, 1e-6 * abs(near_expected))
+    genuinely_distinct = near_expected + 2.0 * separation
+    assert genuinely_distinct != pytest.approx(
+        near_expected, rel=1e-6, abs=1e-12
+    )

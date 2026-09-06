@@ -1,0 +1,114 @@
+{
+  "a06_parent_to_v2_ledger": {
+    "LOOSER_WITH_JUSTIFICATION": 17,
+    "SEMANTICALLY_EXPLICIT_SAME_EFFECTIVE_BUDGET": 121,
+    "STRICTER": 171,
+    "UNJUSTIFIED_LOOSENING": 0,
+    "changed_preexisting_comparisons": 309,
+    "changed_preexisting_test_files": 25,
+    "parent_test_comparisons": 347
+  },
+  "adversarial_validation": {
+    "corrected_abs": 1e-12,
+    "corrected_rel": 1e-06,
+    "corrected_result": "NEAR_EQUALITY_REJECTED_AS_SEPARATION",
+    "flawed_v1_abs": 1e-14,
+    "flawed_v1_rel": 2e-12,
+    "flawed_v1_result": "NEAR_EQUALITY_ESCAPES_AS_FALSE_SEPARATION",
+    "near_equality_family": [
+      0.1,
+      0.10000005,
+      0.1000001
+    ],
+    "regression_cases": 4,
+    "valid_distinct_case": "PASSES_AT_TWICE_PARENT_EFFECTIVE_THRESHOLD"
+  },
+  "branch": "phase-1f-c-r-astra-audit-remediation",
+  "changed_files": [
+    "reports/phase1f_c_r_astra_audit_remediation_v2.md",
+    "reports/phase1f_c_r_astra_audit_remediation_v2_inventory.json",
+    "tests/test_phase1e_g_continuum_h1.py",
+    "tests/test_phase1f_a_density.py",
+    "tests/test_phase1f_c_r_astra_remediation.py"
+  ],
+  "correction_scope": "NEGATIVE_APPROX_SEPARATION_BUDGET_RESTORATION",
+  "current_scientific_status": {
+    "ALL_TIME_TRANSFER_CONSTITUTIVE_COMPATIBILITY": "NOT_DERIVED",
+    "D3_VERDICT": "RESOLVED_DERIVED_4_10",
+    "FSIGMA8_AUTHORIZATION": "NOT_GRANTED",
+    "REGIONAL_COMMON_TIMESCAPE_BACKGROUND_EMBEDDING": "NOT_DERIVED",
+    "UNIQUE_TIMESCAPE_PREDICTION": "NOT_GRANTED"
+  },
+  "four_predicates": [
+    {
+      "corrected_abs": 1e-12,
+      "corrected_rel": 1e-06,
+      "file": "tests/test_phase1e_g_continuum_h1.py",
+      "predicate_index": 0,
+      "purpose": "DISTINGUISH_DISCRETE_EUCLIDEAN_EIGENVALUE_FROM_CONTINUUM_ASSUMPTION",
+      "test": "test_v7_ordinary_generalized_and_continuum_coercivity_are_distinct"
+    },
+    {
+      "corrected_abs": 1e-12,
+      "corrected_rel": 1e-06,
+      "file": "tests/test_phase1e_g_continuum_h1.py",
+      "predicate_index": 1,
+      "purpose": "DISTINGUISH_GENERALIZED_MASS_WEIGHTED_FROM_ORDINARY_EUCLIDEAN_EIGENVALUE",
+      "test": "test_v7_ordinary_generalized_and_continuum_coercivity_are_distinct"
+    },
+    {
+      "corrected_abs": 1e-12,
+      "corrected_rel": 1e-06,
+      "file": "tests/test_phase1e_g_continuum_h1.py",
+      "predicate_index": 0,
+      "purpose": "DISTINGUISH_TARGET_METRIC_WEIGHTED_L2_FROM_EUCLIDEAN_NORM",
+      "test": "test_n11_morphology_difference_uses_target_metric_weighted_l2"
+    },
+    {
+      "corrected_abs": 1e-12,
+      "corrected_rel": 1e-06,
+      "file": "tests/test_phase1f_a_density.py",
+      "predicate_index": 0,
+      "purpose": "VERIFY_UNEQUAL_BACKGROUND_CARRIER_OFFSET_SURVIVES",
+      "test": "test_t5_unequal_backgrounds_preserve_regional_offset_term"
+    }
+  ],
+  "preflight": {
+    "baseline_python_3_11_9": "650_PASSED_ZERO_FAILURES_SKIPS_XFAILS_WARNINGS",
+    "baseline_python_3_14_3": "650_PASSED_ZERO_FAILURES_SKIPS_XFAILS_WARNINGS",
+    "main_and_origin_main": "63d2104575c6a249e5177e47f4a354b660e70e32",
+    "notebook_sha256": "86d2534db9e9b3169835e4ce223ee8f3bff6d03b47e5677d3937fed4adafe55a",
+    "status": "PASS",
+    "upstream_commit": "590c6fd5332acb15f5683ebf392a0d7ce54983c5",
+    "v1_head": "72d8c51433662947b8981eb970a2bd90a94bbe4e",
+    "v1_tag_object": "3956bfdb3f7dcbffbade69414f69bff0efa94f6c"
+  },
+  "schema_version": 1,
+  "scientific_preservation": {
+    "A01_STATUS": "PRESERVED_PASS",
+    "A02_STATUS": "PRESERVED_PASS",
+    "A03_STATUS": "PRESERVED_PASS",
+    "A04_STATUS": "PRESERVED_PASS",
+    "A05_STATUS": "PRESERVED_PASS",
+    "A06_STATUS": "CORRECTED",
+    "A07_STATUS": "PRESERVED_PASS",
+    "LOAD_BEARING_SCIENTIFIC_EQUATIONS_CHANGED": "NO",
+    "SCIENTIFIC_REALIZATION_CHANGED": "NO",
+    "SCIENTIFIC_SOURCE_CHANGED": "NO"
+  },
+  "tests": {
+    "affected_python_3_11_9": "133_PASSED",
+    "affected_python_3_14_3": "133_PASSED",
+    "complete_python_3_11_9": "654_PASSED_IN_63.88_SECONDS_ZERO_FAILURES_SKIPS_XFAILS_WARNINGS",
+    "complete_python_3_14_3": "654_PASSED_IN_62.82_SECONDS_ZERO_FAILURES_SKIPS_XFAILS_WARNINGS",
+    "expected_complete_count": 654,
+    "new_parametrized_regression_cases": 4
+  },
+  "title": "Phase 1F-C-R corrective v2 A06 separation semantics",
+  "v1_commit": "72d8c51433662947b8981eb970a2bd90a94bbe4e",
+  "v1_parent": "63d2104575c6a249e5177e47f4a354b660e70e32",
+  "v1_tag": "phase-1f-c-r-astra-audit-remediation-v1",
+  "v1_tag_object": "3956bfdb3f7dcbffbade69414f69bff0efa94f6c",
+  "v2_commit_message": "Correct Phase 1F-C-R separation tolerance regressions",
+  "v2_local_tag": "phase-1f-c-r-astra-audit-remediation-v2"
+}
