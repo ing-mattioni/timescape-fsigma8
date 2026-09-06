@@ -2,14 +2,16 @@
 
 The frozen CGI expansion definition is from Eqs. (2.2), (2.20)--(2.24) of
 Galoppo & Mourier, arXiv:2511.17160v2.  The first-order frame transformation
-uses the observer-boost conventions audited against Eqs. (14)--(16) of
-Bruni, Dunsby & Ellis, ApJ 395 (1992) 34 and Eqs. (14), (15), (27) of
-Dunsby, Bruni & Ellis, ApJ 395 (1992) 54.  The common-spacetime wall closure
+is derived explicitly from the normalized boost (BMR Eq. (2.7),
+arXiv:1912.04213v2) and covariant divergence/acceleration definitions in
+phase1f_b.dynamics. The common-spacetime wall closure
 and scalar-normal restrictions are the explicitly human-approved Phase 1F-B
 model extension; they are not predicted by Timescape.
 """
 
 from __future__ import annotations
+
+from timescape_fsigma8.components import ComponentRepresentation
 
 from dataclasses import dataclass, field, fields
 from enum import Enum
@@ -339,8 +341,13 @@ class BoostBoundaryKernelPolicy:
 class CommonSpacetimeWallGeometryClosure:
     """External common-spacetime geometry driving the scalar-normal boost.
 
+    A first-order boost requires coincident zeroth-order dust/wall backgrounds.
+    Their physical Timescape embedding is NOT_DERIVED. Matching record IDs
+    checks bookkeeping, not that physical prerequisite or all-time admissibility.
+
     ``A_W,a=D_a nu_W`` is the normal-congruence lapse identity used with the
-    acceleration frame law audited from BDE Eqs. (14)--(16) and dust
+    acceleration frame law derived from the normalized boost in
+    phase1f_b.dynamics (BMR Eq. (2.7), arXiv:1912.04213v2) and dust
     geodesicity from GM Eq. (2.9).  The local lapse perturbation is external;
     the background Timescape lapse ``gamma_w=dt/dtau_w`` ([W09] Eq. (B7))
     cannot populate this record.
@@ -825,6 +832,11 @@ class ScalarDustWallBoostResult:
     scalar_potential_time_derivative_units: str
     velocity_component_representation: str
     _integrity_token: object = field(init=False, repr=False, compare=False)
+
+    @property
+    def velocity_component_kind(self) -> ComponentRepresentation:
+        """Physical orthonormal components in the inverse-metric Cholesky frame."""
+        return ComponentRepresentation.PHYSICAL_ORTHONORMAL
 
     def __post_init__(self) -> None:
         for name in (

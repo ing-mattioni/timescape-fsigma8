@@ -39,8 +39,8 @@ from timescape_fsigma8.perturbations.solver import SolverConfig
 class BarotropicScenario:
     """Complete mandatory scientific interpretation of one barotropic run.
 
-    Every unresolved Phase 1C choice is required and has no default.  The D3
-    labels identify equation provenance only; this record does not rank them.
+    Every Phase 1C convention is explicit and has no default. D3 is resolved
+    as DERIVED_4_10; PRINTED_4_15 is retained as a forensic alternative.
     """
 
     k: float

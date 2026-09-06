@@ -1,5 +1,9 @@
 """Phase 1F-A explicit longitudinal dust-to-wall boost tests."""
 
+# A06: absolute budgets use rtol=0; relative budgets use atol=0.
+# Previously implicit algebraic comparisons use rtol=2e-12, atol=1e-14
+# in the fixture units (roundoff allowance); explicit convergence budgets remain.
+
 from __future__ import annotations
 
 import inspect
@@ -57,9 +61,9 @@ def test_t18_external_boost_divergence_reconstructs_potential_and_longitudinal_f
         zero_mode_closure=zero_mode("wall"),
     )
     mask = result.domain.mask
-    np.testing.assert_allclose(result.scalar_potential[mask], potential.reshape(-1)[mask], atol=2e-12)
+    np.testing.assert_allclose(result.scalar_potential[mask], potential.reshape(-1)[mask], atol=2e-12, rtol=0.0)
     np.testing.assert_allclose(
-        result.reconstructed_divergence[mask], divergence.reshape(-1)[mask], atol=2e-10
+        result.reconstructed_divergence[mask], divergence.reshape(-1)[mask], atol=2e-10, rtol=0.0
     )
     assert result.boost_residual_max_abs <= 2e-10
     assert result.longitudinal_relative_dust_to_wall_velocity.shape == (

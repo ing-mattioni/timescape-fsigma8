@@ -9,6 +9,8 @@ from __future__ import annotations
 
 import numpy as np
 
+from timescape_fsigma8.components import orthonormal_components
+
 from timescape_fsigma8.phase1f_c.models import (
     AUGMENTED_FULL_METRIC_RUNTIME_RANK,
     COMMON_PERTURBED_4D_SPACETIME,
@@ -59,13 +61,18 @@ def derive_clock_anchored_wall_kinematic_geometry(
       the ADM metric in BMR Eq. (2.5), with zero shift selected explicitly.
     * ``A_W,i=D_W,i nu_W`` is the first-order normal-congruence acceleration
       from BMR Eq. (2.6).
-    * ``deltaTheta_W=deltaTheta_d,w-D_W^2 psi_dw`` has the sign fixed by the
-      frame expansion law BDE Eqs. (14)--(16).
+    * ``deltaTheta_W=deltaTheta_d,w-D_W^2 psi_dw`` follows by taking the
+      covariant divergence of ``u_d=u_W+v+O(v^2)`` (BMR Eq. (2.7)).
+      On the assumed common background with zero acceleration,
+      ``nabla_a v^a=D_a v^a+O(2)``; insert ``v_a=D_a psi``.
     * ``partial_t psi_dw=-alpha_W Q0 nu_W`` applies the explicit clock chain
       rule in BMR Eqs. (2.29)--(2.30) to frozen Phase 1F-B v3.
 
     These are kinematic identities conditional on the external lapse and
     spatial pullback.  They are not a perturbed Timescape Einstein closure.
+    Generic boost/divergence identities are DERIVED_FROM_GENERIC_GR;
+    the shared-background scalar wall application is conditional. BDE's
+    matter/flux equations do not supply these expansion/acceleration laws.
     """
     if not isinstance(scenario, ClockAnchoredWallGeometryScenario):
         raise Phase1FCCompatibilityError("explicit Phase 1F-C scenario required")
@@ -134,12 +141,21 @@ def derive_clock_anchored_wall_kinematic_geometry(
             "derived deltaTheta_W is incompatible with the frozen Phase 1F-B geometry"
         )
 
-    acceleration = np.einsum(
+    coordinate_acceleration = np.einsum(
         "aij,tj->tia",
         pullback.wall_reference_gradient_operators,
         lapse,
         optimize=True,
-    ) / wall_scale_factor[:, np.newaxis, np.newaxis]
+    )
+    acceleration = orthonormal_components(
+        coordinate_acceleration, pullback.wall_reference_metric_inverse,
+        wall_scale_factor[:, np.newaxis, np.newaxis],
+    )
+    # Raising BMR Eq. (2.6)'s lower coordinate index with h^-1=a^-2 gamma^-1.
+    contravariant_acceleration = np.einsum(
+        "nij,tnj->tni", pullback.wall_reference_metric_inverse,
+        coordinate_acceleration, optimize=True,
+    ) / wall_scale_factor[:, np.newaxis, np.newaxis] ** 2
     adm_lapse = alpha[:, np.newaxis] * (1.0 + lapse)
     if np.any(adm_lapse <= 0.0):
         raise Phase1FCCompatibilityError("first-order ADM lapse must stay positive")
@@ -169,7 +185,9 @@ def derive_clock_anchored_wall_kinematic_geometry(
         background_wall_proper_time_rate=alpha,
         adm_lapse_first_order=adm_lapse,
         perturbative_wall_lapse=lapse,
-        wall_acceleration_covector=acceleration,
+        wall_acceleration_orthonormal=acceleration,
+        wall_acceleration_coordinate_covector=coordinate_acceleration,
+        wall_acceleration_coordinate_contravariant=contravariant_acceleration,
         wall_expansion_perturbation=wall_expansion,
         wall_laplacian_of_boost_potential=laplacian,
         expansion_compatibility_residual=expansion_residual,
@@ -259,6 +277,7 @@ def reconstruct_optional_scalar_metric_trace(
         trace[index] = trace[index - 1] + 0.5 * dt * (
             derivative[index - 1] + derivative[index]
         )
+        initial_data.validate_field(trace[index])
     means = _weighted_mean(trace, weights)
     if _maximum(means) > numerics.metric_trace_mean_tolerance:
         raise Phase1FCMetricReconstructionError("reconstructed C_W mean split drifted")
@@ -284,6 +303,9 @@ def reconstruct_optional_scalar_metric_trace(
         mean_tolerance=numerics.metric_trace_mean_tolerance,
         evolution_tolerance=numerics.metric_trace_residual_tolerance,
         integration_method=numerics.metric_trace_integration_method,
+        linear_regime_limit=initial_data.linear_regime_limit,
+        metric_trace_max_abs=_maximum(trace),
+        minimum_metric_factor=float(np.min(1.0 + 2.0 * trace)),
     )
     result = ScalarMetricTraceResult(
         time_grid=time,

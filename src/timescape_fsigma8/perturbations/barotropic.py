@@ -6,8 +6,11 @@ arXiv:2511.17160v2.  The closure is [GM] Eq. (4.13), and the state is
 ``V`` used by the Timescape notebook or the paper variable
 ``Vtilde=(1+w_eff)V``.
 
-The two D3 labels expose the unresolved inconsistency documented in the
-Phase 1C-A audit.  Neither label adjudicates which equation chain is intended.
+Phase 1D-D-t resolved D3 as RESOLVED_DERIVED_4_10. The printed branch remains
+an explicit forensic alternative, not an equally supported derived equation.
+Finite-mode ODE uniqueness does not establish continuum stability: negative
+corrected sound speed permits high-k amplification; unrestricted spatial
+data require a separate validity-scale and closure analysis.
 Only the corrected Phase 1B ``cs2_eff`` is used in this module; reproduction
 of the upstream D2 defect is deliberately outside the scientific package.
 """
@@ -28,7 +31,7 @@ FloatArray = NDArray[np.float64]
 
 
 class D3Branch(str, Enum):
-    """Mandatory unresolved coefficient choice for [GM] Eq. (4.15).
+    """Mandatory explicit derived-versus-forensic choice for [GM] Eq. (4.15).
 
     ``PRINTED_4_15`` uses ``(w_eff+cs2_eff)Theta`` as printed in Eq. (4.15)
     and implemented by the notebooks.  ``DERIVED_4_10`` uses
@@ -184,7 +187,7 @@ def barotropic_matrix(
     matrix[1, 0] = -four_pi_G * rho_d
     matrix[1, 1] = -(2.0 / 3.0) * theta
     matrix[1, 2] = -four_pi_G * rho_eff * (1.0 + 3.0 * cs2_eff)
-    # [GM] Eq. (4.15), with the mandatory unresolved A33 branch.
+    # [GM] Eq. (4.15) forensic branch versus derived Eqs. (4.10)+(4.13).
     matrix[2, 1] = -one_plus_w
     matrix[2, 2] = _a33(theta, w_eff, cs2_eff, branch)
 

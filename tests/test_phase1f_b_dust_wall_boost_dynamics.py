@@ -1,5 +1,9 @@
 """Phase 1F-B conditional common-spacetime scalar boost dynamics tests."""
 
+# A06: absolute budgets use rtol=0; relative budgets use atol=0.
+# Previously implicit algebraic comparisons use rtol=2e-12, atol=1e-14
+# in the fixture units (roundoff allowance); explicit convergence budgets remain.
+
 from __future__ import annotations
 
 from dataclasses import FrozenInstanceError, replace
@@ -270,7 +274,8 @@ def normal_varying_case(
     """Build a genuine 3-D wall-interior boundary fixture.
 
     The field varies along the layer normal.  Its evolution follows the
-    Phase 1F-B scalar law derived from BDE Eqs. (14)--(16), while the
+    Phase 1F-B scalar law derived from the normalized boost and scalar
+    gradient commutator (see phase1f_b.dynamics), while the
     no-penetration trace is the explicit external boost closure approved for
     v2 rather than a Timescape interface equation.
     """
@@ -341,7 +346,7 @@ def test_v1_zero_driver_preserves_nonzero_initial_scalar_boost() -> None:
     np.testing.assert_allclose(
         result.scalar_potential[1:],
         np.broadcast_to(result.scalar_potential[0], result.scalar_potential[1:].shape),
-        atol=1e-14,
+        atol=1e-14, rtol=0.0,
     )
     np.testing.assert_allclose(
         result.dust_velocity_relative_to_wall[1:],
@@ -349,7 +354,7 @@ def test_v1_zero_driver_preserves_nonzero_initial_scalar_boost() -> None:
             result.dust_velocity_relative_to_wall[0],
             result.dust_velocity_relative_to_wall[1:].shape,
         ),
-        atol=1e-14,
+        atol=1e-14, rtol=0.0,
     )
     assert result.diagnostics.propagation_residual_max_abs <= 2e-10
     assert result.velocity_units == "REFERENCE_LENGTH_PER_COMMON_TIME"
@@ -376,7 +381,7 @@ def test_v2_manufactured_lapse_solution_and_q0_projection() -> None:
     np.testing.assert_allclose(
         result.scalar_potential[:, mask],
         expected[:, None] * scalar.reshape(-1)[mask],
-        atol=2e-12,
+        atol=2e-12, rtol=0.0,
     )
     assert result.diagnostics.lapse_raw_mean_max_abs <= 2e-15
 
@@ -437,7 +442,7 @@ def test_v8_kernel_incompatibility_and_explicit_q0_policy() -> None:
     # The explicit projection is accepted only if the independently supplied
     # wall expansion remains compatible with the projected trajectory.
     result = propagate_scalar_dust_wall_boost(scenario=projected, numerics=boost_numerics())
-    assert result.diagnostics.lapse_q0_correction_max_abs == pytest.approx(0.01)
+    assert result.diagnostics.lapse_q0_correction_max_abs == pytest.approx(0.01, rel=2e-12, abs=1e-14)
 
 
 def test_v8_supplied_initial_potential_mean_mismatch_fails_closed() -> None:
@@ -556,7 +561,7 @@ def test_expansion_matched_initialization_solves_sign_correct_constraint() -> No
     result = propagate_scalar_dust_wall_boost(scenario=scenario, numerics=boost_numerics())
     mask = scenario.geometry_closure.wall_domain.mask
     np.testing.assert_allclose(
-        result.scalar_potential[0, mask], 0.002 * scalar.reshape(-1)[mask], atol=2e-12
+        result.scalar_potential[0, mask], 0.002 * scalar.reshape(-1)[mask], atol=2e-12, rtol=0.0
     )
 
 
@@ -627,7 +632,7 @@ def test_boundary_compatible_driver_preserves_no_penetration_for_all_times() -> 
     result = propagate_scalar_dust_wall_boost(
         scenario=scenario, numerics=boost_numerics()
     )
-    np.testing.assert_allclose(result.scalar_potential, expected, atol=2e-14)
+    np.testing.assert_allclose(result.scalar_potential, expected, atol=2e-14, rtol=0.0)
     assert result.diagnostics.driver_boundary_normal_acceleration_max_abs <= 2e-11
     assert result.diagnostics.propagated_boundary_normal_velocity_max_abs <= 2e-11
 
@@ -654,7 +659,7 @@ def test_normal_varying_fixture_distinguishes_broken_and_unbroken_operators() ->
     difference = np.max(
         np.abs(result.physical_laplacian_of_potential[0, wall_mask] - unbroken.reshape(-1)[wall_mask])
     )
-    assert difference == pytest.approx(0.128)
+    assert difference == pytest.approx(0.128, rel=2e-12, abs=1e-14)
 
 
 def test_shear_free_sector_is_explicit_and_nonzero_shear_is_rejected() -> None:
@@ -719,7 +724,7 @@ def test_t1_unit_clock_rate_reproduces_the_wall_proper_time_evolution() -> None:
     np.testing.assert_allclose(
         result.scalar_potential[:, mask],
         analytic[:, None] * scalar.reshape(-1)[mask],
-        atol=2e-12,
+        atol=2e-12, rtol=0.0,
     )
     assert result.diagnostics.wall_proper_time_rate_min == 1.0
     assert result.common_time_propagation == COMMON_TIME_PROPAGATION
@@ -736,7 +741,7 @@ def test_t2_t3_constant_non_unit_clock_rate_scales_the_evolution(rate: float) ->
     np.testing.assert_allclose(
         result.scalar_potential[:, mask],
         analytic[:, None] * scalar.reshape(-1)[mask],
-        atol=2e-12,
+        atol=2e-12, rtol=0.0,
     )
     unit = 0.002 + 0.001 * time - 0.0002 * time**2
     assert np.max(np.abs(analytic - unit)) > 1e-4
@@ -761,10 +766,10 @@ def test_t4_time_dependent_clock_rate_matches_the_analytic_integral() -> None:
     np.testing.assert_allclose(
         result.scalar_potential[:, mask],
         analytic[:, None] * scalar.reshape(-1)[mask],
-        atol=2e-12,
+        atol=2e-12, rtol=0.0,
     )
     # The 0.5 t^2 term is exactly the chain-rule contribution of alpha_W(t).
-    assert np.max(np.abs(analytic - (0.002 + 0.001 * time))) == pytest.approx(0.0005)
+    assert np.max(np.abs(analytic - (0.002 + 0.001 * time))) == pytest.approx(0.0005, rel=2e-12, abs=1e-14)
 
 
 @pytest.mark.parametrize("bad", [0.0, -1.0, np.nan, np.inf])
@@ -803,7 +808,7 @@ def test_t6_non_unit_clock_preserves_no_penetration_boundary() -> None:
         proper_time_rate=alpha,
     )
     result = propagate_scalar_dust_wall_boost(scenario=scenario, numerics=boost_numerics())
-    np.testing.assert_allclose(result.scalar_potential, expected, atol=2e-14)
+    np.testing.assert_allclose(result.scalar_potential, expected, atol=2e-14, rtol=0.0)
     assert result.diagnostics.propagated_boundary_normal_velocity_max_abs <= 2e-11
     assert result.diagnostics.driver_boundary_normal_acceleration_max_abs <= 2e-11
     _, unit_scenario, unit_expected = normal_varying_case(

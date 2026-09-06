@@ -192,3 +192,7 @@ __all__ = [
     "two_region_coefficients",
     "validate_clean_diagnostics",
 ]
+
+# Successor cross-phase interpretation; earlier reports remain historical.
+from timescape_fsigma8.scientific_status import CURRENT_SCIENTIFIC_STATUS
+__all__.append("CURRENT_SCIENTIFIC_STATUS")

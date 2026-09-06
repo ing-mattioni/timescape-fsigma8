@@ -1,5 +1,9 @@
 """Phase 1F-A explicit dressed-spacetime density-map gating tests."""
 
+# A06: absolute budgets use rtol=0; relative budgets use atol=0.
+# Previously implicit algebraic comparisons use rtol=2e-12, atol=1e-14
+# in the fixture units (roundoff allowance); explicit convergence budgets remain.
+
 from __future__ import annotations
 
 import inspect
@@ -65,9 +69,9 @@ def test_t23_density_is_mapped_before_destination_mean_is_recomputed() -> None:
         * closure.destination_measure_jacobian
     )
     expected_mean = np.dot(measure, expected_rho) / np.sum(measure)
-    np.testing.assert_allclose(result.rho_dressed, expected_rho)
-    assert result.rho_bar_dressed == pytest.approx(expected_mean)
-    np.testing.assert_allclose(result.delta_m_dressed, expected_rho / expected_mean - 1.0)
+    np.testing.assert_allclose(result.rho_dressed, expected_rho, rtol=2e-12, atol=1e-14)
+    assert result.rho_bar_dressed == pytest.approx(expected_mean, rel=2e-12, abs=1e-14)
+    np.testing.assert_allclose(result.delta_m_dressed, expected_rho / expected_mean - 1.0, rtol=2e-12, atol=1e-14)
     assert abs(result.destination_mean_residual) <= realization.numerics.dressed_mean_tolerance
     assert result.map_classification == SYNTHETIC_VALIDATION_ONLY
     direct_delta_pullback = carrier.delta_m_carrier[closure.destination_source_indices]

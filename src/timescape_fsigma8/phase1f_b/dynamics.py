@@ -4,8 +4,8 @@ Implemented scientific chain:
 
 * ``Z_w = Delta_gamma_w deltaTheta_d,w`` from GM Eqs. (2.20)--(2.24);
 * ``Theta_d = Theta_W + D_a v_d|W^a`` under the convention
-  ``u_d=u_W+v_d|W`` audited against BDE Eqs. (14)--(16) and DBE
-  Eqs. (14)--(15), so
+  ``u_d=u_W+v_d|W`` obtained by linearizing the normalized boost
+  (BMR Eq. (2.7), arXiv:1912.04213v2) and taking its covariant divergence, so
   ``D^2 psi = deltaTheta_d,w - deltaTheta_W``;
 * ``A_W + dot(v) + H_W v = 0`` from the same first-order acceleration
   transformation with dust geodesicity from GM Eq. (2.9), written along the
@@ -43,6 +43,7 @@ from timescape_fsigma8.phase1f_a import (
     Phase1FADegeneracyError,
 )
 from timescape_fsigma8.phase1f_a.boost import _regional_gradient
+from timescape_fsigma8.components import orthonormal_components
 from timescape_fsigma8.phase1f_a.operators import (
     apply_regional_laplace_beltrami,
     assemble_regional_elliptic_system,
@@ -130,9 +131,7 @@ def _physical_orthonormal_gradient(
     covector = np.linalg.solve(inverse_metric, reference_contravariant[..., None])[
         ..., 0
     ]
-    cholesky = np.linalg.cholesky(inverse_metric)
-    result = np.einsum("nji,nj->ni", cholesky, covector, optimize=True)
-    result /= scale_factor
+    result = orthonormal_components(covector, inverse_metric, scale_factor)
     result[~domain.mask, :] = 0.0
     return result
 
@@ -234,7 +233,14 @@ def propagate_scalar_dust_wall_boost(
     (2.20)--(2.24), with the physical/comoving harmonic distinction in BDE
     Eq. (74) and footnote 22).  Therefore the sign-sensitive constraint is
     ``L_w psi=a_w^2(deltaTheta_d,w-deltaTheta_W)``.  The wall-proper-time law
-    ``d psi/d tau_W=-Q0 nu_W`` follows from the BDE Eqs. (14)--(16) frame law
+    ``d psi/d tau_W=-Q0 nu_W`` follows from direct differentiation of the
+    normalized boost (BMR Eq. (2.7), arXiv:1912.04213v2): expand
+    ``u_d^b nabla_b u_d,a=A_W,a+dot(v)_<a>+H_proper v_a+O(2)``
+    on an assumed coincident shear-free, unaccelerated background. For
+    ``v_a=D_a psi``, ``dot(D_a psi)=D_a(dot psi)-H_proper D_a psi``
+    cancels the H term; BMR Eq. (2.6) supplies ``A_W,a=D_a nu``. The
+    remaining spatial constant is fixed by Q0. This generic-GR derivation
+    is retained; its selected-wall application requires those assumptions,
     and GM Eq. (2.9) dust geodesicity; the runtime integrates its chain-rule
     common-time form ``d psi/dt=-alpha_W Q0 nu_W`` on the declared common-time
     grid, with ``alpha_W=d tau_W/dt`` supplied by the external clock closure.

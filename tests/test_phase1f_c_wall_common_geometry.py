@@ -1,5 +1,9 @@
 """Phase 1F-C conditional clock-anchored wall-geometry tests."""
 
+# A06: absolute budgets use rtol=0; relative budgets use atol=0.
+# Previously implicit algebraic comparisons use rtol=2e-12, atol=1e-14
+# in the fixture units (roundoff allowance); explicit convergence budgets remain.
+
 from __future__ import annotations
 
 from dataclasses import FrozenInstanceError, replace
@@ -8,6 +12,8 @@ import inspect
 
 import numpy as np
 import pytest
+
+from timescape_fsigma8.components import ComponentRepresentation
 
 from test_phase1f_b_dust_wall_boost_dynamics import (
     boost_numerics,
@@ -161,6 +167,8 @@ def make_case(
             SpatialOperatorInputSemantics.REFERENCE_COMOVING
         ),
         wall_reference_gradient_operators=gradient,
+        wall_gradient_component_representation=ComponentRepresentation.COORDINATE_COVECTOR,
+        wall_reference_metric_inverse=np.broadcast_to(np.eye(3), (wall_indices.size, 3, 3)),
         wall_reference_laplace_beltrami_operator=laplacian,
         wall_measure_weights=np.full(wall_indices.size, 1.0 / wall_indices.size),
         wall_grid_shape=wall_shape,
@@ -254,7 +262,7 @@ def test_clock_bridge_is_explicit_reciprocal_and_has_no_lapse_inference() -> Non
     np.testing.assert_allclose(
         clock.background_wall_proper_time_rate,
         1.0 / clock.timescape_background_lapse,
-        atol=0.0,
+        atol=0.0, rtol=0.0,
     )
     assert not hasattr(clock, "perturbative_wall_lapse")
     for parameter in inspect.signature(TimescapeWallClockBridge).parameters.values():
@@ -282,7 +290,7 @@ def test_first_order_adm_lapse_and_no_hidden_zero_provider() -> None:
     scenario, result = make_case()
     alpha = scenario.clock_bridge.background_wall_proper_time_rate
     expected = alpha[:, None] * (1.0 + scenario.lapse_closure.perturbative_wall_lapse)
-    np.testing.assert_allclose(result.adm_lapse_first_order, expected, atol=0.0)
+    np.testing.assert_allclose(result.adm_lapse_first_order, expected, atol=0.0, rtol=0.0)
     signature = inspect.signature(ClockAnchoredWallGeometryScenario)
     assert signature.parameters["lapse_closure"].default is inspect.Parameter.empty
     with pytest.raises((Phase1FCLapseClosureError, Phase1FCContractError)):
@@ -323,6 +331,7 @@ def test_metric_trace_nonzero_hubble_has_no_double_alpha_factor() -> None:
         initial_potential_amplitude=0.0002,
     )
     initial = ScalarMetricTraceInitialData(
+        linear_regime_limit=0.05,  # Explicit synthetic first-order validity budget.
         initial_metric_trace=np.zeros(geometry.scenario.spatial_pullback.wall_size),
         initial_time=float(geometry.time_grid[0]),
         background_split_policy=(
@@ -363,7 +372,7 @@ def test_nonunit_clock_rate_is_load_bearing_and_first_order_consistent() -> None
     np.testing.assert_allclose(
         result.background_wall_proper_time_rate,
         np.asarray(alpha),
-        atol=2e-15,
+        atol=2e-15, rtol=0.0,
     )
     assert result.diagnostics.boost_clock_residual_max_abs <= 2e-11
     assert np.max(np.abs(result.boost_clock_residual)) <= 2e-11
@@ -428,7 +437,7 @@ def test_reference_to_physical_operator_uses_exact_scale_factor_powers() -> None
     np.testing.assert_allclose(
         result.wall_laplacian_of_boost_potential,
         reference_laplacian / 4.0,
-        atol=2e-14,
+        atol=2e-14, rtol=0.0,
     )
     reference_acceleration = np.einsum(
         "aij,tj->tia",
@@ -436,12 +445,12 @@ def test_reference_to_physical_operator_uses_exact_scale_factor_powers() -> None
         scenario.lapse_closure.perturbative_wall_lapse,
     )
     np.testing.assert_allclose(
-        result.wall_acceleration_covector,
+        result.wall_acceleration_orthonormal,
         reference_acceleration / 2.0,
-        atol=2e-14,
+        atol=2e-14, rtol=0.0,
     )
     assert np.max(np.abs(reference_laplacian - result.wall_laplacian_of_boost_potential)) > 1.0e-3
-    assert np.max(np.abs(reference_acceleration - result.wall_acceleration_covector)) > 1.0e-4
+    assert np.max(np.abs(reference_acceleration - result.wall_acceleration_orthonormal)) > 1.0e-4
     with pytest.raises(Phase1FCSpatialClosureError, match="scale-factor"):
         replace(scenario.spatial_pullback, scale_factor_relation="D_W^2=Delta_gamma_W")
 
@@ -492,7 +501,7 @@ def test_falsely_labelled_physical_operator_is_a_caller_contract_violation() -> 
         @ deliberately_mislabelled.wall_reference_laplace_beltrami_operator.T
         / 4.0
     )
-    np.testing.assert_allclose(double_scaled, correct_physical / 4.0, atol=2e-15)
+    np.testing.assert_allclose(double_scaled, correct_physical / 4.0, atol=2e-15, rtol=0.0)
     assert np.max(np.abs(double_scaled - correct_physical)) > 1e-3
     with pytest.raises(Phase1FCCompatibilityError, match="incompatible"):
         derive_clock_anchored_wall_kinematic_geometry(
@@ -508,9 +517,9 @@ def test_acceleration_is_wall_gradient_of_external_lapse() -> None:
         scenario.spatial_pullback.wall_reference_gradient_operators,
         scenario.lapse_closure.perturbative_wall_lapse,
     ) / scenario.boost_result.scenario.geometry_closure.wall_scale_factor[:, None, None]
-    np.testing.assert_allclose(result.wall_acceleration_covector, expected, atol=2e-15)
+    np.testing.assert_allclose(result.wall_acceleration_orthonormal, expected, atol=2e-15, rtol=0.0)
     assert result.acceleration_classification == DERIVED_FROM_GENERIC_GR
-    assert np.max(np.abs(result.wall_acceleration_covector)) > 0.0
+    assert np.max(np.abs(result.wall_acceleration_orthonormal)) > 0.0
 
 
 def test_spatially_homogeneous_lapse_has_zero_acceleration() -> None:
@@ -545,7 +554,7 @@ def test_wall_expansion_sign_and_wall_dust_distinction() -> None:
         - dust
         + result.wall_expansion_perturbation,
         0.0,
-        atol=2e-14,
+        atol=2e-14, rtol=0.0,
     )
     assert result.diagnostics.expansion_compatibility_max_abs <= 5e-10
     assert np.max(np.abs(result.wall_expansion_perturbation - dust)) > 0.0
@@ -656,6 +665,7 @@ def test_metric_trace_requires_explicit_initial_data_and_split() -> None:
         )
     with pytest.raises(Phase1FCMetricReconstructionError):
         ScalarMetricTraceInitialData(
+            linear_regime_limit=0.05,
             initial_metric_trace=np.zeros(geometry.scenario.spatial_pullback.wall_size),
             initial_time=geometry.time_grid[0],
             background_split_policy="MEAN_ZERO",  # type: ignore[arg-type]
@@ -669,6 +679,7 @@ def test_metric_trace_requires_explicit_initial_data_and_split() -> None:
 def test_optional_metric_trace_equations_and_rank() -> None:
     _, geometry = make_case()
     initial = ScalarMetricTraceInitialData(
+        linear_regime_limit=0.05,  # Numerical validity choice, not a prediction.
         initial_metric_trace=np.zeros(geometry.scenario.spatial_pullback.wall_size),
         initial_time=float(geometry.time_grid[0]),
         background_split_policy=(
@@ -689,7 +700,7 @@ def test_optional_metric_trace_equations_and_rank() -> None:
         * geometry.wall_expansion_perturbation
         / 3.0
     )
-    np.testing.assert_allclose(result.metric_trace_time_derivative, expected, atol=0.0)
+    np.testing.assert_allclose(result.metric_trace_time_derivative, expected, atol=0.0, rtol=0.0)
     assert result.diagnostics.evolution_residual_max_abs <= 2e-13
     assert result.differential_rank_contribution == 1
     assert result.augmented_runtime_rank == 6
@@ -785,7 +796,8 @@ def test_realization_state_ceiling_is_exact() -> None:
     assert phase1f_c.NEW_PERTURBED_GEOMETRIC_DYNAMICS_REQUIRED == "YES"
 
 
-def test_every_implemented_scientific_equation_carries_a_reference() -> None:
+def test_source_provenance_metadata_not_mathematical_proof() -> None:
+    """Citation retention only; behavior/sign tests independently test equations."""
     model_source = inspect.getsource(phase1f_c.TimescapeWallClockBridge)
     spatial_source = inspect.getsource(phase1f_c.H1ToWallSpatialPullback)
     derive_source = inspect.getsource(
@@ -800,7 +812,7 @@ def test_every_implemented_scientific_equation_carries_a_reference() -> None:
         "W09 Eq. (B7)",
         "BMR Eq. (2.5)",
         "BMR Eq. (2.6)",
-        "BDE Eqs. (14)--(16)",
+        "BMR Eq. (2.7)",
         "BMR Eqs. (2.29)--(2.30)",
     ):
         assert citation in derive_source

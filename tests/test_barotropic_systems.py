@@ -1,5 +1,9 @@
 """Equation, convention, and transformation tests for Phase 1C-B2."""
 
+# A06: absolute budgets use rtol=0; relative budgets use atol=0.
+# Previously implicit algebraic comparisons use rtol=2e-12, atol=1e-14
+# in the fixture units (roundoff allowance); explicit convergence budgets remain.
+
 from dataclasses import MISSING, fields
 import inspect
 
@@ -133,7 +137,7 @@ def test_a34_a43_recombines_pressure_laplacian(params, branch, tilt_form):
         lcdm_h=LCDM_H,
     )
     expected = -float(bg.cs2_eff(t, params)) * K**2 / float(bg.a_D(t, params)) ** 2
-    assert matrix[2, 3] * matrix[3, 2] == pytest.approx(expected, rel=2e-14)
+    assert matrix[2, 3] * matrix[3, 2] == pytest.approx(expected, rel=2e-14, abs=0.0)
 
 
 @pytest.mark.parametrize("branch", list(D3Branch))
@@ -152,7 +156,7 @@ def test_long_wavelength_limit_removes_only_k2_source(params, branch, tilt_form)
     )
     matrix_k1 = barotropic_matrix(t, k=1e-5, **common)
     matrix_k2 = barotropic_matrix(t, k=2e-5, **common)
-    assert matrix_k2[2, 3] == pytest.approx(4.0 * matrix_k1[2, 3], rel=2e-14)
+    assert matrix_k2[2, 3] == pytest.approx(4.0 * matrix_k1[2, 3], rel=2e-14, abs=0.0)
     matrix_k1[2, 3] = 0.0
     matrix_k2[2, 3] = 0.0
     np.testing.assert_array_equal(matrix_k1, matrix_k2)
@@ -168,10 +172,10 @@ def test_paper_wavenumber_conversion_matches_present_physical_mode(params):
         lcdm_h=LCDM_H,
     )
     expected_factor = params.aD0 * LCDM_H / TIMESCAPE_H
-    assert resolved.matrix_k == pytest.approx(K * expected_factor, rel=2e-15)
+    assert resolved.matrix_k == pytest.approx(K * expected_factor, rel=2e-15, abs=0.0)
     upstream_wavelength_in_lcdm_hubble_lengths = params.aD0 * LCDM_H / TIMESCAPE_H
     assert upstream_wavelength_in_lcdm_hubble_lengths == pytest.approx(
-        1.2596, abs=1e-4
+        1.2596, abs=1e-4, rel=0.0
     )
 
 
@@ -222,7 +226,7 @@ def test_barotropic_state_transform_roundtrip(params):
         to_tilt_form=TiltForm.RESCALED_VTILDE,
     )
     assert state_tilde[3] == pytest.approx(
-        (1.0 + float(bg.w_eff(t, params))) * state_v[3], rel=2e-15
+        (1.0 + float(bg.w_eff(t, params))) * state_v[3], rel=2e-15, abs=0.0
     )
     roundtrip = transform_barotropic_state(
         t,
@@ -432,7 +436,7 @@ def _trajectory_residual_maxima(params, branch, tilt_form):
             -(2.0 / 3.0) * theta * y[1],
             -4.0 * np.pi * G * rho_eff * (1.0 + 3.0 * cs2_eff) * y[2],
         ],
-        [  # [GM] Eq. (4.15), with the selected unresolved branch.
+        [  # [GM] Eq. (4.15), with the explicit forensic-versus-derived branch.
             -(1.0 + w_eff) * y[1],
             (w_eff + branch_sign * cs2_eff) * theta * y[2],
             (
@@ -779,8 +783,8 @@ def test_initial_and_numerical_early_time_continuity_with_clean_systems(params):
     np.testing.assert_allclose(
         barotropic_derivative[:3], comoving_derivative, rtol=2e-14, atol=2e-14
     )
-    assert barotropic_derivative[0] == pytest.approx(meszaros_derivative[0])
-    assert barotropic_derivative[1] == pytest.approx(-meszaros_derivative[1])
+    assert barotropic_derivative[0] == pytest.approx(meszaros_derivative[0], rel=2e-12, abs=1e-14)
+    assert barotropic_derivative[1] == pytest.approx(-meszaros_derivative[1], rel=2e-12, abs=1e-14)
 
     # Over shrinking intervals, the barotropic and comoving states converge
     # continuously from their identical initial state/RHS.  The fine-window

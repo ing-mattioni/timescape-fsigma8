@@ -1,5 +1,9 @@
 """Crossing scan, refinement, intervals, and the frozen baseline pattern."""
 
+# A06: absolute budgets use rtol=0; relative budgets use atol=0.
+# Previously implicit algebraic comparisons use rtol=2e-12, atol=1e-14
+# in the fixture units (roundoff allowance); explicit convergence budgets remain.
+
 import numpy as np
 import pytest
 
@@ -30,7 +34,7 @@ def test_strict_sign_change_scan_finds_brackets_and_preserves_them():
     )
     assert len(brackets) == 3
     for b in brackets:
-        assert b.t_right - b.t_left == pytest.approx(1.0 / 9.0)
+        assert b.t_right - b.t_left == pytest.approx(1.0 / 9.0, rel=2e-12, abs=1e-14)
         assert b.y_left * b.y_right < 0.0
         assert b.right_index == b.left_index + 1
     assert not endpoints
@@ -142,16 +146,16 @@ def test_root_records_carry_every_required_coordinate(derived_2pi_run):
     params = derived_2pi_run.history.background.params
     root = derived_2pi_run.crossings.delta_d_roots[0]
     assert root.t_root_gyr == pytest.approx(
-        root.t_root / derived_2pi_run.history.time_unit_per_gyr
+        root.t_root / derived_2pi_run.history.time_unit_per_gyr, rel=2e-12, abs=1e-14
     )
     assert root.dressed_redshift == pytest.approx(
-        float(bg.redshift(root.t_root, params)), rel=1e-12
+        float(bg.redshift(root.t_root, params)), rel=1e-12, abs=0.0
     )
     assert root.a_D == pytest.approx(
-        float(bg.a_D(root.t_root, params)), rel=1e-12
+        float(bg.a_D(root.t_root, params)), rel=1e-12, abs=0.0
     )
     assert root.a_obs == pytest.approx(
-        float(bg.a_w(root.t_root, params)), rel=1e-12
+        float(bg.a_w(root.t_root, params)), rel=1e-12, abs=0.0
     )
     meta = root.to_metadata()
     for key in (
@@ -182,8 +186,8 @@ def test_validity_intervals_are_maximal_with_explicit_semantics(derived_2pi_run)
     assert len(intervals) == 2
     first, second = intervals
     root_t = derived_2pi_run.crossings.delta_d_roots[0].t_root
-    assert first.end == pytest.approx(root_t)
-    assert second.start == pytest.approx(root_t)
+    assert first.end == pytest.approx(root_t, rel=2e-12, abs=1e-14)
+    assert second.start == pytest.approx(root_t, rel=2e-12, abs=1e-14)
     # closed at integration endpoints, open at the amplitude root
     assert not first.start_open and first.end_open
     assert second.start_open and not second.end_open

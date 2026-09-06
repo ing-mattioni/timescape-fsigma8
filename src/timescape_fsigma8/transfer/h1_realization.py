@@ -1,7 +1,7 @@
 """Conditional Phase 1E-F H1 clean transmission realization.
 
 Realization: ``H1-1E-F-CLEAN-NONDEGENERATE-TRANSMISSION-V1``.
-Framework: ``COMPATIBLE_IMPORTED_DYNAMICS``.  This module implements only
+Framework: ``DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION``. This module implements only
 the user-authorised non-observational operator-contract research runtime.
 
 Inherited GM equation references use Galoppo & Mourier,
@@ -9,7 +9,7 @@ arXiv:2511.17160v2: regional CGI variables Eqs. (2.2), (2.20)-(2.23),
 effective-fluid background Eqs. (3.12)-(3.13), clean closure Eqs. (4.12),
 (4.20), and target propagation Eqs. (4.21)-(4.23).  New carrier and
 transmission formulas are cited to the authoritative Phase 1E-F
-implementation specification because they are compatible imported dynamics,
+implementation specification because they are conditional imported dynamics,
 not equations supplied by that paper or the unlicensed upstream notebook.
 """
 
@@ -32,7 +32,7 @@ from timescape_fsigma8.transfer.matrix_backend import (
 
 
 REALIZATION_ID = "H1-1E-F-CLEAN-NONDEGENERATE-TRANSMISSION-V1"
-FRAMEWORK_STATUS = "COMPATIBLE_IMPORTED_DYNAMICS"
+FRAMEWORK_STATUS = "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION"
 SCIENTIFIC_STATUS = "CONDITIONALLY_CLOSED"
 OBSERVATIONAL_STATUS = "NON_OBSERVATIONAL"
 FSIGMA8_STATUS = "NOT_FSIGMA8"
@@ -346,6 +346,11 @@ def regional_evolution(
     G: float,
 ) -> RegionalEvolution:
     """Evaluate the exact common-time regional rank-two dust system.
+
+    Exactness refers to the supplied regional proper-time dust-FLRW system.
+    Its regional/common Timescape background and source embedding is
+    NOT_DERIVED. Identifier equality does not establish coincident zeroth-
+    order dust/wall backgrounds or all-time constitutive compatibility.
 
     The proper-time system is GM Eqs. (2.22)-(2.23) with ``w=P=V=F=0``
     (equivalently DBE92 Eqs. (32)-(33)); the common-time ``alpha_r`` factors

@@ -13,8 +13,13 @@ Bruni--Dunsby--Ellis, ApJ 395 (1992) 34.
 
 from __future__ import annotations
 
+from timescape_fsigma8.components import ComponentRepresentation
+from timescape_fsigma8.scientific_status import REMAINING_SCIENTIFIC_CLOSURES
+
 from dataclasses import dataclass, field, fields
 from enum import Enum
+from types import MappingProxyType
+from typing import Mapping
 
 import numpy as np
 from numpy.typing import ArrayLike, NDArray
@@ -77,7 +82,7 @@ WALL_GEOMETRY_DRIVER = (
     "PARTIALLY_DERIVED_REDUCED_EXTERNAL_GEOMETRIC_CLOSURE_REQUIRED"
 )
 IRREDUCIBLE_GEOMETRIC_INPUT = (
-    "PERTURBED_WALL_CONGRUENCE_LAPSE_PLUS_SPATIAL_PULLBACK"
+    "NOT_ESTABLISHED_AS_AN_EXHAUSTIVE_IRREDUCIBLE_INPUT_SET"
 )
 FROZEN_PHASE_1F_B_DIFFERENTIAL_STATE_RANK = 5
 DRIVER_ONLY_DIFFERENTIAL_STATE_RANK = 5
@@ -283,7 +288,9 @@ class H1ToWallSpatialPullback:
     identity pullback and no H1 regional Laplacian are supplied by default.
     The supplied gradient and Laplace--Beltrami matrices MUST be operators on
     the declared reference/comoving wall geometry.  Phase 1F-C, not the
-    caller, applies ``D_W=a_W^-1 D_gamma_W`` and
+    caller, converts coordinate covectors to the positive-diagonal Cholesky
+    frame of the supplied inverse reference metric, then applies
+    ``D_W=a_W^-1 D_gamma_W`` to these orthonormal components and
     ``D_W^2=a_W^-2 Delta_gamma_W`` following BDE Eq. (74).  Already-physical
     operators are unsupported inputs because they would be scaled twice.
 
@@ -293,12 +300,20 @@ class H1ToWallSpatialPullback:
     ``a_W^-2``.  Falsely declaring an already-physical operator as
     ``REFERENCE_COMOVING`` is therefore a caller contract violation, not a
     runtime-detectable scientific state.
+
+    The gradient input MUST contain lower coordinate scalar derivatives.
+    ``wall_reference_metric_inverse=L L^T`` fixes the reference frame:
+    ``A_hat=L^T partial(nu)/a``, ``A_i=partial_i nu``, and
+    ``A^i=a^-2 gamma^ij partial_j nu`` (BMR Eq. (2.6), tensor conversion).
+    No flat metric or unspecified tetrad is silently supplied.
     """
 
     h1_wall_domain: RegionalDomainSpec
     pullback_matrix: FloatArray
     operator_input_semantics: SpatialOperatorInputSemantics
     wall_reference_gradient_operators: FloatArray
+    wall_gradient_component_representation: ComponentRepresentation
+    wall_reference_metric_inverse: FloatArray
     wall_reference_laplace_beltrami_operator: FloatArray
     wall_measure_weights: FloatArray
     wall_grid_shape: tuple[int, ...]
@@ -407,6 +422,16 @@ class H1ToWallSpatialPullback:
             raise Phase1FCSpatialClosureError("pullback matrix shape mismatch")
         if gradient.shape != (self.spatial_dimension, target_size, target_size):
             raise Phase1FCSpatialClosureError("gradient operator shape mismatch")
+        if self.wall_gradient_component_representation is not ComponentRepresentation.COORDINATE_COVECTOR:
+            raise Phase1FCSpatialClosureError("reference gradient must return COORDINATE_COVECTOR derivatives")
+        inverse = _readonly_float(self.wall_reference_metric_inverse, "wall_reference_metric_inverse")
+        if inverse.shape != (target_size, self.spatial_dimension, self.spatial_dimension):
+            raise Phase1FCSpatialClosureError("wall inverse metric shape mismatch")
+        # Numerical symmetry tolerance, absolute in the supplied metric units.
+        if not np.allclose(inverse, inverse.swapaxes(-1, -2), rtol=0.0, atol=self.operator_symmetry_tolerance):
+            raise Phase1FCSpatialClosureError("wall inverse metric must be symmetric")
+        if np.min(np.linalg.eigvalsh(inverse)) <= 0.0:
+            raise Phase1FCSpatialClosureError("wall inverse metric must be SPD for the Cholesky frame")
         if laplacian.shape != (target_size, target_size):
             raise Phase1FCSpatialClosureError("Laplacian operator shape mismatch")
         if weights.shape != (target_size,) or np.any(weights <= 0.0):
@@ -455,6 +480,7 @@ class H1ToWallSpatialPullback:
         for name, value in (
             ("pullback_matrix", pullback),
             ("wall_reference_gradient_operators", gradient),
+            ("wall_reference_metric_inverse", inverse),
             ("wall_reference_laplace_beltrami_operator", laplacian),
             ("wall_measure_weights", weights),
         ):
@@ -482,6 +508,8 @@ class H1ToWallSpatialPullback:
             self.pullback_matrix,
             self.operator_input_semantics,
             self.wall_reference_gradient_operators,
+            self.wall_gradient_component_representation,
+            self.wall_reference_metric_inverse,
             self.wall_reference_laplace_beltrami_operator,
             self.wall_measure_weights,
             self.wall_grid_shape,
@@ -612,7 +640,12 @@ class Phase1FCNumerics:
 
 @dataclass(frozen=True, kw_only=True)
 class ClockAnchoredWallGeometryScenario:
-    """All choices required for one conditional Phase 1F-C realization."""
+    """Runtime choices for a conditional Phase 1F-C kinematic realization.
+
+    ID checks do not derive regional/common Timescape background coincidence,
+    physical source embedding or all-time constitutive compatibility. Those
+    remain NOT_DERIVED in CURRENT_SCIENTIFIC_STATUS.
+    """
 
     boost_result: ScalarDustWallBoostResult
     clock_bridge: TimescapeWallClockBridge
@@ -773,13 +806,21 @@ class WallKinematicGeometryDiagnostics:
 
 @dataclass(frozen=True, kw_only=True)
 class WallKinematicGeometryResult:
-    """Derived local kinematics, conditional on two external closures."""
+    """Local kinematics for supplied data; physical background embedding unproved.
+
+    Two immediate callbacks are not an exhaustive physical closure inventory;
+    see REMAINING_SCIENTIFIC_CLOSURES and the 1F-C-R successor record.
+    Ranks 4/5/+1 count differential field species, not free admissible initial
+    functions after constraints and prescribed histories.
+    """
 
     time_grid: FloatArray
     background_wall_proper_time_rate: FloatArray
     adm_lapse_first_order: FloatArray
     perturbative_wall_lapse: FloatArray
-    wall_acceleration_covector: FloatArray
+    wall_acceleration_orthonormal: FloatArray
+    wall_acceleration_coordinate_covector: FloatArray
+    wall_acceleration_coordinate_contravariant: FloatArray
     wall_expansion_perturbation: FloatArray
     wall_laplacian_of_boost_potential: FloatArray
     expansion_compatibility_residual: FloatArray
@@ -813,7 +854,9 @@ class WallKinematicGeometryResult:
             "background_wall_proper_time_rate",
             "adm_lapse_first_order",
             "perturbative_wall_lapse",
-            "wall_acceleration_covector",
+            "wall_acceleration_orthonormal",
+            "wall_acceleration_coordinate_covector",
+            "wall_acceleration_coordinate_contravariant",
             "wall_expansion_perturbation",
             "wall_laplacian_of_boost_potential",
             "expansion_compatibility_residual",
@@ -857,11 +900,11 @@ class WallKinematicGeometryResult:
                 raise Phase1FCContractError(f"{name} shape mismatch")
         if self.background_wall_proper_time_rate.shape != (nt,):
             raise Phase1FCContractError("background wall clock shape mismatch")
-        if self.wall_acceleration_covector.shape != (
+        if any(getattr(self, name).shape != (
             nt,
             wall_size,
             self.scenario.spatial_pullback.spatial_dimension,
-        ):
+        ) for name in self.acceleration_component_representations):
             raise Phase1FCContractError("wall acceleration shape mismatch")
         tolerance_pairs = (
             (
@@ -889,6 +932,19 @@ class WallKinematicGeometryResult:
             raise Phase1FCContractError("diagnostic/numerics tolerance mismatch")
         _seal(self, self._live_state())
 
+    @property
+    def acceleration_component_representations(self) -> Mapping[str, ComponentRepresentation]:
+        """Each public acceleration array's exact basis and index semantics."""
+        return MappingProxyType({
+            "wall_acceleration_orthonormal": ComponentRepresentation.PHYSICAL_ORTHONORMAL,
+            "wall_acceleration_coordinate_covector": ComponentRepresentation.COORDINATE_COVECTOR,
+            "wall_acceleration_coordinate_contravariant": ComponentRepresentation.COORDINATE_CONTRAVARIANT,
+        })
+
+    @property
+    def acceleration_component_realization_classification(self) -> str:
+        return DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION
+
     def _live_state(self) -> object:
         return tuple(
             id(getattr(self, item.name))
@@ -906,9 +962,18 @@ class WallKinematicGeometryResult:
 
 @dataclass(frozen=True, kw_only=True)
 class ScalarMetricTraceInitialData:
-    """Explicit initial representative for optional ``C_W`` reconstruction."""
+    """Initial representative and caller-declared reconstruction validity.
+
+    ``linear_regime_limit`` bounds ``abs(C_W)`` at every accepted output.
+    Like the existing lapse policy, it must be positive and below one, and
+    must be chosen small enough for the caller's first-order error budget.
+    It is a numerical/model-validity criterion, not a Timescape prediction.
+    Positivity of ``1+2C_W`` (the metric ansatz based on BMR Eq. (2.5)) is
+    independently necessary and is enforced with a strict zero threshold.
+    """
 
     initial_metric_trace: FloatArray
+    linear_regime_limit: float
     initial_time: float
     background_split_policy: MetricTraceBackgroundSplit
     spatial_measure_id: str
@@ -931,11 +996,24 @@ class ScalarMetricTraceInitialData:
             "initial_metric_trace",
             _readonly_float(self.initial_metric_trace, "initial_metric_trace").reshape(-1),
         )
+        if not np.isfinite(self.linear_regime_limit) or not 0.0 < self.linear_regime_limit < 1.0:
+            raise Phase1FCMetricReconstructionError("explicit C_W linear-regime limit must be finite and between zero and one")
+        self.validate_field(self.initial_metric_trace)
         _seal(self, self._live_state())
+
+    def validate_field(self, values: FloatArray) -> None:
+        """Necessary positive-metric and declared first-order-domain gates."""
+        if not np.all(np.isfinite(values)):
+            raise Phase1FCMetricReconstructionError("C_W must be finite")
+        if np.any(1.0 + 2.0 * values <= 0.0):
+            raise Phase1FCMetricReconstructionError("C_W violates positive metric: 1+2C_W > 0 required")
+        if np.any(np.abs(values) > self.linear_regime_limit):
+            raise Phase1FCMetricReconstructionError("C_W exits the declared linear-regime limit")
 
     def _live_state(self) -> object:
         return (
             self.initial_metric_trace,
+            self.linear_regime_limit,
             self.initial_time,
             self.background_split_policy,
             self.spatial_measure_id,
@@ -956,12 +1034,18 @@ class ScalarMetricTraceDiagnostics:
     mean_tolerance: float
     evolution_tolerance: float
     integration_method: str
+    linear_regime_limit: float
+    metric_trace_max_abs: float
+    minimum_metric_factor: float
 
     def __post_init__(self) -> None:
         for name in (
             "initial_weighted_mean_residual",
             "reconstructed_weighted_mean_max_abs",
             "evolution_residual_max_abs",
+            "linear_regime_limit",
+            "metric_trace_max_abs",
+            "minimum_metric_factor",
         ):
             if not np.isfinite(float(getattr(self, name))):
                 raise Phase1FCMetricReconstructionError(
@@ -969,6 +1053,10 @@ class ScalarMetricTraceDiagnostics:
                 )
         _positive(self.mean_tolerance, "mean_tolerance")
         _positive(self.evolution_tolerance, "evolution_tolerance")
+        if not 0.0 < self.linear_regime_limit < 1.0:
+            raise Phase1FCMetricReconstructionError("diagnostic linear-regime limit invalid")
+        if not 0.0 <= self.metric_trace_max_abs <= self.linear_regime_limit or self.minimum_metric_factor <= 0.0:
+            raise Phase1FCMetricReconstructionError("diagnostic metric validity domain failed")
         if self.integration_method != "EXPLICIT_TRAPEZOIDAL_COMMON_TIME_GRID":
             raise Phase1FCMetricReconstructionError("diagnostic integrator mismatch")
 
@@ -1020,6 +1108,9 @@ class ScalarMetricTraceResult:
             raise Phase1FCMetricReconstructionError("metric trace field shape mismatch")
         if self.metric_trace_time_derivative.shape != (nt, wall_size):
             raise Phase1FCMetricReconstructionError("metric trace derivative shape mismatch")
+        self.initial_data.validate_field(self.metric_trace_perturbation)
+        if self.diagnostics.linear_regime_limit != self.initial_data.linear_regime_limit:
+            raise Phase1FCMetricReconstructionError("C_W diagnostic validity-limit mismatch")
         _seal(self, self._live_state())
 
     def _live_state(self) -> object:

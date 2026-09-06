@@ -7,6 +7,10 @@ the downstream evaluator retain their cited paper equations in the Phase
 1E-G model-extension specification and have no paper equation number.
 """
 
+# A06: absolute budgets use rtol=0; relative budgets use atol=0.
+# Previously implicit algebraic comparisons use rtol=2e-12, atol=1e-14
+# in the fixture units (roundoff allowance); explicit convergence budgets remain.
+
 from __future__ import annotations
 
 from dataclasses import fields, replace
@@ -302,7 +306,7 @@ def test_v1_flat_wall_operator_reproduces_periodic_scalarization() -> None:
     np.testing.assert_allclose(
         discrete_minus_laplacian,
         expected_eigenvalue * field,
-        atol=2e-12,
+        atol=2e-12, rtol=0.0,
     )
 
 
@@ -342,8 +346,8 @@ def test_v2_negative_curvature_poincare_metric_is_spd_and_weighted() -> None:
         },
     )
     assert np.ptp(void.metric_volume_ratio) > 0.1
-    np.testing.assert_allclose(void.elliptic_tensor_density[..., 0, 0], 1.0)
-    np.testing.assert_allclose(void.elliptic_tensor_density[..., 1, 1], 1.0)
+    np.testing.assert_allclose(void.elliptic_tensor_density[..., 0, 0], 1.0, rtol=2e-12, atol=1e-14)
+    np.testing.assert_allclose(void.elliptic_tensor_density[..., 1, 1], 1.0, rtol=2e-12, atol=1e-14)
     assert void.inverse_metric_eigenvalue_bounds[0] > 0.0
     operator = make_operator(shape=shape, void_geometry=void)
     source = np.ones(np.prod(shape))
@@ -360,7 +364,7 @@ def test_v3_single_global_kernel_before_normalization() -> None:
     operator = make_operator()
     assert operator.global_kernel_dimension == 1
     np.testing.assert_allclose(
-        operator.stiffness_matrix @ np.ones(operator.size), 0.0, atol=1e-13
+        operator.stiffness_matrix @ np.ones(operator.size), 0.0, atol=1e-13, rtol=0.0
     )
 
 
@@ -370,22 +374,22 @@ def test_v4_no_independent_regional_constant_projection() -> None:
     projected, _ = operator.project_dual_source(raw)
     wall = operator.morphology.wall_domain.reshape(-1)
     void = operator.morphology.void_domain.reshape(-1)
-    assert np.sum(projected[wall]) != pytest.approx(0.0, abs=1e-13)
-    assert np.sum(projected[void]) != pytest.approx(0.0, abs=1e-13)
-    assert np.sum(projected) == pytest.approx(0.0, abs=1e-13)
+    assert np.sum(projected[wall]) != pytest.approx(0.0, abs=1e-13, rel=0.0)
+    assert np.sum(projected[void]) != pytest.approx(0.0, abs=1e-13, rel=0.0)
+    assert np.sum(projected) == pytest.approx(0.0, abs=1e-13, rel=0.0)
 
 
 def test_v5_one_global_normalization_removes_the_common_constant() -> None:
     response = ContinuumTransfer(make_operator()).transfer_source(
         np.arange(8.0), region="global", provenance="normalization"
     )
-    assert response.solution_global_mean == pytest.approx(0.0, abs=2e-11)
+    assert response.solution_global_mean == pytest.approx(0.0, abs=2e-11, rel=0.0)
 
 
 def test_v6_explicit_geometric_ellipticity_bounds() -> None:
     operator = make_operator()
-    assert operator.ellipticity_lower_bound == pytest.approx(1.0)
-    assert operator.ellipticity_upper_bound == pytest.approx(1.0)
+    assert operator.ellipticity_lower_bound == pytest.approx(1.0, rel=2e-12, abs=1e-14)
+    assert operator.ellipticity_upper_bound == pytest.approx(1.0, rel=2e-12, abs=1e-14)
     assert operator.ellipticity_lower_bound >= operator.configuration.ellipticity_min
 
 
@@ -393,12 +397,12 @@ def test_v7_ordinary_generalized_and_continuum_coercivity_are_distinct() -> None
     operator = make_operator()
     assert operator.ordinary_euclidean_constrained_stiffness_eigenvalue > 0.0
     assert operator.generalized_mass_weighted_laplacian_eigenvalue > 0.0
-    assert operator.continuum_coercivity_assumption == pytest.approx(0.1)
+    assert operator.continuum_coercivity_assumption == pytest.approx(0.1, rel=2e-12, abs=1e-14)
     assert operator.ordinary_euclidean_constrained_stiffness_eigenvalue != pytest.approx(
-        operator.continuum_coercivity_assumption
+        operator.continuum_coercivity_assumption, rel=2e-12, abs=1e-14
     )
     assert operator.generalized_mass_weighted_laplacian_eigenvalue != pytest.approx(
-        operator.ordinary_euclidean_constrained_stiffness_eigenvalue
+        operator.ordinary_euclidean_constrained_stiffness_eigenvalue, rel=2e-12, abs=1e-14
     )
 
 
@@ -412,7 +416,7 @@ def test_v8_v9_value_and_common_normal_flux_continuity() -> None:
         response.interface.wall_outward_flux
         + response.interface.void_outward_flux,
         0.0,
-        atol=2e-11,
+        atol=2e-11, rtol=0.0,
     )
 
 
@@ -433,7 +437,7 @@ def test_v10_flux_sign_and_trace_adversarial_diagnostics() -> None:
         void_common_flux=np.array([-2.0]),
         normal_convention=COMMON_REFERENCE_NORMAL_WALL_TO_VOID_1E_G,
     )
-    assert reversed_flux[0] == pytest.approx(4.0)
+    assert reversed_flux[0] == pytest.approx(4.0, rel=2e-12, abs=1e-14)
 
 
 def test_v11_dual_source_compatibility_records_before_and_after() -> None:
@@ -442,7 +446,7 @@ def test_v11_dual_source_compatibility_records_before_and_after() -> None:
     )
     assert abs(response.source_projection.mean_before_projection) > 0.1
     assert response.source_projection.mean_after_projection == pytest.approx(
-        0.0, abs=2e-11
+        0.0, abs=2e-11, rel=0.0
     )
 
 
@@ -451,7 +455,7 @@ def test_v12_constrained_provenance_roundtrip_recovers_projected_load() -> None:
         np.linspace(-1.0, 2.0, 8), region="void", provenance="roundtrip"
     )
     recovered = -make_operator().apply_weak_operator(response.potential)
-    np.testing.assert_allclose(recovered, response.projected_source_load, atol=2e-11)
+    np.testing.assert_allclose(recovered, response.projected_source_load, atol=2e-11, rtol=0.0)
     assert response.provenance_roundtrip_error <= 1e-10
 
 
@@ -484,7 +488,7 @@ def test_v15_v16_v17_regional_injection_linearity_and_superposition() -> None:
     np.testing.assert_allclose(
         first.transferred_field.value + second.transferred_field.value,
         summed.transferred_field.value,
-        atol=2e-12,
+        atol=2e-12, rtol=0.0,
     )
     void = continuum.transfer_regional_amplitude(
         scalar(0.7), region="void", provenance="void"
@@ -494,7 +498,7 @@ def test_v15_v16_v17_regional_injection_linearity_and_superposition() -> None:
     np.testing.assert_allclose(
         joint.carrier_field.value,
         summed.transferred_field.value + void.transferred_field.value,
-        atol=2e-12,
+        atol=2e-12, rtol=0.0,
     )
 
 
@@ -511,7 +515,7 @@ def test_v18_curvature_bridge_uses_only_derived_regional_curvature() -> None:
         0.5 * fields_value.curvature_wall.transferred_field.value
         + 0.5 * fields_value.curvature_void.transferred_field.value
     )
-    np.testing.assert_allclose(fields_value.C_R_Gamma.value, expected)
+    np.testing.assert_allclose(fields_value.C_R_Gamma.value, expected, rtol=2e-12, atol=1e-14)
     assert "curvature" not in {field.name for field in fields(RegionalBulkState)}
 
 
@@ -524,7 +528,7 @@ def test_v19_e_delta_theta_is_derived_from_transferred_expansions() -> None:
         fields_value.expansion_void.transferred_field.value
         - fields_value.expansion_wall.transferred_field.value
     )
-    np.testing.assert_allclose(fields_value.E_DeltaTheta_Gamma.value, expected)
+    np.testing.assert_allclose(fields_value.E_DeltaTheta_Gamma.value, expected, rtol=2e-12, atol=1e-14)
 
 
 def test_v20_e_delta_xi0_uses_homogeneous_clock_factors() -> None:
@@ -537,7 +541,7 @@ def test_v20_e_delta_xi0_uses_homogeneous_clock_factors() -> None:
         1.2 * fields_value.expansion_void.transferred_field.value
         - 0.8 * fields_value.expansion_wall.transferred_field.value
     )
-    np.testing.assert_allclose(fields_value.E_DeltaXi_0_Gamma.value, expected)
+    np.testing.assert_allclose(fields_value.E_DeltaXi_0_Gamma.value, expected, rtol=2e-12, atol=1e-14)
 
 
 def test_v21_j_f_zero_is_branch_derived_and_unsupported_branch_fails() -> None:
@@ -592,8 +596,8 @@ def test_v23_transfer_derivatives_commute_and_match_finite_difference() -> None:
 
 def test_v24_manufactured_background_volume_fraction_consistency_fixture() -> None:
     result = make_result()
-    assert result.f_v_geom == pytest.approx(0.5)
-    assert result.volume_fraction_consistency_residual == pytest.approx(0.0)
+    assert result.f_v_geom == pytest.approx(0.5, rel=2e-12, abs=1e-14)
+    assert result.volume_fraction_consistency_residual == pytest.approx(0.0, rel=2e-12, abs=1e-14)
     with pytest.raises(ContinuumContractError, match="volume-fraction"):
         make_result(background=make_background(f_v=0.4))
 
@@ -626,7 +630,7 @@ def test_v25_equal_geometry_mask_and_source_injection_relabel_covariance_of_tran
     np.testing.assert_allclose(
         old_wall.transferred_field.value,
         new_void.transferred_field.value,
-        atol=2e-12,
+        atol=2e-12, rtol=0.0,
     )
 
 
@@ -776,20 +780,20 @@ def test_v31_discrete_operator_contract_consistency() -> None:
         state.wall.injected_source.first + state.void.injected_source.first,
         state.wall.injected_source.second + state.void.injected_source.second,
     )
-    np.testing.assert_allclose(recovered.value, expected.value, atol=1e-10)
-    np.testing.assert_allclose(recovered.first, expected.first, atol=1e-10)
-    np.testing.assert_allclose(recovered.second, expected.second, atol=1e-10)
+    np.testing.assert_allclose(recovered.value, expected.value, atol=1e-10, rtol=0.0)
+    np.testing.assert_allclose(recovered.first, expected.first, atol=1e-10, rtol=0.0)
+    np.testing.assert_allclose(recovered.second, expected.second, atol=1e-10, rtol=0.0)
 
 
 def test_v32_continuum_derived_downstream_phase1e_f_diagnostics_stay_green() -> None:
     result = make_result()
     downstream = result.downstream_phase1e_f
     assert np.max(np.abs(result.E_DeltaTheta_Gamma.value)) > 0.1
-    np.testing.assert_allclose(downstream.C_P, 0.0, atol=1e-10)
-    np.testing.assert_allclose(downstream.R_Delta, 0.0, atol=1e-10)
-    np.testing.assert_allclose(downstream.R_Z, 0.0, atol=1e-10)
-    np.testing.assert_allclose(downstream.R_eff, 0.0, atol=1e-10)
-    np.testing.assert_allclose(downstream.K_GM, 0.0, atol=1e-10)
+    np.testing.assert_allclose(downstream.C_P, 0.0, atol=1e-10, rtol=0.0)
+    np.testing.assert_allclose(downstream.R_Delta, 0.0, atol=1e-10, rtol=0.0)
+    np.testing.assert_allclose(downstream.R_Z, 0.0, atol=1e-10, rtol=0.0)
+    np.testing.assert_allclose(downstream.R_eff, 0.0, atol=1e-10, rtol=0.0)
+    np.testing.assert_allclose(downstream.K_GM, 0.0, atol=1e-10, rtol=0.0)
 
 
 def test_v33_d3_firewall_preserves_two_explicit_variants_without_default() -> None:
@@ -873,7 +877,7 @@ def test_source_measure_adversarial_nonconstant_j_detects_omission() -> None:
     correct = ContinuumTransfer(operator).transfer_source(
         source, region="global", provenance="correct-J"
     )
-    np.testing.assert_allclose(correct.potential, potential, atol=2e-10)
+    np.testing.assert_allclose(correct.potential, potential, atol=2e-10, rtol=0.0)
     wrong_load = operator.reference_weights * source
     wrong_projected, _ = operator.project_dual_source(wrong_load)
     wrong_potential = operator.solve_projected_load(wrong_projected)
@@ -969,7 +973,8 @@ def test_missing_morphology_and_invalid_physical_metadata_fail_closed() -> None:
 def test_unsupported_anisotropic_reference_discretization_fails_closed() -> None:
     shape = (6, 6)
     inverse = np.zeros(shape + (2, 2))
-    inverse[..., 0, 0] = 1.0
+    # Determinant one isolates the unsupported anisotropy (A01 contract).
+    inverse[..., 0, 0] = 0.5
     inverse[..., 1, 1] = 2.0
     anisotropic = RegionalGeometrySpec(
         region_id="void", metric_inverse=inverse,
@@ -998,8 +1003,8 @@ def test_broken_explicit_value_and_flux_conditions_are_detected() -> None:
         void_common_flux=np.array([0.4, 0.3]),
         normal_convention=COMMON_REFERENCE_NORMAL_WALL_TO_VOID_1E_G,
     )
-    assert np.max(np.abs(value)) == pytest.approx(0.1)
-    assert np.max(np.abs(flux)) == pytest.approx(0.5)
+    assert np.max(np.abs(value)) == pytest.approx(0.1, rel=2e-12, abs=1e-14)
+    assert np.max(np.abs(flux)) == pytest.approx(0.5, rel=2e-12, abs=1e-14)
 
 
 def test_wrong_normal_convention_fails_closed() -> None:
@@ -1035,10 +1040,10 @@ def test_d5_one_dimensional_weighted_operator_survives_without_volume_promotion(
         ), metadata={},
     )
     operator = make_operator(void_geometry=void)
-    assert np.mean(operator.morphology.void_domain) == pytest.approx(0.5)
+    assert np.mean(operator.morphology.void_domain) == pytest.approx(0.5, rel=2e-12, abs=1e-14)
     wall_measure, void_measure = operator.metric_derived_regional_reference_measures()
-    assert wall_measure == pytest.approx(0.5)
-    assert void_measure == pytest.approx(1.0)
+    assert wall_measure == pytest.approx(0.5, rel=2e-12, abs=1e-14)
+    assert void_measure == pytest.approx(1.0, rel=2e-12, abs=1e-14)
     assert operator.metric_normalization_diagnostics["void"].measure_semantics == (
         REDUCED_DIMENSIONAL_MEASURE_ONLY
     )
@@ -1156,12 +1161,12 @@ def test_n5_consistent_metric_scale_factor_volume_transform_is_explicit() -> Non
         != base.void_geometry.normalization.normalization_id
     )
     assert alternative.geometric_void_fraction(a_w=1.0, a_v=0.5) == pytest.approx(
-        base.geometric_void_fraction(a_w=1.0, a_v=1.0)
+        base.geometric_void_fraction(a_w=1.0, a_v=1.0), rel=2e-12, abs=1e-14
     )
     assert PHYSICAL_NORMALIZATION_COVARIANCE == "PHYSICAL_NORMALIZATION_COVARIANCE"
     base_physical = base.physical_regional_volumes(a_w=1.0, a_v=1.0)
     transformed_physical = alternative.physical_regional_volumes(a_w=1.0, a_v=0.5)
-    assert transformed_physical == pytest.approx(base_physical)
+    assert transformed_physical == pytest.approx(base_physical, rel=2e-12, abs=1e-14)
 
 
 def test_n6_volume_fraction_fixture_is_labelled_manufactured_consistency() -> None:
@@ -1180,7 +1185,12 @@ def _continuum_dynamic_fixture(
     q_bar_first_shift: float = 0.0,
     relaxed_residuals: bool = False,
 ):
-    """Independently specified continuum-derived nontrivial GM trajectory."""
+    """Manufactured algebraic jets, not an all-time physical Timescape trajectory.
+
+    In particular rho_w.first=0 while -alpha_w*Theta_w*rho_w=-0.6.
+    Nontrivial target residual cancellation does not establish regional dust
+    background conservation or a common-spacetime embedding (Astra A07).
+    """
     morphology = layered_morphology(
         morphology_id="continuum-dynamic-one-wall-cell",
         grid_shape=(6, 3, 3),
@@ -1260,8 +1270,8 @@ def test_n7_n8_continuum_derived_r_z_and_r_eff_cancel_nontrivially() -> None:
     assert np.max(np.abs(r_z_pressure_term)) < 1e-12
     r_z_terms = r_z_nonpressure_terms + (r_z_pressure_term,)
     independent_r_z = sum(r_z_terms, np.zeros_like(downstream.R_Z))
-    np.testing.assert_allclose(independent_r_z, 0.0, atol=1e-12)
-    np.testing.assert_allclose(downstream.R_Z, independent_r_z, atol=1e-13)
+    np.testing.assert_allclose(independent_r_z, 0.0, atol=1e-12, rtol=0.0)
+    np.testing.assert_allclose(downstream.R_Z, independent_r_z, atol=1e-13, rtol=0.0)
 
     r_eff_nonpressure_terms = (
         downstream.Delta_eff.first,
@@ -1275,8 +1285,8 @@ def test_n7_n8_continuum_derived_r_z_and_r_eff_cancel_nontrivially() -> None:
     assert np.max(np.abs(r_eff_pressure_term)) < 1e-12
     r_eff_terms = r_eff_nonpressure_terms + (r_eff_pressure_term,)
     independent_r_eff = sum(r_eff_terms, np.zeros_like(downstream.R_eff))
-    np.testing.assert_allclose(independent_r_eff, 0.0, atol=1e-12)
-    np.testing.assert_allclose(downstream.R_eff, independent_r_eff, atol=1e-13)
+    np.testing.assert_allclose(independent_r_eff, 0.0, atol=1e-12, rtol=0.0)
+    np.testing.assert_allclose(downstream.R_eff, independent_r_eff, atol=1e-13, rtol=0.0)
 
 
 def test_n9_continuum_derived_adversarial_r_z_increment_is_predictable() -> None:
@@ -1292,7 +1302,7 @@ def test_n9_continuum_derived_adversarial_r_z_increment_is_predictable() -> None
         corrupted.downstream_phase1e_f.R_Z
         - baseline.downstream_phase1e_f.R_Z,
         expected_increment,
-        atol=2e-13,
+        atol=2e-13, rtol=0.0,
     )
     with pytest.raises(H1ClosureError, match=r"^R_Z="):
         _continuum_dynamic_fixture(alpha_w_first=shift)
@@ -1311,7 +1321,7 @@ def test_n10_continuum_derived_adversarial_r_eff_increment_is_predictable() -> N
         corrupted.downstream_phase1e_f.R_eff
         - baseline.downstream_phase1e_f.R_eff,
         expected_increment,
-        atol=2e-13,
+        atol=2e-13, rtol=0.0,
     )
     with pytest.raises(H1ClosureError, match=r"^R_eff="):
         _continuum_dynamic_fixture(q_bar_first_shift=shift)
@@ -1328,8 +1338,8 @@ def test_n11_morphology_difference_uses_target_metric_weighted_l2() -> None:
         reference_scale=2.0,
         normalization_floor=1e-12,
     )
-    assert value == pytest.approx(np.sqrt(3.0) / 2.0)
-    assert value != pytest.approx(np.linalg.norm(first) / 2.0)
+    assert value == pytest.approx(np.sqrt(3.0) / 2.0, rel=2e-12, abs=1e-14)
+    assert value != pytest.approx(np.linalg.norm(first) / 2.0, rel=2e-12, abs=1e-14)
 
 
 def _shifted_half_morphology(resolution: int) -> MorphologySpec:
@@ -1447,7 +1457,7 @@ def test_n15_ordinary_stiffness_and_generalized_mass_spectrum_are_distinct() -> 
     assert abs(generalized[-1] - 4.0 * np.pi**2) < abs(
         generalized[0] - 4.0 * np.pi**2
     )
-    assert generalized[-1] == pytest.approx(4.0 * np.pi**2, rel=4e-3)
+    assert generalized[-1] == pytest.approx(4.0 * np.pi**2, rel=4e-3, abs=0.0)
 
 
 def test_d1_three_dimensional_physical_volume_path_is_accepted() -> None:
@@ -1456,9 +1466,9 @@ def test_d1_three_dimensional_physical_volume_path_is_accepted() -> None:
     assert result.continuum_geometry["dimension"] == 3
     assert result.physical_volume_semantics == PHYSICAL_VOLUME_SEMANTICS
     assert operator.physical_regional_volumes(a_w=1.0, a_v=1.0) == pytest.approx(
-        (0.5, 0.5)
+        (0.5, 0.5), rel=2e-12, abs=1e-14
     )
-    assert operator.geometric_void_fraction(a_w=1.0, a_v=1.0) == pytest.approx(0.5)
+    assert operator.geometric_void_fraction(a_w=1.0, a_v=1.0) == pytest.approx(0.5, rel=2e-12, abs=1e-14)
 
 
 @pytest.mark.parametrize(
@@ -1554,9 +1564,9 @@ def test_dimensional_covariance_factor_is_c_to_d_minus_three(
     literal_measure_scaling = scale**dimension
     scale_factor_cubic_scaling = (1.0 / scale) ** 3
     assert literal_measure_scaling * scale_factor_cubic_scaling == pytest.approx(
-        scale ** (dimension - 3)
+        scale ** (dimension - 3), rel=2e-12, abs=1e-14
     )
-    assert scale ** (dimension - 3) == pytest.approx(expected_factor)
+    assert scale ** (dimension - 3) == pytest.approx(expected_factor, rel=2e-12, abs=1e-14)
     assert (dimension == 3) is (expected_factor == 1.0)
 
 
@@ -1725,7 +1735,7 @@ def test_i11_legitimate_untouched_three_dimensional_operator_remains_usable() ->
     )
     assert np.all(np.isfinite(transfer_response.transferred_field))
     assert operator.physical_regional_volumes(a_w=1.0, a_v=1.0) == pytest.approx(
-        (0.5, 0.5)
+        (0.5, 0.5), rel=2e-12, abs=1e-14
     )
     assert make_result(bridge=make_bridge(shape=(4, 3, 3))).realization_id == (
         "H1-1E-G-COMOVING-CGI-ELLIPTIC-TRANSMISSION-V1"

@@ -6,6 +6,10 @@ AGENTS.md rule 3). Exception: tau_w admits t = 0, where its closed form
 has the exact finite limit tau_w(0) = 0 ([W09] (B12)).
 """
 
+# A06: absolute budgets use rtol=0; relative budgets use atol=0.
+# Previously implicit algebraic comparisons use rtol=2e-12, atol=1e-14
+# in the fixture units (roundoff allowance); explicit convergence budgets remain.
+
 import numpy as np
 import pytest
 
@@ -41,7 +45,7 @@ def test_rejects_array_containing_nonpositive(func):
 
 def test_tau_w_admits_zero_rejects_negative():
     assert float(bg.tau_w(0.0, P)) == 0.0
-    np.testing.assert_allclose(bg.tau_w(np.array([0.0, P.t0]), P)[0], 0.0)
+    np.testing.assert_allclose(bg.tau_w(np.array([0.0, P.t0]), P)[0], 0.0, rtol=0.0, atol=0.0)
     with pytest.raises(ValueError):
         bg.tau_w(-1e-9, P)
     with pytest.raises(ValueError):

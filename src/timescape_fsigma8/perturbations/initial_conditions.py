@@ -67,8 +67,16 @@ PLANCK_2018_QPLUS_RECIPE = LCDMGrowthRecipe(
 def qplus(z: float, recipe: LCDMGrowthRecipe) -> np.float64:
     """Return the flat-LCDM growing mode used for the initial amplitude.
 
-    This is the incomplete-beta solution in Eqs. (11)-(12) of Short &
-    Coles, arXiv:astro-ph/0605013, which solves their growth Eq. (3).
+    Independently obtained by reduction of order of the growth equation,
+    Eq. (3) of Short & Coles, arXiv:astro-ph/0605013v2:
+    ``D=(5/2) Omega_m E(a) integral_0^a dx/[x^3 E(x)^3]``, ``D/a -> 1``.
+    Substituting ``x_beta=Omega_L a^3/(Omega_m+Omega_L a^3)`` gives the
+    implemented incomplete beta with indices (5/6, 2/3).
+    This is NOT a literal transcription of printed Eqs. (11)-(12): their
+    cube-root prefactor contains an extra a^-1, their square root contains
+    a^-6 instead of a^-3, and their beta denominator uses a^6 instead of
+    a^3. They also normalize at an initial epoch rather than D/a -> 1.
+    See the Phase 1F-C-R successor report for the independent derivation.
     It is evaluated with the explicitly supplied Planck-2018 parameters,
     as described for the dust IC construction in Sec. 5.1.2 of
     arXiv:2511.17160v2.
@@ -88,8 +96,9 @@ def qplus(z: float, recipe: LCDMGrowthRecipe) -> np.float64:
 def qplus_prime(z: float, recipe: LCDMGrowthRecipe) -> np.float64:
     """Return the explicitly forward-differenced ``dqplus/dz``.
 
-    The growing mode is Eq. (11) of Short & Coles,
-    arXiv:astro-ph/0605013.  The forward step is intentionally the audited
+    The growing mode is the independently derived solution of Short &
+    Coles Eq. (3), arXiv:astro-ph/0605013v2; see qplus for the printed
+    formula discrepancy. The forward step is intentionally the audited
     ``epsilon=1e-5`` recipe used to generate the published/upstream IC; it
     is not a derivative used by the perturbation solver.
     """
@@ -114,8 +123,8 @@ def qplus_dot(z: float, recipe: LCDMGrowthRecipe) -> np.float64:
     """Return ``dqplus/dt`` in units where the recipe's LCDM ``H0=1``.
 
     Uses ``dz/dt = -(1+z)H(z)`` with Hogg's Eq. (14)
-    (arXiv:astro-ph/9905116) and the growing mode of Eqs. (11)-(12) of
-    Short & Coles (arXiv:astro-ph/0605013).  The sign of the resulting IC
+    (arXiv:astro-ph/9905116) and the independently derived growing mode
+    described in qplus. The sign of the resulting IC
     is fixed by ``Z=-dDelta_d/dt``, Eq. (4.21) of arXiv:2511.17160v2.
     """
     dz_dt = -(1.0 + z) * lcdm_hubble_normalized(z, recipe)

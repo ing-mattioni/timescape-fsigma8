@@ -1,8 +1,9 @@
 """Generate corrected-sound-speed Figure-3 variants independently.
 
 This script imports only the scientific package.  It never reads the upstream
-oracle.  The two unresolved D3 branches are emitted as separate, equally
+oracle. The derived and forensic D3 branches are emitted as separately
 labelled outputs; each has a raw-Delta_eff and Delta_eff/k^2 right panel.
+The scientific adjudication remains RESOLVED_DERIVED_4_10.
 """
 
 from __future__ import annotations

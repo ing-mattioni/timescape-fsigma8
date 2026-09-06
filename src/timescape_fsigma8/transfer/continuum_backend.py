@@ -642,6 +642,7 @@ class ContinuumH1Operator:
     def _isotropic_tensor_density(
         self, geometry: RegionalGeometrySpec, name: str
     ) -> FloatArray:
+        geometry.validate_metric_measure()
         tensor = geometry.elliptic_tensor_density
         dimension = geometry.dimension
         diagonal = np.diagonal(tensor, axis1=-2, axis2=-1)

@@ -6,6 +6,10 @@ human-approved Phase 1E-F specification, with inherited CGI/GM equations
 cited in the implementation docstrings.
 """
 
+# A06: absolute budgets use rtol=0; relative budgets use atol=0.
+# Previously implicit algebraic comparisons use rtol=2e-12, atol=1e-14
+# in the fixture units (roundoff allowance); explicit convergence budgets remain.
+
 from __future__ import annotations
 
 from dataclasses import fields
@@ -202,12 +206,14 @@ def make_nontrivial_dynamic_arguments(
     operator_second_shift: float = 0.0,
     delta_eff_first_shift: float = 0.0,
 ) -> tuple[dict[str, object], dict[str, object]]:
-    """Build an independently specified nontrivial GM-compatible trajectory.
+    """Build independently specified algebraically compatible manufactured jets.
 
     The target jets below are manufactured before the realization is called.
     They satisfy the human-approved Phase 1E-F R_Z and R_eff equations with
     nonzero clean-branch terms. The effective-sector input is then solved
     algebraically so the real H1 realization must reproduce those target jets.
+    This is not a physical regional dust background or evidence of an all-time
+    Timescape trajectory; rho_w.first=0 violates dust conservation for Theta_w=0.6.
     """
     G = 1.0 / (4.0 * np.pi)
     background = make_background(
@@ -356,12 +362,12 @@ def test_v1_regional_exact_equations_include_common_time_alpha() -> None:
             Theta=scalar(3.0 * H),
             G=G,
         )
-        assert result.delta.first == pytest.approx(-alpha * Z)
+        assert result.delta.first == pytest.approx(-alpha * Z, rel=2e-12, abs=1e-14)
         expected_z = (
             -2.0 * alpha * H * Z
             - 4.0 * np.pi * G * alpha * rho * delta
         )
-        assert result.Z.first == pytest.approx(expected_z)
+        assert result.Z.first == pytest.approx(expected_z, rel=2e-12, abs=1e-14)
 
 
 def test_v2_global_constant_mode_is_removed_exactly_once() -> None:
@@ -369,10 +375,10 @@ def test_v2_global_constant_mode_is_removed_exactly_once() -> None:
     projected = backend.project_source(np.eye(N)[0])
     assert backend.global_mean_constraint_count == 1
     assert backend.total_constraint_rank == backend.interface_constraint_rank + 1
-    assert backend.global_mean(projected) == pytest.approx(0.0, abs=1e-14)
-    assert np.sum(projected[:3]) != pytest.approx(0.0, abs=1e-14)
-    assert np.sum(projected[3:]) != pytest.approx(0.0, abs=1e-14)
-    assert np.sum(projected[:3]) == pytest.approx(-np.sum(projected[3:]))
+    assert backend.global_mean(projected) == pytest.approx(0.0, abs=1e-14, rel=0.0)
+    assert np.sum(projected[:3]) != pytest.approx(0.0, abs=1e-14, rel=0.0)
+    assert np.sum(projected[3:]) != pytest.approx(0.0, abs=1e-14, rel=0.0)
+    assert np.sum(projected[:3]) == pytest.approx(-np.sum(projected[3:]), rel=2e-12, abs=1e-14)
 
 
 def test_v3_v4_transmission_value_and_conormal_flux_continuity() -> None:
@@ -384,8 +390,8 @@ def test_v3_v4_transmission_value_and_conormal_flux_continuity() -> None:
     )
     for jet in (state.wall.field, state.void.field, state.carrier_field):
         for field in (jet.value, jet.first, jet.second):
-            np.testing.assert_allclose(backend.value_jump(field), 0.0, atol=1e-14)
-            np.testing.assert_allclose(backend.flux_jump(field), 0.0, atol=1e-14)
+            np.testing.assert_allclose(backend.value_jump(field), 0.0, atol=1e-14, rtol=0.0)
+            np.testing.assert_allclose(backend.flux_jump(field), 0.0, atol=1e-14, rtol=0.0)
 
 
 def test_v5_coercivity_guard_fails_closed() -> None:
@@ -411,7 +417,7 @@ def test_v6_equal_region_is_fail_closed_degenerate_with_special_zero_numerator_p
             regional_bulk=bulk,
             background=make_background(R_bar_v=scalar(contrast)),
         )
-        np.testing.assert_allclose(result.F_v.value, 0.0, atol=1e-14)
+        np.testing.assert_allclose(result.F_v.value, 0.0, atol=1e-14, rtol=0.0)
         # This is only the special numerator-identically-zero path 0/contrast.
         # No generic equal-region limit is inferred.
     with pytest.raises(H1DegeneracyError, match=r"A_P"):
@@ -435,9 +441,9 @@ def test_v7_wall_void_relabelling_is_carrier_covariant() -> None:
         background=swapped_background,
         backend=make_backend(reverse_regions=True),
     )
-    np.testing.assert_allclose(swapped.Delta_d.value, original.Delta_d.value)
-    np.testing.assert_allclose(swapped.Z, original.Z)
-    np.testing.assert_allclose(swapped.Delta_eff.value, original.Delta_eff.value)
+    np.testing.assert_allclose(swapped.Delta_d.value, original.Delta_d.value, rtol=2e-12, atol=1e-14)
+    np.testing.assert_allclose(swapped.Z, original.Z, rtol=2e-12, atol=1e-14)
+    np.testing.assert_allclose(swapped.Delta_eff.value, original.Delta_eff.value, rtol=2e-12, atol=1e-14)
 
 
 @pytest.mark.parametrize("f_v", [0.0, 1.0])
@@ -458,7 +464,7 @@ def test_v9_normalized_effective_density_rejects_zero_denominator() -> None:
         np.testing.assert_allclose(
             diagnostics.C_P.value,
             diagnostics.mathscr_W.value - 3.0 * diagnostics.mathscr_Q.value,
-            atol=1e-14,
+            atol=1e-14, rtol=0.0,
         )
         assert "normalized Delta_eff and w_eff were not evaluated" in str(error)
     else:
@@ -467,20 +473,20 @@ def test_v9_normalized_effective_density_rejects_zero_denominator() -> None:
 
 def test_v10_constitutive_clean_closure_is_verified() -> None:
     result = make_result()
-    np.testing.assert_allclose(result.C_P, 0.0, atol=1e-14)
+    np.testing.assert_allclose(result.C_P, 0.0, atol=1e-14, rtol=0.0)
     np.testing.assert_allclose(
         result.mathscr_W.value - 3.0 * result.mathscr_Q.value,
         result.C_P,
-        atol=1e-14,
+        atol=1e-14, rtol=0.0,
     )
 
 
 def test_v11_v12_v13_all_three_canonical_gm_residuals_vanish() -> None:
     result = make_result()
-    np.testing.assert_allclose(result.R_Delta, 0.0, atol=1e-14)
-    np.testing.assert_allclose(result.R_Z, 0.0, atol=1e-14)
-    np.testing.assert_allclose(result.R_eff, 0.0, atol=1e-14)
-    np.testing.assert_allclose(result.P_tilde_eff, 0.0, atol=1e-14)
+    np.testing.assert_allclose(result.R_Delta, 0.0, atol=1e-14, rtol=0.0)
+    np.testing.assert_allclose(result.R_Z, 0.0, atol=1e-14, rtol=0.0)
+    np.testing.assert_allclose(result.R_eff, 0.0, atol=1e-14, rtol=0.0)
+    np.testing.assert_allclose(result.P_tilde_eff, 0.0, atol=1e-14, rtol=0.0)
 
 
 def test_nontrivial_manufactured_r_z_and_r_eff_cancellations() -> None:
@@ -488,19 +494,19 @@ def test_nontrivial_manufactured_r_z_and_r_eff_cancellations() -> None:
     result = evaluate_h1_realization(**arguments)
     phi = expected["phi"]
 
-    np.testing.assert_allclose(result.Delta_d.value, expected["Delta_d"] * phi)
-    np.testing.assert_allclose(result.Z, expected["Z"] * phi)
-    np.testing.assert_allclose(-result.Delta_d.second, expected["Z_dot"] * phi)
-    np.testing.assert_allclose(result.Delta_eff.value, expected["Delta_eff"] * phi)
+    np.testing.assert_allclose(result.Delta_d.value, expected["Delta_d"] * phi, rtol=2e-12, atol=1e-14)
+    np.testing.assert_allclose(result.Z, expected["Z"] * phi, rtol=2e-12, atol=1e-14)
+    np.testing.assert_allclose(-result.Delta_d.second, expected["Z_dot"] * phi, rtol=2e-12, atol=1e-14)
+    np.testing.assert_allclose(result.Delta_eff.value, expected["Delta_eff"] * phi, rtol=2e-12, atol=1e-14)
     np.testing.assert_allclose(
         result.Delta_eff.first,
-        expected["Delta_eff_dot"] * phi,
+        expected["Delta_eff_dot"] * phi, rtol=2e-12, atol=1e-14,
     )
-    assert result.rho_d == pytest.approx(expected["rho_d"])
-    assert result.rho_eff == pytest.approx(expected["rho_eff"])
-    assert result.w_eff == pytest.approx(expected["w_eff"])
+    assert result.rho_d == pytest.approx(expected["rho_d"], rel=2e-12, abs=1e-14)
+    assert result.rho_eff == pytest.approx(expected["rho_eff"], rel=2e-12, abs=1e-14)
+    assert result.w_eff == pytest.approx(expected["w_eff"], rel=2e-12, abs=1e-14)
     assert result.w_eff not in (-1.0, 0.0)
-    np.testing.assert_allclose(result.C_P, 0.0, atol=1e-13)
+    np.testing.assert_allclose(result.C_P, 0.0, atol=1e-13, rtol=0.0)
 
     R_Z_terms = (
         -result.Delta_d.second,
@@ -520,9 +526,9 @@ def test_nontrivial_manufactured_r_z_and_r_eff_cancellations() -> None:
     np.testing.assert_allclose(
         independently_reconstructed_R_Z,
         result.R_Z,
-        atol=2e-13,
+        atol=2e-13, rtol=0.0,
     )
-    np.testing.assert_allclose(independently_reconstructed_R_Z, 0.0, atol=2e-13)
+    np.testing.assert_allclose(independently_reconstructed_R_Z, 0.0, atol=2e-13, rtol=0.0)
 
     R_eff_terms = (
         result.Delta_eff.first,
@@ -539,9 +545,9 @@ def test_nontrivial_manufactured_r_z_and_r_eff_cancellations() -> None:
     np.testing.assert_allclose(
         independently_reconstructed_R_eff,
         result.R_eff,
-        atol=2e-13,
+        atol=2e-13, rtol=0.0,
     )
-    np.testing.assert_allclose(independently_reconstructed_R_eff, 0.0, atol=2e-13)
+    np.testing.assert_allclose(independently_reconstructed_R_eff, 0.0, atol=2e-13, rtol=0.0)
 
 
 def test_adversarial_second_density_jet_produces_predictable_r_z_failure() -> None:
@@ -555,7 +561,7 @@ def test_adversarial_second_density_jet_produces_predictable_r_z_failure() -> No
     with pytest.raises(H1ClosureError, match=r"^R_Z=") as error:
         evaluate_h1_realization(**arguments)
     measured_magnitude = float(str(error.value).split("=", 1)[1].split()[0])
-    assert measured_magnitude == pytest.approx(np.max(np.abs(expected_increment)))
+    assert measured_magnitude == pytest.approx(np.max(np.abs(expected_increment)), rel=2e-12, abs=1e-14)
 
 
 def test_adversarial_effective_first_jet_produces_predictable_r_eff_failure() -> None:
@@ -569,7 +575,7 @@ def test_adversarial_effective_first_jet_produces_predictable_r_eff_failure() ->
     with pytest.raises(H1ClosureError, match=r"^R_eff=") as error:
         evaluate_h1_realization(**arguments)
     measured_magnitude = float(str(error.value).split("=", 1)[1].split()[0])
-    assert measured_magnitude == pytest.approx(np.max(np.abs(expected_increment)))
+    assert measured_magnitude == pytest.approx(np.max(np.abs(expected_increment)), rel=2e-12, abs=1e-14)
 
 
 def test_v14_gm_curvature_is_derived_and_constraint_residual_vanishes() -> None:
@@ -580,8 +586,8 @@ def test_v14_gm_curvature_is_derived_and_constraint_residual_vanishes() -> None:
         * np.pi
         * (result.rho_d * result.Delta_d.value + result.rho_eff * result.Delta_eff.value)
     )
-    np.testing.assert_allclose(result.R_GM, expected, atol=1e-14)
-    np.testing.assert_allclose(result.K_GM, 0.0, atol=1e-14)
+    np.testing.assert_allclose(result.R_GM, expected, atol=1e-14, rtol=0.0)
+    np.testing.assert_allclose(result.K_GM, 0.0, atol=1e-14, rtol=0.0)
     assert "R_GM" not in {field.name for field in fields(RegionalBulkState)}
 
 
@@ -606,10 +612,10 @@ def test_v16_deliberately_broken_transmission_is_detected() -> None:
     field = backend.solve_joint(scalar(1.0), scalar(0.0), source_name="broken").carrier_field.value
     broken = field.copy()
     broken[2] += 1e-3
-    assert np.max(np.abs(backend.value_jump(broken))) == pytest.approx(1e-3)
+    assert np.max(np.abs(backend.value_jump(broken))) == pytest.approx(1e-3, rel=2e-12, abs=1e-14)
     broken_flux = field.copy()
     broken_flux[1] += 2e-3
-    assert np.max(np.abs(backend.flux_jump(broken_flux))) == pytest.approx(2e-3)
+    assert np.max(np.abs(backend.flux_jump(broken_flux))) == pytest.approx(2e-3, rel=2e-12, abs=1e-14)
 
 
 def test_v17_broken_constitutive_closure_stays_separate_from_c_eff() -> None:
@@ -662,13 +668,13 @@ def test_v20_provenance_source_roundtrip_includes_analytic_derivatives() -> None
     for solution in (state.wall, state.void):
         recovered = backend.apply_coupled_operator_jet(solution.field)
         np.testing.assert_allclose(
-            recovered.value, solution.injected_source.value, atol=1e-13
+            recovered.value, solution.injected_source.value, atol=1e-13, rtol=0.0
         )
         np.testing.assert_allclose(
-            recovered.first, solution.injected_source.first, atol=1e-13
+            recovered.first, solution.injected_source.first, atol=1e-13, rtol=0.0
         )
         np.testing.assert_allclose(
-            recovered.second, solution.injected_source.second, atol=1e-13
+            recovered.second, solution.injected_source.second, atol=1e-13, rtol=0.0
         )
 
 
@@ -696,7 +702,7 @@ def test_result_exposes_required_scientific_record_without_target_inverse() -> N
         "nondegeneracy_margins",
     }
     assert required <= {field.name for field in fields(type(result))}
-    assert result.framework_status == "COMPATIBLE_IMPORTED_DYNAMICS"
+    assert result.framework_status == "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION"
     assert result.scientific_status == "CONDITIONALLY_CLOSED"
     assert result.observational_status == "NON_OBSERVATIONAL"
     assert result.fsigma8_status == "NOT_FSIGMA8"
@@ -767,7 +773,7 @@ def test_time_independent_partition_requires_explicit_zero_commutator() -> None:
     np.testing.assert_allclose(
         result.J_Xi,
         baseline.J_Xi - np.ones(N) / 0.24,
-        atol=1e-13,
+        atol=1e-13, rtol=0.0,
     )
 
 
@@ -779,7 +785,7 @@ def test_wall_void_source_injections_are_linear_and_provenance_preserving() -> N
     np.testing.assert_allclose(
         first.carrier_field.value + second.carrier_field.value,
         summed.carrier_field.value,
-        atol=1e-14,
+        atol=1e-14, rtol=0.0,
     )
     assert first.wall.provenance == "wall:linear"
     assert first.void.provenance == "void:linear"
@@ -807,20 +813,20 @@ def test_mass_weighted_dust_transfer_retains_regional_weights_and_d_f_term() -> 
         + m_v * result.transmission_state.density.void.field.value
         + d_f * result.F_v.value
     )
-    np.testing.assert_allclose(result.Delta_d.value, expected, atol=1e-14)
+    np.testing.assert_allclose(result.Delta_d.value, expected, atol=1e-14, rtol=0.0)
     assert d_f != 0.0
 
 
 def test_effective_background_matches_gm_equations_3_12_and_3_13() -> None:
     result = make_result()
-    assert result.rho_eff == pytest.approx(1.0 / (8.0 * np.pi))
-    assert result.p_eff == pytest.approx(-1.0 / (8.0 * np.pi))
-    assert result.w_eff == pytest.approx(-1.0)
+    assert result.rho_eff == pytest.approx(1.0 / (8.0 * np.pi), rel=2e-12, abs=1e-14)
+    assert result.p_eff == pytest.approx(-1.0 / (8.0 * np.pi), rel=2e-12, abs=1e-14)
+    assert result.w_eff == pytest.approx(-1.0, rel=2e-12, abs=1e-14)
 
 
 def test_target_expansion_is_only_the_analytic_density_derivative() -> None:
     result = make_result()
-    np.testing.assert_allclose(result.Z, -result.Delta_d.first, atol=0.0)
+    np.testing.assert_allclose(result.Z, -result.Delta_d.first, atol=0.0, rtol=0.0)
 
 
 def test_analytic_operator_derivative_matches_independent_finite_difference() -> None:
@@ -834,7 +840,7 @@ def test_analytic_operator_derivative_matches_independent_finite_difference() ->
     np.testing.assert_allclose(
         backend.apply_inverse_derivative(combined_source),
         analytic.carrier_field.first,
-        atol=1e-14,
+        atol=1e-14, rtol=0.0,
     )
     step = 1e-6
     plus = make_backend(scale=scale + step * scale_dot).solve_joint(
@@ -931,22 +937,22 @@ def test_common_reference_normal_matches_opposite_outward_fluxes() -> None:
         VectorJet(2.0 * state, np.zeros(4), np.zeros(4)),
         provenance="one-dimensional-oriented-interface",
     )
-    np.testing.assert_allclose(solution.field.value, state, atol=1e-14)
+    np.testing.assert_allclose(solution.field.value, state, atol=1e-14, rtol=0.0)
 
     j_wall_out = wall_outward @ state
     j_void_out = void_outward @ state
     q_wall = j_wall_out
     q_void = void_common_reference @ state
-    assert j_wall_out == pytest.approx(1.0)
-    assert j_void_out == pytest.approx(-1.0)
-    assert q_wall == pytest.approx(1.0)
-    assert q_void == pytest.approx(1.0)
-    assert j_wall_out + j_void_out == pytest.approx(0.0)
-    assert q_wall - q_void == pytest.approx(0.0)
-    np.testing.assert_allclose(backend.flux_jump(state), 0.0, atol=1e-14)
+    assert j_wall_out == pytest.approx(1.0, rel=2e-12, abs=1e-14)
+    assert j_void_out == pytest.approx(-1.0, rel=2e-12, abs=1e-14)
+    assert q_wall == pytest.approx(1.0, rel=2e-12, abs=1e-14)
+    assert q_void == pytest.approx(1.0, rel=2e-12, abs=1e-14)
+    assert j_wall_out + j_void_out == pytest.approx(0.0, rel=2e-12, abs=1e-14)
+    assert q_wall - q_void == pytest.approx(0.0, rel=2e-12, abs=1e-14)
+    np.testing.assert_allclose(backend.flux_jump(state), 0.0, atol=1e-14, rtol=0.0)
 
     wrong_same_outward_sign = wall_outward + void_common_reference
-    assert wrong_same_outward_sign @ state == pytest.approx(2.0)
+    assert wrong_same_outward_sign @ state == pytest.approx(2.0, rel=2e-12, abs=1e-14)
 
 
 def test_single_common_constant_null_mode_is_removed_by_global_normalization() -> None:
@@ -957,10 +963,10 @@ def test_single_common_constant_null_mode_is_removed_by_global_normalization() -
         interval_bound=0.9,
     )
     assert backend.global_mean_constraint_count == 1
-    assert backend.instantaneous_coercivity_lower_bound == pytest.approx(1.0)
+    assert backend.instantaneous_coercivity_lower_bound == pytest.approx(1.0, rel=2e-12, abs=1e-14)
     state = backend.solve_joint(scalar(1.0), scalar(1.0), source_name="null-mode")
     assert backend.global_mean(state.carrier_field.value) == pytest.approx(
-        0.0, abs=1e-14
+        0.0, abs=1e-14, rel=0.0
     )
 
 
@@ -1015,12 +1021,12 @@ def test_two_region_coefficients_evaluate_both_authorized_algebraic_forms() -> N
         - 2.0 * (1.0 - 2.0 * background.f_v.value) * d_theta**2
     )
     expected_b_p = -4.0 * background.f_v.value * (1.0 - background.f_v.value) * d_theta
-    assert coefficients.A_P.value == pytest.approx(expected_a_p)
+    assert coefficients.A_P.value == pytest.approx(expected_a_p, rel=2e-12, abs=1e-14)
     assert coefficients.A_P.value == pytest.approx(
-        coefficients.A_W.value - 3.0 * coefficients.A_Q.value
+        coefficients.A_W.value - 3.0 * coefficients.A_Q.value, rel=2e-12, abs=1e-14
     )
-    assert coefficients.B_P.value == pytest.approx(expected_b_p)
-    assert coefficients.B_P.value == pytest.approx(-3.0 * coefficients.B_Q.value)
+    assert coefficients.B_P.value == pytest.approx(expected_b_p, rel=2e-12, abs=1e-14)
+    assert coefficients.B_P.value == pytest.approx(-3.0 * coefficients.B_Q.value, rel=2e-12, abs=1e-14)
 
 
 def test_regional_bulk_rank_and_algebraic_variables_do_not_add_differential_states() -> None:
@@ -1050,7 +1056,7 @@ def test_d3_variant_firewall_is_unchanged_and_has_no_default() -> None:
 
 def test_phase1e_f_authorization_and_nonobservational_status_tokens() -> None:
     assert transfer.REALIZATION_ID == "H1-1E-F-CLEAN-NONDEGENERATE-TRANSMISSION-V1"
-    assert transfer.FRAMEWORK_STATUS == "COMPATIBLE_IMPORTED_DYNAMICS"
+    assert transfer.FRAMEWORK_STATUS == "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION"
     assert transfer.SCIENTIFIC_STATUS == "CONDITIONALLY_CLOSED"
     assert transfer.OBSERVATIONAL_STATUS == "NON_OBSERVATIONAL"
     assert transfer.FSIGMA8_STATUS == "NOT_FSIGMA8"

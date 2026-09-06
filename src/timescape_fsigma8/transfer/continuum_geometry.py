@@ -27,7 +27,7 @@ BoolArray = NDArray[np.bool_]
 REALIZATION_ID_1E_G = "H1-1E-G-COMOVING-CGI-ELLIPTIC-TRANSMISSION-V1"
 ROLE_1E_G = "CONTINUUM_GEOMETRIC_REALIZATION_OF_1E_F_H1_CONTRACT"
 FRAMEWORK_STATUS_1E_G = (
-    "COMPATIBLE_IMPORTED_DYNAMICS;EXPLICIT_MODEL_EXTENSION"
+    "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION;EXPLICIT_MODEL_EXTENSION"
 )
 SCIENTIFIC_STATUS_1E_G = "CONDITIONALLY_DERIVED_CONTINUUM_REALIZATION"
 IMPLEMENTATION_STATUS_1E_G = "CONDITIONAL_RESEARCH_RUNTIME"
@@ -44,6 +44,10 @@ EXTERNALLY_SUPPLIED_REFERENCE_VOLUME = (
 )
 MORPHOLOGY_NORM_TARGET_METRIC_L2 = "TARGET_METRIC_WEIGHTED_L2"
 PHYSICAL_VOLUME_DIMENSION = 3
+# Float64 determinant/volume consistency, relative to the metric's own scale.
+# This is a numerical contract tolerance, not a physical perturbation limit.
+METRIC_MEASURE_RTOL = 2e-12
+METRIC_MEASURE_ATOL = 0.0
 PHYSICAL_VOLUME_SEMANTICS = "PHYSICAL_TIMESCAPE_THREE_VOLUME_ONLY"
 REDUCED_DIMENSIONAL_MEASURE_ONLY = "REDUCED_DIMENSIONAL_METRIC_MEASURE_ONLY"
 PHYSICAL_NORMALIZATION_COVARIANCE = "PHYSICAL_NORMALIZATION_COVARIANCE"
@@ -151,6 +155,13 @@ class RegionalGeometrySpec:
     ``(Phi_r^* gamma_r)^(-1)``.  Consequently the weak-form tensor density is
     ``K_r=J_r metric_inverse``.  These are Phase 1E-G specification Eqs. in
     sections 7--8 (explicit model extension; no paper equation number).
+
+    Phase 1F-C-R A01 makes the selected reference density explicit:
+    ``dmu_0 = d^d x`` (unit coordinate density), with quadrature cell weights
+    ``prod(dx)``. For ``g=Phi_r^* gamma_r``, ``J=sqrt(det(g))`` and
+    ``J*sqrt(det(metric_inverse))=1`` pointwise. Independent weighted
+    diffusion is outside this Riemannian contract. The determinant check uses
+    relative tolerance 2e-12 and zero absolute tolerance in float64.
     """
 
     region_id: str
@@ -201,9 +212,31 @@ class RegionalGeometrySpec:
             )
         object.__setattr__(self, "metric_inverse", inverse)
         object.__setattr__(self, "metric_volume_ratio", ratio)
+        self.validate_metric_measure()
         object.__setattr__(
             self, "metadata", MappingProxyType(dict(self.metadata))
         )
+
+    def validate_metric_measure(self) -> None:
+        """Revalidate the pointwise A01 relation, including at operator assembly.
+
+        Logarithms avoid determinant/product overflow. The bounds are exactly
+        ``1-rtol <= J/sqrt(det(g)) <= 1+rtol`` with zero absolute tolerance.
+        This is the authorized Riemannian contract, not weighted diffusion.
+        """
+        sign, logdet = np.linalg.slogdet(self.metric_inverse)
+        ratio = self.metric_volume_ratio
+        if np.any(ratio <= 0.0) or not np.all(np.isfinite(ratio)) or np.any(sign <= 0.0):
+            raise ContinuumContractError("pointwise metric/measure data are invalid")
+        log_relative = np.log(ratio) + 0.5 * logdet
+        if not np.all(np.isfinite(log_relative)) or np.any(
+            (log_relative < np.log1p(-METRIC_MEASURE_RTOL))
+            | (log_relative > np.log1p(METRIC_MEASURE_RTOL))
+        ):
+            raise ContinuumContractError(
+                "pointwise metric/measure mismatch: J must equal sqrt(det(g)) "
+                "for unit reference coordinate density"
+            )
 
     @property
     def grid_shape(self) -> tuple[int, ...]:
@@ -279,6 +312,13 @@ class ContinuumCarrierSpec:
         if not np.allclose(weights, weights.flat[0], rtol=0.0, atol=1e-15):
             raise ContinuumContractError(
                 "the structured reference backend currently requires uniform dmu_0 weights"
+            )
+        if not np.allclose(
+            weights, np.prod(self.grid_spacing),
+            rtol=METRIC_MEASURE_RTOL, atol=METRIC_MEASURE_ATOL,
+        ):
+            raise ContinuumContractError(
+                "reference measure requires unit coordinate density: weights=prod(dx)"
             )
         if self.target_geometry.grid_shape != self.grid_shape:
             raise ContinuumContractError("target geometry grid does not match the carrier")

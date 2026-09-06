@@ -6,7 +6,47 @@ cosmological model, based on:
 > M. Galoppo & P. Mourier, *Cosmological perturbations on an averaged
 > background*, JCAP 02 (2026) 066, arXiv:2511.17160.
 
-## Current status: Phase 1D-B — growth pipeline validated
+## Current status: Phase 1F-C-R — Astra independent-audit remediation
+
+The current scientific interpretation is recorded in
+[the successor remediation report](reports/phase1f_c_r_astra_audit_remediation.md)
+and its [machine-readable inventory](reports/phase1f_c_r_astra_audit_remediation_inventory.json).
+Earlier reports and inventories are preserved historical checkpoints; their
+source attributions and physical-compatibility claims are superseded by this
+record where specified. The accepted 1F-C realization and kinematic verdict
+remain unchanged. Phase 1F-D has not begun.
+
+Imported regional dust-FLRW equations are conditional on their regional
+backgrounds. Their physical embedding into the common Timescape spacetime,
+zeroth-order dust/wall background coincidence, all-time transfer/constitutive
+compatibility, and a physical Timescape trajectory remain **NOT_DERIVED**.
+The naive W09 regional common-time EdS scale interpreted as exact proper-time
+flat dust using the W09 wall lapse is **REJECTED_UNSUPPORTED**.
+Manufactured H1 jets establish algebraic compatibility only.
+
+Remaining closures include regional/common background and source embedding;
+all-time transfer/constitutive compatibility; H1-to-wall/dressed spatial and
+density maps; perturbative wall lapse; local scale/Hubble and perturbed
+geometry; initial, boundary, kernel and morphology data; and future
+lightcone, tracer and statistical inputs. Lapse and pullback callbacks are
+not an exhaustive irreducible-input theorem. No unique Timescape prediction
+or observational, RSD, sigma8 or fsigma8 authorization is granted.
+
+Ranks 4, 5 and the optional +1=6 count differential field species, not freely
+selectable admissible initial functions after constraints and supplied
+histories. Conditional forward uniqueness assumes complete admissible data;
+it is not a trajectory-existence result. Finite-mode barotropic ODE uniqueness
+does not establish continuum stability: the negative corrected sound speed
+requires a separate validity-scale/closure analysis before unrestricted
+high-wavenumber use. No such research is introduced here.
+
+Phase 1F-C acceleration arrays explicitly distinguish coordinate covectors,
+coordinate contravariant components and physical orthonormal components in
+the same inverse-metric Cholesky frame as 1F-B. Optional C_W reconstruction
+requires a caller-declared linear-regime limit and positive `1+2C_W` at every
+accepted output time. These are validity gates, not new scientific dynamics.
+
+The earlier implementation milestones below remain useful provenance:
 
 - **Phase 1A (done):** audit + clean-room re-execution of the authors'
   `ACPT_Timescape.ipynb` → `reports/upstream_reproducibility.md`.
@@ -29,7 +69,7 @@ cosmological model, based on:
   `reports/phase1c_b1_clean_systems_validation.md`.
 - **Phase 1C-B2 (done):** independent typed implementation and numerical
   validation of the **barotropic** system (Eqs. 4.13–4.17), exposing **both**
-  unresolved D3 branches (`printed_4_15`, `derived_4_10`), both tilt
+  explicit D3 branches (`printed_4_15`, `derived_4_10`), both tilt
   variables, and the IC-rate/epoch/wavenumber interpretations as mandatory
   explicit choices with no defaults; upstream Fig.-3 trajectories reproduced
   through an isolated forensic harness (the D2-corrupted sound speed never
@@ -48,9 +88,10 @@ cosmological model, based on:
   zero crossings with maximal piecewise validity intervals, and an
   optional solver-harmonic δ_m coefficient mapping →
   `reports/phase1d_b_growth_pipeline_validation.md`.
-- **Not implemented:** power spectra, transfer functions, σ_R, σ8,
-  fσ8 (including any "fσ8-shaped" diagnostic), RSD/Kaiser mappings,
-  galaxy bias, likelihoods, or fitting.
+- **Later conditional checkpoints:** anchored density-growth Candidate A,
+  H1 regional transfer and spectra, scalar dust-to-wall boost, and optional
+  local wall metric-trace reconstruction. These do not supply observational
+  power spectra, σ_R, σ8, fσ8, RSD/Kaiser, bias, likelihoods or fitting.
 
 > **Read this before using the growth layer:** `Delta_d` is the CGI
 > Laplacian density scalar, **not** the ordinary local density contrast;
@@ -58,8 +99,8 @@ cosmological model, based on:
 > growth and logarithmic rates are invariant under the fixed harmonic
 > conversion. Growth rates are **piecewise** for trajectories with
 > amplitude crossings (the barotropic rate has poles inside the observable
-> window). Both D3 branches remain unresolved and are always reported side
-> by side. No observational fσ8, σ8, spectrum, or RSD quantity has been
+> window). D3 is **RESOLVED_DERIVED_4_10**; the printed branch remains an
+> explicit forensic alternative. No observational fσ8, σ8, spectrum, or RSD quantity has been
 > implemented. D2 remains excluded from the scientific package.
 
 ## Layout

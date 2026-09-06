@@ -1,5 +1,9 @@
 """Phase 1F-A regional/carrier generalized spectral tests."""
 
+# A06: absolute budgets use rtol=0; relative budgets use atol=0.
+# Previously implicit algebraic comparisons use rtol=2e-12, atol=1e-14
+# in the fixture units (roundoff allowance); explicit convergence budgets remain.
+
 from __future__ import annotations
 
 from dataclasses import fields
@@ -41,7 +45,7 @@ def test_t14_regional_and_carrier_generalized_eigenpair_residuals() -> None:
     assert carrier.basis_normalization_residual <= realization.numerics.basis_normalization_tolerance
     np.testing.assert_allclose(
         regional.physical_wavenumbers,
-        np.sqrt(regional.generalized_eigenvalues) / 0.8,
+        np.sqrt(regional.generalized_eigenvalues) / 0.8, rtol=2e-12, atol=1e-14,
     )
 
 

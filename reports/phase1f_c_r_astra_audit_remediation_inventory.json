@@ -1,0 +1,533 @@
+{
+  "accepted_realization": "H1-1F-C-CLOCK-ANCHORED-SCALAR-NORMAL-KINEMATIC-GEOMETRY-V1",
+  "accepted_scientific_verdict": "PARTIAL_GEOMETRIC_CLOSURE_DERIVED_NEW_PERTURBED_GEOMETRIC_DYNAMICS_REQUIRED",
+  "audit_checkpoint": "63d2104575c6a249e5177e47f4a354b660e70e32",
+  "audit_counts": {
+    "D3_VERDICT": "RESOLVED_DERIVED_4_10",
+    "HIDDEN_CIRCULARITY_FOUND": "NO",
+    "LOAD_BEARING_SCIENTIFIC_ERRORS": 0,
+    "S2_CORRECTIONS": 6,
+    "S3_CLASSIFICATION_CORRECTIONS": 1
+  },
+  "audit_global_verdict": "ACCEPT_WITH_TARGETED_CORRECTIONS",
+  "branch": "phase-1f-c-r-astra-audit-remediation",
+  "changed_files": [
+    "README.md",
+    "reports/phase1f_c_r_astra_audit_remediation.md",
+    "reports/phase1f_c_r_astra_audit_remediation_inventory.json",
+    "scripts/_phase1c_b2_forensic.py",
+    "scripts/audit_numerical_tolerances.py",
+    "scripts/make_barotropic_fig3.py",
+    "scripts/validate_phase1f_c_r_astra_remediation.py",
+    "src/timescape_fsigma8/components.py",
+    "src/timescape_fsigma8/growth/scenarios.py",
+    "src/timescape_fsigma8/perturbations/__init__.py",
+    "src/timescape_fsigma8/perturbations/barotropic.py",
+    "src/timescape_fsigma8/perturbations/barotropic_solver.py",
+    "src/timescape_fsigma8/perturbations/initial_conditions.py",
+    "src/timescape_fsigma8/phase1f_b/__init__.py",
+    "src/timescape_fsigma8/phase1f_b/dynamics.py",
+    "src/timescape_fsigma8/phase1f_b/models.py",
+    "src/timescape_fsigma8/phase1f_c/__init__.py",
+    "src/timescape_fsigma8/phase1f_c/geometry.py",
+    "src/timescape_fsigma8/phase1f_c/models.py",
+    "src/timescape_fsigma8/scientific_status.py",
+    "src/timescape_fsigma8/transfer/__init__.py",
+    "src/timescape_fsigma8/transfer/continuum_backend.py",
+    "src/timescape_fsigma8/transfer/continuum_geometry.py",
+    "src/timescape_fsigma8/transfer/h1_realization.py",
+    "tests/test_background_identities.py",
+    "tests/test_barotropic_forensics.py",
+    "tests/test_barotropic_systems.py",
+    "tests/test_clean_perturbation_systems.py",
+    "tests/test_domain_validation.py",
+    "tests/test_epochs.py",
+    "tests/test_growth_convergence_purity.py",
+    "tests/test_growth_crossings.py",
+    "tests/test_growth_histories_rates.py",
+    "tests/test_growth_scenarios.py",
+    "tests/test_limits_and_reference_values.py",
+    "tests/test_perturbation_initial_conditions.py",
+    "tests/test_phase1e_f_h1_transfer.py",
+    "tests/test_phase1e_g_continuum_h1.py",
+    "tests/test_phase1f_a_boost.py",
+    "tests/test_phase1f_a_density.py",
+    "tests/test_phase1f_a_dressed.py",
+    "tests/test_phase1f_a_expansion.py",
+    "tests/test_phase1f_a_spectral.py",
+    "tests/test_phase1f_b_dust_wall_boost_dynamics.py",
+    "tests/test_phase1f_c_r_astra_remediation.py",
+    "tests/test_phase1f_c_wall_common_geometry.py",
+    "tests/test_refactor_equivalence.py",
+    "tests/test_units_and_presets.py",
+    "tests/test_vs_upstream_oracle.py",
+    "tests/test_wall_observables.py"
+  ],
+  "current_scientific_status": {
+    "ALL_TIME_TRANSFER_CONSTITUTIVE_COMPATIBILITY": "NOT_DERIVED",
+    "CONDITIONAL_FORWARD_UNIQUENESS_SCOPE": "GIVEN_COMPLETE_ADMISSIBLE_CLOSURE_DATA_NOT_EXISTENCE",
+    "D3_VERDICT": "RESOLVED_DERIVED_4_10",
+    "DIFFERENTIAL_RANK_MEANING": "FIELD_SPECIES_COUNTS_NOT_FREE_ADMISSIBLE_INITIAL_FUNCTIONS",
+    "FSIGMA8_AUTHORIZATION": "NOT_GRANTED",
+    "MANUFACTURED_H1_TRAJECTORIES": "ALGEBRAIC_VALIDATION_ONLY",
+    "NAIVE_W09_WALL_CLOCK_AS_REGIONAL_PROPER_DUST_FLRW_CLOCK": "REJECTED_UNSUPPORTED",
+    "OBSERVATIONAL_AUTHORIZATION": "NOT_GRANTED",
+    "PHYSICAL_TIMESCAPE_TRAJECTORY_EXISTENCE": "NOT_DERIVED",
+    "REGIONAL_COMMON_TIMESCAPE_BACKGROUND_EMBEDDING": "NOT_DERIVED",
+    "REGIONAL_DUST_FLRW_EQUATIONS": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+    "REMAINING_SCIENTIFIC_CLOSURES": [
+      "REGIONAL_COMMON_BACKGROUND_AND_SOURCE_EMBEDDING",
+      "ALL_TIME_TRANSFER_CONSTITUTIVE_COMPATIBILITY",
+      "H1_TO_WALL_DRESSED_SPATIAL_REALIZATION_AND_DENSITY_CODOMAIN_MAP",
+      "PERTURBATIVE_WALL_LAPSE_NU_W",
+      "LOCAL_SCALE_HUBBLE_MAPPING_AND_PERTURBED_GEOMETRIC_DYNAMICS",
+      "INITIAL_BOUNDARY_KERNEL_AND_MORPHOLOGY_DATA",
+      "FUTURE_LIGHTCONE_TRACER_STATISTICAL_AND_SURVEY_INPUTS"
+    ],
+    "RSD_AUTHORIZATION": "NOT_GRANTED",
+    "SIGMA8_AUTHORIZATION": "NOT_GRANTED",
+    "UNIQUE_TIMESCAPE_PREDICTION": "NOT_GRANTED",
+    "UNRESTRICTED_BAROTROPIC_CONTINUUM_STABILITY": "NOT_DERIVED",
+    "ZEROTH_ORDER_DUST_WALL_BACKGROUND_COINCIDENCE": "REQUIRED_FOR_FIRST_ORDER_BOOST",
+    "ZEROTH_ORDER_DUST_WALL_BACKGROUND_COINCIDENCE_STATUS": "NOT_DERIVED"
+  },
+  "final_validation": {
+    "ast_checks": "PASS",
+    "changed_file_inventory_count": 50,
+    "diff_checks": "UNSTAGED_AND_CACHED_PASS",
+    "equation_preservation": "PASS",
+    "explicit_comparisons": {
+      "scripts": 2,
+      "src": 11,
+      "tests": 359
+    },
+    "failures": 0,
+    "frozen_tags_verified": 27,
+    "historical_reports_unchanged": 52,
+    "json_roundtrips": 15,
+    "package_imports": 46,
+    "producer_determinism_sha256": {
+      "validate_phase1f_a_h1_closure": "dc1a379737a76094daf61906f9b272eace8da4d127007ceeb2392be0753dfebc",
+      "validate_phase1f_b_dust_wall_boost_dynamics": "6dbd1758ceda7560c9f683516cd0cfa3b3334e6f9a2cf99b4300629056b157fa"
+    },
+    "python": {
+      "3.11.9": {
+        "full": {
+          "passed": 650,
+          "seconds": 67.59
+        },
+        "targeted": {
+          "passed": 589,
+          "seconds": 67.15
+        }
+      },
+      "3.14.3": {
+        "full": {
+          "passed": 650,
+          "seconds": 69.06
+        },
+        "targeted": {
+          "passed": 589,
+          "seconds": 62.49
+        }
+      }
+    },
+    "skips": 0,
+    "status": "PASS",
+    "warnings": 0,
+    "xfails": 0
+  },
+  "finding_dispositions": {
+    "A01": {
+      "classification_after": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION_FOR_CONSISTENT_INPUTS;INCONSISTENT_INPUTS_REJECTED",
+      "classification_before": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION_WITH_INCOMPLETE_INPUT_VALIDATION",
+      "correction": "Unit coordinate density and pointwise determinant relation enforced at geometry construction and operator assembly.",
+      "downstream": "All consumed accepted fixtures pass. Invalid J/metric combinations are rejected; no valid scientific fixture or physical normalization changed.",
+      "files": [
+        "src/timescape_fsigma8/transfer/continuum_geometry.py",
+        "src/timescape_fsigma8/transfer/continuum_backend.py",
+        "tests/test_phase1e_g_continuum_h1.py"
+      ],
+      "finding": "Independent positive J and SPD inverse metric accepted despite pointwise inconsistency.",
+      "tests": [
+        "test_a01_mean_preserving_inconsistent_measure_rejected",
+        "test_a01_conformal_determinant_and_normalization",
+        "test_a01_preassembly_metric_measure_tampering_rejected"
+      ]
+    },
+    "A02": {
+      "classification_after": "DERIVED_FROM_GENERIC_GR;COMPONENT_REALIZATION_DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "classification_before": "DERIVED_FROM_GENERIC_GR_WITH_AMBIGUOUS_COMPONENT_ARRAY",
+      "correction": "Three explicit component representations; required coordinate-gradient semantics and SPD reference metric; shared inverse-metric Cholesky frame with Phase 1F-B.",
+      "downstream": "Consumers migrate wall_acceleration_covector to wall_acceleration_orthonormal and supply metric/gradient metadata; scalar boost and C equations preserved.",
+      "files": [
+        "src/timescape_fsigma8/components.py",
+        "src/timescape_fsigma8/phase1f_b/__init__.py",
+        "src/timescape_fsigma8/phase1f_b/dynamics.py",
+        "src/timescape_fsigma8/phase1f_b/models.py",
+        "src/timescape_fsigma8/phase1f_c/__init__.py",
+        "src/timescape_fsigma8/phase1f_c/geometry.py",
+        "src/timescape_fsigma8/phase1f_c/models.py"
+      ],
+      "finding": "a_W^-1 array incorrectly named as a coordinate covector.",
+      "tests": [
+        "test_a02_nontrivial_metric_coordinate_derivative_and_frame",
+        "test_a02_nondiagonal_frame_and_metric_contraction"
+      ]
+    },
+    "A03": {
+      "classification_after": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION_WITH_EXPLICIT_NUMERICAL_MODEL_VALIDITY_CRITERION",
+      "classification_before": "CONDITIONAL_FORMULA_WITH_INCOMPLETE_VALIDITY_GATES",
+      "correction": "Strict 1+2C>0 plus mandatory caller-declared 0<linear_regime_limit<1 and abs(C)<=limit, initially and at every accepted output.",
+      "downstream": "Only optional reconstruction requires the new limit; driver-only behavior and evolution equation preserved.",
+      "files": [
+        "src/timescape_fsigma8/phase1f_c/models.py",
+        "src/timescape_fsigma8/phase1f_c/geometry.py",
+        "tests/test_phase1f_c_wall_common_geometry.py"
+      ],
+      "finding": "Optional C fields can violate positivity and first-order validity.",
+      "tests": [
+        "test_a03_alternating_unit_and_positivity_boundary_rejected",
+        "test_a03_long_time_accumulation_rejected_driver_unchanged",
+        "test_a03_small_trace_independent_time_integral_converges"
+      ]
+    },
+    "A04": {
+      "classification_after": "DERIVED_FROM_GENERIC_GR;SELECTED_WALL_APPLICATION_CONDITIONAL;PREVIOUS_SOURCE_DOES_NOT_SUPPORT_CLAIM",
+      "classification_before": "GENERIC_GR_IDENTITY_WITH_FALSE_EXACT_SOURCE_SUPPORT",
+      "correction": "Primary PDF visually verified; explicit normalized-boost, divergence and acceleration derivation replaces false attribution.",
+      "downstream": "Equations and numerical signs retained; historical reports and inventories superseded for current source support, not rewritten.",
+      "files": [
+        "src/timescape_fsigma8/phase1f_b/dynamics.py",
+        "src/timescape_fsigma8/phase1f_b/models.py",
+        "src/timescape_fsigma8/phase1f_c/geometry.py",
+        "tests/test_phase1f_b_dust_wall_boost_dynamics.py",
+        "tests/test_phase1f_c_wall_common_geometry.py"
+      ],
+      "finding": "BDE (14)-(16) do not support the claimed expansion/acceleration transformation.",
+      "tests": [
+        "test_source_provenance_metadata_not_mathematical_proof",
+        "test_a04_citation_regression_and_a07_live_classification"
+      ]
+    },
+    "A05": {
+      "classification_after": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION;IC_AMPLITUDE_AND_TRANSFER_EXTERNAL_CLOSURE_INPUT",
+      "classification_before": "CONDITIONAL_IC_FORMULA_WITH_FALSE_LITERAL_ATTRIBUTION",
+      "correction": "Precise discrepancy and independent reduction-of-order derivation documented; executable implementation preserved.",
+      "downstream": "No changed IC values, qplus arithmetic, derivative recipe or rate conversion.",
+      "files": [
+        "src/timescape_fsigma8/perturbations/initial_conditions.py",
+        "tests/test_perturbation_initial_conditions.py"
+      ],
+      "finding": "qplus is not literally printed Short-Coles (11)-(12).",
+      "tests": [
+        "test_a05_qplus_independent_reduction_of_order",
+        "test_a05_early_normalization_and_dust_limit"
+      ]
+    },
+    "A06": {
+      "classification_after": "EXPLICIT_NUMERICAL_TOLERANCE_SEMANTICS",
+      "classification_before": "NUMERICAL_GUARANTEE_PARTLY_IMPLICIT",
+      "correction": "309 existing comparisons made explicit; AST gate includes aliases and all source/script/test comparisons.",
+      "downstream": "No tolerance loosened to regain a pass; stricter full 617-test run found no new numerical discrepancy.",
+      "files": [
+        "tests/test_background_identities.py",
+        "tests/test_barotropic_forensics.py",
+        "tests/test_barotropic_systems.py",
+        "tests/test_clean_perturbation_systems.py",
+        "tests/test_domain_validation.py",
+        "tests/test_epochs.py",
+        "tests/test_growth_convergence_purity.py",
+        "tests/test_growth_crossings.py",
+        "tests/test_growth_histories_rates.py",
+        "tests/test_growth_scenarios.py",
+        "tests/test_limits_and_reference_values.py",
+        "tests/test_perturbation_initial_conditions.py",
+        "tests/test_phase1e_f_h1_transfer.py",
+        "tests/test_phase1e_g_continuum_h1.py",
+        "tests/test_phase1f_a_boost.py",
+        "tests/test_phase1f_a_density.py",
+        "tests/test_phase1f_a_dressed.py",
+        "tests/test_phase1f_a_expansion.py",
+        "tests/test_phase1f_a_spectral.py",
+        "tests/test_phase1f_b_dust_wall_boost_dynamics.py",
+        "tests/test_phase1f_c_r_astra_remediation.py",
+        "tests/test_phase1f_c_wall_common_geometry.py",
+        "tests/test_refactor_equivalence.py",
+        "tests/test_units_and_presets.py",
+        "tests/test_vs_upstream_oracle.py",
+        "tests/test_wall_observables.py",
+        "scripts/audit_numerical_tolerances.py"
+      ],
+      "finding": "Load-bearing comparisons omitted relative or absolute tolerance semantics.",
+      "tests": [
+        "test_a06_no_implicit_scientific_test_comparison_tolerances",
+        "complete suites on both stacks"
+      ]
+    },
+    "A07": {
+      "classification_after": "REGIONAL_EQUATIONS_CONDITIONAL;BACKGROUND_EMBEDDING_NOT_DERIVED;NAIVE_W09_CLOCK_IDENTIFICATION_REJECTED_UNSUPPORTED",
+      "classification_before": "COMPATIBLE_IMPORTED_DYNAMICS;OVERSTATED_PHYSICAL_COMPATIBILITY",
+      "correction": "Current exported ontology qualifies regional equations and withdraws unproved embedding/trajectory and exhaustive lapse-plus-pullback claims.",
+      "downstream": "No embedding solved or new dynamics introduced. Manufactured jets retain only algebraic-validation meaning.",
+      "files": [
+        "README.md",
+        "src/timescape_fsigma8/scientific_status.py",
+        "src/timescape_fsigma8/transfer/h1_realization.py",
+        "src/timescape_fsigma8/transfer/continuum_geometry.py",
+        "src/timescape_fsigma8/transfer/__init__.py",
+        "src/timescape_fsigma8/phase1f_b/models.py",
+        "src/timescape_fsigma8/phase1f_b/__init__.py",
+        "src/timescape_fsigma8/phase1f_c/models.py",
+        "src/timescape_fsigma8/phase1f_c/__init__.py",
+        "tests/test_phase1e_f_h1_transfer.py",
+        "tests/test_phase1e_g_continuum_h1.py"
+      ],
+      "finding": "Physical regional/common Timescape embedding, all-time admissibility and closure completeness overstated.",
+      "tests": [
+        "test_a04_citation_regression_and_a07_live_classification"
+      ]
+    }
+  },
+  "frozen_tags": {
+    "refs/tags/phase-1b-background-v1": {
+      "peeled_commit": "fe8b00fbe8a6bfcd71fa6d7ff5fa4b7cc6b50be4",
+      "tag_object": "f678010a5a8584495a81402c17a6b529291de58c"
+    },
+    "refs/tags/phase-1c-a-equation-audit-v1": {
+      "peeled_commit": "5d9aa47832c8f02a26c2353d0736531d34dbc59b",
+      "tag_object": "1bb5679e85659c40b091476fe5a63bffdd8cf2ff"
+    },
+    "refs/tags/phase-1c-b1-clean-systems-v1": {
+      "peeled_commit": "18b666648649ba1004f7f1219693bab8bc83bc7d",
+      "tag_object": "b0fed30d513b67ca9f53b84a79f47be2ad024846"
+    },
+    "refs/tags/phase-1c-b2-barotropic-v1": {
+      "peeled_commit": "9ec3bcc36bd9d7cc5defe4305c63d44d201a9971",
+      "tag_object": "cf90bcc8377632252dd8f0732d6d36c939e5bf7b"
+    },
+    "refs/tags/phase-1d-a-growth-observable-audit-v1": {
+      "peeled_commit": "878a97e83357025c78e2fee7bf458c3b22a207d3",
+      "tag_object": "ff6d27a70fdc6743788523ef1e02f9caf6a66daf"
+    },
+    "refs/tags/phase-1d-b-growth-pipeline-v1": {
+      "peeled_commit": "93d956d0020f0edec34a44cd9d19f30c085aecc7",
+      "tag_object": "7713cb348890416c1e864afabc1109081291d88e"
+    },
+    "refs/tags/phase-1d-c-observable-closure-audit-v1": {
+      "peeled_commit": "81148eb6be8add842b538e2a21c5cf9782f9e49e",
+      "tag_object": "36edbdd33241e0e125e73fe7e7344ae6adc3e880"
+    },
+    "refs/tags/phase-1d-d-anchored-density-growth-v1": {
+      "peeled_commit": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+      "tag_object": "d42519aff3f6028c8d71eb7ef478b79201e422c3"
+    },
+    "refs/tags/phase-1d-d-t-d3-frame-mapping-v1": {
+      "peeled_commit": "f960a9054ae9db3a7c378557ac3a2938c5ff7ef0",
+      "tag_object": "dfa48eef28c19f3e948ffe1e84c732464f265775"
+    },
+    "refs/tags/phase-1e-a-dressed-observable-bridge-audit-v1": {
+      "peeled_commit": "f4044cbe10a7fbd59d1b14131e2d2e31100984ef",
+      "tag_object": "bdcbaaca20aed707d43944fc2cd5096b636243b1"
+    },
+    "refs/tags/phase-1e-b-dressed-lightcone-velocity-derivation-v1": {
+      "peeled_commit": "8634f14a35c22983413672075fa7f37f03fd663d",
+      "tag_object": "a08230b0ab275993d9e8645d55532a1336c5f637"
+    },
+    "refs/tags/phase-1e-c-perturbed-dressed-geometry-transfer-closure-v1": {
+      "peeled_commit": "fcbf9c29a28c586044150e6910e1637bc3f6975b",
+      "tag_object": "0a6dbe6ac27991d6119a4ebc4e84e4a005f3d988"
+    },
+    "refs/tags/phase-1e-d-regional-matching-dynamics-v1": {
+      "peeled_commit": "2fd3ed2006821bc162fb740bd773f2d0b6e5e0b4",
+      "tag_object": "00a9d7e44418496b71ad95cd19390ba79bb3448d"
+    },
+    "refs/tags/phase-1e-e-transfer-realization-selection-v1": {
+      "peeled_commit": "1f2800c9685b7ab4c2bbbef3e93d1767073cc783",
+      "tag_object": "602178e639e3a750a719754fd15b6e61d0850ca8"
+    },
+    "refs/tags/phase-1e-f-h1-transfer-realization-v1": {
+      "peeled_commit": "0ad10f45f2e2119a345271449de85aa42469ef49",
+      "tag_object": "50f9b3b8ae84169b9a0109c307d4ba2277ef2cd3"
+    },
+    "refs/tags/phase-1e-f-h1-transfer-realization-v2": {
+      "peeled_commit": "1e0a1772aa01ef312a9c3cae6d3e65c8b4f9cbdd",
+      "tag_object": "58238a9aeb62033d3bacf5f7e737dea024adb669"
+    },
+    "refs/tags/phase-1e-g-continuum-h1-realization-v1": {
+      "peeled_commit": "75d4f30ae7c63c05e1f0998f5e7e62f4ed3728f1",
+      "tag_object": "064963b54a2e7eac242bf5296b83f14b0821a4bb"
+    },
+    "refs/tags/phase-1e-g-continuum-h1-realization-v2": {
+      "peeled_commit": "8fa4ab8fe28c3b4a5598b13b3289f65b83a7f1ca",
+      "tag_object": "668c73e9e3ef864bb20ee61783a4088ca2acbe73"
+    },
+    "refs/tags/phase-1e-g-continuum-h1-realization-v3": {
+      "peeled_commit": "94c5f8349849628f1533ab69f56d626e16cb4910",
+      "tag_object": "7f7b1a72770cb2efbe90976c2ac7b17df885a331"
+    },
+    "refs/tags/phase-1e-g-continuum-h1-realization-v4": {
+      "peeled_commit": "d262099ce3fe977af628ff233abed411e70a3c85",
+      "tag_object": "97c66c812fcbca6c7612fb220970a60cb340f9d4"
+    },
+    "refs/tags/phase-1f-a-h1-broken-density-spectral-boost-v1": {
+      "peeled_commit": "a56fa88b64062761fefc193d7061d1d12ba2dedd",
+      "tag_object": "c9cd0c5519052d08cf607e725b45dbf8a0cd8a9b"
+    },
+    "refs/tags/phase-1f-a-h1-broken-density-spectral-boost-v2": {
+      "peeled_commit": "87af7976b82b0b38e2c3e77dfc9458e664034c5d",
+      "tag_object": "e2ccb27a4d7e8f60c0c6b0536bde01769af397e9"
+    },
+    "refs/tags/phase-1f-b-dust-wall-boost-dynamics-v1": {
+      "peeled_commit": "27fd65fd2a05c5b990508d948703897f433b566e",
+      "tag_object": "d784074049148fad65632fe91848eada8923bb7a"
+    },
+    "refs/tags/phase-1f-b-dust-wall-boost-dynamics-v2": {
+      "peeled_commit": "16440e1a682c8d62d1e1b1d15fe8fad9290fa66a",
+      "tag_object": "bd1facf1fce246ef6fb42d02f03c5da6c2eef3a0"
+    },
+    "refs/tags/phase-1f-b-dust-wall-boost-dynamics-v3": {
+      "peeled_commit": "d2f150222cb08565aa9d0822747250309d8aaa67",
+      "tag_object": "61dc9cf7602908b563158554d1b991a8d7059ab7"
+    },
+    "refs/tags/phase-1f-c-wall-common-spacetime-geometry-v1": {
+      "peeled_commit": "6a633903fe7355a9892ed61abefece5a7b6f2855",
+      "tag_object": "ef3b180e080e299f26316f9f5a30982776378e1e"
+    },
+    "refs/tags/phase-1f-c-wall-common-spacetime-geometry-v2": {
+      "peeled_commit": "63d2104575c6a249e5177e47f4a354b660e70e32",
+      "tag_object": "0afeb8fffac66dc182f6edd5885936d6e2779eaf"
+    }
+  },
+  "independent_evidence": {
+    "accepted_scientific_fixture_changed": "NONE",
+    "mean_preserving_J_adversary": "REJECTED_WALL_VOID_TARGET",
+    "metric_trace_analytic_integral_convergence": "SECOND_ORDER_9_17_33_POINTS",
+    "metric_trace_small_case_max_abs": 0.03661067708333335,
+    "metric_trace_small_case_minimum_metric_factor": 0.9267786458333334,
+    "qplus_python_3_14_max_relative_error": 8.67361738331343e-16,
+    "qplus_quadrature_cases": 18
+  },
+  "next_phase_boundary": {
+    "commit_message": "Remediate independent Astra scientific audit findings",
+    "embedding_problem_solved": false,
+    "local_annotated_tag": "phase-1f-c-r-astra-audit-remediation-v1",
+    "main_integration": false,
+    "observational_development": false,
+    "phase_1f_d_started": false,
+    "remote_changes": false
+  },
+  "nonblocking": {
+    "A08": "FIELD_SPECIES_COUNTS_NOT_FREE_ADMISSIBLE_INITIAL_FUNCTIONS",
+    "A09": "CURRENT_D3_WORDING_CORRECTED_HISTORICAL_REPORTS_PRESERVED",
+    "A10": "NOT_ATTEMPTED",
+    "A13": "FINITE_MODE_BAROTROPIC_CONTINUUM_STABILITY_CAVEAT_RETAINED"
+  },
+  "preflight": {
+    "baseline": {
+      "3.11.9": {
+        "passed": 617,
+        "seconds": 70.54
+      },
+      "3.14.3": {
+        "passed": 617,
+        "seconds": 69.06
+      }
+    },
+    "extra_untracked_audit": "USER_AUTHORIZED_PRESERVE_UNCHANGED",
+    "failures": 0,
+    "fetch": "PASS",
+    "head_main_origin_main": "EXACT_EXPECTED_CHECKPOINT",
+    "skips": 0,
+    "tracked_tree_and_index": "CLEAN",
+    "warnings": 0,
+    "xfails": 0
+  },
+  "preserved_equations": [
+    "tracker background; D1 and D2 corrections",
+    "D3 RESOLVED_DERIVED_4_10; clean perturbation systems",
+    "D_W^2 psi_dw = deltaTheta_d,w - deltaTheta_W",
+    "partial_t psi_dw = -alpha_W Q0 nu_W",
+    "deltaTheta_W = (3/alpha_W)[partial_t C_W - H_W^(t) nu_W]",
+    "partial_t C_W = H_W^(t) nu_W + (alpha_W/3)[deltaTheta_d,w - D_W^2 psi_dw]",
+    "D_W^2 phi = a_W^-2 Delta_reference phi",
+    "h_ij = a_W^2 (1+2 C_W) gamma_ij in selected first-order sector",
+    "ADM sign; scalar boost sign; proper/common-time conversion",
+    "regional field-species rank 4; Phase 1F-B rank 5; optional reconstruction +1"
+  ],
+  "preserved_local_files_sha256": {
+    ".reference/Linear-Perturbations-in-averaged-cosmological-models/ACPT_Timescape.ipynb": "86d2534db9e9b3169835e4ce223ee8f3bff6d03b47e5677d3937fed4adafe55a",
+    "astra/INDEPENDENT_SCIENTIFIC_AUDIT.md": "4b8f8b3959ddce4510054bd314b8af99fd80e5668e5adf51cec1629c56354518",
+    "reports/phase1f_b_dust_wall_boost_dynamics_v3_final_audit.md": "08c30893e8df88818760a91d85c9839770d7234f263c226446b634fddc216930",
+    "reports/phase1f_c_wall_common_geometry_adversarial_audit.md": "345417fdecf5ce686988a128a04a788263a5a51c2831f3cfd3c0511dfd15df3c"
+  },
+  "required_status": {
+    "A01_METRIC_MEASURE_CONTRACT": "CORRECTED",
+    "A02_ACCELERATION_COMPONENT_ONTOLOGY": "CORRECTED",
+    "A03_OPTIONAL_METRIC_VALIDITY_DOMAIN": "CORRECTED",
+    "A04_BDE_ATTRIBUTION": "CORRECTED",
+    "A05_SHORT_COLES_ATTRIBUTION": "CORRECTED",
+    "A06_NUMERICAL_TOLERANCE_SEMANTICS": "EXPLICIT",
+    "A07_BACKGROUND_EMBEDDING_CLASSIFICATION": "CORRECTED",
+    "ALL_TIME_TRANSFER_CONSTITUTIVE_COMPATIBILITY": "NOT_DERIVED",
+    "ASTRA_LOAD_BEARING_SCIENTIFIC_ERRORS": 0,
+    "FSIGMA8_AUTHORIZATION": "NOT_GRANTED",
+    "INTEGRATION_READINESS": "READY_FOR_INDEPENDENT_POST_REMEDIATION_AUDIT",
+    "LOAD_BEARING_SCIENTIFIC_EQUATIONS_CHANGED": "NO",
+    "NEXT_SCIENTIFIC_PHASE": "1F-D_BACKGROUND_EMBEDDING_AND_CONSTRAINT_CLOSURE_FEASIBILITY",
+    "OBSERVATIONAL_AUTHORIZATION": "NOT_GRANTED",
+    "PHASE": "1F-C-R",
+    "PURPOSE": "ASTRA_INDEPENDENT_AUDIT_REMEDIATION",
+    "REGIONAL_COMMON_TIMESCAPE_BACKGROUND_EMBEDDING": "NOT_DERIVED",
+    "SCIENTIFIC_REALIZATION_CHANGED": "NO",
+    "UNIQUE_TIMESCAPE_PREDICTION": "NOT_GRANTED"
+  },
+  "schema_version": 1,
+  "source_corrections": {
+    "BDE_14_16_PREVIOUS_ATTRIBUTION": "SOURCE_DOES_NOT_SUPPORT_CLAIM",
+    "FORMULA_STATUS": "INDEPENDENTLY_DERIVED_AND_RETAINED",
+    "QPLUS_IMPLEMENTATION": "INDEPENDENTLY_VERIFIED_CORRECT_FOR_SELECTED_FLAT_DUST_LAMBDA_IC_MODEL",
+    "SHORT_COLES_LITERAL_ATTRIBUTION": "SOURCE_DOES_NOT_SUPPORT_CLAIM",
+    "historical_attributions_superseded": [
+      "reports/phase1f_b_dust_wall_boost_dynamics_validation.md",
+      "reports/phase1f_b_dust_wall_boost_dynamics_inventory.json",
+      "reports/phase1f_c_wall_common_geometry_validation.md",
+      "reports/phase1f_c_wall_common_geometry_inventory.json",
+      "reports/phase1c_b1_clean_systems_validation.md",
+      "reports/phase1c_equation_inventory.json"
+    ],
+    "historical_policy": "ALL_EARLIER_REPORTS_AND_INVENTORIES_RETAINED_UNCHANGED;THIS_RECORD_IS_CURRENT_SUCCESSOR",
+    "primary_pdf_sha256": {
+      "BDE": "eaa273fa5982689cd55eaba7530103e8e9d77199d4b34d3d173c1e9201075b6c",
+      "SHORT_COLES_V2": "d20f3436170ffbd2280370ccb51d8dda09eca85c68d3b67ae2bf0810696d3e18"
+    }
+  },
+  "title": "Phase 1F-C-R Astra independent-audit remediation",
+  "tolerance_audit": {
+    "categories": {
+      "absolute_budget_add_zero_relative": 119,
+      "adversarial_separation_preserve_former_threshold": 1,
+      "algebraic_budget_relative_2e_minus12_absolute_1e_minus14": 90,
+      "exact_zero_endpoint": 1,
+      "relative_budget_add_zero_absolute": 98
+    },
+    "comparisons_made_explicit": 309,
+    "existing_comparisons": 347,
+    "existing_test_files_changed": 25,
+    "loosened_to_regain_passing_tests": "NO",
+    "metric_measure": {
+      "atol": 0,
+      "reference_coordinate_density": 1,
+      "rtol": 2e-12
+    },
+    "new_numerical_defect_exposed": "NO",
+    "quadrature": {
+      "comparison_atol": 0,
+      "comparison_rtol": 3e-12,
+      "epsabs": 2e-14,
+      "epsrel": 2e-13,
+      "limit": 200
+    }
+  },
+  "upstream_commit": "590c6fd5332acb15f5683ebf392a0d7ce54983c5"
+}

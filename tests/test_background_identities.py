@@ -9,6 +9,10 @@ differentiation use central differences with step h = 1e-6 * t, whose
 truncation error dominates, tested at RTOL_NUM = 1e-7.
 """
 
+# A06: absolute budgets use rtol=0; relative budgets use atol=0.
+# Previously implicit algebraic comparisons use rtol=2e-12, atol=1e-14
+# in the fixture units (roundoff allowance); explicit convergence budgets remain.
+
 import numpy as np
 import pytest
 
@@ -37,7 +41,7 @@ def test_hamiltonian_constraint_3_8(params, tgrid):
     lhs = 3.0 * bg.H_D(tgrid, params) ** 2
     rhs = (8.0 * np.pi * G * bg.rho_d(tgrid, params, G)
            - 0.5 * bg.R_D(tgrid, params) - 0.5 * bg.Q_D(tgrid, params))
-    np.testing.assert_allclose(lhs, rhs, rtol=RTOL_EXACT)
+    np.testing.assert_allclose(lhs, rhs, rtol=RTOL_EXACT, atol=0.0)
 
 
 def test_raychaudhuri_3_9(params, tgrid):
@@ -48,14 +52,14 @@ def test_raychaudhuri_3_9(params, tgrid):
     addot = num_deriv(lambda t: bg.da_D_dt(t, params), tgrid)
     lhs = 3.0 * addot / bg.a_D(tgrid, params)
     rhs = -4.0 * np.pi * G * bg.rho_d(tgrid, params, G) + bg.Q_D(tgrid, params)
-    np.testing.assert_allclose(lhs, rhs, rtol=RTOL_NUM)
+    np.testing.assert_allclose(lhs, rhs, rtol=RTOL_NUM, atol=0.0)
 
 
 def test_mass_conservation_3_10(params, tgrid):
     """drho_d/dt + 3 H_D rho_d = 0, [GM] (3.10). Exact in closed forms."""
     lhs = bg.drho_d_dt(tgrid, params, G)
     rhs = -3.0 * bg.H_D(tgrid, params) * bg.rho_d(tgrid, params, G)
-    np.testing.assert_allclose(lhs, rhs, rtol=RTOL_EXACT)
+    np.testing.assert_allclose(lhs, rhs, rtol=RTOL_EXACT, atol=0.0)
 
 
 def test_integrability_condition_3_11(params, tgrid):
@@ -77,7 +81,7 @@ def test_effective_conservation_3_17(params, tgrid):
     lhs = bg.drho_eff_dt(tgrid, params, G)
     rhs = -3.0 * bg.H_D(tgrid, params) * (
         bg.rho_eff(tgrid, params, G) + bg.p_eff(tgrid, params, G))
-    np.testing.assert_allclose(lhs, rhs, rtol=RTOL_EXACT)
+    np.testing.assert_allclose(lhs, rhs, rtol=RTOL_EXACT, atol=0.0)
 
 
 # ---------------------------------------------------------------------
@@ -88,7 +92,7 @@ def test_rho_eff_definition_3_12(params, tgrid):
     """rho_eff = -(Q_D + <R>_D)/(16 pi G) with K_D = 0, [GM] (3.12)."""
     lhs = bg.rho_eff(tgrid, params, G)
     rhs = -(bg.Q_D(tgrid, params) + bg.R_D(tgrid, params)) / (16.0 * np.pi * G)
-    np.testing.assert_allclose(lhs, rhs, rtol=RTOL_EXACT)
+    np.testing.assert_allclose(lhs, rhs, rtol=RTOL_EXACT, atol=0.0)
 
 
 def test_p_eff_definition_3_13(params, tgrid):
@@ -96,21 +100,21 @@ def test_p_eff_definition_3_13(params, tgrid):
     lhs = bg.p_eff(tgrid, params, G)
     rhs = (-bg.Q_D(tgrid, params) / (16.0 * np.pi * G)
            + bg.R_D(tgrid, params) / (48.0 * np.pi * G))
-    np.testing.assert_allclose(lhs, rhs, rtol=RTOL_EXACT)
+    np.testing.assert_allclose(lhs, rhs, rtol=RTOL_EXACT, atol=0.0)
 
 
 def test_w_eff_definition(params, tgrid):
     """w_eff = p_eff / rho_eff, [GM] Sec. 4 text."""
     lhs = bg.w_eff(tgrid, params)
     rhs = bg.p_eff(tgrid, params, G) / bg.rho_eff(tgrid, params, G)
-    np.testing.assert_allclose(lhs, rhs, rtol=RTOL_EXACT)
+    np.testing.assert_allclose(lhs, rhs, rtol=RTOL_EXACT, atol=0.0)
 
 
 def test_cs2_eff_definition(params, tgrid):
     """c^2_s,eff = (dp_eff/dt)/(drho_eff/dt), [GM] Sec. 4 text."""
     lhs = bg.cs2_eff(tgrid, params)
     rhs = bg.dp_eff_dt(tgrid, params, G) / bg.drho_eff_dt(tgrid, params, G)
-    np.testing.assert_allclose(lhs, rhs, rtol=RTOL_EXACT)
+    np.testing.assert_allclose(lhs, rhs, rtol=RTOL_EXACT, atol=0.0)
 
 
 # ---------------------------------------------------------------------
@@ -126,7 +130,7 @@ def test_cs2_eff_definition(params, tgrid):
 ], ids=["dfv_dt", "d2fv_dt2", "da_D_dt", "dR_D_dt", "dQ_D_dt"])
 def test_analytic_derivatives(params, tgrid, func, deriv):
     num = num_deriv(lambda t: func(t, params), tgrid)
-    np.testing.assert_allclose(deriv(tgrid, params), num, rtol=RTOL_NUM)
+    np.testing.assert_allclose(deriv(tgrid, params), num, rtol=RTOL_NUM, atol=0.0)
 
 
 @pytest.mark.parametrize("func,deriv", [
@@ -136,7 +140,7 @@ def test_analytic_derivatives(params, tgrid, func, deriv):
 ], ids=["drho_d_dt", "drho_eff_dt", "dp_eff_dt"])
 def test_analytic_derivatives_with_G(params, tgrid, func, deriv):
     num = num_deriv(lambda t: func(t, params, G), tgrid)
-    np.testing.assert_allclose(deriv(tgrid, params, G), num, rtol=RTOL_NUM)
+    np.testing.assert_allclose(deriv(tgrid, params, G), num, rtol=RTOL_NUM, atol=0.0)
 
 
 # ---------------------------------------------------------------------
@@ -151,13 +155,13 @@ def test_omega_definitions_3_18(params, tgrid):
     H2 = bg.H_D(tgrid, params) ** 2
     np.testing.assert_allclose(
         bg.Omega_m(tgrid, params),
-        8.0 * np.pi * G * bg.rho_d(tgrid, params, G) / (3.0 * H2), rtol=RTOL_EXACT)
+        8.0 * np.pi * G * bg.rho_d(tgrid, params, G) / (3.0 * H2), rtol=RTOL_EXACT, atol=0.0)
     np.testing.assert_allclose(
         bg.Omega_R(tgrid, params),
-        -bg.R_D(tgrid, params) / (6.0 * H2), rtol=RTOL_EXACT)
+        -bg.R_D(tgrid, params) / (6.0 * H2), rtol=RTOL_EXACT, atol=0.0)
     np.testing.assert_allclose(
         bg.Omega_Q(tgrid, params),
-        -bg.Q_D(tgrid, params) / (6.0 * H2), rtol=RTOL_EXACT)
+        -bg.Q_D(tgrid, params) / (6.0 * H2), rtol=RTOL_EXACT, atol=0.0)
 
 
 def test_omega_sum_is_unity(params, tgrid):
@@ -167,7 +171,7 @@ def test_omega_sum_is_unity(params, tgrid):
     f_v0^(-2/3) prefactor of [GM] Eq. (5.7)."""
     total = (bg.Omega_m(tgrid, params) + bg.Omega_R(tgrid, params)
              + bg.Omega_Q(tgrid, params))
-    np.testing.assert_allclose(total, 1.0, rtol=RTOL_EXACT)
+    np.testing.assert_allclose(total, 1.0, rtol=RTOL_EXACT, atol=0.0)
 
 
 # ---------------------------------------------------------------------
@@ -180,4 +184,4 @@ def test_rho_d_scaling_and_normalisation(params, tgrid):
     rho0 = 12.0 * params.HD0**2 * (1.0 - params.fv0) / (
         8.0 * np.pi * G * (2.0 + params.fv0) ** 2)
     expected = rho0 * (bg.a_D(params.t0, params) / bg.a_D(tgrid, params)) ** 3
-    np.testing.assert_allclose(bg.rho_d(tgrid, params, G), expected, rtol=RTOL_EXACT)
+    np.testing.assert_allclose(bg.rho_d(tgrid, params, G), expected, rtol=RTOL_EXACT, atol=0.0)

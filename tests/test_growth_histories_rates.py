@@ -1,5 +1,9 @@
 """Extraction, reference, relative growth, analytic rates, and mapping."""
 
+# A06: absolute budgets use rtol=0; relative budgets use atol=0.
+# Previously implicit algebraic comparisons use rtol=2e-12, atol=1e-14
+# in the fixture units (roundoff allowance); explicit convergence budgets remain.
+
 import numpy as np
 import pytest
 
@@ -76,7 +80,7 @@ def test_comoving_and_barotropic_pass_z_through():
 def test_meszaros_initial_z_matches_ic_convention(meszaros_run):
     ic = meszaros_run.history.initial_conditions
     assert meszaros_run.history.z_expansion[0] == pytest.approx(
-        ic.expansion_gradient, rel=1e-12
+        ic.expansion_gradient, rel=1e-12, abs=0.0
     )
 
 
@@ -84,13 +88,13 @@ def test_meszaros_initial_z_matches_ic_convention(meszaros_run):
 def test_reference_resolution_records_all_coordinates(meszaros_run):
     ref = meszaros_run.reference
     params = meszaros_run.history.background.params
-    assert ref.dressed_redshift == pytest.approx(10.0, abs=1e-9)
-    assert ref.a_obs == pytest.approx(1.0 / 11.0, rel=1e-9)
+    assert ref.dressed_redshift == pytest.approx(10.0, abs=1e-9, rel=0.0)
+    assert ref.a_obs == pytest.approx(1.0 / 11.0, rel=1e-9, abs=0.0)
     assert ref.a_obs == pytest.approx(
-        float(bg.a_w(ref.t_solver_units, params)), rel=1e-12
+        float(bg.a_w(ref.t_solver_units, params)), rel=1e-12, abs=0.0
     )
     assert ref.t_gyr == pytest.approx(
-        ref.t_solver_units / meszaros_run.history.time_unit_per_gyr
+        ref.t_solver_units / meszaros_run.history.time_unit_per_gyr, rel=2e-12, abs=1e-14
     )
 
 
@@ -139,7 +143,7 @@ def test_relative_growth_is_normalised_at_the_reference(comoving_run):
     ref = comoving_run.reference
     idx = int(np.argmin(np.abs(comoving_run.history.t - ref.t_solver_units)))
     g_near_ref = comoving_run.relative_growth_delta_d[idx]
-    assert g_near_ref == pytest.approx(1.0, rel=5e-3)
+    assert g_near_ref == pytest.approx(1.0, rel=5e-3, abs=0.0)
     np.testing.assert_allclose(
         comoving_run.relative_growth_delta_d,
         comoving_run.history.delta_d / ref.amplitude_delta_d,
@@ -188,16 +192,16 @@ def test_exact_tracker_chain_factor(meszaros_run):
     f_v = bg.fv(h.t, h.background.params)
     expected = (2.0 + f_v) ** 2 / (4.0 + f_v + 4.0 * f_v**2)
     np.testing.assert_allclose(
-        meszaros_run.rates.chain_factor, expected, rtol=1e-14
+        meszaros_run.rates.chain_factor, expected, rtol=1e-14, atol=0.0
     )
     np.testing.assert_allclose(
         meszaros_run.rates.f_dressed,
         meszaros_run.rates.f_bare * expected,
-        rtol=1e-13,
+        rtol=1e-13, atol=0.0,
     )
     # audited value at t0 (1D-A Sec. 7)
     assert meszaros_run.rates.chain_factor[-1] == pytest.approx(
-        1.08416, abs=5e-5
+        1.08416, abs=5e-5, rel=0.0
     )
 
 
@@ -209,7 +213,7 @@ def test_f_bare_against_independent_finite_difference(comoving_run):
     fd = np.gradient(ln_d, ln_a)
     interior = slice(5, -5)
     np.testing.assert_allclose(
-        comoving_run.rates.f_bare[interior], fd[interior], rtol=5e-3
+        comoving_run.rates.f_bare[interior], fd[interior], rtol=5e-3, atol=0.0
     )
 
 
@@ -219,7 +223,7 @@ def test_non_logarithmic_derivative_matches_minus_3z_over_theta(barotropic_run):
     np.testing.assert_allclose(
         barotropic_run.rates.dDelta_d_dln_aD,
         -3.0 * h.z_expansion / theta,
-        rtol=1e-14,
+        rtol=1e-14, atol=0.0,
     )
 
 
@@ -271,9 +275,9 @@ def test_density_mapping_formula_and_derivative_factor():
     )
     delta_d = np.array([9.0, -18.0, 4.5])
     delta_m = map_delta_m(delta_d, harmonic=harmonic)
-    np.testing.assert_allclose(delta_m, -delta_d / 9.0, rtol=0.0)
+    np.testing.assert_allclose(delta_m, -delta_d / 9.0, rtol=0.0, atol=0.0)
     deriv = map_delta_m_dln_a_derivative(delta_d, harmonic=harmonic)
-    np.testing.assert_allclose(deriv, -delta_d / 9.0, rtol=0.0)
+    np.testing.assert_allclose(deriv, -delta_d / 9.0, rtol=0.0, atol=0.0)
 
 
 def test_mapped_run_exposes_harmonic_metadata_and_derivatives():
@@ -287,10 +291,10 @@ def test_mapped_run_exposes_harmonic_metadata_and_derivatives():
     )
     assert run.mapped is not None
     hm = run.mapped.harmonic
-    assert hm.k_code == pytest.approx(5.0 * np.pi)
-    assert hm.k_com_D_H0TS_over_c == pytest.approx(hm.k_code)
+    assert hm.k_code == pytest.approx(5.0 * np.pi, rel=2e-12, abs=1e-14)
+    assert hm.k_com_D_H0TS_over_c == pytest.approx(hm.k_code, rel=2e-12, abs=1e-14)
     assert hm.k_phys0_D_H0TS_over_c == pytest.approx(
-        hm.k_code / run.history.background.params.aD0
+        hm.k_code / run.history.background.params.aD0, rel=2e-12, abs=1e-14
     )
     # d delta_m/d ln a_D = +3Z/(Theta k^2)
     theta = np.asarray(
@@ -299,7 +303,7 @@ def test_mapped_run_exposes_harmonic_metadata_and_derivatives():
     np.testing.assert_allclose(
         run.mapped.d_delta_m_dln_aD,
         3.0 * run.history.z_expansion / (theta * hm.k_code**2),
-        rtol=1e-13,
+        rtol=1e-13, atol=0.0,
     )
     # logarithmic rates identical for Delta_d and delta_m (C cancels)
     ok = ~run.rates.near_zero_mask
@@ -308,7 +312,7 @@ def test_mapped_run_exposes_harmonic_metadata_and_derivatives():
         run.mapped.d_delta_m_dln_aD[ok] / run.mapped.delta_m[ok]
     )
     np.testing.assert_allclose(
-        f_from_dm[ok], run.rates.f_bare[ok], rtol=1e-12
+        f_from_dm[ok], run.rates.f_bare[ok], rtol=1e-12, atol=0.0
     )
 
 
@@ -347,7 +351,7 @@ def test_clean_relative_growth_invariant_under_harmonic_metadata():
     np.testing.assert_array_equal(runs[0].rates.f_bare, runs[1].rates.f_bare)
     # while the absolute mapped coefficient does change
     assert not np.allclose(
-        runs[0].mapped.delta_m[-1], runs[1].mapped.delta_m[-1]
+        runs[0].mapped.delta_m[-1], runs[1].mapped.delta_m[-1], rtol=1e-5, atol=1e-8
     )
 
 

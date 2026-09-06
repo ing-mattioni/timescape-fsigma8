@@ -6,6 +6,10 @@ at RTOL_EXACT = 1e-12; comparisons against central-difference numerical
 derivatives (relative step 1e-6, truncation-limited) at RTOL_NUM = 1e-7.
 """
 
+# A06: absolute budgets use rtol=0; relative budgets use atol=0.
+# Previously implicit algebraic comparisons use rtol=2e-12, atol=1e-14
+# in the fixture units (roundoff allowance); explicit convergence budgets remain.
+
 import numpy as np
 import pytest
 
@@ -41,7 +45,7 @@ def gyr_grid():
 def test_a_w_today_is_unity(preset):
     """a_w(t0) = 1 exactly: [GM] (5.4) with a_D(t0) = 1 + fv0/2 = gamma_w(t0)."""
     p = preset.tracker_params_gyr
-    assert float(bg.a_w(p.t0, p)) == pytest.approx(1.0, rel=RTOL_EXACT)
+    assert float(bg.a_w(p.t0, p)) == pytest.approx(1.0, rel=RTOL_EXACT, abs=0.0)
 
 
 # ---------------------------------------------------------------------
@@ -53,9 +57,9 @@ def test_dtau_w_dt_is_inverse_lapse(preset, gyr_grid):
     """dtau_w/dt = 1/gamma_w = 2/(2 + f_v), from gamma_w := dt/dtau_w."""
     p, t = gyr_grid(preset)
     np.testing.assert_allclose(
-        bg.dtau_w_dt(t, p), 1.0 / bg.gamma_w(t, p), rtol=RTOL_EXACT)
+        bg.dtau_w_dt(t, p), 1.0 / bg.gamma_w(t, p), rtol=RTOL_EXACT, atol=0.0)
     np.testing.assert_allclose(
-        bg.dtau_w_dt(t, p), 2.0 / (2.0 + bg.fv(t, p)), rtol=RTOL_EXACT)
+        bg.dtau_w_dt(t, p), 2.0 / (2.0 + bg.fv(t, p)), rtol=RTOL_EXACT, atol=0.0)
 
 
 # ---------------------------------------------------------------------
@@ -67,7 +71,7 @@ def test_tau_w_numerical_derivative(preset, gyr_grid):
     """[W09] (B12) closed form differentiates back to 1/gamma_w."""
     p, t = gyr_grid(preset)
     num = num_deriv(lambda s: bg.tau_w(s, p), t)
-    np.testing.assert_allclose(bg.dtau_w_dt(t, p), num, rtol=RTOL_NUM)
+    np.testing.assert_allclose(bg.dtau_w_dt(t, p), num, rtol=RTOL_NUM, atol=0.0)
 
 
 def test_dgamma_w_dt_numerical_derivative():
@@ -75,7 +79,7 @@ def test_dgamma_w_dt_numerical_derivative():
     p = NOTEBOOK_REFERENCE.tracker_params_gyr
     t = np.linspace(0.18, p.t0, 300)
     num = num_deriv(lambda s: bg.gamma_w(s, p), t)
-    np.testing.assert_allclose(bg.dgamma_w_dt(t, p), num, rtol=RTOL_NUM)
+    np.testing.assert_allclose(bg.dgamma_w_dt(t, p), num, rtol=RTOL_NUM, atol=0.0)
 
 
 # ---------------------------------------------------------------------
@@ -89,7 +93,7 @@ def test_H_dressed_is_wall_frame_expansion_rate(preset, gyr_grid):
     daw_dt = num_deriv(lambda s: bg.a_w(s, p), t)
     lhs = bg.H_dressed(t, p)
     rhs = bg.gamma_w(t, p) * daw_dt / bg.a_w(t, p)
-    np.testing.assert_allclose(lhs, rhs, rtol=RTOL_NUM)
+    np.testing.assert_allclose(lhs, rhs, rtol=RTOL_NUM, atol=0.0)
 
 
 def test_H_dressed_defining_combination():
@@ -97,7 +101,7 @@ def test_H_dressed_defining_combination():
     p = NOTEBOOK_REFERENCE.tracker_params_gyr
     t = np.linspace(0.18, p.t0, 300)
     rhs = bg.gamma_w(t, p) * bg.H_D(t, p) - bg.dgamma_w_dt(t, p)
-    np.testing.assert_allclose(bg.H_dressed(t, p), rhs, rtol=RTOL_EXACT)
+    np.testing.assert_allclose(bg.H_dressed(t, p), rhs, rtol=RTOL_EXACT, atol=0.0)
 
 
 # ---------------------------------------------------------------------
@@ -108,8 +112,8 @@ def test_H_dressed_defining_combination():
 def test_H_dressed_today_equals_preset_H0(preset):
     p = preset.tracker_params_gyr
     assert float(bg.H_dressed(p.t0, p)) == pytest.approx(
-        preset.H0_dressed_per_gyr, rel=1e-13)
-    assert float(bg.H_dressed(p.t0, p)) == pytest.approx(p.H0_dressed, rel=1e-13)
+        preset.H0_dressed_per_gyr, rel=1e-13, abs=0.0)
+    assert float(bg.H_dressed(p.t0, p)) == pytest.approx(p.H0_dressed, rel=1e-13, abs=0.0)
 
 
 # ---------------------------------------------------------------------
@@ -122,7 +126,7 @@ def test_H_dressed_matches_W09_B8(preset, gyr_grid):
     p, t = gyr_grid(preset)
     f = bg.fv(t, p)
     rhs = (4.0 * f**2 + f + 4.0) * bg.H_D(t, p) / (2.0 * (2.0 + f))
-    np.testing.assert_allclose(bg.H_dressed(t, p), rhs, rtol=RTOL_EXACT)
+    np.testing.assert_allclose(bg.H_dressed(t, p), rhs, rtol=RTOL_EXACT, atol=0.0)
 
 
 # ---------------------------------------------------------------------
@@ -134,7 +138,7 @@ def test_redshift_is_inverse_dressed_scale_factor(preset, gyr_grid):
     """1 + z = a_{w,0}/a_w = 1/a_w ([GM] p. 25 via Eq. (5.4))."""
     p, t = gyr_grid(preset)
     np.testing.assert_allclose(
-        bg.redshift(t, p), 1.0 / bg.a_w(t, p) - 1.0, rtol=RTOL_EXACT)
+        bg.redshift(t, p), 1.0 / bg.a_w(t, p) - 1.0, rtol=RTOL_EXACT, atol=0.0)
 
 
 @PRESETS
@@ -144,7 +148,7 @@ def test_redshift_matches_W09_38(preset, gyr_grid):
     p, t = gyr_grid(preset)
     f = bg.fv(t, p)
     z38 = (2.0 + f) * np.cbrt(f) / (3.0 * np.cbrt(p.fv0) * p.HD0 * t) - 1.0
-    np.testing.assert_allclose(bg.redshift(t, p), z38, rtol=RTOL_EXACT)
+    np.testing.assert_allclose(bg.redshift(t, p), z38, rtol=RTOL_EXACT, atol=0.0)
 
 
 # ---------------------------------------------------------------------
@@ -171,4 +175,4 @@ def test_tau_w_today_reference_value():
     p = NOTEBOOK_REFERENCE.tracker_params_gyr
     tau0 = float(bg.tau_w(p.t0, p))
     assert tau0 < p.t0
-    assert tau0 == pytest.approx(12.262, abs=0.005)
+    assert tau0 == pytest.approx(12.262, abs=0.005, rel=0.0)

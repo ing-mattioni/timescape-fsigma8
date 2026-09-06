@@ -1,5 +1,9 @@
 """Phase 1F-A density inversion, carrier assembly, and dimensional tests."""
 
+# A06: absolute budgets use rtol=0; relative budgets use atol=0.
+# Previously implicit algebraic comparisons use rtol=2e-12, atol=1e-14
+# in the fixture units (roundoff allowance); explicit convergence budgets remain.
+
 from __future__ import annotations
 
 import inspect
@@ -36,8 +40,8 @@ def test_t2_analytic_three_dimensional_regional_density_inversion_multiple_modes
     wall, void, expected = density_pair(realization)
     wall_mask = realization.scientific_state.operator.morphology.wall_domain.reshape(-1)
     void_mask = ~wall_mask
-    np.testing.assert_allclose(wall.delta_m[wall_mask], expected.reshape(-1)[wall_mask], atol=2e-12)
-    np.testing.assert_allclose(void.delta_m[void_mask], 0.6 * expected.reshape(-1)[void_mask], atol=2e-12)
+    np.testing.assert_allclose(wall.delta_m[wall_mask], expected.reshape(-1)[wall_mask], atol=2e-12, rtol=0.0)
+    np.testing.assert_allclose(void.delta_m[void_mask], 0.6 * expected.reshape(-1)[void_mask], atol=2e-12, rtol=0.0)
     assert wall.diagnostics.equation_residual_max_abs <= 2e-10
     assert void.diagnostics.equation_residual_max_abs <= 2e-10
     assert wall.diagnostics.condition_number > 1.0
@@ -49,8 +53,8 @@ def test_t3_zero_mode_is_not_identifiable_and_closure_is_required() -> None:
     base = manufactured_scalar(shape)
     shifted = base + 7.25
     source = manufactured_laplacian(shape)
-    np.testing.assert_allclose(source, manufactured_laplacian(shape))
-    assert np.max(np.abs(base - shifted)) == pytest.approx(7.25)
+    np.testing.assert_allclose(source, manufactured_laplacian(shape), rtol=2e-12, atol=1e-14)
+    assert np.max(np.abs(base - shifted)) == pytest.approx(7.25, rel=2e-12, abs=1e-14)
     with pytest.raises(Phase1FAContractError, match="zero-mode closure"):
         reconstruct_regional_density(
             delta_cgi=regional_full(source, realization, "wall"),
@@ -68,7 +72,7 @@ def test_t3_zero_mode_is_not_identifiable_and_closure_is_required() -> None:
         provenance="EXPLICIT_ZERO_MODE",
     )
     mask = reconstructed.domain.mask
-    np.testing.assert_allclose(reconstructed.delta_m[mask], base.reshape(-1)[mask], atol=2e-12)
+    np.testing.assert_allclose(reconstructed.delta_m[mask], base.reshape(-1)[mask], atol=2e-12, rtol=0.0)
 
 
 def test_t4_explicit_regional_mean_zero_normalization() -> None:
@@ -102,11 +106,11 @@ def test_t5_unequal_backgrounds_preserve_regional_offset_term() -> None:
     void_mask = ~wall_mask
     expected_wall = (result.b_wall - 1.0) + result.b_wall * wall.delta_m[wall_mask]
     expected_void = (result.b_void - 1.0) + result.b_void * void.delta_m[void_mask]
-    np.testing.assert_allclose(result.delta_m_carrier[wall_mask], expected_wall, atol=2e-12)
-    np.testing.assert_allclose(result.delta_m_carrier[void_mask], expected_void, atol=2e-12)
-    assert result.b_wall == pytest.approx(4.0 / 3.0)
-    assert result.b_void == pytest.approx(2.0 / 3.0)
-    assert result.delta_m_carrier[wall_mask][0] != pytest.approx(wall.delta_m[wall_mask][0])
+    np.testing.assert_allclose(result.delta_m_carrier[wall_mask], expected_wall, atol=2e-12, rtol=0.0)
+    np.testing.assert_allclose(result.delta_m_carrier[void_mask], expected_void, atol=2e-12, rtol=0.0)
+    assert result.b_wall == pytest.approx(4.0 / 3.0, rel=2e-12, abs=1e-14)
+    assert result.b_void == pytest.approx(2.0 / 3.0, rel=2e-12, abs=1e-14)
+    assert result.delta_m_carrier[wall_mask][0] != pytest.approx(wall.delta_m[wall_mask][0], rel=2e-12, abs=1e-14)
 
 
 def test_t6_carrier_global_mean_and_background_assembly() -> None:
@@ -114,7 +118,7 @@ def test_t6_carrier_global_mean_and_background_assembly() -> None:
     assert abs(result.diagnostics.global_mean_residual) <= 2e-10
     assert abs(result.diagnostics.background_density_assembly_residual) <= 2e-10
     assert abs(result.diagnostics.carrier_volume_additivity_residual) <= 2e-11
-    assert result.rho_bar_carrier == pytest.approx(1.5)
+    assert result.rho_bar_carrier == pytest.approx(1.5, rel=2e-12, abs=1e-14)
 
 
 def test_physical_carrier_rejects_nonpositive_regional_density() -> None:
@@ -235,5 +239,5 @@ def test_t11_three_dimensional_metric_scale_factor_volume_covariance() -> None:
     )
     base_volumes = base.physical_regional_volumes(a_w=1.0, a_v=1.0)
     transformed_volumes = transformed.physical_regional_volumes(a_w=1.0, a_v=1.0 / c)
-    assert transformed_volumes == pytest.approx(base_volumes)
+    assert transformed_volumes == pytest.approx(base_volumes, rel=2e-12, abs=1e-14)
     assert scaled_void.metadata["classification"] == "PHYSICAL_NORMALIZATION_COVARIANCE"

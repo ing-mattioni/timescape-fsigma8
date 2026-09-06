@@ -1,5 +1,9 @@
 """Isolation and diagnostic tests for the Phase 1C-B2 D2 harness."""
 
+# A06: absolute budgets use rtol=0; relative budgets use atol=0.
+# Previously implicit algebraic comparisons use rtol=2e-12, atol=1e-14
+# in the fixture units (roundoff allowance); explicit convergence budgets remain.
+
 from pathlib import Path
 import sys
 
@@ -97,8 +101,8 @@ def test_forensic_d2_sound_speed_matches_audited_values(params):
         np.array([t_initial, params.t0]), params
     )
     np.testing.assert_allclose(values, [-0.47372, -0.34516], atol=6e-6, rtol=0.0)
-    assert values[0] != pytest.approx(float(bg.cs2_eff(t_initial, params)), abs=1e-3)
-    assert values[1] != pytest.approx(float(bg.cs2_eff(params.t0, params)), abs=1e-3)
+    assert values[0] != pytest.approx(float(bg.cs2_eff(t_initial, params)), abs=1e-3, rel=0.0)
+    assert values[1] != pytest.approx(float(bg.cs2_eff(params.t0, params)), abs=1e-3, rel=0.0)
 
 
 @pytest.mark.parametrize("branch", list(D3Branch))
@@ -141,7 +145,7 @@ def test_d2_breaks_direct_tilt_form_equivalence(params, branch):
     cs2_d2 = float(forensic._upstream_d2_corrupted_cs2(t, params))
     cs2_corrected = float(bg.cs2_eff(t, params))
     expected_a44_mismatch = float(bg.Theta(t, params)) * (cs2_corrected - cs2_d2)
-    assert mismatch[3, 3] == pytest.approx(expected_a44_mismatch, rel=2e-13)
+    assert mismatch[3, 3] == pytest.approx(expected_a44_mismatch, rel=2e-13, abs=0.0)
     assert abs(mismatch[3, 3]) > 1e-3
 
 

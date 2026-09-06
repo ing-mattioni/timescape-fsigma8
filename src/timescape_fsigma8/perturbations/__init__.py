@@ -6,7 +6,8 @@ The package contains the validated Phase 1C-B1 clean systems:
 * the comoving effective-fluid closure, Eqs. (4.20)-(4.23) of the same paper.
 
 Phase 1C-B2 adds the barotropic closure, Eqs. (4.13)-(4.17), with both
-unresolved D3 equation branches and both tilt variables exposed explicitly.
+derived and forensic D3 equation branches and both tilt variables explicit.
+The accepted scientific adjudication is RESOLVED_DERIVED_4_10.
 Only the corrected Phase 1B sound speed is available here.  The upstream D2
 defect remains isolated in a non-exported forensic script.  F-sigma-8,
 normalisation, likelihoods, and parameter fitting remain outside scope.

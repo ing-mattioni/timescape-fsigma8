@@ -1,5 +1,7 @@
 """Public API for conditional Phase 1F-C wall/common-spacetime geometry."""
 
+from timescape_fsigma8.components import ComponentRepresentation
+
 from timescape_fsigma8.phase1f_c.geometry import (
     derive_clock_anchored_wall_kinematic_geometry,
     reconstruct_optional_scalar_metric_trace,
@@ -80,3 +82,7 @@ from timescape_fsigma8.phase1f_c.models import (
 )
 
 __all__ = [name for name in globals() if not name.startswith("_")]
+
+# Successor cross-phase interpretation; earlier reports remain historical.
+from timescape_fsigma8.scientific_status import CURRENT_SCIENTIFIC_STATUS
+__all__.append("CURRENT_SCIENTIFIC_STATUS")

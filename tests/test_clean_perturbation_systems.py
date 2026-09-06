@@ -6,6 +6,10 @@ calibrated by explicit grid refinement.  Other solver comparisons and EdS
 limits state their tolerances individually.
 """
 
+# A06: absolute budgets use rtol=0; relative budgets use atol=0.
+# Previously implicit algebraic comparisons use rtol=2e-12, atol=1e-14
+# in the fixture units (roundoff allowance); explicit convergence budgets remain.
+
 import numpy as np
 import pytest
 
@@ -68,7 +72,7 @@ def test_meszaros_rhs_is_eq_4_27(perturbation_setup):
     theta = float(bg.Theta(epoch.time, params))
     rho_d = float(bg.rho_d(epoch.time, params, G))
     expected_ddot = 4.0 * np.pi * G * rho_d * state[0] - (2.0 / 3.0) * theta * state[1]
-    np.testing.assert_allclose(rhs, [state[1], expected_ddot], rtol=RTOL_EXACT)
+    np.testing.assert_allclose(rhs, [state[1], expected_ddot], rtol=RTOL_EXACT, atol=0.0)
 
 
 def test_comoving_matrix_is_eqs_4_21_to_4_23(perturbation_setup):
@@ -86,7 +90,7 @@ def test_comoving_matrix_is_eqs_4_21_to_4_23(perturbation_setup):
             [0.0, -(1.0 + w_eff), w_eff * theta],
         ]
     )
-    np.testing.assert_allclose(comoving_matrix(t, params=params, G=G), expected, rtol=RTOL_EXACT)
+    np.testing.assert_allclose(comoving_matrix(t, params=params, G=G), expected, rtol=RTOL_EXACT, atol=0.0)
 
 
 def test_comoving_matrix_is_independent_of_G_units(perturbation_setup):
@@ -94,7 +98,7 @@ def test_comoving_matrix_is_independent_of_G_units(perturbation_setup):
     params, epoch, _ = perturbation_setup
     matrix_g1 = comoving_matrix(epoch.time, params=params, G=1.0)
     matrix_g7 = comoving_matrix(epoch.time, params=params, G=7.3)
-    np.testing.assert_allclose(matrix_g1, matrix_g7, rtol=RTOL_EXACT)
+    np.testing.assert_allclose(matrix_g1, matrix_g7, rtol=RTOL_EXACT, atol=0.0)
 
 
 def test_rhs_dimensional_rescaling(perturbation_setup):
@@ -112,7 +116,7 @@ def test_rhs_dimensional_rescaling(perturbation_setup):
         t_scaled, comoving_scaled_state, params=params_scaled, G=G
     )
     np.testing.assert_allclose(
-        rhs_scaled, rhs * np.array([scale, scale**2, scale]), rtol=RTOL_EXACT
+        rhs_scaled, rhs * np.array([scale, scale**2, scale]), rtol=RTOL_EXACT, atol=0.0
     )
 
     meszaros_state = initial.meszaros_vector()
@@ -122,7 +126,7 @@ def test_rhs_dimensional_rescaling(perturbation_setup):
         t_scaled, meszaros_scaled_state, params=params_scaled, G=G
     )
     np.testing.assert_allclose(
-        mz_rhs_scaled, mz_rhs * np.array([scale, scale**2]), rtol=RTOL_EXACT
+        mz_rhs_scaled, mz_rhs * np.array([scale, scale**2]), rtol=RTOL_EXACT, atol=0.0
     )
 
 
@@ -329,9 +333,9 @@ def test_figure_2_published_endpoint_scale(perturbation_setup):
         params=params, initial_conditions=initial, t_eval=t_eval,
         config=TIGHT_DOP853, G=G
     )
-    assert comoving.y[0, -1] == pytest.approx(0.04, abs=0.003)
-    assert meszaros.y[0, -1] == pytest.approx(0.033, abs=0.002)
-    assert comoving.y[2, -1] == pytest.approx(0.007, abs=0.001)
+    assert comoving.y[0, -1] == pytest.approx(0.04, abs=0.003, rel=0.0)
+    assert meszaros.y[0, -1] == pytest.approx(0.033, abs=0.002, rel=0.0)
+    assert comoving.y[2, -1] == pytest.approx(0.007, abs=0.001, rel=0.0)
 
 
 @pytest.mark.parametrize("bad_state", [[1.0], [1.0, 2.0, 3.0], [1.0, np.nan]])

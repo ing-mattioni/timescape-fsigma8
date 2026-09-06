@@ -1,5 +1,9 @@
 """Scenario model tests: enums, serialization, no defaults, applicability."""
 
+# A06: absolute budgets use rtol=0; relative budgets use atol=0.
+# Previously implicit algebraic comparisons use rtol=2e-12, atol=1e-14
+# in the fixture units (roundoff allowance); explicit convergence budgets remain.
+
 import dataclasses
 
 import numpy as np
@@ -60,7 +64,7 @@ def test_scenario_serialization_round_trips_every_field():
     assert meta["wavenumber_convention"] == "upstream_timescape_k"
     assert meta["growth_coordinate"] == "bare_aD"
     assert meta["density_contrast_mapping"] == "keep_Delta_d"
-    assert meta["supplied_mode_k"] == pytest.approx(2.0 * np.pi)
+    assert meta["supplied_mode_k"] == pytest.approx(2.0 * np.pi, rel=2e-12, abs=1e-14)
     assert meta["mode_label"] == "2pi"
     assert "system=barotropic" in scenario.identifier
     assert "d3=printed_4_15" in scenario.identifier
@@ -222,9 +226,9 @@ def test_background_presets_resolve_to_frozen_phase1b_parameters():
     nb = resolve_background(GrowthBackgroundPreset.NOTEBOOK_REFERENCE)
     pp = resolve_background(GrowthBackgroundPreset.PAPER_REFERENCE)
     assert nb.params.fv0 == 0.737 and pp.params.fv0 == 0.737
-    assert nb.params.H0_dressed == pytest.approx(1.0, rel=1e-12)
-    assert nb.timescape_h == pytest.approx(0.7323)
-    assert pp.timescape_h == pytest.approx(0.7303)
-    assert nb.lcdm_h == pytest.approx(0.674)
-    assert nb.time_unit.target_time_per_gyr == pytest.approx(0.7323 / 9.778)
-    assert pp.time_unit.target_time_per_gyr == pytest.approx(0.7303 / 9.778)
+    assert nb.params.H0_dressed == pytest.approx(1.0, rel=1e-12, abs=0.0)
+    assert nb.timescape_h == pytest.approx(0.7323, rel=2e-12, abs=1e-14)
+    assert pp.timescape_h == pytest.approx(0.7303, rel=2e-12, abs=1e-14)
+    assert nb.lcdm_h == pytest.approx(0.674, rel=2e-12, abs=1e-14)
+    assert nb.time_unit.target_time_per_gyr == pytest.approx(0.7323 / 9.778, rel=2e-12, abs=1e-14)
+    assert pp.time_unit.target_time_per_gyr == pytest.approx(0.7303 / 9.778, rel=2e-12, abs=1e-14)

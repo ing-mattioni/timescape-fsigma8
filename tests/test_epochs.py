@@ -22,6 +22,10 @@ Cross-check encoded below: z depends on t only through the product
 HD0 * t, so t(z = 20) scales exactly as 1/HD0 between presets.
 """
 
+# A06: absolute budgets use rtol=0; relative budgets use atol=0.
+# Previously implicit algebraic comparisons use rtol=2e-12, atol=1e-14
+# in the fixture units (roundoff allowance); explicit convergence budgets remain.
+
 import pytest
 from scipy.optimize import brentq
 
@@ -52,7 +56,7 @@ PRESETS = pytest.mark.parametrize(
 def test_z_dressed_at_background_start_0p180_Gyr(preset):
     p = preset.tracker_params_gyr
     z = float(bg.redshift(0.180, p))
-    assert z == pytest.approx(EXPECTED[preset.name]["z_at_0.180"], rel=1e-10)
+    assert z == pytest.approx(EXPECTED[preset.name]["z_at_0.180"], rel=1e-10, abs=0.0)
     # Neither preset puts 0.18 Gyr at z = 20.
     assert z > 21.0
 
@@ -61,7 +65,7 @@ def test_z_dressed_at_background_start_0p180_Gyr(preset):
 def test_z_dressed_at_perturbation_start_0p218_Gyr(preset):
     p = preset.tracker_params_gyr
     z = float(bg.redshift(0.218, p))
-    assert z == pytest.approx(EXPECTED[preset.name]["z_at_0.218"], rel=1e-10)
+    assert z == pytest.approx(EXPECTED[preset.name]["z_at_0.218"], rel=1e-10, abs=0.0)
     # The upstream perturbation start is z ~ 18.6, not the paper's z = 20.
     assert 18.5 < z < 18.7
 
@@ -70,9 +74,9 @@ def test_z_dressed_at_perturbation_start_0p218_Gyr(preset):
 def test_t_at_z_dressed_20(preset):
     p = preset.tracker_params_gyr
     t20 = brentq(lambda t: float(bg.redshift(t, p)) - 20.0, 1e-4, p.t0, **BRENTQ_KW)
-    assert t20 == pytest.approx(EXPECTED[preset.name]["t_at_z20"], rel=1e-10)
+    assert t20 == pytest.approx(EXPECTED[preset.name]["t_at_z20"], rel=1e-10, abs=0.0)
     # verify the root and that it differs from both upstream start times
-    assert float(bg.redshift(t20, p)) == pytest.approx(20.0, abs=1e-9)
+    assert float(bg.redshift(t20, p)) == pytest.approx(20.0, abs=1e-9, rel=0.0)
     assert abs(t20 - 0.218) > 0.02
     assert abs(t20 - 0.180) > 0.015
 
@@ -84,4 +88,4 @@ def test_t_at_z20_scales_inversely_with_HD0():
              / EXPECTED["NOTEBOOK_REFERENCE"]["t_at_z20"])
     HD0_ratio = (NOTEBOOK_REFERENCE.tracker_params_gyr.HD0
                  / PAPER_REFERENCE.tracker_params_gyr.HD0)
-    assert ratio == pytest.approx(HD0_ratio, rel=1e-9)
+    assert ratio == pytest.approx(HD0_ratio, rel=1e-9, abs=0.0)

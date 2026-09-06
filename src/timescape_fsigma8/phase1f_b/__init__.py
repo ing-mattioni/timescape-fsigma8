@@ -107,3 +107,7 @@ __all__ = [
     "ScalarDustWallBoostScenario",
     "propagate_scalar_dust_wall_boost",
 ]
+
+# Successor cross-phase interpretation; earlier reports remain historical.
+from timescape_fsigma8.scientific_status import CURRENT_SCIENTIFIC_STATUS
+__all__.append("CURRENT_SCIENTIFIC_STATUS")

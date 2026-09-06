@@ -16,6 +16,10 @@ from `timescape_fsigma8.background` before the split must remain
 importable from the same location.
 """
 
+# A06: absolute budgets use rtol=0; relative budgets use atol=0.
+# Previously implicit algebraic comparisons use rtol=2e-12, atol=1e-14
+# in the fixture units (roundoff allowance); explicit convergence budgets remain.
+
 import numpy as np
 import pytest
 
@@ -68,10 +72,10 @@ def gparams() -> TrackerParams:
 
 
 def test_golden_params_unchanged(gparams):
-    assert gparams.t0 == pytest.approx(1.1516126666666666, rel=1e-15)
-    assert gparams.HD0 == pytest.approx(0.7922223849569792, rel=1e-15)
+    assert gparams.t0 == pytest.approx(1.1516126666666666, rel=1e-15, abs=0.0)
+    assert gparams.HD0 == pytest.approx(0.7922223849569792, rel=1e-15, abs=0.0)
     np.testing.assert_allclose(
-        GOLDEN_T, [0.05 * gparams.t0, 0.4 * gparams.t0, 1.0 * gparams.t0], rtol=1e-15)
+        GOLDEN_T, [0.05 * gparams.t0, 0.4 * gparams.t0, 1.0 * gparams.t0], rtol=1e-15, atol=0.0)
 
 
 @pytest.mark.parametrize("name", sorted(GOLDEN))

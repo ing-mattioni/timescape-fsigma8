@@ -1,5 +1,9 @@
 """Phase 1F-A regional expansion-scalar reconstruction tests."""
 
+# A06: absolute budgets use rtol=0; relative budgets use atol=0.
+# Previously implicit algebraic comparisons use rtol=2e-12, atol=1e-14
+# in the fixture units (roundoff allowance); explicit convergence budgets remain.
+
 from __future__ import annotations
 
 import inspect
@@ -35,7 +39,7 @@ def test_t12_manufactured_regional_expansion_inversion() -> None:
         provenance="MANUFACTURED_EXPANSION_SCALAR",
     )
     mask = result.domain.mask
-    np.testing.assert_allclose(result.delta_theta[mask], expected.reshape(-1)[mask], atol=2e-12)
+    np.testing.assert_allclose(result.delta_theta[mask], expected.reshape(-1)[mask], atol=2e-12, rtol=0.0)
     assert result.diagnostics.equation_residual_max_abs <= 2e-10
     assert result.scientific_classification == DUST_EXPANSION_FIELD_RECONSTRUCTED_CONDITIONALLY
 

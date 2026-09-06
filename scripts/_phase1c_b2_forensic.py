@@ -127,7 +127,7 @@ def _forensic_barotropic_matrix(
     matrix[1, 0] = -four_pi_G * rho_d
     matrix[1, 1] = -(2.0 / 3.0) * theta
     matrix[1, 2] = -four_pi_G * rho_eff * (1.0 + 3.0 * cs2_eff)
-    # [GM] Eq. (4.15), with the unresolved branch explicitly carried.
+    # [GM] Eq. (4.15), with the forensic-versus-derived branch explicit.
     matrix[2, 1] = -one_plus_w
     branch_sign = 1.0 if scenario.branch is D3Branch.PRINTED_4_15 else -1.0
     matrix[2, 2] = (w_eff + branch_sign * cs2_eff) * theta

@@ -24,6 +24,10 @@ Two upstream quantities are NOT equivalent by design:
     (b) the discrepancy with upstream has the predicted magnitude.
 """
 
+# A06: absolute budgets use rtol=0; relative budgets use atol=0.
+# Previously implicit algebraic comparisons use rtol=2e-12, atol=1e-14
+# in the fixture units (roundoff allowance); explicit convergence budgets remain.
+
 import json
 from pathlib import Path
 
@@ -65,9 +69,9 @@ def oG(oracle) -> float:
 def test_oracle_constants_consistency(oracle, oparams):
     """Upstream derived constants match our parameter object."""
     c = oracle["constants"]
-    assert oparams.t0 == pytest.approx(c["t0"], rel=1e-14)
-    assert oparams.aD0 == pytest.approx(c["a0"], rel=1e-14)
-    assert oparams.H0_dressed == pytest.approx(c["H0"], rel=1e-13)
+    assert oparams.t0 == pytest.approx(c["t0"], rel=1e-14, abs=0.0)
+    assert oparams.aD0 == pytest.approx(c["a0"], rel=1e-14, abs=0.0)
+    assert oparams.H0_dressed == pytest.approx(c["H0"], rel=1e-13, abs=0.0)
 
 
 @pytest.mark.parametrize("ours,theirs,needs_G", [
@@ -89,7 +93,7 @@ def test_equivalent_quantities_match_oracle(oracle, oparams, oG, ours, theirs, n
     t = oracle["t"]
     ref = oracle["values"][theirs]
     val = ours(t, oparams, oG) if needs_G else ours(t, oparams)
-    np.testing.assert_allclose(val, ref, rtol=RTOL_ORACLE)
+    np.testing.assert_allclose(val, ref, rtol=RTOL_ORACLE, atol=0.0)
 
 
 # Interior window for np.gradient comparisons: the second-order gradient
@@ -108,7 +112,7 @@ def test_dQ_D_dt_matches_oracle_data_not_oracle_code(oracle, oparams):
     num = np.gradient(oracle["values"]["QD"], t)
     ours = bg.dQ_D_dt(t, oparams)
     theirs = oracle["values"]["dQDdt"]
-    np.testing.assert_allclose(ours[GRAD_WINDOW], num[GRAD_WINDOW], rtol=GRAD_RTOL)
+    np.testing.assert_allclose(ours[GRAD_WINDOW], num[GRAD_WINDOW], rtol=GRAD_RTOL, atol=0.0)
     rel_err_theirs = np.abs(theirs - num)[GRAD_WINDOW] / np.abs(num)[GRAD_WINDOW]
     assert np.median(rel_err_theirs) > 0.3
 
@@ -125,7 +129,7 @@ def test_effective_derivatives_match_oracle_data(oracle, oparams, oG, ours, thei
     t = oracle["t"]
     num = np.gradient(oracle["values"][source], t)
     val = ours(t, oparams, oG)
-    np.testing.assert_allclose(val[GRAD_WINDOW], num[GRAD_WINDOW], rtol=GRAD_RTOL)
+    np.testing.assert_allclose(val[GRAD_WINDOW], num[GRAD_WINDOW], rtol=GRAD_RTOL, atol=0.0)
     rel_err_theirs = (np.abs(oracle["values"][theirs] - num)
                       / np.abs(num))[GRAD_WINDOW]
     assert np.median(rel_err_theirs) > min_median
@@ -142,5 +146,5 @@ def test_cs2_eff_deviation_D2_quantified(oracle, oparams):
     rel_dev = np.abs(ours - theirs) / np.abs(theirs)
     assert rel_dev[0] < 0.06          # small (but nonzero) early on
     assert rel_dev[-1] > 0.10         # large today
-    assert theirs[-1] == pytest.approx(-0.34516, abs=0.0005)
-    assert ours[-1] == pytest.approx(-0.39124, abs=0.0005)
+    assert theirs[-1] == pytest.approx(-0.34516, abs=0.0005, rel=0.0)
+    assert ours[-1] == pytest.approx(-0.39124, abs=0.0005, rel=0.0)

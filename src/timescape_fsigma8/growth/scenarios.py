@@ -49,10 +49,11 @@ class GrowthBackgroundPreset(str, Enum):
 
 
 class GrowthD3Branch(str, Enum):
-    """Unresolved Phase 1C-A F1 branch of [GM] Eq. (4.15).
+    """Explicit D3 branch of [GM] Eq. (4.15), adjudicated in Phase 1D-D-t.
 
     ``NOT_APPLICABLE`` is the explicit value for the clean systems.  The two
-    real branches remain unresolved; neither is ranked in any way.
+    real branches remain separately selectable; DERIVED_4_10 is the derived
+    scientific branch and PRINTED_4_15 is retained for forensic reproduction.
     """
 
     NOT_APPLICABLE = "not_applicable"

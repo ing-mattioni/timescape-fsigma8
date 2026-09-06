@@ -1,5 +1,9 @@
 """Tilt equivalence, convergence, schema, and scope-purity tests."""
 
+# A06: absolute budgets use rtol=0; relative budgets use atol=0.
+# Previously implicit algebraic comparisons use rtol=2e-12, atol=1e-14
+# in the fixture units (roundoff allowance); explicit convergence budgets remain.
+
 import dataclasses
 import inspect
 import json
@@ -60,11 +64,11 @@ def test_tilt_forms_agree_for_identical_corrected_physics():
         a.crossings.delta_d_roots + a.crossings.z_roots,
         b.crossings.delta_d_roots + b.crossings.z_roots,
     ):
-        assert ra.t_root == pytest.approx(rb.t_root, abs=1e-8)
+        assert ra.t_root == pytest.approx(rb.t_root, abs=1e-8, rel=0.0)
     # same rates and non-logarithmic derivatives away from roots
     ok = ~(a.rates.near_zero_mask | b.rates.near_zero_mask)
     np.testing.assert_allclose(
-        a.rates.f_bare[ok], b.rates.f_bare[ok], rtol=1e-6
+        a.rates.f_bare[ok], b.rates.f_bare[ok], rtol=1e-6, atol=0.0
     )
     np.testing.assert_allclose(
         a.rates.dDelta_d_dln_aD, b.rates.dDelta_d_dln_aD, rtol=0, atol=1e-8 * scale
