@@ -60,6 +60,12 @@ class BarotropicScenario:
         _require_enum(
             self.rate_convention, RateUnitConvention, "rate_convention"
         )
+        if self.rate_convention is RateUnitConvention.TIMESCAPE_REGULAR_GROWING_MODE:
+            raise ValueError(
+                "timescape_regular_growing_mode is defined only for the clean "
+                "Meszaros/comoving systems; the barotropic early-time solution "
+                "is k- and D3-dependent (see perturbations.growing_mode)"
+            )
         _require_enum(self.epoch_choice, EpochChoice, "epoch_choice")
         _require_enum(
             self.wavenumber_convention,

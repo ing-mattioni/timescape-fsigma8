@@ -251,6 +251,14 @@ class GrowthScenario:
                 )
             if self.supplied_mode_k is None:
                 raise ValueError("barotropic requires an explicit supplied_mode_k")
+            if (
+                self.rate_unit_convention
+                is RateUnitConvention.TIMESCAPE_REGULAR_GROWING_MODE
+            ):
+                raise ValueError(
+                    "timescape_regular_growing_mode is defined only for the "
+                    "clean meszaros/comoving systems, not for barotropic runs"
+                )
         else:  # meszaros / comoving (clean, scale-independent systems)
             if branch is not GrowthD3Branch.NOT_APPLICABLE:
                 raise ValueError(

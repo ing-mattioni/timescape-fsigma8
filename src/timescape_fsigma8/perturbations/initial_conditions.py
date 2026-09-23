@@ -23,10 +23,20 @@ class RateUnitConvention(str, Enum):
     ``UPSTREAM_UNCONVERTED`` reproduces the notebook's unchanged numerical
     injection. ``LCDM_TO_TIMESCAPE_CONVERTED`` converts the rate from the
     Planck-2018 H0 unit (h=0.674) to the Timescape H0 unit (h=0.7323).
+
+    ``TIMESCAPE_REGULAR_GROWING_MODE`` does not import an LCDM rate at all:
+    ``Z`` and ``Delta_eff`` are taken from the regular (growing-mode)
+    solution of the selected clean system on the tracker background at the
+    resolved initial epoch (post-remediation review finding F1).  It depends
+    on the system and the epoch, so it is resolved only by
+    ``timescape_fsigma8.perturbations.growing_mode.
+    resolve_growing_mode_initial_conditions``; ``InitialConditionScenario``
+    and the barotropic solver reject it.
     """
 
     UPSTREAM_UNCONVERTED = "upstream_unconverted"
     LCDM_TO_TIMESCAPE_CONVERTED = "lcdm_to_timescape_converted"
+    TIMESCAPE_REGULAR_GROWING_MODE = "timescape_regular_growing_mode"
 
 
 @dataclass(frozen=True)
@@ -185,6 +195,12 @@ class InitialConditionScenario:
             rate_factor = 1.0
         elif self.rate_units is RateUnitConvention.LCDM_TO_TIMESCAPE_CONVERTED:
             rate_factor = self.recipe.h / self.timescape_h
+        elif self.rate_units is RateUnitConvention.TIMESCAPE_REGULAR_GROWING_MODE:
+            raise ValueError(
+                "timescape_regular_growing_mode depends on the clean system and "
+                "the resolved epoch; use growing_mode."
+                "resolve_growing_mode_initial_conditions"
+            )
         else:  # defensive against non-Enum construction
             raise ValueError(f"unsupported rate-unit convention: {self.rate_units!r}")
         expansion_gradient = z_lcdm_h0_units * rate_factor * params.H0_dressed

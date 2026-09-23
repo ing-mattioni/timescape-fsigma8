@@ -8,6 +8,11 @@ The package contains the validated Phase 1C-B1 clean systems:
 Phase 1C-B2 adds the barotropic closure, Eqs. (4.13)-(4.17), with both
 derived and forensic D3 equation branches and both tilt variables explicit.
 The accepted scientific adjudication is RESOLVED_DERIVED_4_10.
+
+``growing_mode`` adds the explicit, non-default initial-condition convention
+``TIMESCAPE_REGULAR_GROWING_MODE`` for the two clean systems (review finding
+F1): ``Z`` and ``Delta_eff`` on the regular growing solution of the tracker
+background at the resolved epoch.  The barotropic closure rejects it.
 Only the corrected Phase 1B sound speed is available here.  The upstream D2
 defect remains isolated in a non-exported forensic script.  F-sigma-8,
 normalisation, likelihoods, and parameter fitting remain outside scope.
@@ -31,6 +36,17 @@ from timescape_fsigma8.perturbations.barotropic_solver import (
     solve_barotropic,
 )
 
+from timescape_fsigma8.perturbations.growing_mode import (
+    EDS_COMOVING_EFFECTIVE_RATIO,
+    EDS_GROWING_LOG_RATE,
+    REGULAR_GROWING_MODE_REFERENCE_CONFIG,
+    CleanPerturbationSystem,
+    GrowingModeConfig,
+    GrowingModeInitialConditions,
+    RegularGrowingModeCoefficients,
+    regular_growing_mode_coefficients,
+    resolve_growing_mode_initial_conditions,
+)
 from timescape_fsigma8.perturbations.initial_conditions import (
     PLANCK_2018_QPLUS_RECIPE,
     InitialConditionScenario,
@@ -87,6 +103,15 @@ __all__ = [
     "BarotropicScenario",
     "BarotropicSolution",
     "solve_barotropic",
+    "EDS_COMOVING_EFFECTIVE_RATIO",
+    "EDS_GROWING_LOG_RATE",
+    "REGULAR_GROWING_MODE_REFERENCE_CONFIG",
+    "CleanPerturbationSystem",
+    "GrowingModeConfig",
+    "GrowingModeInitialConditions",
+    "RegularGrowingModeCoefficients",
+    "regular_growing_mode_coefficients",
+    "resolve_growing_mode_initial_conditions",
     "PLANCK_2018_QPLUS_RECIPE",
     "InitialConditionScenario",
     "LCDMGrowthRecipe",
