@@ -39,9 +39,11 @@ from timescape_fsigma8.transfer.continuum_geometry import (
     FixedReferenceBranchSpec,
 )
 from timescape_fsigma8.transfer.h1_realization import (
+    ALGEBRAIC_VALIDATION_ONLY_STATUS,
     EffectiveSectorContract,
     H1Background,
     H1DegeneracyError,
+    H1KinematicGatePolicy,
     H1RealizationResult,
     RegionalBulkState,
     RegionalEvolution,
@@ -484,7 +486,14 @@ class EffectiveSectorContinuumBridge:
             realization_id=REALIZATION_ID_1E_G,
             role=ROLE_1E_G,
             framework_status=FRAMEWORK_STATUS_1E_G,
-            scientific_status=SCIENTIFIC_STATUS_1E_G,
+            # Review finding F3: the 1E-G status requires the enforced
+            # background and CLK-H1 kinematic gates of the downstream result.
+            scientific_status=(
+                SCIENTIFIC_STATUS_1E_G
+                if downstream.kinematic_gate_policy
+                == H1KinematicGatePolicy.ENFORCE.value
+                else ALGEBRAIC_VALIDATION_ONLY_STATUS
+            ),
             implementation_status=IMPLEMENTATION_STATUS_1E_G,
             physical_volume_semantics=PHYSICAL_VOLUME_SEMANTICS,
             continuum_geometry={

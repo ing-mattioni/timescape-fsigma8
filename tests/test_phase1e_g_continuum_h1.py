@@ -45,8 +45,10 @@ from timescape_fsigma8.transfer import (
     EffectiveSectorContinuumBridge,
     FixedReferenceBranchSpec,
     H1Background,
+    H1BackgroundIdentityError,
     H1ClosureError,
     H1Configuration,
+    H1KinematicGatePolicy,
     H1DegeneracyError,
     MorphologySpec,
     RegionalBulkState,
@@ -61,6 +63,7 @@ from timescape_fsigma8.transfer import (
     require_no_generic_spectral_label,
     target_metric_weighted_l2_difference,
     two_region_coefficients,
+    two_region_dust_flrw_background,
 )
 
 
@@ -87,6 +90,10 @@ def downstream_configuration(**changes: float) -> H1Configuration:
         "transmission_flux_tolerance": 1e-10,
         "source_roundtrip_tolerance": 1e-10,
         "background_identity_tolerance": 2e-12,
+        "J_Xi_tolerance": 1e-10,
+        # Operator-algebra fixtures, not kinematically consistent backgrounds
+        # (review finding F3); enforced states are in the F3 section below.
+        "kinematic_gate_policy": H1KinematicGatePolicy.ALGEBRAIC_VALIDATION_ONLY,
     }
     values.update(changes)
     return H1Configuration(**values)
@@ -149,6 +156,7 @@ def make_background(*, f_v: float = 0.5, **changes: ScalarJet | float) -> H1Back
         "Xi_w": ZERO,
         "Xi_v": ZERO,
         "G": 1.0,
+        "six_K_D_over_a_D_squared": 0.0,
     }
     values.update(changes)
     return H1Background(**values)
@@ -1061,7 +1069,12 @@ def test_d5_one_dimensional_weighted_operator_survives_without_volume_promotion(
 def test_phase1e_g_result_status_and_no_fifth_state() -> None:
     result = make_result()
     assert result.realization_id == "H1-1E-G-COMOVING-CGI-ELLIPTIC-TRANSMISSION-V1"
-    assert result.scientific_status == "CONDITIONALLY_DERIVED_CONTINUUM_REALIZATION"
+    # Unenforced operator-algebra fixture (review finding F3); the enforced
+    # 1E-G label is tested in the F3 section at the end of this module.
+    assert result.scientific_status == "ALGEBRAIC_VALIDATION_ONLY"
+    assert (
+        result.downstream_phase1e_f.scientific_status == "ALGEBRAIC_VALIDATION_ONLY"
+    )
     assert result.implementation_status == "CONDITIONAL_RESEARCH_RUNTIME"
     assert [field.name for field in fields(RegionalBulkState)] == [
         "Delta_w", "Z_w", "Delta_v", "Z_v"
@@ -1187,6 +1200,9 @@ def _continuum_dynamic_fixture(
     alpha_w_first: float = 0.0,
     q_bar_first_shift: float = 0.0,
     relaxed_residuals: bool = False,
+    kinematic_gate_policy: H1KinematicGatePolicy = (
+        H1KinematicGatePolicy.ALGEBRAIC_VALIDATION_ONLY
+    ),
 ):
     """Manufactured algebraic jets, not an all-time physical Timescape trajectory.
 
@@ -1203,11 +1219,12 @@ def _continuum_dynamic_fixture(
         void_pullback_id="Phi_v_dynamic",
     )
     downstream = downstream_configuration(
+        kinematic_gate_policy=kinematic_gate_policy,
         **(
             {"R_Z_tolerance": 1e9, "R_eff_tolerance": 1e9}
             if relaxed_residuals
             else {}
-        )
+        ),
     )
     bridge = make_bridge(
         shape=(6, 3, 3),
@@ -1761,3 +1778,219 @@ def test_i12_untouched_reduced_dimensional_operator_remains_mathematical() -> No
     assert operator.global_kernel_dimension == 1
     with pytest.raises(ContinuumDimensionalContractError, match="dimension 1"):
         operator.geometric_void_fraction(a_w=1.0, a_v=1.0)
+
+
+# --- Review finding F3: enforced background and CLK-H1 kinematic gates -----
+# A06: gated residuals of the null-space states are roundoff in O(1) fixture
+# units (budget 1e-12 absolute); rank decisions use relative singular values
+# with an explicit 1e-12 null threshold and a 1e-6 nonzero threshold.
+
+F3_SHAPE = (6, 3, 3)
+F3_NULL = 1e-12
+F3_NONZERO = 1e-6
+
+
+def _f3_morphology() -> MorphologySpec:
+    return layered_morphology(
+        morphology_id="f3-consistent-one-wall-cell",
+        grid_shape=F3_SHAPE,
+        axis=0,
+        wall_cell_count=1,
+        wall_pullback_id="Phi_w_f3",
+        void_pullback_id="Phi_v_f3",
+    )
+
+
+def _f3_bridge(
+    *,
+    policy: H1KinematicGatePolicy,
+    probing: bool,
+    void_geometry: RegionalGeometrySpec | None = None,
+) -> EffectiveSectorContinuumBridge:
+    """``probing`` relaxes only R_Z/R_eff, to measure the linear residual map."""
+    extra = {"R_Z_tolerance": 1e9, "R_eff_tolerance": 1e9} if probing else {}
+    downstream = downstream_configuration(kinematic_gate_policy=policy, **extra)
+    return make_bridge(
+        shape=F3_SHAPE,
+        morphology=_f3_morphology(),
+        void_geometry=void_geometry,
+        configuration=continuum_configuration(downstream_configuration=downstream),
+    )
+
+
+def _f3_background(*, six_K_D_over_a_D_squared: float) -> H1Background:
+    return two_region_dust_flrw_background(
+        f_v=0.6,
+        rho_w=1.5,
+        rho_v=0.5,
+        H_w=0.3,
+        H_v=0.5,
+        alpha_w=scalar(1.0),
+        alpha_v=scalar(1.0),
+        six_K_D_over_a_D_squared=six_K_D_over_a_D_squared,
+        G=1.0 / (4.0 * np.pi),
+    )
+
+
+def _f3_void_scale(bridge: EffectiveSectorContinuumBridge, f_v: float) -> float:
+    """Scale factor a_v (a_w=1) that makes the geometric f_v equal ``f_v``."""
+    wall = bridge.operator.geometric_void_fraction(a_w=1.0, a_v=1.0)
+    ratio = (1.0 - wall) / wall  # V_w / V_v at unit scale factors
+    return (f_v / (1.0 - f_v) * ratio) ** (1.0 / 3.0)
+
+
+def _f3_evaluate(bridge, background: H1Background, bulk: np.ndarray):
+    return bridge.evaluate(
+        regional_bulk=RegionalBulkState(*(float(x) for x in bulk)),
+        background=background,
+        a_w=1.0,
+        a_v=_f3_void_scale(bridge, background.f_v.value),
+        equal_geometry_probe=None,
+        volume_fraction_consistency_classification=(
+            "F3_CONSISTENT_MANUFACTURED_BACKGROUND"
+        ),
+        morphology_sensitivity_diagnostics={},
+        discretization_convergence_metrics={},
+    )
+
+
+def _f3_residual_maps(bridge, background: H1Background) -> dict[str, np.ndarray]:
+    """The gated residual fields are linear in the bulk state: their matrices."""
+    columns: dict[str, list[np.ndarray]] = {"R_Z": [], "R_eff": [], "J_Xi": []}
+    for index in range(4):
+        unit = np.zeros(4)
+        unit[index] = 1.0
+        downstream = _f3_evaluate(bridge, background, unit).downstream_phase1e_f
+        for name, column in columns.items():
+            column.append(np.asarray(getattr(downstream, name)))
+    return {name: np.array(column).T for name, column in columns.items()}
+
+
+def _f3_relative_svd(maps: dict[str, np.ndarray], blocks: tuple[str, ...]):
+    _, singular, right = np.linalg.svd(np.vstack([maps[name] for name in blocks]))
+    return singular / singular[0], right
+
+
+def test_f3_dynamic_fixture_reproduces_review_kinematic_violations() -> None:
+    result, _ = _continuum_dynamic_fixture()
+    downstream = result.downstream_phase1e_f
+    residuals = downstream.background_identity_residuals
+    assert result.scientific_status == "ALGEBRAIC_VALIDATION_ONLY"
+    # Review F3 table (Appendix A.3): J_Xi in [-26.65, 5.33], wall/void
+    # Friedmann -3.760/-3.148, partition -0.144, W offset 2.957, Theta ok.
+    assert float(np.min(downstream.J_Xi)) == pytest.approx(-26.646643109540666, rel=1e-9, abs=0.0)
+    assert float(np.max(downstream.J_Xi)) == pytest.approx(5.329328621908169, rel=1e-9, abs=0.0)
+    assert residuals["regional_hamiltonian_constraint_w"] == pytest.approx(3.76, rel=2e-12, abs=0.0)
+    assert residuals["regional_hamiltonian_constraint_v"] == pytest.approx(
+        4.0 - (2.0 / 3.0) * 1.44 + 0.10755555555555557, rel=2e-12, abs=0.0
+    )
+    assert residuals["partition_kinematics"] == pytest.approx(0.144, rel=2e-12, abs=0.0)
+    assert residuals["averaged_curvature_W"] == pytest.approx(
+        3.0 + 0.4 * (-0.10755555555555557), rel=2e-12, abs=0.0
+    )
+    assert residuals["average_expansion"] <= 1e-15
+    with pytest.raises(
+        H1BackgroundIdentityError, match=r"^regional_hamiltonian_constraint_w "
+    ):
+        _continuum_dynamic_fixture(kinematic_gate_policy=H1KinematicGatePolicy.ENFORCE)
+
+
+def test_f3_flat_continuum_admits_nontrivial_state_passing_every_enforced_gate() -> None:
+    background = _f3_background(six_K_D_over_a_D_squared=0.0)
+    probe = _f3_bridge(
+        policy=H1KinematicGatePolicy.ALGEBRAIC_VALIDATION_ONLY, probing=True
+    )
+    maps = _f3_residual_maps(probe, background)
+    singular, right = _f3_relative_svd(maps, ("R_Z", "R_eff", "J_Xi"))
+    # With K_D = 0 the three gated fields impose only two independent
+    # conditions on the four bulk amplitudes: a two-parameter family remains.
+    assert singular[1] > F3_NONZERO
+    assert singular[2] < F3_NULL and singular[3] < F3_NULL
+    state = right[-1]
+    enforced = _f3_bridge(policy=H1KinematicGatePolicy.ENFORCE, probing=False)
+    result = _f3_evaluate(enforced, background, state)
+    downstream = result.downstream_phase1e_f
+    assert result.scientific_status == "CONDITIONALLY_DERIVED_CONTINUUM_REALIZATION"
+    assert downstream.scientific_status == "CONDITIONALLY_CLOSED"
+    assert max(downstream.background_identity_residuals.values()) <= 1e-12
+    assert downstream.J_Xi_max_abs <= 1e-12
+    for residual in (downstream.R_Z, downstream.R_eff, downstream.C_P, downstream.K_GM):
+        assert np.max(np.abs(residual)) <= 1e-12
+    for field in (
+        downstream.Delta_d.value,
+        downstream.Z,
+        downstream.Delta_eff.value,
+        downstream.F_v.value,
+        result.E_DeltaTheta_Gamma.value,
+        result.E_DeltaXi_0_Gamma.value,
+    ):
+        assert np.max(np.abs(field)) > 1e-2
+
+
+def test_f3_clock_gate_is_independent_when_K_D_is_nonzero() -> None:
+    background = _f3_background(six_K_D_over_a_D_squared=0.3)
+    probe = _f3_bridge(
+        policy=H1KinematicGatePolicy.ALGEBRAIC_VALIDATION_ONLY, probing=True
+    )
+    maps = _f3_residual_maps(probe, background)
+    clean_singular, clean_right = _f3_relative_svd(maps, ("R_Z", "R_eff"))
+    all_singular, all_right = _f3_relative_svd(maps, ("R_Z", "R_eff", "J_Xi"))
+    assert clean_singular[1] > F3_NONZERO and clean_singular[2] < F3_NULL
+    assert all_singular[2] > F3_NONZERO and all_singular[3] < F3_NULL
+    closed = all_right[-1]
+    # A state in the R_Z/R_eff null plane (orthonormal rows) orthogonal to
+    # the fully closed state: it passes R_Z and R_eff but not J_Xi.
+    plane = clean_right[2:]
+    candidates = plane - np.outer(plane @ closed, closed)
+    clock_violating = candidates[np.argmax(np.linalg.norm(candidates, axis=1))]
+    clock_violating /= np.linalg.norm(clock_violating)
+    enforced = _f3_bridge(policy=H1KinematicGatePolicy.ENFORCE, probing=False)
+    with pytest.raises(H1ClosureError, match=r"^J_Xi="):
+        _f3_evaluate(enforced, background, clock_violating)
+    result = _f3_evaluate(enforced, background, closed)
+    downstream = result.downstream_phase1e_f
+    assert downstream.J_Xi_max_abs <= 1e-12
+    assert downstream.scientific_status == "CONDITIONALLY_CLOSED"
+    # Numerical observation recorded in the F3 validation report (not a
+    # derived identity): for K_D != 0 the closed state has Z = 0 while the
+    # density fields stay nonzero.
+    assert np.max(np.abs(downstream.Z)) <= 1e-12
+    assert np.max(np.abs(downstream.Delta_d.value)) > 1e-3
+    assert np.max(np.abs(downstream.Delta_eff.value)) > 1e-3
+
+
+def test_f3_heterogeneous_void_geometry_admits_only_the_trivial_state() -> None:
+    morphology = _f3_morphology()
+    indices = np.indices(F3_SHAPE)
+    conformal = 1.0 + 0.3 * np.cos(2.0 * np.pi * indices[1] / 3.0) * (indices[0] >= 1)
+    void = conformal_regional_geometry(
+        region_id="void",
+        conformal_factor=conformal,
+        dimension=3,
+        curvature_class="SYNTHETIC_CONFORMAL_COMPARATOR",
+        pullback_provenance=morphology.void_pullback_id,
+        normalization=metric_normalization(
+            normalization_id="f3-heterogeneous-void",
+            reference_comoving_volume=metric_domain_volume(
+                conformal**3, morphology.void_domain
+            ),
+            metric_scale_convention="SYNTHETIC_HETEROGENEOUS_CONFORMAL_FACTOR",
+        ),
+        metadata={"role": "F3 non-collinear transfer comparator"},
+    )
+    background = _f3_background(six_K_D_over_a_D_squared=0.0)
+    probe = _f3_bridge(
+        policy=H1KinematicGatePolicy.ALGEBRAIC_VALIDATION_ONLY,
+        probing=True,
+        void_geometry=void,
+    )
+    singular, right = _f3_relative_svd(
+        _f3_residual_maps(probe, background), ("R_Z", "R_eff")
+    )
+    # Non-collinear wall/void transfers: R_Z = R_eff = 0 alone force zero.
+    assert singular[3] > F3_NONZERO
+    enforced = _f3_bridge(
+        policy=H1KinematicGatePolicy.ENFORCE, probing=False, void_geometry=void
+    )
+    with pytest.raises(H1ClosureError, match=r"^R_(Z|eff)="):
+        _f3_evaluate(enforced, background, right[-1])

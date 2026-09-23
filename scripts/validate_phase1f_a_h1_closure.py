@@ -46,6 +46,7 @@ from timescape_fsigma8.transfer import (
     ContinuumTransfer,
     FixedReferenceBranchSpec,
     H1Configuration,
+    H1KinematicGatePolicy,
     RegionalMetricNormalization,
     flat_regional_geometry,
     layered_morphology,
@@ -90,6 +91,8 @@ def h1_configuration() -> H1Configuration:
         transmission_flux_tolerance=1e-10,
         source_roundtrip_tolerance=1e-10,
         background_identity_tolerance=2e-12,
+        J_Xi_tolerance=1e-10,
+        kinematic_gate_policy=H1KinematicGatePolicy.ENFORCE,
     )
 
 
