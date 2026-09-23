@@ -19,7 +19,13 @@
         "rationale",
         "disposition of 1E-E deficits"
       ],
-      "status": "DECISION_RECORD_INCOMPLETE_AWAITING_HUMAN_CONFIRMATION"
+      "status": "UNAVAILABLE_CONFIRMED_BY_HUMAN"
+    },
+    "human_decision": {
+      "answer": "NOT_AVAILABLE_RECORD_AS_PERMANENT_GAP",
+      "consequence": "H1 implementation authorization traceable only to the 1E-F report's assertion; specification authority unverifiable; citation map is the durable substitute",
+      "date": "2026-09-23",
+      "question": "supply the 1E-F/1E-G/1F-A specifications, the three audits, the phase-1f-b tags and an H1 decision record?"
     },
     "specification_citations_displayed_or_described_in_committed_reports": true,
     "specification_sections_not_separately_identifiable": [
@@ -155,8 +161,8 @@
       "status": "ADDRESSED_BY_ENFORCED_GATES"
     },
     "F4": {
-      "record": "reports/phase1f_c_r_f2_f4_f9_remediation.md#3",
-      "status": "PARTIALLY_RESOLVED_AWAITING_HUMAN_DOCUMENTS"
+      "record": "reports/phase1f_c_r_f2_f4_f9_remediation.md#3.4",
+      "status": "CLOSED_AS_DOCUMENTED_PERMANENT_GAP"
     },
     "F5": {
       "record": "CLAUDE.md scope firewall",

@@ -24,7 +24,7 @@ fix (`phase1f_c_r_f3_h1_kinematic_gates_validation.md`).
 | Finding | Severity (review) | Status after this change |
 |---|---|---|
 | F2 bare/dressed factor range | MEDIUM | `RESOLVED_BY_SUCCESSOR_ERRATUM` (§2) |
-| F4 missing authorization, specifications and audits | MEDIUM | `PARTIALLY_RESOLVED_AWAITING_HUMAN_DOCUMENTS` (§3) |
+| F4 missing authorization, specifications and audits | MEDIUM | `CLOSED_AS_DOCUMENTED_PERMANENT_GAP` (§3; human decision 2026-09-23) |
 | F5 scope-firewall wording | LOW-MEDIUM | `RESOLVED` (§4) |
 | F6 checkout- and history-bound reproducibility | LOW-MEDIUM | `RESOLVED` (§5) |
 | F7 `G = 1.0` defaults | LOW | `RESOLVED` (§6) |
@@ -87,7 +87,7 @@ The erratum is pinned by `tests/test_review_errata.py`. Those tests check:
 - the table above;
 - that the factor exceeds 1.084156 throughout `0.3 ≤ z ≤ 3`.
 
-## 3. F4 — provenance record (partially resolved)
+## 3. F4 — provenance record (closed as a documented permanent gap)
 
 F4 asked for three things: commit the specifications, commit the three
 audits, and add an H1 decision record. None of the five documents exists in
@@ -160,13 +160,31 @@ No committed document records any of the following:
 This record does not assert that the grant occurred or what it said; only a
 human can confirm that. Status: `DECISION_RECORD_INCOMPLETE_AWAITING_HUMAN_CONFIRMATION`.
 
-**To close F4:**
-1. Commit the three specifications (or faithful excerpts of the cited
-   sections) and the three audits. The validator then reports them as
-   `VERIFIED` against the pinned hashes.
-2. Record the H1 decision (date, decision-maker, rationale, deficit
-   disposition) in a short human-authored decision record.
-3. Push the three `phase-1f-b-*` tags.
+### 3.4 Human decision (2026-09-23)
+
+The project owner was asked whether the missing documents could be supplied
+or committed. The answer was that they are **not available**, and that the
+gap should be recorded as permanent. Accordingly:
+
+- **F4 status: `CLOSED_AS_DOCUMENTED_PERMANENT_GAP`.** No specification,
+  audit or decision text will be added.
+  - The three specifications, the three audits (pinned hashes above) and any
+    record of the H1 decision are permanently unavailable to this repository.
+  - The three `phase-1f-b` tag objects are also permanently unavailable; their
+    commits remain verified.
+- **H1 decision record: `UNAVAILABLE_CONFIRMED_BY_HUMAN`.** The H1 runtime's
+  "Scientific implementation authorization: GRANTED" rests only on the 1E-F
+  report's own assertion. It cannot be traced to a committed decision.
+- **The specifications' authority is unverifiable.** The citation map (§3.2)
+  is the durable substitute. Every specification-cited equation can be checked
+  against a committed report, but not against the specification that
+  authorised it. Code citations of those specifications are kept as
+  historical attributions.
+- **The validator status is permanent.**
+  `validate_phase1f_c_r_astra_remediation.py` will keep reporting
+  `PASS_WITH_ABSENT_LOCAL_PROVENANCE`: three absent local files and three
+  absent tag objects. Any of those files that reappears is still verified
+  against its pin.
 
 ## 4. F5 — scope firewall
 
@@ -323,8 +341,9 @@ and the identity of 0.9204.
 
 ## 10. What remains open
 
-- **F4 (§3):** the three specifications, the three audits, the H1 decision
-  record and the three `phase-1f-b` tags need human input.
+- **F4 (§3.4):** closed as a documented permanent gap by human decision.
+  The specifications, audits, H1 decision record and `phase-1f-b` tag objects
+  are unavailable. The citation map is the durable substitute.
 - **Earlier fixes:** the open items of F1 (barotropic ICs, amplitude recipe)
   and F3 (heterogeneous geometry, unequal clocks, `K_D ≠ 0` observation,
   time evolution) are recorded in their own reports.

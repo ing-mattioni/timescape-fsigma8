@@ -61,9 +61,10 @@ number, and raised nine findings. They have been addressed as follows:
   ([validation](reports/phase1f_c_r_f3_h1_kinematic_gates_validation.md)).
 - **F2, F4–F9:** a successor erratum, provenance records, checkout-independent
   reproducibility gates, mandatory `G`, and refreshed documentation
-  ([remediation](reports/phase1f_c_r_f2_f4_f9_remediation.md)). F4 is only
-  partly resolved: two specifications and three audits have never been
-  committed, and the report records what is still missing.
+  ([remediation](reports/phase1f_c_r_f2_f4_f9_remediation.md)). F4 is closed
+  as a documented permanent gap: three specifications, three audits and any
+  H1 decision record are confirmed unavailable. A citation map ties every
+  specification-cited equation to a committed report.
 
 The earlier implementation milestones below remain useful provenance:
 
