@@ -27,6 +27,18 @@
       "date": "2026-09-23",
       "question": "supply the 1E-F/1E-G/1F-A specifications, the three audits, the phase-1f-b tags and an H1 decision record?"
     },
+    "phase1f_b_tags": {
+      "commits_match_pins": true,
+      "published": "2026-09-23",
+      "refs": [
+        "refs/tags/phase-1f-b-dust-wall-boost-dynamics-v1",
+        "refs/tags/phase-1f-b-dust-wall-boost-dynamics-v2",
+        "refs/tags/phase-1f-b-dust-wall-boost-dynamics-v3"
+      ],
+      "signed_by_owner": true,
+      "status": "PUBLISHED_BY_OWNER_AFTER_CLOSURE",
+      "tag_objects_match_pins": true
+    },
     "specification_citations_displayed_or_described_in_committed_reports": true,
     "specification_sections_not_separately_identifiable": [
       "1E-G section 21",
@@ -59,13 +71,7 @@
         "document": "reports/phase1f_c_wall_common_geometry_adversarial_audit.md",
         "pinned_sha256": "345417fdecf5ce686988a128a04a788263a5a51c2831f3cfd3c0511dfd15df3c"
       }
-    ],
-    "unpublished_tags": [
-      "refs/tags/phase-1f-b-dust-wall-boost-dynamics-v1",
-      "refs/tags/phase-1f-b-dust-wall-boost-dynamics-v2",
-      "refs/tags/phase-1f-b-dust-wall-boost-dynamics-v3"
-    ],
-    "unpublished_tags_commits_present_and_ancestral": true
+    ]
   },
   "F6_reproducibility": {
     "barotropic_oracle_reextraction_data_identical": true,
@@ -82,7 +88,8 @@
       "base": "63d2104575c6a249e5177e47f4a354b660e70e32",
       "certified_commit": "118b8f3af3c1360b0da74df8e9a9cb3ba1fed83a",
       "frozen_tags_total": 27,
-      "frozen_tags_verified": 24,
+      "frozen_tags_verified": 27,
+      "frozen_tags_verified_at_first_writing": 24,
       "historical_reports_unchanged": 52,
       "post_remediation_drift": [
         "src/timescape_fsigma8/background/effective_fluid.py",
@@ -102,6 +109,13 @@
     "dp_eff_dt"
   ],
   "authorization": "human request: fix F2, F4, F5, F6, F7, F8 and F9",
+  "checkpoint": {
+    "merge_commit": "ce550753f2e0270ddd29b2e81f99cb23b8bf8780",
+    "merged_branch_deleted": true,
+    "pull_request": 1,
+    "tag": "phase-1f-c-r-post-remediation-review-v1",
+    "tag_object": "d4084287023c77414461a8b5ad465bcc76030998"
+  },
   "errata": {
     "F2_dressed_chain_factor": {
       "derivative": "(2+f_v)(6-15 f_v)/(4+f_v+4 f_v^2)^2",

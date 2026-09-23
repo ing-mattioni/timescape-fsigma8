@@ -111,10 +111,11 @@ supply.
 The Phase 1F-A specification is an additional gap. The review named only the
 1E-F and 1E-G specifications.
 
-**Unpublished tags.** The inventory also pins three tags that were never
-pushed to `origin`: `phase-1f-b-dust-wall-boost-dynamics-v1/v2/v3`. Their
-commits are present and are ancestors of `HEAD`, so the validator verifies the
-commits and reports the tag objects as absent (§5).
+**Tags (published after this report was first written).** The inventory
+also pins three tags, `phase-1f-b-dust-wall-boost-dynamics-v1/v2/v3`, that were
+not on `origin` when this report was written. The project owner has since
+published the original signed tags (§11). Their tag objects and commits match
+the pins, and the validator verifies them.
 
 ### 3.2 Specification citation map
 
@@ -170,8 +171,8 @@ gap should be recorded as permanent. Accordingly:
   audit or decision text will be added.
   - The three specifications, the three audits (pinned hashes above) and any
     record of the H1 decision are permanently unavailable to this repository.
-  - The three `phase-1f-b` tag objects are also permanently unavailable; their
-    commits remain verified.
+  - The three `phase-1f-b` tags are not part of the gap: the project owner
+    published the originals after this decision (§11).
 - **H1 decision record: `UNAVAILABLE_CONFIRMED_BY_HUMAN`.** The H1 runtime's
   "Scientific implementation authorization: GRANTED" rests only on the 1E-F
   report's own assertion. It cannot be traced to a committed decision.
@@ -182,9 +183,9 @@ gap should be recorded as permanent. Accordingly:
   historical attributions.
 - **The validator status is permanent.**
   `validate_phase1f_c_r_astra_remediation.py` will keep reporting
-  `PASS_WITH_ABSENT_LOCAL_PROVENANCE`: three absent local files and three
-  absent tag objects. Any of those files that reappears is still verified
-  against its pin.
+  `PASS_WITH_ABSENT_LOCAL_PROVENANCE` because of the three absent audit
+  files. Any of those files that reappears is still verified against its
+  pin.
 
 ## 4. F5 — scope firewall
 
@@ -240,7 +241,8 @@ labels are unchanged.
 
    On this checkout the result is `PASS_WITH_ABSENT_LOCAL_PROVENANCE`:
    - 20 preserved equations certified;
-   - 24 of 27 tags verified, with the 3 `phase-1f-b` tag objects absent;
+   - 27 of 27 tags verified. When this section was first written, only 24
+     were verified, because the 3 `phase-1f-b` tags were unpublished (§11);
    - the 3 audits of §3.1 absent;
    - 52 historical reports byte-identical;
    - no explicit-tolerance omissions.
@@ -342,8 +344,36 @@ and the identity of 0.9204.
 ## 10. What remains open
 
 - **F4 (§3.4):** closed as a documented permanent gap by human decision.
-  The specifications, audits, H1 decision record and `phase-1f-b` tag objects
-  are unavailable. The citation map is the durable substitute.
+  The specifications, audits and H1 decision record are unavailable. The
+  citation map is the durable substitute.
 - **Earlier fixes:** the open items of F1 (barotropic ICs, amplitude recipe)
   and F3 (heterogeneous geometry, unequal clocks, `K_D ≠ 0` observation,
   time evolution) are recorded in their own reports.
+
+## 11. Post-merge update (2026-09-23)
+
+After PR #1 was merged (merge commit `ce55075`), the project owner published
+these tags from the original clone:
+
+| Tag | Tag object | Commit |
+|---|---|---|
+| `phase-1f-b-dust-wall-boost-dynamics-v1` | `d7840740…23bb7a` | `27fd65fd…3b566e` |
+| `phase-1f-b-dust-wall-boost-dynamics-v2` | `bd1facf1…eef3a0` | `16440e1a…90fa66a` |
+| `phase-1f-b-dust-wall-boost-dynamics-v3` | `61dc9cf7…7059ab7` | `d2f15022…250309d8aaa67` |
+| `phase-1f-c-r-post-remediation-review-v1` (this checkpoint) | `d4084287…6030998` | `ce550753…23b8bf8780` |
+
+All four tags are signed by the owner.
+
+The three `phase-1f-b` tag objects and their commits match the 1F-C-R
+inventory pins exactly; they are the originals, not recreations. Rerunning
+`validate_phase1f_c_r_astra_remediation.py` gives:
+- 27 of 27 frozen tags verified;
+- no absent tag objects;
+- 20 preserved equations certified;
+- 52 historical reports byte-identical.
+
+The status stays `PASS_WITH_ABSENT_LOCAL_PROVENANCE`, only because of the
+three unavailable audits of §3.1. F4 therefore remains
+`CLOSED_AS_DOCUMENTED_PERMANENT_GAP`, now limited to the specifications, the
+audits and the H1 decision record. The merged branch
+`claude/loving-dijkstra-esoj6f` was deleted after the merge.
