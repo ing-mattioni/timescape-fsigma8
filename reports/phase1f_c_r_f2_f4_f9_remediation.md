@@ -302,8 +302,24 @@ and the identity of 0.9204.
 **Validators:**
 - `validate_phase1f_c_r_astra_remediation.py`: §5, item 3.
 - `validate_anchored_density_growth.py`, regenerated on the clean committed
-  tree by ancestry: run after this commit; the result is recorded in the
-  follow-up commit.
+  tree `ae00246` by ancestry: exit 0.
+  - `execution_context = post_phase_regeneration_by_ancestry`, off the
+    historical branch.
+  - All declared gates passed, and the 25-section artifact schema held.
+  - Its embedded full suites passed: 724 passed on Python 3.13.12 and 724
+    passed on Python 3.11.15. Its own artifact test ran rather than skipped,
+    because the provisional artifact exists during the run.
+  - The regenerated values agree with the frozen 1D-D report:
+
+    | Quantity | Regenerated | Frozen report | Relative difference |
+    |---|---|---|---|
+    | `Q_bare` | `2.1502835091436094` | `2.150283509143608` | 6.2e−16 |
+    | `Q_dressed` | `2.331243485933034` | `2.3312434859330327` | 5.7e−16 |
+    | chain factor | `1.084156333813626` | `1.084156333813626` | identical |
+
+    The residual differences come from the numpy/scipy versions.
+  - Post-phase changes recorded since `7ea266c`: the F1 and F7 edits, plus
+    the 1F-C-R edit to `perturbations/barotropic.py` (`72d8c51`).
 
 ## 10. What remains open
 
