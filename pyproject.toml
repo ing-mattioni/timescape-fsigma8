@@ -1,5 +1,7 @@
-# Minimal reproducible environment for Phase 1A: executing the upstream
-# ACPT_Timescape.ipynb notebook (see UPSTREAM.lock).
+# Independent, equation-audited reproduction of arXiv:2511.17160 (Timescape
+# background, perturbations and growth) plus conditional, non-observational
+# research runtimes (Phases 1E-F to 1F-C).  The `exec` extra executes the
+# upstream ACPT_Timescape.ipynb notebook (see UPSTREAM.lock).
 #
 # Dependency policy: the notebook imports only numpy, scipy and matplotlib.
 # nbformat/nbclient/ipykernel are needed solely to execute the notebook from
@@ -14,7 +16,7 @@
 [project]
 name = "timescape-fsigma8"
 version = "0.1.0"
-description = "Equation-audited Timescape background and clean Mészáros/comoving perturbation reproduction from arXiv:2511.17160"
+description = "Equation-audited Timescape background, perturbation and growth reproduction of arXiv:2511.17160, with conditional non-observational regional-transfer research runtimes"
 requires-python = ">=3.11"
 dependencies = [
     "numpy",

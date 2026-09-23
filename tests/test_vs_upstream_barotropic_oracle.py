@@ -44,7 +44,12 @@ NOTEBOOK_PATH = (
     / "ACPT_Timescape.ipynb"
 )
 EXPECTED_COMMIT = "590c6fd5332acb15f5683ebf392a0d7ce54983c5"
-EXPECTED_SHA256 = "86d2534db9e9b3169835e4ce223ee8f3bff6d03b47e5677d3937fed4adafe55a"
+# Review finding F6: the pinned notebook identity is the SHA-256 of its bytes
+# with CRLF normalised to LF (UPSTREAM.lock notebook_sha256_lf).  Raw hashes
+# recorded in an oracle are one of the two encodings of that same content.
+EXPECTED_SHA256_LF = "628c441288d67854e0380518841dede3680bddab610e9ef5cea04937455cea2a"
+EXPECTED_SHA256_CRLF = "86d2534db9e9b3169835e4ce223ee8f3bff6d03b47e5677d3937fed4adafe55a"
+RECOGNISED_RAW_SHA256 = {EXPECTED_SHA256_LF, EXPECTED_SHA256_CRLF}
 NORMALIZED_LINF_GATE = 2e-8
 
 
@@ -73,8 +78,17 @@ def test_barotropic_oracle_provenance_is_unchanged(oracle):
     assert provenance["source_cells"] == [0, 1, 2, 3, 4, 5, 6, 7, 8, 12, 15]
     assert provenance["upstream_commit_before"] == EXPECTED_COMMIT
     assert provenance["upstream_commit_after"] == EXPECTED_COMMIT
-    assert provenance["upstream_notebook_sha256_before"] == EXPECTED_SHA256
-    assert provenance["upstream_notebook_sha256_after"] == EXPECTED_SHA256
+    assert provenance["upstream_notebook_sha256_before"] in RECOGNISED_RAW_SHA256
+    assert (
+        provenance["upstream_notebook_sha256_after"]
+        == provenance["upstream_notebook_sha256_before"]
+    )
+    for key in (
+        "upstream_notebook_sha256_lf_normalized_before",
+        "upstream_notebook_sha256_lf_normalized_after",
+    ):
+        if key in provenance:  # absent from oracles extracted before F6
+            assert provenance[key] == EXPECTED_SHA256_LF
     assert provenance["notebook_unmodified"] is True
     assert provenance["solver_convention"] == {
         "method": "RK45",
@@ -85,7 +99,23 @@ def test_barotropic_oracle_provenance_is_unchanged(oracle):
         "source": "scipy.integrate.solve_ivp defaults made explicit",
     }
     if NOTEBOOK_PATH.exists():
-        assert hashlib.sha256(NOTEBOOK_PATH.read_bytes()).hexdigest() == EXPECTED_SHA256
+        normalized = NOTEBOOK_PATH.read_bytes().replace(b"\r\n", b"\n")
+        assert hashlib.sha256(normalized).hexdigest() == EXPECTED_SHA256_LF
+
+
+def test_pinned_notebook_identity_matches_upstream_lock():
+    lock = (PROJECT_ROOT / "UPSTREAM.lock").read_text(encoding="utf-8")
+    values = dict(
+        (key.strip(), value.strip())
+        for key, value in (
+            line.split("=", 1)
+            for line in lock.splitlines()
+            if "=" in line and not line.lstrip().startswith("#")
+        )
+    )
+    assert values["commit"] == EXPECTED_COMMIT
+    assert values["notebook_sha256_lf"] == EXPECTED_SHA256_LF
+    assert values["notebook_sha256_crlf"] == EXPECTED_SHA256_CRLF
 
 
 @pytest.mark.parametrize("k", [2.0 * np.pi, 5.0 * np.pi, 10.0 * np.pi])

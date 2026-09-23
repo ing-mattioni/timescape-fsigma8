@@ -11,11 +11,25 @@ effective-fluid background Eqs. (3.12)-(3.13), clean closure Eqs. (4.12),
 transmission formulas are cited to the authoritative Phase 1E-F
 implementation specification because they are conditional imported dynamics,
 not equations supplied by that paper or the unlicensed upstream notebook.
+
+Kinematic gates (post-remediation review finding F3,
+``reports/phase1f_c_r_f3_h1_kinematic_gates_validation.md``).  Under the
+explicit policy ``H1KinematicGatePolicy.ENFORCE`` the evaluator fails closed
+unless (i) the background satisfies the zeroth-order identities of two exact
+pressureless FLRW regions at ``Lambda=0`` together with the two-region
+averaging identities and the GM averaged equations
+(``two_region_background_identity_residuals``), and (ii) the clock mismatch
+``J_Xi`` vanishes, as the homogeneous-clock branch ``CLK-H1`` requires.  Only
+enforced results carry ``SCIENTIFIC_STATUS``; the explicit
+``ALGEBRAIC_VALIDATION_ONLY`` policy records the same residuals without
+enforcing them and labels the result accordingly.
 """
 
 from __future__ import annotations
 
 from dataclasses import dataclass
+from enum import Enum
+from types import MappingProxyType
 from typing import Mapping
 
 import numpy as np
@@ -44,6 +58,27 @@ OBSERVATIONAL_IMPLEMENTATION_AUTHORIZATION = "NOT_GRANTED"
 DRESSED_LIGHTCONE_IMPLEMENTATION_AUTHORIZATION = "NOT_GRANTED"
 RSD_IMPLEMENTATION_AUTHORIZATION = "NOT_GRANTED"
 FSIGMA8_IMPLEMENTATION_AUTHORIZATION = "NOT_GRANTED"
+# Status of a result evaluated without kinematic enforcement; identical to
+# scientific_status.MANUFACTURED_H1_TRAJECTORIES (Phase 1F-C-R).
+ALGEBRAIC_VALIDATION_ONLY_STATUS = "ALGEBRAIC_VALIDATION_ONLY"
+# Phase 1E-E clock dictionary (section 11): homogeneous rate, spatial
+# dependence EXCLUDED, perturbative lapse NOT_DEFINED.  It is the only clock
+# branch this runtime implements.
+CLOCK_BRANCH = "CLK-H1"
+
+
+class H1KinematicGatePolicy(str, Enum):
+    """Mandatory choice of whether the F3 kinematic gates are enforced.
+
+    ``ENFORCE`` fails closed on every background identity and on ``J_Xi``;
+    only such results carry ``SCIENTIFIC_STATUS``.  ``ALGEBRAIC_VALIDATION_ONLY``
+    evaluates and records the same residuals without enforcing them, for
+    operator-algebra fixtures that are not kinematically consistent states;
+    its results carry ``ALGEBRAIC_VALIDATION_ONLY_STATUS``.  No default.
+    """
+
+    ENFORCE = "ENFORCE_TWO_REGION_BACKGROUND_AND_CLK_H1_KINEMATICS"
+    ALGEBRAIC_VALIDATION_ONLY = "ALGEBRAIC_VALIDATION_ONLY"
 
 
 class H1ContractError(ValueError):
@@ -58,9 +93,19 @@ class H1ClosureError(H1ContractError):
     """A transmission, constitutive, compatibility, or constraint gate fails."""
 
 
+class H1BackgroundIdentityError(H1ContractError):
+    """An enforced zeroth-order background identity fails."""
+
+
 @dataclass(frozen=True)
 class H1Configuration:
-    """All scientific thresholds are explicit; no field has a default."""
+    """All scientific thresholds are explicit; no field has a default.
+
+    ``background_identity_tolerance`` bounds ``Theta_r=3H_r`` (always
+    enforced) and, under ``H1KinematicGatePolicy.ENFORCE``, every residual of
+    ``two_region_background_identity_residuals``.  ``J_Xi_tolerance`` bounds
+    the clock mismatch under the same policy.
+    """
 
     A_P_min: float
     effective_denominator_min: float
@@ -76,8 +121,14 @@ class H1Configuration:
     transmission_flux_tolerance: float
     source_roundtrip_tolerance: float
     background_identity_tolerance: float
+    J_Xi_tolerance: float
+    kinematic_gate_policy: H1KinematicGatePolicy
 
     def __post_init__(self) -> None:
+        if not isinstance(self.kinematic_gate_policy, H1KinematicGatePolicy):
+            raise H1ContractError(
+                "kinematic_gate_policy must be an explicit H1KinematicGatePolicy"
+            )
         minima = (
             "A_P_min",
             "effective_denominator_min",
@@ -95,6 +146,7 @@ class H1Configuration:
             "transmission_flux_tolerance",
             "source_roundtrip_tolerance",
             "background_identity_tolerance",
+            "J_Xi_tolerance",
         )
         for name in minima:
             value = float(getattr(self, name))
@@ -146,7 +198,14 @@ class RegionalBulkState:
 
 @dataclass(frozen=True)
 class H1Background:
-    """Explicit common-time background and derivative contract."""
+    """Explicit common-time background and derivative contract.
+
+    ``six_K_D_over_a_D_squared`` is ``6 K_D/a_D^2`` at the evaluation time,
+    the constant-curvature part of ``W_D = <R>_D - 6 K_D/a_D^2`` ([GM] Eq.
+    (3.12) and Phase 1E-D section 19).  It is mandatory; GM Timescape uses
+    ``K_D = 0``.  Its time derivatives follow from ``K_D`` constant and
+    ``d ln a_D/dt = Theta/3``.
+    """
 
     f_v: ScalarJet
     rho_w: ScalarJet
@@ -165,10 +224,13 @@ class H1Background:
     Xi_w: ScalarJet
     Xi_v: ScalarJet
     G: float
+    six_K_D_over_a_D_squared: float
 
     def __post_init__(self) -> None:
         if not np.isfinite(self.G) or self.G <= 0.0:
             raise ValueError("G must be finite and positive")
+        if not np.isfinite(self.six_K_D_over_a_D_squared):
+            raise ValueError("six_K_D_over_a_D_squared must be finite")
 
 
 @dataclass(frozen=True)
@@ -266,6 +328,10 @@ class H1RealizationResult:
     rho_eff: float
     p_eff: float
     w_eff: float
+    kinematic_gate_policy: str
+    clock_branch: str
+    background_identity_residuals: Mapping[str, float]
+    J_Xi_max_abs: float
 
 
 def _s_add(a: ScalarJet, b: ScalarJet) -> ScalarJet:
@@ -409,6 +475,282 @@ def two_region_coefficients(background: H1Background) -> TwoRegionCoefficients:
     return TwoRegionCoefficients(d_theta, A_W, A_Q, B_Q, A_P, B_P, A_f)
 
 
+# Names of the background identities, in gate order.  Each maps to the
+# largest absolute residual over the jet orders that the supplied jets
+# determine (three for algebraic identities, two for evolution equations).
+BACKGROUND_IDENTITY_NAMES = (
+    "regional_hamiltonian_constraint_w",
+    "regional_hamiltonian_constraint_v",
+    "regional_raychaudhuri_w",
+    "regional_raychaudhuri_v",
+    "regional_dust_continuity_w",
+    "regional_dust_continuity_v",
+    "partition_kinematics",
+    "average_expansion",
+    "two_region_backreaction",
+    "averaged_curvature_W",
+    "averaged_hamiltonian_constraint",
+    "averaged_raychaudhuri",
+    "averaged_mass_conservation",
+)
+
+
+def _full_jet_magnitude(jet: ScalarJet) -> float:
+    return max(abs(jet.value), abs(jet.first), abs(jet.second))
+
+
+def _constant_curvature_jet(background: H1Background) -> ScalarJet:
+    """``6 K_D/a_D^2`` with ``K_D`` constant and ``d ln a_D/dt = Theta/3``."""
+    value = background.six_K_D_over_a_D_squared
+    theta = background.Theta
+    first = -(2.0 / 3.0) * theta.value * value
+    second = -(2.0 / 3.0) * (theta.first * value + theta.value * first)
+    return ScalarJet(value, first, second)
+
+
+def two_region_background_identity_residuals(
+    background: H1Background,
+) -> Mapping[str, float]:
+    """Return the zeroth-order kinematic identity residuals of the background.
+
+    All hold for two exact, irrotational, shear-free pressureless FLRW regions
+    at ``Lambda = 0`` whose regional proper times are ``tau_r(t)`` with
+    ``alpha_r = d tau_r/dt`` (Phase 1E-D section 16), averaged over the fixed
+    two-region partition.  Per region ``r``:
+
+    * ``regional_hamiltonian_constraint_r``: ``R_bar_r = 16 pi G rho_r -
+      (2/3) Theta_r^2``, [GM] Eq. (2.13) at zeroth order with ``Lambda=0``;
+    * ``regional_raychaudhuri_r``: ``Theta_r_dot = -alpha_r (Theta_r^2/3 +
+      4 pi G rho_r)``, [GM] Eq. (2.12) with the standard ``-Lambda`` and
+      ``Lambda=0`` (Phase 1C-A finding F5 does not arise);
+    * ``regional_dust_continuity_r``: ``rho_r_dot = -alpha_r Theta_r rho_r``
+      (``rho_r a_r^3`` constant; the regional form of [GM] Eq. (3.10)).
+
+    Two-region averaging (Phase 1E-D sections 17-19):
+
+    * ``partition_kinematics``: ``f_v_dot = f_v f_w (Xi_v - Xi_w)`` (H-D5);
+    * ``average_expansion``: ``Theta = f_w Xi_w + f_v Xi_v``;
+    * ``two_region_backreaction``: ``Q_bar = (2/3) f_v f_w (Theta_v -
+      Theta_w)^2`` (H-D7; the zeroth-order quantity whose first variation
+      ``two_region_coefficients`` implements);
+    * ``averaged_curvature_W``: ``W_bar = f_w R_bar_w + f_v R_bar_v - 6
+      K_D/a_D^2`` ([GM] Eq. (3.12) definition, ``K_D`` explicit).
+
+    GM averaged equations at ``Lambda=0`` with ``H_D = Theta/3`` and
+    ``rho_d = f_w rho_w + f_v rho_v``:
+
+    * ``averaged_hamiltonian_constraint``: [GM] Eq. (3.8);
+    * ``averaged_raychaudhuri``: [GM] Eq. (3.9);
+    * ``averaged_mass_conservation``: [GM] Eq. (3.10).
+
+    Algebraic identities are checked through the second jet order and
+    evolution equations through the first, the highest orders the jets
+    determine.  The residuals are absolute, in the background's units.
+    """
+    if not isinstance(background, H1Background):
+        raise H1ContractError("background must be an explicit H1Background")
+    G = background.G
+    four_pi_G = 4.0 * np.pi * G
+    one = ScalarJet(1.0, 0.0, 0.0)
+    f_v = background.f_v
+    f_w = _s_sub(one, f_v)
+    residuals: dict[str, float] = {}
+
+    regions = (
+        ("w", background.rho_w, background.Theta_w, background.alpha_w, background.R_bar_w),
+        ("v", background.rho_v, background.Theta_v, background.alpha_v, background.R_bar_v),
+    )
+    for region, rho, theta, alpha, R_bar in regions:
+        hamiltonian = _s_sub(
+            R_bar,
+            _s_sub(
+                _s_scale(4.0 * four_pi_G, rho),
+                _s_scale(2.0 / 3.0, _s_mul(theta, theta)),
+            ),
+        )
+        residuals[f"regional_hamiltonian_constraint_{region}"] = _full_jet_magnitude(
+            hamiltonian
+        )
+    for region, rho, theta, alpha, _ in regions:
+        source = theta.value**2 / 3.0 + four_pi_G * rho.value
+        source_dot = (2.0 / 3.0) * theta.value * theta.first + four_pi_G * rho.first
+        residuals[f"regional_raychaudhuri_{region}"] = max(
+            abs(theta.first + alpha.value * source),
+            abs(theta.second + alpha.first * source + alpha.value * source_dot),
+        )
+    for region, rho, theta, alpha, _ in regions:
+        residuals[f"regional_dust_continuity_{region}"] = max(
+            abs(rho.first + alpha.value * theta.value * rho.value),
+            abs(
+                rho.second
+                + alpha.first * theta.value * rho.value
+                + alpha.value * theta.first * rho.value
+                + alpha.value * theta.value * rho.first
+            ),
+        )
+
+    d_xi = _s_sub(background.Xi_v, background.Xi_w)
+    f_product = f_v.value * f_w.value
+    residuals["partition_kinematics"] = max(
+        abs(f_v.first - f_product * d_xi.value),
+        abs(
+            f_v.second
+            - (f_w.value - f_v.value) * f_v.first * d_xi.value
+            - f_product * d_xi.first
+        ),
+    )
+    residuals["average_expansion"] = _full_jet_magnitude(
+        _s_sub(
+            background.Theta,
+            _s_add(_s_mul(f_w, background.Xi_w), _s_mul(f_v, background.Xi_v)),
+        )
+    )
+    d_theta = _s_sub(background.Theta_v, background.Theta_w)
+    residuals["two_region_backreaction"] = _full_jet_magnitude(
+        _s_sub(
+            background.Q_bar,
+            _s_scale(2.0 / 3.0, _s_mul(_s_mul(f_v, f_w), _s_mul(d_theta, d_theta))),
+        )
+    )
+    average_R = _s_add(_s_mul(f_w, background.R_bar_w), _s_mul(f_v, background.R_bar_v))
+    residuals["averaged_curvature_W"] = _full_jet_magnitude(
+        _s_sub(background.W_bar, _s_sub(average_R, _constant_curvature_jet(background)))
+    )
+
+    theta = background.Theta
+    rho_d = _s_add(_s_mul(f_w, background.rho_w), _s_mul(f_v, background.rho_v))
+    # [GM] (3.8): 3 H_D^2 = 8 pi G rho_d - <R>_D/2 - Q_D/2 with H_D = Theta/3.
+    residuals["averaged_hamiltonian_constraint"] = _full_jet_magnitude(
+        _s_add(
+            _s_sub(_s_scale(1.0 / 3.0, _s_mul(theta, theta)), _s_scale(2.0 * four_pi_G, rho_d)),
+            _s_scale(0.5, _s_add(average_R, background.Q_bar)),
+        )
+    )
+    # [GM] (3.9): 3 a_D_ddot/a_D = Theta_dot + Theta^2/3 = -4 pi G rho_d + Q_D.
+    residuals["averaged_raychaudhuri"] = max(
+        abs(
+            theta.first
+            + theta.value**2 / 3.0
+            + four_pi_G * rho_d.value
+            - background.Q_bar.value
+        ),
+        abs(
+            theta.second
+            + (2.0 / 3.0) * theta.value * theta.first
+            + four_pi_G * rho_d.first
+            - background.Q_bar.first
+        ),
+    )
+    # [GM] (3.10): rho_d_dot = -Theta rho_d.
+    residuals["averaged_mass_conservation"] = max(
+        abs(rho_d.first + theta.value * rho_d.value),
+        abs(rho_d.second + theta.first * rho_d.value + theta.value * rho_d.first),
+    )
+    return MappingProxyType({name: residuals[name] for name in BACKGROUND_IDENTITY_NAMES})
+
+
+def two_region_dust_flrw_background(
+    *,
+    f_v: float,
+    rho_w: float,
+    rho_v: float,
+    H_w: float,
+    H_v: float,
+    alpha_w: ScalarJet,
+    alpha_v: ScalarJet,
+    six_K_D_over_a_D_squared: float,
+    G: float,
+) -> H1Background:
+    """Build the background jets of two exact dust-FLRW regions at one instant.
+
+    Free data: the instantaneous ``f_v``, ``rho_r`` and ``H_r``, the regional
+    clock-rate jets ``alpha_r = d tau_r/dt``, ``6 K_D/a_D^2`` and ``G``.  Every
+    other jet is derived from the identities of
+    ``two_region_background_identity_residuals``, on the homogeneous-clock
+    branch ``Xi_r = alpha_r Theta_r`` (Phase 1E-G section 18):
+
+    * ``Theta_r = 3 H_r``; ``rho_r``, ``Theta_r`` evolve by the regional
+      continuity and Raychaudhuri equations; ``R_bar_r`` is [GM] (2.13);
+    * ``f_v`` evolves by the partition kinematics; ``Theta``, ``Q_bar`` and
+      ``W_bar`` are the averaging identities with the explicit ``K_D`` term.
+
+    The regional and two-region identities hold by construction.  The GM
+    averaged equations (3.8)-(3.10) then hold if and only if the clock data
+    are compatible with them; for ``alpha_r = 1`` (common proper time) they
+    hold identically (Phase 1E-D adversarial audit section 6.2).  This is a
+    validation constructor for one instant, not a trajectory or a Timescape
+    prediction.
+    """
+    for name, value in (
+        ("f_v", f_v),
+        ("rho_w", rho_w),
+        ("rho_v", rho_v),
+        ("H_w", H_w),
+        ("H_v", H_v),
+        ("six_K_D_over_a_D_squared", six_K_D_over_a_D_squared),
+        ("G", G),
+    ):
+        if not np.isfinite(value):
+            raise H1ContractError(f"{name} must be finite")
+    if not 0.0 < f_v < 1.0:
+        raise H1ContractError("two-region background requires 0 < f_v < 1")
+    if G <= 0.0:
+        raise H1ContractError("G must be positive")
+    for name, alpha in (("alpha_w", alpha_w), ("alpha_v", alpha_v)):
+        if not isinstance(alpha, ScalarJet):
+            raise H1ContractError(f"{name} must be an explicit ScalarJet")
+    four_pi_G = 4.0 * np.pi * G
+
+    def region(rho0: float, H0: float, alpha: ScalarJet):
+        theta0 = 3.0 * H0
+        rho1 = -alpha.value * theta0 * rho0
+        source0 = theta0**2 / 3.0 + four_pi_G * rho0
+        theta1 = -alpha.value * source0
+        rho2 = -(alpha.first * theta0 + alpha.value * theta1) * rho0 - alpha.value * theta0 * rho1
+        source1 = (2.0 / 3.0) * theta0 * theta1 + four_pi_G * rho1
+        theta2 = -alpha.first * source0 - alpha.value * source1
+        rho = ScalarJet(rho0, rho1, rho2)
+        theta = ScalarJet(theta0, theta1, theta2)
+        R_bar = _s_sub(_s_scale(4.0 * four_pi_G, rho), _s_scale(2.0 / 3.0, _s_mul(theta, theta)))
+        return rho, theta, _s_scale(1.0 / 3.0, theta), R_bar, _s_mul(alpha, theta)
+
+    rho_w_jet, theta_w, H_w_jet, R_bar_w, xi_w = region(rho_w, H_w, alpha_w)
+    rho_v_jet, theta_v, H_v_jet, R_bar_v, xi_v = region(rho_v, H_v, alpha_v)
+    d_xi = _s_sub(xi_v, xi_w)
+    f_product0 = f_v * (1.0 - f_v)
+    f1 = f_product0 * d_xi.value
+    f2 = (1.0 - 2.0 * f_v) * f1 * d_xi.value + f_product0 * d_xi.first
+    f_v_jet = ScalarJet(f_v, f1, f2)
+    f_w_jet = _s_sub(ScalarJet(1.0, 0.0, 0.0), f_v_jet)
+    theta = _s_add(_s_mul(f_w_jet, xi_w), _s_mul(f_v_jet, xi_v))
+    d_theta = _s_sub(theta_v, theta_w)
+    Q_bar = _s_scale(2.0 / 3.0, _s_mul(_s_mul(f_v_jet, f_w_jet), _s_mul(d_theta, d_theta)))
+    average_R = _s_add(_s_mul(f_w_jet, R_bar_w), _s_mul(f_v_jet, R_bar_v))
+    k1 = -(2.0 / 3.0) * theta.value * six_K_D_over_a_D_squared
+    k2 = -(2.0 / 3.0) * (theta.first * six_K_D_over_a_D_squared + theta.value * k1)
+    W_bar = _s_sub(average_R, ScalarJet(six_K_D_over_a_D_squared, k1, k2))
+    return H1Background(
+        f_v=f_v_jet,
+        rho_w=rho_w_jet,
+        rho_v=rho_v_jet,
+        Theta_w=theta_w,
+        Theta_v=theta_v,
+        H_w=H_w_jet,
+        H_v=H_v_jet,
+        alpha_w=alpha_w,
+        alpha_v=alpha_v,
+        R_bar_w=R_bar_w,
+        R_bar_v=R_bar_v,
+        Q_bar=Q_bar,
+        W_bar=W_bar,
+        Theta=theta,
+        Xi_w=xi_w,
+        Xi_v=xi_v,
+        G=G,
+        six_K_D_over_a_D_squared=six_K_D_over_a_D_squared,
+    )
+
+
 def compatibility_mismatch_rhs(
     mismatches: ArrayLike,
     *,
@@ -497,6 +839,13 @@ def evaluate_h1_realization(
     Every division is preceded by its named nondegeneracy gate.  Target
     ``Z`` is the analytic ``-d(Delta_d)/dt`` from the operator/source jets,
     never a finite difference or an independently invented transfer.
+
+    Under ``H1KinematicGatePolicy.ENFORCE`` the background identities
+    (``two_region_background_identity_residuals``) are gated after the
+    nondegeneracy gates, and ``J_Xi = 0`` (``CLK-H1``) after the clean
+    residual gates; only then is the result labelled ``SCIENTIFIC_STATUS``.
+    Under ``ALGEBRAIC_VALIDATION_ONLY`` the same residuals are recorded but
+    not enforced, and the result is labelled accordingly.
     """
     f_v = background.f_v
     f_w = _s_sub(ScalarJet(1.0, 0.0, 0.0), f_v)
@@ -538,6 +887,15 @@ def evaluate_h1_realization(
         )
         if max(errors) > configuration.background_identity_tolerance:
             raise H1ContractError(f"Theta_{region}=3 H_{region} jet identity failed")
+    enforce = configuration.kinematic_gate_policy is H1KinematicGatePolicy.ENFORCE
+    background_residuals = two_region_background_identity_residuals(background)
+    if enforce:
+        for name, residual in background_residuals.items():
+            if residual > configuration.background_identity_tolerance:
+                raise H1BackgroundIdentityError(
+                    f"{name} background identity residual {residual} exceeds "
+                    f"tolerance {configuration.background_identity_tolerance}"
+                )
 
     wall = regional_evolution(
         regional_bulk.Delta_w,
@@ -710,6 +1068,14 @@ def evaluate_h1_realization(
         K_GM=K_GM,
         configuration=configuration,
     )
+    # CLK-H1 has a homogeneous rate and no perturbative lapse, so no clock
+    # mismatch has an admissible source: the supplied E_DeltaXi_0 must be the
+    # complete L_D(delta Xi_v - delta Xi_w) (review finding F3).
+    J_Xi_max_abs = _max_abs(J_Xi)
+    if enforce and J_Xi_max_abs > configuration.J_Xi_tolerance:
+        raise H1ClosureError(
+            f"J_Xi={J_Xi_max_abs} exceeds tolerance {configuration.J_Xi_tolerance}"
+        )
     zero_rhs = compatibility_mismatch_rhs(
         np.zeros(3),
         Theta=background.Theta.value,
@@ -721,7 +1087,9 @@ def evaluate_h1_realization(
     return H1RealizationResult(
         realization_id=REALIZATION_ID,
         framework_status=FRAMEWORK_STATUS,
-        scientific_status=SCIENTIFIC_STATUS,
+        scientific_status=(
+            SCIENTIFIC_STATUS if enforce else ALGEBRAIC_VALIDATION_ONLY_STATUS
+        ),
         observational_status=OBSERVATIONAL_STATUS,
         fsigma8_status=FSIGMA8_STATUS,
         scientific_implementation_authorization=(
@@ -762,4 +1130,8 @@ def evaluate_h1_realization(
         rho_eff=rho_eff_jet.value,
         p_eff=p_eff_jet.value,
         w_eff=w_eff_jet.value,
+        kinematic_gate_policy=configuration.kinematic_gate_policy.value,
+        clock_branch=CLOCK_BRANCH,
+        background_identity_residuals=background_residuals,
+        J_Xi_max_abs=J_Xi_max_abs,
     )

@@ -19,6 +19,7 @@ import re
 import shutil
 import subprocess
 import sys
+import sysconfig
 import tempfile
 from dataclasses import replace
 from importlib.metadata import version
@@ -80,6 +81,21 @@ BASE_PHASE1D_D_T_CHECKPOINT = "f960a9054ae9db3a7c378557ac3a2938c5ff7ef0"
 UPSTREAM_COMMIT = "590c6fd5332acb15f5683ebf392a0d7ce54983c5"
 NOTEBOOK_SHA256 = (
     "86d2534db9e9b3169835e4ce223ee8f3bff6d03b47e5677d3937fed4adafe55a"
+)
+# Review finding F6: NOTEBOOK_SHA256 is the raw hash of a Windows
+# core.autocrlf working tree and stays the frozen provenance label of the
+# growth results.  Verification uses the line-ending-independent identity
+# (UPSTREAM.lock notebook_sha256_lf).
+NOTEBOOK_SHA256_LF = (
+    "628c441288d67854e0380518841dede3680bddab610e9ef5cea04937455cea2a"
+)
+PHASE1D_D_WORK_BRANCH = "phase-1d-d-anchored-density-growth"
+# Peeled commit of tag phase-1d-d-anchored-density-growth-v1.
+PHASE1D_D_COMMIT = "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c"
+POST_PHASE_DRIFT_PREFIXES = (
+    "src/timescape_fsigma8/background/",
+    "src/timescape_fsigma8/perturbations/",
+    "src/timescape_fsigma8/growth/",
 )
 PERMITTED_PHASE1D_D_TRACKED_PATHS = frozenset(
     {
@@ -233,6 +249,90 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def sha256_lf(path: Path) -> str:
+    """SHA-256 of the bytes with CRLF normalised to LF (review finding F6)."""
+    import hashlib
+
+    return hashlib.sha256(path.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+
+
+def is_ancestor(commit: str, descendant: str) -> bool:
+    completed = subprocess.run(
+        [
+            "git",
+            "-c",
+            f"safe.directory={PROJECT_ROOT.as_posix()}",
+            "merge-base",
+            "--is-ancestor",
+            commit,
+            descendant,
+        ],
+        cwd=PROJECT_ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if completed.returncode not in (0, 1):
+        raise RuntimeError(f"git merge-base failed: {completed.stderr.strip()}")
+    return completed.returncode == 0
+
+
+def validate_post_phase_regeneration_state(branch: str) -> dict:
+    """Ancestry-based provenance for regenerating the artifact later (F6).
+
+    The frozen Phase 1D-D commit must be an ancestor of HEAD.  The phase's
+    scope rule is checked on its immutable historical range
+    ``BASE..PHASE1D_D_COMMIT``; later, separately approved changes are
+    recorded as post-phase drift instead of being rejected.  The tree must be
+    clean so that the regenerated artifact belongs to one commit.
+    """
+    execution_head = git("rev-parse", "HEAD")
+    for commit in (BASE_PHASE1D_D_T_CHECKPOINT, PHASE1D_D_COMMIT):
+        if not is_ancestor(commit, execution_head):
+            raise RuntimeError(f"{commit} is not an ancestor of HEAD")
+    committed_paths = sorted(
+        path.replace("\\", "/")
+        for path in git(
+            "diff",
+            "--name-only",
+            f"{BASE_PHASE1D_D_T_CHECKPOINT}..{PHASE1D_D_COMMIT}",
+        ).splitlines()
+        if path
+    )
+    out_of_scope = sorted(set(committed_paths) - PERMITTED_PHASE1D_D_TRACKED_PATHS)
+    if out_of_scope:
+        raise RuntimeError(f"historical Phase 1D-D range is out of scope: {out_of_scope}")
+    if git("diff", "--cached", "--name-only"):
+        raise RuntimeError("regeneration requires a clean index")
+    working_paths = _porcelain_paths(
+        git("status", "--porcelain=v1", "--untracked-files=all")
+    )
+    if working_paths:
+        raise RuntimeError(
+            f"regeneration requires a clean working tree: {working_paths}"
+        )
+    drift = sorted(
+        path.replace("\\", "/")
+        for path in git(
+            "diff", "--name-only", f"{PHASE1D_D_COMMIT}..{execution_head}"
+        ).splitlines()
+        if path.startswith(POST_PHASE_DRIFT_PREFIXES)
+    )
+    return {
+        "branch": branch,
+        "base_phase1d_d_t_checkpoint": BASE_PHASE1D_D_T_CHECKPOINT,
+        "execution_context": "post_phase_regeneration_by_ancestry",
+        "phase1d_d_commit": PHASE1D_D_COMMIT,
+        "execution_head": execution_head,
+        "execution_state": "clean_committed_tree",
+        "committed_paths_since_base": committed_paths,
+        "committed_paths_scope": "historical range BASE..PHASE1D_D_COMMIT",
+        "post_phase_scientific_module_changes": drift,
+        "permitted_working_tree_paths": [],
+        "staged_paths": [],
+    }
+
+
 def _porcelain_paths(status: str) -> list[str]:
     paths = []
     for line in status.splitlines():
@@ -248,8 +348,10 @@ def _porcelain_paths(status: str) -> list[str]:
 def validate_repository_execution_state() -> dict:
     """Validate pre-commit and future clean-commit execution provenance."""
     branch = git("branch", "--show-current")
-    if branch != "phase-1d-d-anchored-density-growth":
-        raise RuntimeError("validation must run on the Phase 1D-D work branch")
+    if branch != PHASE1D_D_WORK_BRANCH:
+        # Review finding F6: off the historical work branch, validate by
+        # ancestry against the recorded commits instead of the branch name.
+        return validate_post_phase_regeneration_state(branch)
     execution_head = git("rev-parse", "HEAD")
     merge_base = git(
         "merge-base",
@@ -306,6 +408,7 @@ def validate_repository_execution_state() -> dict:
     return {
         "branch": branch,
         "base_phase1d_d_t_checkpoint": BASE_PHASE1D_D_T_CHECKPOINT,
+        "execution_context": "phase_work_branch",
         "execution_head": execution_head,
         "execution_state": execution_state,
         "committed_paths_since_base": committed_paths,
@@ -576,7 +679,7 @@ def main() -> None:
         raise RuntimeError("upstream clone commit changed")
     if git("status", "--short", cwd=UPSTREAM_ROOT):
         raise RuntimeError("upstream clone is not clean")
-    if sha256(UPSTREAM_NOTEBOOK) != NOTEBOOK_SHA256:
+    if sha256_lf(UPSTREAM_NOTEBOOK) != NOTEBOOK_SHA256_LF:
         raise RuntimeError("pinned notebook hash changed")
 
     baseline_scenario = clean_scenario(system=GrowthSystem.COMOVING)
@@ -957,6 +1060,7 @@ def main() -> None:
             "upstream_commit": UPSTREAM_COMMIT,
             "upstream_notebook_path": str(UPSTREAM_NOTEBOOK.relative_to(PROJECT_ROOT)),
             "upstream_notebook_sha256": sha256(UPSTREAM_NOTEBOOK),
+            "upstream_notebook_sha256_lf_normalized": sha256_lf(UPSTREAM_NOTEBOOK),
         },
         "exact_diagnostic_equations": {
             "G": "Delta_d(t) / Delta_d(t_ref)",
@@ -1106,12 +1210,29 @@ def main() -> None:
         json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8"
     )
 
-    if sys.version_info[:2] != (3, 14):
-        raise RuntimeError("run validation with the established Python 3.14")
-    py314_site = PROJECT_ROOT / ".venv" / "Lib" / "site-packages"
-    py311 = PROJECT_ROOT / ".venv311" / "Scripts" / "python.exe"
+    # Review finding F6: the phase ran under Python 3.14 (.venv) and 3.11
+    # (.venv311) on Windows.  Any primary interpreter other than 3.11 plus the
+    # .venv311 environment is accepted; the actual versions are recorded.
+    primary_key = f"python_{sys.version_info[0]}_{sys.version_info[1]}"
+    if primary_key == "python_3_11":
+        raise RuntimeError("run validation with the primary (non-3.11) environment")
+    primary_site = sysconfig.get_paths()["purelib"]
+    py311 = next(
+        (
+            candidate
+            for candidate in (
+                PROJECT_ROOT / ".venv311" / "Scripts" / "python.exe",
+                PROJECT_ROOT / ".venv311" / "bin" / "python",
+            )
+            if candidate.exists()
+        ),
+        None,
+    )
+    if py311 is None:
+        raise RuntimeError("the Python 3.11 environment .venv311 is required")
+    expected_environments = {primary_key, "python_3_11"}
     test_environments = {
-        "python_3_14": test_environment(sys.executable, str(py314_site)),
+        primary_key: test_environment(sys.executable, primary_site),
         "python_3_11": test_environment(py311, ""),
     }
     payload["complete_test_environments"] = test_environments
@@ -1142,7 +1263,7 @@ def main() -> None:
     if parsed["gate_results"]["all_passed"] is not True:
         raise RuntimeError("final artifact does not record all gates passing")
     environments = parsed["complete_test_environments"]
-    if set(environments) != {"python_3_14", "python_3_11"} or any(
+    if set(environments) != expected_environments or any(
         record.get("returncode") != 0
         or "versions" not in record
         or "passed" not in record

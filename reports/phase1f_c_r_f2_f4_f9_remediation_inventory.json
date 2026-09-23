@@ -1,0 +1,198 @@
+{
+  "F4_provenance": {
+    "h1_decision_record": {
+      "evidence": [
+        {
+          "commit": "1f2800c",
+          "date": "2026-08-12",
+          "record": "1E-E: S1 PRIMARY_SELECTED_CONDITIONALLY; H1 MANDATORY_SECONDARY_COMPARATOR; implementation NOT_GRANTED"
+        },
+        {
+          "commit": "0ad10f4",
+          "date": "2026-08-18",
+          "record": "1E-F: scientific implementation GRANTED (no committed decision record)"
+        }
+      ],
+      "required_human_input": [
+        "decision date",
+        "decision-maker",
+        "rationale",
+        "disposition of 1E-E deficits"
+      ],
+      "status": "UNAVAILABLE_CONFIRMED_BY_HUMAN"
+    },
+    "human_decision": {
+      "answer": "NOT_AVAILABLE_RECORD_AS_PERMANENT_GAP",
+      "consequence": "H1 implementation authorization traceable only to the 1E-F report's assertion; specification authority unverifiable; citation map is the durable substitute",
+      "date": "2026-09-23",
+      "question": "supply the 1E-F/1E-G/1F-A specifications, the three audits, the phase-1f-b tags and an H1 decision record?"
+    },
+    "specification_citations_displayed_or_described_in_committed_reports": true,
+    "specification_sections_not_separately_identifiable": [
+      "1E-G section 21",
+      "1E-G section 23",
+      "1E-G section 24"
+    ],
+    "uncommitted_documents": [
+      {
+        "document": "Phase 1E-F specification",
+        "pinned_sha256": null
+      },
+      {
+        "document": "Phase 1E-G specification (with v2/v3 amendments)",
+        "pinned_sha256": null
+      },
+      {
+        "document": "Phase 1F-A specification (2026-08-24)",
+        "note": "not named by the review",
+        "pinned_sha256": null
+      },
+      {
+        "document": "astra/INDEPENDENT_SCIENTIFIC_AUDIT.md",
+        "pinned_sha256": "4b8f8b3959ddce4510054bd314b8af99fd80e5668e5adf51cec1629c56354518"
+      },
+      {
+        "document": "reports/phase1f_b_dust_wall_boost_dynamics_v3_final_audit.md",
+        "pinned_sha256": "08c30893e8df88818760a91d85c9839770d7234f263c226446b634fddc216930"
+      },
+      {
+        "document": "reports/phase1f_c_wall_common_geometry_adversarial_audit.md",
+        "pinned_sha256": "345417fdecf5ce686988a128a04a788263a5a51c2831f3cfd3c0511dfd15df3c"
+      }
+    ],
+    "unpublished_tags": [
+      "refs/tags/phase-1f-b-dust-wall-boost-dynamics-v1",
+      "refs/tags/phase-1f-b-dust-wall-boost-dynamics-v2",
+      "refs/tags/phase-1f-b-dust-wall-boost-dynamics-v3"
+    ],
+    "unpublished_tags_commits_present_and_ancestral": true
+  },
+  "F6_reproducibility": {
+    "barotropic_oracle_reextraction_data_identical": true,
+    "upstream_lock_additions": {
+      "notebook_git_blob": "c6bef3207861b50a76a6da7f4c024fe425dd19ee",
+      "notebook_sha256_crlf": "86d2534db9e9b3169835e4ce223ee8f3bff6d03b47e5677d3937fed4adafe55a",
+      "notebook_sha256_lf": "628c441288d67854e0380518841dede3680bddab610e9ef5cea04937455cea2a"
+    },
+    "validate_anchored_density_growth": {
+      "ancestry_commit": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+      "base": "f960a9054ae9db3a7c378557ac3a2938c5ff7ef0"
+    },
+    "validate_phase1f_c_r_astra_remediation": {
+      "base": "63d2104575c6a249e5177e47f4a354b660e70e32",
+      "certified_commit": "118b8f3af3c1360b0da74df8e9a9cb3ba1fed83a",
+      "frozen_tags_total": 27,
+      "frozen_tags_verified": 24,
+      "historical_reports_unchanged": 52,
+      "post_remediation_drift": [
+        "src/timescape_fsigma8/background/effective_fluid.py",
+        "src/timescape_fsigma8/background/tracker.py",
+        "src/timescape_fsigma8/perturbations/initial_conditions.py"
+      ],
+      "preserved_equations_certified": 20,
+      "status_on_this_checkout": "PASS_WITH_ABSENT_LOCAL_PROVENANCE"
+    }
+  },
+  "F7_mandatory_G": [
+    "rho_d",
+    "drho_d_dt",
+    "rho_eff",
+    "p_eff",
+    "drho_eff_dt",
+    "dp_eff_dt"
+  ],
+  "authorization": "human request: fix F2, F4, F5, F6, F7, F8 and F9",
+  "errata": {
+    "F2_dressed_chain_factor": {
+      "derivative": "(2+f_v)(6-15 f_v)/(4+f_v+4 f_v^2)^2",
+      "formula": "g(f_v) = (2+f_v)^2/(4+f_v+4 f_v^2)",
+      "maximum": {
+        "dressed_redshift": 2.00656,
+        "f_v": 0.4,
+        "value": 1.1428571428571428
+      },
+      "superseded_locations": [
+        "reports/phase1d_a_growth_observable_audit.md:688",
+        "reports/phase1d_a_growth_observable_audit.md:832",
+        "reports/phase1d_a_observable_inventory.json:237",
+        "reports/phase1d_c_observable_closure_audit.md:906",
+        "reports/phase1d_c_closure_inventory.json:263",
+        "reports/phase1d_c_compliance_audit.md:435",
+        "reports/phase1d_c_compliance_audit.md:525",
+        "reports/phase1d_c_observable_closure_audit.md:471"
+      ],
+      "superseded_range": "1.025-1.084 (1.02-1.08)",
+      "tests": "tests/test_review_errata.py",
+      "values_by_dressed_redshift": {
+        "0": 1.0842,
+        "0.3": 1.1024,
+        "0.5": 1.1124,
+        "1": 1.1307,
+        "10": 1.0579,
+        "2": 1.1429,
+        "20": 1.0248,
+        "3": 1.1361
+      }
+    },
+    "F7_background_validation_default": {
+      "current_reading": "G is mandatory; no default exists",
+      "location": "reports/background_validation.md:74",
+      "superseded_text": "G passed explicitly (default 1.0 = code units)"
+    },
+    "F9_wavenumber_factor": {
+      "correct": "a_D,0 x h_LCDM/h_TS = 1.3685 x 0.674/0.7323 = 1.25955",
+      "implementation_correct": true,
+      "location": "reports/phase1c_perturbation_equation_audit.md:300-301",
+      "printed": "a_D,0 x h_TS/h_LCDM = 1.3685 x 0.9204",
+      "tests": "tests/test_review_errata.py"
+    }
+  },
+  "finding_status": {
+    "F1": {
+      "record": "reports/phase1f_c_r_f1_growing_mode_initial_conditions_validation.md",
+      "status": "ADDRESSED_BY_EXPLICIT_OPTION"
+    },
+    "F2": {
+      "record": "reports/phase1f_c_r_f2_f4_f9_remediation.md#2",
+      "status": "RESOLVED_BY_SUCCESSOR_ERRATUM"
+    },
+    "F3": {
+      "record": "reports/phase1f_c_r_f3_h1_kinematic_gates_validation.md",
+      "status": "ADDRESSED_BY_ENFORCED_GATES"
+    },
+    "F4": {
+      "record": "reports/phase1f_c_r_f2_f4_f9_remediation.md#3.4",
+      "status": "CLOSED_AS_DOCUMENTED_PERMANENT_GAP"
+    },
+    "F5": {
+      "record": "CLAUDE.md scope firewall",
+      "status": "RESOLVED"
+    },
+    "F6": {
+      "record": "reports/phase1f_c_r_f2_f4_f9_remediation.md#5",
+      "status": "RESOLVED"
+    },
+    "F7": {
+      "record": "src/timescape_fsigma8/background (G mandatory)",
+      "status": "RESOLVED"
+    },
+    "F8": {
+      "record": "CLAUDE.md, README.md, pyproject.toml",
+      "status": "RESOLVED"
+    },
+    "F9": {
+      "record": "reports/phase1f_c_r_f2_f4_f9_remediation.md#8",
+      "status": "RESOLVED_BY_SUCCESSOR_ERRATUM"
+    }
+  },
+  "historical_reports_modified": false,
+  "parent_checkpoint": "c62bc741389233ba7bcca16346f3b2d1dbdd8a64",
+  "review_report": "reports/phase1f_c_r_post_remediation_independent_audit.md",
+  "runtime_equations_or_status_tokens_changed": false,
+  "schema_version": 1,
+  "tests_added": [
+    "tests/test_review_errata.py",
+    "tests/test_reproducibility_gates.py"
+  ],
+  "title": "Review findings F2, F4-F9: remediation, successor errata and provenance record"
+}

@@ -38,12 +38,14 @@ Strictly layered; each layer imports only from the ones above it.
 
 | Layer | Package | Owns |
 |---|---|---|
-| Foundations | `units.py`, `presets.py` | Audited unit conversions; immutable `PAPER_REFERENCE` (H0 = 73.03) / `NOTEBOOK_REFERENCE` (H0 = 73.23) presets |
+| Foundations | `units.py`, `presets.py`, `components.py`, `scientific_status.py` | Audited unit conversions; immutable `PAPER_REFERENCE` (H0 = 73.03) / `NOTEBOOK_REFERENCE` (H0 = 73.23) presets; tensor-component ontology (coordinate covector / contravariant / orthonormal, 1F-C-R A02); current cross-phase scientific classifications (`CURRENT_SCIENTIFIC_STATUS`, 1F-C-R) |
 | Background (1B) | `background/` | Timescape tracker solution, effective fluid, wall/dressed observables (`parameters`, `tracker`, `effective_fluid`, `observables`) |
-| Perturbations (1C-B1/B2) | `perturbations/` | Pure RHS functions for the Mészáros (Eq. 4.27), comoving (4.20–4.23) and barotropic (4.13–4.17) systems, explicit IC/epoch scenarios, solver layer, residual diagnostics |
+| Perturbations (1C-B1/B2) | `perturbations/` | Pure RHS functions for the Mészáros (Eq. 4.27), comoving (4.20–4.23) and barotropic (4.13–4.17) systems, explicit IC/epoch scenarios, solver layer, residual diagnostics; `growing_mode` adds the explicit, non-default Timescape regular growing-mode IC convention for the clean systems (review F1) |
 | Growth (1D-B/1D-D) | `growth/` | Signed relative growth histories, exact analytic f_bare/f_dressed via −3Z/(ΘΔ_d) (never numerical differentiation), root-refined amplitude crossings with piecewise validity intervals, solver-harmonic δ_m mapping, externally anchored density-growth diagnostic ("Candidate A") |
-| Transfer (1E-F/1E-G) | `transfer/` | Non-observational regional→GM transfer research runtime: the abstract H1 transmission contract (`h1_realization`, `matrix_backend`) and its continuum-geometric realization (`continuum_*`) |
+| Transfer (1E-F/1E-G) | `transfer/` | Non-observational regional→GM transfer research runtime: the abstract H1 transmission contract (`h1_realization`, `matrix_backend`) and its continuum-geometric realization (`continuum_*`); mandatory `H1KinematicGatePolicy` — only `ENFORCE`d results (background identities + CLK-H1 `J_Xi = 0`) carry the closure status tokens (review F3) |
 | Forward runtime (1F-A) | `phase1f_a/` | Conditional theoretical forward realization over the frozen 1E-G operator: broken regional Laplace–Beltrami assembly, regional density/expansion inversion, sharp carrier density, regional/carrier spectra, external longitudinal boost, dressed map, sealed orchestrator |
+| Boost dynamics (1F-B) | `phase1f_b/` | Conditional, non-observational scalar dust-to-wall boost propagation with explicit fail-closed closures |
+| Wall geometry (1F-C) | `phase1f_c/` | Conditional clock-anchored wall/common-spacetime kinematic geometry and optional scalar metric-trace reconstruction |
 
 ### Conventions that pervade the scientific packages
 
@@ -69,12 +71,15 @@ Strictly layered; each layer imports only from the ones above it.
 ### Scope firewall (do not cross without a new audited phase)
 
 Deliberately not implemented: power spectra, observational transfer
-functions, σ_R, σ8, fσ8 **or any "fσ8-shaped" diagnostic**, RSD/Kaiser
-mappings, bias, AP conversion, datasets, covariances, likelihoods, fitting.
-Phase 1E-A's verdict on identifying Candidate A with observational fσ8 is
-`NOT_JUSTIFIED_FOR_OBSERVATIONAL_USE`. The `transfer/` and `phase1f_a/`
-runtimes are conditional research runtimes, not Timescape predictions; their
-missing closures stay explicit external inputs.
+functions, σ_R, σ8, fσ8, RSD/Kaiser mappings, bias, AP conversion, datasets,
+covariances, likelihoods, fitting. **No fσ8-shaped diagnostic exists beyond
+the conditional, externally anchored Candidate A** (`Q_anchor = f·A_anchor`,
+Phase 1D-D, `growth/anchored_diagnostic.py`), which 1D-A conditionally
+authorised and which stays non-observational; do not add another. Phase
+1E-A's verdict on identifying Candidate A with observational fσ8 is
+`NOT_JUSTIFIED_FOR_OBSERVATIONAL_USE`. The `transfer/`, `phase1f_a/`,
+`phase1f_b/` and `phase1f_c/` runtimes are conditional research runtimes, not
+Timescape predictions; their missing closures stay explicit external inputs.
 
 ### Standing scientific caveats
 
@@ -94,16 +99,27 @@ missing closures stay explicit external inputs.
   the local density contrast; mapped `delta_m` values are solver-harmonic
   coefficients (Δ_d,k = −k_code²·δ_m,k). Growth rates are piecewise across
   amplitude crossings and are never joined across a pole.
+- **Initial conditions (review F1):** the paper/notebook ICs transplant the
+  ΛCDM growing-mode rate and so carry a decaying mode (Δ_d(t0) up to ~14%
+  high). The explicit `TIMESCAPE_REGULAR_GROWING_MODE` convention removes it
+  for the clean systems; reproduction keeps the legacy conventions.
+- **Bare→dressed rate factor (review F2):** f_dressed/f_bare =
+  (2+f_v)²/(4+f_v+4f_v²) peaks at 8/7 (dressed z ≈ 2.0); the "1.025–1.084"
+  range in 1D-A/1D-C is superseded (`reports/phase1f_c_r_f2_f4_f9_remediation.md`).
+- Reports and inventories older than a successor erratum are frozen
+  historical records; the successor states the current reading.
 
 ## Key commands
 
 ```
-# One-time setup (no .venv is checked in)
+# One-time setup (no .venv is checked in). Windows shown; on Linux/macOS use
+# python3.X -m venv .venv and .venv/bin/python in place of .venv\Scripts\python
 py -3.14 -m venv .venv
 .venv\Scripts\python -m pip install -e ".[exec,test]"
 
-# Full validation suite (539 tests at the Phase 1F-A checkpoint; oracle and
-# generated-artifact tests auto-skip when their inputs are absent)
+# Full validation suite (723 passed + 1 skipped at the review-remediation
+# checkpoint; oracle and generated-artifact tests auto-skip when their inputs
+# are absent)
 .venv\Scripts\python -m pytest -q
 
 # A single file / single test / keyword selection
@@ -129,7 +145,19 @@ each writes JSON or figures into `artifacts/`:
 .venv\Scripts\python scripts\validate_growth_pipeline.py
 .venv\Scripts\python scripts\validate_anchored_density_growth.py
 .venv\Scripts\python scripts\validate_phase1f_a_h1_closure.py
+.venv\Scripts\python scripts\validate_phase1f_b_dust_wall_boost_dynamics.py
+.venv\Scripts\python scripts\validate_phase1f_c_r_astra_remediation.py [--producers]
+.venv\Scripts\python scripts\validate_growing_mode_initial_conditions.py
+.venv\Scripts\python scripts\validate_h1_kinematic_gates.py
 ```
+
+The historical validators check ancestry against recorded commits, not branch
+names (review F6): `validate_anchored_density_growth.py` regenerates from any
+clean descendant of the 1D-D commit; `validate_phase1f_c_r_astra_remediation.py`
+certifies base→remediation preservation, reports later drift, and reports
+local-only provenance files or unpublished tags as absent rather than
+crashing. The upstream notebook is identified by its line-ending-independent
+hash (`UPSTREAM.lock` `notebook_sha256_lf`), so LF and CRLF checkouts agree.
 
 Figure reproductions: `make_independent_fig1.py` (Fig. 1 + D2 forensic),
 `make_clean_fig2.py`, `make_barotropic_fig3.py` (corrected c²_s, both D3
@@ -140,7 +168,10 @@ byte-for-byte.
 
 ## Hard constraints
 
-- **Never push, publish, fork, or open PRs.** All work stays local.
+- **Never push, publish, fork, or open PRs without explicit human approval**
+  for that specific action (AGENTS.md rule 7 is the operative rule). An
+  approval covers only the action it names; approved pushes go only to the
+  designated branch.
 - `.reference/` is a read-only clone of the upstream repo pinned in
   `UPSTREAM.lock` (no license — treat as all-rights-reserved). Never edit it,
   never commit it, never copy its source into package files.
@@ -152,8 +183,10 @@ byte-for-byte.
 
 ## Environment
 
-- Windows 11; Python launcher `py` (3.14 default, 3.11 available). The
-  project venv `.venv` is git-ignored and must be created locally.
+- Primary development machine: Windows 11; Python launcher `py` (3.14
+  default, 3.11 available). Linux/macOS work equally (`python3.X -m venv`,
+  `.venv/bin/python`); remote sessions have used 3.13 + 3.11. The project
+  venvs `.venv`/`.venv311` are git-ignored and must be created locally.
 - The machine's pip default index is an internal Artifactory mirror that is
   not always reachable; if installs fail with DNS errors add
   `--index-url https://pypi.org/simple` (pypi.org is already a trusted host).
@@ -174,8 +207,13 @@ adjudication (report-only) · **1D-D** anchored density-growth diagnostic ·
 perturbed dressed transfer closure, regional matching dynamics,
 transfer-realization selection (all report-only) · **1E-F** conditional H1
 transmission realization · **1E-G** continuum-geometric H1 realization ·
-**1F-A** H1 carrier density, spectra, expansion and wall-boost closure
-(current branch).
+**1F-A** H1 carrier density, spectra, expansion and wall-boost closure ·
+**1F-B** scalar dust-to-wall boost dynamics · **1F-C** wall/common-spacetime
+geometry · **1F-C-R** Astra independent-audit remediation (v1, v2) ·
+post-remediation independent review (`phase1f_c_r_post_remediation_independent_audit.md`,
+findings F1–F9) and its fixes: F1 growing-mode ICs, F3 H1 kinematic gates,
+F2/F4–F9 remediation (`phase1f_c_r_f2_f4_f9_remediation.md`). Phase 1F-D has
+not begun.
 
 Each entry maps to a `reports/phase<id>_*.md` file — read it before touching
 the corresponding code.

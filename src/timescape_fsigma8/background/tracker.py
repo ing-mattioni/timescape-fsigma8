@@ -153,7 +153,7 @@ def dQ_D_dt(t: ArrayLike, p: TrackerParams) -> NDArray[np.float64]:
 # Dust density
 # --------------------------------------------------------------------------
 
-def rho_d(t: ArrayLike, p: TrackerParams, G: float = 1.0) -> NDArray[np.float64]:
+def rho_d(t: ArrayLike, p: TrackerParams, G: float) -> NDArray[np.float64]:
     """Averaged dust density <rho_d>_D(t) = (1 - f_v(t)) / (6 pi G t^2)  (derived).
 
     From a_D^{-3} scaling ([GM] Eq. (3.16)) with normalisation
@@ -167,7 +167,7 @@ def rho_d(t: ArrayLike, p: TrackerParams, G: float = 1.0) -> NDArray[np.float64]
     return (1.0 - fv(t, p)) / (6.0 * np.pi * G * t**2)
 
 
-def drho_d_dt(t: ArrayLike, p: TrackerParams, G: float = 1.0) -> NDArray[np.float64]:
+def drho_d_dt(t: ArrayLike, p: TrackerParams, G: float) -> NDArray[np.float64]:
     """d<rho_d>_D/dt = -(1 - f_v)(2 + f_v) / (6 pi G t^3)   (derived).
 
     d/dt[(1-f_v)/(6 pi G t^2)] = [-f_v(1-f_v) - 2(1-f_v)]/(6 pi G t^3).

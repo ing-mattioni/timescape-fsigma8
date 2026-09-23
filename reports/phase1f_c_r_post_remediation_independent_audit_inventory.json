@@ -1,0 +1,530 @@
+{
+  "audit_classification": "INDEPENDENT_READ_ONLY_POST_REMEDIATION_REVIEW",
+  "checkpoint": {
+    "branch": "claude/loving-dijkstra-esoj6f",
+    "commit": "118b8f3af3c1360b0da74df8e9a9cb3ba1fed83a",
+    "commit_date": "2026-09-06T19:39:33+02:00",
+    "main_equals_checkpoint": true,
+    "origin_main_equals_checkpoint": true,
+    "tracked_tree_clean_before_review": true
+  },
+  "environment": {
+    "platform": "Linux cloud container",
+    "python_3_11": {
+      "matplotlib": "3.11.2",
+      "numpy": "2.4.6",
+      "pytest": "9.1.1",
+      "python": "3.11.15",
+      "scipy": "1.17.1"
+    },
+    "python_3_13": {
+      "matplotlib": "3.11.2",
+      "numpy": "2.5.3",
+      "pytest": "9.1.1",
+      "python": "3.13.12",
+      "scipy": "1.18.1"
+    },
+    "python_3_14_available": false
+  },
+  "final_machine_verdict": {
+    "AUDIT": "INDEPENDENT_READ_ONLY_POST_REMEDIATION_REVIEW",
+    "CHECKPOINT": "118b8f3af3c1360b0da74df8e9a9cb3ba1fed83a",
+    "CODE_OR_EQUATIONS_CHANGED": "NO",
+    "D1_TYPO_CLASSIFICATION": "CONFIRMED_CONSISTENT",
+    "D2_UPSTREAM_DEFECT": "CONFIRMED",
+    "D3_VERDICT_RESOLVED_DERIVED_4_10": "INDEPENDENTLY_CONFIRMED",
+    "F1_IC_DECAYING_MODE_CONTAMINATION": "OPEN",
+    "F2_CHAIN_FACTOR_RANGE_ERROR": "OPEN",
+    "F3_H1_CLOSURE_NOT_DEMONSTRATED": "OPEN",
+    "F4_PROVENANCE_GAPS": "OPEN",
+    "F5_SCOPE_FIREWALL_CONTRADICTION": "OPEN",
+    "F6_REPRODUCIBILITY_PORTABILITY": "OPEN",
+    "F7_G_DEFAULTS": "OPEN",
+    "F8_STALE_DOCUMENTATION": "OPEN",
+    "F9_NOTATIONAL_SLIP": "OPEN",
+    "FSIGMA8_AUTHORIZATION": "NOT_GRANTED",
+    "IMPLEMENTED_EQUATION_ERRORS_PHASES_1B_1D": 0,
+    "OBSERVATIONAL_AUTHORIZATION": "NOT_GRANTED",
+    "PUBLISHED_AND_REPORTED_NUMBERS_RECOMPUTED": "REPRODUCED",
+    "SCOPE": "PHASES_1A_TO_1F_C_R_COMPLETE_PROJECT",
+    "TEST_SUITE_PY311": "653_PASSED_1_SKIPPED",
+    "TEST_SUITE_PY313": "653_PASSED_1_SKIPPED",
+    "UNIQUE_TIMESCAPE_PREDICTION": "NOT_GRANTED"
+  },
+  "finding_counts": {
+    "HIGH": 0,
+    "LOW": 3,
+    "LOW-MEDIUM": 2,
+    "MEDIUM": 3,
+    "MEDIUM-HIGH": 1,
+    "total": 9
+  },
+  "findings": [
+    {
+      "consequence": "Reproduced Fig. 2 and endpoint amplitudes are ~13-14% above the growing-mode evolution of the same initial Delta_d; the rate-unit and epoch one-factor effects are mostly different amounts of the same decaying transient; Candidate A G is biased by +0.4% to +2.6%; growing-mode dominance required by 1D-A section 6 is never checked.",
+      "evidence": {
+        "Delta_d_t0_ratio_to_growing_mode": {
+          "converted_0p218_gyr": {
+            "comoving": 1.0882,
+            "meszaros": 1.0974
+          },
+          "converted_dressed_z20": {
+            "comoving": 1.0384,
+            "meszaros": 1.0473
+          },
+          "unconverted_0p218_gyr": {
+            "comoving": 1.1312,
+            "meszaros": 1.1398
+          },
+          "unconverted_dressed_z20": {
+            "comoving": 1.0771,
+            "meszaros": 1.0855
+          }
+        },
+        "G_t0_zref10_bias": {
+          "converted_0p218_gyr": {
+            "comoving": 0.01664,
+            "meszaros": 0.02145
+          },
+          "converted_dressed_z20": {
+            "comoving": 0.00429,
+            "meszaros": 0.00907
+          },
+          "unconverted_0p218_gyr": {
+            "comoving": 0.02577,
+            "meszaros": 0.02991
+          },
+          "unconverted_dressed_z20": {
+            "comoving": 0.01174,
+            "meszaros": 0.01591
+          }
+        },
+        "candidate_A_G_t0_zref10": {
+          "growing_mode": 6.164012,
+          "notebook_ic": 6.322867
+        },
+        "decomposition_Delta_d_t0_over_growing": {
+          "growing_mode_Z_with_Delta_eff_zero": 0.992,
+          "notebook_Z_with_attractor_Delta_eff": 1.1392,
+          "notebook_ic": 1.1312
+        },
+        "f_bare_bias_comoving_notebook_ic": {
+          "z0": 0.00045,
+          "z1": 0.00118,
+          "z2": 0.00268,
+          "z5": 0.0145
+        },
+        "growing_mode_Delta_eff_over_Delta_d": 0.20005,
+        "growing_mode_f_bare_t0": {
+          "comoving": 0.42491,
+          "meszaros": 0.31
+        },
+        "growing_mode_rate_0p218_gyr_comoving": 40.0878,
+        "growing_mode_rate_0p218_gyr_meszaros": 39.8503,
+        "growing_mode_rate_dressed_z20_comoving": 44.6209,
+        "growing_mode_rate_dressed_z20_meszaros": 44.3828,
+        "ic_rate_converted": 49.7107,
+        "ic_rate_unconverted": 54.0106
+      },
+      "id": "F1",
+      "locations": [
+        "src/timescape_fsigma8/perturbations/initial_conditions.py",
+        "reports/phase1c_perturbation_equation_audit.md#5",
+        "reports/phase1c_b1_clean_systems_validation.md#9",
+        "reports/phase1c_b2_barotropic_validation.md#9",
+        "reports/phase1d_a_growth_observable_audit.md:349-363",
+        "reports/phase1d_b_growth_pipeline_validation.md#19",
+        "reports/phase1d_d_anchored_density_growth_validation.md#17"
+      ],
+      "primary_classification": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "severity": "MEDIUM-HIGH",
+      "statement": "The dust ICs transplant the flat-LCDM growing-mode rate at z=20 (-Z/Delta_d=54.0106 unconverted, 49.7107 converted) onto the tracker, whose regular solution at 0.218 Gyr has -Z/Delta_d=40.0878 and Delta_eff/Delta_d=0.20005 (44.6209 at dressed z=20); a decaying mode is excited.",
+      "status": "OPEN_NOT_FIXED",
+      "suggested_resolution": "Add an explicit non-default growing-mode IC convention, report the decaying-mode fraction of every convention, restate the convention studies relative to it (requires human approval under AGENTS.md rules 1 and 4).",
+      "supporting_classification": "NUMERICALLY_CORROBORATED",
+      "title": "Initial conditions are not the Timescape growing mode"
+    },
+    {
+      "consequence": "The bare-versus-dressed spread of any fsigma8-like number is understated by up to about 6 percentage points in the observable window.",
+      "evidence": {
+        "maximum": 1.1428571429,
+        "maximum_dressed_z": 2.0066,
+        "maximum_f_v": 0.4,
+        "z0": 1.0841563338,
+        "z0p3": 1.1023531127,
+        "z0p5": 1.1124305013,
+        "z1": 1.1306676738,
+        "z10": 1.0578767186,
+        "z2": 1.1428567452,
+        "z20": 1.0247547361,
+        "z3": 1.1360532044
+      },
+      "id": "F2",
+      "locations": [
+        "reports/phase1d_a_growth_observable_audit.md:688",
+        "reports/phase1d_a_growth_observable_audit.md:832",
+        "reports/phase1d_a_observable_inventory.json:237",
+        "reports/phase1d_c_observable_closure_audit.md:906",
+        "reports/phase1d_c_closure_inventory.json:263",
+        "reports/phase1d_c_compliance_audit.md:525"
+      ],
+      "primary_classification": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "severity": "MEDIUM",
+      "statement": "g(f)=(2+f)^2/(4+f+4f^2) has g'(f)=(2+f)(6-15f)/(4+f+4f^2)^2; its maximum is g(2/5)=8/7 at dressed z=2.007, so over 0.3<~z<~3 the factor is 1.10-1.14.",
+      "status": "OPEN_NOT_FIXED",
+      "suggested_resolution": "Successor erratum; historical reports remain frozen.",
+      "supporting_classification": "NUMERICALLY_CORROBORATED",
+      "title": "Bare-to-dressed growth-rate factor range 1.025-1.084 is wrong"
+    },
+    {
+      "consequence": "CONDITIONALLY_CLOSED (1E-F, 1E-G) and CONDITIONALLY_DERIVED_CONTINUUM_REALIZATION (1E-G) are not supported by any exhibited state satisfying the model's zeroth- and first-order kinematics; 1F-C-R A07 names only the dust-conservation defect.",
+      "evidence": {
+        "E_DeltaXi_0_range": [
+          -1.0,
+          0.2
+        ],
+        "J_Xi_range": [
+          -26.6466,
+          5.3293
+        ],
+        "J_f": 0.0,
+        "Q_bar_first_tuned_for_R_eff_cancellation": -26.979222614841003,
+        "Q_bar_fixture": -5.0,
+        "Q_bar_two_region": 0.0576,
+        "W_bar_fixture": -3.0,
+        "W_bar_two_region_K_D_zero": -0.043,
+        "dust_conservation_residual_void": 1.2,
+        "dust_conservation_residual_wall": 0.6,
+        "fixture": "tests/test_phase1e_g_continuum_h1.py::_continuum_dynamic_fixture",
+        "friedmann_residual_void": -3.1476,
+        "friedmann_residual_wall": -3.76,
+        "gates_passed": {
+          "max_abs_C_P": 1.1e-16,
+          "max_abs_R_Z": 4.8e-15,
+          "max_abs_R_eff": 1.5e-15
+        },
+        "partition_kinematics_residual": -0.144,
+        "six_K_D_over_aD2_required": 2.957,
+        "volume_averaged_expansion": "SATISFIED_0p84"
+      },
+      "id": "F3",
+      "locations": [
+        "src/timescape_fsigma8/transfer/h1_realization.py:487-765",
+        "src/timescape_fsigma8/transfer/h1_realization.py:627-633",
+        "src/timescape_fsigma8/transfer/h1_realization.py:742",
+        "tests/test_phase1e_g_continuum_h1.py:1185-1246",
+        "tests/test_phase1e_g_continuum_h1.py:1249",
+        "tests/test_phase1e_f_h1_transfer.py:205-262",
+        "reports/phase1e_e_transfer_realization_selection.md#11",
+        "reports/phase1e_f_h1_transfer_realization.md#6",
+        "reports/phase1e_g_continuum_h1_realization.md"
+      ],
+      "primary_classification": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "severity": "MEDIUM",
+      "statement": "(a) the clock mismatch J_Xi, the residual of the linearised partition kinematics after F_v is slaved to C_P=0, is returned but never gated, although CLK-H1 (homogeneous clock, no spatial dependence, no perturbative lapse) and the 1E-G fixed-partition branch require J_Xi=0; (b) no zeroth-order identity of the two exact dust-FLRW regions is validated (regional Friedmann, dust conservation, partition kinematics, two-region Q_bar, W_bar with K_D, volume-averaged expansion).",
+      "status": "OPEN_NOT_FIXED",
+      "suggested_resolution": "Fail-closed gates for J_Xi=0 on CLK-H1 and for the background identities with K_D as explicit input; exhibit a consistent manufactured state or downgrade the status tokens.",
+      "supporting_classification": "NUMERICALLY_CORROBORATED",
+      "title": "H1 conditional closure not demonstrated"
+    },
+    {
+      "consequence": "The scientific basis of Phase 1E-F onward cannot be audited from the repository alone.",
+      "evidence": {
+        "phase1e_e_commit": "1f2800c (2026-08-12)",
+        "phase1e_f_commit": "0ad10f4 (2026-08-18)"
+      },
+      "id": "F4",
+      "locations": [
+        "reports/phase1e_e_transfer_realization_selection.md:9,17,19,902-919",
+        "reports/phase1e_e_transfer_realization_correction_verification.md:167-177",
+        "reports/phase1e_f_h1_transfer_realization.md:7-13",
+        "src/timescape_fsigma8/transfer/matrix_backend.py:7,133",
+        "src/timescape_fsigma8/transfer/continuum_backend.py:4,597,976,991,1098,1293",
+        "src/timescape_fsigma8/transfer/continuum_bridge.py:9",
+        "src/timescape_fsigma8/transfer/continuum_geometry.py:95,345",
+        "src/timescape_fsigma8/transfer/h1_realization.py:393,579,584,608,618,627",
+        "reports/phase1f_c_r_astra_audit_remediation_inventory.json:458-463"
+      ],
+      "missing_documents": [
+        "user-approved Phase 1E-F specification",
+        "human-approved Phase 1E-G specification",
+        "astra/INDEPENDENT_SCIENTIFIC_AUDIT.md",
+        "reports/phase1f_b_dust_wall_boost_dynamics_v3_final_audit.md",
+        "reports/phase1f_c_wall_common_geometry_adversarial_audit.md"
+      ],
+      "primary_classification": "VERIFIED_FROM_PRIMARY_SOURCE",
+      "severity": "MEDIUM",
+      "statement": "1E-E ends with S1 primary, H1 comparator and implementation NOT_GRANTED; 1E-F implements H1 with implementation GRANTED and CONDITIONALLY_CLOSED with no committed decision record. The user/human-approved Phase 1E-F and 1E-G specifications cited as scientific authority are not in the repository, nor are three cited audits.",
+      "status": "OPEN_NOT_FIXED",
+      "suggested_resolution": "Commit the specifications (or faithful excerpts) and the three audits; add an H1 decision record.",
+      "title": "Authorization, specification and audit provenance missing from the repository"
+    },
+    {
+      "id": "F5",
+      "locations": [
+        "CLAUDE.md:72",
+        "src/timescape_fsigma8/growth/anchored_diagnostic.py:479",
+        "reports/phase1d_a_growth_observable_audit.md:855"
+      ],
+      "primary_classification": "VERIFIED_FROM_PRIMARY_SOURCE",
+      "severity": "LOW-MEDIUM",
+      "statement": "Candidate A (Q_anchor=f*A_anchor) is the fsigma8-shaped diagnostic 1D-A conditionally authorised; CLAUDE.md lists it as implemented and also states no fsigma8-shaped diagnostic is implemented.",
+      "status": "OPEN_NOT_FIXED",
+      "suggested_resolution": "State that no fsigma8-shaped diagnostic exists beyond the conditional, anchored Candidate A.",
+      "title": "CLAUDE.md scope firewall contradicts the implemented Candidate A"
+    },
+    {
+      "evidence": {
+        "current_main": "118b8f3af3c1360b0da74df8e9a9cb3ba1fed83a",
+        "notebook_sha256_crlf_pinned": "86d2534db9e9b3169835e4ce223ee8f3bff6d03b47e5677d3937fed4adafe55a",
+        "notebook_sha256_lf": "628c441288d67854e0380518841dede3680bddab610e9ef5cea04937455cea2a",
+        "validator_required_main": "63d2104575c6a249e5177e47f4a354b660e70e32"
+      },
+      "id": "F6",
+      "locations": [
+        "scripts/extract_upstream_barotropic_oracle.py:35-36,115",
+        "tests/test_vs_upstream_barotropic_oracle.py:47,76-77,88",
+        "tests/test_anchored_density_growth.py:37",
+        "scripts/validate_anchored_density_growth.py:82,250-252",
+        "scripts/validate_phase1f_c_r_astra_remediation.py:22,94-101"
+      ],
+      "primary_classification": "VERIFIED_FROM_PRIMARY_SOURCE",
+      "severity": "LOW-MEDIUM",
+      "statement": "The pinned notebook SHA-256 is the CRLF (autocrlf) working-copy hash; LF checkouts fail the barotropic extraction gate and its tests auto-skip. The 1D-D validator requires a historical branch; the 1F-C-R validator requires main==origin/main==63d2104 and untracked files.",
+      "status": "OPEN_NOT_FIXED",
+      "suggested_resolution": "Pin the Git blob hash or a line-ending-normalised hash; use ancestry checks against recorded commits.",
+      "supporting_classification": "NUMERICALLY_CORROBORATED",
+      "title": "Reproducibility tied to a Windows checkout and historical Git state"
+    },
+    {
+      "id": "F7",
+      "locations": [
+        "src/timescape_fsigma8/background/tracker.py:156,170",
+        "src/timescape_fsigma8/background/effective_fluid.py:18,29,40,51",
+        "src/timescape_fsigma8/background/__init__.py:55",
+        "reports/background_validation.md:74"
+      ],
+      "primary_classification": "VERIFIED_FROM_PRIMARY_SOURCE",
+      "severity": "LOW",
+      "statement": "Stated policy is that G is passed explicitly with no hidden unit choices, yet six functions default to G=1.0; harmless because G cancels in 4 pi G rho and callers pass G.",
+      "status": "OPEN_NOT_FIXED",
+      "title": "Density functions default to G=1.0"
+    },
+    {
+      "id": "F8",
+      "locations": [
+        "CLAUDE.md:105,143,178",
+        "README.md",
+        "pyproject.toml"
+      ],
+      "primary_classification": "VERIFIED_FROM_PRIMARY_SOURCE",
+      "severity": "LOW",
+      "statement": "CLAUDE.md phase ledger ends at 1F-A (current branch), cites 539 tests (654 collected now), omits phase1f_b, phase1f_c, scientific_status.py, components.py and the 1F-B/1F-C-R drivers, and says never push although approved pushes are part of the workflow (AGENTS.md rule 7 operative); README layout table stops at 1D-B and setup is Windows-only; pyproject description covers only background and clean systems.",
+      "status": "OPEN_NOT_FIXED",
+      "title": "Governing documentation is stale"
+    },
+    {
+      "id": "F9",
+      "locations": [
+        "reports/phase1c_perturbation_equation_audit.md:300-301"
+      ],
+      "primary_classification": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "severity": "LOW",
+      "statement": "The factor is written a_D0*h_TS/h_LCDM but the number used (0.9204) is h_LCDM/h_TS; the correct factor a_D0*h_LCDM/h_TS=1.25955 is implemented in barotropic.resolve_wavenumber.",
+      "status": "OPEN_NOT_FIXED",
+      "title": "Notational slip in 1C-A wavenumber finding F7"
+    }
+  ],
+  "limitations": [
+    "arxiv.org blocked by the container network policy: the arXiv:2511.17160v2 PDF was not inspected; printed-equation statements rely on project transcriptions",
+    "DBE/BDE, W09, Kaiser and Percival-White not re-inspected; load-bearing equations re-derived instead",
+    "runtime layers reviewed at the level of load-bearing equations, closure gates and flagship fixtures, not line by line",
+    "notebook IC Z not bit-exact under SciPy 1.18.1: -0.16974050044476324 vs -0.16974050039281288 (5.2e-11, inside the documented 2e-10 gate)"
+  ],
+  "method": [
+    "independent hand derivation of every load-bearing equation",
+    "from-scratch numerical reimplementation of the tracker background and the three CGI systems (report Appendix A.0-A.2, no project code)",
+    "evaluation of the project's own 1E-G manufactured fixture (report Appendix A.3)",
+    "reading of all 56 committed report files (40 Markdown, 16 JSON)",
+    "full reading of background/, perturbations/, growth/; load-bearing-equation, gate and fixture review of transfer/, phase1f_a/, phase1f_b/, phase1f_c/ (about 9,500 lines)"
+  ],
+  "preservation": {
+    "authors_contacted": false,
+    "committed": false,
+    "gitignored_local_state_created": [
+      ".reference/ (upstream clone at 590c6fd, checked out with core.autocrlf=true)",
+      ".venv/ (Python 3.13)",
+      ".venv311/ (Python 3.11)",
+      "artifacts/ (regenerated oracles, validation JSON and figures)"
+    ],
+    "new_files": [
+      "reports/phase1f_c_r_post_remediation_independent_audit.md",
+      "reports/phase1f_c_r_post_remediation_independent_audit_inventory.json"
+    ],
+    "pushed": false,
+    "staged": false,
+    "tagged": false,
+    "tracked_files_modified": []
+  },
+  "report": "reports/phase1f_c_r_post_remediation_independent_audit.md",
+  "reproduction": {
+    "blocks": {
+      "A.0": "independent tracker background and CGI systems (no project code)",
+      "A.1": "reproduction of published and reported numbers; chain factor; k factor",
+      "A.2": "growing-mode analysis of the initial conditions (F1)",
+      "A.3": "consistency of the 1E-G manufactured state (F3); run from the repository root"
+    },
+    "executed_with": {
+      "numpy": "2.5.3",
+      "python": "3.13.12",
+      "scipy": "1.18.1"
+    },
+    "location": "Appendix A of reports/phase1f_c_r_post_remediation_independent_audit.md"
+  },
+  "request": "user-requested complete revision of implementation and theoretical scientific results; errors described, not fixed",
+  "review_date": "2026-09-23",
+  "schema_version": 1,
+  "scope": "PHASES_1A_TO_1F_C_R_COMPLETE_PROJECT",
+  "severity_scale": {
+    "HIGH": "invalidates a load-bearing result",
+    "LOW": "minor or cosmetic",
+    "LOW-MEDIUM": "governance, documentation or reproducibility defect with scientific-record impact",
+    "MEDIUM": "incorrect statement or a status claim not supported by the evidence",
+    "MEDIUM-HIGH": "materially changes a quantitative result or its interpretation without invalidating the equations"
+  },
+  "tests": {
+    "collected": 654,
+    "command": "python -m pytest -q -p no:cacheprovider",
+    "python_3_11_15": "653_PASSED_1_SKIPPED",
+    "python_3_13_12": "653_PASSED_1_SKIPPED",
+    "skipped_test": "tests/test_anchored_density_growth.py:609 (Phase 1D-D artifact absent; validator is branch-bound, F6)"
+  },
+  "title": "Independent post-remediation scientific review - Phases 1A to 1F-C-R",
+  "upstream": {
+    "commit": "590c6fd5332acb15f5683ebf392a0d7ce54983c5",
+    "matches_upstream_lock": true,
+    "notebook_sha256_committed_lf_content": "628c441288d67854e0380518841dede3680bddab610e9ef5cea04937455cea2a",
+    "notebook_sha256_pinned_by_project": "86d2534db9e9b3169835e4ce223ee8f3bff6d03b47e5677d3937fed4adafe55a",
+    "pinned_hash_reproduced_only_with": "git clone -c core.autocrlf=true"
+  },
+  "validation_drivers": {
+    "audit_numerical_tolerances.py": "ZERO_MISSING_EXPLICIT_TOLERANCES",
+    "compare_to_oracle.py": "EXIT_0_EQUIVALENCE_GATE_PASSED",
+    "execute_upstream_notebook.py": "SUCCESS_0_NOTEBOOK_WARNINGS",
+    "extract_upstream_barotropic_oracle.py": "EXIT_4_ON_LF_CHECKOUT_HASH_GATE; SUCCESS_WITH_CORE_AUTOCRLF_TRUE",
+    "extract_upstream_oracle.py": "SUCCESS",
+    "extract_upstream_perturbation_oracle.py": "SUCCESS",
+    "make_barotropic_fig3.py": "EXIT_0",
+    "make_barotropic_fig3_forensic.py": "EXIT_0",
+    "make_clean_fig2.py": "EXIT_0",
+    "make_independent_fig1.py": "EXIT_0",
+    "validate_anchored_density_growth.py": "CANNOT_RUN_REQUIRES_BRANCH_phase-1d-d-anchored-density-growth",
+    "validate_barotropic_perturbations.py": {
+      "oracle_worst_normalized_linf": 1.476e-14,
+      "radau_vs_reference": 2.529e-11,
+      "tight_explicit_vs_reference": 3.139e-09
+    },
+    "validate_clean_perturbations.py": {
+      "oracle_worst_normalized_linf": 7.35e-16,
+      "radau_vs_reference": 1.879e-11,
+      "tight_explicit_vs_reference": 2.341e-10
+    },
+    "validate_growth_pipeline.py": "GATES_PASSED",
+    "validate_phase1f_a_h1_closure.py": "EXIT_0",
+    "validate_phase1f_b_dust_wall_boost_dynamics.py": "EXIT_0",
+    "validate_phase1f_c_r_astra_remediation.py": "CANNOT_RUN_REQUIRES_MAIN_EQUALS_63d2104_AND_THREE_UNTRACKED_FILES"
+  },
+  "verified_results": [
+    {
+      "area": "1B background",
+      "result": "CORRECT",
+      "statement": "tracker H_D, dressed H, tau_w, dressed redshift, Omegas, dQ_D/dt, dR_D/dt, integrability (3.11), rho_eff, p_eff and their derivatives re-derived"
+    },
+    {
+      "area": "1B background",
+      "result": "CORRECT",
+      "statement": "c_s^2=-(2+2f_v-f_v^2)/(2+f_v)^2; c_s^2-w_eff=-6f_v(1-f_v)/[(2+f_v)^2(8+f_v)]<0",
+      "values": {
+        "cs2_t0": -0.391238,
+        "w_eff_t0": -0.373469
+      }
+    },
+    {
+      "area": "1B background",
+      "result": "CONFIRMED",
+      "statement": "D2 notebook quotient-rule defect"
+    },
+    {
+      "area": "1B background",
+      "result": "CONFIRMED_CONSISTENT",
+      "statement": "D1: with <R>_D=-6f_v/t^2 the Omega sum is exactly one"
+    },
+    {
+      "area": "1B epochs",
+      "result": "REPRODUCED",
+      "values": {
+        "HD0_for_73p03": 57.86,
+        "HD0_for_73p23": 58.01,
+        "lcdm_age_z20_gyr": 0.17906,
+        "t_at_dressed_z20_gyr": 0.19620643,
+        "z_at_0p18_gyr": 21.233273,
+        "z_at_0p218_gyr": 18.586475
+      }
+    },
+    {
+      "area": "1C perturbations",
+      "result": "CORRECT",
+      "statement": "Meszaros, comoving and barotropic matrices; V/Vtilde equivalence via w_dot=-Theta(1+w)(c_s^2-w); residual equations (4.24)-(4.26); qplus incomplete-beta form"
+    },
+    {
+      "area": "1C D3",
+      "result": "RESOLVED_DERIVED_4_10_INDEPENDENTLY_CONFIRMED",
+      "statement": "first-principles dust-frame self-coupling (w_eff-c_s^2)Theta; paper (4.29) follows from the derived chain only; C_printed and C_derived second-order equations re-derived"
+    },
+    {
+      "area": "1C endpoints",
+      "result": "REPRODUCED",
+      "values": {
+        "comoving_Delta_d_t0": 0.0386165401,
+        "comoving_Delta_eff_t0": 0.0070813934,
+        "derived_4_10_10pi_Delta_d_t0": -272159300000000.0,
+        "derived_4_10_10pi_Delta_eff_t0": 3.545589e+17,
+        "meszaros_Delta_d_t0": 0.0331504916,
+        "paper_lcdm_hubble_k_factor": 1.2595507305749012
+      }
+    },
+    {
+      "area": "1D growth",
+      "result": "CORRECT",
+      "statement": "f_bare=-3Z/(Theta Delta_d); chain factor (2+f_v)^2/(4+f_v+4f_v^2) values; harmonic mapping and ratio cancellation; 1D-C Fourier rescaling Jacobians"
+    },
+    {
+      "area": "1D growth",
+      "result": "REPRODUCED",
+      "values": {
+        "G_end_derived_2pi": -6.1617,
+        "G_end_printed_2pi": 4.7326,
+        "candidate_A_G_t0_zref10": 6.322867,
+        "candidate_A_f_bare_t0": 0.4251006,
+        "derived_4_10_2pi_root_t": 0.7851615735,
+        "f_bare_t0_derived_2pi": 4.3419,
+        "f_bare_t0_printed_2pi": 0.14661
+      }
+    },
+    {
+      "area": "1E-A to 1E-D theory",
+      "result": "CORRECT",
+      "statement": "Kaiser multipoles, AP scalings, perturbed expansion formula, plane-parallel Jacobian, first-order boost laws, Buchert commutation rule, regional CGI pair, linearised Hamiltonian constraint, partition kinematics, two-region Q_D (reproduces tracker Q_D), effective normalisations, C_P/4 coefficient, intertwining residual"
+    },
+    {
+      "area": "1E-F/1E-G runtime",
+      "result": "CORRECT",
+      "statement": "two-region coefficients, dust-transfer weights, P_tilde_eff, residual forms, regional jets, discrete Laplacian eigenvalues (2N sin(pi/N))^2, E_DeltaTheta and E_DeltaXi_0 bridge formulas"
+    },
+    {
+      "area": "1F-A/1F-B/1F-C runtime",
+      "result": "CORRECT",
+      "statement": "density/expansion inversions; D.v=deltaTheta_d-deltaTheta_W; v_dot+Hv=-D nu; d_t psi=-alpha_W Q0 nu; A_i=D_i nu; d_t C_W=H nu+(alpha_W/3)deltaTheta_W; orthonormal components L^T A/a"
+    }
+  ]
+}

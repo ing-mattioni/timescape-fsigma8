@@ -13,3 +13,13 @@ paper      = arXiv:2511.17160v2 (Galoppo & Mourier, JCAP 02 (2026) 066)
 license    = NONE FOUND in upstream repository — treat as all-rights-reserved,
              reference-only. Do not copy upstream source into files intended
              for publication or redistribution.
+
+# Line-ending-independent notebook identity (review finding F6, additive; the
+# pinned upstream state above is unchanged).  notebook_sha256_lf is the
+# SHA-256 of the notebook bytes with CRLF normalised to LF, which equals the
+# SHA-256 of the committed Git blob.  A Windows core.autocrlf checkout has the
+# raw working-tree SHA-256 notebook_sha256_crlf; an LF checkout has raw
+# SHA-256 equal to notebook_sha256_lf.  Verification uses notebook_sha256_lf.
+notebook_sha256_lf   = 628c441288d67854e0380518841dede3680bddab610e9ef5cea04937455cea2a
+notebook_sha256_crlf = 86d2534db9e9b3169835e4ce223ee8f3bff6d03b47e5677d3937fed4adafe55a
+notebook_git_blob    = c6bef3207861b50a76a6da7f4c024fe425dd19ee

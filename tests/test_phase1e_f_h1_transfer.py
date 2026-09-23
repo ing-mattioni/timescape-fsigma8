@@ -26,11 +26,13 @@ from timescape_fsigma8.transfer import (
     DenseH1TransmissionBackend,
     EffectiveSectorContract,
     H1Background,
+    H1BackgroundIdentityError,
     H1ClosureError,
     H1Configuration,
     H1ContractError,
     H1DegeneracyError,
     H1EffectiveNormalizationError,
+    H1KinematicGatePolicy,
     MatrixJet,
     RegionalBulkState,
     ScalarJet,
@@ -39,6 +41,7 @@ from timescape_fsigma8.transfer import (
     evaluate_h1_realization,
     regional_evolution,
     two_region_coefficients,
+    two_region_dust_flrw_background,
     validate_clean_diagnostics,
 )
 
@@ -135,6 +138,7 @@ def make_background(**changes: ScalarJet | float) -> H1Background:
         "Xi_w": ZERO,
         "Xi_v": ZERO,
         "G": 1.0,
+        "six_K_D_over_a_D_squared": 0.0,
     }
     values.update(changes)
     return H1Background(**values)
@@ -175,6 +179,11 @@ def make_configuration(**changes: float) -> H1Configuration:
         "transmission_flux_tolerance": 1e-10,
         "source_roundtrip_tolerance": 1e-10,
         "background_identity_tolerance": 1e-12,
+        "J_Xi_tolerance": 1e-10,
+        # These operator-algebra fixtures are not kinematically consistent
+        # backgrounds (review finding F3); enforced states are tested in the
+        # F3 section at the end of this module.
+        "kinematic_gate_policy": H1KinematicGatePolicy.ALGEBRAIC_VALIDATION_ONLY,
     }
     values.update(changes)
     return H1Configuration(**values)
@@ -703,7 +712,11 @@ def test_result_exposes_required_scientific_record_without_target_inverse() -> N
     }
     assert required <= {field.name for field in fields(type(result))}
     assert result.framework_status == "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION"
-    assert result.scientific_status == "CONDITIONALLY_CLOSED"
+    # Unenforced operator-algebra fixture (review finding F3); the enforced
+    # "CONDITIONALLY_CLOSED" label is tested in the F3 section below.
+    assert result.scientific_status == "ALGEBRAIC_VALIDATION_ONLY"
+    assert result.kinematic_gate_policy == "ALGEBRAIC_VALIDATION_ONLY"
+    assert result.clock_branch == "CLK-H1"
     assert result.observational_status == "NON_OBSERVATIONAL"
     assert result.fsigma8_status == "NOT_FSIGMA8"
     assert result.scientific_implementation_authorization == "GRANTED"
@@ -1067,3 +1080,203 @@ def test_phase1e_f_authorization_and_nonobservational_status_tokens() -> None:
     assert transfer.INTERFACE_ONTOLOGY == "MATHEMATICAL_CARRIER_TRANSFER_INTERFACE"
     assert transfer.SCIENTIFIC_IMPLEMENTATION_AUTHORIZATION == "GRANTED"
     assert transfer.PROTOTYPE_AUTHORIZATION == "GRANTED"
+
+
+# --- Review finding F3: enforced background and CLK-H1 kinematic gates -----
+# A06: the solved consistent state is exact up to roundoff in O(1) fixture
+# units (budgets 1e-12 absolute); perturbation budgets are relative.
+
+F3_G = 1.0 / (4.0 * np.pi)
+
+
+def consistent_background(*, six_K_D_over_a_D_squared: float) -> H1Background:
+    """Two exact dust-FLRW regions on a common proper time (alpha_r = 1)."""
+    return two_region_dust_flrw_background(
+        f_v=0.4,
+        rho_w=1.5,
+        rho_v=0.5,
+        H_w=0.3,
+        H_v=0.5,
+        alpha_w=scalar(1.0),
+        alpha_v=scalar(1.0),
+        six_K_D_over_a_D_squared=six_K_D_over_a_D_squared,
+        G=F3_G,
+    )
+
+
+def identity_effective_contract(
+    delta_theta: VectorJet, delta_xi0: VectorJet
+) -> EffectiveSectorContract:
+    identity_operator = DenseCarrierOperator(matrix_jet(np.eye(N)))
+    return EffectiveSectorContract(
+        delta_theta_operator=identity_operator,
+        delta_theta_inputs=delta_theta,
+        delta_xi0_operator=identity_operator,
+        delta_xi0_inputs=delta_xi0,
+        J_f_Gamma=VectorJet(np.zeros(N), np.zeros(N), np.zeros(N)),
+        partition_time_independent=True,
+    )
+
+
+def make_consistent_state_arguments(
+    *, six_K_D_over_a_D_squared: float
+) -> dict[str, object]:
+    """Solve the free 1E-F effective-sector inputs for a gated-consistent state.
+
+    On a consistent background, E_DeltaTheta enters R_eff affinely through its
+    first jet and R_Z through its second jet, componentwise; J_Xi equals its
+    value at E_DeltaXi_0 = 0 minus E_DeltaXi_0.  The inputs are solved in that
+    order, then the state is returned for an ENFORCE evaluation.  This is an
+    instantaneous manufactured state, not an all-time trajectory.
+    """
+    background = consistent_background(
+        six_K_D_over_a_D_squared=six_K_D_over_a_D_squared
+    )
+    bulk = RegionalBulkState(Delta_w=0.3, Z_w=0.2, Delta_v=-0.1, Z_v=0.4)
+    backend = make_backend()
+    probe = make_configuration(R_Z_tolerance=1e9, R_eff_tolerance=1e9)
+    zeros = np.zeros(N)
+    e0 = np.linspace(0.05, 0.3, N)
+
+    def evaluate(e1: np.ndarray, e2: np.ndarray, x0: np.ndarray):
+        return evaluate_h1_realization(
+            regional_bulk=bulk,
+            background=background,
+            backend=backend,
+            effective_sector=identity_effective_contract(
+                VectorJet(e0, e1, e2), VectorJet(x0, zeros, zeros)
+            ),
+            configuration=probe,
+        )
+
+    base, unit = evaluate(zeros, zeros, zeros), evaluate(np.ones(N), zeros, zeros)
+    e1 = -base.R_eff / (unit.R_eff - base.R_eff)
+    base, unit = evaluate(e1, zeros, zeros), evaluate(e1, np.ones(N), zeros)
+    e2 = -base.R_Z / (unit.R_Z - base.R_Z)
+    x0 = np.array(evaluate(e1, e2, zeros).J_Xi)
+    return {
+        "regional_bulk": bulk,
+        "background": background,
+        "backend": backend,
+        "effective_sector": identity_effective_contract(
+            VectorJet(e0, e1, e2), VectorJet(x0, zeros, zeros)
+        ),
+        "configuration": make_configuration(
+            kinematic_gate_policy=H1KinematicGatePolicy.ENFORCE
+        ),
+    }
+
+
+def test_f3_manufactured_fixture_violates_background_kinematics_and_fails_closed() -> None:
+    arguments, _ = make_nontrivial_dynamic_arguments()
+    result = evaluate_h1_realization(**arguments)
+    residuals = result.background_identity_residuals
+    assert result.scientific_status == "ALGEBRAIC_VALIDATION_ONLY"
+    # rho_w=1, Theta_w=0.6, R_bar_w=0, 16 pi G = 4: 4 - (2/3) 0.36 = 3.76.
+    assert residuals["regional_hamiltonian_constraint_w"] == pytest.approx(3.76, rel=2e-12, abs=0.0)
+    # rho_r.first = 0 while alpha_r Theta_r rho_r = 0.6 and 1.2 (Astra A07).
+    assert residuals["regional_dust_continuity_w"] == pytest.approx(0.6, rel=2e-12, abs=0.0)
+    assert residuals["regional_dust_continuity_v"] == pytest.approx(1.2, rel=2e-12, abs=0.0)
+    # Q_bar = -5 against (2/3) 0.24 (0.6)^2 = 0.0576.
+    assert residuals["two_region_backreaction"] == pytest.approx(5.0576, rel=2e-12, abs=0.0)
+    assert result.J_Xi_max_abs > 1.0
+    enforced = dict(arguments)
+    enforced["configuration"] = make_configuration(
+        kinematic_gate_policy=H1KinematicGatePolicy.ENFORCE
+    )
+    with pytest.raises(
+        H1BackgroundIdentityError, match=r"^regional_hamiltonian_constraint_w "
+    ):
+        evaluate_h1_realization(**enforced)
+
+
+@pytest.mark.parametrize("six_K_D_over_a_D_squared", [0.0, 0.3])
+def test_f3_consistent_manufactured_state_passes_every_enforced_gate(
+    six_K_D_over_a_D_squared: float,
+) -> None:
+    arguments = make_consistent_state_arguments(
+        six_K_D_over_a_D_squared=six_K_D_over_a_D_squared
+    )
+    result = evaluate_h1_realization(**arguments)
+    assert result.scientific_status == "CONDITIONALLY_CLOSED"
+    assert result.kinematic_gate_policy == H1KinematicGatePolicy.ENFORCE.value
+    assert result.clock_branch == "CLK-H1"
+    assert max(result.background_identity_residuals.values()) <= 1e-12
+    assert result.J_Xi_max_abs <= 1e-12
+    for residual in (result.C_P, result.R_Delta, result.R_Z, result.R_eff, result.K_GM):
+        assert np.max(np.abs(residual)) <= 1e-12
+    for field in (result.Delta_d.value, result.Z, result.Delta_eff.value, result.F_v.value):
+        assert np.max(np.abs(field)) > 1e-2
+    # The same state without enforcement is never labelled closed.
+    unenforced = dict(arguments)
+    unenforced["configuration"] = make_configuration()
+    algebraic = evaluate_h1_realization(**unenforced)
+    assert algebraic.scientific_status == "ALGEBRAIC_VALIDATION_ONLY"
+    np.testing.assert_array_equal(algebraic.Delta_d.value, result.Delta_d.value)
+
+
+def test_f3_clock_mismatch_increment_is_predictable_and_fails_closed() -> None:
+    arguments = make_consistent_state_arguments(six_K_D_over_a_D_squared=0.0)
+    contract = arguments["effective_sector"]
+    shift = 0.05 * np.linspace(-1.0, 1.0, N)
+    zeros = np.zeros(N)
+    corrupted = dict(arguments)
+    corrupted["effective_sector"] = identity_effective_contract(
+        contract.delta_theta_inputs,
+        VectorJet(contract.delta_xi0_inputs.value + shift, zeros, zeros),
+    )
+    corrupted["configuration"] = make_configuration()
+    baseline = evaluate_h1_realization(
+        **{**arguments, "configuration": make_configuration()}
+    )
+    shifted_result = evaluate_h1_realization(**corrupted)
+    # J_Xi = [F_v_dot - A_f F_v - f_v f_w E_DeltaXi_0 - J_f]/(f_v f_w).
+    np.testing.assert_allclose(
+        shifted_result.J_Xi - baseline.J_Xi, -shift, rtol=0.0, atol=1e-13
+    )
+    # No other residual sees the clock input: only the J_Xi gate can catch it.
+    for residual in (shifted_result.R_Z, shifted_result.R_eff, shifted_result.C_P):
+        assert np.max(np.abs(residual)) <= 1e-12
+    corrupted["configuration"] = make_configuration(
+        kinematic_gate_policy=H1KinematicGatePolicy.ENFORCE
+    )
+    with pytest.raises(H1ClosureError, match=r"^J_Xi=") as error:
+        evaluate_h1_realization(**corrupted)
+    measured = float(str(error.value).split("=", 1)[1].split()[0])
+    assert measured == pytest.approx(np.max(np.abs(shift)), rel=1e-9, abs=0.0)
+
+
+def test_f3_enforced_background_gate_precedes_evaluation() -> None:
+    arguments = make_consistent_state_arguments(six_K_D_over_a_D_squared=0.0)
+    background = arguments["background"]
+    corrupted = dict(arguments)
+    corrupted["background"] = replace_background(
+        background,
+        R_bar_w=scalar(
+            background.R_bar_w.value + 1e-6,
+            background.R_bar_w.first,
+            background.R_bar_w.second,
+        ),
+    )
+    with pytest.raises(
+        H1BackgroundIdentityError,
+        match=r"^regional_hamiltonian_constraint_w background identity residual",
+    ):
+        evaluate_h1_realization(**corrupted)
+    # The pre-existing nondegeneracy gates still act first.
+    with pytest.raises(H1DegeneracyError, match="c_Gamma"):
+        evaluate_h1_realization(
+            **{
+                **corrupted,
+                "configuration": make_configuration(
+                    coercivity_min=1.1,
+                    kinematic_gate_policy=H1KinematicGatePolicy.ENFORCE,
+                ),
+            }
+        )
+
+
+def replace_background(background: H1Background, **changes: object) -> H1Background:
+    values = {field.name: getattr(background, field.name) for field in fields(H1Background)}
+    values.update(changes)
+    return H1Background(**values)  # type: ignore[arg-type]

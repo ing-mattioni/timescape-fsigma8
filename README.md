@@ -46,6 +46,26 @@ the same inverse-metric Cholesky frame as 1F-B. Optional C_W reconstruction
 requires a caller-declared linear-regime limit and positive `1+2C_W` at every
 accepted output time. These are validity gates, not new scientific dynamics.
 
+### Post-remediation independent review and fixes
+
+An independent review of Phases 1A–1F-C-R
+([report](reports/phase1f_c_r_post_remediation_independent_audit.md),
+findings F1–F9) confirmed the paper-level equations and every re-computed
+number, and raised nine findings. They have been addressed as follows:
+
+- **F1:** the paper ICs carry a decaying mode. An explicit, non-default
+  `TIMESCAPE_REGULAR_GROWING_MODE` convention now exists for the clean
+  systems ([validation](reports/phase1f_c_r_f1_growing_mode_initial_conditions_validation.md)).
+- **F3:** the H1 runtime now gates `J_Xi = 0` and 13 background identities.
+  Only enforced results carry closure status tokens
+  ([validation](reports/phase1f_c_r_f3_h1_kinematic_gates_validation.md)).
+- **F2, F4–F9:** a successor erratum, provenance records, checkout-independent
+  reproducibility gates, mandatory `G`, and refreshed documentation
+  ([remediation](reports/phase1f_c_r_f2_f4_f9_remediation.md)). F4 is closed
+  as a documented permanent gap: three specifications, three audits and any
+  H1 decision record are confirmed unavailable. A citation map ties every
+  specification-cited equation to a committed report.
+
 The earlier implementation milestones below remain useful provenance:
 
 - **Phase 1A (done):** audit + clean-room re-execution of the authors'
@@ -126,7 +146,19 @@ The earlier implementation milestones below remain useful provenance:
 | `scripts/make_barotropic_fig3.py` | Corrected-c²ₛ Fig.-3 variants for both D3 branches (raw and /k²) |
 | `scripts/make_barotropic_fig3_forensic.py` | Forensic (D2-corrupted, upstream-reproduction) Fig.-3 variants |
 | `scripts/_phase1c_b2_forensic.py` | Isolated forensic harness holding the D2-corrupted sound speed (never imported by the scientific package) |
-| `src/timescape_fsigma8/growth/` | Phase 1D-B growth layer: mandatory-explicit scenarios, dust-mode histories, exact analytic rates, root-refined crossings/validity intervals, solver-harmonic δ_m mapping |
+| `src/timescape_fsigma8/growth/` | Phase 1D-B growth layer: mandatory-explicit scenarios, dust-mode histories, exact analytic rates, root-refined crossings/validity intervals, solver-harmonic δ_m mapping; Phase 1D-D anchored density-growth diagnostic (Candidate A, conditional and non-observational) |
+| `src/timescape_fsigma8/perturbations/growing_mode.py` | Explicit Timescape regular growing-mode ICs for the clean systems (review F1) |
+| `src/timescape_fsigma8/transfer/` | Phase 1E-F/1E-G conditional H1 transmission runtime (matrix contract, continuum-geometric backend and bridge) with the F3 kinematic gates |
+| `src/timescape_fsigma8/phase1f_a/` | Phase 1F-A conditional forward realization: regional density/expansion inversion, carrier density, spectra, external boost, dressed map |
+| `src/timescape_fsigma8/phase1f_b/` | Phase 1F-B conditional scalar dust-to-wall boost dynamics |
+| `src/timescape_fsigma8/phase1f_c/` | Phase 1F-C conditional wall/common-spacetime kinematic geometry |
+| `src/timescape_fsigma8/components.py` | Tensor-component ontology (coordinate/orthonormal representations, 1F-C-R) |
+| `src/timescape_fsigma8/scientific_status.py` | Current cross-phase scientific classifications (1F-C-R successor record) |
+| `scripts/validate_anchored_density_growth.py` | Phase 1D-D Candidate A validation (regenerable on any clean descendant of the 1D-D commit) |
+| `scripts/validate_phase1f_a_h1_closure.py`, `scripts/validate_phase1f_b_dust_wall_boost_dynamics.py` | Phase 1F-A/1F-B validation drivers (deterministic artifacts) |
+| `scripts/validate_phase1f_c_r_astra_remediation.py` | 1F-C-R provenance, equation-preservation and JSON checks (ancestry-based; reports post-remediation drift and absent local provenance) |
+| `scripts/audit_numerical_tolerances.py` | AST inventory ensuring every numerical comparison states its tolerances |
+| `scripts/validate_growing_mode_initial_conditions.py`, `scripts/validate_h1_kinematic_gates.py` | Review F1 and F3 validation drivers |
 | `scripts/validate_growth_pipeline.py` | Growth-pipeline validation: frozen-bracket crossing checks, analytic identities, solver/root convergence, tilt equivalence, one-factor studies |
 | `artifacts/upstream/` | Executed notebook copy, figures, logs, oracles (git-ignored: upstream-derived content with unclear licensing) |
 | `artifacts/independent/` | Outputs of our own implementation: comparison statistics, reproduced figures |
@@ -140,6 +172,9 @@ The earlier implementation milestones below remain useful provenance:
 | `reports/phase1c_b2_barotropic_validation.md` | Phase 1C-B2 barotropic implementation, upstream reproduction, D2/D3 factorial, and sensitivity report |
 | `reports/phase1d_a_growth_observable_audit.md` | Phase 1D-A observable-definition audit (+ machine-readable `phase1d_a_observable_inventory.json`) |
 | `reports/phase1d_b_growth_pipeline_validation.md` | Phase 1D-B growth-pipeline implementation and validation report |
+| `reports/phase1d_c_*`, `phase1d_d_*`, `phase1d_d_t_*` | Observable-closure audit, Candidate A validation, D3 frame-mapping adjudication |
+| `reports/phase1e_*` | Dressed-observable bridge, light-cone velocity, transfer closure, regional matching, realization selection, H1 and continuum H1 realizations (with adversarial audits) |
+| `reports/phase1f_*` | 1F-A/1F-B/1F-C conditional runtimes, 1F-C-R remediation, the post-remediation review and its F1/F3/F2–F9 fixes |
 | `AGENTS.md` | Permanent project rules (scientific-integrity constraints) |
 | `pyproject.toml` | Package + minimal dependency declaration |
 
@@ -152,11 +187,29 @@ never committed to this repository, and never redistributed. See
 
 ## Reproducing the audit
 
+Windows:
+
 ```
 py -3.14 -m venv .venv
-.venv\Scripts\python -m pip install numpy scipy matplotlib nbformat nbclient ipykernel
+.venv\Scripts\python -m pip install -e ".[exec,test]"
 .venv\Scripts\python scripts\execute_upstream_notebook.py
+.venv\Scripts\python -m pytest -q
 ```
+
+Linux/macOS (any CPython >= 3.11; phases are also validated on 3.11 in a
+second environment `.venv311`):
+
+```
+python3 -m venv .venv
+.venv/bin/python -m pip install -e ".[exec,test]"
+.venv/bin/python scripts/execute_upstream_notebook.py
+.venv/bin/python -m pytest -q
+```
+
+The upstream clone goes in `.reference/` at the commit pinned in
+`UPSTREAM.lock`. Its notebook is identified by a line-ending-independent
+SHA-256 (`notebook_sha256_lf`), so LF and CRLF (`core.autocrlf`) checkouts
+verify identically.
 
 The script fails with a nonzero exit code if any notebook cell fails, writes
 the executed copy to `artifacts/upstream/ACPT_Timescape.executed.ipynb`, and

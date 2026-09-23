@@ -649,7 +649,11 @@ def test_generated_phase1d_d_artifact_schema_when_present():
     )
     environments = payload["complete_test_environments"]
     if isinstance(environments, dict):
-        assert {"python_3_14", "python_3_11"} <= environments.keys()
+        # The phase ran 3.14 + 3.11; regeneration (review finding F6) records
+        # its actual primary version next to the required 3.11 environment.
+        assert "python_3_11" in environments
+        assert len(environments) == 2
+        assert all(key.startswith("python_3_") for key in environments)
     provenance = payload["repository_and_frozen_checkpoint_provenance"]
     assert provenance["base_phase1d_d_t_checkpoint"] == (
         FROZEN_PROVENANCE.repository_commit

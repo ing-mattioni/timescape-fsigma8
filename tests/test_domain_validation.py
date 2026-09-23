@@ -10,6 +10,8 @@ has the exact finite limit tau_w(0) = 0 ([W09] (B12)).
 # Previously implicit algebraic comparisons use rtol=2e-12, atol=1e-14
 # in the fixture units (roundoff allowance); explicit convergence budgets remain.
 
+import inspect
+
 import numpy as np
 import pytest
 
@@ -20,10 +22,13 @@ P = TrackerParams(fv0=0.737, HD0=1.0)
 
 REJECTS_NONPOSITIVE = [
     bg.fv, bg.dfv_dt, bg.d2fv_dt2, bg.a_D, bg.H_D, bg.da_D_dt, bg.Theta,
-    bg.R_D, bg.Q_D, bg.dR_D_dt, bg.dQ_D_dt, bg.rho_d, bg.drho_d_dt,
-    bg.rho_eff, bg.p_eff, bg.drho_eff_dt, bg.dp_eff_dt, bg.w_eff,
+    bg.R_D, bg.Q_D, bg.dR_D_dt, bg.dQ_D_dt, bg.w_eff,
     bg.cs2_eff, bg.Omega_m, bg.Omega_R, bg.Omega_Q, bg.gamma_w,
     bg.dgamma_w_dt, bg.a_w, bg.dtau_w_dt, bg.H_dressed, bg.redshift,
+]
+# Densities take a mandatory G (review finding F7: no G = 1.0 default).
+DENSITIES = [
+    bg.rho_d, bg.drho_d_dt, bg.rho_eff, bg.p_eff, bg.drho_eff_dt, bg.dp_eff_dt,
 ]
 
 
@@ -32,6 +37,20 @@ REJECTS_NONPOSITIVE = [
 def test_rejects_nonpositive_scalar(func, bad_t):
     with pytest.raises(ValueError):
         func(bad_t, P)
+
+
+@pytest.mark.parametrize("func", DENSITIES, ids=lambda f: f.__name__)
+@pytest.mark.parametrize("bad_t", [0.0, -1.0], ids=["zero", "negative"])
+def test_densities_reject_nonpositive_scalar(func, bad_t):
+    with pytest.raises(ValueError):
+        func(bad_t, P, 1.0)
+
+
+@pytest.mark.parametrize("func", DENSITIES, ids=lambda f: f.__name__)
+def test_densities_require_explicit_G(func):
+    assert inspect.signature(func).parameters["G"].default is inspect.Parameter.empty
+    with pytest.raises(TypeError):
+        func(1.0, P)
 
 
 @pytest.mark.parametrize("func", [bg.fv, bg.a_D, bg.H_dressed],

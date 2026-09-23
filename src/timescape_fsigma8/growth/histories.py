@@ -23,15 +23,20 @@ import timescape_fsigma8.background as bg
 from timescape_fsigma8.perturbations import (
     PHASE1C_EPOCH_ROOT,
     PLANCK_2018_QPLUS_RECIPE,
+    REGULAR_GROWING_MODE_REFERENCE_CONFIG,
     BarotropicScenario,
+    CleanPerturbationSystem,
     D3Branch,
     EpochScenario,
+    GrowingModeInitialConditions,
     InitialConditionScenario,
     PerturbationInitialConditions,
+    RateUnitConvention,
     ResolvedEpoch,
     ResolvedWavenumber,
     TiltForm,
     WavenumberConvention,
+    resolve_growing_mode_initial_conditions,
     solve_barotropic,
     solve_comoving,
     solve_meszaros,
@@ -161,6 +166,24 @@ class DustModeHistory:
     def dressed_redshift(self) -> NDArray[np.float64]:
         return _frozen_array(bg.redshift(self.t, self.background.params))
 
+    def _initial_conditions_metadata(self) -> dict:
+        ics = self.initial_conditions
+        record = {
+            "delta_d": ics.delta_d,
+            "expansion_gradient": ics.expansion_gradient,
+            "delta_eff": ics.delta_eff,
+            "rate_units": ics.rate_units.value,
+        }
+        if isinstance(ics, GrowingModeInitialConditions):
+            record["regular_growing_mode"] = {
+                "system": ics.system.value,
+                "initial_time": ics.initial_time,
+                "log_rate": ics.log_rate,
+                "effective_ratio": ics.effective_ratio,
+                "config": ics.config.to_metadata(),
+            }
+        return record
+
     def to_metadata(self) -> dict:
         return {
             "scenario": self.scenario.to_metadata(),
@@ -177,12 +200,7 @@ class DustModeHistory:
                 "time_gyr": self.epoch.time_gyr,
                 "dressed_redshift": self.epoch.dressed_redshift,
             },
-            "initial_conditions": {
-                "delta_d": self.initial_conditions.delta_d,
-                "expansion_gradient": self.initial_conditions.expansion_gradient,
-                "delta_eff": self.initial_conditions.delta_eff,
-                "rate_units": self.initial_conditions.rate_units.value,
-            },
+            "initial_conditions": self._initial_conditions_metadata(),
             "integration_interval_solver_units": [float(self.t[0]), float(self.t[-1])],
             "resolved_k_code": self.resolved_k_code,
             "solver_nfev": self.solver_nfev,
@@ -193,14 +211,40 @@ class DustModeHistory:
 
 
 def resolve_epoch_and_ics(
-    scenario: GrowthScenario, background: ResolvedBackground
+    scenario: GrowthScenario, background: ResolvedBackground, *, G: float
 ) -> tuple[ResolvedEpoch, PerturbationInitialConditions]:
-    """Resolve the frozen Phase 1C epoch and IC scenarios for this run."""
+    """Resolve the frozen Phase 1C epoch and IC scenarios for this run.
+
+    ``TIMESCAPE_REGULAR_GROWING_MODE`` (clean systems only; the scenario
+    rejects barotropic use) is resolved at the resolved epoch with the named
+    immutable ``REGULAR_GROWING_MODE_REFERENCE_CONFIG`` and the explicit
+    ``G``; the two LCDM-rate conventions use the frozen
+    ``InitialConditionScenario`` unchanged and do not use ``G``.
+    """
     epoch = EpochScenario(
         choice=scenario.epoch_choice,
         time_unit=background.time_unit,
         root=PHASE1C_EPOCH_ROOT,
     ).resolve(background.params)
+    if (
+        scenario.rate_unit_convention
+        is RateUnitConvention.TIMESCAPE_REGULAR_GROWING_MODE
+    ):
+        system = {
+            GrowthSystem.MESZAROS: CleanPerturbationSystem.MESZAROS,
+            GrowthSystem.COMOVING: CleanPerturbationSystem.COMOVING,
+        }.get(scenario.perturbation_system)
+        if system is None:  # pragma: no cover - GrowthScenario rejects it
+            raise ValueError("the regular growing mode is defined for clean systems only")
+        ics = resolve_growing_mode_initial_conditions(
+            background.params,
+            recipe=PLANCK_2018_QPLUS_RECIPE,
+            system=system,
+            epoch=epoch,
+            config=REGULAR_GROWING_MODE_REFERENCE_CONFIG,
+            G=G,
+        )
+        return epoch, ics
     ics = InitialConditionScenario(
         recipe=PLANCK_2018_QPLUS_RECIPE,
         rate_units=scenario.rate_unit_convention,
@@ -244,7 +288,7 @@ def compute_history(
     if not isinstance(numerics, GrowthNumericsConfig):
         raise ValueError("numerics must be an explicit GrowthNumericsConfig")
     background = resolve_background(scenario.background_preset)
-    epoch, ics = resolve_epoch_and_ics(scenario, background)
+    epoch, ics = resolve_epoch_and_ics(scenario, background, G=numerics.G)
     t_eval = np.linspace(epoch.time, background.t0, numerics.n_samples)
 
     resolved_k_code: float | None = None
