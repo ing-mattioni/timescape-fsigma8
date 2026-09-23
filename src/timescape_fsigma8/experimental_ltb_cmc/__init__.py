@@ -2,6 +2,8 @@
 
 from .geometry import LTBModel, LTBDomainError, LTBNumericalError, Numerics
 from .solver import Averages, CMCSolution, Residuals, solve_cmc
+from .evolution import CMCEvolution, EvolutionResiduals, solve_cmc_evolution
 
 __all__ = ["LTBModel", "LTBDomainError", "LTBNumericalError", "Numerics",
-           "Averages", "CMCSolution", "Residuals", "solve_cmc"]
+           "Averages", "CMCSolution", "Residuals", "solve_cmc",
+           "CMCEvolution", "EvolutionResiduals", "solve_cmc_evolution"]

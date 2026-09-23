@@ -10,7 +10,7 @@ profile and anchors. They are NOT published Timescape embedding equations.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import ClassVar
+from typing import Any, Callable, ClassVar
 
 import numpy as np
 from scipy.integrate import solve_bvp
@@ -106,6 +106,29 @@ def _readonly(value: Array) -> Array:
     return value
 
 
+@dataclass(frozen=True)
+class _Background:
+    """Internal accepted background in s_c-scaled units; never public output.
+
+    It keeps the dense collocation interpolants (``cmc.sol``, ``lapse.sol``)
+    and the section/sample evaluators of one accepted solve, so that later
+    single-age computations reuse them instead of re-solving or
+    differentiating the public sampled grids.  ``K`` and ``K_s`` are the
+    dimensionless eigenparameters (lengths divided by s_c).
+    """
+
+    s_c: float
+    geometry: Geometry
+    cmc: Any
+    lapse: Any
+    K: float
+    K_s: float
+    gamma_b: float
+    section: Callable[[Array], tuple]
+    sample: Callable[[Array], tuple]
+    solution: CMCSolution
+
+
 def solve_cmc(s_c: float, model: LTBModel,
               numerics: Numerics = Numerics()) -> CMCSolution:
     """Solve one age with S(0)=S(1)=s_c and unknown K=-div(n).
@@ -118,6 +141,15 @@ def solve_cmc(s_c: float, model: LTBModel,
     trial or an under-resolved check raises LTBNumericalError, not a
     non-existence verdict. No partial solution is returned.
     """
+    return _checked_background(s_c, model, numerics).solution
+
+
+def _checked_background(s_c: float, model: LTBModel, numerics: Numerics) -> _Background:
+    """Validated accepted background with its internal dense state.
+
+    Same input validation and arithmetic policy as ``solve_cmc``; used by
+    the separate single-age evolution module without a second solve.
+    """
     s_c = scalar(s_c, "s_c")
     if s_c <= 0:
         raise LTBDomainError("s_c must be positive")
@@ -125,12 +157,16 @@ def solve_cmc(s_c: float, model: LTBModel,
         raise LTBDomainError("Require LTBModel and Numerics instances")
     try:
         with np.errstate(over="raise", divide="raise", invalid="raise"):
-            return _solve(s_c, model, numerics)
+            return _solve_background(s_c, model, numerics)
     except (FloatingPointError, OverflowError, ZeroDivisionError, RuntimeWarning) as exc:
         raise LTBNumericalError(f"Arithmetic/representation failure: {exc}") from exc
 
 
 def _solve(s_c: float, model: LTBModel, num: Numerics) -> CMCSolution:
+    return _solve_background(s_c, model, num).solution
+
+
+def _solve_background(s_c: float, model: LTBModel, num: Numerics) -> _Background:
     geometry = Geometry(model, s_c, num)
     transition = np.linspace(model.r_c, model.r_o, 11)
     if len(np.unique(transition)) != 11:
@@ -290,14 +326,15 @@ def _solve(s_c: float, model: LTBModel, num: Numerics) -> CMCSolution:
     residuals = Residuals(float(np.max(cmc.rms_residuals)), float(np.max(lapse.rms_residuals)),
                           cmc_error, lapse_error, boundary, mass_res, ham_res, qerr,
                           len(cmc.x), len(lapse.x), lower_bound)
-    return CMCSolution(model, num, s_c, dimensional(K, s_c, -1), dimensional(K_s, s_c, -2),
-                       _readonly(r), _readonly(dimensional(y[0], s_c, 1)), _readonly(y[1]),
-                       _readonly(gamma), _readonly(y[1] / gamma),
-                       _readonly(dimensional(g.A, s_c, 1)), _readonly(dimensional(g.R, s_c, 1)),
-                       _readonly(dimensional(g.R_r, s_c, 1)), _readonly(dimensional(g.Theta, s_c, -1)),
-                       _readonly(dimensional(g.sigma2, s_c, -2)),
-                       _readonly(dimensional(g.G_rho, s_c, -2, model.G)),
-                       _readonly(dimensional(g.R_u, s_c, -2)), _readonly(dimensional(kp, s_c, -1)),
-                       _readonly(dimensional(kl, s_c, -1)), _readonly(dimensional(U, s_c, -2)),
-                       _readonly(dimensional(basis[0], s_c, 2)), _readonly(basis[2]),
-                       _readonly(N), _readonly(lam), averages, residuals)
+    solution = CMCSolution(model, num, s_c, dimensional(K, s_c, -1), dimensional(K_s, s_c, -2),
+                           _readonly(r), _readonly(dimensional(y[0], s_c, 1)), _readonly(y[1]),
+                           _readonly(gamma), _readonly(y[1] / gamma),
+                           _readonly(dimensional(g.A, s_c, 1)), _readonly(dimensional(g.R, s_c, 1)),
+                           _readonly(dimensional(g.R_r, s_c, 1)), _readonly(dimensional(g.Theta, s_c, -1)),
+                           _readonly(dimensional(g.sigma2, s_c, -2)),
+                           _readonly(dimensional(g.G_rho, s_c, -2, model.G)),
+                           _readonly(dimensional(g.R_u, s_c, -2)), _readonly(dimensional(kp, s_c, -1)),
+                           _readonly(dimensional(kl, s_c, -1)), _readonly(dimensional(U, s_c, -2)),
+                           _readonly(dimensional(basis[0], s_c, 2)), _readonly(basis[2]),
+                           _readonly(N), _readonly(lam), averages, residuals)
+    return _Background(s_c, geometry, cmc, lapse, K, K_s, gamma_b, section, sample, solution)
