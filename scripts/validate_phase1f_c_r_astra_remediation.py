@@ -20,11 +20,41 @@ from audit_numerical_tolerances import audit
 from timescape_fsigma8.scientific_status import CURRENT_SCIENTIFIC_STATUS
 
 BASE = "63d2104575c6a249e5177e47f4a354b660e70e32"
+# Peeled commit of tag phase-1f-c-r-astra-audit-remediation-v2: the frozen
+# state this validator certified.  Review finding F6 replaced the former
+# ``main == origin/main == BASE`` and working-tree equality gates with
+# ancestry checks against these recorded commits, so the historical claims
+# stay verifiable on any descendant checkout.
+REMEDIATION = "118b8f3af3c1360b0da74df8e9a9cb3ba1fed83a"
 INVENTORY = Path("reports/phase1f_c_r_astra_audit_remediation_inventory.json")
+# Raw working-tree hashes that are line-ending encodings of the same content:
+# the upstream notebook pinned in UPSTREAM.lock (CRLF -> LF-normalised).
+LINE_ENDING_EQUIVALENTS = {
+    "86d2534db9e9b3169835e4ce223ee8f3bff6d03b47e5677d3937fed4adafe55a":
+        "628c441288d67854e0380518841dede3680bddab610e9ef5cea04937455cea2a",
+}
 
 
 def git(*args: str) -> str:
     return subprocess.check_output(["git", *args], text=True, encoding="utf-8").strip()
+
+
+def is_ancestor(commit: str, descendant: str = "HEAD") -> bool:
+    return subprocess.run(["git", "merge-base", "--is-ancestor", commit, descendant]).returncode == 0
+
+
+def local_file_status(path: str, expected: str) -> str:
+    """Verify one inventory-pinned local file; absence is reported, not hidden."""
+    candidate = Path(path)
+    if not candidate.is_file():
+        return "ABSENT_FROM_CHECKOUT"
+    data = candidate.read_bytes()
+    if hashlib.sha256(data).hexdigest() == expected:
+        return "VERIFIED"
+    normalized = LINE_ENDING_EQUIVALENTS.get(expected)
+    if normalized and hashlib.sha256(data.replace(b"\r\n", b"\n")).hexdigest() == normalized:
+        return "VERIFIED_LINE_ENDING_EQUIVALENT"
+    raise AssertionError(f"{path}: SHA-256 differs from the inventory pin")
 
 
 class WithoutDocstrings(ast.NodeTransformer):
@@ -58,22 +88,35 @@ def validate(*, producers: bool = False) -> dict[str, object]:
     for key, value in CURRENT_SCIENTIFIC_STATUS.items():
         assert inventory["current_scientific_status"][key] == (list(value) if isinstance(value, tuple) else value)
 
-    preserved = []
-    paths = sorted(Path("src/timescape_fsigma8/background").glob("*.py"))
+    for commit in (BASE, REMEDIATION):
+        assert is_ancestor(commit), f"{commit} is not an ancestor of HEAD"
+
+    # Preservation is a claim about the remediation itself: BASE -> REMEDIATION.
+    # Later, separately approved changes are reported as drift, not rejected.
+    preserved, post_remediation_drift = [], []
+    paths = sorted(git("ls-tree", "--name-only", REMEDIATION, "src/timescape_fsigma8/background/").splitlines())
+    paths = [Path(name) for name in paths if name.endswith(".py")]
     paths += [Path("src/timescape_fsigma8/perturbations")/name for name in (
         "systems.py", "barotropic.py", "initial_conditions.py")]
     for path in paths:
         before = git("show", f"{BASE}:{path.as_posix()}")
-        assert executable_tree(before) == executable_tree(path.read_text(encoding="utf-8")), path
+        certified = git("show", f"{REMEDIATION}:{path.as_posix()}")
+        assert executable_tree(before) == executable_tree(certified), path
         preserved.append(path.as_posix())
+        if not path.is_file() or executable_tree(certified) != executable_tree(path.read_text(encoding="utf-8")):
+            post_remediation_drift.append(path.as_posix())
     path = Path("src/timescape_fsigma8/transfer/h1_realization.py")
-    old = ast.parse(git("show", f"{BASE}:{path.as_posix()}"))
-    new = ast.parse(path.read_text(encoding="utf-8"))
+    trees = [ast.parse(git("show", f"{ref}:{path.as_posix()}")) for ref in (BASE, REMEDIATION)]
+    trees.append(ast.parse(path.read_text(encoding="utf-8")))
     for name in ("regional_evolution", "two_region_coefficients"):
-        left = next(n for n in old.body if isinstance(n, ast.FunctionDef) and n.name == name)
-        right = next(n for n in new.body if isinstance(n, ast.FunctionDef) and n.name == name)
-        assert executable_tree(ast.unparse(left)) == executable_tree(ast.unparse(right)), name
+        dumps = [
+            executable_tree(ast.unparse(next(n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == name)))
+            for tree in trees
+        ]
+        assert dumps[0] == dumps[1], name
         preserved.append(f"{path.as_posix()}:{name}")
+        if dumps[1] != dumps[2]:
+            post_remediation_drift.append(f"{path.as_posix()}:{name}")
 
     assignments = {
         "phase1f_b/dynamics.py": ["driver_regional", "potential[index + 1]", "potential_dot_regional", "physical_laplacian_regional", "compatibility_regional", "propagation"],
@@ -81,7 +124,8 @@ def validate(*, producers: bool = False) -> dict[str, object]:
     }
     for relative, targets in assignments.items():
         path = Path("src/timescape_fsigma8")/relative
-        trees = [ast.parse(git("show", f"{BASE}:{path.as_posix()}")), ast.parse(path.read_text(encoding="utf-8"))]
+        trees = [ast.parse(git("show", f"{ref}:{path.as_posix()}")) for ref in (BASE, REMEDIATION)]
+        trees.append(ast.parse(path.read_text(encoding="utf-8")))
         for target in targets:
             expressions = []
             for tree in trees:
@@ -90,15 +134,29 @@ def validate(*, producers: bool = False) -> dict[str, object]:
                 expressions.append(matches[0])
             assert expressions[0] == expressions[1], (relative, target)
             preserved.append(f"{relative}:{target}")
+            if expressions[1] != expressions[2]:
+                post_remediation_drift.append(f"{relative}:{target}")
 
-    for path, expected in inventory["preserved_local_files_sha256"].items():
-        assert hashlib.sha256(Path(path).read_bytes()).hexdigest() == expected, path
+    local_files = {
+        path: local_file_status(path, expected)
+        for path, expected in inventory["preserved_local_files_sha256"].items()
+    }
+    absent_local_files = sorted(path for path, state in local_files.items() if state == "ABSENT_FROM_CHECKOUT")
     assert git("-C", ".reference/Linear-Perturbations-in-averaged-cosmological-models", "rev-parse", "HEAD") == inventory["upstream_commit"]
+    frozen_tags = {}
     for ref, expected in inventory["frozen_tags"].items():
-        assert git("rev-parse", ref) == expected["tag_object"], ref
-        assert git("rev-parse", ref + "^{}") == expected["peeled_commit"], ref
-    assert git("rev-parse", "main") == BASE
-    assert git("rev-parse", "origin/main") == BASE
+        present = subprocess.run(["git", "rev-parse", "-q", "--verify", ref], capture_output=True, text=True).stdout.strip()
+        if present:
+            assert present == expected["tag_object"], ref
+            assert git("rev-parse", ref + "^{}") == expected["peeled_commit"], ref
+            frozen_tags[ref] = "VERIFIED"
+        else:
+            # Tag never published to this clone: the recorded commit must
+            # still exist and be an ancestor; the tag object stays unverified.
+            assert git("cat-file", "-t", expected["peeled_commit"]) == "commit", ref
+            frozen_tags[ref] = "TAG_ABSENT_FROM_CLONE_COMMIT_VERIFIED"
+        assert is_ancestor(expected["peeled_commit"]), ref
+    absent_tags = sorted(ref for ref, state in frozen_tags.items() if state != "VERIFIED")
 
     historical = git("ls-tree", "-r", "--name-only", BASE, "reports").splitlines()
     for name in historical:
@@ -125,8 +183,15 @@ def validate(*, producers: bool = False) -> dict[str, object]:
             second = canonical(validate_producer())
             assert first == second, module
             producer_checks[module] = hashlib.sha256(first).hexdigest()
-    return {"status": "PASS", "preserved_equations": preserved,
-            "frozen_tags_verified": len(inventory["frozen_tags"]),
+    return {"status": "PASS_WITH_ABSENT_LOCAL_PROVENANCE" if absent_local_files or absent_tags else "PASS",
+            "frozen_tags": frozen_tags,
+            "absent_frozen_tag_objects": absent_tags,
+            "certified_commit": REMEDIATION,
+            "preserved_equations": preserved,
+            "post_remediation_drift": sorted(post_remediation_drift),
+            "local_provenance_files": local_files,
+            "absent_local_provenance_files": absent_local_files,
+            "frozen_tags_verified": len(inventory["frozen_tags"]) - len(absent_tags),
             "historical_reports_unchanged": len(historical),
             "json_roundtrips": len(json_paths), "package_imports": len(imports),
             "explicit_comparisons": {key: len(value) for key, value in records.items()},

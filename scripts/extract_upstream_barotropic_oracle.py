@@ -32,8 +32,12 @@ ORACLE_PATH = PROJECT_ROOT / "artifacts" / "upstream" / "oracle_barotropic_pertu
 SOURCE_CELLS = [*range(0, 9), 12, 15]
 CELL_TIMEOUT_S = 600
 EXPECTED_COMMIT = "590c6fd5332acb15f5683ebf392a0d7ce54983c5"
-EXPECTED_NOTEBOOK_SHA256 = (
-    "86d2534db9e9b3169835e4ce223ee8f3bff6d03b47e5677d3937fed4adafe55a"
+# Line-ending-independent notebook pin (UPSTREAM.lock ``notebook_sha256_lf``,
+# review finding F6): SHA-256 of the bytes with CRLF normalised to LF, equal to
+# the committed Git blob.  The raw hash depends on core.autocrlf and is only
+# recorded.
+EXPECTED_NOTEBOOK_SHA256_LF = (
+    "628c441288d67854e0380518841dede3680bddab610e9ef5cea04937455cea2a"
 )
 
 SAMPLING_SOURCE = r"""
@@ -73,6 +77,10 @@ def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def sha256_lf(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+
+
 def lock_value(name: str) -> str:
     for line in UPSTREAM_LOCK.read_text(encoding="utf-8").splitlines():
         if line.strip().startswith(f"{name}") and "=" in line:
@@ -105,14 +113,20 @@ def main() -> int:
         return 2
     locked_commit = lock_value("commit")
     locked_path = lock_value("local_path")
+    locked_lf_hash = lock_value("notebook_sha256_lf")
     expected_relative = str(UPSTREAM_NOTEBOOK.relative_to(PROJECT_ROOT)).replace("\\", "/")
-    if locked_commit != EXPECTED_COMMIT or locked_path != expected_relative:
+    if (
+        locked_commit != EXPECTED_COMMIT
+        or locked_path != expected_relative
+        or locked_lf_hash != EXPECTED_NOTEBOOK_SHA256_LF
+    ):
         print("FATAL: UPSTREAM.lock no longer matches validated B1 provenance", file=sys.stderr)
         return 3
 
     commit_before = upstream_commit()
     hash_before = sha256(UPSTREAM_NOTEBOOK)
-    if commit_before != EXPECTED_COMMIT or hash_before != EXPECTED_NOTEBOOK_SHA256:
+    lf_hash_before = sha256_lf(UPSTREAM_NOTEBOOK)
+    if commit_before != EXPECTED_COMMIT or lf_hash_before != EXPECTED_NOTEBOOK_SHA256_LF:
         print("FATAL: upstream commit or notebook hash differs before extraction", file=sys.stderr)
         return 4
 
@@ -146,7 +160,12 @@ def main() -> int:
 
     commit_after = upstream_commit()
     hash_after = sha256(UPSTREAM_NOTEBOOK)
-    if commit_after != commit_before or hash_after != hash_before:
+    lf_hash_after = sha256_lf(UPSTREAM_NOTEBOOK)
+    if (
+        commit_after != commit_before
+        or hash_after != hash_before
+        or lf_hash_after != lf_hash_before
+    ):
         print("FATAL: upstream commit or notebook hash changed during extraction", file=sys.stderr)
         return 6
 
@@ -157,6 +176,8 @@ def main() -> int:
         "upstream_notebook_path": expected_relative,
         "upstream_notebook_sha256_before": hash_before,
         "upstream_notebook_sha256_after": hash_after,
+        "upstream_notebook_sha256_lf_normalized_before": lf_hash_before,
+        "upstream_notebook_sha256_lf_normalized_after": lf_hash_after,
         "source_cells": SOURCE_CELLS,
         "notebook_unmodified": True,
         "extractor": str(Path(__file__).resolve().relative_to(PROJECT_ROOT)).replace(

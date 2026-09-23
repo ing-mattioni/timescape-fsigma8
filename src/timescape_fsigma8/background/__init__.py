@@ -52,8 +52,9 @@ Conventions: c = 1; Lambda = 0; K_D = 0 ([GM] Sec. 5 preamble), so the
 curvature deviation W_D := <R>_D - 6 K_D / a_D^2 equals <R>_D. Time t is
 the Buchert volume-average (cosmic) time in any unit consistent with
 1/HD0; all outputs carry the corresponding powers of that unit. G enters
-only densities and is passed explicitly (AGENTS.md rule 4: no hidden
-unit choices). The tracker domain is t > 0, enforced by input validation
+only densities and is a mandatory argument without a default (AGENTS.md
+rule 4: no hidden unit choices; review finding F7 removed the former
+G = 1.0 defaults). The tracker domain is t > 0, enforced by input validation
 (ValueError on t <= 0; only tau_w admits t = 0, where tau_w(0) = 0). For
 physically parametrised inputs see timescape_fsigma8.presets (Gyr units)
 and timescape_fsigma8.units (audited conversions).
