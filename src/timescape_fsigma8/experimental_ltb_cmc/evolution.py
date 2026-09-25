@@ -25,7 +25,7 @@ dlambda/du = L lambda_s; physical outputs restore these powers of s_c.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import ClassVar
+from typing import Any, Callable, ClassVar
 
 import numpy as np
 from scipy.integrate import solve_bvp
@@ -113,6 +113,43 @@ class _Coefficients:
     U_s: Array
     d_s: Array
     e_s: Array
+    # Intermediate section quantities, exposed for later single-age
+    # computations that differentiate these coefficients analytically.
+    xi: Array
+    a: Array
+    Hp: Array
+    Hl: Array
+    Hp_age: Array
+    F_over_a: Array
+    xi_over_r: Array
+    xi_r: Array
+    gamma_r: Array
+    lam_r: Array
+    v: Array
+    v_s: Array
+    xi_s: Array
+    xi_s_over_r: Array
+    kp: Array
+    kl: Array
+    kp_s: Array
+    kl_s: Array
+
+
+@dataclass(frozen=True)
+class _EvolutionState:
+    """Internal accepted evolution state (s_c-scaled units); never public output.
+
+    ``result`` is the public CMCEvolution; ``bvp`` the accepted SciPy
+    solution (dense interpolant of X=N_c_s, Z=z_s); ``coefficients`` the
+    evaluator of the BVP coefficients at any radii; ``K_ss`` and
+    ``gamma_s_1`` the internal eigenparameter and boundary value.
+    """
+
+    result: CMCEvolution
+    bvp: Any
+    coefficients: Callable[[Array], _Coefficients]
+    K_ss: float
+    gamma_s_1: float
 
 
 def solve_cmc_evolution(s_c: float, model: LTBModel,
@@ -135,6 +172,10 @@ def solve_cmc_evolution(s_c: float, model: LTBModel,
 
 
 def _evolve(bg: _Background, num: Numerics) -> CMCEvolution:
+    return _evolve_state(bg, num).result
+
+
+def _evolve_state(bg: _Background, num: Numerics) -> _EvolutionState:
     m, K, K_s, gamma_b = bg.geometry.m, bg.K, bg.K_s, bg.gamma_b
     # Regular central limits at internal central age 1 (flat EdS centre).
     a_center = (4.5 * m) ** (1 / 3)
@@ -187,7 +228,10 @@ def _evolve(bg: _Background, num: Numerics) -> CMCEvolution:
         e_s = e * (Theta * lam - gamma_s / gamma)
         finite(N, z, lam, xi_r, lam_r, gamma_s, kp_s, U_s, d_s, e_s)
         result = _Coefficients(r, gamma, lam, Theta, D, g.A, g.R, g.G_rho,
-                               g.sigma2, N, z, U, d, e, gamma_s, U_s, d_s, e_s)
+                               g.sigma2, N, z, U, d, e, gamma_s, U_s, d_s, e_s,
+                               xi, g.a, Hp, Hl, Hp_age, F_over_a, xi_over_r, xi_r,
+                               gamma_r, lam_r, v, v_s, xi_s, xi_s_over_r, kp, kl,
+                               kp_s, kl_s)
         if len(cache) > 16:
             cache.clear()
         cache[key] = result
@@ -298,7 +342,7 @@ def _evolve(bg: _Background, num: Numerics) -> CMCEvolution:
                                    boundary, lambda_s_boundary, quadrature,
                                    raychaudhuri, background_J, phi_center,
                                    len(evolution.x))
-    return CMCEvolution(
+    result = CMCEvolution(
         bg.solution,
         dimensional(K_ss, s_c, -3),
         _readonly(dimensional(X_grid, s_c, -1)),
@@ -311,3 +355,4 @@ def _evolve(bg: _Background, num: Numerics) -> CMCEvolution:
         dimensional(var_E, s_c, -2),
         residuals,
     )
+    return _EvolutionState(result, evolution, coefficients, K_ss, gamma_s_1)

@@ -51,6 +51,32 @@ Timescape runtime. The preserved statuses are listed at the end. No frozen
 scientific status or checkpoint is promoted, and Phase 1F-D is not declared
 complete.
 
+## Documentary corrections (2026-09-25)
+
+Three passages of this report were corrected. These are corrections of the
+**report text only**. They change neither the method nor the tests, nor the
+code as tested on 2026-09-24, whose SHA-256 values are listed under "Test
+results".
+
+1. **`__init__.py` description.** The change was described as "additions
+   only". In fact two import lines were added and the last line of `__all__`
+   was extended; every preexisting export is preserved. The correction
+   appears in "Files" and in "Final state and firewall".
+2. **Scope of the normal-binary64 policy.** It applies to the outputs that
+   undergo dimensional rescaling. The dimensionless outputs are only required
+   to be finite. The correction appears in "Algorithm and gates", step 4.
+3. **Measure variation.** "`eta_s = Theta`" is replaced by
+   "`partial_s ln(A*R**2) = Theta`". The shift therefore contributes
+   `Theta*delta_S` to the measure variation `eta`. The correction appears in
+   "Contract review", remark 3.
+
+**A separate code change, not documented here.** The 2026-09-25
+mixed-sensitivity task refactored `kappa_sensitivity.py` internally, to
+expose its accepted state for reuse: `_sensitivity_state`, `_KappaState` and
+`_LapseVariations`. The public outputs were verified bit-identical to the
+code tested here. That change is documented in
+`reports/experimental_ltb_cmc_mixed_sensitivity.md`, not in this report.
+
 ## State verified before any modification
 
 Recorded at 2026-09-24T20:52:20Z:
@@ -118,16 +144,16 @@ tests/test_experimental_ltb_cmc_kappa_sensitivity.py
 reports/experimental_ltb_cmc_kappa_sensitivity.md
 ```
 
-Modified, by additions only:
+Modified:
 
-- **`geometry.py`**, the geometric supports:
+- **`geometry.py`**, by additions only, the geometric supports:
   - `chi_profile(r, model)`;
   - the frozen record `LocalKappaTerms`;
   - `Geometry._integral5`;
   - `Geometry.kappa_terms(s, r)`.
 
   `curvature`, `Geometry.at` and every preexisting line are unchanged; a diff against the previous version shows no removed lines.
-- **`__init__.py`**: exports `KappaSensitivity`, `KappaSensitivityResiduals` and `solve_kappa_sensitivity`.
+- **`__init__.py`**: exports `KappaSensitivity`, `KappaSensitivityResiduals` and `solve_kappa_sensitivity`. Two import lines were added and the last line of `__all__` was extended: it was replaced by the same line with a trailing comma, plus a new line with the three new names. Every preexisting export is preserved. (Corrected 2026-09-25: an earlier version called this change "additions only".)
 
 Unchanged: `solver.py`, `clock.py`, `evolution.py`, the two preexisting
 experiment test files and reports, `scientific_status.py`, README, the
@@ -335,7 +361,7 @@ is obtained from an identity.
    - J consistency with the accepted background.
 
    Any failure raises `LTBNumericalError`; nothing partial is returned.
-4. **Physical outputs.** They are restored through `dimensional`. Every nonzero output must lie in the normal binary64 range, independently of the background's acceptance.
+4. **Physical outputs.** The normal-binary64 policy applies to the outputs that undergo dimensional rescaling through `dimensional`: `delta_K_star`, `delta_K_s`, the `delta_S` profile, `delta_J`, `delta_rho_lambda`, `delta_Q_lambda` and `delta_R_lambda`. Each nonzero value must lie in the normal binary64 range, independently of the background's acceptance. The dimensionless outputs are not rescaled and are only required to be finite. They are `delta_ln_V`, `delta_ln_M_rest`, `delta_ln_rho0` and the `delta_xi`, `delta_gamma`, `delta_N_c` and `delta_lambda` profiles. (Corrected 2026-09-25: an earlier version applied the normal-range wording to every output.)
 
 The algebraic identities are:
 
@@ -513,7 +539,7 @@ Remarks:
 
 1. **`delta_ln_rho0`** is derived as `delta_ln_M_rest - delta_ln_V`. It is not independent.
 2. **The flat `delta_Q_lambda = 0`** holds only up to the background's representation of `lambda = 1`, which is about 1e-11. The observed value is about 1e-16.
-3. **The local mass identity** is exact per section and independent of `delta_S`, because the shift terms cancel: `(ln rho)_s = -Theta` and `eta_s = Theta`.
+3. **The local mass identity** is exact per section and independent of `delta_S`, because the shift terms cancel. On one side `(ln rho)_s = -Theta`. On the other `partial_s ln(A*R**2) = Theta`, since `A_s/A = Hparallel` and `R_s/R = Hperp`. The shift therefore contributes `Theta*delta_S` to the measure variation `eta` and `-Theta*delta_S` to `delta_ln_rho`. (Corrected 2026-09-25: an earlier version wrote this as "`eta_s = Theta`".)
 
 ## Final state and firewall
 
@@ -528,7 +554,7 @@ Remarks:
   - the two preexisting experiment test files;
   - the two preexisting experiment reports;
   - `scientific_status.py` and `README.md`.
-- **Changed by additions only:** `geometry.py` and `__init__.py`.
+- **Changed:** `geometry.py`, by additions only, and `__init__.py`, by two added import lines and one extended `__all__` line with every preexisting export preserved. (Corrected 2026-09-25.)
 - **Preserved:** the git-ignored `__pycache__` directories of other packages were left as found. The isolated baseline snapshot lives only in the session scratchpad.
 
 ```text

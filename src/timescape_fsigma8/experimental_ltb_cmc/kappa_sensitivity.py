@@ -23,7 +23,7 @@ response, nor a mass-compensated family: m0 is held fixed.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import ClassVar
+from typing import Any, Callable, ClassVar
 
 import numpy as np
 from scipy.integrate import solve_bvp
@@ -150,7 +150,55 @@ class _Section:
     z: Array
 
 
+@dataclass(frozen=True)
+class _LapseVariations:
+    """Total kappa_star variations entering the linearized lapse problem."""
+
+    d_gamma: Array
+    d_a: Array
+    dA: Array
+    d_ln_rho: Array
+    d_ln_d: Array
+    d_ln_e: Array
+    d_Hp: Array
+    xi_over_r: Array
+    dxi_over_r: Array
+    F_over_a: Array
+    d_F_over_a: Array
+    d_kp: Array
+    d_kl: Array
+    d_U: Array
+    d: Array
+    e: Array
+
+
+@dataclass(frozen=True)
+class _KappaState:
+    """Internal accepted kappa_star sensitivity state; never public output.
+
+    ``result`` is the public KappaSensitivity; ``dcmc``/``dlapse`` the
+    accepted SciPy solutions (dense interpolants of delta_S, delta_xi and
+    delta_N_c, delta_z); ``section``, ``cmc_terms`` and ``lapse_variations``
+    the evaluators used by the linearized problems; ``dK``, ``dKs`` and
+    ``d_gamma_1`` internal eigenparameters and boundary value.
+    """
+
+    result: KappaSensitivity
+    dcmc: Any
+    dlapse: Any
+    section: Callable[[Array], _Section]
+    cmc_terms: Callable
+    lapse_variations: Callable[[_Section, Array, Array], _LapseVariations]
+    dK: float
+    dKs: float
+    d_gamma_1: float
+
+
 def _sensitivity(bg: _Background, num: Numerics) -> KappaSensitivity:
+    return _sensitivity_state(bg, num).result
+
+
+def _sensitivity_state(bg: _Background, num: Numerics) -> _KappaState:
     m, K, K_s, gamma_b = bg.geometry.m, bg.K, bg.K_s, bg.gamma_b
     a_center = (4.5 * m) ** (1 / 3)  # flat EdS centre at internal age 1
     xi_over_r0 = -a_center * (K + 2) / 3
@@ -197,7 +245,7 @@ def _sensitivity(bg: _Background, num: Numerics) -> KappaSensitivity:
         raise LTBNumericalError(f"Sensitivity CMC BVP status {dcmc.status}: {dcmc.message}")
     dK = float(dcmc.p[0])
 
-    def lapse_terms(c: _Section, dS: Array, dxi: Array, dN: Array, dz: Array, dKs: float):
+    def lapse_variations(c: _Section, dS: Array, dxi: Array) -> _LapseVariations:
         g, t, xi, gamma, r = c.g, c.t, c.xi, c.gamma, c.r
         centre = r == 0
         r_safe = np.where(centre, 1.0, r)  # no 0/0: centre uses exact limits
@@ -217,8 +265,14 @@ def _sensitivity(bg: _Background, num: Numerics) -> KappaSensitivity:
         four_pi_G_rho = 4 * np.pi * g.G_rho
         d_U = (2 * c.kl * d_kl + 4 * c.kp * d_kp
                + four_pi_G_rho * (d_ln_rho * (2 * gamma**2 - 1) + 4 * gamma * d_gamma))
-        g1 = (d * d_ln_d * c.z, d * dz)
-        g2 = (e * d_ln_e * (c.U * c.N - K_s), e * d_U * c.N, e * c.U * dN, -e * dKs)
+        return _LapseVariations(d_gamma, d_a, dA, d_ln_rho, d_ln_d, d_ln_e, d_Hp,
+                                xi_over_r, dxi_over_r, F_over_a, d_F_over_a, d_kp,
+                                d_kl, d_U, d, e)
+
+    def lapse_terms(c: _Section, dS: Array, dxi: Array, dN: Array, dz: Array, dKs: float):
+        w = lapse_variations(c, dS, dxi)
+        g1 = (w.d * w.d_ln_d * c.z, w.d * dz)
+        g2 = (w.e * w.d_ln_e * (c.U * c.N - K_s), w.e * w.d_U * c.N, w.e * c.U * dN, -w.e * dKs)
         return g1, g2
 
     def lapse_rhs(r: Array, y: Array, p: Array) -> Array:
@@ -369,7 +423,7 @@ def _sensitivity(bg: _Background, num: Numerics) -> KappaSensitivity:
         mass_identity, local_hamilton, hamilton, background_J, phi_center,
         len(dcmc.x), len(dlapse.x))
     finite(gS, gxi, gN, g_dgamma, g_lambda)
-    return KappaSensitivity(
+    result = KappaSensitivity(
         bg.solution, model.kappa_star == 0,
         dimensional(dK, s_c, -1), dimensional(dKs, s_c, -2),
         _readonly(dimensional(gS, s_c, 1)), _readonly(gxi), _readonly(g_dgamma),
@@ -379,6 +433,8 @@ def _sensitivity(bg: _Background, num: Numerics) -> KappaSensitivity:
         dimensional(dQ, s_c, -2), dimensional(dR, s_c, -2),
         residuals,
     )
+    return _KappaState(result, dcmc, dlapse, section, cmc_terms, lapse_variations,
+                       dK, dKs, d_gamma_1)
 
 
 def _variations(c: _Section, dS: Array, dxi: Array) -> tuple[Array, ...]:
