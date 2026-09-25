@@ -2,7 +2,10 @@
 
 ## Provenance, scope and status
 
-Date: 2026-09-23. This is an extension of the isolated conditional LTB--CMC
+Date: 2026-09-23. Documentary corrections: 2026-09-24, see "Documentary
+corrections" below.
+
+This is an extension of the isolated conditional LTB--CMC
 experiment documented in `reports/experimental_ltb_cmc.md`. It adds the
 derivative d/ds_c of the CMC section family **inside one fixed LTB
 geometry**, at fixed r and fixed physical model parameters (m0, kappa profile,
@@ -39,6 +42,31 @@ Timescape runtime. The primary sources used for conventions are:
 - [Sussman, arXiv:1002.0173v2](https://arxiv.org/pdf/1002.0173v2), Eqs. (1)--(3), (5)--(7): the LTB relations, with the conventions of the first report;
 - [Wiltshire, arXiv:0909.0749v2](https://arxiv.org/pdf/0909.0749v2), Eqs. (B2), (B3), (B6), (B7) and (B12) (W09): the separate tracker clock, translated to b through f=t/(t+b).
 
+## Documentary corrections (2026-09-24)
+
+This file is the only one changed by the correction. No source, test,
+tolerance, profile, anchor, dependency, `scientific_status.py` or Phase 1F-D
+file was touched.
+
+- **The seven Python files are unchanged.** The five experiment modules and the two test files are byte-identical to the versions recorded in `MANIFEST.sha256` of the 2026-09-24 export.
+- **No suite was re-run** for this documentary change.
+- **No retroactive baseline was reconstructed.**
+
+1. **Sign error in the uniqueness paragraph of this report.**
+   - The earlier text read `L[delta_X] = -delta_K_ss` and `delta_X = -delta_K_ss*phi`.
+   - The correct statements are `L[delta_X] = delta_K_ss` and `delta_X = delta_K_ss*phi`.
+   - The error was in this report's prose only. The user contract and the code were already correct: the flux equation `Z_r = e*(U*X - K_ss) + …` gives `L[X] = K_ss + …`.
+   - The uniqueness conclusion is unchanged.
+   - This is a correction of the report text, not a remediation of the original derivation or of the solver.
+2. **Representability.** The earlier "Numerical limits" section claimed that representable background outputs imply representable evolution outputs. That claim was wrong and has been removed. The corrected text, with the counterexample from the independent review, is under "Numerical limits".
+3. **Test evidence and provenance.** The precisions already recorded in `NOTA_EXPORT.md` and `logs/INDEX.md` of the export are now part of this report:
+   - the qualified baseline;
+   - the separate contexts of the later runs;
+   - the scope of the 801-pass result;
+   - the runs on the tree of commit `28a87a1`.
+
+   The end of the implementation task, the later publication and the export are now kept distinct under "Later events". No new frozen checkpoint is promoted.
+
 ## Initial state actually verified
 
 The instructions' historical checkpoint (`118b8f3…`), their test counts
@@ -56,11 +84,20 @@ modification:
 - These six files were not present in the fresh cloud clone. The user published them on the separate branch `experiment/ltb-cmc-background` (commit `586a1fb586c9f14d952f2b8f6d9d48f62cfd4ce7`). They were copied from there with read-only `git show`: no checkout, stage or merge. Their blob contents were verified identical.
 - `astra/`, the Phase 1F-D files (`phase1f_d.py`, its test and report), the preexisting untracked audits and the README modification mentioned in the first report exist only on the user's machine. They are **absent** from this environment, so nothing here could touch them.
 - SHA-256 of the six experiment files, `scientific_status.py` and `README.md` were recorded before the work began.
-- The baseline full suite, run with the six files present and warnings as errors, gave:
+
+**Baseline full suite: qualified evidence (correction 3).**
+
+- **The run.** A full suite with warnings as errors was **started** on both interpreters at 2026-09-23T12:54:48Z, running in parallel. The six files were present and no edit had yet been made.
+- **The result.** Both runs reported 774 passed:
   - Python 3.13.12: 774 passed;
   - Python 3.11.15: 774 passed.
 
   The 774 is 724 preexisting tests plus the 50 targeted tests of the first solver.
+- **Not isolated from the implementation work.** `solver.py` was modified on disk between 12:55:11Z and 12:55:50Z, while both runs were in progress. The logs end at 12:56:40Z and 12:56:47Z.
+- **Version exercised: not verified.** pytest normally imports the modules during collection, at the start of the run, so the executed code is expected to be the `586a1fb` version. Which complete version was actually exercised is **not verified**.
+- **One test reads the source at run time.** `test_firewall_and_readonly_profiles` in the first solver's tests reads the text of `solver.py` during execution. Its assertions hold for both versions.
+- **`evolution.py` did not exist yet.** It was created only at 12:57:55Z.
+- **No reconstruction.** This baseline is reported as observed. It has not been reconstructed after the fact.
 
 ## Files
 
@@ -211,10 +248,18 @@ enters through `d_s`) and K_ss=d2K_star/ds_c**2 is the eigenparameter. No
 sign is imposed on X, lambda_s, K_ss or P_lambda.
 
 Uniqueness follows the contract. The difference of two solutions solves
-`L[delta_X] = -delta_K_ss` with homogeneous data, so `delta_X=-delta_K_ss*phi`.
-Then `delta_X(0)=0` with `phi(0)>0` forces `delta_K_ss=0`. This is an
-existence-conditional uniqueness statement, not a uniform conditioning
-guarantee. `phi(0)` is therefore exported as the diagnostic `phi_center`.
+`L[delta_X] = delta_K_ss` with homogeneous data: `delta_X(1)=0` and a regular
+flux at the centre. Since `L[phi]=1` with `phi(1)=0`, this gives
+`delta_X=delta_K_ss*phi`. Then `delta_X(0)=0` with `phi(0)>0` forces
+`delta_K_ss=0`.
+
+This is an existence-conditional uniqueness statement, not a uniform
+conditioning guarantee. `phi(0)` is therefore exported as the diagnostic
+`phi_center`.
+
+(Corrected 2026-09-24: an earlier version of this report wrote
+`L[delta_X] = -delta_K_ss` and `delta_X=-delta_K_ss*phi`. That was a sign
+error in the report text only; see "Documentary corrections".)
 
 Averages use **only** the dust-intrinsic measure `dmu=4*pi*A*R**2 dr` (BMR),
 never B:
@@ -346,7 +391,7 @@ The tests cover:
   - an eigenparameter perturbed by 1e-3 relative is caught by the equation gate ("Unresolved evolution checks") through both APIs.
 - **Propagated failures:** a background BVP failure propagates.
 - **Input errors:** invalid ages, types and clock inputs raise `LTBDomainError`.
-- **Representability:** an unrepresentable scale raises `LTBNumericalError`, and `_signed_product` enforces its range.
+- **Representability:** an unrepresentable scale raises `LTBNumericalError`, and `_signed_product` enforces its range. The tested scales are ones at which the background itself already fails; see "Numerical limits" for the window in which only the evolution fails.
 - **Clock limits:**
   - with f rounding to 1 (t=1e20, b=1), q_required = -3.33e-21 exactly as `b(2b-3t)/(3t+2b)**2` and is not collapsed to 0;
   - with 3t=2b, q_required is exactly 0.
@@ -365,8 +410,25 @@ in the new test file.
 All runs used bytecode and cache writes disabled and warnings as errors.
 Dependencies were neither installed nor updated.
 
-Final runs on the final file state (targeted = the new file plus the first
-solver's 50 tests; the full suites were run one after another):
+The evidence is kept separate by context (correction 3). None of it
+constitutes a new frozen checkpoint.
+
+The logs of contexts 1–4 are preserved, unmodified, in the 2026-09-24 export
+archive: `logs/`, with commands, times and hashes in `logs/INDEX.md`. The log
+files contain only pytest output; the commands in `INDEX.md` come from the
+session transcript. Some development runs were visible only on the console
+and are not preserved as logs: the first run of the new file alone (27 passed
+on 3.13) and a first targeted run on 3.11 (77 passed).
+
+1. **Baseline**, started 2026-09-23T12:54:48Z. 774 passed on each interpreter, but it was not isolated from the edits to `solver.py`; see "Initial state actually verified".
+2. **Intermediate full runs**, started 13:09:58Z, one interpreter after the other.
+   - **Result:** 801 passed on each interpreter.
+   - **Test file used:** they executed `tests/test_experimental_ltb_cmc_evolution.py` as it was *before* three tolerances were widened. That edit was made between 13:14:02Z and 13:14:11Z. The 3.13 run had already finished; the 3.11 run was still in progress, but had imported the module during collection.
+   - **Sources:** unchanged during these runs; the last source edit was at 12:59:07Z.
+3. **Final runs on the final file state**, started 13:15:34Z, after the last source or test edit (13:14:11Z).
+   - **What ran:** "targeted" means the new file plus the first solver's 50 tests. The runs went in the order targeted 3.13, full 3.13, targeted 3.11, full 3.11.
+   - **Which files:** this report was retouched afterwards, between 13:23:42Z and 13:23:45Z, but the tests do not execute it.
+   - **Scope of the 801 passes:** they refer to the checkout at HEAD `4f28a095e6401c31e0a90dfc4c35ae92cbc0592d` with the nine experiment files added as untracked files: 724 preexisting + 50 + 27.
 
 ```text
 .venv/bin/python -B -W error -m pytest -q -p no:cacheprovider \
@@ -384,12 +446,20 @@ Python 3.13.12: 801 passed in 161.69 s
 Python 3.11.15: 801 passed in 168.51 s
 ```
 
-An earlier full run of both suites, made before three test tolerances were
-widened, also gave 801 passed on each interpreter. The three widened
-tolerances were the knot-Richardson atol (3e-12 to 5e-12), the h=1e-3
-profile bound (1e-10 to 2e-10) and the clock Richardson tolerance (3e-9/3e-10
-to 1e-8/1e-9). They were widened because their margins over the observed
-errors were only 4–5x. Wall times are not performance benchmarks.
+4. **Tree of commit `28a87a1`**, run on 2026-09-23 from 14:06:11Z. This happened after the end of the implementation task, in connection with the publication described under "Later events".
+   - **Setup:** the commit's tree was extracted with `git archive`, and `PYTHONPATH` pointed to that copy. That tree is base `118b8f3` plus the nine files.
+   - **Targeted:** 77 passed on both interpreters.
+   - **Full suite, Python 3.13 only:** 702 passed and 29 skipped. The skips come from oracle and validation artifacts that are excluded by `.gitignore` and so were absent from the extracted tree.
+   - No full 3.11 run was made on that tree.
+
+The three tolerances widened between contexts 2 and 3 were:
+
+- the knot-Richardson atol, from 3e-12 to 5e-12;
+- the h=1e-3 profile bound, from 1e-10 to 2e-10;
+- the clock Richardson tolerance, from 3e-9/3e-10 to 1e-8/1e-9.
+
+They were widened because their margins over the observed errors were only
+4–5x. Wall times are not performance benchmarks.
 
 Environments:
 
@@ -397,9 +467,9 @@ Environments:
 - Python 3.11.15 with numpy 2.4.6, scipy 1.17.1, pytest 9.1.1.
 
 This Linux cloud environment does not have the user's Windows Python 3.14.
-The full-suite total is the 774-test baseline plus the 27 new tests. The 50
-tests of the first solver pass unchanged after the `solver.py`/`clock.py`
-refactoring.
+The full-suite total of contexts 2 and 3 is 724 preexisting tests, plus the
+50 tests of the first solver, plus the 27 new tests. The 50 tests of the
+first solver pass unchanged after the `solver.py`/`clock.py` refactoring.
 
 Other executed checks:
 
@@ -416,7 +486,17 @@ artifacts are preserved.
 - **Accuracy is bounded by the background.** The evolution coefficients use the background's C¹ piecewise-cubic collocation interpolants, so the accuracy of K_ss and the profiles is bounded by the background `bvp_tol`. The observed default-vs-TIGHT difference in K_ss (5.5e-10) reflects this.
 - **Conditioning of K_ss.** K_ss is fixed through the centre condition and `phi(0)`; a small `phi_center` signals poor conditioning. No uniform conditioning bound is claimed. Large tilt, thin transitions, large scale separation or an exponentially small central w0 can make the solve fail, as in the first solver.
 - **Scope of the checks.** The checks are on samples (nodes, midpoints, check grid and quadrature points). They do not prove bounds between samples.
-- **Representability.** Within the representable range of the background outputs, the new outputs are representable. Outside it, the background already fails first, for example V ~ s_c**3.
+- **Representability.** Representable background outputs do **not** imply representable evolution outputs.
+  - **Why.** The new outputs carry their own powers of s_c. In particular K_ss scales as s_c**-3, while the background volume V scales as s_c**3. So the background can be accepted while restoring K_ss to physical units leaves the normal binary64 range.
+  - **How the code handles it.** The code already covers this case: `dimensional` raises `LTBNumericalError("Dimensional output outside normal binary64 range")`, and no partial evolution is returned.
+  - **Counterexample**, reproduced in the independent review; it is not a new execution made for this correction:
+    - s_c=2e-103, m0=0.2*s_c, kappa_star=0.2, r_c=0.25, r_o=0.7, G=1.7, with explicit units and default `Numerics`;
+    - the background was accepted, with V ≈ 3.7455948021e-308;
+    - the evolution raised `LTBNumericalError` "Dimensional output outside normal binary64 range".
+  - **Consistency with this report.** The numbers match, by arithmetic only, the scalings of the s_c=1 values: V/s_c**3 ≈ 4.682 (first report) and K_ss*s_c**3 ≈ -4.058 (this report). Together they give |K_ss| ≈ 5.1e308 at that age, above the binary64 maximum of about 1.8e308.
+  - **Not covered by the tests.** `test_representability_policy` uses scales at which the background itself already fails, plus `_signed_product`, so it does not reach this window.
+
+  (Corrected 2026-09-24: an earlier version stated that the new outputs are representable within the representable range of the background outputs, and that the background fails first outside it. That statement was wrong.)
 - **No sweep.** There is no claim over the whole parameter domain and no temporal or parameter scan. The nearby-age steps are test tools only.
 
 ## Contract review and discrepancies
@@ -439,10 +519,10 @@ Remarks, none of which is a contradiction:
 2. The lambda_s boundary checks are consequences of the imposed conditions, as noted above.
 3. The centre values assume that the section's central worldline is always at age s_c. This is implied by `S(s_c,0)=s_c`.
 
-## Final state and firewall
+## State at the end of the implementation task, and firewall
 
 - HEAD is unchanged at `4f28a095e6401c31e0a90dfc4c35ae92cbc0592d`.
-- There was no commit, stage, merge, push, stash, reset, checkout or history operation during this task.
+- There was no commit, stage, merge, push, stash, reset, checkout or history operation during the implementation task.
 - The final Git status has only untracked entries: the six first-experiment files (three of them modified as described) plus the three new files.
 - SHA-256 is unchanged for `geometry.py`, `tests/test_experimental_ltb_cmc.py`, `reports/experimental_ltb_cmc.md`, `scientific_status.py` and `README.md`.
 
@@ -472,3 +552,25 @@ Still not implemented:
 - integration into main.
 
 Phase 1F-D is not declared complete.
+
+## Later events (not part of the implementation task)
+
+1. **Publication, 2026-09-23**, after the implementation task and on the user's explicit request.
+   - Commit `28a87a18aed9f85a0e65624fea76b26dfd459a0f` (parent `586a1fb`) contains the nine files.
+   - It was created with a temporary index, leaving the current branch, index and working tree untouched.
+   - It was pushed to `experiment/ltb-cmc-background`. This is the publication referred to in `NOTA_EXPORT.md` of the export.
+   - That commit contains the version of this report *before* the documentary corrections.
+   - It is neither a tag nor a frozen checkpoint.
+2. **Export, 2026-09-24.** The archive `ltb_cmc_export_20260924.zip` was created outside the repository.
+   - It holds the nine files, `MANIFEST.sha256`, local Git provenance and the existing test logs.
+   - During the export there was no commit, stage, push, fetch or remote operation.
+   - The archive also contains the pre-correction version of this report. It is preserved unchanged.
+3. **Documentary correction, 2026-09-24.** Only this file was changed.
+   - The corrected report is local and untracked. It is contained neither in `28a87a1` nor in the export archive.
+   - There was no commit, stage, merge, push, fetch or history change.
+
+No new frozen checkpoint is promoted by these events. The relationship
+between `118b8f3` and the current history has still to be examined. Local
+ancestry is recorded in the export provenance: `118b8f3` is an ancestor of
+both `586a1fb` and HEAD, and neither of those two is an ancestor of the
+other. That ancestry is not a judgement on the status of `118b8f3`.
