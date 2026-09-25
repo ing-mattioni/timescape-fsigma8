@@ -165,6 +165,31 @@ def curvature(r: Array, model: LTBModel) -> tuple[Array, Array]:
     return k, kr
 
 
+def chi_profile(r: Array, model: LTBModel) -> tuple[Array, Array]:
+    """The fixed transition shape chi and chi_r, independent of kappa_star.
+
+    Same logistic form and endpoint rounding as ``curvature`` (so that
+    kappa = kappa_star*chi and kappa_r = kappa_star*chi_r up to rounding),
+    evaluated directly: never obtained as kappa/kappa_star, so it also
+    exists at kappa_star=0, where d/dkappa_star is a right derivative.
+    """
+    r = np.asarray(r, dtype=float)
+    chi = np.zeros_like(r)
+    chi_r = np.zeros_like(r)
+    z = (r - model.r_c) / (model.r_o - model.r_c)
+    chi[z >= 1 - 1e-6] = 1.0
+    mask = (z > 1e-6) & (z < 1 - 1e-6)
+    u = z[mask]
+    h = 1 / (1 - u) - 1 / u
+    logchi = -np.logaddexp(0, -h)
+    logother = -np.logaddexp(0, h)
+    loghp = np.logaddexp(-2 * np.log(u), -2 * np.log1p(-u))
+    chi[mask] = np.exp(logchi)
+    chi_r[mask] = np.exp(logchi + logother + loghp - math.log(model.r_o - model.r_c))
+    finite(chi, chi_r)
+    return chi, chi_r
+
+
 @dataclass(frozen=True)
 class LocalGeometry:
     """Internal values with length unit s_c; density is G*rho, not rho."""
@@ -181,6 +206,42 @@ class LocalGeometry:
     G_rho: Array
     R_u: Array
     sqrt_energy: Array
+
+
+@dataclass(frozen=True)
+class LocalKappaTerms:
+    """Analytic kappa_star derivatives of the local LTB geometry (internal units).
+
+    Prefix ``d_``: partial d/dkappa_star at fixed dust age s, r, m0, anchors
+    and G, with kappa=kappa_star*chi(r). Suffix ``_s``: d/ds (dust proper
+    age) at fixed r and kappa_star. ``a_kk``, ``a_sk``, ``a_skk`` are the
+    second curvature, mixed and mixed-second derivatives of the scale a(s,k).
+    """
+
+    chi: Array
+    chi_r: Array
+    a_kk: Array
+    a_sk: Array
+    a_skk: Array
+    Hp: Array
+    Hl: Array
+    D: Array
+    d_a: Array
+    d_R_r: Array
+    d_ln_F: Array
+    d_A: Array
+    d_Hp: Array
+    d_Hl: Array
+    d_Theta: Array
+    d_ln_rho: Array
+    d_radial_extra: Array
+    d_sigma2: Array
+    d_R_u: Array
+    Hp_s: Array
+    Hl_s: Array
+    radial_extra_s: Array
+    sigma2_s: Array
+    R_u_s: Array
 
 
 class Geometry:
@@ -254,3 +315,76 @@ class Geometry:
         return LocalGeometry(a, ak, a_s, rr / sqrt_energy, r * a, rr,
                              ak * kr / a, hl + 2 * hp, (hl - hp)**2 / 3,
                              rho, ru, sqrt_energy)
+
+    def _integral5(self, a: Array, k: Array, order: int) -> Array:
+        # int_0^a (2m/a'+k)**(-5/2) da' with a'=a*z**2, as in _integrals.
+        z, w = gauss(order)
+        h = k * a / (2 * self.m)
+        den = np.sqrt(1 + h[:, None] * z**2)
+        return (a * (a / (2 * self.m))**2.5) * (2 * (z**6 / den**5) @ w)
+
+    def kappa_terms(self, s: Array, r: Array) -> tuple[LocalGeometry, LocalKappaTerms]:
+        """Local geometry and its analytic d/dkappa_star; no finite differences.
+
+        S10 Eq. (2) age equation I(a,k)=s differentiated twice in k:
+        a_kk = -(I_aa*a_k**2 + 2*I_ak*a_k + I_kk)/I_a, with I_a=1/a_s,
+        I_aa=m/(a**2*a_s**3), I_ak=-1/(2*a_s**3) and
+        I_kk=(3/4)*int_0^a (2m/a'+k)**(-5/2) da' (n/2n Gauss check). The
+        parabolic limit k=0 is analytic: a_kk=-3*a**3/(350*m**2).
+        a_sk and a_skk follow from a_s**2=2m/a+k. Conditional derivation.
+        """
+        g = self.at(s, r)
+        s, r = np.broadcast_arrays(np.asarray(s, float), np.asarray(r, float))
+        k, kr = curvature(r, self.model)
+        chi, chi_r = chi_profile(r, self.model)
+        m, a, ak, a_s = self.m, g.a, g.a_kappa, g.a_s
+        akk = -3 * a**3 / (350 * m**2)
+        curved = k > 0
+        if np.any(curved):
+            order = 2 * self.numerics.quadrature_order
+            aa, kk = a[curved], k[curved]
+            i5 = self._integral5(aa, kk, order)
+            i5_low = self._integral5(aa, kk, order // 2)
+            if np.max(np.abs(i5_low - i5) / i5) > self.numerics.age_rtol * 8:
+                raise LTBNumericalError("LTB second curvature derivative quadrature is under-resolved")
+            ak_c, as_c = ak[curved], a_s[curved]
+            akk[curved] = (-m * ak_c**2 / (aa**2 * as_c**2) + ak_c / as_c**2
+                           - 0.75 * as_c * i5)
+        a_sk = (1 - 2 * m * ak / a**2) / (2 * a_s)
+        a_skk = -m * (akk / a**2 - 2 * ak**2 / a**3) / a_s - a_sk**2 / a_s
+        R_r = g.R_r
+        R_rs = a_s + r * a_sk * kr
+        F = g.sqrt_energy
+        Hp, Hl = a_s / a, R_rs / R_r
+        four_pi_G_rho = 4 * np.pi * g.G_rho
+        D = g.Theta**2 / 3 + 2 * g.sigma2 + four_pi_G_rho
+        # Partial d/dkappa_star at fixed s: d(kappa)=chi, d(kappa_r)=chi_r.
+        d_a = chi * ak
+        d_ak_kr = chi * akk * kr + ak * chi_r
+        d_R_r = d_a + r * d_ak_kr
+        d_R_rs = chi * a_sk + r * (chi * a_skk * kr + a_sk * chi_r)
+        d_ln_F = r**2 * chi / (2 * F**2)
+        d_A = g.A * (d_R_r / R_r - d_ln_F)
+        d_Hp = (chi * a_sk - Hp * d_a) / a
+        d_Hl = (d_R_rs - Hl * d_R_r) / R_r
+        d_Theta = d_Hl + 2 * d_Hp
+        d_ln_rho = -2 * d_a / a - d_R_r / R_r
+        d_radial_extra = d_ak_kr / a - g.radial_extra * d_a / a
+        d_sigma2 = (2 / 3) * (Hl - Hp) * (d_Hl - d_Hp)
+        ru_den = a**2 * R_r
+        d_nu = (3 * chi * a + 3 * k * d_a
+                + r * (chi_r * (a + k * ak) + kr * (2 * chi * ak + k * chi * akk)))
+        d_R_u = -2 * d_nu / ru_den - g.R_u * (2 * a * d_a * R_r + a**2 * d_R_r) / ru_den
+        # Dust proper-age derivatives at fixed r (S10 (2),(5); BMR (4.16)).
+        Hp_s = -m / a**3 - Hp**2
+        Hl_s = -four_pi_G_rho + 2 * m / a**3 - Hl**2
+        radial_extra_s = kr * (a_sk - ak * Hp) / a
+        sigma2_s = (2 / 3) * (Hl - Hp) * (Hl_s - Hp_s)
+        s_nu = 3 * k * a_s + r * kr * (a_s + k * a_sk)
+        R_u_s = -2 * s_nu / ru_den - g.R_u * (2 * Hp + Hl)
+        finite(akk, a_sk, a_skk, d_A, d_Theta, d_ln_rho, d_radial_extra, d_sigma2,
+               d_R_u, Hl_s, radial_extra_s, R_u_s)
+        return g, LocalKappaTerms(chi, chi_r, akk, a_sk, a_skk, Hp, Hl, D, d_a, d_R_r,
+                                  d_ln_F, d_A, d_Hp, d_Hl, d_Theta, d_ln_rho,
+                                  d_radial_extra, d_sigma2, d_R_u, Hp_s, Hl_s,
+                                  radial_extra_s, sigma2_s, R_u_s)
