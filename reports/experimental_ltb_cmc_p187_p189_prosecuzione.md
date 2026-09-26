@@ -25,14 +25,17 @@ registrati in `conformal_drift.out`.
    definito" e "l'enunciato è falso".
 2. **Ipotesi del no-go scalare rese esplicite.** Sono H_A, H_B e H_asym (§0,
    §3.2, §3.5–§3.7).
-3. **Eliminata l'identificazione fra la disomogeneità di λ e quella del clock
-   regionale α_r di CLK-H1.** λ = ∂_cS è il tasso della parametrizzazione della
-   famiglia di sezioni, non un clock di H1. Di conseguenza ho tolto:
-   - la conclusione "CLK-H1 violato";
-   - il confronto con f̂;
-   - la voce ν_W fra le estensioni necessarie.
+3. **Eliminata l'identificazione non derivata fra la disomogeneità di
+   λ = ∂_cS e il lapse perturbativo dell'osservatore wall ν_W.**
+   - **Significato di λ.** λ conserva il suo significato cinematico: è il rapporto locale fra l'età propria della polvere e il parametro c, a etichetta fissa.
+   - **Identificazione con α_r.** Anche l'identificazione con il clock regionale omogeneo α_r di CLK-H1 richiede una mappa esplicita. M1 ne è una scelta (§4.5).
+   - **Cosa ho tolto.** Presupponevano una di queste identificazioni:
+     - la voce "clock regionali non omogenei, cioè ν_W" fra le estensioni necessarie;
+     - la conclusione "CLK-H1 violato";
+     - il confronto con f̂.
+   - **Termine 𝓑.** Non è più chiamato "termine di clock", ma termine di retroazione e dei pesi λ (§3.3).
 
-   Inoltre il termine 𝓑 (§3.3) non è più chiamato "termine di clock".
+   Questa voce è stata riformulata il 2026-09-26; vedi sotto.
 4. **Larghezza dello strato limite.** La formula precedente valeva solo in
    unità interne. Ora è scritta in forma dimensionalmente corretta, insieme allo
    spessore proprio c/√2 (§3.4).
@@ -43,6 +46,23 @@ registrati in `conformal_drift.out`.
    - Il riferimento ai profili generali punta ora a §3.6 invece che a §3.7.
    - Lo stato del repository è datato al momento della stesura.
    - Script e output sono indicati nell'archivio, non nel repository (§7).
+
+## Correzioni (2026-09-26)
+
+**Che cosa ho riformulato.** La voce 3 della lista precedente, dopo il
+chiarimento che i due simboli della richiesta erano λ e ν_W. La versione del
+2026-09-25 attribuiva la correzione all'identificazione λ ↔ α_r, e conteneva
+formulazioni assolute come "λ non è un clock" e "non un clock fisico". Le ho
+eliminate.
+
+**La nuova versione.**
+
+- L'identificazione rimossa è quella, non derivata, fra la disomogeneità di λ e il lapse perturbativo dell'osservatore wall ν_W.
+- λ è descritto per il suo significato cinematico: rapporto locale fra età propria della polvere e c.
+- L'identificazione con α_r è dichiarata possibile solo tramite una mappa esplicita.
+
+**Punti modificati:** §3.3, §4.4, §4.5, §4.8 e §6. Nessun'altra modifica, e
+nessun calcolo nuovo.
 
 ---
 
@@ -295,7 +315,7 @@ $$\mathcal B=Q_\lambda+P_\lambda-4\pi G(\rho_\lambda-\rho_0).$$
 **Conseguenze.**
 
 - **Il FLRW aperto non basta mai.** Per un FLRW aperto di polvere q = Ω/2, quindi 𝓔 = E_FLRW(f) > 0 per ogni 0 < f < 1.
-- **Cosa serve per il matching.** Il matching richiede 𝓑 = 3J²E_FLRW(f̂) > 0 esattamente: la retroazione e i termini con i pesi λ devono fornire proprio il contributo del tracker. Qui λ = ∂_cS è il peso delle medie BMR sulla famiglia di sezioni, non un clock fisico.
+- **Cosa serve per il matching.** Il matching richiede 𝓑 = 3J²E_FLRW(f̂) > 0 esattamente: la retroazione e i termini con i pesi λ devono fornire proprio il contributo del tracker. Qui λ = ∂_cS è il rapporto locale fra età propria della polvere e parametro c, che entra come peso nelle medie BMR della famiglia di sezioni.
 
 **Verifica.** Controllo sui valori accettati dal package
 (`backreaction_split.out`). L'identità vale a 7·10⁻¹⁶:
@@ -559,8 +579,9 @@ essere sincrona sia vicino al centro (EdS) sia vicino al bordo (FLRW aperto).
 | esterno | [1.0000006, 1.00305] | [1.000001, 1.00290] |
 
 - **Vicino al bang.** Il nucleo è sincrono a meno di termini esponenzialmente piccoli. Nell'esterno la sezione esterna allo strato ha S − c ≈ εcκ*. Ne segue λ − 1 ≈ (5/3)εκ*: a c/m₀ = 10⁻⁵ si osserva 2.6·10⁻⁵, contro 2.55·10⁻⁵ previsto.
-- **Che cosa è λ.** λ = ∂_cS è il tasso con cui la famiglia di sezioni avanza nell'età propria della polvere, a etichetta fissa. Il solver lo documenta come "dS/ds_c, not a physical wall lapse".
-- **Che cosa non ne segue.** Non identifico λ con il tasso di clock regionale α_r di CLK-H1 (R2). La sua disomogeneità è quindi una proprietà della parametrizzazione delle sezioni, e non implica una violazione di CLK-H1.
+- **Che cosa è λ.** λ = ∂_cS è il rapporto locale fra l'età propria della polvere e il parametro c, a etichetta fissa: di quanto avanza l'età della polvere per unità di c lungo la famiglia di sezioni. Il solver lo documenta come "dS/ds_c, not a physical wall lapse".
+- **Che cosa non ne segue: ν_W.** La disomogeneità di λ non è stata derivata come lapse perturbativo dell'osservatore wall ν_W (oggi `NOT_DEFINED`), e non la identifico con esso.
+- **Che cosa non ne segue: α_r.** L'identificazione di λ con il clock regionale omogeneo α_r di CLK-H1 (R2) richiede una mappa esplicita. M1 ne propone una, α_r = ⟨λ⟩_r (§4.5). Senza una mappa di questo tipo, dalla disomogeneità di λ non segue alcuna affermazione né su CLK-H1 né su ν_W.
 - **Classificazione.** La Proposizione F riguarda solo la non sincronia delle sezioni.
 
 ### 4.5 Verifica con il codice H1 del repository
@@ -570,8 +591,9 @@ LTB–CMC con una mappa esplicita. È una scelta, esatta per regioni FLRW
 sincrone. I risultati di questa sezione valgono solo per M1 e per le due
 assegnazioni della transizione indicate, e non si estendono ad altre mappe.
 
-In M1, α_r = ⟨λ⟩_r è una definizione interna alla mappa. Non afferma che λ sia
-il clock regionale di H1.
+In M1, α_r = ⟨λ⟩_r è la mappa esplicita, scelta e non derivata, fra il
+rapporto cinematico λ e il clock regionale omogeneo α_r. Un'altra mappa
+esplicita potrebbe dare esiti diversi.
 
 - tempo comune t_D = c; f_v = V_v/V;
 - Ξ_r = ⟨λΘ⟩_r; α_r = ⟨λ⟩_r; Θ_r = Ξ_r/α_r; ρ_r = M_r/V_r; R̄_r = ⟨R_u⟩_r;
@@ -603,7 +625,7 @@ relativi a Θ², per BASE a c = 1:
 - **Retroazione a due regioni, con M1.** Il confronto diretto delle retroazioni (`h1_regional_BASE.out`) mostra che la formula a due regioni sbaglia la Q totale di un fattore O(1) o più, con entrambe le assegnazioni:
   - con la transizione nel muro il residuo è +239 in forma relativa;
   - con il muro ridotto al solo nucleo è −0.98.
-- **Vincolo K3 del report F3.** F3 aveva già notato che le righe regionali, la riga 9 e GM (3.8) sono compatibili solo se Σf_rα_rΘ_r = Σf_rΘ_r. In M1 i valori definiti come α_r = ⟨λ⟩_r sono α_w = 1.0033 e α_v = 1.0014, quindi la condizione non vale per M1. Questo non dice nulla sul clock fisico di H1.
+- **Vincolo K3 del report F3.** F3 aveva già notato che le righe regionali, la riga 9 e GM (3.8) sono compatibili solo se Σf_rα_rΘ_r = Σf_rΘ_r. In M1 i valori definiti come α_r = ⟨λ⟩_r sono α_w = 1.0033 e α_v = 1.0014, quindi la condizione non vale per M1. La conclusione dipende da questa mappa, e non riguarda ν_W.
 
 ### 4.6 Nota condizionata: l'operatore L_D
 
@@ -668,7 +690,7 @@ esiste una mappa che lo faccia.
 
 - Non ho mostrato che il trasferimento sia impossibile per identificazioni diverse da IM, né per mappe diverse da M1.
 - La nota sul Laplaciano (§4.6) dipende da un'identificazione non dimostrata.
-- La disomogeneità di λ non è un risultato su CLK-H1.
+- Dalla disomogeneità di λ non segue un risultato su ν_W. Su CLK-H1 segue solo tramite una mappa esplicita verso α_r, e ho esaminato soltanto M1.
 - Il secondo punto aperto resta quindi aperto al di fuori di IM.
 
 **Che cosa servirebbe sotto IM per un enunciato positivo.** Una terza
@@ -730,7 +752,10 @@ ho usati per cambiare alcuno status. Phase 1F-D non è dichiarata risolta.
   - La violazione dei gate vale solo per M1.
   - Il Teorema D e le Proposizioni E ed F non dipendono da M1.
   - Il no-go H1 vale solo sotto IM.
-- **λ non è un clock di H1.** λ = ∂_cS è il tasso della parametrizzazione della famiglia di sezioni. Non l'ho identificato con il tasso di clock regionale α_r di CLK-H1.
+- **λ e i clock di H1.**
+  - λ = ∂_cS è il rapporto locale fra età propria della polvere e parametro c.
+  - La sua disomogeneità non è identificata con il lapse perturbativo dell'osservatore wall ν_W: sarebbe un'identificazione non derivata.
+  - L'identificazione con il clock regionale omogeneo α_r richiede una mappa esplicita. M1 ne è una scelta.
 - **Getti temporali.** I getti usati per i gate H1 sono differenze finite in c.
 - **Settore generale.** L'esistenza di una famiglia con 𝓔 ≡ 0 resta aperta.
 - **Audit dell'export.** Non ho eseguito l'audit dell'export della sensibilità mista, che il report di partenza segnalava come aperto.
