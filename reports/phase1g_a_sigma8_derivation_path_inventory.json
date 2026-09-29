@@ -1,0 +1,337 @@
+{
+  "authorization": "project owner 2026-09-29: advance the theoretical framework toward the final scope, deriving sigma8; report-only first step",
+  "base_checkpoint": "3213242",
+  "blocker_update_1DC_s34": {
+    "item_1_dressed_map": "NOT_NEEDED_FOR_LINEAR_SIGMA_M; replaced by declared radius convention (7-15%)",
+    "item_3_rsd_jacobian": "UNCHANGED",
+    "item_4_ensemble": "RESOLVED_FOR_COMOVING_CLOSURE",
+    "item_5_barotropic_high_k": "CLOSED_NEGATIVE_ILL_POSED",
+    "item_6_bias": "UNCHANGED"
+  },
+  "branch": "phase-1g-a-sigma8-derivation-path",
+  "classification": "REPORT_ONLY_DERIVATION_PATH_AUDIT_WITH_NUMERICAL_EVIDENCE",
+  "closure_admissibility": {
+    "barotropic": {
+      "class": "DERIVED_FROM_VERIFIED_DEFINITIONS+NUMERICALLY_CORROBORATED",
+      "direct_slope_at_k_64pi": {
+        "derived_4_10": 1.6994,
+        "printed_4_15": 1.6996
+      },
+      "linear_sigma_R_exists": false,
+      "verdict": "HADAMARD_ILL_POSED_FOR_NEGATIVE_CS2",
+      "wkb_alpha_dressed_H0_units_matrix_k": 1.706948,
+      "wkb_exponent_at_kR_1_R8": 875.4
+    },
+    "comoving": {
+      "class": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "gm_preferred": true,
+      "verdict": "WELL_POSED_POINTWISE_ODE_SCALE_INDEPENDENT_ENSEMBLE_PRESERVING"
+    },
+    "homogeneous_density_B3_B5": {
+      "class": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "numerically_corroborated": false,
+      "verdict": "BACKWARD_PARABOLIC_ILL_POSED"
+    },
+    "meszaros": {
+      "gm_states_inapplicable": true,
+      "verdict": "APPROXIMATION_COMPARATOR_ONLY"
+    },
+    "two_scale_decisive": "volume-average CGI sigma(M8) 0.52-0.69 vs wall-regional 0.83-0.96"
+  },
+  "conditional_sigma_M8": {
+    "anchor_sigma8_planck": 0.8111,
+    "cases": {
+      "NW15_CMB_FIT": {
+        "comoving": {
+          "bare_8_over_hbar_volume_average": {
+            "E": 0.9844,
+            "R_Mpc": 11.7814,
+            "sigma_planck_anchored_primary_fb": 0.6855
+          },
+          "dressed_8_over_h_wall_comoving": {
+            "E": 0.9153,
+            "R_Mpc": 13.1148,
+            "sigma_planck_anchored_primary_fb": 0.6374
+          },
+          "equal_mass_M8_planck": {
+            "E": 0.9602,
+            "R_Mpc": 12.226,
+            "sigma_planck_anchored_primary_fb": 0.6687
+          }
+        },
+        "meszaros": {
+          "bare_8_over_hbar_volume_average": {
+            "E": 0.9844,
+            "R_Mpc": 11.7814,
+            "sigma_planck_anchored_primary_fb": 0.6104
+          },
+          "dressed_8_over_h_wall_comoving": {
+            "E": 0.9153,
+            "R_Mpc": 13.1148,
+            "sigma_planck_anchored_primary_fb": 0.5676
+          },
+          "equal_mass_M8_planck": {
+            "E": 0.9602,
+            "R_Mpc": 12.226,
+            "sigma_planck_anchored_primary_fb": 0.5954
+          }
+        }
+      },
+      "PAPER_REFERENCE": {
+        "comoving": {
+          "bare_8_over_hbar_volume_average": {
+            "E": 1.0634,
+            "R_Mpc": 10.1041,
+            "sigma_planck_anchored_primary_fb": 0.6033
+          },
+          "dressed_8_over_h_wall_comoving": {
+            "E": 1.0104,
+            "R_Mpc": 10.9544,
+            "sigma_planck_anchored_primary_fb": 0.5733
+          },
+          "equal_mass_M8_planck": {
+            "E": 0.9238,
+            "R_Mpc": 12.5702,
+            "sigma_planck_anchored_primary_fb": 0.5241
+          }
+        },
+        "meszaros": {
+          "bare_8_over_hbar_volume_average": {
+            "E": 1.0634,
+            "R_Mpc": 10.1041,
+            "sigma_planck_anchored_primary_fb": 0.5119
+          },
+          "dressed_8_over_h_wall_comoving": {
+            "E": 1.0104,
+            "R_Mpc": 10.9544,
+            "sigma_planck_anchored_primary_fb": 0.4865
+          },
+          "equal_mass_M8_planck": {
+            "E": 0.9238,
+            "R_Mpc": 12.5702,
+            "sigma_planck_anchored_primary_fb": 0.4447
+          }
+        }
+      }
+    },
+    "ratio_to_planck_all_forks_range": [
+      0.504,
+      0.905
+    ],
+    "ratio_to_planck_primary_fb_range": [
+      0.548,
+      0.845
+    ],
+    "status": "CONDITIONAL_MODEL_INTERNAL_LINEAR_SIGMA_M; NOT_OBSERVATIONAL; NOT_SIGMA8"
+  },
+  "date": "2026-09-29",
+  "early_spectrum": {
+    "A_s": 2.1e-09,
+    "baryon_fraction_primary": 0.15633,
+    "baryon_fraction_sensitivity": [
+      0.12,
+      0.2
+    ],
+    "class": "PROVISIONAL_MODEL_IMPORT",
+    "eh98_planck_rel_to_anchor": 0.0303,
+    "eh98_planck_sigma8": 0.8357,
+    "n_s": 0.9649,
+    "transfer": "EH98 zero-baryon-oscillation",
+    "validation_gate": {
+      "final": 0.05,
+      "initial": 0.03,
+      "reason": "EH98 omits BAO wiggles and 0.06 eV neutrino suppression; anchored ratios cancel the common bias"
+    }
+  },
+  "evidence_artifact_gitignored": "artifacts/independent/phase1g_a_sigma8_path.json",
+  "evidence_script": "scripts/phase1g_a_sigma8_path_numerics.py",
+  "frozen_scientific_status": {
+    "FSIGMA8_AUTHORIZATION": "NOT_GRANTED",
+    "OBSERVATIONAL_AUTHORIZATION": "NOT_GRANTED",
+    "SIGMA8_AUTHORIZATION": "NOT_GRANTED",
+    "UNIQUE_TIMESCAPE_PREDICTION": "NOT_GRANTED"
+  },
+  "gm_equation_map": {
+    "barotropic_closure": "4.13",
+    "barotropic_delta_eff_second_order": "4.19",
+    "barotropic_system": "4.14-4.17",
+    "comoving_preference_source_line": 1097,
+    "comoving_system": "4.21-4.23",
+    "general_dust_frame_system": "4.9-4.12",
+    "homogeneous_density_closure": "B.3-B.5",
+    "meszaros": "4.27",
+    "roadmap_quote_source_line": 1102,
+    "tracker": "5.4-5.7 and text p. 25"
+  },
+  "growth_ratio": {
+    "cases": {
+      "NW15_CMB_FIT": {
+        "comoving": {
+          "X_inf": 0.858568,
+          "X_z_i": {
+            "z_i=100": 0.8588,
+            "z_i=20": 0.861089,
+            "z_i=300": 0.858612,
+            "z_i=50": 0.859219
+          },
+          "g_TS_vs_volume_average_EdS": 0.514953
+        },
+        "meszaros": {
+          "X_inf": 0.764551,
+          "X_z_i": {
+            "z_i=100": 0.764895,
+            "z_i=20": 0.768252,
+            "z_i=300": 0.764617,
+            "z_i=50": 0.765514
+          },
+          "g_TS_vs_volume_average_EdS": 0.458563
+        }
+      },
+      "PAPER_REFERENCE": {
+        "comoving": {
+          "X_inf": 0.699461,
+          "X_z_i": {
+            "z_i=100": 0.699815,
+            "z_i=20": 0.703464,
+            "z_i=300": 0.699529,
+            "z_i=50": 0.700464
+          },
+          "g_TS_vs_volume_average_EdS": 0.402663
+        },
+        "meszaros": {
+          "X_inf": 0.593553,
+          "X_z_i": {
+            "z_i=100": 0.594053,
+            "z_i=20": 0.599065,
+            "z_i=300": 0.593649,
+            "z_i=50": 0.59496
+          },
+          "g_TS_vs_volume_average_EdS": 0.341694
+        }
+      }
+    },
+    "definition": "X_inf = gamma_w0 g_TS / g_Lambda at equal early photon temperature",
+    "fv0_scan": [
+      {
+        "X_inf_comoving": 0.9999,
+        "X_inf_meszaros": 0.9247,
+        "fv0": 0.5
+      },
+      {
+        "X_inf_comoving": 0.9489,
+        "X_inf_meszaros": 0.866,
+        "fv0": 0.55
+      },
+      {
+        "X_inf_comoving": 0.892,
+        "X_inf_meszaros": 0.8017,
+        "fv0": 0.6
+      },
+      {
+        "X_inf_comoving": 0.8586,
+        "X_inf_meszaros": 0.7646,
+        "fv0": 0.627
+      },
+      {
+        "X_inf_comoving": 0.8285,
+        "X_inf_meszaros": 0.7315,
+        "fv0": 0.65
+      },
+      {
+        "X_inf_comoving": 0.765,
+        "X_inf_meszaros": 0.6628,
+        "fv0": 0.695
+      },
+      {
+        "X_inf_comoving": 0.7575,
+        "X_inf_meszaros": 0.6548,
+        "fv0": 0.7
+      },
+      {
+        "X_inf_comoving": 0.6995,
+        "X_inf_meszaros": 0.5936,
+        "fv0": 0.737
+      },
+      {
+        "X_inf_comoving": 0.6778,
+        "X_inf_meszaros": 0.5711,
+        "fv0": 0.75
+      },
+      {
+        "X_inf_comoving": 0.5878,
+        "X_inf_meszaros": 0.4794,
+        "fv0": 0.8
+      }
+    ],
+    "g_Lambda_qplus0": 0.787813
+  },
+  "notational_finding_GM_a_w": {
+    "class": "VERIFIED_FROM_PRIMARY_SOURCE",
+    "code_affected": false,
+    "dressed_a_w_over_t23_rel_variation_fv0_0737": 0.1658,
+    "eq_5_1": "regional wall volume scale factor, a_w proportional to t^(2/3) (W09 lines 1763-1764)",
+    "eq_5_4": "null-matched dressed scale factor a_D/gamma_w (W09 dressed a), enters 1+z",
+    "package_a_w_implements": "eq_5_4"
+  },
+  "package_code_changed": false,
+  "per_photon_matter_density": {
+    "class": "DERIVED_FROM_VERIFIED_DEFINITIONS; numerically verified to 1e-13",
+    "identity": "omega_m_eff = <rho>_D0 gamma_w0^3 / rho_crit100 = (1/2)(1-fv0)(2+fv0)(H_D0/100)^2",
+    "planck_omega_m": 0.1431,
+    "values": {
+      "NOTEBOOK_REFERENCE": 0.12114,
+      "NW15_CMB_FIT": 0.13094,
+      "PAPER_REFERENCE": 0.12048
+    }
+  },
+  "phase": "1G-A",
+  "radius_conventions": {
+    "a_equal_mass_M8_planck": "frame-free; fixed-mass comparison",
+    "b_dressed_8_over_h_wall_comoving": "presupposes wall rulers = wall-comoving length",
+    "c_bare_8_over_hbar_volume_average": "bare units",
+    "class": "CONVENTION_DEPENDENT"
+  },
+  "recommendations_require_human_approval": [
+    "UNRESTRICTED_BAROTROPIC_CONTINUUM_STABILITY: NOT_DERIVED -> REFUTED_HADAMARD_ILL_POSED",
+    "Phase 1G-B: implement conditional mass-labelled sigma(M) for the comoving closure with explicit early-spectrum import",
+    "Phase 1G-C: derive the two-scale (wall-region) linear growth law; decisive for sigma8",
+    "Author question: is volume-average CGI growth the growth of structures inside walls?"
+  ],
+  "report": "reports/phase1g_a_sigma8_derivation_path_audit.md",
+  "schema_version": 1,
+  "sources": {
+    "DNW13": "arXiv:1306.3208 (abstract)",
+    "EH98": "astro-ph/9709112 Eqs. (26),(28)-(31)",
+    "GM_latex_eprint_v2_main_tex_sha256": "f9cadfa03ecc9a74b0a8f432ae4b13422daeb219f253756bcd877b4b75077c59",
+    "NW15": "arXiv:1410.3470 (abstract)",
+    "P18": "arXiv:1807.06209 Table 2",
+    "W09_eprint_observe_tex_sha256": "2b0324d127440e9a053a7cb37102d7655cca228a63cd2222843e879989b4b531"
+  },
+  "status_tokens_changed": false,
+  "title": "sigma(M) derivation-path audit for the Timescape CGI framework",
+  "two_scale_bracket": {
+    "assumption": "sub-wall linear perturbations follow the EdS growing mode of the wall region in common time t (W09 no backreaction within walls)",
+    "cases": {
+      "NW15_CMB_FIT": {
+        "X_wall_regional": 1.200172,
+        "sigma_planck_anchored_by_convention": {
+          "bare_8_over_hbar_volume_average": 0.9582,
+          "dressed_8_over_h_wall_comoving": 0.891,
+          "equal_mass_M8_planck": 0.9347
+        }
+      },
+      "PAPER_REFERENCE": {
+        "X_wall_regional": 1.112945,
+        "sigma_planck_anchored_by_convention": {
+          "bare_8_over_hbar_volume_average": 0.9599,
+          "dressed_8_over_h_wall_comoving": 0.9121,
+          "equal_mass_M8_planck": 0.8339
+        }
+      }
+    },
+    "class": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+    "conflicts_with_recorded_status": false,
+    "formula": "X_wall = gamma_w0 (1 - f_v0)^(1/3) / g_Lambda",
+    "note": "common time t, not wall proper time; regional embedding stays NOT_DERIVED"
+  }
+}

@@ -219,6 +219,13 @@ audits were recovered and committed, §12) · **1F-D** minimal scalar
 necessary-bound diagnostic (`phase1f_d_necessary_bound.md`, tag
 `phase-1f-d-necessary-bound-v1`; conditional).
 
+In progress: **1G-A** σ(M) derivation-path audit (report-only,
+`phase1g_a_sigma8_derivation_path_audit.md`). The route is standard early
+universe plus comoving-closure growth. The barotropic closure is
+Hadamard ill-posed. Volume-average σ(M8) is 0.52–0.69, against 0.83–0.96
+for wall-regional growth, so the two-scale growth law is decisive. No
+status token has changed and `SIGMA8_AUTHORIZATION` stays `NOT_GRANTED`.
+
 Outside the phase sequence: the isolated, conditional **LTB–CMC experiment**
 (`experimental_ltb_cmc/`). Its reports are `reports/experimental_ltb_cmc*.md`,
 including the Italian research note
