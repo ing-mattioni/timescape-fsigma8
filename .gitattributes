@@ -1,0 +1,6 @@
+# Inventory-pinned provenance files (F4, phase1f_c_r_f2_f4_f9_remediation.md
+# section 12): never convert line endings, so every checkout keeps the pinned
+# SHA-256.
+astra/INDEPENDENT_SCIENTIFIC_AUDIT.md -text
+reports/phase1f_b_dust_wall_boost_dynamics_v3_final_audit.md -text
+reports/phase1f_c_wall_common_geometry_adversarial_audit.md -text

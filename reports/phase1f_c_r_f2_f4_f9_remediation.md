@@ -406,9 +406,13 @@ exactly:
 For the three audits only, this supersedes the 2026-09-23 decision (§3.4)
 that no audit text would be added.
 
-- They are committed unchanged, with their original CRLF line endings. The
-  committing clone uses `core.autocrlf=false` and the repository has no
-  `.gitattributes`, so the committed blobs carry the pinned bytes.
+- They are committed unchanged. Their original line endings are LF, and
+  the SHA-256 of each committed blob equals its pin. A `.gitattributes`
+  entry marks the three files `-text`, so no checkout converts their line
+  endings, whatever its `core.autocrlf` setting. The validator accepts no
+  line-ending equivalent for them. (Corrected 2026-09-29: this item first
+  said CRLF, from a faulty shell check. The `.gitattributes` entry was added
+  at the same time.)
 - Their content is not edited, and none of their findings is re-adjudicated
   here.
 - F4 remains `CLOSED_AS_DOCUMENTED_PERMANENT_GAP`, now limited to the 1E-F,
