@@ -3,7 +3,7 @@
 Report: reports/phase1g_e_two_phase_sigma.md (sections cited as [1G-E]).
 Writes artifacts/independent/phase1g_e_two_phase_sigma.json (git-ignored).
 
-Model ([1G-E] Sec. 3): empty voids (the tracker's rho_v = 0, [1G-C] Sec. 3)
+Model ([1G-E] Sec. 2): empty voids (the tracker's rho_v = 0, [1G-C] Sec. 3)
 filling f_v0 of the volume as a Boolean model of Poisson-placed balls of
 radius a; walls carry all the mass at rho_w = <rho>/f_w plus the linear
 wall-internal field of [1G-C] (growth D_wall(t0) = gamma_w0 (1-f_v0)^(1/3)).

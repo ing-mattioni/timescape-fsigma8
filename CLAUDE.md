@@ -230,7 +230,21 @@ audits were recovered and committed, §12) · **1F-D** minimal scalar
 necessary-bound diagnostic (`phase1f_d_necessary_bound.md`, tag
 `phase-1f-d-necessary-bound-v1`; conditional).
 
-In progress (σ track; no adversarial audit or tag yet):
+In progress (σ track; audited, not tagged):
+- **Adversarial audits of 1G-A to 1G-E** (2026-09-29; one independent
+  auditor per phase, `reports/phase1g_<x>_adversarial_audit.md` + inventory;
+  consolidation `phase1g_adversarial_audit_errata_successor.md`).
+  - Every phase: `ACCEPT_WITH_CORRECTIONS`, `NOT_READY_OWNER_DECISION_REQUIRED`.
+    No HIGH finding and no error in an implemented equation.
+  - MEDIUM-HIGH findings: GC-F1 (the 1G-C wall σ is the wall-internal
+    statistic), GD-F1 (1G-D void-seed scale vs the tracker), GE-F1 (1G-E
+    non-empty-void formula breaks mass conservation), GE-F2 (void
+    population vs [W09]).
+  - The errata are applied as successor readings, and three docstring
+    citations are fixed; the frozen reports are unchanged.
+  - On Linux (AVX-512) one test fails at 6f7937c:
+    `test_top_hat_window_limits_series_and_envelope` (bitwise evenness of
+    `x**3`; GB-F1, an owner decision). Linux counts: 1043 passed, 1 failed.
 - **1G-A:** σ(M) derivation-path audit (report-only,
   `phase1g_a_sigma8_derivation_path_audit.md`). The route is standard early
   universe plus scale-independent growth; the barotropic closure is Hadamard

@@ -1,0 +1,699 @@
+{
+  "audit_classification": "INDEPENDENT_ADVERSARIAL_AUDIT",
+  "audit_date": "2026-09-29",
+  "audited_report": "reports/phase1g_c_two_scale_growth_law.md",
+  "checkpoint": "6f7937ce5681900898f5e0a6482a953f0fa3e5a0",
+  "claims": [
+    {
+      "claim": "The tracker is exactly two FLRW regions in the common time t: empty Milne voids (a_v ~ t, rho_v = 0) and EdS walls (a_w,reg ~ t^(2/3), rho_w = 1/(6 pi G t^2)); H_D = f_v H_v + f_w H_w, <rho> = f_w rho_w, Q_D = 6 f_v f_w (H_v-H_w)^2, <R> = -6 f_v/t^2, gamma_w H_w = H_D.",
+      "evidence_class_assessed": "kinematics VERIFIED_FROM_PRIMARY_SOURCE ([W07] solution.tex 317-321, 404-406; [W09] 1763-1764) and derived; dynamics (rho_v = 0, EdS wall density, FLRW regions, partition-only backreaction) DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION (regional dust Friedmann equations in t with Q_v = Q_w = 0, flat walls, D1-corrected <R>)",
+      "evidence_class_reported": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "id": "C1",
+      "independent_values": {
+        "D1_printed_over_hamiltonian_minus_1": {
+          "fv0_0.627": 0.3651,
+          "fv0_0.737": 0.2256
+        },
+        "max_abs_residual_mpmath_40_digits": {
+          "(3.9)_Raychaudhuri": 3.1e-41,
+          "(5.2)_rel": 2.85e-41,
+          "(5.3)_gamma_w_H_w_over_H_D": 2.3e-41,
+          "H_v_t_minus_1": 3.44e-41,
+          "H_w_t_minus_2/3": 2.3e-41,
+          "R_from_3.8_vs_minus_6fv_over_t2": 1.25e-34,
+          "W09_Q1_with_printed_5.7_Q": 2.07e-40,
+          "mass_budget": 2.76e-40,
+          "void_rho_v_over_mean": 2.8e-34,
+          "wall_Raychaudhuri": 3.65e-41
+        },
+        "phase_script_identity_max_rel_linux": 2.220446049250313e-15,
+        "void_density_8piG_rho_v_t2_with_printed_5.7": {
+          "fv0_0.627": -1.095,
+          "fv0_0.737": -0.6769
+        }
+      },
+      "location": "[1G-C] Sec. 1 verdict 1; Sec. 3",
+      "notes": "Report's listed check <rho> = f_w/(6 pi G t^2) holds for any rho_v (rho_w defined as 1/(6 pi G t^2) in the script); the rho_v = 0 step (void Hamiltonian with R_v = <R>/f_v) is not shown. [W09] foot2 (lines 2399-2404) allows non-FLRW regions with Q = 0. See GC-F2, GC-F6.",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    },
+    {
+      "claim": "[GM] use one symbol a_w for the (5.1) regional volume scale factor (~ t^(2/3)) and the (5.4) dressed a_w = a_D/gamma_w; they differ by gamma_w (1-f_v)^(1/3) f_wi^(-1/3); dressed a_w/t^(2/3) varies by 16.6% (f_v0 = 0.737).",
+      "evidence_class_assessed": "VERIFIED_FROM_PRIMARY_SOURCE",
+      "evidence_class_reported": "VERIFIED_FROM_PRIMARY_SOURCE",
+      "id": "C2",
+      "independent_values": {
+        "dressed_aw_over_t23_max_over_min_minus_1": 0.16576,
+        "dressed_minimum_at_t_over_tau": "1/3",
+        "ratio_identity_residual": 2.3e-41
+      },
+      "location": "1G-A Sec. 5.3 (used by [1G-C] Secs. 3, 5)",
+      "notes": "[GM] main.tex 622-623 (5.1) and 638-641 (5.4); [W09] 269-272 (wgeom), 294 (bav), 606 (etarel), 617-623 (dgeom, a = gamma^-1 abar). Genuine notational conflict, harmless to [GM]'s numerics; 1G-A wording is fair.",
+      "outcome": "CONFIRMED"
+    },
+    {
+      "claim": "Assumptions A1-A4 and the quoted sources ([W09] lines 510, 513, 311-458, 461; [GM] lines 500, 602, 1083).",
+      "evidence_class_assessed": "quotes VERIFIED_FROM_PRIMARY_SOURCE except: [W09] 383-386 truncated before 'which characterize the nonlinear regime'; 'characteristic diameter 30 h^-1 Mpc' is at line 277, outside the cited range",
+      "evidence_class_reported": "VERIFIED_FROM_PRIMARY_SOURCE (quotes); assumptions DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "id": "C3",
+      "independent_values": {
+        "line_checks": {
+          "GM_1083": "exact",
+          "GM_500": "exact",
+          "GM_602": "exact",
+          "W09_1763-1764": "exact",
+          "W09_277_void_diameter": "location imprecise",
+          "W09_311-458_subsection": "exact",
+          "W09_327_100_h-1_Mpc": "exact",
+          "W09_367-368_110_h-1_Mpc": "exact",
+          "W09_383-386": "truncated",
+          "W09_461": "exact",
+          "W09_510-511": "exact",
+          "W09_513_Q1": "exact"
+        }
+      },
+      "location": "[1G-C] Secs. 4-5",
+      "notes": "A1 is a model postulate ([GM] 618, [W07] 211-215, [W09] 510), with which the tracker is consistent, not a property it 'satisfies exactly'. A2 carries an unstated clock identification (GC-F3).",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    },
+    {
+      "claim": "On the wall regional background rho_eff,w = 0, [GM] (4.9)-(4.12) reduce to dust and (4.27) is exact: Delta_w ~ t^(2/3) or t^(-1).",
+      "evidence_class_assessed": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "evidence_class_reported": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "id": "C4",
+      "independent_values": {
+        "4piG_rho_w_t2": "2/3 exactly",
+        "decaying_mode_check": "2-4/3-2/3=0",
+        "growing_mode_check": "-2/9+8/9-6/9=0",
+        "phase_script_integration_dev": 1.5631940186722204e-13,
+        "t_H_w": "2/3 exactly"
+      },
+      "location": "[1G-C] Sec. 5",
+      "notes": "Exact given A1, flat walls, A2 and the clock identification of GC-F3. a_w ~ t^(2/3) holds for the general two-scale solution ([W07] 311-321), so the law does not need epsilon_i = 0.",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    },
+    {
+      "claim": "Photon-normalised wall growth gamma_w0 (1-f_v0)^(1/3) = (1/2)(2+f_v0)(1-f_v0)^(1/3); X_wall = 1.1129/1.2002; sigma = 0.834/0.912/0.960 ([GM]) and 0.935/0.891/0.958 ([NW15]); volume-average rows; (1-f_v0)^(1/3) = 0.641 vs CGI 0.403/0.342.",
+      "evidence_class_assessed": "DERIVED_FROM_VERIFIED_DEFINITIONS given the wall law; NUMERICALLY_CORROBORATED; meaning of sigma: see C7/GC-F1; radius conventions: GC-F5",
+      "evidence_class_reported": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION (sigma); closed form DERIVED",
+      "id": "C5",
+      "independent_values": {
+        "X_cgi_comoving": {
+          "GM": 0.69946,
+          "NW15": 0.858567
+        },
+        "X_wall": {
+          "GM": 1.112945,
+          "NW15": 1.200172
+        },
+        "baryon_fraction_sensitivity_fb_0.12_0.20": [
+          0.0699,
+          -0.0808
+        ],
+        "eh98_planck_sigma8_absolute": 0.83569,
+        "finite_te_identity_rel_residual_mpmath": 6.9e-41,
+        "g_LCDM": 0.7878126,
+        "g_vs_volume_EdS_GM": {
+          "cgi_comoving": 0.402662,
+          "cgi_meszaros": 0.341693,
+          "wall": 0.640696
+        },
+        "gamma_w0_(1-f_v0)^(1/3)": {
+          "GM": 0.876792,
+          "NW15": 0.94551
+        },
+        "naive_limit_rel_diff_at_1e-8_t0": {
+          "GM": -4.6705e-09,
+          "minus_fv_te_over_6": -4.6705e-09
+        },
+        "sigma": {
+          "NOTEBOOK_REFERENCE": {
+            "a_equal_mass": {
+              "E": 0.926162,
+              "R_Mpc": 12.547,
+              "cgi_comoving": 0.52544,
+              "wall": 0.83606
+            },
+            "b_dressed_8_over_h": {
+              "E": 1.01372,
+              "R_Mpc": 10.924,
+              "cgi_comoving": 0.57511,
+              "wall": 0.91509
+            },
+            "c_bare_8_over_hbar_over_gamma": {
+              "E": 1.06683,
+              "R_Mpc": 10.076,
+              "cgi_comoving": 0.60525,
+              "wall": 0.96304
+            }
+          },
+          "NW15_CMB_FIT": {
+            "a_equal_mass": {
+              "E": 0.960198,
+              "R_Mpc": 12.226,
+              "cgi_comoving": 0.66867,
+              "wall": 0.93471
+            },
+            "b_dressed_8_over_h": {
+              "E": 0.915339,
+              "R_Mpc": 13.115,
+              "cgi_comoving": 0.63743,
+              "wall": 0.89105
+            },
+            "c_bare_8_over_hbar_over_gamma": {
+              "E": 0.984375,
+              "R_Mpc": 11.781,
+              "cgi_comoving": 0.6855,
+              "wall": 0.95825
+            }
+          },
+          "PAPER_REFERENCE": {
+            "a_equal_mass": {
+              "E": 0.923799,
+              "R_Mpc": 12.57,
+              "cgi_comoving": 0.5241,
+              "wall": 0.83392
+            },
+            "b_dressed_8_over_h": {
+              "E": 1.01045,
+              "R_Mpc": 10.954,
+              "cgi_comoving": 0.57326,
+              "wall": 0.91214
+            },
+            "c_bare_8_over_hbar_over_gamma": {
+              "E": 1.06336,
+              "R_Mpc": 10.104,
+              "cgi_comoving": 0.60328,
+              "wall": 0.9599
+            }
+          }
+        },
+        "wall_overdensity": {
+          "GM": 3.802,
+          "NW15": 2.681
+        }
+      },
+      "location": "[1G-C] Secs. 5, 7",
+      "notes": "Every printed digit of [1G-C] Sec. 7 reproduced. Line 182 writes 1+z = a/a0 (inverted; GC-F7); the computation uses the correct a0/a.",
+      "outcome": "CONFIRMED"
+    },
+    {
+      "claim": "The flat-dust wall in wall proper time tau_w violates its Friedmann equation by gamma_w^2 - 1 = 0.873/0.725 and is inadmissible; the common-time law is the only admissible regional law within [GM]'s dust-proper-time framework.",
+      "evidence_class_assessed": "inadmissibility DERIVED_FROM_VERIFIED_DEFINITIONS (with rho_v >= 0); 'only admissible' conditional on identifying t with the wall matter's proper time (GC-F3)",
+      "evidence_class_reported": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "id": "C6",
+      "independent_values": {
+        "dressed_geometry_variant_Omega_M": {
+          "GM": 0.3599,
+          "NW15": 0.4899
+        },
+        "gamma_w0^2-1": {
+          "GM": 0.872792,
+          "NW15": 0.725282
+        },
+        "required_rho_v_over_mean_for_tau_w_wall": {
+          "GM": -1.184,
+          "NW15": -1.157
+        }
+      },
+      "location": "[1G-C] Sec. 1 verdict 3; Sec. 6",
+      "notes": "Non-circular mass-budget version: the tau_w wall needs rho_v/<rho> = (1-gamma_w0^2)/f_v0 < 0. The dressed-a variant (W09 dgeom, line 638) also fails. The rejected variant is [W07] figeom / [W09] wgeom read as dust FLRW; consistent with NAIVE_W09_WALL_CLOCK_AS_REGIONAL_PROPER_DUST_FLRW_CLOCK = REJECTED_UNSUPPORTED.",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    },
+    {
+      "claim": "sigma_8's radius lies inside [W09]'s >= 100 h^-1 Mpc dust cell; the volume-average CGI growth describes super-cell modes.",
+      "evidence_class_assessed": "quotes VERIFIED_FROM_PRIMARY_SOURCE; the super-cell reading of the CGI dust DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION (identifies [GM]'s coarse-grained dust, line 636, with [W09]'s dust cells, lines 326-327)",
+      "evidence_class_reported": "VERIFIED_FROM_PRIMARY_SOURCE (quotes); consequence DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "id": "C7a",
+      "independent_values": {
+        "cell_100_over_h_Mpc": {
+          "h_0.61": 163.93,
+          "h_0.7303": 136.93
+        },
+        "cell_100_over_hbar_Mpc": {
+          "GM": 172.84,
+          "NW15": 193.44
+        },
+        "sigma8_radius_range_Mpc": [
+          10.1,
+          13.1
+        ]
+      },
+      "location": "[1G-C] Sec. 1 verdict 2; Sec. 4",
+      "notes": "'about 10x smaller' holds; the report's 'R ~ 11-12.6 Mpc' understates the range (GC-F8).",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    },
+    {
+      "claim": "Mass-weighted fluctuations at 8 h^-1 Mpc are governed by the wall regional dynamics; 0.834/0.935 is the conditional mass-weighted sigma(M8) and supersedes 1G-A's volume-average values for sigma_8-scale statistics; the open problem is settled for mass-weighted sigma(M8).",
+      "evidence_class_assessed": "the numbers are the wall-internal linear statistic relative to the wall mean (DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION); their identification with sigma(M8) is not supported",
+      "evidence_class_reported": "DERIVED_FROM_VERIFIED_DEFINITIONS (Sec. 4); DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION (verdict 4)",
+      "id": "C7b",
+      "independent_values": {
+        "f_v0": 0.737,
+        "rho_w_over_mean": 3.8023,
+        "sigma8_sphere_diameter_h-1_Mpc": 16,
+        "void_diameter_h-1_Mpc": 30
+      },
+      "location": "[1G-C] Sec. 1 verdict 4; Sec. 4 Consequence; Sec. 7 Reading; Sec. 9 item 1; inventory 'supersedes', 'scale_hierarchy'",
+      "notes": "[W09] 383-386 in full: '|delta rho/rho| ~ 1 which characterize the nonlinear regime'; foot11 (2648-2651): the two scales are 'largest relevant scales in the nonlinear regime'. Reached independently of 1G-D; agrees with the owner-approved narrowing in the live token comment. GC-F1.",
+      "outcome": "REFUTED"
+    },
+    {
+      "claim": "Power step (X_wall/X_CGI)^2 = 1.95-2.53 (comoving); f_v0 table; transition NOT_DERIVED (tracker 'self-similar', no length scale); 'sharp observational discriminant'.",
+      "evidence_class_assessed": "same; wording caveats (GC-F9)",
+      "evidence_class_reported": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION (limits); NOT_DERIVED (transition)",
+      "id": "C8",
+      "independent_values": {
+        "power_step": {
+          "0.5": {
+            "comoving": 1.5863,
+            "meszaros": 1.8546
+          },
+          "0.6": {
+            "comoving": 1.8579,
+            "meszaros": 2.3
+          },
+          "0.627": {
+            "comoving": 1.9541,
+            "meszaros": 2.4642
+          },
+          "0.695": {
+            "comoving": 2.2654,
+            "meszaros": 3.0176
+          },
+          "0.737": {
+            "comoving": 2.5318,
+            "meszaros": 3.5159
+          },
+          "0.8": {
+            "comoving": 3.1255,
+            "meszaros": 4.6997
+          }
+        }
+      },
+      "location": "[1G-C] Sec. 1 verdict 5; Sec. 8",
+      "notes": "All table entries reproduced. The tracker has a time scale tau (f_v = t/(t+tau)); it has no sub-horizon length scale.",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    },
+    {
+      "claim": "Status tokens TWO_SCALE_MASS_WEIGHTED_SUB_CELL_GROWTH_LAW = DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION and SUPER_CELL_TO_SUB_CELL_GROWTH_TRANSITION = NOT_DERIVED rest on 1G-C.",
+      "evidence_class_assessed": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION; NOT_DERIVED",
+      "evidence_class_reported": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION; NOT_DERIVED",
+      "id": "C9",
+      "independent_values": {},
+      "location": "src/timescape_fsigma8/scientific_status.py lines 44-56",
+      "notes": "Values supported; the comment's narrowing (wall-internal statistic relative to the wall mean) matches this audit. The comment's assumption list A1-A4 omits the clock identification (GC-F3). No token change proposed.",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    },
+    {
+      "claim": "Frozen package background functions used by the phase are correct.",
+      "evidence_class_assessed": "NUMERICALLY_CORROBORATED against an independent mpmath evaluation of the printed definitions",
+      "evidence_class_reported": "frozen, validated (1B)",
+      "id": "C10",
+      "independent_values": {
+        "functions": [
+          "fv",
+          "dfv_dt",
+          "a_D",
+          "H_D",
+          "Q_D",
+          "R_D",
+          "rho_d",
+          "gamma_w",
+          "a_w",
+          "1+redshift"
+        ],
+        "max_rel_diff_vs_mpmath": 4.44e-16
+      },
+      "location": "src/timescape_fsigma8/background/",
+      "notes": "",
+      "outcome": "CONFIRMED"
+    },
+    {
+      "claim": "The evidence script reproduces its artifact; inventory, report and artifact agree.",
+      "evidence_class_assessed": "reproducible",
+      "evidence_class_reported": "reproducible",
+      "id": "C11",
+      "independent_values": {
+        "inventory_max_identity_error_owner_platform": 2.886579864025407e-15,
+        "linux_max_identity_error": 2.220446049250313e-15,
+        "py311_results_bit_identical": true,
+        "py313_artifact_sha256": "bf97007064caabfe89208fc982af8a4db72ac75998483b60299742d8f7828a89"
+      },
+      "location": "[1G-C] Sec. 11; inventory",
+      "notes": "The in-place 2026-09-29 correction note in Sec. 5 (integration commit 214a626, before any tag) is correct.",
+      "outcome": "CONFIRMED"
+    }
+  ],
+  "environment": {
+    "full_test_suite": "not run (lead runs it)",
+    "interpreters": [
+      {
+        "numpy": "2.5.3",
+        "python": "3.13.12",
+        "scipy": "1.18.1"
+      },
+      {
+        "numpy": "2.4.6",
+        "python": "3.11.15",
+        "scipy": "1.17.1"
+      }
+    ],
+    "platform": "Linux x86-64 (AVX-512)",
+    "runs": [
+      "scripts/phase1g_c_two_scale_growth_numerics.py on both interpreters in AUDIT_TREE (PYTHONPATH=AUDIT_TREE/src, -B -W error): all budgets pass; 3.13 artifact byte-identical to the checkpoint copy; 3.11 results bit-identical; original artifact bytes restored",
+      "independent scratch scripts audit_c/indep_1gc.py and follow-ups"
+    ],
+    "scratch_only_packages": {
+      "mpmath": "1.3.0",
+      "sympy": "1.14.0"
+    }
+  },
+  "errata": [
+    {
+      "file": "reports/phase1g_c_two_scale_growth_law.md",
+      "finding": "GC-F7",
+      "id": "E1",
+      "location": "line 182",
+      "new": "redshift `1+z = a0/a` ([GM] (5.4); [W09]'s dressed `a`) and",
+      "old": "redshift `1+z = a/a0` ([GM] (5.4); [W09]'s dressed `a`) and",
+      "proof": "[GM] main.tex line 663: '1 + z= a_{w,0}/a_w'; [W07] solution.tex line 440; package observables.redshift (lines 98-108); the report's own line 186."
+    },
+    {
+      "file": "reports/phase1g_c_two_scale_growth_law.md",
+      "finding": "GC-F8",
+      "id": "E2",
+      "location": "line 134",
+      "new": "(R \u2248 10\u201313 Mpc across the three radius conventions of Sec. 7 and both parameter sets) is about 10\u00d7 smaller than the dust-cell scale (\u2248137\u2013164 Mpc for h = 0.73\u20130.61).",
+      "old": "(R \u2248 11\u201312.6 Mpc) is about 10\u00d7 smaller than the dust-cell scale (\u2248140\u2013160 Mpc for h = 0.73\u20130.61).",
+      "proof": "Sec. 7 radii (a), (b), (c): [GM] 12.570, 10.954, 10.104 Mpc; notebook 12.547, 10.924, 10.076; [NW15] 12.226, 13.115, 11.781 (1G-A script lines 424-431 definitions, recomputed independently); 100/0.7303 = 136.93, 100/0.61 = 163.93."
+    },
+    {
+      "file": "reports/phase1g_c_two_scale_growth_law.md",
+      "finding": "GC-F8",
+      "id": "E3",
+      "location": "line 123",
+      "new": "- voids have \"a characteristic diameter 30 h\u207b\u00b9 Mpc\" (line 277; \"30h\u207b\u00b9 Mpc diameter voids\", line 386);",
+      "old": "- voids have \"a characteristic diameter 30 h\u207b\u00b9 Mpc\";",
+      "proof": "[W09] observe.tex line 277 ('Voids of a characteristic diameter $30h^{-1}$ Mpc') and line 386 ('30h^{-1} Mpc diameter voids')."
+    },
+    {
+      "file": "reports/phase1g_c_two_scale_growth_law.md",
+      "finding": "GC-F8",
+      "id": "E4",
+      "location": "line 113",
+      "new": "The kinematic facts are stated explicitly in [W07] (solution.tex lines 317\u2013321 and 404\u2013406); the others are implicit in [W07]/[W09]. They are recorded here as verified",
+      "old": "These facts are implicit in [W07]/[W09]. They are recorded here as verified",
+      "proof": "[W07] solution.tex 317-321 ('a_w = a_w0 t^{2/3} ... exactly that of an Einstein--de Sitter universe, but in volume average time not locally measured wall time') and 404-406 ('the void regions expand exactly as a Milne universe in volume--average time')."
+    }
+  ],
+  "finding_counts": {
+    "HIGH": 0,
+    "LOW": 5,
+    "LOW-MEDIUM": 1,
+    "MEDIUM": 2,
+    "MEDIUM-HIGH": 1,
+    "total": 9
+  },
+  "findings": [
+    {
+      "consequence": "The headline '3-15% above Planck-LCDM' compares a wall-internal statistic with a global-mean sigma8; 'supersedes' and 'settled' overstate the result. The report already disclaims observational use (Sec. 7, lines 241-243); the defect is in the model-internal meaning.",
+      "evidence": "[W09] observe.tex 383-386 in full ('... |delta rho/rho| ~ 1 which characterize the nonlinear regime'; truncated in [1G-C] Sec. 4); foot11, 2648-2651; void diameter 30 h^-1 Mpc (line 277) > sigma8 sphere diameter 16 h^-1 Mpc; f_v0 = 0.737; rho_w/<rho> = 3.80; Delta_w is defined relative to rho_w.",
+      "id": "GC-F1",
+      "locations": [
+        "reports/phase1g_c_two_scale_growth_law.md Sec. 1 verdict 4 (lines 44-52)",
+        "Sec. 4 Consequence (lines 133-140)",
+        "Sec. 7 Reading (lines 231-243)",
+        "Sec. 9 item 1 (lines 278-282)",
+        "reports/phase1g_c_two_scale_growth_inventory.json keys 'supersedes', 'scale_hierarchy'"
+      ],
+      "resolution_class": "OWNER_DECISION",
+      "severity": "MEDIUM-HIGH",
+      "statement": "The wall law, X_wall and the sigma values are correct, but they give the linear variance of the wall-internal field relative to the wall mean. [1G-C] presents them as 'Conditional sigma(M8) (mass-weighted, framework-consistent)' that 'supersedes 1G-A's volume-average values ... for sigma8-scale, mass-weighted statistics', with the open problem 'settled'.",
+      "suggested_resolution": "Dated 1G-C successor note narrowing these passages to 'wall-internal linear sigma at mass M8, relative to the wall mean'; quote [W09] 383-386 in full with foot11; withdraw 'settled'. Text only; no number changes.",
+      "title": "The 'mass-weighted sigma(M8)' identification, 'supersedes' and 'settled' are not supported; the result is the wall-internal linear statistic"
+    },
+    {
+      "consequence": "Evidence class stronger than the evidence; propagated to CLAUDE.md line 254 and README lines 31-33. Under the stated assumptions the result is exact (confirmed to 1e-34).",
+      "evidence": "The dynamics need the regional dust Friedmann equations in t with Q_v = Q_w = 0 ([GM] 618; [W09] 510), flat walls ([GM] 620) and D1 (with the printed (5.7) the void density is negative: 8 pi G rho_v t^2 = -0.677 / -1.095). The rho_v = 0 step is not shown and the listed check is independent of rho_v. Live REGIONAL_DUST_FLRW_EQUATIONS = DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION; 1G-B Sec. 5 keeps the regional embedding NOT_DERIVED; [W09] foot2 allows non-FLRW regions with Q = 0.",
+      "id": "GC-F2",
+      "locations": [
+        "reports/phase1g_c_two_scale_growth_law.md lines 27-32, 70, 107-114, 147-149",
+        "CLAUDE.md line 254",
+        "README.md lines 31-33"
+      ],
+      "resolution_class": "OWNER_DECISION",
+      "severity": "MEDIUM",
+      "statement": "Sec. 1 verdict 1 and Sec. 3 class the full two-region structure (including rho_v = 0, rho_w = 1/(6 pi G t^2), void curvature, 'all matter sits in walls') as DERIVED_FROM_VERIFIED_DEFINITIONS. Only the kinematics follow from [GM] (5.1), (5.5)-(5.6) (and are explicit in [W07] 317-321, 404-406).",
+      "suggested_resolution": "Split the class: kinematics VERIFIED_FROM_PRIMARY_SOURCE (+ derived); dynamics DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION naming the regional dust-FLRW-in-t assumption and D1; describe A1 as a postulate the tracker is consistent with.",
+      "title": "'Exactly two FLRW regions' is over-classified: its dynamical content rests on the regional dust-FLRW equations in t"
+    },
+    {
+      "consequence": "The law is consistent within [GM]'s formal framework but is not a derivation within Timescape's clock ontology at sub-cell scales; 'framework-consistent' (verdict 4), 'only admissible' (Sec. 6) and the token comment's A1-A4 list need this qualifier.",
+      "evidence": "[W07] solution.tex 211-215 (wall geometry in tau_w with the regional a_w), 229-230, 261-262, 320-321 ('in volume average time not locally measured wall time'); [W09] observe.tex 269-272 (wgeom in tau_w), 461-475 (t is not the time of every isotropic observer within a dust cell; sub-cell flow in local proper lengths and times), 483-485 (Hbar = (1/a_w) da_w/dtau_w); [GM] main.tex 441 and 636 (t = coarse-grained dust proper time).",
+      "id": "GC-F3",
+      "locations": [
+        "reports/phase1g_c_two_scale_growth_law.md lines 150-155 (A2), 198-215 (Sec. 6), 44",
+        "src/timescape_fsigma8/scientific_status.py lines 44-51 (comment)"
+      ],
+      "resolution_class": "OWNER_DECISION",
+      "severity": "MEDIUM",
+      "statement": "A2 and Sec. 6 evolve wall matter with [GM]'s dust-frame equations in the common time t, which identifies t with the proper time of the wall matter; this is not among A1-A4. Sec. 6 concludes the t-law is 'the only admissible regional law' and that 'Wall observers' clocks enter sigma8 only through the redshift-time map'.",
+      "suggested_resolution": "Add explicit assumption A5 (wall matter clocks the common coarse-grained dust time t); record that the tau_w alternative fails the mass budget for any rho_v >= 0; rephrase the last Sec. 6 sentence as an assumption. Token value unchanged.",
+      "title": "The common-time law identifies t with the wall matter's proper time; the assumption is unstated and 'only admissible' depends on it"
+    },
+    {
+      "consequence": "A reader of the current records can take 0.83-0.96 as a sigma(M8), contrary to LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC and the token comment.",
+      "evidence": "reports/phase1g_status_additions_successor.md Sec. 4; reports/phase1g_d_separate_universe_growth.md lines 296-298; CLAUDE.md 255-257; README.md 34-35 (all at 6f7937c).",
+      "id": "GC-F4",
+      "locations": [
+        "reports/phase1g_status_additions_successor.md Sec. 4",
+        "CLAUDE.md lines 255-257",
+        "README.md lines 34-35"
+      ],
+      "resolution_class": "OWNER_DECISION",
+      "severity": "LOW-MEDIUM",
+      "statement": "The status-additions successor record's Sec. 4 'Superseded readings' table lists for 1G-C only Sec. 10 item 2, Sec. 12 and the inventory status_tokens_changed. 1G-D (lines 296-298) lists Sec. 8 and Sec. 9's 'settled', but not Sec. 1 verdict 4, Sec. 4 Consequence, Sec. 7 Reading or the inventory 'supersedes'. CLAUDE.md lines 255-257 ('mass-weighted sigma(M8) follows the wall law: 0.83-0.96') and README lines 34-35 carry the unqualified wording; the narrowing appears only in a neighbouring bullet.",
+      "suggested_resolution": "Extend the successor record's superseded-readings table; qualify the two sentences as 'the wall-internal linear sigma at mass M8 (relative to the wall mean)'.",
+      "title": "Superseded 1G-C readings are flagged incompletely in the current records"
+    },
+    {
+      "consequence": "'0.83-0.96 across the three radius conventions' and '+3% to +18%' are not an envelope for the wall law; the equal-mass headline is unaffected; Sec. 9 item 3 already lists the radius convention as open.",
+      "evidence": "Wall-adapted conventions give sigma_wall = 0.837 (8/h) and 0.714 (8/hbar) for [GM], 0.857 and 0.761 for [NW15].",
+      "id": "GC-F5",
+      "locations": [
+        "reports/phase1g_c_two_scale_growth_law.md lines 44-48, 223-235"
+      ],
+      "resolution_class": "OWNER_DECISION",
+      "severity": "LOW",
+      "statement": "The wall rows of Sec. 7 reuse 1G-A's conventions (b), (c); (c) maps via volume-average proper length, which includes void expansion. For wall matter a present proper length maps to R_ph = r_now/[gamma_w0 (1-f_v0)^(1/3)].",
+      "suggested_resolution": "State that (b), (c) are volume-average-picture conventions; add a wall-adapted convention or drop the range claim.",
+      "title": "Radius conventions (b), (c) are volume-average conventions; 0.83-0.96 is not a convention envelope for the wall law"
+    },
+    {
+      "consequence": "The 'max rel. error' column measures floating-point rounding, not agreement with [GM]'s printed definitions. The identities are true (verified non-circularly to <= 1.3e-34 by this audit).",
+      "evidence": "scripts/phase1g_c_two_scale_growth_numerics.py lines 72-81, 104-108; src/timescape_fsigma8/background/tracker.py (closed forms).",
+      "id": "GC-F6",
+      "locations": [
+        "reports/phase1g_c_two_scale_growth_law.md lines 93-105, 173-176"
+      ],
+      "resolution_class": "OWNER_DECISION",
+      "severity": "LOW",
+      "statement": "The Sec. 3 checks compare package closed forms with algebraically identical rearrangements (Q_D = 2f(1-f)/(3t^2) vs 6f(1-f)(1/t-2/(3t))^2; R_D = -6f/t^2 vs f(-6/t^2); rho_d vs (1-f) rho_w; H_D and gamma_w H_w with H_v = 1/t, H_w = 2/(3t) hard-coded at script line 72). The Sec. 5 coefficients reduce exactly to 2/(3t) and 1/(6 pi G t^2), so the integration tests the integrator on EdS.",
+      "suggested_resolution": "Describe these as algebraic consistency checks and point to a non-circular check.",
+      "title": "The Sec. 3 identity table and the Sec. 5 integration are algebraically circular checks"
+    },
+    {
+      "consequence": "Typo only; the formula used on line 186 and in the script is correct.",
+      "evidence": "[GM] main.tex line 663; [W07] solution.tex line 440; package observables.redshift (lines 98-108); the report's own line 186.",
+      "id": "GC-F7",
+      "locations": [
+        "reports/phase1g_c_two_scale_growth_law.md line 182"
+      ],
+      "resolution_class": "UNAMBIGUOUS_ERRATUM",
+      "severity": "LOW",
+      "statement": "Line 182 writes the dressed redshift as 1+z = a/a0; [GM] line 663 gives 1 + z = a_{w,0}/a_w, i.e. a0/a.",
+      "suggested_resolution": "Erratum E1.",
+      "title": "Inverted dressed-redshift formula in Sec. 5 (1+z = a/a0)"
+    },
+    {
+      "consequence": "Citation and number accuracy only; conclusions unchanged.",
+      "evidence": "Radii (a), (b), (c): [GM] 12.570, 10.954, 10.104; notebook 12.547, 10.924, 10.076; [NW15] 12.226, 13.115, 11.781 Mpc; [W09] observe.tex 277, 386; [W07] solution.tex 317-321, 404-406.",
+      "id": "GC-F8",
+      "locations": [
+        "reports/phase1g_c_two_scale_growth_law.md lines 113, 123, 134"
+      ],
+      "resolution_class": "UNAMBIGUOUS_ERRATUM",
+      "severity": "LOW",
+      "statement": "(i) line 134 'R ~ 11-12.6 Mpc ... (~140-160 Mpc ...)': the report's conventions and parameter sets give 10.1-13.1 Mpc and 136.9-163.9 Mpc; (ii) line 123 quotes 'a characteristic diameter 30 h^-1 Mpc' under '[W09] ... (lines 311-458) and line 461', but the phrase is at [W09] line 277; (iii) line 113 'These facts are implicit in [W07]/[W09]': the kinematic facts are explicit in [W07] 317-321 and 404-406.",
+      "suggested_resolution": "Errata E2-E4.",
+      "title": "Imprecise sigma8-radius range and two source-location statements"
+    },
+    {
+      "consequence": "Governance and wording only.",
+      "evidence": "reports/phase1g_c_two_scale_growth_law.md lines 56-58, 264-268, 293-299; reports/phase1g_b_lagrangian_sigma_validation.md lines 17-21.",
+      "id": "GC-F9",
+      "locations": [
+        "reports/phase1g_c_two_scale_growth_law.md lines 56-58, 264-268, 293-299"
+      ],
+      "resolution_class": "OWNER_DECISION",
+      "severity": "LOW",
+      "statement": "Sec. 10 is headed 'none applied; each requires human approval' but item 1 says 'The lead has already sent this scope addition to the 1G-B implementer' (1G-B Sec. 1 records the lead adding the wall law during 1G-B). Sec. 1 verdict 5 and Sec. 8 call the conditional P(k) step 'a sharp observational discriminant' / 'a sharp, testable signature', attaching observational significance to a conditional theoretical quantity now recorded as superseded (1G-D). Sec. 8 calls the tracker 'self-similar', but it has a time scale tau.",
+      "suggested_resolution": "Owner confirms the 1G-B wall-law approval in the successor note; rephrase as 'a conditional theoretical feature (no observational comparison is made)'; replace 'self-similar' by 'has no sub-horizon length scale'.",
+      "title": "Wording and governance: 'none applied' vs 'already sent'; 'sharp observational discriminant'; 'self-similar'"
+    }
+  ],
+  "limitations": [
+    "[NW15] arXiv:1410.3470 not opened; parameters used as in the phase (f_v0 = 0.627, H0 = 61.0 km/s/Mpc).",
+    "Planck Omega_m = 0.315, h = 0.674 rounding inherited from the frozen qplus recipe, not re-audited (1G-A scope).",
+    "mpmath residuals (<= 1e-34) limited by numerical differentiation at 40 digits.",
+    "CGI growth started at t_e = 1e-8 t0 with the leading regular-mode ratio 1/5; agreement with the artifact <= 2e-6.",
+    "No Windows run; owner-platform values (e.g. max identity error 2.9e-15) not reproduced bit for bit, within budget.",
+    "1G-A, 1G-B, 1G-D, 1G-E not audited beyond the passages named."
+  ],
+  "method": [
+    "Primary-source re-derivation from the printed [GM] definitions ((5.1), (5.5)-(5.7), (3.8)-(3.9), (3.12)-(3.13), (4.9)-(4.12), (4.21)-(4.23), (4.27), text p. 25), [W09] and [W07], with line numbers; [GM] equation numbers reconstructed from main.tex counters.",
+    "40-digit mpmath evaluation with numerical derivatives; no package closed form used in the identities.",
+    "Own integration of the volume-average CGI closures and flat-LCDM growth; own EH98 zero-baryon-oscillation T(k) and top-hat sigma integral.",
+    "Package background functions compared afterwards with the independent values.",
+    "Circularity and classification review; inventory/report/artifact cross-check; no other adversarial audit or auditor scratch directory read."
+  ],
+  "owner_decisions": [
+    {
+      "decision": "Approve a dated 1G-C successor note narrowing Sec. 1 verdict 4, Sec. 4 Consequence, Sec. 7 Reading, Sec. 9 item 1 and the inventory 'supersedes'/'scale_hierarchy' fields to the wall-internal linear statistic relative to the wall mean; quote [W09] 383-386 in full with foot11; withdraw 'settled'; decide whether 'supersedes ... for sigma8-scale statistics' is withdrawn. Text only.",
+      "finding": "GC-F1"
+    },
+    {
+      "decision": "Reclassify Sec. 1 verdict 1 / Sec. 3: kinematics VERIFIED_FROM_PRIMARY_SOURCE (+ derived), dynamics DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION (regional dust-FLRW in t, Q_v = Q_w = 0, flat walls, D1); align CLAUDE.md line 254 and README lines 31-33.",
+      "finding": "GC-F2"
+    },
+    {
+      "decision": "Add assumption A5 (wall matter clocks the common time t) to Secs. 5-6 and to the TWO_SCALE_MASS_WEIGHTED_SUB_CELL_GROWTH_LAW comment; token value unchanged.",
+      "finding": "GC-F3"
+    },
+    {
+      "decision": "Extend the successor record's superseded-readings table; qualify CLAUDE.md lines 255-257 and README lines 34-35.",
+      "finding": "GC-F4"
+    },
+    {
+      "decision": "Label conventions (b), (c) as volume-average conventions; add a wall-adapted convention or drop the '0.83-0.96' / '+3% to +18%' envelope.",
+      "finding": "GC-F5"
+    },
+    {
+      "decision": "Describe the Sec. 3 and Sec. 5 checks as algebraic consistency checks.",
+      "finding": "GC-F6"
+    },
+    {
+      "decision": "Confirm the 1G-B wall-law approval; rephrase 'sharp observational discriminant' / 'testable signature' and 'self-similar'.",
+      "finding": "GC-F9"
+    }
+  ],
+  "phase": "1G-C",
+  "preservation": "Only this inventory and reports/phase1g_c_adversarial_audit.md were written in the main tree. No repository file was edited, staged, committed, pushed or tagged. The git-ignored artifact in AUDIT_TREE was regenerated and then restored to its original bytes (bf970070...). mpmath/sympy were installed only into the scratch directory.",
+  "report": "reports/phase1g_c_adversarial_audit.md",
+  "schema_version": 1,
+  "scope": {
+    "context_read_not_relied_on": [
+      "reports/phase1g_a_sigma8_derivation_path_audit.md (Sec. 5.3 a_w notation)",
+      "reports/phase1g_b_lagrangian_sigma_validation.md (Secs. 1, 5)",
+      "reports/phase1g_status_additions_successor.md",
+      "reports/phase1g_d_separate_universe_growth.md (only its list of superseded 1G-C readings; conclusions not relied on)",
+      "reports/phase1f_c_r_astra_audit_remediation.md (A07 tokens)",
+      "CLAUDE.md and README.md at 6f7937c"
+    ],
+    "files": [
+      {
+        "path": "reports/phase1g_c_two_scale_growth_law.md",
+        "role": "audited report",
+        "sha256": "59c5e5619eef8455580651ebf9c1e3bbd2b083b3a3c8ef3d137620ae150a13cd"
+      },
+      {
+        "path": "reports/phase1g_c_two_scale_growth_inventory.json",
+        "role": "audited inventory",
+        "sha256": "9aec89026990faf751a3034b73261fc3faa57bad21cf7e8f326c4c3aaa3a7813"
+      },
+      {
+        "path": "scripts/phase1g_c_two_scale_growth_numerics.py",
+        "role": "audited evidence script",
+        "sha256": "b5fc40c100bcd9fa75d118c43f89aa5270b727770c77418ccaacbdbcba5def70"
+      },
+      {
+        "path": "artifacts/independent/phase1g_c_two_scale_growth.json",
+        "role": "audited git-ignored artifact (regenerated, byte-identical on 3.13)",
+        "sha256": "bf97007064caabfe89208fc982af8a4db72ac75998483b60299742d8f7828a89"
+      },
+      {
+        "path": "scripts/phase1g_a_sigma8_path_numerics.py",
+        "role": "imported by path (context)",
+        "sha256": "65eb42352aed1c9d26f4fba8b6e7bac3c4ed6e336e8910c150180f0c161c08f9"
+      },
+      {
+        "path": "src/timescape_fsigma8/scientific_status.py",
+        "role": "status tokens resting on 1G-C",
+        "sha256": "31100557ecb71cba86f47915ca4fcbf22878906524a48160428bde88c08d63bf"
+      },
+      {
+        "path": "src/timescape_fsigma8/background/__init__.py",
+        "role": "frozen background (relied on)",
+        "sha256": "e8b2ef97e9caab22916bf2b0f6367f2c2c461b2f25d06dcc91fb12bc62bc8e81"
+      },
+      {
+        "path": "src/timescape_fsigma8/background/parameters.py",
+        "role": "frozen background (relied on)",
+        "sha256": "003fd2224be92eeefe9dd14e7bfd2f5cf882c7647468acc46a167fb1de3fc70c"
+      },
+      {
+        "path": "src/timescape_fsigma8/background/tracker.py",
+        "role": "frozen background (relied on)",
+        "sha256": "b7cf16a7375000fffe52df37a5b7b6e28a6193dd11283d86305229fa930d5de4"
+      },
+      {
+        "path": "src/timescape_fsigma8/background/effective_fluid.py",
+        "role": "frozen background (relied on)",
+        "sha256": "f2ce407bf08aa9ec8b60e9e7c666dfbf31fd76182f3536dc79432c5cb5cf1ec7"
+      },
+      {
+        "path": "src/timescape_fsigma8/background/observables.py",
+        "role": "frozen background (relied on)",
+        "sha256": "67c298efab8e3700c8792ac581d5da7d1424bc4f1df50f298dc17de9b3243a5d"
+      }
+    ]
+  },
+  "severity_scale": {
+    "HIGH": "invalidates a load-bearing result",
+    "LOW": "minor or cosmetic",
+    "LOW-MEDIUM": "governance, documentation or reproducibility defect with scientific-record impact",
+    "MEDIUM": "incorrect statement or a status claim not supported by the evidence",
+    "MEDIUM-HIGH": "materially changes a quantitative result or its interpretation without invalidating the equations"
+  },
+  "sources": {
+    "EH98": {
+      "file": "astro-ph_9709112/trans.tex",
+      "id": "astro-ph/9709112",
+      "sha256": "5f2ac6b413df8b738c95f6650152b7e82d7c36f6d9b3a618da540e9739dce17f"
+    },
+    "GM": {
+      "file": "2511.17160v2/main.tex",
+      "id": "arXiv:2511.17160v2",
+      "sha256": "f9cadfa03ecc9a74b0a8f432ae4b13422daeb219f253756bcd877b4b75077c59"
+    },
+    "P18": {
+      "file": "1807.06209/ms.tex",
+      "id": "arXiv:1807.06209",
+      "sha256": "fe0833d2d0fda17427a709c9559dc7b3a988b955f47bb7de7a02c900ffdc21cf"
+    },
+    "W07": {
+      "file": "0709.0732v2/solution.tex",
+      "id": "arXiv:0709.0732v2",
+      "sha256": "221662c987e454729ef8202c87fa697c5882b5b7daaecdedb50a7cba8ffe6cd8"
+    },
+    "W09": {
+      "file": "0909.0749v2/observe.tex",
+      "id": "arXiv:0909.0749v2",
+      "sha256": "2b0324d127440e9a053a7cb37102d7655cca228a63cd2222843e879989b4b531"
+    }
+  },
+  "tag_readiness": "NOT_READY_OWNER_DECISION_REQUIRED",
+  "tag_readiness_note": "All corrections are text-only (no equation, number, token value, tolerance or code change). After a dated successor note recording the owner decisions and errata E1-E4, READY_FOR_TAG.",
+  "title": "Phase 1G-C \u2014 Independent adversarial audit",
+  "verdict": "ACCEPT_WITH_CORRECTIONS"
+}

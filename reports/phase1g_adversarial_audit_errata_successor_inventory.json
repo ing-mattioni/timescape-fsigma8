@@ -1,0 +1,492 @@
+{
+  "audited_checkpoint": "6f7937ce5681900898f5e0a6482a953f0fa3e5a0",
+  "audits": {
+    "a": "ACCEPT_WITH_CORRECTIONS",
+    "b": "ACCEPT_WITH_CORRECTIONS",
+    "c": "ACCEPT_WITH_CORRECTIONS",
+    "d": "ACCEPT_WITH_CORRECTIONS",
+    "e": "ACCEPT_WITH_CORRECTIONS"
+  },
+  "branch": "claude/zealous-rubin-1m3vf4",
+  "classification": "AUDIT_CONSOLIDATION_AND_ERRATA_SUCCESSOR_RECORD",
+  "date": "2026-09-29",
+  "errata": [
+    {
+      "audit": "reports/phase1g_a_adversarial_audit.md",
+      "auditor_proof": "artifact sigma.cases.PAPER_REFERENCE.closures.meszaros.conventions.equal_mass_M8_planck.by_baryon_fraction['f_b=0.1563'].sigma_planck_anchored = 0.44474 -> 0.44",
+      "current_reading": "values span 0.44\u20130.69 (Sec. 7).",
+      "file": "reports/phase1g_a_sigma8_derivation_path_audit.md",
+      "frozen_text": "values span 0.45\u20130.69 (Sec. 7).",
+      "id": "E-1GA-1",
+      "lead_verification": "artifact min anchored sigma at f_b = 0.1563: 0.444745 ([GM] Meszaros, equal mass)",
+      "location": "l. 50",
+      "status": "APPLIED_AS_SUCCESSOR_READING"
+    },
+    {
+      "audit": "reports/phase1g_a_adversarial_audit.md",
+      "auditor_proof": "max over presets and closures of growth.*.*.log_g_grid_refinement_change = 4.108e-15",
+      "current_reading": "- Simpson grid refinement changes ln g by \u2264 5e\u221215.",
+      "file": "reports/phase1g_a_sigma8_derivation_path_audit.md",
+      "frozen_text": "- Simpson grid refinement changes ln g by \u2264 4e\u221215.",
+      "id": "E-1GA-2",
+      "location": "l. 253",
+      "reason": "round-off-level diagnostic (4.108e-15 on Linux/NumPy 2.5.3); the report records the owner's Windows run, which this session cannot reproduce; recorded as a platform observation, not corrected",
+      "status": "NOT_APPLIED_PLATFORM_DEPENDENT"
+    },
+    {
+      "audit": "reports/phase1g_a_adversarial_audit.md",
+      "auditor_proof": "as for l. 253",
+      "current_reading": "- growth grid \u2264 1e\u22127 (achieved \u2264 5e\u221215);",
+      "file": "reports/phase1g_a_sigma8_derivation_path_audit.md",
+      "frozen_text": "- growth grid \u2264 1e\u22127 (achieved \u2264 4e\u221215);",
+      "id": "E-1GA-3",
+      "location": "l. 527",
+      "reason": "same diagnostic as the previous entry; recorded as a platform observation, not corrected",
+      "status": "NOT_APPLIED_PLATFORM_DEPENDENT"
+    },
+    {
+      "audit": "reports/phase1g_a_adversarial_audit.md",
+      "auditor_proof": "max growth.*.*.matching['z_i=20'].direct_vs_riccati_rel_diff = 2.2515e-13",
+      "current_reading": "- Direct integration agrees with the Riccati integral to \u2264 3e\u221213 at",
+      "file": "reports/phase1g_a_sigma8_derivation_path_audit.md",
+      "frozen_text": "- Direct integration agrees with the Riccati integral to \u2264 2e\u221213 at",
+      "id": "E-1GA-4",
+      "location": "l. 255",
+      "reason": "round-off-level diagnostic (2.25e-13 on Linux); recorded as a platform observation, not corrected",
+      "status": "NOT_APPLIED_PLATFORM_DEPENDENT"
+    },
+    {
+      "audit": "reports/phase1g_a_adversarial_audit.md",
+      "auditor_proof": "artifact PAPER_REFERENCE meszaros: X(z_i=20) = 0.599065 vs X_inf = 0.593553 (+0.93%)",
+      "current_reading": "| Matching epoch z_i \u2265 20 | \u2264 0.6% (comoving), \u2264 0.9% (M\u00e9sz\u00e1ros) | negligible |",
+      "file": "reports/phase1g_a_sigma8_derivation_path_audit.md",
+      "frozen_text": "| Matching epoch z_i \u2265 20 | \u2264 0.6% | negligible |",
+      "id": "E-1GA-5",
+      "lead_verification": "artifact X(z_i = 20)/X_inf - 1 = +0.93% ([GM] Meszaros); deterministic, not round-off",
+      "location": "l. 428",
+      "status": "APPLIED_AS_SUCCESSOR_READING"
+    },
+    {
+      "audit": "reports/phase1g_a_adversarial_audit.md",
+      "auditor_proof": "script PLANCK['omega_m_total_Om_h2'] = 0.315*0.674^2 = 0.143101; [P18] ms.tex l. 2309: Omega_m h^2 = 0.1430 +/- 0.0011",
+      "current_reading": "| Parameters | \u03c9_m,eff | ratio to 0.315 \u00d7 0.674\u00b2 = 0.1431 (recipe; [P18] Table 2: 0.1430) |",
+      "file": "reports/phase1g_a_sigma8_derivation_path_audit.md",
+      "frozen_text": "| Parameters | \u03c9_m,eff | ratio to Planck (0.1431) |",
+      "id": "E-1GA-6",
+      "lead_verification": "[P18] ms.tex l. 2309 (TT,TE,EE+lowE+lensing column): Omega_m h^2 = 0.1430; script recipe 0.315 x 0.674^2 = 0.143101",
+      "location": "l. 340",
+      "status": "APPLIED_AS_SUCCESSOR_READING"
+    },
+    {
+      "audit": "reports/phase1g_a_adversarial_audit.md",
+      "auditor_proof": "git diff 462121c 6f7937c adds 7 lines at l. 259 and net 4 at l. 442; the recommendation now reads at l. 493-494",
+      "current_reading": "`phase1g_a_sigma8_derivation_path_audit.md` l. 153\u2013155, 493\u2013494 (482\u2013483 at 462121c)",
+      "file": "reports/phase1g_a_barotropic_status_successor.md",
+      "frozen_text": "`phase1g_a_sigma8_derivation_path_audit.md` l. 153\u2013155, 482\u2013483",
+      "id": "E-1GA-7",
+      "lead_verification": "the 1G-A report's recommendation now reads at l. 493-494 (sed -n 493,494p)",
+      "location": "l. 104 (Sec. 4 table)",
+      "status": "APPLIED_AS_SUCCESSOR_READING"
+    },
+    {
+      "audit": "reports/phase1g_a_adversarial_audit.md",
+      "auditor_proof": "as above; no test or script reads this field",
+      "current_reading": "reports/phase1g_a_sigma8_derivation_path_audit.md l. 153-155, 493-494 (482-483 at 462121c)",
+      "file": "reports/phase1g_a_barotropic_status_successor_inventory.json",
+      "frozen_text": "reports/phase1g_a_sigma8_derivation_path_audit.md l. 153-155, 482-483",
+      "id": "E-1GA-8",
+      "lead_verification": "as the previous entry",
+      "location": "superseded_frozen_readings[4].location",
+      "status": "APPLIED_AS_SUCCESSOR_READING"
+    },
+    {
+      "audit": "reports/phase1g_b_adversarial_audit.md",
+      "auditor_proof": "git log --format='%h %p': 3834a63 parent dee72e1, 9157dc4 parent 3834a63; git cat-file -t 0883814 fails.",
+      "current_reading": "- **Parent checkpoint:** `dee72e1` (Phase 1G-A barotropic status record; child of `462121c`). Branch\n  `phase-1g-b-lagrangian-sigma` (local, unpushed, untagged).\n- **Implementation commit:** `3834a63` (module, tests, validation driver); this report is `9157dc4`.\n  The runs of Secs. 10 and 12 were made on a pre-rebase commit `0883814` (parent `462121c`) that is not in the repository history.",
+      "file": "reports/phase1g_b_lagrangian_sigma_validation.md",
+      "frozen_text": "- **Parent checkpoint:** `462121c` (Phase 1G-A). Branch\n  `phase-1g-b-lagrangian-sigma` (local, unpushed, untagged).\n- **Implementation commit:** `0883814` (module, tests, validation driver).\n  This report is committed on top of it.",
+      "id": "E-1GB-1",
+      "lead_verification": "git cat-file -t 0883814: not a valid object; 3834a63 has parent dee72e1; 9157dc4 has parent 3834a63",
+      "location": "Sec. 1, lines 23-26 (GB-F2)",
+      "status": "APPLIED_AS_SUCCESSOR_READING"
+    },
+    {
+      "audit": "reports/phase1g_b_adversarial_audit.md",
+      "auditor_proof": "audit(Path('tests')): 583 at 462121c, 590 at dee72e1, 633 at 9157dc4; 0 missing.",
+      "current_reading": "The tolerance audit\n(`scripts/audit_numerical_tolerances.py`) counts 633 comparisons in `tests/` at `9157dc4`: 590 at the parent `dee72e1` plus 43 new (626 = 583 + 43 on the pre-rebase tree). None is missing a tolerance.",
+      "file": "reports/phase1g_b_lagrangian_sigma_validation.md",
+      "frozen_text": "The tolerance audit\n(`scripts/audit_numerical_tolerances.py`) now counts 626 comparisons, 583\nbefore plus 43 new, with none missing a tolerance.",
+      "id": "E-1GB-2",
+      "lead_verification": "audit_numerical_tolerances on tests/: 583 at 462121c, 590 at dee72e1, 633 at 9157dc4, 0 missing",
+      "location": "Sec. 10, lines 353-355 (GB-F2)",
+      "status": "APPLIED_AS_SUCCESSOR_READING"
+    },
+    {
+      "audit": "reports/phase1g_b_adversarial_audit.md",
+      "auditor_proof": "pytest --collect-only: 916 at 462121c, 924 at dee72e1, 1016 at 9157dc4.",
+      "current_reading": "The 1G-A base recorded 916 passed with every input present; 916\n+ 92 new = 1008 = 978 + 30. These counts are for the pre-rebase tree (parent `462121c`). The committed checkpoint `9157dc4` (parent `dee72e1`, which adds 8 tests) collects 1016 tests = 924 + 92, and no full-suite run of it is recorded here.",
+      "file": "reports/phase1g_b_lagrangian_sigma_validation.md",
+      "frozen_text": "The 1G-A base recorded 916 passed with every input present; 916\n+ 92 new = 1008 = 978 + 30.",
+      "id": "E-1GB-3",
+      "lead_verification": "pytest --collect-only: 916 at 462121c, 924 at dee72e1, 1016 at 9157dc4",
+      "location": "Sec. 12, lines 448-449 (GB-F2)",
+      "status": "APPLIED_AS_SUCCESSOR_READING"
+    },
+    {
+      "audit": "reports/phase1g_b_adversarial_audit.md",
+      "auditor_proof": "Independent integration of [GM] (4.21)-(4.23)/(4.27) from t_e = 1e-12 t0; the package's own log_growth_early_limit_linear_bias_estimate gives the same limits to 1e-9.",
+      "current_reading": "This is inside the declared 1e\u22124 early-limit budget of [1G-A]. At the t_e \u2192 0 limit, three printed four-decimal values move by one unit in the last digit: \u03c3 for the [GM] notebook preset, CGI comoving, bare convention (Sec. 7.3: 0.60525003 \u2192 0.6052489, i.e. 0.6053 \u2192 0.6052); X for CGI M\u00e9sz\u00e1ros at f_v0 = 0.627 (0.7646 \u2192 0.7645, Sec. 7.6); and X for CGI M\u00e9sz\u00e1ros at f_v0 = 0.75 (0.5711 \u2192 0.5710, Sec. 7.6). Every six-decimal g and X of Sec. 7.1 carries the same bias. The limits are g = 0.402662 / 0.341693 ([GM]) and 0.514952 / 0.458562 ([NW15]), and X = 0.699460 / 0.593552 ([GM]) and 0.858567 / 0.764550 ([NW15]), each pair comoving / M\u00e9sz\u00e1ros.",
+      "file": "reports/phase1g_b_lagrangian_sigma_validation.md",
+      "frozen_text": "This is inside the declared 1e\u22124 early-limit budget of [1G-A] and changes no\nfour-decimal \u03c3.",
+      "id": "E-1GB-4",
+      "lead_verification": "the +1.8e-6 / +2.1e-6 ln-g bias of the 1G-A precision note moves 0.60525003 to 0.6052489 (rounding boundary); consistent with the auditor's independent integration",
+      "location": "Sec. 9.1, lines 329-330 (GB-F3)",
+      "status": "APPLIED_AS_SUCCESSOR_READING"
+    },
+    {
+      "audit": "reports/phase1g_b_adversarial_audit.md",
+      "auditor_proof": "[GM] main.tex line 641 is Eq. (5.4) a_w = gamma_w^-1 a_D; line 663 states gamma_w(t) = 1 + f_v(t)/2.",
+      "current_reading": "In both, ``gamma_w0 = 1 + f_v0/2`` ([GM] text after Eq. (5.7); Eq. (5.4) defines ``a_w = gamma_w^-1 a_D``).",
+      "file": "src/timescape_fsigma8/lagrangian_sigma.py",
+      "frozen_text": "In both, ``gamma_w0 = 1 + f_v0/2`` ([GM] Eq. (5.4)).",
+      "id": "E-1GB-5",
+      "lead_verification": "[GM] main.tex l. 641 is Eq. (5.4) a_w = gamma_w^-1 a_D; gamma_w = 1 + f_v/2 is stated in the text at l. 663 after Eq. (5.7)",
+      "location": "timescape_growth_factor docstring, line 1083 (GB-F8)",
+      "status": "APPLIED_IN_SOURCE_DOCSTRING"
+    },
+    {
+      "audit": "reports/phase1g_b_adversarial_audit.md",
+      "auditor_proof": "As above.",
+      "current_reading": "``gamma_w0 = 1 + f_v0/2`` ([GM] text after Eq. (5.7))",
+      "file": "src/timescape_fsigma8/lagrangian_sigma.py",
+      "frozen_text": "``gamma_w0 = 1 + f_v0/2`` ([GM] Eq. (5.4))",
+      "id": "E-1GB-6",
+      "lead_verification": "as the previous entry",
+      "location": "early_matter_density_per_photon docstring, line 1177 (GB-F8)",
+      "status": "APPLIED_IN_SOURCE_DOCSTRING"
+    },
+    {
+      "audit": "reports/phase1g_b_adversarial_audit.md",
+      "auditor_proof": "[GM] Eq. (5.1) (main.tex line 624) with a_Y normalised at t_init gives a_w^3 = (1 - f_v) a_D^3 / f_w(t_init); 1G-A Sec. 5.3 writes the same.",
+      "current_reading": "a_w,reg^3 = (1 - f_v) a_D^3 / f_w(t_init) proportional to t^2",
+      "file": "src/timescape_fsigma8/lagrangian_sigma.py",
+      "frozen_text": "a_w,reg^3 = (1 - f_v) a_D^3 proportional to t^2",
+      "id": "E-1GB-7",
+      "lead_verification": "[GM] Eq. (5.1) with a_Y normalised at t_init gives a_w^3 = (1 - f_v) a_D^3 / f_w(t_init); 1G-A Sec. 5.3 writes the same",
+      "location": "module docstring, line 49 (GB-F8)",
+      "status": "APPLIED_IN_SOURCE_DOCSTRING"
+    },
+    {
+      "audit": "reports/phase1g_b_adversarial_audit.md",
+      "auditor_proof": "The inventory's top-level keys do not include 'validation'.",
+      "current_reading": "Not filled in: the companion inventory has no `validation` block. The full-suite result for this checkpoint is recorded only in CLAUDE.md (\"1044 passed on Windows, Python 3.14.3 and 3.11.9\"). The 1G-B driver comparison is in Sec. 3.",
+      "file": "reports/phase1g_status_additions_successor.md",
+      "frozen_text": "Filled in after the runs; see the inventory's `validation` block.",
+      "id": "E-1GB-8",
+      "lead_verification": "the precedent inventory has no top-level 'validation' key",
+      "location": "Sec. 8, line 223 (GB-F10)",
+      "status": "APPLIED_AS_SUCCESSOR_READING"
+    },
+    {
+      "audit": "reports/phase1g_b_adversarial_audit.md",
+      "auditor_proof": "Sec. 8 contains no validation data.",
+      "current_reading": "the driver's `working_tree_changes_present` flag.",
+      "file": "reports/phase1g_status_additions_successor.md",
+      "frozen_text": "the driver's `working_tree_changes_present` flag\n  (Sec. 8).",
+      "id": "E-1GB-9",
+      "lead_verification": "as the previous entry",
+      "location": "Sec. 3, lines 119-121 (GB-F10)",
+      "status": "APPLIED_AS_SUCCESSOR_READING"
+    },
+    {
+      "audit": "reports/phase1g_c_adversarial_audit.md",
+      "auditor_proof": "[GM] main.tex line 663: '1 + z= a_{w,0}/a_w'; [W07] solution.tex line 440; package observables.redshift (lines 98-108); the report's own line 186.",
+      "current_reading": "redshift `1+z = a0/a` ([GM] (5.4); [W09]'s dressed `a`) and",
+      "file": "reports/phase1g_c_two_scale_growth_law.md",
+      "frozen_text": "redshift `1+z = a/a0` ([GM] (5.4); [W09]'s dressed `a`) and",
+      "id": "E-1GC-1",
+      "lead_verification": "[GM] main.tex l. 663: 1 + z = a_w0/a_w; the same report's l. 186 uses the correct form",
+      "location": "line 182",
+      "status": "APPLIED_AS_SUCCESSOR_READING"
+    },
+    {
+      "audit": "reports/phase1g_c_adversarial_audit.md",
+      "auditor_proof": "Sec. 7 radii (a), (b), (c): [GM] 12.570, 10.954, 10.104 Mpc; notebook 12.547, 10.924, 10.076; [NW15] 12.226, 13.115, 11.781 (1G-A script lines 424-431 definitions, recomputed independently); 100/0.7303 = 136.93, 100/0.61 = 163.93.",
+      "current_reading": "(R \u2248 10\u201313 Mpc across the three radius conventions of Sec. 7 and both parameter sets) is about 10\u00d7 smaller than the dust-cell scale (\u2248137\u2013164 Mpc for h = 0.73\u20130.61).",
+      "file": "reports/phase1g_c_two_scale_growth_law.md",
+      "frozen_text": "(R \u2248 11\u201312.6 Mpc) is about 10\u00d7 smaller than the dust-cell scale (\u2248140\u2013160 Mpc for h = 0.73\u20130.61).",
+      "id": "E-1GC-2",
+      "lead_verification": "1G-A artifact radii: 10.104-13.115 Mpc; 100/0.7303 = 136.93, 100/0.61 = 163.93",
+      "location": "line 134",
+      "status": "APPLIED_AS_SUCCESSOR_READING"
+    },
+    {
+      "audit": "reports/phase1g_c_adversarial_audit.md",
+      "auditor_proof": "[W09] observe.tex line 277 ('Voids of a characteristic diameter $30h^{-1}$ Mpc') and line 386 ('30h^{-1} Mpc diameter voids').",
+      "current_reading": "- voids have \"a characteristic diameter 30 h\u207b\u00b9 Mpc\" (line 277; \"30h\u207b\u00b9 Mpc diameter voids\", line 386);",
+      "file": "reports/phase1g_c_two_scale_growth_law.md",
+      "frozen_text": "- voids have \"a characteristic diameter 30 h\u207b\u00b9 Mpc\";",
+      "id": "E-1GC-3",
+      "lead_verification": "[W09] observe.tex l. 277 and l. 386",
+      "location": "line 123",
+      "status": "APPLIED_AS_SUCCESSOR_READING"
+    },
+    {
+      "audit": "reports/phase1g_c_adversarial_audit.md",
+      "auditor_proof": "[W07] solution.tex 317-321 ('a_w = a_w0 t^{2/3} ... exactly that of an Einstein--de Sitter universe, but in volume average time not locally measured wall time') and 404-406 ('the void regions expand exactly as a Milne universe in volume--average time').",
+      "current_reading": "The kinematic facts are stated explicitly in [W07] (solution.tex lines 317\u2013321 and 404\u2013406); the others are implicit in [W07]/[W09]. They are recorded here as verified",
+      "file": "reports/phase1g_c_two_scale_growth_law.md",
+      "frozen_text": "These facts are implicit in [W07]/[W09]. They are recorded here as verified",
+      "id": "E-1GC-4",
+      "lead_verification": "[W07] solution.tex l. 317-321 and 404-406 state the EdS-in-t walls and Milne-in-t voids explicitly",
+      "location": "line 113",
+      "status": "APPLIED_AS_SUCCESSOR_READING"
+    },
+    {
+      "audit": "reports/phase1g_d_adversarial_audit.md",
+      "auditor_proof": "1G-A artifact radii_photon_comoving_Mpc.equal_mass_M8_planck = 12.226040 Mpc for NW15_CMB_FIT; script line 254 hard-codes 12.57; own sigma_LSS(12.226) = 9.33593e-4; 4723.80 x 9.33593e-4 = 4.410; 3180.50 x 9.33593e-4 = 2.969; 1e6 x 9.33593e-4 = 933.6.",
+      "current_reading": "At R8 (Lagrangian, equal mass: 12.6 Mpc for [GM], 12.2 Mpc for [NW15]), \u03c3_LSS = 9.0e\u22124 ([GM]) or 9.3e\u22124 ([NW15]). So\n`A_v \u03c3_LSS(R8) = 2.6\u20134.4` (PBS) and 90\u2013930 ([W09] single). Both are \u226b 1.",
+      "file": "reports/phase1g_d_separate_universe_growth.md",
+      "frozen_text": "At R8 (Lagrangian 12.6 Mpc), \u03c3_LSS = 9.0e\u22124 ([GM]) or 9.2e\u22124 ([NW15]). So\n`A_v \u03c3_LSS(R8) = 2.6\u20134.3` (PBS) and 90\u2013900 ([W09] single). Both are \u226b 1.",
+      "id": "E-1GD-1",
+      "lead_verification": "own evaluation of the 1G-D sigma_large_R at the [NW15] equal-mass radius 12.226040 Mpc: 9.33593e-4; x 3180.5 = 2.969, x 4723.8 = 4.410",
+      "location": "Sec. 9, lines 262-263",
+      "status": "APPLIED_AS_SUCCESSOR_READING"
+    },
+    {
+      "audit": "reports/phase1g_d_adversarial_audit.md",
+      "auditor_proof": "As E1; the '>> 1' wording is subject to owner decision OD1.",
+      "current_reading": "`A_v \u03c3_LSS(R8) \u2248 2.6\u20134.4 \u226b 1`",
+      "file": "reports/phase1g_d_separate_universe_growth.md",
+      "frozen_text": "`A_v \u03c3_LSS(R8) \u2248 2.6\u20134.3 \u226b 1`",
+      "id": "E-1GD-2",
+      "lead_verification": "as the previous entry",
+      "location": "Sec. 1 item 6, line 70",
+      "status": "APPLIED_AS_SUCCESSOR_READING"
+    },
+    {
+      "audit": "reports/phase1g_d_adversarial_audit.md",
+      "auditor_proof": "As E1.",
+      "current_reading": "4.41, 2.969, 93.359, 933.593; \"2.6-4.4 (PBS) >> 1\"",
+      "file": "reports/phase1g_d_separate_universe_inventory.json",
+      "frozen_text": "4.328, 2.914, 91.62, 916.205; \"2.6-4.3 (PBS) >> 1\"",
+      "id": "E-1GD-3",
+      "lead_verification": "as the previous entry; the frozen inventory is not edited, the successor gives the current values",
+      "location": "cases.NW15_CMB_FIT.void_response_at_R8; findings.sigma8_location.void_response_at_R8",
+      "status": "APPLIED_AS_SUCCESSOR_READING"
+    },
+    {
+      "audit": "reports/phase1g_d_adversarial_audit.md",
+      "auditor_proof": "artifact NW15_CMB_FIT transition_scales.R_star['W09_single_perturbation_|dH|=1e-5']['eps=1'].R_h_inv_Mpc = 353.2952; inventory 353.3.",
+      "current_reading": "relation gives 353\u20131298 / 752\u20132651 / 1004\u20133501 h\u207b\u00b9 Mpc.",
+      "file": "reports/phase1g_d_separate_universe_growth.md",
+      "frozen_text": "relation gives 354\u20131298 / 752\u20132651 / 1004\u20133501 h\u207b\u00b9 Mpc.",
+      "id": "E-1GD-4",
+      "lead_verification": "artifact R*(eps = 1) = 353.2952 h^-1 Mpc ([NW15], |delta_H| = 1e-5)",
+      "location": "Sec. 8, line 247",
+      "status": "APPLIED_AS_SUCCESSOR_READING"
+    },
+    {
+      "audit": "reports/phase1g_d_adversarial_audit.md",
+      "auditor_proof": "artifact PAPER_REFERENCE transition_scales.R_star['W09_single_perturbation_|dH|=1e-6'].void_fraction_10pct.R_Mpc = 3744.4815.",
+      "current_reading": "| [W09] single, \\|\u03b4_H\\| = 10\u207b\u2076 | 1615 (2212) | 2735 (3744) | 4755 (6511) |",
+      "file": "reports/phase1g_d_separate_universe_growth.md",
+      "frozen_text": "| [W09] single, \\|\u03b4_H\\| = 10\u207b\u2076 | 1615 (2212) | 2735 (3745) | 4755 (6511) |",
+      "id": "E-1GD-5",
+      "lead_verification": "artifact R(void fraction 10%) = 3744.48 Mpc ([GM], |delta_H| = 1e-6)",
+      "location": "Sec. 8 table, line 244",
+      "status": "APPLIED_AS_SUCCESSOR_READING"
+    },
+    {
+      "audit": "reports/phase1g_d_adversarial_audit.md",
+      "auditor_proof": "Linearised region Friedmann 6 H_w dH_w = 8 pi G rho_w delta_w - dR_w/2 with 8 pi G rho_w = 4/(3t^2), H_w = 2/(3t): dR_w = (8/3)(delta_w/t^2 + dot(delta_w)/t) = 10 H_w^2 delta_w for t^(2/3), 0 for t^-1; checked symbolically (su_symbolic.py).",
+      "current_reading": "- `\u03b4H_w = \u2212\u03b4\u0307_w/3` and, for the growing mode, `\u03b4R_w = 10 H_w\u00b2 \u03b4_w` (linearised Friedmann equation\n  of a closed dust patch; `\u03b4R_w = 0` for the t^{\u22121} mode).",
+      "file": "reports/phase1g_d_separate_universe_growth.md",
+      "frozen_text": "- `\u03b4H_w = \u2212\u03b4\u0307_w/3` and `\u03b4R_w = 10 H_w\u00b2 \u03b4_w` (linearised Friedmann equation\n  of a closed dust patch).",
+      "id": "E-1GD-6",
+      "lead_verification": "for delta_w = C t^-1: delta R_w = (8/3)(delta_w/t^2 + dot(delta_w)/t) = 0",
+      "location": "Sec. 4, lines 118-119",
+      "status": "APPLIED_AS_SUCCESSOR_READING"
+    },
+    {
+      "audit": "reports/phase1g_d_adversarial_audit.md",
+      "auditor_proof": "Wall-mode ratio 2(3t^2-10 t tau-10 tau^2)/(3t(9t+8tau)) has its root at t = (5+sqrt(55)) tau/3 = 4.139 tau > t0 (2.80 tau GM, 1.68 tau NW15); void-onset ratio -2 tau(5t+4tau)/(t(9t+8tau)) < 0 for all t.",
+      "current_reading": "`\u0394_eff/\u0394_d < 0` at all t \u2264 t0 and `P\u0303_eff \u2260 0`, with",
+      "file": "reports/phase1g_d_separate_universe_growth.md",
+      "frozen_text": "`\u0394_eff/\u0394_d < 0` at all times and `P\u0303_eff \u2260 0`, with",
+      "id": "E-1GD-7",
+      "lead_verification": "the wall-mode ratio changes sign at t = (5 + sqrt 55) tau/3 = 4.14 tau, after t0 (2.80 tau [GM], 1.68 tau [NW15])",
+      "location": "Sec. 1 item 3, line 45",
+      "status": "APPLIED_AS_SUCCESSOR_READING"
+    },
+    {
+      "audit": "reports/phase1g_d_adversarial_audit.md",
+      "auditor_proof": "git show --numstat 5ab2394: CLAUDE.md 16/1, README.md 10/3, report 346/0, inventory 443/0, script 297/0.",
+      "current_reading": "- **Added:** this report, its inventory, and one script. **Modified:** the phase ledger in CLAUDE.md and the summary in README.md (text only).",
+      "file": "reports/phase1g_d_separate_universe_growth.md",
+      "frozen_text": "- **Added:** this report, its inventory, and one script.",
+      "id": "E-1GD-8",
+      "lead_verification": "git show --numstat 5ab2394: CLAUDE.md +16/-1, README.md +10/-3",
+      "location": "Sec. 12, line 343",
+      "status": "APPLIED_AS_SUCCESSOR_READING"
+    },
+    {
+      "audit": "reports/phase1g_e_adversarial_audit.md",
+      "auditor_proof": "artifact covariance u=1.5 analytic: 0.12103 [GM], 0.08794 [NW15]",
+      "current_reading": "| ungated u = 1.5 (\u03be_w \u2248 0.12 [GM], 0.088 [NW15]; noise-dominated) | 4.7% | 7.4% |",
+      "file": "reports/phase1g_e_two_phase_sigma.md",
+      "frozen_text": "| ungated u = 1.5 (\u03be_w \u2248 0.12, noise-dominated) | 4.7% | 7.4% |",
+      "id": "E-1GE-1",
+      "lead_verification": "artifact u = 1.5 analytic xi_w: 0.12103 [GM], 0.08794 [NW15]",
+      "location": "line 132 (Sec. 3 table)",
+      "status": "APPLIED_AS_SUCCESSOR_READING"
+    },
+    {
+      "audit": "reports/phase1g_e_adversarial_audit.md",
+      "auditor_proof": "Sec. 4 table: 1.826/0.976 = 1.870, 2.120/1.226 = 1.729, 1.533/0.923 = 1.660, 1.743/1.117 = 1.560",
+      "current_reading": "   - the void radius: a factor 1.6\u20131.9 in \u03c3 between a = 5 and 30 h\u207b\u00b9 Mpc ([GM] 1.73\u20131.87, [NW15] 1.56\u20131.66);",
+      "file": "reports/phase1g_e_two_phase_sigma.md",
+      "frozen_text": "   - the void radius: a factor 1.7\u20131.9 in \u03c3 between a = 5 and 30 h\u207b\u00b9 Mpc;",
+      "id": "E-1GE-2",
+      "lead_verification": "report Sec. 4 table ratios 1.870, 1.729, 1.660, 1.560",
+      "location": "line 180 (Sec. 5 item 3)",
+      "status": "APPLIED_AS_SUCCESSOR_READING"
+    },
+    {
+      "audit": "reports/phase1g_e_adversarial_audit.md",
+      "auditor_proof": "uncompressed/compressed sigma total: [GM] 1.161-1.255, [NW15] 1.137-1.210; sigma_int: 1.253-1.347 (artifact rows)",
+      "current_reading": "   - the Eulerian mapping of the wall field: +14\u201326% in \u03c3 total, +25\u201335% in \u03c3_int (uncompressed vs\n     compressed);",
+      "file": "reports/phase1g_e_two_phase_sigma.md",
+      "frozen_text": "   - the Eulerian mapping of the wall field: +15\u201326% (uncompressed vs\n     compressed);",
+      "id": "E-1GE-3",
+      "lead_verification": "report Sec. 4 table rows",
+      "location": "lines 181-182 (Sec. 5 item 3)",
+      "status": "APPLIED_AS_SUCCESSOR_READING"
+    },
+    {
+      "audit": "reports/phase1g_e_adversarial_audit.md",
+      "auditor_proof": "script line 184 R = R_H_MPC / h with dressed h equals the 1G-A artifact radius dressed_8_over_h_wall_comoving (10.954 / 13.115)",
+      "current_reading": "**R = 8 h\u207b\u00b9 Mpc** (photon-normalised comoving radii 10.95 Mpc for [GM], 13.11 Mpc for [NW15]; [1G-A] Sec. 6.4 convention (b)).",
+      "file": "reports/phase1g_e_two_phase_sigma.md",
+      "frozen_text": "**R = 8 h\u207b\u00b9 Mpc** (10.95 Mpc for [GM], 13.11 Mpc for [NW15]).",
+      "id": "E-1GE-4",
+      "lead_verification": "script R = R_H_MPC / h (dressed h) equals the 1G-A convention (b) radii 10.954 / 13.115 Mpc",
+      "location": "line 142 (Sec. 4)",
+      "status": "APPLIED_AS_SUCCESSOR_READING"
+    },
+    {
+      "audit": "reports/phase1g_e_adversarial_audit.md",
+      "auditor_proof": "[W09] observe.tex (sha256 2b0324d1...b531) lines 277-280; quote completion only, the downstream choice of primary is owner decision OD-2",
+      "current_reading": "  - [W09] gives \"voids of a characteristic diameter 30 h\u207b\u00b9 Mpc\" that \"fill 40\u201350% of the universe\", plus \"numerous minivoids\" (lines 277\u2013280),",
+      "file": "reports/phase1g_e_two_phase_sigma.md",
+      "frozen_text": "  - [W09] gives \"voids of a characteristic diameter 30 h\u207b\u00b9 Mpc\" (line 277),",
+      "id": "E-1GE-5",
+      "lead_verification": "[W09] observe.tex l. 277-280",
+      "location": "line 74 (Sec. 2, E2)",
+      "status": "APPLIED_AS_SUCCESSOR_READING"
+    },
+    {
+      "audit": "reports/phase1g_e_adversarial_audit.md",
+      "auditor_proof": "measured wall time 81 s (CPython 3.13.12) and 77 s (3.11.15) on the audit machine; the script makes about 3.2e7 k-d tree queries (1.6e7 per parameter set)",
+      "current_reading": "\u2192 wrote artifacts\\independent\\phase1g_e_two_phase_sigma.json    (about 1\u20132 minutes)",
+      "file": "reports/phase1g_e_two_phase_sigma.md",
+      "frozen_text": "\u2192 wrote artifacts\\independent\\phase1g_e_two_phase_sigma.json    (a few seconds)",
+      "id": "E-1GE-6",
+      "lead_verification": "measured on this Linux machine: about 80 s per interpreter; the owner's Windows timing is not known here, so the current reading states the Linux measurement",
+      "location": "line 220 (Sec. 7)",
+      "status": "APPLIED_AS_SUCCESSOR_READING"
+    },
+    {
+      "audit": "reports/phase1g_e_adversarial_audit.md",
+      "auditor_proof": "[1G-E] Sec. 2 is 'Model', Sec. 3 is 'Verification'",
+      "current_reading": "Model ([1G-E] Sec. 2): empty voids (the tracker's rho_v = 0, [1G-C] Sec. 3)",
+      "file": "scripts/phase1g_e_two_phase_sigma_numerics.py",
+      "frozen_text": "Model ([1G-E] Sec. 3): empty voids (the tracker's rho_v = 0, [1G-C] Sec. 3)",
+      "id": "E-1GE-7",
+      "lead_verification": "the 1G-E report's Sec. 2 is 'Model', Sec. 3 'Verification'",
+      "location": "line 6 (module docstring)",
+      "status": "APPLIED_IN_SOURCE_DOCSTRING"
+    }
+  ],
+  "errata_counts": {
+    "APPLIED_AS_SUCCESSOR_READING": 29,
+    "APPLIED_IN_SOURCE_DOCSTRING": 4,
+    "NOT_APPLIED_PLATFORM_DEPENDENT": 3
+  },
+  "finding_counts": {
+    "a": {
+      "HIGH": 0,
+      "LOW": 8,
+      "LOW-MEDIUM": 1,
+      "MEDIUM": 2,
+      "MEDIUM-HIGH": 0,
+      "total": 11
+    },
+    "b": {
+      "HIGH": 0,
+      "LOW": 8,
+      "LOW-MEDIUM": 2,
+      "MEDIUM": 0,
+      "MEDIUM-HIGH": 0,
+      "total": 10
+    },
+    "c": {
+      "HIGH": 0,
+      "LOW": 5,
+      "LOW-MEDIUM": 1,
+      "MEDIUM": 2,
+      "MEDIUM-HIGH": 1,
+      "total": 9
+    },
+    "d": {
+      "HIGH": 0,
+      "LOW": 5,
+      "LOW-MEDIUM": 1,
+      "MEDIUM": 3,
+      "MEDIUM-HIGH": 1,
+      "total": 10
+    },
+    "e": {
+      "HIGH": 0,
+      "LOW": 2,
+      "LOW-MEDIUM": 1,
+      "MEDIUM": 2,
+      "MEDIUM-HIGH": 2,
+      "total": 7
+    }
+  },
+  "parent_commit": "ad1ac35",
+  "report": "reports/phase1g_adversarial_audit_errata_successor.md",
+  "schema_version": 1,
+  "scope": {
+    "equations_changed": false,
+    "executable_code_changed": false,
+    "frozen_reports_or_inventories_edited": false,
+    "source_docstrings_changed": [
+      "src/timescape_fsigma8/lagrangian_sigma.py (3 citations)",
+      "scripts/phase1g_e_two_phase_sigma_numerics.py (1 section citation)"
+    ],
+    "status_tokens_changed": false,
+    "tolerances_changed": false
+  },
+  "tag_readiness": {
+    "a": "NOT_READY_OWNER_DECISION_REQUIRED",
+    "b": "NOT_READY_OWNER_DECISION_REQUIRED",
+    "c": "NOT_READY_OWNER_DECISION_REQUIRED",
+    "d": "NOT_READY_OWNER_DECISION_REQUIRED",
+    "e": "NOT_READY_OWNER_DECISION_REQUIRED"
+  },
+  "title": "Phase 1G adversarial audits: consolidation and errata successor record",
+  "validation": {
+    "docstring_errata": "executable AST (docstrings stripped, validate_phase1f_c_r_astra_remediation.executable_tree) identical to ad1ac35 for src/timescape_fsigma8/lagrangian_sigma.py and scripts/phase1g_e_two_phase_sigma_numerics.py; scripts/validate_phase1g_b_lagrangian_sigma.py: all gates PASS and all 1471 numeric artifact leaves bit-identical to the pre-change run",
+    "environments": [
+      "Linux x86-64 (AVX-512), CPython 3.13.12, NumPy 2.5.3, SciPy 1.18.1",
+      "Linux x86-64 (AVX-512), CPython 3.11.15, NumPy 2.4.6, SciPy 1.17.1"
+    ],
+    "full_suites_after_all_items": "recorded in reports/phase1g_f_void_population.md Sec. 15 and in the session pull request",
+    "lead_verification_of_errata": "every erratum's frozen text found verbatim at the audited checkpoint; each applied erratum re-checked against the artifact, the primary source or git history (per-entry lead_verification)",
+    "preflight_at_6f7937c": "full suite (-B -W error): 1043 passed, 1 failed (tests/test_phase1g_b_lagrangian_sigma.py::test_top_hat_window_limits_series_and_envelope, GB-F1), 0 skipped, on both interpreters; the owner's Windows baseline is 1044 passed",
+    "targeted_tests": "tests/test_phase1g_b_lagrangian_sigma.py, tests/test_phase1g_status_additions.py, tests/test_phase1g_e_status_addition.py, tests/test_barotropic_hadamard_refutation.py: 132 passed, 1 failed (GB-F1 only) on both interpreters",
+    "validator": "scripts/validate_phase1f_c_r_astra_remediation.py: PASS on both interpreters"
+  }
+}
