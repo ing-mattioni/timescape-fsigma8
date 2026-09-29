@@ -19,6 +19,7 @@ import importlib
 import inspect
 import math
 from pathlib import Path
+import sys
 
 import numpy as np
 import pytest
@@ -279,13 +280,22 @@ def test_error_sources_are_separated(base):
     assert quadrature.residuals.quadrature > reference.residuals.quadrature
 
 
+# Owner-approved Windows exception (2026-09-29). On win32 NumPy/SciPy builds
+# delta_Q_lambda, a cancellation-limited centred-variance derivative, differs
+# from the unscaled solve by 4.9e-11 relative (3.1e-15 absolute). Every other
+# scalar stays below 5e-13 there, as on Linux, and keeps the common gate.
+HOMOTHETY_REL = 3e-11
+HOMOTHETY_REL_WIN32 = {"delta_Q_lambda": 1e-10}
+
+
 @pytest.mark.parametrize("scale", [1e-4, 1e4])
 def test_dimensional_powers(base, scale):
     # Scales s_c and m0 together (G fixed): a homothety, not a kappa_star test.
     scaled = solve_kappa_sensitivity(scale, replace(BASE, m0=BASE.m0 * scale), TIGHT)
     for name, power in zip(SCALARS, (-1, -2, 0, 0, 0, -1, -2, -2, -2)):
+        rel = HOMOTHETY_REL_WIN32.get(name, HOMOTHETY_REL) if sys.platform == "win32" else HOMOTHETY_REL
         assert getattr(scaled, name) / scale**power == pytest.approx(
-            getattr(base, name), rel=3e-11, abs=1e-15)
+            getattr(base, name), rel=rel, abs=1e-15)
     nodes = np.linspace(0, 1, 71)
     for name, power in zip(PROFILES, (1, 0, 0, 0, 0)):
         np.testing.assert_allclose(

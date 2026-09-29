@@ -435,7 +435,7 @@ Representative TIGHT values (not predictions):
 
 **Dimensions and representability.**
 
-- **Homothety.** Scaling s_c and m0 by 1e-4 and 1e4, with G fixed, reproduces every dimensional power to 4.4e-13. This is a homothety check, distinct from the fixed-m0 derivative checks.
+- **Homothety.** Scaling s_c and m0 by 1e-4 and 1e4, with G fixed, reproduces every dimensional power to 4.4e-13. This is a homothety check, distinct from the fixed-m0 derivative checks. (Linux record. On Windows, `delta_Q_lambda` reaches 4.9e-11; see the 2026-09-29 addendum.)
 - **Scaling in G.** Multiplying G by 3 changes only `delta_rho_lambda`, by exactly 1/3; every other output is bit-identical.
 - **Representability with an accepted background.** Take s_c=1e-50, m0=0.02*s_c, G=3.5e-210, kappa_star=0.2, r_c=0.25, r_o=0.7.
   - The background is accepted. Its largest density-type output is `rho(0) = 1.516e308`, below the binary64 maximum.
@@ -570,3 +570,33 @@ FSIGMA8_AUTHORIZATION: NOT_GRANTED
 
 No frozen scientific status or checkpoint is promoted. Phase 1F-D is not
 declared complete. The result is left local for review.
+
+## Addendum: Windows homothety tolerance (2026-09-29)
+
+On Windows 11, `test_dimensional_powers[0.0001]` and `[10000.0]` failed on
+Python 3.14.3 (NumPy 2.5.2, SciPy 1.18.1) and on Python 3.11.9 (NumPy 2.4.6,
+SciPy 1.17.1).
+
+Measured on both Windows interpreters, identically at both scales:
+- `delta_Q_lambda`: 4.94e-11 relative, 3.05e-15 absolute. The common gate
+  (`rel=3e-11`, `abs=1e-15`) allows 1.8e-15.
+- The other eight scalars: at most 4.65e-13 relative.
+- The five profiles: at most 2.1e-14 absolute, against `atol=1e-13`.
+- Scaling in G: `delta_rho_lambda` agrees to 3.5e-16; every other scalar is
+  bit-identical.
+- The final collocation mesh (1211 nodes) is identical in the scaled and
+  unscaled solves. The difference therefore arises in floating-point
+  evaluation, not in mesh selection. Its root cause was not investigated.
+
+`delta_Q_lambda` is the kappa_star derivative of a centred variance. Its
+absolute rounding floor is large relative to its small value (6.2e-5).
+
+**Change (approved by the project owner).** On `win32` only, `delta_Q_lambda`
+uses `rel=1e-10`, about twice the measured deviation. Everything else keeps
+its original gate:
+- the other eight scalars on Windows;
+- all scalars on other platforms;
+- the profile and G checks.
+
+No solver code, equation or other tolerance changed. The two tests pass on
+both Windows interpreters after the change.
