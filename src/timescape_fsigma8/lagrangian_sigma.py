@@ -57,6 +57,23 @@ Ingredients and sources
     Evidence class ``DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION``; the regional
     embedding stays ``NOT_DERIVED`` (``scientific_status``).
 
+* Documented limitation (added 2026-09-29 with the project owner's approval;
+  Phase 1G-D Secs. 5, 9, 10, ``reports/phase1g_d_separate_universe_growth.md``;
+  text only, no equation, value, default or argument changes):
+
+  - ``VOLUME_AVERAGE_CGI`` implements [GM]'s closure faithfully, but that
+    closure fails the separate-universe consistency test for the Timescape
+    tracker (1G-D Sec. 5; ``scientific_status.
+    GM_CGI_CLOSURES_SEPARATE_UNIVERSE_CONSISTENCY = "FAILED_FOR_TIMESCAPE_TRACKER"``),
+    so its growth is not Timescape's long-wavelength growth.
+  - ``WALL_REGIONAL_EDS_COMMON_TIME`` computes the wall-internal linear
+    statistic relative to the wall mean, not a global-mean sigma at
+    8 h^-1 Mpc, which is not defined in the linear two-scale theory
+    (1G-D Sec. 9; ``scientific_status.LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC``).
+
+  Every result carries the statement for its law in ``model_caveat`` and
+  ``limitations``.
+
 * Photon normalisation ([1G-A] Sec. 5.1): with ``1 + z = a_w0/a_w``,
   ``a_w = a_D/gamma_w``, ``gamma_w = 1 + f_v/2`` ([GM] Eq. (5.4), text
   p. 25), the growth today of a mode with ``D/a_photon -> 1`` early,
@@ -225,26 +242,49 @@ _SCALE_DEPENDENCE_CAVEAT = (
     "growth_law_scale_dependence: the volume-average CGI law applies to "
     "super-homogeneity modes and the wall-regional EdS law to mass-weighted "
     "sub-homogeneity statistics; the choice is scale-dependent, is analysed "
-    "in Phase 1G-C, and neither law is a default"
+    "in Phase 1G-C, and neither law is a default; Phase 1G-D Secs. 5 and 9 "
+    "narrow this reading (limitation added 2026-09-29): the volume-average "
+    "CGI law is not Timescape's long-wavelength growth, and the wall law "
+    "gives only the wall-internal linear statistic (see the growth-law "
+    "caveat)"
 )
 
+# The "limitation (...)" clauses record Phase 1G-D Secs. 5, 9, 10 (owner
+# approval 2026-09-29); they are text only and change no computed value.
 _CAVEATS = {
     "volume_average_cgi:comoving": (
         "volume_average_cgi_comoving: regular growing mode of the [GM] "
         "comoving closure, Eqs. (4.21)-(4.23), on the volume-average "
-        "background; the [GM]-preferred parametrisation (Phase 1G-A Sec. 4.3)"
+        "background; the [GM]-preferred parametrisation (Phase 1G-A Sec. 4.3); "
+        "limitation (Phase 1G-D Secs. 5, 10; added 2026-09-29): this "
+        "faithfully implements [GM]'s comoving closure, but that closure "
+        "fails the separate-universe consistency test for the Timescape "
+        "tracker (GM_CGI_CLOSURES_SEPARATE_UNIVERSE_CONSISTENCY = "
+        "FAILED_FOR_TIMESCAPE_TRACKER), so this growth is not Timescape's "
+        "long-wavelength growth"
     ),
     "volume_average_cgi:meszaros": (
         "volume_average_cgi_meszaros_comparison_only: [GM] Eq. (4.27) is "
         "formally inapplicable to the Timescape framework ([GM] Sec. 5.1.1) "
-        "and is retained only as a comparison baseline"
+        "and is retained only as a comparison baseline; limitation "
+        "(Phase 1G-D Secs. 5, 10; added 2026-09-29): this faithfully "
+        "implements [GM]'s Meszaros closure, but that closure fails the "
+        "separate-universe consistency test for the Timescape tracker "
+        "(GM_CGI_CLOSURES_SEPARATE_UNIVERSE_CONSISTENCY = "
+        "FAILED_FOR_TIMESCAPE_TRACKER), so this growth is not Timescape's "
+        "long-wavelength growth"
     ),
     "wall_regional_eds_common_time:NOT_APPLICABLE": (
         "wall_regional_eds_common_time: sub-homogeneity modes assumed to grow "
         "as the EdS growing mode of the wall region in the common Buchert time "
         "t (Phase 1G-A Sec. 8; [W09] no backreaction within walls); evidence "
         "class DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION; the regional "
-        "embedding stays NOT_DERIVED"
+        "embedding stays NOT_DERIVED; limitation (Phase 1G-D Secs. 9, 10; "
+        "added 2026-09-29): this computes the wall-internal linear statistic "
+        "relative to the wall mean, not a global-mean sigma at 8 h^-1 Mpc, "
+        "which is not defined in the linear two-scale theory "
+        "(LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC = "
+        "NOT_DEFINED_IN_LINEAR_TWO_SCALE_THEORY)"
     ),
 }
 
@@ -292,7 +332,10 @@ class GrowthLaw(str, Enum):
     ``VOLUME_AVERAGE_CGI`` requires an explicit ``CleanPerturbationSystem``;
     ``WALL_REGIONAL_EDS_COMMON_TIME`` requires ``closure=NOT_APPLICABLE``.
     The choice is scale-dependent and is analysed in Phase 1G-C; neither
-    member is a default.
+    member is a default.  Phase 1G-D (Secs. 5, 9) limits both readings: the
+    volume-average CGI closure fails the separate-universe consistency test
+    for the tracker, and the wall law gives the wall-internal linear
+    statistic only (documented limitation, 2026-09-29; module docstring).
     """
 
     VOLUME_AVERAGE_CGI = "volume_average_cgi"

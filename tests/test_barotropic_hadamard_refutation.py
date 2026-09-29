@@ -159,20 +159,27 @@ def test_validator_keeps_frozen_snapshot_and_reads_live_value_from_successor(
     changes = remediation.successor_status_changes()
     assert changes == {TOKEN: {"old_token": OLD_TOKEN, "new_token": NEW_TOKEN,
                                "record": "reports/phase1g_a_barotropic_status_successor_inventory.json"}}
-    remediation.check_current_scientific_status(frozen, CURRENT_SCIENTIFIC_STATUS, changes)
+    # Tokens *added* by a later successor record (2026-09-29, see
+    # tests/test_phase1g_status_additions.py) are passed through unchanged;
+    # none of them is this token.
+    additions = remediation.successor_status_additions()
+    assert TOKEN not in additions
+    remediation.check_current_scientific_status(
+        frozen, CURRENT_SCIENTIFIC_STATUS, changes, additions=additions)
     # The historical check stays active: a frozen snapshot that no longer
     # records the superseded token is rejected ...
     with pytest.raises(AssertionError, match="frozen snapshot"):
         remediation.check_current_scientific_status(
-            {**frozen, TOKEN: NEW_TOKEN}, CURRENT_SCIENTIFIC_STATUS, changes)
+            {**frozen, TOKEN: NEW_TOKEN}, CURRENT_SCIENTIFIC_STATUS, changes, additions=additions)
     # ... and so is a live value that disagrees with the successor record,
     with pytest.raises(AssertionError, match="successor record"):
         remediation.check_current_scientific_status(
-            frozen, {**CURRENT_SCIENTIFIC_STATUS, TOKEN: OLD_TOKEN}, changes)
+            frozen, {**CURRENT_SCIENTIFIC_STATUS, TOKEN: OLD_TOKEN}, changes, additions=additions)
     # ... and any drift of a token that no successor record covers.
     with pytest.raises(AssertionError, match="D3_VERDICT"):
         remediation.check_current_scientific_status(
-            frozen, {**CURRENT_SCIENTIFIC_STATUS, "D3_VERDICT": "CHANGED"}, changes)
+            frozen, {**CURRENT_SCIENTIFIC_STATUS, "D3_VERDICT": "CHANGED"}, changes,
+            additions=additions)
 
 
 @pytest.mark.parametrize("tilt_form", list(TiltForm))

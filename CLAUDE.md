@@ -130,9 +130,9 @@ Everything else in the list above stays unimplemented.
 py -3.14 -m venv .venv
 .venv\Scripts\python -m pip install -e ".[exec,test]"
 
-# Full validation suite (1016 passed on Windows, Python 3.14.3 and 3.11.9, at
-# the Phase 1G integration checkpoint; oracle and generated-artifact tests
-# auto-skip when their inputs are absent)
+# Full validation suite (1044 passed on Windows, Python 3.14.3 and 3.11.9, at
+# the Phase 1G status-approvals checkpoint; oracle and generated-artifact
+# tests auto-skip when their inputs are absent)
 .venv\Scripts\python -m pytest -q
 
 # A single file / single test / keyword selection
@@ -242,6 +242,13 @@ In progress (σ track; no adversarial audit or tag yet):
 - **1G-B:** conditional Lagrangian σ(M) runtime (`lagrangian_sigma.py`,
   `phase1g_b_lagrangian_sigma_validation.md`). It reproduces every 1G-A
   number.
+  - With owner approval (2026-09-29), results carry a documented limitation
+    (1G-D §§5, 9; validation report §14). `VOLUME_AVERAGE_CGI` faithfully
+    implements [GM]'s closure, but that closure fails the separate-universe
+    test. `WALL_REGIONAL_EDS_COMMON_TIME` gives the wall-internal linear
+    statistic, not a global-mean σ at 8 h⁻¹ Mpc.
+  - The change is text only: the executable AST differs only in string
+    constants, and every numeric output is bit-identical.
 - **1G-C:** two-scale growth law (report-only,
   `phase1g_c_two_scale_growth_law.md`).
   - The tracker is exactly empty Milne voids plus EdS walls in common time t.
@@ -251,6 +258,11 @@ In progress (σ track; no adversarial audit or tag yet):
   - The volume-average CGI values, 0.52–0.69, are the super-cell growth
     (superseded by 1G-D).
   - The super-cell/sub-cell transition law is `NOT_DERIVED`.
+  - Tokens (owner approval 2026-09-29):
+    - `TWO_SCALE_MASS_WEIGHTED_SUB_CELL_GROWTH_LAW = DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION`
+      (§5), narrowed by 1G-D §9 to the wall-internal linear statistic;
+    - `SUPER_CELL_TO_SUB_CELL_GROWTH_TRANSITION = NOT_DERIVED` (§8). 1G-D §8
+      gives a conditional length scale, not the law.
 - **1G-D:** separate-universe structure (report-only,
   `phase1g_d_separate_universe_growth.md`).
   - The tracker has one time scale: `f_v = t/(t+τ)`, with τ = 1F-D's `b`.
@@ -265,6 +277,11 @@ In progress (σ track; no adversarial audit or tag yet):
   - At 8 h⁻¹ Mpc the void fraction is non-perturbative, so a linear
     global-mean σ8 is not defined. The only linear statistic is σ_wall; an
     observable σ8 needs a nonlinear two-phase model (proposed 1G-E).
+  - Tokens (owner approval 2026-09-29):
+    - `GM_CGI_CLOSURES_SEPARATE_UNIVERSE_CONSISTENCY = FAILED_FOR_TIMESCAPE_TRACKER` (§5);
+    - `TWO_SCALE_SUPER_CELL_GROWTH_LAW = DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION` (§6);
+    - `VOID_ONSET_RESPONSE = EXTERNAL_CLOSURE_INPUT` (§7);
+    - `LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC = NOT_DEFINED_IN_LINEAR_TWO_SCALE_THEORY` (§9).
 - **1G-E:** two-phase mass variance (report-only,
   `phase1g_e_two_phase_sigma.md`).
   - Formula: `σ² = δ_v² σ²_part + σ²_int`, with Boolean voids (Poisson
@@ -273,6 +290,13 @@ In progress (σ track; no adversarial audit or tag yet):
     for [GM] and 1.36 for [NW15]. The range is 0.9–2.1.
   - This is a nonlinear, model-internal quantity. Its next step is 1G-F, a
     self-consistent void population.
+- **Status-token additions:** the six 1G-C/1G-D tokens are *additions*, not
+  changes (`phase1g_status_additions_successor.md`). The frozen 1F-C-R
+  snapshot has no entry for them. The 1F-C-R validator accepts a new token
+  only if a registered successor record declares it; it must still be absent
+  from the snapshot, and the live value must match the record. No existing
+  token changed. The 1G-E proposal `TWO_PHASE_MASS_VARIANCE_8_H_INV_MPC` is
+  not approved or added.
 - `SIGMA8_AUTHORIZATION` stays `NOT_GRANTED`.
 
 Outside the phase sequence: the isolated, conditional **LTB–CMC experiment**

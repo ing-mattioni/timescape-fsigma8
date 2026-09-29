@@ -485,3 +485,52 @@ No new test skips.
 - **Remote:** nothing is pushed or tagged.
 - **Before freezing:** an adversarial/compliance audit of this phase is
   still required by the project workflow.
+
+## 14. Limitation added 2026-09-29
+
+Sections 1–13 above record the 1G-B checkpoint and are unchanged. This
+section was appended on 2026-09-29, with the project owner's approval, on
+branch `phase-1g-status-approvals` (parent `8cf5c49`). It applies
+recommendation 2 of Phase 1G-D Sec. 11
+([`phase1g_d_separate_universe_growth.md`](phase1g_d_separate_universe_growth.md);
+successor record
+[`phase1g_status_additions_successor.md`](phase1g_status_additions_successor.md)).
+
+**The limitation** (1G-D Secs. 5, 9, 10):
+- `GrowthLaw.VOLUME_AVERAGE_CGI` implements [GM]'s comoving closure (and
+  the Mészáros comparator) faithfully. But that closure fails the
+  separate-universe consistency test for the Timescape tracker (1G-D Sec. 5;
+  `GM_CGI_CLOSURES_SEPARATE_UNIVERSE_CONSISTENCY = FAILED_FOR_TIMESCAPE_TRACKER`).
+  Its growth is therefore not Timescape's long-wavelength growth.
+- `WALL_REGIONAL_EDS_COMMON_TIME` computes the wall-internal linear statistic
+  relative to the wall mean. It is not a global-mean σ at 8 h⁻¹ Mpc, which
+  is not defined in the linear two-scale theory (1G-D Sec. 9;
+  `LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC = NOT_DEFINED_IN_LINEAR_TWO_SCALE_THEORY`).
+- Sec. 5's "Scale dependence" reading (the CGI law for super-homogeneity
+  modes, the wall law for sub-homogeneity statistics) is narrowed
+  accordingly.
+
+**What changed in the module: text only.**
+- Each growth-law caveat carried by results (`model_caveat`, `limitations`,
+  `to_json_dict()`) gains a dated `limitation (Phase 1G-D …)` clause.
+- The generic `growth_law_scale_dependence` caveat gains a clause pointing
+  to it.
+- The module and `GrowthLaw` docstrings say the same.
+- The original texts are kept verbatim as prefixes. No equation, numeric
+  value, default, argument or status constant changes.
+
+**Verification.**
+- **AST.** With docstrings stripped and string constants masked, the
+  executable AST equals `8cf5c49`'s. Exactly four string constants differ,
+  each an extension of its old text.
+- **Driver.** `scripts/validate_phase1g_b_lagrangian_sigma.py` was re-run at
+  `8cf5c49` and after the change, on Python 3.14.3 and 3.11.9. 21/21 gates
+  pass, with identical gate lines. All 1494 numeric artifact leaves are
+  bit-identical; only the three caveat strings differ.
+- **Tests.** No existing test asserted the exact caveat text. The naming
+  firewall of Sec. 10 still passes. `tests/test_phase1g_status_additions.py`
+  asserts the extended texts, with the old ones as verbatim prefixes, on
+  real results for all three laws.
+
+The numbers in Secs. 7–9 are unchanged as computed quantities. Their
+interpretation is now that of 1G-C Sec. 5 as narrowed by 1G-D Secs. 5 and 9.

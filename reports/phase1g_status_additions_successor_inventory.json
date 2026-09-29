@@ -1,0 +1,208 @@
+{
+  "branch": "phase-1g-status-approvals",
+  "classification": "APPROVED_SCIENTIFIC_STATUS_ADDITION_SUCCESSOR_RECORD",
+  "date": "2026-09-29",
+  "files_changed": [
+    "CLAUDE.md",
+    "README.md",
+    "reports/phase1g_b_lagrangian_sigma_validation.md",
+    "reports/phase1g_status_additions_successor.md",
+    "reports/phase1g_status_additions_successor_inventory.json",
+    "scripts/validate_phase1f_c_r_astra_remediation.py",
+    "src/timescape_fsigma8/lagrangian_sigma.py",
+    "src/timescape_fsigma8/scientific_status.py",
+    "tests/test_barotropic_hadamard_refutation.py",
+    "tests/test_phase1g_status_additions.py"
+  ],
+  "human_approval": {
+    "approves": [
+      "reports/phase1g_c_two_scale_growth_law.md Sec. 10 recommendation 2: two status tokens",
+      "reports/phase1g_d_separate_universe_growth.md Sec. 11 recommendation 1: four status tokens",
+      "reports/phase1g_d_separate_universe_growth.md Sec. 11 recommendation 2: Phase 1G-B documented limitation, no numerical change",
+      "fast-forward of main to this branch and a plain push of main to origin (no force, no tags, no other branches)"
+    ],
+    "by": "project owner",
+    "date": "2026-09-29",
+    "not_approved_here": [
+      "reports/phase1g_e_two_phase_sigma.md proposal TWO_PHASE_MASS_VARIANCE_8_H_INV_MPC (not in the resolved list; not added)",
+      "any change to an existing status token"
+    ],
+    "resolved_by": "the lead agent, into the exact list applied by this record",
+    "verbatim": "let a sub-agent do the fast-forwarding and all the things that needed my approval that I give now to you for all of them"
+  },
+  "lagrangian_sigma_limitation": {
+    "carried_by": [
+      "ConditionalLagrangianSigma.model_caveat",
+      "ConditionalLagrangianSigma.limitations",
+      "to_json_dict() model_caveat and limitations"
+    ],
+    "differing_string_constants": 4,
+    "docstrings_extended": [
+      "module docstring",
+      "GrowthLaw"
+    ],
+    "evidence": "reports/phase1g_d_separate_universe_growth.md Secs. 5, 9, 10",
+    "executable_ast_identical_with_string_constants_masked": true,
+    "module": "src/timescape_fsigma8/lagrangian_sigma.py",
+    "original_texts_kept_verbatim_as_prefix": true,
+    "report_section_appended": "reports/phase1g_b_lagrangian_sigma_validation.md Sec. 14",
+    "texts_extended": [
+      "_CAVEATS['volume_average_cgi:comoving']",
+      "_CAVEATS['volume_average_cgi:meszaros']",
+      "_CAVEATS['wall_regional_eds_common_time:NOT_APPLICABLE']",
+      "_SCALE_DEPENDENCE_CAVEAT (member of _GENERIC_LIMITATIONS)"
+    ]
+  },
+  "parent_commit": "8cf5c497f45bb2098bdc13a410fe0e3c4c81ab02",
+  "phase": "1G-C/1G-D",
+  "report": "reports/phase1g_status_additions_successor.md",
+  "schema_version": 1,
+  "scope": {
+    "equations_changed": false,
+    "existing_status_tokens_changed": false,
+    "frozen_historical_reports_or_inventories_edited": false,
+    "lagrangian_sigma_defaults_arguments_or_status_constants_changed": false,
+    "lagrangian_sigma_numeric_outputs_changed": false,
+    "not_granted_tokens": [
+      "FSIGMA8_AUTHORIZATION",
+      "OBSERVATIONAL_AUTHORIZATION",
+      "RSD_AUTHORIZATION",
+      "SIGMA8_AUTHORIZATION",
+      "UNIQUE_TIMESCAPE_PREDICTION"
+    ],
+    "not_granted_tokens_changed": false,
+    "tolerances_changed": false
+  },
+  "status_additions": {
+    "GM_CGI_CLOSURES_SEPARATE_UNIVERSE_CONSISTENCY": {
+      "evidence_class": "DERIVED+NUMERICALLY_CORROBORATED",
+      "meaning": "the separate-universe (k -> 0) modes of the tracker are exact solutions of [GM] (4.9)-(4.11) with Delta_eff/Delta_d < 0 and P_eff != 0; [GM]'s comoving (Delta_eff/Delta_d = +0.18...+0.20, P_eff = 0), Meszaros (Delta_eff = 0) and barotropic (P_eff = c_s^2 Delta_eff) closures are inconsistent with them, so the volume-average CGI growth is not Timescape's long-wavelength growth",
+      "module": "src/timescape_fsigma8/scientific_status.py",
+      "not_meant": [
+        "any change to [GM]'s equations or to the package's comoving, Meszaros or barotropic runtimes",
+        "that the 1G-B VOLUME_AVERAGE_CGI numbers are computed wrongly (they faithfully implement [GM]'s closure; only their interpretation changes)"
+      ],
+      "proposed_in": "reports/phase1g_d_separate_universe_growth.md Sec. 11 item 1",
+      "report": "reports/phase1g_d_separate_universe_growth.md",
+      "section": "Sec. 5",
+      "value": "FAILED_FOR_TIMESCAPE_TRACKER"
+    },
+    "LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC": {
+      "evidence_class": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "meaning": "at 8 h^-1 Mpc the wall/void partition is non-perturbative (A_v sigma_LSS(R8) = 2.6-4.3 for the peak-background split, 90-900 for [W09] seeding), so a linear, global-mean sigma at that scale is not defined in the linear two-scale theory; the only linear statistic there is the wall-internal sigma_wall",
+      "module": "src/timescape_fsigma8/scientific_status.py",
+      "not_meant": [
+        "an authorization of any kind (SIGMA8_AUTHORIZATION stays NOT_GRANTED)",
+        "a statement about nonlinear two-phase statistics (Phase 1G-E, report-only)"
+      ],
+      "proposed_in": "reports/phase1g_d_separate_universe_growth.md Sec. 11 item 1",
+      "report": "reports/phase1g_d_separate_universe_growth.md",
+      "section": "Sec. 9",
+      "value": "NOT_DEFINED_IN_LINEAR_TWO_SCALE_THEORY"
+    },
+    "SUPER_CELL_TO_SUB_CELL_GROWTH_TRANSITION": {
+      "evidence_class": "NOT_DERIVED",
+      "meaning": "the law (shape) of the transition between super-cell and sub-cell growth is not derivable from the self-similar tracker",
+      "module": "src/timescape_fsigma8/scientific_status.py",
+      "narrowed_by": "reports/phase1g_d_separate_universe_growth.md Sec. 8 derives a conditional transition length scale R* (peak-background-split void response), not the transition law",
+      "not_meant": [
+        "that no transition length scale is known (1G-D Sec. 8 gives a conditional R*)",
+        "that the 1G-C Sec. 8 reading of the volume-average CGI growth as the super-cell law still holds (superseded by 1G-D Secs. 5-6)"
+      ],
+      "proposed_in": "reports/phase1g_c_two_scale_growth_law.md Sec. 10 item 2",
+      "report": "reports/phase1g_c_two_scale_growth_law.md",
+      "section": "Sec. 8",
+      "value": "NOT_DERIVED"
+    },
+    "TWO_SCALE_MASS_WEIGHTED_SUB_CELL_GROWTH_LAW": {
+      "evidence_class": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "meaning": "under assumptions A1-A4, linear sub-cell perturbations of the wall matter grow as the EdS growing mode of the wall region in the common time t ([GM] (4.27) exact on the wall regional background, Delta_w proportional to t^(2/3))",
+      "module": "src/timescape_fsigma8/scientific_status.py",
+      "narrowed_by": "reports/phase1g_d_separate_universe_growth.md Sec. 9: the law gives the wall-internal linear statistic relative to the wall mean, not a global-mean sigma at 8 h^-1 Mpc",
+      "not_meant": [
+        "an observational sigma8 or any authorization (SIGMA8_AUTHORIZATION stays NOT_GRANTED)",
+        "the global-mean mass variance at 8 h^-1 Mpc (see LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC)",
+        "a derived regional embedding (REGIONAL_COMMON_TIMESCAPE_BACKGROUND_EMBEDDING stays NOT_DERIVED)"
+      ],
+      "proposed_in": "reports/phase1g_c_two_scale_growth_law.md Sec. 10 item 2",
+      "report": "reports/phase1g_c_two_scale_growth_law.md",
+      "section": "Sec. 5",
+      "value": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION"
+    },
+    "TWO_SCALE_SUPER_CELL_GROWTH_LAW": {
+      "evidence_class": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "meaning": "D_SU(t) = f_w(t) D_wall(t) + A_v a_LS f_v(t) for the primordial long-wavelength mode, under assumption S2 (void-onset response), valid only for R > R*",
+      "module": "src/timescape_fsigma8/scientific_status.py",
+      "not_meant": [
+        "a value of A_v (see VOID_ONSET_RESPONSE)",
+        "any comparison with survey data (needs the dressed map and a bias model)"
+      ],
+      "proposed_in": "reports/phase1g_d_separate_universe_growth.md Sec. 11 item 1",
+      "report": "reports/phase1g_d_separate_universe_growth.md",
+      "section": "Sec. 6",
+      "value": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION"
+    },
+    "VOID_ONSET_RESPONSE": {
+      "evidence_class": "EXTERNAL_CLOSURE_INPUT",
+      "meaning": "the void-onset response A_v = d(epsilon)/d(delta_L) is an external closure; the [W09] single-perturbation seeding (A_v = 1e5-1e6) and the peak-background-split estimate (A_v = 2.9e3-4.7e3) differ by orders of magnitude",
+      "module": "src/timescape_fsigma8/scientific_status.py",
+      "not_meant": [
+        "a preferred value of A_v"
+      ],
+      "proposed_in": "reports/phase1g_d_separate_universe_growth.md Sec. 11 item 1",
+      "report": "reports/phase1g_d_separate_universe_growth.md",
+      "section": "Sec. 7",
+      "value": "EXTERNAL_CLOSURE_INPUT"
+    }
+  },
+  "status_changes": {},
+  "superseded_frozen_readings": [
+    {
+      "current": "the six tokens are live additions (this record); the frozen snapshot is unchanged and still checked",
+      "frozen": "no entry for the six tokens",
+      "location": "reports/phase1f_c_r_astra_audit_remediation_inventory.json current_scientific_status"
+    },
+    {
+      "current": "true of the 1G-C checkpoint; approved 2026-09-29 and applied by this record",
+      "frozen": "proposal, none applied; false",
+      "location": "reports/phase1g_c_two_scale_growth_law.md Sec. 10 item 2 and Sec. 12; reports/phase1g_c_two_scale_growth_inventory.json status_tokens_changed"
+    },
+    {
+      "current": "true of the 1G-D checkpoint; approved 2026-09-29 and applied by this record (tokens and the 1G-B limitation text)",
+      "frozen": "proposal, none applied; false",
+      "location": "reports/phase1g_d_separate_universe_growth.md Sec. 11 items 1-2, Sec. 10 ('No code change is made here') and Sec. 12; reports/phase1g_d_separate_universe_inventory.json status_tokens_changed"
+    },
+    {
+      "current": "true of the 1G-B checkpoint; narrowed by 1G-D Secs. 5, 9 as recorded in the appended Sec. 14 and in the result caveats",
+      "frozen": "the volume-average CGI law is the relevant one for super-homogeneity modes; no status token was changed",
+      "location": "reports/phase1g_b_lagrangian_sigma_validation.md Sec. 5 ('Scale dependence') and Sec. 13 ('scientific_status.py is not edited')"
+    }
+  ],
+  "title": "Successor record: six approved Phase 1G-C/1G-D status-token additions and the Phase 1G-B documented limitation",
+  "validator_change": {
+    "barotropic_record_edited": false,
+    "failure_modes_added": [
+      "token added by more than one record",
+      "token both changed and added",
+      "added token missing from the live module",
+      "added token already present in the frozen snapshot",
+      "live value differs from the adding record",
+      "live token absent from the frozen snapshot and added by no record (previously a KeyError, now a named assertion)"
+    ],
+    "failure_modes_kept": [
+      "token superseded by more than one record",
+      "change names a token the live module lacks",
+      "frozen snapshot does not hold the superseded token",
+      "live value differs from the changing record",
+      "drift of any token no record covers"
+    ],
+    "frozen_inventory_edited": false,
+    "historical_check": "each added token must be absent from the frozen current_scientific_status",
+    "live_check": "each added token must hold the record's value in the live module; every other token must be in the frozen snapshot and equal it, or be a registered change",
+    "reader": "successor_status_additions() reads status_additions; a record without that key adds nothing",
+    "registry": "STATUS_SUCCESSOR_RECORDS lists both successor records",
+    "report_key": "successor_status_additions",
+    "script": "scripts/validate_phase1f_c_r_astra_remediation.py",
+    "signature": "check_current_scientific_status(frozen, live, changes, *, additions)"
+  }
+}

@@ -46,6 +46,19 @@ implemented, and the frozen scientific statuses are preserved.
   empty Boolean voids plus the wall-internal field give σ ≈ 1.36–1.57 in
   8 h⁻¹ Mpc spheres with [W09]'s void size (0.9–2.1 across closures). This is
   a conditional nonlinear quantity, not an observational σ8.
+- **Status tokens.** With owner approval (2026-09-29), six tokens record the
+  1G-C/1G-D findings
+  ([successor record](reports/phase1g_status_additions_successor.md)):
+  - `TWO_SCALE_MASS_WEIGHTED_SUB_CELL_GROWTH_LAW` and
+    `TWO_SCALE_SUPER_CELL_GROWTH_LAW` are `DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION`;
+  - `SUPER_CELL_TO_SUB_CELL_GROWTH_TRANSITION` is `NOT_DERIVED`;
+  - `GM_CGI_CLOSURES_SEPARATE_UNIVERSE_CONSISTENCY` is `FAILED_FOR_TIMESCAPE_TRACKER`;
+  - `VOID_ONSET_RESPONSE` is `EXTERNAL_CLOSURE_INPUT`;
+  - `LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC` is
+    `NOT_DEFINED_IN_LINEAR_TWO_SCALE_THEORY`.
+
+  The σ(M) runtime's results now state the matching limitation of each
+  growth law (text only; the numbers are unchanged).
 - **Status.** These are conditional numbers, not an observational σ8, and no
   σ8 authorization is granted.
 
