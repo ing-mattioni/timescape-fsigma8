@@ -24,7 +24,7 @@ fix (`phase1f_c_r_f3_h1_kinematic_gates_validation.md`).
 | Finding | Severity (review) | Status after this change |
 |---|---|---|
 | F2 bare/dressed factor range | MEDIUM | `RESOLVED_BY_SUCCESSOR_ERRATUM` (§2) |
-| F4 missing authorization, specifications and audits | MEDIUM | `CLOSED_AS_DOCUMENTED_PERMANENT_GAP` (§3; human decision 2026-09-23) |
+| F4 missing authorization, specifications and audits | MEDIUM | `CLOSED_AS_DOCUMENTED_PERMANENT_GAP` (§3; human decision 2026-09-23; audits recovered 2026-09-29, §12) |
 | F5 scope-firewall wording | LOW-MEDIUM | `RESOLVED` (§4) |
 | F6 checkout- and history-bound reproducibility | LOW-MEDIUM | `RESOLVED` (§5) |
 | F7 `G = 1.0` defaults | LOW | `RESOLVED` (§6) |
@@ -117,6 +117,11 @@ not on `origin` when this report was written. The project owner has since
 published the original signed tags (§11). Their tag objects and commits match
 the pins, and the validator verifies them.
 
+**Audits (committed after this report was first written).** The three audits
+in the table were later found as untracked files in the project owner's local
+working tree. Their hashes match the pins exactly, and they are now committed
+unchanged (§12).
+
 ### 3.2 Specification citation map
 
 Every equation the runtime attributes to an uncommitted specification was
@@ -173,6 +178,8 @@ gap should be recorded as permanent. Accordingly:
     record of the H1 decision are permanently unavailable to this repository.
   - The three `phase-1f-b` tags are not part of the gap: the project owner
     published the originals after this decision (§11).
+  - The three audits are no longer part of the gap either: they were found
+    with matching hashes and committed after this decision (§12).
 - **H1 decision record: `UNAVAILABLE_CONFIRMED_BY_HUMAN`.** The H1 runtime's
   "Scientific implementation authorization: GRANTED" rests only on the 1E-F
   report's own assertion. It cannot be traced to a committed decision.
@@ -185,7 +192,7 @@ gap should be recorded as permanent. Accordingly:
   `validate_phase1f_c_r_astra_remediation.py` will keep reporting
   `PASS_WITH_ABSENT_LOCAL_PROVENANCE` because of the three absent audit
   files. Any of those files that reappears is still verified against its
-  pin.
+  pin. Superseded by §12: with the audits committed, the status is `PASS`.
 
 ## 4. F5 — scope firewall
 
@@ -344,8 +351,9 @@ and the identity of 0.9204.
 ## 10. What remains open
 
 - **F4 (§3.4):** closed as a documented permanent gap by human decision.
-  The specifications, audits and H1 decision record are unavailable. The
-  citation map is the durable substitute.
+  The specifications and the H1 decision record are unavailable. The
+  citation map is the durable substitute. The three audits were recovered
+  and committed (§12).
 - **Earlier fixes:** the open items of F1 (barotropic ICs, amplitude recipe)
   and F3 (heterogeneous geometry, unequal clocks, `K_D ≠ 0` observation,
   time evolution) are recorded in their own reports.
@@ -377,3 +385,56 @@ three unavailable audits of §3.1. F4 therefore remains
 `CLOSED_AS_DOCUMENTED_PERMANENT_GAP`, now limited to the specifications, the
 audits and the H1 decision record. The merged branch
 `claude/loving-dijkstra-esoj6f` was deleted after the merge.
+
+## 12. Recovered audits (2026-09-29)
+
+The three audits of §3.1 had never been lost. They were untracked files in
+the project owner's local Windows working tree. The review and this
+remediation ran in a Linux cloud clone (review §2), which holds only
+committed files, so they could not be found there.
+
+Their SHA-256 values, computed on the raw local bytes, match the pins
+exactly:
+
+| File | SHA-256 |
+|---|---|
+| `astra/INDEPENDENT_SCIENTIFIC_AUDIT.md` | `4b8f8b3959ddce4510054bd314b8af99fd80e5668e5adf51cec1629c56354518` |
+| `reports/phase1f_b_dust_wall_boost_dynamics_v3_final_audit.md` | `08c30893e8df88818760a91d85c9839770d7234f263c226446b634fddc216930` |
+| `reports/phase1f_c_wall_common_geometry_adversarial_audit.md` | `345417fdecf5ce686988a128a04a788263a5a51c2831f3cfd3c0511dfd15df3c` |
+
+**Human decision (2026-09-29).** The project owner approved committing them.
+For the three audits only, this supersedes the 2026-09-23 decision (§3.4)
+that no audit text would be added.
+
+- They are committed unchanged, with their original CRLF line endings. The
+  committing clone uses `core.autocrlf=false` and the repository has no
+  `.gitattributes`, so the committed blobs carry the pinned bytes.
+- Their content is not edited, and none of their findings is re-adjudicated
+  here.
+- F4 remains `CLOSED_AS_DOCUMENTED_PERMANENT_GAP`, now limited to the 1E-F,
+  1E-G and 1F-A specifications and the H1 decision record (§3.3).
+
+**Validator.** On this checkout, which also holds the pinned `.reference/`
+clone, `validate_phase1f_c_r_astra_remediation.py` exits 0 with status
+`PASS`:
+- 4 of 4 local provenance files `VERIFIED` (the upstream notebook and the
+  three audits);
+- 27 of 27 frozen tags verified;
+- 20 preserved equations certified;
+- 52 historical reports byte-identical;
+- post-remediation drift unchanged (the F1 and F7 files of §5).
+
+The notebook entry reads the git-ignored `.reference/` clone, so it is
+verified only where that clone exists.
+
+**Suites (Windows 11).** Python 3.14.3 and Python 3.11.9 each gave 850
+passed and 2 failed. The same two tests failed in both runs:
+`tests/test_experimental_ltb_cmc_kappa_sensitivity.py::test_dimensional_powers[0.0001]`
+and `[10000.0]`.
+- They belong to the experimental LTB-CMC code already on `main`
+  (`e98998b`). This change touches no code.
+- The two rescaled runs agree with each other. Both differ from the unscaled
+  run by about 4.9e-11 relative, above the test's `rel=3e-11` gate.
+- They are recorded here, not fixed.
+
+No runtime equation, status token, test or tolerance changes.

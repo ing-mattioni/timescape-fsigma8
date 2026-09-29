@@ -39,6 +39,30 @@
       "status": "PUBLISHED_BY_OWNER_AFTER_CLOSURE",
       "tag_objects_match_pins": true
     },
+    "recovered_audits": {
+      "committed_byte_identical_to_pins": true,
+      "files": [
+        {
+          "path": "astra/INDEPENDENT_SCIENTIFIC_AUDIT.md",
+          "pinned_sha256": "4b8f8b3959ddce4510054bd314b8af99fd80e5668e5adf51cec1629c56354518"
+        },
+        {
+          "path": "reports/phase1f_b_dust_wall_boost_dynamics_v3_final_audit.md",
+          "pinned_sha256": "08c30893e8df88818760a91d85c9839770d7234f263c226446b634fddc216930"
+        },
+        {
+          "path": "reports/phase1f_c_wall_common_geometry_adversarial_audit.md",
+          "pinned_sha256": "345417fdecf5ce686988a128a04a788263a5a51c2831f3cfd3c0511dfd15df3c"
+        }
+      ],
+      "found_as": "untracked files in the project owner's local working tree, not visible to the cloud review clone",
+      "human_decision": {
+        "answer": "COMMIT_UNCHANGED",
+        "date": "2026-09-29",
+        "supersedes": "the 2026-09-23 decision, for the three audits only"
+      },
+      "status": "RECOVERED_AND_COMMITTED_AFTER_CLOSURE"
+    },
     "specification_citations_displayed_or_described_in_committed_reports": true,
     "specification_sections_not_separately_identifiable": [
       "1E-G section 21",
@@ -58,18 +82,6 @@
         "document": "Phase 1F-A specification (2026-08-24)",
         "note": "not named by the review",
         "pinned_sha256": null
-      },
-      {
-        "document": "astra/INDEPENDENT_SCIENTIFIC_AUDIT.md",
-        "pinned_sha256": "4b8f8b3959ddce4510054bd314b8af99fd80e5668e5adf51cec1629c56354518"
-      },
-      {
-        "document": "reports/phase1f_b_dust_wall_boost_dynamics_v3_final_audit.md",
-        "pinned_sha256": "08c30893e8df88818760a91d85c9839770d7234f263c226446b634fddc216930"
-      },
-      {
-        "document": "reports/phase1f_c_wall_common_geometry_adversarial_audit.md",
-        "pinned_sha256": "345417fdecf5ce686988a128a04a788263a5a51c2831f3cfd3c0511dfd15df3c"
       }
     ]
   },
@@ -97,7 +109,8 @@
         "src/timescape_fsigma8/perturbations/initial_conditions.py"
       ],
       "preserved_equations_certified": 20,
-      "status_on_this_checkout": "PASS_WITH_ABSENT_LOCAL_PROVENANCE"
+      "status_at_first_writing": "PASS_WITH_ABSENT_LOCAL_PROVENANCE",
+      "status_on_this_checkout": "PASS"
     }
   },
   "F7_mandatory_G": [
@@ -176,6 +189,12 @@
     },
     "F4": {
       "record": "reports/phase1f_c_r_f2_f4_f9_remediation.md#3.4",
+      "remaining_gap": [
+        "Phase 1E-F specification",
+        "Phase 1E-G specification",
+        "Phase 1F-A specification",
+        "H1 decision record"
+      ],
       "status": "CLOSED_AS_DOCUMENTED_PERMANENT_GAP"
     },
     "F5": {

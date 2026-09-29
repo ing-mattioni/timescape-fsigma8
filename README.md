@@ -62,8 +62,9 @@ number, and raised nine findings. They have been addressed as follows:
 - **F2, F4–F9:** a successor erratum, provenance records, checkout-independent
   reproducibility gates, mandatory `G`, and refreshed documentation
   ([remediation](reports/phase1f_c_r_f2_f4_f9_remediation.md)). F4 is closed
-  as a documented permanent gap: three specifications, three audits and any
-  H1 decision record are confirmed unavailable. A citation map ties every
+  as a documented permanent gap: three specifications and any H1 decision
+  record are confirmed unavailable. The three audits were later recovered
+  with matching hashes and are committed unchanged. A citation map ties every
   specification-cited equation to a committed report.
 
 The earlier implementation milestones below remain useful provenance:
