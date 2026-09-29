@@ -265,6 +265,14 @@ In progress (σ track; no adversarial audit or tag yet):
   - At 8 h⁻¹ Mpc the void fraction is non-perturbative, so a linear
     global-mean σ8 is not defined. The only linear statistic is σ_wall; an
     observable σ8 needs a nonlinear two-phase model (proposed 1G-E).
+- **1G-E:** two-phase mass variance (report-only,
+  `phase1g_e_two_phase_sigma.md`).
+  - Formula: `σ² = δ_v² σ²_part + σ²_int`, with Boolean voids (Poisson
+    balls, checked by Monte Carlo) and the wall-internal linear field.
+  - At 8 h⁻¹ Mpc, with tracker voids and [W09]'s 30 h⁻¹ Mpc voids, σ ≈ 1.57
+    for [GM] and 1.36 for [NW15]. The range is 0.9–2.1.
+  - This is a nonlinear, model-internal quantity. Its next step is 1G-F, a
+    self-consistent void population.
 - `SIGMA8_AUTHORIZATION` stays `NOT_GRANTED`.
 
 Outside the phase sequence: the isolated, conditional **LTB–CMC experiment**

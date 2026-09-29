@@ -42,6 +42,10 @@ implemented, and the frozen scientific statuses are preserved.
   - at 8 h⁻¹ Mpc the void/wall partition is non-perturbative. The
     wall-internal σ is the only linear statistic there, and an observable σ8
     needs a nonlinear two-phase model.
+- **Phase 1G-E** ([two-phase mass variance](reports/phase1g_e_two_phase_sigma.md)):
+  empty Boolean voids plus the wall-internal field give σ ≈ 1.36–1.57 in
+  8 h⁻¹ Mpc spheres with [W09]'s void size (0.9–2.1 across closures). This is
+  a conditional nonlinear quantity, not an observational σ8.
 - **Status.** These are conditional numbers, not an observational σ8, and no
   σ8 authorization is granted.
 

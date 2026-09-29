@@ -1,0 +1,247 @@
+{
+  "authorization": "project owner 2026-09-29: proceed with Phase 1G-E",
+  "base": "5ab2394",
+  "branch": "phase-1g-e-two-phase-sigma",
+  "cases": {
+    "NW15_CMB_FIT": {
+      "D_wall_t0": 0.94551,
+      "R_Mpc": 13.1148,
+      "f_v0": 0.627,
+      "monte_carlo_a15": {
+        "f_v_nominal": 0.627,
+        "f_v_realisation": 0.625,
+        "f_w_mc": 0.3784,
+        "f_w_realisation_analytic": 0.375,
+        "max_rel_err_gated": 0.0091,
+        "n_balls": 6322,
+        "sigma2_part_analytic_realisation": 0.8234,
+        "sigma2_part_mc": 0.8199,
+        "ungated_small_xi": {
+          "u=1.0": 0.004010508190297024,
+          "u=1.5": 0.07422199452121458
+        }
+      },
+      "pair_identity_rel_err": 1.6942342199748202e-12,
+      "rows": [
+        {
+          "sigma_int_compressed_fw13": 0.8326,
+          "sigma_int_uncompressed": 1.0433,
+          "sigma_part": 0.3994,
+          "sigma_total_compressed_fw13_dv-0.8": 0.8918,
+          "sigma_total_compressed_fw13_dv-0.9": 0.9069,
+          "sigma_total_compressed_fw13_dv-1.0": 0.9234,
+          "sigma_total_uncompressed_dv-0.8": 1.0911,
+          "sigma_total_uncompressed_dv-0.9": 1.1034,
+          "sigma_total_uncompressed_dv-1.0": 1.1171,
+          "void_radius_h_inv_Mpc": 5.0
+        },
+        {
+          "sigma_int_compressed_fw13": 0.9006,
+          "sigma_int_uncompressed": 1.1299,
+          "sigma_part": 0.6032,
+          "sigma_total_compressed_fw13_dv-0.8": 1.0217,
+          "sigma_total_compressed_fw13_dv-0.9": 1.0516,
+          "sigma_total_compressed_fw13_dv-1.0": 1.0839,
+          "sigma_total_uncompressed_dv-0.8": 1.2286,
+          "sigma_total_uncompressed_dv-0.9": 1.2535,
+          "sigma_total_uncompressed_dv-1.0": 1.2808,
+          "void_radius_h_inv_Mpc": 7.5
+        },
+        {
+          "sigma_int_compressed_fw13": 0.9482,
+          "sigma_int_uncompressed": 1.1919,
+          "sigma_part": 0.7462,
+          "sigma_total_compressed_fw13_dv-0.8": 1.1205,
+          "sigma_total_compressed_fw13_dv-0.9": 1.162,
+          "sigma_total_compressed_fw13_dv-1.0": 1.2066,
+          "sigma_total_uncompressed_dv-0.8": 1.333,
+          "sigma_total_uncompressed_dv-0.9": 1.3681,
+          "sigma_total_uncompressed_dv-1.0": 1.4062,
+          "void_radius_h_inv_Mpc": 10.0
+        },
+        {
+          "sigma_int_compressed_fw13": 1.0056,
+          "sigma_int_uncompressed": 1.2672,
+          "sigma_part": 0.9108,
+          "sigma_total_compressed_fw13_dv-0.8": 1.2418,
+          "sigma_total_compressed_fw13_dv-0.9": 1.2973,
+          "sigma_total_compressed_fw13_dv-1.0": 1.3567,
+          "sigma_total_uncompressed_dv-0.8": 1.4618,
+          "sigma_total_uncompressed_dv-0.9": 1.5092,
+          "sigma_total_uncompressed_dv-1.0": 1.5606,
+          "void_radius_h_inv_Mpc": 15.0
+        },
+        {
+          "sigma_int_compressed_fw13": 1.038,
+          "sigma_int_uncompressed": 1.31,
+          "sigma_part": 1.0004,
+          "sigma_total_compressed_fw13_dv-0.8": 1.3107,
+          "sigma_total_compressed_fw13_dv-0.9": 1.3741,
+          "sigma_total_compressed_fw13_dv-1.0": 1.4416,
+          "sigma_total_uncompressed_dv-0.8": 1.5351,
+          "sigma_total_uncompressed_dv-0.9": 1.5896,
+          "sigma_total_uncompressed_dv-1.0": 1.6483,
+          "void_radius_h_inv_Mpc": 20.0
+        },
+        {
+          "sigma_int_compressed_fw13": 1.0729,
+          "sigma_int_uncompressed": 1.3563,
+          "sigma_part": 1.0947,
+          "sigma_total_compressed_fw13_dv-0.8": 1.385,
+          "sigma_total_compressed_fw13_dv-0.9": 1.4567,
+          "sigma_total_compressed_fw13_dv-1.0": 1.5328,
+          "sigma_total_uncompressed_dv-0.8": 1.6145,
+          "sigma_total_uncompressed_dv-0.9": 1.6764,
+          "sigma_total_uncompressed_dv-1.0": 1.743,
+          "void_radius_h_inv_Mpc": 30.0
+        }
+      ],
+      "sigma_wall_internal_no_partition": 0.891
+    },
+    "PAPER_REFERENCE": {
+      "D_wall_t0": 0.87679,
+      "R_Mpc": 10.9544,
+      "f_v0": 0.737,
+      "monte_carlo_a15": {
+        "f_v_nominal": 0.737,
+        "f_v_realisation": 0.7354,
+        "f_w_mc": 0.267,
+        "f_w_realisation_analytic": 0.2646,
+        "max_rel_err_gated": 0.0151,
+        "n_balls": 8569,
+        "sigma2_part_analytic_realisation": 1.2677,
+        "sigma2_part_mc": 1.28,
+        "ungated_small_xi": {
+          "u=1.5": 0.04690247640860412
+        }
+      },
+      "pair_identity_rel_err": 1.6943452444977543e-12,
+      "rows": [
+        {
+          "sigma_int_compressed_fw13": 0.8483,
+          "sigma_int_uncompressed": 1.1264,
+          "sigma_part": 0.4835,
+          "sigma_total_compressed_fw13_dv-0.8": 0.9324,
+          "sigma_total_compressed_fw13_dv-0.9": 0.9534,
+          "sigma_total_compressed_fw13_dv-1.0": 0.9765,
+          "sigma_total_uncompressed_dv-0.8": 1.191,
+          "sigma_total_uncompressed_dv-0.9": 1.2075,
+          "sigma_total_uncompressed_dv-1.0": 1.2258,
+          "void_radius_h_inv_Mpc": 5.0
+        },
+        {
+          "sigma_int_compressed_fw13": 0.9424,
+          "sigma_int_uncompressed": 1.2541,
+          "sigma_part": 0.7342,
+          "sigma_total_compressed_fw13_dv-0.8": 1.1105,
+          "sigma_total_compressed_fw13_dv-0.9": 1.151,
+          "sigma_total_compressed_fw13_dv-1.0": 1.1947,
+          "sigma_total_uncompressed_dv-0.8": 1.3848,
+          "sigma_total_uncompressed_dv-0.9": 1.4175,
+          "sigma_total_uncompressed_dv-1.0": 1.4532,
+          "void_radius_h_inv_Mpc": 7.5
+        },
+        {
+          "sigma_int_compressed_fw13": 1.0097,
+          "sigma_int_uncompressed": 1.3477,
+          "sigma_part": 0.9146,
+          "sigma_total_compressed_fw13_dv-0.8": 1.2469,
+          "sigma_total_compressed_fw13_dv-0.9": 1.3027,
+          "sigma_total_compressed_fw13_dv-1.0": 1.3623,
+          "sigma_total_uncompressed_dv-0.8": 1.5335,
+          "sigma_total_uncompressed_dv-0.9": 1.5792,
+          "sigma_total_uncompressed_dv-1.0": 1.6287,
+          "void_radius_h_inv_Mpc": 10.0
+        },
+        {
+          "sigma_int_compressed_fw13": 1.0926,
+          "sigma_int_uncompressed": 1.4645,
+          "sigma_part": 1.1298,
+          "sigma_total_compressed_fw13_dv-0.8": 1.418,
+          "sigma_total_compressed_fw13_dv-0.9": 1.4926,
+          "sigma_total_compressed_fw13_dv-1.0": 1.5717,
+          "sigma_total_uncompressed_dv-0.8": 1.7209,
+          "sigma_total_uncompressed_dv-0.9": 1.7829,
+          "sigma_total_uncompressed_dv-1.0": 1.8496,
+          "void_radius_h_inv_Mpc": 15.0
+        },
+        {
+          "sigma_int_compressed_fw13": 1.1405,
+          "sigma_int_uncompressed": 1.5324,
+          "sigma_part": 1.2511,
+          "sigma_total_compressed_fw13_dv-0.8": 1.5174,
+          "sigma_total_compressed_fw13_dv-0.9": 1.6027,
+          "sigma_total_compressed_fw13_dv-1.0": 1.6929,
+          "sigma_total_uncompressed_dv-0.8": 1.8303,
+          "sigma_total_uncompressed_dv-0.9": 1.9016,
+          "sigma_total_uncompressed_dv-1.0": 1.9783,
+          "void_radius_h_inv_Mpc": 20.0
+        },
+        {
+          "sigma_int_compressed_fw13": 1.1931,
+          "sigma_int_uncompressed": 1.6073,
+          "sigma_part": 1.382,
+          "sigma_total_compressed_fw13_dv-0.8": 1.6266,
+          "sigma_total_compressed_fw13_dv-0.9": 1.7236,
+          "sigma_total_compressed_fw13_dv-1.0": 1.8258,
+          "sigma_total_uncompressed_dv-0.8": 1.9508,
+          "sigma_total_uncompressed_dv-0.9": 2.0323,
+          "sigma_total_uncompressed_dv-1.0": 2.1197,
+          "void_radius_h_inv_Mpc": 30.0
+        }
+      ],
+      "sigma_wall_internal_no_partition": 0.9121
+    }
+  },
+  "classification": "REPORT_ONLY_THEORY_AUDIT_WITH_NUMERICAL_EVIDENCE",
+  "date": "2026-09-29",
+  "evidence_artifact_gitignored": "artifacts/independent/phase1g_e_two_phase_sigma.json",
+  "evidence_script": "scripts/phase1g_e_two_phase_sigma_numerics.py",
+  "frozen_scientific_status": {
+    "OBSERVATIONAL_AUTHORIZATION": "NOT_GRANTED",
+    "SIGMA8_AUTHORIZATION": "NOT_GRANTED"
+  },
+  "headline_8_h_inv_Mpc": {
+    "NW15_CMB_FIT_a15_tracker": 1.357,
+    "PAPER_REFERENCE_a15_tracker": 1.572,
+    "range_NW15": [
+      0.89,
+      1.74
+    ],
+    "range_PAPER": [
+      0.93,
+      2.12
+    ],
+    "ratio_to_planck_linear_sigma8": [
+      1.67,
+      1.94
+    ]
+  },
+  "model": {
+    "assumptions": {
+      "E1": "two phases: empty voids (tracker), walls at <rho>/f_w with linear internal field",
+      "E2": "Boolean voids: Poisson balls of radius a, lambda V_a = -ln f_w",
+      "E3": "wall field independent of void geometry",
+      "E4": "Eulerian wall field: isotropic compression s = f_w^(1/3) (primary) or s = 1 (bracket)"
+    },
+    "class": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+    "formula": "sigma^2 = delta_v^2 sigma_part^2 + sigma_int^2"
+  },
+  "package_code_changed": false,
+  "phase": "1G-E",
+  "recommendations_require_human_approval": [
+    "Phase 1G-F: self-consistent excursion-set void population from the 1G-D early spectrum and void response; test against f_v0",
+    "matched nonlinear observable computed identically for data, LCDM and Timescape",
+    "status token TWO_PHASE_MASS_VARIANCE_8_H_INV_MPC = DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION"
+  ],
+  "report": "reports/phase1g_e_two_phase_sigma.md",
+  "schema_version": 1,
+  "status_tokens_changed": false,
+  "title": "Two-phase mass variance at 8 h^-1 Mpc in the Timescape model",
+  "verification": {
+    "first_run_note": "nominal-intensity comparison failed at 14% (Poisson count fluctuation); fixed by realisation-intensity comparison, gate unchanged",
+    "monte_carlo_gated_max_rel_err": "<= 1.5%",
+    "pair_identity": "int P_R j0 = W^2 to 1.7e-12",
+    "recovers_1G-C_sigma_wall": true
+  }
+}
