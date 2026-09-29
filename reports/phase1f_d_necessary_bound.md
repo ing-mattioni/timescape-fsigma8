@@ -183,3 +183,39 @@ conditional diagnostic without promoting the scientific interpretation.
 The historical phase-specific 1F-C-R validator (which hard-codes an older
 branch/remote tip) was not repurposed; its relevant comparison, syntax,
 import and preservation checks were performed directly for this checkpoint.
+
+## Integration onto the review-remediation main (2026-09-29)
+
+The text above records the checkpoint on base `118b8f3`. On 2026-09-29 the
+work was committed there as `7d181c8`, after both suites passed again with
+718 tests (Python 3.14.3 and 3.11.9).
+
+It was then rebased without conflict onto `7d5d8ce`, the F4 audit-recovery
+commit. That commit's parent is `main` = `origin/main` = `e98998b`, which
+includes the F1–F9 review fixes and the LTB-CMC experiment. The rebased
+commit is `95a0e0a`.
+- The module, its tests and this report are byte-identical to `7d181c8`.
+  The patch-id is unchanged.
+- The README paragraph applied unchanged. This follow-up commit only updates
+  the `CLAUDE.md` architecture table and phase ledger and adds this section.
+- Nothing in 1F-D uses the F7 `G` arguments or the F1 initial conditions.
+  The frozen tracker functions it compares against (`fv`, `tau_w`,
+  `dtau_w_dt`, `H_D`, `TrackerParams`) are unchanged.
+
+Suites on the integrated tree (Windows 11), run the same way as above:
+
+| Run | Result |
+|---|---|
+| Python 3.14.3 | 914 passed, 2 failed |
+| Python 3.11.9 | 914 passed, 2 failed |
+
+914 = 850 on the F4 commit + the 64 Phase 1F-D tests, all of which pass.
+The two failures are
+`tests/test_experimental_ltb_cmc_kappa_sensitivity.py::test_dimensional_powers[0.0001]`
+and `[10000.0]`.
+- They are pre-existing on `7d5d8ce`, with the same count on both
+  interpreters, and are unrelated to 1F-D.
+- They are recorded in `phase1f_c_r_f2_f4_f9_remediation.md` §12, not fixed.
+
+Phase 1F-D has had no adversarial audit and no phase tag. Its scientific
+statuses and all `NOT_GRANTED` authorizations are unchanged.

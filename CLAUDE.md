@@ -46,6 +46,7 @@ Strictly layered; each layer imports only from the ones above it.
 | Forward runtime (1F-A) | `phase1f_a/` | Conditional theoretical forward realization over the frozen 1E-G operator: broken regional Laplace–Beltrami assembly, regional density/expansion inversion, sharp carrier density, regional/carrier spectra, external longitudinal boost, dressed map, sealed orchestrator |
 | Boost dynamics (1F-B) | `phase1f_b/` | Conditional, non-observational scalar dust-to-wall boost propagation with explicit fail-closed closures |
 | Wall geometry (1F-C) | `phase1f_c/` | Conditional clock-anchored wall/common-spacetime kinematic geometry and optional scalar metric-trace reconstruction |
+| Necessary bound (1F-D) | `phase1f_d.py` | Conditional scalar positive-core necessary-bound diagnostic in the explicit (t, b, C) parameterization; standard library only, no solver, root finder or time scan; a positive margin establishes no existence |
 
 ### Conventions that pervade the scientific packages
 
@@ -212,8 +213,11 @@ transmission realization · **1E-G** continuum-geometric H1 realization ·
 geometry · **1F-C-R** Astra independent-audit remediation (v1, v2) ·
 post-remediation independent review (`phase1f_c_r_post_remediation_independent_audit.md`,
 findings F1–F9) and its fixes: F1 growing-mode ICs, F3 H1 kinematic gates,
-F2/F4–F9 remediation (`phase1f_c_r_f2_f4_f9_remediation.md`). Phase 1F-D has
-not begun.
+F2/F4–F9 remediation (`phase1f_c_r_f2_f4_f9_remediation.md`).
+
+In progress: **1F-D** minimal scalar necessary-bound diagnostic
+(`phase1f_d_necessary_bound.md`); conditional, awaiting its adversarial audit
+and tag.
 
 Each entry maps to a `reports/phase<id>_*.md` file — read it before touching
 the corresponding code.
