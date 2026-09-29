@@ -47,6 +47,7 @@ Strictly layered; each layer imports only from the ones above it.
 | Boost dynamics (1F-B) | `phase1f_b/` | Conditional, non-observational scalar dust-to-wall boost propagation with explicit fail-closed closures |
 | Wall geometry (1F-C) | `phase1f_c/` | Conditional clock-anchored wall/common-spacetime kinematic geometry and optional scalar metric-trace reconstruction |
 | Necessary bound (1F-D) | `phase1f_d.py` | Conditional scalar positive-core necessary-bound diagnostic in the explicit (t, b, C) parameterization; standard library only, no solver, root finder or time scan; a positive margin establishes no existence |
+| LTB–CMC experiment (outside the phases) | `experimental_ltb_cmc/` | Isolated, conditional spherical LTB dust background with constant-mean-curvature slicing (BVP solver), tracker-clock comparison adapter, single-age section-family evolution, kappa_star and mixed sensitivities; imports only NumPy/SciPy and its own modules; distinct from 1F-D and promotes no scientific status |
 
 ### Conventions that pervade the scientific packages
 
@@ -118,9 +119,9 @@ Timescape predictions; their missing closures stay explicit external inputs.
 py -3.14 -m venv .venv
 .venv\Scripts\python -m pip install -e ".[exec,test]"
 
-# Full validation suite (723 passed + 1 skipped at the review-remediation
-# checkpoint; oracle and generated-artifact tests auto-skip when their inputs
-# are absent)
+# Full validation suite (916 passed on Windows, Python 3.14.3 and 3.11.9, at
+# the Phase 1F-D checkpoint; oracle and generated-artifact tests auto-skip
+# when their inputs are absent)
 .venv\Scripts\python -m pytest -q
 
 # A single file / single test / keyword selection
@@ -213,11 +214,16 @@ transmission realization · **1E-G** continuum-geometric H1 realization ·
 geometry · **1F-C-R** Astra independent-audit remediation (v1, v2) ·
 post-remediation independent review (`phase1f_c_r_post_remediation_independent_audit.md`,
 findings F1–F9) and its fixes: F1 growing-mode ICs, F3 H1 kinematic gates,
-F2/F4–F9 remediation (`phase1f_c_r_f2_f4_f9_remediation.md`).
+F2/F4–F9 remediation (`phase1f_c_r_f2_f4_f9_remediation.md`; the three F4
+audits were recovered and committed, §12) · **1F-D** minimal scalar
+necessary-bound diagnostic (`phase1f_d_necessary_bound.md`, tag
+`phase-1f-d-necessary-bound-v1`; conditional).
 
-In progress: **1F-D** minimal scalar necessary-bound diagnostic
-(`phase1f_d_necessary_bound.md`); conditional, awaiting its adversarial audit
-and tag.
+Outside the phase sequence: the isolated, conditional **LTB–CMC experiment**
+(`experimental_ltb_cmc/`). Its reports are `reports/experimental_ltb_cmc*.md`,
+including the Italian research note
+`experimental_ltb_cmc_p187_p189_prosecuzione.md`. It is distinct from 1F-D,
+promotes no scientific status and has no phase tag.
 
 Each entry maps to a `reports/phase<id>_*.md` file — read it before touching
 the corresponding code.

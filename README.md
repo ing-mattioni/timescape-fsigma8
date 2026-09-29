@@ -158,6 +158,8 @@ The earlier implementation milestones below remain useful provenance:
 | `src/timescape_fsigma8/phase1f_a/` | Phase 1F-A conditional forward realization: regional density/expansion inversion, carrier density, spectra, external boost, dressed map |
 | `src/timescape_fsigma8/phase1f_b/` | Phase 1F-B conditional scalar dust-to-wall boost dynamics |
 | `src/timescape_fsigma8/phase1f_c/` | Phase 1F-C conditional wall/common-spacetime kinematic geometry |
+| `src/timescape_fsigma8/phase1f_d.py` | Phase 1F-D conditional scalar positive-core necessary-bound diagnostic (no solver; a positive margin establishes no existence) |
+| `src/timescape_fsigma8/experimental_ltb_cmc/` | Isolated, conditional LTB–CMC experiment outside the phase sequence: CMC-sliced LTB background, tracker-clock comparison, single-age evolution, kappa_star and mixed sensitivities |
 | `src/timescape_fsigma8/components.py` | Tensor-component ontology (coordinate/orthonormal representations, 1F-C-R) |
 | `src/timescape_fsigma8/scientific_status.py` | Current cross-phase scientific classifications (1F-C-R successor record) |
 | `scripts/validate_anchored_density_growth.py` | Phase 1D-D Candidate A validation (regenerable on any clean descendant of the 1D-D commit) |
@@ -180,7 +182,9 @@ The earlier implementation milestones below remain useful provenance:
 | `reports/phase1d_b_growth_pipeline_validation.md` | Phase 1D-B growth-pipeline implementation and validation report |
 | `reports/phase1d_c_*`, `phase1d_d_*`, `phase1d_d_t_*` | Observable-closure audit, Candidate A validation, D3 frame-mapping adjudication |
 | `reports/phase1e_*` | Dressed-observable bridge, light-cone velocity, transfer closure, regional matching, realization selection, H1 and continuum H1 realizations (with adversarial audits) |
-| `reports/phase1f_*` | 1F-A/1F-B/1F-C conditional runtimes, 1F-C-R remediation, the post-remediation review and its F1/F3/F2–F9 fixes |
+| `reports/phase1f_*` | 1F-A/1F-B/1F-C conditional runtimes, 1F-C-R remediation, the post-remediation review and its F1/F3/F2–F9 fixes, the 1F-D necessary-bound diagnostic |
+| `astra/INDEPENDENT_SCIENTIFIC_AUDIT.md` | The independent audit that 1F-C-R remediates (recovered F4 provenance, pinned SHA-256) |
+| `reports/experimental_ltb_cmc*.md` | LTB–CMC experiment reports (background, evolution, kappa_star and mixed sensitivities) and the Italian P187–P189 research note |
 | `AGENTS.md` | Permanent project rules (scientific-integrity constraints) |
 | `pyproject.toml` | Package + minimal dependency declaration |
 
