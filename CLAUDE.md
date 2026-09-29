@@ -248,8 +248,23 @@ In progress (σ track; no adversarial audit or tag yet):
   - σ8 lies inside [W09]'s ≈100 h⁻¹ Mpc dust cells, so mass-weighted σ(M8)
     follows the wall law: 0.83–0.96 (equal mass: 0.834 for [GM], 0.935 for
     the [NW15] CMB fit).
-  - The volume-average CGI values, 0.52–0.69, are the super-cell growth.
+  - The volume-average CGI values, 0.52–0.69, are the super-cell growth
+    (superseded by 1G-D).
   - The super-cell/sub-cell transition law is `NOT_DERIVED`.
+- **1G-D:** separate-universe structure (report-only,
+  `phase1g_d_separate_universe_growth.md`).
+  - The tracker has one time scale: `f_v = t/(t+τ)`, with τ = 1F-D's `b`.
+  - Long-wavelength modes are the wall-curvature mode (`f_w δ_w`) and the
+    void-onset mode (`ε f_v`). Both are exact k→0 solutions of [GM]
+    (4.9)–(4.11).
+  - **[GM]'s comoving, Mészáros and barotropic closures fail this
+    separate-universe test,** so the volume-average CGI growth is not
+    Timescape's long-wavelength growth.
+  - With a peak-background-split void response, the model predicts its own
+    homogeneity scale (10% density at 128–215 h⁻¹ Mpc).
+  - At 8 h⁻¹ Mpc the void fraction is non-perturbative, so a linear
+    global-mean σ8 is not defined. The only linear statistic is σ_wall; an
+    observable σ8 needs a nonlinear two-phase model (proposed 1G-E).
 - `SIGMA8_AUTHORIZATION` stays `NOT_GRANTED`.
 
 Outside the phase sequence: the isolated, conditional **LTB–CMC experiment**

@@ -32,9 +32,16 @@ implemented, and the frozen scientific statuses are preserved.
   shows that the tracker is exactly empty Milne voids plus Einstein–de Sitter
   walls in common time.
 - **Results.** Mass-weighted σ at the Planck 8 h⁻¹ Mpc mass follows the
-  wall-regional growth law: 0.83–0.96 with a Planck early universe. The
-  volume-average values (0.52–0.69) describe super-homogeneity modes.
-- **Open.** The transition between the two regimes is not derived.
+  wall-regional growth law: 0.83–0.96 with a Planck early universe.
+- **Phase 1G-D** ([separate-universe audit](reports/phase1g_d_separate_universe_growth.md)):
+  - the paper's CGI closures fail Timescape's own long-wavelength
+    (separate-universe) consistency test, so the volume-average values
+    (0.52–0.69) are not Timescape's large-scale growth;
+  - with a peak-background-split void response, the model predicts a
+    homogeneity scale of 128–215 h⁻¹ Mpc;
+  - at 8 h⁻¹ Mpc the void/wall partition is non-perturbative. The
+    wall-internal σ is the only linear statistic there, and an observable σ8
+    needs a nonlinear two-phase model.
 - **Status.** These are conditional numbers, not an observational σ8, and no
   σ8 authorization is granted.
 

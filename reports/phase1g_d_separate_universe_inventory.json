@@ -1,0 +1,443 @@
+{
+  "authorization": "project owner 2026-09-29: continue with next theory step, Phase 1G-D",
+  "base": "214a626",
+  "branch": "phase-1g-d-growth-transition",
+  "cases": {
+    "NW15_CMB_FIT": {
+      "R_star_h_inv_Mpc": {
+        "PBS_f_vi=0.0001": {
+          "density_10pct": 167.2,
+          "eps=1": 40.9,
+          "void_fraction_10pct": 117.8
+        },
+        "PBS_f_vi=0.01": {
+          "density_10pct": 128.4,
+          "eps=1": 28.0,
+          "void_fraction_10pct": 88.3
+        },
+        "W09_single_perturbation_|dH|=1e-5": {
+          "density_10pct": 1003.7,
+          "eps=1": 353.3,
+          "void_fraction_10pct": 751.6
+        },
+        "W09_single_perturbation_|dH|=1e-6": {
+          "density_10pct": 3500.9,
+          "eps=1": 1297.9,
+          "void_fraction_10pct": 2650.7
+        }
+      },
+      "closure_table": [
+        {
+          "gm_barotropic": {
+            "Ptilde_over_Delta_eff_cs2": -0.4999989457069574
+          },
+          "gm_comoving": {
+            "Delta_eff_over_Delta_d": 0.20000310150652234,
+            "Ptilde": 0.0
+          },
+          "gm_meszaros": {
+            "Delta_eff": 0.0
+          },
+          "su_eps": {
+            "Delta_eff_over_Delta_d": -595.0210957988951,
+            "Ptilde_over_Delta_eff": -0.49937095981299345,
+            "raychaudhuri_4_11_rel_residual": 6.339373864737845e-17
+          },
+          "su_wall": {
+            "Delta_eff_over_Delta_d": -495.6425536169079,
+            "Ptilde_over_Delta_eff": -0.33255001062908124,
+            "raychaudhuri_4_11_rel_residual": 2.2001307532943957e-16
+          },
+          "t_over_t0": 0.001
+        },
+        {
+          "gm_barotropic": {
+            "Ptilde_over_Delta_eff_cs2": -0.49989918637638336
+          },
+          "gm_comoving": {
+            "Delta_eff_over_Delta_d": 0.2000265891456634,
+            "Ptilde": 0.0
+          },
+          "gm_meszaros": {
+            "Delta_eff": 0.0
+          },
+          "su_eps": {
+            "Delta_eff_over_Delta_d": -59.61231318949937,
+            "Ptilde_over_Delta_eff": -0.49382610693537266,
+            "raychaudhuri_4_11_rel_residual": 7.082937483838075e-17
+          },
+          "su_wall": {
+            "Delta_eff_over_Delta_d": -49.46833654854454,
+            "Ptilde_over_Delta_eff": -0.32559934178366506,
+            "raychaudhuri_4_11_rel_residual": 2.4423513876382073e-16
+          },
+          "t_over_t0": 0.01
+        },
+        {
+          "gm_barotropic": {
+            "Ptilde_over_Delta_eff_cs2": -0.493241666847269
+          },
+          "gm_comoving": {
+            "Delta_eff_over_Delta_d": 0.1999069823031431,
+            "Ptilde": 0.0
+          },
+          "gm_meszaros": {
+            "Delta_eff": 0.0
+          },
+          "su_eps": {
+            "Delta_eff_over_Delta_d": -6.054084079439437,
+            "Ptilde_over_Delta_eff": -0.44790916643589024,
+            "raychaudhuri_4_11_rel_residual": 3.1215258430362666e-16
+          },
+          "su_wall": {
+            "Delta_eff_over_Delta_d": -4.834527928650093,
+            "Ptilde_over_Delta_eff": -0.264061648097004,
+            "raychaudhuri_4_11_rel_residual": 1.0928652642926076e-16
+          },
+          "t_over_t0": 0.1
+        },
+        {
+          "gm_barotropic": {
+            "Ptilde_over_Delta_eff_cs2": -0.46908798125331663
+          },
+          "gm_comoving": {
+            "Delta_eff_over_Delta_d": 0.1983444948673261,
+            "Ptilde": 0.0
+          },
+          "gm_meszaros": {
+            "Delta_eff": 0.0
+          },
+          "su_eps": {
+            "Delta_eff_over_Delta_d": -2.062741455456602,
+            "Ptilde_over_Delta_eff": -0.3840082219938335,
+            "raychaudhuri_4_11_rel_residual": 2.308761775226722e-16
+          },
+          "su_wall": {
+            "Delta_eff_over_Delta_d": -1.5055905109910734,
+            "Ptilde_over_Delta_eff": -0.15666002437193116,
+            "raychaudhuri_4_11_rel_residual": 5.125717138993012e-16
+          },
+          "t_over_t0": 0.3
+        },
+        {
+          "gm_barotropic": {
+            "Ptilde_over_Delta_eff_cs2": -0.4145511553254547
+          },
+          "gm_comoving": {
+            "Delta_eff_over_Delta_d": 0.19018899110389767,
+            "Ptilde": 0.0
+          },
+          "gm_meszaros": {
+            "Delta_eff": 0.0
+          },
+          "su_eps": {
+            "Delta_eff_over_Delta_d": -0.6381326827295112,
+            "Ptilde_over_Delta_eff": -0.2967365463583315,
+            "raychaudhuri_4_11_rel_residual": 1.4522508465917703e-16
+          },
+          "su_wall": {
+            "Delta_eff_over_Delta_d": -0.314359052384712,
+            "Ptilde_over_Delta_eff": 0.1973171416701269,
+            "raychaudhuri_4_11_rel_residual": 1.793602195621535e-15
+          },
+          "t_over_t0": 1.0
+        }
+      ],
+      "eps_mode_vs_package_max": 1.0354468904516523e-07,
+      "implied_void_response_growth_factor": {
+        "comoving": 79.91,
+        "meszaros": 72.2
+      },
+      "max_raychaudhuri_4_11_residual": 1.793602195621535e-15,
+      "pbs": {
+        "f_vi=0.0001": {
+          "A_v": 4723.802038686531,
+          "nu": 3.7190164854556804
+        },
+        "f_vi=0.01": {
+          "A_v": 3180.4999456372398,
+          "nu": 2.3263478740408408
+        }
+      },
+      "super_cell_growth": {
+        "PBS_f_vi=0.0001": {
+          "A_v_a_LS": 4.3298,
+          "D_SU_t0": 3.0675,
+          "X_SU": 3.8936
+        },
+        "PBS_f_vi=0.01": {
+          "A_v_a_LS": 2.9152,
+          "D_SU_t0": 2.1805,
+          "X_SU": 2.7678
+        },
+        "beta0": {
+          "D_SU_t0": 0.3527,
+          "X_SU": 0.4477
+        }
+      },
+      "tau_over_t0": 0.5949,
+      "void_response_at_R8": {
+        "PBS_f_vi=0.0001": 4.328,
+        "PBS_f_vi=0.01": 2.914,
+        "W09_single_perturbation_|dH|=1e-5": 91.62,
+        "W09_single_perturbation_|dH|=1e-6": 916.205
+      }
+    },
+    "PAPER_REFERENCE": {
+      "R_star_h_inv_Mpc": {
+        "PBS_f_vi=0.0001": {
+          "density_10pct": 214.6,
+          "eps=1": 45.0,
+          "void_fraction_10pct": 103.7
+        },
+        "PBS_f_vi=0.01": {
+          "density_10pct": 164.8,
+          "eps=1": 30.2,
+          "void_fraction_10pct": 75.3
+        },
+        "W09_single_perturbation_|dH|=1e-5": {
+          "density_10pct": 1365.4,
+          "eps=1": 438.3,
+          "void_fraction_10pct": 767.2
+        },
+        "W09_single_perturbation_|dH|=1e-6": {
+          "density_10pct": 4754.7,
+          "eps=1": 1615.3,
+          "void_fraction_10pct": 2734.6
+        }
+      },
+      "closure_table": [
+        {
+          "gm_barotropic": {
+            "Ptilde_over_Delta_eff_cs2": -0.4999970798083657
+          },
+          "gm_comoving": {
+            "Delta_eff_over_Delta_d": 0.20000511469115587,
+            "Ptilde": 0.0
+          },
+          "gm_meszaros": {
+            "Delta_eff": 0.0
+          },
+          "su_eps": {
+            "Delta_eff_over_Delta_d": -356.97671028837266,
+            "Ptilde_over_Delta_eff": -0.498952812628767,
+            "raychaudhuri_4_11_rel_residual": 1.4583269248063362e-16
+          },
+          "su_wall": {
+            "Delta_eff_over_Delta_d": -297.2722149256008,
+            "Ptilde_over_Delta_eff": -0.33202873129771066,
+            "raychaudhuri_4_11_rel_residual": 1.5288602217714515e-16
+          },
+          "t_over_t0": 0.001
+        },
+        {
+          "gm_barotropic": {
+            "Ptilde_over_Delta_eff_cs2": -0.49972879931414904
+          },
+          "gm_comoving": {
+            "Delta_eff_over_Delta_d": 0.2000390472267933,
+            "Ptilde": 0.0
+          },
+          "gm_meszaros": {
+            "Delta_eff": 0.0
+          },
+          "su_eps": {
+            "Delta_eff_over_Delta_d": -35.80639004050438,
+            "Ptilde_over_Delta_eff": -0.4898470863755338,
+            "raychaudhuri_4_11_rel_residual": 3.2482883542125415e-16
+          },
+          "su_wall": {
+            "Delta_eff_over_Delta_d": -29.62990055913459,
+            "Ptilde_over_Delta_eff": -0.32055864170419335,
+            "raychaudhuri_4_11_rel_residual": 2.7049829884794528e-17
+          },
+          "t_over_t0": 0.01
+        },
+        {
+          "gm_barotropic": {
+            "Ptilde_over_Delta_eff_cs2": -0.48540282677098795
+          },
+          "gm_comoving": {
+            "Delta_eff_over_Delta_d": 0.1995241486527483,
+            "Ptilde": 0.0
+          },
+          "gm_meszaros": {
+            "Delta_eff": 0.0
+          },
+          "su_eps": {
+            "Delta_eff_over_Delta_d": -3.6635595163736445,
+            "Ptilde_over_Delta_eff": -0.42217529039070756,
+            "raychaudhuri_4_11_rel_residual": 3.7919602164812277e-16
+          },
+          "su_wall": {
+            "Delta_eff_over_Delta_d": -2.8413038731075977,
+            "Ptilde_over_Delta_eff": -0.22510417209175218,
+            "raychaudhuri_4_11_rel_residual": 3.451954211991346e-16
+          },
+          "t_over_t0": 0.1
+        },
+        {
+          "gm_barotropic": {
+            "Ptilde_over_Delta_eff_cs2": -0.4481575035687938
+          },
+          "gm_comoving": {
+            "Delta_eff_over_Delta_d": 0.19610041179151125,
+            "Ptilde": 0.0
+          },
+          "gm_meszaros": {
+            "Delta_eff": 0.0
+          },
+          "su_eps": {
+            "Delta_eff_over_Delta_d": -1.2537489313092478,
+            "Ptilde_over_Delta_eff": -0.3462804171494786,
+            "raychaudhuri_4_11_rel_residual": 1.370023581396159e-16
+          },
+          "su_wall": {
+            "Delta_eff_over_Delta_d": -0.8297065450806744,
+            "Ptilde_over_Delta_eff": -0.06351872598828488,
+            "raychaudhuri_4_11_rel_residual": 4.638372711757118e-16
+          },
+          "t_over_t0": 0.3
+        },
+        {
+          "gm_barotropic": {
+            "Ptilde_over_Delta_eff_cs2": -0.39123813653116096
+          },
+          "gm_comoving": {
+            "Delta_eff_over_Delta_d": 0.18330006143991814,
+            "Ptilde": 0.0
+          },
+          "gm_meszaros": {
+            "Delta_eff": 0.0
+          },
+          "su_eps": {
+            "Delta_eff_over_Delta_d": -0.38695396874969423,
+            "Ptilde_over_Delta_eff": -0.266624445851805,
+            "raychaudhuri_4_11_rel_residual": 7.287975761654999e-17
+          },
+          "su_wall": {
+            "Delta_eff_over_Delta_d": -0.10358407013907128,
+            "Ptilde_over_Delta_eff": 0.9326998456427644,
+            "raychaudhuri_4_11_rel_residual": 7.877043610165602e-16
+          },
+          "t_over_t0": 1.0
+        }
+      ],
+      "eps_mode_vs_package_max": 5.065786641278436e-07,
+      "implied_void_response_growth_factor": {
+        "comoving": 72.59,
+        "meszaros": 62.91
+      },
+      "max_raychaudhuri_4_11_residual": 7.877043610165602e-16,
+      "pbs": {
+        "f_vi=0.0001": {
+          "A_v": 4260.450233622632,
+          "nu": 3.7190164854556804
+        },
+        "f_vi=0.01": {
+          "A_v": 2868.528703246563,
+          "nu": 2.3263478740408408
+        }
+      },
+      "super_cell_growth": {
+        "PBS_f_vi=0.0001": {
+          "A_v_a_LS": 3.9051,
+          "D_SU_t0": 3.1086,
+          "X_SU": 3.9459
+        },
+        "PBS_f_vi=0.01": {
+          "A_v_a_LS": 2.6293,
+          "D_SU_t0": 2.1684,
+          "X_SU": 2.7524
+        },
+        "beta0": {
+          "D_SU_t0": 0.2306,
+          "X_SU": 0.2927
+        }
+      },
+      "tau_over_t0": 0.35685,
+      "void_response_at_R8": {
+        "PBS_f_vi=0.0001": 3.827,
+        "PBS_f_vi=0.01": 2.577,
+        "W09_single_perturbation_|dH|=1e-5": 89.821,
+        "W09_single_perturbation_|dH|=1e-6": 898.211
+      }
+    }
+  },
+  "classification": "REPORT_ONLY_THEORY_AUDIT_WITH_NUMERICAL_EVIDENCE",
+  "date": "2026-09-29",
+  "evidence_artifact_gitignored": "artifacts/independent/phase1g_d_separate_universe.json",
+  "evidence_script": "scripts/phase1g_d_separate_universe_numerics.py",
+  "findings": {
+    "gm_closures_su_consistency": {
+      "barotropic": "FAILS (Ptilde/Delta_eff = c_s^2 only asymptotically early for the void-onset mode)",
+      "class": "DERIVED + NUMERICALLY_CORROBORATED",
+      "comoving": "FAILS (Delta_eff/Delta_d +0.18..+0.20 vs SU < 0; Ptilde 0 vs SU != 0; implied response not constant)",
+      "meszaros": "FAILS (Delta_eff = 0)"
+    },
+    "one_time_scale": {
+      "class": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "law": "f_v = t/(t+tau), tau = (2+f_v0)(1-f_v0)/(3 f_v0 H_D0) = Phase 1F-D b"
+    },
+    "separate_universe_modes": {
+      "class": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "closure": "separate-universe closure",
+      "exact_k0_solutions_of": "GM (4.9)-(4.11)",
+      "void_onset_mode": "eps f_v(t)",
+      "wall_mode_cell_contrast": "f_w delta_w, delta_w ~ t^(2/3) or t^-1"
+    },
+    "sigma8_location": {
+      "class": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "defined_linear_statistic": "sigma_wall (1G-C: 0.83-0.96)",
+      "linear_global_mean_sigma8": "NOT_DEFINED_IN_LINEAR_TWO_SCALE_THEORY",
+      "observable_route": "nonlinear two-phase statistic (Phase 1G-E)",
+      "void_response_at_R8": "2.6-4.3 (PBS) >> 1"
+    },
+    "super_cell_growth_law": {
+      "assumptions": [
+        "S1 separate universe (regions are two-scale trackers)",
+        "S2 void-onset response eps = A_v delta_L(LSS)"
+      ],
+      "class": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "law": "D_SU = f_w D_wall + A_v a_LS f_v"
+    },
+    "transition_length_scale": {
+      "class": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "pbs_density_10pct_h_inv_Mpc": "128-215 (matches W09 '100 h^-1 Mpc or somewhat larger')",
+      "pbs_nonperturbative_h_inv_Mpc": "28-45",
+      "w09_single_perturbation_density_10pct_h_inv_Mpc": "1004-4755 (inconsistent with W09 homogeneity claim)"
+    },
+    "void_onset_response": {
+      "W09_single_perturbation": "A_v = 1/|delta_H| = 1e5-1e6",
+      "class": "EXTERNAL_CLOSURE_INPUT",
+      "peak_background_split": "A_v = phi(nu)/(sigma_s Phi(-nu)) ~ 2.9e3-4.7e3 (seed R = W09 void radius / 1.72)"
+    }
+  },
+  "frozen_scientific_status": {
+    "OBSERVATIONAL_AUTHORIZATION": "NOT_GRANTED",
+    "SIGMA8_AUTHORIZATION": "NOT_GRANTED"
+  },
+  "package_code_changed": false,
+  "phase": "1G-D",
+  "recommendations_require_human_approval": [
+    "status tokens: GM_CGI_CLOSURES_SEPARATE_UNIVERSE_CONSISTENCY = FAILED_FOR_TIMESCAPE_TRACKER; TWO_SCALE_SUPER_CELL_GROWTH_LAW = DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION; VOID_ONSET_RESPONSE = EXTERNAL_CLOSURE_INPUT; LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC = NOT_DEFINED_IN_LINEAR_TWO_SCALE_THEORY",
+    "1G-B runtime: documented limitation (no numerical change)",
+    "Phase 1G-E: nonlinear two-phase sigma(R) from a void population model plus sigma_wall",
+    "finite-k separate-universe closure for GM's system",
+    "author questions (comoving closure vs separate universe; f_vi vs local primordial density)"
+  ],
+  "report": "reports/phase1g_d_separate_universe_growth.md",
+  "schema_version": 1,
+  "status_tokens_changed": false,
+  "supersedes": [
+    "1G-C Sec. 8 reading of CGI as super-cell law and its P(k) step",
+    "1G-C Sec. 9 'open problem settled' beyond the wall-internal linear statistic"
+  ],
+  "title": "Separate-universe structure of two-scale Timescape growth and the transition length scale",
+  "unchanged": [
+    "1G-A Sec. 4",
+    "1G-A Sec. 6",
+    "1G-C Sec. 3",
+    "1G-C Sec. 5"
+  ]
+}
