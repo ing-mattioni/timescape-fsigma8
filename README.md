@@ -58,7 +58,10 @@ implemented, and the frozen scientific statuses are preserved.
     `NOT_DEFINED_IN_LINEAR_TWO_SCALE_THEORY`.
 
   The σ(M) runtime's results now state the matching limitation of each
-  growth law (text only; the numbers are unchanged).
+  growth law (text only; the numbers are unchanged). A seventh token,
+  `TWO_PHASE_MASS_VARIANCE_8_H_INV_MPC = DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION`,
+  records the 1G-E two-phase variance under its assumptions E1–E4
+  ([successor record](reports/phase1g_e_status_addition_successor.md)).
 - **Status.** These are conditional numbers, not an observational σ8, and no
   σ8 authorization is granted.
 

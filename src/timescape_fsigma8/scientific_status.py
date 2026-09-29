@@ -5,7 +5,8 @@ record says so, refutations; they neither change equations nor assert
 nonexistence of every possible embedding. Historical phase reports remain
 checkpoint evidence and are superseded for current interpretation by 1F-C-R
 and its successor records (reports/phase1g_a_barotropic_status_successor.md
-changes one token; reports/phase1g_status_additions_successor.md adds six).
+changes one token; reports/phase1g_status_additions_successor.md adds six;
+reports/phase1g_e_status_addition_successor.md adds one).
 """
 
 from types import MappingProxyType
@@ -78,6 +79,17 @@ VOID_ONSET_RESPONSE = "EXTERNAL_CLOSURE_INPUT"
 # authorisation: SIGMA8_AUTHORIZATION stays NOT_GRANTED.  Owner approval
 # 2026-09-29.
 LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC = "NOT_DEFINED_IN_LINEAR_TWO_SCALE_THEORY"
+# Phase 1G-E Sec. 2 (reports/phase1g_e_two_phase_sigma.md), proposed in its
+# Sec. 6 item 3: the two-phase mass variance in 8 h^-1 Mpc balls,
+# sigma^2 = delta_v^2 sigma_part^2 + sigma_int^2, is derived only under
+# assumptions E1-E4 (empty voids; Boolean Poisson balls of one radius at
+# volume fraction f_v0; wall field independent of the void geometry;
+# isotropic Eulerian compression of the wall field).  It is a conditional,
+# nonlinear, model-internal quantity, not an observational sigma_8, and it
+# grants nothing: SIGMA8_AUTHORIZATION stays NOT_GRANTED.  An addition, not a
+# change, with the project owner's approval dated 2026-09-29; successor record
+# reports/phase1g_e_status_addition_successor.md.
+TWO_PHASE_MASS_VARIANCE_8_H_INV_MPC = "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION"
 
 REMAINING_SCIENTIFIC_CLOSURES = (
     "REGIONAL_COMMON_BACKGROUND_AND_SOURCE_EMBEDDING",

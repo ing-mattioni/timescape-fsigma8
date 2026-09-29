@@ -295,8 +295,12 @@ In progress (σ track; no adversarial audit or tag yet):
   snapshot has no entry for them. The 1F-C-R validator accepts a new token
   only if a registered successor record declares it; it must still be absent
   from the snapshot, and the live value must match the record. No existing
-  token changed. The 1G-E proposal `TWO_PHASE_MASS_VARIANCE_8_H_INV_MPC` is
-  not approved or added.
+  token changed.
+  - With owner approval (2026-09-29, a separate record,
+    `phase1g_e_status_addition_successor.md`), the 1G-E proposal
+    `TWO_PHASE_MASS_VARIANCE_8_H_INV_MPC = DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION`
+    (assumptions E1–E4) is added the same way. It is the seventh addition;
+    the validator registers three successor records.
 - `SIGMA8_AUTHORIZATION` stays `NOT_GRANTED`.
 
 Outside the phase sequence: the isolated, conditional **LTB–CMC experiment**
