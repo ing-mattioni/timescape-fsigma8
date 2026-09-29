@@ -1,0 +1,161 @@
+{
+  "authorization": "project owner 2026-09-29: continue with the next steps starting with Phase 1G-C",
+  "base": "462121c (Phase 1G-A)",
+  "branch": "phase-1g-c-two-scale-growth-law",
+  "cases": {
+    "NW15_CMB_FIT": {
+      "X_wall": 1.200172,
+      "g_wall_vs_volume_average_EdS": 0.71984,
+      "sigma_M8_wall_planck_anchored": {
+        "bare_8_over_hbar_volume_average": 0.9582,
+        "dressed_8_over_h_wall_comoving": 0.891,
+        "equal_mass_M8_planck": 0.9347
+      },
+      "tau_w_flat_dust_friedmann_residual_today": 0.7253,
+      "volume_average_cgi": {
+        "comoving": {
+          "X": 0.858568,
+          "power_step": 1.9541
+        },
+        "meszaros": {
+          "X": 0.764551,
+          "power_step": 2.4642
+        }
+      },
+      "wall_overdensity_rho_w_over_mean": 2.681
+    },
+    "PAPER_REFERENCE": {
+      "X_wall": 1.112945,
+      "g_wall_vs_volume_average_EdS": 0.640696,
+      "sigma_M8_wall_planck_anchored": {
+        "bare_8_over_hbar_volume_average": 0.9599,
+        "dressed_8_over_h_wall_comoving": 0.9121,
+        "equal_mass_M8_planck": 0.8339
+      },
+      "tau_w_flat_dust_friedmann_residual_today": 0.8728,
+      "volume_average_cgi": {
+        "comoving": {
+          "X": 0.699461,
+          "power_step": 2.5317
+        },
+        "meszaros": {
+          "X": 0.593553,
+          "power_step": 3.5158
+        }
+      },
+      "wall_overdensity_rho_w_over_mean": 3.8023
+    }
+  },
+  "classification": "REPORT_ONLY_THEORY_AUDIT_WITH_NUMERICAL_EVIDENCE",
+  "date": "2026-09-29",
+  "evidence_artifact_gitignored": "artifacts/independent/phase1g_c_two_scale_growth.json",
+  "evidence_script": "scripts/phase1g_c_two_scale_growth_numerics.py",
+  "frozen_scientific_status": {
+    "OBSERVATIONAL_AUTHORIZATION": "NOT_GRANTED",
+    "SIGMA8_AUTHORIZATION": "NOT_GRANTED"
+  },
+  "g_Lambda": 0.787813,
+  "package_code_changed": false,
+  "phase": "1G-C",
+  "power_step_fv0_scan": [
+    {
+      "X_cgi_comoving": 0.9999,
+      "X_cgi_meszaros": 0.9247,
+      "X_wall": 1.2593,
+      "fv0": 0.5,
+      "power_step_comoving": 1.5863,
+      "power_step_meszaros": 1.8546
+    },
+    {
+      "X_cgi_comoving": 0.892,
+      "X_cgi_meszaros": 0.8017,
+      "X_wall": 1.2158,
+      "fv0": 0.6,
+      "power_step_comoving": 1.8579,
+      "power_step_meszaros": 2.3
+    },
+    {
+      "X_cgi_comoving": 0.8586,
+      "X_cgi_meszaros": 0.7646,
+      "X_wall": 1.2002,
+      "fv0": 0.627,
+      "power_step_comoving": 1.9541,
+      "power_step_meszaros": 2.4642
+    },
+    {
+      "X_cgi_comoving": 0.765,
+      "X_cgi_meszaros": 0.6628,
+      "X_wall": 1.1513,
+      "fv0": 0.695,
+      "power_step_comoving": 2.2654,
+      "power_step_meszaros": 3.0176
+    },
+    {
+      "X_cgi_comoving": 0.6995,
+      "X_cgi_meszaros": 0.5936,
+      "X_wall": 1.1129,
+      "fv0": 0.737,
+      "power_step_comoving": 2.5317,
+      "power_step_meszaros": 3.5158
+    },
+    {
+      "X_cgi_comoving": 0.5878,
+      "X_cgi_meszaros": 0.4794,
+      "X_wall": 1.0392,
+      "fv0": 0.8,
+      "power_step_comoving": 3.1255,
+      "power_step_meszaros": 4.6996
+    }
+  ],
+  "recommendations_require_human_approval": [
+    "Phase 1G-B exposes both growth laws as explicit non-default choices (scope addition already sent to the implementer)",
+    "status tokens: TWO_SCALE_MASS_WEIGHTED_SUB_CELL_GROWTH_LAW = DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION; SUPER_CELL_TO_SUB_CELL_GROWTH_TRANSITION = NOT_DERIVED",
+    "Phase 1G-D: growth-transition model with an explicit length scale (e.g. LTB-CMC cell ensemble)",
+    "author questions on sub-homogeneity applicability of CGI and the regional wall law"
+  ],
+  "regional_growth_law": {
+    "X_wall_formula": "gamma_w0 (1 - f_v0)^(1/3) / g_Lambda",
+    "assumptions": {
+      "A1": "W09 no backreaction within walls/voids (exact on tracker)",
+      "A2": "GM CGI dust-frame equations on the wall regional background (GM RZA precedent)",
+      "A3": "sigma(M) mass-weighted; no mass in voids",
+      "A4": "Lagrangian scale below the dust-cell scale"
+    },
+    "class": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+    "law": "Delta_w ~ t^(2/3) (regional GM 4.27 exact, rho_eff,w = 0)",
+    "numerical_dev_from_t23": 1.5709655798445965e-13
+  },
+  "report": "reports/phase1g_c_two_scale_growth_law.md",
+  "scale_hierarchy": {
+    "W09_homogeneity_scale": "100 h^-1 Mpc or somewhat larger; acoustic ~110 h^-1 Mpc; dust cells coarse-grained there (W09 lines 311-461)",
+    "class": "VERIFIED_FROM_PRIMARY_SOURCE",
+    "sigma8_radius_vs_cell": "about 10x smaller"
+  },
+  "schema_version": 1,
+  "status_tokens_changed": false,
+  "supersedes": "1G-A volume-average sigma(M8) for sub-cell mass-weighted statistics; those values remain the super-cell growth",
+  "title": "Two-scale linear growth law for Timescape sigma(M)",
+  "tracker_two_region_structure": {
+    "class": "DERIVED_FROM_VERIFIED_DEFINITIONS; numerically verified <= 3e-15",
+    "identities": [
+      "H_D = f_v H_v + f_w H_w",
+      "<rho> = f_w rho_w",
+      "Q_D = 6 f_v f_w (H_v - H_w)^2 (W09 Eq. Q1)",
+      "<R> = -6 f_v / t^2",
+      "gamma_w H_w = H_D (GM 5.3)"
+    ],
+    "max_identity_error": 2.886579864025407e-15,
+    "voids": "empty Milne: a_v ~ t, H_v = 1/t, rho_v = 0",
+    "walls": "Einstein-de Sitter in common time t: a_w,reg ~ t^(2/3), rho_w = 1/(6 pi G t^2)"
+  },
+  "transition_law": {
+    "class": "NOT_DERIVED",
+    "reason": "tracker is self-similar (no length scale); W09 places the scale at ~100-110 h^-1 Mpc"
+  },
+  "wall_clock_variant": {
+    "class": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+    "consistent_with": "NAIVE_W09_WALL_CLOCK_AS_REGIONAL_PROPER_DUST_FLRW_CLOCK = REJECTED_UNSUPPORTED",
+    "residual": "gamma_w^2 - 1",
+    "verdict": "INADMISSIBLE"
+  }
+}
