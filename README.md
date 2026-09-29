@@ -14,7 +14,12 @@ and its [machine-readable inventory](reports/phase1f_c_r_astra_audit_remediation
 Earlier reports and inventories are preserved historical checkpoints; their
 source attributions and physical-compatibility claims are superseded by this
 record where specified. The accepted 1F-C realization and kinematic verdict
-remain unchanged. Phase 1F-D has not begun.
+remain unchanged. A minimal conditional
+[Phase 1F-D scalar necessary-bound diagnostic](reports/phase1f_d_necessary_bound.md)
+is now available in `timescape_fsigma8.phase1f_d`. It tests only the strict
+positive-core margin; a positive result does not establish existence or
+physical compatibility. No Phase 1F-D geometric or perturbative solver is
+implemented, and the frozen scientific statuses are preserved.
 
 Imported regional dust-FLRW equations are conditional on their regional
 backgrounds. Their physical embedding into the common Timescape spacetime,
