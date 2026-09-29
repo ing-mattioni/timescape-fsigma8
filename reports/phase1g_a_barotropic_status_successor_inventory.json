@@ -1,0 +1,230 @@
+{
+  "branch": "phase-1g-a-barotropic-status-refutation",
+  "classification": "APPROVED_SCIENTIFIC_STATUS_CHANGE_SUCCESSOR_RECORD",
+  "date": "2026-09-29",
+  "evidence": {
+    "cs2_eff_corrected": {
+      "source": "frozen Phase 1B",
+      "t0": -0.3912,
+      "z_20": -0.4996
+    },
+    "direct_slope_32pi_to_64pi": {
+      "derived_4_10": 1.6994,
+      "printed_4_15": 1.6996
+    },
+    "float64_log_max": 709.78,
+    "linear_barotropic_sigma_R_exists": false,
+    "matrix_symbol": "A23*A32 = -c_s^2 k^2/a_D^2 > 0 ([GM] Eqs. (4.15), (4.17)); D3 changes only the k-independent A33",
+    "principal_part": "[GM] Eq. (4.19): Delta_eff_ddot - c_s^2 (3)Laplacian Delta_eff; elliptic in space-time for c_s^2 < 0",
+    "reference_script": "scripts/phase1g_a_sigma8_path_numerics.py::barotropic_evidence",
+    "regression_test": "tests/test_barotropic_hadamard_refutation.py",
+    "slope_approach": "from below; gap to alpha roughly halves when k doubles (ratio 2.15-2.16; algebraic WKB prefactor)",
+    "units": "dressed H0 = 1, matrix-convention k (UPSTREAM_TIMESCAPE_K), z = 20 to t0",
+    "wkb_alpha": 1.706948,
+    "wkb_exponent_at_kR_1_R8": 875.4
+  },
+  "files_changed": [
+    "README.md",
+    "reports/phase1g_a_barotropic_status_successor.md",
+    "reports/phase1g_a_barotropic_status_successor_inventory.json",
+    "scripts/validate_phase1f_c_r_astra_remediation.py",
+    "src/timescape_fsigma8/perturbations/barotropic.py",
+    "src/timescape_fsigma8/scientific_status.py",
+    "tests/test_barotropic_hadamard_refutation.py"
+  ],
+  "human_approval": {
+    "approves": "reports/phase1g_a_sigma8_derivation_path_audit.md Sec. 10 recommendation 1",
+    "by": "project owner",
+    "date": "2026-09-29",
+    "verbatim": "let ... another [sub-agent] mark the barothropic closure as refuted, I give you the approval"
+  },
+  "parent_commit": "462121c02b2891cc01390ff05072c1d9fd203ef4",
+  "phase": "1G-A",
+  "regression_tolerances": {
+    "alpha_minus_slope_band_32pi_64pi": [
+      0.0,
+      0.01
+    ],
+    "alpha_quad": {
+      "abserr_max": 1e-10,
+      "epsabs": 0.0,
+      "epsrel": 1e-12,
+      "limit": 400
+    },
+    "alpha_rtol_vs_1_706948": 1e-06,
+    "cs2_endpoint_atol": 5e-05,
+    "cs2_sign_samples": 2001,
+    "d3_slope_difference_atol": 0.001,
+    "gap_ratio_band_16pi_32pi_over_32pi_64pi": [
+      1.5,
+      3.0
+    ],
+    "sigma8_exponent_atol": 0.05,
+    "slope_record_atol": 0.0001,
+    "solver": {
+      "atol": 1e-30,
+      "method": "DOP853",
+      "rtol": 1e-10
+    },
+    "symbol_identity_rtol": 1e-13
+  },
+  "report": "reports/phase1g_a_barotropic_status_successor.md",
+  "schema_version": 1,
+  "scope": {
+    "barotropic_executable_ast_identical": true,
+    "barotropic_runtime_changed": false,
+    "claude_md_edited": false,
+    "d3_branches": [
+      "printed_4_15",
+      "derived_4_10"
+    ],
+    "equations_changed": false,
+    "historical_reports_or_inventories_edited": false,
+    "other_status_tokens_changed": false,
+    "tolerances_changed": false
+  },
+  "status_changes": {
+    "UNRESTRICTED_BAROTROPIC_CONTINUUM_STABILITY": {
+      "evidence": "reports/phase1g_a_sigma8_derivation_path_audit.md Sec. 4.1; reports/phase1g_a_sigma8_derivation_path_inventory.json closure_admissibility.barotropic",
+      "evidence_class": "DERIVED_FROM_VERIFIED_DEFINITIONS+NUMERICALLY_CORROBORATED",
+      "meaning": "the linear barotropic closure ([GM] Eq. (4.13)) is not stable for unrestricted spatial data: with corrected c_s,eff^2 < 0 its Cauchy problem is ill-posed in Hadamard's sense and no linear barotropic sigma_R exists",
+      "module": "src/timescape_fsigma8/scientific_status.py",
+      "new_token": "REFUTED_HADAMARD_ILL_POSED",
+      "not_meant": [
+        "finite-mode ODEs ill-defined (each fixed k is a regular linear ODE with a unique solution)",
+        "any change to the barotropic runtime, its D3 branches, equations, ICs, units, signs or tolerances",
+        "any statement about the comoving or Meszaros closures (no c_s^2)",
+        "any authorization (UNIQUE_TIMESCAPE_PREDICTION, OBSERVATIONAL, RSD, SIGMA8, FSIGMA8 stay NOT_GRANTED)"
+      ],
+      "old_token": "NOT_DERIVED"
+    }
+  },
+  "superseded_frozen_readings": [
+    {
+      "current": "REFUTED_HADAMARD_ILL_POSED",
+      "frozen": "a stable unrestricted continuum physical prediction is NOT_DERIVED",
+      "location": "astra/INDEPENDENT_SCIENTIFIC_AUDIT.md A13"
+    },
+    {
+      "current": "caveat resolved negatively; finite-mode language stays correct",
+      "frozen": "A13 finite-mode versus unrestricted barotropic-continuum stability caveat is retained",
+      "location": "reports/phase1f_c_r_astra_audit_remediation.md l. 272-273"
+    },
+    {
+      "current": "REFUTED_HADAMARD_ILL_POSED",
+      "frozen": "NOT_DERIVED",
+      "location": "reports/phase1f_c_r_astra_audit_remediation_inventory.json current_scientific_status"
+    },
+    {
+      "current": "historically accurate; caveat now resolved negatively",
+      "frozen": "FINITE_MODE_BAROTROPIC_CONTINUUM_STABILITY_CAVEAT_RETAINED",
+      "location": "reports/phase1f_c_r_astra_audit_remediation_inventory.json A13 disposition"
+    },
+    {
+      "current": "approved 2026-09-29 and applied",
+      "frozen": "NOT_DERIVED; recommends REFUTED_HADAMARD_ILL_POSED (requires human approval)",
+      "location": "reports/phase1g_a_sigma8_derivation_path_audit.md l. 153-155, 482-483"
+    },
+    {
+      "current": "true of the 1G-A checkpoint; this record changes one token",
+      "frozen": "false",
+      "location": "reports/phase1g_a_sigma8_derivation_path_inventory.json status_tokens_changed"
+    }
+  ],
+  "title": "Successor record: barotropic continuum stability refuted (Hadamard ill-posed)",
+  "validation": {
+    "barotropic_executable_ast_identical_to_parent": true,
+    "environments": {
+      "checkout": "isolated worktree without .reference/ and artifacts/; package imported from the worktree src",
+      "flags": "-B -W error -p no:cacheprovider, PYTHONDONTWRITEBYTECODE=1",
+      "os": "Windows 11",
+      "python_3_11": {
+        "numpy": "2.4.6",
+        "python": "3.11.9",
+        "scipy": "1.17.1"
+      },
+      "python_3_14": {
+        "numpy": "2.5.2",
+        "python": "3.14.3",
+        "scipy": "1.18.1"
+      }
+    },
+    "full_suite": {
+      "after_change": {
+        "python_3_11": {
+          "passed": 894,
+          "skipped": 30
+        },
+        "python_3_14": {
+          "passed": 894,
+          "skipped": 30
+        }
+      },
+      "baseline_parent_462121c": {
+        "python_3_11": {
+          "passed": 886,
+          "skipped": 30
+        },
+        "python_3_14": {
+          "passed": 886,
+          "skipped": 30
+        }
+      },
+      "failures_errors_warnings": 0,
+      "skipped_by_file": {
+        "tests/test_anchored_density_growth.py": 1,
+        "tests/test_b2_artifact_schema.py": 1,
+        "tests/test_growth_convergence_purity.py": 1,
+        "tests/test_reproducibility_gates.py": 1,
+        "tests/test_vs_upstream_barotropic_oracle.py": 4,
+        "tests/test_vs_upstream_oracle.py": 18,
+        "tests/test_vs_upstream_perturbation_oracle.py": 4
+      },
+      "skips_identical_to_baseline": true
+    },
+    "mutation_check": "old token restored in a scratch package copy: the 2 status tests fail, 6 pass",
+    "new_regression_test": {
+      "file": "tests/test_barotropic_hadamard_refutation.py",
+      "passed": 8,
+      "runtime_seconds_approx": {
+        "python_3_11": 4,
+        "python_3_14": 3
+      }
+    },
+    "phase1f_c_r_validator": {
+      "absent_local_provenance_files": [
+        ".reference/Linear-Perturbations-in-averaged-cosmological-models/ACPT_Timescape.ipynb"
+      ],
+      "frozen_tags_verified": 27,
+      "historical_reports_unchanged": 52,
+      "identical_on_both_interpreters": true,
+      "json_roundtrips": 20,
+      "package_imports": 55,
+      "post_remediation_drift": [
+        "src/timescape_fsigma8/background/effective_fluid.py",
+        "src/timescape_fsigma8/background/tracker.py",
+        "src/timescape_fsigma8/perturbations/initial_conditions.py"
+      ],
+      "post_remediation_drift_note": "pre-existing F1/F7 drift; barotropic.py absent",
+      "status": "PASS_WITH_ABSENT_LOCAL_PROVENANCE",
+      "stubbed_call": "git -C .reference/Linear-Perturbations-in-averaged-cosmological-models rev-parse HEAD (clone absent; check not exercised)"
+    },
+    "remote": "nothing pushed or tagged",
+    "scientific_status_changed_assignments": [
+      "UNRESTRICTED_BAROTROPIC_CONTINUUM_STABILITY"
+    ],
+    "tolerance_audit": {
+      "comparisons": 590,
+      "comparisons_at_1G_A": 583,
+      "missing": 0,
+      "script": "scripts/audit_numerical_tolerances.py"
+    }
+  },
+  "validator_change": {
+    "frozen_inventory_edited": false,
+    "historical_check": "each superseded token must still hold old_token in the frozen current_scientific_status",
+    "live_check": "each superseded token must hold new_token in the live module; all other tokens must equal the frozen snapshot",
+    "registry": "STATUS_SUCCESSOR_RECORDS",
+    "script": "scripts/validate_phase1f_c_r_astra_remediation.py"
+  }
+}

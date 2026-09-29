@@ -33,6 +33,14 @@ LINE_ENDING_EQUIVALENTS = {
     "86d2534db9e9b3169835e4ce223ee8f3bff6d03b47e5677d3937fed4adafe55a":
         "628c441288d67854e0380518841dede3680bddab610e9ef5cea04937455cea2a",
 }
+# Human-approved successor records that supersede values of the frozen
+# inventory's ``current_scientific_status`` snapshot.  The frozen inventory is
+# never edited and is still checked: each superseded token must hold the
+# record's ``old_token`` there, and the live module its ``new_token``.
+STATUS_SUCCESSOR_RECORDS = (
+    # Phase 1G-A Sec. 4.1, approved 2026-09-29.
+    Path("reports/phase1g_a_barotropic_status_successor_inventory.json"),
+)
 
 
 def git(*args: str) -> str:
@@ -81,12 +89,44 @@ def unique_pairs(pairs):
     return result
 
 
+def successor_status_changes() -> dict[str, dict[str, str]]:
+    """Read the approved token changes of every registered successor record."""
+    changes: dict[str, dict[str, str]] = {}
+    for path in STATUS_SUCCESSOR_RECORDS:
+        record = json.loads(path.read_text(encoding="utf-8"), object_pairs_hook=unique_pairs)
+        for key, change in record["status_changes"].items():
+            assert key not in changes, f"{key}: superseded by more than one successor record"
+            changes[key] = {"old_token": change["old_token"], "new_token": change["new_token"],
+                            "record": path.as_posix()}
+    return changes
+
+
+def check_current_scientific_status(frozen, live, changes) -> None:
+    """Frozen snapshot versus live module, with approved successor changes.
+
+    A superseded token must still hold its old value in the frozen snapshot
+    (the historical check) and the successor's new value in the live module.
+    Every other token must equal the frozen snapshot.
+    """
+    assert set(changes) <= set(live), "successor record names a token the live module lacks"
+    for key, value in live.items():
+        current = list(value) if isinstance(value, tuple) else value
+        if key in changes:
+            assert frozen[key] == changes[key]["old_token"], (
+                f"{key}: frozen snapshot does not hold the superseded token")
+            assert current == changes[key]["new_token"], (
+                f"{key}: live value differs from the successor record")
+        else:
+            assert frozen[key] == current, key
+
+
 def validate(*, producers: bool = False) -> dict[str, object]:
     inventory = json.loads(INVENTORY.read_text(encoding="utf-8"), object_pairs_hook=unique_pairs)
     assert INVENTORY.read_bytes() == canonical(inventory), "inventory is not canonical UTF-8/LF JSON"
     assert canonical(json.loads(canonical(inventory))) == canonical(inventory)
-    for key, value in CURRENT_SCIENTIFIC_STATUS.items():
-        assert inventory["current_scientific_status"][key] == (list(value) if isinstance(value, tuple) else value)
+    status_changes = successor_status_changes()
+    check_current_scientific_status(
+        inventory["current_scientific_status"], CURRENT_SCIENTIFIC_STATUS, status_changes)
 
     for commit in (BASE, REMEDIATION):
         assert is_ancestor(commit), f"{commit} is not an ancestor of HEAD"
@@ -189,6 +229,7 @@ def validate(*, producers: bool = False) -> dict[str, object]:
             "certified_commit": REMEDIATION,
             "preserved_equations": preserved,
             "post_remediation_drift": sorted(post_remediation_drift),
+            "successor_status_changes": status_changes,
             "local_provenance_files": local_files,
             "absent_local_provenance_files": absent_local_files,
             "frozen_tags_verified": len(inventory["frozen_tags"]) - len(absent_tags),

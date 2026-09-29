@@ -8,9 +8,12 @@ arXiv:2511.17160v2.  The closure is [GM] Eq. (4.13), and the state is
 
 Phase 1D-D-t resolved D3 as RESOLVED_DERIVED_4_10. The printed branch remains
 an explicit forensic alternative, not an equally supported derived equation.
-Finite-mode ODE uniqueness does not establish continuum stability: negative
-corrected sound speed permits high-k amplification; unrestricted spatial
-data require a separate validity-scale and closure analysis.
+Finite-mode ODE uniqueness does not establish continuum stability. With the
+negative corrected sound speed the unrestricted continuum Cauchy problem is
+Hadamard ill-posed (Phase 1G-A Sec. 4.1; scientific_status
+UNRESTRICTED_BAROTROPIC_CONTINUUM_STABILITY = REFUTED_HADAMARD_ILL_POSED,
+approved 2026-09-29).  Each fixed-k system below remains a regular linear
+ODE and is kept unchanged for reproduction on both D3 branches.
 Only the corrected Phase 1B ``cs2_eff`` is used in this module; reproduction
 of the upstream D2 defect is deliberately outside the scientific package.
 """

@@ -41,9 +41,16 @@ Ranks 4, 5 and the optional +1=6 count differential field species, not freely
 selectable admissible initial functions after constraints and supplied
 histories. Conditional forward uniqueness assumes complete admissible data;
 it is not a trajectory-existence result. Finite-mode barotropic ODE uniqueness
-does not establish continuum stability: the negative corrected sound speed
-requires a separate validity-scale/closure analysis before unrestricted
-high-wavenumber use. No such research is introduced here.
+does not establish continuum stability, and Phase 1G-A refutes it
+([§4.1](reports/phase1g_a_sigma8_derivation_path_audit.md)): with the negative
+corrected sound speed the unrestricted barotropic Cauchy problem is Hadamard
+ill-posed (a mode of wavenumber k grows like exp(kα), α = 1.70695 from z = 20
+to today in dressed H0 = 1 units), so no linear barotropic σ_R exists.
+`UNRESTRICTED_BAROTROPIC_CONTINUUM_STABILITY` is therefore
+`REFUTED_HADAMARD_ILL_POSED` (human approval 2026-09-29;
+[successor record](reports/phase1g_a_barotropic_status_successor.md)). The
+finite-mode barotropic runtime and both D3 branches are unchanged and remain
+required for Fig. 3 reproduction.
 
 Phase 1F-C acceleration arrays explicitly distinguish coordinate covectors,
 coordinate contravariant components and physical orthonormal components in

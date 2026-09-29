@@ -1,8 +1,10 @@
 """Current cross-phase scientific classifications after Astra A07 (1F-C-R).
 
-These record missing derivations; they neither change equations nor assert
+These record missing derivations and, where a human-approved successor
+record says so, refutations; they neither change equations nor assert
 nonexistence of every possible embedding. Historical phase reports remain
-checkpoint evidence and are superseded for current interpretation by 1F-C-R.
+checkpoint evidence and are superseded for current interpretation by 1F-C-R
+and its successor records (reports/phase1g_a_barotropic_status_successor.md).
 """
 
 from types import MappingProxyType
@@ -23,7 +25,15 @@ OBSERVATIONAL_AUTHORIZATION = "NOT_GRANTED"
 RSD_AUTHORIZATION = "NOT_GRANTED"
 SIGMA8_AUTHORIZATION = "NOT_GRANTED"
 FSIGMA8_AUTHORIZATION = "NOT_GRANTED"
-UNRESTRICTED_BAROTROPIC_CONTINUUM_STABILITY = "NOT_DERIVED"
+# Phase 1G-A Sec. 4.1 (reports/phase1g_a_sigma8_derivation_path_audit.md):
+# with the corrected c_s,eff^2 < 0 the principal part of [GM] Eq. (4.19) is
+# elliptic in space-time, so the unrestricted barotropic Cauchy problem is
+# Hadamard ill-posed (growth ~ exp(k*alpha), alpha = 1.70695) and no linear
+# barotropic sigma_R exists.  Changed from NOT_DERIVED with the project
+# owner's approval dated 2026-09-29; successor record
+# reports/phase1g_a_barotropic_status_successor.md.  The finite-mode
+# barotropic runtime and both D3 branches are unchanged.
+UNRESTRICTED_BAROTROPIC_CONTINUUM_STABILITY = "REFUTED_HADAMARD_ILL_POSED"
 
 REMAINING_SCIENTIFIC_CLOSURES = (
     "REGIONAL_COMMON_BACKGROUND_AND_SOURCE_EMBEDDING",
