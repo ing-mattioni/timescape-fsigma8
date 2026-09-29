@@ -47,6 +47,7 @@ Strictly layered; each layer imports only from the ones above it.
 | Boost dynamics (1F-B) | `phase1f_b/` | Conditional, non-observational scalar dust-to-wall boost propagation with explicit fail-closed closures |
 | Wall geometry (1F-C) | `phase1f_c/` | Conditional clock-anchored wall/common-spacetime kinematic geometry and optional scalar metric-trace reconstruction |
 | Necessary bound (1F-D) | `phase1f_d.py` | Conditional scalar positive-core necessary-bound diagnostic in the explicit (t, b, C) parameterization; standard library only, no solver, root finder or time scan; a positive margin establishes no existence |
+| Lagrangian σ(M) (1G-B) | `lagrangian_sigma.py` | Conditional, model-internal, mass-labelled linear σ(M). Mandatory, non-default `GrowthLaw`: volume-average CGI regular growing mode (comoving, or Mészáros comparator), or wall-regional EdS in common time t (closure `NOT_APPLICABLE`). Per-photon ω_m,eff identity, EH98 early spectrum as `PROVISIONAL_MODEL_IMPORT`, explicit radius conventions, flat-ΛCDM reference and explicitly anchored ratios. Barotropic closure refused (1G-A §4.1). Lives outside `growth/` so the 1D-B firewall test stays intact |
 | LTB–CMC experiment (outside the phases) | `experimental_ltb_cmc/` | Isolated, conditional spherical LTB dust background with constant-mean-curvature slicing (BVP solver), tracker-clock comparison adapter, single-age section-family evolution, kappa_star and mixed sensitivities; imports only NumPy/SciPy and its own modules; distinct from 1F-D and promotes no scientific status |
 
 ### Conventions that pervade the scientific packages
@@ -82,6 +83,16 @@ authorised and which stays non-observational; do not add another. Phase
 `NOT_JUSTIFIED_FOR_OBSERVATIONAL_USE`. The `transfer/`, `phase1f_a/`,
 `phase1f_b/` and `phase1f_c/` runtimes are conditional research runtimes, not
 Timescape predictions; their missing closures stay explicit external inputs.
+
+**Authorised exception (Phase 1G-B, owner approval 2026-09-29).**
+`lagrangian_sigma.py` computes a conditional, model-internal, mass-labelled
+linear σ(M) with an explicit `PROVISIONAL_MODEL_IMPORT` early spectrum.
+- Its outputs carry `NON_OBSERVATIONAL` and `NOT_OBSERVATIONAL_SIGMA_8`.
+- No public name may contain `sigma8`, `sigma_8` or `8hMpc`.
+- It is not an observational σ8, and `SIGMA8_AUTHORIZATION` stays
+  `NOT_GRANTED`.
+
+Everything else in the list above stays unimplemented.
 
 ### Standing scientific caveats
 
@@ -119,9 +130,9 @@ Timescape predictions; their missing closures stay explicit external inputs.
 py -3.14 -m venv .venv
 .venv\Scripts\python -m pip install -e ".[exec,test]"
 
-# Full validation suite (916 passed on Windows, Python 3.14.3 and 3.11.9, at
-# the Phase 1F-D checkpoint; oracle and generated-artifact tests auto-skip
-# when their inputs are absent)
+# Full validation suite (1016 passed on Windows, Python 3.14.3 and 3.11.9, at
+# the Phase 1G integration checkpoint; oracle and generated-artifact tests
+# auto-skip when their inputs are absent)
 .venv\Scripts\python -m pytest -q
 
 # A single file / single test / keyword selection
@@ -219,12 +230,27 @@ audits were recovered and committed, §12) · **1F-D** minimal scalar
 necessary-bound diagnostic (`phase1f_d_necessary_bound.md`, tag
 `phase-1f-d-necessary-bound-v1`; conditional).
 
-In progress: **1G-A** σ(M) derivation-path audit (report-only,
-`phase1g_a_sigma8_derivation_path_audit.md`). The route is standard early
-universe plus comoving-closure growth. The barotropic closure is
-Hadamard ill-posed. Volume-average σ(M8) is 0.52–0.69, against 0.83–0.96
-for wall-regional growth, so the two-scale growth law is decisive. No
-status token has changed and `SIGMA8_AUTHORIZATION` stays `NOT_GRANTED`.
+In progress (σ track; no adversarial audit or tag yet):
+- **1G-A:** σ(M) derivation-path audit (report-only,
+  `phase1g_a_sigma8_derivation_path_audit.md`). The route is standard early
+  universe plus scale-independent growth; the barotropic closure is Hadamard
+  ill-posed.
+  - With owner approval (2026-09-29), `UNRESTRICTED_BAROTROPIC_CONTINUUM_STABILITY`
+    is `REFUTED_HADAMARD_ILL_POSED` (`phase1g_a_barotropic_status_successor.md`;
+    the 1F-C-R validator reads the live value from that record).
+  - The barotropic runtime and both D3 branches are unchanged.
+- **1G-B:** conditional Lagrangian σ(M) runtime (`lagrangian_sigma.py`,
+  `phase1g_b_lagrangian_sigma_validation.md`). It reproduces every 1G-A
+  number.
+- **1G-C:** two-scale growth law (report-only,
+  `phase1g_c_two_scale_growth_law.md`).
+  - The tracker is exactly empty Milne voids plus EdS walls in common time t.
+  - σ8 lies inside [W09]'s ≈100 h⁻¹ Mpc dust cells, so mass-weighted σ(M8)
+    follows the wall law: 0.83–0.96 (equal mass: 0.834 for [GM], 0.935 for
+    the [NW15] CMB fit).
+  - The volume-average CGI values, 0.52–0.69, are the super-cell growth.
+  - The super-cell/sub-cell transition law is `NOT_DERIVED`.
+- `SIGMA8_AUTHORIZATION` stays `NOT_GRANTED`.
 
 Outside the phase sequence: the isolated, conditional **LTB–CMC experiment**
 (`experimental_ltb_cmc/`). Its reports are `reports/experimental_ltb_cmc*.md`,

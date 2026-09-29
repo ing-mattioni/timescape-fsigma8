@@ -256,6 +256,13 @@ module. It is cross-checked by direct integration of the frozen
   z_i = 20 and ≤ 2e−11 over all z_i (both closures, all cases).
 - X depends only on f_v0: the paper and notebook presets agree to every
   digit.
+- **Precision note (from Phase 1G-B, 2026-09-29):**
+  - Starting at t_e = 1e−6 t0 leaves out a piece `c·f_v(t_e)` to first
+    order, with c = −13/20 (comoving) and −3/4 (Mészáros).
+  - This biases ln g by +1.8e−6 and +2.1e−6.
+  - The t_e → 0 limits are g_TS = 0.4026623 (comoving) and 0.3416935
+    (Mészáros), compared with the printed 0.402663 and 0.341694.
+  - This is inside the stated budget and changes no four-decimal X or σ.
 
 **Matching at finite z_i.** Matching at z_i = 20, the [GM] convention, gives
 X = 0.7035 (comoving). That is 0.6% above X∞; z_i = 100 gives 0.6998. So the
@@ -439,7 +446,11 @@ lim_{t_e→0} (t0/t_e)^{2/3}/(1+z_e) = γ_w0 (1 − f_v0)^{1/3} = ½(2+f_v0)(1�
 X_wall = γ_w0 (1 − f_v0)^{1/3} / g_Λ .
 ```
 
-The closed form was checked against the numerical limit to 1e−13.
+The closed form equals the exact finite-t_e identity
+`(t0/t_e)^{2/3}/(1+z_e) = γ_w0(1−f_v0)^{1/3}/[γ_w(t_e)(1−f_v(t_e))^{1/3}]`
+to ≤ 1e−15 (Phase 1G-B). The naive limit at t_e = 1e−8 t0 differs by
+−f_v(t_e)/6 ≈ −4.7e−9, as expected. (Corrected 2026-09-29: this line first
+claimed 1e−13 agreement with the naive limit.)
 
 | Parameters | X_wall | σ(M8), (a) equal mass | (b) dressed | (c) bare |
 |---|---|---|---|---|
