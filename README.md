@@ -21,7 +21,7 @@ positive-core margin; a positive result does not establish existence or
 physical compatibility. No Phase 1F-D geometric or perturbative solver is
 implemented, and the frozen scientific statuses are preserved.
 
-**σ(M) track (Phases 1G-A to 1G-F, in progress; 1G-A to 1G-E adversarially audited, not tagged):**
+**σ(M) track (Phases 1G-A to 1G-F, in progress; 1G-A to 1G-E adversarially audited; owner decisions of 2026-09-30 applied, not yet tagged):**
 - **Route.** The [σ(M) derivation-path audit](reports/phase1g_a_sigma8_derivation_path_audit.md)
   follows the authors' own proposal: standard early-universe physics, then
   scale-independent growth.
@@ -29,23 +29,31 @@ implemented, and the frozen scientific statuses are preserved.
   runtime is available in `timescape_fsigma8.lagrangian_sigma`
   ([validation](reports/phase1g_b_lagrangian_sigma_validation.md)).
 - **Two-scale structure.** [Phase 1G-C](reports/phase1g_c_two_scale_growth_law.md)
-  shows that the tracker is exactly empty Milne voids plus Einstein–de Sitter
-  walls in common time.
-- **Results.** Mass-weighted σ at the Planck 8 h⁻¹ Mpc mass follows the
-  wall-regional growth law: 0.83–0.96 with a Planck early universe.
+  shows that, kinematically, the tracker is empty Milne voids plus
+  Einstein–de Sitter walls in common time; its dynamics are exact under the
+  regional dust-FLRW assumption.
+- **Results.** The wall-internal linear σ at the Planck 8 h⁻¹ Mpc mass,
+  relative to the wall mean, follows the wall-regional growth law: 0.834
+  ([GM]) and 0.935 ([NW15]) with a Planck early universe, under assumptions
+  A1–A5 (A5: the wall matter clocks the common time). It is not a
+  global-mean σ8.
 - **Phase 1G-D** ([separate-universe audit](reports/phase1g_d_separate_universe_growth.md)):
-  - the paper's CGI closures fail Timescape's own long-wavelength
-    (separate-universe) consistency test, so the volume-average values
-    (0.52–0.69) are not Timescape's large-scale growth;
-  - with a peak-background-split void response, the model predicts a
-    homogeneity scale of 128–215 h⁻¹ Mpc;
-  - at 8 h⁻¹ Mpc the void/wall partition is non-perturbative. The
-    wall-internal σ is the only linear statistic there, and an observable σ8
-    needs a nonlinear two-phase model.
+  - under its separate-universe assumption S1, the paper's CGI closures fail
+    Timescape's own long-wavelength consistency test, so the volume-average
+    values (0.52–0.69) are not Timescape's large-scale growth;
+  - with a peak-background-split void response and a tracker-consistent
+    void seed, the 10% homogeneity scale is 61–84 h⁻¹ Mpc (172–215 with the
+    [SvdW04] seed factor);
+  - at 8 h⁻¹ Mpc the void onset is non-perturbative (|ε| ≈ 1) and the
+    dominant voids are larger than the sphere. The wall-internal σ is the
+    only linear statistic there, and an observable σ8 needs a nonlinear
+    two-phase model.
 - **Phase 1G-E** ([two-phase mass variance](reports/phase1g_e_two_phase_sigma.md)):
-  empty Boolean voids plus the wall-internal field give σ ≈ 1.36–1.57 in
-  8 h⁻¹ Mpc spheres with [W09]'s void size (0.9–2.1 across closures). This is
-  a conditional nonlinear quantity, not an observational σ8.
+  empty Boolean voids plus the wall-internal field, with a mass-conserving
+  formula. With the 1G-F derived void population σ ≈ 0.99 in 8 h⁻¹ Mpc
+  spheres; a single 15 h⁻¹ Mpc void radius, an idealisation, gives
+  1.52–1.76 (0.8–2.1 across the sensitivities). This is a conditional,
+  hybrid quantity, not an observational σ8.
 - **Phase 1G-F** ([self-consistent void population](reports/phase1g_f_void_population.md)):
   an excursion-set void size distribution from the same early spectrum,
   with the growth clock as an explicit closure. The tracker's void fraction
@@ -55,10 +63,20 @@ implemented, and the frozen scientific statuses are preserved.
   not an observational σ8).
 - **Adversarial audits** of 1G-A to 1G-E (one independent auditor per phase;
   [consolidation](reports/phase1g_adversarial_audit_errata_successor.md)):
-  every phase is accepted with corrections and awaits owner decisions before
-  tagging. No implemented equation is in error; the main findings concern
-  interpretation and inputs (the 1G-C wall σ, the 1G-D void-seed scale, the
-  1G-E non-empty-void formula and void population).
+  every phase is accepted with corrections. No implemented equation is in
+  error; the main findings concern interpretation and inputs (the 1G-C wall
+  σ, the 1G-D void-seed scale, the 1G-E non-empty-void formula and void
+  population).
+- **Owner decisions** (2026-09-30), one successor record per phase:
+  [1G-A](reports/phase1g_a_owner_decisions_successor.md),
+  [1G-B](reports/phase1g_b_owner_decisions_successor.md),
+  [1G-C](reports/phase1g_c_owner_decisions_successor.md),
+  [1G-D](reports/phase1g_d_owner_decisions_successor.md),
+  [1G-E](reports/phase1g_e_owner_decisions_successor.md). No token value,
+  equation or tolerance changes; the numbers above are the current readings.
+- **Windows validation** ([record](reports/phase1g_windows_validation_record.md)):
+  both interpreters pass the full suite, as on Linux, and every recorded
+  1G-A…1G-F number reproduces.
 - **Status tokens.** With owner approval (2026-09-29), six tokens record the
   1G-C/1G-D findings
   ([successor record](reports/phase1g_status_additions_successor.md)):
@@ -249,7 +267,7 @@ The earlier implementation milestones below remain useful provenance:
 | `reports/phase1e_*` | Dressed-observable bridge, light-cone velocity, transfer closure, regional matching, realization selection, H1 and continuum H1 realizations (with adversarial audits) |
 | `reports/phase1f_*` | 1F-A/1F-B/1F-C conditional runtimes, 1F-C-R remediation, the post-remediation review and its F1/F3/F2–F9 fixes, the 1F-D necessary-bound diagnostic |
 | `astra/INDEPENDENT_SCIENTIFIC_AUDIT.md` | The independent audit that 1F-C-R remediates (recovered F4 provenance, pinned SHA-256) |
-| `reports/phase1g_*` | σ(M) track: 1G-A derivation-path audit, barotropic status successor record, 1G-B runtime validation, 1G-C two-scale growth law |
+| `reports/phase1g_*` | σ(M) track: 1G-A…1G-F reports, status and errata successor records, adversarial audits, owner-decision successor records (2026-09-30) and the Windows validation record |
 | `reports/experimental_ltb_cmc*.md` | LTB–CMC experiment reports (background, evolution, kappa_star and mixed sensitivities) and the Italian P187–P189 research note |
 | `AGENTS.md` | Permanent project rules (scientific-integrity constraints) |
 | `pyproject.toml` | Package + minimal dependency declaration |

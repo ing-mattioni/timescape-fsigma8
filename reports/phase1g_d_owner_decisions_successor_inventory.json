@@ -1,0 +1,224 @@
+{
+  "branch": "phase-1g-owner-decisions",
+  "classification": "OWNER_DECISIONS_SUCCESSOR_RECORD",
+  "date": "2026-09-30",
+  "decisions": {
+    "GD-OD1": {
+      "alternative_seed": "svdw04_factor_1.72",
+      "applied": true,
+      "blocks_tag": true,
+      "finding": "GD-F1",
+      "frozen_readings": [
+        "[1G-D] Sec. 7 item 2 (seed scale)",
+        "[1G-D] Sec. 1 items 4-6",
+        "[1G-D] Secs. 6, 8, 9",
+        "[1G-D] inventory void_response_at_R8, findings.sigma8_location"
+      ],
+      "item_verbatim": "[B] **GD-OD1, void-seed scale (GD-F1).**",
+      "note": "the tick quotes the audit's ranges for f_vi in {1e-4, 1e-2} with the frozen S2; with GD-OD2 and GD-OD6 also applied the primary ranges are A_v sigma_LSS(R8) = 1.05-1.11 and X_SU = 1.26-1.28 (record Sec. 3)",
+      "primary_seed": "tracker_consistent",
+      "tick_verbatim": "[x] Tracker-consistent primary, `R_seed = R_void (f_vi/f_v0)^{1/3}/\u03b3_w0`, giving A_v \u03c3(R8) 1.05\u20131.5 and X_SU 1.30\u20131.63. Quote the [SvdW04]-factor values as the alternative."
+    },
+    "GD-OD2": {
+      "applied": true,
+      "blocks_tag": true,
+      "f_vi": "f_v(t_LS)",
+      "finding": "GD-F2",
+      "frozen_readings": [
+        "[1G-D] Sec. 7 item 2 Result (f_vi in {1e-4, 1e-2})"
+      ],
+      "item_verbatim": "[B] **GD-OD2, f_vi (GD-F2).**",
+      "tick_verbatim": "[x] Restrict f_vi to the tracker's f_v(t_LS): 9.47e\u22125 ([GM]) and 5.07e\u22125 ([NW15]).",
+      "z_last_scattering": 1090
+    },
+    "GD-OD3": {
+      "applied": true,
+      "assumption": "S1",
+      "blocks_tag": true,
+      "exactness_class": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "finding": "GD-F3",
+      "frozen_readings": [
+        "[1G-D] Sec. 1 items 2-4",
+        "[1G-D] Sec. 4 heading class",
+        "[1G-D] Sec. 6 table (A_v = 0 bound)"
+      ],
+      "gm_line_620": "the curvature within such idealised wall regions is not a free choice within the framework, but instead must be vanishing by construction",
+      "identification_class": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "item_verbatim": "[B] **GD-OD3 (GD-F3).**",
+      "tick_verbatim": "[x] Reclassify the SU-mode identification as `DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION` (S1), cite [GM] l. 620, and condition the headline and the X_SU lower bound on S1.",
+      "x_su_lower_bound_flat_walls": 0.0
+    },
+    "GD-OD4": {
+      "applied": true,
+      "blocks_tag": true,
+      "current_reading": "reading [W09] (initc) as a void-onset response, A_v = 1/|delta_H| (1G-D's construction), is not a viable response relation; it does not show that [W09] is internally inconsistent",
+      "finding": "GD-F4",
+      "frozen_readings": [
+        "[1G-D] Sec. 1 item 5",
+        "[1G-D] Sec. 8 Reading",
+        "[1G-D] inventory transition-scale finding"
+      ],
+      "item_verbatim": "[B] **GD-OD4 (GD-F4).**",
+      "tick_verbatim": "[x] Reword \"[W09] internally inconsistent\" as the auditor proposes."
+    },
+    "GD-OD5": {
+      "applied": true,
+      "artifact_field_not_renamed": "gm_meszaros.Delta_eff (frozen script)",
+      "barotropic_condition": "holds exactly for the global bang-time shift (decaying)",
+      "blocks_tag": true,
+      "finding": "GD-F5",
+      "growing_su_mode_satisfies": false,
+      "item_verbatim": "[B] **GD-OD5 (GD-F5).**",
+      "meszaros_condition": "delta Q = 0 (not Delta_eff = 0)",
+      "tick_verbatim": "[x] Correct the M\u00e9sz\u00e1ros/barotropic characterisation in the report, the inventory and the `GM_CGI_CLOSURES_SEPARATE_UNIVERSE_CONSISTENCY` comment. The value is unchanged.",
+      "token_comment": "GM_CGI_CLOSURES_SEPARATE_UNIVERSE_CONSISTENCY (value unchanged)"
+    },
+    "GD-OD6": {
+      "applied": true,
+      "blocks_tag": false,
+      "delta_L": "total_contrast_at_last_scattering",
+      "finding": "GD-F6",
+      "formula": "D_SU(t0) = f_w0 D_wall(t0) (1 - A_v f_vLS)/(1 - f_vLS) + A_v a_LS f_v0",
+      "item_verbatim": "**GD-OD6, definition of \u03b4_L in S2.** The effect on X_SU is about 3%.",
+      "tick_verbatim": "[x] Total contrast at last scattering."
+    },
+    "GD-OD7": {
+      "applied": true,
+      "blocks_tag": false,
+      "finding": "GD-F7",
+      "frozen_pbs_at_own_radius_NW15": {
+        "f_vi=1e-2": 2.969,
+        "f_vi=1e-4": 4.41
+      },
+      "item_verbatim": "**GD-OD7.**",
+      "tick_verbatim": "[x] Recompute \u03c3_LSS(R8) at [NW15]'s own radius (12.226 Mpc) in the new numerics script, and update the \"2.6\u20134.3\" token comment accordingly.",
+      "token_comment": "LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC (value unchanged; rationale not rebased)"
+    }
+  },
+  "evidence": {
+    "artifact_gitignored": "artifacts/independent/phase1g_owner_decisions.json",
+    "gates_passed": "124/124",
+    "interpreters_identical": "see reports/phase1g_windows_validation_record.md Sec. 7",
+    "script": "scripts/phase1g_owner_decisions_numerics.py"
+  },
+  "files_changed": [
+    "reports/phase1g_d_owner_decisions_successor.md",
+    "reports/phase1g_d_owner_decisions_successor_inventory.json",
+    "src/timescape_fsigma8/scientific_status.py",
+    "tests/test_phase1g_d_owner_decisions.py",
+    "CLAUDE.md",
+    "README.md"
+  ],
+  "frozen_files_sha256_lf": {
+    "reports/phase1g_adversarial_audit_errata_successor.md": "7fc67b7ded50fee3c9a182f9b01e5e5fc66c3d1fb80a6c69b97b9728105ce5a6",
+    "reports/phase1g_adversarial_audit_errata_successor_inventory.json": "8add47eb0d40fa9b891f17db89bb37944370181ccd357d4640a0c23f65c91ba9",
+    "reports/phase1g_d_adversarial_audit.md": "b0eb5ac461b5e5a93cc9f93e5f79543527c98b2d9a18fef3dc8e0fed47e54d02",
+    "reports/phase1g_d_adversarial_audit_inventory.json": "e81f0c22c56ab3bfcfb67cc32764d5df5a3c4db3f47611fac8499d861f72403c",
+    "reports/phase1g_d_separate_universe_growth.md": "05aa83f39746316eef4a3f85b32b0f17fc088e4490bb824e5721314e52e88b34",
+    "reports/phase1g_d_separate_universe_inventory.json": "c2043fe26a16a5d5fdfa8b60d259e21ce4770851086d9596647b42c1ca58b93e",
+    "reports/phase1g_status_additions_successor.md": "c01d2120fe848ce42090eaacde27055d80e2051809a6b90954c70e3ccf3c92d8",
+    "reports/phase1g_status_additions_successor_inventory.json": "84b133b0faaddef1444838418027d0b0937c55ae1e3549e91bdd17eaab3f3809",
+    "scripts/phase1g_d_separate_universe_numerics.py": "b47861888f5fcfb239dc06903aa7cfe9478a70316456f220c37e066c6404cf5f"
+  },
+  "human_approval": {
+    "by": "project owner",
+    "date": "2026-09-30",
+    "not_approved_verbatim": [
+      "[ ] Create signed annotated tags **locally** for the phases that Sec. 5 finds ready.",
+      "[ ] Push `phase-1g-owner-decisions` and open ONE pull request against `main`.",
+      "[ ] Merge that pull request (merge commit, as PR #1 and PR #2).",
+      "[ ] Push the tags created under approval 3."
+    ],
+    "nothing_else_approved": [
+      "editing frozen reports, inventories or phase scripts",
+      "changing any status-token value, equation, IC, unit, sign convention, independent variable, normalisation or tolerance beyond a ticked decision",
+      "force-push; push to any branch"
+    ],
+    "source": "the owner's task statement of 2026-09-30, 'Phase 1G - Windows validation, owner decisions for 1G-A/C/D/E, tags', Sec. 0 (approvals) and Sec. 3 (ticks)",
+    "verbatim": [
+      "Create the local branch `phase-1g-owner-decisions` from `main` and commit there.",
+      "Apply the owner decisions ticked `[x]` in Sec. 3, exactly as ticked. An unticked decision is **not** approved: leave it open and list it at the end."
+    ]
+  },
+  "numbers_from_artifact": {
+    "GD_void_response|NW15_CMB_FIT|R8_equal_mass_own_Mpc": 12.226,
+    "GD_void_response|NW15_CMB_FIT|X_SU_A_v_zero_needs_wall_curvature": 0.448,
+    "GD_void_response|NW15_CMB_FIT|f_v_at_LS": 5.073e-05,
+    "GD_void_response|NW15_CMB_FIT|sigma_LSS_R8_own": 0.0009336,
+    "GD_void_response|NW15_CMB_FIT|variants|alternative_svdw04_factor_f_vi_LS|A_v": 4914.0,
+    "GD_void_response|NW15_CMB_FIT|variants|alternative_svdw04_factor_f_vi_LS|A_v_sigma_LSS_R8_own": 4.588,
+    "GD_void_response|NW15_CMB_FIT|variants|alternative_svdw04_factor_f_vi_LS|R_seed_Mpc": 14.297,
+    "GD_void_response|NW15_CMB_FIT|variants|alternative_svdw04_factor_f_vi_LS|R_star|density_10pct|R_h_inv_Mpc": 171.5,
+    "GD_void_response|NW15_CMB_FIT|variants|alternative_svdw04_factor_f_vi_LS|R_star|eps=1|R_h_inv_Mpc": 42.4,
+    "GD_void_response|NW15_CMB_FIT|variants|alternative_svdw04_factor_f_vi_LS|R_star|void_fraction_10pct|R_h_inv_Mpc": 121.1,
+    "GD_void_response|NW15_CMB_FIT|variants|alternative_svdw04_factor_f_vi_LS|X_SU|total_contrast_at_LS": 3.921,
+    "GD_void_response|NW15_CMB_FIT|variants|alternative_svdw04_factor_f_vi_LS|X_SU|wall_mode_amplitude_frozen": 4.033,
+    "GD_void_response|NW15_CMB_FIT|variants|primary_tracker_seed_f_vi_LS|A_v": 1185.0,
+    "GD_void_response|NW15_CMB_FIT|variants|primary_tracker_seed_f_vi_LS|A_v_sigma_LSS_R8_own": 1.106,
+    "GD_void_response|NW15_CMB_FIT|variants|primary_tracker_seed_f_vi_LS|R_seed_Mpc": 0.81,
+    "GD_void_response|NW15_CMB_FIT|variants|primary_tracker_seed_f_vi_LS|R_star|density_10pct|R_h_inv_Mpc": 60.8,
+    "GD_void_response|NW15_CMB_FIT|variants|primary_tracker_seed_f_vi_LS|R_star|eps=1|R_h_inv_Mpc": 8.6,
+    "GD_void_response|NW15_CMB_FIT|variants|primary_tracker_seed_f_vi_LS|R_star|void_fraction_10pct|R_h_inv_Mpc": 38.5,
+    "GD_void_response|NW15_CMB_FIT|variants|primary_tracker_seed_f_vi_LS|X_SU|total_contrast_at_LS": 1.285,
+    "GD_void_response|NW15_CMB_FIT|variants|primary_tracker_seed_f_vi_LS|X_SU|wall_mode_amplitude_frozen": 1.312,
+    "GD_void_response|PAPER_REFERENCE|R8_equal_mass_own_Mpc": 12.57,
+    "GD_void_response|PAPER_REFERENCE|X_SU_A_v_zero_needs_wall_curvature": 0.293,
+    "GD_void_response|PAPER_REFERENCE|f_v_at_LS": 9.471e-05,
+    "GD_void_response|PAPER_REFERENCE|sigma_LSS_R8_own": 0.0008982,
+    "GD_void_response|PAPER_REFERENCE|variants|alternative_svdw04_factor_f_vi_LS|A_v": 4274.0,
+    "GD_void_response|PAPER_REFERENCE|variants|alternative_svdw04_factor_f_vi_LS|A_v_sigma_LSS_R8_own": 3.839,
+    "GD_void_response|PAPER_REFERENCE|variants|alternative_svdw04_factor_f_vi_LS|R_seed_Mpc": 11.942,
+    "GD_void_response|PAPER_REFERENCE|variants|alternative_svdw04_factor_f_vi_LS|R_star|density_10pct|R_h_inv_Mpc": 215.0,
+    "GD_void_response|PAPER_REFERENCE|variants|alternative_svdw04_factor_f_vi_LS|R_star|eps=1|R_h_inv_Mpc": 45.2,
+    "GD_void_response|PAPER_REFERENCE|variants|alternative_svdw04_factor_f_vi_LS|R_star|void_fraction_10pct|R_h_inv_Mpc": 104.0,
+    "GD_void_response|PAPER_REFERENCE|variants|alternative_svdw04_factor_f_vi_LS|X_SU|total_contrast_at_LS": 3.839,
+    "GD_void_response|PAPER_REFERENCE|variants|alternative_svdw04_factor_f_vi_LS|X_SU|wall_mode_amplitude_frozen": 3.958,
+    "GD_void_response|PAPER_REFERENCE|variants|primary_tracker_seed_f_vi_LS|A_v": 1169.0,
+    "GD_void_response|PAPER_REFERENCE|variants|primary_tracker_seed_f_vi_LS|A_v_sigma_LSS_R8_own": 1.05,
+    "GD_void_response|PAPER_REFERENCE|variants|primary_tracker_seed_f_vi_LS|R_seed_Mpc": 0.757,
+    "GD_void_response|PAPER_REFERENCE|variants|primary_tracker_seed_f_vi_LS|R_star|density_10pct|R_h_inv_Mpc": 84.1,
+    "GD_void_response|PAPER_REFERENCE|variants|primary_tracker_seed_f_vi_LS|R_star|eps=1|R_h_inv_Mpc": 9.9,
+    "GD_void_response|PAPER_REFERENCE|variants|primary_tracker_seed_f_vi_LS|R_star|void_fraction_10pct|R_h_inv_Mpc": 32.5,
+    "GD_void_response|PAPER_REFERENCE|variants|primary_tracker_seed_f_vi_LS|X_SU|total_contrast_at_LS": 1.263,
+    "GD_void_response|PAPER_REFERENCE|variants|primary_tracker_seed_f_vi_LS|X_SU|wall_mode_amplitude_frozen": 1.295
+  },
+  "open_items": [
+    "GD-OD1 sub-option (unticked): rebase the LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC rationale on the R8 < R_void partition argument",
+    "rename of the frozen artifact field gm_meszaros.Delta_eff (not covered by the tick)",
+    "[1G-D] Sec. 11 item 5 author question on f_vi"
+  ],
+  "parent_commit": "63ca316b87399fc323713338a07519f8bce52113",
+  "phase": "1G-D",
+  "report": "reports/phase1g_d_owner_decisions_successor.md",
+  "schema_version": 1,
+  "scope": {
+    "equations_changed": false,
+    "frozen_reports_inventories_or_phase_scripts_edited": false,
+    "initial_conditions_units_sign_conventions_changed": false,
+    "not_granted_tokens_unchanged": [
+      "FSIGMA8_AUTHORIZATION",
+      "OBSERVATIONAL_AUTHORIZATION",
+      "RSD_AUTHORIZATION",
+      "SIGMA8_AUTHORIZATION",
+      "UNIQUE_TIMESCAPE_PREDICTION"
+    ],
+    "package_modules_changed": [
+      "src/timescape_fsigma8/scientific_status.py (comments only)"
+    ],
+    "status_token_comments_changed": [
+      "GM_CGI_CLOSURES_SEPARATE_UNIVERSE_CONSISTENCY",
+      "LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC"
+    ],
+    "status_token_values_changed": false,
+    "tolerances_changed": false
+  },
+  "unticked_not_applied": [
+    "[ ] Keep the [SvdW04] factor as an explicit additional assumption, and quote both ranges.",
+    "[ ] In either case, rebase the rationale comment of `LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC` on the \"R8 < R_void partition\" argument. The value is unchanged.",
+    "[ ] Keep 10\u207b\u00b2, marked as outside the tracker.",
+    "[ ] Wall-mode amplitude."
+  ],
+  "validation": {
+    "recorded_in": "reports/phase1g_windows_validation_record.md (Sec. 7, final runs)"
+  }
+}
