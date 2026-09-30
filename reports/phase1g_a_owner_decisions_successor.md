@@ -128,8 +128,8 @@ equal-mass values reproduce [AUD]'s EH98 values (0.637, 0.643; 0.890,
 0.899) to their printed digits (gated in [OD-N]). [AUD]'s CAMB 2.0.4
 cross-check gives 0.639 / 0.645 and 0.893 / 0.902; CAMB is not run here. So
 the sensitivity is σ = 0.637–0.645 (EH98–CAMB) for the comoving closure and
-0.89–0.90 for the wall law: 4–5% below the hybrid primary, inside [1G-A]'s
-own f_b band (±7–8%).
+0.89–0.90 for the wall law: 3.8–4.8% below the hybrid primary (EH98),
+inside [1G-A]'s own f_b band (±7–8%).
 
 **Downstream quotes.** The [NW15] numbers quoted by 1G-C (0.935), 1G-E
 (1.36) and 1G-F, and in `CLAUDE.md` and `README.md`, use the Planck hybrid.
