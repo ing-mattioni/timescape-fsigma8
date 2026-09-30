@@ -1,0 +1,354 @@
+{
+  "branch": "phase-1g-owner-decisions",
+  "classification": "OWNER_DECISIONS_SUCCESSOR_RECORD",
+  "date": "2026-09-30",
+  "decisions": {
+    "GE-OD1": {
+      "applied": true,
+      "blocks_tag": true,
+      "finding": "GE-F1",
+      "formula": "sigma^2 = delta_v^2 sigma_part^2 + (f_w - f_v delta_v)^2 sigma_int^2",
+      "frozen_formula_exact_for": "delta_v = -1 (E1, empty voids)",
+      "frozen_readings": [
+        "[1G-E] l. 29-31, 89-91 (formula)",
+        "[1G-E] l. 155-161 (delta_v table)",
+        "[1G-E] l. 184 (-9%)",
+        "[1G-E] l. 46-49 (range column)",
+        "[1G-E] inventory model.formula, headline_8_h_inv_Mpc.range_*"
+      ],
+      "item_verbatim": "[B] **GE-OD1, mass conservation (GE-F1).**",
+      "range_current": "0.8-2.1 (a = 5-30, s from f_w^(1/3) to 1, delta_v -1 to -0.8, convention (b))",
+      "tick_verbatim": "[x] Adopt `\u03c3\u00b2 = \u03b4_v\u00b2\u03c3\u00b2_part + (f_w \u2212 f_v \u03b4_v)\u00b2\u03c3\u00b2_int`. Update the \u03b4_v table (\u22120.8: 1.298/1.142), the \"\u22129%\" reading and the range (0.9\u20132.1 becomes 0.8\u20132.1)."
+    },
+    "GE-OD2": {
+      "applied": true,
+      "blocks_tag": true,
+      "finding": "GE-F2",
+      "frozen_readings": [
+        "[1G-E] l. 71-76 (E2)",
+        "[1G-E] l. 44-57 (primary 1.57 / 1.36; 1.7-1.9x)",
+        "[1G-E] inventory headline_8_h_inv_Mpc",
+        "phase1g_e_status_addition_successor.md Sec. 1 (E2 radius from [W09])"
+      ],
+      "item_verbatim": "[B] **GE-OD2, primary void population (GE-F2).**",
+      "reference_population": "1G-F: C1 wall EdS clock, shell-crossing void barrier, collapse threshold 1.686, normalised to f_v0, empty voids, s = D_wall",
+      "single_radius": "idealisation (not a [W09] statement: [W09] l. 277-285, 30 h^-1 Mpc voids fill 40-50%, plus minivoids)",
+      "tick_verbatim": "[x] Adopt the 1G-F derived population as the reference (\u03c3 \u2248 0.99) and relabel the single 15 h\u207b\u00b9 Mpc radius as an idealisation."
+    },
+    "GE-OD3": {
+      "applied": true,
+      "blocks_tag": true,
+      "finding": "GE-F3, L1",
+      "frozen_readings": [
+        "[1G-E] l. 81-87 (E4)",
+        "[1G-E] l. 181-182"
+      ],
+      "item_verbatim": "[B] **GE-OD3 plus lead observation L1, the E4 wall mapping.** Reword E4 as a two-sided sensitivity, and choose the frame:",
+      "primary_compression": "s = D_wall (photon frame)",
+      "sensitivity": "s = f_w^(1/3) (a_D frame) and s = 1; two-sided (anisotropic maps fall on either side; phase1g_e_adversarial_audit.md Sec. 4.3)",
+      "tick_verbatim": "[x] photon-frame compression `s = D_wall` as primary (\u03c3 = 1.759 / 1.523 at a = 15);"
+    },
+    "GE-OD4": {
+      "applied": true,
+      "blocks_tag": true,
+      "conventions_reported": [
+        "(b) 8/h_dressed",
+        "(a) equal Lagrangian mass"
+      ],
+      "finding": "GE-F4",
+      "frozen_readings": [
+        "[1G-E] l. 142 (R = 8/h)",
+        "[1G-E] l. 183 (f_v0: about 16%)"
+      ],
+      "item_verbatim": "[B] **GE-OD4, radius convention (GE-F4).**",
+      "tick_verbatim": "[x] Report the equal-mass values (1.437/1.419) beside convention (b)."
+    },
+    "GE-OD5": {
+      "applied": true,
+      "blocks_tag": true,
+      "failing_seeds_realised": {
+        "NW15_CMB_FIT": [],
+        "PAPER_REFERENCE": [
+          12
+        ]
+      },
+      "finding": "GE-F5",
+      "frozen_readings": [
+        "[1G-E] l. 41-42 (<= 1.5%)",
+        "[1G-E] l. 134-138 (first run: 2% fewer balls, 4.5%)"
+      ],
+      "gate_unchanged": "the frozen 5% gate and seed 20260929 of the 1G-E script are unchanged",
+      "item_verbatim": "[B] **GE-OD5, MC precision (GE-F5).**",
+      "seeds": [
+        20260929,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "seeds_failing_frozen_gate_nominal": {
+        "NW15_CMB_FIT": 1,
+        "PAPER_REFERENCE": 3
+      },
+      "seeds_failing_frozen_gate_realised": {
+        "NW15_CMB_FIT": 0,
+        "PAPER_REFERENCE": 1
+      },
+      "tick_verbatim": "[x] Restate the precision as the scatter across seeds, and correct the first-run sentence."
+    },
+    "GE-OD6": {
+      "applied": true,
+      "blocks_tag": false,
+      "finding": "GE-OD6 (audit Sec. 4.8)",
+      "item_verbatim": "**GE-OD6, meaning of the 1G-E token.**",
+      "tick_verbatim": "[x] Record the four corrections of the audit's Sec. 4.8 in a successor note. The value is unchanged.",
+      "token_comment_changed": false
+    }
+  },
+  "evidence": {
+    "artifact_gitignored": "artifacts/independent/phase1g_owner_decisions.json",
+    "gates_passed": "124/124",
+    "interpreters_identical": "see reports/phase1g_windows_validation_record.md Sec. 7",
+    "script": "scripts/phase1g_owner_decisions_numerics.py"
+  },
+  "files_changed": [
+    "reports/phase1g_e_owner_decisions_successor.md",
+    "reports/phase1g_e_owner_decisions_successor_inventory.json",
+    "tests/test_phase1g_e_owner_decisions.py",
+    "CLAUDE.md",
+    "README.md"
+  ],
+  "frozen_files_sha256_lf": {
+    "reports/phase1g_adversarial_audit_errata_successor.md": "7fc67b7ded50fee3c9a182f9b01e5e5fc66c3d1fb80a6c69b97b9728105ce5a6",
+    "reports/phase1g_adversarial_audit_errata_successor_inventory.json": "8add47eb0d40fa9b891f17db89bb37944370181ccd357d4640a0c23f65c91ba9",
+    "reports/phase1g_e_adversarial_audit.md": "bd1f365ba84189b52cbbcfffae0733ebb3c53170f0800ffad0f5a94de02b0c32",
+    "reports/phase1g_e_adversarial_audit_inventory.json": "634478c10f10f6e776208722c6437cd29e9ddd9e14b0aa7a11126996bde689ae",
+    "reports/phase1g_e_status_addition_successor.md": "9345216e11b7f2f7be75c779b307330862f4eb0c545310b35e4b79530e3770a5",
+    "reports/phase1g_e_status_addition_successor_inventory.json": "9186696d95634d59fe3238bc3cfaf7e1976cb5e3e94ae58ce6f8bda7d77b46d0",
+    "reports/phase1g_e_two_phase_sigma.md": "421b47b531701dd8b575d689f608f84a80679c6d9f00c4abd04a4c4c2b737be8",
+    "reports/phase1g_e_two_phase_sigma_inventory.json": "0dd5ff4fe37069e3cb57eaabafb6edaa8b626d1b7f9a7200adaf8b9bbcf54d7d",
+    "reports/phase1g_f_void_population.md": "fe8fd8f1b16c9625a37d86fa7df3e83cd9a881a704386dd8dc52cca80b440003",
+    "reports/phase1g_f_void_population_inventory.json": "e74c8e95c12410474d456e0ac0b15f3983b030f49cfc72bf3856bec6254284fc",
+    "scripts/phase1g_e_two_phase_sigma_numerics.py": "91ac3aa43b999cfe296deab04ad7d58e0bf5a6d0c0808fd14f11e3e345aec0a3",
+    "scripts/phase1g_f_void_population_numerics.py": "8ac59ed34e63bdbb7b5b80c0d666874157b02d873356cdca5153766b0ead9ce3"
+  },
+  "human_approval": {
+    "by": "project owner",
+    "date": "2026-09-30",
+    "not_approved_verbatim": [
+      "[ ] Create signed annotated tags **locally** for the phases that Sec. 5 finds ready.",
+      "[ ] Push `phase-1g-owner-decisions` and open ONE pull request against `main`.",
+      "[ ] Merge that pull request (merge commit, as PR #1 and PR #2).",
+      "[ ] Push the tags created under approval 3."
+    ],
+    "nothing_else_approved": [
+      "editing frozen reports, inventories or phase scripts",
+      "changing any status-token value, equation, IC, unit, sign convention, independent variable, normalisation or tolerance beyond a ticked decision",
+      "force-push; push to any branch"
+    ],
+    "source": "the owner's task statement of 2026-09-30, 'Phase 1G - Windows validation, owner decisions for 1G-A/C/D/E, tags', Sec. 0 (approvals) and Sec. 3 (ticks)",
+    "verbatim": [
+      "Create the local branch `phase-1g-owner-decisions` from `main` and commit there.",
+      "Apply the owner decisions ticked `[x]` in Sec. 3, exactly as ticked. An unticked decision is **not** approved: leave it open and list it at the end."
+    ]
+  },
+  "numbers_from_artifact": {
+    "GE_mc_seed_scatter|NW15_CMB_FIT|first_run_note_f_w_shift_for_2pct_fewer_balls": 0.0197,
+    "GE_mc_seed_scatter|NW15_CMB_FIT|gated_max_realised_min_median_max|0": 0.0016,
+    "GE_mc_seed_scatter|NW15_CMB_FIT|gated_max_realised_min_median_max|1": 0.0097,
+    "GE_mc_seed_scatter|NW15_CMB_FIT|gated_max_realised_min_median_max|2": 0.0395,
+    "GE_mc_seed_scatter|NW15_CMB_FIT|sigma2_part_rel_sd": 0.015,
+    "GE_mc_seed_scatter|PAPER_REFERENCE|first_run_note_f_w_shift_for_2pct_fewer_balls": 0.0267,
+    "GE_mc_seed_scatter|PAPER_REFERENCE|gated_max_realised_min_median_max|0": 0.01,
+    "GE_mc_seed_scatter|PAPER_REFERENCE|gated_max_realised_min_median_max|1": 0.0313,
+    "GE_mc_seed_scatter|PAPER_REFERENCE|gated_max_realised_min_median_max|2": 0.0503,
+    "GE_mc_seed_scatter|PAPER_REFERENCE|sigma2_part_rel_sd": 0.0308,
+    "GE_reference_population_1G_F|NW15_CMB_FIT|a_equal_mass|sigma_a_D_frame_fw13_empty_voids": 0.8845,
+    "GE_reference_population_1G_F|NW15_CMB_FIT|a_equal_mass|sigma_int_a_D_frame_fw13": 0.823,
+    "GE_reference_population_1G_F|NW15_CMB_FIT|a_equal_mass|sigma_int_photon_frame_D_wall": 0.9936,
+    "GE_reference_population_1G_F|NW15_CMB_FIT|a_equal_mass|sigma_part": 0.3239,
+    "GE_reference_population_1G_F|NW15_CMB_FIT|a_equal_mass|sigma_photon_frame_D_wall_empty_voids": 1.045,
+    "GE_reference_population_1G_F|NW15_CMB_FIT|b_dressed_8_over_h|sigma_a_D_frame_fw13_empty_voids": 0.8332,
+    "GE_reference_population_1G_F|NW15_CMB_FIT|b_dressed_8_over_h|sigma_int_a_D_frame_fw13": 0.7759,
+    "GE_reference_population_1G_F|NW15_CMB_FIT|b_dressed_8_over_h|sigma_int_photon_frame_D_wall": 0.9403,
+    "GE_reference_population_1G_F|NW15_CMB_FIT|b_dressed_8_over_h|sigma_part": 0.3036,
+    "GE_reference_population_1G_F|NW15_CMB_FIT|b_dressed_8_over_h|sigma_photon_frame_D_wall_empty_voids": 0.9881,
+    "GE_reference_population_1G_F|PAPER_REFERENCE|a_equal_mass|sigma_a_D_frame_fw13_empty_voids": 0.7305,
+    "GE_reference_population_1G_F|PAPER_REFERENCE|a_equal_mass|sigma_int_a_D_frame_fw13": 0.6727,
+    "GE_reference_population_1G_F|PAPER_REFERENCE|a_equal_mass|sigma_int_photon_frame_D_wall": 0.8367,
+    "GE_reference_population_1G_F|PAPER_REFERENCE|a_equal_mass|sigma_part": 0.2848,
+    "GE_reference_population_1G_F|PAPER_REFERENCE|a_equal_mass|sigma_photon_frame_D_wall_empty_voids": 0.8839,
+    "GE_reference_population_1G_F|PAPER_REFERENCE|b_dressed_8_over_h|sigma_a_D_frame_fw13_empty_voids": 0.8231,
+    "GE_reference_population_1G_F|PAPER_REFERENCE|b_dressed_8_over_h|sigma_int_a_D_frame_fw13": 0.7556,
+    "GE_reference_population_1G_F|PAPER_REFERENCE|b_dressed_8_over_h|sigma_int_photon_frame_D_wall": 0.9316,
+    "GE_reference_population_1G_F|PAPER_REFERENCE|b_dressed_8_over_h|sigma_part": 0.3264,
+    "GE_reference_population_1G_F|PAPER_REFERENCE|b_dressed_8_over_h|sigma_photon_frame_D_wall_empty_voids": 0.9871,
+    "GE_single_radius|NW15_CMB_FIT|rows|a_equal_mass/a=15|sigma_a_D_frame_fw13_dv-0.8_mass_conserving": 1.1961,
+    "GE_single_radius|NW15_CMB_FIT|rows|a_equal_mass/a=15|sigma_a_D_frame_fw13_dv-0.9_mass_conserving": 1.3072,
+    "GE_single_radius|NW15_CMB_FIT|rows|a_equal_mass/a=15|sigma_a_D_frame_fw13_dv-1.0_mass_conserving": 1.4188,
+    "GE_single_radius|NW15_CMB_FIT|rows|a_equal_mass/a=15|sigma_int_a_D_frame_fw13": 1.0675,
+    "GE_single_radius|NW15_CMB_FIT|rows|a_equal_mass/a=15|sigma_int_photon_frame_D_wall": 1.2907,
+    "GE_single_radius|NW15_CMB_FIT|rows|a_equal_mass/a=15|sigma_int_uncompressed": 1.3396,
+    "GE_single_radius|NW15_CMB_FIT|rows|a_equal_mass/a=15|sigma_part": 0.9346,
+    "GE_single_radius|NW15_CMB_FIT|rows|a_equal_mass/a=15|sigma_photon_frame_D_wall_dv-0.8_mass_conserving": 1.354,
+    "GE_single_radius|NW15_CMB_FIT|rows|a_equal_mass/a=15|sigma_photon_frame_D_wall_dv-0.9_mass_conserving": 1.4734,
+    "GE_single_radius|NW15_CMB_FIT|rows|a_equal_mass/a=15|sigma_photon_frame_D_wall_dv-1.0_mass_conserving": 1.5935,
+    "GE_single_radius|NW15_CMB_FIT|rows|a_equal_mass/a=15|sigma_uncompressed_dv-0.8_mass_conserving": 1.3898,
+    "GE_single_radius|NW15_CMB_FIT|rows|a_equal_mass/a=15|sigma_uncompressed_dv-0.9_mass_conserving": 1.5113,
+    "GE_single_radius|NW15_CMB_FIT|rows|a_equal_mass/a=15|sigma_uncompressed_dv-1.0_mass_conserving": 1.6334,
+    "GE_single_radius|NW15_CMB_FIT|rows|b_dressed_8_over_h/a=15|sigma_a_D_frame_fw13_dv-0.8_mass_conserving": 1.1421,
+    "GE_single_radius|NW15_CMB_FIT|rows|b_dressed_8_over_h/a=15|sigma_a_D_frame_fw13_dv-0.9_mass_conserving": 1.2491,
+    "GE_single_radius|NW15_CMB_FIT|rows|b_dressed_8_over_h/a=15|sigma_a_D_frame_fw13_dv-1.0_mass_conserving": 1.3567,
+    "GE_single_radius|NW15_CMB_FIT|rows|b_dressed_8_over_h/a=15|sigma_int_a_D_frame_fw13": 1.0056,
+    "GE_single_radius|NW15_CMB_FIT|rows|b_dressed_8_over_h/a=15|sigma_int_photon_frame_D_wall": 1.2201,
+    "GE_single_radius|NW15_CMB_FIT|rows|b_dressed_8_over_h/a=15|sigma_int_uncompressed": 1.2672,
+    "GE_single_radius|NW15_CMB_FIT|rows|b_dressed_8_over_h/a=15|sigma_part": 0.9108,
+    "GE_single_radius|NW15_CMB_FIT|rows|b_dressed_8_over_h/a=15|sigma_photon_frame_D_wall_dv-0.8_mass_conserving": 1.2921,
+    "GE_single_radius|NW15_CMB_FIT|rows|b_dressed_8_over_h/a=15|sigma_photon_frame_D_wall_dv-0.9_mass_conserving": 1.407,
+    "GE_single_radius|NW15_CMB_FIT|rows|b_dressed_8_over_h/a=15|sigma_photon_frame_D_wall_dv-1.0_mass_conserving": 1.5226,
+    "GE_single_radius|NW15_CMB_FIT|rows|b_dressed_8_over_h/a=15|sigma_uncompressed_dv-0.8_mass_conserving": 1.3264,
+    "GE_single_radius|NW15_CMB_FIT|rows|b_dressed_8_over_h/a=15|sigma_uncompressed_dv-0.9_mass_conserving": 1.4432,
+    "GE_single_radius|NW15_CMB_FIT|rows|b_dressed_8_over_h/a=15|sigma_uncompressed_dv-1.0_mass_conserving": 1.5606,
+    "GE_single_radius|PAPER_REFERENCE|rows|a_equal_mass/a=15|sigma_a_D_frame_fw13_dv-0.8_mass_conserving": 1.1843,
+    "GE_single_radius|PAPER_REFERENCE|rows|a_equal_mass/a=15|sigma_a_D_frame_fw13_dv-0.9_mass_conserving": 1.3104,
+    "GE_single_radius|PAPER_REFERENCE|rows|a_equal_mass/a=15|sigma_a_D_frame_fw13_dv-1.0_mass_conserving": 1.4368,
+    "GE_single_radius|PAPER_REFERENCE|rows|a_equal_mass/a=15|sigma_int_a_D_frame_fw13": 0.967,
+    "GE_single_radius|PAPER_REFERENCE|rows|a_equal_mass/a=15|sigma_int_photon_frame_D_wall": 1.202,
+    "GE_single_radius|PAPER_REFERENCE|rows|a_equal_mass/a=15|sigma_int_uncompressed": 1.3095,
+    "GE_single_radius|PAPER_REFERENCE|rows|a_equal_mass/a=15|sigma_part": 1.0626,
+    "GE_single_radius|PAPER_REFERENCE|rows|a_equal_mass/a=15|sigma_photon_frame_D_wall_dv-0.8_mass_conserving": 1.3316,
+    "GE_single_radius|PAPER_REFERENCE|rows|a_equal_mass/a=15|sigma_photon_frame_D_wall_dv-0.9_mass_conserving": 1.4678,
+    "GE_single_radius|PAPER_REFERENCE|rows|a_equal_mass/a=15|sigma_photon_frame_D_wall_dv-1.0_mass_conserving": 1.6044,
+    "GE_single_radius|PAPER_REFERENCE|rows|a_equal_mass/a=15|sigma_uncompressed_dv-0.8_mass_conserving": 1.4033,
+    "GE_single_radius|PAPER_REFERENCE|rows|a_equal_mass/a=15|sigma_uncompressed_dv-0.9_mass_conserving": 1.5446,
+    "GE_single_radius|PAPER_REFERENCE|rows|a_equal_mass/a=15|sigma_uncompressed_dv-1.0_mass_conserving": 1.6864,
+    "GE_single_radius|PAPER_REFERENCE|rows|b_dressed_8_over_h/a=15|sigma_a_D_frame_fw13_dv-0.8_mass_conserving": 1.298,
+    "GE_single_radius|PAPER_REFERENCE|rows|b_dressed_8_over_h/a=15|sigma_a_D_frame_fw13_dv-0.9_mass_conserving": 1.4347,
+    "GE_single_radius|PAPER_REFERENCE|rows|b_dressed_8_over_h/a=15|sigma_a_D_frame_fw13_dv-1.0_mass_conserving": 1.5717,
+    "GE_single_radius|PAPER_REFERENCE|rows|b_dressed_8_over_h/a=15|sigma_int_a_D_frame_fw13": 1.0926,
+    "GE_single_radius|PAPER_REFERENCE|rows|b_dressed_8_over_h/a=15|sigma_int_photon_frame_D_wall": 1.3482,
+    "GE_single_radius|PAPER_REFERENCE|rows|b_dressed_8_over_h/a=15|sigma_int_uncompressed": 1.4645,
+    "GE_single_radius|PAPER_REFERENCE|rows|b_dressed_8_over_h/a=15|sigma_part": 1.1298,
+    "GE_single_radius|PAPER_REFERENCE|rows|b_dressed_8_over_h/a=15|sigma_photon_frame_D_wall_dv-0.8_mass_conserving": 1.4623,
+    "GE_single_radius|PAPER_REFERENCE|rows|b_dressed_8_over_h/a=15|sigma_photon_frame_D_wall_dv-0.9_mass_conserving": 1.6104,
+    "GE_single_radius|PAPER_REFERENCE|rows|b_dressed_8_over_h/a=15|sigma_photon_frame_D_wall_dv-1.0_mass_conserving": 1.759,
+    "GE_single_radius|PAPER_REFERENCE|rows|b_dressed_8_over_h/a=15|sigma_uncompressed_dv-0.8_mass_conserving": 1.5414,
+    "GE_single_radius|PAPER_REFERENCE|rows|b_dressed_8_over_h/a=15|sigma_uncompressed_dv-0.9_mass_conserving": 1.6953,
+    "GE_single_radius|PAPER_REFERENCE|rows|b_dressed_8_over_h/a=15|sigma_uncompressed_dv-1.0_mass_conserving": 1.8496
+  },
+  "parent_commit": "63ca316b87399fc323713338a07519f8bce52113",
+  "phase": "1G-E",
+  "ranges_mass_conserving": {
+    "all_three_frames/a_equal_mass": {
+      "NW15_CMB_FIT": [
+        0.849,
+        1.808
+      ],
+      "PAPER_REFERENCE": [
+        0.716,
+        1.977
+      ]
+    },
+    "all_three_frames/b_dressed_8_over_h": {
+      "NW15_CMB_FIT": [
+        0.795,
+        1.743
+      ],
+      "PAPER_REFERENCE": [
+        0.82,
+        2.12
+      ]
+    },
+    "audit_set_fw13_and_uncompressed/a_equal_mass": {
+      "NW15_CMB_FIT": [
+        0.849,
+        1.808
+      ],
+      "PAPER_REFERENCE": [
+        0.716,
+        1.977
+      ]
+    },
+    "audit_set_fw13_and_uncompressed/b_dressed_8_over_h": {
+      "NW15_CMB_FIT": [
+        0.795,
+        1.743
+      ],
+      "PAPER_REFERENCE": [
+        0.82,
+        2.12
+      ]
+    },
+    "photon_frame_only/a_equal_mass": {
+      "NW15_CMB_FIT": [
+        0.995,
+        1.767
+      ],
+      "PAPER_REFERENCE": [
+        0.851,
+        1.89
+      ]
+    },
+    "photon_frame_only/b_dressed_8_over_h": {
+      "NW15_CMB_FIT": [
+        0.936,
+        1.704
+      ],
+      "PAPER_REFERENCE": [
+        0.967,
+        2.023
+      ]
+    }
+  },
+  "report": "reports/phase1g_e_owner_decisions_successor.md",
+  "schema_version": 1,
+  "scope": {
+    "equations_changed": false,
+    "frozen_reports_inventories_or_phase_scripts_edited": false,
+    "initial_conditions_units_sign_conventions_changed": false,
+    "not_granted_tokens_unchanged": [
+      "FSIGMA8_AUTHORIZATION",
+      "OBSERVATIONAL_AUTHORIZATION",
+      "RSD_AUTHORIZATION",
+      "SIGMA8_AUTHORIZATION",
+      "UNIQUE_TIMESCAPE_PREDICTION"
+    ],
+    "package_modules_changed": [],
+    "status_token_comments_changed": [],
+    "status_token_values_changed": false,
+    "tolerances_changed": false
+  },
+  "token_meaning_successor": {
+    "TWO_PHASE_MASS_VARIANCE_8_H_INV_MPC": {
+      "corrections": {
+        "1_formula": "sigma^2 = delta_v^2 sigma_part^2 + sigma_int^2 is exact under E1 (delta_v = -1); for delta_v != -1 the mass-conserving form (f_w - f_v delta_v)^2 sigma_int^2 applies",
+        "2_E2_idealisation": "a single void radius at the full f_v0 is an idealisation, not a [W09] statement; the reference is the 1G-F derived population",
+        "3_E4_sensitivity": "isotropic compression s = D_wall (photon frame) is primary; s = f_w^(1/3) and s = 1 are a two-sided sensitivity, not a bracket",
+        "4_hybrid": "the partition term is nonlinear and the wall-internal term is linear theory extrapolated to sigma_int ~ 1: the statistic is a hybrid, not a full nonlinear variance"
+      },
+      "record_superseded": "reports/phase1g_e_status_addition_successor.md Sec. 1 and its inventory status_additions (frozen)",
+      "value": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION"
+    }
+  },
+  "unticked_not_applied": [
+    "[ ] Restrict 1G-E to \u03b4_v = \u22121.",
+    "[ ] Keep the single radius as an explicit idealisation, not attributed to [W09].",
+    "[ ] Use the auditor's [W09]-consistent population (\u03c3 \u2248 1.0\u20131.2).",
+    "[ ] keep `s = f_w^{1/3}` with its frame stated.",
+    "[ ] Justify (b) for the Planck comparison."
+  ],
+  "validation": {
+    "recorded_in": "reports/phase1g_windows_validation_record.md (Sec. 7, final runs)"
+  }
+}
