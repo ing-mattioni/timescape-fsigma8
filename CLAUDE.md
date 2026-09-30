@@ -131,8 +131,9 @@ py -3.14 -m venv .venv
 .venv\Scripts\python -m pip install -e ".[exec,test]"
 
 # Full validation suite (1044 passed on Windows, Python 3.14.3 and 3.11.9, at
-# the Phase 1G status-approvals checkpoint; oracle and generated-artifact
-# tests auto-skip when their inputs are absent)
+# the Phase 1G status-approvals checkpoint; 1049 passed on Linux, Python
+# 3.13.12 and 3.11.15, after the Phase 1G audit PR; oracle and
+# generated-artifact tests auto-skip when their inputs are absent)
 .venv\Scripts\python -m pytest -q
 
 # A single file / single test / keyword selection
@@ -242,9 +243,11 @@ In progress (σ track; audited, not tagged):
     population vs [W09]).
   - The errata are applied as successor readings, and three docstring
     citations are fixed; the frozen reports are unchanged.
-  - On Linux (AVX-512) one test fails at 6f7937c:
+  - On Linux (AVX-512) one test failed at 6f7937c:
     `test_top_hat_window_limits_series_and_envelope` (bitwise evenness of
-    `x**3`; GB-F1, an owner decision). Linux counts: 1043 passed, 1 failed.
+    `x**3`; GB-F1). With owner approval (2026-09-30, option A) the test now
+    compares with `rtol=1e-15`; the implementation is unchanged. GB-F1 was
+    1G-B's only blocking decision.
 - **1G-A:** σ(M) derivation-path audit (report-only,
   `phase1g_a_sigma8_derivation_path_audit.md`). The route is standard early
   universe plus scale-independent growth; the barotropic closure is Hadamard

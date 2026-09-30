@@ -455,6 +455,28 @@
       "total": 7
     }
   },
+  "owner_resolutions": {
+    "GB-OD1": {
+      "by": "project owner",
+      "change": "tests/test_phase1g_b_lagrangian_sigma.py::test_top_hat_window_limits_series_and_envelope: np.array_equal(top_hat_window(-x), top_hat_window(x)) replaced by np.testing.assert_allclose(..., rtol=1e-15, atol=0.0) with a comment giving the reason (NumPy AVX-512 x ** 3 not exactly odd; measured <= 2.9e-16 relative)",
+      "date": "2026-09-30",
+      "finding": "GB-F1",
+      "implementation_changed": false,
+      "option": "A (test only)",
+      "tag_readiness_effect": "GB-OD1 was the only blocking decision of 1G-B; 1G-B is ready for its tag once the owner's Windows run also passes (the auditor asked for Linux and Windows runs); the other four phases keep their blocking decisions",
+      "verbatim": "Fix the one test failure as suggested (fix test), update the branch (and so the PR) and then merge the PR",
+      "verification": {
+        "environments": [
+          "Linux x86-64 (AVX-512), CPython 3.13.12, NumPy 2.5.3, SciPy 1.18.1",
+          "Linux x86-64 (AVX-512), CPython 3.11.15, NumPy 2.4.6, SciPy 1.17.1"
+        ],
+        "full_suites": "1049 passed, 0 failed, 0 skipped on each interpreter (-B -W error -p no:cacheprovider)",
+        "test_before_after": "fails without the change, passes with it, on both interpreters",
+        "tolerance_audit": "634 comparisons, 0 missing",
+        "validator_1f_c_r": "PASS on both (--producers)"
+      }
+    }
+  },
   "parent_commit": "ad1ac35",
   "report": "reports/phase1g_adversarial_audit_errata_successor.md",
   "schema_version": 1,

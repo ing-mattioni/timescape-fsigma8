@@ -189,7 +189,7 @@ they follow the order of the audit's list.
 | GA-OD2 (GA-F2) | yes | Choose the [NW15] row's early-universe inputs: the declared Planck hybrid, or [NW15]'s own fit (f_b ≈ 0.18, n_s ≈ 0.99, σ 0.637–0.645). Also fix the f_b justification. |
 | GA-OD3 (GA-F3) | yes | Qualify the "αk ≈ 875" illustration (the report's own conventions give 557–694); the regression test pins it. |
 | GA-OD4 | no | Wording and classification refinements (GA-F4–F8, F11). |
-| GB-OD1 (GB-F1) | yes | Fix the Linux-failing evenness test: option A (tolerance in the test) or option B (closed form on \|x\|, bit-identical for x > 0). |
+| GB-OD1 (GB-F1) | yes → **resolved 2026-09-30** | Fix the Linux-failing evenness test: option A (tolerance in the test) or option B (closed form on \|x\|, bit-identical for x > 0). The owner chose option A (Sec. 10). |
 | GB-OD2–OD6 | no | Naming-firewall wording; status-validator hardening (deleted tokens pass silently); contract hardening; caveat on `TimescapeGrowthFactor`; an independent g_TS regression. |
 | GC-OD1 (GC-F1) | yes | Narrow 1G-C verdict 4 and Secs. 4, 7, 9 to the wall-internal linear statistic; withdraw "settled" and decide on "supersedes". |
 | GC-OD2 (GC-F2) | yes | Reclassify "exactly two FLRW regions": kinematics verified, dynamics `DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION`. |
@@ -247,3 +247,33 @@ token, tolerance and equation.
 Recorded in the inventory's `validation` block: the full suites, the 1F-C-R
 validator, the tolerance audit and every `scripts/phase1g_*` script, on
 CPython 3.13.12 and 3.11.15 (Linux).
+
+## 10. Owner decision applied after this record (2026-09-30)
+
+**GB-OD1 (GB-F1) — resolved with option A (test only).** The project owner
+wrote on 2026-09-30, verbatim: "Fix the one test failure as suggested (fix
+test), update the branch (and so the PR) and then merge the PR".
+
+- **Change.** In `tests/test_phase1g_b_lagrangian_sigma.py`,
+  `test_top_hat_window_limits_series_and_envelope` no longer asserts bitwise
+  evenness:
+  - the old line was `np.array_equal(top_hat_window(-x), top_hat_window(x))`;
+  - the new one is `assert_allclose(..., rtol=1e-15, atol=0.0)`.
+
+  An adjacent comment records the reason: NumPy's vectorised `x ** 3` is
+  not exactly odd on AVX-512 builds; the measured difference is ≤ 2.9e−16
+  relative.
+- **Unchanged.** `lagrangian_sigma.py` and its outputs are not touched, and
+  every other assertion of the test stays.
+- **Tolerance.** The new tolerance is explicit (AGENTS.md rule 9). The
+  tolerance audit counts one more explicit comparison and still finds none
+  missing.
+- **Verification (Linux, CPython 3.13.12 and 3.11.15).**
+  - The test fails without the change and passes with it on both
+    interpreters.
+  - The full suites, the 1F-C-R validator and the tolerance audit are
+    recorded in the inventory's `owner_resolutions` block.
+- **Tag readiness of 1G-B.** GB-OD1 was the only blocking decision for 1G-B.
+  The auditor asked for the fix to be run on Linux and Windows. It passes on
+  Linux; once the owner's Windows run also passes, 1G-B is ready for its tag
+  (Sec. 7). The other four phases still have blocking decisions.
