@@ -45,6 +45,8 @@ STATUS_SUCCESSOR_RECORDS = (
     # Phase 1G-C Secs. 5, 8 and 1G-D Secs. 5-7, 9, approved 2026-09-29 (six
     # additions).
     Path("reports/phase1g_status_additions_successor_inventory.json"),
+    # Phase 1G-E Secs. 2, 6 item 3, approved 2026-09-29 (one addition).
+    Path("reports/phase1g_e_status_addition_successor_inventory.json"),
 )
 
 

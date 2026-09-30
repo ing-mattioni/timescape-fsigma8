@@ -425,7 +425,14 @@ def test_top_hat_window_limits_series_and_envelope():
     exact = 3.0 * (np.sin(x) - x * np.cos(x)) / x ** 3
     np.testing.assert_allclose(ls.top_hat_window(x=x), exact, rtol=0.0, atol=0.0)
     assert np.all(np.abs(ls.top_hat_window(x=x)) <= 3.0 / x ** 2 + 3.0 / x ** 3)
-    assert np.array_equal(ls.top_hat_window(x=-x), ls.top_hat_window(x=x))   # even
+    # Even function.  Not asserted bitwise: NumPy's vectorised ``x ** 3`` is
+    # not exactly odd on every platform (AVX-512 builds differ by one ulp for
+    # some -x vs x; sin/cos stay exactly odd/even), so W(-x) and W(x) may
+    # differ by a few ulps (measured <= 2.9e-16 relative on Linux AVX-512).
+    # Phase 1G-B adversarial audit GB-F1, option A (test only), owner
+    # decision 2026-09-30; the implementation is unchanged.
+    np.testing.assert_allclose(ls.top_hat_window(x=-x), ls.top_hat_window(x=x),
+                               rtol=1e-15, atol=0.0)
 
 
 @pytest.mark.parametrize("law, coefficient", [("meszaros", -3.0 / 4.0),

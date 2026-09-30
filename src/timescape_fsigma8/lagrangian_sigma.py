@@ -46,7 +46,7 @@ Ingredients and sources
     growing mode of the wall region in the common Buchert time t
     ([1G-A] Sec. 8; [W09] two-scale solution with no backreaction inside
     walls).  On the tracker the regional wall volume scale obeys
-    a_w,reg^3 = (1 - f_v) a_D^3 proportional to t^2 ([GM] Eq. (5.1) meaning of
+    a_w,reg^3 = (1 - f_v) a_D^3 / f_w(t_init) proportional to t^2 ([GM] Eq. (5.1) meaning of
     a_w, [W09] e-print lines 1763-1764; [1G-A] Sec. 5.3), and the regional
     density (1 - f_v)^-1 <rho>_D = 1/(6 pi G t^2) is exactly EdS.  Then
 
@@ -1080,7 +1080,7 @@ def timescape_growth_factor(
     ``VOLUME_AVERAGE_CGI``: Eq. (2) on the regular growing mode of the
     selected clean closure ([GM] Eqs. (4.21)-(4.23) or (4.27)).
     ``WALL_REGIONAL_EDS_COMMON_TIME``: Eq. (3) (``closure=NOT_APPLICABLE``).
-    In both, ``gamma_w0 = 1 + f_v0/2`` ([GM] Eq. (5.4)).  ``params`` may use
+    In both, ``gamma_w0 = 1 + f_v0/2`` ([GM] text after Eq. (5.7); Eq. (5.4) defines ``a_w = gamma_w^-1 a_D``).  ``params`` may use
     any time unit: g is dimensionless and depends on f_v0 only (the tracker
     is self-similar in ``H_D0 t``); ``G`` cancels in ``t^2 4 pi G rho``.
     The barotropic closure is refused ([1G-A] Sec. 4.1).
@@ -1174,7 +1174,7 @@ def early_matter_density_per_photon(
     Rates are expressed in km/s/Mpc (time unit Mpc s/km), so
     ``rho_crit(100) = 3 x 100^2/(8 pi G)`` with the same ``G`` as
     ``<rho>_D0`` ([GM] text p. 25, via ``background.rho_d``); G cancels.
-    ``gamma_w0 = 1 + f_v0/2`` ([GM] Eq. (5.4)); H_D0 from the dressed H0
+    ``gamma_w0 = 1 + f_v0/2`` ([GM] text after Eq. (5.7)); H_D0 from the dressed H0
     ([GM] p. 25).  Fails closed if the relative residual exceeds
     ``identity_tolerance``.
     """

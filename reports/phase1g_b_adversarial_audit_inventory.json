@@ -1,0 +1,797 @@
+{
+  "audit_classification": "INDEPENDENT_ADVERSARIAL_AUDIT",
+  "audit_date": "2026-09-29",
+  "checkpoint": "6f7937ce5681900898f5e0a6482a953f0fa3e5a0",
+  "claims": [
+    {
+      "claim": "Every scientific choice is a mandatory keyword-only argument; NOT_APPLICABLE explicit; frozen kw_only dataclasses validated in __post_init__ with dedicated errors; read-only arrays; explicit tolerances",
+      "evidence_class_assessed": "NOT_APPLICABLE (API contract)",
+      "evidence_class_reported": "NOT_APPLICABLE (API contract)",
+      "id": "C1",
+      "independent_values": {
+        "public_dataclasses_frozen_kw_only_no_default": 12,
+        "public_functions_kw_only_no_default": 9
+      },
+      "location": "phase1g_b_lagrangian_sigma_validation.md Sec. 3; lagrangian_sigma.py lines 118-121",
+      "notes": "Scalars strictly checked; array inputs accept str/bool and only warn on complex; EH98 range not enforced; records forgeable by direct construction; TimescapeGrowthFactor carries no caveat (GB-F6, GB-F7)",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    },
+    {
+      "claim": "The barotropic closure is refused under both growth laws citing 1G-A Sec. 4.1",
+      "evidence_class_assessed": "NOT_APPLICABLE (API contract)",
+      "evidence_class_reported": "NOT_APPLICABLE (API contract)",
+      "id": "C2",
+      "independent_values": {
+        "computation_paths_reaching_a_barotropic_sigma": 0,
+        "spellings_tried": [
+          "GrowthSystem.BAROTROPIC",
+          "barotropic",
+          " barotropic ",
+          "BAROTROPIC",
+          "barotropic\\n",
+          "b'barotropic'",
+          "baro-tropic",
+          "printed_4_15",
+          "derived_4_10"
+        ]
+      },
+      "location": "phase1g_b_lagrangian_sigma_validation.md Sec. 3; lagrangian_sigma.py lines 232-239, 426-447, 1404-1405",
+      "notes": "All computation paths refuse; a forged TimescapeGrowthFactor (closure=COMOVING, arbitrary g) is accepted by ConditionalLagrangianSigma via dataclasses.replace (GB-F6)",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    },
+    {
+      "claim": "No public name contains sigma8, sigma_8 or 8hMpc; outputs carry NON_OBSERVATIONAL and NOT_OBSERVATIONAL_SIGMA_8; SIGMA8_AUTHORIZATION stays NOT_GRANTED",
+      "evidence_class_assessed": "NOT_APPLICABLE (governance)",
+      "evidence_class_reported": "NOT_APPLICABLE (governance)",
+      "id": "C3",
+      "independent_values": {
+        "functions_classes_members_json_keys_matching": 0,
+        "public_names_matching_case_insensitive": [
+          "FSIGMA8_STATUS",
+          "SIGMA8_STATUS"
+        ]
+      },
+      "location": "CLAUDE.md line 91; phase1g_b_lagrangian_sigma_validation.md Secs. 3, 11 item 2; lagrangian_sigma.py lines 22-26",
+      "notes": "Firewall test skips constants; 1D-B growth firewall would reject both constants; 1D-C Sec. 19 'any spelling' not enforced (caveat text 'sigma at 8 h^-1 Mpc'); all occurrences negative statements (GB-F4)",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    },
+    {
+      "claim": "Every implemented equation cites its source equation number (AGENTS.md rule 2)",
+      "evidence_class_assessed": "VERIFIED_FROM_PRIMARY_SOURCE",
+      "evidence_class_reported": "VERIFIED_FROM_PRIMARY_SOURCE",
+      "id": "C4",
+      "independent_values": {
+        "EH98": "(26) s-fit trans.tex 682-685; (28) q line 758; (29) T0/L0/C0 lines 775-780; (30)-(31) lines 838-844",
+        "GM": "(3.6) line 364; (4.13)-(4.17) lines 507-520; (4.21)-(4.23) lines 544-548; (4.27) line 577; (5.1) line 624; (5.4) line 641; gamma_w = 1 + f_v/2 in text line 663",
+        "W09": "(B3), (B8)-(B9); e-print lines 1763-1764"
+      },
+      "location": "phase1g_b_lagrangian_sigma_validation.md Sec. 4; lagrangian_sigma.py docstrings",
+      "notes": "gamma_w = 1 + f_v/2 cited as Eq. (5.4) in two docstrings; a_w,reg^3 equality omits 1/f_w(t_init); 'p. 25' not checkable from .tex (GB-F8)",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    },
+    {
+      "claim": "g_TS and X_inf of the volume-average CGI law reproduce 1G-A",
+      "evidence_class_assessed": "NUMERICALLY_CORROBORATED",
+      "evidence_class_reported": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "id": "C5",
+      "independent_values": {
+        "X_inf_limit": {
+          "GM_comoving": 0.6994599,
+          "GM_meszaros": 0.5935517,
+          "NW15_comoving": 0.858567,
+          "NW15_meszaros": 0.7645496
+        },
+        "g_TS_limit": {
+          "GM_comoving": 0.402662257,
+          "GM_meszaros": 0.341693481,
+          "NW15_comoving": 0.514952313,
+          "NW15_meszaros": 0.458562482
+        },
+        "package_minus_limit_relative": {
+          "GM_comoving": 1.82e-06,
+          "GM_meszaros": 2.1e-06,
+          "NW15_comoving": 1.09e-06,
+          "NW15_meszaros": 1.26e-06
+        },
+        "small_fv0_ln_g_over_fv0_at_1e-4": {
+          "comoving": -0.6500348,
+          "meszaros": -0.7500418
+        }
+      },
+      "location": "phase1g_b_lagrangian_sigma_validation.md Secs. 7.1, 9.1; phase1g_a inventory growth_ratio",
+      "notes": "Package values carry the recorded t_e = 1e-6 bias; all eight printed six-decimal g/X exceed half a unit from the limit; two four-decimal X in the f_v0 scan flip (GB-F3)",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    },
+    {
+      "claim": "Wall-regional law X_wall = gamma_w0 (1 - f_v0)^(1/3)/g_Lambda reproduces 1G-A; wall identities hold to 1e-13",
+      "evidence_class_assessed": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "evidence_class_reported": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "id": "C6",
+      "independent_values": {
+        "X_wall_GM": 1.1129452,
+        "X_wall_NW15": 1.2001718,
+        "g_Lambda_qplus0": 0.7878126021855962,
+        "uncorrected_limit_rel_GM": -4.67e-09
+      },
+      "location": "phase1g_b_lagrangian_sigma_validation.md Secs. 4.2, 5, 7.1",
+      "notes": "Closed form re-derived: (1-f)a_D^3 proportional to t^2 on the tracker; regional density 1/(6 pi G t^2)",
+      "outcome": "CONFIRMED"
+    },
+    {
+      "claim": "Per-photon early matter density omega_m,eff = (1/2)(1-f_v0)(2+f_v0)(H_D0/100)^2 reproduces 1G-A",
+      "evidence_class_assessed": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "evidence_class_reported": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "id": "C7",
+      "independent_values": {
+        "H_D0": {
+          "NOTEBOOK": 58.01445,
+          "NW15": 51.69662,
+          "PAPER": 57.856
+        },
+        "omega_m_eff": {
+          "NOTEBOOK": 0.12113589,
+          "NW15": 0.13093723,
+          "PAPER": 0.12047512
+        },
+        "ratio_to_planck": {
+          "NOTEBOOK": 0.84653,
+          "NW15": 0.91502,
+          "PAPER": 0.84191
+        }
+      },
+      "location": "phase1g_b_lagrangian_sigma_validation.md Sec. 7.2",
+      "notes": "Direct <rho>_D0 gamma_w0^3/rho_crit(100) equals the closed form to <= 1.1e-16",
+      "outcome": "CONFIRMED"
+    },
+    {
+      "claim": "EH98 + Planck inputs give sigma_LCDM = 0.835689, +3.03% from the 0.8111 anchor (5% gate; 3% gate fails)",
+      "evidence_class_assessed": "PROVISIONAL_MODEL_IMPORT",
+      "evidence_class_reported": "PROVISIONAL_MODEL_IMPORT",
+      "id": "C8",
+      "independent_values": {
+        "offset": 0.030315,
+        "package_vs_independent_rel": 1.05e-11,
+        "sigma_lcdm": 0.8356886600517,
+        "unit_growth_sigma": 1.0607709
+      },
+      "location": "phase1g_b_lagrangian_sigma_validation.md Sec. 7.4",
+      "notes": "Anchor 0.8111 and A_s, n_s, omega_b verified in P18 ms.tex lines 2241-2252",
+      "outcome": "CONFIRMED"
+    },
+    {
+      "claim": "Radius conventions (a)/(b)/(c) reproduce 1G-A",
+      "evidence_class_assessed": "CONVENTION_DEPENDENT",
+      "evidence_class_reported": "CONVENTION_DEPENDENT",
+      "id": "C9",
+      "independent_values": {
+        "GM": [
+          12.570168,
+          10.954402,
+          10.10408
+        ],
+        "NOTEBOOK": [
+          12.54727,
+          10.924485,
+          10.076485
+        ],
+        "NW15": [
+          12.22604,
+          13.114754,
+          11.781424
+        ]
+      },
+      "location": "phase1g_b_lagrangian_sigma_validation.md Sec. 7.3",
+      "notes": "",
+      "outcome": "CONFIRMED"
+    },
+    {
+      "claim": "Anchored sigma table and early-spectrum factors E reproduce 1G-A; baryon-fraction band +7%/-8%",
+      "evidence_class_assessed": "NUMERICALLY_CORROBORATED",
+      "evidence_class_reported": "PROVISIONAL_MODEL_IMPORT",
+      "id": "C10",
+      "independent_values": {
+        "E_GM": [
+          0.923799,
+          1.01045,
+          1.063357
+        ],
+        "E_NW15": [
+          0.960198,
+          0.915339,
+          0.984375
+        ],
+        "fb_0.12_0.20_GM_comoving_equal_mass": [
+          0.560714,
+          0.481747
+        ],
+        "notebook_comoving_bare_limit": 0.6052489,
+        "notebook_comoving_bare_package": 0.60525003,
+        "sigma_cgi_comoving_equal_mass_limit": {
+          "GM": 0.5241008,
+          "NW15": 0.6686664
+        },
+        "sigma_wall_equal_mass": {
+          "GM": 0.8339227,
+          "NW15": 0.934714
+        }
+      },
+      "location": "phase1g_b_lagrangian_sigma_validation.md Secs. 7.3, 7.5, 7.6",
+      "notes": "27 primary-f_b entries: R/E/omega/wall agree to <= 2.1e-11; CGI entries differ by the recorded bias; notebook bare 0.6053 -> 0.6052 at the limit (GB-F3)",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    },
+    {
+      "claim": "The tests and gates validate against the 1G-A numbers",
+      "evidence_class_assessed": "NUMERICALLY_CORROBORATED",
+      "evidence_class_reported": "NUMERICALLY_CORROBORATED",
+      "id": "C11",
+      "independent_values": {
+        "independent_test_content": [
+          "small-f_v0 coefficients",
+          "wall closed form",
+          "T(k->0) -> 1",
+          "W(0) = 1 and series"
+        ],
+        "same_lineage_comparisons": [
+          "1G-A printed values",
+          "1G-A evidence script (shares regular_growing_mode_coefficients and background)",
+          "window 'exact' and f_b = 0 EH98 checks re-evaluate the implementation formula"
+        ]
+      },
+      "location": "tests/test_phase1g_b_lagrangian_sigma.py; validation report Secs. 6, 8, 10",
+      "notes": "Regression rather than independent validation; closed by this audit's recomputation (GB-F9)",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    },
+    {
+      "claim": "The 6f7937c limitation is text only: masked AST equals 8cf5c49; exactly four string constants differ, each extending the old text; all numeric outputs bit-identical",
+      "evidence_class_assessed": "NUMERICALLY_CORROBORATED",
+      "evidence_class_reported": "NUMERICALLY_CORROBORATED",
+      "id": "C12",
+      "independent_values": {
+        "artifact_leaves": {
+          "bool": 24,
+          "float": 1421,
+          "int": 50,
+          "str": 428
+        },
+        "differing_string_constants": 4,
+        "docstrings_changed": 2,
+        "gates_passed_each_run": "21/21",
+        "masked_ast_equal": true,
+        "numeric_leaves_differing_across_commits_and_interpreters": 0,
+        "prefix_preserved": true,
+        "string_constants_old_new": [
+          441,
+          441
+        ]
+      },
+      "location": "phase1g_b_lagrangian_sigma_validation.md Sec. 14; phase1g_status_additions_successor.md Sec. 3",
+      "notes": "Record's '1494 numeric leaves' matches only when booleans count as numeric and the one differing boolean is excluded",
+      "outcome": "CONFIRMED"
+    },
+    {
+      "claim": "The six status additions are exactly the 1G-C/1G-D proposals, change no existing token, and are recorded in a canonical successor record with a consistent verbatim approval",
+      "evidence_class_assessed": "NOT_APPLICABLE (governance)",
+      "evidence_class_reported": "NOT_APPLICABLE (governance)",
+      "id": "C13",
+      "independent_values": {
+        "existing_tokens_changed": 0,
+        "frozen_reports_changed_8cf5c49_6f7937c": 0,
+        "record_canonical_bytes": true,
+        "tokens_matching_proposals": 6
+      },
+      "location": "phase1g_status_additions_successor.md Secs. 1-2, 7; its inventory; scientific_status.py lines 39-80",
+      "notes": "Sec. 8 refers to a non-existent inventory 'validation' block (GB-F10); owner wording generic, resolution by the lead recorded openly",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    },
+    {
+      "claim": "The validator accepts an addition only through a registered record and rejects the listed failure modes; drift of any uncovered token is kept as a failure",
+      "evidence_class_assessed": "NOT_APPLICABLE (governance)",
+      "evidence_class_reported": "NOT_APPLICABLE (governance)",
+      "id": "C14",
+      "independent_values": {
+        "accepted_silently": [
+          "frozen token deleted from live (D3_VERDICT, SIGMA8_AUTHORIZATION)",
+          "in-tree edit of the frozen inventory content"
+        ],
+        "bare_KeyError": [
+          "change naming a token absent from the snapshot"
+        ],
+        "order_dependence": false,
+        "rejected_named": [
+          "undeclared addition",
+          "new live token",
+          "addition in frozen snapshot",
+          "live value differs",
+          "addition missing from live",
+          "changed and added",
+          "double claim"
+        ],
+        "validator_status_at_6f7937c": "PASS"
+      },
+      "location": "phase1g_status_additions_successor.md Sec. 5; validate_phase1f_c_r_astra_remediation.py lines 97-150",
+      "notes": "Gaps pre-existing (live-only loop since 72d8c51); pytest set equality covers deletion at this checkpoint (GB-F5)",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    },
+    {
+      "claim": "test_top_hat_window_limits_series_and_envelope passes (92 passed)",
+      "evidence_class_assessed": "NUMERICALLY_CORROBORATED",
+      "evidence_class_reported": "NUMERICALLY_CORROBORATED",
+      "id": "C15",
+      "independent_values": {
+        "cube_mismatches_of_997": 51,
+        "max_rel_asymmetry": 3.33e-16,
+        "option_B_bit_identical_for_positive_x": true,
+        "passes_with_X86_V4_disabled": true,
+        "pow_negative_base_max_ulp": 0.4961,
+        "pow_positive_base_max_ulp": 0.61,
+        "window_mismatches_of_997": 46
+      },
+      "location": "tests/test_phase1g_b_lagrangian_sigma.py line 428; validation report Secs. 10, 12",
+      "notes": "Fails on Linux AVX-512 on both interpreters; root cause NumPy X86_V4 power kernel; test assumption at fault (GB-F1)",
+      "outcome": "REFUTED"
+    },
+    {
+      "claim": "Validation-report provenance and counts: implementation commit 0883814 on parent 462121c; 626 = 583 + 43 tolerance comparisons; 916 + 92 = 1008 = 978 + 30 tests",
+      "evidence_class_assessed": "NOT_APPLICABLE (provenance)",
+      "evidence_class_reported": "NOT_APPLICABLE (provenance)",
+      "id": "C16",
+      "independent_values": {
+        "0883814_exists": false,
+        "module_commit": "3834a63",
+        "module_parent": "dee72e1",
+        "report_commit": "9157dc4",
+        "tests_collected": {
+          "462121c": 916,
+          "6f7937c": 1044,
+          "8cf5c49": 1016,
+          "9157dc4": 1016,
+          "dee72e1": 924
+        },
+        "tests_tolerance_audit": {
+          "462121c": 583,
+          "9157dc4": 633,
+          "dee72e1": 590
+        }
+      },
+      "location": "phase1g_b_lagrangian_sigma_validation.md Secs. 1, 10, 12",
+      "notes": "Counts are those of the pre-rebase tree; gate counts n and 21 gates confirmed; Windows runs not verifiable here (GB-F2)",
+      "outcome": "REFUTED"
+    },
+    {
+      "claim": "Sec. 9.1: the early-limit bias changes no four-decimal sigma",
+      "evidence_class_assessed": "NUMERICALLY_CORROBORATED",
+      "evidence_class_reported": "NUMERICALLY_CORROBORATED",
+      "id": "C17",
+      "independent_values": {
+        "X_meszaros_fv0_0.627": [
+          0.7645506,
+          0.7645496
+        ],
+        "X_meszaros_fv0_0.75": [
+          0.5710511,
+          0.5710498
+        ],
+        "notebook_comoving_bare": [
+          0.60525003,
+          0.6052489
+        ]
+      },
+      "location": "phase1g_b_lagrangian_sigma_validation.md Sec. 9.1 lines 329-330",
+      "notes": "Three printed four-decimal values move by one unit at the t_e -> 0 limit (GB-F3)",
+      "outcome": "REFUTED"
+    }
+  ],
+  "environment": {
+    "interpreters": [
+      {
+        "numpy": "2.5.3",
+        "python": "3.13.12",
+        "scipy": "1.18.1"
+      },
+      {
+        "numpy": "2.4.6",
+        "python": "3.11.15",
+        "scipy": "1.17.1"
+      }
+    ],
+    "platform": "Linux x86-64 with AVX-512 (NumPy dispatch X86_V3, X86_V4, AVX512_ICL, AVX512_SPR)",
+    "trees": "scratch detached worktrees at 8cf5c49, 6f7937c, 9157dc4, dee72e1, 462121c (PYTHONPATH=<tree>/src); AUDIT_TREE read only"
+  },
+  "errata": [
+    {
+      "file": "reports/phase1g_b_lagrangian_sigma_validation.md",
+      "location": "Sec. 1, lines 23-26 (GB-F2)",
+      "new": "- **Parent checkpoint:** `dee72e1` (Phase 1G-A barotropic status record; child of `462121c`). Branch\n  `phase-1g-b-lagrangian-sigma` (local, unpushed, untagged).\n- **Implementation commit:** `3834a63` (module, tests, validation driver); this report is `9157dc4`.\n  The runs of Secs. 10 and 12 were made on a pre-rebase commit `0883814` (parent `462121c`) that is not in the repository history.",
+      "old": "- **Parent checkpoint:** `462121c` (Phase 1G-A). Branch\n  `phase-1g-b-lagrangian-sigma` (local, unpushed, untagged).\n- **Implementation commit:** `0883814` (module, tests, validation driver).\n  This report is committed on top of it.",
+      "proof": "git log --format='%h %p': 3834a63 parent dee72e1, 9157dc4 parent 3834a63; git cat-file -t 0883814 fails."
+    },
+    {
+      "file": "reports/phase1g_b_lagrangian_sigma_validation.md",
+      "location": "Sec. 10, lines 353-355 (GB-F2)",
+      "new": "The tolerance audit\n(`scripts/audit_numerical_tolerances.py`) counts 633 comparisons in `tests/` at `9157dc4`: 590 at the parent `dee72e1` plus 43 new (626 = 583 + 43 on the pre-rebase tree). None is missing a tolerance.",
+      "old": "The tolerance audit\n(`scripts/audit_numerical_tolerances.py`) now counts 626 comparisons, 583\nbefore plus 43 new, with none missing a tolerance.",
+      "proof": "audit(Path('tests')): 583 at 462121c, 590 at dee72e1, 633 at 9157dc4; 0 missing."
+    },
+    {
+      "file": "reports/phase1g_b_lagrangian_sigma_validation.md",
+      "location": "Sec. 12, lines 448-449 (GB-F2)",
+      "new": "The 1G-A base recorded 916 passed with every input present; 916\n+ 92 new = 1008 = 978 + 30. These counts are for the pre-rebase tree (parent `462121c`). The committed checkpoint `9157dc4` (parent `dee72e1`, which adds 8 tests) collects 1016 tests = 924 + 92, and no full-suite run of it is recorded here.",
+      "old": "The 1G-A base recorded 916 passed with every input present; 916\n+ 92 new = 1008 = 978 + 30.",
+      "proof": "pytest --collect-only: 916 at 462121c, 924 at dee72e1, 1016 at 9157dc4."
+    },
+    {
+      "file": "reports/phase1g_b_lagrangian_sigma_validation.md",
+      "location": "Sec. 9.1, lines 329-330 (GB-F3)",
+      "new": "This is inside the declared 1e\u22124 early-limit budget of [1G-A]. At the t_e \u2192 0 limit, three printed four-decimal values move by one unit in the last digit: \u03c3 for the [GM] notebook preset, CGI comoving, bare convention (Sec. 7.3: 0.60525003 \u2192 0.6052489, i.e. 0.6053 \u2192 0.6052); X for CGI M\u00e9sz\u00e1ros at f_v0 = 0.627 (0.7646 \u2192 0.7645, Sec. 7.6); and X for CGI M\u00e9sz\u00e1ros at f_v0 = 0.75 (0.5711 \u2192 0.5710, Sec. 7.6). Every six-decimal g and X of Sec. 7.1 carries the same bias. The limits are g = 0.402662 / 0.341693 ([GM]) and 0.514952 / 0.458562 ([NW15]), and X = 0.699460 / 0.593552 ([GM]) and 0.858567 / 0.764550 ([NW15]), each pair comoving / M\u00e9sz\u00e1ros.",
+      "old": "This is inside the declared 1e\u22124 early-limit budget of [1G-A] and changes no\nfour-decimal \u03c3.",
+      "proof": "Independent integration of [GM] (4.21)-(4.23)/(4.27) from t_e = 1e-12 t0; the package's own log_growth_early_limit_linear_bias_estimate gives the same limits to 1e-9."
+    },
+    {
+      "file": "src/timescape_fsigma8/lagrangian_sigma.py",
+      "location": "timescape_growth_factor docstring, line 1083 (GB-F8)",
+      "new": "In both, ``gamma_w0 = 1 + f_v0/2`` ([GM] text after Eq. (5.7); Eq. (5.4) defines ``a_w = gamma_w^-1 a_D``).",
+      "old": "In both, ``gamma_w0 = 1 + f_v0/2`` ([GM] Eq. (5.4)).",
+      "proof": "[GM] main.tex line 641 is Eq. (5.4) a_w = gamma_w^-1 a_D; line 663 states gamma_w(t) = 1 + f_v(t)/2."
+    },
+    {
+      "file": "src/timescape_fsigma8/lagrangian_sigma.py",
+      "location": "early_matter_density_per_photon docstring, line 1177 (GB-F8)",
+      "new": "``gamma_w0 = 1 + f_v0/2`` ([GM] text after Eq. (5.7))",
+      "old": "``gamma_w0 = 1 + f_v0/2`` ([GM] Eq. (5.4))",
+      "proof": "As above."
+    },
+    {
+      "file": "src/timescape_fsigma8/lagrangian_sigma.py",
+      "location": "module docstring, line 49 (GB-F8)",
+      "new": "a_w,reg^3 = (1 - f_v) a_D^3 / f_w(t_init) proportional to t^2",
+      "old": "a_w,reg^3 = (1 - f_v) a_D^3 proportional to t^2",
+      "proof": "[GM] Eq. (5.1) (main.tex line 624) with a_Y normalised at t_init gives a_w^3 = (1 - f_v) a_D^3 / f_w(t_init); 1G-A Sec. 5.3 writes the same."
+    },
+    {
+      "file": "reports/phase1g_status_additions_successor.md",
+      "location": "Sec. 8, line 223 (GB-F10)",
+      "new": "Not filled in: the companion inventory has no `validation` block. The full-suite result for this checkpoint is recorded only in CLAUDE.md (\"1044 passed on Windows, Python 3.14.3 and 3.11.9\"). The 1G-B driver comparison is in Sec. 3.",
+      "old": "Filled in after the runs; see the inventory's `validation` block.",
+      "proof": "The inventory's top-level keys do not include 'validation'."
+    },
+    {
+      "file": "reports/phase1g_status_additions_successor.md",
+      "location": "Sec. 3, lines 119-121 (GB-F10)",
+      "new": "the driver's `working_tree_changes_present` flag.",
+      "old": "the driver's `working_tree_changes_present` flag\n  (Sec. 8).",
+      "proof": "Sec. 8 contains no validation data."
+    }
+  ],
+  "finding_counts": {
+    "HIGH": 0,
+    "LOW": 8,
+    "LOW-MEDIUM": 2,
+    "MEDIUM": 0,
+    "MEDIUM-HIGH": 0,
+    "total": 10
+  },
+  "findings": [
+    {
+      "consequence": "The phase's '92 passed' does not hold on Linux x86-64 with AVX-512; Linux preflights of later phases fail. The implementation is numerically correct.",
+      "evidence": {
+        "passes_with": "NPY_DISABLE_CPU_FEATURES='X86_V4 AVX512_ICL AVX512_SPR'",
+        "reproduced_on": [
+          "CPython 3.13.12 / NumPy 2.5.3",
+          "CPython 3.11.15 / NumPy 2.4.6"
+        ],
+        "sin_odd_cos_even_exact": true,
+        "x_times_x_times_x_odd": true
+      },
+      "id": "GB-F1",
+      "locations": [
+        "tests/test_phase1g_b_lagrangian_sigma.py:428",
+        "src/timescape_fsigma8/lagrangian_sigma.py:778-779"
+      ],
+      "resolution_class": "OWNER_DECISION",
+      "severity": "LOW-MEDIUM",
+      "statement": "tests/test_phase1g_b_lagrangian_sigma.py line 428 asserts np.array_equal(W(-x), W(x)). NumPy's vectorised x**3 uses the X86_V4 (AVX-512) power kernel for positive bases (up to 0.61 ulp) and a correctly rounded path for negative bases, so (-x)**3 != -(x**3) in 51 of 997 points and W differs in 46 points by <= 3.3e-16 relative.",
+      "suggested_resolution": "Option A (test only): assert_allclose(W(-x), W(x), rtol=1e-15, atol=0.0) with a documented reason. Option B (implementation, output-preserving): evaluate the closed form on xl = np.abs(arr[~small]); bit-identical for all x > 0 (verified on 2.0e5 points), evenness exact, bitwise test kept. Recommend B.",
+      "title": "Window evenness test asserts bitwise sign symmetry of np.power; fails on Linux AVX-512"
+    },
+    {
+      "consequence": "The validated checkpoint recorded in the report is not the committed one; no full-suite run of 9157dc4 is recorded. Numbers unaffected.",
+      "evidence": {
+        "collected": {
+          "462121c": 916,
+          "9157dc4": 1016,
+          "dee72e1": 924
+        },
+        "git_cat_file_0883814": "fatal: Not a valid object name",
+        "git_log": "3834a63 parent dee72e1; 9157dc4 parent 3834a63",
+        "tolerance_audit_tests": {
+          "462121c": 583,
+          "9157dc4": 633,
+          "dee72e1": 590
+        }
+      },
+      "id": "GB-F2",
+      "locations": [
+        "reports/phase1g_b_lagrangian_sigma_validation.md:23-26",
+        "reports/phase1g_b_lagrangian_sigma_validation.md:353-355",
+        "reports/phase1g_b_lagrangian_sigma_validation.md:441-449"
+      ],
+      "resolution_class": "UNAMBIGUOUS_ERRATUM",
+      "severity": "LOW-MEDIUM",
+      "statement": "Sec. 1 names implementation commit 0883814 on parent 462121c; the committed module is 3834a63 on parent dee72e1 and the report is 9157dc4. 0883814 is not in the repository. Sec. 10 (626 = 583 + 43) and Sec. 12 (916 + 92 = 1008 = 978 + 30; determinism SHA at 0883814) describe the pre-rebase tree.",
+      "suggested_resolution": "Apply errata 1-3 through a dated successor note; the lead's full-suite run at the tagged commit supplies the current record.",
+      "title": "Validation report records a non-existent implementation commit and pre-rebase counts"
+    },
+    {
+      "consequence": "Precision statement wrong; reproduction tests at 5e-7 and the V7 fv0-scan gate lock in the biased values (a more accurate start would fail them). No scientific conclusion changes. The same X flip is in the 1G-A inventory fv0_scan and 1G-A Sec. 5.2 (NW15 Meszaros 0.7646) - passed to the lead for the 1G-A audit.",
+      "evidence": {
+        "independent_limit_agrees_with_bias_corrected_package_to": 1e-09,
+        "notebook_comoving_bare_limit": 0.6052489275,
+        "notebook_comoving_bare_package": 0.6052500299625055,
+        "package_bias_estimate_GM_comoving": 1.8214568e-06
+      },
+      "id": "GB-F3",
+      "locations": [
+        "reports/phase1g_b_lagrangian_sigma_validation.md:329-330",
+        "reports/phase1g_b_lagrangian_sigma_validation.md Secs. 7.1, 7.3, 7.6"
+      ],
+      "resolution_class": "UNAMBIGUOUS_ERRATUM",
+      "severity": "LOW",
+      "statement": "At the t_e -> 0 limit the notebook comoving bare sigma moves 0.6053 -> 0.6052 and two f_v0-scan Meszaros X move 0.7646 -> 0.7645 (f_v0 0.627) and 0.5711 -> 0.5710 (0.75). All eight six-decimal g and X (Sec. 7.1, 1G-A inventory) differ from the limit by 5.2e-7 to 1.39e-6.",
+      "suggested_resolution": "Apply erratum 4.",
+      "title": "'Changes no four-decimal sigma' is false; six-decimal g/X carry the t_e bias"
+    },
+    {
+      "consequence": "Governance text and enforcement disagree; no observational label is attached.",
+      "evidence": {
+        "module_docstring_scope": "public function/class name or output key",
+        "occurrences_all_negative": true,
+        "report_disclosure": "Sec. 11 item 2"
+      },
+      "id": "GB-F4",
+      "locations": [
+        "CLAUDE.md:91",
+        "src/timescape_fsigma8/lagrangian_sigma.py:153-154,208-209",
+        "tests/test_phase1g_b_lagrangian_sigma.py:558-576"
+      ],
+      "resolution_class": "OWNER_DECISION",
+      "severity": "LOW",
+      "statement": "SIGMA8_STATUS and FSIGMA8_STATUS are public names in __all__ that contain 'sigma8' case-insensitively. The 1G-B firewall test checks only functions, classes and their members; the 1D-B growth firewall checks every lower-cased __all__ name. 1D-C Sec. 19 'any spelling' is not enforced for caveat text ('sigma at 8 h^-1 Mpc').",
+      "suggested_resolution": "Amend the CLAUDE.md wording to exempt negative status constants and values (recommended), or rename the constants (API change).",
+      "title": "Naming-firewall wording (CLAUDE.md line 91) is broader than what is enforced"
+    },
+    {
+      "consequence": "The record lists 'drift of any token no record covers' as a kept failure mode; deletion drift is not detected by the validator.",
+      "evidence": {
+        "deletion_D3_VERDICT": "accepted",
+        "deletion_SIGMA8_AUTHORIZATION": "accepted",
+        "pre_existing_since": "72d8c51",
+        "pytest_covers_deletion": "test_six_added_tokens_hold_the_approved_values (set equality)"
+      },
+      "id": "GB-F5",
+      "locations": [
+        "scripts/validate_phase1f_c_r_astra_remediation.py:124-150",
+        "scripts/validate_phase1f_c_r_astra_remediation.py:154-156",
+        "scripts/validate_phase1f_c_r_astra_remediation.py:245-249"
+      ],
+      "resolution_class": "OWNER_DECISION",
+      "severity": "LOW",
+      "statement": "check_current_scientific_status iterates live tokens only: deleting a frozen token (even SIGMA8_AUTHORIZATION) from the live module passes silently. A change naming a token absent from the snapshot raises a bare KeyError. The frozen inventory content is not pinned to the REMEDIATION commit (only canonical bytes are checked), and the reports/*.json loop checks idempotence, not canonical bytes.",
+      "suggested_resolution": "Reject frozen tokens missing from live unless a registered removal exists; named assertion for the KeyError case; compare the inventory with git show REMEDIATION:<inventory>; optionally byte-check successor records.",
+      "title": "Status validator: deletions and snapshot edits pass; one bare KeyError"
+    },
+    {
+      "consequence": "No computed number is affected; misuse could produce correctly labelled records carrying non-derived numbers.",
+      "evidence": {
+        "production_inputs_in_range": "omega_m 0.120-0.143, omega_b >= 0.0145"
+      },
+      "id": "GB-F6",
+      "locations": [
+        "src/timescape_fsigma8/lagrangian_sigma.py:769-771",
+        "src/timescape_fsigma8/lagrangian_sigma.py:803-819",
+        "src/timescape_fsigma8/lagrangian_sigma.py:928-963",
+        "src/timescape_fsigma8/lagrangian_sigma.py:1140-1149",
+        "src/timescape_fsigma8/lagrangian_sigma.py:1322-1352"
+      ],
+      "resolution_class": "OWNER_DECISION",
+      "severity": "LOW",
+      "statement": "Array inputs of top_hat_window, eh98_zero_baryon_transfer and matter_era_linear_amplitude accept '1.0' and True; complex arrays only raise ComplexWarning and are truncated. The EH98 validity range (trans.tex 686-687, 855-856) is not enforced (omega_m >= 9.83 gives s <= 0). TimescapeGrowthFactor, EarlyMatterDensityPerPhoton and ConditionalLagrangianSigma accept directly constructed arbitrary values (gamma_w0 = 5, omega_m_per_photon = 0.3, a barotropic-derived g under closure=COMOVING).",
+      "suggested_resolution": "Type-check array inputs; enforce or document the EH98 range; add record invariants (gamma_w0 = 1 + f_v0/2, recomputed closed form).",
+      "title": "Contract-hardening gaps: array coercion, EH98 range, forgeable records"
+    },
+    {
+      "consequence": "A bare growth or X result can travel without the limitation.",
+      "evidence": {
+        "records_with_caveat": [
+          "ConditionalLagrangianSigma",
+          "AnchoredLagrangianSigmaRatio (via timescape)"
+        ],
+        "records_without": [
+          "TimescapeGrowthFactor"
+        ]
+      },
+      "id": "GB-F7",
+      "locations": [
+        "src/timescape_fsigma8/lagrangian_sigma.py:904-982"
+      ],
+      "resolution_class": "OWNER_DECISION",
+      "severity": "LOW",
+      "statement": "The 1G-D limitation (CGI growth is not Timescape's long-wavelength growth) applies to g and X, but TimescapeGrowthFactor has no caveat field and its to_json_dict (exported as V1_growth by the driver) carries none.",
+      "suggested_resolution": "Owner decides whether to add a caveat field (code change beyond the approved text-only scope).",
+      "title": "Public TimescapeGrowthFactor results do not carry the growth-law limitation"
+    },
+    {
+      "consequence": "Citation imprecision only.",
+      "evidence": {
+        "GM_lines": {
+          "5.1": 624,
+          "5.4": 641,
+          "gamma_w_value": 663
+        }
+      },
+      "id": "GB-F8",
+      "locations": [
+        "src/timescape_fsigma8/lagrangian_sigma.py:49",
+        "src/timescape_fsigma8/lagrangian_sigma.py:1083",
+        "src/timescape_fsigma8/lagrangian_sigma.py:1177"
+      ],
+      "resolution_class": "UNAMBIGUOUS_ERRATUM",
+      "severity": "LOW",
+      "statement": "[GM] (5.4) is a_w = gamma_w^-1 a_D (main.tex line 641); the value 1 + f_v/2 is in the text after (5.7) (line 663). With [GM] (5.1) normalisation a_w^3 = (1 - f_v) a_D^3 / f_w(t_init).",
+      "suggested_resolution": "Apply erratum 5 (docstring text only).",
+      "title": "Docstring cites gamma_w = 1 + f_v/2 as [GM] Eq. (5.4); a_w,reg^3 equality omits 1/f_w(t_init)"
+    },
+    {
+      "consequence": "A shared defect in the growing-mode code would not be caught by the suite; this audit's recomputation found none.",
+      "evidence": {
+        "evidence_script_imports": "scripts/phase1g_a_sigma8_path_numerics.py lines 40-60, 156-180"
+      },
+      "id": "GB-F9",
+      "locations": [
+        "tests/test_phase1g_b_lagrangian_sigma.py:151-316",
+        "scripts/validate_phase1g_b_lagrangian_sigma.py:49-76"
+      ],
+      "resolution_class": "OWNER_DECISION",
+      "severity": "LOW",
+      "statement": "The printed 1G-A values and the 1G-A evidence script share regular_growing_mode_coefficients and background with the module; the window 'exact' and f_b = 0 EH98 checks re-evaluate the implementation formula. Independent content: small-f_v0 coefficients, wall closed form, T(k->0), W(0) and the series.",
+      "suggested_resolution": "Optionally add one independent regression test (e.g. the normalised-variable ODE of this audit).",
+      "title": "Reproduction tests are same-lineage regressions; no independent implementation"
+    },
+    {
+      "consequence": "The record's validation of the approvals commit is not recorded in the record (CLAUDE.md states 1044 passed on Windows).",
+      "evidence": {
+        "inventory_top_level_keys": [
+          "branch",
+          "classification",
+          "date",
+          "files_changed",
+          "human_approval",
+          "lagrangian_sigma_limitation",
+          "parent_commit",
+          "phase",
+          "report",
+          "schema_version",
+          "scope",
+          "status_additions",
+          "status_changes",
+          "superseded_frozen_readings",
+          "title",
+          "validator_change"
+        ]
+      },
+      "id": "GB-F10",
+      "locations": [
+        "reports/phase1g_status_additions_successor.md:119-121",
+        "reports/phase1g_status_additions_successor.md:221-223"
+      ],
+      "resolution_class": "UNAMBIGUOUS_ERRATUM",
+      "severity": "LOW",
+      "statement": "phase1g_status_additions_successor.md Sec. 8 reads 'Filled in after the runs; see the inventory's validation block', and Sec. 3 points to it; the inventory has no 'validation' key.",
+      "suggested_resolution": "Apply erratum 6.",
+      "title": "Successor record Sec. 8 points to a validation block that does not exist"
+    }
+  ],
+  "limitations": [
+    "Windows 3.14.3 / 3.11.9 environments not available; their gate values and test results are taken from the report",
+    "[GM] page references ('p. 25') cannot be checked from the .tex",
+    "Equation numbers reconstructed with counters; [EH98] matches the known numbering; [GM] and [W09] rows cited here were inspected individually",
+    "EH98 checked by independent transcription and quadrature only, not against a Boltzmann code or published tables",
+    "Full test suite not run (lead runs it); only the three in-scope test files, collect-only counts and the 1G-B and 1F-C-R drivers",
+    "Scientific content of 1G-C and 1G-D not audited beyond matching the proposed tokens"
+  ],
+  "method": [
+    "From-scratch recomputation (audit_b/independent.py, no timescape_fsigma8 or 1G-A script import): growth ODE of [GM] (4.21)-(4.23)/(4.27) in normalised variables with [W09] (B2), (B3), (B6) coefficients and [GM] (3.14) (K_D = 0), (3.17); EH98 transcribed from trans.tex; composite Gauss-Legendre sigma integral with scipy spherical_jn window; Heath integral for g_Lambda",
+    "Equation numbers reconstructed from the .tex sources with explicit counters",
+    "1G-B driver run at 8cf5c49 and 6f7937c on both interpreters; artifact leaf-by-leaf comparison",
+    "Own AST transform: docstrings stripped, string constants masked, 8cf5c49 vs 6f7937c",
+    "Targeted pytest of the three in-scope test files on both interpreters; window test with AVX-512 dispatch disabled",
+    "Adversarial scripts against the module contracts (types, NaN, enums, barotropic spellings, forged records, array mutation) and the status validator (deletion, double claims, reordering, snapshot tampering)",
+    "pytest --collect-only and tolerance-audit counts at 462121c, dee72e1, 9157dc4, 8cf5c49, 6f7937c"
+  ],
+  "owner_decisions": [
+    {
+      "blocks_tag": true,
+      "decision": "Choose option A (test-only rtol 1e-15, atol 0, documented) or option B (closed form on |x|, bit-identical for x > 0, bitwise test kept); re-run on Linux and Windows. Recommendation: B.",
+      "finding": "GB-F1",
+      "id": "OD1"
+    },
+    {
+      "blocks_tag": false,
+      "decision": "Amend CLAUDE.md line 91 to 'no public function, class, member or output-key name; negative status constants and values excepted' (recommended), or rename SIGMA8_STATUS/FSIGMA8_STATUS; decide whether 1D-C Sec. 19 'any spelling' applies to caveat text.",
+      "finding": "GB-F4",
+      "id": "OD2"
+    },
+    {
+      "blocks_tag": false,
+      "decision": "Harden check_current_scientific_status (missing frozen tokens, named KeyError case, pin the frozen inventory to REMEDIATION, optional canonical-bytes check of successor records).",
+      "finding": "GB-F5",
+      "id": "OD3"
+    },
+    {
+      "blocks_tag": false,
+      "decision": "Optional contract hardening: array input types, EH98 range, record invariants.",
+      "finding": "GB-F6",
+      "id": "OD4"
+    },
+    {
+      "blocks_tag": false,
+      "decision": "Whether TimescapeGrowthFactor should carry the growth-law caveat (code change beyond the approved text-only scope).",
+      "finding": "GB-F7",
+      "id": "OD5"
+    },
+    {
+      "blocks_tag": false,
+      "decision": "Optionally add an independent regression test for g_TS.",
+      "finding": "GB-F9",
+      "id": "OD6"
+    }
+  ],
+  "phase": "1G-B",
+  "preservation": "Only reports/phase1g_b_adversarial_audit.md and this inventory were created in the main tree; nothing else was edited, staged, committed, pushed or tagged. AUDIT_TREE was read only. All scratch work is in audit_b/, including five detached scratch worktrees (8cf5c49, 6f7937c, 9157dc4, dee72e1, 462121c) added with git worktree add as the brief allows and removed again at the end of the audit.",
+  "report": "reports/phase1g_b_adversarial_audit.md",
+  "schema_version": 1,
+  "scope": [
+    "src/timescape_fsigma8/lagrangian_sigma.py",
+    "tests/test_phase1g_b_lagrangian_sigma.py",
+    "tests/test_phase1g_status_additions.py",
+    "tests/test_barotropic_hadamard_refutation.py (validator calls)",
+    "scripts/validate_phase1g_b_lagrangian_sigma.py and artifacts/independent/phase1g_b_lagrangian_sigma.json",
+    "reports/phase1g_b_lagrangian_sigma_validation.md (Secs. 1-14)",
+    "reports/phase1g_status_additions_successor.md",
+    "reports/phase1g_status_additions_successor_inventory.json",
+    "src/timescape_fsigma8/scientific_status.py",
+    "scripts/validate_phase1f_c_r_astra_remediation.py (STATUS_SUCCESSOR_RECORDS, successor_status_changes, successor_status_additions, check_current_scientific_status, validate)",
+    "consulted for numbers/proposals only: reports/phase1g_a_sigma8_derivation_path_audit.md Secs. 5-8 and inventory; reports/phase1g_c_two_scale_growth_law.md Sec. 10; reports/phase1g_d_separate_universe_growth.md Secs. 9-11"
+  ],
+  "severity_scale": {
+    "HIGH": "invalidates a load-bearing result",
+    "LOW": "minor or cosmetic",
+    "LOW-MEDIUM": "governance, documentation or reproducibility defect with scientific-record impact",
+    "MEDIUM": "incorrect statement or a status claim not supported by the evidence",
+    "MEDIUM-HIGH": "materially changes a quantitative result or its interpretation without invalidating the equations"
+  },
+  "sources": {
+    "EH98": {
+      "file": "astro-ph_9709112/trans.tex",
+      "sha256": "5f2ac6b413df8b738c95f6650152b7e82d7c36f6d9b3a618da540e9739dce17f"
+    },
+    "GM": {
+      "file": "2511.17160v2/main.tex",
+      "sha256": "f9cadfa03ecc9a74b0a8f432ae4b13422daeb219f253756bcd877b4b75077c59"
+    },
+    "NW15": {
+      "file": "1410.3470/cmb1.tex",
+      "sha256": "6d0e6397d3877e0aaa3dba16601e1423c4bfe952c7221c1565cdd410d2669bcd"
+    },
+    "P18": {
+      "file": "1807.06209/ms.tex",
+      "sha256": "fe0833d2d0fda17427a709c9559dc7b3a988b955f47bb7de7a02c900ffdc21cf"
+    },
+    "W09": {
+      "file": "0909.0749v2/observe.tex",
+      "sha256": "2b0324d127440e9a053a7cb37102d7655cca228a63cd2222843e879989b4b531"
+    }
+  },
+  "tag_readiness": "NOT_READY_OWNER_DECISION_REQUIRED",
+  "title": "Phase 1G-B - Independent adversarial audit",
+  "verdict": "ACCEPT_WITH_CORRECTIONS"
+}

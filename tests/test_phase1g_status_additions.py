@@ -63,6 +63,13 @@ ADDED = {
 NOT_GRANTED = ("UNIQUE_TIMESCAPE_PREDICTION", "OBSERVATIONAL_AUTHORIZATION",
                "RSD_AUTHORIZATION", "SIGMA8_AUTHORIZATION", "FSIGMA8_AUTHORIZATION")
 BAROTROPIC_TOKEN = "UNRESTRICTED_BAROTROPIC_CONTINUUM_STABILITY"
+# Successor records registered after this one (each with its own regression):
+# reports/phase1g_e_status_addition_successor.md adds one Phase 1G-E token
+# (owner approval 2026-09-29, tests/test_phase1g_e_status_addition.py).  The
+# checks below still pin this record's six additions exactly; they only allow
+# the later registered records and their additions to exist as well.
+LATER_RECORDS_JSON = ("reports/phase1g_e_status_addition_successor_inventory.json",)
+LATER_ADDITIONS = {"TWO_PHASE_MASS_VARIANCE_8_H_INV_MPC": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION"}
 
 
 def load_json(path: Path) -> dict:
@@ -86,9 +93,13 @@ def test_six_added_tokens_hold_the_approved_values(frozen: dict) -> None:
         assert getattr(scientific_status, token) == value
         assert CURRENT_SCIENTIFIC_STATUS[token] == value
         assert token not in frozen  # an addition, not a change
-    # Exactly the six tokens are new; every other token is the frozen one,
-    # except the separately approved Phase 1G-A change.
-    assert set(CURRENT_SCIENTIFIC_STATUS) == set(frozen) | set(ADDED)
+    # Exactly the six tokens are new (plus the additions of the later
+    # registered records); every other token is the frozen one, except the
+    # separately approved Phase 1G-A change.
+    assert not set(LATER_ADDITIONS) & (set(frozen) | set(ADDED))
+    for token, value in LATER_ADDITIONS.items():
+        assert CURRENT_SCIENTIFIC_STATUS[token] == value
+    assert set(CURRENT_SCIENTIFIC_STATUS) == set(frozen) | set(ADDED) | set(LATER_ADDITIONS)
     for token, value in frozen.items():
         live = CURRENT_SCIENTIFIC_STATUS[token]
         live = list(live) if isinstance(live, tuple) else live
@@ -143,10 +154,13 @@ def test_validator_accepts_additions_declared_by_the_registered_record(
     remediation, frozen: dict,
 ) -> None:
     assert remediation.STATUS_SUCCESSOR_RECORDS == (
-        Path(BAROTROPIC_RECORD_JSON), Path(RECORD_JSON))
+        Path(BAROTROPIC_RECORD_JSON), Path(RECORD_JSON), *map(Path, LATER_RECORDS_JSON))
     additions = remediation.successor_status_additions()
-    assert additions == {token: {"value": value, "record": RECORD_JSON}
-                         for token, (value, _report, _section) in ADDED.items()}
+    assert {key: value for key, value in additions.items()
+            if value["record"] == RECORD_JSON} == {
+        token: {"value": value, "record": RECORD_JSON}
+        for token, (value, _report, _section) in ADDED.items()}
+    assert set(additions) == set(ADDED) | set(LATER_ADDITIONS)
     # The new record changes no existing token: the change set is still the
     # Phase 1G-A one alone.
     changes = remediation.successor_status_changes()
@@ -223,6 +237,7 @@ def test_validator_rejects_double_claims_and_tampered_records(
 ) -> None:
     record_path = Path(RECORD_JSON)
     barotropic_path = Path(BAROTROPIC_RECORD_JSON)
+    later_paths = tuple(map(Path, LATER_RECORDS_JSON))  # keep later additions declared
     # A token added by two records is rejected ...
     monkeypatch.setattr(remediation, "STATUS_SUCCESSOR_RECORDS", (record_path, record_path))
     with pytest.raises(AssertionError, match="added by more than one successor record"):
@@ -237,7 +252,8 @@ def test_validator_rejects_double_claims_and_tampered_records(
     tampered["status_additions"]["VOID_ONSET_RESPONSE"]["value"] = "DERIVED"
     tampered_path = tmp_path / "tampered_value.json"
     tampered_path.write_text(json.dumps(tampered), encoding="utf-8")
-    monkeypatch.setattr(remediation, "STATUS_SUCCESSOR_RECORDS", (barotropic_path, tampered_path))
+    monkeypatch.setattr(remediation, "STATUS_SUCCESSOR_RECORDS",
+                        (barotropic_path, tampered_path, *later_paths))
     with pytest.raises(AssertionError, match="VOID_ONSET_RESPONSE: live value differs"):
         remediation.check_current_scientific_status(
             frozen, CURRENT_SCIENTIFIC_STATUS, remediation.successor_status_changes(),
@@ -248,7 +264,8 @@ def test_validator_rejects_double_claims_and_tampered_records(
     readded["status_additions"]["D3_VERDICT"] = {"value": "RESOLVED_DERIVED_4_10"}
     readded_path = tmp_path / "readded.json"
     readded_path.write_text(json.dumps(readded), encoding="utf-8")
-    monkeypatch.setattr(remediation, "STATUS_SUCCESSOR_RECORDS", (barotropic_path, readded_path))
+    monkeypatch.setattr(remediation, "STATUS_SUCCESSOR_RECORDS",
+                        (barotropic_path, readded_path, *later_paths))
     with pytest.raises(AssertionError, match="D3_VERDICT: frozen snapshot already holds"):
         remediation.check_current_scientific_status(
             frozen, CURRENT_SCIENTIFIC_STATUS, remediation.successor_status_changes(),

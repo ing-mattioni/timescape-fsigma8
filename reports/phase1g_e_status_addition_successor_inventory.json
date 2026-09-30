@@ -1,0 +1,112 @@
+{
+  "branch": "claude/zealous-rubin-1m3vf4",
+  "classification": "APPROVED_SCIENTIFIC_STATUS_ADDITION_SUCCESSOR_RECORD",
+  "date": "2026-09-29",
+  "files_changed": [
+    "CLAUDE.md",
+    "README.md",
+    "reports/phase1g_e_status_addition_successor.md",
+    "reports/phase1g_e_status_addition_successor_inventory.json",
+    "scripts/validate_phase1f_c_r_astra_remediation.py",
+    "src/timescape_fsigma8/scientific_status.py",
+    "tests/test_phase1g_e_status_addition.py",
+    "tests/test_phase1g_status_additions.py"
+  ],
+  "human_approval": {
+    "applied_here": "approval 1 (the token); approval 2 governs how this change reaches the remote",
+    "by": "project owner",
+    "date": "2026-09-29",
+    "not_approved": [
+      "merging the pull request",
+      "pushing to main or to any branch other than the session branch",
+      "creating or pushing tags",
+      "force-pushing",
+      "changing any existing status token, equation, initial condition, unit, sign convention or tolerance",
+      "editing frozen historical reports or inventories"
+    ],
+    "source": "the owner's task statement for this session, section 0 'Rules and authorisation', which lists the only approvals given",
+    "verbatim": [
+      "Add the status token TWO_PHASE_MASS_VARIANCE_8_H_INV_MPC = \"DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION\" (reports/phase1g_e_two_phase_sigma.md \u00a76 item 3; assumptions E1\u2013E4).",
+      "Commit to this session's working branch, push that branch, and open ONE draft pull request against main at the end."
+    ]
+  },
+  "parent_commit": "6f7937ce5681900898f5e0a6482a953f0fa3e5a0",
+  "phase": "1G-E",
+  "report": "reports/phase1g_e_status_addition_successor.md",
+  "schema_version": 1,
+  "scope": {
+    "equations_changed": false,
+    "existing_status_tokens_changed": false,
+    "frozen_historical_reports_or_inventories_edited": false,
+    "not_granted_tokens": [
+      "FSIGMA8_AUTHORIZATION",
+      "OBSERVATIONAL_AUTHORIZATION",
+      "RSD_AUTHORIZATION",
+      "SIGMA8_AUTHORIZATION",
+      "UNIQUE_TIMESCAPE_PREDICTION"
+    ],
+    "not_granted_tokens_changed": false,
+    "package_modules_changed": [
+      "src/timescape_fsigma8/scientific_status.py"
+    ],
+    "tolerances_changed": false
+  },
+  "status_additions": {
+    "TWO_PHASE_MASS_VARIANCE_8_H_INV_MPC": {
+      "assumptions": {
+        "E1": "two phases: empty voids (tracker), walls at <rho>/f_w with linear internal field",
+        "E2": "Boolean voids: Poisson balls of radius a, lambda V_a = -ln f_w",
+        "E3": "wall field independent of void geometry",
+        "E4": "Eulerian wall field: isotropic compression s = f_w^(1/3) (primary) or s = 1 (bracket)"
+      },
+      "evidence_class": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "meaning": "the mass variance of the two-phase (wall/void) Timescape universe in balls of radius 8 h^-1 Mpc, sigma^2 = delta_v^2 sigma_part^2 + sigma_int^2, is derived only under assumptions E1-E4; it is a conditional, nonlinear, model-internal quantity",
+      "module": "src/timescape_fsigma8/scientific_status.py",
+      "not_meant": [
+        "an observational sigma_8 or any authorization (SIGMA8_AUTHORIZATION stays NOT_GRANTED)",
+        "a derived void population (the E2 void radius is an external input; Phase 1G-F is the report-only follow-up)",
+        "any change to the linear sigma numbers of 1G-A/1G-C or to the 1G-B runtime"
+      ],
+      "proposed_in": "reports/phase1g_e_two_phase_sigma.md Sec. 6 item 3",
+      "report": "reports/phase1g_e_two_phase_sigma.md",
+      "section": "Sec. 2",
+      "value": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION"
+    }
+  },
+  "status_changes": {},
+  "superseded_frozen_readings": [
+    {
+      "current": "live addition (this record); the frozen snapshot is unchanged and still checked",
+      "frozen": "no entry for the token",
+      "location": "reports/phase1f_c_r_astra_audit_remediation_inventory.json current_scientific_status"
+    },
+    {
+      "current": "true of the 1G-E checkpoint; approved 2026-09-29 and applied by this record",
+      "frozen": "proposal, none applied; false",
+      "location": "reports/phase1g_e_two_phase_sigma.md Sec. 6 item 3; reports/phase1g_e_two_phase_sigma_inventory.json status_tokens_changed"
+    },
+    {
+      "current": "true of that record's checkpoint (6f7937c); approved separately 2026-09-29 and applied by this record",
+      "frozen": "the 1G-E proposal is not in the approved list and is not added",
+      "location": "reports/phase1g_status_additions_successor.md Sec. 1 Scope; reports/phase1g_status_additions_successor_inventory.json human_approval.not_approved_here"
+    }
+  ],
+  "title": "Successor record: one approved Phase 1G-E status-token addition",
+  "validation": {
+    "environments": [
+      "Linux x86-64 (AVX-512), CPython 3.13.12, NumPy 2.5.3, SciPy 1.18.1",
+      "Linux x86-64 (AVX-512), CPython 3.11.15, NumPy 2.4.6, SciPy 1.17.1"
+    ],
+    "full_suite": "run at the end of the session on every interpreter and recorded in the session pull request and the Phase 1G-F report; the preflight at the parent 6f7937c gave 1043 passed, 1 failed (tests/test_phase1g_b_lagrangian_sigma.py::test_top_hat_window_limits_series_and_envelope, a platform-dependent bitwise-evenness assertion; see reports/phase1g_b_adversarial_audit.md), 0 skipped on both interpreters",
+    "targeted_tests": "tests/test_phase1g_e_status_addition.py, tests/test_phase1g_status_additions.py, tests/test_barotropic_hadamard_refutation.py, tests/test_phase1f_c_r_astra_remediation.py: 78 passed on both interpreters (-B -W error)",
+    "tolerance_audit": "scripts/audit_numerical_tolerances.py: 633 comparisons, 0 missing",
+    "validator": "scripts/validate_phase1f_c_r_astra_remediation.py --producers: PASS on both interpreters; successor_status_additions lists the seven additions, successor_status_changes the 1G-A token alone"
+  },
+  "validator_change": {
+    "frozen_inventory_edited": false,
+    "logic_changed": false,
+    "precedent_records_edited": false,
+    "registry": "STATUS_SUCCESSOR_RECORDS lists the three successor records in order (1G-A change, 1G-C/1G-D additions, this record)",
+    "script": "scripts/validate_phase1f_c_r_astra_remediation.py"
+  }
+}

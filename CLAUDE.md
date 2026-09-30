@@ -131,8 +131,9 @@ py -3.14 -m venv .venv
 .venv\Scripts\python -m pip install -e ".[exec,test]"
 
 # Full validation suite (1044 passed on Windows, Python 3.14.3 and 3.11.9, at
-# the Phase 1G status-approvals checkpoint; oracle and generated-artifact
-# tests auto-skip when their inputs are absent)
+# the Phase 1G status-approvals checkpoint; 1049 passed on Linux, Python
+# 3.13.12 and 3.11.15, after the Phase 1G audit PR; oracle and
+# generated-artifact tests auto-skip when their inputs are absent)
 .venv\Scripts\python -m pytest -q
 
 # A single file / single test / keyword selection
@@ -230,7 +231,23 @@ audits were recovered and committed, §12) · **1F-D** minimal scalar
 necessary-bound diagnostic (`phase1f_d_necessary_bound.md`, tag
 `phase-1f-d-necessary-bound-v1`; conditional).
 
-In progress (σ track; no adversarial audit or tag yet):
+In progress (σ track; audited, not tagged):
+- **Adversarial audits of 1G-A to 1G-E** (2026-09-29; one independent
+  auditor per phase, `reports/phase1g_<x>_adversarial_audit.md` + inventory;
+  consolidation `phase1g_adversarial_audit_errata_successor.md`).
+  - Every phase: `ACCEPT_WITH_CORRECTIONS`, `NOT_READY_OWNER_DECISION_REQUIRED`.
+    No HIGH finding and no error in an implemented equation.
+  - MEDIUM-HIGH findings: GC-F1 (the 1G-C wall σ is the wall-internal
+    statistic), GD-F1 (1G-D void-seed scale vs the tracker), GE-F1 (1G-E
+    non-empty-void formula breaks mass conservation), GE-F2 (void
+    population vs [W09]).
+  - The errata are applied as successor readings, and three docstring
+    citations are fixed; the frozen reports are unchanged.
+  - On Linux (AVX-512) one test failed at 6f7937c:
+    `test_top_hat_window_limits_series_and_envelope` (bitwise evenness of
+    `x**3`; GB-F1). With owner approval (2026-09-30, option A) the test now
+    compares with `rtol=1e-15`; the implementation is unchanged. GB-F1 was
+    1G-B's only blocking decision.
 - **1G-A:** σ(M) derivation-path audit (report-only,
   `phase1g_a_sigma8_derivation_path_audit.md`). The route is standard early
   universe plus scale-independent growth; the barotropic closure is Hadamard
@@ -290,13 +307,32 @@ In progress (σ track; no adversarial audit or tag yet):
     for [GM] and 1.36 for [NW15]. The range is 0.9–2.1.
   - This is a nonlinear, model-internal quantity. Its next step is 1G-F, a
     self-consistent void population.
+- **1G-F:** self-consistent void population (report-only,
+  `phase1g_f_void_population.md`).
+  - Excursion-set voids ([SvdW04] two barriers; [JLH13]'s corrected EdS
+    shell crossing δ_v = −2.717, r_NL/r_L = 1.697) from the 1G-A early
+    spectrum, with the growth clock as an explicit closure (wall EdS in t,
+    volume-average CGI, 1G-D separate-universe response).
+  - The void mass fraction 1 − 𝒟 is clock-independent. The tracker's f_v0
+    is reproduced only under the two-scale volume budget (f_v 0.66–0.79 at
+    all sizes); [JLH13]'s volume-conserving mapping gives ≤ 0.38.
+  - With the wall clock the voids are small (median 2.4–2.8 h⁻¹ Mpc;
+    ≥ 10 h⁻¹ Mpc voids fill ~4%, not [W09]'s 40–50%), and no fixed
+    threshold reproduces f_v(t).
+  - The self-consistent two-phase σ at 8 h⁻¹ Mpc is ≈ 0.99 with empty voids
+    (1G-E's 1.36–1.57 needs 1G-D's disputed PBS response). Conditional,
+    nonlinear, model-internal; three tokens proposed, none added.
 - **Status-token additions:** the six 1G-C/1G-D tokens are *additions*, not
   changes (`phase1g_status_additions_successor.md`). The frozen 1F-C-R
   snapshot has no entry for them. The 1F-C-R validator accepts a new token
   only if a registered successor record declares it; it must still be absent
   from the snapshot, and the live value must match the record. No existing
-  token changed. The 1G-E proposal `TWO_PHASE_MASS_VARIANCE_8_H_INV_MPC` is
-  not approved or added.
+  token changed.
+  - With owner approval (2026-09-29, a separate record,
+    `phase1g_e_status_addition_successor.md`), the 1G-E proposal
+    `TWO_PHASE_MASS_VARIANCE_8_H_INV_MPC = DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION`
+    (assumptions E1–E4) is added the same way. It is the seventh addition;
+    the validator registers three successor records.
 - `SIGMA8_AUTHORIZATION` stays `NOT_GRANTED`.
 
 Outside the phase sequence: the isolated, conditional **LTB–CMC experiment**

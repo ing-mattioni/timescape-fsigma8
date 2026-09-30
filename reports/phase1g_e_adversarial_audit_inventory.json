@@ -1,0 +1,577 @@
+{
+  "audit_classification": "INDEPENDENT_ADVERSARIAL_AUDIT",
+  "audit_date": "2026-09-29",
+  "checkpoint": "6f7937ce5681900898f5e0a6482a953f0fa3e5a0",
+  "claims": [
+    {
+      "claim": "Boolean covariance xi_w = exp(lambda gamma) - 1 with lambda V = -ln f_w; covariogram gamma = V(1 - 3r/4a + r^3/16a^3)",
+      "evidence_class_assessed": "DERIVED_FROM_VERIFIED_DEFINITIONS (given E2)",
+      "evidence_class_reported": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION (Sec. 2); Boolean model cited as standard stochastic geometry",
+      "id": "C1",
+      "independent_values": {
+        "lens_volume": "(pi/12)(2a-r)^2(4a+r) = V(1 - 3r/4a + r^3/16a^3)"
+      },
+      "location": "[1G-E] Sec. 2 lines 94, 100",
+      "notes": "Derived from the Poisson void probability of the union of two balls.",
+      "outcome": "CONFIRMED"
+    },
+    {
+      "claim": "xi_w(0) = f_v/f_w; sigma_part -> sqrt(f_v/f_w) for R << a: 1.674, 1.297; sigma_part -> 0 for R >> a",
+      "evidence_class_assessed": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "evidence_class_reported": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "id": "C2",
+      "independent_values": {
+        "GM": 1.674001603589821,
+        "NW15": 1.2965203999371098
+      },
+      "location": "[1G-E] Sec. 2 lines 108-111",
+      "notes": "",
+      "outcome": "CONFIRMED"
+    },
+    {
+      "claim": "P_R(r) = (3r^2/R^3)(1 - 3r/4R + r^3/16R^3) and int P_R j0(kr) dr = W_TH(kR)^2, holding to 1.7e-12",
+      "evidence_class_assessed": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "evidence_class_reported": "NUMERICALLY_CORROBORATED",
+      "id": "C3",
+      "independent_values": {
+        "residual_kR_0.01": 1.6941231954518856e-12,
+        "residual_kR_0.3_to_10_max": 1.2434556308997275e-15,
+        "residual_kR_60": 7.191441057563895e-13
+      },
+      "location": "[1G-E] Sec. 2 line 101, Sec. 3 lines 115-117",
+      "notes": "The 1.7e-12 residual is round-off in the closed-form reference W^2 at kR = 0.01 (the series gives the quadrature value exactly), not quadrature error. Not tested for 60 < kR <= 300 (negligible there).",
+      "outcome": "CONFIRMED"
+    },
+    {
+      "claim": "sigma^2 = sigma_part^2 + sigma_int^2 with sigma_int^2 = int P_R (1 + xi_w) xi_E dr (delta_v = -1, E1-E3); no cross terms",
+      "evidence_class_assessed": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "evidence_class_reported": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "id": "C4",
+      "independent_values": {},
+      "location": "[1G-E] Sec. 2 lines 89-96",
+      "notes": "Cross term vanishes by E3 and <delta_w> = 0.",
+      "outcome": "CONFIRMED"
+    },
+    {
+      "claim": "Non-empty voids scale the partition amplitude by delta_v^2: sigma^2 = delta_v^2 sigma_part^2 + sigma_int^2",
+      "evidence_class_assessed": "NOT_DERIVED (mass-consistent form differs)",
+      "evidence_class_reported": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "id": "C5",
+      "independent_values": {
+        "GM_a15_dv-0.8": 1.29798,
+        "GM_a15_dv-0.9": 1.43466,
+        "GM_range_min": 0.82023,
+        "NW15_a15_dv-0.8": 1.14209,
+        "NW15_a15_dv-0.9": 1.24911,
+        "NW15_range_min": 0.79519
+      },
+      "location": "[1G-E] lines 30, 67-70, 89-91, 155-161",
+      "notes": "Partition term correct; internal term must carry (f_w - f_v delta_v)^2. See GE-F1.",
+      "outcome": "REFUTED"
+    },
+    {
+      "claim": "E4 implemented as Delta^2_E(k) = Delta^2_L(k s) is equivalent to xi_E(r) = xi_L(r/s)",
+      "evidence_class_assessed": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "evidence_class_reported": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "id": "C6",
+      "independent_values": {
+        "real_space_vs_artifact_max_rel_diff": 3.4613663795202143e-06
+      },
+      "location": "[1G-E] line 96; script lines 159-168",
+      "notes": "P_E(k) = s^3 P_L(ks); the Jacobian cancels in Delta^2.",
+      "outcome": "CONFIRMED"
+    },
+    {
+      "claim": "Compression direction s = f_w^(1/3) (walls occupy f_w of the volume, mass conserved)",
+      "evidence_class_assessed": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "evidence_class_reported": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "id": "C7",
+      "independent_values": {
+        "D_wall_over_gamma_w0_GM": 0.6406958577185559,
+        "f_w_cuberoot_GM": 0.6406958577185559
+      },
+      "location": "[1G-E] lines 82-85",
+      "notes": "Isotropic compression equals the tracker's regional wall volume law.",
+      "outcome": "CONFIRMED"
+    },
+    {
+      "claim": "s = 1 (no compression) is the upper bracket; real walls are anisotropic",
+      "evidence_class_assessed": "EXTERNAL_CLOSURE_INPUT",
+      "evidence_class_reported": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "id": "C8",
+      "independent_values": {
+        "GM_sigma_int_filament": 1.065,
+        "GM_sigma_int_isotropic": 1.0926,
+        "GM_sigma_int_s1": 1.4645,
+        "GM_sigma_int_sheet": 0.9881,
+        "GM_sigma_int_shell_tau1.7_in_plane": 1.9874
+      },
+      "location": "[1G-E] lines 86-87, 181-182",
+      "notes": "True as an upper value only within E3; E3-consistent anisotropic maps lie below the primary. See GE-F3.",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    },
+    {
+      "claim": "Monte Carlo confirms the Boolean formula to <= 1.5% (gated); ungated 4.7% / 7.4% noise-dominated",
+      "evidence_class_assessed": "NUMERICALLY_CORROBORATED",
+      "evidence_class_reported": "NUMERICALLY_CORROBORATED",
+      "id": "C9",
+      "independent_values": {
+        "lattice_ensemble_sig2_realised_rel_GM": [
+          -0.0033,
+          0.0038
+        ],
+        "lattice_ensemble_sig2_realised_rel_NW15": [
+          0.0002,
+          0.0034
+        ],
+        "phase_mc_16_seeds_gated_max_GM": [
+          0.01,
+          0.0313,
+          0.0503
+        ],
+        "phase_mc_16_seeds_gated_max_NW15": [
+          0.0016,
+          0.0097,
+          0.0395
+        ]
+      },
+      "location": "[1G-E] lines 40-42, 121-133",
+      "notes": "Formula confirmed independently; quoted precision is a single favourable draw and seed 12 fails the gate ([GM]). See GE-F5.",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    },
+    {
+      "claim": "First run failed at 14% because of the ball-count fluctuation (2% fewer balls shifts f_w by 4.5%); realisation-intensity comparison is legitimate",
+      "evidence_class_assessed": "NUMERICALLY_CORROBORATED",
+      "evidence_class_reported": "NUMERICALLY_CORROBORATED",
+      "id": "C10",
+      "independent_values": {
+        "f_w_shift_for_2pct_fewer_balls_GM": 0.0267,
+        "f_w_shift_for_2pct_fewer_balls_NW15": 0.0197,
+        "lattice_single_realisation_nominal_max_miss_GM": 0.1402,
+        "same_seed_final_box_nominal_gated_GM": 0.0162,
+        "same_seed_final_box_nominal_gated_NW15": 0.0167
+      },
+      "location": "[1G-E] lines 134-138",
+      "notes": "Conditioning is a legitimate variance reduction (no hidden model error); the 2%->4.5% arithmetic is inconsistent and the first run is unrecorded.",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    },
+    {
+      "claim": "sigma_part, sigma_int (compressed/uncompressed), sigma total for a = 5-30, both parameter sets (Sec. 4 table)",
+      "evidence_class_assessed": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "evidence_class_reported": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "id": "C11",
+      "independent_values": {
+        "GM_a15_total_compressed": 1.57171,
+        "NW15_a15_total_compressed": 1.35673,
+        "mismatches_at_3_decimals": 0,
+        "table_entries_checked": 60
+      },
+      "location": "[1G-E] Sec. 4 lines 146-153",
+      "notes": "Recomputed by a real-space route with own EH98, tracker closed forms and LCDM growth.",
+      "outcome": "CONFIRMED"
+    },
+    {
+      "claim": "R = 8 h^-1 Mpc -> 10.95 / 13.11 Mpc (dressed h); D_wall = gamma_w0 (1-f_v0)^(1/3); Planck anchor 0.97058",
+      "evidence_class_assessed": "CONVENTION_DEPENDENT (radius); DERIVED_FROM_VERIFIED_DEFINITIONS (D_wall, anchor)",
+      "evidence_class_reported": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "id": "C12",
+      "independent_values": {
+        "D_wall_GM": 0.8767922812878437,
+        "D_wall_NW15": 0.9455104962879062,
+        "R_GM": 10.954402300424482,
+        "R_NW15": 13.114754098360656,
+        "anchor": 0.970576769523401,
+        "equal_mass_total_GM": 1.4367870287388531,
+        "equal_mass_total_NW15": 1.4188266795252542,
+        "lcdm_growth0": 0.7878126021855962
+      },
+      "location": "[1G-E] lines 103-106, 142",
+      "notes": "Values exact; the radius is 1G-A convention (b), not labelled. See GE-F4.",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    },
+    {
+      "claim": "Switching the partition off gives sigma_int = 0.9121 / 0.8910, exactly [1G-C]'s sigma_wall at the dressed 8/h radius",
+      "evidence_class_assessed": "NUMERICALLY_CORROBORATED",
+      "evidence_class_reported": "NUMERICALLY_CORROBORATED",
+      "id": "C13",
+      "independent_values": {
+        "GM": 0.9121431034024505,
+        "NW15": 0.8910454030747986
+      },
+      "location": "[1G-E] lines 118-120",
+      "notes": "Agrees to 1.5e-9 / 2.0e-9 relative, but shares the spectrum, growth and anchor code with 1G-C; it re-tests only the kernel quadrature.",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    },
+    {
+      "claim": "sigma ~ 1.4-1.6 is about 1.7-1.9 times Planck-LCDM's linear sigma8 (0.81)",
+      "evidence_class_assessed": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "evidence_class_reported": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "id": "C14",
+      "independent_values": {
+        "ratio_GM": 1.9378,
+        "ratio_NW15": 1.6727,
+        "ratio_W09_consistent_GM": [
+          1.25,
+          1.52
+        ],
+        "ratio_equal_mass": [
+          1.771,
+          1.749
+        ]
+      },
+      "location": "[1G-E] lines 54, 175-176",
+      "notes": "Arithmetic correct; depends on GE-F2 and GE-F4; the statistic is a hybrid (nonlinear partition + linear-theory wall field).",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    },
+    {
+      "claim": "[W09] line 277 gives voids of characteristic diameter 30 h^-1 Mpc, so a = 15 h^-1 Mpc is the primary radius (at f_v0)",
+      "evidence_class_assessed": "EXTERNAL_CLOSURE_INPUT",
+      "evidence_class_reported": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "id": "C15",
+      "independent_values": {
+        "W09_consistent_total_GM": [
+          1.02,
+          1.23
+        ],
+        "W09_consistent_total_NW15": [
+          1.04,
+          1.2
+        ],
+        "W09_fill_fraction_30Mpc_voids": "40-50%"
+      },
+      "location": "[1G-E] lines 72-78",
+      "notes": "Quote verbatim but partial; [W09] lines 277-285 assign 40-50% to these voids and the rest to minivoids. See GE-F2.",
+      "outcome": "REFUTED"
+    },
+    {
+      "claim": "E1: empty voids (delta_v = -1), the tracker's rho_v = 0",
+      "evidence_class_assessed": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "evidence_class_reported": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "id": "C16",
+      "independent_values": {
+        "JLH13_shell_crossing_1_plus_Delta": 0.2047,
+        "SvdW04_shell_crossing_1_plus_Delta": 0.1982
+      },
+      "location": "[1G-E] lines 67-70",
+      "notes": "Tracker-consistent ([1G-C] Sec. 3), but the [SvdW04] (voids.tex lines 1420, 2159) and [JLH13] (voids_mnras.tex lines 73, 1343) void definitions sit at delta_v ~ -0.8; voids empty toward -1 at the centre later ([SvdW04] line 449).",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    },
+    {
+      "claim": "Every printed number is identical on both interpreters, including the seeded Monte Carlo",
+      "evidence_class_assessed": "NUMERICALLY_CORROBORATED",
+      "evidence_class_reported": "NUMERICALLY_CORROBORATED",
+      "id": "C17",
+      "independent_values": {
+        "artifact_py3_11_15_identical_except_environment": true,
+        "artifact_sha256_py3_13_12": "94c16cc15d3dee14ad1de4a8b5833c752f76e9d7289c237b1a18cd9751393612"
+      },
+      "location": "[1G-E] lines 229-231",
+      "notes": "Verified on Linux 3.13.12 / 3.11.15; owner's Windows runs not verifiable. Four full-precision inventory entries differ in the last bits from Linux (platform floating point); all rounded values and MC counts identical.",
+      "outcome": "CONFIRMED"
+    },
+    {
+      "claim": "Inventory, report and artifact are mutually consistent",
+      "evidence_class_assessed": "NUMERICALLY_CORROBORATED",
+      "evidence_class_reported": "not stated",
+      "id": "C18",
+      "independent_values": {
+        "inventory_numeric_entries_checked": 149,
+        "mismatches_at_stated_rounding": 0
+      },
+      "location": "reports/phase1g_e_two_phase_sigma_inventory.json",
+      "notes": "The inventory repeats the GE-F1 formula; numeric summaries in report Sec. 5 differ from the tables (GE-F6).",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    },
+    {
+      "claim": "Proposed (now owner-approved) token TWO_PHASE_MASS_VARIANCE_8_H_INV_MPC = DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION with E1-E4",
+      "evidence_class_assessed": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "evidence_class_reported": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "id": "C19",
+      "independent_values": {},
+      "location": "[1G-E] Sec. 6 item 3",
+      "notes": "Value supported for delta_v = -1 under E1-E4. Recorded meaning should: restrict or correct the delta_v formula (GE-F1); describe E2's single radius at full f_v0 as an idealisation, not a [W09] statement (GE-F2); describe E4's s = 1 as a sensitivity (GE-F3); state that the internal part is linear theory (hybrid statistic). Outside the audited checkpoint, the lead's successor record at ad1ac35 repeats the delta_v formula and the '[W09]' attribution.",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    }
+  ],
+  "environment": {
+    "audit_tree": "isolated worktree of 6f7937c, PYTHONPATH=<audit_tree>/src",
+    "full_test_suite": "not run (brief)",
+    "interpreters": [
+      "CPython 3.13.12, NumPy 2.5.3, SciPy 1.18.1",
+      "CPython 3.11.15, NumPy 2.4.6, SciPy 1.17.1"
+    ],
+    "phase_script_wall_time_s": {
+      "3.11.15": 77,
+      "3.13.12": 81
+    },
+    "platform": "Linux x86-64, AVX-512"
+  },
+  "errata": [
+    {
+      "file": "reports/phase1g_e_two_phase_sigma.md",
+      "location": "line 132 (Sec. 3 table)",
+      "new": "| ungated u = 1.5 (\u03be_w \u2248 0.12 [GM], 0.088 [NW15]; noise-dominated) | 4.7% | 7.4% |",
+      "old": "| ungated u = 1.5 (\u03be_w \u2248 0.12, noise-dominated) | 4.7% | 7.4% |",
+      "proof": "artifact covariance u=1.5 analytic: 0.12103 [GM], 0.08794 [NW15]"
+    },
+    {
+      "file": "reports/phase1g_e_two_phase_sigma.md",
+      "location": "line 180 (Sec. 5 item 3)",
+      "new": "   - the void radius: a factor 1.6\u20131.9 in \u03c3 between a = 5 and 30 h\u207b\u00b9 Mpc ([GM] 1.73\u20131.87, [NW15] 1.56\u20131.66);",
+      "old": "   - the void radius: a factor 1.7\u20131.9 in \u03c3 between a = 5 and 30 h\u207b\u00b9 Mpc;",
+      "proof": "Sec. 4 table: 1.826/0.976 = 1.870, 2.120/1.226 = 1.729, 1.533/0.923 = 1.660, 1.743/1.117 = 1.560"
+    },
+    {
+      "file": "reports/phase1g_e_two_phase_sigma.md",
+      "location": "lines 181-182 (Sec. 5 item 3)",
+      "new": "   - the Eulerian mapping of the wall field: +14\u201326% in \u03c3 total, +25\u201335% in \u03c3_int (uncompressed vs\n     compressed);",
+      "old": "   - the Eulerian mapping of the wall field: +15\u201326% (uncompressed vs\n     compressed);",
+      "proof": "uncompressed/compressed sigma total: [GM] 1.161-1.255, [NW15] 1.137-1.210; sigma_int: 1.253-1.347 (artifact rows)"
+    },
+    {
+      "file": "reports/phase1g_e_two_phase_sigma.md",
+      "location": "line 142 (Sec. 4)",
+      "new": "**R = 8 h\u207b\u00b9 Mpc** (photon-normalised comoving radii 10.95 Mpc for [GM], 13.11 Mpc for [NW15]; [1G-A] Sec. 6.4 convention (b)).",
+      "old": "**R = 8 h\u207b\u00b9 Mpc** (10.95 Mpc for [GM], 13.11 Mpc for [NW15]).",
+      "proof": "script line 184 R = R_H_MPC / h with dressed h equals the 1G-A artifact radius dressed_8_over_h_wall_comoving (10.954 / 13.115)"
+    },
+    {
+      "file": "reports/phase1g_e_two_phase_sigma.md",
+      "location": "line 74 (Sec. 2, E2)",
+      "new": "  - [W09] gives \"voids of a characteristic diameter 30 h\u207b\u00b9 Mpc\" that \"fill 40\u201350% of the universe\", plus \"numerous minivoids\" (lines 277\u2013280),",
+      "old": "  - [W09] gives \"voids of a characteristic diameter 30 h\u207b\u00b9 Mpc\" (line 277),",
+      "proof": "[W09] observe.tex (sha256 2b0324d1...b531) lines 277-280; quote completion only, the downstream choice of primary is owner decision OD-2"
+    },
+    {
+      "file": "reports/phase1g_e_two_phase_sigma.md",
+      "location": "line 220 (Sec. 7)",
+      "new": "\u2192 wrote artifacts\\independent\\phase1g_e_two_phase_sigma.json    (about 1\u20132 minutes)",
+      "old": "\u2192 wrote artifacts\\independent\\phase1g_e_two_phase_sigma.json    (a few seconds)",
+      "proof": "measured wall time 81 s (CPython 3.13.12) and 77 s (3.11.15) on the audit machine; the script makes about 3.2e7 k-d tree queries (1.6e7 per parameter set)"
+    },
+    {
+      "file": "scripts/phase1g_e_two_phase_sigma_numerics.py",
+      "location": "line 6 (module docstring)",
+      "new": "Model ([1G-E] Sec. 2): empty voids (the tracker's rho_v = 0, [1G-C] Sec. 3)",
+      "old": "Model ([1G-E] Sec. 3): empty voids (the tracker's rho_v = 0, [1G-C] Sec. 3)",
+      "proof": "[1G-E] Sec. 2 is 'Model', Sec. 3 is 'Verification'"
+    }
+  ],
+  "finding_counts": {
+    "HIGH": 0,
+    "LOW": 2,
+    "LOW-MEDIUM": 1,
+    "MEDIUM": 2,
+    "MEDIUM-HIGH": 2,
+    "total": 7
+  },
+  "findings": [
+    {
+      "consequence": "The delta_v sensitivity is understated by about a factor 2 (about -16 to -17% at delta_v=-0.8, not about -9%). The headline ranges become 0.82-2.12 [GM] and 0.80-1.74 [NW15]; the CLAUDE.md reading 'range is 0.9-2.1' becomes 0.8-2.1. The delta_v=-1 (tracker) values are unaffected. The [SvdW04]/[JLH13] void definition sits at delta_v ~ -0.8, so the affected rows are the physically relevant sensitivity.",
+      "evidence": "Analytic derivation (audit Sec. 4.2); direct lattice construction with exact mean density (dv_check.py, antithetic pair) reproduces the mass-consistent formula to every printed digit and not the [1G-E] one (f_v=0.737, delta_v=-0.8: measured 1.0896, [1G-E] formula 1.1412, mass-consistent 1.0896). Recomputed at a=15, compressed: delta_v=-0.9: 1.435 [GM] / 1.249 [NW15] (reported 1.493 / 1.297); delta_v=-0.8: 1.298 / 1.142 (reported 1.418 / 1.242). Range lower edges: 0.820 [GM] (reported 0.93), 0.795 [NW15] (reported 0.89). Alternative closure (void matter carries the same delta_w): 1.321 / 1.164 at delta_v=-0.8, also below the report.",
+      "id": "GE-F1",
+      "locations": [
+        "reports/phase1g_e_two_phase_sigma.md lines 30, 46-49, 67-70, 89-91, 155-161, 184",
+        "reports/phase1g_e_two_phase_sigma_inventory.json model.formula, headline_8_h_inv_Mpc.range_PAPER, range_NW15",
+        "scripts/phase1g_e_two_phase_sigma_numerics.py line 197"
+      ],
+      "resolution_class": "OWNER_DECISION",
+      "severity": "MEDIUM-HIGH",
+      "statement": "With uniform void interiors (1+delta_v)<rho> and walls carrying the remaining mass with the fractional field delta_w, mass conservation gives 1+delta_W = (f_w - f_v delta_v)/f_w, hence delta = -delta_v(chi_w/f_w - 1) + (f_w - f_v delta_v)(chi_w/f_w) delta_w and sigma^2 = delta_v^2 sigma_part^2 + (f_w - f_v delta_v)^2 sigma_int^2. [1G-E] keeps sigma_int unchanged, which requires walls at <rho>/f_w while voids also hold mass (mean density [1 + f_v(1+delta_v)]<rho>). The partition amplitude delta_v^2 is correct; the internal term is not.",
+      "suggested_resolution": "Owner decision: adopt sigma^2 = delta_v^2 sigma_part^2 + (f_w - f_v delta_v)^2 sigma_int^2 and update the delta_v table, the '-9%' statement, the ranges and the inventory; or restrict the formula and tables to delta_v = -1. Record the choice in a dated successor note and in the token's recorded meaning.",
+      "title": "The non-empty-void formula sigma^2 = delta_v^2 sigma_part^2 + sigma_int^2 violates mass conservation"
+    },
+    {
+      "consequence": "The 'primary' values and the reading 'about 1.7-1.9 times Planck-LCDM's linear sigma8' rest on a partial quotation; a [W09]-consistent population lowers sigma by 22-35% [GM] and 11-23% [NW15]. The reported a = 5-30 range still contains these values.",
+      "evidence": "Two independent Boolean populations, 1+xi_w = exp(sum lambda_i gamma_i): 15 h^-1 Mpc voids filling 40-50% plus minivoids of radius 1-4 h^-1 Mpc filling the rest up to f_v0, give sigma total (compressed, delta_v=-1) 1.02-1.23 [GM] and 1.04-1.20 [NW15] vs the primary 1.57 / 1.36; ratio to 0.8111: 1.25-1.52. In the single-radius Boolean model a void point is covered by 1.8 balls on average and the mean void chord is 42 [GM] / 34 [NW15] h^-1 Mpc (20 for an isolated ball), so a is not the observable void radius.",
+      "id": "GE-F2",
+      "locations": [
+        "reports/phase1g_e_two_phase_sigma.md lines 44-57, 72-78, 175-176",
+        "reports/phase1g_e_two_phase_sigma_inventory.json headline_8_h_inv_Mpc",
+        "scripts/phase1g_e_two_phase_sigma_numerics.py line 58 comment"
+      ],
+      "resolution_class": "OWNER_DECISION",
+      "severity": "MEDIUM-HIGH",
+      "statement": "[1G-E] line 74 quotes [W09] line 277 ('voids of a characteristic diameter 30 h^-1 Mpc') and infers a = 15 h^-1 Mpc as the primary radius at volume fraction f_v0. The same [W09] sentence (lines 277-278) says these voids 'are observed to fill 40--50% of the universe'; lines 278-285 add 'numerous minivoids' and state that dominant voids and minivoids together make up the void fraction. The tracker f_v0 (0.737 / 0.627) therefore includes minivoids.",
+      "suggested_resolution": "Complete the quote (erratum 5). Owner decision on the primary population: keep a single radius at full f_v0 as an explicit idealisation not attributed to [W09], or adopt a [W09]-consistent population; restate the ratio to Planck accordingly.",
+      "title": "The primary void model (one radius 15 h^-1 Mpc at the full f_v0) is attributed to [W09], which says such voids fill 40-50%"
+    },
+    {
+      "consequence": "The E4 uncertainty is two-sided and not bounded by the reported pair; the '+15-26% (uncompressed vs compressed)' statement presents it as one-sided.",
+      "evidence": "sigma_int at a = 15 [GM]/[NW15]: isotropic 1.093/1.006; s=1 1.464/1.267; sheets diag(1,1,f_w) orientation-averaged 0.988/0.950; filaments diag(sqrt f_w, sqrt f_w, 1) 1.065/0.991; void shell tau=1.7 in-plane pairs 1.987/1.764. sigma total correspondingly 1.501-2.286 [GM].",
+      "id": "GE-F3",
+      "locations": [
+        "reports/phase1g_e_two_phase_sigma.md lines 82-87, 181-182",
+        "reports/phase1g_e_two_phase_sigma_inventory.json model.assumptions.E4"
+      ],
+      "resolution_class": "OWNER_DECISION",
+      "severity": "MEDIUM",
+      "statement": "[1G-E] lines 86-87: '`s = 1` (no compression) is the upper bracket. Real walls are sheets and filaments, so their compression is anisotropic.' This implies that anisotropy moves the value from the isotropic primary toward s = 1. Under E3 (pair orientation independent of wall orientation), volume-f_w anisotropic maps give sigma_int below the isotropic primary. Void shells are tangentially stretched (factor 1.7151 [SvdW04] line 2163; 1.697 [JLH13] line 1345), and for same-wall pairs (beyond E3) sigma_int exceeds the s = 1 value.",
+      "suggested_resolution": "Owner decision: reword E4 as a two-sided sensitivity; drop 'upper bracket' or restrict it to 'within E3'.",
+      "title": "E4: [compressed, uncompressed] is not a bracket; under E3 anisotropic compression lowers sigma_int below the primary"
+    },
+    {
+      "consequence": "The 'f_v0: about 16% at a = 15' uncertainty (line 183) is mostly the radius convention (the two sets also differ in dressed H0); the ratio to Planck compares balls of different mass.",
+      "evidence": "The [GM] dressed ball holds 0.66 of the Lagrangian mass of Planck's R8 sphere, the [NW15] ball 1.23. At convention (a) (R = 12.570 / 12.226 Mpc, a = 15/h_dressed), sigma total (compressed, delta_v=-1) is 1.437 [GM] and 1.419 [NW15] (reported 1.572 / 1.357), ratios to 0.8111 of 1.77 / 1.75; the [GM]/[NW15] difference falls from 16% to 1.3%.",
+      "id": "GE-F4",
+      "locations": [
+        "reports/phase1g_e_two_phase_sigma.md lines 44, 142, 175-176, 183"
+      ],
+      "resolution_class": "OWNER_DECISION",
+      "severity": "MEDIUM",
+      "statement": "R = 8/h_dressed (10.95 / 13.11 Mpc) is [1G-A] Sec. 6.4 convention (b), which [1G-A] says 'presuppose[s] parts of the underived dressed map'; [1G-A] calls convention (a) 'the right comparison with LCDM predictions at fixed mass', and (a) was [1G-C]'s primary. [1G-E] states neither the convention nor its effect, and compares with Planck's sigma8 at R8 = 11.869 Mpc.",
+      "suggested_resolution": "Label the convention (erratum 4). Owner decision: report the equal-mass values or justify (b) for the comparison; revise the f_v0 statement.",
+      "title": "Radius convention (b) is used for the Planck comparison without its 1G-A status; the 'f_v0: about 16%' spread is mostly the convention"
+    },
+    {
+      "consequence": "The Boolean formula is unaffected. The stated verification precision and gate margin are overstated, and the recorded first-run account cannot be reproduced.",
+      "evidence": "rerun_phase_mc_seeds.py (phase_mc_seeds.json). Independent lattice ensemble (indep_mc.py, 24 realisations each): formula confirmed (sigma^2_part mean MC/analytic - 1 = -0.3 +- 0.4% [GM], 0.0 +- 0.3% [NW15] at the realised intensity; +0.3 +- 1.2% / -0.05 +- 0.9% at nominal); realised-intensity conditioning is a legitimate variance reduction (rms scatter 5.6% -> 1.9%, box 16a).",
+      "id": "GE-F5",
+      "locations": [
+        "reports/phase1g_e_two_phase_sigma.md lines 40-42, 121-138, 226",
+        "reports/phase1g_e_two_phase_sigma_inventory.json verification"
+      ],
+      "resolution_class": "OWNER_DECISION",
+      "severity": "LOW-MEDIUM",
+      "statement": "'Its covariance was checked against an independent Monte Carlo to <= 1.5%' (line 42) is a single draw. The phase's own monte_carlo_boolean, rerun with 15 other seeds, gives gated maximum errors 1.00-5.03% [GM] (median 3.1%; seed 12 fails the 5% gate) and 0.16-3.95% [NW15]; the driver is the sigma^2_part ball variance (sd 3.1% / 1.5%). The first-run explanation '2% fewer balls, which shifts f_w by 4.5%' contradicts f_w = exp(-lambda V) (2.7% [GM], 2.0% [NW15]); the first-run configuration is not recorded. With the same seed at the final box size the nominal-intensity comparison already passes (1.62% / 1.67%).",
+      "suggested_resolution": "Owner decision: restate the precision as a scatter across seeds; optionally gate on an ensemble mean or a larger ball sample; correct or remove the '2% -> 4.5%' sentence or record the first-run configuration.",
+      "title": "Monte Carlo precision and gate robustness are overstated; the first-run note is inconsistent and not reproducible"
+    },
+    {
+      "consequence": "Cosmetic; the tables themselves are correct.",
+      "evidence": "Ratios from the [1G-E] Sec. 4 table and the artifact (audit Sec. 4.5).",
+      "id": "GE-F6",
+      "locations": [
+        "reports/phase1g_e_two_phase_sigma.md lines 132, 180-182"
+      ],
+      "resolution_class": "UNAMBIGUOUS_ERRATUM",
+      "severity": "LOW",
+      "statement": "Line 180: the a = 5 -> 30 factor is 1.73-1.87 [GM] and 1.56-1.66 [NW15], not 1.7-1.9. Lines 181-182: uncompressed/compressed is +14-26% in sigma total (+25-35% in sigma_int), not +15-26%. Line 132: xi_w ~ 0.12 holds for [GM] only; [NW15] has 0.088.",
+      "suggested_resolution": "Apply errata 1-3.",
+      "title": "Numeric summaries in Secs. 3 and 5 do not match the tables"
+    },
+    {
+      "consequence": "Cosmetic.",
+      "evidence": "Report section headings; measured wall time on CPython 3.13.12 and 3.11.15.",
+      "id": "GE-F7",
+      "locations": [
+        "scripts/phase1g_e_two_phase_sigma_numerics.py line 6",
+        "reports/phase1g_e_two_phase_sigma.md line 220"
+      ],
+      "resolution_class": "UNAMBIGUOUS_ERRATUM",
+      "severity": "LOW",
+      "statement": "The script docstring cites '[1G-E] Sec. 3' for the model, which is in Sec. 2. The reproduction line says '(a few seconds)'; the run takes 76-81 s wall time on the audit machine.",
+      "suggested_resolution": "Apply errata 6-7.",
+      "title": "Cosmetic: script section citation and runtime statement"
+    }
+  ],
+  "limitations": [
+    "Minivoid radii (1-4 h^-1 Mpc) are illustrative; Tikhonov & Karachentsev (2006) and Hoyle & Vogeley were not fetched.",
+    "Anisotropic E4 maps are illustrative closures; they refute the bracket but do not bound the E4 uncertainty.",
+    "Planck inputs taken as quoted in the 1G-A script; [P18] not re-read line by line.",
+    "Owner's Windows platform (3.14.3 / 3.11.9) not available; full test suite not run (brief).",
+    "The novelty statement ('first Timescape numbers of the nonlinear mass-variance type') was not checked against the literature.",
+    "Lattice MC resolves the ball at 0.05a; the lattice-vs-continuum ball difference (+0.24% in sigma_part^2) is handled by comparing with the analytic lattice-ball value."
+  ],
+  "method": {
+    "independence": "No phase script or package import in the recomputation; no other auditor's output read.",
+    "monte_carlo": "Lattice method: exact distance test at every node of a 320^3 lattice in a 16a periodic box, exact FFT autocorrelation, ball variance over all lattice positions against the analytic lattice-ball value; 24 independent realisations per parameter set (master seeds 101, 202). Phase MC rerun with seeds 1-15 for comparison.",
+    "recomputation": "Tracker closed forms from [GM] main.tex line 663; EH98 no-wiggle from trans.tex lines 683, 759, 778-779, 839-842; LCDM growth by direct quadrature (0.7878126); sigma_part by quad with a break point at 2a and by Gauss-Legendre; sigma_int by a real-space route sigma_L^2(R/s) + int P_R xi_w xi_L(r/s) dr with xi_L by QAWF (validated against k-space sigma_L^2 to <= 2e-5).",
+    "scratch_scripts_sha256": {
+      "dv_check.py": "6611ccbb4f3eebeaf553b9cdfdbdf373fe958a731b61c1a4ddd1b81eea99d462",
+      "equal_mass.py": "480e14ab2bd849769f7417a38b77c8d5c44e9028564c46e46676970f96894784",
+      "indep_mc.py": "e2237e0906dc2fb9f7b19d8be637c68b5c442aa34a7c0949d23e3a73bf9aa695",
+      "indep_sigma.py": "2074caf2b6c72814b63df16afb763e1465e4157ae6ca1efecb6c160c3c05b13a",
+      "rerun_phase_mc_seeds.py (comparison only; runs the phase MC)": "7090d2ea5136bbe049b5b4a6b562a0b33d828a25481565a3756ed1a003efc7ed",
+      "sensitivities.py": "85283f581010e5954fa79a70ca6b2b3e48e3722bd548ab39bc6df99d7b202e3d"
+    },
+    "sensitivities": "[W09]-consistent two-population Boolean voids; anisotropic E4 maps (sheets, filaments, void shells); equal-mass radius convention; direct lattice check of the delta_v algebra."
+  },
+  "owner_decisions": [
+    {
+      "decision": "Adopt sigma^2 = delta_v^2 sigma_part^2 + (f_w - f_v delta_v)^2 sigma_int^2 and update the delta_v table (-0.9: 1.435/1.249; -0.8: 1.298/1.142), the '-9%' reading, the range lower edges (0.82/0.80), the inventory, the CLAUDE.md '0.9-2.1' reading and the token's recorded meaning; or restrict to delta_v = -1.",
+      "finding": "GE-F1",
+      "id": "OD-1"
+    },
+    {
+      "decision": "Choose the primary void population: single radius at full f_v0 as an explicit idealisation not attributed to [W09], or a [W09]-consistent population (sigma ~ 1.0-1.2); restate the ratio to Planck.",
+      "finding": "GE-F2",
+      "id": "OD-2"
+    },
+    {
+      "decision": "Reword E4 as a two-sided sensitivity; drop 'upper bracket' or restrict it to 'within E3'.",
+      "finding": "GE-F3",
+      "id": "OD-3"
+    },
+    {
+      "decision": "Report the equal-mass convention (1.437/1.419; ratios 1.77/1.75) or justify (b) for the Planck comparison; revise 'f_v0: about 16%'.",
+      "finding": "GE-F4",
+      "id": "OD-4"
+    },
+    {
+      "decision": "Restate the MC precision as a scatter across seeds; optionally gate on an ensemble mean or larger ball sample; correct/remove the '2% -> 4.5%' sentence or record the first-run configuration.",
+      "finding": "GE-F5",
+      "id": "OD-5"
+    },
+    {
+      "decision": "Keep the approved value DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION; record its meaning with the four corrections of audit Sec. 4.8.",
+      "finding": "token",
+      "id": "OD-6"
+    }
+  ],
+  "phase": "1G-E",
+  "preservation": "Only reports/phase1g_e_adversarial_audit.md and this inventory were created in the main tree; scratch files are in the session scratch directory audit_e/. Nothing else was edited, staged, committed, pushed or tagged. The git-ignored 1G-E artifact in the audit worktree was regenerated by the runs and restored to its supplied bytes (sha256 94c16cc1...3612).",
+  "report": "reports/phase1g_e_adversarial_audit.md",
+  "schema_version": 1,
+  "scope": {
+    "artifacts/independent/phase1g_e_two_phase_sigma.json": "94c16cc15d3dee14ad1de4a8b5833c752f76e9d7289c237b1a18cd9751393612",
+    "reports/phase1g_e_two_phase_sigma.md": "421b47b531701dd8b575d689f608f84a80679c6d9f00c4abd04a4c4c2b737be8",
+    "reports/phase1g_e_two_phase_sigma_inventory.json": "0dd5ff4fe37069e3cb57eaabafb6edaa8b626d1b7f9a7200adaf8b9bbcf54d7d",
+    "scripts/phase1g_a_sigma8_path_numerics.py": "65eb42352aed1c9d26f4fba8b6e7bac3c4ed6e336e8910c150180f0c161c08f9",
+    "scripts/phase1g_e_two_phase_sigma_numerics.py": "030eb7f649ac523cafc799c1ac304a8a3a664578a12a5b1a9a2ff39266c8ff09"
+  },
+  "severity_scale": {
+    "HIGH": "invalidates a load-bearing result",
+    "LOW": "minor or cosmetic",
+    "LOW-MEDIUM": "governance, documentation or reproducibility defect with scientific-record impact",
+    "MEDIUM": "incorrect statement or a status claim not supported by the evidence",
+    "MEDIUM-HIGH": "materially changes a quantitative result or its interpretation without invalidating the equations"
+  },
+  "sources": {
+    "EH98": {
+      "file": "astro-ph_9709112/trans.tex",
+      "sha256": "5f2ac6b413df8b738c95f6650152b7e82d7c36f6d9b3a618da540e9739dce17f"
+    },
+    "GM": {
+      "file": "2511.17160v2/main.tex",
+      "sha256": "f9cadfa03ecc9a74b0a8f432ae4b13422daeb219f253756bcd877b4b75077c59"
+    },
+    "JLH13": {
+      "file": "1304.6087/voids_mnras.tex",
+      "sha256": "cf6fc77a31b395138ac3a027d008698556534e81cfb27c39853d3a99c7b07c4e"
+    },
+    "NW15": {
+      "file": "1410.3470/cmb1.tex",
+      "sha256": "6d0e6397d3877e0aaa3dba16601e1423c4bfe952c7221c1565cdd410d2669bcd"
+    },
+    "P18": {
+      "file": "1807.06209/ms.tex",
+      "sha256": "fe0833d2d0fda17427a709c9559dc7b3a988b955f47bb7de7a02c900ffdc21cf"
+    },
+    "SvdW04": {
+      "file": "astro-ph_0311260/voids.tex",
+      "sha256": "e66ad192ee91a83ba88b4068cce5f6b505eb4277a6365d961a60ca10cc1c84b5"
+    },
+    "W07": {
+      "file": "0709.0732v2/solution.tex",
+      "sha256": "221662c987e454729ef8202c87fa697c5882b5b7daaecdedb50a7cba8ffe6cd8"
+    },
+    "W09": {
+      "file": "0909.0749v2/observe.tex",
+      "sha256": "2b0324d127440e9a053a7cb37102d7655cca228a63cd2222843e879989b4b531"
+    }
+  },
+  "tag_readiness": "NOT_READY_OWNER_DECISION_REQUIRED",
+  "title": "Phase 1G-E \u2014 Independent adversarial audit",
+  "verdict": "ACCEPT_WITH_CORRECTIONS"
+}

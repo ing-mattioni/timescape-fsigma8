@@ -1,0 +1,930 @@
+{
+  "audit_classification": "INDEPENDENT_ADVERSARIAL_AUDIT",
+  "audit_date": "2026-09-29",
+  "checkpoint": "6f7937ce5681900898f5e0a6482a953f0fa3e5a0",
+  "claims": [
+    {
+      "claim": "Barotropic closure: the only k-dependence of [GM] (4.19) is c_s^2 (k^2/a^2) Delta_eff; with c_s,eff^2 < 0 the principal part is elliptic and the Cauchy problem Hadamard ill-posed; A23*A32 = -c_s^2 k^2/a_D^2 > 0; D3 changes only A33",
+      "evidence_class_assessed": "DERIVED_FROM_VERIFIED_DEFINITIONS+NUMERICALLY_CORROBORATED",
+      "evidence_class_reported": "DERIVED_FROM_VERIFIED_DEFINITIONS+NUMERICALLY_CORROBORATED",
+      "id": "C1",
+      "independent_values": {
+        "A33_derived_4_10": "(w - c^2) Theta",
+        "A33_printed_4_15": "(w + c^2) Theta",
+        "cs2_eff_closed_form": "-(2 + 2 f_v - f_v^2)/(2 + f_v)^2",
+        "cs2_range_all_fv_in_0_1": [
+          -0.5,
+          -0.3333333333
+        ],
+        "cs2_t0": -0.391238,
+        "cs2_z20": -0.499568
+      },
+      "location": "reports/phase1g_a_sigma8_derivation_path_audit.md Sec. 4.1 (l. 115-155)",
+      "notes": "c_s,eff^2 is negative for the whole tracker history (analytic), not only z <= 20. The sign of A32 = -c^2/a from (4.17) is physically correct (acoustic oscillation for c^2 > 0; [GM] l. 591).",
+      "outcome": "CONFIRMED"
+    },
+    {
+      "claim": "WKB exponent alpha = int sqrt(-c_s^2) dt/a_D = 1.70695 (z = 20 to t0, dressed H0 = 1, matrix k); frozen-RHS slopes converge to alpha from below on both D3 branches; gap roughly halves when k doubles",
+      "evidence_class_assessed": "NUMERICALLY_CORROBORATED",
+      "evidence_class_reported": "NUMERICALLY_CORROBORATED",
+      "id": "C2",
+      "independent_values": {
+        "alpha": 1.7069482005,
+        "alpha_times_aD0_invariant": 2.3359586,
+        "gap_16_32_printed_derived": [
+          0.015854,
+          0.016211
+        ],
+        "gap_32_64_printed_derived": [
+          0.007382,
+          0.007509
+        ],
+        "gap_ratio_printed_derived": [
+          2.148,
+          2.159
+        ],
+        "ln_abs_delta_eff_agreement_with_artifact": "<= 4e-9 absolute (6e-11 relative)",
+        "slope_agreement_with_artifact": "<= 2e-10",
+        "slope_delta_d_64pi_derived": 1.685464,
+        "slopes_derived_4_10": [
+          1.475512,
+          1.616674,
+          1.669976,
+          1.690737,
+          1.699439
+        ],
+        "slopes_printed_4_15": [
+          1.365945,
+          1.606843,
+          1.670147,
+          1.691094,
+          1.699566
+        ]
+      },
+      "location": "reports/phase1g_a_sigma8_derivation_path_audit.md Sec. 4.1 l. 131-139; reports/phase1g_a_barotropic_status_successor.md Sec. 3",
+      "notes": "Own implementation of [GM] (4.14)-(4.17) from closed-form background; Delta_d(t0) sign negative at k = 2pi on derived_4_10.",
+      "outcome": "CONFIRMED"
+    },
+    {
+      "claim": "At kR = 1, R = 8/h Mpc (1D-A Sec. 10 chain): k_matrix ~ 513, alpha k ~ 875 > ln(float64 max) = 709.8, so the linear barotropic amplitude is not representable",
+      "evidence_class_assessed": "CONVENTION_DEPENDENT",
+      "evidence_class_reported": "NUMERICALLY_CORROBORATED",
+      "id": "C3",
+      "independent_values": {
+        "aD_times_1pz_at_fv_1e-8": 1.000000005,
+        "alpha_k_1G_A_chain": 875.378,
+        "alpha_k_convention_a_equal_mass_R_12.570": 557.44,
+        "alpha_k_convention_b_dressed_R_10.954": 639.66,
+        "alpha_k_convention_c_bare_R_10.104": 693.49,
+        "k_code_1G_A_chain": 512.832,
+        "photon_normalised_R_of_1G_A_chain_Mpc": 8.005
+      },
+      "location": "reports/phase1g_a_sigma8_derivation_path_audit.md l. 141-144; reports/phase1g_a_sigma8_derivation_path_inventory.json closure_admissibility.barotropic.wkb_exponent_at_kR_1_R8; reports/phase1g_a_barotropic_status_successor.md l. 72-75; tests/test_barotropic_hadamard_refutation.py EXPONENT_KR1_R8_1G_A",
+      "notes": "Arithmetic reproduces, but the chain pairs k_phys0_D with R8, which 1D-A Sec. 10 excludes; under the report's own Sec. 6.4 conventions alpha k < 709.8 at kR = 1 (GA-F3).",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    },
+    {
+      "claim": "No linear barotropic sigma_R exists (for any R > 0, window with power-law tails, spectrum bounded below by a power law)",
+      "evidence_class_assessed": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "evidence_class_reported": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "id": "C4",
+      "independent_values": {
+        "gaussian_window_dominant_k": "~ alpha/R_code^2 ~ 640/R",
+        "gaussian_window_log_amplitude": "~ (alpha/R_code)^2 ~ 4e5"
+      },
+      "location": "reports/phase1g_a_sigma8_derivation_path_audit.md l. 146-149, Sec. 1 table row 5, Sec. 9 row C; reports/phase1g_a_barotropic_status_successor_inventory.json status_changes meaning",
+      "notes": "Correct as scoped in l. 146-148; headline restatements drop the qualifiers (GA-F5).",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    },
+    {
+      "claim": "Printed [GM] (B.3)-(B.5): principal part Delta_eff_dot = +(k^2/(2 Theta a^2)) Delta_eff, a backward heat equation; leading high-k eigenvalue +k^2/(2 Theta a^2)",
+      "evidence_class_assessed": "DERIVED_FROM_VERIFIED_DEFINITIONS+NUMERICALLY_CORROBORATED",
+      "evidence_class_reported": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "id": "C5",
+      "independent_values": {
+        "beta_int_dt_over_2Theta_aD2": 0.32951,
+        "dlnDelta_eff_dk2_k_4_8_12_16_20_24": [
+          0.251,
+          0.3121,
+          0.3225,
+          0.3257,
+          0.3271
+        ]
+      },
+      "location": "reports/phase1g_a_sigma8_derivation_path_audit.md Sec. 4.2 l. 157-166",
+      "notes": "Newly numerically corroborated by integrating the printed (B.3)-(B.5) on the tracker (z = 20 to t0, matrix k).",
+      "outcome": "CONFIRMED"
+    },
+    {
+      "claim": "The homogeneous-density closure of [GM] App. B is ill-posed; among the [GM] closures only the comoving closure (and the Meszaros comparator) can define a linear sigma",
+      "evidence_class_assessed": "CONVENTION_DEPENDENT",
+      "evidence_class_reported": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "id": "C6",
+      "independent_values": {
+        "4_10_with_that_P": "(Thetadot/Theta - k^2/(a^2 Theta)) Delta_eff + (1+w) Z = 0 (Delta_eff_dot cancels)",
+        "P_from_4_12_and_B2": "Theta P = -Delta_eff_dot + (w Theta + Thetadot/Theta) Delta_eff",
+        "consistent_closure_Delta_d_ratio_k_0_1_10_100_1e3_1e4": [
+          24.299,
+          17.955,
+          10.218,
+          10.00043,
+          9.998209,
+          9.998187
+        ],
+        "dae_factor_k0": "(2 - 2 f_v)/(2 + f_v^2) > 0",
+        "meszaros_Delta_d_ratio": 9.998186,
+        "printed_B4_equals": "(1/2) x [(4.10) with P -> -P] (sympy residual 0) = printed_4_15 sign convention",
+        "printed_B5_equals": "(4.11) with +P and Delta_eff_dot from printed (B.4) (sympy residual 0)"
+      },
+      "location": "reports/phase1g_a_sigma8_derivation_path_audit.md Sec. 4.2 title and l. 168-172, Sec. 4 conclusion l. 205-207; reports/phase1g_a_sigma8_derivation_path_inventory.json closure_admissibility.homogeneous_density_B3_B5",
+      "notes": "Printed (B.4) carries the printed_4_15 sign of Theta P; under the adjudicated D3_VERDICT = RESOLVED_DERIVED_4_10 the closure reduces to an algebraic constraint and is well-posed, tending to Meszaros at high k (GA-F1). No sigma number depends on it.",
+      "outcome": "REFUTED"
+    },
+    {
+      "claim": "Comoving closure: pointwise ODEs, scale-independent, well-posed, ensemble-preserving; decaying modes fall as t^(-5/3) relative to the growing mode",
+      "evidence_class_assessed": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "evidence_class_reported": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "id": "C7",
+      "independent_values": {
+        "Z0_mode_exact": "Z = 0, Delta_d const, Delta_eff = -(<rho>/rho_eff) Delta_d ([GM] l. 570)",
+        "Z0_mode_relative_decay_in_Delta_d": "t^(-2/3)",
+        "Z0_mode_to_growing_ratio_at_t0_from_fv_1e-3": 0.008
+      },
+      "location": "reports/phase1g_a_sigma8_derivation_path_audit.md Sec. 4.3 l. 174-197",
+      "notes": "The t^(-5/3) rate holds at the (u, q) fixed point; the exact Z = 0 mode decays only as t^(-2/3) in Delta_d but is singular early and excluded by regular ICs (GA-F6).",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    },
+    {
+      "claim": "omega_m,eff = <rho>_D0 gamma_w0^3/rho_crit(100) = (1/2)(1-f_v0)(2+f_v0)(H_D0/100)^2 = 0.12048 / 0.12114 / 0.13094; H_D0 bare; [W09] canonical dressed value (l. 880)",
+      "evidence_class_assessed": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "evidence_class_reported": "DERIVED_FROM_VERIFIED_DEFINITIONS; numerically verified to 1e-13",
+      "id": "C8",
+      "independent_values": {
+        "Hbar_notebook": 58.0144,
+        "Hbar_paper": 57.856,
+        "NW15": 0.1309372,
+        "NW15_dressed_OmegaM": 0.489,
+        "NW15_table_bare_OmegaM_hbar2_gamma3": 0.1301,
+        "identity_at_NW15_best_fit": 0.1304,
+        "notebook": 0.1211359,
+        "paper": 0.1204751
+      },
+      "location": "reports/phase1g_a_sigma8_derivation_path_audit.md Sec. 6.2 l. 323-348",
+      "notes": "Independent derivation and external corroboration by the [NW15] table (l. 1534-1548, 1568). The 1e-13 'numerical verification' re-evaluates the same [GM] p. 25 normalisation (circular; GA-F11). [W09] phrase spans l. 880-881.",
+      "outcome": "CONFIRMED"
+    },
+    {
+      "claim": "X_inf = gamma_w0 g_TS/g_Lambda with g_TS = exp int (u - t Theta/3) dln t and g_Lambda = qplus(0) = 0.787813; X_inf comoving 0.6995/0.8586, Meszaros 0.5936/0.7646",
+      "evidence_class_assessed": "DERIVED_FROM_VERIFIED_DEFINITIONS; NUMERICALLY_CORROBORATED",
+      "evidence_class_reported": "DERIVED_FROM_VERIFIED_DEFINITIONS; NUMERICALLY_CORROBORATED",
+      "id": "C9",
+      "independent_values": {
+        "X_inf_comoving_GM": 0.69946,
+        "X_inf_comoving_NW15": 0.858567,
+        "X_inf_meszaros_GM": 0.593552,
+        "X_inf_meszaros_NW15": 0.76455,
+        "g_Lambda": 0.7878126,
+        "g_TS_comoving_GM_limit": 0.40266226,
+        "g_TS_meszaros_GM_limit": 0.34169348,
+        "gamma_w_minus_1_z20_50_100_300": [
+          0.01726,
+          0.004653,
+          0.001677,
+          0.000327
+        ]
+      },
+      "location": "reports/phase1g_a_sigma8_derivation_path_audit.md Sec. 5.1-5.2 l. 209-252",
+      "notes": "Own ODE integration in s = ln t with analytic early series; paper and notebook presets agree to 1e-15.",
+      "outcome": "CONFIRMED"
+    },
+    {
+      "claim": "Precision note: the t_e = 1e-6 t0 start omits c f_v(t_e), c = -13/20 (comoving), -3/4 (Meszaros); limits g_TS = 0.4026623 / 0.3416935",
+      "evidence_class_assessed": "DERIVED_FROM_VERIFIED_DEFINITIONS+NUMERICALLY_CORROBORATED",
+      "evidence_class_reported": "NUMERICALLY_CORROBORATED",
+      "id": "C10",
+      "independent_values": {
+        "c1_comoving": -0.31666667,
+        "c1_meszaros": -0.41666667,
+        "c_comoving": -0.65,
+        "c_meszaros": -0.75,
+        "ln_bias_comoving": 1.82e-06,
+        "ln_bias_meszaros": 2.1e-06
+      },
+      "location": "reports/phase1g_a_sigma8_derivation_path_audit.md l. 259-265",
+      "notes": "c derived analytically from the first-order early-time series (u = 2/3 + c1 f_v; c = c1 - 1/3).",
+      "outcome": "CONFIRMED"
+    },
+    {
+      "claim": "Finite z_i matching (z_i = 20 gives X = 0.7035, +0.6%; z_i = 100 gives 0.6998); f_v0 scan table; matching epoch z_i >= 20 <= 0.6%",
+      "evidence_class_assessed": "NUMERICALLY_CORROBORATED",
+      "evidence_class_reported": "NUMERICALLY_CORROBORATED",
+      "id": "C11",
+      "independent_values": {
+        "X_comoving_GM_z20_50_100_300": [
+          0.703464,
+          0.700464,
+          0.699815,
+          0.699529
+        ],
+        "X_meszaros_GM_z20": 0.599065,
+        "meszaros_z20_excess_over_X_inf": 0.0093
+      },
+      "location": "reports/phase1g_a_sigma8_derivation_path_audit.md l. 267-280, fork table l. 428",
+      "notes": "All scan values agree to 3 decimals; the fork-table bound 0.6% holds for comoving only (Meszaros +0.93%; errata).",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    },
+    {
+      "claim": "EH98 zero-baryon-oscillation transfer, Eqs. (26), (28)-(31), Theta_2.7 = T/2.7, k in Mpc^-1, Gamma_eff h = omega_m(...)",
+      "evidence_class_assessed": "PROVISIONAL_MODEL_IMPORT",
+      "evidence_class_reported": "PROVISIONAL_MODEL_IMPORT",
+      "id": "C12",
+      "independent_values": {
+        "h_units_test": "identical sigma with explicit h-units at arbitrary h = 0.5",
+        "planck_sigma8_eh98_nowiggle": 0.8356887
+      },
+      "location": "reports/phase1g_a_sigma8_derivation_path_audit.md Sec. 6.3; scripts/phase1g_a_sigma8_path_numerics.py eh98_nowiggle_transfer",
+      "notes": "Every coefficient checked against trans.tex l. 682, 758, 775-779, 838-843; unit chain correct.",
+      "outcome": "CONFIRMED"
+    },
+    {
+      "claim": "Matter-era amplitude Delta^2 = (4/25) A_s (k/k_p)^(n_s-1) (k/aH)^4 T^2 with (aH)^2 = H100^2 omega_m/a, D/a -> 1",
+      "evidence_class_assessed": "PROVISIONAL_MODEL_IMPORT",
+      "evidence_class_reported": "PROVISIONAL_MODEL_IMPORT",
+      "id": "C13",
+      "independent_values": {
+        "camb_planck_sigma8_0p06eV": 0.81113
+      },
+      "location": "reports/phase1g_a_sigma8_derivation_path_audit.md l. 352-358; scripts/phase1g_a_sigma8_path_numerics.py sigma_matter_era",
+      "notes": "Standard Phi = -(3/5) zeta matter-era normalisation; CAMB reproduces the [P18] anchor.",
+      "outcome": "CONFIRMED"
+    },
+    {
+      "claim": "Planck validation: EH98 gives sigma8 = 0.8357 (+3.03%) against 0.8111; bias from omitted BAO wiggles and 0.06 eV neutrinos; gate 3% -> 5%; anchored ratios cancel the bias; [P18] Table 2 inputs",
+      "evidence_class_assessed": "PROVISIONAL_MODEL_IMPORT+NUMERICALLY_CORROBORATED",
+      "evidence_class_reported": "PROVISIONAL_MODEL_IMPORT",
+      "id": "C14",
+      "independent_values": {
+        "E_camb_vs_eh98_max_rel_diff": 0.005,
+        "P18_Table2_TTTEEE_lowE_lensing": {
+          "1e9_A_s": 2.1,
+          "Omega_m_h2": 0.143,
+          "n_s": 0.9649,
+          "omega_b": 0.02237,
+          "sigma8": 0.8111
+        },
+        "camb_P18_mnu0": 0.82276,
+        "camb_recipe_mnu0": 0.82599,
+        "decomposition": {
+          "eh98_fit_error_at_recipe": 0.0117,
+          "neutrinos_0p06eV": 0.0143,
+          "recipe_vs_P18_means": 0.0039,
+          "wiggles_part": 0.0033
+        },
+        "eh98_full_with_wiggles": 0.8329851
+      },
+      "location": "reports/phase1g_a_sigma8_derivation_path_audit.md l. 360-374; scripts/phase1g_a_sigma8_path_numerics.py l. 85-103",
+      "notes": "Anchor and inputs correctly read ([P18] ms.tex l. 2299-2315, Table 2); the recipe (0.315, 0.674) is used for Omega_m and h (documented). Wiggles are only 0.33% of the 3.03% (GA-F4).",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    },
+    {
+      "claim": "[NW15] pins the baryon/non-baryon ratio, so Planck's f_b = 0.1563 is the primary closure",
+      "evidence_class_assessed": "PROVISIONAL_MODEL_IMPORT",
+      "evidence_class_reported": "PROVISIONAL_MODEL_IMPORT",
+      "id": "C15",
+      "independent_values": {
+        "NW15_As": "nuisance, unconstrained (l. 1421-1427)",
+        "NW15_fb_bare": 0.181,
+        "NW15_fb_dressed": 0.182,
+        "NW15_ns_mean": 0.992,
+        "NW15_sigma_equal_mass_comoving": {
+          "fb_0.181_camb": 0.639,
+          "fb_0.181_eh98": 0.637,
+          "fb_0.181_ns_0.992_camb": 0.645,
+          "fb_0.181_ns_0.992_eh98": 0.643,
+          "printed": 0.669
+        },
+        "NW15_wall_equal_mass": {
+          "fb_0.181_eh98": 0.89,
+          "fb_0.181_ns_0.992_eh98": 0.899,
+          "printed": 0.935
+        }
+      },
+      "location": "reports/phase1g_a_sigma8_derivation_path_audit.md l. 364-367",
+      "notes": "[NW15] cmb1.tex l. 1526-1568: Omega_B0/Omega_M0 = 0.039/0.215 (bare), 0.089/0.489 (dressed); the abstract states a relation, not Planck's value (GA-F2).",
+      "outcome": "REFUTED"
+    },
+    {
+      "claim": "Radius conventions (a) 12.570/12.226, (b) 10.954/13.115, (c) 10.104/11.781 Mpc; Planck R8 = 11.869 Mpc",
+      "evidence_class_assessed": "CONVENTION_DEPENDENT",
+      "evidence_class_reported": "CONVENTION_DEPENDENT",
+      "id": "C16",
+      "independent_values": {
+        "R8": 11.869436,
+        "a": [
+          12.570168,
+          12.22604
+        ],
+        "b": [
+          10.954402,
+          13.114754
+        ],
+        "b_with_5_1_regional_wall_reading": [
+          12.494,
+          13.871
+        ],
+        "c": [
+          10.10408,
+          11.781424
+        ]
+      },
+      "location": "reports/phase1g_a_sigma8_derivation_path_audit.md Sec. 6.4 l. 376-390",
+      "notes": "(c) = (8/hbar)/gamma_w0 derived by mass conservation. Label 'wall-comoving' for (b) uses the dressed (5.4) a_w (GA-F8).",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    },
+    {
+      "claim": "sigma table (0.524 ... 0.686; Meszaros 0.445 ... 0.610), E factors, f_b sensitivity +7%/-8%, ranges 0.548-0.845 / 0.504-0.905; X_wall 1.1129/1.2002 and sigma 0.834/0.912/0.960, 0.935/0.891/0.958",
+      "evidence_class_assessed": "CONVENTION_DEPENDENT / DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "evidence_class_reported": "CONVENTION_DEPENDENT / DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "id": "C17",
+      "independent_values": {
+        "E_GM_abc": [
+          0.923799,
+          1.01045,
+          1.063357
+        ],
+        "E_NW15_abc": [
+          0.960198,
+          0.915339,
+          0.984375
+        ],
+        "GM_comoving_abc": [
+          0.524101,
+          0.57326,
+          0.603277
+        ],
+        "GM_meszaros_abc": [
+          0.444745,
+          0.486461,
+          0.511932
+        ],
+        "NW15_comoving_abc": [
+          0.668666,
+          0.637427,
+          0.685503
+        ],
+        "NW15_meszaros_abc": [
+          0.595444,
+          0.567626,
+          0.610437
+        ],
+        "X_wall": [
+          1.112945,
+          1.200172
+        ],
+        "sigma_wall_GM_abc": [
+          0.833923,
+          0.912143,
+          0.959903
+        ],
+        "sigma_wall_NW15_abc": [
+          0.934714,
+          0.891045,
+          0.958249
+        ],
+        "wall_identity_residual": 2.2e-16,
+        "wall_naive_minus_limit_rel_te_1e-8_t0": -4.67e-09
+      },
+      "location": "reports/phase1g_a_sigma8_derivation_path_audit.md Secs. 7-8; reports/phase1g_a_sigma8_derivation_path_inventory.json conditional_sigma_M8, two_scale_bracket",
+      "notes": "All entries reproduced to <= 1e-10 relative with an independent trapezoid quadrature.",
+      "outcome": "CONFIRMED"
+    },
+    {
+      "claim": "Every examined fork gives less linear structure than Planck-LCDM (15-45% / 9-50% less); the sign of the effect is robust across closures, presets, conventions and baryon fractions",
+      "evidence_class_assessed": "NUMERICALLY_CORROBORATED",
+      "evidence_class_reported": "NUMERICALLY_CORROBORATED",
+      "id": "C18",
+      "independent_values": {
+        "all_fb_ratio_range": [
+          0.504,
+          0.9053
+        ],
+        "primary_ratio_range": [
+          0.5483,
+          0.8452
+        ],
+        "wall_bracket_ratio_range": [
+          1.028,
+          1.183
+        ]
+      },
+      "location": "reports/phase1g_a_sigma8_derivation_path_audit.md l. 409-416",
+      "notes": "True within the volume-average CGI closures; the same report's decisive two-scale fork reverses the sign (GA-F7).",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    },
+    {
+      "claim": "[GM] use a_w for two scale factors: (5.1) regional wall volume scale (a_w ~ t^(2/3), [W09] l. 1763-1764) and (5.4) null-matched dressed a_w = a_D/gamma_w ([W09] l. 617-623); they differ by gamma_w (1-f_v)^(1/3) f_wi^(-1/3); dressed a_w/t^(2/3) varies by 16.6%",
+      "evidence_class_assessed": "VERIFIED_FROM_PRIMARY_SOURCE (text) + DERIVED_FROM_VERIFIED_DEFINITIONS+NUMERICALLY_CORROBORATED (difference)",
+      "evidence_class_reported": "VERIFIED_FROM_PRIMARY_SOURCE",
+      "id": "C19",
+      "independent_values": {
+        "analytic_minimum_at_fv": 0.25,
+        "dressed_aw_over_t23_variation": 0.165761,
+        "regional_aw_over_t23_variation": 8.9e-16
+      },
+      "location": "reports/phase1g_a_sigma8_derivation_path_audit.md Sec. 5.3 l. 289-307",
+      "notes": "[GM] (5.1) l. 622-625, (5.4) l. 639-641.",
+      "outcome": "CONFIRMED"
+    },
+    {
+      "claim": "Successor record: UNRESTRICTED_BAROTROPIC_CONTINUUM_STABILITY NOT_DERIVED -> REFUTED_HADAMARD_ILL_POSED is supported, correctly scoped, runtime unchanged; record and regression test match the report",
+      "evidence_class_assessed": "DERIVED_FROM_VERIFIED_DEFINITIONS+NUMERICALLY_CORROBORATED",
+      "evidence_class_reported": "DERIVED_FROM_VERIFIED_DEFINITIONS+NUMERICALLY_CORROBORATED",
+      "id": "C20",
+      "independent_values": {
+        "barotropic_py_executable_ast_identical_462121c_dee72e1_6f7937c": true,
+        "inventories_canonical_json": true,
+        "scientific_status_changed_assignments": [
+          "UNRESTRICTED_BAROTROPIC_CONTINUUM_STABILITY"
+        ],
+        "test_result_py313_py311": "8 passed / 8 passed"
+      },
+      "location": "reports/phase1g_a_barotropic_status_successor.md; reports/phase1g_a_barotropic_status_successor_inventory.json; tests/test_barotropic_hadamard_refutation.py",
+      "notes": "Token change supported. Defects: the 875.4 hybrid chain is repeated and pinned (GA-F3); line reference 482-483 stale after 214a626 (GA-F10).",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    },
+    {
+      "claim": "CLAUDE.md summary of 1G-A (route; Hadamard ill-posed; token via successor; validator; runtime and D3 unchanged)",
+      "evidence_class_assessed": "not applicable",
+      "evidence_class_reported": "not applicable",
+      "id": "C21",
+      "independent_values": {},
+      "location": "CLAUDE.md Phase ledger, 1G-A entry; Architecture table 1G-B row",
+      "notes": "Accurate; silent on App. B.",
+      "outcome": "CONFIRMED"
+    },
+    {
+      "claim": "The evidence script is deterministic, asserts every budget and gives identical results on both interpreters; achieved budgets as printed",
+      "evidence_class_assessed": "NUMERICALLY_CORROBORATED",
+      "evidence_class_reported": "NUMERICALLY_CORROBORATED",
+      "id": "C22",
+      "independent_values": {
+        "artifact_diff_vs_copied_in_py311": 0,
+        "artifact_diff_vs_copied_in_py313": 0,
+        "max_direct_vs_riccati_all": 1.93e-11,
+        "max_direct_vs_riccati_z20": 2.2515e-13,
+        "max_early_limit_change": 1.89e-05,
+        "max_grid_refinement_change": 4.108e-15
+      },
+      "location": "reports/phase1g_a_sigma8_derivation_path_audit.md Sec. 11 l. 519-547, Sec. 5.2 l. 252-257",
+      "notes": "Linux only. Two achieved-budget bounds are misprinted (<= 4e-15, <= 2e-13; errata).",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    },
+    {
+      "claim": "Evidence classes follow 1D-C Sec. 5 (one primary class) and are appropriate",
+      "evidence_class_assessed": "not applicable",
+      "evidence_class_reported": "not applicable",
+      "id": "C23",
+      "independent_values": {},
+      "location": "reports/phase1g_a_sigma8_derivation_path_audit.md Sec. 2 l. 86-92 and class labels throughout",
+      "notes": "Composite class in Sec. 4.1; DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION used in Sec. 8 but not declared; Sec. 4.2 should be CONVENTION_DEPENDENT; Sec. 6.2 numerical check circular; Sec. 5.3 mixes text verification with derivation (GA-F11). Nothing is labelled VERIFIED where a hidden assumption decides the result.",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    }
+  ],
+  "environment": {
+    "cross_check_only": {
+      "camb": "2.0.4",
+      "install": "pip --target into the audit scratch directory only",
+      "sympy": "1.14.0"
+    },
+    "not_exercised": "Windows 11 / Python 3.14.3 owner platform",
+    "platform": "Linux x86-64 (AVX-512), isolated worktree of 6f7937c",
+    "python_3_11": {
+      "numpy": "2.4.6",
+      "python": "3.11.15",
+      "scipy": "1.17.1"
+    },
+    "python_3_13": {
+      "numpy": "2.5.3",
+      "python": "3.13.12",
+      "scipy": "1.18.1"
+    }
+  },
+  "errata": [
+    {
+      "file": "reports/phase1g_a_sigma8_derivation_path_audit.md",
+      "location": "l. 50",
+      "new": "values span 0.44\u20130.69 (Sec. 7).",
+      "old": "values span 0.45\u20130.69 (Sec. 7).",
+      "proof": "artifact sigma.cases.PAPER_REFERENCE.closures.meszaros.conventions.equal_mass_M8_planck.by_baryon_fraction['f_b=0.1563'].sigma_planck_anchored = 0.44474 -> 0.44"
+    },
+    {
+      "file": "reports/phase1g_a_sigma8_derivation_path_audit.md",
+      "location": "l. 253",
+      "new": "- Simpson grid refinement changes ln g by \u2264 5e\u221215.",
+      "old": "- Simpson grid refinement changes ln g by \u2264 4e\u221215.",
+      "proof": "max over presets and closures of growth.*.*.log_g_grid_refinement_change = 4.108e-15"
+    },
+    {
+      "file": "reports/phase1g_a_sigma8_derivation_path_audit.md",
+      "location": "l. 527",
+      "new": "- growth grid \u2264 1e\u22127 (achieved \u2264 5e\u221215);",
+      "old": "- growth grid \u2264 1e\u22127 (achieved \u2264 4e\u221215);",
+      "proof": "as for l. 253"
+    },
+    {
+      "file": "reports/phase1g_a_sigma8_derivation_path_audit.md",
+      "location": "l. 255",
+      "new": "- Direct integration agrees with the Riccati integral to \u2264 3e\u221213 at",
+      "old": "- Direct integration agrees with the Riccati integral to \u2264 2e\u221213 at",
+      "proof": "max growth.*.*.matching['z_i=20'].direct_vs_riccati_rel_diff = 2.2515e-13"
+    },
+    {
+      "file": "reports/phase1g_a_sigma8_derivation_path_audit.md",
+      "location": "l. 428",
+      "new": "| Matching epoch z_i \u2265 20 | \u2264 0.6% (comoving), \u2264 0.9% (M\u00e9sz\u00e1ros) | negligible |",
+      "old": "| Matching epoch z_i \u2265 20 | \u2264 0.6% | negligible |",
+      "proof": "artifact PAPER_REFERENCE meszaros: X(z_i=20) = 0.599065 vs X_inf = 0.593553 (+0.93%)"
+    },
+    {
+      "file": "reports/phase1g_a_sigma8_derivation_path_audit.md",
+      "location": "l. 340",
+      "new": "| Parameters | \u03c9_m,eff | ratio to 0.315 \u00d7 0.674\u00b2 = 0.1431 (recipe; [P18] Table 2: 0.1430) |",
+      "old": "| Parameters | \u03c9_m,eff | ratio to Planck (0.1431) |",
+      "proof": "script PLANCK['omega_m_total_Om_h2'] = 0.315*0.674^2 = 0.143101; [P18] ms.tex l. 2309: Omega_m h^2 = 0.1430 +/- 0.0011"
+    },
+    {
+      "file": "reports/phase1g_a_barotropic_status_successor.md",
+      "location": "l. 104 (Sec. 4 table)",
+      "new": "`phase1g_a_sigma8_derivation_path_audit.md` l. 153\u2013155, 493\u2013494 (482\u2013483 at 462121c)",
+      "old": "`phase1g_a_sigma8_derivation_path_audit.md` l. 153\u2013155, 482\u2013483",
+      "proof": "git diff 462121c 6f7937c adds 7 lines at l. 259 and net 4 at l. 442; the recommendation now reads at l. 493-494"
+    },
+    {
+      "file": "reports/phase1g_a_barotropic_status_successor_inventory.json",
+      "location": "superseded_frozen_readings[4].location",
+      "new": "reports/phase1g_a_sigma8_derivation_path_audit.md l. 153-155, 493-494 (482-483 at 462121c)",
+      "old": "reports/phase1g_a_sigma8_derivation_path_audit.md l. 153-155, 482-483",
+      "proof": "as above; no test or script reads this field"
+    }
+  ],
+  "finding_counts": {
+    "HIGH": 0,
+    "LOW": 8,
+    "LOW-MEDIUM": 1,
+    "MEDIUM": 2,
+    "MEDIUM-HIGH": 0,
+    "total": 11
+  },
+  "findings": [
+    {
+      "consequence": "No sigma number changes. The Sec. 4 conclusion 'only the comoving closure (and Meszaros) can define a linear sigma', the inventory verdict BACKWARD_PARABOLIC_ILL_POSED and its class DERIVED_FROM_VERIFIED_DEFINITIONS are not supported as closure-level statements. A second printed-vs-derived sign discrepancy in [GM] (App. B, same sign pattern as D3) is identified.",
+      "evidence": {
+        "beta": 0.32951,
+        "consistent_closure_Delta_d_ratio": {
+          "k=0": 24.299,
+          "k=1": 17.955,
+          "k=10": 10.218,
+          "k=100": 10.00043,
+          "k=1000": 9.998209,
+          "k=1e4": 9.998187
+        },
+        "meszaros_Delta_d_ratio": 9.998186,
+        "printed_B3_B5_dlnDelta_dk2_at_k_24": 0.3271,
+        "scratch_scripts": [
+          "audit_a/appB_check.py",
+          "audit_a/appB_consistent.py"
+        ],
+        "sympy_residuals": {
+          "printed_B4_minus_half_4_10_with_minus_P": 0,
+          "printed_B5_minus_4_11_with_plus_P_and_B4": 0
+        }
+      },
+      "id": "GA-F1",
+      "locations": [
+        "reports/phase1g_a_sigma8_derivation_path_audit.md Sec. 4.2 (l. 157-172) and Sec. 4 conclusion (l. 205-207)",
+        "reports/phase1g_a_sigma8_derivation_path_inventory.json closure_admissibility.homogeneous_density_B3_B5"
+      ],
+      "resolution_class": "OWNER_DECISION",
+      "severity": "MEDIUM",
+      "statement": "Printed [GM] (B.4) equals (1/2)[(4.10) with P -> -P], where P follows from (4.12) and (B.2); printed (B.5) uses +P. With the (4.10) sign adjudicated by the project (D3_VERDICT = RESOLVED_DERIVED_4_10), Delta_eff_dot cancels from (4.10) and the closure becomes the constraint (Thetadot/Theta - k^2/(a^2 Theta)) Delta_eff + (1+w) Z = 0, a regular constrained system whose growth tends to the Meszaros growth at high k. The backward-heat term exists only in the printed_4_15 sign convention.",
+      "suggested_resolution": "Successor reading: 'ill-posed as printed (printed_4_15 sign convention); under RESOLVED_DERIVED_4_10 the closure reduces to a constraint and is not shown to be ill-posed'; qualify the Sec. 4 conclusion; optionally add an author question on the sign of Theta P in (B.4).",
+      "title": "The App. B 'backward-parabolic' verdict belongs to the printed (B.4), which carries the printed_4_15 sign; under RESOLVED_DERIVED_4_10 the closure is a well-posed constrained system"
+    },
+    {
+      "consequence": "The [NW15] row pairs the [NW15] background with a Planck early universe. Its primary values fall by about 4-5% with [NW15]'s own inputs; this is inside the report's f_b band (0.614-0.716). CLAUDE.md quotes [NW15]-row numbers from later phases (1G-C 0.935, 1G-E 1.36); whether they inherit the Planck f_b is outside this audit.",
+      "evidence": {
+        "NW15_sigma_equal_mass_comoving": {
+          "fb_0.181": [
+            0.637,
+            0.639
+          ],
+          "fb_0.181_ns_0.992": [
+            0.643,
+            0.645
+          ],
+          "printed": 0.669
+        },
+        "NW15_wall_equal_mass": {
+          "fb_0.181": [
+            0.89,
+            0.893
+          ],
+          "fb_0.181_ns_0.992": [
+            0.899,
+            0.902
+          ],
+          "printed": 0.935
+        },
+        "note": "pairs are [EH98, CAMB 2.0.4]"
+      },
+      "id": "GA-F2",
+      "locations": [
+        "reports/phase1g_a_sigma8_derivation_path_audit.md Sec. 6.3 l. 364-367, Sec. 7 table, Sec. 8 bracket",
+        "reports/phase1g_a_sigma8_derivation_path_inventory.json early_spectrum, conditional_sigma_M8.cases.NW15_CMB_FIT, two_scale_bracket.cases.NW15_CMB_FIT"
+      ],
+      "resolution_class": "OWNER_DECISION",
+      "severity": "MEDIUM",
+      "statement": "[1G-A] l. 364-367 infers from the [NW15] abstract (l. 110-113) that Planck's f_b is the primary closure. The abstract states a relation between the baryon/non-baryon ratio and the peak heights; [NW15]'s canonical Timescape fit (cmb1.tex l. 1526-1568) has Omega_B0/Omega_M0 = 0.039/0.215 (bare), 0.089/0.489 (dressed), i.e. f_b = 0.181, n_s = 0.992 +/- 0.009, and A_s as an unconstrained nuisance (l. 1421-1427). 1G-A read only the abstract (its Sec. 2).",
+      "suggested_resolution": "Owner decides the primary early-universe inputs for the [NW15] row; a successor note corrects the justification sentence and records [NW15]'s own f_b and n_s with the resulting values.",
+      "title": "Planck's f_b is justified by a misreading of [NW15]; [NW15]'s own fit has f_b ~ 0.18 and n_s ~ 0.99, so the [NW15] row is a hybrid"
+    },
+    {
+      "consequence": "'Not even representable at kR = 1' is convention-dependent; ill-posedness and divergence are unaffected. The number is repeated in the 1G-A inventory, the successor record and its inventory, and pinned (875.4) in the regression test.",
+      "evidence": {
+        "alpha_k_a_b_c": [
+          557.44,
+          639.66,
+          693.49
+        ],
+        "alpha_k_hybrid": 875.378,
+        "kR_where_all_exceed_709.8": 1.27
+      },
+      "id": "GA-F3",
+      "locations": [
+        "reports/phase1g_a_sigma8_derivation_path_audit.md l. 141-144",
+        "reports/phase1g_a_sigma8_derivation_path_inventory.json closure_admissibility.barotropic.wkb_exponent_at_kR_1_R8",
+        "reports/phase1g_a_barotropic_status_successor.md l. 72-75",
+        "reports/phase1g_a_barotropic_status_successor_inventory.json evidence.wkb_exponent_at_kR_1_R8",
+        "tests/test_barotropic_hadamard_refutation.py EXPONENT_KR1_R8_1G_A and comment"
+      ],
+      "resolution_class": "OWNER_DECISION",
+      "severity": "LOW-MEDIUM",
+      "statement": "The chain sets k_phys0_D = 1/R with R = 8/h_dressed Mpc (present volume-average physical radius), which 1D-A Sec. 10 says cannot be paired with R8. In the package normalisation a_D-comoving equals photon-normalised comoving early (a_D (1+z) -> 1), so k_code = (c/H0)/R_gamma; under the report's Sec. 6.4 conventions (a)/(b)/(c), alpha k at kR = 1 is 557.4 / 639.7 / 693.5 < 709.8.",
+      "suggested_resolution": "Successor note naming the chain and giving the Sec. 6.4 values; the test pin may stay as a regression of the named chain, with its comment saying so.",
+      "title": "'alpha k ~ 875 > 709.8 at kR = 1' uses a hybrid unit chain that 1D-A Sec. 10 excludes; the report's own conventions give 557-694"
+    },
+    {
+      "consequence": "None on results: the post-hoc 3% -> 5% gate is justified and the anchored-ratio bias is <= 0.5% (confirms '<~ 1%').",
+      "evidence": {
+        "E_ratio_bias_max": 0.005,
+        "camb_P18_0p06eV": 0.81113,
+        "camb_P18_mnu0": 0.82276,
+        "camb_recipe_mnu0": 0.82599,
+        "eh98_full": 0.8329851,
+        "eh98_nowiggle": 0.8356887
+      },
+      "id": "GA-F4",
+      "locations": [
+        "reports/phase1g_a_sigma8_derivation_path_audit.md l. 369-374",
+        "scripts/phase1g_a_sigma8_path_numerics.py l. 85-89"
+      ],
+      "resolution_class": "OWNER_DECISION",
+      "severity": "LOW",
+      "statement": "[1G-A] l. 370-373 names omitted BAO wiggles and 0.06 eV neutrinos. EH98 with wiggles gives +2.70%, so wiggles are 0.33% of the 3.03%. CAMB: EH98 no-wiggle +1.17% at the recipe cosmology; recipe (0.315, 0.674) vs [P18] means +0.39%; neutrinos +1.43%.",
+      "suggested_resolution": "Record the CAMB decomposition in a successor note.",
+      "title": "EH98 bias attributed mainly to omitted wiggles; CAMB attributes it to fit error (+1.2%), recipe cosmology (+0.4%) and neutrinos (+1.4%)"
+    },
+    {
+      "consequence": "Physical conclusion unchanged; the recorded meaning is broader than the derivation.",
+      "evidence": {
+        "gaussian_window_log_amplitude": "~ (alpha k_code(kR=1))^2 ~ 4e5"
+      },
+      "id": "GA-F5",
+      "locations": [
+        "reports/phase1g_a_sigma8_derivation_path_audit.md l. 36, l. 487",
+        "reports/phase1g_a_barotropic_status_successor_inventory.json status_changes.UNRESTRICTED_BAROTROPIC_CONTINUUM_STABILITY.meaning"
+      ],
+      "resolution_class": "OWNER_DECISION",
+      "severity": "LOW",
+      "statement": "Sec. 4.1 scopes the statement to windows with power-law tails and spectra bounded below by a power law; Sec. 1 row 5, Sec. 9 row C and the successor 'meaning' state it unqualified. A Gaussian window gives a finite, UV-dominated value (k ~ 640/R, log-amplitude ~ 4e5).",
+      "suggested_resolution": "Carry the qualifiers or say 'no finite, IR-controlled linear sigma_R'.",
+      "title": "Headline 'no linear barotropic sigma_R exists' drops the window and spectrum qualifiers"
+    },
+    {
+      "consequence": "None numerically: the mode is singular early (Delta_eff/Delta_d ~ -1/(2 f_v)) and excluded by regular ICs.",
+      "evidence": {
+        "Z0_mode_ratio_at_t0_from_fv_1e-3": 0.008,
+        "zeta_max": 1.2e-13
+      },
+      "id": "GA-F6",
+      "locations": [
+        "reports/phase1g_a_sigma8_derivation_path_audit.md l. 180-181"
+      ],
+      "resolution_class": "OWNER_DECISION",
+      "severity": "LOW",
+      "statement": "[GM] l. 570: Z = 0, Delta_d constant, Delta_eff = -(<rho>/rho_eff) Delta_d is an exact comoving solution; relative to the growing mode it decays as t^(-2/3) in Delta_d. The t^(-5/3) rate is the (u, q) fixed-point rate with f_v -> 0 frozen (growing_mode docstring).",
+      "suggested_resolution": "Qualify the rate; note the Z = 0 mode and why regular ICs exclude it (the frozen growing_mode docstring has the same imprecision; note only).",
+      "title": "The 't^(-5/3)' decay statement misses [GM]'s exact Z = 0 mode, which falls as t^(-2/3) in Delta_d"
+    },
+    {
+      "consequence": "Risk of misquotation of a conditional, since-superseded (1G-D) volume-average result.",
+      "evidence": {
+        "volume_average_ratio_range": [
+          0.504,
+          0.905
+        ],
+        "wall_bracket_ratio_range": [
+          1.028,
+          1.183
+        ]
+      },
+      "id": "GA-F7",
+      "locations": [
+        "reports/phase1g_a_sigma8_derivation_path_audit.md l. 409-416"
+      ],
+      "resolution_class": "OWNER_DECISION",
+      "severity": "LOW",
+      "statement": "l. 412-416 state the sign is robust across closures, presets, conventions and baryon fractions. Sec. 8 of the same report gives 0.83-0.96 (ratio 1.03-1.18 to Planck) for the two-scale fork it calls decisive.",
+      "suggested_resolution": "Add 'within the volume-average CGI closures'.",
+      "title": "'Every examined fork ... sign robust' holds only within the volume-average closures; the same report's decisive fork reverses the sign"
+    },
+    {
+      "consequence": "Values remain inside the stated convention budgets; terminology conflicts with the report's own notational finding.",
+      "evidence": {
+        "sigma_comoving_b_vs_regional": {
+          "GM": [
+            0.573,
+            0.526
+          ],
+          "NW15": [
+            0.637,
+            0.613
+          ]
+        },
+        "sigma_wall_b_vs_regional": {
+          "GM": [
+            0.912,
+            0.837
+          ],
+          "NW15": [
+            0.891,
+            0.857
+          ]
+        }
+      },
+      "id": "GA-F8",
+      "locations": [
+        "reports/phase1g_a_sigma8_derivation_path_audit.md l. 384, 388-389",
+        "reports/phase1g_a_sigma8_derivation_path_inventory.json radius_conventions.b_dressed_8_over_h_wall_comoving"
+      ],
+      "resolution_class": "OWNER_DECISION",
+      "severity": "LOW",
+      "statement": "(b) R = 8/h_dressed in photon-normalised (dressed) comoving Mpc. With the (5.1) regional wall reading, R = 8/h/[gamma_w0 (1-f_v0)^(1/3)] = 12.494 / 13.871 Mpc.",
+      "suggested_resolution": "Relabel (b) 'dressed-comoving (Eq. 5.4 a_w)'; note the (5.1) reading.",
+      "title": "Convention (b) 'wall-comoving' uses the dressed (5.4) a_w, which Sec. 5.3 shows is not the wall-regional scale"
+    },
+    {
+      "consequence": "Cosmetic.",
+      "evidence": {
+        "artifact": "artifacts/independent/phase1g_a_sigma8_path.json (regenerated at 6f7937c, identical to the copied-in artifact)"
+      },
+      "id": "GA-F9",
+      "locations": [
+        "reports/phase1g_a_sigma8_derivation_path_audit.md l. 50, 253, 255, 340, 428, 527"
+      ],
+      "resolution_class": "UNAMBIGUOUS_ERRATUM",
+      "severity": "LOW",
+      "statement": "0.45-0.69 (min 0.4447); achieved grid budget '<= 4e-15' (4.108e-15, twice); direct-vs-Riccati '<= 2e-13 at z_i = 20' (2.25e-13); fork table '<= 0.6%' (Meszaros +0.93%); 'ratio to Planck (0.1431)' is the recipe 0.315 x 0.674^2 ([P18]: 0.1430).",
+      "suggested_resolution": "Apply errata 1-6.",
+      "title": "Misprinted numbers and labels in the 1G-A report"
+    },
+    {
+      "consequence": "Broken line citation in a status-change record.",
+      "evidence": {
+        "git_diff_462121c_6f7937c_hunks": [
+          "@@ -256,6 +256,13 @@",
+          "@@ -439,7 +446,11 @@"
+        ]
+      },
+      "id": "GA-F10",
+      "locations": [
+        "reports/phase1g_a_barotropic_status_successor.md l. 104",
+        "reports/phase1g_a_barotropic_status_successor_inventory.json superseded_frozen_readings[4].location"
+      ],
+      "resolution_class": "UNAMBIGUOUS_ERRATUM",
+      "severity": "LOW",
+      "statement": "The 1G-A report was edited in place at 214a626 (precision notes, +11 lines above the recommendation). The successor record, written at dee72e1, cites l. 482-483 for the recommendation, which is now at l. 493-494.",
+      "suggested_resolution": "Apply errata 7-8.",
+      "title": "Successor record line reference 'l. 482-483' stale after the in-place edit 214a626 (now l. 493-494)"
+    },
+    {
+      "consequence": "Documentation only; nothing is labelled VERIFIED where a hidden assumption decides the result.",
+      "evidence": {},
+      "id": "GA-F11",
+      "locations": [
+        "reports/phase1g_a_sigma8_derivation_path_audit.md l. 86-92, 117, 325, 289, 431"
+      ],
+      "resolution_class": "OWNER_DECISION",
+      "severity": "LOW",
+      "statement": "Sec. 2 says classes follow 1D-C Sec. 5 (one primary class) but Sec. 4.1 uses a composite; Sec. 8 uses DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION, not in Sec. 2's list; Sec. 6.2 'numerically verified to 1e-13' re-evaluates the same [GM] p. 25 normalisation; Sec. 5.3's VERIFIED_FROM_PRIMARY_SOURCE covers only the textual part; Sec. 4.2 should be CONVENTION_DEPENDENT (GA-F1).",
+      "suggested_resolution": "Align Sec. 2 with the classes used; relabel the Sec. 6.2 check as arithmetic; split the Sec. 5.3 class.",
+      "title": "Evidence-class bookkeeping: single-primary-class rule, an undeclared class, a circular 'numerically verified' check"
+    }
+  ],
+  "limitations": [
+    "Linux only; the owner's Windows 11 / Python 3.14.3 platform was not exercised.",
+    "CAMB 2.0.4 is a numerical cross-check, not a primary source; CAMB E factors are ratios at z = 30 and 60 (differ by <= 0.12%).",
+    "The App. B analysis takes [GM] (4.10)-(4.12) as printed (audited in 1C-A and 1D-D-t); well-posedness of the consistent reduction shown analytically at high k and numerically on the tracker for k <= 1e4 only.",
+    "[NW15] gives no A_s; the self-consistent [NW15] sigma values keep Planck's A_s by assumption.",
+    "[DNW13] not consulted; the owner-approval quote in the successor record cannot be verified independently.",
+    "Full test suite and scripts/audit_numerical_tolerances.py not run."
+  ],
+  "method": {
+    "equation_numbers": "reconstructed from LaTeX (section/appendix counters; one number per unstarred row without nonumber); agree with every number 1G-A cites",
+    "independence": "No other adversarial audit or auditor scratch read; own code imports nothing from timescape_fsigma8; phase script run only for comparison.",
+    "runs": {
+      "full_suite": "not run (lead runs it)",
+      "phase_script_py313_py311": "all budgets pass; artifact identical to the copied-in artifact in every non-environment field",
+      "test_barotropic_hadamard_refutation_py313_py311": "8 passed / 8 passed"
+    },
+    "scratch_scripts": [
+      "indep_background.py",
+      "indep_growth.py",
+      "indep_sigma.py",
+      "camb_check.py",
+      "indep_barotropic.py",
+      "appB_check.py",
+      "appB_consistent.py",
+      "eqnum.py",
+      "make_inventory.py"
+    ]
+  },
+  "owner_decisions": [
+    {
+      "decision": "Record the App. B verdict as convention-dependent (printed_4_15 sign; not shown ill-posed under RESOLVED_DERIVED_4_10); qualify the Sec. 4 conclusion; optionally add the (B.4) sign author question.",
+      "finding": "GA-F1"
+    },
+    {
+      "decision": "Choose the primary early-universe inputs of the [NW15] row (declared Planck hybrid vs [NW15]'s own f_b ~ 0.18, n_s ~ 0.99); correct the f_b justification; check downstream [NW15] quotes (1G-C, 1G-E, CLAUDE.md).",
+      "finding": "GA-F2"
+    },
+    {
+      "decision": "Qualify the 875 illustration in a successor note to 1G-A and the status successor; decide whether the regression-test comment names the chain.",
+      "finding": "GA-F3"
+    },
+    {
+      "decision": "Wording, attribution and classification refinements in one successor note; no number, token or tolerance changes.",
+      "finding": "GA-F4, GA-F5, GA-F6, GA-F7, GA-F8, GA-F11"
+    }
+  ],
+  "phase": "1G-A",
+  "preservation": "Only reports/phase1g_a_adversarial_audit.md and reports/phase1g_a_adversarial_audit_inventory.json were created in the main tree. Nothing else was edited, staged, committed, pushed or tagged. The phase script rewrote its git-ignored artifact in the audit worktree; git status there shows only the pre-existing untracked .reference symlink. Scratch code, outputs and the CAMB/SymPy installation live only in the audit scratch directory.",
+  "report": "reports/phase1g_a_adversarial_audit.md",
+  "schema_version": 1,
+  "scope": [
+    "reports/phase1g_a_sigma8_derivation_path_audit.md",
+    "reports/phase1g_a_sigma8_derivation_path_inventory.json",
+    "scripts/phase1g_a_sigma8_path_numerics.py",
+    "artifacts/independent/phase1g_a_sigma8_path.json",
+    "reports/phase1g_a_barotropic_status_successor.md",
+    "reports/phase1g_a_barotropic_status_successor_inventory.json",
+    "tests/test_barotropic_hadamard_refutation.py",
+    "CLAUDE.md (1G-A summary)"
+  ],
+  "severity_scale": {
+    "HIGH": "invalidates a load-bearing result",
+    "LOW": "minor or cosmetic",
+    "LOW-MEDIUM": "governance, documentation or reproducibility defect with scientific-record impact",
+    "MEDIUM": "incorrect statement or a status claim not supported by the evidence",
+    "MEDIUM-HIGH": "materially changes a quantitative result or its interpretation without invalidating the equations"
+  },
+  "sources": {
+    "EH98": {
+      "file": "astro-ph_9709112/trans.tex",
+      "sha256": "5f2ac6b413df8b738c95f6650152b7e82d7c36f6d9b3a618da540e9739dce17f"
+    },
+    "GM": {
+      "file": "2511.17160v2/main.tex",
+      "sha256": "f9cadfa03ecc9a74b0a8f432ae4b13422daeb219f253756bcd877b4b75077c59"
+    },
+    "NW15": {
+      "file": "1410.3470/cmb1.tex",
+      "sha256": "6d0e6397d3877e0aaa3dba16601e1423c4bfe952c7221c1565cdd410d2669bcd"
+    },
+    "P18": {
+      "file": "1807.06209/ms.tex",
+      "sha256": "fe0833d2d0fda17427a709c9559dc7b3a988b955f47bb7de7a02c900ffdc21cf"
+    },
+    "W07": {
+      "file": "0709.0732v2/solution.tex",
+      "sha256": "221662c987e454729ef8202c87fa697c5882b5b7daaecdedb50a7cba8ffe6cd8"
+    },
+    "W09": {
+      "file": "0909.0749v2/observe.tex",
+      "sha256": "2b0324d127440e9a053a7cb37102d7655cca228a63cd2222843e879989b4b531"
+    }
+  },
+  "tag_readiness": "NOT_READY_OWNER_DECISION_REQUIRED",
+  "title": "Phase 1G-A \u2014 Independent adversarial audit",
+  "verdict": "ACCEPT_WITH_CORRECTIONS"
+}

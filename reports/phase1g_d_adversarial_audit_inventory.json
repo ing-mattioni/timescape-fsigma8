@@ -1,0 +1,784 @@
+{
+  "audit_classification": "INDEPENDENT_ADVERSARIAL_AUDIT",
+  "audit_date": "2026-09-29",
+  "audited_phase_commit": "5ab23940f434d8bf06a687e323d4766db560011f",
+  "checkpoint": "6f7937ce5681900898f5e0a6482a953f0fa3e5a0",
+  "claims": [
+    {
+      "claim": "f_v = t/(t+tau), tau = (2+f_v0)(1-f_v0)/(3 f_v0 H_D0), tau/t0 = 0.3569/0.5949; tau is Phase 1F-D's b",
+      "evidence_class_assessed": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "evidence_class_reported": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "id": "C1",
+      "independent_values": {
+        "closed_form": "tau/t0 = f_w0/f_v0 exactly",
+        "phase1f_d_b": "reports/phase1f_d_necessary_bound.md lines 37 (f=t/(t+b)) and 85 (b=(2+fv0)*(1-fv0)/(3*fv0*HD0))",
+        "tau_over_t0_GM": 0.356852,
+        "tau_over_t0_NW15": 0.594896
+      },
+      "location": "[1G-D] Sec. 1 item 1; Sec. 3",
+      "notes": "Symbolic identity from [GM] (5.6), main.tex line 657.",
+      "outcome": "CONFIRMED"
+    },
+    {
+      "claim": "SU modes: delta f_v = f_v f_w delta_w, delta_d = f_w delta_w, delta H_w = -dot(delta_w)/3, delta R_w = 10 H_w^2 delta_w; void onset delta f_v = -f_v f_w eps, delta_d = f_v eps; each an exact k->0 solution of [GM] (4.9)-(4.11)",
+      "evidence_class_assessed": "DERIVED_FROM_VERIFIED_DEFINITIONS for exactness; DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION (S1) for the identification of the long-wavelength mode set",
+      "evidence_class_reported": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "id": "C2",
+      "independent_values": {
+        "buchert_first_order": "averaged Hamilton and Raychaudhuri hold to first order in all four parameters",
+        "correspondence": "Delta = -k^2 delta rho/rho, Z = -k^2 delta Theta = k^2 dot(delta_d), Ptilde = -k^2 delta p/rho_eff; common factor cancels",
+        "eps_Delta_eff_over_delta_d": "-2 tau (5t+4tau)/(t(9t+8tau))",
+        "eps_Ptilde_over_Delta_eff": "-(t+2tau)/(5t+4tau)",
+        "eq_4_10": "k->0 form of (4.10) is the linearisation of [GM] (3.17), obeyed by every exact cell",
+        "residuals_4_9_4_10_4_11": "identically 0 (symbolic) for eps, K, b_w, b_v",
+        "wall_Delta_eff_over_delta_d": "2(3t^2-10 t tau-10 tau^2)/(3t(9t+8tau))",
+        "wall_linearisation": "a_w = t^(2/3)(1 - (9/20) K t^(2/3)); delta_w = (27/20) K t^(2/3); delta R_w/(H_w^2 delta_w) = 10 exactly"
+      },
+      "location": "[1G-D] Sec. 1 item 2; Sec. 4",
+      "notes": "The report's (4.11) check is an identity check of its hand-linearised formulas (Z defined as -dot(delta_d)), not circular; confirmed independently from an exact-cell construction. Wall-curvature mode conflicts with [GM] main.tex line 620 (walls flat by construction); S1 keeps the wall bang-time mode but drops the void bang-time mode (GD-F3). delta R_w = 10 H_w^2 delta_w holds for the growing mode only (GD-F9).",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    },
+    {
+      "claim": "[GM]'s comoving, Meszaros and barotropic closures fail the separate-universe test (Sec. 5 table)",
+      "evidence_class_assessed": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION (S1), numerically corroborated",
+      "evidence_class_reported": "DERIVED + NUMERICALLY_CORROBORATED",
+      "id": "C3",
+      "independent_values": {
+        "early_log_rate": "u_comoving = 2/3 - (19/60) f_v + O(f_v^2); u_Meszaros = 2/3 - (5/12) f_v; SU wall u = 2/3 - f_v exactly",
+        "max_rel_diff_vs_artifact": {
+          "comoving_ratio": 1e-12,
+          "cs2": 5.6e-16,
+          "su_ratios": 2.4e-15
+        },
+        "su_combinations_null_space": {
+          "barotropic_Ptilde_eq_cs2_Delta_eff": "only c_bw = c_bv (global bang-time shift, decaying)",
+          "comoving_Ptilde_eq_0": "none",
+          "literal_Delta_eff_eq_0": "none",
+          "meszaros_Delta_eff_plus_3Ptilde_eq_0_ie_dQ_eq_0": "only c_bw = 1.5 c_bv (decaying bang-time combination)"
+        },
+        "table_GM": [
+          {
+            "comoving_Deff_over_Dd_own": 0.200005,
+            "cs2": -0.499997,
+            "su_eps_Deff_over_Dd": -356.977,
+            "su_eps_Pt_over_Deff": -0.498953,
+            "su_wall_Deff_over_Dd": -297.272,
+            "su_wall_Pt_over_Deff": -0.332029,
+            "t_over_t0": 0.001
+          },
+          {
+            "comoving_Deff_over_Dd_own": 0.200039,
+            "cs2": -0.499729,
+            "su_eps_Deff_over_Dd": -35.8064,
+            "su_eps_Pt_over_Deff": -0.489847,
+            "su_wall_Deff_over_Dd": -29.6299,
+            "su_wall_Pt_over_Deff": -0.320559,
+            "t_over_t0": 0.01
+          },
+          {
+            "comoving_Deff_over_Dd_own": 0.199524,
+            "cs2": -0.485403,
+            "su_eps_Deff_over_Dd": -3.66356,
+            "su_eps_Pt_over_Deff": -0.422175,
+            "su_wall_Deff_over_Dd": -2.8413,
+            "su_wall_Pt_over_Deff": -0.225104,
+            "t_over_t0": 0.1
+          },
+          {
+            "comoving_Deff_over_Dd_own": 0.1961,
+            "cs2": -0.448158,
+            "su_eps_Deff_over_Dd": -1.25375,
+            "su_eps_Pt_over_Deff": -0.34628,
+            "su_wall_Deff_over_Dd": -0.829707,
+            "su_wall_Pt_over_Deff": -0.0635187,
+            "t_over_t0": 0.3
+          },
+          {
+            "comoving_Deff_over_Dd_own": 0.1833,
+            "cs2": -0.391238,
+            "su_eps_Deff_over_Dd": -0.386954,
+            "su_eps_Pt_over_Deff": -0.266624,
+            "su_wall_Deff_over_Dd": -0.103584,
+            "su_wall_Pt_over_Deff": 0.9327,
+            "t_over_t0": 1.0
+          }
+        ]
+      },
+      "location": "[1G-D] Sec. 1 item 3; Sec. 5",
+      "notes": "Robust for the growing modes, even with the void-onset mode alone. Meszaros consistency is dQ = 0 (not Delta_eff = 0); barotropic is exact for the global bang-time mode (GD-F5). Conditional on S1 (GD-F3).",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    },
+    {
+      "claim": "Implied void response r(t) = (D_CGI - f_w D_wall)/f_v rises 0.006 -> 0.435 (x72.6); Meszaros x62.9; NW15 x80, x72",
+      "evidence_class_assessed": "DERIVED_FROM_VERIFIED_DEFINITIONS (under S1), numerically corroborated",
+      "evidence_class_reported": "DERIVED + NUMERICALLY_CORROBORATED",
+      "id": "C4",
+      "independent_values": {
+        "D_wall_t0_GM": 0.8767922,
+        "D_wall_t0_closed_form_GM": 0.8767923,
+        "factor_comoving_GM": 72.609,
+        "factor_comoving_NW15": 79.935,
+        "factor_meszaros_GM": 62.926,
+        "factor_meszaros_NW15": 72.224,
+        "r_early_log_slope": 0.66664
+      },
+      "location": "[1G-D] Sec. 5 'Implied void response'",
+      "notes": "Normalisation consistent (both D/a_ph -> 1 at t_e = 1e-7 t0). Report values use nearest grid points (72.59 etc.). Test omits decaying SU modes and fixes the wall coefficient; the series argument of C3 closes the gap.",
+      "outcome": "CONFIRMED"
+    },
+    {
+      "claim": "PBS A_v = phi(nu)/(sigma_s Phi(-nu)) since tau ~ 1/f_vi; R_seed = (30/2)/1.72/h; sigma_s = 9.3e-4/8.4e-4; nu = 3.72/2.33; A_v = 4260/2869/4724/3181; R* table",
+      "evidence_class_assessed": "EXTERNAL_CLOSURE_INPUT (A_v); R* DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION and CONVENTION_DEPENDENT on the seed scale and f_vi",
+      "evidence_class_reported": "EXTERNAL_CLOSURE_INPUT (A_v); DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION (R*)",
+      "id": "C5",
+      "independent_values": {
+        "A_v_GM": [
+          4260.45,
+          2868.53
+        ],
+        "A_v_NW15": [
+          4723.8,
+          3180.5
+        ],
+        "R_seed_Mpc": [
+          11.942,
+          14.297
+        ],
+        "R_star_max_rel_diff_vs_artifact": 1.3e-08,
+        "nu": [
+          3.719016,
+          2.326348
+        ],
+        "planck_sigma8_eh98_own": 0.835689,
+        "sigma_seed": [
+          0.00092912,
+          0.00083799
+        ],
+        "svdw_factor": {
+          "effect_on_A_v": "+0.9%",
+          "own_1_plus_Delta": 0.2047,
+          "own_delta_v": -2.717,
+          "own_root_of_svdw_condition": 1.6967,
+          "own_theta_sc": 3.4875,
+          "svdw_quoted": 1.7151
+        },
+        "tracker_consistent_seed": {
+          "GM_fvi_1e-2": {
+            "A_v": 1464.7,
+            "A_v_sigma_R8_own_equal_mass": 1.316,
+            "A_v_sigma_R8_without_gamma_w0": 1.536,
+            "R_seed_Mpc": 3.58,
+            "R_star_h_inv_Mpc": {
+              "density_10pct": 100.8,
+              "eps=1": 13.55,
+              "void_fraction_10pct": 40.84
+            },
+            "X_SU": 1.549,
+            "sigma_seed": 0.00182
+          },
+          "GM_fvi_1e-4": {
+            "A_v": 1172.3,
+            "A_v_sigma_R8_own_equal_mass": 1.053,
+            "A_v_sigma_R8_without_gamma_w0": 1.176,
+            "R_seed_Mpc": 0.7712,
+            "R_star_h_inv_Mpc": {
+              "density_10pct": 84.29,
+              "eps=1": 9.913,
+              "void_fraction_10pct": 32.59
+            },
+            "X_SU": 1.298,
+            "sigma_seed": 0.003377
+          },
+          "NW15_fvi_1e-2": {
+            "A_v": 1623.3,
+            "A_v_sigma_R8_own_equal_mass": 1.516,
+            "A_v_sigma_R8_without_gamma_w0": 1.755,
+            "R_seed_Mpc": 4.712,
+            "R_star_h_inv_Mpc": {
+              "density_10pct": 78.46,
+              "eps=1": 13.14,
+              "void_fraction_10pct": 51.11
+            },
+            "X_SU": 1.632,
+            "sigma_seed": 0.001642
+          },
+          "NW15_fvi_1e-4": {
+            "A_v": 1234.9,
+            "A_v_sigma_R8_own_equal_mass": 1.153,
+            "A_v_sigma_R8_without_gamma_w0": 1.278,
+            "R_seed_Mpc": 1.015,
+            "R_star_h_inv_Mpc": {
+              "density_10pct": 62.97,
+              "eps=1": 9.151,
+              "void_fraction_10pct": 40.0
+            },
+            "X_SU": 1.349,
+            "sigma_seed": 0.003205
+          }
+        },
+        "tracker_f_v_at_z1090": {
+          "GM": 9.471e-05,
+          "NW15": 5.073e-05
+        },
+        "tracker_own_fvi": {
+          "GM": {
+            "A_v": 4274.4,
+            "X_SU": 3.958
+          },
+          "NW15": {
+            "A_v": 4914.2,
+            "A_v_sigma_R8_own": 4.588,
+            "R_star_h_inv_Mpc": {
+              "density_10pct": 171.5,
+              "eps=1": 42.44,
+              "void_fraction_10pct": 121.1
+            },
+            "X_SU": 4.033
+          }
+        }
+      },
+      "location": "[1G-D] Secs. 7, 8",
+      "notes": "Arithmetic reproduced exactly. tau ~ 1/f_vi holds inside the tracker (dln tau/dln f_vi = -1/(1-f_vi)) but the tracker then fixes f_vi (GD-F2). The EdS seed factor is inconsistent with the tracker's own void-domain growth (f_v0/f_vi)^(1/3) (GD-F1). [SvdW04]'s appendix numbers (lines 2152-2163) do not satisfy their own stated condition; immaterial here.",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    },
+    {
+      "claim": "[W09] readings: Eq. initc (line 1811), |delta_H| in {1e-6,1e-5} (1814), f_vi range (1815), 30 h^-1 Mpc voids (277), '100 h^-1 Mpc or somewhat larger' (327); A_v = 1/|delta_H|; [W09] seeding internally inconsistent with its homogeneity claim",
+      "evidence_class_assessed": "VERIFIED_FROM_PRIMARY_SOURCE for the quotes; A_v = 1/|delta_H| is DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION (the report's own reading)",
+      "evidence_class_reported": "EXTERNAL_CLOSURE_INPUT",
+      "id": "C6",
+      "independent_values": {
+        "W09_1807_1811": "If this uncompensated fraction is viewed as a single density perturbation then \\de\\Z{\\cal H}\\equiv\\left(\\de\\rh\\over\\rh\\right)_{\\!\\cal H\\hbox{\\sevenrm i}} =\\fvi\\left(\\de\\rh\\over\\rh\\right)\\ns{vi}.\\label{initc}",
+        "W09_1814_1817": "We might demand $\\de\\Z{\\cal H}\\in\\{-10^{-6},-10^{-5}\\}$, which means we might take $\\fvi\\in\\{10^{-4},10^{-2}\\}$, depending on what values of $(\\de\\rh/\\rh)\\ns{vi}$ are acceptable for the nonbaryonic dark matter power spectrum.",
+        "W09_2414_2415_footT": "were fit using the full exact solution for $\\hri=0.99999$, $\\fvi=10^{-4}$, and $z_i=1100$.",
+        "W09_277_278": "Voids of a characteristic diameter $30h^{-1}$ Mpc are observed to fill 40--50\\% of the universe at the present epoch \\cite{HV}.",
+        "W09_326_327": "Here we take a ``dust particle'' to be of at least the scale of statistical homogeneity, 100$h^{-1}$ Mpc or somewhat larger \\cite{footD}.",
+        "W09_455_457": "represents a scale above which the variance in density contrasts is bounded at the 10\\% level, and below which density constrasts become as large as they can possibly be."
+      },
+      "location": "[1G-D] Secs. 1 item 5, 7, 8",
+      "notes": "Quotes and line numbers accurate. The 'internally inconsistent' attribution to [W09] is over-strong (GD-F4).",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    },
+    {
+      "claim": "D_SU = f_w D_wall + A_v a_LS f_v; X_SU >= 0.293/0.448; PBS X_SU = 2.75-3.95; Sec. 9: A_v sigma_LSS(R8) = 2.6-4.3 >> 1, no linear global-mean sigma8",
+      "evidence_class_assessed": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION; PBS numbers CONVENTION_DEPENDENT",
+      "evidence_class_reported": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "id": "C7",
+      "independent_values": {
+        "A_v_f_v_LS": {
+          "GM": [
+            0.404,
+            0.272
+          ],
+          "NW15": [
+            0.24,
+            0.161
+          ]
+        },
+        "A_v_sigma_R8_NW15_own_radius": [
+          2.969,
+          4.41
+        ],
+        "X_SU_A_v_0": [
+          0.2927,
+          0.44766
+        ],
+        "X_SU_PBS_GM": [
+          2.7524,
+          3.9459
+        ],
+        "X_SU_PBS_NW15": [
+          2.7678,
+          3.8936
+        ],
+        "X_SU_total_LS_contrast_normalised_GM": [
+          2.673,
+          3.828
+        ],
+        "inverse_mills_ratio": [
+          2.665214,
+          3.95848
+        ],
+        "sigma_LSS_R8_GM_12.570Mpc": 0.0008982,
+        "sigma_LSS_R8_NW15_at_12.57Mpc_as_script": 0.0009162,
+        "sigma_LSS_R8_NW15_own_equal_mass_12.226Mpc": 0.00093359
+      },
+      "location": "[1G-D] Secs. 1 items 4 and 6, 6, 9",
+      "notes": "Numbers reproduce to 5e-9. With R_seed ~ R8 the Sec. 9 figure is essentially the inverse Mills ratio phi(nu)/Phi(-nu). NW15 R8 radius wrong (GD-F7); LS normalisation (GD-F6); lower bound needs curved walls (GD-F3); seed scale (GD-F1).",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    },
+    {
+      "claim": "Approved tokens: GM_CGI_CLOSURES_SEPARATE_UNIVERSE_CONSISTENCY = FAILED_FOR_TIMESCAPE_TRACKER; TWO_SCALE_SUPER_CELL_GROWTH_LAW = DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION; VOID_ONSET_RESPONSE = EXTERNAL_CLOSURE_INPUT; LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC = NOT_DEFINED_IN_LINEAR_TWO_SCALE_THEORY",
+      "evidence_class_assessed": "values defensible; rationale comments need owner review",
+      "evidence_class_reported": "owner-approved status additions (2026-09-29)",
+      "id": "C8",
+      "independent_values": {
+        "GM_CGI_CLOSURES_SEPARATE_UNIVERSE_CONSISTENCY": "supported for all growing SU modes (void-onset mode alone suffices); conditional on S1; comment 'Meszaros (Delta_eff = 0)' imprecise",
+        "LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC": "value defensible (|eps| >~ 1 at R8 under all tested seed conventions; R8 < R_void partition variance f_v/f_w ~ 2.8); rationale 'A_v sigma_LSS(R8) = 2.6-4.3' is seed-convention dependent (1.05-1.5 tracker-consistent) and uses the GM radius for NW15",
+        "TWO_SCALE_SUPER_CELL_GROWTH_LAW": "appropriate; add S1 wall-curvature and LS-normalisation caveats",
+        "VOID_ONSET_RESPONSE": "confirmed; PBS alone spans 1.2e3-4.9e3 across seed and f_vi conventions"
+      },
+      "location": "src/timescape_fsigma8/scientific_status.py lines 57-80",
+      "notes": "Headline 'the volume-average CGI growth is not Timescape's long-wavelength growth' holds under S1 only; repeated in README.md and CLAUDE.md.",
+      "outcome": "CONFIRMED_WITH_CAVEAT"
+    }
+  ],
+  "environment": {
+    "audit_tree": "isolated worktree of 6f7937c; PYTHONPATH=<audit_tree>/src",
+    "gm_equation_numbers": "reconstructed from main.tex counters: (3.12)-(3.13) lines 399-400, (3.17) 414-415, (4.9)-(4.12) 493-496, (4.13) 507, (4.27) 578, (5.6) 657",
+    "numerics_interpreters": [
+      "CPython 3.13.12, NumPy 2.5.3, SciPy 1.18.1 (/home/user/timescape-fsigma8/.venv)",
+      "CPython 3.11.15, NumPy 2.4.6, SciPy 1.17.1 (/home/user/timescape-fsigma8/.venv311)"
+    ],
+    "platform": "Linux x86-64 (AVX-512)",
+    "symbolic": "SymPy 1.14.0 in a scratch virtual environment (CPython 3.13.12)"
+  },
+  "errata": [
+    {
+      "file": "reports/phase1g_d_separate_universe_growth.md",
+      "location": "Sec. 9, lines 262-263",
+      "new": "At R8 (Lagrangian, equal mass: 12.6 Mpc for [GM], 12.2 Mpc for [NW15]), \u03c3_LSS = 9.0e\u22124 ([GM]) or 9.3e\u22124 ([NW15]). So\n`A_v \u03c3_LSS(R8) = 2.6\u20134.4` (PBS) and 90\u2013930 ([W09] single). Both are \u226b 1.",
+      "old": "At R8 (Lagrangian 12.6 Mpc), \u03c3_LSS = 9.0e\u22124 ([GM]) or 9.2e\u22124 ([NW15]). So\n`A_v \u03c3_LSS(R8) = 2.6\u20134.3` (PBS) and 90\u2013900 ([W09] single). Both are \u226b 1.",
+      "proof": "1G-A artifact radii_photon_comoving_Mpc.equal_mass_M8_planck = 12.226040 Mpc for NW15_CMB_FIT; script line 254 hard-codes 12.57; own sigma_LSS(12.226) = 9.33593e-4; 4723.80 x 9.33593e-4 = 4.410; 3180.50 x 9.33593e-4 = 2.969; 1e6 x 9.33593e-4 = 933.6."
+    },
+    {
+      "file": "reports/phase1g_d_separate_universe_growth.md",
+      "location": "Sec. 1 item 6, line 70",
+      "new": "`A_v \u03c3_LSS(R8) \u2248 2.6\u20134.4 \u226b 1`",
+      "old": "`A_v \u03c3_LSS(R8) \u2248 2.6\u20134.3 \u226b 1`",
+      "proof": "As E1; the '>> 1' wording is subject to owner decision OD1."
+    },
+    {
+      "file": "reports/phase1g_d_separate_universe_inventory.json",
+      "location": "cases.NW15_CMB_FIT.void_response_at_R8; findings.sigma8_location.void_response_at_R8",
+      "new": "4.41, 2.969, 93.359, 933.593; \"2.6-4.4 (PBS) >> 1\"",
+      "old": "4.328, 2.914, 91.62, 916.205; \"2.6-4.3 (PBS) >> 1\"",
+      "proof": "As E1."
+    },
+    {
+      "file": "reports/phase1g_d_separate_universe_growth.md",
+      "location": "Sec. 8, line 247",
+      "new": "relation gives 353\u20131298 / 752\u20132651 / 1004\u20133501 h\u207b\u00b9 Mpc.",
+      "old": "relation gives 354\u20131298 / 752\u20132651 / 1004\u20133501 h\u207b\u00b9 Mpc.",
+      "proof": "artifact NW15_CMB_FIT transition_scales.R_star['W09_single_perturbation_|dH|=1e-5']['eps=1'].R_h_inv_Mpc = 353.2952; inventory 353.3."
+    },
+    {
+      "file": "reports/phase1g_d_separate_universe_growth.md",
+      "location": "Sec. 8 table, line 244",
+      "new": "| [W09] single, \\|\u03b4_H\\| = 10\u207b\u2076 | 1615 (2212) | 2735 (3744) | 4755 (6511) |",
+      "old": "| [W09] single, \\|\u03b4_H\\| = 10\u207b\u2076 | 1615 (2212) | 2735 (3745) | 4755 (6511) |",
+      "proof": "artifact PAPER_REFERENCE transition_scales.R_star['W09_single_perturbation_|dH|=1e-6'].void_fraction_10pct.R_Mpc = 3744.4815."
+    },
+    {
+      "file": "reports/phase1g_d_separate_universe_growth.md",
+      "location": "Sec. 4, lines 118-119",
+      "new": "- `\u03b4H_w = \u2212\u03b4\u0307_w/3` and, for the growing mode, `\u03b4R_w = 10 H_w\u00b2 \u03b4_w` (linearised Friedmann equation\n  of a closed dust patch; `\u03b4R_w = 0` for the t^{\u22121} mode).",
+      "old": "- `\u03b4H_w = \u2212\u03b4\u0307_w/3` and `\u03b4R_w = 10 H_w\u00b2 \u03b4_w` (linearised Friedmann equation\n  of a closed dust patch).",
+      "proof": "Linearised region Friedmann 6 H_w dH_w = 8 pi G rho_w delta_w - dR_w/2 with 8 pi G rho_w = 4/(3t^2), H_w = 2/(3t): dR_w = (8/3)(delta_w/t^2 + dot(delta_w)/t) = 10 H_w^2 delta_w for t^(2/3), 0 for t^-1; checked symbolically (su_symbolic.py)."
+    },
+    {
+      "file": "reports/phase1g_d_separate_universe_growth.md",
+      "location": "Sec. 1 item 3, line 45",
+      "new": "`\u0394_eff/\u0394_d < 0` at all t \u2264 t0 and `P\u0303_eff \u2260 0`, with",
+      "old": "`\u0394_eff/\u0394_d < 0` at all times and `P\u0303_eff \u2260 0`, with",
+      "proof": "Wall-mode ratio 2(3t^2-10 t tau-10 tau^2)/(3t(9t+8tau)) has its root at t = (5+sqrt(55)) tau/3 = 4.139 tau > t0 (2.80 tau GM, 1.68 tau NW15); void-onset ratio -2 tau(5t+4tau)/(t(9t+8tau)) < 0 for all t."
+    },
+    {
+      "file": "reports/phase1g_d_separate_universe_growth.md",
+      "location": "Sec. 12, line 343",
+      "new": "- **Added:** this report, its inventory, and one script. **Modified:** the phase ledger in CLAUDE.md and the summary in README.md (text only).",
+      "old": "- **Added:** this report, its inventory, and one script.",
+      "proof": "git show --numstat 5ab2394: CLAUDE.md 16/1, README.md 10/3, report 346/0, inventory 443/0, script 297/0."
+    }
+  ],
+  "finding_counts": {
+    "HIGH": 0,
+    "LOW": 5,
+    "LOW-MEDIUM": 1,
+    "MEDIUM": 3,
+    "MEDIUM-HIGH": 1,
+    "total": 10
+  },
+  "findings": [
+    {
+      "consequence": "A_v 1.2-1.6e3, A_v sigma_LSS(R8) 1.05-1.5, R*(eps=1) 9-14 h^-1 Mpc, R*(10% density) 63-101 h^-1 Mpc, X_SU 1.30-1.63; the '>> 1', '3-4x LCDM (8-16x power)', 'reproduces W09 100 h^-1 Mpc' and 'sigma8 in the non-perturbative regime' readings are not robust; equations unaffected.",
+      "evidence": {
+        "report_values": {
+          "A_v": "2869-4724",
+          "A_v_sigma_R8": "2.6-4.3",
+          "R_star_density10_h_inv_Mpc": "128-215",
+          "R_star_eps1_h_inv_Mpc": "28-45",
+          "X_SU": "2.75-3.95"
+        },
+        "tracker_consistent_seed_rows": {
+          "GM_fvi_1e-2": {
+            "A_v": 1464.7,
+            "A_v_sigma_R8_own_equal_mass": 1.316,
+            "A_v_sigma_R8_without_gamma_w0": 1.536,
+            "R_seed_Mpc": 3.58,
+            "R_star_h_inv_Mpc": {
+              "density_10pct": 100.8,
+              "eps=1": 13.55,
+              "void_fraction_10pct": 40.84
+            },
+            "X_SU": 1.549,
+            "sigma_seed": 0.00182
+          },
+          "GM_fvi_1e-4": {
+            "A_v": 1172.3,
+            "A_v_sigma_R8_own_equal_mass": 1.053,
+            "A_v_sigma_R8_without_gamma_w0": 1.176,
+            "R_seed_Mpc": 0.7712,
+            "R_star_h_inv_Mpc": {
+              "density_10pct": 84.29,
+              "eps=1": 9.913,
+              "void_fraction_10pct": 32.59
+            },
+            "X_SU": 1.298,
+            "sigma_seed": 0.003377
+          },
+          "NW15_fvi_1e-2": {
+            "A_v": 1623.3,
+            "A_v_sigma_R8_own_equal_mass": 1.516,
+            "A_v_sigma_R8_without_gamma_w0": 1.755,
+            "R_seed_Mpc": 4.712,
+            "R_star_h_inv_Mpc": {
+              "density_10pct": 78.46,
+              "eps=1": 13.14,
+              "void_fraction_10pct": 51.11
+            },
+            "X_SU": 1.632,
+            "sigma_seed": 0.001642
+          },
+          "NW15_fvi_1e-4": {
+            "A_v": 1234.9,
+            "A_v_sigma_R8_own_equal_mass": 1.153,
+            "A_v_sigma_R8_without_gamma_w0": 1.278,
+            "R_seed_Mpc": 1.015,
+            "R_star_h_inv_Mpc": {
+              "density_10pct": 62.97,
+              "eps=1": 9.151,
+              "void_fraction_10pct": 40.0
+            },
+            "X_SU": 1.349,
+            "sigma_seed": 0.003205
+          }
+        }
+      },
+      "id": "GD-F1",
+      "locations": [
+        "reports/phase1g_d_separate_universe_growth.md Sec. 1 items 4-6, Secs. 6-9",
+        "reports/phase1g_d_separate_universe_inventory.json findings.transition_length_scale, void_onset_response, sigma8_location",
+        "scripts/phase1g_d_separate_universe_numerics.py lines 61-62, 227",
+        "README.md, CLAUDE.md (1G-D summaries)",
+        "src/timescape_fsigma8/scientific_status.py comment of LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC"
+      ],
+      "resolution_class": "OWNER_DECISION",
+      "severity": "MEDIUM-HIGH",
+      "statement": "R_seed = R_void/1.72 uses [SvdW04]'s EdS shell-crossing factor, but the tracker used for D_SU grows each void domain's comoving radius by (f_v0/f_vi)^(1/3) (x gamma_w0^-1 in photon-comoving units), i.e. 4.2-19.8, not 1.72; with 1.72, seeds filling 1e-4 of the volume at LS would fill 5e-4 today instead of f_v0 = 0.737.",
+      "suggested_resolution": "Owner chooses the seed convention: tracker-consistent R_seed = R_void (f_vi/f_v0)^(1/3)/gamma_w0, or keep [SvdW04]'s factor as an explicit additional assumption and quote both ranges; rebase the LINEAR_GLOBAL_MEAN token rationale on the R8 < R_void partition argument.",
+      "title": "PBS void-seed scale is inconsistent with the tracker's own void expansion"
+    },
+    {
+      "consequence": "Quoted ranges (A_v 2.9-4.7e3, X_SU 2.75-3.95, A_v sigma(R8) 2.6-4.3, R* 28-45 / 128-215) are partly set by a tracker-inconsistent input; NW15 tracker-consistent values lie outside them.",
+      "evidence": {
+        "tracker_f_v_LS": {
+          "GM": 9.471e-05,
+          "NW15": 5.073e-05
+        },
+        "with_tracker_fvi_report_seed": {
+          "GM": {
+            "A_v": 4274.4,
+            "X_SU": 3.958
+          },
+          "NW15": {
+            "A_v": 4914.2,
+            "A_v_sigma_R8_own": 4.588,
+            "X_SU": 4.033
+          }
+        }
+      },
+      "id": "GD-F2",
+      "locations": [
+        "reports/phase1g_d_separate_universe_growth.md Secs. 1 items 4-6, 6, 7, 8, 9",
+        "scripts/phase1g_d_separate_universe_numerics.py line 63"
+      ],
+      "resolution_class": "OWNER_DECISION",
+      "severity": "MEDIUM",
+      "statement": "The step 'tau ~ 1/f_vi' is derived inside the tracker, where f_v(t_LS) is fixed: 9.47e-5 ([GM]) and 5.07e-5 ([NW15]) at z = 1090. The f_vi = 1e-2 branch sets every lower end of the quoted ranges; [W09] footT (lines 2412-2418) used f_vi = 1e-4.",
+      "suggested_resolution": "Restrict f_vi to the tracker's f_v(t_LS), or mark the 1e-2 branch as outside the tracker; update ranges.",
+      "title": "f_vi = 1e-2 branch is inconsistent with the tracker's f_v at last scattering"
+    },
+    {
+      "consequence": "Exactness stays DERIVED_FROM_VERIFIED_DEFINITIONS; identification is DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION. The A_v = 0 lower bound X_SU >= 0.293/0.448 exists only if wall curvature is admitted (0 otherwise). The headline 'not Timescape's long-wavelength growth' holds under S1 only. FAILED token value unaffected.",
+      "evidence": {
+        "GM_line_620": "the curvature within such idealised wall regions is not a free choice within the framework, but instead must be vanishing by construction.",
+        "token_robustness": "void-onset mode alone fails comoving (Ptilde != 0), Meszaros (dQ != 0) and barotropic closures"
+      },
+      "id": "GD-F3",
+      "locations": [
+        "reports/phase1g_d_separate_universe_growth.md Sec. 1 items 1-4, Secs. 4, 5, 6",
+        "reports/phase1g_d_separate_universe_inventory.json findings.separate_universe_modes",
+        "README.md",
+        "CLAUDE.md"
+      ],
+      "resolution_class": "OWNER_DECISION",
+      "severity": "MEDIUM",
+      "statement": "Sec. 4 is labelled DERIVED_FROM_VERIFIED_DEFINITIONS but opens with Assumption S1. [GM] main.tex line 620: the wall curvature 'is not a free choice within the framework, but instead must be vanishing by construction'. S1 keeps the wall bang-time mode but drops the void bang-time mode.",
+      "suggested_resolution": "Reclassify the identification; cite [GM] line 620; condition the headline and the lower bound on S1 including wall curvature.",
+      "title": "SU-mode identification rests on S1 and its wall-curvature mode conflicts with [GM]'s flat walls; evidence class over-strong"
+    },
+    {
+      "consequence": "Sec. 1 item 5, Sec. 8 Reading and the inventory make an unsupported statement about a primary source.",
+      "evidence": {
+        "W09_1807_1811": "If this uncompensated fraction is viewed as a single density perturbation then ... =\\fvi(\\de\\rh/\\rh)_vi (initc)"
+      },
+      "id": "GD-F4",
+      "locations": [
+        "reports/phase1g_d_separate_universe_growth.md Sec. 1 item 5, Sec. 8 'Reading'",
+        "reports/phase1g_d_separate_universe_inventory.json findings.transition_length_scale.w09_single_perturbation_density_10pct_h_inv_Mpc"
+      ],
+      "resolution_class": "OWNER_DECISION",
+      "severity": "MEDIUM",
+      "statement": "A_v = 1/|delta_H| is 1G-D's reading of [W09] (initc) (perturbing f_vi at fixed (delta rho/rho)_vi); [W09] lines 1805-1817 state no response of a region's void fraction to a long-wavelength mode. The 1000-4750 h^-1 Mpc result shows the reading is not a viable response relation, not that [W09] is internally inconsistent.",
+      "suggested_resolution": "Reword: 'reading [W09] (initc) as a response relation gives 1000-4750 h^-1 Mpc, incompatible with [W09]'s homogeneity scale; the reading is therefore not a viable void-onset response'.",
+      "title": "'[W09] internally inconsistent' attributes to [W09] a consequence of the report's own reading"
+    },
+    {
+      "consequence": "Conclusion unchanged (no growing SU mode satisfies either closure); the recorded reason and the token-rationale comment are imprecise.",
+      "evidence": {
+        "null_spaces": {
+          "barotropic": "c_bw = c_bv only (decaying)",
+          "dQ_eq_0": "c_bw = 1.5 c_bv only (decaying)"
+        }
+      },
+      "id": "GD-F5",
+      "locations": [
+        "reports/phase1g_d_separate_universe_growth.md Sec. 1 item 3, Sec. 5 'Reading'",
+        "reports/phase1g_d_separate_universe_inventory.json findings.gm_closures_su_consistency",
+        "artifacts/independent/phase1g_d_separate_universe.json field gm_meszaros.Delta_eff (script line 171)",
+        "src/timescape_fsigma8/scientific_status.py comment of GM_CGI_CLOSURES_SEPARATE_UNIVERSE_CONSISTENCY"
+      ],
+      "resolution_class": "OWNER_DECISION",
+      "severity": "LOW-MEDIUM",
+      "statement": "[GM] (4.27) is (4.11) without the source 4 pi G rho_eff (Delta_eff + 3 Ptilde) = -dQ at k->0, so Meszaros-consistency is dQ = 0, not Delta_eff = 0 ([GM] line 500: Delta_eff = Ptilde = 0 together forces all perturbations to zero). The barotropic closure is satisfied exactly by the global bang-time SU mode, not 'only asymptotically early, and only for the void-onset mode'.",
+      "suggested_resolution": "State Meszaros as 'drops the effective source, i.e. requires dQ = 0 at k->0'; note the barotropic closure holds exactly only for the decaying global bang-time mode.",
+      "title": "Meszaros and barotropic closures mischaracterised in the SU test and a token comment"
+    },
+    {
+      "consequence": "If delta_L is the region's early-universe contrast, X_SU drops by about 3% (3.95 -> 3.83, 2.75 -> 2.67).",
+      "evidence": {
+        "X_SU_GM_total_LS_normalised": [
+          2.673,
+          3.828
+        ],
+        "X_SU_NW15_total_LS_normalised": [
+          2.696,
+          3.786
+        ]
+      },
+      "id": "GD-F6",
+      "locations": [
+        "reports/phase1g_d_separate_universe_growth.md Sec. 6 (Assumption S2)"
+      ],
+      "resolution_class": "OWNER_DECISION",
+      "severity": "LOW",
+      "statement": "With delta_w(LS) = delta_L and eps = A_v delta_L, the SU cell contrast at LS is (1 - f_vLS + A_v f_vLS) delta_L, A_v f_vLS = 0.404/0.272 ([GM]) and 0.240/0.161 ([NW15]).",
+      "suggested_resolution": "Define delta_L in S2 (total LS contrast or wall-mode amplitude) and normalise accordingly.",
+      "title": "S2 normalisation: the void-onset term is 16-40% of the cell contrast at last scattering"
+    },
+    {
+      "consequence": "Sec. 9 and Sec. 1 item 6 quote 9.2e-4 and 2.6-4.3; correct 9.3e-4 and 2.6-4.4 (90-930 for [W09] single).",
+      "evidence": {
+        "NW15_A_v_sigma_own_radius": [
+          2.969,
+          4.41
+        ],
+        "NW15_sigma_LSS_12.226": 0.00093359,
+        "NW15_sigma_LSS_12.57": 0.0009162,
+        "NW15_single_A_v_sigma_own_radius": [
+          93.359,
+          933.59
+        ]
+      },
+      "id": "GD-F7",
+      "locations": [
+        "reports/phase1g_d_separate_universe_growth.md lines 70, 262-263",
+        "reports/phase1g_d_separate_universe_inventory.json cases.NW15_CMB_FIT.void_response_at_R8, findings.sigma8_location.void_response_at_R8",
+        "scripts/phase1g_d_separate_universe_numerics.py lines 254-255",
+        "src/timescape_fsigma8/scientific_status.py comment '2.6-4.3'"
+      ],
+      "resolution_class": "UNAMBIGUOUS_ERRATUM",
+      "severity": "LOW",
+      "statement": "Script lines 254-255 evaluate sigma_large_R(12.57, ...) for every case; [NW15]'s equal-mass R8 is 12.226 Mpc (1G-A artifact).",
+      "suggested_resolution": "Errata E1-E3; owner decides on the script constant and the token comment (code).",
+      "title": "[NW15] sigma_LSS(R8) computed at the [GM] radius 12.57 Mpc"
+    },
+    {
+      "consequence": "Cosmetic.",
+      "evidence": {
+        "artifact_values": {
+          "GM_single_1e-6_void_fraction_Mpc": 3744.4815092972713,
+          "NW15_single_1e-5_eps1_h_inv_Mpc": 353.2951687492809
+        }
+      },
+      "id": "GD-F8",
+      "locations": [
+        "reports/phase1g_d_separate_universe_growth.md lines 244, 247"
+      ],
+      "resolution_class": "UNAMBIGUOUS_ERRATUM",
+      "severity": "LOW",
+      "statement": "[NW15] single-perturbation eps=1 value 353.295 h^-1 Mpc printed '354'; [GM] 1e-6 void-fraction value 3744.48 Mpc printed '3745'.",
+      "suggested_resolution": "Errata E4, E5.",
+      "title": "Two rounding errors in the Sec. 8 R* values"
+    },
+    {
+      "consequence": "Cosmetic; no number changes (the script uses only the growing wall mode).",
+      "evidence": {
+        "t0_over_tau": {
+          "GM": 2.802,
+          "NW15": 1.681
+        },
+        "wall_ratio_root_t_over_tau": 4.1387
+      },
+      "id": "GD-F9",
+      "locations": [
+        "reports/phase1g_d_separate_universe_growth.md lines 45, 118-119"
+      ],
+      "resolution_class": "UNAMBIGUOUS_ERRATUM",
+      "severity": "LOW",
+      "statement": "Sec. 4 applies delta R_w = 10 H_w^2 delta_w to 'delta_w = C t^(2/3) (or C t^-1)'; for t^-1, delta R_w = 0 (general: delta R_w = (8/3)(delta_w/t^2 + dot(delta_w)/t)). Sec. 1 item 3 'Delta_eff/Delta_d < 0 at all times': the wall-mode ratio changes sign at t = (5+sqrt(55)) tau/3 ~ 4.14 tau (f_v ~ 0.805), after t0 for both presets.",
+      "suggested_resolution": "Errata E6, E7.",
+      "title": "Two statements are too general (delta R_w for the decaying mode; 'at all times')"
+    },
+    {
+      "consequence": "Incomplete provenance record.",
+      "evidence": {
+        "numstat": {
+          "CLAUDE.md": "16 1",
+          "README.md": "10 3",
+          "inventory": "443 0",
+          "report": "346 0",
+          "script": "297 0"
+        }
+      },
+      "id": "GD-F10",
+      "locations": [
+        "reports/phase1g_d_separate_universe_growth.md line 343"
+      ],
+      "resolution_class": "UNAMBIGUOUS_ERRATUM",
+      "severity": "LOW",
+      "statement": "git show --stat 5ab2394 lists CLAUDE.md (+16/-1) and README.md (+10/-3) besides the report, inventory and script; Sec. 12 lists only the latter three.",
+      "suggested_resolution": "Erratum E8.",
+      "title": "Preservation statement omits the CLAUDE.md and README.md edits"
+    }
+  ],
+  "limitations": [
+    "tau ~ 1/f_vi verified inside the tracker only; [W09]'s general solution (h_ri ~ 1, eps_i != 0) not integrated.",
+    "The tracker-consistent seed scale follows from the report's identification of seeds with the tracker's void domain; the photon-comoving conversion of [W09]'s 30 h^-1 Mpc is convention-dependent (results given with and without gamma_w0). The Gaussian-threshold PBS itself (e.g. neglected seed-depth response) was not validated; Kaiser (1984) and Bardeen et al. (1986) not fetched (standard formula re-derived).",
+    "Early-spectrum inputs (Planck parameters, EH98 import, omega_m,eff identity) taken from 1G-A; EH98 re-implemented from trans.tex but 1G-A's choices not re-audited.",
+    "Owner reference platform (Windows, Python 3.14.3/3.11.9) unavailable; Linux runs differ from each other and from the committed inventory only at the ulp level.",
+    "No test suite run (per brief)."
+  ],
+  "method": [
+    "Phase script run on both interpreters (5 s each); results identical up to ulp-level differences in (4.11) residuals and last digits.",
+    "su_symbolic.py: exact two-region cell (empty Milne voids V_v=(t-b_v)^3/(tau(1+eps)); dust walls with exact linearised curvature K and bang-time shift b_w); cell averages from [W09] Q1 (line 513) and [GM] (3.12)-(3.13); SU modes as parameter derivatives; symbolic residuals of [GM] (4.9)-(4.11) at k->0 and of the averaged Buchert equations; no use of the report's hand-linearised formulas.",
+    "su_combinations.py: exact null spaces of the comoving, Meszaros, literal Delta_eff=0 and barotropic closures over the 4-parameter SU family.",
+    "su_numerics.py: closed-form SU ratios; comoving and Meszaros regular growing modes by two independent integrations from closed-form backgrounds (not perturbations.growing_mode); own EH98 no-wiggle T(k) from trans.tex lines 683, 758-759, 776-779, 839-842 with adaptive quadrature; PBS A_v, R*, X_SU; tracker-consistent seed-scale and tracker-f_vi variants; tracker f_v at z=1090.",
+    "Primary-source line checks in [GM], [W09], [SvdW04], [JLH13]; own derivation and brute-force check of the EdS tophat-void shell-crossing factor.",
+    "Package functions used only for the frozen qplus LCDM growth factor (shared 1G-A normalisation).",
+    "No other 1G adversarial audit or auditor scratch directory was read."
+  ],
+  "owner_decisions": [
+    {
+      "decision": "Choose the void-seed convention (tracker-consistent R_seed = R_void (f_vi/f_v0)^(1/3)/gamma_w0, or [SvdW04]'s factor as an explicit additional assumption with both ranges quoted); revise Sec. 1 items 4-6, Secs. 6-9, README.md, CLAUDE.md and the LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC rationale comment (value can stay; rationale should rest on the R8 < R_void partition argument).",
+      "finding": "GD-F1",
+      "id": "OD1"
+    },
+    {
+      "decision": "Restrict f_vi to the tracker's f_v(t_LS) or mark the 1e-2 branch as outside the tracker; update quoted ranges.",
+      "finding": "GD-F2",
+      "id": "OD2"
+    },
+    {
+      "decision": "Reclassify the Sec. 4 identification as DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION (S1), cite [GM] line 620, condition the X_SU lower bound and the headline on S1 in the report, README.md and CLAUDE.md.",
+      "finding": "GD-F3",
+      "id": "OD3"
+    },
+    {
+      "decision": "Reword the '[W09] internally inconsistent' statements (Sec. 1 item 5, Sec. 8, inventory).",
+      "finding": "GD-F4",
+      "id": "OD4"
+    },
+    {
+      "decision": "Correct the Meszaros/barotropic characterisation in the report, inventory and the GM_CGI_CLOSURES_SEPARATE_UNIVERSE_CONSISTENCY comment; decide on the artifact field name gm_meszaros.Delta_eff.",
+      "finding": "GD-F5",
+      "id": "OD5"
+    },
+    {
+      "decision": "Define delta_L in S2 (total LS contrast or wall-mode amplitude).",
+      "finding": "GD-F6",
+      "id": "OD6"
+    },
+    {
+      "decision": "Decide whether to fix the script constant 12.57 and regenerate the artifact, and whether to update the token comment '2.6-4.3' (code).",
+      "finding": "GD-F7",
+      "id": "OD7"
+    }
+  ],
+  "phase": "1G-D",
+  "preservation": "Exactly two files created in the main tree (this report and this inventory); nothing else edited, staged, committed, pushed or tagged. Scratch work in /tmp/claude-0/-home-user-timescape-fsigma8/b43492c2-35bf-5351-8e13-b75ee0b87001/scratchpad/audit_d/ (including a scratch virtual environment with SymPy). The audit tree's git-ignored 1G-D artifact, rewritten by running the phase script, was restored byte-identical to the lead's copy; the audit tree git status is clean apart from the pre-existing .reference symlink.",
+  "report": "reports/phase1g_d_adversarial_audit.md",
+  "schema_version": 1,
+  "scope": [
+    "reports/phase1g_d_separate_universe_growth.md",
+    "reports/phase1g_d_separate_universe_inventory.json",
+    "scripts/phase1g_d_separate_universe_numerics.py",
+    "artifacts/independent/phase1g_d_separate_universe.json (git-ignored, regenerated)",
+    "src/timescape_fsigma8/scientific_status.py (tokens GM_CGI_CLOSURES_SEPARATE_UNIVERSE_CONSISTENCY, TWO_SCALE_SUPER_CELL_GROWTH_LAW, VOID_ONSET_RESPONSE, LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC)",
+    "src/timescape_fsigma8/background/ (tracker.py, effective_fluid.py, observables.py, parameters.py)",
+    "src/timescape_fsigma8/perturbations/growing_mode.py",
+    "scripts/phase1g_a_sigma8_path_numerics.py (functions imported by 1G-D)",
+    "reports/phase1f_d_necessary_bound.md lines 37, 85 (b); reports/phase1g_c_two_scale_growth_law.md Secs. 8-9 (superseded readings)",
+    "git show 5ab2394 (commit footprint)"
+  ],
+  "severity_scale": {
+    "HIGH": "invalidates a load-bearing result",
+    "LOW": "minor or cosmetic",
+    "LOW-MEDIUM": "governance, documentation or reproducibility defect with scientific-record impact",
+    "MEDIUM": "incorrect statement or a status claim not supported by the evidence",
+    "MEDIUM-HIGH": "materially changes a quantitative result or its interpretation without invalidating the equations"
+  },
+  "sources": {
+    "EH98": {
+      "file": "/tmp/claude-0/-home-user-timescape-fsigma8/b43492c2-35bf-5351-8e13-b75ee0b87001/scratchpad/sources/astro-ph_9709112/trans.tex",
+      "sha256": "5f2ac6b413df8b738c95f6650152b7e82d7c36f6d9b3a618da540e9739dce17f"
+    },
+    "GM": {
+      "file": "/tmp/claude-0/-home-user-timescape-fsigma8/b43492c2-35bf-5351-8e13-b75ee0b87001/scratchpad/sources/2511.17160v2/main.tex",
+      "sha256": "f9cadfa03ecc9a74b0a8f432ae4b13422daeb219f253756bcd877b4b75077c59"
+    },
+    "JLH13": {
+      "file": "/tmp/claude-0/-home-user-timescape-fsigma8/b43492c2-35bf-5351-8e13-b75ee0b87001/scratchpad/sources/1304.6087/voids_mnras.tex",
+      "sha256": "cf6fc77a31b395138ac3a027d008698556534e81cfb27c39853d3a99c7b07c4e"
+    },
+    "NW15": {
+      "file": "/tmp/claude-0/-home-user-timescape-fsigma8/b43492c2-35bf-5351-8e13-b75ee0b87001/scratchpad/sources/1410.3470/cmb1.tex",
+      "sha256": "6d0e6397d3877e0aaa3dba16601e1423c4bfe952c7221c1565cdd410d2669bcd"
+    },
+    "SvdW04": {
+      "file": "/tmp/claude-0/-home-user-timescape-fsigma8/b43492c2-35bf-5351-8e13-b75ee0b87001/scratchpad/sources/astro-ph_0311260/voids.tex",
+      "sha256": "e66ad192ee91a83ba88b4068cce5f6b505eb4277a6365d961a60ca10cc1c84b5"
+    },
+    "W07": {
+      "file": "/tmp/claude-0/-home-user-timescape-fsigma8/b43492c2-35bf-5351-8e13-b75ee0b87001/scratchpad/sources/0709.0732v2/solution.tex",
+      "sha256": "221662c987e454729ef8202c87fa697c5882b5b7daaecdedb50a7cba8ffe6cd8"
+    },
+    "W09": {
+      "file": "/tmp/claude-0/-home-user-timescape-fsigma8/b43492c2-35bf-5351-8e13-b75ee0b87001/scratchpad/sources/0909.0749v2/observe.tex",
+      "sha256": "2b0324d127440e9a053a7cb37102d7655cca228a63cd2222843e879989b4b531"
+    }
+  },
+  "tag_readiness": "NOT_READY_OWNER_DECISION_REQUIRED",
+  "title": "Phase 1G-D \u2014 Independent adversarial audit",
+  "verdict": "ACCEPT_WITH_CORRECTIONS"
+}

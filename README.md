@@ -21,7 +21,7 @@ positive-core margin; a positive result does not establish existence or
 physical compatibility. No Phase 1F-D geometric or perturbative solver is
 implemented, and the frozen scientific statuses are preserved.
 
-**σ(M) track (Phases 1G-A to 1G-C, in progress, not yet audited or tagged):**
+**σ(M) track (Phases 1G-A to 1G-F, in progress; 1G-A to 1G-E adversarially audited, not tagged):**
 - **Route.** The [σ(M) derivation-path audit](reports/phase1g_a_sigma8_derivation_path_audit.md)
   follows the authors' own proposal: standard early-universe physics, then
   scale-independent growth.
@@ -46,6 +46,19 @@ implemented, and the frozen scientific statuses are preserved.
   empty Boolean voids plus the wall-internal field give σ ≈ 1.36–1.57 in
   8 h⁻¹ Mpc spheres with [W09]'s void size (0.9–2.1 across closures). This is
   a conditional nonlinear quantity, not an observational σ8.
+- **Phase 1G-F** ([self-consistent void population](reports/phase1g_f_void_population.md)):
+  an excursion-set void size distribution from the same early spectrum,
+  with the growth clock as an explicit closure. The tracker's void fraction
+  is reproduced only under its own two-scale volume budget, by voids of a
+  few h⁻¹ Mpc and minivoids, not by 30 h⁻¹ Mpc voids alone. The
+  self-consistent two-phase σ in 8 h⁻¹ Mpc spheres is ≈ 1.0 (conditional,
+  not an observational σ8).
+- **Adversarial audits** of 1G-A to 1G-E (one independent auditor per phase;
+  [consolidation](reports/phase1g_adversarial_audit_errata_successor.md)):
+  every phase is accepted with corrections and awaits owner decisions before
+  tagging. No implemented equation is in error; the main findings concern
+  interpretation and inputs (the 1G-C wall σ, the 1G-D void-seed scale, the
+  1G-E non-empty-void formula and void population).
 - **Status tokens.** With owner approval (2026-09-29), six tokens record the
   1G-C/1G-D findings
   ([successor record](reports/phase1g_status_additions_successor.md)):
@@ -58,7 +71,10 @@ implemented, and the frozen scientific statuses are preserved.
     `NOT_DEFINED_IN_LINEAR_TWO_SCALE_THEORY`.
 
   The σ(M) runtime's results now state the matching limitation of each
-  growth law (text only; the numbers are unchanged).
+  growth law (text only; the numbers are unchanged). A seventh token,
+  `TWO_PHASE_MASS_VARIANCE_8_H_INV_MPC = DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION`,
+  records the 1G-E two-phase variance under its assumptions E1–E4
+  ([successor record](reports/phase1g_e_status_addition_successor.md)).
 - **Status.** These are conditional numbers, not an observational σ8, and no
   σ8 authorization is granted.
 
