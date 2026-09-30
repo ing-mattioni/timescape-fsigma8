@@ -20,10 +20,12 @@ observational sigma_8 (whose values are compressed in a LCDM fiducial,
 1D-C Sec. 23; 1E-A), NOT f sigma_8, and carries no observational
 authorisation: ``scientific_status.SIGMA8_AUTHORIZATION`` and
 ``OBSERVATIONAL_AUTHORIZATION`` stay ``NOT_GRANTED``.  Per 1D-C Sec. 19 no
-public function/class name or output key carries the observational tokens;
-they appear only inside the negative status values ``SIGMA8_STATUS =
-"NOT_OBSERVATIONAL_SIGMA_8"`` and ``FSIGMA8_STATUS = "NOT_FSIGMA8"`` (same
-pattern as ``transfer.h1_realization.FSIGMA8_STATUS``).
+public function, class, member or output-key name carries the observational
+tokens.  The one exception is the pair of negative status constants
+``SIGMA8_STATUS = "NOT_OBSERVATIONAL_SIGMA_8"`` and ``FSIGMA8_STATUS =
+"NOT_FSIGMA8"``, whose names and values state the negation (same pattern as
+``transfer.h1_realization.FSIGMA8_STATUS``; wording of owner decision GB-OD2,
+2026-09-30, ``reports/phase1g_b_owner_decisions_successor.md``).
 
 Ingredients and sources
 -----------------------
@@ -72,7 +74,15 @@ Ingredients and sources
     (1G-D Sec. 9; ``scientific_status.LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC``).
 
   Every result carries the statement for its law in ``model_caveat`` and
-  ``limitations``.
+  ``limitations``; ``TimescapeGrowthFactor`` carries it in ``model_caveat``
+  too (owner decision GB-OD5, 2026-09-30).
+
+* Contract hardening (owner decision GB-OD4, 2026-09-30; no computed value
+  changes): array inputs must be real numeric arrays (str, bytes, bool,
+  complex and object arrays are refused); the EH98 fit is refused outside
+  ``EH98_OMEGA_M_FIT_RANGE``; and result records check their closed-form
+  invariants (``gamma_w0 = 1 + f_v0/2``, the per-photon closed form, the
+  resolved radius) to ``RECORD_IDENTITY_RTOL``.
 
 * Photon normalisation ([1G-A] Sec. 5.1): with ``1 + z = a_w0/a_w``,
   ``a_w = a_D/gamma_w``, ``gamma_w = 1 + f_v/2`` ([GM] Eq. (5.4), text
@@ -160,6 +170,8 @@ __all__ = [
     "SPEED_OF_LIGHT_KM_S",
     "TOP_HAT_SERIES_THRESHOLD",
     "REFERENCE_MATCH_RTOL",
+    "RECORD_IDENTITY_RTOL",
+    "EH98_OMEGA_M_FIT_RANGE",
     # enums
     "GrowthLaw",
     "EarlyTransferModel",
@@ -228,6 +240,25 @@ TOP_HAT_SERIES_THRESHOLD = 0.1
 # radius convention and the LCDM reference record (round-off allowance for
 # independently evaluated Omega_m h^2 products).
 REFERENCE_MATCH_RTOL = 1e-12
+
+# Relative tolerance of the record invariants (owner decision GB-OD4,
+# 2026-09-30): a stored value against its closed form re-evaluated from the
+# record's own inputs (gamma_w0 = 1 + f_v0/2, [GM] text after Eq. (5.7);
+# bare Omega_M0 = 4(1-f_v0)/(2+f_v0)^2, [W09] (B3); H_D0 from the dressed H0,
+# [W09] (B8)-(B9); omega_m_bare = Omega_M0 (H_D0/100)^2).  Round-off
+# allowance only: observed <= 9e-16 for f_v0 in [0.01, 0.99].
+RECORD_IDENTITY_RTOL = 1e-13
+
+# Physical matter density range of the EH98 fit ([EH98] astro-ph/9709112, the
+# stated accuracy range of Eq. (26): 0.025 <~ Omega_0 h^2 <~ 0.5; source lines
+# 686-687 as read by the Phase 1G-B adversarial audit, GB-F6).  Enforced
+# (owner decision GB-OD4, 2026-09-30); outside it Eq. (26) is unvalidated and
+# for omega_m >= 9.83 gives s <= 0.  The same source also states
+# Omega_b h^2 >~ 0.0125 and a poor no-wiggle form for Omega_b/Omega_0 >~ 0.5;
+# those are documented, not enforced, because baryon_fraction = 0 is the exact
+# zero-baryon limit of Eq. (31) (alpha_Gamma = 1).  The production inputs are
+# omega_m = 0.120-0.143 and baryon_fraction <= 0.2.
+EH98_OMEGA_M_FIT_RANGE = (0.025, 0.5)
 
 _BAROTROPIC_REFUSAL = (
     "the barotropic closure ([GM] Eqs. (4.13)-(4.17)) is refused: for the "
@@ -413,6 +444,27 @@ def _readonly(values) -> NDArray[np.float64]:
     out = np.array(values, dtype=np.float64, copy=True)
     out.flags.writeable = False
     return out
+
+
+def _real_array(value, name: str) -> NDArray[np.float64]:
+    """A real numeric array as float64 (owner decision GB-OD4, 2026-09-30).
+
+    Only integer, unsigned and floating dtypes are accepted: str, bytes,
+    bool, complex and object inputs are refused rather than coerced (a
+    complex array would otherwise be truncated with only a warning).
+    Valid inputs are converted exactly as ``np.asarray(value, dtype=float64)``.
+    """
+    if isinstance(value, (str, bytes)):
+        raise LagrangianSigmaContractError(f"{name} must be a real numeric array, not {value!r}")
+    raw = np.asarray(value)
+    if raw.dtype.kind not in "iuf":
+        raise LagrangianSigmaContractError(
+            f"{name} must be a real numeric array, not dtype {raw.dtype}")
+    return np.asarray(raw, dtype=np.float64)
+
+
+def _close(value: float, expected: float) -> bool:
+    return math.isclose(value, expected, rel_tol=RECORD_IDENTITY_RTOL, abs_tol=0.0)
 
 
 def _require_enum(value, enum_type, name: str):
@@ -766,7 +818,7 @@ def top_hat_window(*, x: ArrayLike) -> NDArray[np.float64]:
     ``sin x - x cos x = sum_{n>=1} (-1)^(n+1) 2n x^(2n+1)/(2n+1)!``).
     ``x`` must be finite and real; ``W(0) = 1``.  Returns a read-only array.
     """
-    arr = np.asarray(x, dtype=np.float64)
+    arr = _real_array(x, "x")
     if not np.all(np.isfinite(arr)):
         raise LagrangianSigmaContractError("x must be finite")
     out = np.empty_like(arr)
@@ -798,12 +850,19 @@ def eh98_zero_baryon_transfer(
       ``C0 = 14.2 + 731/(1 + 62.5 q)``.
 
     Depends only on the physical densities.  PROVISIONAL_MODEL_IMPORT
-    ([1G-A] Sec. 6.3); read-only output.
+    ([1G-A] Sec. 6.3); read-only output.  ``omega_m`` outside
+    ``EH98_OMEGA_M_FIT_RANGE`` is refused (the fit's stated range; the
+    baryon limits are documented there, not enforced).
     """
-    k = np.asarray(k_per_Mpc, dtype=np.float64)
+    k = _real_array(k_per_Mpc, "k_per_Mpc")
     if not np.all(np.isfinite(k)) or np.any(k <= 0.0):
         raise LagrangianSigmaContractError("k_per_Mpc must be finite and positive")
     om = _positive(omega_m, "omega_m")
+    low, high = EH98_OMEGA_M_FIT_RANGE
+    if not low <= om <= high:
+        raise LagrangianSigmaContractError(
+            f"omega_m = {om!r} lies outside the EH98 fit range [{low}, {high}] "
+            "(Omega_0 h^2 of astro-ph/9709112 Eq. (26))")
     f_b = _real(baryon_fraction, "baryon_fraction")
     if not 0.0 <= f_b < 1.0:
         raise LagrangianSigmaContractError("baryon_fraction must lie in [0, 1)")
@@ -841,7 +900,7 @@ def matter_era_linear_amplitude(
         raise LagrangianSigmaContractError("unsupported transfer model")  # pragma: no cover
     om = _positive(omega_m, "omega_m")
     growth = _positive(growth_today_photon_normalised, "growth_today_photon_normalised")
-    k = np.asarray(k_per_Mpc, dtype=np.float64)
+    k = _real_array(k_per_Mpc, "k_per_Mpc")
     transfer = eh98_zero_baryon_transfer(
         k_per_Mpc=k, omega_m=om, baryon_fraction=early_spectrum.baryon_fraction,
         T_cmb_K=early_spectrum.T_cmb_K)
@@ -911,6 +970,11 @@ class TimescapeGrowthFactor:
     early ([1G-A] Sec. 5.1).  ``diagnostics`` holds the convergence budget
     (volume-average law) or identity residuals (wall law), each checked
     against the explicit numerics before the record is built.
+    ``model_caveat`` is the growth law's documented limitation, the same text
+    as ``ConditionalLagrangianSigma.model_caveat`` (owner decision GB-OD5,
+    2026-09-30): g and X are not Timescape's long-wavelength growth for the
+    volume-average law, and give only the wall-internal linear statistic for
+    the wall law.
     """
 
     growth_law: GrowthLaw
@@ -924,6 +988,7 @@ class TimescapeGrowthFactor:
     numerics: VolumeAverageGrowthNumerics | WallRegionalGrowthChecks
     diagnostics: tuple[tuple[str, float], ...]
     G: float
+    model_caveat: str
 
     def __post_init__(self) -> None:
         law, _ = _check_law_and_closure(self.growth_law, self.closure)
@@ -961,6 +1026,11 @@ class TimescapeGrowthFactor:
             raise LagrangianSigmaContractError(
                 "diagnostics must be a tuple of (name, finite float) pairs"
             )
+        if self.model_caveat != _caveat(law, self.closure):
+            raise LagrangianSigmaContractError("model_caveat is inconsistent with growth law")
+        if not _close(self.gamma_w0, 1.0 + self.fv0 / 2.0):
+            raise LagrangianSigmaContractError(
+                "gamma_w0 must equal 1 + f_v0/2 ([GM] text after Eq. (5.7))")
 
     def diagnostic(self, name: str) -> float:
         return dict(self.diagnostics)[name]
@@ -979,6 +1049,7 @@ class TimescapeGrowthFactor:
             "numerics": self.numerics.to_metadata(),
             "diagnostics": dict(self.diagnostics),
             "G": self.G,
+            "model_caveat": self.model_caveat,
         }
 
 
@@ -1108,7 +1179,7 @@ def timescape_growth_factor(
         gamma_w0=gamma0, log_growth_relative_to_volume_average_eds=ln_g,
         growth_relative_to_volume_average_eds=g,
         growth_today_photon_normalised=gamma0 * g, numerics=numerics,
-        diagnostics=diagnostics, G=G)
+        diagnostics=diagnostics, G=G, model_caveat=_caveat(law, closure))
 
 
 # --------------------------------------------------------------------------
@@ -1147,6 +1218,27 @@ class EarlyMatterDensityPerPhoton:
             raise LagrangianSigmaNumericalError(
                 "per-photon density identity residual exceeds its tolerance"
             )
+        # Record invariants (owner decision GB-OD4, 2026-09-30): every stored
+        # closed form is re-evaluated from the record's own background.
+        fv0, h_bare = self.background.fv0, self.HD0_bare_km_s_Mpc / 100.0
+        H0 = self.background.H0_dressed_km_s_Mpc
+        invariants = (
+            ("gamma_w0 = 1 + f_v0/2", self.gamma_w0, 1.0 + fv0 / 2.0),
+            ("H_D0 = 2 H0 (2+f_v0)/(4+f_v0+4 f_v0^2)", self.HD0_bare_km_s_Mpc,
+             2.0 * H0 * (2.0 + fv0) / (4.0 + fv0 + 4.0 * fv0 ** 2)),
+            ("bare Omega_M0 = 4(1-f_v0)/(2+f_v0)^2", self.bare_Omega_M0,
+             4.0 * (1.0 - fv0) / (2.0 + fv0) ** 2),
+            ("omega_m_bare = Omega_M0 (H_D0/100)^2", self.omega_m_bare,
+             self.bare_Omega_M0 * h_bare ** 2),
+            ("closed_form = (1/2)(1-f_v0)(2+f_v0)(H_D0/100)^2", self.closed_form,
+             0.5 * (1.0 - fv0) * (2.0 + fv0) * h_bare ** 2),
+        )
+        for label, value, expected in invariants:
+            if not _close(value, expected):
+                raise LagrangianSigmaContractError(f"record invariant violated: {label}")
+        if self.identity_relative_residual != abs(self.omega_m_per_photon / self.closed_form - 1.0):
+            raise LagrangianSigmaContractError(
+                "identity_relative_residual must equal |omega_m_per_photon/closed_form - 1|")
 
     @property
     def h_dressed(self) -> float:
@@ -1204,6 +1296,16 @@ def early_matter_density_per_photon(
 # Radius
 # --------------------------------------------------------------------------
 
+_RADIUS_FORMULAS = {
+    LagrangianRadiusConvention.EQUAL_LAGRANGIAN_MASS_TO_REFERENCE:
+        "R = R_ref (omega_ref / omega_m_eff)^(1/3)",
+    LagrangianRadiusConvention.DRESSED_WALL_COMOVING_LENGTH: "R = L / h_dressed",
+    LagrangianRadiusConvention.BARE_VOLUME_AVERAGE_PROPER_LENGTH: "R = (L / h_bare) / gamma_w0",
+    LagrangianRadiusConvention.EXPLICIT_PHOTON_NORMALISED_RADIUS:
+        "R = explicit photon-normalised comoving radius",
+}
+
+
 @dataclass(frozen=True, kw_only=True)
 class ResolvedLagrangianRadius:
     """A radius in photon-normalised comoving Mpc and its mass label.
@@ -1225,6 +1327,13 @@ class ResolvedLagrangianRadius:
         _positive(self.omega_m_R_cubed_Mpc3, "omega_m_R_cubed_Mpc3")
         _nonempty(self.formula, "formula")
         _check_statuses(self, {"convention_status": RADIUS_CONVENTION_STATUS})
+        # Record invariants (owner decision GB-OD4, 2026-09-30): the formula is
+        # the convention's own, and an explicit radius is the supplied one.
+        if self.formula != _RADIUS_FORMULAS[self.spec.convention]:
+            raise LagrangianSigmaContractError("formula is inconsistent with the radius convention")
+        if (self.spec.convention is LagrangianRadiusConvention.EXPLICIT_PHOTON_NORMALISED_RADIUS
+                and self.radius_Mpc != self.spec.explicit_radius_Mpc):
+            raise LagrangianSigmaContractError("radius_Mpc must equal the explicit radius")
 
     def to_json_dict(self) -> dict:
         return {"spec": self.spec.to_metadata(), "radius_Mpc": self.radius_Mpc,
@@ -1254,19 +1363,15 @@ def resolve_lagrangian_radius(
     convention = spec.convention
     if convention is LagrangianRadiusConvention.EQUAL_LAGRANGIAN_MASS_TO_REFERENCE:
         radius = spec.reference_radius_Mpc * (spec.reference_omega_m / om) ** (1.0 / 3.0)
-        formula = "R = R_ref (omega_ref / omega_m_eff)^(1/3)"
     elif convention is LagrangianRadiusConvention.DRESSED_WALL_COMOVING_LENGTH:
         radius = spec.length_h_inverse_Mpc / density.h_dressed
-        formula = "R = L / h_dressed"
     elif convention is LagrangianRadiusConvention.BARE_VOLUME_AVERAGE_PROPER_LENGTH:
         radius = (spec.length_h_inverse_Mpc / density.h_bare) / density.gamma_w0
-        formula = "R = (L / h_bare) / gamma_w0"
     else:
         radius = spec.explicit_radius_Mpc
-        formula = "R = explicit photon-normalised comoving radius"
     return ResolvedLagrangianRadius(
         spec=spec, radius_Mpc=float(radius), omega_m_R_cubed_Mpc3=float(om * radius ** 3),
-        formula=formula, convention_status=RADIUS_CONVENTION_STATUS)
+        formula=_RADIUS_FORMULAS[convention], convention_status=RADIUS_CONVENTION_STATUS)
 
 
 # --------------------------------------------------------------------------
@@ -1350,6 +1455,14 @@ class ConditionalLagrangianSigma:
         if any(item not in self.limitations for item in _GENERIC_LIMITATIONS):
             raise LagrangianSigmaContractError("limitations must contain the generic caveats")
         _check_statuses(self, _RESULT_STATUSES)
+        # Record invariant (owner decision GB-OD4, 2026-09-30): the radius is
+        # the one resolved from this record's density.  (gamma_w0 of the growth
+        # and of the density are each bound to 1 + f_v0/2 by their records.)
+        resolved = resolve_lagrangian_radius(spec=self.radius.spec, density=self.density)
+        if (self.radius.radius_Mpc != resolved.radius_Mpc
+                or self.radius.omega_m_R_cubed_Mpc3 != resolved.omega_m_R_cubed_Mpc3):
+            raise LagrangianSigmaContractError(
+                "radius must be the one resolved from this record's density")
 
     def to_json_dict(self) -> dict:
         return {

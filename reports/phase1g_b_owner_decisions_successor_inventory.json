@@ -1,0 +1,137 @@
+{
+  "branch": "phase-1g-owner-decisions",
+  "classification": "OWNER_DECISIONS_SUCCESSOR_RECORD",
+  "date": "2026-09-30",
+  "decisions": {
+    "GB-OD2": {
+      "applied": true,
+      "change": "CLAUDE.md and the module docstring: no public function, class, member or output-key name may contain sigma8, sigma_8 or 8hMpc (case-insensitive); the negative status constants SIGMA8_STATUS and FSIGMA8_STATUS are the only exception; enforced by a test over __all__",
+      "finding": "GB-F4",
+      "not_decided": "whether 1D-C Sec. 19's 'any spelling' rule applies to caveat text",
+      "tick_verbatim": "[x] OD2 naming-firewall wording"
+    },
+    "GB-OD3": {
+      "applied": true,
+      "change": [
+        "frozen tokens missing from the live module fail unless a registered status_removals entry covers them (none exists)",
+        "a change naming a token absent from the snapshot fails by name",
+        "the frozen 1F-C-R inventory must equal its blob at REMEDIATION",
+        "registered status successor records must be canonical UTF-8/LF JSON"
+      ],
+      "file": "scripts/validate_phase1f_c_r_astra_remediation.py",
+      "finding": "GB-F5",
+      "tick_verbatim": "[x] OD3 status-validator hardening"
+    },
+    "GB-OD4": {
+      "applied": true,
+      "change": [
+        "array inputs: integer, unsigned or floating dtypes only (str, bytes, bool, complex, object refused)",
+        "EH98_OMEGA_M_FIT_RANGE = (0.025, 0.5) enforced; baryon limits documented, not enforced",
+        "record invariants to RECORD_IDENTITY_RTOL = 1e-13: gamma_w0 = 1 + f_v0/2, H_D0, bare Omega_M0, omega_m_bare, the per-photon closed form and its residual, the radius formula and explicit radius, and the radius resolved from the record's density"
+      ],
+      "eh98_omega_m_fit_range": [
+        0.025,
+        0.5
+      ],
+      "finding": "GB-F6",
+      "observed_record_identity_max": 8.9e-16,
+      "record_identity_rtol": 1e-13,
+      "tick_verbatim": "[x] OD4 contract hardening"
+    },
+    "GB-OD5": {
+      "applied": true,
+      "change": "TimescapeGrowthFactor.model_caveat (mandatory, validated, exported by to_json_dict); the 1G-B driver artifact gains 10 model_caveat strings",
+      "finding": "GB-F7",
+      "tick_verbatim": "[x] OD5 caveat on `TimescapeGrowthFactor`"
+    },
+    "GB-OD6": {
+      "applied": true,
+      "budgets": {
+        "audit_printed_abs": 5e-09,
+        "bias_corrected_abs": 1e-09,
+        "package_vs_independent_ln_g_abs": 3e-06
+      },
+      "change": "tests/test_phase1g_b_owner_decisions.py::test_gb_od6_independent_g_ts_regression (closed-form tracker, [GM] (4.21)-(4.23) and (4.27), DOP853 rtol 1e-12)",
+      "finding": "GB-F9",
+      "independent_g_TS_GM": {
+        "comoving": 0.40266226,
+        "meszaros": 0.34169348
+      },
+      "tick_verbatim": "[x] OD6 independent g_TS regression"
+    }
+  },
+  "equivalence_agents_rule_3": {
+    "driver_gates": "21/21 PASS before and after",
+    "executable_ast_changed_modules": [
+      "src/timescape_fsigma8/lagrangian_sigma.py (checks only; no computation path)"
+    ],
+    "new_string_leaves": 10,
+    "numeric_leaves_bit_identical": 1471,
+    "other_changed_strings": [
+      "provenance.working_tree_changes_present"
+    ]
+  },
+  "files_changed": [
+    "src/timescape_fsigma8/lagrangian_sigma.py",
+    "scripts/validate_phase1f_c_r_astra_remediation.py",
+    "tests/test_phase1g_b_owner_decisions.py",
+    "CLAUDE.md",
+    "reports/phase1g_b_owner_decisions_successor.md",
+    "reports/phase1g_b_owner_decisions_successor_inventory.json"
+  ],
+  "frozen_files_sha256_lf": {
+    "reports/phase1g_adversarial_audit_errata_successor.md": "7fc67b7ded50fee3c9a182f9b01e5e5fc66c3d1fb80a6c69b97b9728105ce5a6",
+    "reports/phase1g_adversarial_audit_errata_successor_inventory.json": "8add47eb0d40fa9b891f17db89bb37944370181ccd357d4640a0c23f65c91ba9",
+    "reports/phase1g_b_adversarial_audit.md": "f2609855fff7e539785a2f4153d70b7ad08d0edf05f242dd1e9de8159ceb192d",
+    "reports/phase1g_b_adversarial_audit_inventory.json": "20cac7dba26258182328381c05e610b7eb3b1757fddd580e0ee6f374178936a5",
+    "reports/phase1g_b_lagrangian_sigma_validation.md": "4f6b6246d1a08d371a5c374ab1249a3ee5e6495bf9c790153433353487f5e057"
+  },
+  "gb_od1": "resolved 2026-09-30 with option A (phase1g_adversarial_audit_errata_successor.md Sec. 10; 738f3c3, merge 63ca316); the Windows run is recorded in reports/phase1g_windows_validation_record.md",
+  "human_approval": {
+    "by": "project owner",
+    "date": "2026-09-30",
+    "not_approved_verbatim": [
+      "[ ] Create signed annotated tags **locally** for the phases that Sec. 5 finds ready.",
+      "[ ] Push `phase-1g-owner-decisions` and open ONE pull request against `main`.",
+      "[ ] Merge that pull request (merge commit, as PR #1 and PR #2).",
+      "[ ] Push the tags created under approval 3."
+    ],
+    "nothing_else_approved": [
+      "editing frozen reports, inventories or phase scripts",
+      "changing any status-token value, equation, IC, unit, sign convention, independent variable, normalisation or tolerance beyond a ticked decision",
+      "force-push; push to any branch"
+    ],
+    "source": "the owner's task statement of 2026-09-30, 'Phase 1G - Windows validation, owner decisions for 1G-A/C/D/E, tags', Sec. 0 (approvals) and Sec. 3 (ticks)",
+    "verbatim": [
+      "Create the local branch `phase-1g-owner-decisions` from `main` and commit there.",
+      "Apply the owner decisions ticked `[x]` in Sec. 3, exactly as ticked. An unticked decision is **not** approved: leave it open and list it at the end."
+    ]
+  },
+  "open_items": [
+    "1D-C Sec. 19 'any spelling' for caveat text (GB-OD2 sub-question)",
+    "forging a TimescapeGrowthFactor with an arbitrary g through dataclasses.replace (deliberate misuse)"
+  ],
+  "parent_commit": "63ca316b87399fc323713338a07519f8bce52113",
+  "phase": "1G-B",
+  "report": "reports/phase1g_b_owner_decisions_successor.md",
+  "schema_version": 1,
+  "scope": {
+    "equations_changed": false,
+    "frozen_reports_inventories_or_phase_scripts_edited": false,
+    "new_explicit_tolerances": [
+      "RECORD_IDENTITY_RTOL = 1e-13 (record invariants)",
+      "test budgets of GB-OD6 (3e-6, 1e-9, 5e-9 absolute; DOP853 rtol 1e-12, atol 1e-14)"
+    ],
+    "numeric_outputs_changed": false,
+    "package_modules_changed": [
+      "src/timescape_fsigma8/lagrangian_sigma.py"
+    ],
+    "status_token_values_changed": false,
+    "status_tokens_changed": false,
+    "tolerances_changed": false
+  },
+  "section_note_verbatim": "These are code changes: apply them only if ticked, with tests.",
+  "validation": {
+    "recorded_in": "reports/phase1g_windows_validation_record.md (Sec. 7, final runs)"
+  }
+}

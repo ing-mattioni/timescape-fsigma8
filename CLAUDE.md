@@ -88,7 +88,10 @@ Timescape predictions; their missing closures stay explicit external inputs.
 `lagrangian_sigma.py` computes a conditional, model-internal, mass-labelled
 linear σ(M) with an explicit `PROVISIONAL_MODEL_IMPORT` early spectrum.
 - Its outputs carry `NON_OBSERVATIONAL` and `NOT_OBSERVATIONAL_SIGMA_8`.
-- No public name may contain `sigma8`, `sigma_8` or `8hMpc`.
+- No public function, class, member or output-key name may contain
+  `sigma8`, `sigma_8` or `8hMpc` (case-insensitive). The negative status
+  constants `SIGMA8_STATUS` and `FSIGMA8_STATUS`, whose values state the
+  negation, are the only exception (owner decision GB-OD2, 2026-09-30).
 - It is not an observational σ8, and `SIGMA8_AUTHORIZATION` stays
   `NOT_GRANTED`.
 

@@ -38,7 +38,13 @@ LINE_ENDING_EQUIVALENTS = {
 # The frozen inventory is never edited and is still checked: each superseded
 # token must hold the record's ``old_token`` there, and the live module its
 # ``new_token``; each added token must be absent there, and the live module
-# must hold the record's ``value``.
+# must hold the record's ``value``.  A frozen token may leave the live module
+# only through a registered ``status_removals`` entry (none exists).
+# Hardening of owner decision GB-OD3 (2026-09-30,
+# reports/phase1g_b_owner_decisions_successor.md): deleted tokens, changes
+# naming a token absent from the snapshot, a frozen inventory that differs
+# from its blob at REMEDIATION, and non-canonical successor records all fail
+# with a named assertion.
 STATUS_SUCCESSOR_RECORDS = (
     # Phase 1G-A Sec. 4.1, approved 2026-09-29 (one change).
     Path("reports/phase1g_a_barotropic_status_successor_inventory.json"),
@@ -123,21 +129,53 @@ def successor_status_additions() -> dict[str, dict[str, str]]:
     return additions
 
 
-def check_current_scientific_status(frozen, live, changes, *, additions) -> None:
+def successor_status_removals() -> dict[str, dict[str, str]]:
+    """Read the approved token removals of every registered successor record.
+
+    A record without ``status_removals`` removes nothing; no registered
+    record has one.  A removal names a frozen token and its frozen value.
+    """
+    removals: dict[str, dict[str, str]] = {}
+    for path in STATUS_SUCCESSOR_RECORDS:
+        record = json.loads(path.read_text(encoding="utf-8"), object_pairs_hook=unique_pairs)
+        for key, removal in record.get("status_removals", {}).items():
+            assert key not in removals, f"{key}: removed by more than one successor record"
+            removals[key] = {"old_token": removal["old_token"], "record": path.as_posix()}
+    return removals
+
+
+def check_current_scientific_status(frozen, live, changes, *, additions, removals=None) -> None:
     """Frozen snapshot versus live module, with approved successor records.
 
     A superseded token must still hold its old value in the frozen snapshot
     (the historical check) and the successor's new value in the live module.
     An added token must be absent from the frozen snapshot (the historical
-    check) and hold the successor's value in the live module.  Every other
-    token must equal the frozen snapshot.
+    check) and hold the successor's value in the live module.  A removed token
+    must hold its old value in the frozen snapshot and be absent from the live
+    module.  Every other frozen token must be present in the live module and
+    equal the frozen snapshot.  ``removals=None`` means that no removal is
+    registered, the strict case.
     """
+    removals = {} if removals is None else removals
     assert set(changes) <= set(live), "successor record names a token the live module lacks"
     assert set(additions) <= set(live), "successor record adds a token the live module lacks"
     assert not set(changes) & set(additions), "token both changed and added by successor records"
+    assert not set(removals) & (set(changes) | set(additions)), (
+        "token both removed and changed or added by successor records")
+    for key, removal in removals.items():
+        assert key in frozen, f"{key}: successor record removes a token absent from the frozen snapshot"
+        assert frozen[key] == removal["old_token"], (
+            f"{key}: frozen snapshot does not hold the removed token")
+        assert key not in live, f"{key}: removed token is still in the live module"
+    missing = sorted(set(frozen) - set(live) - set(removals))
+    assert not missing, (
+        f"{', '.join(missing)}: frozen token missing from the live module and removed by no "
+        "successor record")
     for key, value in live.items():
         current = list(value) if isinstance(value, tuple) else value
         if key in changes:
+            assert key in frozen, (
+                f"{key}: successor record changes a token absent from the frozen snapshot")
             assert frozen[key] == changes[key]["old_token"], (
                 f"{key}: frozen snapshot does not hold the superseded token")
             assert current == changes[key]["new_token"], (
@@ -152,15 +190,33 @@ def check_current_scientific_status(frozen, live, changes, *, additions) -> None
             assert frozen[key] == current, key
 
 
+def check_frozen_inventory_pinned(current: bytes) -> None:
+    """``current`` (the checkout's INVENTORY bytes) equals its blob at REMEDIATION."""
+    pinned = subprocess.check_output(["git", "show", f"{REMEDIATION}:{INVENTORY.as_posix()}"])
+    assert current == pinned, (
+        f"{INVENTORY.as_posix()}: frozen inventory differs from its blob at {REMEDIATION}")
+
+
+def check_successor_records_canonical(paths) -> None:
+    """Every successor record in ``paths`` is canonical UTF-8/LF JSON."""
+    for path in paths:
+        record = json.loads(path.read_text(encoding="utf-8"), object_pairs_hook=unique_pairs)
+        assert path.read_bytes() == canonical(record), (
+            f"{path.as_posix()}: successor record is not canonical UTF-8/LF JSON")
+
+
 def validate(*, producers: bool = False) -> dict[str, object]:
     inventory = json.loads(INVENTORY.read_text(encoding="utf-8"), object_pairs_hook=unique_pairs)
     assert INVENTORY.read_bytes() == canonical(inventory), "inventory is not canonical UTF-8/LF JSON"
     assert canonical(json.loads(canonical(inventory))) == canonical(inventory)
+    check_frozen_inventory_pinned(INVENTORY.read_bytes())
+    check_successor_records_canonical(STATUS_SUCCESSOR_RECORDS)
     status_changes = successor_status_changes()
     status_additions = successor_status_additions()
+    status_removals = successor_status_removals()
     check_current_scientific_status(
         inventory["current_scientific_status"], CURRENT_SCIENTIFIC_STATUS, status_changes,
-        additions=status_additions)
+        additions=status_additions, removals=status_removals)
 
     for commit in (BASE, REMEDIATION):
         assert is_ancestor(commit), f"{commit} is not an ancestor of HEAD"
@@ -265,6 +321,7 @@ def validate(*, producers: bool = False) -> dict[str, object]:
             "post_remediation_drift": sorted(post_remediation_drift),
             "successor_status_changes": status_changes,
             "successor_status_additions": status_additions,
+            "successor_status_removals": status_removals,
             "local_provenance_files": local_files,
             "absent_local_provenance_files": absent_local_files,
             "frozen_tags_verified": len(inventory["frozen_tags"]) - len(absent_tags),
