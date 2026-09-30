@@ -46,6 +46,13 @@ implemented, and the frozen scientific statuses are preserved.
   empty Boolean voids plus the wall-internal field give σ ≈ 1.36–1.57 in
   8 h⁻¹ Mpc spheres with [W09]'s void size (0.9–2.1 across closures). This is
   a conditional nonlinear quantity, not an observational σ8.
+- **Phase 1G-F** ([self-consistent void population](reports/phase1g_f_void_population.md)):
+  an excursion-set void size distribution from the same early spectrum,
+  with the growth clock as an explicit closure. The tracker's void fraction
+  is reproduced only under its own two-scale volume budget, by voids of a
+  few h⁻¹ Mpc and minivoids, not by 30 h⁻¹ Mpc voids alone. The
+  self-consistent two-phase σ in 8 h⁻¹ Mpc spheres is ≈ 1.0 (conditional,
+  not an observational σ8).
 - **Adversarial audits** of 1G-A to 1G-E (one independent auditor per phase;
   [consolidation](reports/phase1g_adversarial_audit_errata_successor.md)):
   every phase is accepted with corrections and awaits owner decisions before

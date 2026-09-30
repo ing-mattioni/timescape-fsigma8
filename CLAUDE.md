@@ -304,6 +304,21 @@ In progress (σ track; audited, not tagged):
     for [GM] and 1.36 for [NW15]. The range is 0.9–2.1.
   - This is a nonlinear, model-internal quantity. Its next step is 1G-F, a
     self-consistent void population.
+- **1G-F:** self-consistent void population (report-only,
+  `phase1g_f_void_population.md`).
+  - Excursion-set voids ([SvdW04] two barriers; [JLH13]'s corrected EdS
+    shell crossing δ_v = −2.717, r_NL/r_L = 1.697) from the 1G-A early
+    spectrum, with the growth clock as an explicit closure (wall EdS in t,
+    volume-average CGI, 1G-D separate-universe response).
+  - The void mass fraction 1 − 𝒟 is clock-independent. The tracker's f_v0
+    is reproduced only under the two-scale volume budget (f_v 0.66–0.79 at
+    all sizes); [JLH13]'s volume-conserving mapping gives ≤ 0.38.
+  - With the wall clock the voids are small (median 2.4–2.8 h⁻¹ Mpc;
+    ≥ 10 h⁻¹ Mpc voids fill ~4%, not [W09]'s 40–50%), and no fixed
+    threshold reproduces f_v(t).
+  - The self-consistent two-phase σ at 8 h⁻¹ Mpc is ≈ 0.99 with empty voids
+    (1G-E's 1.36–1.57 needs 1G-D's disputed PBS response). Conditional,
+    nonlinear, model-internal; three tokens proposed, none added.
 - **Status-token additions:** the six 1G-C/1G-D tokens are *additions*, not
   changes (`phase1g_status_additions_successor.md`). The frozen 1F-C-R
   snapshot has no entry for them. The 1F-C-R validator accepts a new token
