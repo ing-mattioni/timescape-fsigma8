@@ -1,0 +1,475 @@
+{
+  "branch": "phase-1g-owner-decisions",
+  "classification": "WINDOWS_VALIDATION_RECORD",
+  "cross_check_windows_vs_linux": {
+    "1G-A_C_D_E_recorded_values_reproduced": {
+      "1G-A": {
+        "recorded": 124,
+        "reproduced": 122,
+        "unmatched": [
+          "/gm_equation_map/comoving_preference_source_line = 1097",
+          "/gm_equation_map/roadmap_quote_source_line = 1102"
+        ]
+      },
+      "1G-C": {
+        "recorded": 61,
+        "reproduced": 61,
+        "unmatched": []
+      },
+      "1G-D": {
+        "recorded": 176,
+        "reproduced": 176,
+        "unmatched": []
+      },
+      "1G-E": {
+        "recorded": 157,
+        "reproduced": 155,
+        "unmatched": [
+          "/headline_8_h_inv_Mpc/ratio_to_planck_linear_sigma8[0] = 1.67",
+          "/headline_8_h_inv_Mpc/ratio_to_planck_linear_sigma8[1] = 1.94"
+        ]
+      }
+    },
+    "1G-F_monte_carlo_largest_deviation": "none resolvable: all 16 entries round to the recorded 4 decimals; ball counts identical (1129532, 80421, 449752, 51664); max |difference| 4.6e-5 is the inventory's rounding",
+    "1G-F_vs_linux_inventory": {
+      "headline": {
+        "entries": 472,
+        "failures": 0,
+        "gated": 472,
+        "max_abs_dev": 0.0004910719970423888
+      },
+      "monte_carlo": {
+        "entries": 16,
+        "failures": 0,
+        "gated": 0,
+        "max_abs_dev": 4.6471959829541554e-05,
+        "rounded_4_equal": 16
+      },
+      "spherical_model": {
+        "entries": 11,
+        "failures": 0,
+        "gated": 11,
+        "max_abs_dev": 4.773383867284764e-05
+      },
+      "void_mass_fraction_1_minus_D": {
+        "entries": 12,
+        "failures": 0,
+        "gated": 12,
+        "max_abs_dev": 4.986847920994408e-05
+      }
+    },
+    "interpreter_identity": {
+      "1G-A": "37 leaves differ by <= 9.5e-16 relative, plus the quadrature error estimate alpha_quad_abserr (1.03e-13 on both)",
+      "1G-D": "(4.11) residual diagnostics differ at round-off (<= 1.9e-15; budget 1e-12)",
+      "artifacts_identical_outside_environment": [
+        "1G-B",
+        "1G-C",
+        "1G-E",
+        "1G-F (4728 leaves)"
+      ],
+      "printed_output_identical": [
+        "phase1g_a",
+        "phase1g_c",
+        "phase1g_d",
+        "phase1g_e",
+        "validate_phase1g_b",
+        "phase1g_f (runner)"
+      ]
+    },
+    "platform_observations": {
+      "1G-A_direct_vs_riccati_z_i_20_max": {
+        "frozen_statement": "<= 2e-13",
+        "linux": 2.25e-13,
+        "windows": 1.9273471707492718e-13
+      },
+      "1G-A_log_g_grid_refinement_max": {
+        "frozen_statement": "<= 4e-15",
+        "linux": 4.108e-15,
+        "windows": 3.9968028886505635e-15
+      },
+      "1G-C_max_identity_error": {
+        "linux_audit": "<= 2.2205e-15",
+        "recorded": 2.886579864025407e-15,
+        "windows": 2.886579864025407e-15
+      },
+      "1G-E_monte_carlo": "8569 / 6322 balls; sigma2_part 1.280/1.268 and 0.820/0.823; gated 1.5% / 0.9% (as the report)",
+      "1G-E_pair_identity_rel_err": {
+        "linux_audit": 1.69412e-12,
+        "recorded": 1.69435e-12,
+        "windows": 1.6943452444977543e-12
+      }
+    }
+  },
+  "date": "2026-09-30",
+  "environment": {
+    "install": "python -m pip install -e \".[exec,test]\" on both; default index answered (no --index-url fallback)",
+    "interpreters": {
+      "3.11": {
+        "matplotlib": "3.11.1",
+        "numpy": "2.4.6",
+        "pytest": "9.1.1",
+        "python": "3.11.9",
+        "scipy": "1.17.1",
+        "venv": ".venv311"
+      },
+      "3.14": {
+        "matplotlib": "3.11.1",
+        "numpy": "2.5.2",
+        "pytest": "9.1.1",
+        "python": "3.14.3",
+        "scipy": "1.18.1",
+        "venv": ".venv"
+      }
+    },
+    "os": "Windows 11 Pro 10.0.26200 (x86-64, Intel family 6 model 141)",
+    "repository": "main fast-forwarded to 63ca316; clean; not shallow",
+    "upstream_clone": {
+      "clean": true,
+      "commit": "590c6fd5332acb15f5683ebf392a0d7ce54983c5",
+      "notebook_sha256_lf_matches_UPSTREAM_lock": true,
+      "notebook_sha256_raw_equals_notebook_sha256_crlf": true,
+      "shallow": false
+    }
+  },
+  "files_changed": [
+    "scripts/_portable_resource.py",
+    "scripts/run_phase1g_f_portable.py",
+    "reports/phase1g_windows_validation_record.md",
+    "reports/phase1g_windows_validation_record_inventory.json"
+  ],
+  "final_runs": {
+    "artifacts": {
+      "phase1g_a_sigma8_path.json": {
+        "differing_outside_environment": 37,
+        "differing_paths_sample": [
+          "/barotropic/alpha_quad_abserr",
+          "/growth/NOTEBOOK_REFERENCE/comoving/matching/z_i=100/D_LCDM_0_over_z_i",
+          "/growth/NOTEBOOK_REFERENCE/comoving/matching/z_i=100/X_z_i",
+          "/growth/NOTEBOOK_REFERENCE/comoving/matching/z_i=300/D_LCDM_0_over_z_i",
+          "/growth/NOTEBOOK_REFERENCE/comoving/matching/z_i=300/X_z_i",
+          "/growth/NOTEBOOK_REFERENCE/comoving/matching/z_i=50/D_LCDM_0_over_z_i"
+        ],
+        "leaves": 632,
+        "max_relative_difference": 2.468674295159113e-08,
+        "same_keys": true
+      },
+      "phase1g_b_lagrangian_sigma.json": {
+        "differing_outside_environment": 0,
+        "differing_paths_sample": [],
+        "leaves": 1933,
+        "max_relative_difference": 0.0,
+        "same_keys": true
+      },
+      "phase1g_c_two_scale_growth.json": {
+        "differing_outside_environment": 0,
+        "differing_paths_sample": [],
+        "leaves": 112,
+        "max_relative_difference": 0.0,
+        "same_keys": true
+      },
+      "phase1g_d_separate_universe.json": {
+        "differing_outside_environment": 19,
+        "differing_paths_sample": [
+          "/results/NOTEBOOK_REFERENCE/closure_comparison[0]/su_eps/raychaudhuri_4_11_rel_residual",
+          "/results/NOTEBOOK_REFERENCE/closure_comparison[1]/su_eps/raychaudhuri_4_11_rel_residual",
+          "/results/NOTEBOOK_REFERENCE/closure_comparison[1]/su_wall/raychaudhuri_4_11_rel_residual",
+          "/results/NOTEBOOK_REFERENCE/closure_comparison[2]/su_wall/raychaudhuri_4_11_rel_residual",
+          "/results/NOTEBOOK_REFERENCE/closure_comparison[3]/su_eps/raychaudhuri_4_11_rel_residual",
+          "/results/NOTEBOOK_REFERENCE/closure_comparison[4]/su_eps/raychaudhuri_4_11_rel_residual"
+        ],
+        "leaves": 399,
+        "max_relative_difference": 1.0,
+        "same_keys": true
+      },
+      "phase1g_e_two_phase_sigma.json": {
+        "differing_outside_environment": 0,
+        "differing_paths_sample": [],
+        "leaves": 175,
+        "max_relative_difference": 0.0,
+        "same_keys": true
+      },
+      "phase1g_f_void_population.json": {
+        "differing_outside_environment": 0,
+        "differing_paths_sample": [],
+        "leaves": 4732,
+        "max_relative_difference": 0.0,
+        "same_keys": true
+      },
+      "phase1g_owner_decisions.json": {
+        "differing_outside_environment": 1,
+        "differing_paths_sample": [
+          "/results/GA_OD3_wkb_exponent_chains/alpha_quad_abserr"
+        ],
+        "leaves": 1707,
+        "max_relative_difference": 2.468674295159113e-08,
+        "same_keys": true
+      }
+    },
+    "commit": "ac16620a0047de2dea889551099b689e5ce63b94",
+    "full_suites": {
+      "3.11": {
+        "failed": 0,
+        "passed": 1093,
+        "returncode": 0,
+        "seconds": 608.86,
+        "skipped": 0
+      },
+      "3.14": {
+        "failed": 0,
+        "passed": 1093,
+        "returncode": 0,
+        "seconds": 611.01,
+        "skipped": 0
+      },
+      "command": ".venv\\Scripts\\python -B -W error -m pytest -q -p no:cacheprovider"
+    },
+    "owner_decisions_gates": "124/124",
+    "phase1g_scripts": {
+      "3.11": {
+        "frozen_f_direct": {
+          "returncode": 1
+        },
+        "phase1g_a_sigma8_path_numerics": {
+          "returncode": 0,
+          "seconds": 15
+        },
+        "phase1g_c_two_scale_growth_numerics": {
+          "returncode": 0,
+          "seconds": 9
+        },
+        "phase1g_d_separate_universe_numerics": {
+          "returncode": 0,
+          "seconds": 8
+        },
+        "phase1g_e_two_phase_sigma_numerics": {
+          "returncode": 0,
+          "seconds": 64
+        },
+        "phase1g_owner_decisions_numerics": {
+          "returncode": 0,
+          "seconds": 626
+        },
+        "run_phase1g_f_portable": {
+          "returncode": 0,
+          "seconds": 666
+        },
+        "validate_phase1g_b_lagrangian_sigma": {
+          "returncode": 0,
+          "seconds": 21
+        }
+      },
+      "3.14": {
+        "frozen_f_direct": {
+          "returncode": 1
+        },
+        "phase1g_a_sigma8_path_numerics": {
+          "returncode": 0,
+          "seconds": 13
+        },
+        "phase1g_c_two_scale_growth_numerics": {
+          "returncode": 0,
+          "seconds": 8
+        },
+        "phase1g_d_separate_universe_numerics": {
+          "returncode": 0,
+          "seconds": 9
+        },
+        "phase1g_e_two_phase_sigma_numerics": {
+          "returncode": 0,
+          "seconds": 62
+        },
+        "phase1g_owner_decisions_numerics": {
+          "returncode": 0,
+          "seconds": 616
+        },
+        "run_phase1g_f_portable": {
+          "returncode": 0,
+          "seconds": 644
+        },
+        "validate_phase1g_b_lagrangian_sigma": {
+          "returncode": 0,
+          "seconds": 19
+        }
+      }
+    },
+    "stdout_identical": {
+      "phase1g_a_sigma8_path_numerics": true,
+      "phase1g_c_two_scale_growth_numerics": true,
+      "phase1g_d_separate_universe_numerics": true,
+      "phase1g_e_two_phase_sigma_numerics": true,
+      "phase1g_owner_decisions_numerics": true,
+      "run_phase1g_f_portable": true,
+      "validate_phase1g_b_lagrangian_sigma": true
+    },
+    "tolerance_audit": {
+      "311": {
+        "comparisons": 638,
+        "missing": 0
+      },
+      "314": {
+        "comparisons": 638,
+        "missing": 0
+      }
+    },
+    "validator": {
+      "311": {
+        "explicit_comparisons": {
+          "scripts": 2,
+          "src": 15,
+          "tests": 638
+        },
+        "post_remediation_drift": [
+          "src/timescape_fsigma8/background/effective_fluid.py",
+          "src/timescape_fsigma8/background/tracker.py",
+          "src/timescape_fsigma8/perturbations/initial_conditions.py"
+        ],
+        "status": "PASS",
+        "successor_status_removals": {}
+      },
+      "314": {
+        "explicit_comparisons": {
+          "scripts": 2,
+          "src": 15,
+          "tests": 638
+        },
+        "post_remediation_drift": [
+          "src/timescape_fsigma8/background/effective_fluid.py",
+          "src/timescape_fsigma8/background/tracker.py",
+          "src/timescape_fsigma8/perturbations/initial_conditions.py"
+        ],
+        "status": "PASS",
+        "successor_status_removals": {}
+      }
+    }
+  },
+  "final_runs_commit": "ac16620a0047de2dea889551099b689e5ce63b94",
+  "human_approval": {
+    "by": "project owner",
+    "date": "2026-09-30",
+    "in_session": {
+      "answer_verbatim": "Committed wrapper (Recommended)",
+      "applied_in": "70f8c3c (scripts/_portable_resource.py, scripts/run_phase1g_f_portable.py)",
+      "option_description_verbatim": "Add a new script, e.g. scripts/phase1g_windows_run_f.py, that puts a Windows `resource` stand-in (peak working set via ctypes) in sys.modules and runs the frozen 1G-F script by path, unchanged. Record the portability defect in the Windows record; the owner-decisions numerics script uses the same stand-in when it imports 1G-F.",
+      "question_verbatim": "Sec. 1.4 fails on Windows: scripts/phase1g_f_void_population_numerics.py does `import resource` (Unix-only; ModuleNotFoundError on Windows). It is used only in `_progress()` for the stderr peak-RSS line, never for an artifact value. The frozen script must not be edited. How should I proceed?"
+    },
+    "not_approved_verbatim": [
+      "[ ] Create signed annotated tags **locally** for the phases that Sec. 5 finds ready.",
+      "[ ] Push `phase-1g-owner-decisions` and open ONE pull request against `main`.",
+      "[ ] Merge that pull request (merge commit, as PR #1 and PR #2).",
+      "[ ] Push the tags created under approval 3."
+    ],
+    "verbatim": [
+      "Create the local branch `phase-1g-owner-decisions` from `main` and commit there.",
+      "Apply the owner decisions ticked `[x]` in Sec. 3, exactly as ticked. An unticked decision is **not** approved: leave it open and list it at the end."
+    ]
+  },
+  "parent_commit": "63ca316b87399fc323713338a07519f8bce52113",
+  "phase": "1G (Windows validation of 1G-A to 1G-F; owner-decision final runs)",
+  "phase_1g_b_tag_readiness": "ready: GB-OD1 (option A) on main (738f3c3, merge 63ca316) passes on Windows on both interpreters",
+  "portability_defect": {
+    "defect": "module-level `import resource` (Unix-only); used only in _progress() for the stderr peak-RSS figure",
+    "file": "scripts/phase1g_f_void_population_numerics.py (frozen, Phase 1G-F)",
+    "frozen_script_edited": false,
+    "gate_or_tolerance_changed": false,
+    "resolution": "scripts/_portable_resource.py (Windows stand-in: K32GetProcessMemoryInfo PeakWorkingSetSize in KiB) and scripts/run_phase1g_f_portable.py (runs the frozen script as __main__ by path)"
+  },
+  "preflight": {
+    "full_suites": {
+      "3.11": {
+        "failed": 0,
+        "passed": 1049,
+        "returncode": 0,
+        "seconds": 716.0,
+        "skipped": 0
+      },
+      "3.14": {
+        "failed": 0,
+        "passed": 1049,
+        "returncode": 0,
+        "seconds": 711.46,
+        "skipped": 0
+      },
+      "command": ".venv\\Scripts\\python -B -W error -m pytest -q -p no:cacheprovider (both interpreters in parallel)",
+      "difference": "none",
+      "expected": "1049 (Linux at 738f3c3: 1044 + 5)"
+    },
+    "phase1g_scripts": {
+      "1G-B_driver_gates": "21/21 PASS on both",
+      "1G-F_frozen_script_direct": "ModuleNotFoundError: No module named 'resource' (both interpreters)",
+      "1G-F_via_runner": {
+        "3.11": "exit 0, 1082 s",
+        "3.14": "exit 0, 1044 s",
+        "peak_working_set_MB": 1466.5
+      },
+      "3.11": {},
+      "3.14": {}
+    },
+    "regeneration_key_commands": {
+      "note": "validate_anchored_density_growth first refused (untracked runner files: 'regeneration requires a clean working tree'); rerun on the clean tree after 70f8c3c: all gates passed; its embedded suites: 1049 passed, 0 failed, 0 skipped on each interpreter"
+    },
+    "tolerance_audit": {
+      "3.11": {
+        "comparisons": 634,
+        "missing": 0
+      },
+      "3.14": {
+        "comparisons": 634,
+        "missing": 0
+      },
+      "outputs_identical": true
+    },
+    "validator_1f_c_r_producers": {
+      "3.11": {
+        "explicit_comparisons": {
+          "scripts": 2,
+          "src": 14,
+          "tests": 634
+        },
+        "json_roundtrips": 32,
+        "package_imports": 56,
+        "post_remediation_drift": [
+          "src/timescape_fsigma8/background/effective_fluid.py",
+          "src/timescape_fsigma8/background/tracker.py",
+          "src/timescape_fsigma8/perturbations/initial_conditions.py"
+        ],
+        "producer_determinism_sha256": {
+          "validate_phase1f_a_h1_closure": "dc1a379737a76094daf61906f9b272eace8da4d127007ceeb2392be0753dfebc",
+          "validate_phase1f_b_dust_wall_boost_dynamics": "6dbd1758ceda7560c9f683516cd0cfa3b3334e6f9a2cf99b4300629056b157fa"
+        },
+        "status": "PASS",
+        "successor_status_removals": "not reported (pre-hardening validator)"
+      },
+      "3.14": {
+        "explicit_comparisons": {
+          "scripts": 2,
+          "src": 14,
+          "tests": 634
+        },
+        "json_roundtrips": 32,
+        "package_imports": 56,
+        "post_remediation_drift": [
+          "src/timescape_fsigma8/background/effective_fluid.py",
+          "src/timescape_fsigma8/background/tracker.py",
+          "src/timescape_fsigma8/perturbations/initial_conditions.py"
+        ],
+        "producer_determinism_sha256": {
+          "validate_phase1f_a_h1_closure": "dc1a379737a76094daf61906f9b272eace8da4d127007ceeb2392be0753dfebc",
+          "validate_phase1f_b_dust_wall_boost_dynamics": "6dbd1758ceda7560c9f683516cd0cfa3b3334e6f9a2cf99b4300629056b157fa"
+        },
+        "status": "PASS",
+        "successor_status_removals": "not reported (pre-hardening validator)"
+      }
+    }
+  },
+  "preflight_commit": "70f8c3c0d99e3fe0d57c6d567b92c0401a8b2244",
+  "report": "reports/phase1g_windows_validation_record.md",
+  "schema_version": 1,
+  "tag_commands_not_run": {
+    "note": "Approval 3 (create signed annotated tags locally) is unticked, so no tag is created; these are the commands for the owner. 1G-B: approvals 4-5 are unticked, so per task Sec. 5 its tag goes on 63ca316 with the Windows results in the message. 1G-A, 1G-C, 1G-D, 1G-E: their resolutions are on branch phase-1g-owner-decisions only; the tag goes on the main commit that carries them (the merge commit of that branch, <merge-commit>), after the owner pushes and merges it.",
+    "phase-1g-a-sigma8-derivation-path-v1": "git tag -s -a phase-1g-a-sigma8-derivation-path-v1 <merge-commit> -m \"Phase 1G-A v1: sigma(M) derivation-path audit (report-only). Barotropic closure Hadamard ill-posed (UNRESTRICTED_BAROTROPIC_CONTINUUM_STABILITY = REFUTED_HADAMARD_ILL_POSED); conditional volume-average CGI sigma(M8) 0.52-0.69; adversarial audit reports/phase1g_a_adversarial_audit.md (ACCEPT_WITH_CORRECTIONS); owner decisions GA-OD1..OD4 applied (reports/phase1g_a_owner_decisions_successor.md: App. B verdict CONVENTION_DEPENDENT with an author question; the [NW15] row a declared Planck-early-universe hybrid, [NW15]'s own inputs a sensitivity 0.637-0.645; the alpha*k illustration a named hybrid chain, 557-694 under the report's conventions; GA-F4..F8, F11); Windows validation reports/phase1g_windows_validation_record.md; unique Timescape prediction, observational, sigma8 and fsigma8 authorization remain NOT_GRANTED.\"",
+    "phase-1g-b-lagrangian-sigma-v1": "git tag -s -a phase-1g-b-lagrangian-sigma-v1 63ca316 -m \"Phase 1G-B v1: conditional, model-internal, mass-labelled linear sigma(M) runtime (lagrangian_sigma.py) with the documented growth-law limitation; reproduces every 1G-A number; adversarial audit reports/phase1g_b_adversarial_audit.md (ACCEPT_WITH_CORRECTIONS) with GB-F1 fixed (owner decision GB-OD1, option A, 738f3c3); Windows validation 2026-09-30: 1049 passed, 0 failed, 0 skipped on CPython 3.14.3 and 3.11.9 (reports/phase1g_windows_validation_record.md, branch phase-1g-owner-decisions, where the non-blocking GB-OD2..OD6 are applied); NON_OBSERVATIONAL, NOT_OBSERVATIONAL_SIGMA_8; SIGMA8_AUTHORIZATION remains NOT_GRANTED.\"",
+    "phase-1g-c-two-scale-growth-law-v1": "git tag -s -a phase-1g-c-two-scale-growth-law-v1 <merge-commit> -m \"Phase 1G-C v1: two-scale growth law (report-only). Tracker kinematically empty Milne voids plus EdS walls in common time, dynamics under the regional dust-FLRW assumption; wall-internal linear sigma at M8 relative to the wall mean (0.834 [GM], 0.935 [NW15]) under A1-A5 (TWO_SCALE_MASS_WEIGHTED_SUB_CELL_GROWTH_LAW = DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION; transition law NOT_DERIVED); adversarial audit reports/phase1g_c_adversarial_audit.md (ACCEPT_WITH_CORRECTIONS); owner decisions GC-OD1..OD7 applied (reports/phase1g_c_owner_decisions_successor.md: supersedes and settled withdrawn, split evidence class, assumption A5, envelope dropped); no observational authorization.\"",
+    "phase-1g-d-separate-universe-growth-v1": "git tag -s -a phase-1g-d-separate-universe-growth-v1 <merge-commit> -m \"Phase 1G-D v1: separate-universe structure (report-only). SU modes exact k->0 solutions of [GM] (4.9)-(4.11); under S1 the [GM] CGI closures fail the SU test (FAILED_FOR_TIMESCAPE_TRACKER); void-onset response an external closure; with the tracker-consistent seed and f_vi = f_v(t_LS), A_v sigma_LSS(R8) = 1.05-1.11 and X_SU = 1.26-1.28; adversarial audit reports/phase1g_d_adversarial_audit.md (ACCEPT_WITH_CORRECTIONS); owner decisions GD-OD1..OD7 applied (reports/phase1g_d_owner_decisions_successor.md); no observational authorization.\"",
+    "phase-1g-e-two-phase-sigma-v1": "git tag -s -a phase-1g-e-two-phase-sigma-v1 <merge-commit> -m \"Phase 1G-E v1: two-phase mass variance at 8 h^-1 Mpc (report-only; TWO_PHASE_MASS_VARIANCE_8_H_INV_MPC = DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION); mass-conserving formula, photon-frame compression, 1G-F derived reference population (sigma ~ 0.99); adversarial audit reports/phase1g_e_adversarial_audit.md (ACCEPT_WITH_CORRECTIONS); owner decisions GE-OD1..OD6 applied (reports/phase1g_e_owner_decisions_successor.md); conditional, hybrid, model-internal, not an observational sigma8; SIGMA8_AUTHORIZATION remains NOT_GRANTED.\""
+  }
+}
