@@ -6,7 +6,9 @@ nonexistence of every possible embedding. Historical phase reports remain
 checkpoint evidence and are superseded for current interpretation by 1F-C-R
 and its successor records (reports/phase1g_a_barotropic_status_successor.md
 changes one token; reports/phase1g_status_additions_successor.md adds six;
-reports/phase1g_e_status_addition_successor.md adds one).
+reports/phase1g_e_status_addition_successor.md adds one).  The owner
+decisions of 2026-09-30 (reports/phase1g_c_owner_decisions_successor.md)
+edit one comment and no value.
 """
 
 from types import MappingProxyType
@@ -44,11 +46,13 @@ UNRESTRICTED_BAROTROPIC_CONTINUUM_STABILITY = "REFUTED_HADAMARD_ILL_POSED"
 # SIGMA8_AUTHORIZATION and the other NOT_GRANTED tokens above are unchanged.
 #
 # Phase 1G-C Sec. 5 (reports/phase1g_c_two_scale_growth_law.md): under
-# assumptions A1-A4, linear sub-cell perturbations of the wall matter grow as
-# the EdS growing mode of the wall region in the common time t.  The reading
-# is narrowed by Phase 1G-D Sec. 9 (reports/phase1g_d_separate_universe_growth.md):
-# the law gives the wall-internal linear statistic, relative to the wall mean,
-# not a global-mean sigma at 8 h^-1 Mpc.  Owner approval 2026-09-29.
+# assumptions A1-A5, linear sub-cell perturbations of the wall matter grow as
+# the EdS growing mode of the wall region in the common time t.  A5 (owner
+# decision GC-OD3, 2026-09-30, reports/phase1g_c_owner_decisions_successor.md):
+# the wall matter clocks the common time t.  The reading is narrowed by Phase
+# 1G-D Sec. 9 (reports/phase1g_d_separate_universe_growth.md): the law gives
+# the wall-internal linear statistic, relative to the wall mean, not a
+# global-mean sigma at 8 h^-1 Mpc.  Owner approval 2026-09-29.
 TWO_SCALE_MASS_WEIGHTED_SUB_CELL_GROWTH_LAW = "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION"
 # Phase 1G-C Sec. 8: the super-cell/sub-cell transition law (its shape) is not
 # derivable from the self-similar tracker.  Phase 1G-D Sec. 8 derives a

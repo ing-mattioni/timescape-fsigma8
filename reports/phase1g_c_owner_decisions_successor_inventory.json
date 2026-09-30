@@ -1,0 +1,181 @@
+{
+  "branch": "phase-1g-owner-decisions",
+  "classification": "OWNER_DECISIONS_SUCCESSOR_RECORD",
+  "date": "2026-09-30",
+  "decisions": {
+    "GC-OD1": {
+      "applied": true,
+      "blocks_tag": true,
+      "current_reading": "0.834 ([GM]) / 0.935 ([NW15]) at equal mass are the wall-internal linear sigma at mass M8, relative to the wall mean, under A1-A5; not a mass-weighted global-mean sigma(M8)",
+      "finding": "GC-F1",
+      "frozen_readings": [
+        "[1G-C] Sec. 1 verdict 4 (l. 44-52)",
+        "[1G-C] Sec. 4 Consequence (l. 133-140)",
+        "[1G-C] Sec. 7 Reading (l. 231-235)",
+        "[1G-C] Sec. 9 item 1 (l. 278-282)",
+        "[1G-C] inventory supersedes, scale_hierarchy"
+      ],
+      "item_verbatim": "[B] **GC-OD1 (GC-F1).** Narrow verdict 4 and Secs. 4, 7 and 9 to \"the wall-internal linear \u03c3 at M8, relative to the wall mean\". Quote [W09] ll. 383\u2013386 with its footnote, and withdraw \"settled\".",
+      "settled_withdrawn": true,
+      "supersedes_withdrawn": true,
+      "tick_verbatim": "[x] Accept, and withdraw \"supersedes \u2026 for \u03c38-scale statistics\".",
+      "w09_quote": {
+        "foot11_lines_2648_2651": "My two scales refer to largest relevant scales in the nonlinear regime (as quoted by phase1g_c_adversarial_audit.md Sec. 10)",
+        "lines_383_386": "Below the scale of statistical homogeneity we will typically find density contrasts |delta rho/rho| ~ 1 which characterize the nonlinear regime"
+      }
+    },
+    "GC-OD2": {
+      "applied": true,
+      "blocks_tag": true,
+      "dynamics_assumptions": [
+        "regional dust Friedmann/Raychaudhuri equations in t with Q_v = Q_w = 0",
+        "flat walls ([GM] l. 620)",
+        "the D1-corrected <R>_D = -6 f_v/t^2"
+      ],
+      "dynamics_class": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "finding": "GC-F2",
+      "frozen_readings": [
+        "[1G-C] Sec. 1 verdict 1 (l. 27-32)",
+        "[1G-C] Sec. 3 heading class",
+        "[1G-C] inventory tracker_two_region_structure.class",
+        "[1G-C] A1 (satisfies it exactly)"
+      ],
+      "item_verbatim": "[B] **GC-OD2 (GC-F2).**",
+      "kinematics_class": "VERIFIED_FROM_PRIMARY_SOURCE (+ derived)",
+      "tick_verbatim": "[x] Split the evidence class: kinematics `VERIFIED_FROM_PRIMARY_SOURCE` (+ derived); dynamics `DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION`. Align CLAUDE.md and README."
+    },
+    "GC-OD3": {
+      "applied": true,
+      "assumption_added": "A5",
+      "assumption_text": "the wall matter clocks the common (coarse-grained dust) time t",
+      "blocks_tag": true,
+      "finding": "GC-F3",
+      "frozen_readings": [
+        "[1G-C] Sec. 5 assumptions A1-A4",
+        "[1G-C] Sec. 6 last paragraph (l. 211-215)",
+        "[1G-C] inventory regional_growth_law.assumptions"
+      ],
+      "item_verbatim": "[B] **GC-OD3 (GC-F3).**",
+      "tau_w_variant_void_density_needed": {
+        "NW15_CMB_FIT": -1.157,
+        "PAPER_REFERENCE": -1.184
+      },
+      "tick_verbatim": "[x] Add assumption A5 (\"the wall matter clocks the common time t\") to Secs. 5\u20136 and to the `TWO_SCALE_MASS_WEIGHTED_SUB_CELL_GROWTH_LAW` comment. The value is unchanged.",
+      "token_comment": "TWO_SCALE_MASS_WEIGHTED_SUB_CELL_GROWTH_LAW (value unchanged)"
+    },
+    "GC-OD4": {
+      "applied": true,
+      "blocks_tag": false,
+      "current_reading": "record Sec. 6 (the complete list of superseded 1G-C readings, with [ADD] Sec. 4 and [1G-D] Sec. 10)",
+      "finding": "GC-F4",
+      "item_verbatim": "**GC-OD4.**",
+      "tick_verbatim": "[x] Extend the superseded-readings table and qualify CLAUDE.md and README."
+    },
+    "GC-OD5": {
+      "applied": true,
+      "blocks_tag": false,
+      "conventions_relabelled": {
+        "b": "volume-average-picture convention (8/h_dressed)",
+        "c": "volume-average-picture convention (8/hbar/gamma_w0)"
+      },
+      "envelope_dropped": [
+        "0.83\u20130.96",
+        "+3% to +18%"
+      ],
+      "finding": "GC-F5",
+      "item_verbatim": "**GC-OD5.** Label conventions (b) and (c) as volume-average conventions, and:",
+      "tick_verbatim": "[x] drop the \"0.83\u20130.96 / +3% to +18%\" envelope; or"
+    },
+    "GC-OD6-OD7": {
+      "applied": true,
+      "blocks_tag": false,
+      "checks_class": "algebraic consistency checks (non-circular check: phase1g_c_adversarial_audit.md Sec. 4, <= 1.3e-34)",
+      "finding": "GC-F6, GC-F9",
+      "governance": "[1G-C] Sec. 10 item 1 was applied (the wall-law option of the 1G-B runtime); the tick is recorded as the owner's confirmation that this option stands approved",
+      "item_verbatim": "**GC-OD6, OD7.**",
+      "tick_verbatim": "[x] Describe the checks as \"algebraic consistency checks\", and apply the governance and wording changes.",
+      "wording": {
+        "self-similar": "has no sub-horizon length scale",
+        "sharp observational discriminant / sharp, testable signature": "a conditional theoretical feature (no observational comparison is made)"
+      }
+    }
+  },
+  "files_changed": [
+    "reports/phase1g_c_owner_decisions_successor.md",
+    "reports/phase1g_c_owner_decisions_successor_inventory.json",
+    "src/timescape_fsigma8/scientific_status.py",
+    "tests/test_phase1g_c_owner_decisions.py",
+    "CLAUDE.md",
+    "README.md"
+  ],
+  "frozen_files_sha256_lf": {
+    "reports/phase1g_adversarial_audit_errata_successor.md": "7fc67b7ded50fee3c9a182f9b01e5e5fc66c3d1fb80a6c69b97b9728105ce5a6",
+    "reports/phase1g_adversarial_audit_errata_successor_inventory.json": "8add47eb0d40fa9b891f17db89bb37944370181ccd357d4640a0c23f65c91ba9",
+    "reports/phase1g_c_adversarial_audit.md": "3a76dbe439fd58411e0674b7aa137393a115e4fadfa8bb37ef7afe060a7f5927",
+    "reports/phase1g_c_adversarial_audit_inventory.json": "229d3d1e926d2a751cd32b491498e7705bb14ae8b6ab5d26f16762b2d6886c4e",
+    "reports/phase1g_c_two_scale_growth_inventory.json": "9aec89026990faf751a3034b73261fc3faa57bad21cf7e8f326c4c3aaa3a7813",
+    "reports/phase1g_c_two_scale_growth_law.md": "59c5e5619eef8455580651ebf9c1e3bbd2b083b3a3c8ef3d137620ae150a13cd",
+    "reports/phase1g_status_additions_successor.md": "c01d2120fe848ce42090eaacde27055d80e2051809a6b90954c70e3ccf3c92d8",
+    "reports/phase1g_status_additions_successor_inventory.json": "84b133b0faaddef1444838418027d0b0937c55ae1e3549e91bdd17eaab3f3809",
+    "scripts/phase1g_c_two_scale_growth_numerics.py": "b5fc40c100bcd9fa75d118c43f89aa5270b727770c77418ccaacbdbcba5def70"
+  },
+  "human_approval": {
+    "by": "project owner",
+    "date": "2026-09-30",
+    "not_approved_verbatim": [
+      "[ ] Create signed annotated tags **locally** for the phases that Sec. 5 finds ready.",
+      "[ ] Push `phase-1g-owner-decisions` and open ONE pull request against `main`.",
+      "[ ] Merge that pull request (merge commit, as PR #1 and PR #2).",
+      "[ ] Push the tags created under approval 3."
+    ],
+    "nothing_else_approved": [
+      "editing frozen reports, inventories or phase scripts",
+      "changing any status-token value, equation, IC, unit, sign convention, independent variable, normalisation or tolerance beyond a ticked decision",
+      "force-push; push to any branch"
+    ],
+    "source": "the owner's task statement of 2026-09-30, 'Phase 1G - Windows validation, owner decisions for 1G-A/C/D/E, tags', Sec. 0 (approvals) and Sec. 3 (ticks)",
+    "verbatim": [
+      "Create the local branch `phase-1g-owner-decisions` from `main` and commit there.",
+      "Apply the owner decisions ticked `[x]` in Sec. 3, exactly as ticked. An unticked decision is **not** approved: leave it open and list it at the end."
+    ]
+  },
+  "numbers_quoted_from_frozen_records": {
+    "gamma_w0_squared_minus_1": {
+      "NW15_CMB_FIT": 0.725,
+      "PAPER_REFERENCE": 0.873
+    },
+    "sigma_wall_equal_mass_GM": 0.834,
+    "sigma_wall_equal_mass_NW15": 0.935
+  },
+  "parent_commit": "63ca316b87399fc323713338a07519f8bce52113",
+  "phase": "1G-C",
+  "report": "reports/phase1g_c_owner_decisions_successor.md",
+  "schema_version": 1,
+  "scope": {
+    "equations_changed": false,
+    "frozen_reports_inventories_or_phase_scripts_edited": false,
+    "initial_conditions_units_sign_conventions_changed": false,
+    "not_granted_tokens_unchanged": [
+      "FSIGMA8_AUTHORIZATION",
+      "OBSERVATIONAL_AUTHORIZATION",
+      "RSD_AUTHORIZATION",
+      "SIGMA8_AUTHORIZATION",
+      "UNIQUE_TIMESCAPE_PREDICTION"
+    ],
+    "package_modules_changed": [
+      "src/timescape_fsigma8/scientific_status.py (comment only)"
+    ],
+    "status_token_comments_changed": [
+      "TWO_SCALE_MASS_WEIGHTED_SUB_CELL_GROWTH_LAW"
+    ],
+    "status_token_values_changed": false,
+    "tolerances_changed": false
+  },
+  "unticked_not_applied": [
+    "[ ] Accept, and keep \"supersedes\" in narrowed form.",
+    "[ ] add a wall-adapted convention."
+  ],
+  "validation": {
+    "recorded_in": "reports/phase1g_windows_validation_record.md (Sec. 7, final runs)"
+  }
+}
