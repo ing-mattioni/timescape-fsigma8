@@ -133,9 +133,9 @@ Everything else in the list above stays unimplemented.
 py -3.14 -m venv .venv
 .venv\Scripts\python -m pip install -e ".[exec,test]"
 
-# Full validation suite (1044 passed on Windows, Python 3.14.3 and 3.11.9, at
-# the Phase 1G status-approvals checkpoint; 1049 passed on Linux, Python
-# 3.13.12 and 3.11.15, after the Phase 1G audit PR; oracle and
+# Full validation suite (1049 passed on Windows, Python 3.14.3 and 3.11.9,
+# and on Linux, 3.13.12 and 3.11.15, at 63ca316; 1093 collected and passed on
+# Windows after the Phase 1G owner decisions of 2026-09-30; oracle and
 # generated-artifact tests auto-skip when their inputs are absent)
 .venv\Scripts\python -m pytest -q
 
@@ -167,6 +167,12 @@ each writes JSON or figures into `artifacts/`:
 .venv\Scripts\python scripts\validate_growing_mode_initial_conditions.py
 .venv\Scripts\python scripts\validate_h1_kinematic_gates.py
 ```
+
+Phase 1G evidence scripts are `scripts\phase1g_*_numerics.py`. On Windows,
+run the 1G-F one as `scripts\run_phase1g_f_portable.py`: the frozen script
+imports the Unix-only `resource` module (owner approval 2026-09-30).
+`scripts\phase1g_owner_decisions_numerics.py` recomputes what the owner
+decisions of 2026-09-30 change (about 20 min: a 16-seed Monte Carlo).
 
 The historical validators check ancestry against recorded commits, not branch
 names (review F6): `validate_anchored_density_growth.py` regenerates from any
@@ -234,23 +240,33 @@ audits were recovered and committed, §12) · **1F-D** minimal scalar
 necessary-bound diagnostic (`phase1f_d_necessary_bound.md`, tag
 `phase-1f-d-necessary-bound-v1`; conditional).
 
-In progress (σ track; audited, not tagged):
+In progress (σ track; audited; owner decisions of 2026-09-30 applied on the
+local branch `phase-1g-owner-decisions`, not yet merged or tagged):
 - **Adversarial audits of 1G-A to 1G-E** (2026-09-29; one independent
   auditor per phase, `reports/phase1g_<x>_adversarial_audit.md` + inventory;
   consolidation `phase1g_adversarial_audit_errata_successor.md`).
-  - Every phase: `ACCEPT_WITH_CORRECTIONS`, `NOT_READY_OWNER_DECISION_REQUIRED`.
-    No HIGH finding and no error in an implemented equation.
-  - MEDIUM-HIGH findings: GC-F1 (the 1G-C wall σ is the wall-internal
-    statistic), GD-F1 (1G-D void-seed scale vs the tracker), GE-F1 (1G-E
-    non-empty-void formula breaks mass conservation), GE-F2 (void
-    population vs [W09]).
-  - The errata are applied as successor readings, and three docstring
-    citations are fixed; the frozen reports are unchanged.
-  - On Linux (AVX-512) one test failed at 6f7937c:
-    `test_top_hat_window_limits_series_and_envelope` (bitwise evenness of
-    `x**3`; GB-F1). With owner approval (2026-09-30, option A) the test now
-    compares with `rtol=1e-15`; the implementation is unchanged. GB-F1 was
-    1G-B's only blocking decision.
+  - Every phase: `ACCEPT_WITH_CORRECTIONS`. No HIGH finding and no error in an
+    implemented equation. The errata are applied as successor readings; the
+    frozen reports are unchanged.
+  - GB-F1 (a Linux-only bitwise-evenness test failure) was fixed with owner
+    approval (2026-09-30, option A): the test compares with `rtol=1e-15`.
+- **Owner decisions (2026-09-30).** One dated successor record per phase,
+  `reports/phase1g_<x>_owner_decisions_successor.md` + inventory; evidence
+  `scripts/phase1g_owner_decisions_numerics.py`.
+  - Every blocking decision of 1G-A, 1G-C, 1G-D and 1G-E is applied as
+    ticked; 1G-B's optional OD2–OD6 are applied as code with tests.
+  - No token value, equation, IC or tolerance changes. Three token comments
+    change: A5 (1G-C), the Mészáros/barotropic characterisation and the
+    void-response figure (1G-D). Unticked options stay open (listed in each
+    record).
+- **Windows validation** (`phase1g_windows_validation_record.md`).
+  - 1049 passed, 0 failed, 0 skipped on 3.14.3 and 3.11.9 at `63ca316` (plus
+    the 1G-F runner), as on Linux; every recorded 1G-A…1G-F number
+    reproduces.
+  - The frozen 1G-F script imports the Unix-only `resource`: run it with
+    `scripts/run_phase1g_f_portable.py` (owner approval 2026-09-30).
+  - 1G-B is ready for its tag. 1G-A, C, D and E are ready once their
+    decisions are on `main`.
 - **1G-A:** σ(M) derivation-path audit (report-only,
   `phase1g_a_sigma8_derivation_path_audit.md`). The route is standard early
   universe plus scale-independent growth; the barotropic closure is Hadamard
@@ -259,6 +275,13 @@ In progress (σ track; audited, not tagged):
     is `REFUTED_HADAMARD_ILL_POSED` (`phase1g_a_barotropic_status_successor.md`;
     the 1F-C-R validator reads the live value from that record).
   - The barotropic runtime and both D3 branches are unchanged.
+  - Owner decisions: the App. B "backward-parabolic" verdict is
+    `CONVENTION_DEPENDENT` (it holds for the printed (B.4) sign; under
+    `RESOLVED_DERIVED_4_10` the closure is a constraint; author question).
+    The [NW15] row is a declared hybrid with the Planck early universe;
+    [NW15]'s own f_b ≈ 0.18 and n_s = 0.992 give 0.637–0.645 (wall law
+    0.89–0.90) as a sensitivity. "αk ≈ 875" is a hybrid unit chain; 1G-A's
+    own radius conventions give 557–694.
 - **1G-B:** conditional Lagrangian σ(M) runtime (`lagrangian_sigma.py`,
   `phase1g_b_lagrangian_sigma_validation.md`). It reproduces every 1G-A
   number.
@@ -269,34 +292,50 @@ In progress (σ track; audited, not tagged):
     statistic, not a global-mean σ at 8 h⁻¹ Mpc.
   - The change is text only: the executable AST differs only in string
     constants, and every numeric output is bit-identical.
+  - Owner decisions GB-OD2–OD6 (2026-09-30): the naming rule above; a
+    hardened 1F-C-R status validator; real-numeric array inputs, the EH98
+    ω_m fit range [0.025, 0.5] and record invariants; a `model_caveat` on
+    `TimescapeGrowthFactor`; an independent g_TS regression. Every numeric
+    output is bit-identical.
 - **1G-C:** two-scale growth law (report-only,
   `phase1g_c_two_scale_growth_law.md`).
-  - The tracker is exactly empty Milne voids plus EdS walls in common time t.
-  - σ8 lies inside [W09]'s ≈100 h⁻¹ Mpc dust cells, so mass-weighted σ(M8)
-    follows the wall law: 0.83–0.96 (equal mass: 0.834 for [GM], 0.935 for
-    the [NW15] CMB fit).
-  - The volume-average CGI values, 0.52–0.69, are the super-cell growth
-    (superseded by 1G-D).
+  - Kinematically, the tracker is empty Milne voids plus EdS walls in common
+    time t ([W07]); its dynamics are exact under the regional dust-FLRW
+    assumption (`DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION`).
+  - σ8 lies inside [W09]'s ≈100 h⁻¹ Mpc dust cells. The wall law gives the
+    wall-internal linear σ at mass M8, relative to the wall mean (not a
+    global-mean σ8): 0.834 for [GM] and 0.935 for the [NW15] CMB fit at
+    equal mass, under A1–A5 (A5: the wall matter clocks the common time t).
+    The "supersedes", "settled" and "0.83–0.96" readings are withdrawn.
+  - The volume-average CGI values, 0.52–0.69, are [GM]'s CGI growth, not the
+    super-cell law (1G-D).
   - The super-cell/sub-cell transition law is `NOT_DERIVED`.
   - Tokens (owner approval 2026-09-29):
     - `TWO_SCALE_MASS_WEIGHTED_SUB_CELL_GROWTH_LAW = DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION`
       (§5), narrowed by 1G-D §9 to the wall-internal linear statistic;
+      A5 added to its comment (2026-09-30);
     - `SUPER_CELL_TO_SUB_CELL_GROWTH_TRANSITION = NOT_DERIVED` (§8). 1G-D §8
       gives a conditional length scale, not the law.
 - **1G-D:** separate-universe structure (report-only,
   `phase1g_d_separate_universe_growth.md`).
   - The tracker has one time scale: `f_v = t/(t+τ)`, with τ = 1F-D's `b`.
-  - Long-wavelength modes are the wall-curvature mode (`f_w δ_w`) and the
-    void-onset mode (`ε f_v`). Both are exact k→0 solutions of [GM]
-    (4.9)–(4.11).
-  - **[GM]'s comoving, Mészáros and barotropic closures fail this
-    separate-universe test,** so the volume-average CGI growth is not
-    Timescape's long-wavelength growth.
-  - With a peak-background-split void response, the model predicts its own
-    homogeneity scale (10% density at 128–215 h⁻¹ Mpc).
-  - At 8 h⁻¹ Mpc the void fraction is non-perturbative, so a linear
-    global-mean σ8 is not defined. The only linear statistic is σ_wall; an
-    observable σ8 needs a nonlinear two-phase model (proposed 1G-E).
+  - The wall-curvature mode (`f_w δ_w`) and the void-onset mode (`ε f_v`)
+    are exact k→0 solutions of [GM] (4.9)–(4.11). That they are *the*
+    long-wavelength modes rests on assumption S1
+    (`DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION`; [GM] l. 620 makes walls flat).
+  - Under S1, **[GM]'s comoving closure admits no separate-universe mode,
+    and the Mészáros (δQ = 0) and barotropic conditions hold only for
+    decaying modes,** so the volume-average CGI growth is not Timescape's
+    long-wavelength growth.
+  - Peak-background-split void response with the tracker-consistent seed
+    and f_vi = f_v(t_LS) (owner decisions 2026-09-30): A_v ≈ 1.2×10³,
+    X_SU = 1.26–1.28, 10% density at 61–84 h⁻¹ Mpc (the [SvdW04] seed
+    factor gives 172–215). Reading [W09]'s single-perturbation relation as a
+    response is not viable.
+  - At 8 h⁻¹ Mpc the void onset is non-perturbative (A_v σ_LSS(R8) =
+    1.05–1.11, |ε| ≈ 1; 3.8–4.6 with the [SvdW04] factor) and R8 < R_void,
+    so a linear global-mean σ8 is not defined. The only linear statistic is
+    σ_wall; an observable σ8 needs a nonlinear two-phase model (1G-E).
   - Tokens (owner approval 2026-09-29):
     - `GM_CGI_CLOSURES_SEPARATE_UNIVERSE_CONSISTENCY = FAILED_FOR_TIMESCAPE_TRACKER` (§5);
     - `TWO_SCALE_SUPER_CELL_GROWTH_LAW = DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION` (§6);
@@ -304,12 +343,17 @@ In progress (σ track; audited, not tagged):
     - `LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC = NOT_DEFINED_IN_LINEAR_TWO_SCALE_THEORY` (§9).
 - **1G-E:** two-phase mass variance (report-only,
   `phase1g_e_two_phase_sigma.md`).
-  - Formula: `σ² = δ_v² σ²_part + σ²_int`, with Boolean voids (Poisson
-    balls, checked by Monte Carlo) and the wall-internal linear field.
-  - At 8 h⁻¹ Mpc, with tracker voids and [W09]'s 30 h⁻¹ Mpc voids, σ ≈ 1.57
-    for [GM] and 1.36 for [NW15]. The range is 0.9–2.1.
-  - This is a nonlinear, model-internal quantity. Its next step is 1G-F, a
-    self-consistent void population.
+  - Formula (mass-conserving, owner decision 2026-09-30):
+    `σ² = δ_v² σ²_part + (f_w − f_v δ_v)² σ²_int`, equal to the frozen form
+    for empty voids, with Boolean voids and the wall-internal linear field
+    compressed by `s = D_wall` (photon frame; `f_w^{1/3}` and 1 are a
+    two-sided sensitivity).
+  - Reference: the 1G-F derived void population, σ ≈ 0.99 in 8 h⁻¹ Mpc balls
+    (0.88–1.05 at equal mass). A single 15 h⁻¹ Mpc radius at the full f_v0
+    is an idealisation, not a [W09] statement: 1.76 ([GM]) and 1.52 ([NW15]),
+    1.60 and 1.59 at equal mass. The range is 0.8–2.1.
+  - This is a conditional, hybrid (nonlinear partition, linear wall field),
+    model-internal quantity.
 - **1G-F:** self-consistent void population (report-only,
   `phase1g_f_void_population.md`).
   - Excursion-set voids ([SvdW04] two barriers; [JLH13]'s corrected EdS
@@ -323,8 +367,9 @@ In progress (σ track; audited, not tagged):
     ≥ 10 h⁻¹ Mpc voids fill ~4%, not [W09]'s 40–50%), and no fixed
     threshold reproduces f_v(t).
   - The self-consistent two-phase σ at 8 h⁻¹ Mpc is ≈ 0.99 with empty voids
-    (1G-E's 1.36–1.57 needs 1G-D's disputed PBS response). Conditional,
-    nonlinear, model-internal; three tokens proposed, none added.
+    (1G-E's 1.36–1.57 needs 1G-D's disputed PBS response); it is the 1G-E
+    reference population (owner decision GE-OD2). Conditional, nonlinear,
+    model-internal; three tokens proposed, none added.
 - **Status-token additions:** the six 1G-C/1G-D tokens are *additions*, not
   changes (`phase1g_status_additions_successor.md`). The frozen 1F-C-R
   snapshot has no entry for them. The 1F-C-R validator accepts a new token
