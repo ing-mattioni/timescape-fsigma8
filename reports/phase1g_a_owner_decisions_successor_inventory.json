@@ -1,0 +1,173 @@
+{
+  "author_questions": [
+    "[GM] App. B: is the sign of the Theta P term in the printed (B.4) intended? (B.4) equals 1/2 [(4.10) with P -> -P], the D3 sign pattern; (B.5) uses +P; with the (4.10) sign, (B.2) turns (4.10) into a constraint."
+  ],
+  "branch": "phase-1g-owner-decisions",
+  "classification": "OWNER_DECISIONS_SUCCESSOR_RECORD",
+  "date": "2026-09-30",
+  "decisions": {
+    "GA-OD1": {
+      "applied": true,
+      "blocks_tag": true,
+      "classification_current": "CONVENTION_DEPENDENT",
+      "classification_frozen": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "current_reading": "ill-posed for the printed (B.3)-(B.5), i.e. the printed_4_15 sign of the Theta P term; under RESOLVED_DERIVED_4_10, (4.10) with (B.2) is a constraint and the closure is not shown to be ill-posed; the Sec. 4 conclusion is qualified accordingly (record Sec. 3)",
+      "evidence": "phase1g_a_adversarial_audit.md Sec. 4.2 (SymPy re-derivation; numerical reduction)",
+      "finding": "GA-F1",
+      "frozen_readings": [
+        "[1G-A] Sec. 4.2 heading and l. 168",
+        "[1G-A] l. 205-206 (Sec. 4 conclusion)",
+        "[1G-A] inventory closure_admissibility.homogeneous_density_B3_B5 (verdict BACKWARD_PARABOLIC_ILL_POSED)"
+      ],
+      "item_verbatim": "[B] **GA-OD1, App. B \"backward-parabolic\" verdict (GA-F1).** The verdict holds only for the printed (B.4) sign; under `RESOLVED_DERIVED_4_10` the closure reduces to a constraint.",
+      "tick_verbatim": "[x] Accept: record it as convention-dependent, qualify \"only the comoving closure (and M\u00e9sz\u00e1ros) can define a linear \u03c3\", and add an author question on the (B.4) sign."
+    },
+    "GA-OD2": {
+      "applied": true,
+      "blocks_tag": true,
+      "current_reading": "the [NW15] abstract states a relation, not Planck's value; the [NW15] row is a declared hybrid; [NW15]'s own inputs give 0.637-0.645 (comoving, equal mass; EH98-CAMB) and 0.89-0.90 (wall law) as a sensitivity",
+      "evidence": "artifact GA_OD2_nw15_own_early_universe_inputs; CAMB values from phase1g_a_adversarial_audit.md Sec. 4.6",
+      "finding": "GA-F2",
+      "frozen_readings": [
+        "[1G-A] l. 364-366 (f_b justification)"
+      ],
+      "item_verbatim": "[B] **GA-OD2, early-universe inputs of the [NW15] row (GA-F2).** [NW15]'s own fit has f_b \u2248 0.18 and n_s \u2248 0.99.",
+      "option": "(i)",
+      "primary": "Planck early universe (declared hybrid for the [NW15] row)",
+      "sensitivity_inputs": {
+        "A_s": "Planck (unconstrained in [NW15])",
+        "baryon_fraction": "0.039/0.215 (bare Omega_B0/Omega_M0 of [NW15])",
+        "n_s": 0.992
+      },
+      "tick_verbatim": "[x] (i) Keep the Planck early universe as a declared hybrid primary. Correct the f_b justification and add [NW15]'s own inputs as a sensitivity (\u03c3 0.637\u20130.645; wall law 0.89\u20130.90)."
+    },
+    "GA-OD3": {
+      "applied": true,
+      "blocks_tag": true,
+      "chain": "hybrid: k_matrix = a_D0 (c/H0) k_phys0_D, k_phys0_D = 1/R, R = 8/h_dressed Mpc (excluded by 1D-A Sec. 10)",
+      "current_reading": "alpha*k at kR = 1 is 557.4 / 639.7 / 693.5 under conventions (a)/(b)/(c); 875.4 is the hybrid chain",
+      "evidence": "artifact GA_OD3_wkb_exponent_chains",
+      "finding": "GA-F3",
+      "frozen_readings": [
+        "[1G-A] l. 141-144",
+        "[1G-A] inventory closure_admissibility.barotropic.wkb_exponent_at_kR_1_R8",
+        "[SUCC] l. 72-75 and inventory evidence.wkb_exponent_at_kR_1_R8"
+      ],
+      "item_verbatim": "[B] **GA-OD3, \"\u03b1k \u2248 875\" (GA-F3).**",
+      "test_pin_kept": "tests/test_barotropic_hadamard_refutation.py EXPONENT_KR1_R8_1G_A = 875.4 (comments only changed)",
+      "tick_verbatim": "[x] Name the unit chain, give 557\u2013694 under the report's own radius conventions, and keep the test pin with a comment naming the chain."
+    },
+    "GA-OD4": {
+      "applied": true,
+      "blocks_tag": false,
+      "current_reading": "record Sec. 6 table (CAMB decomposition; window/spectrum qualifiers; t^-5/3 vs the exact Z = 0 mode; sign within the volume-average closures; convention (b) is dressed-comoving; evidence-class bookkeeping)",
+      "evidence": "phase1g_a_adversarial_audit.md Secs. 4.1, 4.3, 4.6, 4.7, 4.10; artifact GA_F8_regional_radius_reading",
+      "finding": "GA-F4, GA-F5, GA-F6, GA-F7, GA-F8, GA-F11",
+      "findings_applied": [
+        "GA-F4",
+        "GA-F5",
+        "GA-F6",
+        "GA-F7",
+        "GA-F8",
+        "GA-F11"
+      ],
+      "item_verbatim": "**GA-OD4, wording and classes (GA-F4\u2013F8, F11).**",
+      "tick_verbatim": "[x] Accept all, in one successor note."
+    }
+  },
+  "errata_not_applied_platform": {
+    "E-1GA-2..4": "Linux round-off; the Windows values (3.997e-15, 1.927e-13) satisfy the frozen '<= 4e-15' and '<= 2e-13' (phase1g_windows_validation_record.md Sec. 5.4)"
+  },
+  "evidence": {
+    "artifact_gitignored": "artifacts/independent/phase1g_owner_decisions.json",
+    "gates_passed": "124/124",
+    "interpreters_identical": "see reports/phase1g_windows_validation_record.md Sec. 7",
+    "script": "scripts/phase1g_owner_decisions_numerics.py"
+  },
+  "files_changed": [
+    "reports/phase1g_a_owner_decisions_successor.md",
+    "reports/phase1g_a_owner_decisions_successor_inventory.json",
+    "tests/test_barotropic_hadamard_refutation.py",
+    "tests/test_phase1g_a_owner_decisions.py"
+  ],
+  "frozen_files_sha256_lf": {
+    "reports/phase1g_a_adversarial_audit.md": "dd0eef18746d9128b928e31f9951df23eb4d300ec341ee06e605770b29ce220c",
+    "reports/phase1g_a_adversarial_audit_inventory.json": "4c27306ae3c1409f0b2ddb997a6008cf8a2f776c0a672404d46252f94bd292a4",
+    "reports/phase1g_a_barotropic_status_successor.md": "3188df3d30ea857ed47325fd543e72a78743096d0749eb954128f47aec472a17",
+    "reports/phase1g_a_barotropic_status_successor_inventory.json": "a25bf730b1140c65e923102ef6b213418929d58ffdc1ff5c8a48dd5f1f139a01",
+    "reports/phase1g_a_sigma8_derivation_path_audit.md": "89ce2ef04146a2669f0960469541a5b095c6f5f022bbfcb0fa89ccac1b26fbb9",
+    "reports/phase1g_a_sigma8_derivation_path_inventory.json": "59f217af8bf75d167dbf5239867b59f2885bd5f76b25161248bf9b3eda8ac956",
+    "reports/phase1g_adversarial_audit_errata_successor.md": "7fc67b7ded50fee3c9a182f9b01e5e5fc66c3d1fb80a6c69b97b9728105ce5a6",
+    "reports/phase1g_adversarial_audit_errata_successor_inventory.json": "8add47eb0d40fa9b891f17db89bb37944370181ccd357d4640a0c23f65c91ba9",
+    "scripts/phase1g_a_sigma8_path_numerics.py": "65eb42352aed1c9d26f4fba8b6e7bac3c4ed6e336e8910c150180f0c161c08f9"
+  },
+  "human_approval": {
+    "by": "project owner",
+    "date": "2026-09-30",
+    "not_approved_verbatim": [
+      "[ ] Create signed annotated tags **locally** for the phases that Sec. 5 finds ready.",
+      "[ ] Push `phase-1g-owner-decisions` and open ONE pull request against `main`.",
+      "[ ] Merge that pull request (merge commit, as PR #1 and PR #2).",
+      "[ ] Push the tags created under approval 3."
+    ],
+    "nothing_else_approved": [
+      "editing frozen reports, inventories or phase scripts",
+      "changing any status-token value, equation, IC, unit, sign convention, independent variable, normalisation or tolerance beyond a ticked decision",
+      "force-push; push to any branch"
+    ],
+    "source": "the owner's task statement of 2026-09-30, 'Phase 1G - Windows validation, owner decisions for 1G-A/C/D/E, tags', Sec. 0 (approvals) and Sec. 3 (ticks)",
+    "verbatim": [
+      "Create the local branch `phase-1g-owner-decisions` from `main` and commit there.",
+      "Apply the owner decisions ticked `[x]` in Sec. 3, exactly as ticked. An unticked decision is **not** approved: leave it open and list it at the end."
+    ]
+  },
+  "numbers_from_artifact": {
+    "GA_F8_regional_radius_reading|NW15_CMB_FIT|R_Mpc": 13.871,
+    "GA_F8_regional_radius_reading|NW15_CMB_FIT|cgi_comoving": 0.613,
+    "GA_F8_regional_radius_reading|NW15_CMB_FIT|wall_regional": 0.857,
+    "GA_F8_regional_radius_reading|PAPER_REFERENCE|R_Mpc": 12.494,
+    "GA_F8_regional_radius_reading|PAPER_REFERENCE|cgi_comoving": 0.526,
+    "GA_F8_regional_radius_reading|PAPER_REFERENCE|wall_regional": 0.837,
+    "GA_OD2_nw15_own_early_universe_inputs|anchored|nw15_baryon_fraction_and_n_s|cgi_comoving|a_equal_mass": 0.6431,
+    "GA_OD2_nw15_own_early_universe_inputs|anchored|nw15_baryon_fraction_and_n_s|cgi_meszaros|a_equal_mass": 0.5727,
+    "GA_OD2_nw15_own_early_universe_inputs|anchored|nw15_baryon_fraction_and_n_s|wall_regional|a_equal_mass": 0.899,
+    "GA_OD2_nw15_own_early_universe_inputs|anchored|nw15_baryon_fraction|cgi_comoving|a_equal_mass": 0.637,
+    "GA_OD2_nw15_own_early_universe_inputs|anchored|nw15_baryon_fraction|cgi_meszaros|a_equal_mass": 0.5672,
+    "GA_OD2_nw15_own_early_universe_inputs|anchored|nw15_baryon_fraction|wall_regional|a_equal_mass": 0.8904,
+    "GA_OD2_nw15_own_early_universe_inputs|anchored|planck_hybrid_primary|cgi_comoving|a_equal_mass": 0.6687,
+    "GA_OD2_nw15_own_early_universe_inputs|anchored|planck_hybrid_primary|cgi_meszaros|a_equal_mass": 0.5954,
+    "GA_OD2_nw15_own_early_universe_inputs|anchored|planck_hybrid_primary|wall_regional|a_equal_mass": 0.9347,
+    "GA_OD3_wkb_exponent_chains|alpha": 1.7069482,
+    "GA_OD3_wkb_exponent_chains|chains|1G-A_hybrid_aD0_k_phys0_D_R_8_over_h|alpha_k": 875.38,
+    "GA_OD3_wkb_exponent_chains|chains|photon_normalised_a_equal_mass|alpha_k": 557.44,
+    "GA_OD3_wkb_exponent_chains|chains|photon_normalised_b_dressed_8_over_h|alpha_k": 639.66,
+    "GA_OD3_wkb_exponent_chains|chains|photon_normalised_c_bare_8_over_hbar|alpha_k": 693.49,
+    "GA_OD3_wkb_exponent_chains|hybrid_photon_normalised_radius_Mpc": 8.005
+  },
+  "parent_commit": "63ca316b87399fc323713338a07519f8bce52113",
+  "phase": "1G-A",
+  "report": "reports/phase1g_a_owner_decisions_successor.md",
+  "schema_version": 1,
+  "scope": {
+    "equations_changed": false,
+    "frozen_reports_inventories_or_phase_scripts_edited": false,
+    "initial_conditions_units_sign_conventions_changed": false,
+    "not_granted_tokens_unchanged": [
+      "FSIGMA8_AUTHORIZATION",
+      "OBSERVATIONAL_AUTHORIZATION",
+      "RSD_AUTHORIZATION",
+      "SIGMA8_AUTHORIZATION",
+      "UNIQUE_TIMESCAPE_PREDICTION"
+    ],
+    "package_modules_changed": [],
+    "status_token_comments_changed": [],
+    "status_token_values_changed": false,
+    "tolerances_changed": false
+  },
+  "unticked_not_applied": [
+    "[ ] (ii) Switch the [NW15] primary to [NW15]'s own inputs and propagate the change to the 1G-C, 1G-E and 1G-F quotes and to CLAUDE.md."
+  ],
+  "validation": {
+    "recorded_in": "reports/phase1g_windows_validation_record.md (Sec. 7, final runs)"
+  }
+}

@@ -92,6 +92,13 @@ SLOPE_GAP_BAND = (0.0, 0.01)
 GAP_RATIO_BAND = (1.5, 3.0)
 # The D3 branch changes only the k-independent A33 entry (observed 1.3e-4).
 D3_SLOPE_DIFFERENCE_ATOL = 1e-3
+# The [1G-A] l. 141-144 illustration, pinned as a regression of its unit chain
+# (owner decision GA-OD3, 2026-09-30, reports/phase1g_a_owner_decisions_successor.md):
+# a hybrid chain, k_matrix = a_D0 (c/H0) k_phys0_D with the present
+# volume-average physical wavenumber k_phys0_D = 1/R, R = 8/h_dressed Mpc,
+# which 1D-A Sec. 10 excludes from k_com R_com.  Under the photon-normalised
+# radius conventions (a)/(b)/(c) of [1G-A] Sec. 6.4, alpha*k at kR = 1 is
+# 557.4 / 639.7 / 693.5, below 709.8.
 EXPONENT_KR1_R8_1G_A = 875.4
 EXPONENT_KR1_R8_ATOL = 0.05  # one-decimal rounding of the recorded value
 # Exact algebraic identity of a two-factor product: roundoff only
@@ -221,8 +228,9 @@ def test_wkb_exponent_reproduces_phase1g_a(
                                rtol=0.0, atol=CS2_EFF_ATOL)
     samples = np.asarray(bg.cs2_eff(np.linspace(t_initial, params.t0, CS2_SIGN_SAMPLES), params))
     assert np.all(samples < 0.0)
-    # sigma_8 scale: kR = 1 at R = 8/h Mpc, matrix k = a_D0 (c/H0) k_phys0
-    # (1D-A Sec. 10 unit chain, as in [1G-A]); exp(alpha*k) overflows float64.
+    # sigma_8 scale: kR = 1 at R = 8/h Mpc, matrix k = a_D0 (c/H0) k_phys0_D,
+    # the hybrid chain of [1G-A] (not the 1D-A Sec. 10 chain; GA-OD3, see
+    # EXPONENT_KR1_R8_1G_A); on this chain exp(alpha*k) overflows float64.
     k_matrix_r8 = params.aD0 * (C_KM_S / (100.0 * TIMESCAPE_H)) / (R8_H_MPC / TIMESCAPE_H)
     np.testing.assert_allclose(alpha * k_matrix_r8, EXPONENT_KR1_R8_1G_A,
                                rtol=0.0, atol=EXPONENT_KR1_R8_ATOL)
