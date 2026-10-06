@@ -1,0 +1,1613 @@
+{
+  "anchoring": {
+    "anchor": 0.8111,
+    "factor": 0.97057677,
+    "g_lcdm_qplus0": 0.787812602,
+    "lcdm_eh98_linear_sigma": 0.83568866,
+    "meaning": "multiplies the direct A_s-normalised EH98 value by the Boltzmann-to-EH98 ratio at the Planck parameters; late-time LCDM growth cancels exactly",
+    "provenance": "Planck 2018 VI (arXiv:1807.06209) Table 2, TT,TE,EE+lowE+lensing"
+  },
+  "assumptions": {
+    "A1-A5": "1G-C regional laws with owner decisions: walls EdS in common time t clocked by the wall matter",
+    "H-A6": "void autonomy: each empty void region expands as Milne independently of the surrounding wall density; no wall-void volume transfer (1G-G J = 0)",
+    "H-A7": "monotone response: f_v,LS <= p <= 1",
+    "H-A8": "linear response applied where the void-volume response rms exceeds 1 (formal, linearly extrapolated statistic)",
+    "S1": "wall-density (curvature) perturbations admitted (1G-D); shown necessary below ~99/127 h^-1 Mpc by (H13)",
+    "closure": "explicit void share p(k) (constant, or Gaussian-threshold peak-background split with an explicit seed radius)",
+    "early_spectrum": "PROVISIONAL_MODEL_IMPORT: Planck 2018 A_s, n_s, k_p, f_b; EH98 zero-baryon transfer at omega_m,eff; matter-era normalisation at z = 1090, radiation neglected",
+    "radius": "CONVENTION_DEPENDENT, explicit"
+  },
+  "authorization": {
+    "granted": [
+      "research and development phase: sources, derivations, numerical experiments, experimental modules, scripts, configurations, tests, reports, current-documentation updates",
+      "exploration of additional hypotheses in isolated experimental implementations, named, motivated and compared",
+      "a dedicated local branch from the updated main and local commits"
+    ],
+    "not_granted": [
+      "push",
+      "pull request",
+      "merge",
+      "tag creation or change",
+      "freeze declaration",
+      "release",
+      "change of a scientific token or observational authorization",
+      "promotion of an explored hypothesis to project law"
+    ],
+    "source": "owner task statement of 2026-10-06 (Timescape-fsigma8 - incarico cloud per chiudere la definizione di sigma8)"
+  },
+  "base": {
+    "branch": "phase-1g-h-global-variance-closure",
+    "f_g_freeze_record": "reports/phase1g_fg_freeze_status_successor.md",
+    "freeze_status_alignment_commit": "79003742fb1f284693d6659e329b2c6b7f7927f0",
+    "main": "8d3cdd0533035858c42269cb1dff1a20dcafc7da",
+    "runtime_commit": "fd7331f321702ed8c20d32ea805e7b9537d44726"
+  },
+  "classification": "RESEARCH_PHASE_WITH_EXPERIMENTAL_RUNTIME",
+  "d_v2_tag_or_branch_created": false,
+  "date": "2026-10-06",
+  "definition": {
+    "contrast": "(H1) 1 + delta_L = (M_L/V_L)/(M_D/V_D)",
+    "ensemble": "centres uniform in Lagrangian space (mass sampling); connected variance",
+    "field": "dust rest-mass density (CDM + baryons after decoupling), dust rest frame",
+    "flrw_limit": "standard linear top-hat variance ([JLH13] Eq. (2)); D_W -> 1 - (5/6) f_v0",
+    "foliation_time": "dust-orthogonal foliation of [GM] Sec. 3; dust proper time t (common time); present epoch f_v(t0) = f_v0",
+    "linear": "first-order ensemble-mean response to the early Gaussian field around the statistically homogeneous two-phase tracker state (propagator G(k) = <delta_L(k) delta_0*(k)>'/P_0(k))",
+    "mean": "global Buchert volume average <rho>_D = M_D/V_D on the same slice",
+    "radius_conventions": {
+      "a_comparison": "equal Lagrangian mass to the reference LCDM M8",
+      "b_diagnostic": "L/h_dressed wall-comoving (needs the underived dressed map)",
+      "c_recommended": "R = (L/h_bare)/gamma_w0, L = 8: present volume-average proper radius 8/h_bare Mpc, R*H_D0 = 800 km/s (H24)"
+    },
+    "region": "Lagrangian top hat: dust elements with early photon-normalised comoving labels within radius R",
+    "statistic": "(H10) sigma^2 = int dln k Delta^2_u G^2 W^2(kR); real-space (H11)"
+  },
+  "equations": {
+    "H1": "global contrast of a Lagrangian region (definition)",
+    "H10": "global linear statistic (spectral)",
+    "H11": "real-space pair-density form",
+    "H12": "Gaussian-threshold peak-background void share with compression term and seed window",
+    "H13": "strict flat-wall cap delta_L < f_v/f_w",
+    "H14": "rms void-volume response",
+    "H15": "closure-independent interval (monotone lower end, homogeneity-premise upper end)",
+    "H16": "amplitude scaling: sigma^2 ~ A_s at fixed closure; PBS void term A_s-independent",
+    "H17": "two-phase density decomposition with conditional normalisation",
+    "H18": "complete covariance with cross terms",
+    "H19": "1G-E mass-conserving formula as special case",
+    "H2": "exact finite-density two-phase contrast",
+    "H20": "Cauchy-Schwarz bound",
+    "H21": "Gaussian-threshold pair: bivariate-normal orthant moments",
+    "H22": "two-barrier void mass fraction response (gambler's ruin) and M3 global bias",
+    "H23": "finite-t identity (t0/t)^(2/3)/(1+z) = gamma_w0 f_w0^(1/3)/(gamma_w f_w^(1/3))",
+    "H24": "mass label of convention (c)",
+    "H3": "exact empty-void specific-volume identity",
+    "H4": "linearisation delta_L = f_w delta_w + f_v epsilon",
+    "H5": "finite-density linear coefficients",
+    "H6": "regional evolution: delta_w = C t^(2/3) + C' t^-1, epsilon const (A1-A5, H-A6)",
+    "H7": "growth of a region with void share p",
+    "H8": "D_W, D_V closed forms",
+    "H9": "propagator G = (1-p) D_W + p D_V",
+    "provenance": "H1-H5, H13, H17-H20, H23 follow from the definitions with [GM] Sec. 3 and (5.4)-(5.6); H6-H9 add A1-A5 and H-A6; H12 extends [1G-D] Sec. 7; H22 applies [SvdW04] Eq. (3) to conditional walks; none is attributed to a source as already derived"
+  },
+  "evidence": {
+    "artifact": "artifacts/independent/phase1g_h_global_variance_closure.json (git-ignored, regenerable)",
+    "artifact_raw_sha256_meaning": "one exact output and environment (includes the git head), not a cross-platform gate",
+    "artifact_sha256_py313_run": "99c4aad4ee1caee1f2e7d49fa390e56d3d40bc1a366983c25a54f212a880aa12",
+    "cross_interpreter_check": {
+      "interpreters": [
+        "CPython 3.13.16 (NumPy 2.5.3, SciPy 1.18.1)",
+        "CPython 3.11.17 (NumPy 2.4.6, SciPy 1.17.1)"
+      ],
+      "label_or_key_mismatches": 0,
+      "max_relative_difference": 0.0,
+      "numeric_leaves_compared": 2779,
+      "rule": "numeric leaves with rtol 1e-11 / atol 1e-14 ignoring environment and figures; labels and keys exactly"
+    },
+    "figures": [
+      "artifacts/independent/phase1g_h/sigma_vs_void_share.png",
+      "artifacts/independent/phase1g_h/radius_scan.png",
+      "artifacts/independent/phase1g_h/propagator_scale_dependence.png"
+    ],
+    "gates": {
+      "D_owner_A_v_printed_digits": 0.5,
+      "D_owner_X_SU_printed_digits": 0.0005,
+      "E_reference_reproduction_abs": 0.0006,
+      "constant_share_A_s_scaling_rel": 1e-10,
+      "gt_orthant_P11_vs_bivariate_cdf_abs": 1e-10,
+      "m3_bias_finite_difference_rel": 1e-06,
+      "pbs_void_term_A_s_independence_rel": 0.002,
+      "refined_quadrature_rel": 2e-06
+    },
+    "gates_passed": 21,
+    "gates_total": 21,
+    "run_environment": {
+      "git_head": "fd7331f321702ed8c20d32ea805e7b9537d44726",
+      "implementation": "CPython",
+      "matplotlib": "3.11.2",
+      "numpy": "2.5.3",
+      "platform": "Linux-6.18.44-fc-v70-x86_64-with-glibc2.39",
+      "python": "3.13.16",
+      "scipy": "1.18.1",
+      "src_scripts_tests_dirty": false
+    },
+    "script": "scripts/phase1g_h_global_variance_closure_numerics.py"
+  },
+  "files": {
+    "added": {
+      "scripts/phase1g_h_configs/gm_bare_pbs_f_median_seed.json": "fce37d4e6bef9b778e68ec5bcb306051e07518020622ecbdb9c1c1847d2ba581",
+      "scripts/phase1g_h_configs/gm_bare_pbs_w09_seed.json": "286cea0cb071b8381fe16025ac99d0d596c8d704282d869ebfe23d80026b3986",
+      "scripts/phase1g_h_configs/nw15_equal_mass_constant_share.json": "41d442557b90a00ddd3d26f263eecea12b982c046656750fa9a1696b6c4d9288",
+      "scripts/phase1g_h_global_variance_case.py": "f476b4fc4302367cd34544b8dd7fb5b703fed2eac3c1de1e21c3eccb525fe5f0",
+      "scripts/phase1g_h_global_variance_closure_numerics.py": "f82648357026f9d99b96e821cccc764a6e44e3acea8385a3912cb14fc311146e",
+      "src/timescape_fsigma8/global_variance.py": "a7c57606bfebf2abb3c87a0f480832f5df1ef98f87741489c760d41cc229b5d2",
+      "tests/test_phase1g_h_global_variance.py": "14bfd2ddfc8aa941fc6e04e9a2f37d064749db1a559bd9b2f4469a15b416e64a"
+    },
+    "added_reports": [
+      "reports/phase1g_h_global_variance_closure.md",
+      "reports/phase1g_h_global_variance_closure_inventory.json",
+      "reports/phase1g_h_global_variance_closure_validation.md",
+      "reports/phase1g_h_global_variance_closure_logs/"
+    ],
+    "changed": [
+      "README.md",
+      "CLAUDE.md"
+    ],
+    "unchanged": "every frozen report, inventory, audit, evidence file, tag, existing package module, test and status token"
+  },
+  "limitations": [
+    "H-A6 ignores wall-void boundary coupling",
+    "single-scale Gaussian-threshold seeds",
+    "1G-F radius conversion ambiguity (photon-comoving vs volume-average proper, factor gamma_w0)",
+    "matching at z = 1090 without radiation",
+    "EH98 no-wiggle transfer",
+    "A_s from a LCDM fit",
+    "empty voids in the propagator (finite-density voids only in the covariance and the M3 alternative)",
+    "no time-dependent mergers or mass transfer (1G-G)",
+    "nothing observational"
+  ],
+  "missing_input": {
+    "object": "p(k) = -d f_v,LS[region]/d delta_L(k) at the matching epoch in the tracker ensemble (void-seed volume-fraction bias); equivalently 1G-D A_v(k) = p/f_v,LS",
+    "sensitivity_dsigma_c_dp": {
+      "NW15_CMB_FIT": 11.46,
+      "PAPER_REFERENCE": 7.785
+    },
+    "status": "EXTERNAL_CLOSURE_INPUT (VOID_ONSET_RESPONSE)",
+    "what_would_determine_it": [
+      "a void-formation model reproducing the tracker f_v(t) from the early spectrum (excursion set with calibrated barrier, or an LTB-CMC ensemble), whose peak-background split gives p(k)",
+      "a statistic fixing G where the void response is linear: global linear rms at ~100 h^-1 Mpc, or the void-fraction / large-scale-density cross-correlation (both need the observational reduction)"
+    ],
+    "why_undetermined": [
+      "tracker f_v,LS fixed by late-time parameters, not by formation on the early field",
+      "A1-A5 and H-A6 propagate any split but do not choose it",
+      "the 1G-F population is not the tracker's (constant void fraction)",
+      "the PBS closure needs a seed model and an external seed scale"
+    ]
+  },
+  "observational_authorizations": {
+    "FSIGMA8_AUTHORIZATION": "NOT_GRANTED",
+    "OBSERVATIONAL_AUTHORIZATION": "NOT_GRANTED",
+    "RSD_AUTHORIZATION": "NOT_GRANTED",
+    "SIGMA8_AUTHORIZATION": "NOT_GRANTED",
+    "UNIQUE_TIMESCAPE_PREDICTION": "NOT_GRANTED"
+  },
+  "owner_decisions_requested": {
+    "H-OD1": "adopt the definition with convention (c) primary and (a) for comparison (recommended), or (a) primary, or keep as proposal",
+    "H-OD2": "void-share closure for a reference value: beta (1G-F-median seed, recommended), alpha (1G-D [W09]-radius seed), gamma (interval only)",
+    "H-OD3": "status tokens: add GLOBAL_MEAN_LINEAR_STATISTIC_DEFINITION = DERIVED_FROM_VERIFIED_DEFINITIONS and GLOBAL_MEAN_LINEAR_STATISTIC_COMPUTATION = DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION (recommended; no validator change), or change LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC (needs an approved validator extension for a second chained change; R2-N4 then relevant)",
+    "H-OD4": "keep global_variance.py experimental until an independent audit (recommended), or promote",
+    "H-OD5": "push / pull request / merge / audit / freeze / tag: separate decisions, none authorised"
+  },
+  "phase": "1G-H",
+  "r2_n4_relevance": "only if H-OD3's second option (a chained change of LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC) is chosen",
+  "report": "reports/phase1g_h_global_variance_closure.md",
+  "results": {
+    "NW15_CMB_FIT": {
+      "a_s_scaling_pbs_tracker_seed": {
+        "x0.5": {
+          "d_ln_sigma_d_ln_A_s": 0.155607,
+          "void_share_rms_ratio": 0.9997526,
+          "wall_share_rms_ratio": 0.688405
+        },
+        "x2": {
+          "d_ln_sigma_d_ln_A_s": 0.19484,
+          "void_share_rms_ratio": 1.0003499,
+          "wall_share_rms_ratio": 1.440661
+        }
+      },
+      "conventions": {
+        "a_equal_mass": {
+          "closures": {
+            "monotone_lower_p_fvLS": {
+              "linear_sigma_direct_A_s": 0.3598,
+              "linear_sigma_planck_anchored": 0.349214,
+              "propagator_k0": 0.353247,
+              "radius_Mpc": 12.22604,
+              "scale_dependence_rel": 0.0,
+              "share_k0": 5.07e-05,
+              "unit_growth_sigma": 1.01855,
+              "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
+              "void_volume_response_rms": 0.0009
+            },
+            "pbs_svdw04_seed_compressed": {
+              "linear_sigma_direct_A_s": 2.423698,
+              "linear_sigma_planck_anchored": 2.352385,
+              "propagator_k0": 3.089525,
+              "radius_Mpc": 12.22604,
+              "scale_dependence_rel": -0.229799,
+              "share_k0": 0.2493724,
+              "unit_growth_sigma": 1.01855,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 3.426
+            },
+            "pbs_tracker_seed_F_median_compressed": {
+              "linear_sigma_direct_A_s": 0.796018,
+              "linear_sigma_planck_anchored": 0.772597,
+              "propagator_k0": 0.781557,
+              "radius_Mpc": 12.22604,
+              "scale_dependence_rel": -4.6e-05,
+              "share_k0": 0.039077,
+              "unit_growth_sigma": 1.01855,
+              "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
+              "void_volume_response_rms": 0.719
+            },
+            "pbs_tracker_seed_compressed": {
+              "linear_sigma_direct_A_s": 1.03074,
+              "linear_sigma_planck_anchored": 1.000412,
+              "propagator_k0": 1.012877,
+              "radius_Mpc": 12.22604,
+              "scale_dependence_rel": -0.000898,
+              "share_k0": 0.0601543,
+              "unit_growth_sigma": 1.01855,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 1.1054
+            },
+            "pbs_tracker_seed_threshold_only_1G_D": {
+              "linear_sigma_direct_A_s": 1.030173,
+              "linear_sigma_planck_anchored": 0.999862,
+              "propagator_k0": 1.01232,
+              "radius_Mpc": 12.22604,
+              "scale_dependence_rel": -0.000899,
+              "share_k0": 0.0601035,
+              "unit_growth_sigma": 1.01855,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 1.1045
+            },
+            "strict_flat_walls_p1": {
+              "linear_sigma_direct_A_s": 11.537714,
+              "linear_sigma_planck_anchored": 11.198238,
+              "propagator_k0": 11.327583,
+              "radius_Mpc": 12.22604,
+              "scale_dependence_rel": 0.0,
+              "share_k0": 1.0,
+              "unit_growth_sigma": 1.01855,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 18.4015
+            },
+            "wall_mode_p0": {
+              "linear_sigma_direct_A_s": 0.359233,
+              "linear_sigma_planck_anchored": 0.348663,
+              "propagator_k0": 0.35269,
+              "radius_Mpc": 12.22604,
+              "scale_dependence_rel": 0.0,
+              "share_k0": 0.0,
+              "unit_growth_sigma": 1.01855,
+              "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
+              "void_volume_response_rms": 0.0
+            }
+          },
+          "intervals": {
+            "W09_10pct_at_100": {
+              "lower": 0.3598,
+              "lower_anchored": 0.349214,
+              "premise_max_linear_rms": 0.1,
+              "premise_radius_Mpc": 152.825504,
+              "primary_rms_at_premise": 0.086653,
+              "primary_target_inside": true,
+              "share_upper": 0.074368,
+              "upper": 1.190556,
+              "upper_anchored": 1.155526
+            },
+            "W09_10pct_at_150": {
+              "lower": 0.3598,
+              "lower_anchored": 0.349214,
+              "premise_max_linear_rms": 0.1,
+              "premise_radius_Mpc": 229.238256,
+              "primary_rms_at_premise": 0.048882,
+              "primary_target_inside": true,
+              "share_upper": 0.156663,
+              "upper": 2.110489,
+              "upper_anchored": 2.048391
+            },
+            "W09_several_pct_6pct_at_100": {
+              "lower": 0.3598,
+              "lower_anchored": 0.349214,
+              "premise_max_linear_rms": 0.06,
+              "premise_radius_Mpc": 152.825504,
+              "primary_rms_at_premise": 0.086653,
+              "primary_target_inside": false,
+              "share_upper": 0.031766,
+              "upper": 0.714333,
+              "upper_anchored": 0.693315
+            },
+            "cell_side_100_as_sphere_62": {
+              "lower": 0.3598,
+              "lower_anchored": 0.349214,
+              "premise_max_linear_rms": 0.1,
+              "premise_radius_Mpc": 94.805377,
+              "primary_rms_at_premise": 0.158016,
+              "primary_target_inside": false,
+              "share_upper": 0.026267,
+              "upper": 0.652862,
+              "upper_anchored": 0.633653
+            }
+          },
+          "radius_scan": [
+            {
+              "length_h_inverse_Mpc": 6.0,
+              "monotone_lower_p_fvLS": 0.433494,
+              "pbs_svdw04_seed_compressed": 2.629517,
+              "pbs_tracker_seed_compressed": 1.241167,
+              "radius_Mpc": 9.16953
+            },
+            {
+              "length_h_inverse_Mpc": 7.0,
+              "monotone_lower_p_fvLS": 0.393055,
+              "pbs_svdw04_seed_compressed": 2.527962,
+              "pbs_tracker_seed_compressed": 1.125755,
+              "radius_Mpc": 10.697785
+            },
+            {
+              "length_h_inverse_Mpc": 8.0,
+              "monotone_lower_p_fvLS": 0.3598,
+              "pbs_svdw04_seed_compressed": 2.423698,
+              "pbs_tracker_seed_compressed": 1.03074,
+              "radius_Mpc": 12.22604
+            },
+            {
+              "length_h_inverse_Mpc": 9.0,
+              "monotone_lower_p_fvLS": 0.331847,
+              "pbs_svdw04_seed_compressed": 2.319487,
+              "pbs_tracker_seed_compressed": 0.950814,
+              "radius_Mpc": 13.754295
+            },
+            {
+              "length_h_inverse_Mpc": 10.0,
+              "monotone_lower_p_fvLS": 0.307947,
+              "pbs_svdw04_seed_compressed": 2.217357,
+              "pbs_tracker_seed_compressed": 0.882439,
+              "radius_Mpc": 15.28255
+            },
+            {
+              "length_h_inverse_Mpc": 12.0,
+              "monotone_lower_p_fvLS": 0.269069,
+              "pbs_svdw04_seed_compressed": 2.024461,
+              "pbs_tracker_seed_compressed": 0.771156,
+              "radius_Mpc": 18.339061
+            }
+          ]
+        },
+        "b_dressed_wall_comoving": {
+          "closures": {
+            "monotone_lower_p_fvLS": {
+              "linear_sigma_direct_A_s": 0.342991,
+              "linear_sigma_planck_anchored": 0.332899,
+              "propagator_k0": 0.353247,
+              "radius_Mpc": 13.114754,
+              "scale_dependence_rel": 0.0,
+              "share_k0": 5.07e-05,
+              "unit_growth_sigma": 0.970965,
+              "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
+              "void_volume_response_rms": 0.0009
+            },
+            "pbs_svdw04_seed_compressed": {
+              "linear_sigma_direct_A_s": 2.362945,
+              "linear_sigma_planck_anchored": 2.293419,
+              "propagator_k0": 3.089525,
+              "radius_Mpc": 13.114754,
+              "scale_dependence_rel": -0.212305,
+              "share_k0": 0.2493724,
+              "unit_growth_sigma": 0.970965,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 3.3479
+            },
+            "pbs_tracker_seed_F_median_compressed": {
+              "linear_sigma_direct_A_s": 0.758833,
+              "linear_sigma_planck_anchored": 0.736506,
+              "propagator_k0": 0.781557,
+              "radius_Mpc": 13.114754,
+              "scale_dependence_rel": -4.1e-05,
+              "share_k0": 0.039077,
+              "unit_growth_sigma": 0.970965,
+              "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
+              "void_volume_response_rms": 0.6854
+            },
+            "pbs_tracker_seed_compressed": {
+              "linear_sigma_direct_A_s": 0.982682,
+              "linear_sigma_planck_anchored": 0.953768,
+              "propagator_k0": 1.012877,
+              "radius_Mpc": 13.114754,
+              "scale_dependence_rel": -0.000799,
+              "share_k0": 0.0601543,
+              "unit_growth_sigma": 0.970965,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 1.0539
+            },
+            "pbs_tracker_seed_threshold_only_1G_D": {
+              "linear_sigma_direct_A_s": 0.982141,
+              "linear_sigma_planck_anchored": 0.953244,
+              "propagator_k0": 1.01232,
+              "radius_Mpc": 13.114754,
+              "scale_dependence_rel": -0.0008,
+              "share_k0": 0.0601035,
+              "unit_growth_sigma": 0.970965,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 1.053
+            },
+            "strict_flat_walls_p1": {
+              "linear_sigma_direct_A_s": 10.998687,
+              "linear_sigma_planck_anchored": 10.67507,
+              "propagator_k0": 11.327583,
+              "radius_Mpc": 13.114754,
+              "scale_dependence_rel": 0.0,
+              "share_k0": 1.0,
+              "unit_growth_sigma": 0.970965,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 17.5418
+            },
+            "wall_mode_p0": {
+              "linear_sigma_direct_A_s": 0.34245,
+              "linear_sigma_planck_anchored": 0.332374,
+              "propagator_k0": 0.35269,
+              "radius_Mpc": 13.114754,
+              "scale_dependence_rel": 0.0,
+              "share_k0": 0.0,
+              "unit_growth_sigma": 0.970965,
+              "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
+              "void_volume_response_rms": 0.0
+            }
+          },
+          "intervals": {
+            "W09_10pct_at_100": {
+              "lower": 0.342991,
+              "lower_anchored": 0.332899,
+              "premise_max_linear_rms": 0.1,
+              "premise_radius_Mpc": 163.934426,
+              "primary_rms_at_premise": 0.078816,
+              "primary_target_inside": true,
+              "share_upper": 0.084958,
+              "upper": 1.24778,
+              "upper_anchored": 1.211067
+            },
+            "W09_10pct_at_150": {
+              "lower": 0.342991,
+              "lower_anchored": 0.332899,
+              "premise_max_linear_rms": 0.1,
+              "premise_radius_Mpc": 245.901639,
+              "primary_rms_at_premise": 0.04401,
+              "primary_target_inside": true,
+              "share_upper": 0.177563,
+              "upper": 2.234603,
+              "upper_anchored": 2.168854
+            },
+            "W09_several_pct_6pct_at_100": {
+              "lower": 0.342991,
+              "lower_anchored": 0.332899,
+              "premise_max_linear_rms": 0.06,
+              "premise_radius_Mpc": 163.934426,
+              "primary_rms_at_premise": 0.078816,
+              "primary_target_inside": false,
+              "share_upper": 0.03812,
+              "upper": 0.748668,
+              "upper_anchored": 0.72664
+            },
+            "cell_side_100_as_sphere_62": {
+              "lower": 0.342991,
+              "lower_anchored": 0.332899,
+              "premise_max_linear_rms": 0.1,
+              "premise_radius_Mpc": 101.696802,
+              "primary_rms_at_premise": 0.145315,
+              "primary_target_inside": false,
+              "share_upper": 0.031372,
+              "upper": 0.676762,
+              "upper_anchored": 0.656849
+            }
+          },
+          "radius_scan": [
+            {
+              "length_h_inverse_Mpc": 6.0,
+              "monotone_lower_p_fvLS": 0.414815,
+              "pbs_svdw04_seed_compressed": 2.585766,
+              "pbs_tracker_seed_compressed": 1.187878,
+              "radius_Mpc": 9.836066
+            },
+            {
+              "length_h_inverse_Mpc": 7.0,
+              "monotone_lower_p_fvLS": 0.375373,
+              "pbs_svdw04_seed_compressed": 2.475056,
+              "pbs_tracker_seed_compressed": 1.075246,
+              "radius_Mpc": 11.47541
+            },
+            {
+              "length_h_inverse_Mpc": 8.0,
+              "monotone_lower_p_fvLS": 0.342991,
+              "pbs_svdw04_seed_compressed": 2.362945,
+              "pbs_tracker_seed_compressed": 0.982682,
+              "radius_Mpc": 13.114754
+            },
+            {
+              "length_h_inverse_Mpc": 9.0,
+              "monotone_lower_p_fvLS": 0.315813,
+              "pbs_svdw04_seed_compressed": 2.252337,
+              "pbs_tracker_seed_compressed": 0.904947,
+              "radius_Mpc": 14.754098
+            },
+            {
+              "length_h_inverse_Mpc": 10.0,
+              "monotone_lower_p_fvLS": 0.292611,
+              "pbs_svdw04_seed_compressed": 2.14525,
+              "pbs_tracker_seed_compressed": 0.83855,
+              "radius_Mpc": 16.393443
+            },
+            {
+              "length_h_inverse_Mpc": 12.0,
+              "monotone_lower_p_fvLS": 0.254948,
+              "pbs_svdw04_seed_compressed": 1.946203,
+              "pbs_tracker_seed_compressed": 0.73072,
+              "radius_Mpc": 19.672131
+            }
+          ]
+        },
+        "c_bare_volume_average": {
+          "closures": {
+            "monotone_lower_p_fvLS": {
+              "linear_sigma_direct_A_s": 0.368859,
+              "linear_sigma_planck_anchored": 0.358006,
+              "propagator_k0": 0.353247,
+              "radius_Mpc": 11.781424,
+              "scale_dependence_rel": 0.0,
+              "share_k0": 5.07e-05,
+              "unit_growth_sigma": 1.044197,
+              "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
+              "void_volume_response_rms": 0.001
+            },
+            "pbs_svdw04_seed_compressed": {
+              "linear_sigma_direct_A_s": 2.454134,
+              "linear_sigma_planck_anchored": 2.381925,
+              "propagator_k0": 3.089525,
+              "radius_Mpc": 11.781424,
+              "scale_dependence_rel": -0.239281,
+              "share_k0": 0.2493724,
+              "unit_growth_sigma": 1.044197,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 3.4647
+            },
+            "pbs_tracker_seed_F_median_compressed": {
+              "linear_sigma_direct_A_s": 0.816059,
+              "linear_sigma_planck_anchored": 0.792048,
+              "propagator_k0": 0.781557,
+              "radius_Mpc": 11.781424,
+              "scale_dependence_rel": -4.9e-05,
+              "share_k0": 0.039077,
+              "unit_growth_sigma": 1.044197,
+              "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
+              "void_volume_response_rms": 0.7371
+            },
+            "pbs_tracker_seed_compressed": {
+              "linear_sigma_direct_A_s": 1.056633,
+              "linear_sigma_planck_anchored": 1.025543,
+              "propagator_k0": 1.012877,
+              "radius_Mpc": 11.781424,
+              "scale_dependence_rel": -0.000955,
+              "share_k0": 0.0601543,
+              "unit_growth_sigma": 1.044197,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 1.1331
+            },
+            "pbs_tracker_seed_threshold_only_1G_D": {
+              "linear_sigma_direct_A_s": 1.056051,
+              "linear_sigma_planck_anchored": 1.024979,
+              "propagator_k0": 1.01232,
+              "radius_Mpc": 11.781424,
+              "scale_dependence_rel": -0.000956,
+              "share_k0": 0.0601035,
+              "unit_growth_sigma": 1.044197,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 1.1322
+            },
+            "strict_flat_walls_p1": {
+              "linear_sigma_direct_A_s": 11.828223,
+              "linear_sigma_planck_anchored": 11.480199,
+              "propagator_k0": 11.327583,
+              "radius_Mpc": 11.781424,
+              "scale_dependence_rel": 0.0,
+              "share_k0": 1.0,
+              "unit_growth_sigma": 1.044197,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 18.8648
+            },
+            "wall_mode_p0": {
+              "linear_sigma_direct_A_s": 0.368278,
+              "linear_sigma_planck_anchored": 0.357442,
+              "propagator_k0": 0.35269,
+              "radius_Mpc": 11.781424,
+              "scale_dependence_rel": 0.0,
+              "share_k0": 0.0,
+              "unit_growth_sigma": 1.044197,
+              "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
+              "void_volume_response_rms": 0.0
+            }
+          },
+          "intervals": {
+            "W09_10pct_at_100": {
+              "lower": 0.368859,
+              "lower_anchored": 0.358006,
+              "premise_max_linear_rms": 0.1,
+              "premise_radius_Mpc": 147.267802,
+              "primary_rms_at_premise": 0.091034,
+              "primary_target_inside": true,
+              "share_upper": 0.069242,
+              "upper": 1.161784,
+              "upper_anchored": 1.127601
+            },
+            "W09_10pct_at_150": {
+              "lower": 0.368859,
+              "lower_anchored": 0.358006,
+              "premise_max_linear_rms": 0.1,
+              "premise_radius_Mpc": 220.901703,
+              "primary_rms_at_premise": 0.051634,
+              "primary_target_inside": true,
+              "share_upper": 0.146603,
+              "upper": 2.048339,
+              "upper_anchored": 1.98807
+            },
+            "W09_several_pct_6pct_at_100": {
+              "lower": 0.368859,
+              "lower_anchored": 0.358006,
+              "premise_max_linear_rms": 0.06,
+              "premise_radius_Mpc": 147.267802,
+              "primary_rms_at_premise": 0.091034,
+              "primary_target_inside": false,
+              "share_upper": 0.028691,
+              "upper": 0.697071,
+              "upper_anchored": 0.676561
+            },
+            "cell_side_100_as_sphere_62": {
+              "lower": 0.368859,
+              "lower_anchored": 0.358006,
+              "premise_max_linear_rms": 0.1,
+              "premise_radius_Mpc": 91.357653,
+              "primary_rms_at_premise": 0.165068,
+              "primary_target_inside": false,
+              "share_upper": 0.023772,
+              "upper": 0.640708,
+              "upper_anchored": 0.621857
+            }
+          },
+          "radius_scan": [
+            {
+              "length_h_inverse_Mpc": 6.0,
+              "monotone_lower_p_fvLS": 0.443536,
+              "pbs_svdw04_seed_compressed": 2.650991,
+              "pbs_tracker_seed_compressed": 1.269802,
+              "radius_Mpc": 8.836068
+            },
+            {
+              "length_h_inverse_Mpc": 7.0,
+              "monotone_lower_p_fvLS": 0.402573,
+              "pbs_svdw04_seed_compressed": 2.554198,
+              "pbs_tracker_seed_compressed": 1.152934,
+              "radius_Mpc": 10.308746
+            },
+            {
+              "length_h_inverse_Mpc": 8.0,
+              "monotone_lower_p_fvLS": 0.368859,
+              "pbs_svdw04_seed_compressed": 2.454134,
+              "pbs_tracker_seed_compressed": 1.056633,
+              "radius_Mpc": 11.781424
+            },
+            {
+              "length_h_inverse_Mpc": 9.0,
+              "monotone_lower_p_fvLS": 0.340499,
+              "pbs_svdw04_seed_compressed": 2.353451,
+              "pbs_tracker_seed_compressed": 0.975556,
+              "radius_Mpc": 13.254102
+            },
+            {
+              "length_h_inverse_Mpc": 10.0,
+              "monotone_lower_p_fvLS": 0.316231,
+              "pbs_svdw04_seed_compressed": 2.254156,
+              "pbs_tracker_seed_compressed": 0.906141,
+              "radius_Mpc": 14.72678
+            },
+            {
+              "length_h_inverse_Mpc": 12.0,
+              "monotone_lower_p_fvLS": 0.276713,
+              "pbs_svdw04_seed_compressed": 2.065016,
+              "pbs_tracker_seed_compressed": 0.793041,
+              "radius_Mpc": 17.672136
+            }
+          ]
+        }
+      },
+      "flat_wall_capacity": {
+        "cap_f_v_ls_over_f_w_ls": 5.074e-05,
+        "radius_Mpc": 208.79964858,
+        "radius_bare_h_inv_Mpc": 141.78228092,
+        "radius_dressed_h_inv_Mpc": 127.36778563
+      },
+      "growth": {
+        "f_v_ls": 5.0734750052150474e-05,
+        "gamma_w0": 1.3135,
+        "gamma_w_ls": 1.0000253673750261,
+        "t_ls_over_t0": 3.0183448047383194e-05,
+        "void_share_growth": 11.327583314531257,
+        "void_to_wall_growth_ratio": 32.117646701977165,
+        "wall_share_growth": 0.3526903268985125
+      },
+      "h_bare": 0.5169661631649954,
+      "h_dressed": 0.61,
+      "m3_two_barrier_alternative": {
+        "C1_clock_growth_today": 0.945503,
+        "compressed_with_long_mode": {
+          "bias": 1.354601,
+          "equivalent_tracker_share": 0.084565,
+          "global_growth_today": 1.280779,
+          "linear_sigma_c_direct": 1.337385
+        },
+        "note": "1G-F's M3 budget: void volume fraction 0.751969 (not the tracker's f_v0), finite-density voids x = 0.2047; a different conditional model, compared by its equivalent tracker share only",
+        "universal_wall_density": {
+          "bias": 0.354601,
+          "equivalent_tracker_share": -0.001587,
+          "global_growth_today": 0.335276,
+          "linear_sigma_c_direct": 0.350094
+        }
+      },
+      "omega_m_per_photon": 0.13093722890629916,
+      "refined_quadrature_linear_sigma_c_pbs": 1.056632599,
+      "seed_radius_sensitivity": {
+        "svdw04_factor_1.72": {
+          "R_s_Mpc": 14.296607,
+          "linear_sigma_c_direct": 2.454134,
+          "share_k0": 0.2493724,
+          "void_volume_response_rms": 3.4647
+        },
+        "tracker_seed_F_median": {
+          "R_s_Mpc": 0.198569,
+          "linear_sigma_c_direct": 0.816059,
+          "share_k0": 0.039077,
+          "void_volume_response_rms": 0.7371
+        },
+        "tracker_seed_W09_15": {
+          "R_s_Mpc": 0.809737,
+          "linear_sigma_c_direct": 1.056633,
+          "share_k0": 0.0601543,
+          "void_volume_response_rms": 1.1331
+        },
+        "tracker_seed_W09_30": {
+          "R_s_Mpc": 1.619474,
+          "linear_sigma_c_direct": 1.257803,
+          "share_k0": 0.078069,
+          "void_volume_response_rms": 1.4643
+        },
+        "tracker_seed_W09_7.5": {
+          "R_s_Mpc": 0.404869,
+          "linear_sigma_c_direct": 0.917515,
+          "share_k0": 0.0479444,
+          "void_volume_response_rms": 0.9041
+        }
+      }
+    },
+    "PAPER_REFERENCE": {
+      "a_s_scaling_pbs_tracker_seed": {
+        "x0.5": {
+          "d_ln_sigma_d_ln_A_s": 0.101809,
+          "void_share_rms_ratio": 0.9997492,
+          "wall_share_rms_ratio": 0.670707
+        },
+        "x2": {
+          "d_ln_sigma_d_ln_A_s": 0.13272,
+          "void_share_rms_ratio": 1.0003546,
+          "wall_share_rms_ratio": 1.465691
+        }
+      },
+      "conventions": {
+        "a_equal_mass": {
+          "closures": {
+            "monotone_lower_p_fvLS": {
+              "linear_sigma_direct_A_s": 0.226629,
+              "linear_sigma_planck_anchored": 0.219961,
+              "propagator_k0": 0.231268,
+              "radius_Mpc": 12.570168,
+              "scale_dependence_rel": -0.0,
+              "share_k0": 9.47e-05,
+              "unit_growth_sigma": 0.979939,
+              "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
+              "void_volume_response_rms": 0.0009
+            },
+            "pbs_svdw04_seed_compressed": {
+              "linear_sigma_direct_A_s": 2.447443,
+              "linear_sigma_planck_anchored": 2.375432,
+              "propagator_k0": 3.025404,
+              "radius_Mpc": 12.570168,
+              "scale_dependence_rel": -0.174475,
+              "share_k0": 0.4049291,
+              "unit_growth_sigma": 0.979939,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 3.1232
+            },
+            "pbs_tracker_seed_F_median_compressed": {
+              "linear_sigma_direct_A_s": 0.704376,
+              "linear_sigma_planck_anchored": 0.683651,
+              "propagator_k0": 0.718822,
+              "radius_Mpc": 12.570168,
+              "scale_dependence_rel": -3.7e-05,
+              "share_k0": 0.070735,
+              "unit_growth_sigma": 0.979939,
+              "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
+              "void_volume_response_rms": 0.6708
+            },
+            "pbs_tracker_seed_compressed": {
+              "linear_sigma_direct_A_s": 0.974562,
+              "linear_sigma_planck_anchored": 0.945887,
+              "propagator_k0": 0.995371,
+              "radius_Mpc": 12.570168,
+              "scale_dependence_rel": -0.000862,
+              "share_k0": 0.1108033,
+              "unit_growth_sigma": 0.979939,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 1.0496
+            },
+            "pbs_tracker_seed_threshold_only_1G_D": {
+              "linear_sigma_direct_A_s": 0.973922,
+              "linear_sigma_planck_anchored": 0.945266,
+              "propagator_k0": 0.994717,
+              "radius_Mpc": 12.570168,
+              "scale_dependence_rel": -0.000863,
+              "share_k0": 0.1107086,
+              "unit_growth_sigma": 0.979939,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 1.0487
+            },
+            "strict_flat_walls_p1": {
+              "linear_sigma_direct_A_s": 6.989454,
+              "linear_sigma_planck_anchored": 6.783802,
+              "propagator_k0": 7.132537,
+              "radius_Mpc": 12.570168,
+              "scale_dependence_rel": 0.0,
+              "share_k0": 1.0,
+              "unit_growth_sigma": 0.979939,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 9.4837
+            },
+            "wall_mode_p0": {
+              "linear_sigma_direct_A_s": 0.225988,
+              "linear_sigma_planck_anchored": 0.219339,
+              "propagator_k0": 0.230615,
+              "radius_Mpc": 12.570168,
+              "scale_dependence_rel": 0.0,
+              "share_k0": 0.0,
+              "unit_growth_sigma": 0.979939,
+              "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
+              "void_volume_response_rms": 0.0
+            }
+          },
+          "intervals": {
+            "W09_10pct_at_100": {
+              "lower": 0.226629,
+              "lower_anchored": 0.219961,
+              "premise_max_linear_rms": 0.1,
+              "premise_radius_Mpc": 157.1271,
+              "primary_rms_at_premise": 0.084955,
+              "primary_target_inside": true,
+              "share_upper": 0.136341,
+              "upper": 1.148125,
+              "upper_anchored": 1.114343
+            },
+            "W09_10pct_at_150": {
+              "lower": 0.226629,
+              "lower_anchored": 0.219961,
+              "premise_max_linear_rms": 0.1,
+              "premise_radius_Mpc": 235.69065,
+              "primary_rms_at_premise": 0.048209,
+              "primary_target_inside": true,
+              "share_upper": 0.265735,
+              "upper": 2.023276,
+              "upper_anchored": 1.963744
+            },
+            "W09_several_pct_6pct_at_100": {
+              "lower": 0.226629,
+              "lower_anchored": 0.219961,
+              "premise_max_linear_rms": 0.06,
+              "premise_radius_Mpc": 157.1271,
+              "primary_rms_at_premise": 0.084955,
+              "primary_target_inside": false,
+              "share_upper": 0.068439,
+              "upper": 0.688875,
+              "upper_anchored": 0.668606
+            },
+            "cell_side_100_as_sphere_62": {
+              "lower": 0.226629,
+              "lower_anchored": 0.219961,
+              "premise_max_linear_rms": 0.1,
+              "premise_radius_Mpc": 97.473874,
+              "primary_rms_at_premise": 0.153755,
+              "primary_target_inside": false,
+              "share_upper": 0.06038,
+              "upper": 0.634366,
+              "upper_anchored": 0.615701
+            }
+          },
+          "radius_scan": [
+            {
+              "length_h_inverse_Mpc": 6.0,
+              "monotone_lower_p_fvLS": 0.272286,
+              "pbs_svdw04_seed_compressed": 2.697046,
+              "pbs_tracker_seed_compressed": 1.170277,
+              "radius_Mpc": 9.427626
+            },
+            {
+              "length_h_inverse_Mpc": 7.0,
+              "monotone_lower_p_fvLS": 0.247245,
+              "pbs_svdw04_seed_compressed": 2.571979,
+              "pbs_tracker_seed_compressed": 1.062986,
+              "radius_Mpc": 10.998897
+            },
+            {
+              "length_h_inverse_Mpc": 8.0,
+              "monotone_lower_p_fvLS": 0.226629,
+              "pbs_svdw04_seed_compressed": 2.447443,
+              "pbs_tracker_seed_compressed": 0.974562,
+              "radius_Mpc": 12.570168
+            },
+            {
+              "length_h_inverse_Mpc": 9.0,
+              "monotone_lower_p_fvLS": 0.209282,
+              "pbs_svdw04_seed_compressed": 2.326547,
+              "pbs_tracker_seed_compressed": 0.900103,
+              "radius_Mpc": 14.141439
+            },
+            {
+              "length_h_inverse_Mpc": 10.0,
+              "monotone_lower_p_fvLS": 0.194434,
+              "pbs_svdw04_seed_compressed": 2.211246,
+              "pbs_tracker_seed_compressed": 0.836341,
+              "radius_Mpc": 15.71271
+            },
+            {
+              "length_h_inverse_Mpc": 12.0,
+              "monotone_lower_p_fvLS": 0.170248,
+              "pbs_svdw04_seed_compressed": 2.000824,
+              "pbs_tracker_seed_compressed": 0.732419,
+              "radius_Mpc": 18.855252
+            }
+          ]
+        },
+        "b_dressed_wall_comoving": {
+          "closures": {
+            "monotone_lower_p_fvLS": {
+              "linear_sigma_direct_A_s": 0.247886,
+              "linear_sigma_planck_anchored": 0.240593,
+              "propagator_k0": 0.231268,
+              "radius_Mpc": 10.954402,
+              "scale_dependence_rel": -0.0,
+              "share_k0": 9.47e-05,
+              "unit_growth_sigma": 1.071856,
+              "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
+              "void_volume_response_rms": 0.001
+            },
+            "pbs_svdw04_seed_compressed": {
+              "linear_sigma_direct_A_s": 2.57553,
+              "linear_sigma_planck_anchored": 2.49975,
+              "propagator_k0": 3.025404,
+              "radius_Mpc": 10.954402,
+              "scale_dependence_rel": -0.205769,
+              "share_k0": 0.4049291,
+              "unit_growth_sigma": 1.071856,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 3.2779
+            },
+            "pbs_tracker_seed_F_median_compressed": {
+              "linear_sigma_direct_A_s": 0.770437,
+              "linear_sigma_planck_anchored": 0.747769,
+              "propagator_k0": 0.718822,
+              "radius_Mpc": 10.954402,
+              "scale_dependence_rel": -4.7e-05,
+              "share_k0": 0.070735,
+              "unit_growth_sigma": 1.071856,
+              "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
+              "void_volume_response_rms": 0.7337
+            },
+            "pbs_tracker_seed_compressed": {
+              "linear_sigma_direct_A_s": 1.065737,
+              "linear_sigma_planck_anchored": 1.034379,
+              "propagator_k0": 0.995371,
+              "radius_Mpc": 10.954402,
+              "scale_dependence_rel": -0.001085,
+              "share_k0": 0.1108033,
+              "unit_growth_sigma": 1.071856,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 1.1478
+            },
+            "pbs_tracker_seed_threshold_only_1G_D": {
+              "linear_sigma_direct_A_s": 1.065036,
+              "linear_sigma_planck_anchored": 1.033699,
+              "propagator_k0": 0.994717,
+              "radius_Mpc": 10.954402,
+              "scale_dependence_rel": -0.001085,
+              "share_k0": 0.1107086,
+              "unit_growth_sigma": 1.071856,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 1.1468
+            },
+            "strict_flat_walls_p1": {
+              "linear_sigma_direct_A_s": 7.645052,
+              "linear_sigma_planck_anchored": 7.42011,
+              "propagator_k0": 7.132537,
+              "radius_Mpc": 10.954402,
+              "scale_dependence_rel": -0.0,
+              "share_k0": 1.0,
+              "unit_growth_sigma": 1.071856,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 10.3732
+            },
+            "wall_mode_p0": {
+              "linear_sigma_direct_A_s": 0.247186,
+              "linear_sigma_planck_anchored": 0.239913,
+              "propagator_k0": 0.230615,
+              "radius_Mpc": 10.954402,
+              "scale_dependence_rel": -0.0,
+              "share_k0": 0.0,
+              "unit_growth_sigma": 1.071856,
+              "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
+              "void_volume_response_rms": 0.0
+            }
+          },
+          "intervals": {
+            "W09_10pct_at_100": {
+              "lower": 0.247886,
+              "lower_anchored": 0.240593,
+              "premise_max_linear_rms": 0.1,
+              "premise_radius_Mpc": 136.930029,
+              "primary_rms_at_premise": 0.101573,
+              "primary_target_inside": false,
+              "share_upper": 0.108567,
+              "upper": 1.050353,
+              "upper_anchored": 1.019448
+            },
+            "W09_10pct_at_150": {
+              "lower": 0.247886,
+              "lower_anchored": 0.240593,
+              "premise_max_linear_rms": 0.1,
+              "premise_radius_Mpc": 205.395043,
+              "primary_rms_at_premise": 0.058825,
+              "primary_target_inside": true,
+              "share_upper": 0.211747,
+              "upper": 1.813662,
+              "upper_anchored": 1.760298
+            },
+            "W09_several_pct_6pct_at_100": {
+              "lower": 0.247886,
+              "lower_anchored": 0.240593,
+              "premise_max_linear_rms": 0.06,
+              "premise_radius_Mpc": 136.930029,
+              "primary_rms_at_premise": 0.101573,
+              "primary_target_inside": false,
+              "share_upper": 0.051775,
+              "upper": 0.630212,
+              "upper_anchored": 0.611669
+            },
+            "cell_side_100_as_sphere_62": {
+              "lower": 0.247886,
+              "lower_anchored": 0.240593,
+              "premise_max_linear_rms": 0.1,
+              "premise_radius_Mpc": 84.944611,
+              "primary_rms_at_premise": 0.180065,
+              "primary_target_inside": false,
+              "share_upper": 0.046675,
+              "upper": 0.592479,
+              "upper_anchored": 0.575046
+            }
+          },
+          "radius_scan": [
+            {
+              "length_h_inverse_Mpc": 6.0,
+              "monotone_lower_p_fvLS": 0.29575,
+              "pbs_svdw04_seed_compressed": 2.791124,
+              "pbs_tracker_seed_compressed": 1.27066,
+              "radius_Mpc": 8.215802
+            },
+            {
+              "length_h_inverse_Mpc": 7.0,
+              "monotone_lower_p_fvLS": 0.269532,
+              "pbs_svdw04_seed_compressed": 2.684602,
+              "pbs_tracker_seed_compressed": 1.158483,
+              "radius_Mpc": 9.585102
+            },
+            {
+              "length_h_inverse_Mpc": 8.0,
+              "monotone_lower_p_fvLS": 0.247886,
+              "pbs_svdw04_seed_compressed": 2.57553,
+              "pbs_tracker_seed_compressed": 1.065737,
+              "radius_Mpc": 10.954402
+            },
+            {
+              "length_h_inverse_Mpc": 9.0,
+              "monotone_lower_p_fvLS": 0.229623,
+              "pbs_svdw04_seed_compressed": 2.466802,
+              "pbs_tracker_seed_compressed": 0.987407,
+              "radius_Mpc": 12.323703
+            },
+            {
+              "length_h_inverse_Mpc": 10.0,
+              "monotone_lower_p_fvLS": 0.213949,
+              "pbs_svdw04_seed_compressed": 2.360546,
+              "pbs_tracker_seed_compressed": 0.920142,
+              "radius_Mpc": 13.693003
+            },
+            {
+              "length_h_inverse_Mpc": 12.0,
+              "monotone_lower_p_fvLS": 0.188323,
+              "pbs_svdw04_seed_compressed": 2.160664,
+              "pbs_tracker_seed_compressed": 0.810086,
+              "radius_Mpc": 16.431603
+            }
+          ]
+        },
+        "c_bare_volume_average": {
+          "closures": {
+            "monotone_lower_p_fvLS": {
+              "linear_sigma_direct_A_s": 0.260866,
+              "linear_sigma_planck_anchored": 0.25319,
+              "propagator_k0": 0.231268,
+              "radius_Mpc": 10.10408,
+              "scale_dependence_rel": 0.0,
+              "share_k0": 9.47e-05,
+              "unit_growth_sigma": 1.127979,
+              "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
+              "void_volume_response_rms": 0.001
+            },
+            "pbs_svdw04_seed_compressed": {
+              "linear_sigma_direct_A_s": 2.643389,
+              "linear_sigma_planck_anchored": 2.565612,
+              "propagator_k0": 3.025404,
+              "radius_Mpc": 10.10408,
+              "scale_dependence_rel": -0.225401,
+              "share_k0": 0.4049291,
+              "unit_growth_sigma": 1.127979,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 3.3589
+            },
+            "pbs_tracker_seed_F_median_compressed": {
+              "linear_sigma_direct_A_s": 0.810772,
+              "linear_sigma_planck_anchored": 0.786917,
+              "propagator_k0": 0.718822,
+              "radius_Mpc": 10.10408,
+              "scale_dependence_rel": -5.3e-05,
+              "share_k0": 0.070735,
+              "unit_growth_sigma": 1.127979,
+              "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
+              "void_volume_response_rms": 0.7721
+            },
+            "pbs_tracker_seed_compressed": {
+              "linear_sigma_direct_A_s": 1.121363,
+              "linear_sigma_planck_anchored": 1.088369,
+              "propagator_k0": 0.995371,
+              "radius_Mpc": 10.10408,
+              "scale_dependence_rel": -0.001242,
+              "share_k0": 0.1108033,
+              "unit_growth_sigma": 1.127979,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 1.2076
+            },
+            "pbs_tracker_seed_threshold_only_1G_D": {
+              "linear_sigma_direct_A_s": 1.120625,
+              "linear_sigma_planck_anchored": 1.087653,
+              "propagator_k0": 0.994717,
+              "radius_Mpc": 10.10408,
+              "scale_dependence_rel": -0.001243,
+              "share_k0": 0.1107086,
+              "unit_growth_sigma": 1.127979,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 1.2066
+            },
+            "strict_flat_walls_p1": {
+              "linear_sigma_direct_A_s": 8.045349,
+              "linear_sigma_planck_anchored": 7.808629,
+              "propagator_k0": 7.132537,
+              "radius_Mpc": 10.10408,
+              "scale_dependence_rel": 0.0,
+              "share_k0": 1.0,
+              "unit_growth_sigma": 1.127979,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 10.9163
+            },
+            "wall_mode_p0": {
+              "linear_sigma_direct_A_s": 0.260128,
+              "linear_sigma_planck_anchored": 0.252474,
+              "propagator_k0": 0.230615,
+              "radius_Mpc": 10.10408,
+              "scale_dependence_rel": 0.0,
+              "share_k0": 0.0,
+              "unit_growth_sigma": 1.127979,
+              "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
+              "void_volume_response_rms": 0.0
+            }
+          },
+          "intervals": {
+            "W09_10pct_at_100": {
+              "lower": 0.260866,
+              "lower_anchored": 0.25319,
+              "premise_max_linear_rms": 0.1,
+              "premise_radius_Mpc": 126.301,
+              "primary_rms_at_premise": 0.112468,
+              "primary_target_inside": false,
+              "share_upper": 0.094813,
+              "upper": 0.998268,
+              "upper_anchored": 0.968895
+            },
+            "W09_10pct_at_150": {
+              "lower": 0.260866,
+              "lower_anchored": 0.25319,
+              "premise_max_linear_rms": 0.1,
+              "premise_radius_Mpc": 189.451499,
+              "primary_rms_at_premise": 0.065906,
+              "primary_target_inside": true,
+              "share_upper": 0.185406,
+              "upper": 1.703551,
+              "upper_anchored": 1.653427
+            },
+            "W09_several_pct_6pct_at_100": {
+              "lower": 0.260866,
+              "lower_anchored": 0.25319,
+              "premise_max_linear_rms": 0.06,
+              "premise_radius_Mpc": 126.301,
+              "primary_rms_at_premise": 0.112468,
+              "primary_target_inside": false,
+              "share_upper": 0.043522,
+              "upper": 0.598961,
+              "upper_anchored": 0.581337
+            },
+            "cell_side_100_as_sphere_62": {
+              "lower": 0.260866,
+              "lower_anchored": 0.25319,
+              "premise_max_linear_rms": 0.1,
+              "premise_radius_Mpc": 78.350887,
+              "primary_rms_at_premise": 0.197081,
+              "primary_target_inside": false,
+              "share_upper": 0.03976,
+              "upper": 0.569666,
+              "upper_anchored": 0.552904
+            }
+          },
+          "radius_scan": [
+            {
+              "length_h_inverse_Mpc": 6.0,
+              "monotone_lower_p_fvLS": 0.310014,
+              "pbs_svdw04_seed_compressed": 2.838852,
+              "pbs_tracker_seed_compressed": 1.331603,
+              "radius_Mpc": 7.57806
+            },
+            {
+              "length_h_inverse_Mpc": 7.0,
+              "monotone_lower_p_fvLS": 0.283111,
+              "pbs_svdw04_seed_compressed": 2.743018,
+              "pbs_tracker_seed_compressed": 1.216608,
+              "radius_Mpc": 8.84107
+            },
+            {
+              "length_h_inverse_Mpc": 8.0,
+              "monotone_lower_p_fvLS": 0.260866,
+              "pbs_svdw04_seed_compressed": 2.643389,
+              "pbs_tracker_seed_compressed": 1.121363,
+              "radius_Mpc": 10.10408
+            },
+            {
+              "length_h_inverse_Mpc": 9.0,
+              "monotone_lower_p_fvLS": 0.242068,
+              "pbs_svdw04_seed_compressed": 2.542614,
+              "pbs_tracker_seed_compressed": 1.04079,
+              "radius_Mpc": 11.36709
+            },
+            {
+              "length_h_inverse_Mpc": 10.0,
+              "monotone_lower_p_fvLS": 0.225913,
+              "pbs_svdw04_seed_compressed": 2.442749,
+              "pbs_tracker_seed_compressed": 0.971491,
+              "radius_Mpc": 12.6301
+            },
+            {
+              "length_h_inverse_Mpc": 12.0,
+              "monotone_lower_p_fvLS": 0.199445,
+              "pbs_svdw04_seed_compressed": 2.251369,
+              "pbs_tracker_seed_compressed": 0.857863,
+              "radius_Mpc": 15.15612
+            }
+          ]
+        }
+      },
+      "flat_wall_capacity": {
+        "cap_f_v_ls_over_f_w_ls": 9.472e-05,
+        "radius_Mpc": 135.58344052,
+        "radius_bare_h_inv_Mpc": 107.34945953,
+        "radius_dressed_h_inv_Mpc": 99.01658661
+      },
+      "growth": {
+        "f_v_ls": 9.471062089872824e-05,
+        "gamma_w0": 1.3685,
+        "gamma_w_ls": 1.0000473553104494,
+        "t_ls_over_t0": 3.380088555844234e-05,
+        "void_share_growth": 7.132537333227989,
+        "void_to_wall_growth_ratio": 30.928389576352675,
+        "wall_share_growth": 0.23061457227250548
+      },
+      "h_bare": 0.5785600077340819,
+      "h_dressed": 0.7303000000000001,
+      "m3_two_barrier_alternative": {
+        "C1_clock_growth_today": 0.876778,
+        "compressed_with_long_mode": {
+          "bias": 1.354601,
+          "equivalent_tracker_share": 0.138667,
+          "global_growth_today": 1.187685,
+          "linear_sigma_c_direct": 1.339683
+        },
+        "note": "1G-F's M3 budget: void volume fraction 0.751969 (not the tracker's f_v0), finite-density voids x = 0.2047; a different conditional model, compared by its equivalent tracker share only",
+        "universal_wall_density": {
+          "bias": 0.354601,
+          "equivalent_tracker_share": 0.011633,
+          "global_growth_today": 0.310907,
+          "linear_sigma_c_direct": 0.350696
+        }
+      },
+      "omega_m_per_photon": 0.12047512089055853,
+      "refined_quadrature_linear_sigma_c_pbs": 1.12136266,
+      "seed_radius_sensitivity": {
+        "svdw04_factor_1.72": {
+          "R_s_Mpc": 11.941572,
+          "linear_sigma_c_direct": 2.643389,
+          "share_k0": 0.4049291,
+          "void_volume_response_rms": 3.3589
+        },
+        "tracker_seed_F_median": {
+          "R_s_Mpc": 0.166154,
+          "linear_sigma_c_direct": 0.810772,
+          "share_k0": 0.070735,
+          "void_volume_response_rms": 0.7721
+        },
+        "tracker_seed_W09_15": {
+          "R_s_Mpc": 0.757395,
+          "linear_sigma_c_direct": 1.121363,
+          "share_k0": 0.1108033,
+          "void_volume_response_rms": 1.2076
+        },
+        "tracker_seed_W09_30": {
+          "R_s_Mpc": 1.514789,
+          "linear_sigma_c_direct": 1.364007,
+          "share_k0": 0.1426947,
+          "void_volume_response_rms": 1.5479
+        },
+        "tracker_seed_W09_7.5": {
+          "R_s_Mpc": 0.378697,
+          "linear_sigma_c_direct": 0.951697,
+          "share_k0": 0.0888672,
+          "void_volume_response_rms": 0.9697
+        }
+      }
+    }
+  },
+  "schema_version": 1,
+  "sources": {
+    "EH98": {
+      "file": "trans.tex",
+      "id": "astro-ph/9709112v1",
+      "sha256": "5f2ac6b413df8b738c95f6650152b7e82d7c36f6d9b3a618da540e9739dce17f"
+    },
+    "GM": {
+      "file": "main.tex",
+      "id": "arXiv:2511.17160v2",
+      "sha256": "f9cadfa03ecc9a74b0a8f432ae4b13422daeb219f253756bcd877b4b75077c59"
+    },
+    "JLH13": {
+      "file": "voids_mnras.tex",
+      "id": "arXiv:1304.6087v2",
+      "sha256": "cf6fc77a31b395138ac3a027d008698556534e81cfb27c39853d3a99c7b07c4e"
+    },
+    "NW15": {
+      "file": "cmb1.tex",
+      "id": "arXiv:1410.3470v2",
+      "sha256": "5688c9ac7123a5c2ef3508e39cb3134c2fe9e3d5e56996a4d4a4d101d7b74673",
+      "used": "A_s a nuisance parameter they cannot constrain (ll. 1422-1428); f_v0 0.627, H0 ~ 61"
+    },
+    "SvdW04": {
+      "eprint_sha256": "4b7ad599f54b3199e0448df1c2eecf4e724401e9ffda7b0f50a3efe7fecdb79b",
+      "file": "voids.tex (e-print tarball)",
+      "id": "astro-ph/0311260v1"
+    },
+    "W07": {
+      "file": "solution.tex",
+      "id": "arXiv:0709.0732v2",
+      "sha256": "221662c987e454729ef8202c87fa697c5882b5b7daaecdedb50a7cba8ffe6cd8"
+    },
+    "W09": {
+      "file": "observe.tex",
+      "id": "arXiv:0909.0749v2",
+      "sha256": "2b0324d127440e9a053a7cb37102d7655cca228a63cd2222843e879989b4b531"
+    },
+    "numbering_note": "e-print LaTeX equation numbering (sequential display numbering); the journal HTML may differ"
+  },
+  "status_tokens": {
+    "added": [],
+    "changed": [],
+    "read_at_run": {
+      "FSIGMA8_AUTHORIZATION": "NOT_GRANTED",
+      "LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC": "NOT_DERIVED",
+      "OBSERVATIONAL_AUTHORIZATION": "NOT_GRANTED",
+      "RSD_AUTHORIZATION": "NOT_GRANTED",
+      "SIGMA8_AUTHORIZATION": "NOT_GRANTED",
+      "UNIQUE_TIMESCAPE_PREDICTION": "NOT_GRANTED",
+      "VOID_ONSET_RESPONSE": "EXTERNAL_CLOSURE_INPUT"
+    }
+  },
+  "tests": {
+    "count": 28,
+    "file": "tests/test_phase1g_h_global_variance.py"
+  },
+  "title": "Global matter-variance definition and minimal closure",
+  "two_phase_covariance": {
+    "NW15_CMB_FIT": {
+      "E_reference_reproduction": {
+        "reproduced": 0.9880976925385465,
+        "sigma_int": 0.9403,
+        "sigma_part": 0.3036,
+        "sigma_printed": 0.9881
+      },
+      "cauchy_schwarz_on_E_reference": {
+        "independent": 0.988098,
+        "lower": 0.6367,
+        "upper": 1.2439
+      },
+      "finite_density_weights_x_shell": {
+        "partition_weight": 1.586238,
+        "void_contrast_global": -0.591667,
+        "void_weight": 0.408333,
+        "wall_weight": 1.994571
+      },
+      "gaussian_threshold_pair": {
+        "ell_Mpc": 0.598733,
+        "laws": {
+          "II_same_field": {
+            "cross_term": 0.049912,
+            "sigma_partition": 0.3036,
+            "sigma_total": 0.409398,
+            "sigma_wall_field": 0.159755
+          },
+          "I_independent": {
+            "cross_term": 0.0,
+            "sigma_partition": 0.3036,
+            "sigma_total": 0.977932,
+            "sigma_wall_field": 0.929612
+          }
+        },
+        "radius_Mpc": 13.114754,
+        "sigma_ratio_II_over_I": 0.418636
+      }
+    },
+    "PAPER_REFERENCE": {
+      "E_reference_reproduction": {
+        "reproduced": 0.9871248755856575,
+        "sigma_int": 0.9316,
+        "sigma_part": 0.3264,
+        "sigma_printed": 0.9871
+      },
+      "cauchy_schwarz_on_E_reference": {
+        "independent": 0.987125,
+        "lower": 0.6052,
+        "upper": 1.258
+      },
+      "finite_density_weights_x_shell": {
+        "partition_weight": 1.921516,
+        "void_contrast_global": -0.505359,
+        "void_weight": 0.494641,
+        "wall_weight": 2.416157
+      },
+      "gaussian_threshold_pair": {
+        "ell_Mpc": 0.291722,
+        "laws": {
+          "II_same_field": {
+            "cross_term": 0.036477,
+            "sigma_partition": 0.3264,
+            "sigma_total": 0.392827,
+            "sigma_wall_field": 0.106296
+          },
+          "I_independent": {
+            "cross_term": 0.0,
+            "sigma_partition": 0.3264,
+            "sigma_total": 0.971073,
+            "sigma_wall_field": 0.914575
+          }
+        },
+        "radius_Mpc": 10.954402,
+        "sigma_ratio_II_over_I": 0.404529
+      }
+    }
+  },
+  "validation_record": "reports/phase1g_h_global_variance_closure_validation.md",
+  "verdict": {
+    "A_definition": "CLOSED",
+    "B_conditional_calculation": "CLOSED_GIVEN_ONE_EXTERNAL_CLOSURE_VOID_SHARE",
+    "C_observational_interpretation": "NOT_REACHED_FIREWALL",
+    "C_timescape_prediction": "NOT_REACHED"
+  },
+  "verification": {
+    "baseline_this_session": {
+      "CPython 3.11.17": {
+        "collected": 1136,
+        "failed": 0,
+        "passed": 1103,
+        "seconds": 358,
+        "skipped": 33
+      },
+      "CPython 3.13.16": {
+        "collected": 1136,
+        "failed": 0,
+        "passed": 1103,
+        "seconds": 365,
+        "skipped": 33
+      },
+      "tree": "8d3cdd0533035858c42269cb1dff1a20dcafc7da"
+    },
+    "diff_check": "clean",
+    "freeze_preflight_quoted_not_rerun": {
+      "CPython 3.11.9 (Windows)": {
+        "failed": 0,
+        "passed": 1136,
+        "seconds": 501,
+        "skipped": 0
+      },
+      "CPython 3.14.3 (Windows)": {
+        "failed": 0,
+        "passed": 1136,
+        "seconds": 505,
+        "skipped": 0
+      },
+      "source": "owner's report of 2026-10-06; tag messages",
+      "tree": "8d3cdd0533035858c42269cb1dff1a20dcafc7da"
+    },
+    "full_suites_final": {
+      "CPython 3.11.17": {
+        "collected": 1164,
+        "failed": 0,
+        "passed": 1132,
+        "seconds": 378,
+        "skipped": 32
+      },
+      "CPython 3.13.16": {
+        "collected": 1164,
+        "failed": 0,
+        "passed": 1132,
+        "seconds": 378,
+        "skipped": 32
+      },
+      "command": "OPENBLAS_NUM_THREADS=1 python -B -W error -m pytest -q -p no:cacheprovider -rs",
+      "logs": [
+        "reports/phase1g_h_global_variance_closure_logs/full_suite_py313.log",
+        "reports/phase1g_h_global_variance_closure_logs/full_suite_py311.log"
+      ],
+      "skip_causes": {
+        "1D-B growth validation artifact absent": 1,
+        "1D-D validation artifact absent": 1,
+        "B2 artifact absent": 1,
+        "barotropic oracle absent": 4,
+        "clean perturbation oracle absent": 4,
+        "owner-decisions artifact absent": 3,
+        "upstream oracle not extracted": 18
+      },
+      "tree": "fd7331f + the report, inventory and README/CLAUDE of the following commit"
+    },
+    "record": "reports/phase1g_h_global_variance_closure_validation.md",
+    "targeted": {
+      "tests/test_phase1g_h_global_variance.py": 28
+    },
+    "tolerance_audit_missing": 0,
+    "validator_1F_C_R": "PASS",
+    "windows_dual_interpreter_gate": "NOT_RUN_IN_THIS_SESSION (commands in the validation record)"
+  }
+}

@@ -49,6 +49,7 @@ Strictly layered; each layer imports only from the ones above it.
 | Wall geometry (1F-C) | `phase1f_c/` | Conditional clock-anchored wall/common-spacetime kinematic geometry and optional scalar metric-trace reconstruction |
 | Necessary bound (1F-D) | `phase1f_d.py` | Conditional scalar positive-core necessary-bound diagnostic in the explicit (t, b, C) parameterization; standard library only, no solver, root finder or time scan; a positive margin establishes no existence |
 | Lagrangian σ(M) (1G-B) | `lagrangian_sigma.py` | Conditional, model-internal, mass-labelled linear σ(M). Mandatory, non-default `GrowthLaw`: volume-average CGI regular growing mode (comoving, or Mészáros comparator), or wall-regional EdS in common time t (closure `NOT_APPLICABLE`). Per-photon ω_m,eff identity, EH98 early spectrum as `PROVISIONAL_MODEL_IMPORT`, explicit radius conventions, flat-ΛCDM reference and explicitly anchored ratios. Barotropic closure refused (1G-A §4.1). Lives outside `growth/` so the 1D-B firewall test stays intact |
+| Global linear variance (1G-H, experimental) | `global_variance.py` | Conditional, model-internal global-mean linear statistic of Lagrangian top-hat regions: exact two-phase identities, the tracker propagator `G = (1−p)D_W + p D_V` (A1–A5 + void autonomy H-A6), explicit void-share closures (constant, Gaussian-threshold seed), the closure-independent interval from the [W09] homogeneity premise, the complete two-phase covariance with cross terms, the two-barrier alternative. Experimental: imported by no other module; reuses `lagrangian_sigma` |
 | LTB–CMC experiment (outside the phases) | `experimental_ltb_cmc/` | Isolated, conditional spherical LTB dust background with constant-mean-curvature slicing (BVP solver), tracker-clock comparison adapter, single-age section-family evolution, kappa_star and mixed sensitivities; imports only NumPy/SciPy and its own modules; distinct from 1F-D and promotes no scientific status |
 
 ### Conventions that pervade the scientific packages
@@ -95,6 +96,16 @@ linear σ(M) with an explicit `PROVISIONAL_MODEL_IMPORT` early spectrum.
   negation, are the only exception (owner decision GB-OD2, 2026-09-30).
 - It is not an observational σ8, and `SIGMA8_AUTHORIZATION` stays
   `NOT_GRANTED`.
+
+**Authorised experimental exception (Phase 1G-H, owner task of 2026-10-06).**
+`global_variance.py` computes a conditional, model-internal *global-mean*
+linear statistic (the σ8 analogue defined in
+`phase1g_h_global_variance_closure.md` §2) for an explicitly supplied
+void-share closure. It is experimental (no other module imports it), its
+outputs carry `NON_OBSERVATIONAL`, `NOT_OBSERVATIONAL_SIGMA_8` and
+`EXPERIMENTAL_CONDITIONAL_RESEARCH_RUNTIME`, it follows the same naming rule,
+and it changes no status token. Promotion, audit and publication are open
+owner decisions (H-OD1…H-OD5).
 
 Everything else in the list above stays unimplemented.
 
@@ -449,6 +460,30 @@ current interpretation; frozen records remain unchanged.
     the separate approved D successor changes one classification. The merge
     (PR #4), freeze and tags followed on the owner's separate authority
     (`phase1g_fg_freeze_status_successor.md`); no release exists.
+- **1G-H (proposed, on the local branch `phase-1g-h-global-variance-closure`;
+  not pushed, audited or frozen):** global matter-variance definition and
+  minimal closure (`phase1g_h_global_variance_closure.md`, inventory,
+  validation record; runtime `global_variance.py`; evidence
+  `scripts/phase1g_h_global_variance_closure_numerics.py`; single cases
+  `scripts/phase1g_h_global_variance_case.py` with `scripts/phase1g_h_configs/`).
+  - A (definition) closed: the rms of the first-order ensemble-mean response
+    of the global contrast `(M_L/V_L)/(M_D/V_D) − 1` of Lagrangian top hats,
+    dust foliation, common time, global volume mean; recommended radius
+    `8 h̄⁻¹ Mpc` of present volume-average proper length (`R·H_D0 = 800 km/s`).
+  - Derived (A1–A5 + void autonomy H-A6): for every Lagrangian region the
+    propagator is `G = (1−p)D_W + p D_V`; D_W = 0.2306 / 0.3527,
+    D_V = 7.133 / 11.33 ([GM] / [NW15]). Strict flat walls cannot carry the
+    early field below ≈ 99 / 127 h⁻¹ Mpc, so 1G-D's S1 is necessary.
+  - B closed only given the void share p (1G-D's `VOID_ONSET_RESPONSE`,
+    still `EXTERNAL_CLOSURE_INPUT`): at 8 h̄⁻¹ Mpc 1.121 / 1.057 (1G-D's
+    [W09]-radius seed), 0.811 / 0.816 (1G-F-median seed), interval
+    [0.261, 0.998] / [0.369, 1.162] from the [W09] 10%-at-100 premise (direct
+    A_s normalisation; ×0.97058 for Planck-anchored values).
+  - Two-phase covariance with cross terms; a constructive pair of admissible
+    laws gives 0.97 vs 0.39 at 8 h⁻¹ Mpc: the nonlinear hybrid variance needs
+    the joint law of geometry and density.
+  - C (prediction, observation) not reached; owner decisions H-OD1…H-OD5 in
+    §9. No token, authorization, equation or frozen record changes.
 - **Status-token additions:** the six 1G-C/1G-D tokens are *additions*, not
   changes (`phase1g_status_additions_successor.md`). The frozen 1F-C-R
   snapshot has no entry for them. The 1F-C-R validator accepts a new token

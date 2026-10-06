@@ -142,6 +142,27 @@ that predate the freeze are resolved in the
   ([successor record](reports/phase1g_e_status_addition_successor.md)).
 - **Status.** These are conditional numbers, not an observational σ8, and no
   σ8 authorization is granted.
+- **Phase 1G-H (proposed, local branch; not pushed, audited or frozen)**
+  ([report](reports/phase1g_h_global_variance_closure.md),
+  [validation](reports/phase1g_h_global_variance_closure_validation.md)):
+  - *Definition (closed).* The Timescape global-mean linear statistic is the
+    rms of the first-order response of the global density contrast of
+    Lagrangian top-hat regions to the early Gaussian field, on the dust
+    foliation and relative to the global volume mean; recommended radius
+    8 h̄⁻¹ Mpc of present volume-average proper length (R·H_D0 = 800 km/s).
+    It reduces to the standard linear σ8 without voids.
+  - *Derived.* Under the regional wall/void laws, every Lagrangian region has
+    the propagator G = (1−p)D_W + p D_V, with D_W = 0.231 / 0.353 and
+    D_V = 7.13 / 11.3 ([GM] / [NW15]); p, the fraction of an early contrast
+    carried by the void volume, is the one missing input (1G-D's void-onset
+    response, an external closure).
+  - *Conditional values* at 8 h̄⁻¹ Mpc: 1.121 / 1.057 with 1G-D's seed
+    closure, 0.811 / 0.816 with the 1G-F void size; closure-independent
+    interval [0.26, 1.00] / [0.37, 1.16] from the background's own
+    homogeneity premise. Not observational; owner decisions are listed in
+    the report (§9).
+  - Experimental runtime `timescape_fsigma8.global_variance`; one case:
+    `python scripts/phase1g_h_global_variance_case.py --config scripts/phase1g_h_configs/gm_bare_pbs_f_median_seed.json`.
 
 Imported regional dust-FLRW equations are conditional on their regional
 backgrounds. Their physical embedding into the common Timescape spacetime,
@@ -289,6 +310,8 @@ The earlier implementation milestones below remain useful provenance:
 | `src/timescape_fsigma8/phase1f_c/` | Phase 1F-C conditional wall/common-spacetime kinematic geometry |
 | `src/timescape_fsigma8/phase1f_d.py` | Phase 1F-D conditional scalar positive-core necessary-bound diagnostic (no solver; a positive margin establishes no existence) |
 | `src/timescape_fsigma8/lagrangian_sigma.py` | Phase 1G-B conditional, model-internal, mass-labelled linear σ(M) (explicit growth law, early-spectrum import and radius convention; non-observational) |
+| `src/timescape_fsigma8/global_variance.py` | Phase 1G-H experimental, conditional global-mean linear statistic (two-phase propagator, explicit void-share closures, admissible interval, two-phase covariance; non-observational) |
+| `scripts/phase1g_h_global_variance_closure_numerics.py`, `scripts/phase1g_h_global_variance_case.py`, `scripts/phase1g_h_configs/` | Phase 1G-H evidence, single-case runner and example configurations |
 | `src/timescape_fsigma8/experimental_ltb_cmc/` | Isolated, conditional LTB–CMC experiment outside the phase sequence: CMC-sliced LTB background, tracker-clock comparison, single-age evolution, kappa_star and mixed sensitivities |
 | `src/timescape_fsigma8/components.py` | Tensor-component ontology (coordinate/orthonormal representations, 1F-C-R) |
 | `src/timescape_fsigma8/scientific_status.py` | Current cross-phase scientific classifications (1F-C-R successor record) |
