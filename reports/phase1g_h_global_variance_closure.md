@@ -6,6 +6,8 @@ Base: `main` = `origin/main` = `8d3cdd0533035858c42269cb1dff1a20dcafc7da`
 (PR #4 merge, the frozen F/G checkpoint), local branch
 `phase-1g-h-global-variance-closure` (first commit: the F/G freeze-status
 alignment, `phase1g_fg_freeze_status_successor.md`).
+Remote: the session branch `ccr-555e67be-u11yht`, pushed with the owner's
+approval of 2026-10-06 (Sec. 1); not merged into `main`.
 Companions: [`phase1g_h_global_variance_closure_inventory.json`](phase1g_h_global_variance_closure_inventory.json),
 [`phase1g_h_global_variance_closure_validation.md`](phase1g_h_global_variance_closure_validation.md).
 Runtime: `src/timescape_fsigma8/global_variance.py` (experimental).
@@ -31,6 +33,11 @@ isolated experimental implementations, named, motivated and compared, and
 does **not** authorise promoting them to project law. It authorises local
 commits only: no push, pull request, merge, tag, freeze or release, and no
 change of a scientific token or observational authorisation.
+
+**Later owner approval** (2026-10-06, after these records were committed):
+pushing the phase commits, and then this documentation update, to the
+session branch `ccr-555e67be-u11yht`. Nothing else is approved: no pull
+request, merge, tag, freeze, release or audit (Sec. 9, H-OD5).
 
 **Distinction recorded as asked.** Everything below that goes beyond the
 approved records is an explicitly named hypothesis (H-A6 … H-A8, the seed
@@ -698,7 +705,8 @@ the PBS closure needs a seed model and an external seed scale.
 
 ## 9. Decisions requested from the owner
 
-Each is separate; none is applied here.
+Each is separate; none is applied by this report (the owner has since
+decided the push part of H-OD5).
 
 1. **H-OD1, definition and radius convention.**
    - [ ] Adopt the definition of Sec. 2 as the project's σ8-analogue, with
@@ -740,6 +748,9 @@ Each is separate; none is applied here.
 5. **H-OD5, publication.** Push, pull request, merge, audit, freeze or tag of
    this phase: none is authorised by the task; each needs a separate
    decision.
+   - *Push decided* (owner, 2026-10-06): the commits are on the session
+     branch `ccr-555e67be-u11yht`. Pull request, merge, audit, freeze and
+     tag remain open.
 
 ## 10. Implementation and usage
 

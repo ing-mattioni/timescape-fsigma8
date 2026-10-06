@@ -197,6 +197,33 @@
     "H-OD5": "push / pull request / merge / audit / freeze / tag: separate decisions, none authorised"
   },
   "phase": "1G-H",
+  "publication": {
+    "approvals": [
+      {
+        "action": "push of the phase commits 79003742fb1f284693d6659e329b2c6b7f7927f0, fd7331f321702ed8c20d32ea805e7b9537d44726 and 0572e416504bcdfaa5831b6d482b687ef6fae582 to the session branch ccr-555e67be-u11yht",
+        "date": "2026-10-06",
+        "verbatim": "Sì, procedi con il push sul branch designato"
+      },
+      {
+        "action": "documentation-only update of the push status (this block, the report, the validation record, the F/G freeze-status record, README.md and CLAUDE.md) and its push to the same branch",
+        "date": "2026-10-06",
+        "verbatim": "Sì, correggi la documentazione e fai il push"
+      }
+    ],
+    "authorization_block": "records the task statement, which granted local commits only; these approvals are separate, later owner actions",
+    "branch": "ccr-555e67be-u11yht",
+    "first_pushed_head": "0572e416504bcdfaa5831b6d482b687ef6fae582",
+    "h_od5_status": "push decided (session branch only); pull request, merge, audit, freeze and tag remain open",
+    "main": "8d3cdd0533035858c42269cb1dff1a20dcafc7da (unchanged)",
+    "not_done": [
+      "pull request",
+      "merge",
+      "tag creation or change",
+      "freeze declaration",
+      "release",
+      "independent audit"
+    ]
+  },
   "r2_n4_relevance": "only if H-OD3's second option (a chained change of LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC) is chosen",
   "report": "reports/phase1g_h_global_variance_closure.md",
   "results": {

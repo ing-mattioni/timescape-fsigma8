@@ -104,8 +104,10 @@ linear statistic (the σ8 analogue defined in
 void-share closure. It is experimental (no other module imports it), its
 outputs carry `NON_OBSERVATIONAL`, `NOT_OBSERVATIONAL_SIGMA_8` and
 `EXPERIMENTAL_CONDITIONAL_RESEARCH_RUNTIME`, it follows the same naming rule,
-and it changes no status token. Promotion, audit and publication are open
-owner decisions (H-OD1…H-OD5).
+and it changes no status token. Promotion, audit, pull request, merge,
+freeze and tagging remain open owner decisions (H-OD1…H-OD5); of H-OD5 the
+owner approved only the push to the session branch `ccr-555e67be-u11yht`
+(2026-10-06).
 
 Everything else in the list above stays unimplemented.
 
@@ -460,8 +462,10 @@ current interpretation; frozen records remain unchanged.
     the separate approved D successor changes one classification. The merge
     (PR #4), freeze and tags followed on the owner's separate authority
     (`phase1g_fg_freeze_status_successor.md`); no release exists.
-- **1G-H (proposed, on the local branch `phase-1g-h-global-variance-closure`;
-  not pushed, audited or frozen):** global matter-variance definition and
+- **1G-H (proposed; pushed with owner approval of 2026-10-06 to the session
+  branch `ccr-555e67be-u11yht`, developed locally as
+  `phase-1g-h-global-variance-closure`; not merged into `main`, audited,
+  frozen or tagged; no pull request):** global matter-variance definition and
   minimal closure (`phase1g_h_global_variance_closure.md`, inventory,
   validation record; runtime `global_variance.py`; evidence
   `scripts/phase1g_h_global_variance_closure_numerics.py`; single cases

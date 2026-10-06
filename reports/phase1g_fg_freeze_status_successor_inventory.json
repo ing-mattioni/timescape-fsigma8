@@ -9,7 +9,8 @@
     "source": "owner task statement of 2026-10-06, section 2.1",
     "verbatim": "Allinea lo stato corrente di F/G al merge, al freeze e ai tag già pubblicati. Questo lavoro è espressamente autorizzato e non richiede un'altra conferma.",
     "d_v2_decision_verbatim": "non creare `phase-1g-d-separate-universe-growth-v2`, né come tag né come branch.",
-    "not_authorized": ["push", "pull request", "merge", "tag creation or change", "freeze declaration", "release"]
+    "not_authorized": ["push", "pull request", "merge", "tag creation or change", "freeze declaration", "release"],
+    "later_owner_approval": {"date": "2026-10-06", "given": "after this record was committed", "action": "push of its commit, with the Phase 1G-H commits, to the session branch ccr-555e67be-u11yht", "not_followed_by": ["pull request", "merge", "tag creation or change", "freeze declaration", "release"]}
   },
   "verified_state": {
     "source_pull_request": {"number": 4, "head": "phase-1g-f-successor-g-evolution", "base": "main", "merged": true, "merged_at": "2026-10-06T13:12:04Z", "verified_by": "GitHub API read (pull_request_read get)"},

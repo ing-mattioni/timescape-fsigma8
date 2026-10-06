@@ -26,7 +26,11 @@ reports and inventories, to resolve outdated sentences through this
 successor, and to update README.md and CLAUDE.md directly. It also states
 that this record documents a freeze that has already happened. The task
 grants local commits on a dedicated branch. It grants no push, pull
-request, merge, tag, freeze or release (§1 of the task).
+request, merge, tag, freeze or release (§1 of the task). With a separate
+approval of 2026-10-06, given after this record was committed, the owner
+had its commit pushed, together with the Phase 1G-H commits, to the session
+branch `ccr-555e67be-u11yht`; no pull request, merge, tag, freeze or release
+followed.
 
 The task also records an explicit decision, verbatim: «non creare
 `phase-1g-d-separate-universe-growth-v2`, né come tag né come branch.»

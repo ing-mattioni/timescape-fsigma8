@@ -35,8 +35,13 @@ dual-interpreter certification on 3.14.3 / 3.11.9 is claimed (Sec. 6).
   - the commit carrying this record, the report, the inventory, the logs and
     the README/CLAUDE updates (its hash cannot be inside itself; see
     `git log`).
-- Nothing was pushed. No tag, branch D v2, pull request or release was
-  created.
+- When these commits were made, nothing had been pushed. With the owner's
+  approval of 2026-10-06, given afterwards, they were pushed to the session
+  branch `ccr-555e67be-u11yht` (new on `origin` at
+  `0572e416504bcdfaa5831b6d482b687ef6fae582`, a fast-forward from
+  `8d3cdd0`), followed, with a second approval, by the documentation-only
+  commit that adds this paragraph. `main` is unchanged. No tag, branch D v2,
+  pull request or release was created.
 
 ## 3. Test suites
 

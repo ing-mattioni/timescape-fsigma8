@@ -142,7 +142,9 @@ that predate the freeze are resolved in the
   ([successor record](reports/phase1g_e_status_addition_successor.md)).
 - **Status.** These are conditional numbers, not an observational σ8, and no
   σ8 authorization is granted.
-- **Phase 1G-H (proposed, local branch; not pushed, audited or frozen)**
+- **Phase 1G-H (proposed; on the branch `ccr-555e67be-u11yht`, pushed with
+  owner approval on 2026-10-06; not merged into `main`, audited, frozen or
+  tagged)**
   ([report](reports/phase1g_h_global_variance_closure.md),
   [validation](reports/phase1g_h_global_variance_closure_validation.md)):
   - *Definition (closed).* The Timescape global-mean linear statistic is the
