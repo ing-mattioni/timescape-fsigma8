@@ -1,0 +1,41 @@
+{
+  "G": 1.0,
+  "background": {
+    "H0_dressed_km_s_Mpc": 61.0,
+    "fv0": 0.627,
+    "label": "NW15_CMB_FIT",
+    "source": "Nazer & Wiltshire, arXiv:1410.3470v2 (Timescape CMB fit; as 1G-A/B/D)"
+  },
+  "density_identity_tolerance": 1e-13,
+  "early_spectrum": {
+    "A_s": 2.1e-09,
+    "T_cmb_K": 2.7255,
+    "baryon_fraction": 0.1563275916312396,
+    "import_status": "PROVISIONAL_MODEL_IMPORT",
+    "k_pivot_per_Mpc": 0.05,
+    "n_s": 0.9649,
+    "provenance": "Planck 2018 VI (arXiv:1807.06209) Table 2, TT,TE,EE+lowE+lensing; T_cmb 2.7255 K",
+    "transfer_model": "eisenstein_hu_1998_zero_baryon_oscillation"
+  },
+  "growth_checks": "TWO_PHASE_GROWTH_REFERENCE_CHECKS",
+  "homogeneity_premise": "NOT_APPLICABLE",
+  "matching": {
+    "provenance": "1G-D Sec. 6 and 1G-F: photon-normalised last scattering, a_LS = 1/1091",
+    "z_last_scattering": 1090.0
+  },
+  "quadrature": "LAGRANGIAN_SIGMA_REFERENCE_QUADRATURE",
+  "radius": {
+    "convention": "equal_lagrangian_mass_to_reference",
+    "explicit_radius_Mpc": "NOT_APPLICABLE",
+    "length_h_inverse_Mpc": "NOT_APPLICABLE",
+    "reference_omega_m": 0.14309694000000003,
+    "reference_radius_Mpc": 11.869436201780415
+  },
+  "seed_quadrature": "NOT_APPLICABLE",
+  "void_share": {
+    "closure": "constant",
+    "evidence_class": "EXAMPLE_INPUT",
+    "provenance": "illustrative explicit share (example only)",
+    "share": 0.05
+  }
+}
