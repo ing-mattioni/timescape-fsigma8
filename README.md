@@ -21,13 +21,18 @@ positive-core margin; a positive result does not establish existence or
 physical compatibility. No Phase 1F-D geometric or perturbative solver is
 implemented, and the frozen scientific statuses are preserved.
 
-**σ(M) track:** phases 1G-A…1G-F and the 2026-09-30 owner decisions are
-merged on `main` at `fb5d952` (PR #3). The 1G-A…1G-E annotated v1 tags
-resolve to that commit (checked 2026-10-01). The F correction and G research
-linked below are successor records on the phase branch
-`phase-1g-f-successor-g-evolution`. They were independently audited
-(2026-10-02) and delta-audited (2026-10-06). They are not merged into `main`,
-frozen or tagged.
+**σ(M) track:** phases 1G-A…1G-E and the 2026-09-30 owner decisions were
+merged on `main` at `fb5d952` (PR #3); the 1G-A…1G-E annotated v1 tags
+resolve to that commit. The F correction and G research linked below,
+independently audited (2026-10-02) and delta-audited (2026-10-06), were
+merged by PR #4 and frozen at `8d3cdd0`: the signed annotated tags
+`phase-1g-f-void-population-v1` and `phase-1g-g-void-evolution-v1` resolve to
+that commit, and the freeze preflight there gave 1136 passed, 0 skipped,
+0 failed on CPython 3.14.3 and 3.11.9 (owner's report). F/G are frozen as
+conditional results; the next phase toward σ8 is separate, and no
+observational authorization changes. Status sentences in the F/G records
+that predate the freeze are resolved in the
+[freeze-status record](reports/phase1g_fg_freeze_status_successor.md).
 - **Route.** The [σ(M) derivation-path audit](reports/phase1g_a_sigma8_derivation_path_audit.md)
   follows the authors' own proposal: standard early-universe physics, then
   scale-independent growth.
@@ -111,7 +116,10 @@ frozen or tagged.
     remediated tree (1136/0/0 on Python 3.14.3 and 3.11.9).
   - The integration record holds the final-tree runs and the residual
     corrections.
-  - Nothing is frozen or tagged.
+  - Merged by PR #4 and frozen at `8d3cdd0` (tags
+    `phase-1g-f-void-population-v1`, `phase-1g-g-void-evolution-v1`;
+    [freeze-status record](reports/phase1g_fg_freeze_status_successor.md)).
+    No release exists.
 - **Windows validation** ([record](reports/phase1g_windows_validation_record.md)):
   both interpreters pass the full suite, as on Linux, and every recorded
   1G-A…1G-F number reproduces.

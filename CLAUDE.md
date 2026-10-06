@@ -14,7 +14,7 @@ explicit human approval.
 
 ## How work is organised
 
-Work proceeds in numbered phases (1A → 1G-F on main; 1G-G research below), each of which is either
+Work proceeds in numbered phases (1A → 1G-G on main, F/G frozen at `8d3cdd0`), each of which is either
 an **audit** (report-only, no code) or an **implementation** gated by a prior
 audit. The pattern is rigid and should be followed for new phases:
 
@@ -101,9 +101,11 @@ Everything else in the list above stays unimplemented.
 The firewall describes package runtimes and observational outputs. The
 1G-C…1G-G report-evidence scripts explore explicitly conditional models;
 they do not authorize a new production runtime, a physical default for an
-unclosed law, or an observational statistic. New G evidence remains
-conditional research: independently audited (2026-10-02) and delta-audited
-(2026-10-06), but not frozen.
+unclosed law, or an observational statistic. The F/G evidence is
+conditional research: independently audited (2026-10-02), delta-audited
+(2026-10-06), merged by PR #4 and frozen at `8d3cdd0` (tags
+`phase-1g-f-void-population-v1`, `phase-1g-g-void-evolution-v1`). The
+freeze attests that checkpoint; it derives no σ8 and grants nothing.
 
 ### Standing scientific caveats
 
@@ -150,6 +152,9 @@ py -3.14 -m venv .venv
 # Delta audit 2026-10-06 (phase1g_fg_remediation_independent_audit.md):
 # 1136 passed / 0 skipped / 0 failed on both for the remediated tree.
 # Final integrated-tree runs: phase1g_fg_remediation_integration.md.
+# Freeze preflight at the PR #4 merge 8d3cdd0 (owner's report, 2026-10-06):
+# 1136 passed / 0 skipped / 0 failed on Windows 3.14.3 (505 s) and 3.11.9
+# (501 s), -W error (phase1g_fg_freeze_status_successor.md).
 .venv\Scripts\python -m pytest -q
 
 # A single file / single test / keyword selection
@@ -253,14 +258,22 @@ audits were recovered and committed, §12) · **1F-D** minimal scalar
 necessary-bound diagnostic (`phase1f_d_necessary_bound.md`, tag
 `phase-1f-d-necessary-bound-v1`; conditional).
 
-σ track (remote state checked 2026-10-01): phases 1G-A…1G-F and the
-2026-09-30 owner decisions are on `main` at
-`fb5d95245bc0cb19ce6cd1438177f1a597bb232f` (PR #3). Annotated v1 tags
-for 1G-A, B, C, D and E all resolve to that commit; no 1G-F tag was found.
-The 2026-10-01 F successor and G research below are unmerged deliverables
-on the phase branch `phase-1g-f-successor-g-evolution`, not part of those
-tags (integration record: `phase1g_fg_remediation_integration.md`). Read their successor reports for the
-current proposed interpretation; frozen records remain unchanged.
+σ track (remote state checked 2026-10-06): phases 1G-A…1G-E and the
+2026-09-30 owner decisions were merged on `main` at
+`fb5d95245bc0cb19ce6cd1438177f1a597bb232f` (PR #3); the annotated v1 tags
+for 1G-A, B, C, D and E all resolve to that commit. The 2026-10-01 F
+successor, the G research, the approved D successor, both F/G audits and
+the remediation were merged by PR #4 at
+`8d3cdd0533035858c42269cb1dff1a20dcafc7da` (tree identical to the phase
+branch head `3d3d46e`) and frozen there: the signed annotated tags
+`phase-1g-f-void-population-v1` and `phase-1g-g-void-evolution-v1` resolve
+to that commit. Freeze preflight: 1136 passed, 0 skipped, 0 failed on
+CPython 3.14.3 and 3.11.9 (owner's report). Status sentences in the F/G
+records that predate the merge and freeze are resolved, without editing
+them, in `phase1g_fg_freeze_status_successor.md`. F/G are frozen as
+conditional results; the next phase toward σ8 is separate, and no
+observational authorization changes. Read the successor reports for the
+current interpretation; frozen records remain unchanged.
 - **Adversarial audits of 1G-A to 1G-E** (2026-09-29; one independent
   auditor per phase, `reports/phase1g_<x>_adversarial_audit.md` + inventory;
   consolidation `phase1g_adversarial_audit_errata_successor.md`).
@@ -380,7 +393,8 @@ current proposed interpretation; frozen records remain unchanged.
     model-internal quantity.
 - **1G-F:** conditional excursion-set void population (report-only;
   frozen `phase1g_f_void_population.md`, corrected reading in
-  `phase1g_f_volume_budget_successor.md`, 2026-10-01 successor on the phase branch).
+  `phase1g_f_volume_budget_successor.md`, 2026-10-01 successor; frozen at
+  `8d3cdd0`, tag `phase-1g-f-void-population-v1`).
   - Excursion-set voids ([SvdW04] two barriers; [JLH13]'s corrected EdS
     shell crossing δ_v = −2.717, r_NL/r_L = 1.697) from the 1G-A early
     spectrum, with the growth clock as an explicit closure (wall EdS in t,
@@ -409,7 +423,8 @@ current proposed interpretation; frozen records remain unchanged.
   - Frozen C3 tracker-seed tables use the older wall-amplitude normalization;
     the current D owner decision uses total delta_L (X_SU=1.26–1.28).
     The primary C1 results do not use C3. No F token is added.
-- **1G-G:** report-only evolution research on the phase branch (`phase1g_g_void_evolution.md`).
+- **1G-G:** report-only evolution research (`phase1g_g_void_evolution.md`;
+  frozen at `8d3cdd0`, tag `phase-1g-g-void-evolution-v1`).
   - Additive mergers conserve the first void-volume moment; they can change
     sizes but cannot fix the full-volume history at a prescribed common,
     size- and age-independent regional void expansion rate.
@@ -431,8 +446,9 @@ current proposed interpretation; frozen records remain unchanged.
     integration blocker (2026-10-06, `phase1g_fg_remediation_independent_audit.md`).
     Residual corrections and the phase-branch integration are recorded in
     `phase1g_fg_remediation_integration.md`. G adds no package API or status;
-    the separate approved D successor changes one classification. No phase
-    freeze, tag, merge or release is implied.
+    the separate approved D successor changes one classification. The merge
+    (PR #4), freeze and tags followed on the owner's separate authority
+    (`phase1g_fg_freeze_status_successor.md`); no release exists.
 - **Status-token additions:** the six 1G-C/1G-D tokens are *additions*, not
   changes (`phase1g_status_additions_successor.md`). The frozen 1F-C-R
   snapshot has no entry for them. The 1F-C-R validator accepts a new token
