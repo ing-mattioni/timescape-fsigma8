@@ -164,8 +164,9 @@ def test_validator_keeps_frozen_snapshot_and_reads_live_value_from_successor(
 
     frozen = load_json(FROZEN_1F_C_R_INVENTORY)["current_scientific_status"]
     changes = remediation.successor_status_changes()
-    assert changes == {TOKEN: {"old_token": OLD_TOKEN, "new_token": NEW_TOKEN,
-                               "record": "reports/phase1g_a_barotropic_status_successor_inventory.json"}}
+    assert changes[TOKEN] == {"old_token": OLD_TOKEN, "new_token": NEW_TOKEN,
+                              "record": "reports/phase1g_a_barotropic_status_successor_inventory.json"}
+    assert set(changes) == {TOKEN, "LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC"}
     # Tokens *added* by a later successor record (2026-09-29, see
     # tests/test_phase1g_status_additions.py) are passed through unchanged;
     # none of them is this token.

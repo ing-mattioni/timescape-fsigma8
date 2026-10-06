@@ -1,0 +1,103 @@
+{
+ "frozen_sha256": "4523ef031484a9f49f91c0522e4562f50bb36f7c8d6d8b0933ddd404ea925569",
+ "n_populations": 84,
+ "max_rel_diff_F2_vs_successor_archive": 0.0,
+ "violations": [],
+ "negative_unresolved": [
+  [
+   "PAPER_REFERENCE",
+   "C2_VOLUME_AVERAGE_CGI_COMOVING/shell_crossing/collapse",
+   -1.71922018898929e-07
+  ],
+  [
+   "PAPER_REFERENCE",
+   "C2_VOLUME_AVERAGE_CGI_MESZAROS/shell_crossing/turnaround",
+   -1.5225404126351094e-07
+  ],
+  [
+   "PAPER_REFERENCE",
+   "C1_WALL_EDS_COMMON_TIME/near_empty_0.1/collapse",
+   -1.0985095619253649e-07
+  ],
+  [
+   "PAPER_REFERENCE",
+   "C1_WALL_EDS_COMMON_TIME/near_empty_0.1/turnaround",
+   -2.2487995826603324e-08
+  ],
+  [
+   "PAPER_REFERENCE",
+   "C2_VOLUME_AVERAGE_CGI_COMOVING/shell_crossing/turnaround",
+   -1.7735038271293746e-08
+  ],
+  [
+   "NW15_CMB_FIT",
+   "C2_VOLUME_AVERAGE_CGI_MESZAROS/shell_crossing/collapse",
+   -1.7580606637146445e-08
+  ],
+  [
+   "NW15_CMB_FIT",
+   "C1_WALL_EDS_COMMON_TIME/near_empty_0.1/collapse",
+   -1.2317176917298056e-08
+  ],
+  [
+   "PAPER_REFERENCE",
+   "C3_SEPARATE_UNIVERSE_PBS_TRACKER_SEED/near_empty_0.1/collapse",
+   -1.1767735563772419e-08
+  ],
+  [
+   "NW15_CMB_FIT",
+   "C3_SEPARATE_UNIVERSE_PBS_TRACKER_SEED/near_empty_0.1/collapse",
+   -1.5819646703718604e-09
+  ],
+  [
+   "NW15_CMB_FIT",
+   "C1_WALL_EDS_COMMON_TIME/near_empty_0.1/turnaround",
+   -1.0129091454480488e-09
+  ]
+ ],
+ "n_negative_unresolved": 12,
+ "local_successor_vs_inventory_max_rel": 5.015729985131617e-13,
+ "local_successor_environment": {
+  "python": "3.14.3",
+  "numpy": "2.5.2",
+  "scipy": "1.18.1"
+ },
+ "variance_shares": {
+  "NW15_CMB_FIT": {
+   "sigma_part": 0.3036278376055833,
+   "sigma_int": 0.9403317479288388,
+   "sigma_total": 0.9881364581534008,
+   "wall_share": 0.9055831892238503,
+   "partition_share": 0.0944168107761497,
+   "check_total": 0.9881364581534008,
+   "f_cov": 0.627,
+   "barrier_interior_total": 0.7222809218415636,
+   "M3_norm_total": 1.0489813195462807
+  },
+  "PAPER_REFERENCE": {
+   "sigma_part": 0.32636527407524424,
+   "sigma_int": 0.9315590530253713,
+   "sigma_total": 0.9870747496495571,
+   "wall_share": 0.89067794150022,
+   "partition_share": 0.10932205849978018,
+   "check_total": 0.9870747496495572,
+   "f_cov": 0.737,
+   "barrier_interior_total": 0.6145057919207413,
+   "M3_norm_total": 0.9943937976138902
+  }
+ },
+ "C3_tracker_seed": {
+  "NW15_CMB_FIT": {
+   "D_t0": 1.033503269737031,
+   "A_v": 1184.6621840386147
+  },
+  "PAPER_REFERENCE": {
+   "D_t0": 1.0202298735527662,
+   "A_v": 1168.9147251008183
+  }
+ },
+ "D_wall_t0": {
+  "NW15_CMB_FIT": 0.9455104962879064,
+  "PAPER_REFERENCE": 0.8767922812878437
+ }
+}

@@ -1,0 +1,878 @@
+{
+  "classification": "REPORT_ONLY_INDEPENDENT_DELTA_AUDIT",
+  "date": "2026-10-06",
+  "auditor": "Claude Code (Claude Opus 5.5), at the project owner's request; same auditor as the 2026-10-02 audit (self-review of own findings mitigated by method-diverse recomputation)",
+  "report": "reports/phase1g_fg_remediation_independent_audit.md",
+  "evidence_directory": "reports/phase1g_fg_remediation_audit_evidence/",
+  "repository": {
+    "branch": "phase-1g-f-successor-g-evolution",
+    "head": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f",
+    "tracked_files": 259,
+    "tracked_modified": 10,
+    "untracked": 16,
+    "changed_excluding_first_audit_files": 24,
+    "git_diff_check": "clean",
+    "stash": "none"
+  },
+  "files_examined_sha256_initial": {
+    "CLAUDE.md": "0eaf3c5af6b459ee27481a988bd48b28dcd0b1e0609fc4c315edba525ed5cd75",
+    "README.md": "3c3c0355d35665782ec2abb6809438e72fa6643f0f1a9747d88d9c3683168f44",
+    "reports/phase1g_d_linear_statistic_status_successor.md": "ece7d11f4707b410ad296f6c67f1f258ceb6be4ce2aa4008e4d6afeb39960f71",
+    "reports/phase1g_d_linear_statistic_status_successor_inventory.json": "4026a6add8a83cd34dc7c676df75eb84a3e6be451a1928ee7a428a1b310237ea",
+    "reports/phase1g_f_volume_budget_successor.md": "8568fe9417052ba7ed78b9901f9f54520afe53ac3dc49e40fa96631a1e196a32",
+    "reports/phase1g_f_volume_budget_successor_inventory.json": "3b4c0ea27503d5f5d317b600ec3c6ae3708a608a65b3ead1246139e600793c16",
+    "reports/phase1g_fg_audit_remediation.md": "2bdbbe32c56553da8843594f28ad19dafc130935d64008e97fe96f69c9ee3aff",
+    "reports/phase1g_fg_audit_remediation_inventory.json": "ff2336e89c514b89d4b03b1adc559ea25575c57236ef2031ee5a4b86888603a7",
+    "reports/phase1g_fg_independent_scientific_audit.md": "6bb8edecf394989186c86e3ead7f401bcbcc0ac1977bc395008db7019a0c063d",
+    "reports/phase1g_fg_independent_scientific_audit_inventory.json": "3503a602413cb15f8daed58bf0a6d31a6c0defcc222527ce528753812d888aae",
+    "reports/phase1g_fg_successor_validation.md": "438a0063363c78ec50ae3ce793264215cf7ba4de58e83d434a4d9ffb8e2b278a",
+    "reports/phase1g_g_void_evolution.md": "bca7832333527f83eb750d1c39fcac92d49bc1891c761908f4e64eb861bb0d61",
+    "reports/phase1g_g_void_evolution_inventory.json": "8e801932a64df1169294136979164b2eb3e4674e1838eac15d402a60eec0c62e",
+    "scripts/phase1g_f_volume_budget_successor_numerics.py": "59b62454ac65a121a603b073e875f9c26d40b1a04deb0185d96d04adb4718a9e",
+    "scripts/phase1g_g_void_evolution_numerics.py": "e5829e97009d55482890c25ca6725959078091cefe8869abccaae760435eb113",
+    "scripts/validate_phase1f_c_r_astra_remediation.py": "e6fb92b0812f05e42b1ec4f739996440e3998a99fa07bdd77694a11fd31787c5",
+    "src/timescape_fsigma8/lagrangian_sigma.py": "d604108b1f070928eb8b21c1e84af8b13144f914fb21892467f200d78f14a46b",
+    "src/timescape_fsigma8/scientific_status.py": "3c626f58ce3bcccd4df242d3287266c1769b7224eeeabcc90566777af68c61bc",
+    "tests/phase1g_owner_decisions_test_utils.py": "11789870008b7e7157a7e146745bda981c7b0bfd2d2894445b889859de87da50",
+    "tests/test_barotropic_hadamard_refutation.py": "684de34a1ac4583342e32d36dce97301ee8a1d464e750ba1f43a3f21972d674e",
+    "tests/test_phase1g_d_linear_statistic_status_successor.py": "48cd02d8b0299593236fedbeb8847ef5886644e6050f6979b63f53b2b325f03a",
+    "tests/test_phase1g_d_owner_decisions.py": "49cab57c768a1edc9e0b0156f969c25e330bfb91cb1956071fb9fa9b36c4e020",
+    "tests/test_phase1g_e_status_addition.py": "a3f7f4f6b60ab8356b69bb39ad95c5dc7fabccce2bddfa8d3095a8f049828f1c",
+    "tests/test_phase1g_f_volume_budget_successor.py": "aee627c28cbbf6c7f76e0bb3699b1a84a22ea221bd7797b581971ab9f41c76ba",
+    "tests/test_phase1g_g_void_evolution.py": "aaf32213ae01247577aa097f80662ff6bf2b0da5996ad825cfa9cd0de8a25de8",
+    "tests/test_phase1g_status_additions.py": "efd6f92b2532de41fe852c8a6f3ff6d989bbbe868468789138c86acaa0a5c245"
+  },
+  "files_examined_unchanged_at_end": true,
+  "environments": {
+    "py314": "CPython 3.14.3, NumPy 2.5.2, SciPy 1.18.1, pytest 9.1.1",
+    "py311": "CPython 3.11.9, NumPy 2.4.6, SciPy 1.17.1, pytest 9.1.1",
+    "platform": "Windows 11",
+    "OPENBLAS_NUM_THREADS": 1,
+    "dependencies_changed": false
+  },
+  "owner_decisions_verified": {
+    "verbatim": {
+      "2026-10-01": "Ottimo, procedi con entrambe le cose (e sistema anche CLAUDE.md se riesci)",
+      "2026-10-02": "si confermo"
+    },
+    "D_token": {
+      "old": "NOT_DEFINED_IN_LINEAR_TWO_SCALE_THEORY",
+      "new": "NOT_DERIVED",
+      "original_addition_preserved": true,
+      "only_live_assignment_changed": true,
+      "lagrangian_sigma_AST_identical_modulo_strings": true
+    },
+    "F_verdict_2": {
+      "milne_rate_asymptote": "DERIVED_FROM_VERIFIED_DEFINITIONS",
+      "finite_mass_seeds_equal_exactly_empty_finite_time_tracker_voids": "NOT_DERIVED"
+    },
+    "observational_authorizations": "NOT_GRANTED (SIGMA8, FSIGMA8, RSD, OBSERVATIONAL, UNIQUE_TIMESCAPE_PREDICTION)",
+    "verbatim_vs_summary_distinguished": "yes, except F successor header (R2-N3)"
+  },
+  "dispositions_of_original_18": {
+    "FGA-F1": {
+      "disposition": "RESOLVED",
+      "evidence": "F successor 5.1 maps every frozen F3/superseded category; near-empty C1/collapse F2 cutoffs recomputed (max |rel| 1.94e-4 vs R2-M1); GM z=3 r>=1 0.0052522 vs 0.0052491; archived r_min declared F3-only in map, artifact cutoff_status and inventory; verdict 2 split per owner approval",
+      "residual": "R2-N2"
+    },
+    "FGA-F2": {
+      "disposition": "RESOLVED",
+      "evidence": "Successor 4 + inventory boolean_surrogate + new test: eta=-ln(1-f)=1.33560/0.98618, ratio 1.7761/1.3115, multiplicity 1.8122/1.5728, mass accounting 3.80/2.68 vs 61.7% at 2.49"
+    },
+    "FGA-F3": {
+      "disposition": "RESOLVED",
+      "evidence": "Precision reduced (>=15 two significant figures); bias 0.22-0.24% / 0.69-0.75% quantified; tests use independent references with accuracy budgets 0.3%/0.8%/0.2%, separate from the rtol=1e-11 reproducibility gate"
+    },
+    "FGA-F4": {
+      "disposition": "RESOLVED",
+      "evidence": "Five identification assumptions listed in successor 1 (l. 62-70), separated from F1-F3 algebra"
+    },
+    "FGA-F5": {
+      "disposition": "RESOLVED",
+      "evidence": "Claim restricted to C1, z=0-3; z=0.5 near-match and non-monotone cutoff sequence stated; README/CLAUDE qualified"
+    },
+    "FGA-F6": {
+      "disposition": "RESOLVED",
+      "evidence": "Signed quadrature residual explained (5.1) and unresolved_interpretation field added; unclipped"
+    },
+    "FGA-G1": {
+      "disposition": "RESOLVED",
+      "evidence": "G 4: cohort is not F's re-identified population; t*J/V_D ~ -0.12434; coefficient 3H_v t-2 rises 2/3 -> 1; normalised source bounded above by 1/3"
+    },
+    "FGA-G2": {
+      "disposition": "RESOLVED",
+      "evidence": "G 3 l. 66-69 and script assumptions transcribe [L03] (2.2) hypotheses: no spatial correlations, morphology neglected or averaged"
+    },
+    "FGA-G3": {
+      "disposition": "RESOLVED",
+      "evidence": "History claim restricted to a prescribed common, size- and age-independent rate; instantaneous conservation vs future weighted rate stated"
+    },
+    "FGA-G4": {
+      "disposition": "RESOLVED",
+      "evidence": "G12 classified as standard covariance definition; optional numbers omitted (acceptable)"
+    },
+    "FGA-T1": {
+      "disposition": "RESOLVED",
+      "evidence": "Tail/cutoff tests use independent references (now reproducible from this evidence directory); Lagrangian shell test non-circular (R2-M5: p=4,6 give 5/6, 7/9)"
+    },
+    "FGA-D1": {
+      "disposition": "RESOLVED_OWNER_APPROVED",
+      "evidence": "Registered D successor with added_by_record; validator fail-closed (12/12 bypass attempts rejected); original addition unchanged; only one live assignment changed; NOT_GRANTED x5",
+      "residual": "R2-N1"
+    },
+    "FGA-D2": {
+      "disposition": "PARTIALLY_RESOLVED",
+      "evidence": "Verbatim quotes and summary flags in remediation, D successor and all inventories",
+      "residual": "R2-N3: F successor header l. 4-5 keeps an unlabelled paraphrase"
+    },
+    "FGA-D3": {
+      "disposition": "RESOLVED",
+      "evidence": "LF byte writes verified (0 CR, both interpreters); raw hashes per run; numeric gate rtol=1e-11, atol=1e-14 passed with 0 mismatches"
+    },
+    "FGA-D4": {
+      "disposition": "RESOLVED",
+      "evidence": "PowerShell commands added; executed in an isolated copy, identical outputs"
+    },
+    "FGA-D5": {
+      "disposition": "RESOLVED",
+      "evidence": "F and G docstrings distinguish project M3 accounting from [JLH13] (13)"
+    },
+    "FGA-D6": {
+      "disposition": "RESOLVED",
+      "evidence": "Historical results scoped; final-tree two-interpreter suites supplied by this audit"
+    },
+    "FGA-D7": {
+      "disposition": "RESOLVED",
+      "evidence": "Successor errata in remediation: [SvdW04] (A17)/(A18); E one-radius comment contextualised; frozen records untouched"
+    }
+  },
+  "disposition_counts": {
+    "RESOLVED": 17,
+    "PARTIALLY_RESOLVED": 1,
+    "OPEN": 0,
+    "NOT_APPLICABLE": 0
+  },
+  "errata_of_first_audit_confirmed": [
+    "G2 gel example: sol mass 1/t is Stockmayer ([L03] (4.77)), not Flory; Flory q=exp[-t(1-q)] ([L03] (4.74)-(4.76)), q(2)=0.20318787",
+    "Finite-grid product-kernel value at t=1 (0.9531, N=120) not converged; deficit ~N^-1/2",
+    "First audit's chat summary called the G6 coefficient 2/3 an upper bound; it is the shell-crossing value rising toward 1; the 1/3 bound applies to the normalised missing source"
+  ],
+  "new_findings": [
+    {
+      "id": "R2-N1",
+      "severity": "LOW",
+      "class": "DOCUMENTATION",
+      "where": "src/timescape_fsigma8/scientific_status.py l. 1-12 (module docstring)",
+      "issue": "Docstring registry summary omits the 2026-10-02 D successor (lists only A change, six additions, E addition, 2026-09-30 comment edits)",
+      "correction": "Add one clause naming reports/phase1g_d_linear_statistic_status_successor.md (changes one added token)",
+      "blocking": "NONE (freeze requirement)"
+    },
+    {
+      "id": "R2-N2",
+      "severity": "LOW",
+      "class": "DOCUMENTATION",
+      "where": "reports/phase1g_f_volume_budget_successor.md 5.1",
+      "issue": "Location labels '§13 verdict 2' (should be §1 item 2/§5) and near-empty range attributed to §12 item 1 (it is §1 item 5/§8.2); frozen [W09]-comparison percentages superseded only generically",
+      "evidence": {
+        "frozen_claim_62_73pct_PBS_shell_crossing_ge10": {
+          "F3": [
+            0.620187521174258,
+            0.7341517642339281
+          ],
+          "F2": [
+            0.4919310608972751,
+            0.7091534724162746
+          ]
+        },
+        "frozen_claim_40_68pct_PBS_x0.1_ge10": {
+          "F3": [
+            0.4006536805816357,
+            0.6748842181578412
+          ],
+          "F2": [
+            0.19537066685132023,
+            0.5359757239633778
+          ]
+        },
+        "frozen_claim_le10pct_C1_C2_C3seed_shell_ge10": {
+          "F3_max": [
+            2.7257266036822178e-06,
+            0.0975693831065599
+          ],
+          "F2_max": [
+            1.0956776997185872e-06,
+            0.04251981651133658
+          ]
+        }
+      },
+      "correction": "Fix labels; state F2 ranges 49-71%, 20-54%, <=4.3% (historical C3 normalisations)",
+      "blocking": "NONE (freeze requirement)"
+    },
+    {
+      "id": "R2-N3",
+      "severity": "LOW",
+      "class": "PROVENANCE",
+      "where": "reports/phase1g_f_volume_budget_successor.md l. 4-5",
+      "issue": "Unlabelled paraphrase 'Owner instruction: proceed with ...' remains (residue of FGA-D2)",
+      "correction": "Replace with the verbatim 2026-10-01 quote or label as summary with pointer",
+      "blocking": "NONE (freeze requirement)"
+    },
+    {
+      "id": "R2-N4",
+      "severity": "INFO",
+      "class": "REGISTRY",
+      "where": "scripts/validate_phase1f_c_r_astra_remediation.py",
+      "issue": "Record order not enforced; validator alone accepts a rewritten original addition with the change dropped (caught by tests and Git); misleading message for a predecessor link on a frozen token",
+      "correction": "Optional",
+      "blocking": "NONE"
+    },
+    {
+      "id": "R2-N5",
+      "severity": "INFO",
+      "class": "DOCUMENTATION",
+      "where": "README.md sigma-track lead; reports/phase1g_g_void_evolution.md 8",
+      "issue": "'pending ... independent audit' wording; Linux-run residual figures quoted",
+      "correction": "Optional",
+      "blocking": "NONE"
+    }
+  ],
+  "new_finding_counts": {
+    "HIGH": 0,
+    "MEDIUM": 0,
+    "LOW": 3,
+    "INFO": 2
+  },
+  "results": {
+    "near_empty_and_primary_accuracy_vs_R2M1": {
+      "PAPER_REFERENCE": {
+        "cutoff_F2_shell": {
+          "audited": 0.346453754921388,
+          "reference": 0.3465576867336336,
+          "rel": -0.0002998975819151761
+        },
+        "cutoff_F3_shell": {
+          "audited": 0.5056719686044271,
+          "reference": 0.5057725149089003,
+          "rel": -0.00019879748604234582
+        },
+        "F2_ge1": {
+          "audited": 0.6242648155823363,
+          "reference": 0.6242901770915215,
+          "rel": -4.062455267728193e-05
+        },
+        "F2_ge10": {
+          "audited": 0.014814955564145397,
+          "reference": 0.014780404816320827,
+          "rel": 0.002337604974555152
+        },
+        "F2_ge15": {
+          "audited": 0.0010256449786711446,
+          "reference": 0.001018553532966584,
+          "rel": 0.006962270980403362
+        },
+        "z3_F2_ge1": {
+          "audited": 0.005252158812596319,
+          "reference": 0.0052490503326711735,
+          "rel": 0.0005921985365233695
+        },
+        "near_empty_0.1_cutoff_F2": {
+          "audited": 0.09399909779093592,
+          "reference": 0.09401731647745666,
+          "rel": -0.0001937801162950059
+        },
+        "near_empty_0.1_cutoff_F3": {
+          "audited": 0.18768693690444127,
+          "reference": 0.18769918931771515,
+          "rel": -6.527685771262615e-05
+        },
+        "near_empty_0.1_F2_ge1": {
+          "audited": 0.30406066247415336,
+          "reference": 0.3040592299108961,
+          "rel": 4.711461176976073e-06
+        },
+        "near_empty_0.05_cutoff_F2": {
+          "audited": 0.018783381597875595,
+          "reference": 0.018785425010521203,
+          "rel": -0.00010877649265128575
+        },
+        "near_empty_0.05_cutoff_F3": {
+          "audited": 0.06198247214273683,
+          "reference": 0.061985174587299435,
+          "rel": -4.359824071797913e-05
+        },
+        "near_empty_0.05_F2_ge1": {
+          "audited": 0.04548968736508347,
+          "reference": 0.045474100230404844,
+          "rel": 0.00034276950175260446
+        }
+      },
+      "NW15_CMB_FIT": {
+        "cutoff_F2_shell": {
+          "audited": 1.2299070133108925,
+          "reference": 1.2301036823305056,
+          "rel": -0.00015988003486056002
+        },
+        "cutoff_F3_shell": {
+          "audited": 1.9515378720971197,
+          "reference": 1.9517353584702157,
+          "rel": -0.00010118501580602679
+        },
+        "F2_ge1": {
+          "audited": 0.6660568366975301,
+          "reference": 0.6660851741130751,
+          "rel": -4.2543231175695695e-05
+        },
+        "F2_ge10": {
+          "audited": 0.01924630792466579,
+          "reference": 0.019203731434304712,
+          "rel": 0.0022170946571884453
+        },
+        "F2_ge15": {
+          "audited": 0.0013150449670235394,
+          "reference": 0.0013052876245294802,
+          "rel": 0.007475243241945595
+        },
+        "z3_F2_ge1": {
+          "audited": 0.004381368282505826,
+          "reference": 0.004376431919384731,
+          "rel": 0.0011279423996590765
+        },
+        "near_empty_0.1_cutoff_F2": {
+          "audited": 0.3935610658293955,
+          "reference": 0.39359874343489487,
+          "rel": -9.57259293324908e-05
+        },
+        "near_empty_0.1_cutoff_F3": {
+          "audited": 0.8095540893834378,
+          "reference": 0.8096503806387119,
+          "rel": -0.00011892942630142844
+        },
+        "near_empty_0.1_F2_ge1": {
+          "audited": 0.3823997387897536,
+          "reference": 0.38240897163567816,
+          "rel": -2.414390511051856e-05
+        },
+        "near_empty_0.05_cutoff_F2": {
+          "audited": 0.09523753868039392,
+          "reference": 0.09524648027570073,
+          "rel": -9.387848538799926e-05
+        },
+        "near_empty_0.05_cutoff_F3": {
+          "audited": 0.2859427022558305,
+          "reference": 0.2859615399776681,
+          "rel": -6.58750188541335e-05
+        },
+        "near_empty_0.05_F2_ge1": {
+          "audited": 0.08216210993981304,
+          "reference": 0.08214271499310835,
+          "rel": 0.0002361128032635218
+        }
+      }
+    },
+    "R2M1_grid_convergence_note": "N=3000 vs 6000 differences <=1.4e-7; agreement with first-audit closed form <=1e-7",
+    "R2M1_fine": {
+      "PAPER_REFERENCE": {
+        "0.1": {
+          "delta_v": -5.190147733838673,
+          "x": 0.09999999999999994,
+          "m_total": 0.24524704092999983,
+          "F2_all": 0.764670909262679,
+          "cutoff_F2": 0.09401731647745666,
+          "cutoff_F3": 0.18769918931771515,
+          "F2_ge1": 0.3040592299108961,
+          "F2_ge10": 2.8655721499143832e-05,
+          "F2_ge15": 4.635003972902398e-08
+        },
+        "0.05": {
+          "delta_v": -8.965065300139402,
+          "x": 0.05,
+          "m_total": 0.15833118143804012,
+          "F2_all": 0.7900181112972106,
+          "cutoff_F2": 0.018785425010521203,
+          "cutoff_F3": 0.061985174587299435,
+          "F2_ge1": 0.045474100230404844,
+          "F2_ge10": 7.731194348394872e-11,
+          "F2_ge15": 1.1055336850394128e-16
+        },
+        "shell_crossing": {
+          "delta_v": -2.717180343688109,
+          "x": 0.20472233401619302,
+          "m_total": 0.3829709426692027,
+          "F2_all": 0.7519694338440864,
+          "cutoff_F2": 0.3465576867336336,
+          "cutoff_F3": 0.5057725149089003,
+          "F2_ge1": 0.6242901770915215,
+          "F2_ge10": 0.014780404816320827,
+          "F2_ge15": 0.001018553532966584
+        },
+        "z3_F2_ge1": 0.0052490503326711735,
+        "z3_tracker_fv": 0.3055849983468641,
+        "omega_eff": 0.12047512089055852,
+        "D_wall": 0.8767922812878437
+      },
+      "NW15_CMB_FIT": {
+        "0.1": {
+          "delta_v": -5.190147733838673,
+          "x": 0.09999999999999994,
+          "m_total": 0.24524704092999983,
+          "F2_all": 0.764670909262679,
+          "cutoff_F2": 0.39359874343489487,
+          "cutoff_F3": 0.8096503806387119,
+          "F2_ge1": 0.38240897163567816,
+          "F2_ge10": 6.491348857923117e-05,
+          "F2_ge15": 1.149295440142186e-07
+        },
+        "0.05": {
+          "delta_v": -8.965065300139402,
+          "x": 0.05,
+          "m_total": 0.15833118143804012,
+          "F2_all": 0.7900181112972106,
+          "cutoff_F2": 0.09524648027570073,
+          "cutoff_F3": 0.2859615399776681,
+          "F2_ge1": 0.08214271499310835,
+          "F2_ge10": 6.431528772356861e-10,
+          "F2_ge15": 1.3896661799071478e-15
+        },
+        "shell_crossing": {
+          "delta_v": -2.717180343688109,
+          "x": 0.20472233401619302,
+          "m_total": 0.3829709426692027,
+          "F2_all": 0.7519694338440864,
+          "cutoff_F2": 1.2301036823305056,
+          "cutoff_F3": 1.9517353584702157,
+          "F2_ge1": 0.6660851741130751,
+          "F2_ge10": 0.019203731434304712,
+          "F2_ge15": 0.0013052876245294802
+        },
+        "z3_F2_ge1": 0.004376431919384731,
+        "z3_tracker_fv": 0.1907402828479838,
+        "omega_eff": 0.13093722890629914,
+        "D_wall": 0.9455104962879062
+      }
+    },
+    "reproducibility_gate": {
+      "rtol": 1e-11,
+      "atol": 1e-14,
+      "F_314_mismatches": 0,
+      "F_311_mismatches": 0,
+      "G_314_mismatches": 0,
+      "G_311_mismatches": 0,
+      "F_314_vs_F_311_mismatches": 0,
+      "G_314_equals_G_311_bytes": true,
+      "platform_margin": {
+        "max_rel_for_abs_ref_gt_0": {
+          "n": 404,
+          "rel": 1.0,
+          "path": "G/cases/NW15_CMB_FIT/history[3]/residual"
+        },
+        "max_rel_for_abs_ref_gt_1e-12": {
+          "n": 378,
+          "rel": 1.1081471049028935e-07,
+          "path": "F/NW15_CMB_FIT/history[1]/unresolved_below_grid"
+        },
+        "max_rel_for_abs_ref_gt_1e-06": {
+          "n": 349,
+          "rel": 3.3589832722433937e-12,
+          "path": "F/NW15_CMB_FIT/near/0.05/unresolved_below_grid"
+        },
+        "max_abs_diff_all": 1.7763568394002505e-14,
+        "n_leaves": 418,
+        "bitwise_equal_leaves": 111
+      }
+    },
+    "archive": {
+      "archive_populations": 84,
+      "archive_max_rel_F2": 0.0,
+      "archive_violations": [],
+      "archive_input_sha256": "4523ef031484a9f49f91c0522e4562f50bb36f7c8d6d8b0933ddd404ea925569",
+      "archive_input_sha256_matches_frozen_file": true,
+      "archive_cutoff_status": "archived M3_r_min values use F3 only; not F2 cutoffs; C1 collapse near-empty cutoffs are recomputed separately"
+    },
+    "boolean_surrogate": {
+      "PAPER_REFERENCE": {
+        "eta": 1.3356012468043725,
+        "eta_reported": 1.3356012468043725,
+        "coverage_from_eta": 0.737,
+        "ratio_to_F": 1.7761376815234975,
+        "multiplicity": 1.812213360657222,
+        "wall_density_over_mean_empty": 3.8022813688212924
+      },
+      "NW15_CMB_FIT": {
+        "eta": 0.9861768593383218,
+        "eta_reported": 0.9861768593383218,
+        "coverage_from_eta": 0.6270000000000001,
+        "ratio_to_F": 1.3114587042414227,
+        "multiplicity": 1.5728498554040218,
+        "wall_density_over_mean_empty": 2.680965147453084
+      }
+    },
+    "registry_adversarial": {
+      "cases": {
+        "baseline_registered_records": {
+          "expected": "PASS",
+          "observed": "PASS",
+          "message": "",
+          "as_expected": true
+        },
+        "change_without_predecessor_link": {
+          "expected": "FAIL",
+          "observed": "FAIL",
+          "message": "AssertionError: token both changed and added without an explicit predecessor record",
+          "as_expected": true
+        },
+        "link_to_unregistered_record": {
+          "expected": "FAIL",
+          "observed": "FAIL",
+          "message": "AssertionError: LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC: change does not name the adding predecessor record",
+          "as_expected": true
+        },
+        "link_to_wrong_registered_record": {
+          "expected": "FAIL",
+          "observed": "FAIL",
+          "message": "AssertionError: LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC: change does not name the adding predecessor record",
+          "as_expected": true
+        },
+        "old_token_inconsistent_with_addition": {
+          "expected": "FAIL",
+          "observed": "FAIL",
+          "message": "AssertionError: LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC: adding record does not hold the superseded token",
+          "as_expected": true
+        },
+        "successor_also_re_adds_token": {
+          "expected": "FAIL",
+          "observed": "FAIL",
+          "message": "AssertionError: LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC: added by more than one successor record",
+          "as_expected": true
+        },
+        "same_change_registered_twice": {
+          "expected": "FAIL",
+          "observed": "FAIL",
+          "message": "AssertionError: LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC: superseded by more than one successor record",
+          "as_expected": true
+        },
+        "chained_second_change": {
+          "expected": "FAIL",
+          "observed": "FAIL",
+          "message": "AssertionError: LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC: superseded by more than one successor record",
+          "as_expected": true
+        },
+        "live_module_not_updated": {
+          "expected": "FAIL",
+          "observed": "FAIL",
+          "message": "AssertionError: LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC: live value differs from the successor record",
+          "as_expected": true
+        },
+        "live_module_other_value": {
+          "expected": "FAIL",
+          "observed": "FAIL",
+          "message": "AssertionError: LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC: live value differs from the successor record",
+          "as_expected": true
+        },
+        "predecessor_link_on_frozen_token": {
+          "expected": "FAIL",
+          "observed": "FAIL",
+          "message": "AssertionError: D3_VERDICT: token absent from the frozen snapshot and added by no successor record; a predecessor link cannot replace the addition",
+          "as_expected": true
+        },
+        "removal_of_added_token": {
+          "expected": "FAIL",
+          "observed": "FAIL",
+          "message": "AssertionError: successor record adds a token the live module lacks",
+          "as_expected": true
+        },
+        "order_swapped_D_before_addition": {
+          "expected": "PASS_OR_FAIL (order not specified)",
+          "observed": "PASS",
+          "message": "",
+          "as_expected": false
+        },
+        "history_rewrite_of_original_addition_without_change": {
+          "expected": "PASS (validator-only blind spot)",
+          "observed": "PASS",
+          "message": "",
+          "as_expected": false
+        },
+        "unrelated_token_changed_in_live_module": {
+          "expected": "FAIL",
+          "observed": "FAIL",
+          "message": "AssertionError: VOID_ONSET_RESPONSE: live value differs from the successor record",
+          "as_expected": true
+        }
+      },
+      "facts": {
+        "original_addition_record_blob_equals_HEAD": true,
+        "original_addition_value": "NOT_DEFINED_IN_LINEAR_TWO_SCALE_THEORY",
+        "D_record_canonical": true,
+        "registered_records": [
+          "reports/phase1g_a_barotropic_status_successor_inventory.json",
+          "reports/phase1g_status_additions_successor_inventory.json",
+          "reports/phase1g_e_status_addition_successor_inventory.json",
+          "reports/phase1g_d_linear_statistic_status_successor_inventory.json"
+        ],
+        "all_registered_records_canonical": true
+      },
+      "all_as_expected": true
+    },
+    "gel_flory_stockmayer": {
+      "flory_q": {
+        "0.5": 1.0,
+        "1": 1.0,
+        "1.5": 0.41718835613418886,
+        "2": 0.20318786997997995,
+        "3": 0.05952020929264039
+      },
+      "flory_via_L03_4_76": {
+        "0.5": 0.0,
+        "1": 0.0,
+        "1.5": 0.41718835613418864,
+        "2": 0.20318786997997995,
+        "3": 0.059520209292640375
+      },
+      "stockmayer_closed_4_77": {
+        "0.5": null,
+        "1": 1.0000000024779847,
+        "1.5": 0.6666666683186565,
+        "2": 0.5000000012389924,
+        "3": 0.33333333415932825
+      },
+      "stockmayer_exact_1_over_t": {
+        "0.5": 1.0,
+        "1": 1.0,
+        "1.5": 0.6666666666666666,
+        "2": 0.5,
+        "3": 0.3333333333333333
+      },
+      "truncated_stockmayer": {
+        "60": {
+          "0.5": 0.9999999361542784,
+          "1": 0.9332219796972554,
+          "1.5": 0.6645709137391215,
+          "2": 0.4998466019168739,
+          "3": 0.3333295321349255
+        },
+        "120": {
+          "0.5": 0.9999999999997746,
+          "1": 0.9530986739324161,
+          "1.5": 0.666313256931492,
+          "2": 0.49999063224513285,
+          "3": 0.3333332774344127
+        },
+        "240": {
+          "0.5": 1.0000000000000004,
+          "1": 0.967008628749605,
+          "1.5": 0.6666337403658277,
+          "2": 0.4999997917672692,
+          "3": 0.33333333367569296
+        },
+        "480": {
+          "0.5": 1.0000000000000004,
+          "1": 0.9767628106479057,
+          "1.5": 0.6666653358267278,
+          "2": 0.499999999282592,
+          "3": 0.33333333384690467
+        },
+        "960": {
+          "0.5": 1.0000000000000004,
+          "1": 0.9836160996068986,
+          "1.5": 0.6666666503544455,
+          "2": 0.5000000005282023,
+          "3": 0.3333333339124166
+        }
+      },
+      "truncated_flory": {
+        "60": {
+          "0.5": 0.9999999342365061,
+          "1": 0.8974680280523355,
+          "1.5": 0.41717246229313903,
+          "2": 0.20318786996900445,
+          "3": 0.059520209292371916
+        },
+        "120": {
+          "0.5": 0.9999999999997706,
+          "1": 0.9273316164889689,
+          "1.5": 0.417188334774202,
+          "2": 0.20318786998049435,
+          "3": 0.059520209291943106
+        },
+        "240": {
+          "0.5": 0.9999999999999996,
+          "1": 0.948556308102488,
+          "1.5": 0.4171883561396458,
+          "2": 0.2031878699790846,
+          "3": 0.05952020929365585
+        },
+        "480": {
+          "0.5": 0.9999999999999996,
+          "1": 0.9636027795966963,
+          "1.5": 0.41718835611941085,
+          "2": 0.20318786997408744,
+          "3": 0.05952020929335086
+        },
+        "960": {
+          "0.5": 0.9999999999999996,
+          "1": 0.9742558238819747,
+          "1.5": 0.4171883561196014,
+          "2": 0.2031878699742328,
+          "3": 0.05952020929339162
+        }
+      },
+      "prior_audit_value_N120_t1": 0.9530986737238387
+    },
+    "shell_test_probe": {
+      "p3_convergence": [
+        {
+          "step": 0.01,
+          "eta": 3.4874900892426077,
+          "Ht": 0.8888868292718763,
+          "err_vs_8_9": -2.0596170124953517e-06
+        },
+        {
+          "step": 0.001,
+          "eta": 3.4875220935999596,
+          "Ht": 0.8888888682781474,
+          "err_vs_8_9": -2.0610741446880354e-08
+        },
+        {
+          "step": 0.0001,
+          "eta": 3.487522413646601,
+          "Ht": 0.888888888678554,
+          "err_vs_8_9": -2.1033486063970486e-10
+        },
+        {
+          "step": 5e-05,
+          "eta": 3.487522416071247,
+          "Ht": 0.8888888888263125,
+          "err_vs_8_9": -6.25763885153674e-11
+        },
+        {
+          "step": 1e-05,
+          "eta": 3.4875224167303984,
+          "Ht": 0.8888888888854224,
+          "err_vs_8_9": -3.4664493497871263e-12
+        }
+      ],
+      "p3_labels": [
+        {
+          "label": 1.05,
+          "eta": 3.4875224039416115,
+          "Ht": 0.8888888880820874,
+          "err_vs_8_9": -8.06801403463453e-10
+        },
+        {
+          "label": 2.0,
+          "eta": 3.4875224039436556,
+          "Ht": 0.8888888880800849,
+          "err_vs_8_9": -8.088039127329694e-10
+        },
+        {
+          "label": 5.0,
+          "eta": 3.4875224039388093,
+          "Ht": 0.8888888880452347,
+          "err_vs_8_9": -8.436541465428604e-10
+        }
+      ],
+      "other_profiles": [
+        {
+          "p": 4.0,
+          "eta": 2.7195849468880513,
+          "Ht": 0.8333333328962519,
+          "analytic": 0.8333333333333334,
+          "err": -4.3708148211862863e-10
+        },
+        {
+          "p": 6.0,
+          "eta": 2.052481995349595,
+          "Ht": 0.7777777768123005,
+          "analytic": 0.7777777777777778,
+          "err": -9.65477253700442e-10
+        }
+      ]
+    },
+    "archived_headlines_F2": {
+      "frozen_claim_62_73pct_PBS_shell_crossing_ge10": {
+        "F3": [
+          0.620187521174258,
+          0.7341517642339281
+        ],
+        "F2": [
+          0.4919310608972751,
+          0.7091534724162746
+        ]
+      },
+      "frozen_claim_40_68pct_PBS_x0.1_ge10": {
+        "F3": [
+          0.4006536805816357,
+          0.6748842181578412
+        ],
+        "F2": [
+          0.19537066685132023,
+          0.5359757239633778
+        ]
+      },
+      "frozen_claim_le10pct_C1_C2_C3seed_shell_ge10": {
+        "F3_max": [
+          2.7257266036822178e-06,
+          0.0975693831065599
+        ],
+        "F2_max": [
+          1.0956776997185872e-06,
+          0.04251981651133658
+        ]
+      }
+    },
+    "full_suites": {
+      "314": {
+        "command": "command: OPENBLAS_NUM_THREADS=1 .venv/Scripts/python -B -W error -m pytest -q -p no:cacheprovider -rfEs",
+        "environment": "3.14.3 numpy 2.5.2 scipy 1.18.1 pytest 9.1.1 Windows-11-10.0.26300-SP0",
+        "passed": 1136,
+        "skipped": 0,
+        "failed": 0,
+        "seconds": 525.48,
+        "exit": "exit=0 elapsed=526s end 2026-10-06T12:31:35+02:00"
+      },
+      "311": {
+        "command": "command: OPENBLAS_NUM_THREADS=1 .venv311/Scripts/python -B -W error -m pytest -q -p no:cacheprovider -rfEs",
+        "environment": "3.11.9 numpy 2.4.6 scipy 1.17.1 pytest 9.1.1 Windows-10-10.0.26300-SP0",
+        "passed": 1136,
+        "skipped": 0,
+        "failed": 0,
+        "seconds": 462.2,
+        "exit": "exit=0 elapsed=463s end 2026-10-06T12:39:19+02:00"
+      }
+    },
+    "tolerance_audit": 669,
+    "tolerance_audit_missing": 0,
+    "validator_1fcr_status": "PASS"
+  },
+  "verdicts": {
+    "F_G_science": "ACCEPT",
+    "implementation_and_registry": "ACCEPT",
+    "provenance_and_documentation": "ACCEPT_WITH_CORRECTIONS"
+  },
+  "integration_blockers": [],
+  "ready_for_integration": "yes, for the exact file hashes recorded here (local commit by the owner); no merge, tag or remote action implied",
+  "open_before_freeze": [
+    "R2-N1",
+    "R2-N2",
+    "R2-N3",
+    "record actual integration commit (remediation inventory actual_remediation_commit is null)",
+    "rerun both full suites and F/G producers if any file changes after this audit",
+    "separate explicit owner approval for annotated tag and any remote action (AGENTS.md rule 7)"
+  ],
+  "optional": [
+    "R2-N4",
+    "R2-N5"
+  ],
+  "checks_not_performed": [
+    "Linux 1101/34/1 run and the delivery's validation/ log (668cd3b8...) are not in the checkout",
+    "Owner's bundle check and APPLY.md not available; only file hashes verified",
+    "Literal PowerShell commands not run in the repository root (would overwrite artifacts); run in an isolated copy",
+    "Eisenstein & Hu 1998 not re-fetched (shared model convention)",
+    "Ziff & Stell 1980 not consulted; [L03] (4.74)-(4.77) suffice",
+    "No phase-1G Monte Carlo rerun (variance inputs unchanged)"
+  ],
+  "scientific_status_changes_by_this_audit": [],
+  "package_changes_by_this_audit": [],
+  "observational_outputs": false,
+  "SIGMA8_AUTHORIZATION": "NOT_GRANTED"
+}

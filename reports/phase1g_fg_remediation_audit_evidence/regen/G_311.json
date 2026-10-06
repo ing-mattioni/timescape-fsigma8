@@ -1,0 +1,144 @@
+{
+  "base_commit": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f",
+  "scope": "REPORT_ONLY_CONDITIONAL_EVOLUTION",
+  "kernel_status": "EXTERNAL_BENCHMARK_NOT_A_TIMESCAPE_CLOSURE",
+  "assumptions": [
+    "mean field: spatial cluster correlations neglected",
+    "averaged cluster morphology",
+    "common size- and age-independent regional void expansion rate",
+    "G6 is an instantaneous synchronous shell-crossing cohort, not F population evolution"
+  ],
+  "spherical_shell_crossing": {
+    "x_void_over_wall": 0.2047223340049085,
+    "H_v_times_t": 0.8888888888888888,
+    "fraction_growth_coefficient": 0.6666666666666665,
+    "tracker_fraction_growth_coefficient": 1.0
+  },
+  "cases": {
+    "PAPER_REFERENCE": {
+      "f_v0_supplied": 0.737,
+      "history": [
+        {
+          "z": 0.0,
+          "time_over_t0": 1.0,
+          "tracker": 0.737,
+          "from_conditional_volume_moments": 0.737,
+          "residual": 0.0
+        },
+        {
+          "z": 0.5,
+          "time_over_t0": 0.6080634736995177,
+          "tracker": 0.6301727200873801,
+          "from_conditional_volume_moments": 0.6301727200873801,
+          "residual": 0.0
+        },
+        {
+          "z": 1.0,
+          "time_over_t0": 0.41811561082152227,
+          "tracker": 0.539526490328941,
+          "from_conditional_volume_moments": 0.5395264903289411,
+          "residual": 1.1102230246251565e-16
+        },
+        {
+          "z": 2.0,
+          "time_over_t0": 0.23864510804653918,
+          "tracker": 0.4007493294196036,
+          "from_conditional_volume_moments": 0.4007493294196036,
+          "residual": 0.0
+        },
+        {
+          "z": 3.0,
+          "time_over_t0": 0.1570367130356189,
+          "tracker": 0.3055849983468639,
+          "from_conditional_volume_moments": 0.305584998346864,
+          "residual": 5.551115123125783e-17
+        }
+      ],
+      "mass_fraction_if_shell_density_at_f_v0": 0.3645506641163156,
+      "mass_fraction_if_exact_vacuum_at_f_v0": 0.0,
+      "J_over_V_times_t_if_shell_rates_and_tracker_target": 0.06461033333333337
+    },
+    "NW15_CMB_FIT": {
+      "f_v0_supplied": 0.6270000000000001,
+      "history": [
+        {
+          "z": 0.0,
+          "time_over_t0": 1.0,
+          "tracker": 0.6270000000000001,
+          "from_conditional_volume_moments": 0.6270000000000001,
+          "residual": 0.0
+        },
+        {
+          "z": 0.5,
+          "time_over_t0": 0.5859551052181591,
+          "tracker": 0.49621407645346055,
+          "from_conditional_volume_moments": 0.4962140764534606,
+          "residual": 5.551115123125783e-17
+        },
+        {
+          "z": 1.0,
+          "time_over_t0": 0.3917995292946072,
+          "tracker": 0.3970823683038495,
+          "from_conditional_volume_moments": 0.39708236830384963,
+          "residual": 1.1102230246251565e-16
+        },
+        {
+          "z": 2.0,
+          "time_over_t0": 0.21627493684180696,
+          "tracker": 0.26662055871424434,
+          "from_conditional_volume_moments": 0.26662055871424434,
+          "residual": 0.0
+        },
+        {
+          "z": 3.0,
+          "time_over_t0": 0.14021542426496747,
+          "tracker": 0.1907402828479839,
+          "from_conditional_volume_moments": 0.19074028284798394,
+          "residual": 5.551115123125783e-17
+        }
+      ],
+      "mass_fraction_if_shell_density_at_f_v0": 0.25602495636416084,
+      "mass_fraction_if_exact_vacuum_at_f_v0": 0.0,
+      "J_over_V_times_t_if_shell_rates_and_tracker_target": 0.07795700000000003
+    }
+  },
+  "constant_kernel_benchmark": [
+    {
+      "u_external": 0.0,
+      "number_ratio": 1.0,
+      "reduced_volume_ratio": 1.0,
+      "omitted_volume_tail": 0.0,
+      "radius_at_mean_volume_over_seed_radius": 1.0,
+      "volume_share_in_k_ge_125": 0.0
+    },
+    {
+      "u_external": 1.0,
+      "number_ratio": 0.5,
+      "reduced_volume_ratio": 1.0,
+      "omitted_volume_tail": 0.0,
+      "radius_at_mean_volume_over_seed_radius": 1.2599210498948732,
+      "volume_share_in_k_ge_125": 2.9622457640721645e-36
+    },
+    {
+      "u_external": 10.0,
+      "number_ratio": 0.0909090909090909,
+      "reduced_volume_ratio": 0.9999999999999993,
+      "omitted_volume_tail": 0.0,
+      "radius_at_mean_volume_over_seed_radius": 2.2239800905693152,
+      "volume_share_in_k_ge_125": 9.041658996456698e-05
+    },
+    {
+      "u_external": 100.0,
+      "number_ratio": 0.00990099009900989,
+      "reduced_volume_ratio": 0.9999999999999979,
+      "omitted_volume_tail": 6.113714737125779e-42,
+      "radius_at_mean_volume_over_seed_radius": 4.657009507803835,
+      "volume_share_in_k_ge_125": 0.648650556889248
+    }
+  ],
+  "tolerances": {
+    "moment_absolute": 2e-12,
+    "tracker_absolute": 2e-14
+  },
+  "observational_outputs": false
+}

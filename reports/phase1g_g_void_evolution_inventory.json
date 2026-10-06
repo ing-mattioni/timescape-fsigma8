@@ -1,0 +1,254 @@
+{
+  "assumptions": [
+    "common tracker time under A5",
+    "disjoint regional volumes, fixed material domain",
+    "additive reduced-volume mergers",
+    "finite moments, no omitted gel/boundary flux",
+    "mean field: spatial cluster correlations neglected",
+    "averaged cluster morphology",
+    "common size- and age-independent regional void expansion rate",
+    "G6 is an instantaneous synchronous shell-crossing cohort, not F population evolution"
+  ],
+  "authorization": {
+    "initial_date": "2026-10-01",
+    "initial_verbatim": "Ottimo, procedi con entrambe le cose (e sistema anche CLAUDE.md se riesci)",
+    "remote_actions_authorized": false,
+    "scope_is_summary_not_verbatim": true,
+    "specific_confirmation_date": "2026-10-02",
+    "specific_confirmation_verbatim": "si confermo",
+    "specific_scope": "D token NOT_DERIVED and split of frozen F verdict 2; audit corrections"
+  },
+  "base_commit": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f",
+  "benchmark_not_a_physical_kernel": true,
+  "classification": "REPORT_ONLY_CONDITIONAL_EVOLUTION_RESEARCH",
+  "date": "2026-10-01",
+  "delta_audit": {
+    "date": "2026-10-06",
+    "evidence": "reports/phase1g_fg_remediation_audit_evidence/",
+    "integration_blockers": [],
+    "inventory": "reports/phase1g_fg_remediation_independent_audit_inventory.json",
+    "report": "reports/phase1g_fg_remediation_independent_audit.md",
+    "residual_findings_closed_in": "reports/phase1g_fg_remediation_integration.md",
+    "verdicts": {
+      "F_G_science": "ACCEPT",
+      "implementation_and_registry": "ACCEPT",
+      "provenance_and_documentation": "ACCEPT_WITH_CORRECTIONS"
+    }
+  },
+  "equations": {
+    "G1": "Imported Smoluchowski equation [L03] (2.2), reduced void volume as label",
+    "G10": "Constant-kernel benchmark [L03] (4.10), rescaled time u",
+    "G11": "Analytic volume-weighted tail of G10",
+    "G12": "Standard definition: double integral of the density covariance over the ball",
+    "G2": "First reduced-volume collision moment vanishes for additive mergers",
+    "G3": "df/dt=3*f*(1-f)*(Hv-Hw) without transfer",
+    "G4": "Milne/EdS conditional tracker identity with supplied f_ref",
+    "G5": "df/dt=3*f*(1-f)*(Hv-Hw)+J/V_D",
+    "G6": "Instantaneous synchronous cohort; zero-transfer coefficient 2/3 increases toward 1 in the homogeneous open-interior continuation; normalized missing source <=1/3; not F threshold-population evolution",
+    "G7": "m=f*x/(1-f+f*x)",
+    "G8": "Phi=-M_D*dm/dt",
+    "G9": "Fixed m plus tracker requires x=m*tau/[(1-m)*t]"
+  },
+  "evidence": {
+    "assumptions": [
+      "mean field: spatial cluster correlations neglected",
+      "averaged cluster morphology",
+      "common size- and age-independent regional void expansion rate",
+      "G6 is an instantaneous synchronous shell-crossing cohort, not F population evolution"
+    ],
+    "base_commit": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f",
+    "cases": {
+      "NW15_CMB_FIT": {
+        "J_over_V_times_t_if_shell_rates_and_tracker_target": 0.07795700000000003,
+        "f_v0_supplied": 0.6270000000000001,
+        "history": [
+          {
+            "from_conditional_volume_moments": 0.6270000000000001,
+            "residual": 0.0,
+            "time_over_t0": 1.0,
+            "tracker": 0.6270000000000001,
+            "z": 0.0
+          },
+          {
+            "from_conditional_volume_moments": 0.4962140764534607,
+            "residual": 1.6653345369377348e-16,
+            "time_over_t0": 0.5859551052181592,
+            "tracker": 0.49621407645346055,
+            "z": 0.5
+          },
+          {
+            "from_conditional_volume_moments": 0.39708236830384985,
+            "residual": 1.6653345369377348e-16,
+            "time_over_t0": 0.3917995292946075,
+            "tracker": 0.3970823683038497,
+            "z": 1.0
+          },
+          {
+            "from_conditional_volume_moments": 0.2666205587142444,
+            "residual": 5.551115123125783e-17,
+            "time_over_t0": 0.216274936841807,
+            "tracker": 0.26662055871424434,
+            "z": 2.0
+          },
+          {
+            "from_conditional_volume_moments": 0.19074028284798394,
+            "residual": 5.551115123125783e-17,
+            "time_over_t0": 0.14021542426496747,
+            "tracker": 0.1907402828479839,
+            "z": 3.0
+          }
+        ],
+        "mass_fraction_if_exact_vacuum_at_f_v0": 0.0,
+        "mass_fraction_if_shell_density_at_f_v0": 0.25602495636416195
+      },
+      "PAPER_REFERENCE": {
+        "J_over_V_times_t_if_shell_rates_and_tracker_target": 0.06461033333333337,
+        "f_v0_supplied": 0.737,
+        "history": [
+          {
+            "from_conditional_volume_moments": 0.737,
+            "residual": 0.0,
+            "time_over_t0": 1.0,
+            "tracker": 0.737,
+            "z": 0.0
+          },
+          {
+            "from_conditional_volume_moments": 0.6301727200873801,
+            "residual": 1.1102230246251565e-16,
+            "time_over_t0": 0.6080634736995176,
+            "tracker": 0.63017272008738,
+            "z": 0.5
+          },
+          {
+            "from_conditional_volume_moments": 0.5395264903289411,
+            "residual": 1.1102230246251565e-16,
+            "time_over_t0": 0.41811561082152227,
+            "tracker": 0.539526490328941,
+            "z": 1.0
+          },
+          {
+            "from_conditional_volume_moments": 0.4007493294196035,
+            "residual": 0.0,
+            "time_over_t0": 0.2386451080465391,
+            "tracker": 0.4007493294196035,
+            "z": 2.0
+          },
+          {
+            "from_conditional_volume_moments": 0.305584998346864,
+            "residual": 5.551115123125783e-17,
+            "time_over_t0": 0.1570367130356189,
+            "tracker": 0.3055849983468639,
+            "z": 3.0
+          }
+        ],
+        "mass_fraction_if_exact_vacuum_at_f_v0": 0.0,
+        "mass_fraction_if_shell_density_at_f_v0": 0.3645506641163168
+      }
+    },
+    "constant_kernel_benchmark": [
+      {
+        "number_ratio": 1.0,
+        "omitted_volume_tail": 0.0,
+        "radius_at_mean_volume_over_seed_radius": 1.0,
+        "reduced_volume_ratio": 1.0,
+        "u_external": 0.0,
+        "volume_share_in_k_ge_125": 0.0
+      },
+      {
+        "number_ratio": 0.5,
+        "omitted_volume_tail": 0.0,
+        "radius_at_mean_volume_over_seed_radius": 1.2599210498948732,
+        "reduced_volume_ratio": 1.0,
+        "u_external": 1.0,
+        "volume_share_in_k_ge_125": 2.9622457640721645e-36
+      },
+      {
+        "number_ratio": 0.0909090909090909,
+        "omitted_volume_tail": 0.0,
+        "radius_at_mean_volume_over_seed_radius": 2.2239800905693152,
+        "reduced_volume_ratio": 0.9999999999999993,
+        "u_external": 10.0,
+        "volume_share_in_k_ge_125": 9.041658996456698e-05
+      },
+      {
+        "number_ratio": 0.00990099009900989,
+        "omitted_volume_tail": 6.113714737125779e-42,
+        "radius_at_mean_volume_over_seed_radius": 4.657009507803835,
+        "reduced_volume_ratio": 0.9999999999999979,
+        "u_external": 100.0,
+        "volume_share_in_k_ge_125": 0.648650556889248
+      }
+    ],
+    "kernel_status": "EXTERNAL_BENCHMARK_NOT_A_TIMESCAPE_CLOSURE",
+    "observational_outputs": false,
+    "scope": "REPORT_ONLY_CONDITIONAL_EVOLUTION",
+    "spherical_shell_crossing": {
+      "H_v_times_t": 0.8888888888888888,
+      "fraction_growth_coefficient": 0.6666666666666665,
+      "tracker_fraction_growth_coefficient": 1.0,
+      "x_void_over_wall": 0.20472233400490963
+    },
+    "tolerances": {
+      "moment_absolute": 2e-12,
+      "tracker_absolute": 2e-14
+    }
+  },
+  "evidence_artifact": "artifacts/independent/phase1g_g_void_evolution.json",
+  "evidence_script": "scripts/phase1g_g_void_evolution_numerics.py",
+  "evidence_sha256": "470134099a64819bb55e24d1ea2dbde72a37b24fb70e07c2676a477231e0509d",
+  "frozen_sha256": {
+    "AGENTS.md": "881050c02635ab9003b494305b3fcf43360815defb32174604b67daa6fd77ecc",
+    "reports/phase1g_f_void_population.md": "fe8fd8f1b16c9625a37d86fa7df3e83cd9a881a704386dd8dc52cca80b440003",
+    "reports/phase1g_f_void_population_inventory.json": "e74c8e95c12410474d456e0ac0b15f3983b030f49cfc72bf3856bec6254284fc",
+    "scripts/phase1g_f_void_population_numerics.py": "8ac59ed34e63bdbb7b5b80c0d666874157b02d873356cdca5153766b0ead9ce3"
+  },
+  "historical_snapshot_note": "This former live-module hash is historical; the explicit D successor now changes one token. All entries remaining in frozen_sha256 stay preserved.",
+  "historical_snapshot_sha256": {
+    "src/timescape_fsigma8/scientific_status.py": "146eb9074aa9b23f243b80b6699a05d9588dc4892f3ef5c69378f5817291fc65"
+  },
+  "independent_audit": {
+    "date": "2026-10-02",
+    "inventory": "reports/phase1g_fg_independent_scientific_audit_inventory.json",
+    "report": "reports/phase1g_fg_independent_scientific_audit.md",
+    "scope": "pre-remediation tree only; the remediated revision was delta-audited on 2026-10-06 (see delta_audit)",
+    "verdict": "ACCEPT_WITH_CORRECTIONS"
+  },
+  "integration_revision_date": "2026-10-06",
+  "integration_state": "LOCAL_REVIEWABLE_UNMERGED_UNTAGGED",
+  "package_changes": [],
+  "phase": "1G-G",
+  "prior_evidence_sha256_20261001": "05a0d505b144545ab254794306bb4fbcedea69858229d4bf77775dedb7f69e3a",
+  "remaining_closures": [
+    "formation and age distribution",
+    "merger kernel and boundary-volume rule",
+    "regional dynamics and clock embedding",
+    "mass and volume transport",
+    "spatial correlations and exclusion",
+    "dressed/observational map"
+  ],
+  "remediation_record": "reports/phase1g_fg_audit_remediation.md",
+  "reproducibility": {
+    "environment": {
+      "numpy": "2.3.5",
+      "python": "3.12.14",
+      "scipy": "1.17.0"
+    },
+    "numerical_comparison": {
+      "atol": 1e-14,
+      "compare_labels_and_keys_exactly": true,
+      "exclude_fields": [
+        "environment",
+        "input_sha256"
+      ],
+      "rtol": 1e-11,
+      "scope": "same script/options and scientifically equivalent frozen input; floats only; not radius-grid accuracy"
+    },
+    "raw_sha256_meaning": "one exact output and environment, not cross-platform equivalence",
+    "serialization": "UTF-8 bytes, LF newlines"
+  },
+  "revision_date": "2026-10-02",
+  "scientific_status_changes": [],
+  "separate_D_reclassification": "reports/phase1g_d_linear_statistic_status_successor_inventory.json",
+  "tests": "tests/test_phase1g_g_void_evolution.py",
+  "validation_record": "reports/phase1g_fg_successor_validation.md"
+}

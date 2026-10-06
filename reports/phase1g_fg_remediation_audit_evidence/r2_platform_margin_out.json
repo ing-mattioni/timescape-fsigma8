@@ -1,0 +1,20 @@
+{
+ "max_rel_for_abs_ref_gt_0": {
+  "n": 404,
+  "rel": 1.0,
+  "path": "G/cases/NW15_CMB_FIT/history[3]/residual"
+ },
+ "max_rel_for_abs_ref_gt_1e-12": {
+  "n": 378,
+  "rel": 1.1081471049028935e-07,
+  "path": "F/NW15_CMB_FIT/history[1]/unresolved_below_grid"
+ },
+ "max_rel_for_abs_ref_gt_1e-06": {
+  "n": 349,
+  "rel": 3.3589832722433937e-12,
+  "path": "F/NW15_CMB_FIT/near/0.05/unresolved_below_grid"
+ },
+ "max_abs_diff_all": 1.7763568394002505e-14,
+ "n_leaves": 418,
+ "bitwise_equal_leaves": 111
+}

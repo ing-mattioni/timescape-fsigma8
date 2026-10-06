@@ -6,9 +6,9 @@ cosmological model, based on:
 > M. Galoppo & P. Mourier, *Cosmological perturbations on an averaged
 > background*, JCAP 02 (2026) 066, arXiv:2511.17160.
 
-## Current status: Phase 1F-C-R — Astra independent-audit remediation
+## Current status: Phase 1G — conditional sigma(M) and void-population research
 
-The current scientific interpretation is recorded in
+The scientific foundation through 1F-C-R is recorded in
 [the successor remediation report](reports/phase1f_c_r_astra_audit_remediation.md)
 and its [machine-readable inventory](reports/phase1f_c_r_astra_audit_remediation_inventory.json).
 Earlier reports and inventories are preserved historical checkpoints; their
@@ -21,7 +21,13 @@ positive-core margin; a positive result does not establish existence or
 physical compatibility. No Phase 1F-D geometric or perturbative solver is
 implemented, and the frozen scientific statuses are preserved.
 
-**σ(M) track (Phases 1G-A to 1G-F, in progress; 1G-A to 1G-E adversarially audited; owner decisions of 2026-09-30 applied, not yet tagged):**
+**σ(M) track:** phases 1G-A…1G-F and the 2026-09-30 owner decisions are
+merged on `main` at `fb5d952` (PR #3). The 1G-A…1G-E annotated v1 tags
+resolve to that commit (checked 2026-10-01). The F correction and G research
+linked below are successor records on the phase branch
+`phase-1g-f-successor-g-evolution`. They were independently audited
+(2026-10-02) and delta-audited (2026-10-06). They are not merged into `main`,
+frozen or tagged.
 - **Route.** The [σ(M) derivation-path audit](reports/phase1g_a_sigma8_derivation_path_audit.md)
   follows the authors' own proposal: standard early-universe physics, then
   scale-independent growth.
@@ -44,23 +50,41 @@ implemented, and the frozen scientific statuses are preserved.
   - with a peak-background-split void response and a tracker-consistent
     void seed, the 10% homogeneity scale is 61–84 h⁻¹ Mpc (172–215 with the
     [SvdW04] seed factor);
-  - at 8 h⁻¹ Mpc the void onset is non-perturbative (|ε| ≈ 1) and the
-    dominant voids are larger than the sphere. The wall-internal σ is the
-    only linear statistic there, and an observable σ8 needs a nonlinear
-    two-phase model.
+  - at 8 h⁻¹ Mpc the conditional void response is non-perturbative
+    (|ε| ≈ 1). Its older large-void scale argument does not apply unchanged
+    to F's smaller median. The current closure constructs a wall-internal
+    linear statistic; a global-mean linear statistic remains unconstructed.
+    The owner-approved [D successor](reports/phase1g_d_linear_statistic_status_successor.md)
+    (2026-10-02) records `LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC = NOT_DERIVED`;
+    all observational authorizations remain `NOT_GRANTED`.
 - **Phase 1G-E** ([two-phase mass variance](reports/phase1g_e_two_phase_sigma.md)):
   empty Boolean voids plus the wall-internal field, with a mass-conserving
-  formula. With the 1G-F derived void population σ ≈ 0.99 in 8 h⁻¹ Mpc
+  formula. With the 1G-F grain-radius shape σ ≈ 0.99 in 8 h⁻¹ Mpc
   spheres; a single 15 h⁻¹ Mpc void radius, an idealisation, gives
   1.52–1.76 (0.8–2.1 across the sensitivities). This is a conditional,
   hybrid quantity, not an observational σ8.
-- **Phase 1G-F** ([self-consistent void population](reports/phase1g_f_void_population.md)):
+- **Phase 1G-F** ([frozen void-population report](reports/phase1g_f_void_population.md),
+  [volume-budget successor](reports/phase1g_f_volume_budget_successor.md)):
   an excursion-set void size distribution from the same early spectrum,
-  with the growth clock as an explicit closure. The tracker's void fraction
-  is reproduced only under its own two-scale volume budget, by voids of a
-  few h⁻¹ Mpc and minivoids, not by 30 h⁻¹ Mpc voids alone. The
-  self-consistent two-phase σ in 8 h⁻¹ Mpc spheres is ≈ 1.0 (conditional,
-  not an observational σ8).
+  with the growth clock as an explicit closure. Correct cumulative volumes
+  keep the full-population denominator fixed: primary voids >=10 h⁻¹ Mpc
+  fill 1.48% (GM) / 1.92% (NW15); all sizes fill 0.751969 in both cases.
+  No fixed cutoff matches z=0–3 under this conditional C1 model. The two-phase variance
+  remains ≈0.99, conditional on the shell-crossing size shape, an externally
+  supplied tracker fraction, overlapping empty Boolean grains and a linear
+  wall field. The grains share F's volume-weighted radius shape, but have
+  separately calibrated eta = −ln(1−f_v0); they are not F's disjoint cells.
+  Their dynamical connection is not derived. Frozen F verdict 2 is explicitly
+  split: the Milne-rate asymptote is derived; identification with exactly
+  empty finite-time tracker voids is `NOT_DERIVED`.
+- **Phase 1G-G** ([population-evolution research](reports/phase1g_g_void_evolution.md)):
+  additive mergers conserve total void volume at the merger instant. At a
+  prescribed common void expansion rate they cannot change its history by
+  size redistribution alone.
+  The report derives the volume/mass transfer constraints needed to connect
+  finite-density seeds to the tracker, with a tested analytic kinetic
+  benchmark. It does not select a Timescape merger law or predict σ8.
+  [Local validation and integration status](reports/phase1g_fg_successor_validation.md).
 - **Adversarial audits** of 1G-A to 1G-E (one independent auditor per phase;
   [consolidation](reports/phase1g_adversarial_audit_errata_successor.md)):
   every phase is accepted with corrections. No implemented equation is in
@@ -73,7 +97,21 @@ implemented, and the frozen scientific statuses are preserved.
   [1G-C](reports/phase1g_c_owner_decisions_successor.md),
   [1G-D](reports/phase1g_d_owner_decisions_successor.md),
   [1G-E](reports/phase1g_e_owner_decisions_successor.md). No token value,
-  equation or tolerance changes; the numbers above are the current readings.
+  equation or tolerance changes in those decisions; the numbers above also
+  include the separately identified 2026-10-01 F successor.
+- **F/G independent audit, remediation and delta audit** (2026-10-02 /
+  2026-10-06):
+  [audit](reports/phase1g_fg_independent_scientific_audit.md),
+  [approved corrections](reports/phase1g_fg_audit_remediation.md),
+  [delta audit](reports/phase1g_fg_remediation_independent_audit.md),
+  [integration record](reports/phase1g_fg_remediation_integration.md).
+  - The first audit's 1125/0/0 full-suite results certify the
+    pre-remediation tree.
+  - The delta audit found no integration blocker and certifies the
+    remediated tree (1136/0/0 on Python 3.14.3 and 3.11.9).
+  - The integration record holds the final-tree runs and the residual
+    corrections.
+  - Nothing is frozen or tagged.
 - **Windows validation** ([record](reports/phase1g_windows_validation_record.md)):
   both interpreters pass the full suite, as on Linux, and every recorded
   1G-A…1G-F number reproduces.
@@ -86,7 +124,8 @@ implemented, and the frozen scientific statuses are preserved.
   - `GM_CGI_CLOSURES_SEPARATE_UNIVERSE_CONSISTENCY` is `FAILED_FOR_TIMESCAPE_TRACKER`;
   - `VOID_ONSET_RESPONSE` is `EXTERNAL_CLOSURE_INPUT`;
   - `LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC` is
-    `NOT_DEFINED_IN_LINEAR_TWO_SCALE_THEORY`.
+    `NOT_DERIVED` following the registered, owner-approved 2026-10-02 D
+    successor; its original addition value remains in the frozen record.
 
   The σ(M) runtime's results now state the matching limitation of each
   growth law (text only; the numbers are unchanged). A seventh token,

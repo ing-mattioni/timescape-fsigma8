@@ -1,0 +1,60 @@
+{
+ "changed_vs_session_start": [
+  "./.gitattributes",
+  "./CLAUDE.md",
+  "./README.md",
+  "./reports/phase1g_f_volume_budget_successor.md",
+  "./reports/phase1g_f_volume_budget_successor_inventory.json",
+  "./reports/phase1g_g_void_evolution.md",
+  "./reports/phase1g_g_void_evolution_inventory.json",
+  "./src/timescape_fsigma8/scientific_status.py"
+ ],
+ "added_vs_session_start": [
+  "./reports/phase1g_fg_remediation_integration.md",
+  "./reports/phase1g_fg_remediation_integration_inventory.json"
+ ],
+ "removed_vs_session_start": [],
+ "changed_within_perimeter": true,
+ "added_within_perimeter": true,
+ "artifacts_unchanged": true,
+ "n_artifact_files": 187,
+ "tracked_reports_unchanged_vs_HEAD": true,
+ "n_tracked_reports": 111,
+ "audit_and_record_files_intact": {
+  "reports/phase1g_fg_independent_scientific_audit.md": true,
+  "reports/phase1g_fg_independent_scientific_audit_inventory.json": true,
+  "reports/phase1g_fg_remediation_independent_audit.md": true,
+  "reports/phase1g_fg_remediation_independent_audit_inventory.json": true,
+  "reports/phase1g_fg_audit_remediation.md": true,
+  "reports/phase1g_fg_audit_remediation_inventory.json": true,
+  "reports/phase1g_d_linear_statistic_status_successor.md": true,
+  "reports/phase1g_d_linear_statistic_status_successor_inventory.json": true,
+  "reports/phase1g_fg_successor_validation.md": true
+ },
+ "evidence_manifest_entries": 45,
+ "evidence_manifest_mismatches": [],
+ "evidence_files_unchanged_vs_session_start": true,
+ "prior_14_evidence_hashes_match_first_audit": true,
+ "frozen_sha256_pins_ok": {
+  "AGENTS.md": true,
+  "reports/phase1g_f_void_population.md": true,
+  "reports/phase1g_f_void_population_inventory.json": true,
+  "scripts/phase1g_f_void_population_numerics.py": true
+ },
+ "status_module_pre_edit_reconstruction_matches_session_start": true,
+ "status_module_AST_without_docstring_identical_to_pre_edit": true,
+ "observational_authorizations": {
+  "SIGMA8_AUTHORIZATION": "NOT_GRANTED",
+  "FSIGMA8_AUTHORIZATION": "NOT_GRANTED",
+  "RSD_AUTHORIZATION": "NOT_GRANTED",
+  "OBSERVATIONAL_AUTHORIZATION": "NOT_GRANTED",
+  "UNIQUE_TIMESCAPE_PREDICTION": "NOT_GRANTED"
+ },
+ "D_token": "NOT_DERIVED",
+ "assignments_differing_from_HEAD": [
+  "LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC"
+ ],
+ "python_files_changed_this_session": [
+  "./src/timescape_fsigma8/scientific_status.py"
+ ]
+}

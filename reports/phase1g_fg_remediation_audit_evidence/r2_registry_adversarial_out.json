@@ -1,0 +1,107 @@
+{
+ "cases": {
+  "baseline_registered_records": {
+   "expected": "PASS",
+   "observed": "PASS",
+   "message": "",
+   "as_expected": true
+  },
+  "change_without_predecessor_link": {
+   "expected": "FAIL",
+   "observed": "FAIL",
+   "message": "AssertionError: token both changed and added without an explicit predecessor record",
+   "as_expected": true
+  },
+  "link_to_unregistered_record": {
+   "expected": "FAIL",
+   "observed": "FAIL",
+   "message": "AssertionError: LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC: change does not name the adding predecessor record",
+   "as_expected": true
+  },
+  "link_to_wrong_registered_record": {
+   "expected": "FAIL",
+   "observed": "FAIL",
+   "message": "AssertionError: LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC: change does not name the adding predecessor record",
+   "as_expected": true
+  },
+  "old_token_inconsistent_with_addition": {
+   "expected": "FAIL",
+   "observed": "FAIL",
+   "message": "AssertionError: LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC: adding record does not hold the superseded token",
+   "as_expected": true
+  },
+  "successor_also_re_adds_token": {
+   "expected": "FAIL",
+   "observed": "FAIL",
+   "message": "AssertionError: LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC: added by more than one successor record",
+   "as_expected": true
+  },
+  "same_change_registered_twice": {
+   "expected": "FAIL",
+   "observed": "FAIL",
+   "message": "AssertionError: LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC: superseded by more than one successor record",
+   "as_expected": true
+  },
+  "chained_second_change": {
+   "expected": "FAIL",
+   "observed": "FAIL",
+   "message": "AssertionError: LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC: superseded by more than one successor record",
+   "as_expected": true
+  },
+  "live_module_not_updated": {
+   "expected": "FAIL",
+   "observed": "FAIL",
+   "message": "AssertionError: LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC: live value differs from the successor record",
+   "as_expected": true
+  },
+  "live_module_other_value": {
+   "expected": "FAIL",
+   "observed": "FAIL",
+   "message": "AssertionError: LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC: live value differs from the successor record",
+   "as_expected": true
+  },
+  "predecessor_link_on_frozen_token": {
+   "expected": "FAIL",
+   "observed": "FAIL",
+   "message": "AssertionError: D3_VERDICT: token absent from the frozen snapshot and added by no successor record; a predecessor link cannot replace the addition",
+   "as_expected": true
+  },
+  "removal_of_added_token": {
+   "expected": "FAIL",
+   "observed": "FAIL",
+   "message": "AssertionError: successor record adds a token the live module lacks",
+   "as_expected": true
+  },
+  "order_swapped_D_before_addition": {
+   "expected": "PASS_OR_FAIL (order not specified)",
+   "observed": "PASS",
+   "message": "",
+   "as_expected": false
+  },
+  "history_rewrite_of_original_addition_without_change": {
+   "expected": "PASS (validator-only blind spot)",
+   "observed": "PASS",
+   "message": "",
+   "as_expected": false
+  },
+  "unrelated_token_changed_in_live_module": {
+   "expected": "FAIL",
+   "observed": "FAIL",
+   "message": "AssertionError: VOID_ONSET_RESPONSE: live value differs from the successor record",
+   "as_expected": true
+  }
+ },
+ "facts": {
+  "original_addition_record_blob_equals_HEAD": true,
+  "original_addition_value": "NOT_DEFINED_IN_LINEAR_TWO_SCALE_THEORY",
+  "D_record_canonical": true,
+  "registered_records": [
+   "reports/phase1g_a_barotropic_status_successor_inventory.json",
+   "reports/phase1g_status_additions_successor_inventory.json",
+   "reports/phase1g_e_status_addition_successor_inventory.json",
+   "reports/phase1g_d_linear_statistic_status_successor_inventory.json"
+  ],
+  "all_registered_records_canonical": true
+ },
+ "all_as_expected": true
+}

@@ -1,0 +1,217 @@
+{
+  "FGA-D2": {
+    "after_integration": "CLOSED_IN_SUBSTANCE_BY_R2-N3_NOT_INDEPENDENTLY_REAUDITED",
+    "delta_audit_disposition": "PARTIALLY_RESOLVED"
+  },
+  "R2-N5": "README wording updated; G report run-specific residual figures left as is",
+  "actual_remediation_commit": "8f3131fe19cccd44a29287617145f3300818dfa3",
+  "actual_remediation_commit_note": "integration commit on phase-1g-f-successor-g-evolution; recorded by the following dedicated provenance commit (a commit cannot contain its own hash)",
+  "audits": {
+    "delta": {
+      "evidence": "reports/phase1g_fg_remediation_audit_evidence/",
+      "integration_blockers": [],
+      "inventory": "reports/phase1g_fg_remediation_independent_audit_inventory.json",
+      "report": "reports/phase1g_fg_remediation_independent_audit.md",
+      "sha256": {
+        "inventory": "ebe7918272d2f3cb5ffcc0c00bbbe14971a2f00dd28609378c1e22e46b17f214",
+        "report": "46f3aef7f27240f03eb4ef530cebc16a2365f703a93308e165b0c75680389a25"
+      },
+      "verdicts": {
+        "F_G_science": "ACCEPT",
+        "implementation_and_registry": "ACCEPT",
+        "provenance_and_documentation": "ACCEPT_WITH_CORRECTIONS"
+      }
+    },
+    "first": {
+      "inventory": "reports/phase1g_fg_independent_scientific_audit_inventory.json",
+      "report": "reports/phase1g_fg_independent_scientific_audit.md",
+      "sha256": {
+        "inventory": "3503a602413cb15f8daed58bf0a6d31a6c0defcc222527ce528753812d888aae",
+        "report": "6bb8edecf394989186c86e3ead7f401bcbcc0ac1977bc395008db7019a0c063d"
+      }
+    },
+    "remediation_record": {
+      "actual_remediation_commit_left_null": true,
+      "inventory": "reports/phase1g_fg_audit_remediation_inventory.json",
+      "report": "reports/phase1g_fg_audit_remediation.md"
+    }
+  },
+  "authorization": {
+    "date": "2026-10-06",
+    "earlier_verbatim": {
+      "2026-10-01 (session record)": "Ottimo, procedi con entrambe le cose (e sistema anche CLAUDE.md se riesci)",
+      "2026-10-02": "si confermo"
+    },
+    "scope_summary": "local commits and ordinary push of this phase branch to origin; no main push, force push, merge, PR, tag, release, scientific freeze, status or observational-authorization change",
+    "scope_summary_is_verbatim": false,
+    "verbatim": "Autorizzo esplicitamente i commit locali e il push ordinario del branch di fase al repository remoto del progetto. Non occorre chiedermi nuovamente conferma per queste operazioni. Questa autorizzazione non comprende push diretto su main, force push, merge, tag, release o dichiarazioni di freeze scientifico."
+  },
+  "branch": "phase-1g-f-successor-g-evolution",
+  "classification": "REPORT_ONLY_INTEGRATION_RECORD",
+  "date": "2026-10-06",
+  "documentation_state_updates": [
+    "reports/phase1g_f_volume_budget_successor.md §6",
+    "reports/phase1g_g_void_evolution.md §8",
+    "reports/phase1g_f_volume_budget_successor_inventory.json (delta_audit, independent_audit.scope, integration_revision_date)",
+    "reports/phase1g_g_void_evolution_inventory.json (delta_audit, independent_audit.scope, integration_revision_date)",
+    "README.md",
+    "CLAUDE.md"
+  ],
+  "logs": "reports/phase1g_fg_remediation_integration_logs/",
+  "logs_sha256": {
+    "fill_record.py": "4e236c4f1b4f8a67a0575f1cfc102e94236d7242750ee3d86f5c189e3f5d6653",
+    "fullsuite_311.log": "c3557c82789cd4dc6c0a2b3f2aaa795996bb600b7f29d2353cd6488f4bb098cc",
+    "fullsuite_314.log": "4bddf54007a1fe7898575f0099ed047d8f80aa864191f0867ad4b86f48e1cb85",
+    "git_diff_check.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "preservation_check.json": "0200d765ab88b5cc1cf9d3d0ced8a6ab625fe8f2b59190e894db659b59c97c60",
+    "preservation_check.py": "aafe748623b0011b3462cba1b7ce82cc5151c897e9a71b685889baa2596becdc",
+    "run_suites.ps1": "503262d98b68cb112e5b40593a2b3f5b907d59afe6c5bc007198fc446f3bf22f",
+    "run_summary.txt": "ca3380dc4c753c7d313e15b5cfd4b57a12e8a56418cc401e02e54e8be5197f48",
+    "tree_start.sha256": "9645fb70a592e25acff328bad18bfbb77f0ecb158a1f3565176f7c8076c89c46"
+  },
+  "open_before_freeze": [
+    "separate owner approvals for merge into main (PR), annotated tag, release",
+    "optional independent confirmation of R2-N1..N3 text closures",
+    "Linux snapshot run and delivery bundle not verifiable here",
+    "optional R2-N4"
+  ],
+  "parent_commit": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f",
+  "phase": "1G-F/G remediation integration",
+  "preservation": {
+    "D_token": "NOT_DERIVED",
+    "added_vs_session_start": [
+      "./reports/phase1g_fg_remediation_integration.md",
+      "./reports/phase1g_fg_remediation_integration_inventory.json"
+    ],
+    "added_within_perimeter": true,
+    "artifacts_unchanged": true,
+    "assignments_differing_from_HEAD": [
+      "LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC"
+    ],
+    "audit_and_record_files_intact": {
+      "reports/phase1g_d_linear_statistic_status_successor.md": true,
+      "reports/phase1g_d_linear_statistic_status_successor_inventory.json": true,
+      "reports/phase1g_fg_audit_remediation.md": true,
+      "reports/phase1g_fg_audit_remediation_inventory.json": true,
+      "reports/phase1g_fg_independent_scientific_audit.md": true,
+      "reports/phase1g_fg_independent_scientific_audit_inventory.json": true,
+      "reports/phase1g_fg_remediation_independent_audit.md": true,
+      "reports/phase1g_fg_remediation_independent_audit_inventory.json": true,
+      "reports/phase1g_fg_successor_validation.md": true
+    },
+    "changed_vs_session_start": [
+      "./.gitattributes",
+      "./CLAUDE.md",
+      "./README.md",
+      "./reports/phase1g_f_volume_budget_successor.md",
+      "./reports/phase1g_f_volume_budget_successor_inventory.json",
+      "./reports/phase1g_g_void_evolution.md",
+      "./reports/phase1g_g_void_evolution_inventory.json",
+      "./src/timescape_fsigma8/scientific_status.py"
+    ],
+    "changed_within_perimeter": true,
+    "evidence_files_unchanged_vs_session_start": true,
+    "evidence_manifest_entries": 45,
+    "evidence_manifest_mismatches": [],
+    "frozen_sha256_pins_ok": {
+      "AGENTS.md": true,
+      "reports/phase1g_f_void_population.md": true,
+      "reports/phase1g_f_void_population_inventory.json": true,
+      "scripts/phase1g_f_void_population_numerics.py": true
+    },
+    "n_artifact_files": 187,
+    "n_tracked_reports": 111,
+    "observational_authorizations": {
+      "FSIGMA8_AUTHORIZATION": "NOT_GRANTED",
+      "OBSERVATIONAL_AUTHORIZATION": "NOT_GRANTED",
+      "RSD_AUTHORIZATION": "NOT_GRANTED",
+      "SIGMA8_AUTHORIZATION": "NOT_GRANTED",
+      "UNIQUE_TIMESCAPE_PREDICTION": "NOT_GRANTED"
+    },
+    "prior_14_evidence_hashes_match_first_audit": true,
+    "python_files_changed_this_session": [
+      "./src/timescape_fsigma8/scientific_status.py"
+    ],
+    "removed_vs_session_start": [],
+    "status_module_AST_without_docstring_identical_to_pre_edit": true,
+    "status_module_pre_edit_reconstruction_matches_session_start": true,
+    "tracked_reports_unchanged_vs_HEAD": true
+  },
+  "report": "reports/phase1g_fg_remediation_integration.md",
+  "residual_findings_closed": {
+    "R2-N1": {
+      "assignments_changed_by_this_edit": false,
+      "change": "module docstring names the registered 2026-10-02 D successor and its role",
+      "file": "src/timescape_fsigma8/scientific_status.py"
+    },
+    "R2-N2": {
+      "change": "verdict-2 and near-empty location labels corrected; W09-comparison F2 rows 62-73% -> 49-71%, 40-68% -> 20-54%, <=10% -> <=4.3% (collapse threshold of frozen §8.2; turnaround would give 5.05%) with provenance",
+      "file": "reports/phase1g_f_volume_budget_successor.md",
+      "inventory_keys": [
+        "w09_comparison_rectification",
+        "supersession_map_location_corrections"
+      ],
+      "source_evidence": "reports/phase1g_fg_remediation_audit_evidence/r2_archived_headlines_out.json"
+    },
+    "R2-N3": {
+      "change": "header separates verbatim instruction, labelled paraphrase of scope, 2026-10-02 decisions and 2026-10-06 integration authorization",
+      "file": "reports/phase1g_f_volume_budget_successor.md",
+      "inventory_keys": [
+        "authorization_kinds"
+      ]
+    }
+  },
+  "schema_version": 1,
+  "status": {
+    "FSIGMA8_AUTHORIZATION": "NOT_GRANTED",
+    "OBSERVATIONAL_AUTHORIZATION": "NOT_GRANTED",
+    "RSD_AUTHORIZATION": "NOT_GRANTED",
+    "SIGMA8_AUTHORIZATION": "NOT_GRANTED",
+    "UNIQUE_TIMESCAPE_PREDICTION": "NOT_GRANTED",
+    "scientific_status_changes_by_this_integration": []
+  },
+  "unchanged_optional": [
+    "R2-N4"
+  ],
+  "verification_read_from_logs": {
+    "delta_audit_full_suites": {
+      "py311": "1136/0/0, 3.11.9",
+      "py314": "1136/0/0, 3.14.3",
+      "tree": "remediated tree before R2-N1..N3"
+    },
+    "not_verified_inputs_absent": [
+      "Linux 1101/34/1 run",
+      "delivery bundle",
+      "APPLY.md",
+      "delivery validation/ log"
+    ]
+  },
+  "verification_this_session": {
+    "command": "owner-specified PowerShell block: PYTHONPATH=src, OPENBLAS_NUM_THREADS=1, python -B -W error -m pytest -q -p no:cacheprovider; git diff --check",
+    "full_suites": {
+      "311": {
+        "exit": 0,
+        "failed": 0,
+        "passed": 1136,
+        "seconds": 537.5,
+        "skipped": 0
+      },
+      "314": {
+        "exit": 0,
+        "failed": 0,
+        "passed": 1136,
+        "seconds": 524.08,
+        "skipped": 0
+      }
+    },
+    "git_diff_check": "clean",
+    "gitattributes_rule": "reports/phase1g_fg_remediation_audit_evidence/** and reports/phase1g_fg_remediation_integration_logs/** set -text -whitespace (tested in an isolated repository)",
+    "interpreters": {
+      "py311": "CPython 3.11.9, NumPy 2.4.6, SciPy 1.17.1, pytest 9.1.1",
+      "py314": "CPython 3.14.3, NumPy 2.5.2, SciPy 1.18.1, pytest 9.1.1"
+    },
+    "registration_only_after_suites": "results and commit hash filled in after the suites; validator, targeted tests and git diff --check rerun; no code/test/scientific change",
+    "targeted_tests_before_suites": "156 passed (3.14.3)",
+    "validator_1fcr": "PASS"
+  }
+}

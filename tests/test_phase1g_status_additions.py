@@ -68,7 +68,9 @@ BAROTROPIC_TOKEN = "UNRESTRICTED_BAROTROPIC_CONTINUUM_STABILITY"
 # (owner approval 2026-09-29, tests/test_phase1g_e_status_addition.py).  The
 # checks below still pin this record's six additions exactly; they only allow
 # the later registered records and their additions to exist as well.
-LATER_RECORDS_JSON = ("reports/phase1g_e_status_addition_successor_inventory.json",)
+D_TOKEN = "LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC"
+D_RECORD_JSON = "reports/phase1g_d_linear_statistic_status_successor_inventory.json"
+LATER_RECORDS_JSON = ("reports/phase1g_e_status_addition_successor_inventory.json", D_RECORD_JSON)
 LATER_ADDITIONS = {"TWO_PHASE_MASS_VARIANCE_8_H_INV_MPC": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION"}
 
 
@@ -90,8 +92,9 @@ def frozen() -> dict:
 
 def test_six_added_tokens_hold_the_approved_values(frozen: dict) -> None:
     for token, (value, _report, _section) in ADDED.items():
-        assert getattr(scientific_status, token) == value
-        assert CURRENT_SCIENTIFIC_STATUS[token] == value
+        current_value = "NOT_DERIVED" if token == D_TOKEN else value
+        assert getattr(scientific_status, token) == current_value
+        assert CURRENT_SCIENTIFIC_STATUS[token] == current_value
         assert token not in frozen  # an addition, not a change
     # Exactly the six tokens are new (plus the additions of the later
     # registered records); every other token is the frozen one, except the
@@ -161,10 +164,9 @@ def test_validator_accepts_additions_declared_by_the_registered_record(
         token: {"value": value, "record": RECORD_JSON}
         for token, (value, _report, _section) in ADDED.items()}
     assert set(additions) == set(ADDED) | set(LATER_ADDITIONS)
-    # The new record changes no existing token: the change set is still the
-    # Phase 1G-A one alone.
+    # This frozen record changed none; the later D successor changes one addition.
     changes = remediation.successor_status_changes()
-    assert set(changes) == {BAROTROPIC_TOKEN}
+    assert set(changes) == {BAROTROPIC_TOKEN, D_TOKEN}
     remediation.check_current_scientific_status(
         frozen, CURRENT_SCIENTIFIC_STATUS, changes, additions=additions)
 
@@ -237,7 +239,12 @@ def test_validator_rejects_double_claims_and_tampered_records(
 ) -> None:
     record_path = Path(RECORD_JSON)
     barotropic_path = Path(BAROTROPIC_RECORD_JSON)
-    later_paths = tuple(map(Path, LATER_RECORDS_JSON))  # keep later additions declared
+    def later_for(adding_path):
+        successor = load_json(PROJECT_ROOT / D_RECORD_JSON)
+        successor["status_changes"][D_TOKEN]["added_by_record"] = adding_path.as_posix()
+        successor_path = tmp_path / "d_successor.json"
+        successor_path.write_text(json.dumps(successor), encoding="utf-8")
+        return Path(LATER_RECORDS_JSON[0]), successor_path
     # A token added by two records is rejected ...
     monkeypatch.setattr(remediation, "STATUS_SUCCESSOR_RECORDS", (record_path, record_path))
     with pytest.raises(AssertionError, match="added by more than one successor record"):
@@ -253,7 +260,7 @@ def test_validator_rejects_double_claims_and_tampered_records(
     tampered_path = tmp_path / "tampered_value.json"
     tampered_path.write_text(json.dumps(tampered), encoding="utf-8")
     monkeypatch.setattr(remediation, "STATUS_SUCCESSOR_RECORDS",
-                        (barotropic_path, tampered_path, *later_paths))
+                        (barotropic_path, tampered_path, *later_for(tampered_path)))
     with pytest.raises(AssertionError, match="VOID_ONSET_RESPONSE: live value differs"):
         remediation.check_current_scientific_status(
             frozen, CURRENT_SCIENTIFIC_STATUS, remediation.successor_status_changes(),
@@ -265,7 +272,7 @@ def test_validator_rejects_double_claims_and_tampered_records(
     readded_path = tmp_path / "readded.json"
     readded_path.write_text(json.dumps(readded), encoding="utf-8")
     monkeypatch.setattr(remediation, "STATUS_SUCCESSOR_RECORDS",
-                        (barotropic_path, readded_path, *later_paths))
+                        (barotropic_path, readded_path, *later_for(readded_path)))
     with pytest.raises(AssertionError, match="D3_VERDICT: frozen snapshot already holds"):
         remediation.check_current_scientific_status(
             frozen, CURRENT_SCIENTIFIC_STATUS, remediation.successor_status_changes(),
@@ -303,9 +310,9 @@ CGI_LIMITATION = (
     "so this growth is not Timescape's long-wavelength growth")
 WALL_LIMITATION = (
     "computes the wall-internal linear statistic relative to the wall mean, "
-    "not a global-mean sigma at 8 h^-1 Mpc, which is not defined in the linear "
-    "two-scale theory (LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC = "
-    "NOT_DEFINED_IN_LINEAR_TWO_SCALE_THEORY)")
+    "not a global-mean sigma at 8 h^-1 Mpc, which has not been derived within the current "
+    "closure (LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC = NOT_DERIVED; "
+    "owner-approved successor 2026-10-02)")
 LAWS = {
     "comoving": (ls.GrowthLaw.VOLUME_AVERAGE_CGI, CleanPerturbationSystem.COMOVING,
                  ls.VOLUME_AVERAGE_GROWTH_REFERENCE_NUMERICS),
@@ -357,7 +364,7 @@ def test_lagrangian_sigma_results_carry_the_documented_limitation(law: str) -> N
     assert (scientific_status.GM_CGI_CLOSURES_SEPARATE_UNIVERSE_CONSISTENCY
             == "FAILED_FOR_TIMESCAPE_TRACKER")
     assert (scientific_status.LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC
-            == "NOT_DEFINED_IN_LINEAR_TWO_SCALE_THEORY")
+            == "NOT_DERIVED")
     # Statuses are not relabelled.
     assert result.observational_status == "NON_OBSERVATIONAL"
     assert result.amplitude_status == "NOT_OBSERVATIONAL_SIGMA_8"

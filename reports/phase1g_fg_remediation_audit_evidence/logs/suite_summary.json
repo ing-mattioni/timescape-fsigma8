@@ -1,0 +1,20 @@
+{
+ "314": {
+  "command": "command: OPENBLAS_NUM_THREADS=1 .venv/Scripts/python -B -W error -m pytest -q -p no:cacheprovider -rfEs",
+  "environment": "3.14.3 numpy 2.5.2 scipy 1.18.1 pytest 9.1.1 Windows-11-10.0.26300-SP0",
+  "passed": 1136,
+  "skipped": 0,
+  "failed": 0,
+  "seconds": 525.48,
+  "exit": "exit=0 elapsed=526s end 2026-10-06T12:31:35+02:00"
+ },
+ "311": {
+  "command": "command: OPENBLAS_NUM_THREADS=1 .venv311/Scripts/python -B -W error -m pytest -q -p no:cacheprovider -rfEs",
+  "environment": "3.11.9 numpy 2.4.6 scipy 1.17.1 pytest 9.1.1 Windows-10-10.0.26300-SP0",
+  "passed": 1136,
+  "skipped": 0,
+  "failed": 0,
+  "seconds": 462.2,
+  "exit": "exit=0 elapsed=463s end 2026-10-06T12:39:19+02:00"
+ }
+}

@@ -53,7 +53,7 @@ def test_record_is_canonical_carries_the_ticks_and_pins_the_frozen_files():
     assert decisions["GD-OD6"]["delta_L"] == "total_contrast_at_last_scattering"
 
 
-def test_token_comments_changed_as_ticked_and_values_are_unchanged():
+def test_token_comments_and_current_values_follow_the_registered_successors():
     source = status_source()
     # GD-OD5: Meszaros is delta Q = 0; no growing SU mode satisfies it or the barotropic closure.
     assert "Meszaros (Delta_eff = 0)" not in source
@@ -61,7 +61,9 @@ def test_token_comments_changed_as_ticked_and_values_are_unchanged():
     # GD-OD7: the void-response figure at each case's own equal-mass R8.
     assert "A_v sigma_LSS(R8) = 2.6-4.3 for the peak-background split" not in source
     assert "1.05-1.11" in source and "3.8-4.6" in source and "own equal-mass R8" in source
-    # The rationale is not rebased (that GD-OD1 sub-option is unticked).
+    # The 2026-10-02 successor now replaces the inference from these amplitudes.
+    assert "do not prove that such a statistic is undefined" in source
+    # The unticked R8 < R_void rationale is still not adopted.
     assert "R8 < R_void" not in source
     for token, value in PHASE1G_TOKENS.items():
         assert CURRENT_SCIENTIFIC_STATUS[token] == value

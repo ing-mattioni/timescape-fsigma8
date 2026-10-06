@@ -1,0 +1,179 @@
+{
+ "F_314_vs_inventory_mismatches": [],
+ "G_314_vs_inventory_mismatches": [],
+ "F_314_environment": {
+  "python": "3.14.3",
+  "numpy": "2.5.2",
+  "scipy": "1.18.1"
+ },
+ "F_311_vs_inventory_mismatches": [],
+ "G_311_vs_inventory_mismatches": [],
+ "F_311_environment": {
+  "python": "3.11.9",
+  "numpy": "2.4.6",
+  "scipy": "1.17.1"
+ },
+ "F_314_vs_F_311_mismatches": [],
+ "G_314_eq_G_311_bytes": true,
+ "max_rel_diff_F_vs_inventory": 0.0,
+ "F_314_max_rel_vs_inventory": 1.1081471051888059e-07,
+ "F_314_max_rel_near_empty_vs_inventory": 2.253404018937033e-09,
+ "G_314_max_rel_vs_inventory": 1.0,
+ "F_311_max_rel_vs_inventory": 1.1081471051888059e-07,
+ "F_311_max_rel_near_empty_vs_inventory": 2.253404018937033e-09,
+ "G_311_max_rel_vs_inventory": 1.0,
+ "archive_input_sha256": "4523ef031484a9f49f91c0522e4562f50bb36f7c8d6d8b0933ddd404ea925569",
+ "archive_input_sha256_matches_frozen_file": true,
+ "archive_cutoff_status": "archived M3_r_min values use F3 only; not F2 cutoffs; C1 collapse near-empty cutoffs are recomputed separately",
+ "archive_populations": 84,
+ "archive_max_rel_F2": 0.0,
+ "archive_violations": [],
+ "frozen_C3_tracker_seed_D_t0": {
+  "NW15_CMB_FIT": 1.033503269737031,
+  "PAPER_REFERENCE": 1.0202298735527662
+ },
+ "accuracy_vs_R2M1": {
+  "PAPER_REFERENCE": {
+   "cutoff_F2_shell": {
+    "audited": 0.346453754921388,
+    "reference": 0.3465576867336336,
+    "rel": -0.0002998975819151761
+   },
+   "cutoff_F3_shell": {
+    "audited": 0.5056719686044271,
+    "reference": 0.5057725149089003,
+    "rel": -0.00019879748604234582
+   },
+   "F2_ge1": {
+    "audited": 0.6242648155823363,
+    "reference": 0.6242901770915215,
+    "rel": -4.062455267728193e-05
+   },
+   "F2_ge10": {
+    "audited": 0.014814955564145397,
+    "reference": 0.014780404816320827,
+    "rel": 0.002337604974555152
+   },
+   "F2_ge15": {
+    "audited": 0.0010256449786711446,
+    "reference": 0.001018553532966584,
+    "rel": 0.006962270980403362
+   },
+   "z3_F2_ge1": {
+    "audited": 0.005252158812596319,
+    "reference": 0.0052490503326711735,
+    "rel": 0.0005921985365233695
+   },
+   "near_empty_0.1_cutoff_F2": {
+    "audited": 0.09399909779093592,
+    "reference": 0.09401731647745666,
+    "rel": -0.0001937801162950059
+   },
+   "near_empty_0.1_cutoff_F3": {
+    "audited": 0.18768693690444127,
+    "reference": 0.18769918931771515,
+    "rel": -6.527685771262615e-05
+   },
+   "near_empty_0.1_F2_ge1": {
+    "audited": 0.30406066247415336,
+    "reference": 0.3040592299108961,
+    "rel": 4.711461176976073e-06
+   },
+   "near_empty_0.05_cutoff_F2": {
+    "audited": 0.018783381597875595,
+    "reference": 0.018785425010521203,
+    "rel": -0.00010877649265128575
+   },
+   "near_empty_0.05_cutoff_F3": {
+    "audited": 0.06198247214273683,
+    "reference": 0.061985174587299435,
+    "rel": -4.359824071797913e-05
+   },
+   "near_empty_0.05_F2_ge1": {
+    "audited": 0.04548968736508347,
+    "reference": 0.045474100230404844,
+    "rel": 0.00034276950175260446
+   }
+  },
+  "NW15_CMB_FIT": {
+   "cutoff_F2_shell": {
+    "audited": 1.2299070133108925,
+    "reference": 1.2301036823305056,
+    "rel": -0.00015988003486056002
+   },
+   "cutoff_F3_shell": {
+    "audited": 1.9515378720971197,
+    "reference": 1.9517353584702157,
+    "rel": -0.00010118501580602679
+   },
+   "F2_ge1": {
+    "audited": 0.6660568366975301,
+    "reference": 0.6660851741130751,
+    "rel": -4.2543231175695695e-05
+   },
+   "F2_ge10": {
+    "audited": 0.01924630792466579,
+    "reference": 0.019203731434304712,
+    "rel": 0.0022170946571884453
+   },
+   "F2_ge15": {
+    "audited": 0.0013150449670235394,
+    "reference": 0.0013052876245294802,
+    "rel": 0.007475243241945595
+   },
+   "z3_F2_ge1": {
+    "audited": 0.004381368282505826,
+    "reference": 0.004376431919384731,
+    "rel": 0.0011279423996590765
+   },
+   "near_empty_0.1_cutoff_F2": {
+    "audited": 0.3935610658293955,
+    "reference": 0.39359874343489487,
+    "rel": -9.57259293324908e-05
+   },
+   "near_empty_0.1_cutoff_F3": {
+    "audited": 0.8095540893834378,
+    "reference": 0.8096503806387119,
+    "rel": -0.00011892942630142844
+   },
+   "near_empty_0.1_F2_ge1": {
+    "audited": 0.3823997387897536,
+    "reference": 0.38240897163567816,
+    "rel": -2.414390511051856e-05
+   },
+   "near_empty_0.05_cutoff_F2": {
+    "audited": 0.09523753868039392,
+    "reference": 0.09524648027570073,
+    "rel": -9.387848538799926e-05
+   },
+   "near_empty_0.05_cutoff_F3": {
+    "audited": 0.2859427022558305,
+    "reference": 0.2859615399776681,
+    "rel": -6.58750188541335e-05
+   },
+   "near_empty_0.05_F2_ge1": {
+    "audited": 0.08216210993981304,
+    "reference": 0.08214271499310835,
+    "rel": 0.0002361128032635218
+   }
+  }
+ },
+ "boolean_surrogate_check": {
+  "PAPER_REFERENCE": {
+   "eta": 1.3356012468043725,
+   "eta_reported": 1.3356012468043725,
+   "coverage_from_eta": 0.737,
+   "ratio_to_F": 1.7761376815234975,
+   "multiplicity": 1.812213360657222,
+   "wall_density_over_mean_empty": 3.8022813688212924
+  },
+  "NW15_CMB_FIT": {
+   "eta": 0.9861768593383218,
+   "eta_reported": 0.9861768593383218,
+   "coverage_from_eta": 0.6270000000000001,
+   "ratio_to_F": 1.3114587042414227,
+   "multiplicity": 1.5728498554040218,
+   "wall_density_over_mean_empty": 2.680965147453084
+  }
+ }
+}
