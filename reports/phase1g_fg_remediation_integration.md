@@ -164,7 +164,7 @@ Both runs include the unmodified historical Git-blob test. The count is the expe
 - **First commit:** the complete, validated F/G work and this record. Its
   full hash is recorded by a second, dedicated provenance commit that
   changes only this report and its inventory:
-  `actual_remediation_commit` = COMMIT1_PENDING.
+  `actual_remediation_commit` = `8f3131fe19cccd44a29287617145f3300818dfa3`.
 - **The second commit:** it cannot contain its own hash.
 - **Push:** the phase branch only, ordinary push with upstream. The push
   necessarily follows the last commit, so its outcome and the local/remote

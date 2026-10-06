@@ -4,8 +4,8 @@
     "delta_audit_disposition": "PARTIALLY_RESOLVED"
   },
   "R2-N5": "README wording updated; G report run-specific residual figures left as is",
-  "actual_remediation_commit": null,
-  "actual_remediation_commit_note": "filled by the dedicated provenance commit that follows the integration commit",
+  "actual_remediation_commit": "8f3131fe19cccd44a29287617145f3300818dfa3",
+  "actual_remediation_commit_note": "integration commit on phase-1g-f-successor-g-evolution; recorded by the following dedicated provenance commit (a commit cannot contain its own hash)",
   "audits": {
     "delta": {
       "evidence": "reports/phase1g_fg_remediation_audit_evidence/",
