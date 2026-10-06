@@ -83,7 +83,10 @@ def test_token_is_an_addition_with_the_approved_value(frozen: dict) -> None:
         else:
             assert live == value, token
     for token, addition in earlier.items():
-        assert CURRENT_SCIENTIFIC_STATUS[token] == addition["value"]
+        # The original D addition is still pinned in its historical record;
+        # its live value follows the separately registered 2026-10-02 change.
+        expected = "NOT_DERIVED" if token == "LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC" else addition["value"]
+        assert CURRENT_SCIENTIFIC_STATUS[token] == expected
     for token in NOT_GRANTED:
         assert CURRENT_SCIENTIFIC_STATUS[token] == "NOT_GRANTED"
 
@@ -131,12 +134,13 @@ def test_validator_accepts_the_addition_through_the_registered_record(
     remediation, frozen: dict,
 ) -> None:
     assert remediation.STATUS_SUCCESSOR_RECORDS == (
-        Path(BAROTROPIC_RECORD_JSON), Path(SIX_RECORD_JSON), Path(RECORD_JSON))
+        Path(BAROTROPIC_RECORD_JSON), Path(SIX_RECORD_JSON), Path(RECORD_JSON),
+        Path("reports/phase1g_d_linear_statistic_status_successor_inventory.json"))
     additions = remediation.successor_status_additions()
     assert additions[TOKEN] == {"value": VALUE, "record": RECORD_JSON}
     assert [key for key, value in additions.items() if value["record"] == RECORD_JSON] == [TOKEN]
     changes = remediation.successor_status_changes()
-    assert set(changes) == {BAROTROPIC_TOKEN}
+    assert set(changes) == {BAROTROPIC_TOKEN, "LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC"}
     remediation.check_current_scientific_status(
         frozen, CURRENT_SCIENTIFIC_STATUS, changes, additions=additions)
 
@@ -181,7 +185,8 @@ def test_validator_rejects_a_double_claim_and_a_tampered_record(
     tampered_path = tmp_path / "tampered_value.json"
     tampered_path.write_text(json.dumps(tampered), encoding="utf-8")
     monkeypatch.setattr(remediation, "STATUS_SUCCESSOR_RECORDS",
-                        (Path(BAROTROPIC_RECORD_JSON), Path(SIX_RECORD_JSON), tampered_path))
+                        (Path(BAROTROPIC_RECORD_JSON), Path(SIX_RECORD_JSON), tampered_path,
+                         Path("reports/phase1g_d_linear_statistic_status_successor_inventory.json")))
     with pytest.raises(AssertionError, match=f"{TOKEN}: live value differs"):
         remediation.check_current_scientific_status(
             frozen, CURRENT_SCIENTIFIC_STATUS, remediation.successor_status_changes(),

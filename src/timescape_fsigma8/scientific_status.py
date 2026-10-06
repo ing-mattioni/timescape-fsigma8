@@ -9,7 +9,12 @@ changes one token; reports/phase1g_status_additions_successor.md adds six;
 reports/phase1g_e_status_addition_successor.md adds one).  The owner
 decisions of 2026-09-30 (reports/phase1g_c_owner_decisions_successor.md,
 reports/phase1g_d_owner_decisions_successor.md) edit three comments and no
-value.
+value.  The registered, owner-approved successor of 2026-10-02
+(reports/phase1g_d_linear_statistic_status_successor.md and its canonical
+inventory) changes one of the six added tokens,
+LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC, to NOT_DERIVED through an explicit
+link to its adding record, which keeps the historical value.  No
+observational authorization changes.
 """
 
 from types import MappingProxyType
@@ -81,18 +86,13 @@ TWO_SCALE_SUPER_CELL_GROWTH_LAW = "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION"
 # peak-background split) differ by orders of magnitude.  Owner approval
 # 2026-09-29.
 VOID_ONSET_RESPONSE = "EXTERNAL_CLOSURE_INPUT"
-# Phase 1G-D Sec. 9: at 8 h^-1 Mpc the wall/void partition is
-# non-perturbative (the peak-background-split void response A_v sigma_LSS(R8)
-# is 1.05-1.11 with the tracker-consistent void seed and 3.8-4.6 with the
-# [SvdW04] seed factor, i.e. |eps| >~ 1; each at its own equal-mass R8 with
-# f_vi = f_v(t_LS); owner decisions GD-OD1, OD2, OD7 of 2026-09-30,
-# reports/phase1g_d_owner_decisions_successor.md, which supersede the frozen
-# 2.6-4.3), so a linear, global-mean sigma at that scale is not defined in the
-# linear two-scale theory; the only linear statistic there is the
-# wall-internal sigma_wall.  This is a statement about the linear theory, not
-# an authorisation: SIGMA8_AUTHORIZATION stays NOT_GRANTED.  Owner approval
-# 2026-09-29.
-LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC = "NOT_DEFINED_IN_LINEAR_TWO_SCALE_THEORY"
+# Phase 1G-D Sec. 9; FGA-D1 successor approved 2026-10-02:
+# reports/phase1g_d_linear_statistic_status_successor.md. The closure has
+# not derived a global-mean linear statistic at this scale. The conditional
+# PBS amplitudes 1.05-1.11 / 3.8-4.6 at each case's own equal-mass R8
+# (GD-OD1/OD2/OD7) do not prove that such a statistic is undefined.
+# No observational authorization follows: SIGMA8_AUTHORIZATION stays NOT_GRANTED.
+LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC = "NOT_DERIVED"
 # Phase 1G-E Sec. 2 (reports/phase1g_e_two_phase_sigma.md), proposed in its
 # Sec. 6 item 3: the two-phase mass variance in 8 h^-1 Mpc balls,
 # sigma^2 = delta_v^2 sigma_part^2 + sigma_int^2, is derived only under

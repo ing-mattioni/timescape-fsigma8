@@ -1,0 +1,2591 @@
+{
+  "base_commit": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f",
+  "scope": "C1_wall_shell_crossing_and_near_empty_collapse",
+  "interpretation": "CONDITIONAL_NON_OBSERVATIONAL_FIXED_DOMAIN_M3",
+  "environment": {
+    "python": "3.11.9",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1"
+  },
+  "spherical": {
+    "eta_sc": 3.4875224168745556,
+    "one_plus_delta_sc": 0.2047223340049085,
+    "delta_v": -2.7171803438378834,
+    "r_nl_over_r_l": 1.6967255197099853,
+    "shell_hubble_over_background": 1.3333333333333333
+  },
+  "delta_c": 1.6864701998411453,
+  "anchor": 0.970576769512911,
+  "cases": {
+    "PAPER_REFERENCE": {
+      "h_dressed": 0.7303000000000001,
+      "history": [
+        {
+          "void_mass_fraction": 0.3829709426561773,
+          "density_ratio_void_to_wall": 0.2047223340049085,
+          "domain_volume_units": 2.487713780228015,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7519694338440863,
+            "r>=1": 0.6242648155823363,
+            "r>=2": 0.4381042377083299,
+            "r>=5": 0.13510567110350769,
+            "r>=10": 0.014814955564145397,
+            "r>=15": 0.0010256449786711446
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7519694338440863,
+            "r>=1": 0.6948324360519397,
+            "r>=2": 0.5838353741302029,
+            "r>=5": 0.26521364225965527,
+            "r>=10": 0.035805889469619115,
+            "r>=15": 0.002546344207682812
+          },
+          "median_radius_h_inv_Mpc": 2.4045649173754695,
+          "resolved_mass_fraction": 0.38297093929897186,
+          "unresolved_below_grid": 3.3572054580766064e-09,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass",
+          "z": 0.0,
+          "t_over_t0": 1.0,
+          "tracker_f_v": 0.737,
+          "D_wall": 0.8767922812878437,
+          "frame": 0.8767922812878437,
+          "cutoff_fixed_domain_h_inv_Mpc": 0.346453754921388,
+          "cutoff_truncated_universe_h_inv_Mpc": 0.5056719686044271
+        },
+        {
+          "void_mass_fraction": 0.3829709426561773,
+          "density_ratio_void_to_wall": 0.2047223340049085,
+          "domain_volume_units": 2.487713780228015,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7519694338440863,
+            "r>=1": 0.4040811176104209,
+            "r>=2": 0.20523291025751653,
+            "r>=5": 0.0286381942382374,
+            "r>=10": 0.0007289633307497303,
+            "r>=15": 8.372388202331963e-06
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7519694338440863,
+            "r>=1": 0.5586383713729605,
+            "r>=2": 0.3631202722601759,
+            "r>=5": 0.06742351724372639,
+            "r>=10": 0.0018108405326433643,
+            "r>=15": 2.0827760510686696e-05
+          },
+          "median_radius_h_inv_Mpc": 1.1035050630428156,
+          "resolved_mass_fraction": 0.38297097237063227,
+          "unresolved_below_grid": -2.971445495214553e-08,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass",
+          "z": 0.5,
+          "t_over_t0": 0.6080634736995177,
+          "tracker_f_v": 0.6301727200873801,
+          "D_wall": 0.6293071441002793,
+          "frame": 0.943960716150419,
+          "cutoff_fixed_domain_h_inv_Mpc": 0.3687678174250033,
+          "cutoff_truncated_universe_h_inv_Mpc": 0.6759415959322822
+        },
+        {
+          "void_mass_fraction": 0.3829709426561773,
+          "density_ratio_void_to_wall": 0.2047223340049085,
+          "domain_volume_units": 2.487713780228015,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7519694338440863,
+            "r>=1": 0.2210297916690495,
+            "r>=2": 0.07914386652643565,
+            "r>=5": 0.004112040155716867,
+            "r>=10": 1.5554200235412493e-05,
+            "r>=15": 1.785843290976335e-08
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7519694338440863,
+            "r>=1": 0.38256627326022097,
+            "r>=2": 0.17023230279002935,
+            "r>=5": 0.010147029268040954,
+            "r>=10": 3.869320756808194e-05,
+            "r>=15": 4.442666807323326e-08
+          },
+          "median_radius_h_inv_Mpc": 0.5383624398999585,
+          "resolved_mass_fraction": 0.3829700408496114,
+          "unresolved_below_grid": 9.018065659227581e-07,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass",
+          "z": 1.0,
+          "t_over_t0": 0.41811561082152227,
+          "tracker_f_v": 0.539526490328941,
+          "D_wall": 0.49026133076218076,
+          "frame": 0.9805226615243615,
+          "cutoff_fixed_domain_h_inv_Mpc": 0.260208288742045,
+          "cutoff_truncated_universe_h_inv_Mpc": 0.5299840525343821
+        },
+        {
+          "void_mass_fraction": 0.3829709426561773,
+          "density_ratio_void_to_wall": 0.2047223340049085,
+          "domain_volume_units": 2.487713780228015,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7519694338440863,
+            "r>=1": 0.044558388762863894,
+            "r>=2": 0.006391622250592316,
+            "r>=5": 2.1179625348686993e-05,
+            "r>=10": 3.7109106105898704e-10,
+            "r>=15": 6.171765103252789e-16
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7519694338440863,
+            "r>=1": 0.101868283514584,
+            "r>=2": 0.015701970097570215,
+            "r>=5": 5.2686638150661414e-05,
+            "r>=10": 9.231683456381105e-10,
+            "r>=15": 1.5353585095692325e-15
+          },
+          "median_radius_h_inv_Mpc": 0.1407978505482273,
+          "resolved_mass_fraction": 0.3814257122478743,
+          "unresolved_below_grid": 0.001545230408303011,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass",
+          "z": 2.0,
+          "t_over_t0": 0.23864510804653918,
+          "tracker_f_v": 0.4007493294196036,
+          "D_wall": 0.3373378521384593,
+          "frame": 1.0120135564153778,
+          "cutoff_fixed_domain_h_inv_Mpc": 0.12391054764863478,
+          "cutoff_truncated_universe_h_inv_Mpc": 0.2841146117900074
+        },
+        {
+          "void_mass_fraction": 0.3829709426561773,
+          "density_ratio_void_to_wall": 0.2047223340049085,
+          "domain_volume_units": 2.487713780228015,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7519694338440863,
+            "r>=1": 0.005252158812596319,
+            "r>=2": 0.00020883970621082555,
+            "r>=5": 1.3743013522187967e-08,
+            "r>=10": 1.2373761797030766e-16,
+            "r>=15": 1.2479066962474661e-26
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7519694338440863,
+            "r>=1": 0.012931496763104358,
+            "r>=2": 0.0005193188463066976,
+            "r>=5": 3.4188683191433864e-08,
+            "r>=10": 3.0782377735732396e-16,
+            "r>=15": 3.1044346846936373e-26
+          },
+          "median_radius_h_inv_Mpc": 0.03976272336748174,
+          "resolved_mass_fraction": 0.3630954850303931,
+          "unresolved_below_grid": 0.019875457625784243,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass",
+          "z": 3.0,
+          "t_over_t0": 0.1570367130356189,
+          "tracker_f_v": 0.3055849983468639,
+          "D_wall": 0.25520989891234147,
+          "frame": 1.0208395956493659,
+          "cutoff_fixed_domain_h_inv_Mpc": 0.06107355541141917,
+          "cutoff_truncated_universe_h_inv_Mpc": 0.14994240088108934
+        }
+      ],
+      "near_empty_C1_collapse": {
+        "0.1": {
+          "void_mass_fraction": 0.24524704092999983,
+          "density_ratio_void_to_wall": 0.1,
+          "domain_volume_units": 3.2072233683699984,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7646709092626788,
+            "r>=1": 0.30406066247415336,
+            "r>=2": 0.11423114352796852,
+            "r>=5": 0.006240832583492025,
+            "r>=10": 2.9103156712750313e-05,
+            "r>=15": 4.8842900222938745e-08
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7646709092626789,
+            "r>=1": 0.5193616166500564,
+            "r>=2": 0.2755185319919313,
+            "r>=5": 0.019661557467277768,
+            "r>=10": 9.333248378659284e-05,
+            "r>=15": 1.5665006888865056e-07
+          },
+          "median_radius_h_inv_Mpc": 0.7710657843917522,
+          "resolved_mass_fraction": 0.245247150780956,
+          "unresolved_below_grid": -1.0985095616478091e-07,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass",
+          "cutoff_fixed_domain_h_inv_Mpc": 0.09399909779093592,
+          "cutoff_truncated_universe_h_inv_Mpc": 0.18768693690444127
+        },
+        "0.05": {
+          "void_mass_fraction": 0.15833118143804012,
+          "density_ratio_void_to_wall": 0.05,
+          "domain_volume_units": 4.008292447322762,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7900181112972106,
+            "r>=1": 0.04548968736508347,
+            "r>=2": 0.004859893731135765,
+            "r>=5": 8.197303518266526e-06,
+            "r>=10": 8.394334476110484e-11,
+            "r>=15": 1.2776754027750912e-16
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7900181112972106,
+            "r>=1": 0.1554150960724866,
+            "r>=2": 0.019125933084712915,
+            "r>=5": 3.285616419751864e-05,
+            "r>=10": 3.3646947470139614e-10,
+            "r>=15": 5.121296667073463e-16
+          },
+          "median_radius_h_inv_Mpc": 0.18447377925552672,
+          "resolved_mass_fraction": 0.15802005696910398,
+          "unresolved_below_grid": 0.0003111244689361359,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass",
+          "cutoff_fixed_domain_h_inv_Mpc": 0.018783381597875595,
+          "cutoff_truncated_universe_h_inv_Mpc": 0.06198247214273683
+        }
+      },
+      "boolean_surrogate": {
+        "coverage_supplied": 0.737,
+        "dimensionless_grain_volume_density_eta": 1.3356012468043725,
+        "eta_over_full_F_volume_fraction": 1.7761376815234975,
+        "mean_multiplicity_given_covered": 1.812213360657222,
+        "identification": "shares volume-weighted grain-radius shape only; overlapping grains, independently calibrated intensity"
+      }
+    },
+    "NW15_CMB_FIT": {
+      "h_dressed": 0.61,
+      "history": [
+        {
+          "void_mass_fraction": 0.3829709426561773,
+          "density_ratio_void_to_wall": 0.2047223340049085,
+          "domain_volume_units": 2.487713780228015,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7519694338440863,
+            "r>=1": 0.6660568366975301,
+            "r>=2": 0.4947776479403669,
+            "r>=5": 0.1658864980671055,
+            "r>=10": 0.01924630792466579,
+            "r>=15": 0.0013150449670235394
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7519694338440863,
+            "r>=1": 0.7149020700589035,
+            "r>=2": 0.6220010475620573,
+            "r>=5": 0.3107062831858744,
+            "r>=10": 0.0461230618302994,
+            "r>=15": 0.0032629661764609114
+          },
+          "median_radius_h_inv_Mpc": 2.800445036058031,
+          "resolved_mass_fraction": 0.3829709386150443,
+          "unresolved_below_grid": 4.041133039311973e-09,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass",
+          "z": 0.0,
+          "t_over_t0": 1.0,
+          "tracker_f_v": 0.6270000000000001,
+          "D_wall": 0.9455104962879062,
+          "frame": 0.9455104962879062,
+          "cutoff_fixed_domain_h_inv_Mpc": 1.2299070133108925,
+          "cutoff_truncated_universe_h_inv_Mpc": 1.9515378720971197
+        },
+        {
+          "void_mass_fraction": 0.3829709426561773,
+          "density_ratio_void_to_wall": 0.2047223340049085,
+          "domain_volume_units": 2.487713780228015,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7519694338440863,
+            "r>=1": 0.4442432058432258,
+            "r>=2": 0.23173658718153728,
+            "r>=5": 0.032212651258843976,
+            "r>=10": 0.0006913539692516046,
+            "r>=15": 5.3925576744354565e-06
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7519694338440863,
+            "r>=1": 0.5881895344593597,
+            "r>=2": 0.3952725107365411,
+            "r>=5": 0.07533475325810948,
+            "r>=10": 0.0017175415588857215,
+            "r>=15": 1.3414996915968053e-05
+          },
+          "median_radius_h_inv_Mpc": 1.2550133690207537,
+          "resolved_mass_fraction": 0.38297094415898747,
+          "unresolved_below_grid": -1.502810154097034e-09,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass",
+          "z": 0.5,
+          "t_over_t0": 0.5859551052181591,
+          "tracker_f_v": 0.49621407645346055,
+          "D_wall": 0.6620781407000177,
+          "frame": 0.9931172110500266,
+          "cutoff_fixed_domain_h_inv_Mpc": 0.8304337986239553,
+          "cutoff_truncated_universe_h_inv_Mpc": 1.4572082351841735
+        },
+        {
+          "void_mass_fraction": 0.3829709426561773,
+          "density_ratio_void_to_wall": 0.2047223340049085,
+          "domain_volume_units": 2.487713780228015,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7519694338440863,
+            "r>=1": 0.23875984462789887,
+            "r>=2": 0.08415896898876721,
+            "r>=5": 0.003721449523092618,
+            "r>=10": 7.70370137153943e-06,
+            "r>=15": 2.979235274340307e-09
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7519694338440863,
+            "r>=1": 0.40340875950027183,
+            "r>=2": 0.17947968933383723,
+            "r>=5": 0.00919023720123993,
+            "r>=10": 1.9164311973981308e-05,
+            "r>=15": 7.411484602833086e-09
+          },
+          "median_radius_h_inv_Mpc": 0.5982364465938976,
+          "resolved_mass_fraction": 0.3829710806735611,
+          "unresolved_below_grid": -1.3801738379948247e-07,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass",
+          "z": 1.0,
+          "t_over_t0": 0.3917995292946072,
+          "tracker_f_v": 0.3970823683038495,
+          "D_wall": 0.5062623464147886,
+          "frame": 1.0125246928295772,
+          "cutoff_fixed_domain_h_inv_Mpc": 0.5521220375908491,
+          "cutoff_truncated_universe_h_inv_Mpc": 1.0212581192846875
+        },
+        {
+          "void_mass_fraction": 0.3829709426561773,
+          "density_ratio_void_to_wall": 0.2047223340049085,
+          "domain_volume_units": 2.487713780228015,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7519694338440863,
+            "r>=1": 0.04330012026742247,
+            "r>=2": 0.005347462944782064,
+            "r>=5": 8.562739690910645e-06,
+            "r>=10": 1.928276860302266e-11,
+            "r>=15": 1.1111290656105721e-18
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7519694338440863,
+            "r>=1": 0.09921864510603516,
+            "r>=2": 0.013163691394178972,
+            "r>=5": 2.1301284666422086e-05,
+            "r>=10": 4.7970009172857544e-11,
+            "r>=15": 2.7641710881312986e-18
+          },
+          "median_radius_h_inv_Mpc": 0.15330868319736352,
+          "resolved_mass_fraction": 0.38236563446846716,
+          "unresolved_below_grid": 0.0006053081877101518,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass",
+          "z": 2.0,
+          "t_over_t0": 0.21627493684180696,
+          "tracker_f_v": 0.26662055871424434,
+          "D_wall": 0.34067255705613664,
+          "frame": 1.02201767116841,
+          "cutoff_fixed_domain_h_inv_Mpc": 0.2578526258110591,
+          "cutoff_truncated_universe_h_inv_Mpc": 0.5039598089896858
+        },
+        {
+          "void_mass_fraction": 0.3829709426561773,
+          "density_ratio_void_to_wall": 0.2047223340049085,
+          "domain_volume_units": 2.487713780228015,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7519694338440863,
+            "r>=1": 0.004381368282505826,
+            "r>=2": 0.0001228851830514363,
+            "r>=5": 1.6881865649258338e-09,
+            "r>=10": 2.1115120203522676e-19,
+            "r>=15": 3.811685093526723e-32
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7519694338440863,
+            "r>=1": 0.010805922349012466,
+            "r>=2": 0.00030562885911142497,
+            "r>=5": 4.199724967134933e-09,
+            "r>=10": 5.252837550147434e-19,
+            "r>=15": 9.482381533056139e-32
+          },
+          "median_radius_h_inv_Mpc": 0.043903109162134635,
+          "resolved_mass_fraction": 0.37035694973921923,
+          "unresolved_below_grid": 0.012613992916958083,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass",
+          "z": 3.0,
+          "t_over_t0": 0.14021542426496747,
+          "tracker_f_v": 0.1907402828479839,
+          "D_wall": 0.2551899389443794,
+          "frame": 1.0207597557775177,
+          "cutoff_fixed_domain_h_inv_Mpc": 0.12949438703234786,
+          "cutoff_truncated_universe_h_inv_Mpc": 0.2612777079103121
+        }
+      ],
+      "near_empty_C1_collapse": {
+        "0.1": {
+          "void_mass_fraction": 0.24524704092999983,
+          "density_ratio_void_to_wall": 0.1,
+          "domain_volume_units": 3.2072233683699984,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7646709092626788,
+            "r>=1": 0.3823997387897536,
+            "r>=2": 0.16227904423214407,
+            "r>=5": 0.011161330179988257,
+            "r>=10": 6.583877990411921e-05,
+            "r>=15": 1.2120892389259813e-07
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7646709092626789,
+            "r>=1": 0.5829655799094124,
+            "r>=2": 0.3544392128586134,
+            "r>=5": 0.03467959968577293,
+            "r>=10": 0.00021111955151145904,
+            "r>=15": 3.88743957153596e-07
+          },
+          "median_radius_h_inv_Mpc": 1.000199157568962,
+          "resolved_mass_fraction": 0.24524705324717672,
+          "unresolved_below_grid": -1.231717688954248e-08,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass",
+          "cutoff_fixed_domain_h_inv_Mpc": 0.3935610658293955,
+          "cutoff_truncated_universe_h_inv_Mpc": 0.8095540893834378
+        },
+        "0.05": {
+          "void_mass_fraction": 0.15833118143804012,
+          "density_ratio_void_to_wall": 0.05,
+          "domain_volume_units": 4.008292447322762,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7900181112972106,
+            "r>=1": 0.08216210993981304,
+            "r>=2": 0.011481738396666151,
+            "r>=5": 3.443574771688684e-05,
+            "r>=10": 6.929967086171484e-10,
+            "r>=15": 1.6187088264710022e-15
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7900181112972106,
+            "r>=1": 0.2508484856153235,
+            "r>=2": 0.04409431522665392,
+            "r>=5": 0.00013801045057857916,
+            "r>=10": 2.777733465839636e-09,
+            "r>=15": 6.488258363558369e-15
+          },
+          "median_radius_h_inv_Mpc": 0.27727314315346224,
+          "resolved_mass_fraction": 0.15829812908455557,
+          "unresolved_below_grid": 3.305235348455282e-05,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass",
+          "cutoff_fixed_domain_h_inv_Mpc": 0.09523753868039392,
+          "cutoff_truncated_universe_h_inv_Mpc": 0.2859427022558305
+        }
+      },
+      "boolean_surrogate": {
+        "coverage_supplied": 0.6270000000000001,
+        "dimensionless_grain_volume_density_eta": 0.9861768593383218,
+        "eta_over_full_F_volume_fraction": 1.3114587042414227,
+        "mean_multiplicity_given_covered": 1.5728498554040218,
+        "identification": "shares volume-weighted grain-radius shape only; overlapping grains, independently calibrated intensity"
+      }
+    }
+  },
+  "precision": "Inherited 481-node grid. At z=0 primary r>=10 tails are high by 0.22-0.24%, r>=15 by 0.69-0.75% versus independent absorption CDF. Quote at most two significant figures at r>=15. These are numerical, not physical, error estimates.",
+  "sigma_recomputed": false,
+  "archived_sensitivities": {
+    "input_filename": "phase1g_f_void_population.json",
+    "input_sha256": "4523ef031484a9f49f91c0522e4562f50bb36f7c8d6d8b0933ddd404ea925569",
+    "method": "F2 applied to archived mass fractions; clocks and C3 normalization unchanged",
+    "cutoff_status": "archived M3_r_min values use F3 only; not F2 cutoffs; C1 collapse near-empty cutoffs are recomputed separately",
+    "cases": {
+      "NW15_CMB_FIT": {
+        "C1_WALL_EDS_COMMON_TIME/near_empty_0.05/collapse": {
+          "void_mass_fraction": 0.15833118143804023,
+          "density_ratio_void_to_wall": 0.05,
+          "domain_volume_units": 4.008292447322764,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7900181112972107,
+            "r>=1": 0.08216210993981368,
+            "r>=10": 6.929967086171826e-10,
+            "r>=15": 1.6187088264711834e-15,
+            "r>=2": 0.01148173839666629,
+            "r>=5": 3.443574771688778e-05
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7900181112972108,
+            "r>=1": 0.250848485615325,
+            "r>=10": 2.777733465839775e-09,
+            "r>=15": 6.488258363559099e-15,
+            "r>=2": 0.04409431522665445,
+            "r>=5": 0.000138010450578583
+          },
+          "median_radius_h_inv_Mpc": 0.2772731431534635,
+          "resolved_mass_fraction": 0.15829812908455582,
+          "unresolved_below_grid": 3.305235348441404e-05,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C1_WALL_EDS_COMMON_TIME/near_empty_0.05/turnaround": {
+          "void_mass_fraction": 0.10594986847921002,
+          "density_ratio_void_to_wall": 0.05,
+          "domain_volume_units": 3.01304750110499,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7032738012948981,
+            "r>=1": 0.0945412035975376,
+            "r>=10": 9.218872136711012e-10,
+            "r>=15": 2.1533873042916843e-15,
+            "r>=2": 0.014358742277846432,
+            "r>=5": 4.563664743315064e-05
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7032738012948981,
+            "r>=1": 0.22418852176281912,
+            "r>=10": 2.777689958122571e-09,
+            "r>=15": 6.488258236107231e-15,
+            "r>=2": 0.04155562018058337,
+            "r>=5": 0.00013748742650862813
+          },
+          "median_radius_h_inv_Mpc": 0.33620797535842867,
+          "resolved_mass_fraction": 0.10594330528673136,
+          "unresolved_below_grid": 6.563192478659108e-06,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C1_WALL_EDS_COMMON_TIME/near_empty_0.1/collapse": {
+          "void_mass_fraction": 0.24524704093,
+          "density_ratio_void_to_wall": 0.1,
+          "domain_volume_units": 3.2072233683699993,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7646709092626789,
+            "r>=1": 0.3823997387897547,
+            "r>=10": 6.58387799041209e-05,
+            "r>=15": 1.2120892389260252e-07,
+            "r>=2": 0.16227904423214493,
+            "r>=5": 0.01116133017998839
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.764670909262679,
+            "r>=1": 0.5829655799094134,
+            "r>=10": 0.00021111955151146457,
+            "r>=15": 3.887439571536103e-07,
+            "r>=2": 0.3544392128586148,
+            "r>=5": 0.034679599685773346
+          },
+          "median_radius_h_inv_Mpc": 1.0001991575689653,
+          "resolved_mass_fraction": 0.2452470532471769,
+          "unresolved_below_grid": -1.2317176917298056e-08,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C1_WALL_EDS_COMMON_TIME/near_empty_0.1/turnaround": {
+          "void_mass_fraction": 0.1699160178422966,
+          "density_ratio_void_to_wall": 0.1,
+          "domain_volume_units": 2.5292441605806695,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.6718055160134754,
+            "r>=1": 0.39837175178952416,
+            "r>=10": 8.347894114032673e-05,
+            "r>=15": 1.5369966784066145e-07,
+            "r>=2": 0.18578434570881988,
+            "r>=5": 0.013999207089410496
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.6718055160134754,
+            "r>=1": 0.5284078427224839,
+            "r>=10": 0.00021109851046642526,
+            "r>=15": 3.8874385135953004e-07,
+            "r>=2": 0.33023575858740767,
+            "r>=5": 0.03431394167620387
+          },
+          "median_radius_h_inv_Mpc": 1.233179150219603,
+          "resolved_mass_fraction": 0.16991601885520574,
+          "unresolved_below_grid": -1.0129091454480488e-09,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C1_WALL_EDS_COMMON_TIME/shell_crossing/collapse": {
+          "void_mass_fraction": 0.3829709426561785,
+          "density_ratio_void_to_wall": 0.20472233400490963,
+          "domain_volume_units": 2.487713780228009,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7519694338440862,
+            "r>=1": 0.6660568366975316,
+            "r>=10": 0.019246307924666296,
+            "r>=15": 0.0013150449670236012,
+            "r>=2": 0.49477764794036927,
+            "r>=5": 0.16588649806710756
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7519694338440862,
+            "r>=1": 0.7149020700589039,
+            "r>=10": 0.04612306183030047,
+            "r>=15": 0.003262966176461057,
+            "r>=2": 0.6220010475620587,
+            "r>=5": 0.31070628318587684
+          },
+          "median_radius_h_inv_Mpc": 2.8004450360580515,
+          "resolved_mass_fraction": 0.3829709386150458,
+          "unresolved_below_grid": 4.041132706245065e-09,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C1_WALL_EDS_COMMON_TIME/shell_crossing/turnaround": {
+          "void_mass_fraction": 0.28109124361573595,
+          "density_ratio_void_to_wall": 0.20472233400490963,
+          "domain_volume_units": 2.0919452889249435,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.6563443794681106,
+            "r>=1": 0.6230357597030897,
+            "r>=10": 0.02287754827912488,
+            "r>=15": 0.001563830819720488,
+            "r>=2": 0.5082416547842995,
+            "r>=5": 0.1925802848847962
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.6563443794681106,
+            "r>=1": 0.639988808120581,
+            "r>=10": 0.046103828033653,
+            "r>=15": 0.0032629592424941786,
+            "r>=2": 0.576095828295528,
+            "r>=5": 0.30511210616566486
+          },
+          "median_radius_h_inv_Mpc": 3.482634206878156,
+          "resolved_mass_fraction": 0.2810912403712675,
+          "unresolved_below_grid": 3.2444684716637084e-09,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C2_VOLUME_AVERAGE_CGI_COMOVING/near_empty_0.05/collapse": {
+          "void_mass_fraction": 0.15833118143804023,
+          "density_ratio_void_to_wall": 0.05,
+          "domain_volume_units": 4.008292447322764,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7900181112972107,
+            "r>=1": 0.004470608424618713,
+            "r>=10": 1.6770763886448696e-18,
+            "r>=15": 2.451162595662973e-29,
+            "r>=2": 0.00010406099195112315,
+            "r>=5": 1.6512000362149038e-09
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7900181112972108,
+            "r>=1": 0.01761955888206631,
+            "r>=10": 6.722212622188567e-18,
+            "r>=15": 9.824976519355958e-29,
+            "r>=2": 0.00041694167431652367,
+            "r>=5": 6.618492592565052e-09
+          },
+          "median_radius_h_inv_Mpc": 0.06695754859436176,
+          "resolved_mass_fraction": 0.1553635691613174,
+          "unresolved_below_grid": 0.0029676122767228197,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C2_VOLUME_AVERAGE_CGI_COMOVING/near_empty_0.05/turnaround": {
+          "void_mass_fraction": 0.10594986847921002,
+          "density_ratio_void_to_wall": 0.05,
+          "domain_volume_units": 3.01304750110499,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7032738012948981,
+            "r>=1": 0.005713104164406673,
+            "r>=10": 2.231034398209612e-18,
+            "r>=15": 3.260810364175399e-29,
+            "r>=2": 0.00013752564289266426,
+            "r>=5": 2.196558721726968e-09
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7032738012948981,
+            "r>=1": 0.01693688264860794,
+            "r>=10": 6.7222126184047474e-18,
+            "r>=15": 9.824976519355941e-29,
+            "r>=2": 0.0004142082404509893,
+            "r>=5": 6.618335725917563e-09
+          },
+          "median_radius_h_inv_Mpc": 0.08525763776131812,
+          "resolved_mass_fraction": 0.10483127192134732,
+          "unresolved_below_grid": 0.0011185965578627,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C2_VOLUME_AVERAGE_CGI_COMOVING/near_empty_0.1/collapse": {
+          "void_mass_fraction": 0.24524704093,
+          "density_ratio_void_to_wall": 0.1,
+          "domain_volume_units": 3.2072233683699993,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7646709092626789,
+            "r>=1": 0.11511496676453133,
+            "r>=10": 8.859643352149385e-09,
+            "r>=15": 5.390480218031998e-14,
+            "r>=2": 0.02165163491297806,
+            "r>=5": 0.00014590052172642898
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.764670909262679,
+            "r>=1": 0.2771185923702916,
+            "r>=10": 2.8414854467773852e-08,
+            "r>=15": 1.7288474122005747e-13,
+            "r>=2": 0.06535698356474201,
+            "r>=5": 0.00046773857837498017
+          },
+          "median_radius_h_inv_Mpc": 0.34708451547060587,
+          "resolved_mass_fraction": 0.2452419340844284,
+          "unresolved_below_grid": 5.106845571589691e-06,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C2_VOLUME_AVERAGE_CGI_COMOVING/near_empty_0.1/turnaround": {
+          "void_mass_fraction": 0.1699160178422966,
+          "density_ratio_void_to_wall": 0.1,
+          "domain_volume_units": 2.5292441605806695,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.6718055160134754,
+            "r>=1": 0.13500532974207138,
+            "r>=10": 1.123452413927299e-08,
+            "r>=15": 6.83543107124731e-14,
+            "r>=2": 0.02692566978947461,
+            "r>=5": 0.00018497170147958026
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.6718055160134754,
+            "r>=1": 0.2611928755795516,
+            "r>=10": 2.8414853849495235e-08,
+            "r>=15": 1.7288474122001236e-13,
+            "r>=2": 0.06416860714915372,
+            "r>=5": 0.00046764169309015274
+          },
+          "median_radius_h_inv_Mpc": 0.44805034447424746,
+          "resolved_mass_fraction": 0.16991590823302585,
+          "unresolved_below_grid": 1.0960927074310511e-07,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C2_VOLUME_AVERAGE_CGI_COMOVING/shell_crossing/collapse": {
+          "void_mass_fraction": 0.3829709426561785,
+          "density_ratio_void_to_wall": 0.20472233400490963,
+          "domain_volume_units": 2.487713780228009,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7519694338440862,
+            "r>=1": 0.44698921086071414,
+            "r>=10": 0.0006033907885528491,
+            "r>=15": 3.955927768998333e-06,
+            "r>=2": 0.2321527014630029,
+            "r>=5": 0.03126360152616775
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7519694338440862,
+            "r>=1": 0.5901190131204731,
+            "r>=10": 0.00149927380294219,
+            "r>=15": 9.841139002856178e-06,
+            "r>=2": 0.39575888562917766,
+            "r>=5": 0.07324452544884456
+          },
+          "median_radius_h_inv_Mpc": 1.263446293633349,
+          "resolved_mass_fraction": 0.38297094280586114,
+          "unresolved_below_grid": -1.4968265515946655e-10,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C2_VOLUME_AVERAGE_CGI_COMOVING/shell_crossing/turnaround": {
+          "void_mass_fraction": 0.28109124361573595,
+          "density_ratio_void_to_wall": 0.20472233400490963,
+          "domain_volume_units": 2.0919452889249435,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.6563443794681106,
+            "r>=1": 0.4692779397005491,
+            "r>=10": 0.0007175440626215029,
+            "r>=15": 4.704337191069088e-06,
+            "r>=2": 0.2644843204105541,
+            "r>=5": 0.03713761051622851
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.6563443794681106,
+            "r>=1": 0.5512937846111076,
+            "r>=10": 0.0014992731463622758,
+            "r>=15": 9.841139002703761e-06,
+            "r>=2": 0.38422247120863556,
+            "r>=5": 0.07316909657772148
+          },
+          "median_radius_h_inv_Mpc": 1.6380893707490067,
+          "resolved_mass_fraction": 0.2810912414855452,
+          "unresolved_below_grid": 2.130190746019167e-09,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C2_VOLUME_AVERAGE_CGI_MESZAROS/near_empty_0.05/collapse": {
+          "void_mass_fraction": 0.15833118143804023,
+          "density_ratio_void_to_wall": 0.05,
+          "domain_volume_units": 4.008292447322764,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7900181112972107,
+            "r>=1": 0.0009620055641961112,
+            "r>=10": 4.57906879314456e-23,
+            "r>=15": 1.1955478686112362e-36,
+            "r>=2": 8.816436222727768e-06,
+            "r>=5": 8.614989167301999e-12
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7900181112972108,
+            "r>=1": 0.0038419258956328417,
+            "r>=10": 1.8354246859332704e-22,
+            "r>=15": 4.792105492167247e-36,
+            "r>=2": 3.533766837077016e-05,
+            "r>=5": 3.4531396011931234e-11
+          },
+          "median_radius_h_inv_Mpc": 0.037702422391911156,
+          "resolved_mass_fraction": 0.15057403568223962,
+          "unresolved_below_grid": 0.00775714575580061,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C2_VOLUME_AVERAGE_CGI_MESZAROS/near_empty_0.05/turnaround": {
+          "void_mass_fraction": 0.10594986847921002,
+          "density_ratio_void_to_wall": 0.05,
+          "domain_volume_units": 3.01304750110499,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7032738012948981,
+            "r>=1": 0.0012550995169101147,
+            "r>=10": 6.091588948583511e-23,
+            "r>=15": 1.590451358768759e-36,
+            "r>=2": 1.1706189405437683e-05,
+            "r>=5": 1.1460603242129226e-11
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7032738012948981,
+            "r>=1": 0.0037681370886526932,
+            "r>=10": 1.8354246859288324e-22,
+            "r>=15": 4.792105492167247e-36,
+            "r>=2": 3.527012291342505e-05,
+            "r>=5": 3.453134195872042e-11
+          },
+          "median_radius_h_inv_Mpc": 0.04901479073478237,
+          "resolved_mass_fraction": 0.1026368870980829,
+          "unresolved_below_grid": 0.0033129813811271225,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C2_VOLUME_AVERAGE_CGI_MESZAROS/near_empty_0.1/collapse": {
+          "void_mass_fraction": 0.24524704093,
+          "density_ratio_void_to_wall": 0.1,
+          "domain_volume_units": 3.2072233683699993,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7646709092626789,
+            "r>=1": 0.06044229755468792,
+            "r>=10": 8.054019043236655e-11,
+            "r>=15": 2.3844771725848953e-17,
+            "r>=2": 0.007599293419567373,
+            "r>=5": 1.5115540757023803e-05
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.764670909262679,
+            "r>=1": 0.16505528867084693,
+            "r>=10": 2.583103807876041e-10,
+            "r>=15": 7.647550909259102e-17,
+            "r>=2": 0.023849484218372897,
+            "r>=5": 4.847680044903269e-05
+          },
+          "median_radius_h_inv_Mpc": 0.2279713825652705,
+          "resolved_mass_fraction": 0.24518515329728557,
+          "unresolved_below_grid": 6.18876327144191e-05,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C2_VOLUME_AVERAGE_CGI_MESZAROS/near_empty_0.1/turnaround": {
+          "void_mass_fraction": 0.1699160178422966,
+          "density_ratio_void_to_wall": 0.1,
+          "domain_volume_units": 2.5292441605806695,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.6718055160134754,
+            "r>=1": 0.0731688300075069,
+            "r>=10": 1.0212947599536192e-10,
+            "r>=15": 3.0236507129083814e-17,
+            "r>=2": 0.009561794969084656,
+            "r>=5": 1.9166879633722682e-05
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.6718055160134754,
+            "r>=1": 0.15863952623911176,
+            "r>=10": 2.5831038072438093e-10,
+            "r>=15": 7.647550909259102e-17,
+            "r>=2": 0.023668942915940232,
+            "r>=5": 4.847560340216017e-05
+          },
+          "median_radius_h_inv_Mpc": 0.3000522632686867,
+          "resolved_mass_fraction": 0.1699097726794796,
+          "unresolved_below_grid": 6.24516281699794e-06,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C2_VOLUME_AVERAGE_CGI_MESZAROS/shell_crossing/collapse": {
+          "void_mass_fraction": 0.3829709426561785,
+          "density_ratio_void_to_wall": 0.20472233400490963,
+          "domain_volume_units": 2.487713780228009,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7519694338440862,
+            "r>=1": 0.35335612862706245,
+            "r>=10": 9.966124920003334e-05,
+            "r>=15": 1.8827521379499078e-07,
+            "r>=2": 0.15644139794515363,
+            "r>=5": 0.013328518204133945
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7519694338440862,
+            "r>=1": 0.517365156002649,
+            "r>=10": 0.00024787978800426357,
+            "r>=15": 4.683746693692047e-07,
+            "r>=2": 0.297196834024212,
+            "r>=5": 0.032305656032913355
+          },
+          "median_radius_h_inv_Mpc": 0.9259754976507628,
+          "resolved_mass_fraction": 0.3829709602367851,
+          "unresolved_below_grid": -1.7580606637146445e-08,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C2_VOLUME_AVERAGE_CGI_MESZAROS/shell_crossing/turnaround": {
+          "void_mass_fraction": 0.28109124361573595,
+          "density_ratio_void_to_wall": 0.20472233400490963,
+          "domain_volume_units": 2.0919452889249435,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.6563443794681106,
+            "r>=1": 0.38571058151006116,
+            "r>=10": 0.0001185158433737917,
+            "r>=15": 2.2389440408064332e-07,
+            "r>=2": 0.1820430716545031,
+            "r>=5": 0.015846793733652723
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.6563443794681106,
+            "r>=1": 0.4914944473874336,
+            "r>=10": 0.00024787978522446927,
+            "r>=15": 4.6837466936919096e-07,
+            "r>=2": 0.2922983835004758,
+            "r>=5": 0.03229909373649127
+          },
+          "median_radius_h_inv_Mpc": 1.2211396039988212,
+          "resolved_mass_fraction": 0.28109124291388327,
+          "unresolved_below_grid": 7.018526870794517e-10,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_A_V_ZERO/near_empty_0.05/collapse": {
+          "void_mass_fraction": 0.15833118143804023,
+          "density_ratio_void_to_wall": 0.05,
+          "domain_volume_units": 4.008292447322764,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7900181112972107,
+            "r>=1": 9.76030640939701e-10,
+            "r>=10": 7.069493324044811e-65,
+            "r>=15": 2.389994952064e-103,
+            "r>=2": 1.7396138412846819e-15,
+            "r>=5": 1.1906577814797017e-32
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7900181112972108,
+            "r>=1": 3.9122162318940355e-09,
+            "r>=10": 2.8336596697167517e-64,
+            "r>=15": 9.579798715497663e-103,
+            "r>=2": 6.9728810212794855e-15,
+            "r>=5": 4.772504592851166e-32
+          },
+          "median_radius_h_inv_Mpc": 0.0015655713121575645,
+          "resolved_mass_fraction": 0.07355113755235228,
+          "unresolved_below_grid": 0.08478004388568795,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_A_V_ZERO/near_empty_0.05/turnaround": {
+          "void_mass_fraction": 0.10594986847921002,
+          "density_ratio_void_to_wall": 0.05,
+          "domain_volume_units": 3.01304750110499,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7032738012948981,
+            "r>=1": 1.2984017165405735e-09,
+            "r>=10": 9.404629925938934e-65,
+            "r>=15": 3.17943833012404e-103,
+            "r>=2": 2.314228662989454e-15,
+            "r>=5": 1.5839460184749563e-32
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7032738012948981,
+            "r>=1": 3.9121460329133635e-09,
+            "r>=10": 2.8336596697167517e-64,
+            "r>=15": 9.579798715497663e-103,
+            "r>=2": 6.972880890005871e-15,
+            "r>=5": 4.772504592851166e-32
+          },
+          "median_radius_h_inv_Mpc": 0.0018704607313612587,
+          "resolved_mass_fraction": 0.05619822238334328,
+          "unresolved_below_grid": 0.04975164609586674,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_A_V_ZERO/near_empty_0.1/collapse": {
+          "void_mass_fraction": 0.24524704093,
+          "density_ratio_void_to_wall": 0.1,
+          "domain_volume_units": 3.2072233683699993,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7646709092626789,
+            "r>=1": 0.00020729525073259145,
+            "r>=10": 2.066727394889752e-29,
+            "r>=15": 7.490203637225285e-48,
+            "r>=2": 7.087470983883341e-07,
+            "r>=5": 1.93392015509343e-14
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.764670909262679,
+            "r>=1": 0.0006644445965916108,
+            "r>=10": 6.628456396940864e-29,
+            "r>=15": 2.4022756139158906e-47,
+            "r>=2": 2.2731056058977975e-06,
+            "r>=5": 6.202513913977037e-14
+          },
+          "median_radius_h_inv_Mpc": 0.02010677906781537,
+          "resolved_mass_fraction": 0.22351636857592017,
+          "unresolved_below_grid": 0.021730672354079827,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_A_V_ZERO/near_empty_0.1/turnaround": {
+          "void_mass_fraction": 0.1699160178422966,
+          "density_ratio_void_to_wall": 0.1,
+          "domain_volume_units": 2.5292441605806695,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.6718055160134754,
+            "r>=1": 0.0002627866504491398,
+            "r>=10": 2.620726183833154e-29,
+            "r>=15": 9.497998063438728e-48,
+            "r>=2": 8.987298440891367e-07,
+            "r>=5": 2.4523191594728852e-14
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.6718055160134754,
+            "r>=1": 0.0006642542532393664,
+            "r>=10": 6.628456396940864e-29,
+            "r>=15": 2.4022756139158906e-47,
+            "r>=2": 2.2731025597967878e-06,
+            "r>=5": 6.202513913976544e-14
+          },
+          "median_radius_h_inv_Mpc": 0.029903136727343207,
+          "resolved_mass_fraction": 0.16148913243540353,
+          "unresolved_below_grid": 0.00842688540689307,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_A_V_ZERO/shell_crossing/collapse": {
+          "void_mass_fraction": 0.3829709426561785,
+          "density_ratio_void_to_wall": 0.20472233400490963,
+          "domain_volume_units": 2.487713780228009,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7519694338440862,
+            "r>=1": 0.044963037813793745,
+            "r>=10": 9.569251926779055e-12,
+            "r>=15": 2.1437174819579414e-19,
+            "r>=2": 0.0054416379077475,
+            "r>=5": 7.455404118542665e-06
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7519694338440862,
+            "r>=1": 0.10271781159152582,
+            "r>=10": 2.3805559884270998e-11,
+            "r>=15": 5.332955520782459e-19,
+            "r>=2": 0.013393049873631071,
+            "r>=5": 1.854663800098534e-05
+          },
+          "median_radius_h_inv_Mpc": 0.16217581013130097,
+          "resolved_mass_fraction": 0.3826042481977255,
+          "unresolved_below_grid": 0.00036669445845299853,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_A_V_ZERO/shell_crossing/turnaround": {
+          "void_mass_fraction": 0.28109124361573595,
+          "density_ratio_void_to_wall": 0.20472233400490963,
+          "domain_volume_units": 2.0919452889249435,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.6563443794681106,
+            "r>=1": 0.05335241373844061,
+            "r>=10": 1.1379628334809574e-11,
+            "r>=15": 2.5492805901836375e-19,
+            "r>=2": 0.006470894941350875,
+            "r>=5": 8.865868366704436e-06
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.6563443794681106,
+            "r>=1": 0.1025113038974714,
+            "r>=10": 2.3805559884270998e-11,
+            "r>=15": 5.332955520782459e-19,
+            "r>=2": 0.013392580609479255,
+            "r>=5": 1.8546638000074153e-05
+          },
+          "median_radius_h_inv_Mpc": 0.23738390554014485,
+          "resolved_mass_fraction": 0.2810717213834012,
+          "unresolved_below_grid": 1.9522232334756584e-05,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_PBS_F_VI_0.0001/near_empty_0.05/collapse": {
+          "void_mass_fraction": 0.15833118143804023,
+          "density_ratio_void_to_wall": 0.05,
+          "domain_volume_units": 4.008292447322764,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7900181112972107,
+            "r>=1": 0.7877858762379715,
+            "r>=10": 0.20533989851318324,
+            "r>=15": 0.055671143257704156,
+            "r>=2": 0.761327377801031,
+            "r>=5": 0.544913683602569
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7900181112972108,
+            "r>=1": 0.789460023563314,
+            "r>=10": 0.46189914897925405,
+            "r>=15": 0.1841157298243563,
+            "r>=2": 0.7826597047580729,
+            "r>=5": 0.7103084401196623
+          },
+          "median_radius_h_inv_Mpc": 6.884797168531995,
+          "resolved_mass_fraction": 0.15833117943385625,
+          "unresolved_below_grid": 2.0041839854378907e-09,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_PBS_F_VI_0.0001/near_empty_0.05/turnaround": {
+          "void_mass_fraction": 0.10594986847921002,
+          "density_ratio_void_to_wall": 0.05,
+          "domain_volume_units": 3.01304750110499,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7032738012948981,
+            "r>=1": 0.7023929422406668,
+            "r>=10": 0.2210285216522526,
+            "r>=15": 0.06547375731711462,
+            "r>=2": 0.6875631811700063,
+            "r>=5": 0.5261456851286537
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7032738012948981,
+            "r>=1": 0.7029812082347835,
+            "r>=10": 0.40790180623696265,
+            "r>=15": 0.16613911608572457,
+            "r>=2": 0.6979806038860934,
+            "r>=5": 0.6325932298816952
+          },
+          "median_radius_h_inv_Mpc": 7.61026114674179,
+          "resolved_mass_fraction": 0.10594986707112473,
+          "unresolved_below_grid": 1.4080852872577765e-09,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_PBS_F_VI_0.0001/near_empty_0.1/collapse": {
+          "void_mass_fraction": 0.24524704093,
+          "density_ratio_void_to_wall": 0.1,
+          "domain_volume_units": 3.2072233683699993,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7646709092626789,
+            "r>=1": 0.7646686919543201,
+            "r>=10": 0.4961301664102507,
+            "r>=15": 0.2637887758978555,
+            "r>=2": 0.7641747522444594,
+            "r>=5": 0.7223007709762174
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.764670909262679,
+            "r>=1": 0.7646702179130195,
+            "r>=10": 0.6542548387918025,
+            "r>=15": 0.48030927827941744,
+            "r>=2": 0.7645161402881508,
+            "r>=5": 0.7509363190920483
+          },
+          "median_radius_h_inv_Mpc": 12.269295715052907,
+          "resolved_mass_fraction": 0.24524703586346874,
+          "unresolved_below_grid": 5.0665312500974835e-09,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_PBS_F_VI_0.0001/near_empty_0.1/turnaround": {
+          "void_mass_fraction": 0.1699160178422966,
+          "density_ratio_void_to_wall": 0.1,
+          "domain_volume_units": 2.5292441605806695,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.6718055160134754,
+            "r>=1": 0.6718053764418604,
+            "r>=10": 0.4945752216252383,
+            "r>=15": 0.2883648697347859,
+            "r>=2": 0.6717182656742982,
+            "r>=5": 0.6528923947953038
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.6718055160134754,
+            "r>=1": 0.6718054608303362,
+            "r>=10": 0.5884348561269496,
+            "r>=15": 0.44031663548446526,
+            "r>=2": 0.6717710166984489,
+            "r>=5": 0.6641982506194811
+          },
+          "median_radius_h_inv_Mpc": 13.777360090621439,
+          "resolved_mass_fraction": 0.1699160140653627,
+          "unresolved_below_grid": 3.776933904520163e-09,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_PBS_F_VI_0.0001/shell_crossing/collapse": {
+          "void_mass_fraction": 0.3829709426561785,
+          "density_ratio_void_to_wall": 0.20472233400490963,
+          "domain_volume_units": 2.487713780228009,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7519694338440862,
+            "r>=1": 0.7519694053663304,
+            "r>=10": 0.6916007644773159,
+            "r>=15": 0.540712719184187,
+            "r>=2": 0.7519692537677095,
+            "r>=5": 0.7504529877364695
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7519694338440862,
+            "r>=1": 0.7519694223967258,
+            "r>=10": 0.726478911286032,
+            "r>=15": 0.6499011465657553,
+            "r>=2": 0.7519693614577836,
+            "r>=5": 0.7513591236245497
+          },
+          "median_radius_h_inv_Mpc": 19.855243552807327,
+          "resolved_mass_fraction": 0.3829709281534677,
+          "unresolved_below_grid": 1.4502710754538128e-08,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_PBS_F_VI_0.0001/shell_crossing/turnaround": {
+          "void_mass_fraction": 0.28109124361573595,
+          "density_ratio_void_to_wall": 0.20472233400490963,
+          "domain_volume_units": 2.0919452889249435,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.6563443794681106,
+            "r>=1": 0.6563443519211032,
+            "r>=10": 0.6356998680845082,
+            "r>=15": 0.5431100565169318,
+            "r>=2": 0.6563443514010288,
+            "r>=5": 0.6562053536536036
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.6563443794681106,
+            "r>=1": 0.6563443662999804,
+            "r>=10": 0.6463110801995693,
+            "r>=15": 0.5968588216801748,
+            "r>=2": 0.6563443660513724,
+            "r>=5": 0.6562779144471512
+          },
+          "median_radius_h_inv_Mpc": 22.586052915037563,
+          "resolved_mass_fraction": 0.2810912318182363,
+          "unresolved_below_grid": 1.1797499643861897e-08,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_PBS_F_VI_0.01/near_empty_0.05/collapse": {
+          "void_mass_fraction": 0.15833118143804023,
+          "density_ratio_void_to_wall": 0.05,
+          "domain_volume_units": 4.008292447322764,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7900181112972107,
+            "r>=1": 0.7338620533977137,
+            "r>=10": 0.025938609468908795,
+            "r>=15": 0.0019409701117561007,
+            "r>=2": 0.586331908874444,
+            "r>=5": 0.21878415711917942
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7900181112972108,
+            "r>=1": 0.7752186136848238,
+            "r>=10": 0.09462347217722553,
+            "r>=15": 0.007722896091677694,
+            "r>=2": 0.727009652319892,
+            "r>=5": 0.4783968613625365
+          },
+          "median_radius_h_inv_Mpc": 3.32001886114125,
+          "resolved_mass_fraction": 0.1583311800183375,
+          "unresolved_below_grid": 1.419702744254181e-09,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_PBS_F_VI_0.01/near_empty_0.05/turnaround": {
+          "void_mass_fraction": 0.10594986847921002,
+          "density_ratio_void_to_wall": 0.05,
+          "domain_volume_units": 3.01304750110499,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7032738012948981,
+            "r>=1": 0.6697576559076125,
+            "r>=10": 0.03157456299444794,
+            "r>=15": 0.0025126475213056265,
+            "r>=2": 0.5596595203116953,
+            "r>=5": 0.23420177552682844
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7032738012948981,
+            "r>=1": 0.6917843019875668,
+            "r>=10": 0.08725009287207071,
+            "r>=15": 0.007516665051869357,
+            "r>=2": 0.6480792894238743,
+            "r>=5": 0.42245591460540577
+          },
+          "median_radius_h_inv_Mpc": 3.739822211423869,
+          "resolved_mass_fraction": 0.10594986747683419,
+          "unresolved_below_grid": 1.0023758351129786e-09,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_PBS_F_VI_0.01/near_empty_0.1/collapse": {
+          "void_mass_fraction": 0.24524704093,
+          "density_ratio_void_to_wall": 0.1,
+          "domain_volume_units": 3.2072233683699993,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7646709092626789,
+            "r>=1": 0.7630505570393378,
+            "r>=10": 0.19537066685132023,
+            "r>=15": 0.05276192164431049,
+            "r>=2": 0.7395798435169143,
+            "r>=5": 0.5280174834942798
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.764670909262679,
+            "r>=1": 0.7641649517800925,
+            "r>=10": 0.4006536805816357,
+            "r>=15": 0.14685382149184134,
+            "r>=2": 0.756666863740084,
+            "r>=5": 0.6709142164397488
+          },
+          "median_radius_h_inv_Mpc": 6.853004259426205,
+          "resolved_mass_fraction": 0.24524703739729892,
+          "unresolved_below_grid": 3.532701076114364e-09,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_PBS_F_VI_0.01/near_empty_0.1/turnaround": {
+          "void_mass_fraction": 0.1699160178422966,
+          "density_ratio_void_to_wall": 0.1,
+          "domain_volume_units": 2.5292441605806695,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.6718055160134754,
+            "r>=1": 0.6714403780185245,
+            "r>=10": 0.22015847186960857,
+            "r>=15": 0.06418028935726514,
+            "r>=2": 0.6617711967461535,
+            "r>=5": 0.5198983405828594
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.6718055160134754,
+            "r>=1": 0.6716611021078236,
+            "r>=10": 0.37093836730867,
+            "r>=15": 0.14163541584961972,
+            "r>=2": 0.6678020417510228,
+            "r>=5": 0.6022335828512075
+          },
+          "median_radius_h_inv_Mpc": 7.849892751000915,
+          "resolved_mass_fraction": 0.16991601521933788,
+          "unresolved_below_grid": 2.6229587113402175e-09,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_PBS_F_VI_0.01/shell_crossing/collapse": {
+          "void_mass_fraction": 0.3829709426561785,
+          "density_ratio_void_to_wall": 0.20472233400490963,
+          "domain_volume_units": 2.487713780228009,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7519694338440862,
+            "r>=1": 0.7519683009051507,
+            "r>=10": 0.4919310608972751,
+            "r>=15": 0.27300642981409995,
+            "r>=2": 0.7515845846957752,
+            "r>=5": 0.7114021247299448
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7519694338440862,
+            "r>=1": 0.7519689784299767,
+            "r>=10": 0.620187521174258,
+            "r>=15": 0.4409791849303105,
+            "r>=2": 0.7518146865515697,
+            "r>=5": 0.7351187271967833
+          },
+          "median_radius_h_inv_Mpc": 12.455366047778465,
+          "resolved_mass_fraction": 0.38297093290333284,
+          "unresolved_below_grid": 9.752845642196917e-09,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_PBS_F_VI_0.01/shell_crossing/turnaround": {
+          "void_mass_fraction": 0.28109124361573595,
+          "density_ratio_void_to_wall": 0.20472233400490963,
+          "domain_volume_units": 2.0919452889249435,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.6563443794681106,
+            "r>=1": 0.6563443532664572,
+            "r>=10": 0.5059667261778936,
+            "r>=15": 0.30688109226807964,
+            "r>=2": 0.6563227402021898,
+            "r>=5": 0.6443169196907206
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.6563443794681106,
+            "r>=1": 0.6563443669430918,
+            "r>=10": 0.5746957318980724,
+            "r>=15": 0.42499617758392716,
+            "r>=2": 0.6563340352022081,
+            "r>=5": 0.6505394401179773
+          },
+          "median_radius_h_inv_Mpc": 14.434249833572858,
+          "resolved_mass_fraction": 0.2810912357230609,
+          "unresolved_below_grid": 7.892675069065547e-09,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_PBS_TRACKER_SEED/near_empty_0.05/collapse": {
+          "void_mass_fraction": 0.15833118143804023,
+          "density_ratio_void_to_wall": 0.05,
+          "domain_volume_units": 4.008292447322764,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7900181112972107,
+            "r>=1": 0.13474510734571502,
+            "r>=10": 2.1424220084332312e-08,
+            "r>=15": 3.949820474416425e-13,
+            "r>=2": 0.026031402998659126,
+            "r>=5": 0.00019386902574211783
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7900181112972108,
+            "r>=1": 0.3569495262615784,
+            "r>=10": 8.587453254809574e-08,
+            "r>=15": 1.583203557586036e-12,
+            "r>=2": 0.09493145254617097,
+            "r>=5": 0.0007765105086376666
+          },
+          "median_radius_h_inv_Mpc": 0.3846031234897479,
+          "resolved_mass_fraction": 0.15832625862893973,
+          "unresolved_below_grid": 4.922809100499359e-06,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_PBS_TRACKER_SEED/near_empty_0.05/turnaround": {
+          "void_mass_fraction": 0.10594986847921002,
+          "density_ratio_void_to_wall": 0.05,
+          "domain_volume_units": 3.01304750110499,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7032738012948981,
+            "r>=1": 0.15000964864287245,
+            "r>=10": 2.8498300722240832e-08,
+            "r>=15": 5.254490776217107e-13,
+            "r>=2": 0.03168645063881479,
+            "r>=5": 0.0002556085250650532
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7032738012948981,
+            "r>=1": 0.3162098386747727,
+            "r>=10": 8.586672677244567e-08,
+            "r>=15": 1.5832030302836362e-12,
+            "r>=2": 0.08753356196141159,
+            "r>=5": 0.000769597549663056
+          },
+          "median_radius_h_inv_Mpc": 0.46142503972134696,
+          "resolved_mass_fraction": 0.10594924492029087,
+          "unresolved_below_grid": 6.235589191522228e-07,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_PBS_TRACKER_SEED/near_empty_0.1/collapse": {
+          "void_mass_fraction": 0.24524704093,
+          "density_ratio_void_to_wall": 0.1,
+          "domain_volume_units": 3.2072233683699993,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7646709092626789,
+            "r>=1": 0.4636091863012528,
+            "r>=10": 0.00031104879030142144,
+            "r>=15": 1.5336249565100728e-06,
+            "r>=2": 0.22992071181632523,
+            "r>=5": 0.023973854275500847
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.764670909262679,
+            "r>=1": 0.6359134710158147,
+            "r>=10": 0.0009967080619462756,
+            "r>=15": 4.918656024878759e-06,
+            "r>=2": 0.4432421621884797,
+            "r>=5": 0.07191308056829034
+          },
+          "median_radius_h_inv_Mpc": 1.2817925704039788,
+          "resolved_mass_fraction": 0.24524704251196466,
+          "unresolved_below_grid": -1.5819646703718604e-09,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_PBS_TRACKER_SEED/near_empty_0.1/turnaround": {
+          "void_mass_fraction": 0.1699160178422966,
+          "density_ratio_void_to_wall": 0.1,
+          "domain_volume_units": 2.5292441605806695,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.6718055160134754,
+            "r>=1": 0.4680064399445855,
+            "r>=10": 0.0003942603614536524,
+            "r>=15": 1.9447166227918807e-06,
+            "r>=2": 0.25508978733441623,
+            "r>=5": 0.029759542155348855
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.6718055160134754,
+            "r>=1": 0.5731293484603516,
+            "r>=10": 0.000996286586959305,
+            "r>=15": 4.91864138835434e-06,
+            "r>=2": 0.40817249683536705,
+            "r>=5": 0.0704937445234899
+          },
+          "median_radius_h_inv_Mpc": 1.5643910486425279,
+          "resolved_mass_fraction": 0.16991601708943946,
+          "unresolved_below_grid": 7.528571377424242e-10,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_PBS_TRACKER_SEED/shell_crossing/collapse": {
+          "void_mass_fraction": 0.3829709426561785,
+          "density_ratio_void_to_wall": 0.20472233400490963,
+          "domain_volume_units": 2.487713780228009,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7519694338440862,
+            "r>=1": 0.700267826957079,
+            "r>=10": 0.035594895214083815,
+            "r>=15": 0.0036436726733536404,
+            "r>=2": 0.559793989936237,
+            "r>=5": 0.22424329214858277
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7519694338440862,
+            "r>=1": 0.7302954836735644,
+            "r>=10": 0.082724318652479,
+            "r>=15": 0.008999539500516731,
+            "r>=2": 0.6607833912496978,
+            "r>=5": 0.3864190414658584
+          },
+          "median_radius_h_inv_Mpc": 3.3837139141362647,
+          "resolved_mass_fraction": 0.3829709382316229,
+          "unresolved_below_grid": 4.424555555271326e-09,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_PBS_TRACKER_SEED/shell_crossing/turnaround": {
+          "void_mass_fraction": 0.28109124361573595,
+          "density_ratio_void_to_wall": 0.20472233400490963,
+          "domain_volume_units": 2.0919452889249435,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.6563443794681106,
+            "r>=1": 0.6396281346731588,
+            "r>=10": 0.04226910512911774,
+            "r>=15": 0.004332936591298232,
+            "r>=2": 0.556841007745506,
+            "r>=5": 0.25609780230865764
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.6563443794681106,
+            "r>=1": 0.6482459527648093,
+            "r>=10": 0.0826149912448272,
+            "r>=15": 0.00899939318680843,
+            "r>=2": 0.6046919830808322,
+            "r>=5": 0.3756791749505315
+          },
+          "median_radius_h_inv_Mpc": 4.168059221219902,
+          "resolved_mass_fraction": 0.2810912400696408,
+          "unresolved_below_grid": 3.5460951397503493e-09,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        }
+      },
+      "PAPER_REFERENCE": {
+        "C1_WALL_EDS_COMMON_TIME/near_empty_0.05/collapse": {
+          "void_mass_fraction": 0.15833118143804023,
+          "density_ratio_void_to_wall": 0.05,
+          "domain_volume_units": 4.008292447322764,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7900181112972107,
+            "r>=1": 0.04548968736508378,
+            "r>=10": 8.394334476110833e-11,
+            "r>=15": 1.2776754027751802e-16,
+            "r>=2": 0.004859893731135819,
+            "r>=5": 8.197303518266689e-06
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7900181112972108,
+            "r>=1": 0.15541509607248755,
+            "r>=10": 3.364694747014103e-10,
+            "r>=15": 5.121296667073823e-16,
+            "r>=2": 0.019125933084713134,
+            "r>=5": 3.2856164197519315e-05
+          },
+          "median_radius_h_inv_Mpc": 0.1844737792555276,
+          "resolved_mass_fraction": 0.15802005696910418,
+          "unresolved_below_grid": 0.0003111244689360526,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C1_WALL_EDS_COMMON_TIME/near_empty_0.05/turnaround": {
+          "void_mass_fraction": 0.10594986847921002,
+          "density_ratio_void_to_wall": 0.05,
+          "domain_volume_units": 3.01304750110499,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7032738012948981,
+            "r>=1": 0.054049062739749326,
+            "r>=10": 1.1167022813510268e-10,
+            "r>=15": 1.6997065724224087e-16,
+            "r>=2": 0.006200654959052911,
+            "r>=5": 1.0884861814753485e-05
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7032738012948981,
+            "r>=1": 0.1410331817800901,
+            "r>=10": 3.3646770172274535e-10,
+            "r>=15": 5.121296640649064e-16,
+            "r>=2": 0.018357053641270223,
+            "r>=5": 3.279558388617466e-05
+          },
+          "median_radius_h_inv_Mpc": 0.2281692974743113,
+          "resolved_mass_fraction": 0.10586328703130098,
+          "unresolved_below_grid": 8.658144790904543e-05,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C1_WALL_EDS_COMMON_TIME/near_empty_0.1/collapse": {
+          "void_mass_fraction": 0.24524704093,
+          "density_ratio_void_to_wall": 0.1,
+          "domain_volume_units": 3.2072233683699993,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7646709092626789,
+            "r>=1": 0.3040606624741542,
+            "r>=10": 2.91031567127509e-05,
+            "r>=15": 4.884290022294043e-08,
+            "r>=2": 0.11423114352796905,
+            "r>=5": 0.006240832583492086
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.764670909262679,
+            "r>=1": 0.5193616166500573,
+            "r>=10": 9.333248378659478e-05,
+            "r>=15": 1.5665006888865604e-07,
+            "r>=2": 0.2755185319919324,
+            "r>=5": 0.01966155746727797
+          },
+          "median_radius_h_inv_Mpc": 0.7710657843917544,
+          "resolved_mass_fraction": 0.24524715078095619,
+          "unresolved_below_grid": -1.0985095619253649e-07,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C1_WALL_EDS_COMMON_TIME/near_empty_0.1/turnaround": {
+          "void_mass_fraction": 0.1699160178422966,
+          "density_ratio_void_to_wall": 0.1,
+          "domain_volume_units": 2.5292441605806695,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.6718055160134754,
+            "r>=1": 0.32686035883158343,
+            "r>=10": 3.690272491658344e-05,
+            "r>=15": 6.193552824392883e-08,
+            "r>=2": 0.13403449094740852,
+            "r>=5": 0.007862282996244759
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.6718055160134754,
+            "r>=1": 0.47402024929064995,
+            "r>=10": 9.332816171508536e-05,
+            "r>=15": 1.566500510581183e-07,
+            "r>=2": 0.2597537060265603,
+            "r>=5": 0.019535996264010404
+          },
+          "median_radius_h_inv_Mpc": 0.9686503933253272,
+          "resolved_mass_fraction": 0.16991604033029242,
+          "unresolved_below_grid": -2.2487995826603324e-08,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C1_WALL_EDS_COMMON_TIME/shell_crossing/collapse": {
+          "void_mass_fraction": 0.3829709426561785,
+          "density_ratio_void_to_wall": 0.20472233400490963,
+          "domain_volume_units": 2.487713780228009,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7519694338440862,
+            "r>=1": 0.6242648155823377,
+            "r>=10": 0.01481495556414579,
+            "r>=15": 0.001025644978671188,
+            "r>=2": 0.43810423770833207,
+            "r>=5": 0.13510567110350938
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7519694338440862,
+            "r>=1": 0.6948324360519403,
+            "r>=10": 0.03580588946961996,
+            "r>=15": 0.0025463442076829133,
+            "r>=2": 0.5838353741302041,
+            "r>=5": 0.2652136422596575
+          },
+          "median_radius_h_inv_Mpc": 2.4045649173754864,
+          "resolved_mass_fraction": 0.3829709392989729,
+          "unresolved_below_grid": 3.357205569098909e-09,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C1_WALL_EDS_COMMON_TIME/shell_crossing/turnaround": {
+          "void_mass_fraction": 0.28109124361573595,
+          "density_ratio_void_to_wall": 0.20472233400490963,
+          "domain_volume_units": 2.0919452889249435,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.6563443794681106,
+            "r>=1": 0.5992778464443672,
+            "r>=10": 0.017613175340515073,
+            "r>=15": 0.0012196819353467573,
+            "r>=2": 0.46175025309163126,
+            "r>=5": 0.1579985400884225
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.6563443794681106,
+            "r>=1": 0.627768320157877,
+            "r>=10": 0.03579685672882886,
+            "r>=15": 0.0025463409524804897,
+            "r>=2": 0.546292492108443,
+            "r>=5": 0.2617270871579429
+          },
+          "median_radius_h_inv_Mpc": 3.0425328573348196,
+          "resolved_mass_fraction": 0.2810912408212235,
+          "unresolved_below_grid": 2.794512454773468e-09,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C2_VOLUME_AVERAGE_CGI_COMOVING/near_empty_0.05/collapse": {
+          "void_mass_fraction": 0.15833118143804023,
+          "density_ratio_void_to_wall": 0.05,
+          "domain_volume_units": 4.008292447322764,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7900181112972107,
+            "r>=1": 0.00018269738215947863,
+            "r>=10": 5.994774479835931e-26,
+            "r>=15": 2.12520529074207e-40,
+            "r>=2": 7.863902549401153e-07,
+            "r>=5": 1.249266262624642e-13
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7900181112972108,
+            "r>=1": 0.0007317954347942373,
+            "r>=10": 2.4028809270929614e-25,
+            "r>=15": 8.518444315891818e-40,
+            "r>=2": 3.152072680712348e-06,
+            "r>=5": 5.007424525171108e-13
+          },
+          "median_radius_h_inv_Mpc": 0.018625803277290003,
+          "resolved_mass_fraction": 0.13804544018851406,
+          "unresolved_below_grid": 0.020285741249526174,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C2_VOLUME_AVERAGE_CGI_COMOVING/near_empty_0.05/turnaround": {
+          "void_mass_fraction": 0.10594986847921002,
+          "density_ratio_void_to_wall": 0.05,
+          "domain_volume_units": 3.01304750110499,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7032738012948981,
+            "r>=1": 0.00024094551740819388,
+            "r>=10": 7.974918836200087e-26,
+            "r>=15": 2.8271855364934686e-40,
+            "r>=2": 1.045557703682562e-06,
+            "r>=5": 1.6619132794744665e-13
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7032738012948981,
+            "r>=1": 0.0007254799391999905,
+            "r>=10": 2.402880927092779e-25,
+            "r>=15": 8.518444315891818e-40,
+            "r>=2": 3.1503055981095056e-06,
+            "r>=5": 5.007423653771359e-13
+          },
+          "median_radius_h_inv_Mpc": 0.02502739851698117,
+          "resolved_mass_fraction": 0.09613959919259114,
+          "unresolved_below_grid": 0.009810269286618878,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C2_VOLUME_AVERAGE_CGI_COMOVING/near_empty_0.1/collapse": {
+          "void_mass_fraction": 0.24524704093,
+          "density_ratio_void_to_wall": 0.1,
+          "domain_volume_units": 3.2072233683699993,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7646709092626789,
+            "r>=1": 0.030814212837970496,
+            "r>=10": 5.8255992779368185e-12,
+            "r>=15": 8.961382741368751e-19,
+            "r>=2": 0.002861593006291256,
+            "r>=5": 2.7657234165388373e-06
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.764670909262679,
+            "r>=1": 0.090755768339709,
+            "r>=10": 1.868399813864418e-11,
+            "r>=15": 2.8741156141025474e-18,
+            "r>=2": 0.00910258072418567,
+            "r>=5": 8.870221958652323e-06
+          },
+          "median_radius_h_inv_Mpc": 0.14388623839076534,
+          "resolved_mass_fraction": 0.24459294407612028,
+          "unresolved_below_grid": 0.0006540968538797098,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C2_VOLUME_AVERAGE_CGI_COMOVING/near_empty_0.1/turnaround": {
+          "void_mass_fraction": 0.1699160178422966,
+          "density_ratio_void_to_wall": 0.1,
+          "domain_volume_units": 2.5292441605806695,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.6718055160134754,
+            "r>=1": 0.03805663824607585,
+            "r>=10": 7.387186428969209e-12,
+            "r>=15": 1.1363535632094539e-18,
+            "r>=2": 0.0036169898463507245,
+            "r>=5": 3.507074982794357e-06
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.6718055160134754,
+            "r>=1": 0.08858085255417487,
+            "r>=10": 1.8683998138276954e-11,
+            "r>=15": 2.8741156141025474e-18,
+            "r>=2": 0.009073544099280018,
+            "r>=5": 8.870178108332163e-06
+          },
+          "median_radius_h_inv_Mpc": 0.1953148819631219,
+          "resolved_mass_fraction": 0.16979722259186453,
+          "unresolved_below_grid": 0.00011879525043206884,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C2_VOLUME_AVERAGE_CGI_COMOVING/shell_crossing/collapse": {
+          "void_mass_fraction": 0.3829709426561785,
+          "density_ratio_void_to_wall": 0.20472233400490963,
+          "domain_volume_units": 2.487713780228009,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7519694338440862,
+            "r>=1": 0.2778384692435737,
+            "r>=10": 4.2194299789150084e-05,
+            "r>=15": 6.872537066320731e-08,
+            "r>=2": 0.11052451312580168,
+            "r>=5": 0.0074527312434570035
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7519694338440862,
+            "r>=1": 0.4460157340566827,
+            "r>=10": 0.00010495857928115864,
+            "r>=15": 1.7096902840384424e-07,
+            "r>=2": 0.22561862438237262,
+            "r>=5": 0.018270864593013816
+          },
+          "median_radius_h_inv_Mpc": 0.6952469601114285,
+          "resolved_mass_fraction": 0.3829711145781974,
+          "unresolved_below_grid": -1.71922018898929e-07,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C2_VOLUME_AVERAGE_CGI_COMOVING/shell_crossing/turnaround": {
+          "void_mass_fraction": 0.28109124361573595,
+          "density_ratio_void_to_wall": 0.20472233400490963,
+          "domain_volume_units": 2.0919452889249435,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.6563443794681106,
+            "r>=1": 0.3118195152385058,
+            "r>=10": 5.017690538444066e-05,
+            "r>=15": 8.172730546791661e-08,
+            "r>=2": 0.12990942692034163,
+            "r>=5": 0.008862103527474609
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.6563443794681106,
+            "r>=1": 0.4294992818683254,
+            "r>=10": 0.00010495857908046496,
+            "r>=15": 1.7096902840384357e-07,
+            "r>=2": 0.22346624177713303,
+            "r>=5": 0.018269673485316936
+          },
+          "median_radius_h_inv_Mpc": 0.9416031768856792,
+          "resolved_mass_fraction": 0.2810912613507742,
+          "unresolved_below_grid": -1.7735038271293746e-08,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C2_VOLUME_AVERAGE_CGI_MESZAROS/near_empty_0.05/collapse": {
+          "void_mass_fraction": 0.15833118143804023,
+          "density_ratio_void_to_wall": 0.05,
+          "domain_volume_units": 4.008292447322764,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7900181112972107,
+            "r>=1": 5.740722188917636e-06,
+            "r>=10": 1.4200767964015503e-35,
+            "r>=15": 1.8328169516945366e-55,
+            "r>=2": 3.239312008795583e-09,
+            "r>=5": 1.3701440095060678e-18
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7900181112972108,
+            "r>=1": 2.300999039434645e-05,
+            "r>=10": 5.69208309763464e-35,
+            "r>=15": 7.346466344802343e-55,
+            "r>=2": 1.2984109699219515e-08,
+            "r>=5": 5.491937885047701e-18
+          },
+          "median_radius_h_inv_Mpc": 0.006743211035721942,
+          "resolved_mass_fraction": 0.11512688162115162,
+          "unresolved_below_grid": 0.043204299816888614,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C2_VOLUME_AVERAGE_CGI_MESZAROS/near_empty_0.05/turnaround": {
+          "void_mass_fraction": 0.10594986847921002,
+          "density_ratio_void_to_wall": 0.05,
+          "domain_volume_units": 3.01304750110499,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7032738012948981,
+            "r>=1": 7.625228722452923e-06,
+            "r>=10": 1.8891448261426854e-35,
+            "r>=15": 2.4382178980278723e-55,
+            "r>=2": 4.309150606304191e-09,
+            "r>=5": 1.8227186529672487e-18
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7032738012948981,
+            "r>=1": 2.297467489269395e-05,
+            "r>=10": 5.69208309763464e-35,
+            "r>=15": 7.346466344802343e-55,
+            "r>=2": 1.2983675306062861e-08,
+            "r>=5": 5.491937882540422e-18
+          },
+          "median_radius_h_inv_Mpc": 0.009419593344021721,
+          "resolved_mass_fraction": 0.08288696614150884,
+          "unresolved_below_grid": 0.023062902337701183,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C2_VOLUME_AVERAGE_CGI_MESZAROS/near_empty_0.1/collapse": {
+          "void_mass_fraction": 0.24524704093,
+          "density_ratio_void_to_wall": 0.1,
+          "domain_volume_units": 3.2072233683699993,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7646709092626789,
+            "r>=1": 0.007393016068212217,
+            "r>=10": 3.374660958131693e-16,
+            "r>=15": 1.446500576119981e-25,
+            "r>=2": 0.00029279948522702355,
+            "r>=5": 2.1799187749679502e-08
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.764670909262679,
+            "r>=1": 0.023215633473815705,
+            "r>=10": 1.0823291485245851e-15,
+            "r>=15": 4.639250450092671e-25,
+            "r>=2": 0.0009382803486025655,
+            "r>=5": 6.991485996297796e-08
+          },
+          "median_radius_h_inv_Mpc": 0.0694910719967685,
+          "resolved_mass_fraction": 0.24114312153919404,
+          "unresolved_below_grid": 0.004103919390805955,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C2_VOLUME_AVERAGE_CGI_MESZAROS/near_empty_0.1/turnaround": {
+          "void_mass_fraction": 0.1699160178422966,
+          "density_ratio_void_to_wall": 0.1,
+          "domain_volume_units": 2.5292441605806695,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.6718055160134754,
+            "r>=1": 0.009303942242253418,
+            "r>=10": 4.279259256156989e-16,
+            "r>=15": 1.834243811806442e-25,
+            "r>=2": 0.0003711397949653192,
+            "r>=5": 2.764259062271607e-08
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.6718055160134754,
+            "r>=1": 0.023043900635289938,
+            "r>=10": 1.0823291485245833e-15,
+            "r>=15": 4.639250450092671e-25,
+            "r>=2": 0.0009379107813430165,
+            "r>=5": 6.991485651654784e-08
+          },
+          "median_radius_h_inv_Mpc": 0.09782133209105681,
+          "resolved_mass_fraction": 0.16879971471483757,
+          "unresolved_below_grid": 0.0011163031274590285,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C2_VOLUME_AVERAGE_CGI_MESZAROS/shell_crossing/collapse": {
+          "void_mass_fraction": 0.3829709426561785,
+          "density_ratio_void_to_wall": 0.20472233400490963,
+          "domain_volume_units": 2.487713780228009,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7519694338440862,
+            "r>=1": 0.16465350134467213,
+            "r>=10": 1.0956776997185872e-06,
+            "r>=15": 1.639419248510602e-10,
+            "r>=2": 0.048110682527089645,
+            "r>=5": 0.0012709290603555177
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7519694338440862,
+            "r>=1": 0.3089643244156738,
+            "r>=10": 2.7257266036822178e-06,
+            "r>=15": 4.078405854768055e-10,
+            "r>=2": 0.10928363214904016,
+            "r>=5": 0.0031537777662072933
+          },
+          "median_radius_h_inv_Mpc": 0.4117517792895639,
+          "resolved_mass_fraction": 0.3829664971216625,
+          "unresolved_below_grid": 4.4455345160065995e-06,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C2_VOLUME_AVERAGE_CGI_MESZAROS/shell_crossing/turnaround": {
+          "void_mass_fraction": 0.28109124361573595,
+          "density_ratio_void_to_wall": 0.20472233400490963,
+          "domain_volume_units": 2.0919452889249435,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.6563443794681106,
+            "r>=1": 0.1912090819848752,
+            "r>=10": 1.3029654870546062e-06,
+            "r>=15": 1.9495757741287664e-10,
+            "r>=2": 0.057070250874039344,
+            "r>=5": 0.001511369219539194
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.6563443794681106,
+            "r>=1": 0.3034639528441326,
+            "r>=10": 2.7257266036794395e-06,
+            "r>=15": 4.078405854768055e-10,
+            "r>=2": 0.10903532192899028,
+            "r>=5": 0.0031537717778622686
+          },
+          "median_radius_h_inv_Mpc": 0.5752090919076408,
+          "resolved_mass_fraction": 0.2810913958697772,
+          "unresolved_below_grid": -1.5225404126351094e-07,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_A_V_ZERO/near_empty_0.05/collapse": {
+          "void_mass_fraction": 0.15833118143804023,
+          "density_ratio_void_to_wall": 0.05,
+          "domain_volume_units": 4.008292447322764,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7900181112972107,
+            "r>=1": 3.2382580066901817e-22,
+            "r>=10": 6.640678825662225e-142,
+            "r>=15": 2.868514846226416e-221,
+            "r>=2": 3.3405324445899297e-35,
+            "r>=5": 4.269965788077372e-73
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7900181112972108,
+            "r>=1": 1.2979885110698725e-21,
+            "r>=10": 2.66177827819981e-141,
+            "r>=15": 1.1497846393162566e-220,
+            "r>=2": 1.3389830967686465e-34,
+            "r>=5": 1.7115271618677124e-72
+          },
+          "median_radius_h_inv_Mpc": 0.0017380996966525036,
+          "resolved_mass_fraction": 0.006375886324854446,
+          "unresolved_below_grid": 0.15195529511318578,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_A_V_ZERO/near_empty_0.05/turnaround": {
+          "void_mass_fraction": 0.10594986847921002,
+          "density_ratio_void_to_wall": 0.05,
+          "domain_volume_units": 3.01304750110499,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7032738012948981,
+            "r>=1": 4.307892625610189e-22,
+            "r>=10": 8.834172966817292e-142,
+            "r>=15": 3.816018960519507e-221,
+            "r>=2": 4.4439495105125103e-35,
+            "r>=5": 5.680385593788466e-73
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7032738012948981,
+            "r>=1": 1.2979885110623394e-21,
+            "r>=10": 2.66177827819981e-141,
+            "r>=15": 1.1497846393162566e-220,
+            "r>=2": 1.3389830967686465e-34,
+            "r>=5": 1.7115271618677124e-72
+          },
+          "median_radius_h_inv_Mpc": 0.0017380996966525036,
+          "resolved_mass_fraction": 0.005788206564122188,
+          "unresolved_below_grid": 0.10016166191508784,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_A_V_ZERO/near_empty_0.1/collapse": {
+          "void_mass_fraction": 0.24524704093,
+          "density_ratio_void_to_wall": 0.1,
+          "domain_volume_units": 3.2072233683699993,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7646709092626789,
+            "r>=1": 2.263603187608936e-09,
+            "r>=10": 1.4112160314348704e-62,
+            "r>=15": 6.743742091216371e-100,
+            "r>=2": 7.621626710799623e-15,
+            "r>=5": 3.198338545000713e-31
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.764670909262679,
+            "r>=1": 7.259880992580915e-09,
+            "r>=10": 4.526085033836288e-62,
+            "r>=15": 2.1628687225209517e-99,
+            "r>=2": 2.4444259291868997e-14,
+            "r>=5": 1.0257786121484793e-30
+          },
+          "median_radius_h_inv_Mpc": 0.0013795306434458967,
+          "resolved_mass_fraction": 0.10623793461258284,
+          "unresolved_below_grid": 0.13900910631741714,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_A_V_ZERO/near_empty_0.1/turnaround": {
+          "void_mass_fraction": 0.1699160178422966,
+          "density_ratio_void_to_wall": 0.1,
+          "domain_volume_units": 2.5292441605806695,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.6718055160134754,
+            "r>=1": 2.87037570852686e-09,
+            "r>=10": 1.7895010313267584e-62,
+            "r>=15": 8.55144298138617e-100,
+            "r>=2": 9.664649887441815e-15,
+            "r>=5": 4.055672552834831e-31
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.6718055160134754,
+            "r>=1": 7.259880952028877e-09,
+            "r>=10": 4.526085033836288e-62,
+            "r>=15": 2.1628687225209517e-99,
+            "r>=2": 2.4444259291868297e-14,
+            "r>=5": 1.0257786121484793e-30
+          },
+          "median_radius_h_inv_Mpc": 0.0015972182982381994,
+          "resolved_mass_fraction": 0.08908763106065895,
+          "unresolved_below_grid": 0.08082838678163765,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_A_V_ZERO/shell_crossing/collapse": {
+          "void_mass_fraction": 0.3829709426561785,
+          "density_ratio_void_to_wall": 0.20472233400490963,
+          "domain_volume_units": 2.487713780228009,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7519694338440862,
+            "r>=1": 0.0009004281151941657,
+            "r>=10": 9.112513809164798e-24,
+            "r>=15": 8.097335764569817e-39,
+            "r>=2": 1.0057042216835954e-05,
+            "r>=5": 9.31150432655291e-12
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7519694338440862,
+            "r>=1": 0.0022360241145730616,
+            "r>=10": 2.26693261755773e-23,
+            "r>=15": 2.0143853764653437e-38,
+            "r>=2": 2.5018544715028522e-05,
+            "r>=5": 2.3164357627391668e-11
+          },
+          "median_radius_h_inv_Mpc": 0.02012465970219433,
+          "resolved_mass_fraction": 0.3458464412109011,
+          "unresolved_below_grid": 0.0371245014452774,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_A_V_ZERO/shell_crossing/turnaround": {
+          "void_mass_fraction": 0.28109124361573595,
+          "density_ratio_void_to_wall": 0.20472233400490963,
+          "domain_volume_units": 2.0919452889249435,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.6563443794681106,
+            "r>=1": 0.0010707762395292405,
+            "r>=10": 1.0836481381990219e-23,
+            "r>=15": 9.629245024378923e-39,
+            "r>=2": 1.1959702120956429e-05,
+            "r>=5": 1.1073118283950262e-11
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.6563443794681106,
+            "r>=1": 0.0022360220016106455,
+            "r>=10": 2.26693261755773e-23,
+            "r>=15": 2.0143853764653437e-38,
+            "r>=2": 2.5018544712751416e-05,
+            "r>=5": 2.3164357627391668e-11
+          },
+          "median_radius_h_inv_Mpc": 0.03440703134019665,
+          "resolved_mass_fraction": 0.26971063416840096,
+          "unresolved_below_grid": 0.011380609447334988,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_PBS_F_VI_0.0001/near_empty_0.05/collapse": {
+          "void_mass_fraction": 0.15833118143804023,
+          "density_ratio_void_to_wall": 0.05,
+          "domain_volume_units": 4.008292447322764,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7900181112972107,
+            "r>=1": 0.7877980695351163,
+            "r>=10": 0.24115003328665488,
+            "r>=15": 0.07862474107917877,
+            "r>=2": 0.7634050979240533,
+            "r>=5": 0.5664644879762973
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7900181112972108,
+            "r>=1": 0.7894630784887992,
+            "r>=10": 0.5038914884259976,
+            "r>=15": 0.24253698217056893,
+            "r>=2": 0.7832064063621899,
+            "r>=5": 0.7192066853900991
+          },
+          "median_radius_h_inv_Mpc": 7.344458599608857,
+          "resolved_mass_fraction": 0.15833117954988327,
+          "unresolved_below_grid": 1.8881569641138185e-09,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_PBS_F_VI_0.0001/near_empty_0.05/turnaround": {
+          "void_mass_fraction": 0.10594986847921002,
+          "density_ratio_void_to_wall": 0.05,
+          "domain_volume_units": 3.01304750110499,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7032738012948981,
+            "r>=1": 0.7023983970124641,
+            "r>=10": 0.2558583677582245,
+            "r>=15": 0.09070609927263165,
+            "r>=2": 0.6888408693630957,
+            "r>=5": 0.5436949645411336
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7032738012948981,
+            "r>=1": 0.7029830216427074,
+            "r>=10": 0.4450056391960179,
+            "r>=15": 0.21696873909456907,
+            "r>=2": 0.69841706502463,
+            "r>=5": 0.6408473564337328
+          },
+          "median_radius_h_inv_Mpc": 8.142788025996701,
+          "resolved_mass_fraction": 0.10594986715318175,
+          "unresolved_below_grid": 1.3260282732963091e-09,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_PBS_F_VI_0.0001/near_empty_0.1/collapse": {
+          "void_mass_fraction": 0.24524704093,
+          "density_ratio_void_to_wall": 0.1,
+          "domain_volume_units": 3.2072233683699993,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7646709092626789,
+            "r>=1": 0.7646688750187467,
+            "r>=10": 0.5359757239633778,
+            "r>=15": 0.3174037548636778,
+            "r>=2": 0.7642672261943165,
+            "r>=5": 0.7304619275519962
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.764670909262679,
+            "r>=1": 0.7646702749920271,
+            "r>=10": 0.6748842181578412,
+            "r>=15": 0.531255628934441,
+            "r>=2": 0.7645449966774605,
+            "r>=5": 0.7536658548521389
+          },
+          "median_radius_h_inv_Mpc": 13.400227040779743,
+          "resolved_mass_fraction": 0.24524703618032598,
+          "unresolved_below_grid": 4.749674015203098e-09,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_PBS_F_VI_0.0001/near_empty_0.1/turnaround": {
+          "void_mass_fraction": 0.1699160178422966,
+          "density_ratio_void_to_wall": 0.1,
+          "domain_volume_units": 2.5292441605806695,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.6718055160134754,
+            "r>=1": 0.6718053897684089,
+            "r>=10": 0.5260828101252784,
+            "r>=15": 0.33932567939375674,
+            "r>=2": 0.671737525009231,
+            "r>=5": 0.6572052661412555
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.6718055160134754,
+            "r>=1": 0.671805466099322,
+            "r>=10": 0.6054935531981872,
+            "r>=15": 0.48421961075992925,
+            "r>=2": 0.6717786324226945,
+            "r>=5": 0.6659560787799554
+          },
+          "median_radius_h_inv_Mpc": 15.096021621698313,
+          "resolved_mass_fraction": 0.16991601430405173,
+          "unresolved_below_grid": 3.5382448637655273e-09,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_PBS_F_VI_0.0001/shell_crossing/collapse": {
+          "void_mass_fraction": 0.3829709426561785,
+          "density_ratio_void_to_wall": 0.20472233400490963,
+          "domain_volume_units": 2.487713780228009,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7519694338440862,
+            "r>=1": 0.7519694073099552,
+            "r>=10": 0.7091534724162746,
+            "r>=15": 0.5878205845787389,
+            "r>=2": 0.7519693188704105,
+            "r>=5": 0.7510368290494991
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7519694338440862,
+            "r>=1": 0.7519694231780154,
+            "r>=10": 0.7341517642339281,
+            "r>=15": 0.6760785206455108,
+            "r>=2": 0.7519693876274807,
+            "r>=5": 0.751594271311521
+          },
+          "median_radius_h_inv_Mpc": 22.09427593500402,
+          "resolved_mass_fraction": 0.3829709291431183,
+          "unresolved_below_grid": 1.3513060170833313e-08,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_PBS_F_VI_0.0001/shell_crossing/turnaround": {
+          "void_mass_fraction": 0.28109124361573595,
+          "density_ratio_void_to_wall": 0.20472233400490963,
+          "domain_volume_units": 2.0919452889249435,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.6563443794681106,
+            "r>=1": 0.6563443538226346,
+            "r>=10": 0.6433935259042278,
+            "r>=15": 0.5760388841558146,
+            "r>=2": 0.6563443535723009,
+            "r>=5": 0.6562725003229394
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.6563443794681106,
+            "r>=1": 0.6563443672089578,
+            "r>=10": 0.6500891349384221,
+            "r>=15": 0.6153375173905928,
+            "r>=2": 0.6563443670892926,
+            "r>=5": 0.6563100175492415
+          },
+          "median_radius_h_inv_Mpc": 25.208804818184145,
+          "resolved_mass_fraction": 0.28109123263260116,
+          "unresolved_below_grid": 1.0983134790532034e-08,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_PBS_F_VI_0.01/near_empty_0.05/collapse": {
+          "void_mass_fraction": 0.15833118143804023,
+          "density_ratio_void_to_wall": 0.05,
+          "domain_volume_units": 4.008292447322764,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7900181112972107,
+            "r>=1": 0.7267171083441113,
+            "r>=10": 0.031107199825324634,
+            "r>=15": 0.003013323482577665,
+            "r>=2": 0.5785209086921648,
+            "r>=5": 0.22401948175280734
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7900181112972108,
+            "r>=1": 0.7732151373523898,
+            "r>=10": 0.11148150094509789,
+            "r>=15": 0.01194126331089804,
+            "r>=2": 0.7239858394788314,
+            "r>=5": 0.4845746287458273
+          },
+          "median_radius_h_inv_Mpc": 3.307322473455647,
+          "resolved_mass_fraction": 0.1583311801613914,
+          "unresolved_below_grid": 1.2766488421966926e-09,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_PBS_F_VI_0.01/near_empty_0.05/turnaround": {
+          "void_mass_fraction": 0.10594986847921002,
+          "density_ratio_void_to_wall": 0.05,
+          "domain_volume_units": 3.01304750110499,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7032738012948981,
+            "r>=1": 0.6649079583458521,
+            "r>=10": 0.037591678232466064,
+            "r>=15": 0.003876609176788495,
+            "r>=2": 0.5534088177716489,
+            "r>=5": 0.2392989268602325
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7032738012948981,
+            "r>=1": 0.6900589157331279,
+            "r>=10": 0.10226190271446926,
+            "r>=15": 0.011552219690030266,
+            "r>=2": 0.6452781932861532,
+            "r>=5": 0.4279125767026097
+          },
+          "median_radius_h_inv_Mpc": 3.7442878906487573,
+          "resolved_mass_fraction": 0.10594986756035069,
+          "unresolved_below_grid": 9.188593358411268e-10,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_PBS_F_VI_0.01/near_empty_0.1/collapse": {
+          "void_mass_fraction": 0.24524704093,
+          "density_ratio_void_to_wall": 0.1,
+          "domain_volume_units": 3.2072233683699993,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7646709092626789,
+            "r>=1": 0.7626742970430261,
+            "r>=10": 0.21770233005840736,
+            "r>=15": 0.06825797895886641,
+            "r>=2": 0.7383332708177374,
+            "r>=5": 0.536903538154237
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.764670909262679,
+            "r>=1": 0.7640472525157147,
+            "r>=10": 0.4287772400798527,
+            "r>=15": 0.18288529430136846,
+            "r>=2": 0.7562595524135384,
+            "r>=5": 0.675342406158036
+          },
+          "median_radius_h_inv_Mpc": 7.098734408636146,
+          "resolved_mass_fraction": 0.24524703766919917,
+          "unresolved_below_grid": 3.260800823801091e-09,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_PBS_F_VI_0.01/near_empty_0.1/turnaround": {
+          "void_mass_fraction": 0.1699160178422966,
+          "density_ratio_void_to_wall": 0.1,
+          "domain_volume_units": 2.5292441605806695,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.6718055160134754,
+            "r>=1": 0.6713355163231999,
+            "r>=10": 0.2428379100719687,
+            "r>=15": 0.08222149251553404,
+            "r>=2": 0.6611650920759894,
+            "r>=5": 0.526814309133109
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.6718055160134754,
+            "r>=1": 0.6716196112315355,
+            "r>=10": 0.39554712173485934,
+            "r>=15": 0.17517251946443663,
+            "r>=2": 0.6675578810474284,
+            "r>=5": 0.6058763822242071
+          },
+          "median_radius_h_inv_Mpc": 8.17450416000478,
+          "resolved_mass_fraction": 0.16991601542325444,
+          "unresolved_below_grid": 2.419042161028173e-09,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_PBS_F_VI_0.01/shell_crossing/collapse": {
+          "void_mass_fraction": 0.3829709426561785,
+          "density_ratio_void_to_wall": 0.20472233400490963,
+          "domain_volume_units": 2.487713780228009,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7519694338440862,
+            "r>=1": 0.7519678439294336,
+            "r>=10": 0.51913418114775,
+            "r>=15": 0.31184802672123724,
+            "r>=2": 0.7515707874186082,
+            "r>=5": 0.7156948983589181
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7519694338440862,
+            "r>=1": 0.7519687947365348,
+            "r>=10": 0.6371063139875902,
+            "r>=15": 0.4797800166143113,
+            "r>=2": 0.7518091369267167,
+            "r>=5": 0.736954812447456
+          },
+          "median_radius_h_inv_Mpc": 13.312029501220659,
+          "resolved_mass_fraction": 0.38297093372457897,
+          "unresolved_below_grid": 8.931599515538124e-09,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_PBS_F_VI_0.01/shell_crossing/turnaround": {
+          "void_mass_fraction": 0.28109124361573595,
+          "density_ratio_void_to_wall": 0.20472233400490963,
+          "domain_volume_units": 2.0919452889249435,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.6563443794681106,
+            "r>=1": 0.6563443502085536,
+            "r>=10": 0.5270464067736522,
+            "r>=15": 0.34576518444241555,
+            "r>=2": 0.6563216842943831,
+            "r>=5": 0.6460112670763374
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.6563443794681106,
+            "r>=1": 0.6563443654813406,
+            "r>=10": 0.5874528890498995,
+            "r>=15": 0.4591814978963191,
+            "r>=2": 0.6563335304351653,
+            "r>=5": 0.651363976596462
+          },
+          "median_radius_h_inv_Mpc": 15.505941519557615,
+          "resolved_mass_fraction": 0.28109123639604455,
+          "unresolved_below_grid": 7.2196914002731205e-09,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_PBS_TRACKER_SEED/near_empty_0.05/collapse": {
+          "void_mass_fraction": 0.15833118143804023,
+          "density_ratio_void_to_wall": 0.05,
+          "domain_volume_units": 4.008292447322764,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7900181112972107,
+            "r>=1": 0.11781744051066825,
+            "r>=10": 3.5629763811058534e-08,
+            "r>=15": 1.6797882753789904e-12,
+            "r>=2": 0.02252717670677509,
+            "r>=5": 0.00018928777035220865
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7900181112972108,
+            "r>=1": 0.3259944336064671,
+            "r>=10": 1.428144938075766e-07,
+            "r>=15": 6.733082657259871e-12,
+            "r>=2": 0.08316182927747,
+            "r>=5": 0.0007581742598644082
+          },
+          "median_radius_h_inv_Mpc": 0.33673440905680063,
+          "resolved_mass_fraction": 0.15830604180535654,
+          "unresolved_below_grid": 2.513963268369057e-05,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_PBS_TRACKER_SEED/near_empty_0.05/turnaround": {
+          "void_mass_fraction": 0.10594986847921002,
+          "density_ratio_void_to_wall": 0.05,
+          "domain_volume_units": 3.01304750110499,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7032738012948981,
+            "r>=1": 0.13242923254437736,
+            "r>=10": 4.739312232547392e-08,
+            "r>=15": 2.2346405104858158e-12,
+            "r>=2": 0.02757076993113455,
+            "r>=5": 0.00024959468012335
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7032738012948981,
+            "r>=1": 0.28933779699668677,
+            "r>=10": 1.4279770942070317e-07,
+            "r>=15": 6.7330780059442e-12,
+            "r>=2": 0.07699566209950595,
+            "r>=5": 0.000751503723969413
+          },
+          "median_radius_h_inv_Mpc": 0.40817144657285753,
+          "resolved_mass_fraction": 0.10594518582660827,
+          "unresolved_below_grid": 4.682652601756265e-06,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_PBS_TRACKER_SEED/near_empty_0.1/collapse": {
+          "void_mass_fraction": 0.24524704093,
+          "density_ratio_void_to_wall": 0.1,
+          "domain_volume_units": 3.2072233683699993,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7646709092626789,
+            "r>=1": 0.44285826310604065,
+            "r>=10": 0.00043376381639224855,
+            "r>=15": 3.6354162010645153e-06,
+            "r>=2": 0.219031329867382,
+            "r>=5": 0.024643764456259716
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.764670909262679,
+            "r>=1": 0.6234203645801747,
+            "r>=10": 0.0013894377892202292,
+            "r>=15": 1.1659469443616185e-05,
+            "r>=2": 0.43038089567239135,
+            "r>=5": 0.07378912319933624
+          },
+          "median_radius_h_inv_Mpc": 1.2115604268609867,
+          "resolved_mass_fraction": 0.24524705269773556,
+          "unresolved_below_grid": -1.1767735563772419e-08,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_PBS_TRACKER_SEED/near_empty_0.1/turnaround": {
+          "void_mass_fraction": 0.1699160178422966,
+          "density_ratio_void_to_wall": 0.1,
+          "domain_volume_units": 2.5292441605806695,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.6718055160134754,
+            "r>=1": 0.45065020216220214,
+            "r>=10": 0.0005497204878216487,
+            "r>=15": 4.6098808781358725e-06,
+            "r>=2": 0.24419089112605724,
+            "r>=5": 0.0305757254004206
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.6718055160134754,
+            "r>=1": 0.5626374347901424,
+            "r>=10": 0.0013886396739597536,
+            "r>=15": 1.165939194343534e-05,
+            "r>=2": 0.39696358040016,
+            "r>=5": 0.07230129554134952
+          },
+          "median_radius_h_inv_Mpc": 1.4932795504167748,
+          "resolved_mass_fraction": 0.16991601875260942,
+          "unresolved_below_grid": -9.103128251197745e-10,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_PBS_TRACKER_SEED/shell_crossing/collapse": {
+          "void_mass_fraction": 0.3829709426561785,
+          "density_ratio_void_to_wall": 0.20472233400490963,
+          "domain_volume_units": 2.487713780228009,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.7519694338440862,
+            "r>=1": 0.693557971437212,
+            "r>=10": 0.04251981651133658,
+            "r>=15": 0.005626935710140523,
+            "r>=2": 0.5531681839322536,
+            "r>=5": 0.23061788619966173
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.7519694338440862,
+            "r>=1": 0.7273455975900732,
+            "r>=10": 0.0975693831065599,
+            "r>=15": 0.013844086761647376,
+            "r>=2": 0.6570490860144317,
+            "r>=5": 0.39396219133881344
+          },
+          "median_radius_h_inv_Mpc": 3.385794549615621,
+          "resolved_mass_fraction": 0.38297093860261794,
+          "unresolved_below_grid": 4.053560542782719e-09,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        },
+        "C3_SEPARATE_UNIVERSE_PBS_TRACKER_SEED/shell_crossing/turnaround": {
+          "void_mass_fraction": 0.28109124361573595,
+          "density_ratio_void_to_wall": 0.20472233400490963,
+          "domain_volume_units": 2.0919452889249435,
+          "fixed_domain_cumulative": {
+            "all_sizes": 0.6563443794681106,
+            "r>=1": 0.6366173215425799,
+            "r>=10": 0.050463792882043064,
+            "r>=15": 0.0066912193024645595,
+            "r>=2": 0.5521378697845956,
+            "r>=5": 0.2628617301502318
+          },
+          "legacy_truncated_universe_budget": {
+            "all_sizes": 0.6563443794681106,
+            "r>=1": 0.6467640723074954,
+            "r>=10": 0.09739098763450821,
+            "r>=15": 0.013843557794759466,
+            "r>=2": 0.6020299651946256,
+            "r>=5": 0.3825824891409157
+          },
+          "median_radius_h_inv_Mpc": 4.209330664789375,
+          "resolved_mass_fraction": 0.2810912403616827,
+          "unresolved_below_grid": 3.2540532490799023e-09,
+          "unresolved_interpretation": "signed grid residual; a negative value is quadrature overshoot, not negative physical mass"
+        }
+      }
+    }
+  }
+}

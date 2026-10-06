@@ -1,0 +1,1101 @@
+{
+  "phase": "1G-F successor / 1G-G independent audit",
+  "date": "2026-10-02",
+  "classification": "REPORT_ONLY_INDEPENDENT_AUDIT",
+  "auditor": "Claude Code (Claude Opus 5.5), at the project owner's request; not an author of the audited deliverables",
+  "report": "reports/phase1g_fg_independent_scientific_audit.md",
+  "repository": {
+    "branch": "phase-1g-f-successor-g-evolution",
+    "head": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f",
+    "declared_base_matches": true,
+    "remote_main": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f",
+    "tracked_files": 259,
+    "modified_tracked": [
+      "CLAUDE.md",
+      "README.md"
+    ],
+    "diffstat": "85 insertions, 35 deletions",
+    "untracked_audited": [
+      "reports/phase1g_f_volume_budget_successor.md",
+      "reports/phase1g_f_volume_budget_successor_inventory.json",
+      "reports/phase1g_fg_successor_validation.md",
+      "reports/phase1g_g_void_evolution.md",
+      "reports/phase1g_g_void_evolution_inventory.json",
+      "scripts/phase1g_f_volume_budget_successor_numerics.py",
+      "scripts/phase1g_g_void_evolution_numerics.py",
+      "tests/test_phase1g_f_volume_budget_successor.py",
+      "tests/test_phase1g_g_void_evolution.py"
+    ],
+    "stash": "none"
+  },
+  "audited_files_sha256": {
+    "CLAUDE.md": "8437e67389ec94e0266d6c5c2ad1a2d30fb6808feec5a04c306a3c86d7b37ff8",
+    "README.md": "c4f9b4a4f6e5ecfa9e8b8d595b25f58df25cc3ecd62480eb8c8566de8ed1097d",
+    "reports/phase1g_f_volume_budget_successor.md": "7e1df34c20b17455d2b82e32b03c5b1b7cf6f9249524badd81a20a29e5fb395e",
+    "reports/phase1g_f_volume_budget_successor_inventory.json": "c641a025b5fa8522a430f0a3e6e26d801293615b94eb2ffe4cfa8512d8bbe88d",
+    "reports/phase1g_fg_successor_validation.md": "d395982a510e3a1dca0c8433eaa7410390136fdf6d0853e09b0a7b0d52ac31ca",
+    "reports/phase1g_g_void_evolution.md": "7bf1fd384eeed5514d84f75b9c36db22d61a1529c6935b6de23d29255a1a4bbd",
+    "reports/phase1g_g_void_evolution_inventory.json": "2be9d42b49dde60065ba12444a84ed4fffe76cd470ac2ecbae1696e5d2e73826",
+    "scripts/phase1g_f_volume_budget_successor_numerics.py": "d0030a842f2f86e02de145d3265fc21e5c2100dd04b4a8c6f6c704b987f0beb9",
+    "scripts/phase1g_g_void_evolution_numerics.py": "db11ad5cf3a3fde254118f7ba14914d57e5dd875b8138979adea21ff99137c14",
+    "tests/test_phase1g_f_volume_budget_successor.py": "206cc9846a6ca5fe26e181535aef004864de1d329b96871e4b5a9b567ac0c21c",
+    "tests/test_phase1g_g_void_evolution.py": "5d8b517e140ea087075391987c8ed2ac258a8efd9a2707b383fe4fb05b351478"
+  },
+  "audited_files_unchanged_at_end": true,
+  "frozen_dependencies_match_inventories": true,
+  "artifacts": {
+    "frozen_F": {
+      "sha256": "4523ef031484a9f49f91c0522e4562f50bb36f7c8d6d8b0933ddd404ea925569",
+      "environment": "Linux CPython 3.12.14 (snapshot run)",
+      "equals_successor_recorded_input": true
+    },
+    "successor_F_preexisting": {
+      "sha256": "2f8931a5bcfb4d96986de6fc18e2d2a60c3559c5e1e2601f318d462cd571cd20",
+      "generated": "2026-10-02 15:40 local, Windows CPython 3.14.3, before this audit",
+      "line_endings": "CRLF"
+    },
+    "G_preexisting": "absent",
+    "protection": "366 files under artifacts/ checksummed before and after all runs: identical; script reruns only in an isolated copy"
+  },
+  "environments": {
+    "py314": {
+      "python": "3.14.3",
+      "numpy": "2.5.2",
+      "scipy": "1.18.1",
+      "pytest": "9.1.1"
+    },
+    "py311": {
+      "python": "3.11.9",
+      "numpy": "2.4.6",
+      "scipy": "1.17.1",
+      "pytest": "9.1.1"
+    },
+    "platform": "Windows 11",
+    "OPENBLAS_NUM_THREADS": 1,
+    "dependencies_changed": false,
+    "cas": "none available; exact fractions.Fraction used"
+  },
+  "sources": [
+    {
+      "id": "JLH13",
+      "arxiv": "1304.6087",
+      "file": "voids_mnras.tex",
+      "sha256": "cf6fc77a31b395138ac3a027d008698556534e81cfb27c39853d3a99c7b07c4e",
+      "verified": [
+        "(2) sigma^2 def",
+        "(6)-(7)",
+        "(12)",
+        "(13) additive cumulative",
+        "(14) F(0)",
+        "(15)-(17) Vdn",
+        "(A4)-(A5)",
+        "(A8) 8/9",
+        "(A9) 0.2047",
+        "(A11)",
+        "(A12) -2.717"
+      ]
+    },
+    {
+      "id": "SvdW04",
+      "arxiv": "astro-ph/0311260",
+      "file": "voids.tex",
+      "sha256": "e66ad192ee91a83ba88b4068cce5f6b505eb4277a6365d961a60ca10cc1c84b5",
+      "verified": [
+        "(1)",
+        "(2)",
+        "(3)",
+        "(7)",
+        "(A21)-(A22)",
+        "(A26)-(A27)",
+        "(A29)-(A31)",
+        "(A33)",
+        "(C1)-(C2)",
+        "(C7)",
+        "(C8)"
+      ],
+      "note": "frozen 1G-F cites (A15) for g(Theta); reconstruction gives (A17), H_s (A18)"
+    },
+    {
+      "id": "L03",
+      "arxiv": "cond-mat/0305670",
+      "files": {
+        "physrep1.tex": "50ed4dcf9cbd0142ef409d4a51eeaf2460bc21d940029ae2d04495a5874e5ffc",
+        "physrep3.tex": "99ee85995fa1fce8d2c77b562116e979ebe333c848771425de4a44dc1be2cbc0"
+      },
+      "verified": [
+        "(2.2) mean-field; hypotheses below it: no spatial correlations, averaged morphology",
+        "(4.4) K=1",
+        "(4.10) c_j=4/(t+2)^2 (t/(t+2))^(j-1) => u=N0*int K dt/2"
+      ]
+    },
+    {
+      "id": "GM",
+      "arxiv": "2511.17160v2",
+      "file": "main.tex",
+      "sha256": "f9cadfa03ecc9a74b0a8f432ae4b13422daeb219f253756bcd877b4b75077c59",
+      "verified": [
+        "(5.1)",
+        "(5.4)",
+        "(5.5)",
+        "(5.6)",
+        "gamma_w=1+f_v/2",
+        "H_D0 relation",
+        "<rho>_0"
+      ]
+    }
+  ],
+  "sources_not_reverified": [
+    "Eisenstein & Hu 1998 (EH98, 1G-A import; formula re-typed, paper not fetched)",
+    "W09 and Wiltshire tracker papers (not needed beyond GM)"
+  ],
+  "independent_methods": {
+    "M1": "tracker closed forms from GM",
+    "M2": "EH98 re-typed, adaptive quad sigma(R), LCDM growth quadrature",
+    "M3": "two-barrier absorption probability from diffusion eigenfunctions + image form (closed-form cumulatives)",
+    "M4": "shell crossing from Lagrangian shells (d ln A / d ln|Delta_i| = 1/3)",
+    "M5": "own Boolean variance",
+    "M6": "exact rational identities",
+    "M7": "direct Smoluchowski integration (constant/additive/product kernels)",
+    "M8": "JSON-level F2 on 84 archived populations"
+  },
+  "independent_results": {
+    "shell_crossing": {
+      "eta_sc": 3.4875224168054193,
+      "one_plus_delta_sc": 0.20472233401619344,
+      "one_plus_delta_direct_leading_order": 0.20472233401619333,
+      "delta_v": -2.7171803436881046,
+      "r_nl_over_r_l": 1.6967255196788091,
+      "Hv_t": 0.888888888971405,
+      "closed_form_A8_residual": -4.4048098502003086e-12
+    },
+    "m_total": 0.38297094266920306,
+    "Z": 2.4877137801754974,
+    "Fv_all": 0.7519694338440863,
+    "g_LCDM": 0.7878126021855962,
+    "P_void_images_vs_fourier_max_abs": 8.881784197001252e-16,
+    "primary_z0_comparison": {
+      "PAPER_REFERENCE": {
+        "r>=1": {
+          "audited": 0.6242648155823377,
+          "independent": 0.6242901738797412,
+          "rel": -4.061940819262504e-05
+        },
+        "r>=2": {
+          "audited": 0.43810423770833207,
+          "independent": 0.43811620167095283,
+          "rel": -2.7307738392542112e-05
+        },
+        "r>=5": {
+          "audited": 0.13510567110350938,
+          "independent": 0.1350904395532135,
+          "rel": 0.00011275076420096334
+        },
+        "r>=10": {
+          "audited": 0.01481495556414579,
+          "independent": 0.01478038764242879,
+          "rel": 0.0023387696285968444
+        },
+        "r>=15": {
+          "audited": 0.001025644978671188,
+          "independent": 0.0010185466556934582,
+          "rel": 0.00696907003528175
+        },
+        "median_radius_h_inv_Mpc": {
+          "audited": 2.4045649173754864,
+          "independent": 2.4046064226116584,
+          "rel": -1.7260719168706623e-05
+        },
+        "cutoff_fixed_domain_h_inv_Mpc": {
+          "audited": 0.34645375492138336,
+          "independent": 0.34655768153502264,
+          "rel": -0.0002998825857183598
+        },
+        "cutoff_truncated_universe_h_inv_Mpc": {
+          "audited": 0.5056719686044262,
+          "independent": 0.5057725231845593,
+          "rel": -0.00019881384520456782
+        }
+      },
+      "NW15_CMB_FIT": {
+        "r>=1": {
+          "audited": 0.6660568366975314,
+          "independent": 0.6660851741459358,
+          "rel": -4.2543280505836667e-05
+        },
+        "r>=2": {
+          "audited": 0.49477764794036894,
+          "independent": 0.49479565113035023,
+          "rel": -3.638510148617762e-05
+        },
+        "r>=5": {
+          "audited": 0.16588649806710723,
+          "independent": 0.16587180228198475,
+          "rel": 8.859724751463768e-05
+        },
+        "r>=10": {
+          "audited": 0.019246307924666247,
+          "independent": 0.019203715242954295,
+          "rel": 0.0022179396628774083
+        },
+        "r>=15": {
+          "audited": 0.001315044967023592,
+          "independent": 0.001305279851462453,
+          "rel": 0.007481242853935235
+        },
+        "median_radius_h_inv_Mpc": {
+          "audited": 2.800445036058049,
+          "independent": 2.800486394318306,
+          "rel": -1.476824181002365e-05
+        },
+        "cutoff_fixed_domain_h_inv_Mpc": {
+          "audited": 1.2299070133109007,
+          "independent": 1.2301037089438527,
+          "rel": -0.0001599016664382492
+        },
+        "cutoff_truncated_universe_h_inv_Mpc": {
+          "audited": 1.951537872097129,
+          "independent": 1.951735378892521,
+          "rel": -0.00010119547840750282
+        }
+      }
+    },
+    "fixed_z0_cutoff_tracks": {
+      "PAPER_REFERENCE": [
+        {
+          "z": 0.0,
+          "tracker": 0.737,
+          "F2_at_z0_cutoff": 0.737
+        },
+        {
+          "z": 0.5,
+          "tracker": 0.6301727200873801,
+          "F2_at_z0_cutoff": 0.6397564400636362
+        },
+        {
+          "z": 1.0,
+          "tracker": 0.5395264903289411,
+          "F2_at_z0_cutoff": 0.48011354249858
+        },
+        {
+          "z": 2.0,
+          "tracker": 0.40074932941960356,
+          "F2_at_z0_cutoff": 0.19844013467060798
+        },
+        {
+          "z": 3.0,
+          "tracker": 0.3055849983468641,
+          "F2_at_z0_cutoff": 0.06033255877327152
+        }
+      ],
+      "NW15_CMB_FIT": [
+        {
+          "z": 0.0,
+          "tracker": 0.627,
+          "F2_at_z0_cutoff": 0.6270000000000012
+        },
+        {
+          "z": 0.5,
+          "tracker": 0.4962140764534606,
+          "F2_at_z0_cutoff": 0.38216530297160056
+        },
+        {
+          "z": 1.0,
+          "tracker": 0.39708236830384963,
+          "F2_at_z0_cutoff": 0.18641592554146652
+        },
+        {
+          "z": 2.0,
+          "tracker": 0.26662055871424434,
+          "F2_at_z0_cutoff": 0.026419941859199367
+        },
+        {
+          "z": 3.0,
+          "tracker": 0.1907402828479838,
+          "F2_at_z0_cutoff": 0.001892328730154687
+        }
+      ]
+    },
+    "variance": {
+      "PAPER_REFERENCE": {
+        "D_wall": 0.8767922812878437,
+        "h": 0.7303000000000001,
+        "omega_eff": 0.12047512089055852,
+        "m_resolved": 0.38297094266920306,
+        "m_total": 0.38297094266920306,
+        "pair_density_norm": 1.000000000000003,
+        "sigma_part": 0.3263656924181659,
+        "sigma_int": 0.931559174991898,
+        "sigma_total": 0.9870750030768556,
+        "wall_share": 0.8906777173727912,
+        "sigma_vectorised_vs_quad": 7.517320099736935e-12,
+        "boolean_grain_volume_density": 1.3356012468043725,
+        "grain_to_excursion_volume_ratio": 1.7761376815234975
+      },
+      "NW15_CMB_FIT": {
+        "D_wall": 0.9455104962879062,
+        "h": 0.61,
+        "omega_eff": 0.13093722890629914,
+        "m_resolved": 0.38297094266920306,
+        "m_total": 0.38297094266920306,
+        "pair_density_norm": 1.000000000000003,
+        "sigma_part": 0.30362820386616407,
+        "sigma_int": 0.9403318363724016,
+        "sigma_total": 0.988136654860291,
+        "wall_share": 0.9055829990281621,
+        "sigma_vectorised_vs_quad": 7.657208200839705e-12,
+        "boolean_grain_volume_density": 0.9861768593383216,
+        "grain_to_excursion_volume_ratio": 1.3114587042414225
+      }
+    },
+    "variance_audited_frozen_artifact": {
+      "NW15_CMB_FIT": {
+        "sigma_part": 0.3036278376055833,
+        "sigma_int": 0.9403317479288388,
+        "sigma_total": 0.9881364581534008,
+        "wall_share": 0.9055831892238503,
+        "partition_share": 0.0944168107761497,
+        "check_total": 0.9881364581534008,
+        "f_cov": 0.627,
+        "barrier_interior_total": 0.7222809218415636,
+        "M3_norm_total": 1.0489813195462807
+      },
+      "PAPER_REFERENCE": {
+        "sigma_part": 0.32636527407524424,
+        "sigma_int": 0.9315590530253713,
+        "sigma_total": 0.9870747496495571,
+        "wall_share": 0.89067794150022,
+        "partition_share": 0.10932205849978018,
+        "check_total": 0.9870747496495572,
+        "f_cov": 0.737,
+        "barrier_interior_total": 0.6145057919207413,
+        "M3_norm_total": 0.9943937976138902
+      }
+    },
+    "superseded_frozen_values_F2": {
+      "PAPER_REFERENCE": {
+        "near_empty": {
+          "x=0.1": {
+            "delta_v": -5.190147733838673,
+            "F2_all": 0.7646709092626789,
+            "rmin_F2": 0.09401730837261367,
+            "rmin_F3": 0.18769919443661742,
+            "F2_ge1": 0.30405922890885456,
+            "F3_ge1": 0.5193603125573844
+          },
+          "x=0.05": {
+            "delta_v": -8.965065300139402,
+            "F2_all": 0.7900181112972106,
+            "rmin_F2": 0.018785423601659915,
+            "rmin_F3": 0.06198517281955778,
+            "F2_ge1": 0.0454740709779125,
+            "F3_ge1": 0.155369617829403
+          }
+        },
+        "history_ge1": [
+          {
+            "z": 0.0,
+            "tracker": 0.737,
+            "F2_ge1": 0.6242901738797412,
+            "F3_ge1": 0.6948450639871188
+          },
+          {
+            "z": 0.5,
+            "tracker": 0.6301727200873801,
+            "F2_ge1": 0.40408612662798904,
+            "F3_ge1": 0.5586422197163868
+          },
+          {
+            "z": 1.0,
+            "tracker": 0.5395264903289411,
+            "F2_ge1": 0.22102028948801736,
+            "F3_ge1": 0.3825548302456399
+          },
+          {
+            "z": 2.0,
+            "tracker": 0.40074932941960356,
+            "F2_ge1": 0.044543651449075794,
+            "F3_ge1": 0.10183732011753717
+          },
+          {
+            "z": 3.0,
+            "tracker": 0.3055849983468641,
+            "F2_ge1": 0.0052490362125049116,
+            "F3_ge1": 0.012923887536484576
+          }
+        ]
+      },
+      "NW15_CMB_FIT": {
+        "near_empty": {
+          "x=0.1": {
+            "delta_v": -5.190147733838673,
+            "F2_all": 0.7646709092626789,
+            "rmin_F2": 0.39359874870325073,
+            "rmin_F3": 0.8096503788427141,
+            "F2_ge1": 0.3824089719307075,
+            "F3_ge1": 0.5829722705146971
+          },
+          "x=0.05": {
+            "delta_v": -8.965065300139402,
+            "F2_all": 0.7900181112972106,
+            "rmin_F2": 0.09524648301125169,
+            "rmin_F3": 0.28596154094530923,
+            "F2_ge1": 0.08214268724952728,
+            "F3_ge1": 0.250803315182608
+          }
+        },
+        "history_ge1": [
+          {
+            "z": 0.0,
+            "tracker": 0.627,
+            "F2_ge1": 0.6660851741459358,
+            "F3_ge1": 0.714915192672148
+          },
+          {
+            "z": 0.5,
+            "tracker": 0.4962140764534606,
+            "F2_ge1": 0.4442534921263964,
+            "F3_ge1": 0.5881967829268405
+          },
+          {
+            "z": 1.0,
+            "tracker": 0.39708236830384963,
+            "F2_ge1": 0.23875389901043073,
+            "F3_ge1": 0.40340193661064144
+          },
+          {
+            "z": 2.0,
+            "tracker": 0.26662055871424434,
+            "F2_ge1": 0.043285331904117215,
+            "F3_ge1": 0.09918743179731583
+          },
+          {
+            "z": 3.0,
+            "tracker": 0.1907402828479838,
+            "F2_ge1": 0.00437642009556696,
+            "F3_ge1": 0.010793823220918411
+          }
+        ]
+      }
+    },
+    "archive_check": {
+      "n_populations": 84,
+      "max_rel_diff_F2_vs_successor_archive": 0.0,
+      "violations": [],
+      "n_negative_unresolved": 12
+    },
+    "archive_min_unresolved_below_grid": -1.71922018898929e-07,
+    "C3_tracker_seed_historical": {
+      "NW15_CMB_FIT": {
+        "D_t0": 1.033503269737031,
+        "A_v": 1184.6621840386147
+      },
+      "PAPER_REFERENCE": {
+        "D_t0": 1.0202298735527662,
+        "A_v": 1168.9147251008183
+      }
+    },
+    "X_SU_current_total_deltaL": {
+      "PAPER_REFERENCE": 1.2626356505876934,
+      "NW15_CMB_FIT": 1.284979492733487
+    },
+    "G_checks": {
+      "F1_F3_exact": [
+        {
+          "additive": true,
+          "direct": true,
+          "F3_not_additive": true,
+          "F3_ge_F2": true,
+          "partition": true
+        },
+        {
+          "additive": true,
+          "direct": true,
+          "F3_not_additive": true,
+          "F3_ge_F2": true,
+          "partition": true
+        },
+        {
+          "additive": true,
+          "direct": true,
+          "F3_not_additive": true,
+          "F3_ge_F2": true,
+          "partition": true
+        }
+      ],
+      "F3_example_5_7_vs_5_9": [
+        "5/7",
+        "5/9"
+      ],
+      "G3_G4_exact": [
+        {
+          "G3": true,
+          "G4": true
+        },
+        {
+          "G3": true,
+          "G4": true
+        },
+        {
+          "G3": true,
+          "G4": true
+        }
+      ],
+      "G5_residual": 5.551115123125783e-17,
+      "cohort_ageing": {
+        "t/t_sc=1": {
+          "Hv_t": 0.8888888888888917,
+          "J_required_over_tracker_rate": 0.33333333333332504
+        },
+        "t/t_sc=1.5": {
+          "Hv_t": 0.9094752431866598,
+          "J_required_over_tracker_rate": 0.27157427044002036
+        },
+        "t/t_sc=2": {
+          "Hv_t": 0.9226822765784912,
+          "J_required_over_tracker_rate": 0.23195317026452633
+        },
+        "t/t_sc=4": {
+          "Hv_t": 0.9491080539169099,
+          "J_required_over_tracker_rate": 0.15267583824927033
+        },
+        "t/t_sc=10": {
+          "Hv_t": 0.97269911841445,
+          "J_required_over_tracker_rate": 0.08190264475665021
+        }
+      },
+      "Hv_t_near_empty": {
+        "x=0.1": 0.9341993729698255,
+        "x=0.05": 0.9609973828272472
+      },
+      "G6_tJ_over_V_GM": 0.06461033333333334,
+      "G6_tJ_over_V_NW15": 0.077957,
+      "F_all_size_history_implied_tJ_over_V": -0.12434093627219375,
+      "F_all_size_history_effective_Hv_minus_Hw": 0.0,
+      "G7": {
+        "GM": {
+          "m": 0.364550664116306,
+          "inverse_ok": true
+        },
+        "NW15": {
+          "m": 0.2560249563641529,
+          "inverse_ok": true
+        }
+      },
+      "G9_exact": true,
+      "G9_x_le_1_requires_t_ge": "tau*m/(1-m)",
+      "G11_exact": {
+        "u=1": {
+          "equal": true,
+          "value": 2.9622457640721645e-36
+        },
+        "u=10": {
+          "equal": true,
+          "value": 9.041658996456732e-05
+        },
+        "u=100": {
+          "equal": true,
+          "value": 0.6486505568892483
+        }
+      },
+      "G10_table": {
+        "u=0": {
+          "N_over_N0": 1.0,
+          "radius_at_mean_volume": 1.0
+        },
+        "u=1": {
+          "N_over_N0": 0.5,
+          "radius_at_mean_volume": 1.2599210498948732
+        },
+        "u=10": {
+          "N_over_N0": 0.09090909090909091,
+          "radius_at_mean_volume": 2.2239800905693152
+        },
+        "u=100": {
+          "N_over_N0": 0.009900990099009901,
+          "radius_at_mean_volume": 4.657009507803835
+        }
+      },
+      "kinetic_Q1_constant_K": [
+        [
+          0.0,
+          1.0
+        ],
+        [
+          0.25,
+          1.0
+        ],
+        [
+          0.5,
+          0.9999999999999994
+        ],
+        [
+          0.75,
+          0.9999999999999996
+        ],
+        [
+          1.0,
+          0.9999999999999994
+        ],
+        [
+          1.25,
+          0.9999999999999993
+        ],
+        [
+          1.5,
+          0.9999999999999993
+        ],
+        [
+          1.75,
+          0.9999999999999996
+        ],
+        [
+          2.0,
+          0.9999999999999996
+        ]
+      ],
+      "kinetic_Q1_additive_K": [
+        [
+          0.0,
+          1.0
+        ],
+        [
+          0.125,
+          0.9999999999999996
+        ],
+        [
+          0.25,
+          0.9999999999999999
+        ],
+        [
+          0.375,
+          0.9999999999999999
+        ],
+        [
+          0.5,
+          0.9999999999999997
+        ],
+        [
+          0.625,
+          0.999999999999857
+        ],
+        [
+          0.75,
+          0.9999999996599918
+        ],
+        [
+          0.875,
+          0.9999999221025286
+        ],
+        [
+          1.0,
+          0.9999961883216848
+        ]
+      ],
+      "kinetic_Q1_product_K_gelling": [
+        [
+          0.0,
+          1.0
+        ],
+        [
+          0.25,
+          1.0000000000000002
+        ],
+        [
+          0.5,
+          0.9999999999997748
+        ],
+        [
+          0.75,
+          0.9999181777021935
+        ],
+        [
+          1.0,
+          0.9530986737238387
+        ],
+        [
+          1.25,
+          0.7965287702850066
+        ],
+        [
+          1.5,
+          0.6663132569630508
+        ],
+        [
+          1.75,
+          0.5713780133556805
+        ],
+        [
+          2.0,
+          0.4999906321640544
+        ]
+      ]
+    }
+  },
+  "tests": {
+    "historical_claimed_not_reverifiable": {
+      "environment": "Linux snapshot, CPython 3.12.14, NumPy 2.3.5, SciPy 1.17.0, pytest 9.1.1",
+      "full_suite_31_new": "1089 passed, 34 skipped, 1 failed (git history), 220.20 s",
+      "targeted": "32 passed, 5.30 s"
+    },
+    "this_audit": {
+      "command": "python -B -W error -m pytest -W error -p no:cacheprovider (OPENBLAS_NUM_THREADS=1)",
+      "targeted_F_G": {
+        "py314": "32 passed, 14.51 s",
+        "py311": "32 passed, 13.74 s"
+      },
+      "full_suite": {
+        "py314": "1125 passed, 0 skipped, 0 failed, 606.19 s",
+        "py311": "1125 passed, 0 skipped, 0 failed, 546.12 s"
+      },
+      "historical_blob_test": "passed unmodified; blob 745b5b9acce2a7de71d950c7d00a4387fd0d7df2 at 118b8f3 == HEAD == working file",
+      "scripts_isolated_copy": {
+        "F_successor_with_frozen_artifact": "exit 0 on both; outputs identical apart from environment; equal to inventory to <=5e-13",
+        "G": "exit 0 on both; byte-identical across interpreters; equal to inventory to <=1.2e-15"
+      },
+      "recorded_evidence_sha256_reproducible_on_windows": false
+    }
+  },
+  "findings": [
+    {
+      "id": "FGA-F1",
+      "severity": "MEDIUM",
+      "cls": "OMISSION",
+      "blocking": "INTEGRATION",
+      "where": [
+        "reports/phase1g_f_volume_budget_successor.md Secs. 2-5 (no mapping table)",
+        "reports/phase1g_f_void_population.md Sec. 1 items 2, 4-6; Sec. 5 Milne limit; Sec. 8.2; Sec. 9; Sec. 12 item 1; Reading; Sec. 13"
+      ],
+      "claim": "Successor is the current reading but leaves frozen F3-based numbers and frozen verdict 2 unmapped.",
+      "evidence": "near-empty r_min 0.06-0.8 -> 0.019-0.39 h^-1 Mpc (F2); z=3 r>=1 0.013 -> 0.0052; token wording 0.5-2 -> 0.35-1.23; verdict 2 (DERIVED_FROM_VERIFIED_DEFINITIONS) contradicted by successor Sec. 4 without supersession.",
+      "impact": "Superseded values read as current; a frozen verdict's status changes silently.",
+      "correction": "Add frozen-text -> current-reading table; recompute F2 r_min for archived C1 near-empty (or flag all frozen r_min as F3/truncated-universe); state current label of frozen verdict 2.",
+      "owner_decision": "Confirm the new label for frozen verdict 2."
+    },
+    {
+      "id": "FGA-F2",
+      "severity": "MEDIUM",
+      "cls": "OMISSION",
+      "blocking": "FREEZE",
+      "where": [
+        "reports/phase1g_f_volume_budget_successor.md l. 116-141",
+        "CLAUDE.md l. 388-392",
+        "README.md l. 66-69"
+      ],
+      "claim": "Hybrid-ingredient list of sigma~0.99 omits that the Boolean void phase is not the F population.",
+      "evidence": "-ln(1-f_v0)=1.3356/0.9862 = 1.78x/1.31x the excursion-set void volume 0.75197; mean grain multiplicity 1.81/1.57 at covered points; F1-F3 assume disjoint volumes.",
+      "impact": "sigma~0.99 (reproduced) is the variance of an overlapping surrogate sharing only the grain-size shape.",
+      "correction": "Add as fifth hybrid ingredient; reword 'empty Boolean voids' accordingly.",
+      "owner_decision": "none"
+    },
+    {
+      "id": "FGA-F3",
+      "severity": "LOW",
+      "cls": "ERROR",
+      "blocking": "FREEZE",
+      "where": [
+        "reports/phase1g_f_volume_budget_successor.md l. 69-79",
+        "scripts/phase1g_f_volume_budget_successor_numerics.py l. 199"
+      ],
+      "claim": "'Interpret ... at about three significant figures.'",
+      "evidence": "481-node trapezoid + log-linear interpolation bias: r>=10 +0.22-0.23%, r>=15 +0.70-0.75% vs closed-form absorption probability.",
+      "impact": "Headline 1.48%/1.92% and cutoffs unaffected at 3 s.f.; r>=15 entries wrong in third digit.",
+      "correction": "Quantify discretisation error; quote r>=15 to 2 s.f. or use closed-form cumulative.",
+      "owner_decision": "none"
+    },
+    {
+      "id": "FGA-F4",
+      "severity": "LOW",
+      "cls": "OMISSION",
+      "blocking": "FREEZE",
+      "where": [
+        "reports/phase1g_f_volume_budget_successor.md l. 51-56"
+      ],
+      "claim": "Wall identification of x flagged as inherited, conditions not listed.",
+      "evidence": "Conditions: C1+A5; walls = unperturbed flat EdS; isolated uncompensated tophats (strained at f_v~0.75); Lagrangian mean = early wall density; delta_c-crossing mass at rho_w.",
+      "impact": "Scope of F1-F3 numbers under-specified.",
+      "correction": "List the five conditions.",
+      "owner_decision": "none"
+    },
+    {
+      "id": "FGA-F5",
+      "severity": "INFO",
+      "cls": "OPTIONAL",
+      "blocking": "NONE",
+      "where": [
+        "successor Sec. 3",
+        "tests/test_phase1g_f_volume_budget_successor.py l. 84-86",
+        "README.md l. 66"
+      ],
+      "claim": "Fixed-cutoff failure not quantified by epoch.",
+      "evidence": "GM fixed z=0 cutoff: +1.5% at z=0.5, -11% at z=1; NW15 -23% at z=0.5; GM cutoff sequence non-monotone.",
+      "impact": "none on conclusion",
+      "correction": "State epoch range; qualify README sentence.",
+      "owner_decision": "none"
+    },
+    {
+      "id": "FGA-F6",
+      "severity": "INFO",
+      "cls": "OPTIONAL",
+      "blocking": "NONE",
+      "where": [
+        "artifacts/independent/phase1g_f_void_population.json (12 populations)"
+      ],
+      "claim": "Negative unresolved_below_grid values.",
+      "evidence": "min -1.72e-7 (trapezoid overshoot)",
+      "impact": "none on F2",
+      "correction": "Mention in successor.",
+      "owner_decision": "none"
+    },
+    {
+      "id": "FGA-G1",
+      "severity": "LOW",
+      "cls": "OMISSION",
+      "blocking": "FREEZE",
+      "where": [
+        "reports/phase1g_g_void_evolution.md Sec. 1 item 2, Sec. 4 (l. 107-127)",
+        "CLAUDE.md l. 399-401"
+      ],
+      "claim": "Reference population of the 2/3 rate not made explicit.",
+      "evidence": "Aged homogeneous interiors have H_v t in (8/9,1) -> J_req/tracker rate = 3(1-H_v t) in (0,1/3]; F all-size history has fdot=0 (t J/V_D = -0.124 rel. to shell-crossing interiors).",
+      "impact": "2/3 could be misread as the F population's evolution.",
+      "correction": "Two sentences in Sec. 4.",
+      "owner_decision": "none"
+    },
+    {
+      "id": "FGA-G2",
+      "severity": "LOW",
+      "cls": "OMISSION",
+      "blocking": "FREEZE",
+      "where": [
+        "reports/phase1g_g_void_evolution.md l. 54-62",
+        "G inventory 'assumptions'"
+      ],
+      "claim": "G1 called 'an additional model assumption' without [L03]'s stated hypotheses.",
+      "evidence": "[L03] below (2.2): no spatial correlations, averaged morphology; voids at f_v~0.6-0.75 are space-filling.",
+      "impact": "Applicability of mean-field kinetics under-stated.",
+      "correction": "Transcribe hypotheses.",
+      "owner_decision": "none"
+    },
+    {
+      "id": "FGA-G3",
+      "severity": "LOW",
+      "cls": "ERROR",
+      "blocking": "FREEZE",
+      "where": [
+        "reports/phase1g_g_void_evolution.md l. 15-17",
+        "CLAUDE.md l. 397-398"
+      ],
+      "claim": "Mergers 'cannot independently fix a wrong total-volume history when the regional expansion laws are prescribed'.",
+      "evidence": "True only for a common g_v; with prescribed size/age-dependent rates mergers change the volume-weighted H_v.",
+      "impact": "Over-general headline.",
+      "correction": "'at a prescribed common regional rate'.",
+      "owner_decision": "none"
+    },
+    {
+      "id": "FGA-G4",
+      "severity": "INFO",
+      "cls": "OPTIONAL",
+      "blocking": "NONE",
+      "where": [
+        "reports/phase1g_g_void_evolution.md l. 274-276"
+      ],
+      "claim": "Closing classification omits G12.",
+      "evidence": "G12 is a standard definition.",
+      "impact": "none",
+      "correction": "Classify G12; optionally add radius-measure numbers (u=100: 4.66 / 4.17 / 5.53).",
+      "owner_decision": "none"
+    },
+    {
+      "id": "FGA-T1",
+      "severity": "LOW",
+      "cls": "OPTIONAL",
+      "blocking": "NONE",
+      "where": [
+        "tests/test_phase1g_f_volume_budget_successor.py l. 75-79",
+        "tests/test_phase1g_g_void_evolution.py l. 92"
+      ],
+      "claim": "Self-referential checks.",
+      "evidence": "r>=10 regression at rel 2e-7 pins a value with +0.23% bias; H_v t = 8/9 is the brentq target.",
+      "impact": "Regression guards, not validation.",
+      "correction": "Add closed-form cumulative test and Lagrangian-shell (A8) test.",
+      "owner_decision": "none"
+    },
+    {
+      "id": "FGA-D1",
+      "severity": "MEDIUM",
+      "cls": "GOVERNANCE",
+      "blocking": "INTEGRATION",
+      "where": [
+        "CLAUDE.md l. 346-352",
+        "README.md l. 50-53",
+        "reports/phase1g_f_volume_budget_successor.md l. 152-157",
+        "src/timescape_fsigma8/scientific_status.py l. 84-95 (unchanged)",
+        "reports/phase1g_d_owner_decisions_successor.md l. 47, 141, 251 (unchanged)"
+      ],
+      "claim": "Documented reading of owner-approved LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC = NOT_DEFINED_IN_LINEAR_TWO_SCALE_THEORY weakened without a dated owner decision.",
+      "evidence": "D successor rests the token on seed-independent 'R8 < R_void'; F median 2.4-2.8 < 8 h^-1 Mpc and sigma_part^2 = 0.107/0.092 << f_v/f_w, so the premise fails (auditor agrees scientifically); remaining support A_v sigma_LSS(R8)=1.05-1.11.",
+      "impact": "CLAUDE.md/README vs token comment vs D successor inconsistent.",
+      "correction": "Owner decision: (a) keep value, re-justify comment via PBS amplitude in a dated D successor; (b) reclassify via registered successor; (c) revert wording pending decision.",
+      "owner_decision": "required"
+    },
+    {
+      "id": "FGA-D2",
+      "severity": "LOW",
+      "cls": "GOVERNANCE",
+      "blocking": "FREEZE",
+      "where": [
+        "successor l. 4-5",
+        "G report l. 4",
+        "both inventories 'authorization'",
+        "validation record 'Scope'"
+      ],
+      "claim": "Authorisation for a scientific reinterpretation paraphrased; covered items not enumerated.",
+      "evidence": "Project practice quotes owner ticks verbatim.",
+      "impact": "Provenance gap.",
+      "correction": "Quote verbatim with date; list covered items.",
+      "owner_decision": "provide verbatim text"
+    },
+    {
+      "id": "FGA-D3",
+      "severity": "LOW",
+      "cls": "REPRODUCIBILITY",
+      "blocking": "FREEZE",
+      "where": [
+        "scripts/phase1g_f_volume_budget_successor_numerics.py l. 212",
+        "scripts/phase1g_g_void_evolution_numerics.py l. 161",
+        "inventories 'evidence_sha256'"
+      ],
+      "claim": "Recorded evidence hashes not reproducible cross-platform.",
+      "evidence": "CRLF text-mode writes on Windows (2370/138 CR bytes); F environment block; G last-ulp differences <=1.2e-15; Windows reruns deterministic but != recorded hashes.",
+      "impact": "Hash-based provenance cannot be re-verified on the primary machine.",
+      "correction": "LF byte writes; hash canonical content without 'environment' or record numerical-equivalence tolerance.",
+      "owner_decision": "none"
+    },
+    {
+      "id": "FGA-D4",
+      "severity": "LOW",
+      "cls": "OPTIONAL",
+      "blocking": "NONE",
+      "where": [
+        "successor Sec. 6",
+        "G report Sec. 8"
+      ],
+      "claim": "POSIX-only reproduction commands.",
+      "evidence": "Scripts run unchanged on Windows (verified).",
+      "impact": "minor",
+      "correction": "Add .venv\\Scripts\\python forms.",
+      "owner_decision": "none"
+    },
+    {
+      "id": "FGA-D5",
+      "severity": "LOW",
+      "cls": "ERROR",
+      "blocking": "FREEZE",
+      "where": [
+        "scripts/phase1g_f_volume_budget_successor_numerics.py l. 36-37",
+        "scripts/phase1g_g_void_evolution_numerics.py l. 59"
+      ],
+      "claim": "'Eq. F1 derives from [JLH13] (13) and V = M/rho'.",
+      "evidence": "[JLH13] (13) gives only the additive definition relative to the background volume; Z = 1-m+m/x is a project deduction ([JLH13] number-conserving case gives m/x, Eq. (14)).",
+      "impact": "Attribution overreach (AGENTS.md rule 2 context).",
+      "correction": "Reword docstrings as successor Sec. 1.",
+      "owner_decision": "none"
+    },
+    {
+      "id": "FGA-D6",
+      "severity": "INFO",
+      "cls": "OPTIONAL",
+      "blocking": "NONE",
+      "where": [
+        "reports/phase1g_fg_successor_validation.md",
+        "CLAUDE.md l. 12, 142-145"
+      ],
+      "claim": "Validation-record limitations superseded; suite counts stale; AGENTS rule-7 summary now equals AGENTS.md.",
+      "evidence": "1125/0/0 on both interpreters in the real checkout.",
+      "impact": "none",
+      "correction": "Update counts and record in the integration commit.",
+      "owner_decision": "awareness"
+    },
+    {
+      "id": "FGA-D7",
+      "severity": "INFO",
+      "cls": "OPTIONAL",
+      "blocking": "NONE",
+      "where": [
+        "src/timescape_fsigma8/scientific_status.py (TWO_PHASE_MASS_VARIANCE_8_H_INV_MPC comment)",
+        "reports/phase1g_f_void_population.md / frozen script ([SvdW04] (A15))"
+      ],
+      "claim": "Pre-existing: token E2 says 'one radius' while GE-OD2 reference is polydisperse; frozen F cites (A15) for g(Theta).",
+      "evidence": "Equation reconstruction gives g at (A17), H_s at (A18) with the counting that reproduces (A21)-(A33).",
+      "impact": "none on audited changes",
+      "correction": "Owner may address in a later record.",
+      "owner_decision": "optional"
+    }
+  ],
+  "finding_counts": {
+    "HIGH": 0,
+    "MEDIUM": 3,
+    "LOW": 10,
+    "INFO": 5
+  },
+  "verdicts": {
+    "F": "ACCEPT_WITH_CORRECTIONS",
+    "G": "ACCEPT_WITH_CORRECTIONS",
+    "documentation_provenance": "ACCEPT_WITH_CORRECTIONS"
+  },
+  "blocking_integration": [
+    "FGA-D1",
+    "FGA-F1"
+  ],
+  "required_before_freeze": [
+    "FGA-F2",
+    "FGA-F3",
+    "FGA-F4",
+    "FGA-G1",
+    "FGA-G2",
+    "FGA-G3",
+    "FGA-D2",
+    "FGA-D3",
+    "FGA-D5"
+  ],
+  "optional": [
+    "FGA-F5",
+    "FGA-F6",
+    "FGA-G4",
+    "FGA-T1",
+    "FGA-D4",
+    "FGA-D6",
+    "FGA-D7"
+  ],
+  "remaining_checks_before_freeze": [
+    "owner decision on FGA-D1 with consistent token comment and successor record",
+    "apply corrections on the phase branch; rerun F/G modules and both full suites on the final tree",
+    "regenerate evidence with LF writes; record hashes or tolerances",
+    "record actual commit; update CLAUDE.md suite counts and validation record",
+    "independent check of any recomputed r_min",
+    "tag and publish only with explicit owner approval per action"
+  ],
+  "auditor_evidence": {
+    "location": "session scratchpad (not committed; repository write scope limited to the two named audit files)",
+    "sha256": {
+      "eqnum.py": "8b3a134621f938131ca9e8d575c9ae2b7c6d592995e37827f1d2e6c680d9699a",
+      "indep_f.py": "13da1c3d1e0fe2045e012f315b008d52ea138213128ad28ef9ed4de5b3ccc9e2",
+      "indep_var.py": "f5993b5aaa9872b36af73719dfc18d673709c2e034ccb770783ddc359bf16972",
+      "indep_g.py": "b1b85cb90dd36686619ce0cebfac4de84ada510c815437b97cde6368c0b9c509",
+      "indep_supersede.py": "45ffb6bd8c072f52d0be0f9fb279f0627d44d5408663ff574ca11b6d8fcb5809",
+      "check_archive.py": "893b49803b89ba30d01a51a6e5cda5bdd51233287bcc027ae671f7c7b6e3ed72",
+      "build_inventory.py": "d546452f875c7c1d9dd58ff8fd7138ddfbf1e51c1ad4b38bb69bcb7c399e97ab",
+      "indep_f_out.json": "62446a24ae40ad039beddf5ac5f3eb9232cc613acaffb157a1ba0f705d66a601",
+      "indep_var_out.json": "afb5462f465a9c4e526203f3a8ace60e097e7824403c578d694a89d8c58f6a5b",
+      "indep_g_out.json": "15d9c1130698307294a937a3467c0ab1a6c1c0e30cd0c0b865b3d1d47a5d815c",
+      "indep_supersede_out.json": "f71967ed1733adbe56182ac88125ed677458b32bd13c256dc16a9bf58850b12f",
+      "check_archive_out.json": "b0636f9dbe237e605ca3f0799e5ec40a6e721c39f5059ab70778a19888a1dd66",
+      "fullsuite_314.log": "4b36daadb9d8341c1c03d435cbc1d09bda457ebc5e6b5a042ff034d8028771ec",
+      "fullsuite_311.log": "91a3ce8493bb52eef43548066c0008b263ddfc22c3bb04c76ed2a758e0eb548d"
+    }
+  },
+  "scientific_status_changes": [],
+  "package_changes": [],
+  "observational_outputs": false,
+  "SIGMA8_AUTHORIZATION": "NOT_GRANTED"
+}

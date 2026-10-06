@@ -1,0 +1,180 @@
+{
+  "actual_remediation_commit": null,
+  "audit": {
+    "date": "2026-10-02",
+    "inventory": "reports/phase1g_fg_independent_scientific_audit_inventory.json",
+    "report": "reports/phase1g_fg_independent_scientific_audit.md",
+    "scope": "pre-remediation tree only; this revision has not received an independent delta audit",
+    "verdict": "ACCEPT_WITH_CORRECTIONS"
+  },
+  "audit_errata": {
+    "G2_Flory_label": "Audit Sec. 5.1 labels sol moment 1/t as Flory. It is Stockmayer, Leyvraz (4.77). Flory satisfies q=exp[-t(1-q)], (4.75)-(4.76), giving q approximately 0.20318787 at t=2.",
+    "gel_cutoff_limit": "Audit product-kernel finite-grid sol moment 0.9531 at t=1 has a 4.69% deficit. No finite-grid gel convergence is certified here; the no-omitted-gel assumption of G2 remains necessary."
+  },
+  "audit_sha256": {
+    "reports/phase1g_fg_independent_scientific_audit.md": "6bb8edecf394989186c86e3ead7f401bcbcc0ac1977bc395008db7019a0c063d",
+    "reports/phase1g_fg_independent_scientific_audit_inventory.json": "3503a602413cb15f8daed58bf0a6d31a6c0defcc222527ce528753812d888aae"
+  },
+  "authorization": {
+    "initial_date": "2026-10-01",
+    "initial_verbatim": "Ottimo, procedi con entrambe le cose (e sistema anche CLAUDE.md se riesci)",
+    "remote_actions_authorized": false,
+    "scope_is_summary_not_verbatim": true,
+    "specific_confirmation_date": "2026-10-02",
+    "specific_confirmation_verbatim": "si confermo",
+    "specific_scope": "D token NOT_DERIVED and split of frozen F verdict 2; audit corrections"
+  },
+  "classification": "OWNER_APPROVED_AUDIT_REMEDIATION_PENDING_DELTA_REVIEW",
+  "date": "2026-10-02",
+  "findings": {
+    "FGA-D1": {
+      "action": "Registered D successor changes one token to NOT_DERIVED; module/caveat/docs/tests consistent.",
+      "disposition": "ADDRESSED_OWNER_APPROVED"
+    },
+    "FGA-D2": {
+      "action": "Owner quotes and dates recorded with explicit scope summaries; remote restrictions remain.",
+      "disposition": "ADDRESSED"
+    },
+    "FGA-D3": {
+      "action": "LF byte writes and environment-specific hashes; separate numeric equivalence tolerance.",
+      "disposition": "ADDRESSED"
+    },
+    "FGA-D4": {
+      "action": "PowerShell reproduction commands added; artifact option attached to the F producer.",
+      "disposition": "ADDRESSED"
+    },
+    "FGA-D5": {
+      "action": "F/G docstrings distinguish project M3 accounting from JLH13 cumulative definition.",
+      "disposition": "ADDRESSED"
+    },
+    "FGA-D6": {
+      "action": "Historical local and Windows runs retained with scopes; final-tree results recorded separately.",
+      "disposition": "ADDRESSED_WITH_FINAL_TREE_GATES_PENDING"
+    },
+    "FGA-D7": {
+      "action": "Frozen SvdW citation A15 -> A17 (velocity), A18 (H_s); E one-radius comment contextualized by polydisperse GE-OD2, no E token change.",
+      "disposition": "SUCCESSOR_ERRATA_RECORDED"
+    },
+    "FGA-F1": {
+      "action": "Complete supersession map; C1/collapse near-empty cutoffs; all other frozen r_min explicitly F3 only; owner-approved split of F verdict 2.",
+      "disposition": "ADDRESSED"
+    },
+    "FGA-F2": {
+      "action": "Boolean grains share only volume-weighted radius shape; independent overlapping geometry and intensity, eta and mass bookkeeping recorded.",
+      "disposition": "ADDRESSED"
+    },
+    "FGA-F3": {
+      "action": "Inherited quadrature retained; tail biases quantified and >=15 precision reduced to two significant figures; tests use independent audit CDF references.",
+      "disposition": "ADDRESSED"
+    },
+    "FGA-F4": {
+      "action": "Five physical wall-identification assumptions distinguished from elementary volume algebra.",
+      "disposition": "ADDRESSED"
+    },
+    "FGA-F5": {
+      "action": "Cutoff mismatch restricted to this C1 model at z=0-3; near-match at z=0.5 and non-monotonic cutoff stated.",
+      "disposition": "ADDRESSED"
+    },
+    "FGA-F6": {
+      "action": "Signed grid residuals explicitly described as numerical overshoot; no clipping.",
+      "disposition": "ADDRESSED"
+    },
+    "FGA-G1": {
+      "action": "Synchronous cohort distinguished from F; aged coefficient and bound clarified. 2/3 is not an upper bound.",
+      "disposition": "ADDRESSED"
+    },
+    "FGA-G2": {
+      "action": "No spatial correlations and averaged morphology stated as imported mean-field assumptions.",
+      "disposition": "ADDRESSED"
+    },
+    "FGA-G3": {
+      "action": "History claim restricted to common size- and age-independent void rate; future weighted-rate exception stated.",
+      "disposition": "ADDRESSED"
+    },
+    "FGA-G4": {
+      "action": "G12 classified as standard covariance definition; optional alternate radius measures not needed.",
+      "disposition": "ADDRESSED_CLASSIFICATION_OPTIONAL_NUMBERS_OMITTED"
+    },
+    "FGA-T1": {
+      "action": "Primary tail regression uses independent CDF values and explicit grid accuracy budget; new shell-crossing test differentiates Lagrangian trajectories without imposing A8.",
+      "disposition": "ADDRESSED"
+    }
+  },
+  "local_git_history_available": false,
+  "observational_authorizations_changed": false,
+  "remaining_gates": [
+    "Final-tree full suite on Windows Python 3.14.3 and 3.11.9 with historical Git and existing optional artifacts",
+    "Independent delta review of this remediation and newly recomputed cutoffs",
+    "Preserve external auditor scratch scripts/logs; only their hashes and reported results are available here",
+    "Record actual integration commit; freeze and remote publication require separate explicit approval"
+  ],
+  "report": "reports/phase1g_fg_audit_remediation.md",
+  "reproducibility": {
+    "environment": {
+      "numpy": "2.3.5",
+      "python": "3.12.14",
+      "scipy": "1.17.0"
+    },
+    "numerical_comparison": {
+      "atol": 1e-14,
+      "compare_labels_and_keys_exactly": true,
+      "exclude_fields": [
+        "environment",
+        "input_sha256"
+      ],
+      "rtol": 1e-11,
+      "scope": "same script/options and scientifically equivalent frozen input; floats only; not radius-grid accuracy"
+    },
+    "raw_sha256_meaning": "one exact output and environment, not cross-platform equivalence",
+    "serialization": "UTF-8 bytes, LF newlines"
+  },
+  "schema_version": 1,
+  "scientific_equations_changed_in_this_revision": false,
+  "source_base_commit": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f",
+  "source_evidence": {
+    "F_successor_sha256": "db381eacb1c100107b5300a980ca8db5aa4e0e61a8adf1315ee18cb700730928",
+    "G_sha256": "470134099a64819bb55e24d1ea2dbde72a37b24fb70e07c2676a477231e0509d",
+    "frozen_F_sha256": "4523ef031484a9f49f91c0522e4562f50bb36f7c8d6d8b0933ddd404ea925569"
+  },
+  "status_changes": {
+    "LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC": {
+      "new": "NOT_DERIVED",
+      "old": "NOT_DEFINED_IN_LINEAR_TWO_SCALE_THEORY"
+    }
+  },
+  "validation": {
+    "environment": {
+      "numpy": "2.3.5",
+      "os": "Linux",
+      "pytest": "9.1.1",
+      "python": "3.12.14",
+      "scipy": "1.17.0"
+    },
+    "full_suite": {
+      "command": "PYTHONPATH=src:/tmp/phase1g-test-deps OPENBLAS_NUM_THREADS=1 python -B -W error -m pytest -q -p no:cacheprovider",
+      "failed": 1,
+      "failure_cause": "source snapshot has no .git; git show exits 128; test unchanged",
+      "passed": 1101,
+      "seconds": 222.98,
+      "skipped": 34,
+      "sole_failure": "tests/test_phase1g_b_owner_decisions.py::test_gb_od3_the_frozen_inventory_is_pinned_to_its_certified_blob",
+      "warnings_as_errors": true
+    },
+    "log_sha256": "668cd3b81234b0d9a9b407bab64a0074062d45006b41f5697b10b1186d587da7",
+    "preservation": {
+      "AGENTS_md_unchanged": true,
+      "base_files_changed": 10,
+      "base_files_unchanged": 249,
+      "frozen_phase1g_numerics_unchanged": true,
+      "frozen_reports_and_inventories_unchanged": 111,
+      "lagrangian_sigma_ast_identical_except_text_constants": true,
+      "live_status_changes": [
+        "LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC"
+      ]
+    },
+    "tolerance_audit": {
+      "comparisons": 669,
+      "missing": 0
+    }
+  }
+}

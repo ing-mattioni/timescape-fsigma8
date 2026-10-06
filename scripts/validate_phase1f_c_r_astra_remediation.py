@@ -37,8 +37,10 @@ LINE_ENDING_EQUIVALENTS = {
 # inventory's ``current_scientific_status`` snapshot, or add tokens to it.
 # The frozen inventory is never edited and is still checked: each superseded
 # token must hold the record's ``old_token`` there, and the live module its
-# ``new_token``; each added token must be absent there, and the live module
-# must hold the record's ``value``.  A frozen token may leave the live module
+# ``new_token``. Added tokens must be absent there; a later change requires
+# an explicit ``added_by_record`` predecessor and its exact original value.
+# Otherwise the live module must hold the adding record's ``value``.
+# A frozen token may leave the live module
 # only through a registered ``status_removals`` entry (none exists).
 # Hardening of owner decision GB-OD3 (2026-09-30,
 # reports/phase1g_b_owner_decisions_successor.md): deleted tokens, changes
@@ -53,6 +55,8 @@ STATUS_SUCCESSOR_RECORDS = (
     Path("reports/phase1g_status_additions_successor_inventory.json"),
     # Phase 1G-E Secs. 2, 6 item 3, approved 2026-09-29 (one addition).
     Path("reports/phase1g_e_status_addition_successor_inventory.json"),
+    # FGA-D1: reclassify one previously added token, approved 2026-10-02.
+    Path("reports/phase1g_d_linear_statistic_status_successor_inventory.json"),
 )
 
 
@@ -111,6 +115,8 @@ def successor_status_changes() -> dict[str, dict[str, str]]:
             assert key not in changes, f"{key}: superseded by more than one successor record"
             changes[key] = {"old_token": change["old_token"], "new_token": change["new_token"],
                             "record": path.as_posix()}
+            if "added_by_record" in change:
+                changes[key]["added_by_record"] = change["added_by_record"]
     return changes
 
 
@@ -150,7 +156,10 @@ def check_current_scientific_status(frozen, live, changes, *, additions, removal
     A superseded token must still hold its old value in the frozen snapshot
     (the historical check) and the successor's new value in the live module.
     An added token must be absent from the frozen snapshot (the historical
-    check) and hold the successor's value in the live module.  A removed token
+    check). A later change may name its adding predecessor explicitly and
+    must match that predecessor's value; only one addition and one change
+    per token are accepted. No implicit overwriting or multi-change chain.
+    Otherwise its original added value must be live. A removed token
     must hold its old value in the frozen snapshot and be absent from the live
     module.  Every other frozen token must be present in the live module and
     equal the frozen snapshot.  ``removals=None`` means that no removal is
@@ -159,7 +168,11 @@ def check_current_scientific_status(frozen, live, changes, *, additions, removal
     removals = {} if removals is None else removals
     assert set(changes) <= set(live), "successor record names a token the live module lacks"
     assert set(additions) <= set(live), "successor record adds a token the live module lacks"
-    assert not set(changes) & set(additions), "token both changed and added by successor records"
+    # One explicit predecessor link permits a later reclassification of an
+    # added token. Duplicate additions/changes remain forbidden by the readers.
+    for key in set(changes) & set(additions):
+        assert "added_by_record" in changes[key], (
+            "token both changed and added without an explicit predecessor record")
     assert not set(removals) & (set(changes) | set(additions)), (
         "token both removed and changed or added by successor records")
     for key, removal in removals.items():
@@ -173,16 +186,28 @@ def check_current_scientific_status(frozen, live, changes, *, additions, removal
         "successor record")
     for key, value in live.items():
         current = list(value) if isinstance(value, tuple) else value
-        if key in changes:
+        if key in additions:
+            assert key not in frozen, f"{key}: frozen snapshot already holds an added token"
+            expected = additions[key]["value"]
+            if key in changes:
+                change = changes[key]
+                assert change["added_by_record"] == additions[key]["record"], (
+                    f"{key}: change does not name the adding predecessor record")
+                assert change["record"] != additions[key]["record"], (
+                    f"{key}: addition and change cannot be in the same record")
+                assert change["old_token"] == expected, (
+                    f"{key}: adding record does not hold the superseded token")
+                expected = change["new_token"]
+            assert current == expected, f"{key}: live value differs from the successor record"
+        elif key in changes:
+            assert "added_by_record" not in changes[key], (
+                f"{key}: token absent from the frozen snapshot and added by no successor record; "
+                "a predecessor link cannot replace the addition")
             assert key in frozen, (
                 f"{key}: successor record changes a token absent from the frozen snapshot")
             assert frozen[key] == changes[key]["old_token"], (
                 f"{key}: frozen snapshot does not hold the superseded token")
             assert current == changes[key]["new_token"], (
-                f"{key}: live value differs from the successor record")
-        elif key in additions:
-            assert key not in frozen, f"{key}: frozen snapshot already holds an added token"
-            assert current == additions[key]["value"], (
                 f"{key}: live value differs from the successor record")
         else:
             assert key in frozen, (

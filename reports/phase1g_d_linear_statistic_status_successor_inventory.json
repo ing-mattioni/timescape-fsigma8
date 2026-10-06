@@ -1,0 +1,50 @@
+{
+  "classification": "APPROVED_SCIENTIFIC_STATUS_CHANGE_SUCCESSOR_RECORD",
+  "date": "2026-10-02",
+  "human_approval": {
+    "by": "project owner",
+    "confirmed_proposal_summary": [
+      "LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC: NOT_DEFINED_IN_LINEAR_TWO_SCALE_THEORY -> NOT_DERIVED, with a dated registered D successor",
+      "Split frozen F verdict 2: Milne-rate asymptote DERIVED_FROM_VERIFIED_DEFINITIONS; finite-mass seeds identified with exactly empty finite-time tracker voids NOT_DERIVED"
+    ],
+    "date": "2026-10-02",
+    "proposal_summary_is_verbatim": false,
+    "verbatim": "si confermo"
+  },
+  "parent_commit": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f",
+  "phase": "1G-D",
+  "report": "reports/phase1g_d_linear_statistic_status_successor.md",
+  "schema_version": 1,
+  "scope": {
+    "equations_changed": false,
+    "frozen_records_edited": false,
+    "lagrangian_sigma_caveat_updated": true,
+    "lagrangian_sigma_numeric_outputs_changed": false,
+    "observational_authorizations_changed": false,
+    "remote_actions_authorized": false
+  },
+  "status_additions": {},
+  "status_changes": {
+    "LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC": {
+      "added_by_record": "reports/phase1g_status_additions_successor_inventory.json",
+      "evidence": "FGA-D1; Phase 1G-D Sec. 9; Phase 1G-F volume-budget successor Sec. 5",
+      "evidence_class": "NOT_DERIVED",
+      "meaning": "The current closure has not derived a global-mean linear statistic at 8 h^-1 Mpc; order-unity PBS response does not prove that no linearly extrapolated statistic can be defined.",
+      "module": "src/timescape_fsigma8/scientific_status.py",
+      "new_token": "NOT_DERIVED",
+      "not_meant": [
+        "an observational authorization",
+        "a completed closure",
+        "a change of equations, growth law, spectrum, normalization or numerical output"
+      ],
+      "old_token": "NOT_DEFINED_IN_LINEAR_TWO_SCALE_THEORY"
+    }
+  },
+  "status_removals": {},
+  "supersedes": [
+    "reports/phase1g_d_separate_universe_growth.md Sec. 9 and proposed token in Sec. 11",
+    "reports/phase1g_status_additions_successor_inventory.json: original addition retained as history",
+    "reports/phase1g_d_owner_decisions_successor.md: previous rationale/value retained as history",
+    "reports/phase1g_f_volume_budget_successor.md Sec. 5: wording-only/no-reclassification claim"
+  ]
+}

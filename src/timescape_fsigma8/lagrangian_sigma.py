@@ -313,9 +313,9 @@ _CAVEATS = {
         "embedding stays NOT_DERIVED; limitation (Phase 1G-D Secs. 9, 10; "
         "added 2026-09-29): this computes the wall-internal linear statistic "
         "relative to the wall mean, not a global-mean sigma at 8 h^-1 Mpc, "
-        "which is not defined in the linear two-scale theory "
-        "(LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC = "
-        "NOT_DEFINED_IN_LINEAR_TWO_SCALE_THEORY)"
+        "which has not been derived within the current closure "
+        "(LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC = NOT_DERIVED; "
+        "owner-approved successor 2026-10-02)"
     ),
 }
 

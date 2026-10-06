@@ -1,0 +1,32 @@
+{
+ "PAPER_REFERENCE": {
+  "D_wall": 0.8767922812878437,
+  "h": 0.7303000000000001,
+  "omega_eff": 0.12047512089055852,
+  "m_resolved": 0.38297094266920306,
+  "m_total": 0.38297094266920306,
+  "pair_density_norm": 1.000000000000003,
+  "sigma_part": 0.3263656924181659,
+  "sigma_int": 0.931559174991898,
+  "sigma_total": 0.9870750030768556,
+  "wall_share": 0.8906777173727912,
+  "sigma_vectorised_vs_quad": 7.517320099736935e-12,
+  "boolean_grain_volume_density": 1.3356012468043725,
+  "grain_to_excursion_volume_ratio": 1.7761376815234975
+ },
+ "NW15_CMB_FIT": {
+  "D_wall": 0.9455104962879062,
+  "h": 0.61,
+  "omega_eff": 0.13093722890629914,
+  "m_resolved": 0.38297094266920306,
+  "m_total": 0.38297094266920306,
+  "pair_density_norm": 1.000000000000003,
+  "sigma_part": 0.30362820386616407,
+  "sigma_int": 0.9403318363724016,
+  "sigma_total": 0.988136654860291,
+  "wall_share": 0.9055829990281621,
+  "sigma_vectorised_vs_quad": 7.657208200839705e-12,
+  "boolean_grain_volume_density": 0.9861768593383216,
+  "grain_to_excursion_volume_ratio": 1.3114587042414225
+ }
+}

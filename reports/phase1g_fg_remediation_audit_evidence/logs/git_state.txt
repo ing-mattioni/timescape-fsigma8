@@ -1,0 +1,45 @@
+# git state at audit start (2026-10-06)
+branch: phase-1g-f-successor-g-evolution
+HEAD: fb5d95245bc0cb19ce6cd1438177f1a597bb232f
+stash entries: 0
+git diff --check: clean (exit 0)
+tracked files: 259
+# status
+ M CLAUDE.md
+ M README.md
+ M scripts/validate_phase1f_c_r_astra_remediation.py
+ M src/timescape_fsigma8/lagrangian_sigma.py
+ M src/timescape_fsigma8/scientific_status.py
+ M tests/phase1g_owner_decisions_test_utils.py
+ M tests/test_barotropic_hadamard_refutation.py
+ M tests/test_phase1g_d_owner_decisions.py
+ M tests/test_phase1g_e_status_addition.py
+ M tests/test_phase1g_status_additions.py
+?? reports/phase1g_d_linear_statistic_status_successor.md
+?? reports/phase1g_d_linear_statistic_status_successor_inventory.json
+?? reports/phase1g_f_volume_budget_successor.md
+?? reports/phase1g_f_volume_budget_successor_inventory.json
+?? reports/phase1g_fg_audit_remediation.md
+?? reports/phase1g_fg_audit_remediation_inventory.json
+?? reports/phase1g_fg_independent_scientific_audit.md
+?? reports/phase1g_fg_independent_scientific_audit_inventory.json
+?? reports/phase1g_fg_successor_validation.md
+?? reports/phase1g_g_void_evolution.md
+?? reports/phase1g_g_void_evolution_inventory.json
+?? scripts/phase1g_f_volume_budget_successor_numerics.py
+?? scripts/phase1g_g_void_evolution_numerics.py
+?? tests/test_phase1g_d_linear_statistic_status_successor.py
+?? tests/test_phase1g_f_volume_budget_successor.py
+?? tests/test_phase1g_g_void_evolution.py
+# diffstat
+ CLAUDE.md                                         | 111 ++++++++++++++++------
+ README.md                                         |  61 ++++++++----
+ scripts/validate_phase1f_c_r_astra_remediation.py |  43 +++++++--
+ src/timescape_fsigma8/lagrangian_sigma.py         |   6 +-
+ src/timescape_fsigma8/scientific_status.py        |  19 ++--
+ tests/phase1g_owner_decisions_test_utils.py       |   5 +-
+ tests/test_barotropic_hadamard_refutation.py      |   5 +-
+ tests/test_phase1g_d_owner_decisions.py           |   6 +-
+ tests/test_phase1g_e_status_addition.py           |  13 ++-
+ tests/test_phase1g_status_additions.py            |  33 ++++---
+ 10 files changed, 212 insertions(+), 90 deletions(-)

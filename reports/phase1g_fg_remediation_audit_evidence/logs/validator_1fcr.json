@@ -1,0 +1,122 @@
+{
+  "absent_frozen_tag_objects": [],
+  "absent_local_provenance_files": [],
+  "certified_commit": "118b8f3af3c1360b0da74df8e9a9cb3ba1fed83a",
+  "explicit_comparisons": {
+    "scripts": 2,
+    "src": 15,
+    "tests": 669
+  },
+  "frozen_tags": {
+    "refs/tags/phase-1b-background-v1": "VERIFIED",
+    "refs/tags/phase-1c-a-equation-audit-v1": "VERIFIED",
+    "refs/tags/phase-1c-b1-clean-systems-v1": "VERIFIED",
+    "refs/tags/phase-1c-b2-barotropic-v1": "VERIFIED",
+    "refs/tags/phase-1d-a-growth-observable-audit-v1": "VERIFIED",
+    "refs/tags/phase-1d-b-growth-pipeline-v1": "VERIFIED",
+    "refs/tags/phase-1d-c-observable-closure-audit-v1": "VERIFIED",
+    "refs/tags/phase-1d-d-anchored-density-growth-v1": "VERIFIED",
+    "refs/tags/phase-1d-d-t-d3-frame-mapping-v1": "VERIFIED",
+    "refs/tags/phase-1e-a-dressed-observable-bridge-audit-v1": "VERIFIED",
+    "refs/tags/phase-1e-b-dressed-lightcone-velocity-derivation-v1": "VERIFIED",
+    "refs/tags/phase-1e-c-perturbed-dressed-geometry-transfer-closure-v1": "VERIFIED",
+    "refs/tags/phase-1e-d-regional-matching-dynamics-v1": "VERIFIED",
+    "refs/tags/phase-1e-e-transfer-realization-selection-v1": "VERIFIED",
+    "refs/tags/phase-1e-f-h1-transfer-realization-v1": "VERIFIED",
+    "refs/tags/phase-1e-f-h1-transfer-realization-v2": "VERIFIED",
+    "refs/tags/phase-1e-g-continuum-h1-realization-v1": "VERIFIED",
+    "refs/tags/phase-1e-g-continuum-h1-realization-v2": "VERIFIED",
+    "refs/tags/phase-1e-g-continuum-h1-realization-v3": "VERIFIED",
+    "refs/tags/phase-1e-g-continuum-h1-realization-v4": "VERIFIED",
+    "refs/tags/phase-1f-a-h1-broken-density-spectral-boost-v1": "VERIFIED",
+    "refs/tags/phase-1f-a-h1-broken-density-spectral-boost-v2": "VERIFIED",
+    "refs/tags/phase-1f-b-dust-wall-boost-dynamics-v1": "VERIFIED",
+    "refs/tags/phase-1f-b-dust-wall-boost-dynamics-v2": "VERIFIED",
+    "refs/tags/phase-1f-b-dust-wall-boost-dynamics-v3": "VERIFIED",
+    "refs/tags/phase-1f-c-wall-common-spacetime-geometry-v1": "VERIFIED",
+    "refs/tags/phase-1f-c-wall-common-spacetime-geometry-v2": "VERIFIED"
+  },
+  "frozen_tags_verified": 27,
+  "historical_reports_unchanged": 52,
+  "json_roundtrips": 43,
+  "local_provenance_files": {
+    ".reference/Linear-Perturbations-in-averaged-cosmological-models/ACPT_Timescape.ipynb": "VERIFIED",
+    "astra/INDEPENDENT_SCIENTIFIC_AUDIT.md": "VERIFIED",
+    "reports/phase1f_b_dust_wall_boost_dynamics_v3_final_audit.md": "VERIFIED",
+    "reports/phase1f_c_wall_common_geometry_adversarial_audit.md": "VERIFIED"
+  },
+  "package_imports": 56,
+  "post_remediation_drift": [
+    "src/timescape_fsigma8/background/effective_fluid.py",
+    "src/timescape_fsigma8/background/tracker.py",
+    "src/timescape_fsigma8/perturbations/initial_conditions.py"
+  ],
+  "preserved_equations": [
+    "src/timescape_fsigma8/background/__init__.py",
+    "src/timescape_fsigma8/background/effective_fluid.py",
+    "src/timescape_fsigma8/background/observables.py",
+    "src/timescape_fsigma8/background/parameters.py",
+    "src/timescape_fsigma8/background/tracker.py",
+    "src/timescape_fsigma8/perturbations/systems.py",
+    "src/timescape_fsigma8/perturbations/barotropic.py",
+    "src/timescape_fsigma8/perturbations/initial_conditions.py",
+    "src/timescape_fsigma8/transfer/h1_realization.py:regional_evolution",
+    "src/timescape_fsigma8/transfer/h1_realization.py:two_region_coefficients",
+    "phase1f_b/dynamics.py:driver_regional",
+    "phase1f_b/dynamics.py:potential[index + 1]",
+    "phase1f_b/dynamics.py:potential_dot_regional",
+    "phase1f_b/dynamics.py:physical_laplacian_regional",
+    "phase1f_b/dynamics.py:compatibility_regional",
+    "phase1f_b/dynamics.py:propagation",
+    "phase1f_c/geometry.py:laplacian",
+    "phase1f_c/geometry.py:wall_expansion",
+    "phase1f_c/geometry.py:derivative",
+    "phase1f_c/geometry.py:trace[index]"
+  ],
+  "producer_determinism_sha256": {},
+  "status": "PASS",
+  "successor_status_additions": {
+    "GM_CGI_CLOSURES_SEPARATE_UNIVERSE_CONSISTENCY": {
+      "record": "reports/phase1g_status_additions_successor_inventory.json",
+      "value": "FAILED_FOR_TIMESCAPE_TRACKER"
+    },
+    "LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC": {
+      "record": "reports/phase1g_status_additions_successor_inventory.json",
+      "value": "NOT_DEFINED_IN_LINEAR_TWO_SCALE_THEORY"
+    },
+    "SUPER_CELL_TO_SUB_CELL_GROWTH_TRANSITION": {
+      "record": "reports/phase1g_status_additions_successor_inventory.json",
+      "value": "NOT_DERIVED"
+    },
+    "TWO_PHASE_MASS_VARIANCE_8_H_INV_MPC": {
+      "record": "reports/phase1g_e_status_addition_successor_inventory.json",
+      "value": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION"
+    },
+    "TWO_SCALE_MASS_WEIGHTED_SUB_CELL_GROWTH_LAW": {
+      "record": "reports/phase1g_status_additions_successor_inventory.json",
+      "value": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION"
+    },
+    "TWO_SCALE_SUPER_CELL_GROWTH_LAW": {
+      "record": "reports/phase1g_status_additions_successor_inventory.json",
+      "value": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION"
+    },
+    "VOID_ONSET_RESPONSE": {
+      "record": "reports/phase1g_status_additions_successor_inventory.json",
+      "value": "EXTERNAL_CLOSURE_INPUT"
+    }
+  },
+  "successor_status_changes": {
+    "LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC": {
+      "added_by_record": "reports/phase1g_status_additions_successor_inventory.json",
+      "new_token": "NOT_DERIVED",
+      "old_token": "NOT_DEFINED_IN_LINEAR_TWO_SCALE_THEORY",
+      "record": "reports/phase1g_d_linear_statistic_status_successor_inventory.json"
+    },
+    "UNRESTRICTED_BAROTROPIC_CONTINUUM_STABILITY": {
+      "new_token": "REFUTED_HADAMARD_ILL_POSED",
+      "old_token": "NOT_DERIVED",
+      "record": "reports/phase1g_a_barotropic_status_successor_inventory.json"
+    }
+  },
+  "successor_status_removals": {}
+}

@@ -4,3 +4,8 @@
 astra/INDEPENDENT_SCIENTIFIC_AUDIT.md -text
 reports/phase1f_b_dust_wall_boost_dynamics_v3_final_audit.md -text
 reports/phase1f_c_wall_common_geometry_adversarial_audit.md -text
+# Audit evidence and integration logs (2026-10-06): raw bytes are pinned by
+# MANIFEST.sha256 or the integration inventory. Never convert line endings,
+# and do not flag the CRLF of Windows-captured logs as whitespace errors.
+reports/phase1g_fg_remediation_audit_evidence/** -text -whitespace
+reports/phase1g_fg_remediation_integration_logs/** -text -whitespace
