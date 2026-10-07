@@ -11,7 +11,9 @@ the published 1G-D / 1G-F values.  Report: reports/phase1g_h_global_variance_clo
 from __future__ import annotations
 
 import dataclasses
+import functools
 import inspect
+import json
 import math
 import re
 from pathlib import Path
@@ -473,7 +475,8 @@ def test_cauchy_schwarz_interval_contains_every_joint_law():
 def test_orthant_moments_against_bivariate_cdf_and_monte_carlo():
     rng = np.random.default_rng(9)
     for rho, c in ((0.0, 0.634), (0.6, -0.5), (0.95, 0.634), (-0.4, 1.2)):
-        mom = gv.bivariate_normal_orthant_moments(correlation=rho, threshold=c, nodes=400)
+        mom = gv.bivariate_normal_orthant_moments(correlation=rho, threshold=c, nodes=32,
+                                                  tolerance=1e-12)
         exact = multivariate_normal(mean=[0, 0], cov=[[1, rho], [rho, 1]]).cdf([-c, -c])
         assert mom["P11"] == pytest.approx(exact, abs=1e-9, rel=0.0)
         z = rng.multivariate_normal([0, 0], [[1, rho], [rho, 1]], size=2_000_000)
@@ -497,7 +500,8 @@ def test_gaussian_threshold_pair_covariance_formulas_by_monte_carlo():
     i1, i2 = z[:, 0] > c, z[:, 1] > c
     kww_mc = i1 * i2 * (z[:, 2] - mu) * (z[:, 3] - mu)
     kxw_mc = (i1 - f_w) * i2 * (z[:, 3] - mu)
-    mom = gv.bivariate_normal_orthant_moments(correlation=rho, threshold=c, nodes=300)
+    mom = gv.bivariate_normal_orthant_moments(correlation=rho, threshold=c, nodes=32,
+                                              tolerance=1e-12)
     B = np.array([[g0, gr], [gr, g0]]) @ np.linalg.inv(np.array([[1, rho], [rho, 1]]))
     mg = np.array([[mom["E_g1g1"], mom["E_g1g2"]], [mom["E_g1g2"], mom["E_g1g1"]]])
     m1 = np.array([mom["E_g1"], mom["E_g2"]])
@@ -542,7 +546,8 @@ def test_every_scientific_argument_is_mandatory_and_keyword_only():
     for fn in (gv.conditional_global_linear_sigma, gv.two_phase_global_growth,
                gv.evaluate_void_share, gv.admissible_global_linear_interval,
                gv.two_phase_global_variance, gv.global_linear_propagator,
-               gv.two_barrier_global_linear_bias):
+               gv.two_barrier_global_linear_bias, gv.bivariate_normal_orthant_moments,
+               gv.bivariate_normal_orthant_probability):
         for param in inspect.signature(fn).parameters.values():
             assert param.kind is inspect.Parameter.KEYWORD_ONLY
             assert param.default is inspect.Parameter.empty, (fn.__name__, param.name)
@@ -593,7 +598,8 @@ def test_closures_and_inputs_fail_closed(growth_gm):
         gv.two_barrier_void_mass_fraction(collapse_threshold=1.686, void_threshold=-2.7,
                                           long_mode_contrast=2.0)
     with pytest.raises(gv.GlobalVarianceContractError):
-        gv.bivariate_normal_orthant_moments(correlation=1.0, threshold=0.0, nodes=64)
+        gv.bivariate_normal_orthant_moments(correlation=1.0, threshold=0.0, nodes=64,
+                                            tolerance=1e-12)
 
 
 def test_records_reject_tampering():
@@ -606,6 +612,37 @@ def test_records_reject_tampering():
         dataclasses.replace(res, void_response_regime=gv.VOID_RESPONSE_NONPERTURBATIVE)
     with pytest.raises(gv.GlobalVarianceContractError):
         dataclasses.replace(res.growth, void_share_growth=res.growth.void_share_growth * 1.001)
+    # The concrete probes of the independent audit (GH-F9) and their siblings.
+    with pytest.raises(gv.GlobalVarianceContractError, match="closure's share"):
+        dataclasses.replace(res.void_share, share_k0=0.95)
+    pbs = run(GM, tracker_seed(GM, res.growth, 15.0, gv.SeedVolumeCompression.COMPRESSED_WITH_REGION),
+              radius("c"))
+    for field, value in (("threshold_share_k0", float("nan")),
+                         ("threshold_share_k0", pbs.void_share.threshold_share_k0 * 1.01),
+                         ("compression_share", 0.0), ("nu", pbs.void_share.nu + 1e-6),
+                         ("kind", "constant")):
+        with pytest.raises(gv.GlobalVarianceContractError):
+            dataclasses.replace(pbs.void_share, **{field: value})
+    for field, value in (("t_ls_over_t0", 2.0), ("t_ls_over_t0", res.growth.t_ls_over_t0 * 1.001),
+                         ("diagnostics", tuple((k, float("nan")) for k, _ in res.growth.diagnostics)),
+                         ("diagnostics", res.growth.diagnostics[1:])):
+        with pytest.raises(gv.GlobalVarianceContractError):
+            dataclasses.replace(res.growth, **{field: value})
+    for field, value in (("propagator_k0", res.propagator_k0 * 1.01),
+                         ("flat_wall_capacity_ratio", res.flat_wall_capacity_ratio * 1.01),
+                         ("quadrature_relative_change", 2.0 * res.quadrature_relative_change + 1e-12)):
+        with pytest.raises(gv.GlobalVarianceContractError):
+            dataclasses.replace(res, **{field: value})
+    premise = gv.HomogeneityPremise(radius=radius("c", 100.0), max_linear_rms=0.1, provenance="test")
+    iv = gv.admissible_global_linear_interval(target=res, premise=premise)
+    for field, value in (("upper", float("inf")), ("share_upper", float("nan")),
+                         ("share_lower", -0.1), ("upper", iv.upper * 1.01),
+                         ("lower", iv.lower * 0.99), ("premise_compatible", not iv.premise_compatible)):
+        with pytest.raises(gv.GlobalVarianceContractError):
+            dataclasses.replace(iv, **{field: value})
+    # Strict JSON: the records serialise without non-finite numbers.
+    for record in (res, pbs, iv):
+        json.dumps(record.to_json_dict(), allow_nan=False)
 
 
 FORBIDDEN = ("sigma8", "sigma_8", "8hmpc")
@@ -662,3 +699,161 @@ def test_example_configurations_run_and_require_every_choice(tmp_path):
         broken = {k: v for k, v in config.items() if k != key}
         with pytest.raises(SystemExit, match="mandatory"):
             module.run(broken)
+
+
+# ------------------------------------------- audit remediation (2026-10-07)
+@functools.lru_cache(maxsize=1)
+def _evidence():
+    """The evidence script as a module (its functions are tested directly)."""
+    import importlib.util
+
+    path = PROJECT_ROOT / "scripts" / "phase1g_h_global_variance_closure_numerics.py"
+    spec_ = importlib.util.spec_from_file_location("_phase1g_h_numerics", path)
+    module = importlib.util.module_from_spec(spec_)
+    spec_.loader.exec_module(module)
+    return module
+
+
+def test_gh_f1_mean_derivative_of_the_exact_identity_is_not_the_tangent():
+    """The audit's two-state example: why D1 defines the formal tangent statistic."""
+    f_v, h = 0.737, 1e-6
+
+    def contrast(s_):
+        return float(gv.empty_void_region_contrast(void_volume_fraction=f_v,
+                                                   wall_density_contrast=s_,
+                                                   void_volume_contrast=0.0))
+
+    states = (-1.0 / 3.0, 1.0)
+    assert np.mean([1.0 / (1.0 + contrast(s_)) for s_ in states]) == pytest.approx(
+        1.0, rel=1e-14, abs=0.0)                                  # equal-mass ensemble
+    mean_derivative = float(np.mean([(contrast(s_ + h) - contrast(s_ - h)) / (2 * h)
+                                     for s_ in states]))
+    tangent = (contrast(h) - contrast(-h)) / (2 * h)
+    assert mean_derivative == pytest.approx(0.274683481680, rel=1e-8, abs=0.0)
+    assert tangent == pytest.approx(1.0 - f_v, rel=1e-8, abs=0.0)
+    assert mean_derivative / tangent - 1.0 > 0.04
+
+
+def test_gh_f3_void_share_is_f_v_minus_the_regional_fraction_derivative(growth_gm):
+    """p delta = f_v epsilon equals p = f_v - d f_v,L/d delta_L (explicit volumes)."""
+    f_v, h = 0.2, 1e-7
+    f_w = 1.0 - f_v
+    for p in (0.0, 0.05, 0.3, 1.0):
+        def state(delta):
+            eps, d_w = p * delta / f_v, (1.0 - p) * delta / f_w
+            v_w0 = 1.0                                     # region's reference wall volume
+            v_w, v_v = v_w0 / (1.0 + d_w), v_w0 * (f_v / f_w) / (1.0 + eps)
+            v_l = v_w + v_v
+            return v_v / v_l, v_w0 / (f_w * v_l) - 1.0     # f_v,L and delta_L (M_L = rho_w v_w0)
+        (fp, dp), (fm, dm) = state(h), state(-h)
+        assert f_v - (fp - fm) / (dp - dm) == pytest.approx(p, rel=1e-6, abs=1e-9)
+    density = ls.early_matter_density_per_photon(background=growth_gm.background,
+                                                 identity_tolerance=1e-13, G=G)
+    for compression in gv.SeedVolumeCompression:
+        share = gv.evaluate_void_share(closure=tracker_seed(GM, growth_gm, 15.0, compression),
+                                       growth=growth_gm, density=density,
+                                       early_spectrum=spectrum(), seed_quadrature=SEED_QUAD)
+        offset = 1.0 if compression is gv.SeedVolumeCompression.COMPRESSED_WITH_REGION else 0.0
+        assert share.share_k0 == pytest.approx(
+            growth_gm.f_v_ls * (offset + share.void_onset_response), rel=1e-12, abs=0.0)
+
+
+def test_gh_f4_scale_dependent_share_escapes_the_constant_share_interval(growth_gm):
+    density = ls.early_matter_density_per_photon(background=growth_gm.background,
+                                                 identity_tolerance=1e-13, G=G)
+    r8 = ls.resolve_lagrangian_radius(spec=radius("c"), density=density).radius_Mpc
+    r_hom = ls.resolve_lagrangian_radius(spec=radius("c", 100.0), density=density).radius_Mpc
+    s8, s_hom = (gv.unit_growth_lagrangian_sigma(radius_Mpc=r, omega_m=density.omega_m_per_photon,
+                                                 early_spectrum=spectrum(), quadrature=QUAD)
+                 for r in (r8, r_hom))
+    upper = min(0.1 / s_hom, growth_gm.void_share_growth) * s8          # (H15), constant share
+    out = _evidence().step_share_counterexample(growth_gm, density, spectrum(), target_R=r8,
+                                                premise_R=r_hom, eta=0.1,
+                                                constant_share_upper=upper)
+    assert out["share_low_k"] == growth_gm.f_v_ls and out["share_high_k"] == 1.0  # inside H-A7
+    assert out["premise_rms"] <= 0.1
+    assert out["target_rms"] > 5.0 * upper
+
+
+def test_gh_f5_lognormal_mask_kernels_by_monte_carlo():
+    """Closed forms of the nonnegative lognormal laws against 4-variate sampling."""
+    ev = _evidence()
+    rng = np.random.default_rng(23)
+    f_v = 0.737
+    f_w, c = 1.0 - f_v, norm.ppf(f_v)
+    rho, lam, xs0, xsr, g0, gr = 0.6, 0.8, 1.0, 0.45, 0.5, 0.3
+    for correlated in (False, True):
+        k0, kr = (g0, gr) if correlated else (0.0, 0.0)
+        cov = np.array([[1, rho, k0, kr], [rho, 1, kr, k0], [k0, kr, xs0, xsr], [kr, k0, xsr, xs0]])
+        z = rng.multivariate_normal(np.zeros(4), cov, size=2_000_000)
+        chi1, chi2 = z[:, 0] > c, z[:, 1] > c
+        n_w = math.exp(0.5 * lam * lam * xs0) * norm.sf(c - lam * k0) / f_w   # E[e^a | wall]
+        psi1, psi2 = np.exp(lam * z[:, 2]) / n_w, np.exp(lam * z[:, 3]) / n_w
+        assert psi1.min() >= 0.0
+        norm_mc = chi1 * (psi1 - 1.0)                                         # E[chi (psi-1)] = 0
+        assert abs(norm_mc.mean()) <= 5 * norm_mc.std() / math.sqrt(norm_mc.size)
+        p11, kww, kpw = ev.lognormal_mask_kernels(rho=rho, c=c, f_w=f_w, lam=lam, xi_lat_r=xsr,
+                                                  kappa0=lam * k0, kappa_r=lam * kr)
+        kww_mc = chi1 * chi2 * (psi1 - 1.0) * (psi2 - 1.0)
+        kpw_mc = (chi1 - f_w) * chi2 * (psi2 - 1.0)
+        assert abs(kww - kww_mc.mean()) <= 5 * kww_mc.std() / math.sqrt(kww_mc.size)
+        assert abs(kpw - kpw_mc.mean()) <= 5 * kpw_mc.std() / math.sqrt(kpw_mc.size)
+        assert p11 == pytest.approx(float(np.mean(chi1 & chi2)), abs=2e-3, rel=0.0)
+
+
+def test_gh_f6_post_hoc_anchoring_differs_from_pbs_reclosure(growth_gm):
+    factor = 0.97
+    const, const_re = (run(GM, constant(0.05), radius("c"), A_s=a) for a in (2.1e-9, 2.1e-9 * factor ** 2))
+    assert const_re.linear_sigma == pytest.approx(const.linear_sigma * factor, rel=1e-10, abs=0.0)
+    seed = tracker_seed(GM, growth_gm, 15.0, gv.SeedVolumeCompression.COMPRESSED_WITH_REGION)
+    pbs, pbs_re = (run(GM, seed, radius("c"), A_s=a) for a in (2.1e-9, 2.1e-9 * factor ** 2))
+    assert pbs_re.void_share.share_k0 > pbs.void_share.share_k0      # threshold term ~ 1/sigma_s
+    assert pbs_re.linear_sigma / (pbs.linear_sigma * factor) - 1.0 > 0.01
+
+
+def test_gh_f10_orthant_quadrature_meets_its_accuracy_contract():
+    tol = 1e-12
+
+    def prob(rho, c1, c2):
+        return gv.bivariate_normal_orthant_probability(correlation=rho, threshold_1=c1,
+                                                       threshold_2=c2, nodes=16, tolerance=tol)
+
+    assert prob(0.0, -100.0, -100.0) == pytest.approx(1.0, abs=1e-12, rel=0.0)
+    for rho in (0.999999, -0.999999, 0.3, -0.7):
+        assert prob(rho, 0.0, 0.0) == pytest.approx(0.25 + math.asin(rho) / (2 * math.pi),
+                                                    abs=1e-12, rel=0.0)
+    for c1, c2 in ((0.634, -1.2), (2.0, 0.5), (-3.0, 4.0)):
+        assert prob(0.0, c1, c2) == pytest.approx(norm.sf(c1) * norm.sf(c2), abs=1e-12, rel=0.0)
+        for rho in (-0.5, 0.4, 0.95):
+            exact = multivariate_normal(mean=[0, 0], cov=[[1, rho], [rho, 1]]).cdf([-c1, -c2])
+            assert prob(rho, c1, c2) == pytest.approx(exact, abs=1e-8, rel=0.0)
+    c = 0.634
+    q, phi = norm.sf(c), norm.pdf(c)
+    mom = gv.bivariate_normal_orthant_moments(correlation=0.0, threshold=c, nodes=16, tolerance=tol)
+    for key, value in (("P11", q * q), ("E_g1", phi * q), ("E_g2", phi * q),
+                       ("E_g1g1", (c * phi + q) * q), ("E_g1g2", phi * phi)):
+        assert mom[key] == pytest.approx(value, abs=1e-12, rel=0.0), key
+    with pytest.raises(gv.GlobalVarianceNumericalError, match="not converged"):
+        gv.bivariate_normal_orthant_moments(correlation=0.5, threshold=0.0,
+                                            nodes=gv.ORTHANT_MAX_NODES, tolerance=tol)
+    with pytest.raises(gv.GlobalVarianceContractError, match="double precision"):
+        gv.bivariate_normal_orthant_probability(correlation=0.5, threshold_1=0.0, threshold_2=0.0,
+                                                nodes=16, tolerance=1e-16)
+
+
+def test_gh_f11_1g_e_reference_reproduces_within_its_rounding_budget():
+    quoted = json.loads((PROJECT_ROOT / "reports" / "phase1g_e_owner_decisions_successor_inventory.json")
+                        .read_text(encoding="utf-8"))["numbers_from_artifact"]
+    for label, fv0 in (("PAPER_REFERENCE", 0.737), ("NW15_CMB_FIT", 0.627)):
+        key = f"GE_reference_population_1G_F|{label}|b_dressed_8_over_h|"
+        sp, si, total = (float(quoted[key + k]) for k in (
+            "sigma_part", "sigma_int_photon_frame_D_wall", "sigma_photon_frame_D_wall_empty_voids"))
+        f_w = 1.0 - fv0
+        var = gv.two_phase_global_variance(
+            void_volume_fraction=fv0, void_to_wall_density_ratio=0.0,
+            moments=gv.TwoPhaseSmoothedMoments(var_partition=(sp * f_w) ** 2,
+                                               wall_field=(si * f_w) ** 2, void_field=0.0,
+                                               partition_wall=0.0, partition_void=0.0,
+                                               wall_void=0.0, provenance="1G-E/F reference, E3"))
+        budget = 5e-5 * (sp / var["rms"] + si / var["rms"] + 1.0)   # half a unit, propagated
+        assert abs(var["rms"] - total) <= budget < 1.2e-4

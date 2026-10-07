@@ -11,9 +11,21 @@ Scenarios (declared, never combined): [GM] PAPER_REFERENCE (f_v0 = 0.737,
 H0 = 73.03) and the [NW15] Timescape CMB fit (f_v0 = 0.627, H0 = 61.0, as in
 1G-A/B/D).  Early universe: Planck 2018 A_s, n_s, k_p and baryon fraction
 (script-level explicit inputs, PROVISIONAL_MODEL_IMPORT; [NW15] l. 1422 leave
-A_s unconstrained), EH98 zero-baryon transfer at the per-photon omega_m,eff.
-Matching epoch z = 1090 (1G-D, 1G-F).  Every number is CONDITIONAL,
-MODEL-INTERNAL and NON_OBSERVATIONAL; none is an observational amplitude.
+A_s unconstrained), the EH98 zero-baryon-oscillation (no-wiggle) transfer
+with the baryon shape suppression, Eqs. (26), (28)-(31), at the per-photon
+omega_m,eff (``lagrangian_sigma``).  Matching epoch z = 1090 (1G-D, 1G-F).
+Every number is CONDITIONAL, MODEL-INTERNAL and NON_OBSERVATIONAL; none is an
+observational amplitude.
+
+Audit remediation (2026-10-07; reports/phase1g_h_audit_remediation.md): the
+statistic is the formal tangent statistic (owner decision D1) with
+seed-indexed void accounting (D2); the evidence adds the GH-F1 two-state
+example, the scale-separation ratios (GH-F2), a step-kernel counterexample
+to an unrestricted (H15) (GH-F4), the negative-density probabilities of the
+signed Gaussian pair and a nonnegative lognormal pair (GH-F5, D3), the PBS
+reclosure under a rescaled input spectrum (GH-F6, D4), the Gaussian fraction
+above the flat-wall cap (GH-F7), orthant analytic cases (GH-F10) and the
+rounding-budget gate of the 1G-E/F reference (GH-F11).
 """
 
 from __future__ import annotations
@@ -31,7 +43,7 @@ from pathlib import Path
 import numpy as np
 from scipy.integrate import simpson
 from scipy.optimize import brentq
-from scipy.special import ndtri, spherical_jn
+from scipy.special import ndtr, ndtri, spherical_jn
 
 import timescape_fsigma8.global_variance as gv
 import timescape_fsigma8.lagrangian_sigma as ls
@@ -62,7 +74,14 @@ ANCHOR = 0.8111
 ANCHOR_TOLERANCE = 0.05
 ANCHOR_RATIONALE = (
     "EH98 zero-baryon-oscillation fit omits BAO wiggles and the 0.06 eV neutrino "
-    "suppression; anchored ratios cancel the common bias ([1G-A] Sec. 6.3)")
+    "suppression ([1G-A] Sec. 6.3); owner decision D4 (2026-10-07): the factor is an "
+    "empirical post-hoc output normalisation at fixed closure, reported beside the "
+    "direct values (primary) and the reclosure variant")
+# Orthant integrals: absolute accuracy target of the refined quadrature (audit
+# GH-F10).  The moments are O(1); 1e-12 is far below every printed digit and
+# the Monte Carlo checks, and above the double-precision floor of the sums.
+ORTHANT_TOLERANCE = 1e-12
+ORTHANT_START_NODES = 32
 
 # Quadratures (explicit; AGENTS.md rule 9).  Main: the 1G-B reference grid.
 # Seed: the seed radius is ~0.1-15 Mpc, so k reaches 1e4 Mpc^-1.
@@ -107,9 +126,20 @@ GATES = {
     "constant_share_A_s_scaling_rel": 1e-10,     # sigma^2 proportional to A_s at fixed p
     "pbs_void_term_A_s_independence_rel": 2e-3,  # window shape at fixed R_s only
     "refined_quadrature_rel": 2e-6,              # main vs refined grid
-    "E_reference_reproduction_abs": 6e-4,        # sqrt(sp^2 + si^2) vs printed 4 decimals
+    # sqrt(sp^2 + si^2) vs the printed total: half a unit of the fourth decimal,
+    # propagated exactly through the formula per scenario (GH-F11); the gate
+    # limit is (sp/s + si/s + 1) times this half unit.
+    "E_reference_printed_half_unit": 5e-5,
     "gt_orthant_P11_vs_bivariate_cdf_abs": 1e-10,
+    "orthant_analytic_cases_abs": 1e-12,         # rho = 0, c = 0 and c = -100 (GH-F10)
     "m3_bias_finite_difference_rel": 1e-6,
+    "lognormal_ball_variance_calibration_rel": 1e-9,
+    # lam -> 0 limit of the lognormal pair vs the signed pair: O(lam sigma_w)
+    # tilt corrections (~1e-2 at latent variance 1e-4) and the cancellation of
+    # O(f_w^2) terms at orthant accuracy 1e-12 in O(lam^2) moments.
+    "lognormal_linear_limit_rel": 5e-2,
+    "step_kernel_premise_ratio": 1.0,            # sigma(R_hom)/eta <= 1 (GH-F4)
+    "reclosure_constant_share_rel": 1e-10,       # constant share: reclosure = post-hoc
 }
 
 
@@ -241,9 +271,13 @@ def anchor_factor() -> dict:
             "anchor_provenance": PLANCK_PROVENANCE, "anchor_rationale": ANCHOR_RATIONALE,
             "factor": ANCHOR / ref.linear_sigma, "offset": offset,
             "g_lcdm_qplus0": ref.growth_today_photon_normalised,
-            "meaning": "multiplies the direct A_s-normalised EH98 value by the "
-                       "Boltzmann-to-EH98 ratio at the Planck parameters; late-time LCDM "
-                       "growth cancels exactly"}
+            "meaning": "empirical post-hoc output normalisation at fixed closure (owner "
+                       "decision D4): multiplies a finished direct value by the ratio of "
+                       "the Planck sigma at 8 Mpc/h to the EH98 value at the Planck "
+                       "parameters.  It is not a verified transfer recalibration: a "
+                       "rescaled input spectrum changes the PBS share (see "
+                       "pbs_reclosure_under_spectrum_rescaling), and the late-time growth "
+                       "cancels only for a common scale-independent growth"}
 
 
 # ---------------------------------------------------------- flat-wall capacity
@@ -334,18 +368,172 @@ def _xi_table(k, lnk, d2, r, w1=None, w2=None):
     return out
 
 
+def _orthant(rho: float, c: float) -> dict:
+    return gv.bivariate_normal_orthant_moments(
+        correlation=min(rho, 1.0 - 1e-12), threshold=c, nodes=ORTHANT_START_NODES,
+        tolerance=ORTHANT_TOLERANCE)
+
+
+def _orthant_p(rho: float, c1: float, c2: float) -> float:
+    return gv.bivariate_normal_orthant_probability(
+        correlation=min(rho, 1.0 - 1e-12), threshold_1=c1, threshold_2=c2,
+        nodes=ORTHANT_START_NODES, tolerance=ORTHANT_TOLERANCE)
+
+
+# Nonnegative lognormal pairs (owner decision D3 on GH-F5): resolution radii of
+# the latent Gaussian smoothing (declared construction parameters, not physics)
+# and the latent point variance of the linear-limit check.
+LOGNORMAL_RESOLUTIONS_MPC = (1.0, 2.0, 4.0)
+LOGNORMAL_LINEAR_LIMIT_LATENT_VARIANCE = 1e-4
+
+
+def lognormal_mask_kernels(*, rho: float, c: float, f_w: float, lam: float, xi_lat_r: float,
+                           kappa0: float, kappa_r: float) -> tuple[float, float, float]:
+    """(P11, K_ww, K_pw) at one separation for the lognormal wall density (GH-F5).
+
+    chi = 1{g > c}; psi = exp(a)/E[exp(a) | wall] with a = lam s; rho the mask
+    correlation, xi_lat_r the latent carrier covariance, kappa0 = Cov(g, a) at
+    one point and kappa_r = Cov(g(x), a(y)) (0 for an independent mask).
+    ``K_ww = E[chi1 chi2 (psi1 - 1)(psi2 - 1)]``,
+    ``K_pw = Cov(chi1, chi2 (psi2 - 1))``; exponential tilting of
+    (g1, g2, a1, a2) gives the closed forms of ``_lognormal_laws``.
+    """
+    q0 = float(ndtr(-(c - kappa0)))
+    p11 = _orthant(rho, c)["P11"]
+    m = kappa0 + kappa_r
+    e_pp = math.exp(lam * lam * xi_lat_r) * f_w ** 2 * _orthant_p(rho, c - m, c - m) / q0 ** 2
+    e_p = f_w * _orthant_p(rho, c - kappa_r, c - kappa0) / q0
+    return p11, e_pp - 2.0 * e_p + p11, e_p - p11
+
+
+def _lognormal_laws(f_v0: float, c: float, u, pair, rho_g, lam: float, xi_lat, cross0_lat: float,
+                    cross_lat) -> dict:
+    """Laws I and II for the wall density proportional to exp(lam s(x)), [1G-H] Sec. 6.3.
+
+    s is the latent Gaussian carrier (covariance ``xi_lat``); the walls are
+    {g > c}, g a unit Gaussian mask field with correlation ``rho_g`` that is
+    independent of s (law I) or has ``Cov(g(x), s(y)) = cross_lat(r)`` (law II).
+    With ``psi = exp(a)/E[exp(a) | wall]`` (nonnegative, conditionally
+    normalised), a = lam s, kappa(r) = lam cross_lat(r), m = kappa0 + kappa(r)
+    and Q0 = P(Z > c - kappa0), exponential tilting of (g1, g2, a1, a2) gives
+    ``E[chi1 chi2 psi1 psi2] = exp(lam^2 xi_lat) f_w^2 P(Z1 > c-m, Z2 > c-m)/Q0^2``
+    and ``E[chi1 chi2 psi2] = f_w P(Z1 > c-kappa(r), Z2 > c-kappa0)/Q0``.
+    """
+    f_w = 1.0 - f_v0
+    kappa0, kappa = lam * cross0_lat, lam * np.asarray(cross_lat)
+    laws = {}
+    for law, correlated in (("I_independent", False), ("II_same_field", True)):
+        c_chi, k_ww, k_pw = [], [], []
+        for i in range(len(u)):
+            p11, kww, kpw = lognormal_mask_kernels(
+                rho=float(rho_g[i]), c=c, f_w=f_w, lam=lam, xi_lat_r=float(xi_lat[i]),
+                kappa0=kappa0 if correlated else 0.0,
+                kappa_r=float(kappa[i]) if correlated else 0.0)
+            c_chi.append(p11 - f_w ** 2)
+            k_ww.append(kww)
+            k_pw.append(kpw)
+        c_chi, k_ww, k_pw = map(np.asarray, (c_chi, k_ww, k_pw))
+        moments = gv.TwoPhaseSmoothedMoments(
+            var_partition=float(simpson(pair * c_chi, x=u)),
+            wall_field=float(simpson(pair * k_ww, x=u)), void_field=0.0,
+            partition_wall=float(simpson(pair * k_pw, x=u)), partition_void=0.0,
+            wall_void=0.0, provenance=f"lognormal threshold law {law}; empty voids")
+        var = gv.two_phase_global_variance(void_volume_fraction=f_v0,
+                                           void_to_wall_density_ratio=0.0, moments=moments)
+        laws[law] = {"sigma_partition": math.sqrt(var["partition_term"]),
+                     "sigma_wall_field": math.sqrt(var["wall_field_term"]),
+                     "cross_term": var["cross_terms"], "sigma_total": var["rms"],
+                     "wall_moment": moments.wall_field,
+                     "partition_wall_moment": moments.partition_wall}
+    return laws
+
+
+def lognormal_pairs(f_v0: float, c: float, u, pair, k, lnk, d2, ell: float, xi_w,
+                    rho_g, signed_moments: dict) -> dict:
+    """Nonnegative lognormal pairs sharing the constraints of the signed pair (D3).
+
+    Latent carrier ``s = w`` smoothed with a Gaussian of radius r_s (the
+    resolution of the lognormal transform, a declared construction parameter);
+    wall density proportional to exp(lam s), conditionally normalised on the
+    walls, hence nonnegative.  Law II takes the signed pair's mask (w smoothed
+    at the calibrated ell); law I an independent mask with the same
+    covariance.  Shared by I and II: f_v0, the partition covariance, the
+    unconditional wall-density covariance ``exp(lam^2 xi_s) - 1`` and the
+    conditional mass normalisation.  For each r_s, lam makes the unmasked
+    wall-density ball variance equal to the signed carrier's.  The linear-limit
+    member (unsmoothed carrier, latent point variance 1e-4) checks that the
+    signed pair is the lam -> 0 limit: wall moments over lam^2 and
+    partition-wall moments over lam reproduce the signed ones.
+    """
+    g_ell = np.exp(-0.5 * (k * ell) ** 2)
+    var_g = float(simpson(d2 * g_ell ** 2, x=lnk))
+    ball_target = float(simpson(pair * xi_w, x=u))
+    members = {}
+    for rs in LOGNORMAL_RESOLUTIONS_MPC:
+        g_s = np.exp(-0.5 * (k * rs) ** 2)
+        var_s = float(simpson(d2 * g_s ** 2, x=lnk))
+        xi_s = _xi_table(k, lnk, d2, u, g_s, g_s)
+        cross0 = float(simpson(d2 * g_s * g_ell, x=lnk)) / math.sqrt(var_g)
+        cross = _xi_table(k, lnk, d2, u, g_s, g_ell) / math.sqrt(var_g)
+
+        def ball(lam2: float) -> float:
+            return float(simpson(pair * np.expm1(lam2 * xi_s), x=u))
+
+        lam2 = brentq(lambda l2: ball(l2) - ball_target, 1e-8, 50.0, xtol=1e-15, rtol=1e-14)
+        laws = _lognormal_laws(f_v0, c, u, pair, rho_g, math.sqrt(lam2), xi_s, cross0, cross)
+        members[f"r_s_{rs:g}_Mpc"] = {
+            "resolution_radius_Mpc": rs, "latent_scale_lambda": math.sqrt(lam2),
+            "latent_point_variance": lam2 * var_s,
+            "density_point_variance": math.expm1(lam2 * var_s),
+            "ball_variance_unmasked_density": ball(lam2),
+            "calibration_rel": abs(ball(lam2) / ball_target - 1.0),
+            "laws": laws,
+            "sigma_ratio_II_over_I": laws["II_same_field"]["sigma_total"]
+            / laws["I_independent"]["sigma_total"]}
+    # Linear limit: unsmoothed carrier, tiny latent variance.
+    xi_w0 = float(simpson(d2, x=lnk))
+    lam = math.sqrt(LOGNORMAL_LINEAR_LIMIT_LATENT_VARIANCE / xi_w0)
+    cross0 = float(simpson(d2 * g_ell, x=lnk)) / math.sqrt(var_g)
+    cross = _xi_table(k, lnk, d2, u, g_ell) / math.sqrt(var_g)
+    small = _lognormal_laws(f_v0, c, u, pair, rho_g, lam, xi_w, cross0, cross)
+    limit = {}
+    for law in ("I_independent", "II_same_field"):
+        ref = signed_moments[law]
+        limit[law] = {"wall_moment_over_lam2": small[law]["wall_moment"] / lam ** 2,
+                      "signed_wall_moment": ref["wall_moment"],
+                      "partition_wall_moment_over_lam": small[law]["partition_wall_moment"] / lam,
+                      "signed_partition_wall_moment": ref["partition_wall_moment"]}
+    rel = max(abs(limit[law]["wall_moment_over_lam2"] / limit[law]["signed_wall_moment"] - 1.0)
+              for law in limit)
+    return {"pair_class": "NONNEGATIVE_LOGNORMAL_DENSITY_LAWS",
+            "negative_wall_density_probability": 0.0,
+            "ball_variance_signed_carrier": ball_target,
+            "shared_constraints": ["f_v0", "partition covariance (identical P11(r))",
+                                   "unconditional wall-density covariance exp(lam^2 xi_s) - 1",
+                                   "conditional mass normalisation"],
+            "members": members,
+            "linear_limit": {"latent_point_variance": LOGNORMAL_LINEAR_LIMIT_LATENT_VARIANCE,
+                             "latent_scale_lambda": lam, "laws": limit,
+                             "max_wall_moment_rel_difference": rel}}
+
+
 def gt_pair(bg_in, growth, density, R: float, target_sigma_part: float,
             anchor: float) -> dict:
-    """Two admissible joint laws with equal acquired constraints (H21).
+    """Two constructive joint-law pairs with equal shared constraints (H21), [1G-H] Sec. 6.3.
 
-    Partition: voids = {g < c}, Phi(c) = f_v0, g the wall field smoothed with a
-    Gaussian of width ell (calibrated so the partition rms in the ball equals
-    the 1G-E/F reference value).  Wall field: the 1G-E/F wall-internal linear
-    field (growth D_wall(t0), photon-frame compression s = D_wall, Planck
-    anchored).  Law I: g independent of the wall field; law II: g is the
-    smoothed wall field itself.  Both have the same f_v0, the same partition
-    covariance and the same wall-field covariance, and both are normalised
-    conditionally (E[chi_w delta_w] = 0).
+    Partition: voids = {g < c}, Phi(c) = f_v0, g the wall carrier smoothed with
+    a Gaussian of width ell (calibrated so the partition rms in the ball
+    equals the 1G-E/F reference value).  Carrier: the 1G-E/F wall-internal
+    linear field (growth D_wall(t0), photon-frame compression s = D_wall,
+    Planck anchored).  Law I: g independent of the carrier; law II: g is the
+    smoothed carrier itself.
+
+    * Signed Gaussian pair (owner decision D3 on audit GH-F5): the wall
+      density is ``1 + w - mu`` with the conditional recentring mu, a signed
+      surrogate; the shared covariance is that of the unconditional carrier,
+      and the phase-conditioned (masked) wall covariance differs between I and
+      II.  ``negative_wall_density_probability`` gives P(rho < 0 | wall).
+    * Nonnegative lognormal pair (D3): ``lognormal_pair``.
     """
     f_v0 = growth.fv0
     f_w = 1.0 - f_v0
@@ -374,8 +562,7 @@ def gt_pair(bg_in, growth, density, R: float, target_sigma_part: float,
 
     def partition_sigma(ell):
         rho_g, _, _ = tables(ell)
-        p11 = np.array([gv.bivariate_normal_orthant_moments(
-            correlation=min(rg, 1.0 - 1e-12), threshold=c, nodes=200)["P11"] for rg in rho_g])
+        p11 = np.array([_orthant(rg, c)["P11"] for rg in rho_g])
         return math.sqrt(float(simpson(pair * (p11 - f_w ** 2), x=u)) / f_w ** 2)
 
     ell = brentq(lambda e: partition_sigma(e) - target_sigma_part, 0.02, 20.0, xtol=1e-8)
@@ -385,8 +572,7 @@ def gt_pair(bg_in, growth, density, R: float, target_sigma_part: float,
     for law, correlated in (("I_independent", False), ("II_same_field", True)):
         c_chi, k_ww, k_xw = [], [], []
         for i in range(len(u)):
-            mom = gv.bivariate_normal_orthant_moments(
-                correlation=min(rho_g[i], 1.0 - 1e-12), threshold=c, nodes=200)
+            mom = _orthant(rho_g[i], c)
             p11 = mom["P11"]
             if correlated:
                 cgg = np.array([[1.0, rho_g[i]], [rho_g[i], 1.0]])
@@ -419,15 +605,146 @@ def gt_pair(bg_in, growth, density, R: float, target_sigma_part: float,
         laws[law] = {"sigma_partition": math.sqrt(var["partition_term"]),
                      "sigma_wall_field": math.sqrt(var["wall_field_term"]),
                      "cross_term": var["cross_terms"], "sigma_total": var["rms"],
+                     "wall_moment": wall, "partition_wall_moment": cross_pw,
                      "cauchy_schwarz": gv.cauchy_schwarz_total_rms_interval(
                          partition_rms=math.sqrt(var["partition_term"]),
                          field_rms=math.sqrt(var["wall_field_term"]))}
+    # P(rho < 0 | wall) of the signed laws (GH-F5): law I, delta_w = w with the
+    # mask independent; law II, delta_w = w - mu with corr(w, g) = cross0/sigma_w.
+    sigma_w = math.sqrt(xi_w0)
+    r_wg = cross0 / sigma_w
+    negative = {"I_independent": float(ndtr(-1.0 / sigma_w)),
+                "II_same_field": _orthant_p(-r_wg, (1.0 - mu) / sigma_w, c) / f_w}
+    lognormal = lognormal_pairs(f_v0, c, u, pair, k, lnk, d2, ell, xi_w, rho_g, laws)
     return {"radius_Mpc": R, "pair_density_norm": pair_norm, "threshold_c": c,
             "partition_smoothing_ell_Mpc": ell, "target_sigma_partition": target_sigma_part,
-            "wall_field_rms_point": math.sqrt(xi_w0), "wall_growth_D_wall": d_wall0,
-            "conditional_wall_mean_mu_law_II": mu, "laws": laws,
+            "wall_field_rms_point": sigma_w, "wall_growth_D_wall": d_wall0,
+            "conditional_wall_mean_mu_law_II": mu,
+            "pair_class": "SIGNED_GAUSSIAN_CARRIER_SURROGATE",
+            "negative_wall_density_probability": negative,
+            "laws": laws,
             "sigma_ratio_II_over_I": laws["II_same_field"]["sigma_total"]
-            / laws["I_independent"]["sigma_total"]}
+            / laws["I_independent"]["sigma_total"],
+            "nonnegative_lognormal_pair": lognormal}
+
+
+# ------------------------------------------------- audit remediation evidence
+def ensemble_vs_tangent_example() -> dict:
+    """GH-F1: averaging the derivative of (H3) is not the zero-amplitude tangent.
+
+    Two equal-mass regions with f_v = 0.737, epsilon = 0 and wall contrasts
+    -1/3 and 1 (the audit's example): the mass-weighted mean of
+    1/(1 + delta_L) is exactly 1, the mean derivative d delta_L/d delta_w is
+    0.27468, the tangent at zero amplitude is f_w = 0.263.  This is why the
+    statistic is defined as the formal tangent (D1), not as the ensemble-mean
+    response of the true contrast.
+    """
+    f_v, h = 0.737, 1e-6
+
+    def contrast(s):
+        return float(gv.empty_void_region_contrast(void_volume_fraction=f_v,
+                                                   wall_density_contrast=s,
+                                                   void_volume_contrast=0.0))
+
+    states = (-1.0 / 3.0, 1.0)
+    derivs = [(contrast(s + h) - contrast(s - h)) / (2.0 * h) for s in states]
+    return {"void_volume_fraction": f_v, "wall_contrasts": list(states),
+            "mean_reciprocal_density": float(np.mean([1.0 / (1.0 + contrast(s))
+                                                      for s in states])),
+            "mean_derivative_central_difference": float(np.mean(derivs)),
+            "mean_derivative_exact": float(np.mean([(1.0 - f_v) / (1.0 + f_v * s) ** 2
+                                                    for s in states])),
+            "tangent_at_zero_amplitude": 1.0 - f_v}
+
+
+def scale_separation(bg_in, growth, density) -> dict:
+    """GH-F2: present void radius over the present proper region radius, convention (c)."""
+    h_d, h_bare, g0 = density.h_dressed, density.h_bare, growth.gamma_w0
+    region = 8.0 / h_bare
+    radii = {"F_median": F_MEDIAN_RADIUS_H_MPC[bg_in.label] * g0 / h_d,
+             "W09_15": (W09_VOID_DIAMETER_H_MPC / 2.0) / h_d}
+    return {"present_proper_region_radius_Mpc": region,
+            **{f"{k}_present_void_radius_Mpc": v for k, v in radii.items()},
+            **{f"{k}_ratio": v / region for k, v in radii.items()}}
+
+
+STEP_K_RANGE = (1e-7, 1e3)
+STEP_GRID = 8001
+STEP_SELF_CONVERGENCE = 1e-6
+STEP_PREMISE_MARGIN = 1e-3
+
+
+def step_share_counterexample(growth, density, spec, target_R: float, premise_R: float,
+                              eta: float, constant_share_upper: float) -> dict:
+    """GH-F4: a pointwise-monotone, scale-dependent share outside the (H15) bound.
+
+    ``p(k) = f_v,LS`` for k < k_cut and 1 above (inside H-A7 at every k); k_cut
+    makes the premise rms eta (1 - 1e-3).  The variance integral is split at
+    k_cut, each part on its own log grid, with a self-convergence check.
+    """
+    om = density.omega_m_per_photon
+    d_w, d_v = growth.wall_share_growth, growth.void_share_growth
+    g_lo, g_hi = d_w + (d_v - d_w) * growth.f_v_ls, d_v
+
+    def sigma(R: float, k_cut: float, n: int) -> float:
+        total = 0.0
+        for ka, kb, g in ((STEP_K_RANGE[0], k_cut, g_lo), (k_cut, STEP_K_RANGE[1], g_hi)):
+            lnk = np.linspace(math.log(ka), math.log(kb), n)
+            kk = np.exp(lnk)
+            amp = np.asarray(ls.matter_era_linear_amplitude(
+                k_per_Mpc=kk, early_spectrum=spec, omega_m=om, growth_today_photon_normalised=1.0))
+            w = np.asarray(ls.top_hat_window(x=kk * R))
+            total += g * g * float(simpson(amp * w * w, x=lnk))
+        return math.sqrt(total)
+
+    def checked(R: float, k_cut: float) -> float:
+        fine, coarse = sigma(R, k_cut, STEP_GRID), sigma(R, k_cut, STEP_GRID // 2 + 1)
+        if not abs(fine / coarse - 1.0) <= STEP_SELF_CONVERGENCE:
+            raise AssertionError("step-kernel variance not converged")
+        return fine
+
+    target = eta * (1.0 - STEP_PREMISE_MARGIN)
+    log_k = brentq(lambda lk: checked(premise_R, math.exp(lk)) - target,
+                   math.log(1e-3), math.log(1.0), xtol=1e-12)
+    k_cut = math.exp(log_k)
+    s_hom, s_target = checked(premise_R, k_cut), checked(target_R, k_cut)
+    return {"share_low_k": growth.f_v_ls, "share_high_k": 1.0, "k_cut_per_Mpc": k_cut,
+            "premise_radius_Mpc": premise_R, "premise_eta": eta, "premise_rms": s_hom,
+            "target_radius_Mpc": target_R, "target_rms": s_target,
+            "constant_share_upper": constant_share_upper,
+            "ratio_to_constant_share_upper": s_target / constant_share_upper}
+
+
+def pbs_reclosure(bg_in, clos, radius, anchor_factor: float, rows: dict, conv: str) -> dict:
+    """GH-F6: rescale the input spectrum by the anchor factor and recompute p.
+
+    A uniform rescaling of the early spectrum amplitude (A_s times the factor
+    squared) changes sigma_s and therefore the PBS threshold share; the
+    post-hoc normalisation multiplies the finished value at fixed closure.
+    For a constant share both agree exactly.  Under reclosure the (H15) upper
+    end is unchanged at fixed eta and the lower end scales with the factor.
+    """
+    spec_re = early_spectrum(2.100e-9 * anchor_factor ** 2)
+    out = {"A_s_factor": anchor_factor ** 2}
+    records = {}
+    for cname in ("monotone_lower_p_fvLS", "pbs_tracker_seed_compressed",
+                  "pbs_tracker_seed_F_median_compressed"):
+        r = run_case(bg_in, clos[cname], spec_re, radius)
+        records[cname] = r
+        post = rows[cname]["linear_sigma_planck_anchored"]
+        out[cname] = {"direct": rows[cname]["linear_sigma_direct_A_s"],
+                      "post_hoc_fixed_closure": post, "reclosure": r.linear_sigma,
+                      "share_k0_direct": rows[cname]["share_k0"],
+                      "share_k0_reclosure": r.void_share.share_k0,
+                      "reclosure_over_post_hoc": r.linear_sigma / post}
+    L_hom, eta = PREMISES["W09_10pct_at_100"]
+    prem = gv.HomogeneityPremise(radius=radius_spec(conv, L_hom), max_linear_rms=eta,
+                                 provenance="[W09] read as rms <= 0.10 at 100 (reclosure)")
+    iv = gv.admissible_global_linear_interval(target=records["pbs_tracker_seed_compressed"],
+                                              premise=prem)
+    out["interval_W09_10pct_at_100_reclosure"] = {"lower": iv.lower, "upper": iv.upper,
+                                                  "share_upper": iv.share_upper}
+    return out
 
 
 # -------------------------------------------------------------------- figures
@@ -437,7 +754,7 @@ def figures(results: dict) -> list[str]:
     import matplotlib.pyplot as plt
     FIGURES.mkdir(parents=True, exist_ok=True)
     written = []
-    # 1. sigma versus the void share with the admissible interval.
+    # 1. sigma versus the void share with the constant-share interval.
     fig, ax = plt.subplots(figsize=(6.4, 4.2))
     for name, colour in (("PAPER_REFERENCE", "tab:blue"), ("NW15_CMB_FIT", "tab:orange")):
         case = results["cases"][name]
@@ -448,7 +765,7 @@ def figures(results: dict) -> list[str]:
         ax.plot(p, (d_w + (d_v - d_w) * p) * su, color=colour, label=f"{name} (H9)")
         iv = conv["intervals"]["W09_10pct_at_100"]
         ax.axhspan(iv["lower"], iv["upper"], color=colour, alpha=0.12,
-                   label=f"{name} admissible interval (H15), 10% at 100 h^-1 Mpc")
+                   label=f"{name} constant-share interval (H15), adopted 10%-at-100 reading")
         prim = conv["closures"]["pbs_tracker_seed_compressed"]
         ax.plot([prim["share_k0"]], [prim["linear_sigma_direct_A_s"]], "o", color=colour,
                 label=f"{name} PBS seed, [W09] void radius")
@@ -457,7 +774,7 @@ def figures(results: dict) -> list[str]:
                 label=f"{name} PBS seed, 1G-F median radius")
     ax.set_xlabel("void share p (k -> 0)")
     ax.set_ylabel("global-mean linear rms at 8 / h_bare Mpc (c)")
-    ax.set_title("Conditional global linear statistic vs the void-share closure")
+    ax.set_title("Formal tangent statistic vs the void-share closure (conditional)")
     ax.legend(fontsize=6.5)
     fig.tight_layout()
     path = FIGURES / "sigma_vs_void_share.png"
@@ -585,6 +902,13 @@ def main(argv=None) -> int:
                 scan.append(row)
             case["conventions"][conv] = {"closures": rows, "intervals": intervals,
                                          "radius_scan": scan}
+            if conv in ("c_bare_volume_average", "a_equal_mass"):
+                reclosure = pbs_reclosure(bg_in, clos, radius, anchor["factor"], rows, conv)
+                case["conventions"][conv]["pbs_reclosure_under_spectrum_rescaling"] = reclosure
+                row = reclosure["monotone_lower_p_fvLS"]
+                gate(f"{name} {conv} constant share reclosure equals post-hoc",
+                     abs(row["reclosure_over_post_hoc"] - 1.0),
+                     GATES["reclosure_constant_share_rel"], kind="physics")
             if conv == "c_bare_volume_average":
                 primary_record = records["pbs_tracker_seed_compressed"]
                 refined = run_case(bg_in, clos["pbs_tracker_seed_compressed"], spec, radius,
@@ -618,6 +942,23 @@ def main(argv=None) -> int:
                         sens[sname] = {"R_s_Mpc": rs, "refused": str(exc)}
                 case["seed_radius_sensitivity"] = sens
                 case["flat_wall_capacity"] = flat_wall_capacity_radius(bg_in, growth, density, spec)
+                # Audit remediation evidence (GH-F2, GH-F4, GH-F7).
+                case["scale_separation"] = scale_separation(bg_in, growth, density)
+                ratio = rows["wall_mode_p0"]["flat_wall_capacity_ratio"]
+                case["flat_wall_cap_exceedance"] = {
+                    "capacity_ratio_at_target": ratio,
+                    "gaussian_fraction_above_cap": float(ndtr(-1.0 / ratio)),
+                    "meaning": "fraction of the matching-epoch Gaussian contrast above the "
+                               "strict flat-wall cap (H13), not the whole overdense half"}
+                L_hom, eta = PREMISES["W09_10pct_at_100"]
+                step = step_share_counterexample(
+                    growth, density, spec, target_R=primary_record.radius.radius_Mpc,
+                    premise_R=resolve_radius(radius_spec(conv, L_hom), density), eta=eta,
+                    constant_share_upper=intervals["W09_10pct_at_100"]["upper"])
+                case["step_share_counterexample"] = step
+                gate(f"{name} step kernel satisfies the premise",
+                     step["premise_rms"] / step["premise_eta"],
+                     GATES["step_kernel_premise_ratio"], kind="physics")
         # Reproduction of the 1G-D owner-decision numbers (threshold-only S2).
         d_row = case["conventions"]["a_equal_mass"]["closures"]["pbs_tracker_seed_threshold_only_1G_D"]
         gate(f"{name} A_v vs 1G-D printed", abs(d_row["void_onset_response_A_v"]
@@ -660,8 +1001,10 @@ def main(argv=None) -> int:
                        "empty voids")
         var = gv.two_phase_global_variance(void_volume_fraction=fv0,
                                            void_to_wall_density_ratio=0.0, moments=e3)
-        gate(f"{name} E reference reproduction", abs(var["rms"] - stot),
-             GATES["E_reference_reproduction_abs"], kind="reproduction")
+        half = GATES["E_reference_printed_half_unit"]
+        budget = half * (sp / var["rms"] + si / var["rms"] + 1.0)
+        gate(f"{name} E reference reproduction within its rounding budget",
+             abs(var["rms"] - stot), budget, kind="reproduction")
         growth = gv.two_phase_global_growth(background=bg_in, matching=MATCHING, checks=CHECKS, G=G)
         density = ls.early_matter_density_per_photon(background=bg_in,
                                                      identity_tolerance=IDENTITY_RTOL, G=G)
@@ -673,8 +1016,15 @@ def main(argv=None) -> int:
             moments=gv.TwoPhaseSmoothedMoments(var_partition=0.0, wall_field=0.0, void_field=0.0,
                                                partition_wall=0.0, partition_void=0.0,
                                                wall_void=0.0, provenance="weights only"))
+        lognormal = gtp["nonnegative_lognormal_pair"]
+        gate(f"{name} lognormal ball-variance calibration",
+             max(m["calibration_rel"] for m in lognormal["members"].values()),
+             GATES["lognormal_ball_variance_calibration_rel"], kind="numerics")
+        gate(f"{name} lognormal linear limit reproduces the signed pair",
+             lognormal["linear_limit"]["max_wall_moment_rel_difference"],
+             GATES["lognormal_linear_limit_rel"], kind="physics")
         cov[name] = {"E_reference": {"sigma_part": sp, "sigma_int": si, "sigma_printed": stot,
-                                     "reproduced": var["rms"]},
+                                     "reproduced": var["rms"], "rounding_budget": budget},
                      "cauchy_schwarz_on_E_reference": gv.cauchy_schwarz_total_rms_interval(
                          partition_rms=sp, field_rms=si),
                      "gaussian_threshold_pair": gtp,
@@ -686,12 +1036,26 @@ def main(argv=None) -> int:
     worst = 0.0
     for rho in (-0.6, 0.0, 0.3, 0.9, 0.999):
         for cthr in (-1.0, 0.0, 0.634, 2.0):
-            mom = gv.bivariate_normal_orthant_moments(correlation=rho, threshold=cthr, nodes=400)
+            mom = _orthant(rho, cthr)
             exact = float(multivariate_normal(mean=[0.0, 0.0], cov=[[1.0, rho], [rho, 1.0]]).cdf(
                 [-cthr, -cthr]))
             worst = max(worst, abs(mom["P11"] - exact))
     gate("orthant P11 vs bivariate CDF", worst, GATES["gt_orthant_P11_vs_bivariate_cdf_abs"],
          kind="numerics")
+    # Analytic special cases of the audit (GH-F10): independence, c = 0 and a
+    # far threshold, including near-singular correlations.
+    analytic = {"rho0_c_minus100": (_orthant(0.0, -100.0)["P11"], 1.0),
+                "rho0_c0p634": (_orthant(0.0, 0.634)["P11"], float(ndtr(-0.634)) ** 2)}
+    for rho in (0.999999, -0.999999, 0.5):
+        analytic[f"c0_rho{rho:+g}"] = (gv.bivariate_normal_orthant_probability(
+            correlation=rho, threshold_1=0.0, threshold_2=0.0, nodes=ORTHANT_START_NODES,
+            tolerance=ORTHANT_TOLERANCE), 0.25 + math.asin(rho) / (2.0 * math.pi))
+    worst_analytic = max(abs(a - b) for a, b in analytic.values())
+    gate("orthant analytic special cases", worst_analytic, GATES["orthant_analytic_cases_abs"],
+         kind="numerics")
+    results["orthant_analytic_cases"] = {k: {"value": a, "exact": b}
+                                         for k, (a, b) in analytic.items()}
+    results["ensemble_vs_tangent_example"] = ensemble_vs_tangent_example()
     results["two_phase_covariance"] = cov
     results["gates"] = gates_seen
     results["gate_definitions"] = GATES
@@ -699,7 +1063,8 @@ def main(argv=None) -> int:
     if not args.no_figures:
         results["figures"] = figures(results)
     ARTIFACT.parent.mkdir(parents=True, exist_ok=True)
-    payload = json.dumps(results, indent=2, sort_keys=True, default=_json_default) + "\n"
+    payload = json.dumps(results, indent=2, sort_keys=True, default=_json_default,
+                         allow_nan=False) + "\n"
     ARTIFACT.write_bytes(payload.encode("utf-8"))
     digest = hashlib.sha256(payload.encode("utf-8")).hexdigest()
     _print_summary(results, digest)
@@ -752,14 +1117,41 @@ def _print_summary(results: dict, digest: str) -> None:
             print(f"  M3 {resp}: b = {m3[resp]['bias']:.5f}, G = {m3[resp]['global_growth_today']:.5f},"
                   f" p_eq = {m3[resp]['equivalent_tracker_share']:.5f}")
         print(f"  flat-wall capacity radius: {case['flat_wall_capacity']['radius_Mpc']:.2f} Mpc")
+        ex = case["flat_wall_cap_exceedance"]
+        print(f"  fraction above the flat-wall cap at R8: {ex['gaussian_fraction_above_cap']:.4f}")
+        sep = case["scale_separation"]
+        print(f"  void/region radius (c): F median {sep['F_median_ratio']:.3f}, "
+              f"W09 {sep['W09_15_ratio']:.3f}")
+        st = case["step_share_counterexample"]
+        print(f"  step kernel: k_cut = {st['k_cut_per_Mpc']:.6g}, premise rms "
+              f"{st['premise_rms']:.5f}, target rms {st['target_rms']:.4f} (constant-share "
+              f"upper {st['constant_share_upper']:.4f})")
+        for conv in ("c_bare_volume_average", "a_equal_mass"):
+            rec = case["conventions"][conv]["pbs_reclosure_under_spectrum_rescaling"]
+            for cname in ("pbs_tracker_seed_compressed", "pbs_tracker_seed_F_median_compressed"):
+                row = rec[cname]
+                print(f"  [{conv}] {cname}: direct {row['direct']:.4f}, post-hoc "
+                      f"{row['post_hoc_fixed_closure']:.4f}, reclosure {row['reclosure']:.4f}")
     for name, cov in results["two_phase_covariance"].items():
         gtp = cov["gaussian_threshold_pair"]
         print(f"\n{name} GT pair at R = {gtp['radius_Mpc']:.4f} Mpc, ell = "
               f"{gtp['partition_smoothing_ell_Mpc']:.4f} Mpc:")
         for law, row in gtp["laws"].items():
-            print(f"  {law:15s} sigma_part = {row['sigma_partition']:.4f}  sigma_wall = "
+            print(f"  signed {law:15s} sigma_part = {row['sigma_partition']:.4f}  sigma_wall = "
                   f"{row['sigma_wall_field']:.4f}  cross = {row['cross_term']:+.4f}  total = "
-                  f"{row['sigma_total']:.4f}")
+                  f"{row['sigma_total']:.4f}  P(rho<0|wall) = "
+                  f"{gtp['negative_wall_density_probability'][law]:.4f}")
+        ln = gtp["nonnegative_lognormal_pair"]
+        for mname, mem in ln["members"].items():
+            print(f"  lognormal {mname}: lambda = {mem['latent_scale_lambda']:.4f}, latent point "
+                  f"variance {mem['latent_point_variance']:.3f}, density point variance "
+                  f"{mem['density_point_variance']:.2f}; II/I = {mem['sigma_ratio_II_over_I']:.4f}")
+            for law, row in mem["laws"].items():
+                print(f"    {law:15s} sigma_part = {row['sigma_partition']:.4f}  sigma_wall = "
+                      f"{row['sigma_wall_field']:.4f}  cross = {row['cross_term']:+.4f}  total = "
+                      f"{row['sigma_total']:.4f}")
+        print(f"  lognormal linear limit: max wall-moment rel. difference "
+              f"{ln['linear_limit']['max_wall_moment_rel_difference']:.2e}")
 
 
 if __name__ == "__main__":

@@ -13,8 +13,8 @@ and the other observational tokens stay ``NOT_GRANTED``, and
 owner decides otherwise.  No public name or output key carries the
 observational tokens (``sigma8``, ``sigma_8``, ``8hMpc``).
 
-What is defined ([1G-H] Sec. 2)
--------------------------------
+What is defined ([1G-H] Sec. 2, as remediated after the 2026-10-07 audit)
+--------------------------------------------------------------------------
 For a Lagrangian region L (a fixed set of dust elements) on the
 dust-orthogonal foliation of [GM] Sec. 3 (Buchert averaging, dust proper
 time t), the global contrast is
@@ -24,16 +24,24 @@ time t), the global contrast is
 with V the Riemannian volume on the slice and D the averaging domain.  The
 smoothing region is the Lagrangian top-hat ball of radius R in
 photon-normalised comoving Mpc (the early frame, in which all frames agree
-to O(f_v)).  The *global-mean linear statistic* is the rms of the first-order
-(ensemble-mean) response of delta_L to the early Gaussian field,
+to O(f_v)).  The statistic computed here is the *formal tangent statistic*
+(owner decision D1 of 2026-10-07 on audit finding GH-F1; a proposal, not a
+closed definition): the rms of the linearly propagated early field, i.e. the
+zero-amplitude tangent G(k) of the regional contrast map around the smooth
+two-phase tracker state applied to the early Gaussian field, with the
+smoothing rule G_R(k) = G(k) W(k R) of a Lagrangian top hat,
 
     sigma^2_lin(R) = int dln k Delta^2_u(k) G(k, t0)^2 W^2(k R),          (H10)
 
 with Delta^2_u the photon-normalised matter-era spectrum at unit growth
 (``lagrangian_sigma.matter_era_linear_amplitude``, [1G-A] Sec. 6.3) and G the
-global linear propagator.  In the FLRW limit G is the linear growth factor
-and (H10) is the standard top-hat variance ([JLH13] arXiv:1304.6087v2,
-Eq. (2)).
+global linear propagator.  It is the analogue of the linear sigma at 8 Mpc/h
+of LCDM (linear extrapolation with the growth factor), not the ensemble-mean
+response of the true region contrast, which differs from the tangent when
+the small-scale field has finite amplitude.  The tangent treats the two-phase
+state as smooth on the region scale.  In the FLRW limit G is the linear
+growth factor and (H10) is the standard top-hat variance ([JLH13]
+arXiv:1304.6087v2, Eq. (2)).
 
 What is derived ([1G-H] Secs. 3-4)
 -----------------------------------
@@ -59,14 +67,26 @@ What is derived ([1G-H] Secs. 3-4)
   from [GM] Eqs. (5.4)-(5.6) and text p. 25 (``1 + z = gamma_w a_w0/a_D``,
   ``gamma_w = 1 + f_v/2``, ``a_D proportional to t f_v^(-1/3)``,
   ``f_v = t/(t + tau)``).  With p = 0 this is 1G-D's wall-curvature mode and
-  with p = 1 its void-onset mode; (H9) holds for every Lagrangian region whose
-  regional laws are A1-A5 and H-A6, not only for super-cell regions.
+  with p = 1 its void-onset mode.  (H9) holds for every Lagrangian region
+  whose regional laws are A1-A5 and H-A6 under the seed-indexed void
+  accounting H-A9 (owner decision D2 of 2026-10-07 on GH-F2): the void volume
+  of a region is the volume of the bubbles whose seeds lie in its Lagrangian
+  ball.  That equals the volume of the transported material region only with
+  scale separation (void radii much smaller than R), which is not met at
+  8 Mpc/h; the material-domain extension below the super-cell scale stays
+  unproved.
 
 What is NOT derived
 -------------------
-The void share p(k) (equivalently 1G-D's void-onset response A_v,
-``scientific_status.VOID_ONSET_RESPONSE = EXTERNAL_CLOSURE_INPUT``) is the
-single missing input of (H9).  It must be supplied as an explicit closure:
+The void share p(k) is the single missing input of (H9) under these
+assumptions.  It is defined by ``p delta_L(LS) = f_v,LS epsilon``, i.e.
+``p = f_v,LS - d f_v,L/d delta_L`` for the region's void volume fraction
+f_v,L at the matching epoch (audit GH-F3).  It carries the status of 1G-D's
+void-onset response (``scientific_status.VOID_ONSET_RESPONSE =
+EXTERNAL_CLOSURE_INPUT``): with 1G-D's threshold response A_v,
+``p(k -> 0) = f_v,LS (1 + A_v)`` when the seed volume is compressed with its
+region and ``f_v,LS A_v`` for the threshold shift alone.  It must be supplied
+as an explicit closure:
 
 * ``ConstantVoidShare``: an explicit, scale-independent p in [0, 1];
 * ``GaussianThresholdSeedVoidShare``: the peak-background split of a Gaussian
@@ -76,24 +96,31 @@ single missing input of (H9).  It must be supplied as an explicit closure:
   an explicit input.
 
 There is no default closure.  The numbers are conditional on A1-A5, H-A6,
-the monotone response H-A7 (0 <= p <= 1, ``f_v,LS <= p`` for a void fraction
-that does not grow with the overdensity), the closure, the early-spectrum
-import (``PROVISIONAL_MODEL_IMPORT``) and the radius convention
+H-A9, the monotone response H-A7 (``f_v,LS <= p <= 1`` at k -> 0 for a void
+fraction that does not grow with the overdensity; an added class
+assumption, not a tracker theorem), the closure, the early-spectrum import
+(``PROVISIONAL_MODEL_IMPORT``) and the radius convention
 (``CONVENTION_DEPENDENT``).
 
 Supporting results ([1G-H] Secs. 5-7)
 -------------------------------------
 * ``strict_flat_wall_contrast_cap``: with universal (flat) walls a region's
   contrast is bounded above by f_v/f_w (H13).
-* ``admissible_global_linear_interval``: the closure-independent interval
-  from the monotone lower end and the background's homogeneity premise
-  ([W09] arXiv:0909.0749v2, ll. 327-335 and 455-458), (H15).
+* ``admissible_global_linear_interval``: the constant-share interval from the
+  monotone lower end and an adopted reading of the background's homogeneity
+  premise ([W09] arXiv:0909.0749v2, ll. 327-335 and 455-458), (H15).  It
+  holds only for a void share constant over the spectral support of both
+  windows; scale-dependent shares in the monotone class are not bounded by
+  it (audit GH-F4).
 * ``two_phase_global_variance``: the complete two-phase covariance with
   phase-conditional normalisation and every cross term (H17)-(H19), with a
   positive-semidefiniteness gate; ``cauchy_schwarz_total_rms_interval``
   (H20).
-* ``bivariate_normal_orthant_moments``: the moments of the Gaussian-threshold
-  constructive pair (H21).
+* ``bivariate_normal_orthant_probability`` and
+  ``bivariate_normal_orthant_moments``: orthant integrals of a bivariate
+  normal with an explicit accuracy contract (H21), used by the constructive
+  pairs of the evidence script (a signed Gaussian surrogate pair and a
+  nonnegative lognormal pair, owner decision D3 on GH-F5).
 * ``two_barrier_void_mass_fraction`` and ``two_barrier_global_linear_bias``:
   the excursion-set response of the two-barrier void mass fraction of
   [SvdW04] (astro-ph/0311260, Eq. (3)), an alternative closure (H22).
@@ -101,9 +128,11 @@ Supporting results ([1G-H] Secs. 5-7)
 References: [GM] Galoppo & Mourier, arXiv:2511.17160v2; [W07] Wiltshire,
 arXiv:0709.0732v2; [W09] Wiltshire, arXiv:0909.0749v2; [JLH13] Jennings,
 Li & Hu, arXiv:1304.6087v2; [SvdW04] Sheth & van de Weygaert,
-astro-ph/0311260; [EH98] Eisenstein & Hu, astro-ph/9709112 (through
-``lagrangian_sigma``).  Every scientific choice is a mandatory keyword-only
-argument; inapplicable choices are passed as ``NOT_APPLICABLE``.
+astro-ph/0311260; [EH98] Eisenstein & Hu, astro-ph/9709112, the
+zero-baryon-oscillation (no-wiggle) fit with the baryon shape suppression,
+Eqs. (26), (28)-(31), through ``lagrangian_sigma``.  Every scientific choice
+is a mandatory keyword-only argument; inapplicable choices are passed as
+``NOT_APPLICABLE``.
 """
 
 from __future__ import annotations
@@ -111,6 +140,7 @@ from __future__ import annotations
 import math
 from dataclasses import dataclass
 from enum import Enum
+from functools import lru_cache
 from numbers import Real
 
 import numpy as np
@@ -148,6 +178,8 @@ __all__ = [
     "VOID_RESPONSE_PERTURBATIVE",
     "VOID_RESPONSE_NONPERTURBATIVE",
     "PSD_TOLERANCE",
+    "RECORD_IDENTITY_RTOL",
+    "ORTHANT_MAX_NODES",
     # enums
     "SeedVolumeCompression",
     "WallLongModeResponse",
@@ -181,6 +213,7 @@ __all__ = [
     "admissible_global_linear_interval",
     "two_phase_global_variance",
     "cauchy_schwarz_total_rms_interval",
+    "bivariate_normal_orthant_probability",
     "bivariate_normal_orthant_moments",
     "two_barrier_void_mass_fraction",
     "two_barrier_global_linear_bias",
@@ -214,6 +247,22 @@ VOID_RESPONSE_NONPERTURBATIVE = "VOID_RESPONSE_NONPERTURBATIVE"
 # two-phase second-moment matrix: eigenvalues >= -PSD_TOLERANCE * max|eig|.
 # Round-off allowance for moments assembled from O(1) quadratures.
 PSD_TOLERANCE = 1e-12
+
+# Relative tolerance of the record invariants re-evaluated in __post_init__
+# from a record's own stored fields (audit GH-F9): a round-off allowance for
+# closed forms of O(1) quantities, the same order as the identity tolerance
+# of TWO_PHASE_GROWTH_REFERENCE_CHECKS.  It is not a physics tolerance.
+RECORD_IDENTITY_RTOL = 1e-12
+
+# Orthant quadrature (audit GH-F10): Gauss-Legendre panels are refined by
+# doubling the node count until two successive results agree to the caller's
+# absolute tolerance; beyond ORTHANT_MAX_NODES per panel the evaluation is
+# refused (the panels split at the conditional step converge by 64-128 nodes;
+# numpy's leggauss costs O(n^3), so the cap also bounds the run time).  The
+# integration range is truncated to |u| <= 12: the omitted Gaussian tails of
+# the five moments are below 12^2 phi(12) < 1e-29.
+ORTHANT_MAX_NODES = 1 << 10
+_ORTHANT_HALF_WIDTH = 12.0
 
 
 # --------------------------------------------------------------------------
@@ -312,6 +361,19 @@ def _require(value, cls, name: str):
 def _require_enum(value, enum_type, name: str):
     if not isinstance(value, enum_type):
         raise GlobalVarianceContractError(f"{name} must be a {enum_type.__name__} member")
+    return value
+
+
+def _close(value: float, expected: float) -> bool:
+    """Record invariant: ``value`` re-evaluated from stored fields (RECORD_IDENTITY_RTOL)."""
+    return math.isclose(value, expected, rel_tol=RECORD_IDENTITY_RTOL, abs_tol=0.0)
+
+
+def _strings(value, name: str) -> tuple[str, ...]:
+    if not isinstance(value, tuple) or not value:
+        raise GlobalVarianceContractError(f"{name} must be a non-empty tuple")
+    for item in value:
+        _nonempty(item, name)
     return value
 
 
@@ -553,8 +615,40 @@ class TwoPhaseGlobalGrowth:
                 and math.isclose(self.gamma_w_ls, 1.0 + self.f_v_ls / 2.0, rel_tol=tol,
                                  abs_tol=0.0)):
             raise GlobalVarianceContractError("gamma_w must equal 1 + f_v/2 ([GM] p. 25)")
-        if not isinstance(self.assumptions, tuple) or not self.assumptions:
-            raise GlobalVarianceContractError("assumptions must be a non-empty tuple")
+        # Tracker consistency of the matching epoch (audit GH-F9): the time
+        # ratio lies in (0, 1), f_v grows with t, the one-time-scale law
+        # f_v = t/(t + tau) with tau/t0 = f_w0/f_v0 links t_LS to f_v,LS, and
+        # the finite-t identity (H23) links t_LS to z_LS.
+        t_ratio = self.t_ls_over_t0
+        if not (0.0 < t_ratio < 1.0 and 0.0 < self.f_v_ls < self.fv0 < 1.0):
+            raise GlobalVarianceContractError(
+                "need 0 < t_LS/t0 < 1 and 0 < f_v,LS < f_v0 < 1 (tracker ordering)")
+        one_scale = t_ratio / (t_ratio + f_w0 / self.fv0)
+        h23 = (t_ratio ** (-2.0 / 3.0) / (1.0 + self.matching.z_last_scattering)) / (
+            self.gamma_w0 * f_w0 ** (1.0 / 3.0) / (self.gamma_w_ls * f_wls ** (1.0 / 3.0)))
+        if not (math.isclose(self.f_v_ls, one_scale, rel_tol=tol, abs_tol=0.0)
+                and math.isclose(h23, 1.0, rel_tol=tol, abs_tol=0.0)):
+            raise GlobalVarianceContractError(
+                "t_LS/t0, f_v,LS and z_LS violate the tracker identities (H23)")
+        # Diagnostics: finite, non-negative, every check present and within
+        # its declared tolerance.
+        if not isinstance(self.diagnostics, tuple):
+            raise GlobalVarianceContractError("diagnostics must be a tuple of (name, value) pairs")
+        diag = {}
+        for item in self.diagnostics:
+            if not (isinstance(item, tuple) and len(item) == 2):
+                raise GlobalVarianceContractError("diagnostics must be (name, value) pairs")
+            name, value = item
+            diag[_nonempty(name, "diagnostic name")] = _real(value, f"diagnostic {name}")
+            if diag[name] < 0.0:
+                raise GlobalVarianceContractError(f"diagnostic {name} must be non-negative")
+        for name in _GROWTH_IDENTITY_DIAGNOSTICS:
+            if name not in diag or not diag[name] <= tol:
+                raise GlobalVarianceContractError(f"identity diagnostic {name} missing or failed")
+        for name in _GROWTH_CROSS_DIAGNOSTICS:
+            if name not in diag or not diag[name] <= self.checks.ode_cross_check_tolerance:
+                raise GlobalVarianceContractError(f"cross-check diagnostic {name} missing or failed")
+        _strings(self.assumptions, "assumptions")
 
     def to_json_dict(self) -> dict:
         return {"background": self.background.to_metadata(),
@@ -583,6 +677,12 @@ _GROWTH_ASSUMPTIONS = (
     "matter-era photon normalisation at the explicit matching redshift; radiation "
     "at last scattering neglected",
 )
+_GROWTH_IDENTITY_DIAGNOSTICS = (
+    "finite_t_photon_identity_rel", "one_time_scale_identity_rel", "redshift_root_rel",
+    "gamma_w0_identity_rel", "gamma_w_ls_identity_rel")
+_GROWTH_CROSS_DIAGNOSTICS = (
+    "wall_share_ode_vs_closed_form_rel", "void_volume_ode_vs_package_rel",
+    "void_share_ode_vs_closed_form_rel")
 
 
 def _t_of_redshift(p, z: float, xtol_fraction: float) -> float:
@@ -689,8 +789,10 @@ class ConstantVoidShare:
 
     p is the fraction of a region's early (matching-epoch) linear contrast
     carried by its void-volume deficit, ``p = f_v,LS epsilon/delta_L(LS)``
-    ([1G-H] (H7)).  The monotone class H-A7 is ``0 <= p <= 1``; ``p = 0`` is
-    1G-D's wall-curvature mode, ``p = 1`` the strict flat-wall reading.
+    ([1G-H] (H7)), equivalently ``p = f_v,LS - d f_v,L/d delta_L`` for the
+    region's void volume fraction f_v,L.  The accepted range is ``[0, 1]``:
+    ``p = 0`` is 1G-D's wall-curvature mode (just below the monotone class
+    H-A7, ``f_v,LS <= p <= 1``), ``p = 1`` the strict flat-wall reading.
     ``evidence_class`` records the status of the supplied value.
     """
 
@@ -773,7 +875,11 @@ class EvaluatedVoidShare:
     ``share_k0`` is p at k -> 0; ``kind`` names the closure.  For the Gaussian
     threshold: ``nu``, ``sigma_seed`` (rms of the seed-scale field at the
     matching epoch), ``threshold_share_k0 = phi(nu)/sigma_s`` and the
-    compression term; ``void_onset_response`` is 1G-D's A_v.
+    compression term (``f_v,LS`` or 0); ``void_onset_response`` is 1G-D's
+    threshold response ``A_v = phi(nu)/(sigma_s Phi(-nu))``, so that
+    ``share_k0 = f_v,LS (1 + A_v)`` with compression and ``f_v,LS A_v``
+    without.  Every field is validated against the closure variant and the
+    growth record (audit GH-F9); inapplicable fields are ``NOT_APPLICABLE``.
     """
 
     closure: ConstantVoidShare | GaussianThresholdSeedVoidShare
@@ -794,6 +900,35 @@ class EvaluatedVoidShare:
         if not 0.0 <= p0 <= 1.0:
             raise GlobalVarianceContractError(
                 f"void share {p0!r} lies outside [0, 1] (monotone class H-A7)")
+        variant_fields = ("nu", "sigma_seed", "threshold_share_k0", "compression_share",
+                          "void_onset_response")
+        if isinstance(self.closure, ConstantVoidShare):
+            if self.kind != "constant":
+                raise GlobalVarianceContractError("kind must be 'constant' for a constant share")
+            if p0 != self.closure.share:
+                raise GlobalVarianceContractError("share_k0 must equal the closure's share")
+            for name in variant_fields:
+                if getattr(self, name) != NOT_APPLICABLE:
+                    raise GlobalVarianceContractError(f"{name} must be NOT_APPLICABLE")
+            return
+        if self.kind != "gaussian_threshold_seed":
+            raise GlobalVarianceContractError("kind must be 'gaussian_threshold_seed'")
+        values = {name: _real(getattr(self, name), name) for name in variant_fields}
+        sigma_s = values["sigma_seed"]
+        if not sigma_s > 0.0:
+            raise GlobalVarianceContractError("sigma_seed must be positive")
+        f_vls = self.growth.f_v_ls
+        nu = -float(ndtri(f_vls))
+        phi_nu = math.exp(-0.5 * nu * nu) / math.sqrt(2.0 * math.pi)
+        compression = (f_vls if self.closure.compression is SeedVolumeCompression.COMPRESSED_WITH_REGION
+                       else 0.0)
+        if not (_close(values["nu"], nu) and _close(values["threshold_share_k0"], phi_nu / sigma_s)
+                and values["compression_share"] == compression
+                and _close(p0, compression + values["threshold_share_k0"])
+                and _close(values["void_onset_response"],
+                           phi_nu / (sigma_s * float(ndtr(-nu))))):
+            raise GlobalVarianceContractError(
+                "Gaussian-threshold fields are inconsistent with (H12) and the growth record")
 
     def share(self, k_per_Mpc: ArrayLike) -> NDArray[np.float64]:
         """p(k), read-only; k in Mpc^-1 (photon-normalised comoving).
@@ -1009,6 +1144,21 @@ class ConditionalGlobalLinearSigma:
                 raise GlobalVarianceContractError(f"{name} must be non-negative")
         if self.effective_propagator != self.linear_sigma / self.unit_growth_sigma:
             raise GlobalVarianceContractError("effective_propagator must be the ratio")
+        # Record invariants re-evaluated from the stored fields (audit GH-F9).
+        if not (self.quadrature_relative_change
+                == abs(self.linear_sigma / self.linear_sigma_comparison_grid - 1.0)
+                and self.quadrature_relative_change <= self.quadrature.self_convergence_tolerance
+                and self.truncation_envelope_fraction <= self.quadrature.truncation_tolerance):
+            raise GlobalVarianceContractError("quadrature diagnostics are inconsistent or failed")
+        p0 = float(np.asarray(self.void_share.share(np.array([0.0])))[0])
+        d_w, d_v = self.growth.wall_share_growth, self.growth.void_share_growth
+        if not _close(self.propagator_k0, (1.0 - p0) * d_w + p0 * d_v):
+            raise GlobalVarianceContractError("propagator_k0 violates (H9) at k -> 0")
+        z_ls = self.growth.matching.z_last_scattering
+        capacity = (self.unit_growth_sigma / (1.0 + z_ls)) / strict_flat_wall_contrast_cap(
+            void_volume_fraction=self.growth.f_v_ls)
+        if not _close(self.flat_wall_capacity_ratio, capacity):
+            raise GlobalVarianceContractError("flat_wall_capacity_ratio violates (H13)")
         expected_regime = (VOID_RESPONSE_NONPERTURBATIVE
                            if self.void_volume_response_rms > VOID_RESPONSE_NONPERTURBATIVE_THRESHOLD
                            else VOID_RESPONSE_PERTURBATIVE)
@@ -1025,8 +1175,7 @@ class ConditionalGlobalLinearSigma:
                 raise GlobalVarianceContractError("share_terms_coherence is inconsistent")
         elif self.share_terms_coherence != NOT_APPLICABLE:
             raise GlobalVarianceContractError("share_terms_coherence must be NOT_APPLICABLE")
-        if not isinstance(self.caveats, tuple) or not self.caveats:
-            raise GlobalVarianceContractError("caveats must be a non-empty tuple")
+        _strings(self.caveats, "caveats")
         _statuses_ok(self)
 
     def to_json_dict(self) -> dict:
@@ -1037,8 +1186,14 @@ class ConditionalGlobalLinearSigma:
                        "mean": "global Buchert volume average on the same slice",
                        "time": "dust proper time t (common time), present epoch t0",
                        "radius": "photon_normalised_comoving_Mpc (Lagrangian top hat)",
-                       "linear_order": "first-order ensemble-mean response to the early "
-                                       "Gaussian field around the two-phase tracker state"},
+                       "linear_order": "formal zero-amplitude tangent of the regional contrast "
+                                       "map around the smooth two-phase tracker state, applied "
+                                       "to the early Gaussian field (linear extrapolation); "
+                                       "smoothing rule G_R(k) = G(k) W(kR); not the "
+                                       "ensemble-mean response of the true contrast",
+                       "void_accounting": "seed-indexed (H-A9): bubbles assigned to the region "
+                                          "containing their seed; equals the material-domain "
+                                          "volume only with scale separation"},
             "background": self.background.to_metadata(),
             "growth": self.growth.to_json_dict(),
             "void_share": self.void_share.to_json_dict(),
@@ -1068,9 +1223,15 @@ _GLOBAL_CAVEATS = (
     "amplitude, not comparable with survey or CMB values without a Timescape reduction",
     "the void share p(k) is an external closure (VOID_ONSET_RESPONSE = "
     "EXTERNAL_CLOSURE_INPUT); the value is conditional on it",
-    "linear means the first-order ensemble-mean response around the two-phase tracker "
-    "state; when the void-volume response rms exceeds 1 the linear statistic is formal "
-    "(linearly extrapolated), not the physical variance",
+    "linear means the formal zero-amplitude tangent (linear extrapolation) around the "
+    "smooth two-phase tracker state, a proposed definition (owner decision D1, "
+    "2026-10-07); it is not the ensemble-mean response of the true region contrast and "
+    "ignores the zeroth-order partition fluctuations on the region scale",
+    "when the void-volume response rms exceeds 1 the linear void response is applied "
+    "beyond its declared validity (H-A8, formal extrapolation); below 1 no controlled "
+    "truncation error is established either",
+    "seed-indexed void accounting H-A9: equal to the material-domain volume only with "
+    "scale separation (void radius much smaller than the region radius)",
     "regional laws A1-A5 and void autonomy H-A6 assumed; the regional embedding stays "
     "NOT_DERIVED",
     "early spectrum is a PROVISIONAL_MODEL_IMPORT; the radius identification is "
@@ -1150,7 +1311,7 @@ def conditional_global_linear_sigma(
 
 
 # --------------------------------------------------------------------------
-# Closure-independent admissible interval ([1G-H] Sec. 5, (H15))
+# Constant-share interval ([1G-H] Sec. 5, (H15))
 # --------------------------------------------------------------------------
 
 @dataclass(frozen=True, kw_only=True)
@@ -1183,15 +1344,19 @@ class HomogeneityPremise:
 
 @dataclass(frozen=True, kw_only=True)
 class AdmissibleGlobalLinearInterval:
-    """[lower, upper] for every scale-independent void share in the class (H15).
+    """[lower, upper] for every *constant* void share in the class (H15).
 
-    ``lower``: the monotone lower end p = f_v,LS (void fraction not increasing
-    with the overdensity); ``upper``: the homogeneity premise,
-    ``G <= max_linear_rms/sigma_u(R_hom)``; ``share_upper`` the matching
-    upper end of p.  ``wall_mode_value`` (p = 0, 1G-D's wall-curvature mode)
-    and ``strict_flat_wall_value`` (p = 1) are reported for reference.
-    ``premise_compatible`` is False when even the lower end violates the
-    premise.
+    Valid only for a share constant over the spectral support of both windows
+    (target and premise top hats); a scale-dependent share in the monotone
+    class is not bounded by it (audit GH-F4).  ``lower``: the monotone lower
+    end p = f_v,LS (void fraction not increasing with the overdensity, H-A7);
+    ``upper``: the adopted homogeneity premise,
+    ``G <= max_linear_rms/sigma_u(R_hom)``, capped at p = 1; ``share_upper``
+    the matching upper end of p.  ``wall_mode_value`` (p = 0, 1G-D's
+    wall-curvature mode) and ``strict_flat_wall_value`` (p = 1) are reported
+    for reference.  ``premise_compatible`` is False when even the lower end
+    violates the premise.  Every field is re-validated from the target and
+    premise (audit GH-F9).
     """
 
     target: ConditionalGlobalLinearSigma
@@ -1215,15 +1380,38 @@ class AdmissibleGlobalLinearInterval:
         _require(self.target, ConditionalGlobalLinearSigma, "target")
         _require(self.premise, HomogeneityPremise, "premise")
         _require(self.premise_radius, ResolvedLagrangianRadius, "premise_radius")
-        for name in ("unit_growth_sigma_at_premise", "propagator_upper", "lower",
+        for name in ("unit_growth_sigma_at_premise", "propagator_upper", "lower", "upper",
                      "wall_mode_value", "strict_flat_wall_value", "target_value",
                      "target_premise_rms"):
             _positive(getattr(self, name), name)
+        for name in ("share_lower", "share_upper"):
+            _real(getattr(self, name), name)
+        for name in ("target_inside", "premise_compatible"):
+            if not isinstance(getattr(self, name), bool):
+                raise GlobalVarianceContractError(f"{name} must be a bool")
+        if self.premise_radius.spec is not self.premise.radius:
+            raise GlobalVarianceContractError("premise_radius must resolve the premise's radius")
+        # Record invariants re-evaluated from the target and the premise (GH-F9).
+        growth = self.target.growth
+        d_w, d_v = growth.wall_share_growth, growth.void_share_growth
+        su = self.target.unit_growth_sigma
+        g_upper = self.premise.max_linear_rms / self.unit_growth_sigma_at_premise
+        g_lower = d_w + (d_v - d_w) * growth.f_v_ls
+        if not (self.share_lower == growth.f_v_ls and self.target_value == self.target.linear_sigma
+                and _close(self.propagator_upper, g_upper)
+                and _close(self.share_upper, min(1.0, (g_upper - d_w) / (d_v - d_w)))
+                and _close(self.lower, g_lower * su)
+                and _close(self.upper, min(g_upper, d_v) * su)
+                and _close(self.wall_mode_value, d_w * su)
+                and _close(self.strict_flat_wall_value, d_v * su)
+                and self.premise_compatible == (g_lower <= g_upper)):
+            raise GlobalVarianceContractError("interval fields violate (H15) for this target")
         if self.premise_compatible and not self.lower <= self.upper:
             raise GlobalVarianceContractError("a compatible premise needs lower <= upper")
         if self.target_inside != (self.premise_compatible
                                   and self.lower <= self.target_value <= self.upper):
             raise GlobalVarianceContractError("target_inside is inconsistent")
+        _strings(self.class_assumptions, "class_assumptions")
 
     def to_json_dict(self) -> dict:
         return {"premise": self.premise.to_metadata(),
@@ -1243,22 +1431,27 @@ class AdmissibleGlobalLinearInterval:
 
 _INTERVAL_ASSUMPTIONS = (
     "all assumptions of the target record (A1-A5, H-A6, empty voids, growing modes)",
-    "H-A7 monotone response: f_v,LS <= p <= 1",
-    "scale-independent void share between the target radius and the premise radius",
-    "the homogeneity premise as recorded (an assumption of the background construction, "
-    "[W09] ll. 327-335, 455-458), not a derived bound",
+    "H-A7 monotone response: f_v,LS <= p <= 1 (an added class assumption)",
+    "a void share constant over the spectral support of both windows (target and "
+    "premise top hats); scale-dependent shares in the monotone class are not bounded by "
+    "this interval (audit GH-F4)",
+    "the homogeneity premise as recorded: an adopted reading of an assumption of the "
+    "background construction ([W09] ll. 327-335, 455-458), not a derived bound and not a "
+    "statement of [W09] about this statistic",
 )
 
 
 def admissible_global_linear_interval(
     *, target: ConditionalGlobalLinearSigma, premise: HomogeneityPremise,
 ) -> AdmissibleGlobalLinearInterval:
-    """Closure-independent interval for the target radius, (H15).
+    """Constant-share interval for the target radius, (H15).
 
-    For a scale-independent share p, ``sigma(R) = G(p) sigma_u(R)`` with
-    ``G(p) = D_W + (D_V - D_W) p``.  H-A7 gives ``p >= f_v,LS`` (lower end);
-    the premise ``G sigma_u(R_hom) <= eta`` gives the upper end.  The target's
-    own closure is evaluated at the premise radius with the same propagator
+    For a share p constant over the spectral support of both windows,
+    ``sigma(R) = G(p) sigma_u(R)`` with ``G(p) = D_W + (D_V - D_W) p``.  H-A7
+    gives ``p >= f_v,LS`` (lower end); the adopted premise
+    ``G sigma_u(R_hom) <= eta`` gives the upper end (capped at p = 1).  It is
+    not a bound for scale-dependent shares (audit GH-F4).  The target's own
+    closure is evaluated at the premise radius with the same propagator
     (``target_premise_rms``) to test the premise directly.
     """
     _require(target, ConditionalGlobalLinearSigma, "target")
@@ -1395,42 +1588,133 @@ def cauchy_schwarz_total_rms_interval(*, partition_rms: float, field_rms: float)
     return {"lower": abs(a - b), "independent": math.hypot(a, b), "upper": a + b}
 
 
-def bivariate_normal_orthant_moments(
-    *, correlation: float, threshold: float, nodes: int,
-) -> dict[str, float]:
-    """Moments of a standard bivariate normal on the orthant {g1 > c, g2 > c}, (H21).
-
-    With corr(g1, g2) = rho and g2 | g1 = u ~ N(rho u, 1 - rho^2):
-    ``P11 = int_c^inf phi(u) Q(z) du``, ``E[1 1 g1] = int phi(u) u Q(z) du``,
-    ``E[1 1 g2] = int phi(u) [rho u Q(z) + s phi(z)] du``,
-    ``E[1 1 g1^2] = int phi(u) u^2 Q(z) du``,
-    ``E[1 1 g1 g2] = int phi(u) u [rho u Q(z) + s phi(z)] du``, with
-    ``s = sqrt(1 - rho^2)``, ``z = (c - rho u)/s`` and Q = 1 - Phi.  By symmetry
-    E[1 1 g1] = E[1 1 g2] and E[1 1 g2^2] = E[1 1 g1^2].  Gauss-Legendre on
-    [c, max(c, 0) + 12] with ``nodes`` points (the omitted tail is below
-    phi(12) ~ 2e-32).  Requires |rho| < 1.
-    """
+def _orthant_inputs(correlation, threshold_1, threshold_2, nodes, tolerance):
     rho = _real(correlation, "correlation")
     if not -1.0 < rho < 1.0:
         raise GlobalVarianceContractError("correlation must lie in (-1, 1)")
-    c = _real(threshold, "threshold")
-    if isinstance(nodes, bool) or not isinstance(nodes, int) or nodes < 16:
-        raise GlobalVarianceContractError("nodes must be an integer >= 16")
-    x, wts = np.polynomial.legendre.leggauss(nodes)
-    lo, hi = c, max(c, 0.0) + 12.0
-    u = 0.5 * (hi - lo) * x + 0.5 * (hi + lo)
-    wq = 0.5 * (hi - lo) * wts
+    c1 = _real(threshold_1, "threshold")
+    c2 = _real(threshold_2, "threshold")
+    if isinstance(nodes, bool) or not isinstance(nodes, int) or not 16 <= nodes <= ORTHANT_MAX_NODES:
+        raise GlobalVarianceContractError(f"nodes must be an integer in [16, {ORTHANT_MAX_NODES}]")
+    tol = _positive(tolerance, "tolerance")
+    if tol < 1e-15:
+        raise GlobalVarianceContractError("tolerance below 1e-15 is beyond double precision")
+    return rho, c1, c2, nodes, tol
+
+
+@lru_cache(maxsize=16)
+def _gauss_legendre(n: int) -> tuple[NDArray[np.float64], NDArray[np.float64]]:
+    x, w = np.polynomial.legendre.leggauss(n)
+    return _readonly(x), _readonly(w)
+
+
+def _orthant_integrals(rho: float, c1: float, c2: float, nodes: int,
+                       tolerance: float) -> tuple[NDArray[np.float64], int, float]:
+    """The five orthant integrals on {g1 > c1, g2 > c2}, refined to ``tolerance``.
+
+    ``P11 = int_c1^inf phi(u) Q(z) du``, ``E[1 1 g1] = int phi(u) u Q(z) du``,
+    ``E[1 1 g2] = int phi(u) [rho u Q(z) + s phi(z)] du``,
+    ``E[1 1 g1^2] = int phi(u) u^2 Q(z) du``,
+    ``E[1 1 g1 g2] = int phi(u) u [rho u Q(z) + s phi(z)] du``, with
+    ``s = sqrt(1 - rho^2)``, ``z = (c2 - rho u)/s`` and Q = 1 - Phi
+    (g2 | g1 = u ~ N(rho u, s^2)).  The range is truncated to
+    ``[max(c1, -12), max(c1, 0) + 12]`` (omitted tails below 1e-29).  Q(z)
+    turns into a step at ``u* = c2/rho`` of width ``s/|rho|`` as |rho| -> 1, so
+    the range is split at u* and at u* +- 8 s/|rho| (|z| = 8, where Q is within
+    1e-15 of 0 or 1).  Gauss-Legendre panels are refined by doubling the node
+    count until two successive results agree to ``tolerance`` in every
+    integral; beyond ``ORTHANT_MAX_NODES`` the evaluation fails closed.
+    """
     s = math.sqrt(1.0 - rho * rho)
-    z = (c - rho * u) / s
-    q = ndtr(-z)
-    ph_u = np.exp(-0.5 * u * u) / math.sqrt(2.0 * math.pi)
-    ph_z = np.exp(-0.5 * z * z) / math.sqrt(2.0 * math.pi)
-    cond_g2 = rho * u * q + s * ph_z
-    return {"P11": float(np.sum(wq * ph_u * q)),
-            "E_g1": float(np.sum(wq * ph_u * u * q)),
-            "E_g2": float(np.sum(wq * ph_u * cond_g2)),
-            "E_g1g1": float(np.sum(wq * ph_u * u * u * q)),
-            "E_g1g2": float(np.sum(wq * ph_u * u * cond_g2))}
+    lo = max(c1, -_ORTHANT_HALF_WIDTH)
+    hi = max(c1, 0.0) + _ORTHANT_HALF_WIDTH
+    breaks = {lo, hi}
+    if rho != 0.0:
+        u_star, width = c2 / rho, s / abs(rho)
+        for b in (u_star - 8.0 * width, u_star, u_star + 8.0 * width):
+            if lo < b < hi:
+                breaks.add(b)
+    edges = sorted(breaks)
+    norm = 1.0 / math.sqrt(2.0 * math.pi)
+
+    def evaluate(n: int) -> NDArray[np.float64]:
+        x, wts = _gauss_legendre(n)
+        total = np.zeros(5)
+        for a, b in zip(edges[:-1], edges[1:]):
+            u = 0.5 * (b - a) * x + 0.5 * (b + a)
+            wq = 0.5 * (b - a) * wts * norm * np.exp(-0.5 * u * u)
+            z = (c2 - rho * u) / s
+            q = ndtr(-z)
+            cond_g2 = rho * u * q + s * norm * np.exp(-0.5 * z * z)
+            total += np.array([np.sum(wq * q), np.sum(wq * u * q), np.sum(wq * cond_g2),
+                               np.sum(wq * u * u * q), np.sum(wq * u * cond_g2)])
+        return total
+
+    n = nodes
+    previous = evaluate(n)
+    while True:
+        if 2 * n > ORTHANT_MAX_NODES:
+            raise GlobalVarianceNumericalError(
+                f"orthant integrals not converged to {tolerance:.1e} with {n} nodes per panel "
+                f"(rho = {rho!r}, thresholds {c1!r}, {c2!r})")
+        n *= 2
+        current = evaluate(n)
+        change = float(np.max(np.abs(current - previous)))
+        if change <= tolerance:
+            return current, n, change
+        previous = current
+
+
+def _check_orthant_probability(p11: float, c1: float, c2: float, tol: float) -> None:
+    upper = min(float(ndtr(-c1)), float(ndtr(-c2)))
+    lower = max(0.0, float(ndtr(-c1)) + float(ndtr(-c2)) - 1.0)      # Frechet bounds
+    if not lower - tol <= p11 <= upper + tol:
+        raise GlobalVarianceNumericalError(
+            f"orthant probability {p11!r} outside its bounds [{lower!r}, {upper!r}]")
+
+
+def bivariate_normal_orthant_probability(
+    *, correlation: float, threshold_1: float, threshold_2: float, nodes: int,
+    tolerance: float,
+) -> float:
+    """P(g1 > c1, g2 > c2) for a standard bivariate normal with correlation rho.
+
+    The orthant probability of (H21) with two thresholds (needed for the
+    exponentially tilted moments of the lognormal pair of [1G-H] Sec. 6.3).
+    ``nodes`` is the starting Gauss-Legendre node count per panel and
+    ``tolerance`` the absolute accuracy target of the refinement (audit
+    GH-F10); the result is checked against the Frechet bounds.  Requires
+    |rho| < 1.
+    """
+    rho, c1, c2, n, tol = _orthant_inputs(correlation, threshold_1, threshold_2, nodes,
+                                          tolerance)
+    values, _, _ = _orthant_integrals(rho, c1, c2, n, tol)
+    p11 = float(values[0])
+    _check_orthant_probability(p11, c1, c2, tol)
+    return p11
+
+
+def bivariate_normal_orthant_moments(
+    *, correlation: float, threshold: float, nodes: int, tolerance: float,
+) -> dict[str, float]:
+    """Moments of a standard bivariate normal on the orthant {g1 > c, g2 > c}, (H21).
+
+    ``P11``, ``E_g1 = E[1 1 g1]``, ``E_g2``, ``E_g1g1 = E[1 1 g1^2]`` and
+    ``E_g1g2`` (formulas in ``_orthant_integrals``), refined until two
+    successive node doublings agree to ``tolerance`` in every moment (audit
+    GH-F10; ``nodes`` is the starting count per panel).  P11 is checked
+    against the Frechet bounds and the symmetry E[1 1 g1] = E[1 1 g2]; a
+    failure raises ``GlobalVarianceNumericalError``.  ``nodes_used`` and
+    ``refinement_change`` record the convergence.  Requires |rho| < 1.
+    """
+    rho, c, _, n, tol = _orthant_inputs(correlation, threshold, threshold, nodes, tolerance)
+    values, used, change = _orthant_integrals(rho, c, c, n, tol)
+    p11, e1, e2, e11, e12 = (float(v) for v in values)
+    _check_orthant_probability(p11, c, c, tol)
+    if not abs(e1 - e2) <= 10.0 * tol:
+        raise GlobalVarianceNumericalError("orthant moments violate E[1 1 g1] = E[1 1 g2]")
+    return {"P11": p11, "E_g1": e1, "E_g2": e2, "E_g1g1": e11, "E_g1g2": e12,
+            "nodes_used": float(used), "refinement_change": change}
 
 
 # --------------------------------------------------------------------------

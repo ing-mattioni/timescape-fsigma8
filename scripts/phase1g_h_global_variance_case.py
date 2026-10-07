@@ -6,7 +6,7 @@ Every scientific choice must be present in the configuration (no defaults):
 background, matching redshift, early-spectrum import, radius convention,
 void-share closure, quadratures and tolerances.  Named reference
 configurations of the package may be selected by name.  The optional
-homogeneity premise adds the closure-independent interval (H15).  Prints the
+homogeneity premise adds the constant-share interval (H15).  Prints the
 record as JSON (or writes it with --output).  Conditional, model-internal,
 NON_OBSERVATIONAL; see reports/phase1g_h_global_variance_closure.md.
 """
