@@ -1,0 +1,40 @@
+..........F.................                                             [100%]
+=================================== FAILURES ===================================
+_____________ test_gaussian_threshold_share_independent_evaluation _____________
+
+growth_gm = TwoPhaseGlobalGrowth(background=TimescapeTrackerInput(label='PAPER_REFERENCE', fv0=0.737, H0_dressed_km_s_Mpc=73.03, s...itions)', 'matter-era photon normalisation at the explicit matching redshift; radiation at last scattering neglected'))
+
+    def test_gaussian_threshold_share_independent_evaluation(growth_gm):
+        closure = tracker_seed(GM, growth_gm, 15.0, gv.SeedVolumeCompression.COMPRESSED_WITH_REGION)
+        res = run(GM, closure, radius("c"))
+        rs = closure.seed_radius_Mpc
+        om = res.density.omega_m_per_photon
+
+        # Independent quadrature: variable x = k R_s, uniform in ln x, own window code.
+        lnx = np.linspace(math.log(1e-6 * rs), math.log(2e4 * rs), 400001)
+        x = np.exp(lnx)
+        amp = np.asarray(ls.matter_era_linear_amplitude(
+            k_per_Mpc=x / rs, early_spectrum=spectrum(), omega_m=om,
+            growth_today_photon_normalised=1.0))
+        w = np.where(x > 1e-3, 3 * (np.sin(x) - x * np.cos(x)) / np.maximum(x, 1e-3) ** 3,
+                     1 - x * x / 10)
+        sigma_s = math.sqrt(simpson(amp * w * w, x=lnx)) / (1 + Z_LS)
+        nu = norm.isf(growth_gm.f_v_ls)
+        p0 = growth_gm.f_v_ls + norm.pdf(nu) / sigma_s
+        assert res.void_share.sigma_seed == pytest.approx(sigma_s, rel=1e-6, abs=0.0)
+        assert res.void_share.nu == pytest.approx(nu, rel=1e-12, abs=0.0)
+        assert res.void_share.share_k0 == pytest.approx(p0, rel=1e-6, abs=0.0)
+        # Scale dependence only through the seed window: p(k) -> p0 as k -> 0.
+        pk = np.asarray(res.void_share.share(np.array([0.0, 1e-4, 1.0 / rs, 1e4 / rs])))
+        assert pk[0] == pytest.approx(p0, rel=1e-6, abs=0.0)
+        assert pk[1] == pytest.approx(p0, rel=1e-9, abs=0.0)
+        # Far inside the seed scale only the compression term remains (|W(1e4)| < 4e-8).
+>       assert pk[3] == pytest.approx(growth_gm.f_v_ls, abs=1e-6 * p0, rel=0.0)
+E       assert np.float64(0.1108033498886438) == 9.47106208987...e-05 ± 1.1e-07
+E
+E         comparison failed
+E         Obtained: 0.1108033498886438
+E         Expected: 9.471062089872824e-05 ± 1.1e-07
+
+tests/test_phase1g_h_global_variance.py:333: AssertionError
+1 failed, 27 passed in 5.96s

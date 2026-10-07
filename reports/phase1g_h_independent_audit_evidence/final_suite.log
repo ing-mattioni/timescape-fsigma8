@@ -1,0 +1,30 @@
+..........................................s............................. [  6%]
+........................................................................ [ 12%]
+........................................................................ [ 18%]
+........................................................................ [ 24%]
+........................................................................ [ 30%]
+........................................................................ [ 37%]
+........................................................................ [ 43%]
+........................................................................ [ 49%]
+........................................................................ [ 55%]
+........................................................................ [ 61%]
+........................................................................ [ 68%]
+........................................................................ [ 74%]
+........................................................................ [ 80%]
+........................................................................ [ 86%]
+........................................................................ [ 92%]
+.....................................s.sssssssssssssssssssssssss........ [ 98%]
+............                                                             [100%]
+=========================== short test summary info ============================
+SKIPPED [1] tests/test_b2_artifact_schema.py:47: B2 artifact absent (phase1c_b2_oracle_comparison.json); run scripts/validate_barotropic_perturbations.py
+SKIPPED [1] tests/test_vs_upstream_barotropic_oracle.py:76: barotropic oracle absent; run extraction script
+SKIPPED [3] tests/test_vs_upstream_barotropic_oracle.py:121: barotropic oracle absent; run extraction script
+SKIPPED [1] tests/test_vs_upstream_oracle.py:69: upstream oracle not extracted (run scripts/extract_upstream_oracle.py)
+SKIPPED [13] tests/test_vs_upstream_oracle.py:77: upstream oracle not extracted (run scripts/extract_upstream_oracle.py)
+SKIPPED [1] tests/test_vs_upstream_oracle.py:107: upstream oracle not extracted (run scripts/extract_upstream_oracle.py)
+SKIPPED [2] tests/test_vs_upstream_oracle.py:120: upstream oracle not extracted (run scripts/extract_upstream_oracle.py)
+SKIPPED [1] tests/test_vs_upstream_oracle.py:138: upstream oracle not extracted (run scripts/extract_upstream_oracle.py)
+SKIPPED [1] tests/test_vs_upstream_perturbation_oracle.py:67: clean perturbation oracle absent; run extraction script
+SKIPPED [1] tests/test_vs_upstream_perturbation_oracle.py:77: clean perturbation oracle absent; run extraction script
+SKIPPED [2] tests/test_vs_upstream_perturbation_oracle.py:84: clean perturbation oracle absent; run extraction script
+1137 passed, 27 skipped in 233.79s (0:03:53)

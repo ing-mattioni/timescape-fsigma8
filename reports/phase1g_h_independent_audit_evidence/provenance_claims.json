@@ -1,0 +1,960 @@
+{
+  "agents_rule_matrix": [
+    {
+      "assessment": "New scientific experiments explicitly authorized by original task §1; no existing equation implementation changed. Scientific validity remains separate.",
+      "commit": "79003742fb1f284693d6659e329b2c6b7f7927f0",
+      "rule": 1,
+      "status": "PASS"
+    },
+    {
+      "assessment": "Documentation-only commit; no relevant executable delta.",
+      "commit": "79003742fb1f284693d6659e329b2c6b7f7927f0",
+      "rule": 2,
+      "status": "NOT_APPLICABLE_DOCUMENTATION_ONLY"
+    },
+    {
+      "assessment": "New module and explicit hypotheses are model additions, documented separately from old code; no disguised numerical refactor.",
+      "commit": "79003742fb1f284693d6659e329b2c6b7f7927f0",
+      "rule": 3,
+      "status": "PASS"
+    },
+    {
+      "assessment": "Documentation-only commit; no relevant executable delta.",
+      "commit": "79003742fb1f284693d6659e329b2c6b7f7927f0",
+      "rule": 4,
+      "status": "NOT_APPLICABLE_DOCUMENTATION_ONLY"
+    },
+    {
+      "assessment": "Documentation-only commit; no relevant executable delta.",
+      "commit": "79003742fb1f284693d6659e329b2c6b7f7927f0",
+      "rule": 5,
+      "status": "NOT_APPLICABLE_DOCUMENTATION_ONLY"
+    },
+    {
+      "assessment": "No upstream notebook source appears among additions; pinned clone remains read-only outside redistribution.",
+      "commit": "79003742fb1f284693d6659e329b2c6b7f7927f0",
+      "rule": 6,
+      "status": "PASS"
+    },
+    {
+      "assessment": "Local commits and reads authorized by task; later remote pushes rest on quoted approvals requiring owner confirmation.",
+      "commit": "79003742fb1f284693d6659e329b2c6b7f7927f0",
+      "rule": 7,
+      "status": "OWNER_CONFIRMATION_REQUIRED"
+    },
+    {
+      "assessment": "Documentation-only commit; no relevant executable delta.",
+      "commit": "79003742fb1f284693d6659e329b2c6b7f7927f0",
+      "rule": 8,
+      "status": "NOT_APPLICABLE_DOCUMENTATION_ONLY"
+    },
+    {
+      "assessment": "Documentation-only commit; no relevant executable delta.",
+      "commit": "79003742fb1f284693d6659e329b2c6b7f7927f0",
+      "rule": 9,
+      "status": "NOT_APPLICABLE_DOCUMENTATION_ONLY"
+    },
+    {
+      "assessment": "Documentation-only commit; no relevant executable delta.",
+      "commit": "79003742fb1f284693d6659e329b2c6b7f7927f0",
+      "rule": 10,
+      "status": "NOT_APPLICABLE_DOCUMENTATION_ONLY"
+    },
+    {
+      "assessment": "New scientific experiments explicitly authorized by original task §1; no existing equation implementation changed. Scientific validity remains separate.",
+      "commit": "fd7331f321702ed8c20d32ea805e7b9537d44726",
+      "rule": 1,
+      "status": "PASS"
+    },
+    {
+      "assessment": "New equations cite H identifiers and source lineage; scientific review determines whether claimed derivations follow.",
+      "commit": "fd7331f321702ed8c20d32ea805e7b9537d44726",
+      "rule": 2,
+      "status": "PASS"
+    },
+    {
+      "assessment": "New module and explicit hypotheses are model additions, documented separately from old code; no disguised numerical refactor.",
+      "commit": "fd7331f321702ed8c20d32ea805e7b9537d44726",
+      "rule": 3,
+      "status": "PASS"
+    },
+    {
+      "assessment": "Conventions, units, normalization, ICs and signs explicit in API/report; semantic scientific findings are addressed separately.",
+      "commit": "fd7331f321702ed8c20d32ea805e7b9537d44726",
+      "rule": 4,
+      "status": "PASS"
+    },
+    {
+      "assessment": "28 new tests cover dimensions, limiting cases, normalization and references; missing historical artifacts disclosed, without weakening tests.",
+      "commit": "fd7331f321702ed8c20d32ea805e7b9537d44726",
+      "rule": 5,
+      "status": "PASS_WITH_CORRECTIONS"
+    },
+    {
+      "assessment": "No upstream notebook source appears among additions; pinned clone remains read-only outside redistribution.",
+      "commit": "fd7331f321702ed8c20d32ea805e7b9537d44726",
+      "rule": 6,
+      "status": "PASS"
+    },
+    {
+      "assessment": "Local commits and reads authorized by task; later remote pushes rest on quoted approvals requiring owner confirmation.",
+      "commit": "fd7331f321702ed8c20d32ea805e7b9537d44726",
+      "rule": 7,
+      "status": "OWNER_CONFIRMATION_REQUIRED"
+    },
+    {
+      "assessment": "Typed pure-function design and frozen keyword-only records; integrity gaps are implementation corrections, not unapproved models.",
+      "commit": "fd7331f321702ed8c20d32ea805e7b9537d44726",
+      "rule": 8,
+      "status": "PASS_WITH_CORRECTIONS"
+    },
+    {
+      "assessment": "716 comparisons have explicit tolerances per saved tolerance audit; independent review found a precision-gate gap, not missing tolerances.",
+      "commit": "fd7331f321702ed8c20d32ea805e7b9537d44726",
+      "rule": 9,
+      "status": "PASS_WITH_CORRECTIONS"
+    },
+    {
+      "assessment": "No added unexplained warning suppression; author suites run with -W error.",
+      "commit": "fd7331f321702ed8c20d32ea805e7b9537d44726",
+      "rule": 10,
+      "status": "PASS"
+    },
+    {
+      "assessment": "New scientific experiments explicitly authorized by original task §1; no existing equation implementation changed. Scientific validity remains separate.",
+      "commit": "0572e416504bcdfaa5831b6d482b687ef6fae582",
+      "rule": 1,
+      "status": "PASS"
+    },
+    {
+      "assessment": "Documentation-only commit; no relevant executable delta.",
+      "commit": "0572e416504bcdfaa5831b6d482b687ef6fae582",
+      "rule": 2,
+      "status": "NOT_APPLICABLE_DOCUMENTATION_ONLY"
+    },
+    {
+      "assessment": "New module and explicit hypotheses are model additions, documented separately from old code; no disguised numerical refactor.",
+      "commit": "0572e416504bcdfaa5831b6d482b687ef6fae582",
+      "rule": 3,
+      "status": "PASS"
+    },
+    {
+      "assessment": "Documentation-only commit; no relevant executable delta.",
+      "commit": "0572e416504bcdfaa5831b6d482b687ef6fae582",
+      "rule": 4,
+      "status": "NOT_APPLICABLE_DOCUMENTATION_ONLY"
+    },
+    {
+      "assessment": "Documentation-only commit; no relevant executable delta.",
+      "commit": "0572e416504bcdfaa5831b6d482b687ef6fae582",
+      "rule": 5,
+      "status": "NOT_APPLICABLE_DOCUMENTATION_ONLY"
+    },
+    {
+      "assessment": "No upstream notebook source appears among additions; pinned clone remains read-only outside redistribution.",
+      "commit": "0572e416504bcdfaa5831b6d482b687ef6fae582",
+      "rule": 6,
+      "status": "PASS"
+    },
+    {
+      "assessment": "Local commits and reads authorized by task; later remote pushes rest on quoted approvals requiring owner confirmation.",
+      "commit": "0572e416504bcdfaa5831b6d482b687ef6fae582",
+      "rule": 7,
+      "status": "OWNER_CONFIRMATION_REQUIRED"
+    },
+    {
+      "assessment": "Documentation-only commit; no relevant executable delta.",
+      "commit": "0572e416504bcdfaa5831b6d482b687ef6fae582",
+      "rule": 8,
+      "status": "NOT_APPLICABLE_DOCUMENTATION_ONLY"
+    },
+    {
+      "assessment": "Documentation-only commit; no relevant executable delta.",
+      "commit": "0572e416504bcdfaa5831b6d482b687ef6fae582",
+      "rule": 9,
+      "status": "NOT_APPLICABLE_DOCUMENTATION_ONLY"
+    },
+    {
+      "assessment": "Documentation-only commit; no relevant executable delta.",
+      "commit": "0572e416504bcdfaa5831b6d482b687ef6fae582",
+      "rule": 10,
+      "status": "NOT_APPLICABLE_DOCUMENTATION_ONLY"
+    },
+    {
+      "assessment": "New scientific experiments explicitly authorized by original task §1; no existing equation implementation changed. Scientific validity remains separate.",
+      "commit": "d4d693d73f995e2245a5720be227273b3639eda9",
+      "rule": 1,
+      "status": "PASS"
+    },
+    {
+      "assessment": "Documentation-only commit; no relevant executable delta.",
+      "commit": "d4d693d73f995e2245a5720be227273b3639eda9",
+      "rule": 2,
+      "status": "NOT_APPLICABLE_DOCUMENTATION_ONLY"
+    },
+    {
+      "assessment": "New module and explicit hypotheses are model additions, documented separately from old code; no disguised numerical refactor.",
+      "commit": "d4d693d73f995e2245a5720be227273b3639eda9",
+      "rule": 3,
+      "status": "PASS"
+    },
+    {
+      "assessment": "Documentation-only commit; no relevant executable delta.",
+      "commit": "d4d693d73f995e2245a5720be227273b3639eda9",
+      "rule": 4,
+      "status": "NOT_APPLICABLE_DOCUMENTATION_ONLY"
+    },
+    {
+      "assessment": "Documentation-only commit; no relevant executable delta.",
+      "commit": "d4d693d73f995e2245a5720be227273b3639eda9",
+      "rule": 5,
+      "status": "NOT_APPLICABLE_DOCUMENTATION_ONLY"
+    },
+    {
+      "assessment": "No upstream notebook source appears among additions; pinned clone remains read-only outside redistribution.",
+      "commit": "d4d693d73f995e2245a5720be227273b3639eda9",
+      "rule": 6,
+      "status": "PASS"
+    },
+    {
+      "assessment": "Local commits and reads authorized by task; later remote pushes rest on quoted approvals requiring owner confirmation.",
+      "commit": "d4d693d73f995e2245a5720be227273b3639eda9",
+      "rule": 7,
+      "status": "OWNER_CONFIRMATION_REQUIRED"
+    },
+    {
+      "assessment": "Documentation-only commit; no relevant executable delta.",
+      "commit": "d4d693d73f995e2245a5720be227273b3639eda9",
+      "rule": 8,
+      "status": "NOT_APPLICABLE_DOCUMENTATION_ONLY"
+    },
+    {
+      "assessment": "Documentation-only commit; no relevant executable delta.",
+      "commit": "d4d693d73f995e2245a5720be227273b3639eda9",
+      "rule": 9,
+      "status": "NOT_APPLICABLE_DOCUMENTATION_ONLY"
+    },
+    {
+      "assessment": "Documentation-only commit; no relevant executable delta.",
+      "commit": "d4d693d73f995e2245a5720be227273b3639eda9",
+      "rule": 10,
+      "status": "NOT_APPLICABLE_DOCUMENTATION_ONLY"
+    }
+  ],
+  "approvals": {
+    "claim_status": "NOT_VERIFIABLE",
+    "quotations": [
+      "Sì, procedi con il push sul branch designato",
+      "Sì, correggi la documentazione e fai il push"
+    ],
+    "scope": "Only the owner can confirm these off-repository approvals; no author conversation was requested or examined. Presence of the branch does not prove permission.",
+    "status": "OWNER_CONFIRMATION_REQUIRED"
+  },
+  "audit_scope": {
+    "base": {
+      "commit": "8d3cdd0533035858c42269cb1dff1a20dcafc7da",
+      "parents": [
+        "fb5d95245bc0cb19ce6cd1438177f1a597bb232f",
+        "3d3d46ed68fde7e6d4100fe518a76731bd2cf9e9"
+      ],
+      "tree": "5bcea4170c92c034af0045afb7f9898c2f28359d"
+    },
+    "commits": [
+      {
+        "changed_files": [
+          "M\tCLAUDE.md",
+          "M\tREADME.md",
+          "A\treports/phase1g_fg_freeze_status_successor.md",
+          "A\treports/phase1g_fg_freeze_status_successor_inventory.json"
+        ],
+        "commit": "79003742fb1f284693d6659e329b2c6b7f7927f0",
+        "parents": [
+          "8d3cdd0533035858c42269cb1dff1a20dcafc7da"
+        ],
+        "tree": "fc2ce9da6837f083a9497c9c2656f8a7748f9aae"
+      },
+      {
+        "changed_files": [
+          "A\tscripts/phase1g_h_configs/gm_bare_pbs_f_median_seed.json",
+          "A\tscripts/phase1g_h_configs/gm_bare_pbs_w09_seed.json",
+          "A\tscripts/phase1g_h_configs/nw15_equal_mass_constant_share.json",
+          "A\tscripts/phase1g_h_global_variance_case.py",
+          "A\tscripts/phase1g_h_global_variance_closure_numerics.py",
+          "A\tsrc/timescape_fsigma8/global_variance.py",
+          "A\ttests/test_phase1g_h_global_variance.py"
+        ],
+        "commit": "fd7331f321702ed8c20d32ea805e7b9537d44726",
+        "parents": [
+          "79003742fb1f284693d6659e329b2c6b7f7927f0"
+        ],
+        "tree": "90db4855e87c299b0fc36278cba8be8adc441b1a"
+      },
+      {
+        "changed_files": [
+          "M\tCLAUDE.md",
+          "M\tREADME.md",
+          "A\treports/phase1g_h_global_variance_closure.md",
+          "A\treports/phase1g_h_global_variance_closure_inventory.json",
+          "A\treports/phase1g_h_global_variance_closure_logs/evidence_head.txt",
+          "A\treports/phase1g_h_global_variance_closure_logs/evidence_py311.log",
+          "A\treports/phase1g_h_global_variance_closure_logs/evidence_py313.log",
+          "A\treports/phase1g_h_global_variance_closure_logs/full_suite_py311.log",
+          "A\treports/phase1g_h_global_variance_closure_logs/full_suite_py313.log",
+          "A\treports/phase1g_h_global_variance_closure_validation.md"
+        ],
+        "commit": "0572e416504bcdfaa5831b6d482b687ef6fae582",
+        "parents": [
+          "fd7331f321702ed8c20d32ea805e7b9537d44726"
+        ],
+        "tree": "b709ba71a91c5cac478187bd81c6c774e8c2c760"
+      },
+      {
+        "changed_files": [
+          "M\tCLAUDE.md",
+          "M\tREADME.md",
+          "M\treports/phase1g_fg_freeze_status_successor.md",
+          "M\treports/phase1g_fg_freeze_status_successor_inventory.json",
+          "M\treports/phase1g_h_global_variance_closure.md",
+          "M\treports/phase1g_h_global_variance_closure_inventory.json",
+          "M\treports/phase1g_h_global_variance_closure_validation.md"
+        ],
+        "commit": "d4d693d73f995e2245a5720be227273b3639eda9",
+        "parents": [
+          "0572e416504bcdfaa5831b6d482b687ef6fae582"
+        ],
+        "tree": "963b6e8e42103c27f329e265056c9624be3f11bd"
+      }
+    ],
+    "head": {
+      "commit": "d4d693d73f995e2245a5720be227273b3639eda9",
+      "parents": [
+        "0572e416504bcdfaa5831b6d482b687ef6fae582"
+      ],
+      "tree": "963b6e8e42103c27f329e265056c9624be3f11bd"
+    },
+    "integration": {
+      "commit": "8f3131fe19cccd44a29287617145f3300818dfa3",
+      "parents": [
+        "fb5d95245bc0cb19ce6cd1438177f1a597bb232f"
+      ],
+      "tree": "22fcadf10ddbae0d48709ed6ac7f2972c8bb65bf"
+    },
+    "provenance": {
+      "commit": "3d3d46ed68fde7e6d4100fe518a76731bd2cf9e9",
+      "parents": [
+        "8f3131fe19cccd44a29287617145f3300818dfa3"
+      ],
+      "tree": "5bcea4170c92c034af0045afb7f9898c2f28359d"
+    }
+  },
+  "errata": [
+    {
+      "correction": "Each row identifies the historical statement; S7 joins explicitly labelled list items, S10 joins two quoted spans. Preserve the source bytes.",
+      "id": "PROV-E1",
+      "location": "reports/phase1g_fg_freeze_status_successor.md §3 lines 101–103 and S7; companion inventory superseded_status_statements[6]",
+      "quote": "Each row quotes the historical statement exactly.",
+      "severity": "LOW"
+    },
+    {
+      "correction": "Add per-document base SHA-256 and exact source locations from FG-S13 in this audit. The source phrases and their corrected current reading are valid.",
+      "id": "PROV-E2",
+      "location": "freeze-status successor §3 S13 and companion inventory superseded_status_statements[12]",
+      "quote": "sigma-track current-status sections",
+      "severity": "LOW"
+    },
+    {
+      "correction": "Add a successor row: historically true at the recorded phase; F/G later merged by PR #4 and frozen/tagged at 8d3cdd0. Keep the historical file unchanged.",
+      "id": "PROV-E3",
+      "location": "freeze-status successor §3 completeness; omitted frozen phase1g_f_void_population.md §14 lines 638–639",
+      "quote": "Nothing is merged or tagged.",
+      "severity": "LOW"
+    },
+    {
+      "correction": "Add the later F/G freeze reading while preserving this description of the earlier integration edit.",
+      "id": "PROV-E4",
+      "location": "freeze-status successor §3 completeness; omitted phase1g_fg_remediation_integration.md §3 lines 79–80",
+      "quote": "\"Not merged, frozen or tagged\" is kept.",
+      "severity": "LOW"
+    },
+    {
+      "correction": "At the later checkpoint merge and F/G tags completed; release remains unperformed. Preserve historical inventory.",
+      "id": "PROV-E5",
+      "location": "freeze-status successor §3 completeness; omitted phase1g_fg_remediation_integration_inventory.json open_before_freeze[0]",
+      "quote": "separate owner approvals for merge into main (PR), annotated tag, release",
+      "severity": "LOW"
+    },
+    {
+      "correction": "Push is recorded as separately approved for the session branch; PR/merge/audit/freeze/tag remained open at this authored checkpoint. Match publication.h_od5_status.",
+      "id": "PROV-E6",
+      "location": "reports/phase1g_h_global_variance_closure_inventory.json owner_decisions_requested.H-OD5 line197",
+      "quote": "push / pull request / merge / audit / freeze / tag: separate decisions, none authorised",
+      "severity": "LOW"
+    },
+    {
+      "correction": "History is a fast-forward descendant of 8d3cdd0. If the first push created the session branch, describe creation of that remote ref; the saved remote snapshot alone cannot certify the push transaction or its previous ref value.",
+      "id": "PROV-E7",
+      "location": "d4d693d commit message and phase1g_h_global_variance_closure_validation.md §2 lines41–42",
+      "quote": "a fast-forward from 8d3cdd0",
+      "severity": "LOW"
+    }
+  ],
+  "preservation": {
+    "all_other_preexisting_blob_ids_identical": true,
+    "base_tracked_files": 334,
+    "frozen_record_sha256": [
+      {
+        "matches": true,
+        "path": "reports/phase1g_f_volume_budget_successor.md",
+        "sha256": "3208c53990dd039d3364d8fc4d76d2959f6ea5376b69bfee926a140c8669c5bd"
+      },
+      {
+        "matches": true,
+        "path": "reports/phase1g_f_volume_budget_successor.md",
+        "sha256": "3208c53990dd039d3364d8fc4d76d2959f6ea5376b69bfee926a140c8669c5bd"
+      },
+      {
+        "matches": true,
+        "path": "reports/phase1g_f_volume_budget_successor_inventory.json",
+        "sha256": "6b09f47539b883be11cd4f15ce0907d4a6bd711f7ea25026fc2a91839a8dd285"
+      },
+      {
+        "matches": true,
+        "path": "reports/phase1g_g_void_evolution.md",
+        "sha256": "41560ed50c8750762a40242652bec275c338d806f2234923c11ff26385654061"
+      },
+      {
+        "matches": true,
+        "path": "reports/phase1g_g_void_evolution.md",
+        "sha256": "41560ed50c8750762a40242652bec275c338d806f2234923c11ff26385654061"
+      },
+      {
+        "matches": true,
+        "path": "reports/phase1g_g_void_evolution_inventory.json",
+        "sha256": "3ce6a5873548679dc64502f1cc8b68146027b163159e7c10b079b6675e7172ac"
+      },
+      {
+        "matches": true,
+        "path": "reports/phase1g_fg_remediation_integration.md",
+        "sha256": "ec41f322ced6325737f01cbd7f5b89e24f5d39267b2fb7b42e7ae7026ae02551"
+      },
+      {
+        "matches": true,
+        "path": "reports/phase1g_fg_remediation_integration_inventory.json",
+        "sha256": "241054f20980d09e9c5e21c3df2be3cb1c9af56cf299dfec7848d3efde73b6bb"
+      },
+      {
+        "matches": true,
+        "path": "reports/phase1g_fg_successor_validation.md",
+        "sha256": "438a0063363c78ec50ae3ce793264215cf7ba4de58e83d434a4d9ffb8e2b278a"
+      },
+      {
+        "matches": true,
+        "path": "reports/phase1g_fg_successor_validation.md",
+        "sha256": "438a0063363c78ec50ae3ce793264215cf7ba4de58e83d434a4d9ffb8e2b278a"
+      },
+      {
+        "matches": true,
+        "path": "reports/phase1g_fg_independent_scientific_audit.md",
+        "sha256": "6bb8edecf394989186c86e3ead7f401bcbcc0ac1977bc395008db7019a0c063d"
+      },
+      {
+        "matches": true,
+        "path": "reports/phase1g_fg_remediation_independent_audit.md",
+        "sha256": "46f3aef7f27240f03eb4ef530cebc16a2365f703a93308e165b0c75680389a25"
+      }
+    ],
+    "head_tracked_files": 351,
+    "lagrangian_sigma_identical": true,
+    "new_files": [
+      "reports/phase1g_fg_freeze_status_successor.md",
+      "reports/phase1g_fg_freeze_status_successor_inventory.json",
+      "reports/phase1g_h_global_variance_closure.md",
+      "reports/phase1g_h_global_variance_closure_inventory.json",
+      "reports/phase1g_h_global_variance_closure_logs/evidence_head.txt",
+      "reports/phase1g_h_global_variance_closure_logs/evidence_py311.log",
+      "reports/phase1g_h_global_variance_closure_logs/evidence_py313.log",
+      "reports/phase1g_h_global_variance_closure_logs/full_suite_py311.log",
+      "reports/phase1g_h_global_variance_closure_logs/full_suite_py313.log",
+      "reports/phase1g_h_global_variance_closure_validation.md",
+      "scripts/phase1g_h_configs/gm_bare_pbs_f_median_seed.json",
+      "scripts/phase1g_h_configs/gm_bare_pbs_w09_seed.json",
+      "scripts/phase1g_h_configs/nw15_equal_mass_constant_share.json",
+      "scripts/phase1g_h_global_variance_case.py",
+      "scripts/phase1g_h_global_variance_closure_numerics.py",
+      "src/timescape_fsigma8/global_variance.py",
+      "tests/test_phase1g_h_global_variance.py"
+    ],
+    "preexisting_changed": [
+      "CLAUDE.md",
+      "README.md"
+    ],
+    "scientific_status_identical": true
+  },
+  "reading_limits": "No complete per-file read ledger found in audit_work. This synthesis directly reads governance/task/current freeze record and relevant validation/inventory passages; scientific mandatory reading coverage must be substantiated by the main auditor and scientific reviewer.",
+  "remote_state": {
+    "d_v2_branch_present": false,
+    "d_v2_tag_present": false,
+    "limits": "Current snapshots plus recorded object identities do not prove no transient reference creation/deletion during the author session.",
+    "main": "8d3cdd0533035858c42269cb1dff1a20dcafc7da",
+    "pr4_merged_at": "2026-10-06T13:12:04Z",
+    "refresh_20261007": "2026-10-07T04:55:46.522Z",
+    "release_count": 0,
+    "session_branch": "d4d693d73f995e2245a5720be227273b3639eda9",
+    "session_branch_PR_count": 0,
+    "snapshot_20261006": "2026-10-06T19:20:54.939Z",
+    "tag_count": 38
+  },
+  "signature_checks": [
+    {
+      "cryptographic_check_without_identity_trust": {
+        "command": "ssh-keygen -Y check-novalidate -n git -s SIGNATURE < PAYLOAD",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "Good \"git\" signature with ED25519 key SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y\n"
+      },
+      "embedded_key_fingerprint": "SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y",
+      "git_sha_matches": true,
+      "github_verification": {
+        "reason": "valid",
+        "verified": true,
+        "verified_at": "2026-10-01T20:41:57Z"
+      },
+      "owner_trust_verification": "NOT_PERFORMED_NO_ESTABLISHED_TRUST_CONFIG_AVAILABLE",
+      "reconstructed_object_sha": "f5fceeae4491afaa418fa1e37322e97a8a924280",
+      "tag": "phase-1g-a-sigma8-derivation-path-v1",
+      "tag_object": "f5fceeae4491afaa418fa1e37322e97a8a924280",
+      "tagger_date_utc": "2026-09-30T15:55:29Z",
+      "target": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f"
+    },
+    {
+      "cryptographic_check_without_identity_trust": {
+        "command": "ssh-keygen -Y check-novalidate -n git -s SIGNATURE < PAYLOAD",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "Good \"git\" signature with ED25519 key SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y\n"
+      },
+      "embedded_key_fingerprint": "SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y",
+      "git_sha_matches": true,
+      "github_verification": {
+        "reason": "valid",
+        "verified": true,
+        "verified_at": "2026-10-01T20:41:57Z"
+      },
+      "owner_trust_verification": "NOT_PERFORMED_NO_ESTABLISHED_TRUST_CONFIG_AVAILABLE",
+      "reconstructed_object_sha": "a279464a52eb767e6840be8774375eac7885d5c3",
+      "tag": "phase-1g-b-lagrangian-sigma-v1",
+      "tag_object": "a279464a52eb767e6840be8774375eac7885d5c3",
+      "tagger_date_utc": "2026-09-30T15:55:29Z",
+      "target": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f"
+    },
+    {
+      "cryptographic_check_without_identity_trust": {
+        "command": "ssh-keygen -Y check-novalidate -n git -s SIGNATURE < PAYLOAD",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "Good \"git\" signature with ED25519 key SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y\n"
+      },
+      "embedded_key_fingerprint": "SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y",
+      "git_sha_matches": true,
+      "github_verification": {
+        "reason": "valid",
+        "verified": true,
+        "verified_at": "2026-10-01T20:41:57Z"
+      },
+      "owner_trust_verification": "NOT_PERFORMED_NO_ESTABLISHED_TRUST_CONFIG_AVAILABLE",
+      "reconstructed_object_sha": "88e96be855e5aca117e6ac12872fdb5070494b59",
+      "tag": "phase-1g-c-two-scale-growth-law-v1",
+      "tag_object": "88e96be855e5aca117e6ac12872fdb5070494b59",
+      "tagger_date_utc": "2026-09-30T15:55:30Z",
+      "target": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f"
+    },
+    {
+      "cryptographic_check_without_identity_trust": {
+        "command": "ssh-keygen -Y check-novalidate -n git -s SIGNATURE < PAYLOAD",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "Good \"git\" signature with ED25519 key SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y\n"
+      },
+      "embedded_key_fingerprint": "SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y",
+      "git_sha_matches": true,
+      "github_verification": {
+        "reason": "valid",
+        "verified": true,
+        "verified_at": "2026-10-01T20:41:57Z"
+      },
+      "owner_trust_verification": "NOT_PERFORMED_NO_ESTABLISHED_TRUST_CONFIG_AVAILABLE",
+      "reconstructed_object_sha": "e2a3b303e2441dd94971a32b7ec327a44f2af000",
+      "tag": "phase-1g-d-separate-universe-growth-v1",
+      "tag_object": "e2a3b303e2441dd94971a32b7ec327a44f2af000",
+      "tagger_date_utc": "2026-09-30T15:55:30Z",
+      "target": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f"
+    },
+    {
+      "cryptographic_check_without_identity_trust": {
+        "command": "ssh-keygen -Y check-novalidate -n git -s SIGNATURE < PAYLOAD",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "Good \"git\" signature with ED25519 key SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y\n"
+      },
+      "embedded_key_fingerprint": "SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y",
+      "git_sha_matches": true,
+      "github_verification": {
+        "reason": "valid",
+        "verified": true,
+        "verified_at": "2026-10-01T20:41:57Z"
+      },
+      "owner_trust_verification": "NOT_PERFORMED_NO_ESTABLISHED_TRUST_CONFIG_AVAILABLE",
+      "reconstructed_object_sha": "2a48639c8cdf6217d6b1c8293a06722eba48e38d",
+      "tag": "phase-1g-e-two-phase-sigma-v1",
+      "tag_object": "2a48639c8cdf6217d6b1c8293a06722eba48e38d",
+      "tagger_date_utc": "2026-09-30T15:55:30Z",
+      "target": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f"
+    },
+    {
+      "cryptographic_check_without_identity_trust": {
+        "command": "ssh-keygen -Y check-novalidate -n git -s SIGNATURE < PAYLOAD",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "Good \"git\" signature with ED25519 key SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y\n"
+      },
+      "embedded_key_fingerprint": "SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y",
+      "git_sha_matches": true,
+      "github_verification": {
+        "reason": "valid",
+        "verified": true,
+        "verified_at": "2026-10-06T19:21:05Z"
+      },
+      "owner_trust_verification": "NOT_PERFORMED_NO_ESTABLISHED_TRUST_CONFIG_AVAILABLE",
+      "reconstructed_object_sha": "ca52c94d6ecad2be62016b019d652d9bc6e89dd2",
+      "tag": "phase-1g-f-void-population-v1",
+      "tag_object": "ca52c94d6ecad2be62016b019d652d9bc6e89dd2",
+      "tagger_date_utc": "2026-10-06T13:32:56Z",
+      "target": "8d3cdd0533035858c42269cb1dff1a20dcafc7da"
+    },
+    {
+      "cryptographic_check_without_identity_trust": {
+        "command": "ssh-keygen -Y check-novalidate -n git -s SIGNATURE < PAYLOAD",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "Good \"git\" signature with ED25519 key SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y\n"
+      },
+      "embedded_key_fingerprint": "SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y",
+      "git_sha_matches": true,
+      "github_verification": {
+        "reason": "valid",
+        "verified": true,
+        "verified_at": "2026-10-06T19:21:05Z"
+      },
+      "owner_trust_verification": "NOT_PERFORMED_NO_ESTABLISHED_TRUST_CONFIG_AVAILABLE",
+      "reconstructed_object_sha": "d151bd45242eff50ca7fa62bbd50453375737117",
+      "tag": "phase-1g-g-void-evolution-v1",
+      "tag_object": "d151bd45242eff50ca7fa62bbd50453375737117",
+      "tagger_date_utc": "2026-10-06T13:32:56Z",
+      "target": "8d3cdd0533035858c42269cb1dff1a20dcafc7da"
+    }
+  ],
+  "successor_claims": [
+    {
+      "claim_id": "FG-S1",
+      "current": "merged (PR #4) and frozen at 8d3cdd0, tag phase-1g-f-void-population-v1; the audit-scope clause stays true",
+      "current_reading_verified": true,
+      "file": "reports/phase1g_f_volume_budget_successor.md",
+      "hash_matches": true,
+      "historical": "This revised local deliverable has not been frozen; the audit does not certify subsequent edits.",
+      "id": "S1",
+      "location": "header, lines 32-33",
+      "method": "SHA-256 of frozen local source plus direct text/location comparison and authenticated remote-object records",
+      "recorded_line_text": "This revised local deliverable has not been frozen; the audit does not\ncertify subsequent edits. Exact owner instructions and validation are in",
+      "sha256": "3208c53990dd039d3364d8fc4d76d2959f6ea5376b69bfee926a140c8669c5bd",
+      "status": "VERIFIED",
+      "tolerance": "exact hash and semantic current-state identity; line wrapping normalized for quote comparison",
+      "whitespace_normalized_quote_present": true
+    },
+    {
+      "claim_id": "FG-S2",
+      "current": "merged, frozen and tagged; no release exists",
+      "current_reading_verified": true,
+      "file": "reports/phase1g_f_volume_budget_successor.md",
+      "hash_matches": true,
+      "historical": "It is not frozen, and no tag, merge or release is implied.",
+      "id": "S2",
+      "location": "section 6, lines 316-317",
+      "method": "SHA-256 of frozen local source plus direct text/location comparison and authenticated remote-object records",
+      "recorded_line_text": "recorded in `phase1g_fg_remediation_integration.md`. It is not frozen, and\nno tag, merge or release is implied.",
+      "sha256": "3208c53990dd039d3364d8fc4d76d2959f6ea5376b69bfee926a140c8669c5bd",
+      "status": "VERIFIED",
+      "tolerance": "exact hash and semantic current-state identity; line wrapping normalized for quote comparison",
+      "whitespace_normalized_quote_present": true
+    },
+    {
+      "claim_id": "FG-S3",
+      "current": "MERGED_FROZEN_TAGGED",
+      "current_reading_verified": true,
+      "file": "reports/phase1g_f_volume_budget_successor_inventory.json",
+      "hash_matches": true,
+      "historical": "LOCAL_REVIEWABLE_UNMERGED_UNTAGGED",
+      "id": "S3",
+      "location": "key integration_state",
+      "method": "SHA-256 of frozen local source plus direct text/location comparison and authenticated remote-object records",
+      "recorded_line_text": null,
+      "sha256": "6b09f47539b883be11cd4f15ce0907d4a6bd711f7ea25026fc2a91839a8dd285",
+      "status": "VERIFIED",
+      "tolerance": "exact hash and semantic current-state identity; line wrapping normalized for quote comparison",
+      "whitespace_normalized_quote_present": true
+    },
+    {
+      "claim_id": "FG-S4",
+      "current": "frozen report-only research phase, tag phase-1g-g-void-evolution-v1; still no package runtime and no new Timescape prediction",
+      "current_reading_verified": true,
+      "file": "reports/phase1g_g_void_evolution.md",
+      "hash_matches": true,
+      "historical": "This is a local research proposal, not a frozen implementation phase or a new Timescape prediction.",
+      "id": "S4",
+      "location": "header, lines 5-6",
+      "method": "SHA-256 of frozen local source plus direct text/location comparison and authenticated remote-object records",
+      "recorded_line_text": "evidence. This is a local research proposal, not a frozen implementation\nphase or a new Timescape prediction. The permanent AGENTS.md rules apply.",
+      "sha256": "41560ed50c8750762a40242652bec275c338d806f2234923c11ff26385654061",
+      "status": "VERIFIED",
+      "tolerance": "exact hash and semantic current-state identity; line wrapping normalized for quote comparison",
+      "whitespace_normalized_quote_present": true
+    },
+    {
+      "claim_id": "FG-S5",
+      "current": "merged, frozen and tagged; no release exists",
+      "current_reading_verified": true,
+      "file": "reports/phase1g_g_void_evolution.md",
+      "hash_matches": true,
+      "historical": "No freeze, tag, merge or release is implied.",
+      "id": "S5",
+      "location": "section 8, lines 283-284",
+      "method": "SHA-256 of frozen local source plus direct text/location comparison and authenticated remote-object records",
+      "recorded_line_text": "`phase1g_fg_remediation_integration.md`. No freeze, tag, merge or release\nis implied. The 2026-10-02 D token successor is a separate classification",
+      "sha256": "41560ed50c8750762a40242652bec275c338d806f2234923c11ff26385654061",
+      "status": "VERIFIED",
+      "tolerance": "exact hash and semantic current-state identity; line wrapping normalized for quote comparison",
+      "whitespace_normalized_quote_present": true
+    },
+    {
+      "claim_id": "FG-S6",
+      "current": "MERGED_FROZEN_TAGGED",
+      "current_reading_verified": true,
+      "file": "reports/phase1g_g_void_evolution_inventory.json",
+      "hash_matches": true,
+      "historical": "LOCAL_REVIEWABLE_UNMERGED_UNTAGGED",
+      "id": "S6",
+      "location": "key integration_state",
+      "method": "SHA-256 of frozen local source plus direct text/location comparison and authenticated remote-object records",
+      "recorded_line_text": null,
+      "sha256": "3ce6a5873548679dc64502f1cc8b68146027b163159e7c10b079b6675e7172ac",
+      "status": "VERIFIED",
+      "tolerance": "exact hash and semantic current-state identity; line wrapping normalized for quote comparison",
+      "whitespace_normalized_quote_present": true
+    },
+    {
+      "claim_id": "FG-S7",
+      "current": "merge and the two tags were later approved and executed by the owner; a release is neither approved nor created; items 2-4 unchanged",
+      "current_reading_verified": true,
+      "file": "reports/phase1g_fg_remediation_integration.md",
+      "formatting_note": "List joined with semicolons and backticks removed; source sentences separately checked.",
+      "hash_matches": true,
+      "historical": "Owner approvals, each separate: merging into main (through a pull request); any annotated phase tag; any release. None is authorized.",
+      "historical_formatting_note": "bulleted list joined with semicolons",
+      "id": "S7",
+      "limitation": "The joined bullets are explicitly labelled as such but are not one literal source quotation; change the blanket verbatim wording.",
+      "location": "section 8 item 1, lines 175-180",
+      "method": "SHA-256 of frozen local source plus direct text/location comparison and authenticated remote-object records",
+      "recorded_line_text": "1. **Owner approvals, each separate:**\n   - merging into `main` (through a pull request);\n   - any annotated phase tag;\n   - any release.\n\n   None is authorized.",
+      "sha256": "ec41f322ced6325737f01cbd7f5b89e24f5d39267b2fb7b42e7ae7026ae02551",
+      "status": "VERIFIED_WITH_QUALIFICATION",
+      "tolerance": "exact hash and semantic current-state identity; line wrapping normalized for quote comparison",
+      "whitespace_normalized_quote_present": false
+    },
+    {
+      "claim_id": "FG-S8",
+      "current": "correct as the scope of that authorization; the merge, freeze and tags rest on separate later owner actions",
+      "current_reading_verified": true,
+      "file": "reports/phase1g_fg_remediation_integration_inventory.json",
+      "hash_matches": true,
+      "historical": "local commits and ordinary push of this phase branch to origin; no main push, force push, merge, PR, tag, release, scientific freeze, status or observational-authorization change",
+      "id": "S8",
+      "location": "authorization scope_summary",
+      "method": "SHA-256 of frozen local source plus direct text/location comparison and authenticated remote-object records",
+      "recorded_line_text": null,
+      "sha256": "241054f20980d09e9c5e21c3df2be3cb1c9af56cf299dfec7848d3efde73b6bb",
+      "status": "VERIFIED",
+      "tolerance": "exact hash and semantic current-state identity; line wrapping normalized for quote comparison",
+      "whitespace_normalized_quote_present": true
+    },
+    {
+      "claim_id": "FG-S9",
+      "current": "phase-1g-f-void-population-v1 exists, target 8d3cdd0",
+      "current_reading_verified": true,
+      "file": "reports/phase1g_fg_successor_validation.md",
+      "hash_matches": true,
+      "historical": "No 1G-F tag was returned.",
+      "id": "S9",
+      "location": "Documentation state verified against GitHub, line 114",
+      "method": "SHA-256 of frozen local source plus direct text/location comparison and authenticated remote-object records",
+      "recorded_line_text": "No 1G-F tag was returned. Tag existence and targets were checked, not",
+      "sha256": "438a0063363c78ec50ae3ce793264215cf7ba4de58e83d434a4d9ffb8e2b278a",
+      "status": "VERIFIED",
+      "tolerance": "exact hash and semantic current-state identity; line wrapping normalized for quote comparison",
+      "whitespace_normalized_quote_present": true
+    },
+    {
+      "claim_id": "FG-S10",
+      "current": "requirements met later: two independent audits, integration record with actual commit 8f3131f, owner's two-interpreter freeze preflight, tags",
+      "current_reading_verified": true,
+      "file": "reports/phase1g_fg_successor_validation.md",
+      "hash_matches": true,
+      "historical": "No push, PR, remote mutation, phase tag or independent adversarial audit was performed. / Before a formal phase freeze, apply in a real checkout, run the existing two-environment gates with their required artifacts, obtain the independent audit and record the actual commit.",
+      "id": "S10",
+      "limitation": "Two individually verifiable spans are joined with /; owner freeze execution itself is reported, not independently re-executed.",
+      "location": "lines 24-25 and 70-73",
+      "method": "SHA-256 of frozen local source plus direct text/location comparison and authenticated remote-object records",
+      "recorded_line_text": "values are preserved. No push, PR, remote mutation, phase tag or independent\nadversarial audit was performed.",
+      "sha256": "438a0063363c78ec50ae3ce793264215cf7ba4de58e83d434a4d9ffb8e2b278a",
+      "status": "VERIFIED_WITH_QUALIFICATION",
+      "tolerance": "exact hash and semantic current-state identity; line wrapping normalized for quote comparison",
+      "whitespace_normalized_quote_present": true
+    },
+    {
+      "claim_id": "FG-S11",
+      "current": "main at 8d3cdd0 carries the 1G-F and 1G-G tags; the audit is not edited",
+      "current_reading_verified": true,
+      "file": "reports/phase1g_fg_independent_scientific_audit.md",
+      "hash_matches": true,
+      "historical": "σ track: main at fb5d952, 1G-A…E v1 tags, no 1G-F tag",
+      "id": "S11",
+      "location": "CLAUDE.md check table, line 515",
+      "method": "SHA-256 of frozen local source plus direct text/location comparison and authenticated remote-object records",
+      "recorded_line_text": "| 249–255 | σ track: main at fb5d952, 1G-A…E v1 tags, no 1G-F tag | verified locally and on the remote (read-only) |",
+      "sha256": "6bb8edecf394989186c86e3ead7f401bcbcc0ac1977bc395008db7019a0c063d",
+      "status": "VERIFIED",
+      "tolerance": "exact hash and semantic current-state identity; line wrapping normalized for quote comparison",
+      "whitespace_normalized_quote_present": true
+    },
+    {
+      "claim_id": "FG-S12",
+      "current": "still true of the audit; the integration, merge and tags happened afterwards on separate owner authority",
+      "current_reading_verified": true,
+      "file": "reports/phase1g_fg_remediation_independent_audit.md",
+      "hash_matches": true,
+      "historical": "The corrections can be integrated: committed locally on the phase branch by the owner. Nothing in this audit authorises a merge, tag or remote action.",
+      "id": "S12",
+      "location": "section 0.1, lines 36-38",
+      "method": "SHA-256 of frozen local source plus direct text/location comparison and authenticated remote-object records",
+      "recorded_line_text": "- **Ready for integration.** The corrections can be integrated: committed\n  locally on the phase branch by the owner. Nothing in this audit\n  authorises a merge, tag or remote action.",
+      "sha256": "46f3aef7f27240f03eb4ef530cebc16a2365f703a93308e165b0c75680389a25",
+      "status": "VERIFIED",
+      "tolerance": "exact hash and semantic current-state identity; line wrapping normalized for quote comparison",
+      "whitespace_normalized_quote_present": true
+    },
+    {
+      "base_docs": {
+        "CLAUDE.md": {
+          "matching_lines": [
+            {
+              "line": 106,
+              "text": "(2026-10-06), but not frozen."
+            },
+            {
+              "line": 259,
+              "text": "for 1G-A, B, C, D and E all resolve to that commit; no 1G-F tag was found."
+            },
+            {
+              "line": 260,
+              "text": "The 2026-10-01 F successor and G research below are unmerged deliverables"
+            }
+          ],
+          "sha256": "2d96e25cf4632395ebe45d9429738198dba9ec06c6f87f5a8bc01b9683f899c6"
+        },
+        "README.md": {
+          "matching_lines": [
+            {
+              "line": 77,
+              "text": "  Their dynamical connection is not derived. Frozen F verdict 2 is explicitly"
+            },
+            {
+              "line": 114,
+              "text": "  - Nothing is frozen or tagged."
+            }
+          ],
+          "sha256": "85d78ff8583a30d340a16c545eab5e972b8ffcabbcc409e337345bc4c70d149c"
+        }
+      },
+      "claim_id": "FG-S13",
+      "current": "updated directly in the same commit as this record",
+      "current_reading_verified": true,
+      "file": "README.md and CLAUDE.md",
+      "historical": "not merged into main, frozen or tagged; Nothing is frozen or tagged; no 1G-F tag was found; unmerged deliverables on the phase branch; but not frozen; No phase freeze, tag, merge or release is implied",
+      "id": "S13",
+      "limitation": "Statements exist at the base and were updated, but the published row supplies neither the base hashes nor exact per-statement locations.",
+      "location": "sigma-track current-status sections",
+      "method": "SHA-256 of frozen local source plus direct text/location comparison and authenticated remote-object records",
+      "reconstructed_locations": [
+        {
+          "file": "README.md",
+          "lines": [
+            29,
+            30
+          ],
+          "text": "They are not merged into `main`, frozen or tagged."
+        },
+        {
+          "file": "README.md",
+          "lines": [
+            114,
+            114
+          ],
+          "text": "Nothing is frozen or tagged."
+        },
+        {
+          "file": "CLAUDE.md",
+          "lines": [
+            259,
+            259
+          ],
+          "text": "no 1G-F tag was found."
+        },
+        {
+          "file": "CLAUDE.md",
+          "lines": [
+            260,
+            261
+          ],
+          "text": "unmerged deliverables on the phase branch"
+        },
+        {
+          "file": "CLAUDE.md",
+          "lines": [
+            106,
+            106
+          ],
+          "text": "but not frozen."
+        },
+        {
+          "file": "CLAUDE.md",
+          "lines": [
+            434,
+            435
+          ],
+          "text": "No phase freeze, tag, merge or release is implied."
+        }
+      ],
+      "status": "VERIFIED_WITH_QUALIFICATION",
+      "tolerance": "exact hash and semantic current-state identity; line wrapping normalized for quote comparison"
+    }
+  ],
+  "task_compliance": {
+    "R2_N4": "Correctly remains optional because no status-registry amendment was made.",
+    "commit_separation": "PASS",
+    "english_technical_docs": "PASS",
+    "experimental_firewall_exception": "AUTHORIZED_original_task_section1",
+    "honest_absent_artifact_skips": "AUTHORIZED_original_task_section10_not_full_historical_coverage",
+    "italian_final_chat_response": "NOT_VERIFIABLE_no_author_conversation_examined",
+    "linux_interpreters": "AUTHORIZED_original_task_sections2_and10",
+    "new_code_and_reproducible_configs": "PASS",
+    "scientific_A_B_closure": "SEE_INDEPENDENT_SCIENCE_FINDINGS"
+  }
+}

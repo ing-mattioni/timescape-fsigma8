@@ -1,0 +1,101 @@
+[
+  {
+    "id": "baseline",
+    "outcome": "BASELINE_PASS",
+    "returncode": 0,
+    "summary": "28 passed in 5.54s",
+    "failed_tests": [],
+    "errors": [],
+    "old": "",
+    "new": "",
+    "source_sha256": "a7c57606bfebf2abb3c87a0f480832f5df1ef98f87741489c760d41cc229b5d2"
+  },
+  {
+    "id": "M1_wall_exponent",
+    "outcome": "KILLED",
+    "returncode": 1,
+    "summary": "12 failed, 12 passed, 4 errors in 4.67s",
+    "failed_tests": [],
+    "errors": [],
+    "old": "d_w = g0 * f_w0 ** (4.0 / 3.0) / (g_ls * f_wls ** (4.0 / 3.0))",
+    "new": "d_w = g0 * f_w0 / (g_ls * f_wls)",
+    "source_sha256": "f6ed75fc1c403b249e6105f182fb15f9f9146fbba21b510a128d4f3b1d07337f"
+  },
+  {
+    "id": "M2_remove_wall_gamma",
+    "outcome": "KILLED",
+    "returncode": 1,
+    "summary": "12 failed, 12 passed, 4 errors in 5.16s",
+    "failed_tests": [],
+    "errors": [],
+    "old": "d_w = g0 * f_w0 ** (4.0 / 3.0) / (g_ls * f_wls ** (4.0 / 3.0))",
+    "new": "d_w = f_w0 ** (4.0 / 3.0) / f_wls ** (4.0 / 3.0)",
+    "source_sha256": "1fc4b0e32f04c689dc56f048e39fb5efeb07146aa9e2df9af632d4c921785268"
+  },
+  {
+    "id": "M3_missing_void_redshift",
+    "outcome": "KILLED",
+    "returncode": 1,
+    "summary": "12 failed, 12 passed, 4 errors in 5.40s",
+    "failed_tests": [],
+    "errors": [],
+    "old": "d_v = fv0 / (f_vls * (1.0 + z_ls))",
+    "new": "d_v = fv0 / f_vls",
+    "source_sha256": "6e5b68ea48bfa778001dfe3d5a3e16900b6c4a544cfdf03b736de921c4b5fc8a"
+  },
+  {
+    "id": "M4_reverse_compression",
+    "outcome": "KILLED",
+    "returncode": 1,
+    "summary": "1 failed, 27 passed in 6.34s",
+    "failed_tests": [],
+    "errors": [],
+    "old": "compression = (f_vls if closure.compression",
+    "new": "compression = (-f_vls if closure.compression",
+    "source_sha256": "757496be6a06fdf624ab5a4085f15ec9022ffd0f5ee18ac2eeaea6b98d9675ca"
+  },
+  {
+    "id": "M5_seed_window_unity",
+    "outcome": "KILLED",
+    "returncode": 1,
+    "summary": "1 failed, 27 passed in 5.96s",
+    "failed_tests": [],
+    "errors": [],
+    "old": "w = top_hat_window(x=k * self.closure.seed_radius_Mpc)",
+    "new": "w = np.ones_like(k)",
+    "source_sha256": "b9e608da3c859595519de6c97a93a3c52890294def6d94d23e4e9b3ea4caa481"
+  },
+  {
+    "id": "M6_swap_phase_weights",
+    "outcome": "KILLED",
+    "returncode": 1,
+    "summary": "2 failed, 26 passed in 5.82s",
+    "failed_tests": [],
+    "errors": [],
+    "old": "w = np.array([alpha, a_w, a_v])",
+    "new": "w = np.array([alpha, a_v, a_w])",
+    "source_sha256": "86166e5371eb63ad13dbd7bfadaf88362c2159f11739448ec573173c56c62b66"
+  },
+  {
+    "id": "M7_shift_orthant_lower",
+    "outcome": "KILLED",
+    "returncode": 1,
+    "summary": "2 failed, 26 passed in 4.85s",
+    "failed_tests": [],
+    "errors": [],
+    "old": "lo, hi = c, max(c, 0.0) + 12.0",
+    "new": "lo, hi = c + 0.1, max(c, 0.0) + 12.0",
+    "source_sha256": "8a2f7a545756bf34d75a00eb271ffb508c5425de929247e2de509e29f5e5c2ca"
+  },
+  {
+    "id": "M8_reverse_barrier_response",
+    "outcome": "KILLED",
+    "returncode": 1,
+    "summary": "1 failed, 27 passed in 5.99s",
+    "failed_tests": [],
+    "errors": [],
+    "old": "return (d_c - d_l) / (d_c - d_v)",
+    "new": "return (d_c + d_l) / (d_c - d_v)",
+    "source_sha256": "6b7832509664219763eed1689c45bfafcd7c04bf6819cc6fbb03a19daedc1ad8"
+  }
+]

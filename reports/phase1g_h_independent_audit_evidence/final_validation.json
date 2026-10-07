@@ -1,0 +1,45 @@
+{
+  "audited_commit": "d4d693d73f995e2245a5720be227273b3639eda9",
+  "completed_utc": "2026-10-07T20:20:33.667819+00:00",
+  "full_suite": {
+    "command": [
+      "/workspace/scratch/7660b169d7d7/repo/.venv/bin/python",
+      "-B",
+      "-W",
+      "error",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "-rs"
+    ],
+    "environment": {
+      "OPENBLAS_NUM_THREADS": "1"
+    },
+    "log": "final_suite.log",
+    "passed": 1137,
+    "returncode": 0,
+    "skipped": 27
+  },
+  "git_diff_check": {
+    "output": "",
+    "returncode": 0
+  },
+  "governance": {
+    "historical_reports_unchanged": 52,
+    "json_roundtrips": 48,
+    "log": "final_governance.json",
+    "status": "PASS"
+  },
+  "packaging_note": "Only verification outputs and the evidence manifest are written after the tested report/inventory were finalized. No tested scientific code, tests or audit claims are changed.",
+  "preservation": {
+    "all_original_351_files_unchanged": true,
+    "tested_report_and_inventory_unchanged": true
+  },
+  "started_utc": "2026-10-07T20:16:39.388632+00:00",
+  "tested_report_inventory_sha256": {
+    "reports/phase1g_h_independent_audit.md": "6ab367ee1a6772df3ee4ceb4291e5fa6cf99a6d7112dadf96cb18c550e05d7af",
+    "reports/phase1g_h_independent_audit_inventory.json": "563f1b855e4c9d1c2a31134685b417872701e12daae7aadedcaa9258d34a6ead"
+  }
+}
