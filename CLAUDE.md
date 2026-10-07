@@ -49,7 +49,7 @@ Strictly layered; each layer imports only from the ones above it.
 | Wall geometry (1F-C) | `phase1f_c/` | Conditional clock-anchored wall/common-spacetime kinematic geometry and optional scalar metric-trace reconstruction |
 | Necessary bound (1F-D) | `phase1f_d.py` | Conditional scalar positive-core necessary-bound diagnostic in the explicit (t, b, C) parameterization; standard library only, no solver, root finder or time scan; a positive margin establishes no existence |
 | Lagrangian σ(M) (1G-B) | `lagrangian_sigma.py` | Conditional, model-internal, mass-labelled linear σ(M). Mandatory, non-default `GrowthLaw`: volume-average CGI regular growing mode (comoving, or Mészáros comparator), or wall-regional EdS in common time t (closure `NOT_APPLICABLE`). Per-photon ω_m,eff identity, EH98 early spectrum as `PROVISIONAL_MODEL_IMPORT`, explicit radius conventions, flat-ΛCDM reference and explicitly anchored ratios. Barotropic closure refused (1G-A §4.1). Lives outside `growth/` so the 1D-B firewall test stays intact |
-| Global linear variance (1G-H, experimental) | `global_variance.py` | Conditional, model-internal global-mean linear statistic of Lagrangian top-hat regions: exact two-phase identities, the tracker propagator `G = (1−p)D_W + p D_V` (A1–A5 + void autonomy H-A6), explicit void-share closures (constant, Gaussian-threshold seed), the closure-independent interval from the [W09] homogeneity premise, the complete two-phase covariance with cross terms, the two-barrier alternative. Experimental: imported by no other module; reuses `lagrangian_sigma` |
+| Global linear variance (1G-H, experimental) | `global_variance.py` | Conditional, model-internal formal tangent statistic of the global contrast of Lagrangian top-hat regions (owner decision D1, 2026-10-07): exact two-phase identities, the tracker propagator `G = (1−p)D_W + p D_V` (A1–A5, void autonomy H-A6, seed-indexed void accounting H-A9), explicit void-share closures (constant, Gaussian-threshold seed), the constant-share interval from an adopted reading of the [W09] homogeneity premise, the complete two-phase covariance with cross terms, orthant integrals with an accuracy contract, the two-barrier alternative; records re-validate every field. Experimental: imported by no other module; reuses `lagrangian_sigma` |
 | LTB–CMC experiment (outside the phases) | `experimental_ltb_cmc/` | Isolated, conditional spherical LTB dust background with constant-mean-curvature slicing (BVP solver), tracker-clock comparison adapter, single-age section-family evolution, kappa_star and mixed sensitivities; imports only NumPy/SciPy and its own modules; distinct from 1F-D and promotes no scientific status |
 
 ### Conventions that pervade the scientific packages
@@ -99,9 +99,9 @@ linear σ(M) with an explicit `PROVISIONAL_MODEL_IMPORT` early spectrum.
 
 **Authorised experimental exception (Phase 1G-H, owner task of 2026-10-06).**
 `global_variance.py` computes a conditional, model-internal *global-mean*
-linear statistic (the σ8 analogue defined in
-`phase1g_h_global_variance_closure.md` §2) for an explicitly supplied
-void-share closure. It is experimental (no other module imports it), its
+linear statistic — the formal tangent statistic, a proposed σ8 analogue
+(`phase1g_h_global_variance_closure.md` §2, owner decision D1 of
+2026-10-07) — for an explicitly supplied void-share closure. It is experimental (no other module imports it), its
 outputs carry `NON_OBSERVATIONAL`, `NOT_OBSERVATIONAL_SIGMA_8` and
 `EXPERIMENTAL_CONDITIONAL_RESEARCH_RUNTIME`, it follows the same naming rule,
 and it changes no status token. Promotion, audit, pull request, merge,
@@ -464,30 +464,55 @@ current interpretation; frozen records remain unchanged.
     (`phase1g_fg_freeze_status_successor.md`); no release exists.
 - **1G-H (proposed; pushed with owner approval of 2026-10-06 to the session
   branch `ccr-555e67be-u11yht`, developed locally as
-  `phase-1g-h-global-variance-closure`; not merged into `main`, audited,
-  frozen or tagged; no pull request):** global matter-variance definition and
-  minimal closure (`phase1g_h_global_variance_closure.md`, inventory,
-  validation record; runtime `global_variance.py`; evidence
+  `phase-1g-h-global-variance-closure`; independently audited 2026-10-07
+  (`phase1g_h_independent_audit.md`, published by the owner on
+  `phase-1g-h-independent-audit` at `816dd00`) and remediated locally on top
+  of it (`phase1g_h_audit_remediation.md`); not merged into `main`, frozen or
+  tagged; no pull request):** global matter-variance definition and minimal
+  closure (`phase1g_h_global_variance_closure.md`, inventory, validation
+  record; runtime `global_variance.py`; evidence
   `scripts/phase1g_h_global_variance_closure_numerics.py`; single cases
   `scripts/phase1g_h_global_variance_case.py` with `scripts/phase1g_h_configs/`).
-  - A (definition) closed: the rms of the first-order ensemble-mean response
-    of the global contrast `(M_L/V_L)/(M_D/V_D) − 1` of Lagrangian top hats,
-    dust foliation, common time, global volume mean; recommended radius
-    `8 h̄⁻¹ Mpc` of present volume-average proper length (`R·H_D0 = 800 km/s`).
-  - Derived (A1–A5 + void autonomy H-A6): for every Lagrangian region the
-    propagator is `G = (1−p)D_W + p D_V`; D_W = 0.2306 / 0.3527,
-    D_V = 7.133 / 11.33 ([GM] / [NW15]). Strict flat walls cannot carry the
-    early field below ≈ 99 / 127 h⁻¹ Mpc, so 1G-D's S1 is necessary.
-  - B closed only given the void share p (1G-D's `VOID_ONSET_RESPONSE`,
-    still `EXTERNAL_CLOSURE_INPUT`): at 8 h̄⁻¹ Mpc 1.121 / 1.057 (1G-D's
-    [W09]-radius seed), 0.811 / 0.816 (1G-F-median seed), interval
-    [0.261, 0.998] / [0.369, 1.162] from the [W09] 10%-at-100 premise (direct
-    A_s normalisation; ×0.97058 for Planck-anchored values).
-  - Two-phase covariance with cross terms; a constructive pair of admissible
-    laws gives 0.97 vs 0.39 at 8 h⁻¹ Mpc: the nonlinear hybrid variance needs
-    the joint law of geometry and density.
+  - Audit (2026-10-07): `REJECT` of the closure claims of the text at
+    `d4d693d`, every other area `ACCEPT_WITH_CORRECTIONS`, 15 findings (GH-F1
+    HIGH; GH-F2, F4, F5 MEDIUM-HIGH); the numbers reproduced. Owner decisions
+    D1–D4 (2026-10-07, "Procedi, usa le scelte raccomandate per i punti 1-4")
+    are applied; the two recorded push approvals still await the owner's
+    confirmation (GH-F15). A delta audit is open.
+  - A (definition) proposed, not closed (D1): the formal tangent statistic —
+    the early Gaussian field propagated with the zero-amplitude tangent of
+    the global contrast `(M_L/V_L)/(M_D/V_D) − 1` of Lagrangian top hats,
+    smoothing rule `G_R = G W(kR)`, dust foliation, common time, global
+    volume mean; preferred radius `8 h̄⁻¹ Mpc` of present volume-average
+    proper length (`R_proper·H_D0 = 800 km/s`, `R_proper = γ_w0 R`). It is
+    not the ensemble-mean response of the true contrast (GH-F1).
+  - Derived within the tangent model (A1–A5, void autonomy H-A6,
+    seed-indexed void accounting H-A9 = D2): the propagator is
+    `G = (1−p)D_W + p D_V`; D_W = 0.2306 / 0.3527, D_V = 7.133 / 11.33
+    ([GM] / [NW15]). Void/region radius ratios at R8 are 0.33 / 0.39 (1G-F
+    median) and 1.49 / 1.59 ([W09]): the sub-cell extension holds for the
+    seed-indexed statistic, not the material-domain volume (GH-F2). With
+    exact empty voids and the early field, wall-density freedom is needed
+    below ≈ 99 / 127 h⁻¹ Mpc; this does not select the full S1 (GH-F7).
+  - B (formal statistic) closed only given the void share p, defined by
+    `p δ_L = f_v,LS ε` (`p = f_v,LS − ∂f_v,L/∂δ_L`, GH-F3; 1G-D's
+    `VOID_ONSET_RESPONSE`, still `EXTERNAL_CLOSURE_INPUT`): at 8 h̄⁻¹ Mpc,
+    direct normalisation (D4), 1.121 / 1.057 (1G-D's [W09]-radius seed, a
+    formal extrapolation, H-A8), 0.811 / 0.816 (1G-F median as a heuristic
+    seed-scale prior); constant-share interval [0.261, 0.998] /
+    [0.369, 1.162] under H-A7 and the adopted 10%-at-100 reading, not a
+    bound for scale-dependent shares (GH-F4). Planck normalisation:
+    post-hoc at fixed closure (×0.970577) and PBS reclosure reported beside
+    them (GH-F6).
+  - Two-phase covariance with cross terms; the signed Gaussian pair (0.97 vs
+    0.39) has negative wall densities (P ≈ 0.45); nonnegative lognormal
+    pairs with the same shared constraints give law II / law I = 0.92–1.29:
+    the nonlinear hybrid variance needs the joint law of geometry and
+    density (GH-F5).
   - C (prediction, observation) not reached; owner decisions H-OD1…H-OD5 in
-    §9. No token, authorization, equation or frozen record changes.
+    §9 (H-OD2, H-OD3 recommendations revised with the audit: no reference
+    value, tokens deferred). No token, authorization, equation or frozen
+    record changes.
 - **Status-token additions:** the six 1G-C/1G-D tokens are *additions*, not
   changes (`phase1g_status_additions_successor.md`). The frozen 1F-C-R
   snapshot has no entry for them. The 1F-C-R validator accepts a new token

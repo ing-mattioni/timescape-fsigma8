@@ -143,26 +143,42 @@ that predate the freeze are resolved in the
 - **Status.** These are conditional numbers, not an observational σ8, and no
   σ8 authorization is granted.
 - **Phase 1G-H (proposed; on the branch `ccr-555e67be-u11yht`, pushed with
-  owner approval on 2026-10-06; not merged into `main`, audited, frozen or
-  tagged)**
+  owner approval on 2026-10-06; independently audited on 2026-10-07 and
+  remediated locally the same day; not merged into `main`, frozen or tagged)**
   ([report](reports/phase1g_h_global_variance_closure.md),
-  [validation](reports/phase1g_h_global_variance_closure_validation.md)):
-  - *Definition (closed).* The Timescape global-mean linear statistic is the
-    rms of the first-order response of the global density contrast of
-    Lagrangian top-hat regions to the early Gaussian field, on the dust
-    foliation and relative to the global volume mean; recommended radius
-    8 h̄⁻¹ Mpc of present volume-average proper length (R·H_D0 = 800 km/s).
-    It reduces to the standard linear σ8 without voids.
-  - *Derived.* Under the regional wall/void laws, every Lagrangian region has
+  [validation](reports/phase1g_h_global_variance_closure_validation.md),
+  [audit](reports/phase1g_h_independent_audit.md),
+  [remediation](reports/phase1g_h_audit_remediation.md)):
+  - *Audit.* The independent audit rejected the closure claims of the
+    audited text (definition "closed", structure "derived", interval
+    "closure-independent", Gaussian laws as physical densities) and accepted
+    the rest with corrections; the numbers reproduced. The owner's decisions
+    D1–D4 (2026-10-07) were applied.
+  - *Definition (proposed).* The formal tangent statistic: the rms of the
+    early Gaussian field propagated with the zero-amplitude tangent of the
+    global contrast of Lagrangian top-hat regions (dust foliation, global
+    volume mean), with the smoothing rule G_R = G·W(kR) — the analogue of
+    ΛCDM's linear σ8, not the ensemble-mean response of the true contrast.
+    Preferred radius 8 h̄⁻¹ Mpc of present volume-average proper length
+    (R_proper·H_D0 = 800 km/s).
+  - *Derived within that model.* Under the regional wall/void laws, void
+    autonomy and seed-indexed void accounting, every Lagrangian region has
     the propagator G = (1−p)D_W + p D_V, with D_W = 0.231 / 0.353 and
-    D_V = 7.13 / 11.3 ([GM] / [NW15]); p, the fraction of an early contrast
-    carried by the void volume, is the one missing input (1G-D's void-onset
-    response, an external closure).
-  - *Conditional values* at 8 h̄⁻¹ Mpc: 1.121 / 1.057 with 1G-D's seed
-    closure, 0.811 / 0.816 with the 1G-F void size; closure-independent
-    interval [0.26, 1.00] / [0.37, 1.16] from the background's own
-    homogeneity premise. Not observational; owner decisions are listed in
-    the report (§9).
+    D_V = 7.13 / 11.3 ([GM] / [NW15]); p (defined by p δ = f_v ε) is the one
+    missing input (1G-D's void-onset response, an external closure). Void
+    radii are not small against R at 8 h̄⁻¹ Mpc, so the sub-cell extension
+    holds for the seed-indexed statistic only.
+  - *Conditional values* at 8 h̄⁻¹ Mpc (direct normalisation): 1.121 / 1.057
+    with 1G-D's seed closure (a formal extrapolation of the void response),
+    0.811 / 0.816 with the 1G-F void size as a heuristic seed scale; the
+    constant-share interval [0.26, 1.00] / [0.37, 1.16] under an adopted
+    reading of the background's homogeneity premise, which does not bound
+    scale-dependent shares. Not observational; owner decisions in the report
+    (§9).
+  - *Nonlinear variance.* Joint laws sharing the acquired constraints give
+    different 8 h⁻¹ Mpc variances: 0.97 vs 0.39 for a signed Gaussian
+    surrogate (negative densities), law II / law I = 0.92–1.29 for
+    nonnegative lognormal laws.
   - Experimental runtime `timescape_fsigma8.global_variance`; one case:
     `python scripts/phase1g_h_global_variance_case.py --config scripts/phase1g_h_configs/gm_bare_pbs_f_median_seed.json`.
 
@@ -312,7 +328,7 @@ The earlier implementation milestones below remain useful provenance:
 | `src/timescape_fsigma8/phase1f_c/` | Phase 1F-C conditional wall/common-spacetime kinematic geometry |
 | `src/timescape_fsigma8/phase1f_d.py` | Phase 1F-D conditional scalar positive-core necessary-bound diagnostic (no solver; a positive margin establishes no existence) |
 | `src/timescape_fsigma8/lagrangian_sigma.py` | Phase 1G-B conditional, model-internal, mass-labelled linear σ(M) (explicit growth law, early-spectrum import and radius convention; non-observational) |
-| `src/timescape_fsigma8/global_variance.py` | Phase 1G-H experimental, conditional global-mean linear statistic (two-phase propagator, explicit void-share closures, admissible interval, two-phase covariance; non-observational) |
+| `src/timescape_fsigma8/global_variance.py` | Phase 1G-H experimental, conditional formal tangent statistic of the global contrast (two-phase propagator, explicit void-share closures, constant-share interval, two-phase covariance, orthant integrals with an accuracy contract; non-observational) |
 | `scripts/phase1g_h_global_variance_closure_numerics.py`, `scripts/phase1g_h_global_variance_case.py`, `scripts/phase1g_h_configs/` | Phase 1G-H evidence, single-case runner and example configurations |
 | `src/timescape_fsigma8/experimental_ltb_cmc/` | Isolated, conditional LTB–CMC experiment outside the phase sequence: CMC-sliced LTB background, tracker-clock comparison, single-age evolution, kappa_star and mixed sensitivities |
 | `src/timescape_fsigma8/components.py` | Tensor-component ontology (coordinate/orthonormal representations, 1F-C-R) |

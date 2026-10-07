@@ -4,17 +4,19 @@
     "factor": 0.97057677,
     "g_lcdm_qplus0": 0.787812602,
     "lcdm_eh98_linear_sigma": 0.83568866,
-    "meaning": "multiplies the direct A_s-normalised EH98 value by the Boltzmann-to-EH98 ratio at the Planck parameters; late-time LCDM growth cancels exactly",
+    "meaning": "empirical post-hoc output normalisation at fixed closure (owner decision D4): multiplies a finished direct value by the ratio of the Planck sigma at 8 Mpc/h to the EH98 value at the Planck parameters.  It is not a verified transfer recalibration: a rescaled input spectrum changes the PBS share (see pbs_reclosure_under_spectrum_rescaling), and the late-time growth cancels only for a common scale-independent growth",
+    "policy": "D4: direct values primary; post-hoc (fixed closure) and reclosure (rescaled input spectrum, PBS share recomputed) reported beside them; the post-hoc interval scaling is withdrawn",
     "provenance": "Planck 2018 VI (arXiv:1807.06209) Table 2, TT,TE,EE+lowE+lensing"
   },
   "assumptions": {
     "A1-A5": "1G-C regional laws with owner decisions: walls EdS in common time t clocked by the wall matter",
     "H-A6": "void autonomy: each empty void region expands as Milne independently of the surrounding wall density; no wall-void volume transfer (1G-G J = 0)",
-    "H-A7": "monotone response: f_v,LS <= p <= 1",
+    "H-A7": "monotone response f_v,LS <= p <= 1 at k -> 0: an added class assumption, not a tracker theorem; the PBS top-hat kernel leaves it slightly at large k",
     "H-A8": "linear response applied where the void-volume response rms exceeds 1 (formal, linearly extrapolated statistic)",
-    "S1": "wall-density (curvature) perturbations admitted (1G-D); shown necessary below ~99/127 h^-1 Mpc by (H13)",
+    "H-A9": "seed-indexed void accounting (owner decision D2): a bubble's volume belongs to the region containing its seed; equals the transported material-region volume only with scale separation (void/region radius 0.33/0.39 for the 1G-F median, 1.49/1.59 for [W09], at 8/h_bare Mpc)",
+    "S1": "wall-density (curvature) perturbations admitted (1G-D); (H13) shows wall-density freedom is necessary below ~99/127 h^-1 Mpc if exact empty voids and the early field are kept; it does not select the full S1 dynamics (GH-F7)",
     "closure": "explicit void share p(k) (constant, or Gaussian-threshold peak-background split with an explicit seed radius)",
-    "early_spectrum": "PROVISIONAL_MODEL_IMPORT: Planck 2018 A_s, n_s, k_p, f_b; EH98 zero-baryon transfer at omega_m,eff; matter-era normalisation at z = 1090, radiation neglected",
+    "early_spectrum": "PROVISIONAL_MODEL_IMPORT: Planck 2018 A_s, n_s, k_p, f_b = 0.02237/0.14309694; EH98 zero-baryon-oscillation (no-wiggle) transfer with the baryon shape suppression, Eqs. (26), (28)-(31), at omega_m,eff; matter-era normalisation at z = 1090, radiation neglected (correction not quantified)",
     "radius": "CONVENTION_DEPENDENT, explicit"
   },
   "authorization": {
@@ -44,38 +46,51 @@
   },
   "classification": "RESEARCH_PHASE_WITH_EXPERIMENTAL_RUNTIME",
   "d_v2_tag_or_branch_created": false,
-  "date": "2026-10-06",
+  "date": "2026-10-06 (revised 2026-10-07)",
   "definition": {
     "contrast": "(H1) 1 + delta_L = (M_L/V_L)/(M_D/V_D)",
-    "ensemble": "centres uniform in Lagrangian space (mass sampling); connected variance",
+    "ensemble": "statistic of the early Gaussian field: centres uniform in Lagrangian (early photon-normalised) coordinates; mass and volume weighting differ only beyond first order; connected variance of the tangent field",
     "field": "dust rest-mass density (CDM + baryons after decoupling), dust rest frame",
     "flrw_limit": "standard linear top-hat variance ([JLH13] Eq. (2)); D_W -> 1 - (5/6) f_v0",
     "foliation_time": "dust-orthogonal foliation of [GM] Sec. 3; dust proper time t (common time); present epoch f_v(t0) = f_v0",
-    "linear": "first-order ensemble-mean response to the early Gaussian field around the statistically homogeneous two-phase tracker state (propagator G(k) = <delta_L(k) delta_0*(k)>'/P_0(k))",
+    "linear": "formal tangent statistic (owner decision D1): zero-amplitude tangent of the global-contrast map of a Lagrangian top hat around the smooth two-phase tracker state, applied to the early Gaussian field (linear extrapolation, as LCDM's linear sigma at 8 Mpc/h)",
     "mean": "global Buchert volume average <rho>_D = M_D/V_D on the same slice",
+    "not_the_ensemble_response": "the ensemble-mean response of the true contrast (cross-propagator <delta_L delta_0*>'/P_0) averages the derivative of (H3) over finite small-scale fluctuations and differs from the tangent (two-state example: 0.27468 against f_w = 0.263); not computed (GH-F1)",
     "radius_conventions": {
       "a_comparison": "equal Lagrangian mass to the reference LCDM M8",
       "b_diagnostic": "L/h_dressed wall-comoving (needs the underived dressed map)",
-      "c_recommended": "R = (L/h_bare)/gamma_w0, L = 8: present volume-average proper radius 8/h_bare Mpc, R*H_D0 = 800 km/s (H24)"
+      "c_preferred": "R = (L/h_bare)/gamma_w0 photon-comoving, L = 8: present volume-average proper radius R_proper = gamma_w0 R = 8/h_bare Mpc, R_proper*H_D0 = 800 km/s (H24); a named, defensible convention, not selected by the background"
     },
     "region": "Lagrangian top hat: dust elements with early photon-normalised comoving labels within radius R",
+    "smoothing_rule": "G_R(k) = G(k) W(kR), G the unsmoothed carrier of a Lagrangian point; exact for the tangent, stated as part of the definition",
     "statistic": "(H10) sigma^2 = int dln k Delta^2_u G^2 W^2(kR); real-space (H11)"
+  },
+  "ensemble_vs_tangent_example": {
+    "mean_derivative_central_difference": 0.274683481738,
+    "mean_derivative_exact": 0.27468348168,
+    "mean_reciprocal_density": 1.0,
+    "tangent_at_zero_amplitude": 0.263,
+    "void_volume_fraction": 0.737,
+    "wall_contrasts": [
+      -0.3333333333333333,
+      1.0
+    ]
   },
   "equations": {
     "H1": "global contrast of a Lagrangian region (definition)",
-    "H10": "global linear statistic (spectral)",
+    "H10": "formal tangent statistic (spectral), smoothing rule G_R = G W",
     "H11": "real-space pair-density form",
     "H12": "Gaussian-threshold peak-background void share with compression term and seed window",
     "H13": "strict flat-wall cap delta_L < f_v/f_w",
     "H14": "rms void-volume response",
-    "H15": "closure-independent interval (monotone lower end, homogeneity-premise upper end)",
+    "H15": "constant-share interval (monotone lower end, adopted homogeneity-premise upper end); not a bound for scale-dependent shares",
     "H16": "amplitude scaling: sigma^2 ~ A_s at fixed closure; PBS void term A_s-independent",
     "H17": "two-phase density decomposition with conditional normalisation",
     "H18": "complete covariance with cross terms",
     "H19": "1G-E mass-conserving formula as special case",
     "H2": "exact finite-density two-phase contrast",
     "H20": "Cauchy-Schwarz bound",
-    "H21": "Gaussian-threshold pair: bivariate-normal orthant moments",
+    "H21": "bivariate-normal orthant probabilities and moments with an accuracy contract; signed Gaussian and nonnegative lognormal constructive pairs",
     "H22": "two-barrier void mass fraction response (gambler's ruin) and M3 global bias",
     "H23": "finite-t identity (t0/t)^(2/3)/(1+z) = gamma_w0 f_w0^(1/3)/(gamma_w f_w^(1/3))",
     "H24": "mass label of convention (c)",
@@ -85,13 +100,13 @@
     "H6": "regional evolution: delta_w = C t^(2/3) + C' t^-1, epsilon const (A1-A5, H-A6)",
     "H7": "growth of a region with void share p",
     "H8": "D_W, D_V closed forms",
-    "H9": "propagator G = (1-p) D_W + p D_V",
-    "provenance": "H1-H5, H13, H17-H20, H23 follow from the definitions with [GM] Sec. 3 and (5.4)-(5.6); H6-H9 add A1-A5 and H-A6; H12 extends [1G-D] Sec. 7; H22 applies [SvdW04] Eq. (3) to conditional walks; none is attributed to a source as already derived"
+    "H9": "propagator G = (1-p) D_W + p D_V within the tangent model (A1-A5, H-A6, H-A9)",
+    "provenance": "H1-H5, H13, H17-H20, H23 follow from the definitions with [GM] Sec. 3 and (5.4)-(5.6); H6-H9 add A1-A5, H-A6 and H-A9 (the tangent model); H12 extends [1G-D] Sec. 7; H22 applies [SvdW04] Eq. (3) to conditional walks; none is attributed to a source as already derived"
   },
   "evidence": {
     "artifact": "artifacts/independent/phase1g_h_global_variance_closure.json (git-ignored, regenerable)",
     "artifact_raw_sha256_meaning": "one exact output and environment (includes the git head), not a cross-platform gate",
-    "artifact_sha256_py313_run": "99c4aad4ee1caee1f2e7d49fa390e56d3d40bc1a366983c25a54f212a880aa12",
+    "artifact_sha256_py313_run": "689efe81b034238de2dc56da58d824c31760c4c3777d2586fdfe1fcafcc891ab",
     "cross_interpreter_check": {
       "interpreters": [
         "CPython 3.13.16 (NumPy 2.5.3, SciPy 1.18.1)",
@@ -99,8 +114,9 @@
       ],
       "label_or_key_mismatches": 0,
       "max_relative_difference": 0.0,
-      "numeric_leaves_compared": 2779,
-      "rule": "numeric leaves with rtol 1e-11 / atol 1e-14 ignoring environment and figures; labels and keys exactly"
+      "numeric_leaves_compared": 3099,
+      "rule": "numeric leaves with rtol 1e-11 / atol 1e-14 ignoring environment and figures; labels and keys exactly",
+      "tree": "remediated tree (2026-10-07)"
     },
     "figures": [
       "artifacts/independent/phase1g_h/sigma_vs_void_share.png",
@@ -110,21 +126,36 @@
     "gates": {
       "D_owner_A_v_printed_digits": 0.5,
       "D_owner_X_SU_printed_digits": 0.0005,
-      "E_reference_reproduction_abs": 0.0006,
+      "E_reference_printed_half_unit": 5e-05,
       "constant_share_A_s_scaling_rel": 1e-10,
       "gt_orthant_P11_vs_bivariate_cdf_abs": 1e-10,
+      "lognormal_ball_variance_calibration_rel": 1e-09,
+      "lognormal_linear_limit_rel": 0.05,
       "m3_bias_finite_difference_rel": 1e-06,
+      "orthant_analytic_cases_abs": 1e-12,
       "pbs_void_term_A_s_independence_rel": 0.002,
-      "refined_quadrature_rel": 2e-06
+      "reclosure_constant_share_rel": 1e-10,
+      "refined_quadrature_rel": 2e-06,
+      "step_kernel_premise_ratio": 1.0
     },
-    "gates_passed": 21,
-    "gates_total": 21,
+    "gates_passed": 32,
+    "gates_total": 32,
+    "remediation_sections": [
+      "ensemble_vs_tangent_example",
+      "orthant_analytic_cases",
+      "scale_separation",
+      "flat_wall_cap_exceedance",
+      "step_share_counterexample",
+      "pbs_reclosure_under_spectrum_rescaling",
+      "negative_wall_density_probability",
+      "nonnegative_lognormal_pair"
+    ],
     "run_environment": {
-      "git_head": "fd7331f321702ed8c20d32ea805e7b9537d44726",
+      "git_head": "c1b448295a631786a2831b05e01650dd2cef73de",
       "implementation": "CPython",
       "matplotlib": "3.11.2",
       "numpy": "2.5.3",
-      "platform": "Linux-6.18.44-fc-v70-x86_64-with-glibc2.39",
+      "platform": "Linux-6.18.44-fc-v77-x86_64-with-glibc2.39",
       "python": "3.13.16",
       "scipy": "1.18.1",
       "src_scripts_tests_dirty": false
@@ -136,10 +167,10 @@
       "scripts/phase1g_h_configs/gm_bare_pbs_f_median_seed.json": "fce37d4e6bef9b778e68ec5bcb306051e07518020622ecbdb9c1c1847d2ba581",
       "scripts/phase1g_h_configs/gm_bare_pbs_w09_seed.json": "286cea0cb071b8381fe16025ac99d0d596c8d704282d869ebfe23d80026b3986",
       "scripts/phase1g_h_configs/nw15_equal_mass_constant_share.json": "41d442557b90a00ddd3d26f263eecea12b982c046656750fa9a1696b6c4d9288",
-      "scripts/phase1g_h_global_variance_case.py": "f476b4fc4302367cd34544b8dd7fb5b703fed2eac3c1de1e21c3eccb525fe5f0",
-      "scripts/phase1g_h_global_variance_closure_numerics.py": "f82648357026f9d99b96e821cccc764a6e44e3acea8385a3912cb14fc311146e",
-      "src/timescape_fsigma8/global_variance.py": "a7c57606bfebf2abb3c87a0f480832f5df1ef98f87741489c760d41cc229b5d2",
-      "tests/test_phase1g_h_global_variance.py": "14bfd2ddfc8aa941fc6e04e9a2f37d064749db1a559bd9b2f4469a15b416e64a"
+      "scripts/phase1g_h_global_variance_case.py": "e1b583f39f5b81c0b6c2ba5df1877de11bf091011c7c663bd81c9abee1de57f5",
+      "scripts/phase1g_h_global_variance_closure_numerics.py": "568bf7591330875c9c09956663863ce5631fb07eb32e33e35002a7bec8a2e20c",
+      "src/timescape_fsigma8/global_variance.py": "71fa240f309e6992edac07c61714b894471a05c1d29a0843b11c3bec6137527c",
+      "tests/test_phase1g_h_global_variance.py": "2a7b827424b3e931e8b0ff4941b8ffb97462ed44de7d343d43a384a9c77cdef6"
     },
     "added_reports": [
       "reports/phase1g_h_global_variance_closure.md",
@@ -151,21 +182,39 @@
       "README.md",
       "CLAUDE.md"
     ],
-    "unchanged": "every frozen report, inventory, audit, evidence file, tag, existing package module, test and status token"
+    "changed_in_remediation": [
+      "src/timescape_fsigma8/global_variance.py",
+      "tests/test_phase1g_h_global_variance.py",
+      "scripts/phase1g_h_global_variance_closure_numerics.py",
+      "scripts/phase1g_h_global_variance_case.py",
+      "reports/phase1g_h_global_variance_closure.md",
+      "reports/phase1g_h_global_variance_closure_inventory.json",
+      "reports/phase1g_h_global_variance_closure_validation.md",
+      "reports/phase1g_fg_freeze_status_successor.md",
+      "reports/phase1g_fg_freeze_status_successor_inventory.json",
+      "README.md",
+      "CLAUDE.md"
+    ],
+    "unchanged": "every frozen report, inventory, audit, evidence file, tag, existing package module (other than global_variance.py), test (other than the 1G-H file) and status token; the independent audit's files"
   },
   "limitations": [
+    "formal tangent statistic, not the ensemble response of the true contrast (D1)",
+    "seed-indexed void accounting H-A9 without scale separation at R8 (D2)",
     "H-A6 ignores wall-void boundary coupling",
     "single-scale Gaussian-threshold seeds",
-    "1G-F radius conversion ambiguity (photon-comoving vs volume-average proper, factor gamma_w0)",
-    "matching at z = 1090 without radiation",
+    "1G-F median radius as a heuristic seed-scale prior; its conversion ambiguity (factor gamma_w0)",
+    "void response beyond its validity for the [W09] seed (H-A8)",
+    "matching at z = 1090 without radiation (correction not quantified)",
     "EH98 no-wiggle transfer",
-    "A_s from a LCDM fit",
+    "A_s from a LCDM fit; empirical Planck normalisation (D4)",
     "empty voids in the propagator (finite-density voids only in the covariance and the M3 alternative)",
+    "lognormal pairs: the resolution radius is a construction parameter",
     "no time-dependent mergers or mass transfer (1G-G)",
     "nothing observational"
   ],
   "missing_input": {
-    "object": "p(k) = -d f_v,LS[region]/d delta_L(k) at the matching epoch in the tracker ensemble (void-seed volume-fraction bias); equivalently 1G-D A_v(k) = p/f_v,LS",
+    "beyond_the_tangent_statistic": "the ensemble statistic of the true contrast and the material-domain volume below the super-cell scale also need the joint small-scale law and a transport map (GH-F1, GH-F2)",
+    "object": "p(k) defined by p delta_L(LS) = f_v,LS epsilon, i.e. p = f_v,LS - d f_v,L/d delta_L(k) for the region's void volume fraction at the matching epoch (corrected, GH-F3); p(k->0) = f_v,LS (1 + A_v) with 1G-D's threshold response A_v when the seed volume is compressed with its region, f_v,LS A_v for the threshold shift alone",
     "sensitivity_dsigma_c_dp": {
       "NW15_CMB_FIT": 11.46,
       "PAPER_REFERENCE": 7.785
@@ -194,7 +243,14 @@
     "H-OD2": "void-share closure for a reference value: beta (1G-F-median seed, recommended), alpha (1G-D [W09]-radius seed), gamma (interval only)",
     "H-OD3": "status tokens: add GLOBAL_MEAN_LINEAR_STATISTIC_DEFINITION = DERIVED_FROM_VERIFIED_DEFINITIONS and GLOBAL_MEAN_LINEAR_STATISTIC_COMPUTATION = DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION (recommended; no validator change), or change LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC (needs an approved validator extension for a second chained change; R2-N4 then relevant)",
     "H-OD4": "keep global_variance.py experimental until an independent audit (recommended), or promote",
-    "H-OD5": "push / pull request / merge / audit / freeze / tag: separate decisions, none authorised"
+    "H-OD5": "push / pull request / merge / audit / freeze / tag: separate decisions; the push to the session branch was decided by the owner on 2026-10-06 (publication block); an independent audit was performed on 2026-10-07; pull request, merge, freeze and tag remain open"
+  },
+  "owner_decisions_status_2026_10_07": {
+    "H-OD1": "narrowed by D1 to the formal tangent statistic and kept a proposal; adoption as the sigma8 analogue not decided",
+    "H-OD2": "open; revised recommendation with the audit: no physical reference value yet",
+    "H-OD3": "open; revised recommendation with the audit: defer both token options, tokens unchanged",
+    "H-OD4": "open; keep experimental (record and orthant contracts hardened)",
+    "H-OD5": "push decided; audit performed; delta audit, pull request, merge, freeze and tag open"
   },
   "phase": "1G-H",
   "publication": {
@@ -245,7 +301,7 @@
           "closures": {
             "monotone_lower_p_fvLS": {
               "linear_sigma_direct_A_s": 0.3598,
-              "linear_sigma_planck_anchored": 0.349214,
+              "linear_sigma_post_hoc_normalised": 0.349214,
               "propagator_k0": 0.353247,
               "radius_Mpc": 12.22604,
               "scale_dependence_rel": 0.0,
@@ -256,7 +312,7 @@
             },
             "pbs_svdw04_seed_compressed": {
               "linear_sigma_direct_A_s": 2.423698,
-              "linear_sigma_planck_anchored": 2.352385,
+              "linear_sigma_post_hoc_normalised": 2.352385,
               "propagator_k0": 3.089525,
               "radius_Mpc": 12.22604,
               "scale_dependence_rel": -0.229799,
@@ -267,7 +323,7 @@
             },
             "pbs_tracker_seed_F_median_compressed": {
               "linear_sigma_direct_A_s": 0.796018,
-              "linear_sigma_planck_anchored": 0.772597,
+              "linear_sigma_post_hoc_normalised": 0.772597,
               "propagator_k0": 0.781557,
               "radius_Mpc": 12.22604,
               "scale_dependence_rel": -4.6e-05,
@@ -278,7 +334,7 @@
             },
             "pbs_tracker_seed_compressed": {
               "linear_sigma_direct_A_s": 1.03074,
-              "linear_sigma_planck_anchored": 1.000412,
+              "linear_sigma_post_hoc_normalised": 1.000412,
               "propagator_k0": 1.012877,
               "radius_Mpc": 12.22604,
               "scale_dependence_rel": -0.000898,
@@ -289,7 +345,7 @@
             },
             "pbs_tracker_seed_threshold_only_1G_D": {
               "linear_sigma_direct_A_s": 1.030173,
-              "linear_sigma_planck_anchored": 0.999862,
+              "linear_sigma_post_hoc_normalised": 0.999862,
               "propagator_k0": 1.01232,
               "radius_Mpc": 12.22604,
               "scale_dependence_rel": -0.000899,
@@ -300,7 +356,7 @@
             },
             "strict_flat_walls_p1": {
               "linear_sigma_direct_A_s": 11.537714,
-              "linear_sigma_planck_anchored": 11.198238,
+              "linear_sigma_post_hoc_normalised": 11.198238,
               "propagator_k0": 11.327583,
               "radius_Mpc": 12.22604,
               "scale_dependence_rel": 0.0,
@@ -311,7 +367,7 @@
             },
             "wall_mode_p0": {
               "linear_sigma_direct_A_s": 0.359233,
-              "linear_sigma_planck_anchored": 0.348663,
+              "linear_sigma_post_hoc_normalised": 0.348663,
               "propagator_k0": 0.35269,
               "radius_Mpc": 12.22604,
               "scale_dependence_rel": 0.0,
@@ -323,48 +379,84 @@
           },
           "intervals": {
             "W09_10pct_at_100": {
+              "class": "CONSTANT_SHARE_ONLY",
               "lower": 0.3598,
-              "lower_anchored": 0.349214,
+              "lower_post_hoc_withdrawn": 0.349214,
               "premise_max_linear_rms": 0.1,
               "premise_radius_Mpc": 152.825504,
               "primary_rms_at_premise": 0.086653,
               "primary_target_inside": true,
               "share_upper": 0.074368,
               "upper": 1.190556,
-              "upper_anchored": 1.155526
+              "upper_post_hoc_withdrawn": 1.155526
             },
             "W09_10pct_at_150": {
+              "class": "CONSTANT_SHARE_ONLY",
               "lower": 0.3598,
-              "lower_anchored": 0.349214,
+              "lower_post_hoc_withdrawn": 0.349214,
               "premise_max_linear_rms": 0.1,
               "premise_radius_Mpc": 229.238256,
               "primary_rms_at_premise": 0.048882,
               "primary_target_inside": true,
               "share_upper": 0.156663,
               "upper": 2.110489,
-              "upper_anchored": 2.048391
+              "upper_post_hoc_withdrawn": 2.048391
             },
             "W09_several_pct_6pct_at_100": {
+              "class": "CONSTANT_SHARE_ONLY",
               "lower": 0.3598,
-              "lower_anchored": 0.349214,
+              "lower_post_hoc_withdrawn": 0.349214,
               "premise_max_linear_rms": 0.06,
               "premise_radius_Mpc": 152.825504,
               "primary_rms_at_premise": 0.086653,
               "primary_target_inside": false,
               "share_upper": 0.031766,
               "upper": 0.714333,
-              "upper_anchored": 0.693315
+              "upper_post_hoc_withdrawn": 0.693315
             },
             "cell_side_100_as_sphere_62": {
+              "class": "CONSTANT_SHARE_ONLY",
               "lower": 0.3598,
-              "lower_anchored": 0.349214,
+              "lower_post_hoc_withdrawn": 0.349214,
               "premise_max_linear_rms": 0.1,
               "premise_radius_Mpc": 94.805377,
               "primary_rms_at_premise": 0.158016,
               "primary_target_inside": false,
               "share_upper": 0.026267,
               "upper": 0.652862,
-              "upper_anchored": 0.633653
+              "upper_post_hoc_withdrawn": 0.633653
+            }
+          },
+          "normalisation_variants": {
+            "A_s_factor": 0.942019266,
+            "interval_W09_10pct_at_100_reclosure": {
+              "lower": 0.349214,
+              "share_upper": 0.077597,
+              "upper": 1.190556
+            },
+            "monotone_lower_p_fvLS": {
+              "direct": 0.3598,
+              "post_hoc_fixed_closure": 0.349214,
+              "reclosure": 0.349214,
+              "reclosure_over_post_hoc": 1.0,
+              "share_k0_direct": 5.1e-05,
+              "share_k0_reclosure": 5.1e-05
+            },
+            "pbs_tracker_seed_F_median_compressed": {
+              "direct": 0.796018,
+              "post_hoc_fixed_closure": 0.772597,
+              "reclosure": 0.785432,
+              "reclosure_over_post_hoc": 1.016613,
+              "share_k0_direct": 0.039077,
+              "share_k0_reclosure": 0.04026
+            },
+            "pbs_tracker_seed_compressed": {
+              "direct": 1.03074,
+              "post_hoc_fixed_closure": 1.000412,
+              "reclosure": 1.020153,
+              "reclosure_over_post_hoc": 1.019733,
+              "share_k0_direct": 0.060154,
+              "share_k0_reclosure": 0.061976
             }
           },
           "radius_scan": [
@@ -416,7 +508,7 @@
           "closures": {
             "monotone_lower_p_fvLS": {
               "linear_sigma_direct_A_s": 0.342991,
-              "linear_sigma_planck_anchored": 0.332899,
+              "linear_sigma_post_hoc_normalised": 0.332899,
               "propagator_k0": 0.353247,
               "radius_Mpc": 13.114754,
               "scale_dependence_rel": 0.0,
@@ -427,7 +519,7 @@
             },
             "pbs_svdw04_seed_compressed": {
               "linear_sigma_direct_A_s": 2.362945,
-              "linear_sigma_planck_anchored": 2.293419,
+              "linear_sigma_post_hoc_normalised": 2.293419,
               "propagator_k0": 3.089525,
               "radius_Mpc": 13.114754,
               "scale_dependence_rel": -0.212305,
@@ -438,7 +530,7 @@
             },
             "pbs_tracker_seed_F_median_compressed": {
               "linear_sigma_direct_A_s": 0.758833,
-              "linear_sigma_planck_anchored": 0.736506,
+              "linear_sigma_post_hoc_normalised": 0.736506,
               "propagator_k0": 0.781557,
               "radius_Mpc": 13.114754,
               "scale_dependence_rel": -4.1e-05,
@@ -449,7 +541,7 @@
             },
             "pbs_tracker_seed_compressed": {
               "linear_sigma_direct_A_s": 0.982682,
-              "linear_sigma_planck_anchored": 0.953768,
+              "linear_sigma_post_hoc_normalised": 0.953768,
               "propagator_k0": 1.012877,
               "radius_Mpc": 13.114754,
               "scale_dependence_rel": -0.000799,
@@ -460,7 +552,7 @@
             },
             "pbs_tracker_seed_threshold_only_1G_D": {
               "linear_sigma_direct_A_s": 0.982141,
-              "linear_sigma_planck_anchored": 0.953244,
+              "linear_sigma_post_hoc_normalised": 0.953244,
               "propagator_k0": 1.01232,
               "radius_Mpc": 13.114754,
               "scale_dependence_rel": -0.0008,
@@ -471,7 +563,7 @@
             },
             "strict_flat_walls_p1": {
               "linear_sigma_direct_A_s": 10.998687,
-              "linear_sigma_planck_anchored": 10.67507,
+              "linear_sigma_post_hoc_normalised": 10.67507,
               "propagator_k0": 11.327583,
               "radius_Mpc": 13.114754,
               "scale_dependence_rel": 0.0,
@@ -482,7 +574,7 @@
             },
             "wall_mode_p0": {
               "linear_sigma_direct_A_s": 0.34245,
-              "linear_sigma_planck_anchored": 0.332374,
+              "linear_sigma_post_hoc_normalised": 0.332374,
               "propagator_k0": 0.35269,
               "radius_Mpc": 13.114754,
               "scale_dependence_rel": 0.0,
@@ -494,48 +586,52 @@
           },
           "intervals": {
             "W09_10pct_at_100": {
+              "class": "CONSTANT_SHARE_ONLY",
               "lower": 0.342991,
-              "lower_anchored": 0.332899,
+              "lower_post_hoc_withdrawn": 0.332899,
               "premise_max_linear_rms": 0.1,
               "premise_radius_Mpc": 163.934426,
               "primary_rms_at_premise": 0.078816,
               "primary_target_inside": true,
               "share_upper": 0.084958,
               "upper": 1.24778,
-              "upper_anchored": 1.211067
+              "upper_post_hoc_withdrawn": 1.211067
             },
             "W09_10pct_at_150": {
+              "class": "CONSTANT_SHARE_ONLY",
               "lower": 0.342991,
-              "lower_anchored": 0.332899,
+              "lower_post_hoc_withdrawn": 0.332899,
               "premise_max_linear_rms": 0.1,
               "premise_radius_Mpc": 245.901639,
               "primary_rms_at_premise": 0.04401,
               "primary_target_inside": true,
               "share_upper": 0.177563,
               "upper": 2.234603,
-              "upper_anchored": 2.168854
+              "upper_post_hoc_withdrawn": 2.168854
             },
             "W09_several_pct_6pct_at_100": {
+              "class": "CONSTANT_SHARE_ONLY",
               "lower": 0.342991,
-              "lower_anchored": 0.332899,
+              "lower_post_hoc_withdrawn": 0.332899,
               "premise_max_linear_rms": 0.06,
               "premise_radius_Mpc": 163.934426,
               "primary_rms_at_premise": 0.078816,
               "primary_target_inside": false,
               "share_upper": 0.03812,
               "upper": 0.748668,
-              "upper_anchored": 0.72664
+              "upper_post_hoc_withdrawn": 0.72664
             },
             "cell_side_100_as_sphere_62": {
+              "class": "CONSTANT_SHARE_ONLY",
               "lower": 0.342991,
-              "lower_anchored": 0.332899,
+              "lower_post_hoc_withdrawn": 0.332899,
               "premise_max_linear_rms": 0.1,
               "premise_radius_Mpc": 101.696802,
               "primary_rms_at_premise": 0.145315,
               "primary_target_inside": false,
               "share_upper": 0.031372,
               "upper": 0.676762,
-              "upper_anchored": 0.656849
+              "upper_post_hoc_withdrawn": 0.656849
             }
           },
           "radius_scan": [
@@ -587,7 +683,7 @@
           "closures": {
             "monotone_lower_p_fvLS": {
               "linear_sigma_direct_A_s": 0.368859,
-              "linear_sigma_planck_anchored": 0.358006,
+              "linear_sigma_post_hoc_normalised": 0.358006,
               "propagator_k0": 0.353247,
               "radius_Mpc": 11.781424,
               "scale_dependence_rel": 0.0,
@@ -598,7 +694,7 @@
             },
             "pbs_svdw04_seed_compressed": {
               "linear_sigma_direct_A_s": 2.454134,
-              "linear_sigma_planck_anchored": 2.381925,
+              "linear_sigma_post_hoc_normalised": 2.381925,
               "propagator_k0": 3.089525,
               "radius_Mpc": 11.781424,
               "scale_dependence_rel": -0.239281,
@@ -609,7 +705,7 @@
             },
             "pbs_tracker_seed_F_median_compressed": {
               "linear_sigma_direct_A_s": 0.816059,
-              "linear_sigma_planck_anchored": 0.792048,
+              "linear_sigma_post_hoc_normalised": 0.792048,
               "propagator_k0": 0.781557,
               "radius_Mpc": 11.781424,
               "scale_dependence_rel": -4.9e-05,
@@ -620,7 +716,7 @@
             },
             "pbs_tracker_seed_compressed": {
               "linear_sigma_direct_A_s": 1.056633,
-              "linear_sigma_planck_anchored": 1.025543,
+              "linear_sigma_post_hoc_normalised": 1.025543,
               "propagator_k0": 1.012877,
               "radius_Mpc": 11.781424,
               "scale_dependence_rel": -0.000955,
@@ -631,7 +727,7 @@
             },
             "pbs_tracker_seed_threshold_only_1G_D": {
               "linear_sigma_direct_A_s": 1.056051,
-              "linear_sigma_planck_anchored": 1.024979,
+              "linear_sigma_post_hoc_normalised": 1.024979,
               "propagator_k0": 1.01232,
               "radius_Mpc": 11.781424,
               "scale_dependence_rel": -0.000956,
@@ -642,7 +738,7 @@
             },
             "strict_flat_walls_p1": {
               "linear_sigma_direct_A_s": 11.828223,
-              "linear_sigma_planck_anchored": 11.480199,
+              "linear_sigma_post_hoc_normalised": 11.480199,
               "propagator_k0": 11.327583,
               "radius_Mpc": 11.781424,
               "scale_dependence_rel": 0.0,
@@ -653,7 +749,7 @@
             },
             "wall_mode_p0": {
               "linear_sigma_direct_A_s": 0.368278,
-              "linear_sigma_planck_anchored": 0.357442,
+              "linear_sigma_post_hoc_normalised": 0.357442,
               "propagator_k0": 0.35269,
               "radius_Mpc": 11.781424,
               "scale_dependence_rel": 0.0,
@@ -665,48 +761,84 @@
           },
           "intervals": {
             "W09_10pct_at_100": {
+              "class": "CONSTANT_SHARE_ONLY",
               "lower": 0.368859,
-              "lower_anchored": 0.358006,
+              "lower_post_hoc_withdrawn": 0.358006,
               "premise_max_linear_rms": 0.1,
               "premise_radius_Mpc": 147.267802,
               "primary_rms_at_premise": 0.091034,
               "primary_target_inside": true,
               "share_upper": 0.069242,
               "upper": 1.161784,
-              "upper_anchored": 1.127601
+              "upper_post_hoc_withdrawn": 1.127601
             },
             "W09_10pct_at_150": {
+              "class": "CONSTANT_SHARE_ONLY",
               "lower": 0.368859,
-              "lower_anchored": 0.358006,
+              "lower_post_hoc_withdrawn": 0.358006,
               "premise_max_linear_rms": 0.1,
               "premise_radius_Mpc": 220.901703,
               "primary_rms_at_premise": 0.051634,
               "primary_target_inside": true,
               "share_upper": 0.146603,
               "upper": 2.048339,
-              "upper_anchored": 1.98807
+              "upper_post_hoc_withdrawn": 1.98807
             },
             "W09_several_pct_6pct_at_100": {
+              "class": "CONSTANT_SHARE_ONLY",
               "lower": 0.368859,
-              "lower_anchored": 0.358006,
+              "lower_post_hoc_withdrawn": 0.358006,
               "premise_max_linear_rms": 0.06,
               "premise_radius_Mpc": 147.267802,
               "primary_rms_at_premise": 0.091034,
               "primary_target_inside": false,
               "share_upper": 0.028691,
               "upper": 0.697071,
-              "upper_anchored": 0.676561
+              "upper_post_hoc_withdrawn": 0.676561
             },
             "cell_side_100_as_sphere_62": {
+              "class": "CONSTANT_SHARE_ONLY",
               "lower": 0.368859,
-              "lower_anchored": 0.358006,
+              "lower_post_hoc_withdrawn": 0.358006,
               "premise_max_linear_rms": 0.1,
               "premise_radius_Mpc": 91.357653,
               "primary_rms_at_premise": 0.165068,
               "primary_target_inside": false,
               "share_upper": 0.023772,
               "upper": 0.640708,
-              "upper_anchored": 0.621857
+              "upper_post_hoc_withdrawn": 0.621857
+            }
+          },
+          "normalisation_variants": {
+            "A_s_factor": 0.942019266,
+            "interval_W09_10pct_at_100_reclosure": {
+              "lower": 0.358006,
+              "share_upper": 0.072315,
+              "upper": 1.161784
+            },
+            "monotone_lower_p_fvLS": {
+              "direct": 0.368859,
+              "post_hoc_fixed_closure": 0.358006,
+              "reclosure": 0.358006,
+              "reclosure_over_post_hoc": 1.0,
+              "share_k0_direct": 5.1e-05,
+              "share_k0_reclosure": 5.1e-05
+            },
+            "pbs_tracker_seed_F_median_compressed": {
+              "direct": 0.816059,
+              "post_hoc_fixed_closure": 0.792048,
+              "reclosure": 0.805206,
+              "reclosure_over_post_hoc": 1.016613,
+              "share_k0_direct": 0.039077,
+              "share_k0_reclosure": 0.04026
+            },
+            "pbs_tracker_seed_compressed": {
+              "direct": 1.056633,
+              "post_hoc_fixed_closure": 1.025543,
+              "reclosure": 1.04578,
+              "reclosure_over_post_hoc": 1.019733,
+              "share_k0_direct": 0.060154,
+              "share_k0_reclosure": 0.061976
             }
           },
           "radius_scan": [
@@ -755,6 +887,10 @@
           ]
         }
       },
+      "flat_wall_cap_exceedance": {
+        "capacity_ratio_at_target": 18.863833,
+        "gaussian_fraction_above_cap": 0.478861
+      },
       "flat_wall_capacity": {
         "cap_f_v_ls_over_f_w_ls": 5.074e-05,
         "radius_Mpc": 208.79964858,
@@ -790,6 +926,13 @@
       },
       "omega_m_per_photon": 0.13093722890629916,
       "refined_quadrature_linear_sigma_c_pbs": 1.056632599,
+      "scale_separation_convention_c": {
+        "F_median_present_void_radius_Mpc": 6.030149,
+        "F_median_ratio": 0.389673,
+        "W09_15_present_void_radius_Mpc": 24.590164,
+        "W09_15_ratio": 1.589035,
+        "present_proper_region_radius_Mpc": 15.474901
+      },
       "seed_radius_sensitivity": {
         "svdw04_factor_1.72": {
           "R_s_Mpc": 14.296607,
@@ -821,6 +964,18 @@
           "share_k0": 0.0479444,
           "void_volume_response_rms": 0.9041
         }
+      },
+      "step_share_counterexample": {
+        "constant_share_upper": 1.161784484,
+        "k_cut_per_Mpc": 0.069092695,
+        "premise_eta": 0.1,
+        "premise_radius_Mpc": 147.267801886,
+        "premise_rms": 0.0999,
+        "ratio_to_constant_share_upper": 8.911209325,
+        "share_high_k": 1.0,
+        "share_low_k": 5.0735e-05,
+        "target_radius_Mpc": 11.781424151,
+        "target_rms": 10.352904725
       }
     },
     "PAPER_REFERENCE": {
@@ -841,7 +996,7 @@
           "closures": {
             "monotone_lower_p_fvLS": {
               "linear_sigma_direct_A_s": 0.226629,
-              "linear_sigma_planck_anchored": 0.219961,
+              "linear_sigma_post_hoc_normalised": 0.219961,
               "propagator_k0": 0.231268,
               "radius_Mpc": 12.570168,
               "scale_dependence_rel": -0.0,
@@ -852,7 +1007,7 @@
             },
             "pbs_svdw04_seed_compressed": {
               "linear_sigma_direct_A_s": 2.447443,
-              "linear_sigma_planck_anchored": 2.375432,
+              "linear_sigma_post_hoc_normalised": 2.375432,
               "propagator_k0": 3.025404,
               "radius_Mpc": 12.570168,
               "scale_dependence_rel": -0.174475,
@@ -863,7 +1018,7 @@
             },
             "pbs_tracker_seed_F_median_compressed": {
               "linear_sigma_direct_A_s": 0.704376,
-              "linear_sigma_planck_anchored": 0.683651,
+              "linear_sigma_post_hoc_normalised": 0.683651,
               "propagator_k0": 0.718822,
               "radius_Mpc": 12.570168,
               "scale_dependence_rel": -3.7e-05,
@@ -874,7 +1029,7 @@
             },
             "pbs_tracker_seed_compressed": {
               "linear_sigma_direct_A_s": 0.974562,
-              "linear_sigma_planck_anchored": 0.945887,
+              "linear_sigma_post_hoc_normalised": 0.945887,
               "propagator_k0": 0.995371,
               "radius_Mpc": 12.570168,
               "scale_dependence_rel": -0.000862,
@@ -885,7 +1040,7 @@
             },
             "pbs_tracker_seed_threshold_only_1G_D": {
               "linear_sigma_direct_A_s": 0.973922,
-              "linear_sigma_planck_anchored": 0.945266,
+              "linear_sigma_post_hoc_normalised": 0.945266,
               "propagator_k0": 0.994717,
               "radius_Mpc": 12.570168,
               "scale_dependence_rel": -0.000863,
@@ -896,7 +1051,7 @@
             },
             "strict_flat_walls_p1": {
               "linear_sigma_direct_A_s": 6.989454,
-              "linear_sigma_planck_anchored": 6.783802,
+              "linear_sigma_post_hoc_normalised": 6.783802,
               "propagator_k0": 7.132537,
               "radius_Mpc": 12.570168,
               "scale_dependence_rel": 0.0,
@@ -907,7 +1062,7 @@
             },
             "wall_mode_p0": {
               "linear_sigma_direct_A_s": 0.225988,
-              "linear_sigma_planck_anchored": 0.219339,
+              "linear_sigma_post_hoc_normalised": 0.219339,
               "propagator_k0": 0.230615,
               "radius_Mpc": 12.570168,
               "scale_dependence_rel": 0.0,
@@ -919,48 +1074,84 @@
           },
           "intervals": {
             "W09_10pct_at_100": {
+              "class": "CONSTANT_SHARE_ONLY",
               "lower": 0.226629,
-              "lower_anchored": 0.219961,
+              "lower_post_hoc_withdrawn": 0.219961,
               "premise_max_linear_rms": 0.1,
               "premise_radius_Mpc": 157.1271,
               "primary_rms_at_premise": 0.084955,
               "primary_target_inside": true,
               "share_upper": 0.136341,
               "upper": 1.148125,
-              "upper_anchored": 1.114343
+              "upper_post_hoc_withdrawn": 1.114343
             },
             "W09_10pct_at_150": {
+              "class": "CONSTANT_SHARE_ONLY",
               "lower": 0.226629,
-              "lower_anchored": 0.219961,
+              "lower_post_hoc_withdrawn": 0.219961,
               "premise_max_linear_rms": 0.1,
               "premise_radius_Mpc": 235.69065,
               "primary_rms_at_premise": 0.048209,
               "primary_target_inside": true,
               "share_upper": 0.265735,
               "upper": 2.023276,
-              "upper_anchored": 1.963744
+              "upper_post_hoc_withdrawn": 1.963744
             },
             "W09_several_pct_6pct_at_100": {
+              "class": "CONSTANT_SHARE_ONLY",
               "lower": 0.226629,
-              "lower_anchored": 0.219961,
+              "lower_post_hoc_withdrawn": 0.219961,
               "premise_max_linear_rms": 0.06,
               "premise_radius_Mpc": 157.1271,
               "primary_rms_at_premise": 0.084955,
               "primary_target_inside": false,
               "share_upper": 0.068439,
               "upper": 0.688875,
-              "upper_anchored": 0.668606
+              "upper_post_hoc_withdrawn": 0.668606
             },
             "cell_side_100_as_sphere_62": {
+              "class": "CONSTANT_SHARE_ONLY",
               "lower": 0.226629,
-              "lower_anchored": 0.219961,
+              "lower_post_hoc_withdrawn": 0.219961,
               "premise_max_linear_rms": 0.1,
               "premise_radius_Mpc": 97.473874,
               "primary_rms_at_premise": 0.153755,
               "primary_target_inside": false,
               "share_upper": 0.06038,
               "upper": 0.634366,
-              "upper_anchored": 0.615701
+              "upper_post_hoc_withdrawn": 0.615701
+            }
+          },
+          "normalisation_variants": {
+            "A_s_factor": 0.942019266,
+            "interval_W09_10pct_at_100_reclosure": {
+              "lower": 0.219961,
+              "share_upper": 0.141487,
+              "upper": 1.148125
+            },
+            "monotone_lower_p_fvLS": {
+              "direct": 0.226629,
+              "post_hoc_fixed_closure": 0.219961,
+              "reclosure": 0.219961,
+              "reclosure_over_post_hoc": 1.0,
+              "share_k0_direct": 9.5e-05,
+              "share_k0_reclosure": 9.5e-05
+            },
+            "pbs_tracker_seed_F_median_compressed": {
+              "direct": 0.704376,
+              "post_hoc_fixed_closure": 0.683651,
+              "reclosure": 0.697708,
+              "reclosure_over_post_hoc": 1.020561,
+              "share_k0_direct": 0.070735,
+              "share_k0_reclosure": 0.072876
+            },
+            "pbs_tracker_seed_compressed": {
+              "direct": 0.974562,
+              "post_hoc_fixed_closure": 0.945887,
+              "reclosure": 0.967894,
+              "reclosure_over_post_hoc": 1.023266,
+              "share_k0_direct": 0.110803,
+              "share_k0_reclosure": 0.11416
             }
           },
           "radius_scan": [
@@ -1012,7 +1203,7 @@
           "closures": {
             "monotone_lower_p_fvLS": {
               "linear_sigma_direct_A_s": 0.247886,
-              "linear_sigma_planck_anchored": 0.240593,
+              "linear_sigma_post_hoc_normalised": 0.240593,
               "propagator_k0": 0.231268,
               "radius_Mpc": 10.954402,
               "scale_dependence_rel": -0.0,
@@ -1023,7 +1214,7 @@
             },
             "pbs_svdw04_seed_compressed": {
               "linear_sigma_direct_A_s": 2.57553,
-              "linear_sigma_planck_anchored": 2.49975,
+              "linear_sigma_post_hoc_normalised": 2.49975,
               "propagator_k0": 3.025404,
               "radius_Mpc": 10.954402,
               "scale_dependence_rel": -0.205769,
@@ -1034,7 +1225,7 @@
             },
             "pbs_tracker_seed_F_median_compressed": {
               "linear_sigma_direct_A_s": 0.770437,
-              "linear_sigma_planck_anchored": 0.747769,
+              "linear_sigma_post_hoc_normalised": 0.747769,
               "propagator_k0": 0.718822,
               "radius_Mpc": 10.954402,
               "scale_dependence_rel": -4.7e-05,
@@ -1045,7 +1236,7 @@
             },
             "pbs_tracker_seed_compressed": {
               "linear_sigma_direct_A_s": 1.065737,
-              "linear_sigma_planck_anchored": 1.034379,
+              "linear_sigma_post_hoc_normalised": 1.034379,
               "propagator_k0": 0.995371,
               "radius_Mpc": 10.954402,
               "scale_dependence_rel": -0.001085,
@@ -1056,7 +1247,7 @@
             },
             "pbs_tracker_seed_threshold_only_1G_D": {
               "linear_sigma_direct_A_s": 1.065036,
-              "linear_sigma_planck_anchored": 1.033699,
+              "linear_sigma_post_hoc_normalised": 1.033699,
               "propagator_k0": 0.994717,
               "radius_Mpc": 10.954402,
               "scale_dependence_rel": -0.001085,
@@ -1067,7 +1258,7 @@
             },
             "strict_flat_walls_p1": {
               "linear_sigma_direct_A_s": 7.645052,
-              "linear_sigma_planck_anchored": 7.42011,
+              "linear_sigma_post_hoc_normalised": 7.42011,
               "propagator_k0": 7.132537,
               "radius_Mpc": 10.954402,
               "scale_dependence_rel": -0.0,
@@ -1078,7 +1269,7 @@
             },
             "wall_mode_p0": {
               "linear_sigma_direct_A_s": 0.247186,
-              "linear_sigma_planck_anchored": 0.239913,
+              "linear_sigma_post_hoc_normalised": 0.239913,
               "propagator_k0": 0.230615,
               "radius_Mpc": 10.954402,
               "scale_dependence_rel": -0.0,
@@ -1090,48 +1281,52 @@
           },
           "intervals": {
             "W09_10pct_at_100": {
+              "class": "CONSTANT_SHARE_ONLY",
               "lower": 0.247886,
-              "lower_anchored": 0.240593,
+              "lower_post_hoc_withdrawn": 0.240593,
               "premise_max_linear_rms": 0.1,
               "premise_radius_Mpc": 136.930029,
               "primary_rms_at_premise": 0.101573,
               "primary_target_inside": false,
               "share_upper": 0.108567,
               "upper": 1.050353,
-              "upper_anchored": 1.019448
+              "upper_post_hoc_withdrawn": 1.019448
             },
             "W09_10pct_at_150": {
+              "class": "CONSTANT_SHARE_ONLY",
               "lower": 0.247886,
-              "lower_anchored": 0.240593,
+              "lower_post_hoc_withdrawn": 0.240593,
               "premise_max_linear_rms": 0.1,
               "premise_radius_Mpc": 205.395043,
               "primary_rms_at_premise": 0.058825,
               "primary_target_inside": true,
               "share_upper": 0.211747,
               "upper": 1.813662,
-              "upper_anchored": 1.760298
+              "upper_post_hoc_withdrawn": 1.760298
             },
             "W09_several_pct_6pct_at_100": {
+              "class": "CONSTANT_SHARE_ONLY",
               "lower": 0.247886,
-              "lower_anchored": 0.240593,
+              "lower_post_hoc_withdrawn": 0.240593,
               "premise_max_linear_rms": 0.06,
               "premise_radius_Mpc": 136.930029,
               "primary_rms_at_premise": 0.101573,
               "primary_target_inside": false,
               "share_upper": 0.051775,
               "upper": 0.630212,
-              "upper_anchored": 0.611669
+              "upper_post_hoc_withdrawn": 0.611669
             },
             "cell_side_100_as_sphere_62": {
+              "class": "CONSTANT_SHARE_ONLY",
               "lower": 0.247886,
-              "lower_anchored": 0.240593,
+              "lower_post_hoc_withdrawn": 0.240593,
               "premise_max_linear_rms": 0.1,
               "premise_radius_Mpc": 84.944611,
               "primary_rms_at_premise": 0.180065,
               "primary_target_inside": false,
               "share_upper": 0.046675,
               "upper": 0.592479,
-              "upper_anchored": 0.575046
+              "upper_post_hoc_withdrawn": 0.575046
             }
           },
           "radius_scan": [
@@ -1183,7 +1378,7 @@
           "closures": {
             "monotone_lower_p_fvLS": {
               "linear_sigma_direct_A_s": 0.260866,
-              "linear_sigma_planck_anchored": 0.25319,
+              "linear_sigma_post_hoc_normalised": 0.25319,
               "propagator_k0": 0.231268,
               "radius_Mpc": 10.10408,
               "scale_dependence_rel": 0.0,
@@ -1194,7 +1389,7 @@
             },
             "pbs_svdw04_seed_compressed": {
               "linear_sigma_direct_A_s": 2.643389,
-              "linear_sigma_planck_anchored": 2.565612,
+              "linear_sigma_post_hoc_normalised": 2.565612,
               "propagator_k0": 3.025404,
               "radius_Mpc": 10.10408,
               "scale_dependence_rel": -0.225401,
@@ -1205,7 +1400,7 @@
             },
             "pbs_tracker_seed_F_median_compressed": {
               "linear_sigma_direct_A_s": 0.810772,
-              "linear_sigma_planck_anchored": 0.786917,
+              "linear_sigma_post_hoc_normalised": 0.786917,
               "propagator_k0": 0.718822,
               "radius_Mpc": 10.10408,
               "scale_dependence_rel": -5.3e-05,
@@ -1216,7 +1411,7 @@
             },
             "pbs_tracker_seed_compressed": {
               "linear_sigma_direct_A_s": 1.121363,
-              "linear_sigma_planck_anchored": 1.088369,
+              "linear_sigma_post_hoc_normalised": 1.088369,
               "propagator_k0": 0.995371,
               "radius_Mpc": 10.10408,
               "scale_dependence_rel": -0.001242,
@@ -1227,7 +1422,7 @@
             },
             "pbs_tracker_seed_threshold_only_1G_D": {
               "linear_sigma_direct_A_s": 1.120625,
-              "linear_sigma_planck_anchored": 1.087653,
+              "linear_sigma_post_hoc_normalised": 1.087653,
               "propagator_k0": 0.994717,
               "radius_Mpc": 10.10408,
               "scale_dependence_rel": -0.001243,
@@ -1238,7 +1433,7 @@
             },
             "strict_flat_walls_p1": {
               "linear_sigma_direct_A_s": 8.045349,
-              "linear_sigma_planck_anchored": 7.808629,
+              "linear_sigma_post_hoc_normalised": 7.808629,
               "propagator_k0": 7.132537,
               "radius_Mpc": 10.10408,
               "scale_dependence_rel": 0.0,
@@ -1249,7 +1444,7 @@
             },
             "wall_mode_p0": {
               "linear_sigma_direct_A_s": 0.260128,
-              "linear_sigma_planck_anchored": 0.252474,
+              "linear_sigma_post_hoc_normalised": 0.252474,
               "propagator_k0": 0.230615,
               "radius_Mpc": 10.10408,
               "scale_dependence_rel": 0.0,
@@ -1261,48 +1456,84 @@
           },
           "intervals": {
             "W09_10pct_at_100": {
+              "class": "CONSTANT_SHARE_ONLY",
               "lower": 0.260866,
-              "lower_anchored": 0.25319,
+              "lower_post_hoc_withdrawn": 0.25319,
               "premise_max_linear_rms": 0.1,
               "premise_radius_Mpc": 126.301,
               "primary_rms_at_premise": 0.112468,
               "primary_target_inside": false,
               "share_upper": 0.094813,
               "upper": 0.998268,
-              "upper_anchored": 0.968895
+              "upper_post_hoc_withdrawn": 0.968895
             },
             "W09_10pct_at_150": {
+              "class": "CONSTANT_SHARE_ONLY",
               "lower": 0.260866,
-              "lower_anchored": 0.25319,
+              "lower_post_hoc_withdrawn": 0.25319,
               "premise_max_linear_rms": 0.1,
               "premise_radius_Mpc": 189.451499,
               "primary_rms_at_premise": 0.065906,
               "primary_target_inside": true,
               "share_upper": 0.185406,
               "upper": 1.703551,
-              "upper_anchored": 1.653427
+              "upper_post_hoc_withdrawn": 1.653427
             },
             "W09_several_pct_6pct_at_100": {
+              "class": "CONSTANT_SHARE_ONLY",
               "lower": 0.260866,
-              "lower_anchored": 0.25319,
+              "lower_post_hoc_withdrawn": 0.25319,
               "premise_max_linear_rms": 0.06,
               "premise_radius_Mpc": 126.301,
               "primary_rms_at_premise": 0.112468,
               "primary_target_inside": false,
               "share_upper": 0.043522,
               "upper": 0.598961,
-              "upper_anchored": 0.581337
+              "upper_post_hoc_withdrawn": 0.581337
             },
             "cell_side_100_as_sphere_62": {
+              "class": "CONSTANT_SHARE_ONLY",
               "lower": 0.260866,
-              "lower_anchored": 0.25319,
+              "lower_post_hoc_withdrawn": 0.25319,
               "premise_max_linear_rms": 0.1,
               "premise_radius_Mpc": 78.350887,
               "primary_rms_at_premise": 0.197081,
               "primary_target_inside": false,
               "share_upper": 0.03976,
               "upper": 0.569666,
-              "upper_anchored": 0.552904
+              "upper_post_hoc_withdrawn": 0.552904
+            }
+          },
+          "normalisation_variants": {
+            "A_s_factor": 0.942019266,
+            "interval_W09_10pct_at_100_reclosure": {
+              "lower": 0.25319,
+              "share_upper": 0.0987,
+              "upper": 0.998268
+            },
+            "monotone_lower_p_fvLS": {
+              "direct": 0.260866,
+              "post_hoc_fixed_closure": 0.25319,
+              "reclosure": 0.25319,
+              "reclosure_over_post_hoc": 1.0,
+              "share_k0_direct": 9.5e-05,
+              "share_k0_reclosure": 9.5e-05
+            },
+            "pbs_tracker_seed_F_median_compressed": {
+              "direct": 0.810772,
+              "post_hoc_fixed_closure": 0.786917,
+              "reclosure": 0.803097,
+              "reclosure_over_post_hoc": 1.020561,
+              "share_k0_direct": 0.070735,
+              "share_k0_reclosure": 0.072876
+            },
+            "pbs_tracker_seed_compressed": {
+              "direct": 1.121363,
+              "post_hoc_fixed_closure": 1.088369,
+              "reclosure": 1.113687,
+              "reclosure_over_post_hoc": 1.023263,
+              "share_k0_direct": 0.110803,
+              "share_k0_reclosure": 0.11416
             }
           },
           "radius_scan": [
@@ -1351,6 +1582,10 @@
           ]
         }
       },
+      "flat_wall_cap_exceedance": {
+        "capacity_ratio_at_target": 10.915315,
+        "gaussian_fraction_above_cap": 0.463502
+      },
       "flat_wall_capacity": {
         "cap_f_v_ls_over_f_w_ls": 9.472e-05,
         "radius_Mpc": 135.58344052,
@@ -1386,6 +1621,13 @@
       },
       "omega_m_per_photon": 0.12047512089055853,
       "refined_quadrature_linear_sigma_c_pbs": 1.12136266,
+      "scale_separation_convention_c": {
+        "F_median_present_void_radius_Mpc": 4.505875,
+        "F_median_ratio": 0.325865,
+        "W09_15_present_void_radius_Mpc": 20.539504,
+        "W09_15_ratio": 1.485417,
+        "present_proper_region_radius_Mpc": 13.827433
+      },
       "seed_radius_sensitivity": {
         "svdw04_factor_1.72": {
           "R_s_Mpc": 11.941572,
@@ -1417,8 +1659,41 @@
           "share_k0": 0.0888672,
           "void_volume_response_rms": 0.9697
         }
+      },
+      "step_share_counterexample": {
+        "constant_share_upper": 0.998267556,
+        "k_cut_per_Mpc": 0.066043199,
+        "premise_eta": 0.1,
+        "premise_radius_Mpc": 126.300999666,
+        "premise_rms": 0.0999,
+        "ratio_to_constant_share_upper": 7.259065513,
+        "share_high_k": 1.0,
+        "share_low_k": 9.4711e-05,
+        "target_radius_Mpc": 10.104079973,
+        "target_rms": 7.246489589
       }
     }
+  },
+  "revision": {
+    "audit_commit": "816dd004763f8de1a8bb09cba9e427a1bd2bb3d1",
+    "audit_report": "reports/phase1g_h_independent_audit.md",
+    "audit_verdict": {
+      "SCIENCE": "REJECT",
+      "other_areas": "ACCEPT_WITH_CORRECTIONS",
+      "overall": "REJECT"
+    },
+    "audited_commit": "d4d693d73f995e2245a5720be227273b3639eda9",
+    "audited_text_preserved_at": "d4d693d73f995e2245a5720be227273b3639eda9",
+    "date": "2026-10-07",
+    "kind": "INDEPENDENT_AUDIT_REMEDIATION",
+    "owner_approval_verbatim": "Procedi, usa le scelte raccomandate per i punti 1-4",
+    "owner_decisions": {
+      "D1": "GH-F1: the statistic is the formal tangent statistic (linear extrapolation of the early field with the zero-amplitude tangent propagator and the smoothing rule G_R = G W), presented as a proposal, not a closed definition",
+      "D2": "GH-F2: seed-indexed void accounting H-A9 with the scale-separation condition declared; the material-domain extension below the super-cell scale is not proved",
+      "D3": "GH-F5: the Gaussian pair requalified as a signed-carrier surrogate and its mechanism corrected; nonnegative lognormal pairs with the same shared constraints added",
+      "D4": "GH-F6: direct values primary; post-hoc fixed-closure normalisation and PBS reclosure under a rescaled input spectrum reported beside them"
+    },
+    "remediation_record": "reports/phase1g_h_audit_remediation.md"
   },
   "schema_version": 1,
   "sources": {
@@ -1474,7 +1749,8 @@
     }
   },
   "tests": {
-    "count": 28,
+    "count": 35,
+    "count_before_remediation": 28,
     "file": "tests/test_phase1g_h_global_variance.py"
   },
   "title": "Global matter-variance definition and minimal closure",
@@ -1482,6 +1758,7 @@
     "NW15_CMB_FIT": {
       "E_reference_reproduction": {
         "reproduced": 0.9880976925385465,
+        "rounding_budget": 0.00011294418099511322,
         "sigma_int": 0.9403,
         "sigma_part": 0.3036,
         "sigma_printed": 0.9881
@@ -1497,22 +1774,126 @@
         "void_weight": 0.408333,
         "wall_weight": 1.994571
       },
-      "gaussian_threshold_pair": {
+      "nonnegative_lognormal_pairs": {
+        "ball_variance_signed_carrier": 0.734479,
+        "linear_limit_max_rel_difference": 0.00641406,
+        "members": {
+          "r_s_1_Mpc": {
+            "ball_variance_unmasked_density": 0.734479,
+            "calibration_rel": 0.0,
+            "density_point_variance": 27.590717,
+            "latent_point_variance": 3.353082,
+            "latent_scale_lambda": 0.785147,
+            "laws": {
+              "II_same_field": {
+                "cross_term": 0.255242,
+                "partition_wall_moment": 0.017756,
+                "sigma_partition": 0.3036,
+                "sigma_total": 0.924187,
+                "sigma_wall_field": 0.711833,
+                "wall_moment": 0.070498
+              },
+              "I_independent": {
+                "cross_term": 0.0,
+                "partition_wall_moment": -0.0,
+                "sigma_partition": 0.3036,
+                "sigma_total": 1.00521,
+                "sigma_wall_field": 0.958266,
+                "wall_moment": 0.127759
+              }
+            },
+            "resolution_radius_Mpc": 1.0,
+            "sigma_ratio_II_over_I": 0.919397
+          },
+          "r_s_2_Mpc": {
+            "ball_variance_unmasked_density": 0.734479,
+            "calibration_rel": 0.0,
+            "density_point_variance": 6.333943,
+            "latent_point_variance": 1.992513,
+            "latent_scale_lambda": 0.839189,
+            "laws": {
+              "II_same_field": {
+                "cross_term": 0.314301,
+                "partition_wall_moment": 0.021864,
+                "sigma_partition": 0.3036,
+                "sigma_total": 1.030011,
+                "sigma_wall_field": 0.80898,
+                "wall_moment": 0.091053
+              },
+              "I_independent": {
+                "cross_term": 0.0,
+                "partition_wall_moment": -0.0,
+                "sigma_partition": 0.3036,
+                "sigma_total": 0.981425,
+                "sigma_wall_field": 0.933285,
+                "wall_moment": 0.121184
+              }
+            },
+            "resolution_radius_Mpc": 2.0,
+            "sigma_ratio_II_over_I": 1.049506
+          },
+          "r_s_4_Mpc": {
+            "ball_variance_unmasked_density": 0.734479,
+            "calibration_rel": 0.0,
+            "density_point_variance": 2.225161,
+            "latent_point_variance": 1.170983,
+            "latent_scale_lambda": 0.949336,
+            "laws": {
+              "II_same_field": {
+                "cross_term": 0.373859,
+                "partition_wall_moment": 0.026007,
+                "sigma_partition": 0.3036,
+                "sigma_total": 1.14492,
+                "sigma_wall_field": 0.919135,
+                "wall_moment": 0.117538
+              },
+              "I_independent": {
+                "cross_term": 0.0,
+                "partition_wall_moment": -0.0,
+                "sigma_partition": 0.3036,
+                "sigma_total": 0.963814,
+                "sigma_wall_field": 0.914748,
+                "wall_moment": 0.116418
+              }
+            },
+            "resolution_radius_Mpc": 4.0,
+            "sigma_ratio_II_over_I": 1.187906
+          }
+        },
+        "pair_class": "NONNEGATIVE_LOGNORMAL_DENSITY_LAWS",
+        "shared_constraints": [
+          "f_v0",
+          "partition covariance (identical P11(r))",
+          "unconditional wall-density covariance exp(lam^2 xi_s) - 1",
+          "conditional mass normalisation"
+        ]
+      },
+      "signed_gaussian_pair": {
+        "conditional_wall_mean_mu_law_II": 3.788834,
         "ell_Mpc": 0.598733,
         "laws": {
           "II_same_field": {
             "cross_term": 0.049912,
+            "partition_wall_moment": 0.003472,
             "sigma_partition": 0.3036,
             "sigma_total": 0.409398,
-            "sigma_wall_field": 0.159755
+            "sigma_wall_field": 0.159755,
+            "wall_moment": 0.003551
           },
           "I_independent": {
             "cross_term": 0.0,
+            "partition_wall_moment": 0.0,
             "sigma_partition": 0.3036,
             "sigma_total": 0.977932,
-            "sigma_wall_field": 0.929612
+            "sigma_wall_field": 0.929612,
+            "wall_moment": 0.120232
           }
         },
+        "negative_wall_density_probability": {
+          "II_same_field": 0.452698,
+          "I_independent": 0.454766
+        },
+        "pair_class": "SIGNED_GAUSSIAN_CARRIER_SURROGATE",
         "radius_Mpc": 13.114754,
         "sigma_ratio_II_over_I": 0.418636
       }
@@ -1520,6 +1901,7 @@
     "PAPER_REFERENCE": {
       "E_reference_reproduction": {
         "reproduced": 0.9871248755856575,
+        "rounding_budget": 0.00011372040818308998,
         "sigma_int": 0.9316,
         "sigma_part": 0.3264,
         "sigma_printed": 0.9871
@@ -1535,22 +1917,126 @@
         "void_weight": 0.494641,
         "wall_weight": 2.416157
       },
-      "gaussian_threshold_pair": {
+      "nonnegative_lognormal_pairs": {
+        "ball_variance_signed_carrier": 0.701038,
+        "linear_limit_max_rel_difference": 0.00930555,
+        "members": {
+          "r_s_1_Mpc": {
+            "ball_variance_unmasked_density": 0.701038,
+            "calibration_rel": 0.0,
+            "density_point_variance": 13.638873,
+            "latent_point_variance": 2.683681,
+            "latent_scale_lambda": 0.813734,
+            "laws": {
+              "II_same_field": {
+                "cross_term": 0.329873,
+                "partition_wall_moment": 0.011408,
+                "sigma_partition": 0.3264,
+                "sigma_total": 1.016595,
+                "sigma_wall_field": 0.772694,
+                "wall_moment": 0.041298
+              },
+              "I_independent": {
+                "cross_term": 0.0,
+                "partition_wall_moment": -0.0,
+                "sigma_partition": 0.3264,
+                "sigma_total": 0.988575,
+                "sigma_wall_field": 0.933136,
+                "wall_moment": 0.060228
+              }
+            },
+            "resolution_radius_Mpc": 1.0,
+            "sigma_ratio_II_over_I": 1.028344
+          },
+          "r_s_2_Mpc": {
+            "ball_variance_unmasked_density": 0.701038,
+            "calibration_rel": 0.0,
+            "density_point_variance": 3.928127,
+            "latent_point_variance": 1.594959,
+            "latent_scale_lambda": 0.869532,
+            "laws": {
+              "II_same_field": {
+                "cross_term": 0.399105,
+                "partition_wall_moment": 0.013803,
+                "sigma_partition": 0.3264,
+                "sigma_total": 1.149218,
+                "sigma_wall_field": 0.902806,
+                "wall_moment": 0.056377
+              },
+              "I_independent": {
+                "cross_term": 0.0,
+                "partition_wall_moment": -0.0,
+                "sigma_partition": 0.3264,
+                "sigma_total": 0.968545,
+                "sigma_wall_field": 0.911889,
+                "wall_moment": 0.057517
+              }
+            },
+            "resolution_radius_Mpc": 2.0,
+            "sigma_ratio_II_over_I": 1.186541
+          },
+          "r_s_4_Mpc": {
+            "ball_variance_unmasked_density": 0.701038,
+            "calibration_rel": 0.0,
+            "density_point_variance": 1.628979,
+            "latent_point_variance": 0.966596,
+            "latent_scale_lambda": 0.998429,
+            "laws": {
+              "II_same_field": {
+                "cross_term": 0.445916,
+                "partition_wall_moment": 0.015422,
+                "sigma_partition": 0.3264,
+                "sigma_total": 1.232992,
+                "sigma_wall_field": 0.983776,
+                "wall_moment": 0.066943
+              },
+              "I_independent": {
+                "cross_term": -0.0,
+                "partition_wall_moment": -0.0,
+                "sigma_partition": 0.3264,
+                "sigma_total": 0.953473,
+                "sigma_wall_field": 0.895865,
+                "wall_moment": 0.055513
+              }
+            },
+            "resolution_radius_Mpc": 4.0,
+            "sigma_ratio_II_over_I": 1.293159
+          }
+        },
+        "pair_class": "NONNEGATIVE_LOGNORMAL_DENSITY_LAWS",
+        "shared_constraints": [
+          "f_v0",
+          "partition covariance (identical P11(r))",
+          "unconditional wall-density covariance exp(lam^2 xi_s) - 1",
+          "conditional mass normalisation"
+        ]
+      },
+      "signed_gaussian_pair": {
+        "conditional_wall_mean_mu_law_II": 5.004603,
         "ell_Mpc": 0.291722,
         "laws": {
           "II_same_field": {
             "cross_term": 0.036477,
+            "partition_wall_moment": 0.001262,
             "sigma_partition": 0.3264,
             "sigma_total": 0.392827,
-            "sigma_wall_field": 0.106296
+            "sigma_wall_field": 0.106296,
+            "wall_moment": 0.000782
           },
           "I_independent": {
             "cross_term": 0.0,
+            "partition_wall_moment": 0.0,
             "sigma_partition": 0.3264,
             "sigma_total": 0.971073,
-            "sigma_wall_field": 0.914575
+            "sigma_wall_field": 0.914575,
+            "wall_moment": 0.057856
           }
         },
+        "negative_wall_density_probability": {
+          "II_same_field": 0.442943,
+          "I_independent": 0.44759
+        },
+        "pair_class": "SIGNED_GAUSSIAN_CARRIER_SURROGATE",
         "radius_Mpc": 10.954402,
         "sigma_ratio_II_over_I": 0.404529
       }
@@ -1558,10 +2044,14 @@
   },
   "validation_record": "reports/phase1g_h_global_variance_closure_validation.md",
   "verdict": {
-    "A_definition": "CLOSED",
-    "B_conditional_calculation": "CLOSED_GIVEN_ONE_EXTERNAL_CLOSURE_VOID_SHARE",
+    "A_definition": "PROPOSED_FORMAL_TANGENT_DEFINITION",
+    "B_conditional_calculation": "CLOSED_FOR_THE_FORMAL_TANGENT_STATISTIC_GIVEN_ONE_EXTERNAL_CLOSURE_AND_H_A9",
     "C_observational_interpretation": "NOT_REACHED_FIREWALL",
-    "C_timescape_prediction": "NOT_REACHED"
+    "C_timescape_prediction": "NOT_REACHED",
+    "superseded_audited_readings": {
+      "A_definition": "CLOSED",
+      "B_conditional_calculation": "CLOSED_GIVEN_ONE_EXTERNAL_CLOSURE_VOID_SHARE"
+    }
   },
   "verification": {
     "baseline_this_session": {
@@ -1636,5 +2126,30 @@
     "tolerance_audit_missing": 0,
     "validator_1F_C_R": "PASS",
     "windows_dual_interpreter_gate": "NOT_RUN_IN_THIS_SESSION (commands in the validation record)"
+  },
+  "verification_remediated_tree": {
+    "evidence_gates": "32 / 32 on both interpreters at c1b4482",
+    "full_suites": {
+      "CPython 3.11.17": {
+        "collected": 1171,
+        "failed": 0,
+        "passed": 1139,
+        "seconds": 292,
+        "skipped": 32
+      },
+      "CPython 3.13.16": {
+        "collected": 1171,
+        "failed": 0,
+        "passed": 1139,
+        "seconds": 294,
+        "skipped": 32
+      },
+      "command": "OPENBLAS_NUM_THREADS=1 python -B -W error -m pytest -q -p no:cacheprovider -rs"
+    },
+    "phase_tests": 35,
+    "record": "reports/phase1g_h_audit_remediation.md (sec. 3)",
+    "tolerance_audit_missing": 0,
+    "validator": "PASS (49 JSON round trips)",
+    "windows_gate": "not run"
   }
 }

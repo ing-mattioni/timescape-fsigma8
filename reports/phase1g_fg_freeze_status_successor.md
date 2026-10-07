@@ -98,10 +98,16 @@ suite before new work; it does not certify the freeze.
 
 ## 3. Superseded status statements
 
-Each row quotes the historical statement exactly. It was correct when
-written; the current reading follows from §2. The files are not edited.
+Each row quotes the historical statement literally, with line wrapping
+normalised; S7 and S10 join separate spans of their source (S7 a bulleted
+list joined with semicolons, S10 two passages joined with a slash). Each
+statement was correct when written; the current reading follows from §2. The
+files are not edited. Rows S1–S13 are this record's 2026-10-06 selection;
+S14–S16 were added on 2026-10-07 after the independent audit of Phase 1G-H
+(finding GH-F14) found them unmapped. The map is not claimed to be
+exhaustive.
 
-| # | Document (SHA-256 at `8d3cdd0`) | Location | Historical statement (verbatim) | Written | Current reading (2026-10-06) |
+| # | Document (SHA-256 at `8d3cdd0`) | Location | Historical statement (literal; joined spans marked) | Written | Current reading (2026-10-06; S14–S16 2026-10-07) |
 |---|---|---|---|---|---|
 | S1 | `phase1g_f_volume_budget_successor.md` (`3208c539…`) | header, l. 32–33 | "This revised local deliverable has not been frozen; the audit does not certify subsequent edits." | 2026-10-02 | Frozen: merged into `main` by PR #4 at `8d3cdd0…`, tagged `phase-1g-f-void-population-v1`. The second clause stays true: neither audit certifies edits after its own scope. |
 | S2 | same | §6, l. 316–317 | "It is not frozen, and no tag, merge or release is implied." | 2026-10-06 (integration revision) | Merged (PR #4) and frozen at `8d3cdd0…`, tag `phase-1g-f-void-population-v1`. No release exists. |
@@ -115,7 +121,10 @@ written; the current reading follows from §2. The files are not edited.
 | S10 | same | l. 24–25 and l. 70–73 | "No push, PR, remote mutation, phase tag or independent adversarial audit was performed." / "Before a formal phase freeze, apply in a real checkout, run the existing two-environment gates with their required artifacts, obtain the independent audit and record the actual commit." | 2026-10-01 | Those freeze requirements were met later: two independent audits (2026-10-02, 2026-10-06), the integration record (actual commit `8f3131f…`), the owner's two-interpreter freeze preflight and the tags. |
 | S11 | `phase1g_fg_independent_scientific_audit.md` (`6bb8edec…`) | CLAUDE.md check table, l. 515 | "σ track: main at fb5d952, 1G-A…E v1 tags, no 1G-F tag" | 2026-10-02 | Audit observation, correct then. `main` is now at `8d3cdd0…` and carries the 1G-F and 1G-G tags. The audit is not edited. |
 | S12 | `phase1g_fg_remediation_independent_audit.md` (`46f3aef7…`) | §0.1, l. 36–38 | "The corrections can be integrated: committed locally on the phase branch by the owner. Nothing in this audit authorises a merge, tag or remote action." | 2026-10-06 | Still true of the audit. The integration, merge and tags happened afterwards on separate owner authority. |
-| S13 | `README.md`, `CLAUDE.md` | σ-track sections | "not merged into `main`, frozen or tagged"; "Nothing is frozen or tagged"; "no 1G-F tag was found"; "unmerged deliverables on the phase branch"; "but not frozen"; "No phase freeze, tag, merge or release is implied" | 2026-10-01 to 2026-10-06 | Current documentation: updated directly in the same commit as this record, pointing here. |
+| S13 | `README.md` (`85d78ff8…`), `CLAUDE.md` (`2d96e25c…`) | README l. 29–30 and l. 114; CLAUDE l. 259, l. 260–261, l. 106 and l. 434–435 (in the order of the quotes) | "not merged into `main`, frozen or tagged"; "Nothing is frozen or tagged"; "no 1G-F tag was found"; "unmerged deliverables on the phase branch"; "but not frozen"; "No phase freeze, tag, merge or release is implied" (six separate phrases) | 2026-10-01 to 2026-10-06 | Current documentation: updated directly in the same commit as this record, pointing here. |
+| S14 | `phase1g_f_void_population.md` (`fe8fd8f1…`) | §14, l. 638–639 | "Nothing is merged or tagged." | 2026-09-29 | Merged by PR #4 and frozen at `8d3cdd0…`, tag `phase-1g-f-void-population-v1`. The frozen F report is not edited. |
+| S15 | `phase1g_fg_remediation_integration.md` (`ec41f322…`) | §3, l. 79–80 | '"Not merged, frozen or tagged" is kept.' | 2026-10-06 | The kept README sentence (S13) was replaced when the merge, freeze and tags followed (§2). |
+| S16 | `phase1g_fg_remediation_integration_inventory.json` (`241054f2…`) | `open_before_freeze[0]` | "separate owner approvals for merge into main (PR), annotated tag, release" | 2026-10-06 | Merge and the two tags were later approved and executed by the owner; a release is neither approved nor created. |
 
 **Readings explicitly not changed:**
 - `phase1g_fg_audit_remediation_inventory.json` keeps

@@ -1,0 +1,542 @@
+{
+  "audit": {
+    "audit_commit": "816dd004763f8de1a8bb09cba9e427a1bd2bb3d1",
+    "audited_commit": "d4d693d73f995e2245a5720be227273b3639eda9",
+    "finding_counts": {
+      "HIGH": 1,
+      "INFO": 1,
+      "LOW": 2,
+      "LOW-MEDIUM": 1,
+      "MEDIUM": 7,
+      "MEDIUM-HIGH": 3
+    },
+    "inventory": "reports/phase1g_h_independent_audit_inventory.json",
+    "report": "reports/phase1g_h_independent_audit.md",
+    "tag_readiness": "NOT_READY_SCIENTIFIC_CORRECTION_AND_OWNER_DECISION_REQUIRED",
+    "verdict": {
+      "DOCUMENTATION": "ACCEPT_WITH_CORRECTIONS",
+      "GOVERNANCE": "ACCEPT_WITH_CORRECTIONS",
+      "IMPLEMENTATION": "ACCEPT_WITH_CORRECTIONS",
+      "NUMERICS": "ACCEPT_WITH_CORRECTIONS",
+      "PROVENANCE": "ACCEPT_WITH_CORRECTIONS",
+      "SCIENCE": "REJECT",
+      "TASK_COMPLIANCE": "ACCEPT_WITH_CORRECTIONS",
+      "TESTS": "ACCEPT_WITH_CORRECTIONS",
+      "overall": "REJECT"
+    }
+  },
+  "classification": "AUDIT_REMEDIATION_RECORD",
+  "commits": {
+    "branch": "ccr-555e67be-u11yht (local; on top of the audit commit 816dd00)",
+    "code": "c1b448295a631786a2831b05e01650dd2cef73de",
+    "pushed": false,
+    "records": "the commit carrying this inventory (its hash cannot be inside itself)"
+  },
+  "date": "2026-10-07",
+  "errata": "GH-E1 ... GH-E22 replaced by the audit's corrected readings or equivalents (map in the record, sec. 2)",
+  "evidence_run": {
+    "artifact_sha256_py313": "689efe81b034238de2dc56da58d824c31760c4c3777d2586fdfe1fcafcc891ab",
+    "cross_interpreter": {
+      "max_relative_difference": 0.0,
+      "mismatches": 0,
+      "numeric_leaves": 3099
+    },
+    "gates": "32 / 32 on CPython 3.13.16 and 3.11.17",
+    "tree": "c1b448295a631786a2831b05e01650dd2cef73de (src, scripts, tests clean)"
+  },
+  "files_changed_sha256": {
+    "CLAUDE.md": "1a5daae1610a7b0918b15d88acc7859f5a23700c983938c23ffa2cd24e31fe1e",
+    "README.md": "48722b9e1dec0bf733498842968c44ab3333da88765e90b6f19c4243b6d69913",
+    "reports/phase1g_fg_freeze_status_successor.md": "e33c5231472e9bae3da69f49aac6b20ca8b5fb7128e43d6affccc6429ec500fe",
+    "reports/phase1g_fg_freeze_status_successor_inventory.json": "2b204efbf5570bca84d6bba735c8ec58b4eeb782371d4730d8b7d25c41c937ab",
+    "reports/phase1g_h_audit_remediation.md": "ba093b14e48772edc8ca355c8bc6e069bc92d429b9e8760780812a810bceb2b3",
+    "reports/phase1g_h_global_variance_closure.md": "008ae4478a7d07c898554f597aacba2b91c534941d1eba9bf366c570ecf8f8dd",
+    "reports/phase1g_h_global_variance_closure_inventory.json": "ccc3c2cb935189269da126edbb5046815a69871d176b3c815d3a4a233882e13f",
+    "reports/phase1g_h_global_variance_closure_validation.md": "29ca3af2adc0acc2c3551fe46c1ef36771b183a198512a465f97abb04b7f2abf",
+    "scripts/phase1g_h_global_variance_case.py": "e1b583f39f5b81c0b6c2ba5df1877de11bf091011c7c663bd81c9abee1de57f5",
+    "scripts/phase1g_h_global_variance_closure_numerics.py": "568bf7591330875c9c09956663863ce5631fb07eb32e33e35002a7bec8a2e20c",
+    "src/timescape_fsigma8/global_variance.py": "71fa240f309e6992edac07c61714b894471a05c1d29a0843b11c3bec6137527c",
+    "tests/test_phase1g_h_global_variance.py": "2a7b827424b3e931e8b0ff4941b8ffb97462ed44de7d343d43a384a9c77cdef6"
+  },
+  "finding_status_counts": {
+    "OPEN": 1,
+    "RESOLVED": 10,
+    "RESOLVED_BY_OWNER_DECISION": 4
+  },
+  "findings": [
+    {
+      "actions": [
+        "definition narrowed to the formal tangent statistic with its smoothing rule (report sec. 1, 2, 7; module; README; CLAUDE)",
+        "two-state example in evidence and tests",
+        "ensemble statistic of the true contrast listed under C"
+      ],
+      "audit_resolution_class": "OWNER_DECISION",
+      "id": "GH-F1",
+      "severity": "HIGH",
+      "status": "RESOLVED_BY_OWNER_DECISION_D1"
+    },
+    {
+      "actions": [
+        "H-A9 seed-indexed void accounting stated (report sec. 3.1-3.2)",
+        "scale-separation ratios in evidence",
+        "sub-cell extension restricted to the seed-indexed statistic"
+      ],
+      "audit_resolution_class": "OWNER_DECISION",
+      "id": "GH-F2",
+      "severity": "MEDIUM-HIGH",
+      "status": "RESOLVED_BY_OWNER_DECISION_D2"
+    },
+    {
+      "actions": [
+        "p = f_v,LS - d f_v,L/d delta_L (report sec. 4.1, 7; module; inventory)",
+        "p(k->0) = f_v,LS (1 + A_v) (compressed) or f_v,LS A_v (threshold only)",
+        "identity test"
+      ],
+      "audit_resolution_class": "CORRECTION",
+      "id": "GH-F3",
+      "severity": "MEDIUM",
+      "status": "RESOLVED"
+    },
+    {
+      "actions": [
+        "(H15) renamed constant-share interval with its conditions everywhere",
+        "step-kernel counterexample reproduced in evidence and tests"
+      ],
+      "audit_resolution_class": "CORRECTION",
+      "id": "GH-F4",
+      "severity": "MEDIUM-HIGH",
+      "status": "RESOLVED"
+    },
+    {
+      "actions": [
+        "signed pair requalified, negative-density probabilities reported, mechanism corrected",
+        "nonnegative lognormal pairs (r_s = 1, 2, 4 Mpc) with the same shared constraints; linear limit gated",
+        "lognormal kernels tested by 4-variate Monte Carlo"
+      ],
+      "audit_resolution_class": "OWNER_DECISION",
+      "id": "GH-F5",
+      "severity": "MEDIUM-HIGH",
+      "status": "RESOLVED_BY_OWNER_DECISION_D3"
+    },
+    {
+      "actions": [
+        "direct values primary; post-hoc and reclosure variants reported",
+        "post-hoc interval scaling withdrawn",
+        "exact-cancellation claim corrected"
+      ],
+      "audit_resolution_class": "OWNER_DECISION",
+      "id": "GH-F6",
+      "severity": "MEDIUM",
+      "status": "RESOLVED_BY_OWNER_DECISION_D4"
+    },
+    {
+      "actions": [
+        "fraction above the flat-wall cap reported (0.4635 / 0.4789)",
+        "S1 necessity narrowed"
+      ],
+      "audit_resolution_class": "CORRECTION",
+      "id": "GH-F7",
+      "severity": "MEDIUM",
+      "status": "RESOLVED"
+    },
+    {
+      "actions": [
+        "H-A8 attached to every [W09]-seed headline",
+        "median seed: below the epsilon threshold without an error estimate; heuristic seed-scale prior"
+      ],
+      "audit_resolution_class": "CORRECTION",
+      "id": "GH-F8",
+      "severity": "MEDIUM",
+      "status": "RESOLVED"
+    },
+    {
+      "actions": [
+        "record re-validation in __post_init__ (RECORD_IDENTITY_RTOL)",
+        "audit probes and twelve siblings refused in tests",
+        "strict JSON"
+      ],
+      "audit_resolution_class": "CORRECTION",
+      "id": "GH-F9",
+      "severity": "MEDIUM",
+      "status": "RESOLVED"
+    },
+    {
+      "actions": [
+        "orthant refinement to an explicit tolerance, step-split panels, Frechet and symmetry checks, ORTHANT_MAX_NODES = 1024",
+        "bivariate_normal_orthant_probability",
+        "analytic-case tests and gate"
+      ],
+      "audit_resolution_class": "CORRECTION",
+      "id": "GH-F10",
+      "severity": "MEDIUM",
+      "status": "RESOLVED"
+    },
+    {
+      "actions": [
+        "reference gate on the propagated rounding budget of four-decimal inputs",
+        "test"
+      ],
+      "audit_resolution_class": "CORRECTION",
+      "id": "GH-F11",
+      "severity": "LOW-MEDIUM",
+      "status": "RESOLVED"
+    },
+    {
+      "actions": [
+        "EH98 transfer named as the zero-baryon-oscillation (no-wiggle) fit with baryon shape suppression"
+      ],
+      "audit_resolution_class": "CORRECTION",
+      "id": "GH-F12",
+      "severity": "MEDIUM",
+      "status": "RESOLVED"
+    },
+    {
+      "actions": [
+        "four rounding errata",
+        "full source hashes in the report",
+        "R_proper*H_D0 = 800 km/s"
+      ],
+      "audit_resolution_class": "CORRECTION",
+      "id": "GH-F13",
+      "severity": "LOW",
+      "status": "RESOLVED"
+    },
+    {
+      "actions": [
+        "F/G successor: quotation policy, joined spans, S13 hashes and locations, S14-S16 added, non-exhaustive",
+        "H-OD5 inventory text aligned with the publication block",
+        "remote-ref creation and fast-forward described separately"
+      ],
+      "audit_resolution_class": "CORRECTION",
+      "id": "GH-F14",
+      "severity": "LOW",
+      "status": "RESOLVED"
+    },
+    {
+      "actions": [
+        "no action possible by the author; the remediation exchange did not confirm the recorded approvals"
+      ],
+      "audit_resolution_class": "OWNER_DECISION",
+      "id": "GH-F15",
+      "severity": "INFO",
+      "status": "OPEN_OWNER_CONFIRMATION_REQUIRED"
+    }
+  ],
+  "numbers": {
+    "NW15_CMB_FIT": {
+      "E_reference_difference": 2.307e-06,
+      "E_reference_rounding_budget": 0.000112944,
+      "flat_wall_cap_fraction_above": 0.478861,
+      "lognormal_linear_limit_rel": 0.006414,
+      "lognormal_pairs": {
+        "r_s_1_Mpc": {
+          "density_point_variance": 27.5907,
+          "latent_point_variance": 3.3531,
+          "law_II_total": 0.924187,
+          "law_I_total": 1.00521,
+          "ratio_II_over_I": 0.919397
+        },
+        "r_s_2_Mpc": {
+          "density_point_variance": 6.3339,
+          "latent_point_variance": 1.9925,
+          "law_II_total": 1.030011,
+          "law_I_total": 0.981425,
+          "ratio_II_over_I": 1.049506
+        },
+        "r_s_4_Mpc": {
+          "density_point_variance": 2.2252,
+          "latent_point_variance": 1.171,
+          "law_II_total": 1.14492,
+          "law_I_total": 0.963814,
+          "ratio_II_over_I": 1.187906
+        }
+      },
+      "normalisation_variants_a": {
+        "monotone_lower_p_fvLS": {
+          "direct": 0.3598,
+          "post_hoc_fixed_closure": 0.349214,
+          "reclosure": 0.349214,
+          "reclosure_over_post_hoc": 1.0,
+          "share_k0_direct": 5.1e-05,
+          "share_k0_reclosure": 5.1e-05
+        },
+        "pbs_tracker_seed_F_median_compressed": {
+          "direct": 0.796018,
+          "post_hoc_fixed_closure": 0.772597,
+          "reclosure": 0.785432,
+          "reclosure_over_post_hoc": 1.016613,
+          "share_k0_direct": 0.039077,
+          "share_k0_reclosure": 0.04026
+        },
+        "pbs_tracker_seed_compressed": {
+          "direct": 1.03074,
+          "post_hoc_fixed_closure": 1.000412,
+          "reclosure": 1.020153,
+          "reclosure_over_post_hoc": 1.019733,
+          "share_k0_direct": 0.060154,
+          "share_k0_reclosure": 0.061976
+        }
+      },
+      "normalisation_variants_c": {
+        "monotone_lower_p_fvLS": {
+          "direct": 0.368859,
+          "post_hoc_fixed_closure": 0.358006,
+          "reclosure": 0.358006,
+          "reclosure_over_post_hoc": 1.0,
+          "share_k0_direct": 5.1e-05,
+          "share_k0_reclosure": 5.1e-05
+        },
+        "pbs_tracker_seed_F_median_compressed": {
+          "direct": 0.816059,
+          "post_hoc_fixed_closure": 0.792048,
+          "reclosure": 0.805206,
+          "reclosure_over_post_hoc": 1.016613,
+          "share_k0_direct": 0.039077,
+          "share_k0_reclosure": 0.04026
+        },
+        "pbs_tracker_seed_compressed": {
+          "direct": 1.056633,
+          "post_hoc_fixed_closure": 1.025543,
+          "reclosure": 1.04578,
+          "reclosure_over_post_hoc": 1.019733,
+          "share_k0_direct": 0.060154,
+          "share_k0_reclosure": 0.061976
+        }
+      },
+      "scale_separation_convention_c": {
+        "F_median_ratio": 0.389673,
+        "W09_15_ratio": 1.589035
+      },
+      "signed_pair_negative_wall_density_probability": {
+        "II_same_field": 0.452698,
+        "I_independent": 0.454766
+      },
+      "signed_pair_totals": {
+        "II_same_field": 0.409398,
+        "I_independent": 0.977932
+      },
+      "step_share_counterexample": {
+        "constant_share_upper": 1.1617845,
+        "k_cut_per_Mpc": 0.0690927,
+        "premise_rms": 0.0999,
+        "ratio_to_constant_share_upper": 8.9112093,
+        "target_rms": 10.3529047
+      }
+    },
+    "PAPER_REFERENCE": {
+      "E_reference_difference": 2.4876e-05,
+      "E_reference_rounding_budget": 0.00011372,
+      "flat_wall_cap_fraction_above": 0.463502,
+      "lognormal_linear_limit_rel": 0.009306,
+      "lognormal_pairs": {
+        "r_s_1_Mpc": {
+          "density_point_variance": 13.6389,
+          "latent_point_variance": 2.6837,
+          "law_II_total": 1.016595,
+          "law_I_total": 0.988575,
+          "ratio_II_over_I": 1.028344
+        },
+        "r_s_2_Mpc": {
+          "density_point_variance": 3.9281,
+          "latent_point_variance": 1.595,
+          "law_II_total": 1.149218,
+          "law_I_total": 0.968545,
+          "ratio_II_over_I": 1.186541
+        },
+        "r_s_4_Mpc": {
+          "density_point_variance": 1.629,
+          "latent_point_variance": 0.9666,
+          "law_II_total": 1.232992,
+          "law_I_total": 0.953473,
+          "ratio_II_over_I": 1.293159
+        }
+      },
+      "normalisation_variants_a": {
+        "monotone_lower_p_fvLS": {
+          "direct": 0.226629,
+          "post_hoc_fixed_closure": 0.219961,
+          "reclosure": 0.219961,
+          "reclosure_over_post_hoc": 1.0,
+          "share_k0_direct": 9.5e-05,
+          "share_k0_reclosure": 9.5e-05
+        },
+        "pbs_tracker_seed_F_median_compressed": {
+          "direct": 0.704376,
+          "post_hoc_fixed_closure": 0.683651,
+          "reclosure": 0.697708,
+          "reclosure_over_post_hoc": 1.020561,
+          "share_k0_direct": 0.070735,
+          "share_k0_reclosure": 0.072876
+        },
+        "pbs_tracker_seed_compressed": {
+          "direct": 0.974562,
+          "post_hoc_fixed_closure": 0.945887,
+          "reclosure": 0.967894,
+          "reclosure_over_post_hoc": 1.023266,
+          "share_k0_direct": 0.110803,
+          "share_k0_reclosure": 0.11416
+        }
+      },
+      "normalisation_variants_c": {
+        "monotone_lower_p_fvLS": {
+          "direct": 0.260866,
+          "post_hoc_fixed_closure": 0.25319,
+          "reclosure": 0.25319,
+          "reclosure_over_post_hoc": 1.0,
+          "share_k0_direct": 9.5e-05,
+          "share_k0_reclosure": 9.5e-05
+        },
+        "pbs_tracker_seed_F_median_compressed": {
+          "direct": 0.810772,
+          "post_hoc_fixed_closure": 0.786917,
+          "reclosure": 0.803097,
+          "reclosure_over_post_hoc": 1.020561,
+          "share_k0_direct": 0.070735,
+          "share_k0_reclosure": 0.072876
+        },
+        "pbs_tracker_seed_compressed": {
+          "direct": 1.121363,
+          "post_hoc_fixed_closure": 1.088369,
+          "reclosure": 1.113687,
+          "reclosure_over_post_hoc": 1.023263,
+          "share_k0_direct": 0.110803,
+          "share_k0_reclosure": 0.11416
+        }
+      },
+      "scale_separation_convention_c": {
+        "F_median_ratio": 0.325865,
+        "W09_15_ratio": 1.485417
+      },
+      "signed_pair_negative_wall_density_probability": {
+        "II_same_field": 0.442943,
+        "I_independent": 0.44759
+      },
+      "signed_pair_totals": {
+        "II_same_field": 0.392827,
+        "I_independent": 0.971073
+      },
+      "step_share_counterexample": {
+        "constant_share_upper": 0.9982676,
+        "k_cut_per_Mpc": 0.0660432,
+        "premise_rms": 0.0999,
+        "ratio_to_constant_share_upper": 7.2590655,
+        "target_rms": 7.2464896
+      }
+    },
+    "ensemble_vs_tangent_example": {
+      "mean_derivative_central_difference": 0.274683481738,
+      "mean_derivative_exact": 0.27468348168,
+      "mean_reciprocal_density": 1.0,
+      "tangent_at_zero_amplitude": 0.263,
+      "void_volume_fraction": 0.737,
+      "wall_contrasts": [
+        -0.3333333333333333,
+        1.0
+      ]
+    },
+    "orthant_analytic_max_abs_error": 6.439293542825908e-15
+  },
+  "observational_authorizations": {
+    "FSIGMA8_AUTHORIZATION": "NOT_GRANTED",
+    "OBSERVATIONAL_AUTHORIZATION": "NOT_GRANTED",
+    "RSD_AUTHORIZATION": "NOT_GRANTED",
+    "SIGMA8_AUTHORIZATION": "NOT_GRANTED",
+    "UNIQUE_TIMESCAPE_PREDICTION": "NOT_GRANTED"
+  },
+  "open_items": [
+    "GH-F15 owner confirmation of the two recorded push approvals",
+    "delta audit of this remediation",
+    "owner decisions H-OD1 ... H-OD5",
+    "Windows gate (CPython 3.14.3 / 3.11.9)",
+    "C: prediction and observation not reached"
+  ],
+  "owner_decisions": {
+    "D1": "GH-F1: formal tangent statistic, proposed definition",
+    "D2": "GH-F2: seed-indexed void accounting H-A9 with the scale-separation condition",
+    "D3": "GH-F5: signed Gaussian pair requalified; nonnegative lognormal pairs added",
+    "D4": "GH-F6: direct values primary; post-hoc and reclosure variants",
+    "date": "2026-10-07",
+    "verbatim": "Procedi, usa le scelte raccomandate per i punti 1-4"
+  },
+  "phase": "1G-H",
+  "published_values_max_relative_change": 6e-13,
+  "record": "reports/phase1g_h_audit_remediation.md",
+  "schema_version": 1,
+  "status_tokens": {
+    "added": [],
+    "changed": []
+  },
+  "unchanged": {
+    "audit_files": "unchanged",
+    "frozen_records_and_tags": "unchanged",
+    "observational_authorizations": "five NOT_GRANTED unchanged",
+    "other_package_modules": "unchanged",
+    "status_tokens": "no value or comment changed"
+  },
+  "verification": {
+    "case_runner": {
+      "gm_bare_pbs_f_median_seed": 0.810772,
+      "gm_bare_pbs_w09_seed": 1.121363,
+      "nw15_equal_mass_constant_share": 0.918157
+    },
+    "diff_check": "clean",
+    "evidence": {
+      "cross_interpreter_numeric_leaves": 3099,
+      "gates": "32 / 32 on CPython 3.13.16 and 3.11.17",
+      "max_relative_difference": 0.0,
+      "tree": "c1b448295a631786a2831b05e01650dd2cef73de"
+    },
+    "full_suites": {
+      "CPython 3.11.17": {
+        "collected": 1171,
+        "failed": 0,
+        "passed": 1139,
+        "seconds": 292,
+        "skipped": 32
+      },
+      "CPython 3.13.16": {
+        "collected": 1171,
+        "failed": 0,
+        "passed": 1139,
+        "seconds": 294,
+        "skipped": 32
+      },
+      "command": "OPENBLAS_NUM_THREADS=1 python -B -W error -m pytest -q -p no:cacheprovider -rs"
+    },
+    "logs": "reports/phase1g_h_audit_remediation_logs/",
+    "not_run": [
+      "Windows CPython 3.14.3 / 3.11.9",
+      "upstream notebook and oracle regeneration",
+      "owner-decisions Monte Carlo"
+    ],
+    "phase_tests": {
+      "file": "tests/test_phase1g_h_global_variance.py",
+      "passed": 35
+    },
+    "skip_causes": {
+      "1D-B growth validation artifact absent": 1,
+      "1D-D validation artifact absent": 1,
+      "B2 artifact absent": 1,
+      "barotropic oracle absent": 4,
+      "clean perturbation oracle absent": 4,
+      "owner-decisions artifact absent": 3,
+      "upstream oracle not extracted": 18
+    },
+    "tolerance_audit": {
+      "comparisons": 728,
+      "missing": 0
+    },
+    "validator": {
+      "json_roundtrips": 49,
+      "status": "PASS"
+    }
+  },
+  "withdrawn_claims": [
+    "radiation correction 'about 0.4%' (not quantified)",
+    "exact cancellation of late LCDM growth in the Planck factor",
+    "post-hoc 'Planck-anchored' interval",
+    "closure-independence of (H15)",
+    "'realisable' and 'admissible' for the signed Gaussian laws as densities",
+    "definition A 'closed' and the extension to every material region"
+  ]
+}

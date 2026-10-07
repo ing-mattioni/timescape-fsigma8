@@ -7,6 +7,13 @@ Logs: [`phase1g_h_global_variance_closure_logs/`](phase1g_h_global_variance_clos
 Everything below was run in this session, on Linux, unless it is marked as
 quoted from an earlier record.
 
+**Scope (note of 2026-10-07).** This record validates the original tree
+(`fd7331f` with its documentation, published at `d4d693d`). The tree
+remediated after the independent audit is validated in
+[`phase1g_h_audit_remediation.md`](phase1g_h_audit_remediation.md). Two
+sentences below are corrected in place (GH-F14, GH-F11); nothing else is
+changed.
+
 ## 1. Environment
 
 | Item | Value |
@@ -37,11 +44,14 @@ dual-interpreter certification on 3.14.3 / 3.11.9 is claimed (Sec. 6).
     `git log`).
 - When these commits were made, nothing had been pushed. With the owner's
   approval of 2026-10-06, given afterwards, they were pushed to the session
-  branch `ccr-555e67be-u11yht` (new on `origin` at
-  `0572e416504bcdfaa5831b6d482b687ef6fae582`, a fast-forward from
-  `8d3cdd0`), followed, with a second approval, by the documentation-only
+  branch `ccr-555e67be-u11yht`: the remote branch was created at
+  `0572e416504bcdfaa5831b6d482b687ef6fae582` (a descendant of `8d3cdd0`;
+  corrected 2026-10-07: the creation of a remote ref is not a fast-forward),
+  then fast-forwarded, with a second approval, to the documentation-only
   commit that adds this paragraph. `main` is unchanged. No tag, branch D v2,
-  pull request or release was created.
+  pull request or release was created. The two approvals are recorded in the
+  inventory's `publication` block; the independent audit marks them
+  `OWNER_CONFIRMATION_REQUIRED` (GH-F15).
 
 ## 3. Test suites
 
@@ -109,8 +119,10 @@ OPENBLAS_NUM_THREADS=1 python -B -W error scripts/phase1g_h_global_variance_clos
   - σ² ∝ A_s at a fixed constant share (10⁻¹⁰);
   - A_s-independence of the PBS void term (2×10⁻³, the compression term);
   - refined quadrature (2×10⁻⁶);
-  - the 1G-E/F reference σ reproduced from its components (6×10⁻⁴, printed
-    digits);
+  - the 1G-E/F reference σ reproduced from its components (6×10⁻⁴; corrected
+    2026-10-07: that limit did not protect the printed fourth decimal, GH-F11;
+    the remediated gate uses the propagated rounding budget of the
+    four-decimal inputs, about 1.1×10⁻⁴);
   - orthant P11 against the bivariate CDF (10⁻¹⁰);
   - two-barrier bias against central differences of the M3 budget (10⁻⁶).
 
