@@ -604,41 +604,56 @@ def test_closures_and_inputs_fail_closed(growth_gm):
 
 def test_records_reject_tampering():
     res = run(GM, constant(0.05), radius("c"))
-    with pytest.raises(gv.GlobalVarianceContractError):
+    # Each targeted invariant fires before the recomputation binding (GH-DF2),
+    # so its own message is required (delta audit mutants N3 and siblings).
+    with pytest.raises(gv.GlobalVarianceContractError, match="effective_propagator must be"):
         dataclasses.replace(res, effective_propagator=res.effective_propagator * 1.01)
-    with pytest.raises(gv.GlobalVarianceContractError):
+    with pytest.raises(gv.GlobalVarianceContractError, match="amplitude_status must be"):
         dataclasses.replace(res, amplitude_status="OBSERVATIONAL")
-    with pytest.raises(gv.GlobalVarianceContractError):
+    with pytest.raises(gv.GlobalVarianceContractError, match="void_response_regime"):
         dataclasses.replace(res, void_response_regime=gv.VOID_RESPONSE_NONPERTURBATIVE)
-    with pytest.raises(gv.GlobalVarianceContractError):
+    with pytest.raises(gv.GlobalVarianceContractError, match=r"violate \(H8\)"):
         dataclasses.replace(res.growth, void_share_growth=res.growth.void_share_growth * 1.001)
     # The concrete probes of the independent audit (GH-F9) and their siblings.
     with pytest.raises(gv.GlobalVarianceContractError, match="closure's share"):
         dataclasses.replace(res.void_share, share_k0=0.95)
     pbs = run(GM, tracker_seed(GM, res.growth, 15.0, gv.SeedVolumeCompression.COMPRESSED_WITH_REGION),
               radius("c"))
-    for field, value in (("threshold_share_k0", float("nan")),
-                         ("threshold_share_k0", pbs.void_share.threshold_share_k0 * 1.01),
-                         ("compression_share", 0.0), ("nu", pbs.void_share.nu + 1e-6),
-                         ("kind", "constant")):
-        with pytest.raises(gv.GlobalVarianceContractError):
+    inconsistent = "inconsistent with \\(H12\\)"
+    for field, value, message in (("threshold_share_k0", float("nan"), "must be finite"),
+                                  ("threshold_share_k0", pbs.void_share.threshold_share_k0 * 1.01,
+                                   inconsistent),
+                                  ("compression_share", 0.0, inconsistent),
+                                  ("nu", pbs.void_share.nu + 1e-6, inconsistent),
+                                  ("kind", "constant", "kind must be")):
+        with pytest.raises(gv.GlobalVarianceContractError, match=message):
             dataclasses.replace(pbs.void_share, **{field: value})
-    for field, value in (("t_ls_over_t0", 2.0), ("t_ls_over_t0", res.growth.t_ls_over_t0 * 1.001),
-                         ("diagnostics", tuple((k, float("nan")) for k, _ in res.growth.diagnostics)),
-                         ("diagnostics", res.growth.diagnostics[1:])):
-        with pytest.raises(gv.GlobalVarianceContractError):
+    for field, value, message in (
+            ("t_ls_over_t0", 2.0, "tracker ordering"),
+            ("t_ls_over_t0", res.growth.t_ls_over_t0 * 1.001, "tracker identities"),
+            ("diagnostics", tuple((k, float("nan")) for k, _ in res.growth.diagnostics),
+             "must be finite"),
+            ("diagnostics", res.growth.diagnostics[1:], "missing or failed")):
+        with pytest.raises(gv.GlobalVarianceContractError, match=message):
             dataclasses.replace(res.growth, **{field: value})
-    for field, value in (("propagator_k0", res.propagator_k0 * 1.01),
-                         ("flat_wall_capacity_ratio", res.flat_wall_capacity_ratio * 1.01),
-                         ("quadrature_relative_change", 2.0 * res.quadrature_relative_change + 1e-12)):
-        with pytest.raises(gv.GlobalVarianceContractError):
+    for field, value, message in (
+            ("propagator_k0", res.propagator_k0 * 1.01, "propagator_k0 violates"),
+            ("flat_wall_capacity_ratio", res.flat_wall_capacity_ratio * 1.01,
+             "flat_wall_capacity_ratio violates"),
+            ("quadrature_relative_change", 2.0 * res.quadrature_relative_change + 1e-12,
+             "quadrature diagnostics")):
+        with pytest.raises(gv.GlobalVarianceContractError, match=message):
             dataclasses.replace(res, **{field: value})
     premise = gv.HomogeneityPremise(radius=radius("c", 100.0), max_linear_rms=0.1, provenance="test")
     iv = gv.admissible_global_linear_interval(target=res, premise=premise)
-    for field, value in (("upper", float("inf")), ("share_upper", float("nan")),
-                         ("share_lower", -0.1), ("upper", iv.upper * 1.01),
-                         ("lower", iv.lower * 0.99), ("premise_compatible", not iv.premise_compatible)):
-        with pytest.raises(gv.GlobalVarianceContractError):
+    for field, value, message in (("upper", float("inf"), "must be finite"),
+                                  ("share_upper", float("nan"), "must be finite"),
+                                  ("share_lower", -0.1, r"violate \(H15\)"),
+                                  ("upper", iv.upper * 1.01, r"violate \(H15\)"),
+                                  ("lower", iv.lower * 0.99, r"violate \(H15\)"),
+                                  ("premise_compatible", not iv.premise_compatible,
+                                   r"violate \(H15\)")):
+        with pytest.raises(gv.GlobalVarianceContractError, match=message):
             dataclasses.replace(iv, **{field: value})
     # Strict JSON: the records serialise without non-finite numbers.
     for record in (res, pbs, iv):
@@ -855,5 +870,198 @@ def test_gh_f11_1g_e_reference_reproduces_within_its_rounding_budget():
                                                wall_field=(si * f_w) ** 2, void_field=0.0,
                                                partition_wall=0.0, partition_void=0.0,
                                                wall_void=0.0, provenance="1G-E/F reference, E3"))
-        budget = 5e-5 * (sp / var["rms"] + si / var["rms"] + 1.0)   # half a unit, propagated
+        budget = _evidence().e_reference_rounding_budget(
+            sigma_partition=sp, sigma_internal=si, sigma_total=var["rms"], half_unit=5e-5)
+        assert budget == pytest.approx(5e-5 * (sp / var["rms"] + si / var["rms"] + 1.0),
+                                       rel=1e-15, abs=0.0)            # half a unit, propagated
         assert abs(var["rms"] - total) <= budget < 1.2e-4
+
+
+# --------------------------------------- delta-audit remediation (2026-10-08)
+def test_gh_df2_records_bind_results_to_their_inputs():
+    """The delta audit's five accepted replacements are refused (GH-DF2)."""
+    res = run(GM, constant(0.05), radius("c"))
+    pbs = run(GM, tracker_seed(GM, res.growth, 15.0, gv.SeedVolumeCompression.COMPRESSED_WITH_REGION),
+              radius("c"))
+    premise = gv.HomogeneityPremise(radius=radius("c", 100.0), max_linear_rms=0.1, provenance="test")
+    iv = gv.admissible_global_linear_interval(target=res, premise=premise)
+    # Unchanged copies of genuine records are accepted.
+    for record in (res, pbs, pbs.void_share, res.growth, iv):
+        assert dataclasses.replace(record) == record
+    with pytest.raises(gv.GlobalVarianceContractError, match="early spectrum"):
+        dataclasses.replace(res, early_spectrum=spectrum(4.0 * 2.1e-9))
+    with pytest.raises(gv.GlobalVarianceContractError, match="recomputation"):
+        dataclasses.replace(res, radius=ls.resolve_lagrangian_radius(spec=radius("c", 16.0),
+                                                                     density=res.density))
+    with pytest.raises(gv.GlobalVarianceContractError, match="do not reproduce a valid result"):
+        dataclasses.replace(res, quadrature=dataclasses.replace(QUAD, grid_points=33,
+                                                                comparison_grid_points=17))
+    seed2 = dataclasses.replace(pbs.void_share.closure,
+                                seed_radius_Mpc=2.0 * pbs.void_share.closure.seed_radius_Mpc)
+    with pytest.raises(gv.GlobalVarianceContractError, match="recomputation"):
+        dataclasses.replace(pbs.void_share, closure=seed2)
+    with pytest.raises(gv.GlobalVarianceContractError, match="recomputation"):
+        dataclasses.replace(pbs.void_share, early_spectrum=spectrum(4.0 * 2.1e-9))
+    with pytest.raises(gv.GlobalVarianceContractError, match="recomputation"):
+        dataclasses.replace(iv, target_premise_rms=999.0)
+    with pytest.raises(gv.GlobalVarianceContractError, match="recomputation"):
+        dataclasses.replace(res.growth, diagnostics=tuple(
+            (k, 0.0 if k.endswith("_rel") else v) for k, v in res.growth.diagnostics))
+    with pytest.raises(gv.GlobalVarianceContractError, match="assumptions"):
+        dataclasses.replace(res.growth, assumptions=("none",))
+    with pytest.raises(gv.GlobalVarianceContractError, match="caveats"):
+        dataclasses.replace(res, caveats=("observational",))
+    # A resolved radius relabelled with another length (same radius_Mpc) leaves
+    # every integral unchanged; only its re-resolution exposes it.
+    forged = dataclasses.replace(res.radius, spec=radius("c", 9.0))
+    with pytest.raises(gv.GlobalVarianceContractError, match="resolution of its specification"):
+        dataclasses.replace(res, radius=forged)
+
+
+def test_gh_df5_defensive_invariants_are_exercised(growth_gm, monkeypatch):
+    """Each defensive check that survived the delta audit's mutants has its own test."""
+    with pytest.raises(gv.GlobalVarianceContractError, match="fv0 must be the background"):
+        dataclasses.replace(growth_gm, background=NW15)
+    res = run(GM, constant(0.05), radius("c"))
+    premise = gv.HomogeneityPremise(radius=radius("c", 100.0), max_linear_rms=0.1, provenance="test")
+    iv = gv.admissible_global_linear_interval(target=res, premise=premise)
+    with pytest.raises(gv.GlobalVarianceContractError, match="target_inside is inconsistent"):
+        dataclasses.replace(iv, target_inside=not iv.target_inside)
+
+    # A quadrature that returns an impossible probability is refused (Frechet bounds),
+    # and moments that break E[1 1 g1] = E[1 1 g2] are refused.
+    def broken(values):
+        return lambda rho, c1, c2, nodes, tolerance: (np.array(values), nodes, 0.0)
+
+    monkeypatch.setattr(gv, "_orthant_integrals", broken([1.5, 0.1, 0.1, 0.1, 0.1]))
+    with pytest.raises(gv.GlobalVarianceNumericalError, match="outside its bounds"):
+        gv.bivariate_normal_orthant_probability(correlation=0.3, threshold_1=0.0,
+                                                threshold_2=0.0, nodes=32, tolerance=1e-12)
+    with pytest.raises(gv.GlobalVarianceNumericalError, match="outside its bounds"):
+        gv.bivariate_normal_orthant_moments(correlation=0.3, threshold=0.0, nodes=32,
+                                            tolerance=1e-12)
+    monkeypatch.setattr(gv, "_orthant_integrals", broken([0.3, 0.1, 0.2, 0.1, 0.1]))
+    with pytest.raises(gv.GlobalVarianceNumericalError, match="E\\[1 1 g1\\] = E\\[1 1 g2\\]"):
+        gv.bivariate_normal_orthant_moments(correlation=0.3, threshold=0.0, nodes=32,
+                                            tolerance=1e-12)
+
+
+def test_gh_df5_rounding_budget_needs_the_output_half_unit():
+    """The printed total's own half unit is part of the GH-F11 budget (mutant N13)."""
+    sp, si, half = 0.3, 0.9, 5e-5
+    total = math.hypot(sp, si)
+    budget = _evidence().e_reference_rounding_budget(sigma_partition=sp, sigma_internal=si,
+                                                     sigma_total=total, half_unit=half)
+    assert budget == pytest.approx(half * (sp / total + si / total + 1.0), rel=1e-15, abs=0.0)
+    # A total printed 1e-4 away is within the budget only with the output term.
+    assert half * (sp / total + si / total) < 1e-4 <= budget
+
+
+def test_gh_df1_lognormal_laws_share_the_carrier_not_the_conditional_density():
+    """GH-DF1: the latent carrier law is shared; the conditionally normalised density is not.
+
+    4-variate sampling of (g1, g2, a1/lam, a2/lam): in both laws the
+    unconditionally normalised carrier exp(a)/E[exp(a)] has covariance
+    exp(lam^2 xi) - 1; the conditionally normalised density psi has that
+    covariance divided by m^2, m = Q(c - kappa0)/f_w (1 in law I).  (H25): the
+    total kernel is E[chi1 chi2 psi1 psi2] - f_w^2 = K_ww + 2 K_pw + P11 - f_w^2.
+    """
+    ev = _evidence()
+    rng = np.random.default_rng(29)
+    f_v = 0.737
+    f_w, c = 1.0 - f_v, norm.ppf(f_v)
+    rho, lam, xs0, xsr, g0, gr = 0.6, 0.8, 1.0, 0.45, 0.5, 0.3
+    shared = math.expm1(lam * lam * xsr)
+    for correlated in (False, True):
+        k0, kr = (g0, gr) if correlated else (0.0, 0.0)
+        m = norm.sf(c - lam * k0) / f_w                                     # E[carrier | wall]
+        if correlated:
+            assert m > 1.2                       # law II: an order-unity change of normaliser
+        else:
+            assert m == pytest.approx(1.0, rel=1e-12, abs=0.0)
+        cov = np.array([[1, rho, k0, kr], [rho, 1, kr, k0], [k0, kr, xs0, xsr], [kr, k0, xsr, xs0]])
+        z = rng.multivariate_normal(np.zeros(4), cov, size=2_000_000)
+        carrier1 = np.exp(lam * z[:, 2] - 0.5 * lam * lam * xs0)          # exp(a)/E[exp(a)]
+        carrier2 = np.exp(lam * z[:, 3] - 0.5 * lam * lam * xs0)
+        prod = carrier1 * carrier2 - 1.0
+        assert abs(prod.mean() - shared) <= 5 * prod.std() / math.sqrt(prod.size)
+        psi1, psi2 = carrier1 / m, carrier2 / m                            # E[psi | wall] = 1
+        conn = (psi1 - psi1.mean()) * (psi2 - psi2.mean())
+        assert abs(conn.mean() - shared / m ** 2) <= 5 * conn.std() / math.sqrt(conn.size)
+        chi1, chi2 = z[:, 0] > c, z[:, 1] > c
+        p11, kww, kpw = ev.lognormal_mask_kernels(rho=rho, c=c, f_w=f_w, lam=lam, xi_lat_r=xsr,
+                                                  kappa0=lam * k0, kappa_r=lam * kr)
+        e_pp = math.exp(lam * lam * xsr) * f_w ** 2 * ev._orthant_p(
+            rho, c - lam * (k0 + kr), c - lam * (k0 + kr)) / (m * f_w) ** 2
+        assert kww + 2.0 * kpw + p11 == pytest.approx(e_pp, rel=1e-10, abs=0.0)   # (H25)
+        both = chi1 * chi2 * psi1 * psi2
+        assert abs(both.mean() - e_pp) <= 5 * both.std() / math.sqrt(both.size)
+
+
+def test_gh_df1_law_summary_satisfies_h25_and_includes_the_first_radial_panel():
+    """(H25) against the (H17)-(H19) assembly, and the ball pair density on [0, 2R]."""
+    ev = _evidence()
+    ball = ev._Ball(10.0)
+    assert ball.u_full[0] == 0.0 and ball.u_full[-1] == 20.0
+    assert ball.integral(np.ones_like(ball.u)) == pytest.approx(1.0, rel=0.0, abs=1e-10)
+    f_v = 0.627
+    f_w = 1.0 - f_v
+    u = ball.u
+    c_chi = 0.05 * np.exp(-u / 0.6)
+    k_ww = 0.2 * np.exp(-u / 3.0) * (c_chi + f_w ** 2)
+    k_pw = 0.01 * np.exp(-u / 1.5)
+    out = ev._law_summary(f_v, ball, c_chi, k_ww, k_pw, "synthetic kernels")
+    assert out["sigma_total_from_H25"] == pytest.approx(out["sigma_total"], rel=1e-12, abs=0.0)
+    expected = math.sqrt((ball.integral(c_chi) + ball.integral(k_ww)
+                          + 2.0 * ball.integral(k_pw)) / f_w ** 2)
+    assert out["sigma_total"] == pytest.approx(expected, rel=1e-12, abs=0.0)
+    assert out["radial_refinement_rel"] < 1e-6
+
+
+class _FewPointBall:
+    """A coarse stand-in for the evidence script's ball quadrature (fast kernel tests)."""
+
+    def __init__(self):
+        self.u = np.linspace(0.25, 4.0, 9)
+
+    def integral(self, values, coarse=False):
+        pair = self.u ** 2 * np.exp(-self.u)
+        step = 2 if coarse else 1
+        return float(simpson(pair[::step] * np.asarray(values)[::step], x=self.u[::step]))
+
+
+def test_gh_df1_lognormal_laws_report_the_law_ii_normaliser():
+    """The evidence script's laws carry m_II = Q(c - kappa0)/f_w and m_I = 1 (GH-DF1)."""
+    ev = _evidence()
+    ball = _FewPointBall()
+    f_v, lam, cross0 = 0.737, 0.8, 0.5
+    c = norm.ppf(f_v)
+    u = ball.u
+    rho_g = np.exp(-u / 1.5)
+    xi_lat = np.exp(-u / 2.0)
+    cross = cross0 * np.exp(-u / 1.8)
+    laws = ev._lognormal_laws(f_v, c, ball, rho_g, lam, xi_lat, cross0, cross)
+    assert laws["I_independent"]["conditional_normaliser_ratio_m"] == 1.0
+    assert laws["II_same_field"]["conditional_normaliser_ratio_m"] == pytest.approx(
+        norm.sf(c - lam * cross0) / (1.0 - f_v), rel=1e-12, abs=0.0)
+    for law in laws.values():
+        assert law["sigma_total_from_H25"] == pytest.approx(law["sigma_total"], rel=1e-12, abs=0.0)
+
+
+def test_gh_df5_pbs_reclosure_rescales_the_input_spectrum_by_the_factor_squared(growth_gm):
+    """The evidence helper: reclosure equals post-hoc for a constant share only (mutant N10)."""
+    ev = _evidence()
+    factor = 0.97
+    clos = ev.closures(growth_gm, ev.seed_radii(GM, growth_gm))
+    spec = ev.radius_spec("c_bare_volume_average", 8.0)
+    names = ("monotone_lower_p_fvLS", "pbs_tracker_seed_compressed",
+             "pbs_tracker_seed_F_median_compressed")
+    rows = {name: ev.summary(ev.run_case(GM, clos[name], ev.early_spectrum(), spec), factor, 1.0)
+            for name in names}
+    out = ev.pbs_reclosure(GM, clos, spec, factor, rows, "c_bare_volume_average")
+    assert out["A_s_factor"] == pytest.approx(factor ** 2, rel=1e-15, abs=0.0)
+    assert out["monotone_lower_p_fvLS"]["reclosure_over_post_hoc"] == pytest.approx(
+        1.0, rel=1e-10, abs=0.0)
+    for name in names[1:]:
+        assert out[name]["share_k0_reclosure"] > out[name]["share_k0_direct"]
+        assert out[name]["reclosure_over_post_hoc"] > 1.005

@@ -125,6 +125,11 @@ Supporting results ([1G-H] Secs. 5-7)
   the excursion-set response of the two-barrier void mass fraction of
   [SvdW04] (astro-ph/0311260, Eq. (3)), an alternative closure (H22).
 
+Records are fail-closed: on construction every public record re-validates
+its fields (audit GH-F9) and recomputes each result and diagnostic from its
+stored inputs with the same pure function its factory uses, refusing any
+record whose inputs do not reproduce its results (delta audit GH-DF2).
+
 References: [GM] Galoppo & Mourier, arXiv:2511.17160v2; [W07] Wiltshire,
 arXiv:0709.0732v2; [W09] Wiltshire, arXiv:0909.0749v2; [JLH13] Jennings,
 Li & Hu, arXiv:1304.6087v2; [SvdW04] Sheth & van de Weygaert,
@@ -249,9 +254,14 @@ VOID_RESPONSE_NONPERTURBATIVE = "VOID_RESPONSE_NONPERTURBATIVE"
 PSD_TOLERANCE = 1e-12
 
 # Relative tolerance of the record invariants re-evaluated in __post_init__
-# from a record's own stored fields (audit GH-F9): a round-off allowance for
-# closed forms of O(1) quantities, the same order as the identity tolerance
-# of TWO_PHASE_GROWTH_REFERENCE_CHECKS.  It is not a physics tolerance.
+# from a record's own stored fields (audit GH-F9), and of the comparison of
+# every stored result and diagnostic with its recomputation from the record's
+# stored inputs (delta audit GH-DF2): a round-off allowance for closed forms
+# of O(1) quantities, the same order as the identity tolerance of
+# TWO_PHASE_GROWTH_REFERENCE_CHECKS.  The recomputation runs the same
+# deterministic code in the same process, so a genuine record agrees exactly;
+# the allowance only guards against reassociation.  It is not a physics
+# tolerance.
 RECORD_IDENTITY_RTOL = 1e-12
 
 # Orthant quadrature (audit GH-F10): Gauss-Legendre panels are refined by
@@ -367,6 +377,38 @@ def _require_enum(value, enum_type, name: str):
 def _close(value: float, expected: float) -> bool:
     """Record invariant: ``value`` re-evaluated from stored fields (RECORD_IDENTITY_RTOL)."""
     return math.isclose(value, expected, rel_tol=RECORD_IDENTITY_RTOL, abs_tol=0.0)
+
+
+def _same(stored, expected) -> bool:
+    """A stored field equals its recomputation (floats within RECORD_IDENTITY_RTOL)."""
+    if isinstance(expected, bool) or isinstance(stored, bool):
+        return type(stored) is type(expected) and stored == expected
+    if isinstance(expected, Real) and not isinstance(expected, bool):
+        return (isinstance(stored, Real) and math.isfinite(float(stored))
+                and _close(float(stored), float(expected)))
+    if isinstance(expected, tuple):
+        return (isinstance(stored, tuple) and len(stored) == len(expected)
+                and all(_same(a, b) for a, b in zip(stored, expected)))
+    return stored == expected
+
+
+def _bind_recomputed(record, compute, what: str) -> None:
+    """Every stored result equals its recomputation from the stored inputs (GH-DF2).
+
+    ``compute()`` re-derives the record's results and diagnostics with the
+    same pure function its factory uses; a record whose inputs no longer
+    reproduce its results (for instance after ``dataclasses.replace`` of an
+    input), or whose inputs make the computation fail, is refused.
+    """
+    try:
+        values = compute()
+    except GlobalVarianceNumericalError as exc:
+        raise GlobalVarianceContractError(
+            f"{what}: the stored inputs do not reproduce a valid result ({exc})") from exc
+    for name, expected in values.items():
+        if not _same(getattr(record, name), expected):
+            raise GlobalVarianceContractError(
+                f"{what}: {name} differs from its recomputation from the stored inputs")
 
 
 def _strings(value, name: str) -> tuple[str, ...]:
@@ -575,12 +617,16 @@ class TwoPhaseGlobalGrowth:
     early contrast carried entirely by the wall density (void volume fixed),
     ``void_share_growth`` D_V that of one carried entirely by the void volume
     (walls fixed); both relative to the matter-era normalisation
-    ``D/a_photon -> 1``.  ``diagnostics`` hold the independent checks.
+    ``D/a_photon -> 1``.  ``diagnostics`` hold the independent checks.  ``G``
+    is the explicit gravitational constant of the ODE cross-check (it
+    cancels).  Every result and diagnostic is recomputed from ``background``,
+    ``matching``, ``checks`` and ``G`` on construction (delta audit GH-DF2).
     """
 
     background: TimescapeTrackerInput
     matching: LastScatteringMatching
     checks: TwoPhaseGrowthChecks
+    G: float
     fv0: float
     gamma_w0: float
     t_ls_over_t0: float
@@ -648,12 +694,18 @@ class TwoPhaseGlobalGrowth:
         for name in _GROWTH_CROSS_DIAGNOSTICS:
             if name not in diag or not diag[name] <= self.checks.ode_cross_check_tolerance:
                 raise GlobalVarianceContractError(f"cross-check diagnostic {name} missing or failed")
-        _strings(self.assumptions, "assumptions")
+        if _strings(self.assumptions, "assumptions") != _GROWTH_ASSUMPTIONS:
+            raise GlobalVarianceContractError("assumptions must be the module's growth assumptions")
+        # Binding (delta audit GH-DF2): results and diagnostics recomputed.
+        G = _positive(self.G, "G")
+        _bind_recomputed(self, lambda: _two_phase_growth_values(
+            self.background, self.matching, self.checks, G), "growth record")
 
     def to_json_dict(self) -> dict:
         return {"background": self.background.to_metadata(),
                 "matching": self.matching.to_metadata(),
                 "checks": self.checks.to_metadata(),
+                "G_ode_cross_check": self.G,
                 "fv0": self.fv0, "gamma_w0": self.gamma_w0,
                 "t_ls_over_t0": self.t_ls_over_t0, "f_v_ls": self.f_v_ls,
                 "gamma_w_ls": self.gamma_w_ls,
@@ -690,26 +742,15 @@ def _t_of_redshift(p, z: float, xtol_fraction: float) -> float:
                   xtol=xtol_fraction * p.t0, rtol=4.0 * np.finfo(float).eps, maxiter=500)
 
 
-def two_phase_global_growth(
-    *, background: TimescapeTrackerInput, matching: LastScatteringMatching,
-    checks: TwoPhaseGrowthChecks, G: float,
-) -> TwoPhaseGlobalGrowth:
-    """D_W and D_V of the tracker, (H8), with fail-closed independent checks.
+def _two_phase_growth_values(background: TimescapeTrackerInput,
+                             matching: LastScatteringMatching,
+                             checks: TwoPhaseGrowthChecks, G: float) -> dict:
+    """The results and diagnostics of ``two_phase_global_growth`` (pure; GH-DF2).
 
-    Closed forms from [GM] Eqs. (5.4)-(5.6) and text p. 25:
-    ``(t0/t)^(2/3)/(1 + z) = gamma_w0 f_w0^(1/3)/(gamma_w(t) f_w(t)^(1/3))``
-    (``1 + z = gamma_w a_w0/a_D``, ``a_D proportional to t f_v^(-1/3)``,
-    ``f_v = t/(t + tau)``), hence ``D_W = (f_w0/f_w,LS)(t0/t_LS)^(2/3)/(1+z_LS)``
-    and ``D_V = (f_v0/f_v,LS)/(1 + z_LS)`` (H7)-(H8).  Independent checks: the
-    wall growing mode integrated in common time on the package's regional
-    background ``H_w = H_D - dfv_dt/(3 f_w)``, ``4 pi G rho_w = 4 pi G <rho>_D/f_w``
-    (1G-C Sec. 5), and the void volume ``dV/dt = 3V/t`` against ``f_v a_D^3``.
-    ``G`` is explicit (it cancels; no default).
+    Shared by the factory and by ``TwoPhaseGlobalGrowth.__post_init__``, which
+    recomputes them from the stored inputs.  Raises
+    ``GlobalVarianceNumericalError`` when a check fails.
     """
-    _require(background, TimescapeTrackerInput, "background")
-    _require(matching, LastScatteringMatching, "matching")
-    _require(checks, TwoPhaseGrowthChecks, "checks")
-    G = _positive(G, "G")
     p = background.dimensionless_params()
     z_ls = matching.z_last_scattering
     t0 = p.t0
@@ -772,10 +813,34 @@ def two_phase_global_growth(
                 f"{checks.ode_cross_check_tolerance:.3e}")
     diagnostics = tuple((k, float(v)) for k, v in {**identities, **cross}.items()) + (
         ("wall_ode_nfev", float(sol_w.nfev)), ("void_ode_nfev", float(sol_v.nfev)))
+    return {"fv0": fv0, "gamma_w0": g0, "t_ls_over_t0": t_ls / t0, "f_v_ls": f_vls,
+            "gamma_w_ls": g_ls, "wall_share_growth": d_w, "void_share_growth": d_v,
+            "diagnostics": diagnostics}
+
+
+def two_phase_global_growth(
+    *, background: TimescapeTrackerInput, matching: LastScatteringMatching,
+    checks: TwoPhaseGrowthChecks, G: float,
+) -> TwoPhaseGlobalGrowth:
+    """D_W and D_V of the tracker, (H8), with fail-closed independent checks.
+
+    Closed forms from [GM] Eqs. (5.4)-(5.6) and text p. 25:
+    ``(t0/t)^(2/3)/(1 + z) = gamma_w0 f_w0^(1/3)/(gamma_w(t) f_w(t)^(1/3))``
+    (``1 + z = gamma_w a_w0/a_D``, ``a_D proportional to t f_v^(-1/3)``,
+    ``f_v = t/(t + tau)``), hence ``D_W = (f_w0/f_w,LS)(t0/t_LS)^(2/3)/(1+z_LS)``
+    and ``D_V = (f_v0/f_v,LS)/(1 + z_LS)`` (H7)-(H8).  Independent checks: the
+    wall growing mode integrated in common time on the package's regional
+    background ``H_w = H_D - dfv_dt/(3 f_w)``, ``4 pi G rho_w = 4 pi G <rho>_D/f_w``
+    (1G-C Sec. 5), and the void volume ``dV/dt = 3V/t`` against ``f_v a_D^3``.
+    ``G`` is explicit (it cancels; no default).
+    """
+    _require(background, TimescapeTrackerInput, "background")
+    _require(matching, LastScatteringMatching, "matching")
+    _require(checks, TwoPhaseGrowthChecks, "checks")
+    G = _positive(G, "G")
     return TwoPhaseGlobalGrowth(
-        background=background, matching=matching, checks=checks, fv0=fv0, gamma_w0=g0,
-        t_ls_over_t0=t_ls / t0, f_v_ls=f_vls, gamma_w_ls=g_ls,
-        wall_share_growth=d_w, void_share_growth=d_v, diagnostics=diagnostics,
+        background=background, matching=matching, checks=checks, G=G,
+        **_two_phase_growth_values(background, matching, checks, G),
         evidence_class=PROPAGATOR_EVIDENCE_CLASS, assumptions=_GROWTH_ASSUMPTIONS)
 
 
@@ -880,10 +945,17 @@ class EvaluatedVoidShare:
     ``share_k0 = f_v,LS (1 + A_v)`` with compression and ``f_v,LS A_v``
     without.  Every field is validated against the closure variant and the
     growth record (audit GH-F9); inapplicable fields are ``NOT_APPLICABLE``.
+    ``density``, ``early_spectrum`` and ``seed_quadrature`` are the inputs of
+    the evaluation (``seed_quadrature`` is ``NOT_APPLICABLE`` for a constant
+    share); every result is recomputed from them on construction (delta audit
+    GH-DF2).
     """
 
     closure: ConstantVoidShare | GaussianThresholdSeedVoidShare
     growth: TwoPhaseGlobalGrowth
+    density: EarlyMatterDensityPerPhoton
+    early_spectrum: EarlySpectrumImport
+    seed_quadrature: LagrangianSigmaQuadrature | str
     kind: str
     share_k0: float
     nu: float | str
@@ -894,6 +966,10 @@ class EvaluatedVoidShare:
 
     def __post_init__(self) -> None:
         _require(self.growth, TwoPhaseGlobalGrowth, "growth")
+        _require(self.density, EarlyMatterDensityPerPhoton, "density")
+        _require(self.early_spectrum, EarlySpectrumImport, "early_spectrum")
+        if self.density.background is not self.growth.background:
+            raise GlobalVarianceContractError("density and growth must share the background object")
         if not isinstance(self.closure, (ConstantVoidShare, GaussianThresholdSeedVoidShare)):
             raise GlobalVarianceContractError("unsupported void-share closure")
         p0 = _real(self.share_k0, "share_k0")
@@ -910,25 +986,31 @@ class EvaluatedVoidShare:
             for name in variant_fields:
                 if getattr(self, name) != NOT_APPLICABLE:
                     raise GlobalVarianceContractError(f"{name} must be NOT_APPLICABLE")
-            return
-        if self.kind != "gaussian_threshold_seed":
-            raise GlobalVarianceContractError("kind must be 'gaussian_threshold_seed'")
-        values = {name: _real(getattr(self, name), name) for name in variant_fields}
-        sigma_s = values["sigma_seed"]
-        if not sigma_s > 0.0:
-            raise GlobalVarianceContractError("sigma_seed must be positive")
-        f_vls = self.growth.f_v_ls
-        nu = -float(ndtri(f_vls))
-        phi_nu = math.exp(-0.5 * nu * nu) / math.sqrt(2.0 * math.pi)
-        compression = (f_vls if self.closure.compression is SeedVolumeCompression.COMPRESSED_WITH_REGION
-                       else 0.0)
-        if not (_close(values["nu"], nu) and _close(values["threshold_share_k0"], phi_nu / sigma_s)
-                and values["compression_share"] == compression
-                and _close(p0, compression + values["threshold_share_k0"])
-                and _close(values["void_onset_response"],
-                           phi_nu / (sigma_s * float(ndtr(-nu))))):
-            raise GlobalVarianceContractError(
-                "Gaussian-threshold fields are inconsistent with (H12) and the growth record")
+        else:
+            if self.kind != "gaussian_threshold_seed":
+                raise GlobalVarianceContractError("kind must be 'gaussian_threshold_seed'")
+            values = {name: _real(getattr(self, name), name) for name in variant_fields}
+            sigma_s = values["sigma_seed"]
+            if not sigma_s > 0.0:
+                raise GlobalVarianceContractError("sigma_seed must be positive")
+            f_vls = self.growth.f_v_ls
+            nu = -float(ndtri(f_vls))
+            phi_nu = math.exp(-0.5 * nu * nu) / math.sqrt(2.0 * math.pi)
+            compression = (f_vls if self.closure.compression
+                           is SeedVolumeCompression.COMPRESSED_WITH_REGION else 0.0)
+            if not (_close(values["nu"], nu)
+                    and _close(values["threshold_share_k0"], phi_nu / sigma_s)
+                    and values["compression_share"] == compression
+                    and _close(p0, compression + values["threshold_share_k0"])
+                    and _close(values["void_onset_response"],
+                               phi_nu / (sigma_s * float(ndtr(-nu))))):
+                raise GlobalVarianceContractError(
+                    "Gaussian-threshold fields are inconsistent with (H12) and the growth record")
+        # Binding (delta audit GH-DF2): sigma_s and every derived field
+        # recomputed from the closure, growth, density, spectrum and quadrature.
+        _bind_recomputed(self, lambda: _void_share_values(
+            self.closure, self.growth, self.density, self.early_spectrum,
+            self.seed_quadrature), "void share")
 
     def share(self, k_per_Mpc: ArrayLike) -> NDArray[np.float64]:
         """p(k), read-only; k in Mpc^-1 (photon-normalised comoving).
@@ -947,7 +1029,11 @@ class EvaluatedVoidShare:
         return _readonly(self.compression_share + self.threshold_share_k0 * w)
 
     def to_json_dict(self) -> dict:
+        seed_quadrature = (self.seed_quadrature.to_metadata()
+                           if isinstance(self.seed_quadrature, LagrangianSigmaQuadrature)
+                           else self.seed_quadrature)
         return {"closure": self.closure.to_metadata(), "kind": self.kind,
+                "seed_quadrature": seed_quadrature,
                 "share_k0": self.share_k0, "nu": self.nu, "sigma_seed": self.sigma_seed,
                 "threshold_share_k0": self.threshold_share_k0,
                 "compression_share": self.compression_share,
@@ -1030,15 +1116,23 @@ def evaluate_void_share(
     _require(early_spectrum, EarlySpectrumImport, "early_spectrum")
     if density.background is not growth.background:
         raise GlobalVarianceContractError("density and growth must share the background object")
+    return EvaluatedVoidShare(
+        closure=closure, growth=growth, density=density, early_spectrum=early_spectrum,
+        seed_quadrature=seed_quadrature,
+        **_void_share_values(closure, growth, density, early_spectrum, seed_quadrature))
+
+
+def _void_share_values(closure, growth: TwoPhaseGlobalGrowth,
+                       density: EarlyMatterDensityPerPhoton,
+                       early_spectrum: EarlySpectrumImport, seed_quadrature) -> dict:
+    """The fields of ``evaluate_void_share``, (H12) (pure; shared with the record, GH-DF2)."""
     na = NOT_APPLICABLE
     if isinstance(closure, ConstantVoidShare):
         if seed_quadrature != NOT_APPLICABLE:
             raise GlobalVarianceContractError(
                 "seed_quadrature does not apply to a constant share; pass NOT_APPLICABLE")
-        return EvaluatedVoidShare(closure=closure, growth=growth, kind="constant",
-                                  share_k0=closure.share, nu=na, sigma_seed=na,
-                                  threshold_share_k0=na, compression_share=na,
-                                  void_onset_response=na)
+        return {"kind": "constant", "share_k0": closure.share, "nu": na, "sigma_seed": na,
+                "threshold_share_k0": na, "compression_share": na, "void_onset_response": na}
     if not isinstance(closure, GaussianThresholdSeedVoidShare):
         raise GlobalVarianceContractError("unsupported void-share closure")
     _require(seed_quadrature, LagrangianSigmaQuadrature, "seed_quadrature")
@@ -1056,10 +1150,9 @@ def evaluate_void_share(
         raise GlobalVarianceContractError(
             f"Gaussian-threshold void share p0 = {p0:.4g} exceeds 1: outside the monotone "
             "class H-A7 (walls would be underdense in overdense regions)")
-    return EvaluatedVoidShare(closure=closure, growth=growth, kind="gaussian_threshold_seed",
-                              share_k0=p0, nu=nu, sigma_seed=sigma_s,
-                              threshold_share_k0=threshold, compression_share=compression,
-                              void_onset_response=phi_nu / (sigma_s * float(ndtr(-nu))))
+    return {"kind": "gaussian_threshold_seed", "share_k0": p0, "nu": nu, "sigma_seed": sigma_s,
+            "threshold_share_k0": threshold, "compression_share": compression,
+            "void_onset_response": phi_nu / (sigma_s * float(ndtr(-nu)))}
 
 
 def global_linear_propagator(
@@ -1092,7 +1185,10 @@ class ConditionalGlobalLinearSigma:
     ``void_volume_response_rms`` is the rms of epsilon over the region,
     ``[(1 + z_LS) f_v,LS]^-1 (int Delta^2_u p^2 W^2)^(1/2)`` (H14), with its
     regime flag.  ``flat_wall_capacity_ratio`` is the matching-epoch rms
-    contrast over the strict flat-wall cap (H13).  Not an observational
+    contrast over the strict flat-wall cap (H13).  On construction the radius
+    is re-resolved from its specification and every result and quadrature
+    diagnostic is recomputed from the stored growth, void share, density,
+    early spectrum and quadrature (delta audit GH-DF2).  Not an observational
     amplitude.
     """
 
@@ -1135,6 +1231,10 @@ class ConditionalGlobalLinearSigma:
             raise GlobalVarianceContractError("records must share this exact background object")
         if self.void_share.growth is not self.growth:
             raise GlobalVarianceContractError("void_share must be evaluated for this growth record")
+        if (self.void_share.density is not self.density
+                or self.void_share.early_spectrum is not self.early_spectrum):
+            raise GlobalVarianceContractError(
+                "void_share must be evaluated with this record's density and early spectrum")
         for name in ("unit_growth_sigma", "linear_sigma", "linear_sigma_comparison_grid",
                      "propagator_k0", "effective_propagator", "flat_wall_capacity_ratio"):
             _positive(getattr(self, name), name)
@@ -1175,8 +1275,18 @@ class ConditionalGlobalLinearSigma:
                 raise GlobalVarianceContractError("share_terms_coherence is inconsistent")
         elif self.share_terms_coherence != NOT_APPLICABLE:
             raise GlobalVarianceContractError("share_terms_coherence must be NOT_APPLICABLE")
-        _strings(self.caveats, "caveats")
+        if _strings(self.caveats, "caveats") != _GLOBAL_CAVEATS:
+            raise GlobalVarianceContractError("caveats must be the module's declared caveats")
         _statuses_ok(self)
+        # Binding (delta audit GH-DF2): the radius is re-resolved from its
+        # specification and every result and quadrature diagnostic recomputed
+        # from the stored growth, share, density, spectrum and quadrature.
+        if resolve_lagrangian_radius(spec=self.radius.spec, density=self.density) != self.radius:
+            raise GlobalVarianceContractError(
+                "radius differs from the resolution of its specification for this density")
+        _bind_recomputed(self, lambda: _global_sigma_values(
+            self.growth, self.void_share, self.density.omega_m_per_photon,
+            self.radius.radius_Mpc, self.early_spectrum, self.quadrature), "sigma record")
 
     def to_json_dict(self) -> dict:
         return {
@@ -1267,10 +1377,24 @@ def conditional_global_linear_sigma(
         background=background, identity_tolerance=density_identity_tolerance, G=G)
     share = evaluate_void_share(closure=void_share_closure, growth=growth, density=density,
                                 early_spectrum=early_spectrum, seed_quadrature=seed_quadrature)
+    _require(quadrature, LagrangianSigmaQuadrature, "quadrature")
     resolved = resolve_lagrangian_radius(spec=radius, density=density)
-    om = density.omega_m_per_photon
-    R = resolved.radius_Mpc
+    return ConditionalGlobalLinearSigma(
+        background=background, growth=growth, void_share=share, density=density,
+        radius=resolved, early_spectrum=early_spectrum, quadrature=quadrature,
+        **_global_sigma_values(growth, share, density.omega_m_per_photon, resolved.radius_Mpc,
+                               early_spectrum, quadrature),
+        caveats=_GLOBAL_CAVEATS, **_STATUS_FIELDS)
 
+
+def _global_sigma_values(growth: TwoPhaseGlobalGrowth, share: EvaluatedVoidShare,
+                         om: float, R: float, early_spectrum: EarlySpectrumImport,
+                         quadrature: LagrangianSigmaQuadrature) -> dict:
+    """The results of ``conditional_global_linear_sigma``, (H9)-(H14) (pure; GH-DF2).
+
+    Shared by the factory and by ``ConditionalGlobalLinearSigma.__post_init__``,
+    which recomputes them from the stored inputs.
+    """
     def propagator(k):
         return global_linear_propagator(growth=growth, void_share=share, k_per_Mpc=k)
 
@@ -1290,7 +1414,7 @@ def conditional_global_linear_sigma(
     wall_rms = _unit_sigma(R, om, early_spectrum, quadrature, wall_part)[0]
     void_rms = _unit_sigma(R, om, early_spectrum, quadrature, void_part)[0]
     share_rms = _unit_sigma(R, om, early_spectrum, quadrature, share_kernel)[0]
-    z_ls = matching.z_last_scattering
+    z_ls = growth.matching.z_last_scattering
     eps_rms = share_rms / ((1.0 + z_ls) * growth.f_v_ls)
     regime = (VOID_RESPONSE_NONPERTURBATIVE if eps_rms > VOID_RESPONSE_NONPERTURBATIVE_THRESHOLD
               else VOID_RESPONSE_PERTURBATIVE)
@@ -1299,15 +1423,13 @@ def conditional_global_linear_sigma(
     p0 = float(np.asarray(share.share(np.array([0.0])))[0])
     coherence = (((fine ** 2 - wall_rms ** 2 - void_rms ** 2) / (2.0 * wall_rms * void_rms))
                  if wall_rms > 0.0 and void_rms > 0.0 else NOT_APPLICABLE)
-    return ConditionalGlobalLinearSigma(
-        background=background, growth=growth, void_share=share, density=density,
-        radius=resolved, early_spectrum=early_spectrum, quadrature=quadrature,
-        unit_growth_sigma=unit, linear_sigma=fine, linear_sigma_comparison_grid=coarse,
-        quadrature_relative_change=change, truncation_envelope_fraction=edge,
-        propagator_k0=(1.0 - p0) * d_w + p0 * d_v, effective_propagator=fine / unit,
-        wall_share_rms=wall_rms, void_share_rms=void_rms, share_terms_coherence=coherence,
-        void_volume_response_rms=eps_rms, void_response_regime=regime,
-        flat_wall_capacity_ratio=capacity, caveats=_GLOBAL_CAVEATS, **_STATUS_FIELDS)
+    return {"unit_growth_sigma": unit, "linear_sigma": fine,
+            "linear_sigma_comparison_grid": coarse, "quadrature_relative_change": change,
+            "truncation_envelope_fraction": edge,
+            "propagator_k0": (1.0 - p0) * d_w + p0 * d_v, "effective_propagator": fine / unit,
+            "wall_share_rms": wall_rms, "void_share_rms": void_rms,
+            "share_terms_coherence": coherence, "void_volume_response_rms": eps_rms,
+            "void_response_regime": regime, "flat_wall_capacity_ratio": capacity}
 
 
 # --------------------------------------------------------------------------
@@ -1356,7 +1478,8 @@ class AdmissibleGlobalLinearInterval:
     wall-curvature mode) and ``strict_flat_wall_value`` (p = 1) are reported
     for reference.  ``premise_compatible`` is False when even the lower end
     violates the premise.  Every field is re-validated from the target and
-    premise (audit GH-F9).
+    premise (audit GH-F9) and recomputed from them on construction, including
+    the target's own rms at the premise radius (delta audit GH-DF2).
     """
 
     target: ConditionalGlobalLinearSigma
@@ -1411,7 +1534,13 @@ class AdmissibleGlobalLinearInterval:
         if self.target_inside != (self.premise_compatible
                                   and self.lower <= self.target_value <= self.upper):
             raise GlobalVarianceContractError("target_inside is inconsistent")
-        _strings(self.class_assumptions, "class_assumptions")
+        if _strings(self.class_assumptions, "class_assumptions") != _INTERVAL_ASSUMPTIONS:
+            raise GlobalVarianceContractError(
+                "class_assumptions must be the module's interval assumptions")
+        # Binding (delta audit GH-DF2): the premise radius, sigma_u there and
+        # the target's own rms at the premise radius recomputed.
+        _bind_recomputed(self, lambda: _interval_values(self.target, self.premise),
+                         "interval record")
 
     def to_json_dict(self) -> dict:
         return {"premise": self.premise.to_metadata(),
@@ -1456,6 +1585,13 @@ def admissible_global_linear_interval(
     """
     _require(target, ConditionalGlobalLinearSigma, "target")
     _require(premise, HomogeneityPremise, "premise")
+    return AdmissibleGlobalLinearInterval(
+        target=target, premise=premise, **_interval_values(target, premise),
+        class_assumptions=_INTERVAL_ASSUMPTIONS)
+
+
+def _interval_values(target: ConditionalGlobalLinearSigma, premise: HomogeneityPremise) -> dict:
+    """The fields of ``admissible_global_linear_interval``, (H15) (pure; GH-DF2)."""
     if premise.radius.convention is not target.radius.spec.convention:
         raise GlobalVarianceContractError(
             "the premise radius must use the target's radius convention")
@@ -1478,15 +1614,13 @@ def admissible_global_linear_interval(
     upper = min(g_upper, d_v) * target.unit_growth_sigma
     compatible = g_lower <= g_upper
     inside = compatible and lower <= target.linear_sigma <= upper
-    return AdmissibleGlobalLinearInterval(
-        target=target, premise=premise, premise_radius=hom,
-        unit_growth_sigma_at_premise=unit_hom, propagator_upper=g_upper,
-        share_lower=p_lower, share_upper=p_upper, lower=lower, upper=upper,
-        wall_mode_value=d_w * target.unit_growth_sigma,
-        strict_flat_wall_value=d_v * target.unit_growth_sigma,
-        target_value=target.linear_sigma, target_inside=inside,
-        target_premise_rms=target_hom, premise_compatible=compatible,
-        class_assumptions=_INTERVAL_ASSUMPTIONS)
+    return {"premise_radius": hom, "unit_growth_sigma_at_premise": unit_hom,
+            "propagator_upper": g_upper, "share_lower": p_lower, "share_upper": p_upper,
+            "lower": lower, "upper": upper,
+            "wall_mode_value": d_w * target.unit_growth_sigma,
+            "strict_flat_wall_value": d_v * target.unit_growth_sigma,
+            "target_value": target.linear_sigma, "target_inside": inside,
+            "target_premise_rms": target_hom, "premise_compatible": compatible}
 
 
 # --------------------------------------------------------------------------

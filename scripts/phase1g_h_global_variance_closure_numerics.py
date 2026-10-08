@@ -1,7 +1,7 @@
 """Phase 1G-H evidence: conditional global-mean linear matter variance.
 
 Report: ``reports/phase1g_h_global_variance_closure.md`` ([1G-H]); equations
-(H1)-(H24) there.  Runtime: ``timescape_fsigma8.global_variance`` (experimental,
+(H1)-(H25) there.  Runtime: ``timescape_fsigma8.global_variance`` (experimental,
 conditional).  Writes the git-ignored
 ``artifacts/independent/phase1g_h_global_variance_closure.json`` and figures
 under ``artifacts/independent/phase1g_h/``; prints a summary and exits
@@ -26,6 +26,14 @@ signed Gaussian pair and a nonnegative lognormal pair (GH-F5, D3), the PBS
 reclosure under a rescaled input spectrum (GH-F6, D4), the Gaussian fraction
 above the flat-wall cap (GH-F7), orthant analytic cases (GH-F10) and the
 rounding-budget gate of the 1G-E/F reference (GH-F11).
+
+Delta-audit remediation (2026-10-08; reports/phase1g_h_delta_audit_remediation.md):
+the lognormal pairs share f_v0, P11(r) and the latent carrier law, not the
+conditionally normalised wall-density covariance, whose law-II normaliser
+ratio m_II is reported (GH-DF1); identity (H25) gives the total from P11(r)
+and the both-walls conditional covariance C_W(r); the ball pair integrals
+include the first radial panel and carry a refinement gate; the rounding
+budget of the 1G-E/F reference is a function the tests exercise (GH-DF5).
 """
 
 from __future__ import annotations
@@ -82,6 +90,12 @@ ANCHOR_RATIONALE = (
 # the Monte Carlo checks, and above the double-precision floor of the sums.
 ORTHANT_TOLERANCE = 1e-12
 ORTHANT_START_NODES = 32
+# Ball pair integrals of the constructive pairs: uniform Simpson grid on
+# [0, 2R] with this many intervals (even), including the first panel; every
+# other node gives the half-resolution estimate of the refinement gate.  At
+# R = 11-13 Mpc the spacing is 0.015-0.018 Mpc, against the mask smoothing
+# ell = 0.29-0.60 Mpc.
+RADIAL_INTERVALS = 1440
 
 # Quadratures (explicit; AGENTS.md rule 9).  Main: the 1G-B reference grid.
 # Seed: the seed radius is ~0.1-15 Mpc, so k reaches 1e4 Mpc^-1.
@@ -140,6 +154,13 @@ GATES = {
     "lognormal_linear_limit_rel": 5e-2,
     "step_kernel_premise_ratio": 1.0,            # sigma(R_hom)/eta <= 1 (GH-F4)
     "reclosure_constant_share_rel": 1e-10,       # constant share: reclosure = post-hoc
+    # Declared 2026-10-08 before their first evaluation (delta audit).  Radial
+    # refinement: every rms of the constructive pairs on RADIAL_INTERVALS vs
+    # half of them; 1e-5 protects the printed fourth decimal by a factor 5.
+    "radial_refinement_rel": 1e-5,
+    # (H25) against the (H17)-(H19) assembly: an algebraic identity of the same
+    # quadrature sums (round-off only).
+    "h25_identity_rel": 1e-12,
 }
 
 
@@ -257,6 +278,20 @@ def summary(r: gv.ConditionalGlobalLinearSigma, anchor_factor: float, g_lcdm: fl
             "quadrature_relative_change": r.quadrature_relative_change,
             "void_onset_response_A_v": r.void_share.void_onset_response,
             "nu": r.void_share.nu, "sigma_seed": r.void_share.sigma_seed}
+
+
+def e_reference_rounding_budget(*, sigma_partition: float, sigma_internal: float,
+                                sigma_total: float, half_unit: float) -> float:
+    """Rounding budget of the 1G-E/F reference reproduction (audit GH-F11).
+
+    The components sigma_part and sigma_int and the printed total are known to
+    four decimals (half a unit ``half_unit``).  First-order propagation of the
+    input rounding through ``sigma = sqrt(sp^2 + si^2)`` gives
+    ``half (sp + si)/sigma``; the printed total adds its own half unit, hence
+    ``half (sp/sigma + si/sigma + 1)`` (the output term is exercised by a test,
+    delta audit GH-DF5).
+    """
+    return half_unit * (sigma_partition / sigma_total + sigma_internal / sigma_total + 1.0)
 
 
 # ---------------------------------------------------------------- anchoring
@@ -387,6 +422,69 @@ LOGNORMAL_RESOLUTIONS_MPC = (1.0, 2.0, 4.0)
 LOGNORMAL_LINEAR_LIMIT_LATENT_VARIANCE = 1e-4
 
 
+class _Ball:
+    """Ball pair-density integrals on [0, 2R] with a half-resolution companion.
+
+    Uniform Simpson grid of ``RADIAL_INTERVALS`` intervals that includes the
+    first panel at u = 0 (delta audit 2026-10-08: the earlier grid started at
+    2R/480 and dropped it).  The pair density of two points in a ball vanishes
+    as u^2 at u = 0 and every kernel is bounded there, so the u = 0 integrand
+    is exactly 0; kernels are evaluated for u > 0 only (zero separation means
+    unit mask correlation, outside the orthant functions' |rho| < 1).  The
+    same kernel values on every other node give the half-resolution estimate
+    for the radial refinement gate.
+    """
+
+    def __init__(self, R: float):
+        self.R = R
+        self.u_full = np.linspace(0.0, 2.0 * R, RADIAL_INTERVALS + 1)
+        self.u = self.u_full[1:]
+        u = self.u
+        self.pair = (3.0 * u ** 2 / R ** 3) * (1.0 - 3.0 * u / (4.0 * R) + u ** 3 / (16.0 * R ** 3))
+
+    def integral(self, values, coarse: bool = False) -> float:
+        y = np.concatenate(([0.0], self.pair * np.asarray(values, dtype=float)))
+        if coarse:
+            return float(simpson(y[::2], x=self.u_full[::2]))
+        return float(simpson(y, x=self.u_full))
+
+
+def _law_summary(f_v0: float, ball: _Ball, c_chi, k_ww, k_pw, provenance: str) -> dict:
+    """One two-phase law from its separation kernels, (H17)-(H19) and (H25).
+
+    ``c_chi = P11 - f_w^2``, ``k_ww = E[chi1 chi2 (psi1 - 1)(psi2 - 1)]`` and
+    ``k_pw = Cov(chi1, chi2 (psi2 - 1))`` for empty voids and a wall density
+    ``psi`` normalised by ``E[psi | wall] = 1``.  (H25): the ball variance is
+    ``< P11(r) C_W(r)/f_w^2 - 1 >`` with ``C_W = E[psi1 psi2 | both in walls]
+    = 1 + (k_ww + 2 k_pw)/P11``, so P11 and C_W fix the total.  Reports the
+    pair-weighted both-walls conditional covariance ``<P11 (C_W - 1)>/<P11>``
+    and the relative change of every rms under radial refinement.
+    """
+    f_w = 1.0 - f_v0
+    c_chi, k_ww, k_pw = (np.asarray(a, dtype=float) for a in (c_chi, k_ww, k_pw))
+    levels = {}
+    for coarse in (False, True):
+        moments = gv.TwoPhaseSmoothedMoments(
+            var_partition=ball.integral(c_chi, coarse), wall_field=ball.integral(k_ww, coarse),
+            void_field=0.0, partition_wall=ball.integral(k_pw, coarse), partition_void=0.0,
+            wall_void=0.0, provenance=provenance)
+        var = gv.two_phase_global_variance(void_volume_fraction=f_v0,
+                                           void_to_wall_density_ratio=0.0, moments=moments)
+        levels[coarse] = (moments, var, {
+            "sigma_partition": math.sqrt(var["partition_term"]),
+            "sigma_wall_field": math.sqrt(var["wall_field_term"]), "sigma_total": var["rms"]})
+    moments, var, sig = levels[False]
+    sig_coarse = levels[True][2]
+    refinement = max(abs(sig[key] / sig_coarse[key] - 1.0) for key in sig if sig_coarse[key] > 0.0)
+    p11 = c_chi + f_w ** 2
+    return {**sig, "cross_term": var["cross_terms"],
+            "wall_moment": moments.wall_field, "partition_wall_moment": moments.partition_wall,
+            "sigma_total_from_H25": math.sqrt(ball.integral(c_chi + k_ww + 2.0 * k_pw) / f_w ** 2),
+            "both_walls_conditional_density_covariance_ball":
+                ball.integral(k_ww + 2.0 * k_pw) / ball.integral(p11),
+            "radial_refinement_rel": refinement}
+
+
 def lognormal_mask_kernels(*, rho: float, c: float, f_w: float, lam: float, xi_lat_r: float,
                            kappa0: float, kappa_r: float) -> tuple[float, float, float]:
     """(P11, K_ww, K_pw) at one separation for the lognormal wall density (GH-F5).
@@ -406,8 +504,8 @@ def lognormal_mask_kernels(*, rho: float, c: float, f_w: float, lam: float, xi_l
     return p11, e_pp - 2.0 * e_p + p11, e_p - p11
 
 
-def _lognormal_laws(f_v0: float, c: float, u, pair, rho_g, lam: float, xi_lat, cross0_lat: float,
-                    cross_lat) -> dict:
+def _lognormal_laws(f_v0: float, c: float, ball: _Ball, rho_g, lam: float, xi_lat,
+                    cross0_lat: float, cross_lat) -> dict:
     """Laws I and II for the wall density proportional to exp(lam s(x)), [1G-H] Sec. 6.3.
 
     s is the latent Gaussian carrier (covariance ``xi_lat``); the walls are
@@ -418,13 +516,16 @@ def _lognormal_laws(f_v0: float, c: float, u, pair, rho_g, lam: float, xi_lat, c
     and Q0 = P(Z > c - kappa0), exponential tilting of (g1, g2, a1, a2) gives
     ``E[chi1 chi2 psi1 psi2] = exp(lam^2 xi_lat) f_w^2 P(Z1 > c-m, Z2 > c-m)/Q0^2``
     and ``E[chi1 chi2 psi2] = f_w P(Z1 > c-kappa(r), Z2 > c-kappa0)/Q0``.
+    The conditional normaliser of law II exceeds law I's by
+    ``m_II = Q0/f_w`` (delta audit GH-DF1), so the unconditional covariance of
+    its conditionally normalised density is law I's divided by m_II^2.
     """
     f_w = 1.0 - f_v0
     kappa0, kappa = lam * cross0_lat, lam * np.asarray(cross_lat)
     laws = {}
     for law, correlated in (("I_independent", False), ("II_same_field", True)):
         c_chi, k_ww, k_pw = [], [], []
-        for i in range(len(u)):
+        for i in range(len(ball.u)):
             p11, kww, kpw = lognormal_mask_kernels(
                 rho=float(rho_g[i]), c=c, f_w=f_w, lam=lam, xi_lat_r=float(xi_lat[i]),
                 kappa0=kappa0 if correlated else 0.0,
@@ -432,61 +533,65 @@ def _lognormal_laws(f_v0: float, c: float, u, pair, rho_g, lam: float, xi_lat, c
             c_chi.append(p11 - f_w ** 2)
             k_ww.append(kww)
             k_pw.append(kpw)
-        c_chi, k_ww, k_pw = map(np.asarray, (c_chi, k_ww, k_pw))
-        moments = gv.TwoPhaseSmoothedMoments(
-            var_partition=float(simpson(pair * c_chi, x=u)),
-            wall_field=float(simpson(pair * k_ww, x=u)), void_field=0.0,
-            partition_wall=float(simpson(pair * k_pw, x=u)), partition_void=0.0,
-            wall_void=0.0, provenance=f"lognormal threshold law {law}; empty voids")
-        var = gv.two_phase_global_variance(void_volume_fraction=f_v0,
-                                           void_to_wall_density_ratio=0.0, moments=moments)
-        laws[law] = {"sigma_partition": math.sqrt(var["partition_term"]),
-                     "sigma_wall_field": math.sqrt(var["wall_field_term"]),
-                     "cross_term": var["cross_terms"], "sigma_total": var["rms"],
-                     "wall_moment": moments.wall_field,
-                     "partition_wall_moment": moments.partition_wall}
+        laws[law] = _law_summary(f_v0, ball, c_chi, k_ww, k_pw,
+                                 f"lognormal threshold law {law}; empty voids")
+        laws[law]["conditional_normaliser_ratio_m"] = (
+            float(ndtr(-(c - kappa0))) / f_w if correlated else 1.0)
     return laws
 
 
-def lognormal_pairs(f_v0: float, c: float, u, pair, k, lnk, d2, ell: float, xi_w,
+def lognormal_pairs(f_v0: float, c: float, ball: _Ball, k, lnk, d2, ell: float, xi_w,
                     rho_g, signed_moments: dict) -> dict:
-    """Nonnegative lognormal pairs sharing the constraints of the signed pair (D3).
+    """Nonnegative lognormal pairs at a fixed latent carrier law (D3; GH-DF1).
 
     Latent carrier ``s = w`` smoothed with a Gaussian of radius r_s (the
-    resolution of the lognormal transform, a declared construction parameter);
-    wall density proportional to exp(lam s), conditionally normalised on the
-    walls, hence nonnegative.  Law II takes the signed pair's mask (w smoothed
-    at the calibrated ell); law I an independent mask with the same
-    covariance.  Shared by I and II: f_v0, the partition covariance, the
-    unconditional wall-density covariance ``exp(lam^2 xi_s) - 1`` and the
-    conditional mass normalisation.  For each r_s, lam makes the unmasked
-    wall-density ball variance equal to the signed carrier's.  The linear-limit
-    member (unsmoothed carrier, latent point variance 1e-4) checks that the
-    signed pair is the lam -> 0 limit: wall moments over lam^2 and
-    partition-wall moments over lam reproduce the signed ones.
+    resolution of the lognormal transform, a free construction parameter);
+    wall density ``psi = exp(lam s)/E[exp(lam s) | wall]``, conditionally
+    normalised on the walls, hence nonnegative.  Law II takes the signed
+    pair's mask (w smoothed at the calibrated ell); law I an independent mask
+    with the same covariance.  Shared by I and II: f_v0, the partition
+    covariance P11(r), the latent carrier law (covariance lam^2 xi_s;
+    equivalently the unconditionally normalised carrier exp(lam s)/E[exp(lam s)],
+    covariance exp(lam^2 xi_s) - 1) and the convention E[psi | wall] = 1.  Not
+    shared (delta audit GH-DF1): the conditionally normalised wall density
+    itself, whose unconditional covariance in law II is law I's divided by
+    m_II^2 (``conditional_normaliser_ratio_m``), and the both-walls
+    conditional covariance C_W(r) - 1 that, with P11, fixes the total by
+    (H25).  For each r_s, lam (a free calibration choice) makes the ball
+    variance of the unconditionally normalised carrier equal to the signed
+    carrier's.  The linear-limit member (unsmoothed carrier, latent point
+    variance 1e-4) is a local numerical check, at one small amplitude, that
+    the signed pair is the lam -> 0 limit: wall moments over lam^2 and
+    partition-wall moments over lam approach the signed ones.
     """
     g_ell = np.exp(-0.5 * (k * ell) ** 2)
     var_g = float(simpson(d2 * g_ell ** 2, x=lnk))
-    ball_target = float(simpson(pair * xi_w, x=u))
+    ball_target = ball.integral(xi_w)
     members = {}
     for rs in LOGNORMAL_RESOLUTIONS_MPC:
         g_s = np.exp(-0.5 * (k * rs) ** 2)
         var_s = float(simpson(d2 * g_s ** 2, x=lnk))
-        xi_s = _xi_table(k, lnk, d2, u, g_s, g_s)
+        xi_s = _xi_table(k, lnk, d2, ball.u, g_s, g_s)
         cross0 = float(simpson(d2 * g_s * g_ell, x=lnk)) / math.sqrt(var_g)
-        cross = _xi_table(k, lnk, d2, u, g_s, g_ell) / math.sqrt(var_g)
+        cross = _xi_table(k, lnk, d2, ball.u, g_s, g_ell) / math.sqrt(var_g)
 
-        def ball(lam2: float) -> float:
-            return float(simpson(pair * np.expm1(lam2 * xi_s), x=u))
+        def carrier_ball(lam2: float) -> float:
+            return ball.integral(np.expm1(lam2 * xi_s))
 
-        lam2 = brentq(lambda l2: ball(l2) - ball_target, 1e-8, 50.0, xtol=1e-15, rtol=1e-14)
-        laws = _lognormal_laws(f_v0, c, u, pair, rho_g, math.sqrt(lam2), xi_s, cross0, cross)
+        lam2 = brentq(lambda l2: carrier_ball(l2) - ball_target, 1e-8, 50.0, xtol=1e-15,
+                      rtol=1e-14)
+        laws = _lognormal_laws(f_v0, c, ball, rho_g, math.sqrt(lam2), xi_s, cross0, cross)
+        m_ii = laws["II_same_field"]["conditional_normaliser_ratio_m"]
         members[f"r_s_{rs:g}_Mpc"] = {
             "resolution_radius_Mpc": rs, "latent_scale_lambda": math.sqrt(lam2),
             "latent_point_variance": lam2 * var_s,
             "density_point_variance": math.expm1(lam2 * var_s),
-            "ball_variance_unmasked_density": ball(lam2),
-            "calibration_rel": abs(ball(lam2) / ball_target - 1.0),
+            "ball_variance_unconditionally_normalised_carrier": carrier_ball(lam2),
+            "calibration_rel": abs(carrier_ball(lam2) / ball_target - 1.0),
+            "conditional_normaliser_ratio_m_II": m_ii,
+            "conditional_density_covariance_ratio_II_over_I": 1.0 / m_ii ** 2,
+            "ball_variance_unmasked_conditional_density_II": carrier_ball(lam2) / m_ii ** 2,
+            "unconditional_mean_conditional_contrast_II": 1.0 / m_ii - 1.0,
             "laws": laws,
             "sigma_ratio_II_over_I": laws["II_same_field"]["sigma_total"]
             / laws["I_independent"]["sigma_total"]}
@@ -494,8 +599,8 @@ def lognormal_pairs(f_v0: float, c: float, u, pair, k, lnk, d2, ell: float, xi_w
     xi_w0 = float(simpson(d2, x=lnk))
     lam = math.sqrt(LOGNORMAL_LINEAR_LIMIT_LATENT_VARIANCE / xi_w0)
     cross0 = float(simpson(d2 * g_ell, x=lnk)) / math.sqrt(var_g)
-    cross = _xi_table(k, lnk, d2, u, g_ell) / math.sqrt(var_g)
-    small = _lognormal_laws(f_v0, c, u, pair, rho_g, lam, xi_w, cross0, cross)
+    cross = _xi_table(k, lnk, d2, ball.u, g_ell) / math.sqrt(var_g)
+    small = _lognormal_laws(f_v0, c, ball, rho_g, lam, xi_w, cross0, cross)
     limit = {}
     for law in ("I_independent", "II_same_field"):
         ref = signed_moments[law]
@@ -508,32 +613,47 @@ def lognormal_pairs(f_v0: float, c: float, u, pair, k, lnk, d2, ell: float, xi_w
     return {"pair_class": "NONNEGATIVE_LOGNORMAL_DENSITY_LAWS",
             "negative_wall_density_probability": 0.0,
             "ball_variance_signed_carrier": ball_target,
-            "shared_constraints": ["f_v0", "partition covariance (identical P11(r))",
-                                   "unconditional wall-density covariance exp(lam^2 xi_s) - 1",
-                                   "conditional mass normalisation"],
+            "shared_constraints": [
+                "f_v0", "partition covariance (identical P11(r))",
+                "latent Gaussian carrier law (covariance lam^2 xi_s); equivalently the "
+                "unconditionally normalised carrier exp(lam s)/E[exp(lam s)], covariance "
+                "exp(lam^2 xi_s) - 1",
+                "normalisation convention E[psi | wall] = 1"],
+            "not_shared": [
+                "the conditionally normalised wall density: its unconditional covariance in "
+                "law II is law I's divided by m_II^2 (conditional_normaliser_ratio_m_II)",
+                "the both-walls conditional covariance C_W(r) - 1, which with P11 fixes the "
+                "total by (H25)"],
+            "free_construction_choices": [
+                "latent smoothing radius r_s (1, 2, 4 Mpc)",
+                "lam calibrated to the ball variance of the signed carrier"],
             "members": members,
             "linear_limit": {"latent_point_variance": LOGNORMAL_LINEAR_LIMIT_LATENT_VARIANCE,
                              "latent_scale_lambda": lam, "laws": limit,
-                             "max_wall_moment_rel_difference": rel}}
+                             "max_wall_moment_rel_difference": rel,
+                             "scope": "local numerical check at one small amplitude with an "
+                                      "empirical gate; not an asymptotic theorem"}}
 
 
 def gt_pair(bg_in, growth, density, R: float, target_sigma_part: float,
             anchor: float) -> dict:
-    """Two constructive joint-law pairs with equal shared constraints (H21), [1G-H] Sec. 6.3.
+    """Two constructive joint-law pairs at fixed partition and carrier laws, [1G-H] Sec. 6.3.
 
     Partition: voids = {g < c}, Phi(c) = f_v0, g the wall carrier smoothed with
     a Gaussian of width ell (calibrated so the partition rms in the ball
     equals the 1G-E/F reference value).  Carrier: the 1G-E/F wall-internal
     linear field (growth D_wall(t0), photon-frame compression s = D_wall,
     Planck anchored).  Law I: g independent of the carrier; law II: g is the
-    smoothed carrier itself.
+    smoothed carrier itself.  Both pairs hold f_v0, P11(r) and the carrier law
+    fixed; by (H25) they differ through the both-walls conditional density
+    covariance C_W(r) - 1, i.e. the joint law of geometry and density.
 
     * Signed Gaussian pair (owner decision D3 on audit GH-F5): the wall
       density is ``1 + w - mu`` with the conditional recentring mu, a signed
       surrogate; the shared covariance is that of the unconditional carrier,
       and the phase-conditioned (masked) wall covariance differs between I and
       II.  ``negative_wall_density_probability`` gives P(rho < 0 | wall).
-    * Nonnegative lognormal pair (D3): ``lognormal_pair``.
+    * Nonnegative lognormal pair (D3; GH-DF1): ``lognormal_pairs``.
     """
     f_v0 = growth.fv0
     f_w = 1.0 - f_v0
@@ -545,9 +665,9 @@ def gt_pair(bg_in, growth, density, R: float, target_sigma_part: float,
     d2 = np.asarray(ls.matter_era_linear_amplitude(
         k_per_Mpc=k * s, early_spectrum=spec, omega_m=density.omega_m_per_photon,
         growth_today_photon_normalised=d_wall0)) * anchor ** 2
-    u = np.linspace(0.0, 2.0 * R, 481)[1:]
-    pair = (3.0 * u ** 2 / R ** 3) * (1.0 - 3.0 * u / (4.0 * R) + u ** 3 / (16.0 * R ** 3))
-    pair_norm = float(simpson(pair, x=u))
+    ball = _Ball(R)
+    u = ball.u
+    pair_norm = ball.integral(np.ones_like(u))
     xi_w = _xi_table(k, lnk, d2, u)
     xi_w0 = float(simpson(d2, x=lnk))
     c = float(ndtri(f_v0))           # voids g < c
@@ -563,7 +683,7 @@ def gt_pair(bg_in, growth, density, R: float, target_sigma_part: float,
     def partition_sigma(ell):
         rho_g, _, _ = tables(ell)
         p11 = np.array([_orthant(rg, c)["P11"] for rg in rho_g])
-        return math.sqrt(float(simpson(pair * (p11 - f_w ** 2), x=u)) / f_w ** 2)
+        return math.sqrt(ball.integral(p11 - f_w ** 2) / f_w ** 2)
 
     ell = brentq(lambda e: partition_sigma(e) - target_sigma_part, 0.02, 20.0, xtol=1e-8)
     rho_g, cross0, cross = tables(ell)
@@ -592,31 +712,27 @@ def gt_pair(bg_in, growth, density, R: float, target_sigma_part: float,
             c_chi.append(p11 - f_w ** 2)
             k_ww.append(kww)
             k_xw.append(kxw)
-        c_chi, k_ww, k_xw = map(np.asarray, (c_chi, k_ww, k_xw))
-        var_part = float(simpson(pair * c_chi, x=u))
-        wall = float(simpson(pair * k_ww, x=u))
-        cross_pw = float(simpson(pair * k_xw, x=u))
-        moments = gv.TwoPhaseSmoothedMoments(
-            var_partition=var_part, wall_field=wall, void_field=0.0,
-            partition_wall=cross_pw, partition_void=0.0, wall_void=0.0,
-            provenance=f"Gaussian-threshold law {law}; empty voids (no void field)")
-        var = gv.two_phase_global_variance(void_volume_fraction=f_v0,
-                                           void_to_wall_density_ratio=0.0, moments=moments)
-        laws[law] = {"sigma_partition": math.sqrt(var["partition_term"]),
-                     "sigma_wall_field": math.sqrt(var["wall_field_term"]),
-                     "cross_term": var["cross_terms"], "sigma_total": var["rms"],
-                     "wall_moment": wall, "partition_wall_moment": cross_pw,
-                     "cauchy_schwarz": gv.cauchy_schwarz_total_rms_interval(
-                         partition_rms=math.sqrt(var["partition_term"]),
-                         field_rms=math.sqrt(var["wall_field_term"]))}
+        laws[law] = _law_summary(f_v0, ball, c_chi, k_ww, k_xw,
+                                 f"Gaussian-threshold law {law}; empty voids (no void field)")
+        laws[law]["cauchy_schwarz"] = gv.cauchy_schwarz_total_rms_interval(
+            partition_rms=laws[law]["sigma_partition"], field_rms=laws[law]["sigma_wall_field"])
     # P(rho < 0 | wall) of the signed laws (GH-F5): law I, delta_w = w with the
     # mask independent; law II, delta_w = w - mu with corr(w, g) = cross0/sigma_w.
     sigma_w = math.sqrt(xi_w0)
     r_wg = cross0 / sigma_w
     negative = {"I_independent": float(ndtr(-1.0 / sigma_w)),
                 "II_same_field": _orthant_p(-r_wg, (1.0 - mu) / sigma_w, c) / f_w}
-    lognormal = lognormal_pairs(f_v0, c, u, pair, k, lnk, d2, ell, xi_w, rho_g, laws)
+    lognormal = lognormal_pairs(f_v0, c, ball, k, lnk, d2, ell, xi_w, rho_g, laws)
+    refinement = max([law["radial_refinement_rel"] for law in laws.values()]
+                     + [law["radial_refinement_rel"] for m in lognormal["members"].values()
+                        for law in m["laws"].values()])
+    h25 = max([abs(law["sigma_total_from_H25"] / law["sigma_total"] - 1.0)
+               for law in laws.values()]
+              + [abs(law["sigma_total_from_H25"] / law["sigma_total"] - 1.0)
+                 for m in lognormal["members"].values() for law in m["laws"].values()])
     return {"radius_Mpc": R, "pair_density_norm": pair_norm, "threshold_c": c,
+            "radial_intervals": RADIAL_INTERVALS,
+            "radial_refinement_max_rel": refinement, "h25_identity_max_rel": h25,
             "partition_smoothing_ell_Mpc": ell, "target_sigma_partition": target_sigma_part,
             "wall_field_rms_point": sigma_w, "wall_growth_D_wall": d_wall0,
             "conditional_wall_mean_mu_law_II": mu,
@@ -1001,8 +1117,9 @@ def main(argv=None) -> int:
                        "empty voids")
         var = gv.two_phase_global_variance(void_volume_fraction=fv0,
                                            void_to_wall_density_ratio=0.0, moments=e3)
-        half = GATES["E_reference_printed_half_unit"]
-        budget = half * (sp / var["rms"] + si / var["rms"] + 1.0)
+        budget = e_reference_rounding_budget(
+            sigma_partition=sp, sigma_internal=si, sigma_total=var["rms"],
+            half_unit=GATES["E_reference_printed_half_unit"])
         gate(f"{name} E reference reproduction within its rounding budget",
              abs(var["rms"] - stot), budget, kind="reproduction")
         growth = gv.two_phase_global_growth(background=bg_in, matching=MATCHING, checks=CHECKS, G=G)
@@ -1023,6 +1140,10 @@ def main(argv=None) -> int:
         gate(f"{name} lognormal linear limit reproduces the signed pair",
              lognormal["linear_limit"]["max_wall_moment_rel_difference"],
              GATES["lognormal_linear_limit_rel"], kind="physics")
+        gate(f"{name} constructive pairs radial refinement", gtp["radial_refinement_max_rel"],
+             GATES["radial_refinement_rel"], kind="numerics")
+        gate(f"{name} constructive pairs (H25) identity", gtp["h25_identity_max_rel"],
+             GATES["h25_identity_rel"], kind="physics")
         cov[name] = {"E_reference": {"sigma_part": sp, "sigma_int": si, "sigma_printed": stot,
                                      "reproduced": var["rms"], "rounding_budget": budget},
                      "cauchy_schwarz_on_E_reference": gv.cauchy_schwarz_total_rms_interval(
@@ -1140,18 +1261,25 @@ def _print_summary(results: dict, digest: str) -> None:
             print(f"  signed {law:15s} sigma_part = {row['sigma_partition']:.4f}  sigma_wall = "
                   f"{row['sigma_wall_field']:.4f}  cross = {row['cross_term']:+.4f}  total = "
                   f"{row['sigma_total']:.4f}  P(rho<0|wall) = "
-                  f"{gtp['negative_wall_density_probability'][law]:.4f}")
+                  f"{gtp['negative_wall_density_probability'][law]:.4f}  <C_W - 1> = "
+                  f"{row['both_walls_conditional_density_covariance_ball']:.4f}")
         ln = gtp["nonnegative_lognormal_pair"]
         for mname, mem in ln["members"].items():
             print(f"  lognormal {mname}: lambda = {mem['latent_scale_lambda']:.4f}, latent point "
                   f"variance {mem['latent_point_variance']:.3f}, density point variance "
-                  f"{mem['density_point_variance']:.2f}; II/I = {mem['sigma_ratio_II_over_I']:.4f}")
+                  f"{mem['density_point_variance']:.2f}; II/I = {mem['sigma_ratio_II_over_I']:.4f}; "
+                  f"m_II = {mem['conditional_normaliser_ratio_m_II']:.4f} (covariance ratio "
+                  f"{mem['conditional_density_covariance_ratio_II_over_I']:.4f})")
             for law, row in mem["laws"].items():
                 print(f"    {law:15s} sigma_part = {row['sigma_partition']:.4f}  sigma_wall = "
                       f"{row['sigma_wall_field']:.4f}  cross = {row['cross_term']:+.4f}  total = "
-                      f"{row['sigma_total']:.4f}")
+                      f"{row['sigma_total']:.4f}  <C_W - 1> = "
+                      f"{row['both_walls_conditional_density_covariance_ball']:.4f}")
         print(f"  lognormal linear limit: max wall-moment rel. difference "
               f"{ln['linear_limit']['max_wall_moment_rel_difference']:.2e}")
+        print(f"  radial refinement max rel. change {gtp['radial_refinement_max_rel']:.2e} "
+              f"({gtp['radial_intervals']} intervals); (H25) max rel. "
+              f"{gtp['h25_identity_max_rel']:.1e}")
 
 
 if __name__ == "__main__":
