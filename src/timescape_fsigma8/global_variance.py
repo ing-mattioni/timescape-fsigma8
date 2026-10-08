@@ -128,7 +128,10 @@ Supporting results ([1G-H] Secs. 5-7)
 Records are fail-closed: on construction every public record re-validates
 its fields (audit GH-F9) and recomputes each result and diagnostic from its
 stored inputs with the same pure function its factory uses, refusing any
-record whose inputs do not reproduce its results (delta audit GH-DF2).
+record whose inputs do not reproduce its results (delta audit GH-DF2).  A
+float result must be stored as a float, and validated scalar inputs are
+stored as floats, so the records serialise as strict JSON (second delta
+audit GH-D2F4).
 
 References: [GM] Galoppo & Mourier, arXiv:2511.17160v2; [W07] Wiltshire,
 arXiv:0709.0732v2; [W09] Wiltshire, arXiv:0909.0749v2; [JLH13] Jennings,
@@ -380,12 +383,17 @@ def _close(value: float, expected: float) -> bool:
 
 
 def _same(stored, expected) -> bool:
-    """A stored field equals its recomputation (floats within RECORD_IDENTITY_RTOL)."""
+    """A stored field equals its recomputation (floats within RECORD_IDENTITY_RTOL).
+
+    A float result must be stored as a finite ``float``: an equal ``Fraction``
+    or ``int`` would pass the comparison but break the strict-JSON contract of
+    ``to_json_dict`` (second delta audit GH-D2F4).
+    """
     if isinstance(expected, bool) or isinstance(stored, bool):
         return type(stored) is type(expected) and stored == expected
-    if isinstance(expected, Real) and not isinstance(expected, bool):
-        return (isinstance(stored, Real) and math.isfinite(float(stored))
-                and _close(float(stored), float(expected)))
+    if isinstance(expected, float):
+        return (isinstance(stored, float) and math.isfinite(stored)
+                and _close(stored, expected))
     if isinstance(expected, tuple):
         return (isinstance(stored, tuple) and len(stored) == len(expected)
                 and all(_same(a, b) for a, b in zip(stored, expected)))
@@ -406,7 +414,11 @@ def _bind_recomputed(record, compute, what: str) -> None:
         raise GlobalVarianceContractError(
             f"{what}: the stored inputs do not reproduce a valid result ({exc})") from exc
     for name, expected in values.items():
-        if not _same(getattr(record, name), expected):
+        stored = getattr(record, name)
+        if isinstance(expected, float) and not isinstance(stored, float):
+            raise GlobalVarianceContractError(
+                f"{what}: {name} must be a float, not {type(stored).__name__}")
+        if not _same(stored, expected):
             raise GlobalVarianceContractError(
                 f"{what}: {name} differs from its recomputation from the stored inputs")
 
@@ -587,7 +599,7 @@ class TwoPhaseGrowthChecks:
     def __post_init__(self) -> None:
         for name in ("identity_tolerance", "ode_rtol", "ode_atol",
                      "ode_cross_check_tolerance", "root_xtol_fraction"):
-            _positive(getattr(self, name), name)
+            object.__setattr__(self, name, _positive(getattr(self, name), name))
 
     def to_metadata(self) -> dict:
         return {"identity_tolerance": self.identity_tolerance, "ode_rtol": self.ode_rtol,
@@ -697,7 +709,9 @@ class TwoPhaseGlobalGrowth:
         if _strings(self.assumptions, "assumptions") != _GROWTH_ASSUMPTIONS:
             raise GlobalVarianceContractError("assumptions must be the module's growth assumptions")
         # Binding (delta audit GH-DF2): results and diagnostics recomputed.
+        # G is stored as a float (second delta audit GH-D2F4).
         G = _positive(self.G, "G")
+        object.__setattr__(self, "G", G)
         _bind_recomputed(self, lambda: _two_phase_growth_values(
             self.background, self.matching, self.checks, G), "growth record")
 

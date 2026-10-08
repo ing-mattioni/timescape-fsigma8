@@ -34,6 +34,13 @@ ratio m_II is reported (GH-DF1); identity (H25) gives the total from P11(r)
 and the both-walls conditional covariance C_W(r); the ball pair integrals
 include the first radial panel and carry a refinement gate; the rounding
 budget of the 1G-E/F reference is a function the tests exercise (GH-DF5).
+
+Second delta-audit remediation (2026-10-08;
+reports/phase1g_h_delta_audit_2_remediation.md): the (H25) gate is a
+consistency check of the (H18) assembly at x = 0 on the same kernel arrays
+(kind numerics); the tests check the kernels by sampling, the reported C_W
+and m_II^-2, the half-resolution estimator, and pin every gate threshold
+(GH-D2F2).
 """
 
 from __future__ import annotations
@@ -158,8 +165,10 @@ GATES = {
     # refinement: every rms of the constructive pairs on RADIAL_INTERVALS vs
     # half of them; 1e-5 protects the printed fourth decimal by a factor 5.
     "radial_refinement_rel": 1e-5,
-    # (H25) against the (H17)-(H19) assembly: an algebraic identity of the same
-    # quadrature sums (round-off only).
+    # (H25) against the (H17)-(H19) assembly at x = 0: a consistency check of
+    # that assembly on the same kernel arrays (round-off only).  It cannot
+    # detect an error in the kernels themselves; the Monte Carlo tests check
+    # those (second delta audit GH-D2F2).
     "h25_identity_rel": 1e-12,
 }
 
@@ -1143,7 +1152,7 @@ def main(argv=None) -> int:
         gate(f"{name} constructive pairs radial refinement", gtp["radial_refinement_max_rel"],
              GATES["radial_refinement_rel"], kind="numerics")
         gate(f"{name} constructive pairs (H25) identity", gtp["h25_identity_max_rel"],
-             GATES["h25_identity_rel"], kind="physics")
+             GATES["h25_identity_rel"], kind="numerics")
         cov[name] = {"E_reference": {"sigma_part": sp, "sigma_int": si, "sigma_printed": stot,
                                      "reproduced": var["rms"], "rounding_budget": budget},
                      "cauchy_schwarz_on_E_reference": gv.cauchy_schwarz_total_rms_interval(

@@ -16,11 +16,13 @@ import inspect
 import json
 import math
 import re
+from decimal import Decimal
+from fractions import Fraction
 from pathlib import Path
 
 import numpy as np
 import pytest
-from scipy.integrate import simpson
+from scipy.integrate import quad, simpson
 from scipy.optimize import brentq
 from scipy.special import spherical_jn
 from scipy.stats import multivariate_normal, norm
@@ -1065,3 +1067,198 @@ def test_gh_df5_pbs_reclosure_rescales_the_input_spectrum_by_the_factor_squared(
     for name in names[1:]:
         assert out[name]["share_k0_reclosure"] > out[name]["share_k0_direct"]
         assert out[name]["reclosure_over_post_hoc"] > 1.005
+
+
+# -------------------------------- second delta-audit remediation (2026-10-08)
+def test_gh_d2f2_law_summary_reports_the_pair_weighted_both_walls_covariance():
+    """<P11 (C_W - 1)>/<P11>, C_W = E[psi1 psi2 | both walls] (mutant A18), and (H25).
+
+    Synthetic kernels.  C_W is formed pointwise from its definition,
+    ``C_W = E[chi1 chi2 psi1 psi2]/P11 = 1 + (K_ww + 2 K_pw)/P11``, and the
+    ball variance from ``1 + xi_delta = P11 C_W/f_w^2`` (empty voids).
+    """
+    ev = _evidence()
+    ball = ev._Ball(11.0)
+    f_v = 0.737
+    f_w = 1.0 - f_v
+    u = ball.u
+    c_chi = f_v * f_w * np.exp(-u / 0.8)                 # P11 falls from f_w to f_w^2
+    p11 = c_chi + f_w ** 2
+    k_ww = 0.3 * np.exp(-u / 2.5) * p11
+    k_pw = 0.02 * np.exp(-u / 1.2)
+    out = ev._law_summary(f_v, ball, c_chi, k_ww, k_pw, "synthetic kernels")
+    c_w = 1.0 + (k_ww + 2.0 * k_pw) / p11
+    assert out["both_walls_conditional_density_covariance_ball"] == pytest.approx(
+        ball.integral(p11 * (c_w - 1.0)) / ball.integral(p11), rel=1e-12, abs=0.0)
+    assert out["sigma_total"] ** 2 == pytest.approx(
+        ball.integral(p11 * c_w / f_w ** 2 - 1.0), rel=1e-11, abs=0.0)
+
+
+def test_gh_d2f2_lognormal_pairs_report_the_inverse_square_of_the_law_ii_normaliser():
+    """1/m_II^2, carrier/m_II^2 and 1/m_II - 1 of ``lognormal_pairs`` (mutant A20).
+
+    A synthetic spectrum on a few separations; m_II = Q(c - kappa0)/f_w is
+    re-derived from lam and the one-point mask-carrier covariance.
+    """
+    ev = _evidence()
+    ball = _FewPointBall()
+    f_v = 0.737
+    f_w, c = 1.0 - f_v, float(norm.ppf(f_v))
+    lnk = np.linspace(math.log(1e-3), math.log(30.0), 1201)
+    k = np.exp(lnk)
+    d2 = 0.4 * (k / 0.3) ** 3 / (1.0 + (k / 0.3) ** 3) * np.exp(-(k / 3.0) ** 2)
+    ell = 0.5
+    g_ell = np.exp(-0.5 * (k * ell) ** 2)
+    var_g = float(simpson(d2 * g_ell ** 2, x=lnk))
+    rho_g = ev._xi_table(k, lnk, d2, ball.u, g_ell, g_ell) / var_g
+    xi_w = ev._xi_table(k, lnk, d2, ball.u)
+    signed = {law: {"wall_moment": 0.01, "partition_wall_moment": 0.001}
+              for law in ("I_independent", "II_same_field")}
+    out = ev.lognormal_pairs(f_v, c, ball, k, lnk, d2, ell, xi_w, rho_g, signed)
+    assert set(out["members"]) == {"r_s_1_Mpc", "r_s_2_Mpc", "r_s_4_Mpc"}
+    for member in out["members"].values():
+        lam, rs = member["latent_scale_lambda"], member["resolution_radius_Mpc"]
+        g_s = np.exp(-0.5 * (k * rs) ** 2)
+        kappa0 = lam * float(simpson(d2 * g_s * g_ell, x=lnk)) / math.sqrt(var_g)
+        m = norm.sf(c - kappa0) / f_w                                  # E[carrier | wall]
+        assert m > 1.2
+        assert member["conditional_normaliser_ratio_m_II"] == pytest.approx(m, rel=1e-12, abs=0.0)
+        assert (member["laws"]["II_same_field"]["conditional_normaliser_ratio_m"]
+                == member["conditional_normaliser_ratio_m_II"])
+        assert member["conditional_density_covariance_ratio_II_over_I"] == pytest.approx(
+            1.0 / m ** 2, rel=1e-12, abs=0.0)
+        assert member["ball_variance_unmasked_conditional_density_II"] == pytest.approx(
+            member["ball_variance_unconditionally_normalised_carrier"] / m ** 2, rel=1e-12, abs=0.0)
+        assert member["unconditional_mean_conditional_contrast_II"] == pytest.approx(
+            1.0 / m - 1.0, rel=1e-12, abs=0.0)
+        assert member["ball_variance_unconditionally_normalised_carrier"] == pytest.approx(
+            out["ball_variance_signed_carrier"], rel=1e-9, abs=0.0)
+
+
+def test_gh_d2f2_conditional_wall_density_by_sample_normalised_monte_carlo():
+    """C_W(r), m_II and the m_II^-2 covariance against sampling (second delta audit).
+
+    psi is the carrier divided by its *sample* mean on the walls, so neither
+    the normaliser nor the covariance ratio is put in by construction; the
+    error budget adds the normaliser's own sampling error.
+    """
+    ev = _evidence()
+    rng = np.random.default_rng(31)
+    f_v = 0.737
+    f_w, c = 1.0 - f_v, norm.ppf(f_v)
+    rho, lam, xs0, xsr, g0, gr = 0.6, 0.8, 1.0, 0.45, 0.5, 0.3
+    ball = _FewPointBall()
+    ones = np.ones_like(ball.u)
+    laws = ev._lognormal_laws(f_v, c, ball, rho * ones, lam, xsr * ones, g0, gr * ones)
+    shared = math.expm1(lam * lam * xsr)
+    for law, correlated in (("I_independent", False), ("II_same_field", True)):
+        k0, kr = (g0, gr) if correlated else (0.0, 0.0)
+        cov = np.array([[1, rho, k0, kr], [rho, 1, kr, k0], [k0, kr, xs0, xsr], [kr, k0, xsr, xs0]])
+        z = rng.multivariate_normal(np.zeros(4), cov, size=2_000_000)
+        chi1, chi2 = z[:, 0] > c, z[:, 1] > c
+        carrier1 = np.exp(lam * z[:, 2] - 0.5 * lam * lam * xs0)       # exp(a)/E[exp(a)]
+        carrier2 = np.exp(lam * z[:, 3] - 0.5 * lam * lam * xs0)
+        on_wall = np.concatenate((carrier1[chi1], carrier2[chi2]))
+        m_s = on_wall.mean()                                            # sample E[carrier | wall]
+        se_m = on_wall.std() / math.sqrt(on_wall.size)
+        m = laws[law]["conditional_normaliser_ratio_m"]
+        assert abs(m_s - m) <= 5 * se_m
+        both = chi1 & chi2
+        cw_mc = carrier1[both] * carrier2[both] / m_s ** 2               # psi1 psi2 | both walls
+        p11, kww, kpw = ev.lognormal_mask_kernels(rho=rho, c=c, f_w=f_w, lam=lam, xi_lat_r=xsr,
+                                                  kappa0=lam * k0, kappa_r=lam * kr)
+        c_w = 1.0 + (kww + 2.0 * kpw) / p11
+        budget = cw_mc.std() / math.sqrt(cw_mc.size) + 2.0 * cw_mc.mean() * se_m / m_s
+        assert abs(cw_mc.mean() - c_w) <= 5 * budget
+        psi1, psi2 = carrier1 / m_s, carrier2 / m_s
+        conn = (psi1 - psi1.mean()) * (psi2 - psi2.mean())
+        budget = conn.std() / math.sqrt(conn.size) + 2.0 * abs(conn.mean()) * se_m / m_s
+        assert abs(conn.mean() - shared / m ** 2) <= 5 * budget
+
+
+def test_gh_d2f2_ball_half_resolution_estimate_has_the_simpson_error_ratio():
+    """The coarse estimate is Simpson's rule at twice the spacing (mutants A15, A16).
+
+    The ball pair density is a quintic in u with unit integral, so the
+    composite Simpson error is exactly ``(h^4/180)[f'''(2R) - f'''(0)] =
+    (h^4/180) 45/R^4`` and the coarse error is 16 times the fine one; for a
+    kernel with a sub-Mpc scale the ratio tends to 16 with an O(h^2) correction.
+    """
+    ev = _evidence()
+    R = 10.0
+    ball = ev._Ball(R)
+    h = 2.0 * R / ev.RADIAL_INTERVALS
+    ones = np.ones_like(ball.u)
+    error = h ** 4 / 180.0 * 45.0 / R ** 4
+    assert ball.integral(ones) - 1.0 == pytest.approx(error, rel=1e-2, abs=0.0)
+    assert ball.integral(ones, coarse=True) - 1.0 == pytest.approx(16.0 * error, rel=1e-2, abs=0.0)
+    a = 0.3
+
+    def integrand(x):
+        return (3.0 * x ** 2 / R ** 3) * (1.0 - 3.0 * x / (4.0 * R) + x ** 3 / (16.0 * R ** 3)) \
+            * math.exp(-x / a)
+
+    exact = quad(integrand, 0.0, 2.0 * R, epsabs=0.0, epsrel=1e-13, limit=400,
+                 points=[0.5, 1.0, 2.0, 5.0])[0]
+    kernel = np.exp(-ball.u / a)
+    ratio = (ball.integral(kernel, coarse=True) - exact) / (ball.integral(kernel) - exact)
+    assert ratio == pytest.approx(16.0, rel=1e-2, abs=0.0)
+
+
+def test_gh_d2f2_binding_boundary_and_record_identities():
+    """2 RECORD_IDENTITY_RTOL is refused, a quarter of it accepted (A01); A07; A09."""
+    res = run(GM, constant(0.05), radius("c"))
+    rtol = gv.RECORD_IDENTITY_RTOL
+    eps_rms = res.void_volume_response_rms           # checked by the binding only
+    with pytest.raises(gv.GlobalVarianceContractError, match="void_volume_response_rms differs"):
+        dataclasses.replace(res, void_volume_response_rms=eps_rms * (1.0 + 2.0 * rtol))
+    near = dataclasses.replace(res, void_volume_response_rms=eps_rms * (1.0 + 0.25 * rtol))
+    assert near.void_volume_response_rms != eps_rms
+    premise = gv.HomogeneityPremise(radius=radius("c", 100.0), max_linear_rms=0.1, provenance="test")
+    iv = gv.admissible_global_linear_interval(target=res, premise=premise)
+    with pytest.raises(gv.GlobalVarianceContractError,
+                       match="class_assumptions must be the module's interval assumptions"):
+        dataclasses.replace(iv, class_assumptions=("x",))
+    # An equal copy of the background reproduces every value, so only the
+    # identity check refuses a density built on it.
+    pbs = run(GM, tracker_seed(GM, res.growth, 15.0, gv.SeedVolumeCompression.COMPRESSED_WITH_REGION),
+              radius("c"))
+    density = dataclasses.replace(pbs.void_share.density, background=dataclasses.replace(GM))
+    assert density == pbs.void_share.density
+    with pytest.raises(gv.GlobalVarianceContractError,
+                       match="density and growth must share the background object"):
+        dataclasses.replace(pbs.void_share, density=density)
+
+
+def test_gh_d2f2_evidence_thresholds_are_pinned():
+    """Every declared gate threshold and grid (mutants A22, A23): a change is a recorded decision."""
+    ev = _evidence()
+    assert ev.GATES == {
+        "D_owner_A_v_printed_digits": 0.5, "D_owner_X_SU_printed_digits": 5e-4,
+        "constant_share_A_s_scaling_rel": 1e-10, "pbs_void_term_A_s_independence_rel": 2e-3,
+        "refined_quadrature_rel": 2e-6, "E_reference_printed_half_unit": 5e-5,
+        "gt_orthant_P11_vs_bivariate_cdf_abs": 1e-10, "orthant_analytic_cases_abs": 1e-12,
+        "m3_bias_finite_difference_rel": 1e-6, "lognormal_ball_variance_calibration_rel": 1e-9,
+        "lognormal_linear_limit_rel": 5e-2, "step_kernel_premise_ratio": 1.0,
+        "reclosure_constant_share_rel": 1e-10, "radial_refinement_rel": 1e-5,
+        "h25_identity_rel": 1e-12}
+    assert (ev.RADIAL_INTERVALS, ev.ORTHANT_TOLERANCE, ev.ORTHANT_START_NODES) == (1440, 1e-12, 32)
+
+
+def test_gh_d2f4_float_results_must_be_floats_and_scalar_inputs_are_stored_as_floats(growth_gm):
+    """An equal Fraction no longer passes the binding; inputs are coerced (strict JSON)."""
+    res = run(GM, constant(0.05), radius("c"))
+    with pytest.raises(gv.GlobalVarianceContractError,
+                       match="linear_sigma must be a float, not Fraction"):
+        dataclasses.replace(res, linear_sigma=Fraction(res.linear_sigma))
+    with pytest.raises(gv.GlobalVarianceContractError, match="must be a real scalar"):
+        dataclasses.replace(res, linear_sigma=Decimal(repr(res.linear_sigma)))
+    nfev_as_int = tuple((k, int(v)) if k.endswith("_nfev") else (k, v)
+                        for k, v in growth_gm.diagnostics)
+    with pytest.raises(gv.GlobalVarianceContractError, match="diagnostics differs"):
+        dataclasses.replace(growth_gm, diagnostics=nfev_as_int)
+    checks = dataclasses.replace(CHECKS, identity_tolerance=Fraction(1, 10 ** 12))
+    assert type(checks.identity_tolerance) is float and checks == CHECKS
+    growth = dataclasses.replace(growth_gm, G=Fraction(1), checks=checks)
+    assert type(growth.G) is float and growth == growth_gm
+    json.dumps(growth.to_json_dict(), allow_nan=False)
