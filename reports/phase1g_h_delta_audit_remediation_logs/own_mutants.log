@@ -1,0 +1,11 @@
+N1_growth_fv0_check_off KILLED | 1 failed, 41 passed in 15.90s
+N4_interval_target_inside_off KILLED | 1 failed, 41 passed in 17.85s
+N8_frechet_gate_off KILLED | 1 failed, 41 passed in 15.52s
+N13_rounding_output_half_unit_off KILLED | 2 failed, 40 passed in 13.62s
+D1_binding_off KILLED | 1 failed, 41 passed in 13.68s
+D2_sigma_spectrum_identity_off KILLED | 1 failed, 41 passed in 15.08s
+D3_radius_reresolution_off KILLED | 1 failed, 41 passed in 14.02s
+D4_symmetry_check_off KILLED | 1 failed, 41 passed in 15.35s
+D5_lognormal_normaliser_unit KILLED | 1 failed, 41 passed in 15.27s
+D6_ball_first_panel_dropped KILLED | 1 failed, 41 passed in 13.54s
+exit 0

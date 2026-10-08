@@ -12,6 +12,20 @@ Remediated records: [`phase1g_h_global_variance_closure.md`](phase1g_h_global_va
 (revised in place; the audited text stays at `d4d693d`), its inventory and
 validation record, and the F/G freeze-status successor.
 
+**Status note (2026-10-08).** This record states the remediation as of
+2026-10-07 and is not rewritten. The independent delta audit
+([`phase1g_h_delta_audit.md`](phase1g_h_delta_audit.md)) verified 6 of the
+findings below resolved, 2 resolved by owner decision (GH-F1, GH-F2), 6
+partially resolved (GH-F4 … GH-F9) and 1 open (GH-F15); the "14 findings are
+resolved" of Secs. 0 and 2 is superseded by that verification. In
+particular, the records of GH-F9 re-validated their fields but did not bind
+their results to their inputs (erratum GH-DE6, finding GH-DF2). The
+corrections are in
+[`phase1g_h_delta_audit_remediation.md`](phase1g_h_delta_audit_remediation.md).
+The commits of this record were pushed on 2026-10-08 and the owner confirmed
+the two push approvals of GH-F15 the same day
+([`phase1g_h_publication_successor.md`](phase1g_h_publication_successor.md)).
+
 ## 0. Summary
 
 - **Audit outcome.** `REJECT` for the scientific closure claims of the text

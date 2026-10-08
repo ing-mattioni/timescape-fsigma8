@@ -1,0 +1,62 @@
+[
+  {
+    "id": "N1_growth_fv0_check_off",
+    "file": "src/timescape_fsigma8/global_variance.py",
+    "old": "if self.fv0 != self.background.fv0:",
+    "new": "if False:"
+  },
+  {
+    "id": "N4_interval_target_inside_off",
+    "file": "src/timescape_fsigma8/global_variance.py",
+    "old": "if self.target_inside != (self.premise_compatible\n                                  and self.lower <= self.target_value <= self.upper):",
+    "new": "if False:"
+  },
+  {
+    "id": "N8_frechet_gate_off",
+    "file": "src/timescape_fsigma8/global_variance.py",
+    "old": "if not lower - tol <= p11 <= upper + tol:",
+    "new": "if False:"
+  },
+  {
+    "id": "N13_rounding_output_half_unit_off",
+    "file": "scripts/phase1g_h_global_variance_closure_numerics.py",
+    "old": "return half_unit * (sigma_partition / sigma_total + sigma_internal / sigma_total + 1.0)",
+    "new": "return half_unit * (sigma_partition / sigma_total + sigma_internal / sigma_total)"
+  },
+  {
+    "id": "D1_binding_off",
+    "file": "src/timescape_fsigma8/global_variance.py",
+    "old": "    for name, expected in values.items():\n        if not _same(getattr(record, name), expected):",
+    "new": "    for name, expected in ():\n        if not _same(getattr(record, name), expected):"
+  },
+  {
+    "id": "D2_sigma_spectrum_identity_off",
+    "file": "src/timescape_fsigma8/global_variance.py",
+    "old": "        if (self.void_share.density is not self.density\n                or self.void_share.early_spectrum is not self.early_spectrum):",
+    "new": "        if False:"
+  },
+  {
+    "id": "D3_radius_reresolution_off",
+    "file": "src/timescape_fsigma8/global_variance.py",
+    "old": "        if resolve_lagrangian_radius(spec=self.radius.spec, density=self.density) != self.radius:",
+    "new": "        if False:"
+  },
+  {
+    "id": "D4_symmetry_check_off",
+    "file": "src/timescape_fsigma8/global_variance.py",
+    "old": "    if not abs(e1 - e2) <= 10.0 * tol:",
+    "new": "    if False:"
+  },
+  {
+    "id": "D5_lognormal_normaliser_unit",
+    "file": "scripts/phase1g_h_global_variance_closure_numerics.py",
+    "old": "            float(ndtr(-(c - kappa0))) / f_w if correlated else 1.0)",
+    "new": "            1.0)"
+  },
+  {
+    "id": "D6_ball_first_panel_dropped",
+    "file": "scripts/phase1g_h_global_variance_closure_numerics.py",
+    "old": "        y = np.concatenate(([0.0], self.pair * np.asarray(values, dtype=float)))\n        if coarse:\n            return float(simpson(y[::2], x=self.u_full[::2]))\n        return float(simpson(y, x=self.u_full))",
+    "new": "        y = self.pair * np.asarray(values, dtype=float)\n        if coarse:\n            return float(simpson(y[::2], x=self.u[::2]))\n        return float(simpson(y, x=self.u))"
+  }
+]

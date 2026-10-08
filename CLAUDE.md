@@ -49,7 +49,7 @@ Strictly layered; each layer imports only from the ones above it.
 | Wall geometry (1F-C) | `phase1f_c/` | Conditional clock-anchored wall/common-spacetime kinematic geometry and optional scalar metric-trace reconstruction |
 | Necessary bound (1F-D) | `phase1f_d.py` | Conditional scalar positive-core necessary-bound diagnostic in the explicit (t, b, C) parameterization; standard library only, no solver, root finder or time scan; a positive margin establishes no existence |
 | Lagrangian σ(M) (1G-B) | `lagrangian_sigma.py` | Conditional, model-internal, mass-labelled linear σ(M). Mandatory, non-default `GrowthLaw`: volume-average CGI regular growing mode (comoving, or Mészáros comparator), or wall-regional EdS in common time t (closure `NOT_APPLICABLE`). Per-photon ω_m,eff identity, EH98 early spectrum as `PROVISIONAL_MODEL_IMPORT`, explicit radius conventions, flat-ΛCDM reference and explicitly anchored ratios. Barotropic closure refused (1G-A §4.1). Lives outside `growth/` so the 1D-B firewall test stays intact |
-| Global linear variance (1G-H, experimental) | `global_variance.py` | Conditional, model-internal formal tangent statistic of the global contrast of Lagrangian top-hat regions (owner decision D1, 2026-10-07): exact two-phase identities, the tracker propagator `G = (1−p)D_W + p D_V` (A1–A5, void autonomy H-A6, seed-indexed void accounting H-A9), explicit void-share closures (constant, Gaussian-threshold seed), the constant-share interval from an adopted reading of the [W09] homogeneity premise, the complete two-phase covariance with cross terms, orthant integrals with an accuracy contract, the two-barrier alternative; records re-validate every field. Experimental: imported by no other module; reuses `lagrangian_sigma` |
+| Global linear variance (1G-H, experimental) | `global_variance.py` | Conditional, model-internal formal tangent statistic of the global contrast of Lagrangian top-hat regions (owner decision D1, 2026-10-07): exact two-phase identities, the tracker propagator `G = (1−p)D_W + p D_V` (A1–A5, void autonomy H-A6, seed-indexed void accounting H-A9), explicit void-share closures (constant, Gaussian-threshold seed), the constant-share interval from an adopted reading of the [W09] homogeneity premise, the complete two-phase covariance with cross terms, orthant integrals with an accuracy contract, the two-barrier alternative; records re-validate their fields and recompute their results from their stored inputs (GH-DF2). Experimental: imported by no other module; reuses `lagrangian_sigma` |
 | LTB–CMC experiment (outside the phases) | `experimental_ltb_cmc/` | Isolated, conditional spherical LTB dust background with constant-mean-curvature slicing (BVP solver), tracker-clock comparison adapter, single-age section-family evolution, kappa_star and mixed sensitivities; imports only NumPy/SciPy and its own modules; distinct from 1F-D and promotes no scientific status |
 
 ### Conventions that pervade the scientific packages
@@ -104,10 +104,11 @@ linear statistic — the formal tangent statistic, a proposed σ8 analogue
 2026-10-07) — for an explicitly supplied void-share closure. It is experimental (no other module imports it), its
 outputs carry `NON_OBSERVATIONAL`, `NOT_OBSERVATIONAL_SIGMA_8` and
 `EXPERIMENTAL_CONDITIONAL_RESEARCH_RUNTIME`, it follows the same naming rule,
-and it changes no status token. Promotion, audit, pull request, merge,
-freeze and tagging remain open owner decisions (H-OD1…H-OD5); of H-OD5 the
-owner approved only the push to the session branch `ccr-555e67be-u11yht`
-(2026-10-06).
+and it changes no status token. Promotion, pull request, merge, freeze and
+tagging remain open owner decisions (H-OD1…H-OD5); of H-OD5 the owner
+approved only pushes to the session branch `ccr-555e67be-u11yht`
+(2026-10-06 and 2026-10-08), and two independent audits (2026-10-07,
+2026-10-08) were published on their own branches.
 
 Everything else in the list above stays unimplemented.
 
@@ -462,13 +463,17 @@ current interpretation; frozen records remain unchanged.
     the separate approved D successor changes one classification. The merge
     (PR #4), freeze and tags followed on the owner's separate authority
     (`phase1g_fg_freeze_status_successor.md`); no release exists.
-- **1G-H (proposed; pushed with owner approval of 2026-10-06 to the session
-  branch `ccr-555e67be-u11yht`, developed locally as
+- **1G-H (proposed; pushed with owner approvals of 2026-10-06 and 2026-10-08
+  to the session branch `ccr-555e67be-u11yht` (at `89cb041`; record
+  `phase1g_h_publication_successor.md`), developed locally as
   `phase-1g-h-global-variance-closure`; independently audited 2026-10-07
   (`phase1g_h_independent_audit.md`, published by the owner on
-  `phase-1g-h-independent-audit` at `816dd00`) and remediated locally on top
-  of it (`phase1g_h_audit_remediation.md`); not merged into `main`, frozen or
-  tagged; no pull request):** global matter-variance definition and minimal
+  `phase-1g-h-independent-audit` at `816dd00`) and remediated
+  (`phase1g_h_audit_remediation.md`); delta-audited 2026-10-08
+  (`phase1g_h_delta_audit.md`, published with the owner's authorisation on
+  `phase-1g-h-delta-audit` at `5c325e1`) and remediated locally on top of it
+  (`phase1g_h_delta_audit_remediation.md`); not merged into `main`, frozen
+  or tagged; no pull request):** global matter-variance definition and minimal
   closure (`phase1g_h_global_variance_closure.md`, inventory, validation
   record; runtime `global_variance.py`; evidence
   `scripts/phase1g_h_global_variance_closure_numerics.py`; single cases
@@ -477,8 +482,18 @@ current interpretation; frozen records remain unchanged.
     `d4d693d`, every other area `ACCEPT_WITH_CORRECTIONS`, 15 findings (GH-F1
     HIGH; GH-F2, F4, F5 MEDIUM-HIGH); the numbers reproduced. Owner decisions
     D1–D4 (2026-10-07, "Procedi, usa le scelte raccomandate per i punti 1-4")
-    are applied; the two recorded push approvals still await the owner's
-    confirmation (GH-F15). A delta audit is open.
+    are applied. The owner confirmed the two recorded push approvals on
+    2026-10-08 (GH-F15, "Si, confermo"; not given directly to an auditor).
+  - Delta audit (2026-10-08): `REJECT` of the remaining claim that the
+    nonnegative pairs share the wall-density covariance and of the
+    completeness claims; provenance and numerics `ACCEPT`, other areas
+    `ACCEPT_WITH_CORRECTIONS`; of GH-F1…F15, 8 resolved, 6 partly, 1 open;
+    six new findings, all corrections (GH-DF1 MEDIUM-HIGH: lognormal
+    constraint; DF2: records not bound to inputs; DF3: §8 contradictions;
+    DF4: integrated vs pointwise scale dependence; DF5: tests; DF6: summary
+    qualifier). Applied with owner approval ("Perfetto, procedi"): records
+    recompute their results from their inputs; the pairs fix the carrier law;
+    identity (H25); first radial panel included; 42 phase tests, 36 gates.
   - A (definition) proposed, not closed (D1): the formal tangent statistic —
     the early Gaussian field propagated with the zero-amplitude tangent of
     the global contrast `(M_L/V_L)/(M_D/V_D) − 1` of Lagrangian top hats,
@@ -499,20 +514,24 @@ current interpretation; frozen records remain unchanged.
     `VOID_ONSET_RESPONSE`, still `EXTERNAL_CLOSURE_INPUT`): at 8 h̄⁻¹ Mpc,
     direct normalisation (D4), 1.121 / 1.057 (1G-D's [W09]-radius seed, a
     formal extrapolation, H-A8), 0.811 / 0.816 (1G-F median as a heuristic
-    seed-scale prior); constant-share interval [0.261, 0.998] /
+    seed-scale prior, below the adopted ε = 1 threshold with no controlled
+    error estimate); constant-share interval [0.261, 0.998] /
     [0.369, 1.162] under H-A7 and the adopted 10%-at-100 reading, not a
     bound for scale-dependent shares (GH-F4). Planck normalisation:
     post-hoc at fixed closure (×0.970577) and PBS reclosure reported beside
     them (GH-F6).
   - Two-phase covariance with cross terms; the signed Gaussian pair (0.97 vs
     0.39) has negative wall densities (P ≈ 0.45); nonnegative lognormal
-    pairs with the same shared constraints give law II / law I = 0.92–1.29:
-    the nonlinear hybrid variance needs the joint law of geometry and
-    density (GH-F5).
+    pairs sharing f_v0, the partition covariance and the latent carrier law
+    (not the conditionally normalised wall-density covariance, ratio
+    1/m_II² with m_II = 1.6–2.9, GH-DF1) give law II / law I = 0.92–1.29.
+    By (H25) the total depends on P11(r) and the both-walls conditional
+    density correlation C_W(r): the nonlinear hybrid variance needs the
+    joint law of geometry and density (GH-F5).
   - C (prediction, observation) not reached; owner decisions H-OD1…H-OD5 in
-    §9 (H-OD2, H-OD3 recommendations revised with the audit: no reference
-    value, tokens deferred). No token, authorization, equation or frozen
-    record changes.
+    §9 (H-OD2, H-OD3 recommendations revised with the audit and confirmed by
+    the delta audit: no reference value, tokens deferred). No token,
+    authorization, equation or frozen record changes.
 - **Status-token additions:** the six 1G-C/1G-D tokens are *additions*, not
   changes (`phase1g_status_additions_successor.md`). The frozen 1F-C-R
   snapshot has no entry for them. The 1F-C-R validator accepts a new token

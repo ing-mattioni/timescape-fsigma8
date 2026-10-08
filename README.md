@@ -143,17 +143,25 @@ that predate the freeze are resolved in the
 - **Status.** These are conditional numbers, not an observational σ8, and no
   σ8 authorization is granted.
 - **Phase 1G-H (proposed; on the branch `ccr-555e67be-u11yht`, pushed with
-  owner approval on 2026-10-06; independently audited on 2026-10-07 and
-  remediated locally the same day; not merged into `main`, frozen or tagged)**
+  owner approvals on 2026-10-06 and 2026-10-08; independently audited on
+  2026-10-07 and remediated; delta-audited on 2026-10-08 and remediated
+  locally; not merged into `main`, frozen or tagged)**
   ([report](reports/phase1g_h_global_variance_closure.md),
   [validation](reports/phase1g_h_global_variance_closure_validation.md),
   [audit](reports/phase1g_h_independent_audit.md),
-  [remediation](reports/phase1g_h_audit_remediation.md)):
-  - *Audit.* The independent audit rejected the closure claims of the
+  [remediation](reports/phase1g_h_audit_remediation.md),
+  [delta audit](reports/phase1g_h_delta_audit.md),
+  [delta remediation](reports/phase1g_h_delta_audit_remediation.md),
+  [publication](reports/phase1g_h_publication_successor.md)):
+  - *Audits.* The independent audit rejected the closure claims of the
     audited text (definition "closed", structure "derived", interval
     "closure-independent", Gaussian laws as physical densities) and accepted
     the rest with corrections; the numbers reproduced. The owner's decisions
-    D1–D4 (2026-10-07) were applied.
+    D1–D4 (2026-10-07) were applied. The delta audit (2026-10-08) rejected
+    the remaining claim that the nonnegative pairs share the wall-density
+    covariance and the completeness claims, and asked for record binding,
+    tests and wording fixes; all six of its findings are corrections, now
+    applied.
   - *Definition (proposed).* The formal tangent statistic: the rms of the
     early Gaussian field propagated with the zero-amplitude tangent of the
     global contrast of Lagrangian top-hat regions (dust foliation, global
@@ -170,15 +178,21 @@ that predate the freeze are resolved in the
     holds for the seed-indexed statistic only.
   - *Conditional values* at 8 h̄⁻¹ Mpc (direct normalisation): 1.121 / 1.057
     with 1G-D's seed closure (a formal extrapolation of the void response),
-    0.811 / 0.816 with the 1G-F void size as a heuristic seed scale; the
-    constant-share interval [0.26, 1.00] / [0.37, 1.16] under an adopted
+    0.811 / 0.816 with the 1G-F void size as a heuristic seed scale (its
+    void response lies below the adopted ε = 1 threshold, with no
+    controlled error estimate); the constant-share interval
+    [0.26, 1.00] / [0.37, 1.16] under an adopted
     reading of the background's homogeneity premise, which does not bound
     scale-dependent shares. Not observational; owner decisions in the report
     (§9).
-  - *Nonlinear variance.* Joint laws sharing the acquired constraints give
-    different 8 h⁻¹ Mpc variances: 0.97 vs 0.39 for a signed Gaussian
-    surrogate (negative densities), law II / law I = 0.92–1.29 for
-    nonnegative lognormal laws.
+  - *Nonlinear variance.* Joint laws sharing the volume fraction, the
+    partition covariance and the wall carrier law give different
+    8 h⁻¹ Mpc variances: 0.97 vs 0.39 for a signed Gaussian surrogate
+    (negative densities), law II / law I = 0.92–1.29 for nonnegative
+    lognormal laws (which do not share the conditionally normalised
+    wall-density covariance). The difference lies in the both-walls
+    conditional density correlation, i.e. the joint law of geometry and
+    density.
   - Experimental runtime `timescape_fsigma8.global_variance`; one case:
     `python scripts/phase1g_h_global_variance_case.py --config scripts/phase1g_h_configs/gm_bare_pbs_f_median_seed.json`.
 

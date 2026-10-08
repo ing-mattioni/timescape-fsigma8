@@ -462,6 +462,39 @@
   "published_values_max_relative_change": 6e-13,
   "record": "reports/phase1g_h_audit_remediation.md",
   "schema_version": 1,
+  "status_note_2026_10_08": {
+    "corrections": "reports/phase1g_h_delta_audit_remediation.md",
+    "delta_audit": "reports/phase1g_h_delta_audit.md (commit 5c325e1fd05b343f6d5e93f931038794de4373a2)",
+    "erratum": "GH-DE6: the GH-F9 records re-validated their fields but did not bind results to inputs (GH-DF2)",
+    "note": "this inventory states the remediation as of 2026-10-07 and is not rewritten",
+    "publication": "the commits of this record were pushed on 2026-10-08; GH-F15 confirmed by the owner on 2026-10-08 (reports/phase1g_h_publication_successor.md)",
+    "superseded_claim": "finding_status_counts (10 RESOLVED, 4 RESOLVED_BY_OWNER_DECISION, 1 OPEN)",
+    "verified_finding_outcomes": {
+      "OPEN_OWNER_CONFIRMATION": [
+        "GH-F15"
+      ],
+      "PARTIALLY_RESOLVED": [
+        "GH-F4",
+        "GH-F5",
+        "GH-F6",
+        "GH-F7",
+        "GH-F8",
+        "GH-F9"
+      ],
+      "RESOLVED": [
+        "GH-F3",
+        "GH-F10",
+        "GH-F11",
+        "GH-F12",
+        "GH-F13",
+        "GH-F14"
+      ],
+      "RESOLVED_BY_OWNER_DECISION": [
+        "GH-F1",
+        "GH-F2"
+      ]
+    }
+  },
   "status_tokens": {
     "added": [],
     "changed": []

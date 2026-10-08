@@ -46,7 +46,7 @@
   },
   "classification": "RESEARCH_PHASE_WITH_EXPERIMENTAL_RUNTIME",
   "d_v2_tag_or_branch_created": false,
-  "date": "2026-10-06 (revised 2026-10-07)",
+  "date": "2026-10-06 (revised 2026-10-07 and 2026-10-08)",
   "definition": {
     "contrast": "(H1) 1 + delta_L = (M_L/V_L)/(M_D/V_D)",
     "ensemble": "statistic of the early Gaussian field: centres uniform in Lagrangian (early photon-normalised) coordinates; mass and volume weighting differ only beyond first order; connected variance of the tangent field",
@@ -90,10 +90,11 @@
     "H19": "1G-E mass-conserving formula as special case",
     "H2": "exact finite-density two-phase contrast",
     "H20": "Cauchy-Schwarz bound",
-    "H21": "bivariate-normal orthant probabilities and moments with an accuracy contract; signed Gaussian and nonnegative lognormal constructive pairs",
+    "H21": "bivariate-normal orthant probabilities and moments with an accuracy contract; signed Gaussian and nonnegative lognormal constructive pairs (the latter at a fixed latent carrier law, GH-DF1)",
     "H22": "two-barrier void mass fraction response (gambler's ruin) and M3 global bias",
     "H23": "finite-t identity (t0/t)^(2/3)/(1+z) = gamma_w0 f_w0^(1/3)/(gamma_w f_w^(1/3))",
     "H24": "mass label of convention (c)",
+    "H25": "empty voids, psi normalised on the walls: 1 + xi_delta(r) = P11(r) C_W(r)/f_w^2 with C_W the both-walls conditional density correlation; the ball variance depends on P11 and C_W only ((H18) at x = 0)",
     "H3": "exact empty-void specific-volume identity",
     "H4": "linearisation delta_L = f_w delta_w + f_v epsilon",
     "H5": "finite-density linear coefficients",
@@ -101,12 +102,12 @@
     "H7": "growth of a region with void share p",
     "H8": "D_W, D_V closed forms",
     "H9": "propagator G = (1-p) D_W + p D_V within the tangent model (A1-A5, H-A6, H-A9)",
-    "provenance": "H1-H5, H13, H17-H20, H23 follow from the definitions with [GM] Sec. 3 and (5.4)-(5.6); H6-H9 add A1-A5, H-A6 and H-A9 (the tangent model); H12 extends [1G-D] Sec. 7; H22 applies [SvdW04] Eq. (3) to conditional walks; none is attributed to a source as already derived"
+    "provenance": "H1-H5, H13, H17-H20, H23 and H25 follow from the definitions with [GM] Sec. 3 and (5.4)-(5.6); H6-H9 add A1-A5, H-A6 and H-A9 (the tangent model); H12 extends [1G-D] Sec. 7; H22 applies [SvdW04] Eq. (3) to conditional walks; none is attributed to a source as already derived"
   },
   "evidence": {
     "artifact": "artifacts/independent/phase1g_h_global_variance_closure.json (git-ignored, regenerable)",
     "artifact_raw_sha256_meaning": "one exact output and environment (includes the git head), not a cross-platform gate",
-    "artifact_sha256_py313_run": "689efe81b034238de2dc56da58d824c31760c4c3777d2586fdfe1fcafcc891ab",
+    "artifact_sha256_py313_run": "91aaca79ad0d0d86ad3208c8cd854e9d03839ef1f8c2d0026ff7a5cf8ff89884",
     "cross_interpreter_check": {
       "interpreters": [
         "CPython 3.13.16 (NumPy 2.5.3, SciPy 1.18.1)",
@@ -114,10 +115,16 @@
       ],
       "label_or_key_mismatches": 0,
       "max_relative_difference": 0.0,
-      "numeric_leaves_compared": 3099,
-      "rule": "numeric leaves with rtol 1e-11 / atol 1e-14 ignoring environment and figures; labels and keys exactly",
-      "tree": "remediated tree (2026-10-07)"
+      "numeric_leaves_compared": 3201,
+      "rule": "every numeric leaf equal (environment and figures ignored); labels and keys exactly",
+      "tree": "delta-audit remediated code 248a06bfeb655337bc499607180c49008b5f34ea (2026-10-08)"
     },
+    "delta_audit_remediation_additions": [
+      "radial_refinement_rel and h25_identity_rel gates (declared before their first evaluation)",
+      "law-II conditional normaliser ratios m_II and covariance ratios 1/m_II^2",
+      "both-walls conditional covariance <C_W - 1> per law",
+      "first radial panel of the ball pair integrals"
+    ],
     "figures": [
       "artifacts/independent/phase1g_h/sigma_vs_void_share.png",
       "artifacts/independent/phase1g_h/radius_scan.png",
@@ -129,17 +136,19 @@
       "E_reference_printed_half_unit": 5e-05,
       "constant_share_A_s_scaling_rel": 1e-10,
       "gt_orthant_P11_vs_bivariate_cdf_abs": 1e-10,
+      "h25_identity_rel": 1e-12,
       "lognormal_ball_variance_calibration_rel": 1e-09,
       "lognormal_linear_limit_rel": 0.05,
       "m3_bias_finite_difference_rel": 1e-06,
       "orthant_analytic_cases_abs": 1e-12,
       "pbs_void_term_A_s_independence_rel": 0.002,
+      "radial_refinement_rel": 1e-05,
       "reclosure_constant_share_rel": 1e-10,
       "refined_quadrature_rel": 2e-06,
       "step_kernel_premise_ratio": 1.0
     },
-    "gates_passed": 32,
-    "gates_total": 32,
+    "gates_passed": 36,
+    "gates_total": 36,
     "remediation_sections": [
       "ensemble_vs_tangent_example",
       "orthant_analytic_cases",
@@ -151,11 +160,11 @@
       "nonnegative_lognormal_pair"
     ],
     "run_environment": {
-      "git_head": "c1b448295a631786a2831b05e01650dd2cef73de",
+      "git_head": "248a06bfeb655337bc499607180c49008b5f34ea",
       "implementation": "CPython",
       "matplotlib": "3.11.2",
       "numpy": "2.5.3",
-      "platform": "Linux-6.18.44-fc-v77-x86_64-with-glibc2.39",
+      "platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
       "python": "3.13.16",
       "scipy": "1.18.1",
       "src_scripts_tests_dirty": false
@@ -168,10 +177,17 @@
       "scripts/phase1g_h_configs/gm_bare_pbs_w09_seed.json": "286cea0cb071b8381fe16025ac99d0d596c8d704282d869ebfe23d80026b3986",
       "scripts/phase1g_h_configs/nw15_equal_mass_constant_share.json": "41d442557b90a00ddd3d26f263eecea12b982c046656750fa9a1696b6c4d9288",
       "scripts/phase1g_h_global_variance_case.py": "e1b583f39f5b81c0b6c2ba5df1877de11bf091011c7c663bd81c9abee1de57f5",
-      "scripts/phase1g_h_global_variance_closure_numerics.py": "568bf7591330875c9c09956663863ce5631fb07eb32e33e35002a7bec8a2e20c",
-      "src/timescape_fsigma8/global_variance.py": "71fa240f309e6992edac07c61714b894471a05c1d29a0843b11c3bec6137527c",
-      "tests/test_phase1g_h_global_variance.py": "2a7b827424b3e931e8b0ff4941b8ffb97462ed44de7d343d43a384a9c77cdef6"
+      "scripts/phase1g_h_global_variance_closure_numerics.py": "73d2f02ca03bbf918d0d6d5f5eb2ce81291c02422f8680448861c2a9a89829cc",
+      "src/timescape_fsigma8/global_variance.py": "4f7db52fdde9295047eeed78597effe3152dfc4cc9d562f24f665cf826968f69",
+      "tests/test_phase1g_h_global_variance.py": "7026c7fc7f2230afd8b89f7df42f814d5f78f864c3da25e720f666a9a9ab8b8e"
     },
+    "added_in_delta_audit_remediation": [
+      "reports/phase1g_h_delta_audit_remediation.md",
+      "reports/phase1g_h_delta_audit_remediation_inventory.json",
+      "reports/phase1g_h_delta_audit_remediation_logs/",
+      "reports/phase1g_h_publication_successor.md",
+      "reports/phase1g_h_publication_successor_inventory.json"
+    ],
     "added_reports": [
       "reports/phase1g_h_global_variance_closure.md",
       "reports/phase1g_h_global_variance_closure_inventory.json",
@@ -179,6 +195,18 @@
       "reports/phase1g_h_global_variance_closure_logs/"
     ],
     "changed": [
+      "README.md",
+      "CLAUDE.md"
+    ],
+    "changed_in_delta_audit_remediation": [
+      "src/timescape_fsigma8/global_variance.py",
+      "tests/test_phase1g_h_global_variance.py",
+      "scripts/phase1g_h_global_variance_closure_numerics.py",
+      "reports/phase1g_h_global_variance_closure.md",
+      "reports/phase1g_h_global_variance_closure_inventory.json",
+      "reports/phase1g_h_global_variance_closure_validation.md",
+      "reports/phase1g_h_audit_remediation.md",
+      "reports/phase1g_h_audit_remediation_inventory.json",
       "README.md",
       "CLAUDE.md"
     ],
@@ -195,7 +223,7 @@
       "README.md",
       "CLAUDE.md"
     ],
-    "unchanged": "every frozen report, inventory, audit, evidence file, tag, existing package module (other than global_variance.py), test (other than the 1G-H file) and status token; the independent audit's files"
+    "unchanged": "every frozen report, inventory, audit, evidence file, tag, existing package module (other than global_variance.py), test (other than the 1G-H file) and status token; the files of the independent audit and of the delta audit"
   },
   "limitations": [
     "formal tangent statistic, not the ensemble response of the true contrast (D1)",
@@ -208,7 +236,8 @@
     "EH98 no-wiggle transfer",
     "A_s from a LCDM fit; empirical Planck normalisation (D4)",
     "empty voids in the propagator (finite-density voids only in the covariance and the M3 alternative)",
-    "lognormal pairs: the resolution radius is a construction parameter",
+    "lognormal pairs: the resolution radius and the lam calibration are free construction choices; the pairs fix the latent carrier law, not the conditionally normalised wall-density covariance (GH-DF1)",
+    "the integrated scale dependence G_eff/G(0) - 1 is not a pointwise or two-window bound (GH-DF4)",
     "no time-dependent mergers or mass transfer (1G-G)",
     "nothing observational"
   ],
@@ -243,7 +272,7 @@
     "H-OD2": "void-share closure for a reference value: beta (1G-F-median seed, recommended), alpha (1G-D [W09]-radius seed), gamma (interval only)",
     "H-OD3": "status tokens: add GLOBAL_MEAN_LINEAR_STATISTIC_DEFINITION = DERIVED_FROM_VERIFIED_DEFINITIONS and GLOBAL_MEAN_LINEAR_STATISTIC_COMPUTATION = DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION (recommended; no validator change), or change LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC (needs an approved validator extension for a second chained change; R2-N4 then relevant)",
     "H-OD4": "keep global_variance.py experimental until an independent audit (recommended), or promote",
-    "H-OD5": "push / pull request / merge / audit / freeze / tag: separate decisions; the push to the session branch was decided by the owner on 2026-10-06 (publication block); an independent audit was performed on 2026-10-07; pull request, merge, freeze and tag remain open"
+    "H-OD5": "push / pull request / merge / audit / freeze / tag: separate decisions; pushes to the session branch were decided by the owner on 2026-10-06 and 2026-10-08 (publication block); an independent audit (2026-10-07) and a delta audit (2026-10-08) were performed; the push of the delta-audit remediation, pull request, merge, freeze and tag remain open"
   },
   "owner_decisions_status_2026_10_07": {
     "H-OD1": "narrowed by D1 to the formal tangent statistic and kept a proposal; adoption as the sigma8 analogue not decided",
@@ -251,6 +280,13 @@
     "H-OD3": "open; revised recommendation with the audit: defer both token options, tokens unchanged",
     "H-OD4": "open; keep experimental (record and orthant contracts hardened)",
     "H-OD5": "push decided; audit performed; delta audit, pull request, merge, freeze and tag open"
+  },
+  "owner_decisions_status_2026_10_08": {
+    "H-OD1": "open; the delta audit recommends keeping the formal tangent a named research proposal",
+    "H-OD2": "open; the delta audit recommends no physical reference value yet",
+    "H-OD3": "open; the delta audit recommends deferring token promotion; tokens and authorisations unchanged",
+    "H-OD4": "open; keep experimental (records now recompute their results from their inputs, GH-DF2)",
+    "H-OD5": "pushes of 2026-10-06 and 2026-10-08 decided; audit and delta audit performed; push of the delta-audit remediation, pull request, merge, freeze and tag open"
   },
   "phase": "1G-H",
   "publication": {
@@ -264,12 +300,25 @@
         "action": "documentation-only update of the push status (this block, the report, the validation record, the F/G freeze-status record, README.md and CLAUDE.md) and its push to the same branch",
         "date": "2026-10-06",
         "verbatim": "Sì, correggi la documentazione e fai il push"
+      },
+      {
+        "action": "push of the audit commit 816dd004763f8de1a8bb09cba9e427a1bd2bb3d1 and the remediation commits c1b448295a631786a2831b05e01650dd2cef73de and 89cb041f901b51a3f90fa6831aab1b4553c1772c to the session branch ccr-555e67be-u11yht (fast-forward from d4d693d)",
+        "date": "2026-10-08",
+        "verbatim": "Si, fai push"
       }
     ],
     "authorization_block": "records the task statement, which granted local commits only; these approvals are separate, later owner actions",
     "branch": "ccr-555e67be-u11yht",
+    "confirmations": [
+      {
+        "action": "confirmation of the two approvals of 2026-10-06 recorded above (audit finding GH-F15)",
+        "date": "2026-10-08",
+        "verbatim": "Si, confermo"
+      }
+    ],
+    "delta_audit_publication": "branch phase-1g-h-delta-audit at 5c325e1fd05b343f6d5e93f931038794de4373a2 (tree a5b810e81d125827a17a9cf87b013ead51232080, parent 89cb041), published with the owner's authorisation from the auditing session (owner's report of 2026-10-08)",
     "first_pushed_head": "0572e416504bcdfaa5831b6d482b687ef6fae582",
-    "h_od5_status": "push decided (session branch only); pull request, merge, audit, freeze and tag remain open",
+    "h_od5_status": "pushes decided (session branch only, 2026-10-06 and 2026-10-08); independent audit and delta audit performed; push of the delta-audit remediation, pull request, merge, freeze and tag remain open",
     "main": "8d3cdd0533035858c42269cb1dff1a20dcafc7da (unchanged)",
     "not_done": [
       "pull request",
@@ -277,8 +326,10 @@
       "tag creation or change",
       "freeze declaration",
       "release",
-      "independent audit"
-    ]
+      "push of the delta-audit remediation commits (needs a separate approval)"
+    ],
+    "pushed_head_2026_10_08": "89cb041f901b51a3f90fa6831aab1b4553c1772c",
+    "record": "reports/phase1g_h_publication_successor.md"
   },
   "r2_n4_relevance": "only if H-OD3's second option (a chained change of LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC) is chosen",
   "report": "reports/phase1g_h_global_variance_closure.md",
@@ -999,7 +1050,7 @@
               "linear_sigma_post_hoc_normalised": 0.219961,
               "propagator_k0": 0.231268,
               "radius_Mpc": 12.570168,
-              "scale_dependence_rel": -0.0,
+              "scale_dependence_rel": 0.0,
               "share_k0": 9.47e-05,
               "unit_growth_sigma": 0.979939,
               "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
@@ -1206,7 +1257,7 @@
               "linear_sigma_post_hoc_normalised": 0.240593,
               "propagator_k0": 0.231268,
               "radius_Mpc": 10.954402,
-              "scale_dependence_rel": -0.0,
+              "scale_dependence_rel": 0.0,
               "share_k0": 9.47e-05,
               "unit_growth_sigma": 1.071856,
               "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
@@ -1261,7 +1312,7 @@
               "linear_sigma_post_hoc_normalised": 7.42011,
               "propagator_k0": 7.132537,
               "radius_Mpc": 10.954402,
-              "scale_dependence_rel": -0.0,
+              "scale_dependence_rel": 0.0,
               "share_k0": 1.0,
               "unit_growth_sigma": 1.071856,
               "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
@@ -1272,7 +1323,7 @@
               "linear_sigma_post_hoc_normalised": 0.239913,
               "propagator_k0": 0.230615,
               "radius_Mpc": 10.954402,
-              "scale_dependence_rel": -0.0,
+              "scale_dependence_rel": 0.0,
               "share_k0": 0.0,
               "unit_growth_sigma": 1.071856,
               "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
@@ -1695,6 +1746,37 @@
     },
     "remediation_record": "reports/phase1g_h_audit_remediation.md"
   },
+  "revision_delta_audit": {
+    "audited_text_preserved_at": "89cb041f901b51a3f90fa6831aab1b4553c1772c",
+    "date": "2026-10-08",
+    "delta_audit_commit": "5c325e1fd05b343f6d5e93f931038794de4373a2",
+    "delta_audit_report": "reports/phase1g_h_delta_audit.md",
+    "delta_audit_verdict": {
+      "NUMERICS": "ACCEPT",
+      "PROVENANCE": "ACCEPT",
+      "SCIENCE": "REJECT",
+      "other_areas": "ACCEPT_WITH_CORRECTIONS",
+      "overall": "REJECT"
+    },
+    "delta_audited_commit": "89cb041f901b51a3f90fa6831aab1b4553c1772c",
+    "kind": "DELTA_AUDIT_REMEDIATION",
+    "new_findings": [
+      "GH-DF1",
+      "GH-DF2",
+      "GH-DF3",
+      "GH-DF4",
+      "GH-DF5",
+      "GH-DF6"
+    ],
+    "original_findings_after_delta_audit": {
+      "OPEN_OWNER_CONFIRMATION": 1,
+      "PARTIALLY_RESOLVED": 6,
+      "RESOLVED": 6,
+      "RESOLVED_BY_OWNER_DECISION": 2
+    },
+    "owner_approval_verbatim": "Perfetto, procedi",
+    "remediation_record": "reports/phase1g_h_delta_audit_remediation.md"
+  },
   "schema_version": 1,
   "sources": {
     "EH98": {
@@ -1749,7 +1831,8 @@
     }
   },
   "tests": {
-    "count": 35,
+    "count": 42,
+    "count_after_first_remediation": 35,
     "count_before_remediation": 28,
     "file": "tests/test_phase1g_h_global_variance.py"
   },
@@ -1775,118 +1858,167 @@
         "wall_weight": 1.994571
       },
       "nonnegative_lognormal_pairs": {
-        "ball_variance_signed_carrier": 0.734479,
-        "linear_limit_max_rel_difference": 0.00641406,
+        "ball_variance_signed_carrier": 0.734491,
+        "free_construction_choices": [
+          "latent smoothing radius r_s (1, 2, 4 Mpc)",
+          "lam calibrated to the ball variance of the signed carrier"
+        ],
+        "linear_limit_max_rel_difference": 0.00640992,
+        "linear_limit_scope": "local numerical check at one small amplitude with an empirical gate; not an asymptotic theorem",
         "members": {
           "r_s_1_Mpc": {
-            "ball_variance_unmasked_density": 0.734479,
+            "ball_variance_unconditionally_normalised_carrier": 0.734491,
+            "ball_variance_unmasked_conditional_density_II": 0.119991,
             "calibration_rel": 0.0,
-            "density_point_variance": 27.590717,
-            "latent_point_variance": 3.353082,
-            "latent_scale_lambda": 0.785147,
+            "conditional_density_covariance_ratio_II_over_I": 0.163366,
+            "conditional_normaliser_ratio_m_II": 2.474113,
+            "density_point_variance": 27.591489,
+            "latent_point_variance": 3.353109,
+            "latent_scale_lambda": 0.78515,
             "laws": {
               "II_same_field": {
-                "cross_term": 0.255242,
+                "both_walls_conditional_density_covariance_ball": 0.697655,
+                "conditional_normaliser_ratio_m": 2.474113,
+                "cross_term": 0.255243,
                 "partition_wall_moment": 0.017756,
                 "sigma_partition": 0.3036,
-                "sigma_total": 0.924187,
-                "sigma_wall_field": 0.711833,
-                "wall_moment": 0.070498
+                "sigma_total": 0.924193,
+                "sigma_total_from_H25": 0.924193,
+                "sigma_wall_field": 0.711841,
+                "wall_moment": 0.070499
               },
               "I_independent": {
+                "both_walls_conditional_density_covariance_ball": 0.840794,
+                "conditional_normaliser_ratio_m": 1.0,
                 "cross_term": 0.0,
-                "partition_wall_moment": -0.0,
+                "partition_wall_moment": 0.0,
                 "sigma_partition": 0.3036,
-                "sigma_total": 1.00521,
-                "sigma_wall_field": 0.958266,
-                "wall_moment": 0.127759
+                "sigma_total": 1.005219,
+                "sigma_total_from_H25": 1.005219,
+                "sigma_wall_field": 0.958276,
+                "wall_moment": 0.127761
               }
             },
             "resolution_radius_Mpc": 1.0,
-            "sigma_ratio_II_over_I": 0.919397
+            "sigma_ratio_II_over_I": 0.919395,
+            "unconditional_mean_conditional_contrast_II": -0.595815
           },
           "r_s_2_Mpc": {
-            "ball_variance_unmasked_density": 0.734479,
+            "ball_variance_unconditionally_normalised_carrier": 0.734491,
+            "ball_variance_unmasked_conditional_density_II": 0.165867,
             "calibration_rel": 0.0,
-            "density_point_variance": 6.333943,
-            "latent_point_variance": 1.992513,
-            "latent_scale_lambda": 0.839189,
+            "conditional_density_covariance_ratio_II_over_I": 0.225826,
+            "conditional_normaliser_ratio_m_II": 2.104325,
+            "density_point_variance": 6.334096,
+            "latent_point_variance": 1.992534,
+            "latent_scale_lambda": 0.839193,
             "laws": {
               "II_same_field": {
-                "cross_term": 0.314301,
+                "both_walls_conditional_density_covariance_ball": 0.887006,
+                "conditional_normaliser_ratio_m": 2.104325,
+                "cross_term": 0.314302,
                 "partition_wall_moment": 0.021864,
                 "sigma_partition": 0.3036,
-                "sigma_total": 1.030011,
-                "sigma_wall_field": 0.80898,
-                "wall_moment": 0.091053
+                "sigma_total": 1.030018,
+                "sigma_total_from_H25": 1.030018,
+                "sigma_wall_field": 0.808988,
+                "wall_moment": 0.091055
               },
               "I_independent": {
+                "both_walls_conditional_density_covariance_ball": 0.797526,
+                "conditional_normaliser_ratio_m": 1.0,
                 "cross_term": 0.0,
-                "partition_wall_moment": -0.0,
+                "partition_wall_moment": 0.0,
                 "sigma_partition": 0.3036,
-                "sigma_total": 0.981425,
-                "sigma_wall_field": 0.933285,
-                "wall_moment": 0.121184
+                "sigma_total": 0.981432,
+                "sigma_total_from_H25": 0.981432,
+                "sigma_wall_field": 0.933293,
+                "wall_moment": 0.121186
               }
             },
             "resolution_radius_Mpc": 2.0,
-            "sigma_ratio_II_over_I": 1.049506
+            "sigma_ratio_II_over_I": 1.049505,
+            "unconditional_mean_conditional_contrast_II": -0.524788
           },
           "r_s_4_Mpc": {
-            "ball_variance_unmasked_density": 0.734479,
+            "ball_variance_unconditionally_normalised_carrier": 0.734491,
+            "ball_variance_unmasked_conditional_density_II": 0.263811,
             "calibration_rel": 0.0,
-            "density_point_variance": 2.225161,
-            "latent_point_variance": 1.170983,
-            "latent_scale_lambda": 0.949336,
+            "conditional_density_covariance_ratio_II_over_I": 0.359175,
+            "conditional_normaliser_ratio_m_II": 1.668579,
+            "density_point_variance": 2.225205,
+            "latent_point_variance": 1.170997,
+            "latent_scale_lambda": 0.949342,
             "laws": {
               "II_same_field": {
-                "cross_term": 0.373859,
+                "both_walls_conditional_density_covariance_ball": 1.115836,
+                "conditional_normaliser_ratio_m": 1.668579,
+                "cross_term": 0.373861,
                 "partition_wall_moment": 0.026007,
                 "sigma_partition": 0.3036,
-                "sigma_total": 1.14492,
-                "sigma_wall_field": 0.919135,
-                "wall_moment": 0.117538
+                "sigma_total": 1.144928,
+                "sigma_total_from_H25": 1.144928,
+                "sigma_wall_field": 0.919143,
+                "wall_moment": 0.11754
               },
               "I_independent": {
+                "both_walls_conditional_density_covariance_ball": 0.766159,
+                "conditional_normaliser_ratio_m": 1.0,
                 "cross_term": 0.0,
-                "partition_wall_moment": -0.0,
+                "partition_wall_moment": 0.0,
                 "sigma_partition": 0.3036,
-                "sigma_total": 0.963814,
-                "sigma_wall_field": 0.914748,
-                "wall_moment": 0.116418
+                "sigma_total": 0.963821,
+                "sigma_total_from_H25": 0.963821,
+                "sigma_wall_field": 0.914756,
+                "wall_moment": 0.11642
               }
             },
             "resolution_radius_Mpc": 4.0,
-            "sigma_ratio_II_over_I": 1.187906
+            "sigma_ratio_II_over_I": 1.187905,
+            "unconditional_mean_conditional_contrast_II": -0.400688
           }
         },
+        "not_shared": [
+          "the conditionally normalised wall density: its unconditional covariance in law II is law I's divided by m_II^2 (conditional_normaliser_ratio_m_II)",
+          "the both-walls conditional covariance C_W(r) - 1, which with P11 fixes the total by (H25)"
+        ],
         "pair_class": "NONNEGATIVE_LOGNORMAL_DENSITY_LAWS",
         "shared_constraints": [
           "f_v0",
           "partition covariance (identical P11(r))",
-          "unconditional wall-density covariance exp(lam^2 xi_s) - 1",
-          "conditional mass normalisation"
+          "latent Gaussian carrier law (covariance lam^2 xi_s); equivalently the unconditionally normalised carrier exp(lam s)/E[exp(lam s)], covariance exp(lam^2 xi_s) - 1",
+          "normalisation convention E[psi | wall] = 1"
         ]
       },
+      "radial_quadrature": {
+        "first_panel_included": true,
+        "h25_identity_max_rel": 0.0,
+        "intervals": 1440,
+        "refinement_max_rel_vs_half": 1.011655e-06
+      },
       "signed_gaussian_pair": {
-        "conditional_wall_mean_mu_law_II": 3.788834,
-        "ell_Mpc": 0.598733,
+        "conditional_wall_mean_mu_law_II": 3.788836,
+        "ell_Mpc": 0.598732,
         "laws": {
           "II_same_field": {
-            "cross_term": 0.049912,
-            "partition_wall_moment": 0.003472,
+            "both_walls_conditional_density_covariance_ball": 0.069083113,
+            "cross_term": 0.04991195,
+            "partition_wall_moment": 0.0034721,
             "sigma_partition": 0.3036,
-            "sigma_total": 0.409398,
-            "sigma_wall_field": 0.159755,
-            "wall_moment": 0.003551
+            "sigma_total": 0.409418696,
+            "sigma_total_from_H25": 0.409418696,
+            "sigma_wall_field": 0.159808505,
+            "wall_moment": 0.003553182
           },
           "I_independent": {
+            "both_walls_conditional_density_covariance_ball": 0.791264148,
             "cross_term": 0.0,
             "partition_wall_moment": 0.0,
             "sigma_partition": 0.3036,
-            "sigma_total": 0.977932,
-            "sigma_wall_field": 0.929612,
-            "wall_moment": 0.120232
+            "sigma_total": 0.977941853,
+            "sigma_total_from_H25": 0.977941853,
+            "sigma_wall_field": 0.929622131,
+            "wall_moment": 0.120234907
           }
         },
         "negative_wall_density_probability": {
@@ -1895,7 +2027,7 @@
         },
         "pair_class": "SIGNED_GAUSSIAN_CARRIER_SURROGATE",
         "radius_Mpc": 13.114754,
-        "sigma_ratio_II_over_I": 0.418636
+        "sigma_ratio_II_over_I": 0.418653
       }
     },
     "PAPER_REFERENCE": {
@@ -1918,118 +2050,167 @@
         "wall_weight": 2.416157
       },
       "nonnegative_lognormal_pairs": {
-        "ball_variance_signed_carrier": 0.701038,
-        "linear_limit_max_rel_difference": 0.00930555,
+        "ball_variance_signed_carrier": 0.701047,
+        "free_construction_choices": [
+          "latent smoothing radius r_s (1, 2, 4 Mpc)",
+          "lam calibrated to the ball variance of the signed carrier"
+        ],
+        "linear_limit_max_rel_difference": 0.0092941,
+        "linear_limit_scope": "local numerical check at one small amplitude with an empirical gate; not an asymptotic theorem",
         "members": {
           "r_s_1_Mpc": {
-            "ball_variance_unmasked_density": 0.701038,
+            "ball_variance_unconditionally_normalised_carrier": 0.701047,
+            "ball_variance_unmasked_conditional_density_II": 0.085145,
             "calibration_rel": 0.0,
-            "density_point_variance": 13.638873,
-            "latent_point_variance": 2.683681,
-            "latent_scale_lambda": 0.813734,
+            "conditional_density_covariance_ratio_II_over_I": 0.121455,
+            "conditional_normaliser_ratio_m_II": 2.869413,
+            "density_point_variance": 13.639144,
+            "latent_point_variance": 2.683699,
+            "latent_scale_lambda": 0.813737,
             "laws": {
               "II_same_field": {
-                "cross_term": 0.329873,
-                "partition_wall_moment": 0.011408,
+                "both_walls_conditional_density_covariance_ball": 0.837693,
+                "conditional_normaliser_ratio_m": 2.869413,
+                "cross_term": 0.329874,
+                "partition_wall_moment": 0.011409,
                 "sigma_partition": 0.3264,
-                "sigma_total": 1.016595,
-                "sigma_wall_field": 0.772694,
+                "sigma_total": 1.0166,
+                "sigma_total_from_H25": 1.0166,
+                "sigma_wall_field": 0.7727,
                 "wall_moment": 0.041298
               },
               "I_independent": {
+                "both_walls_conditional_density_covariance_ball": 0.78692,
+                "conditional_normaliser_ratio_m": 1.0,
                 "cross_term": 0.0,
-                "partition_wall_moment": -0.0,
+                "partition_wall_moment": 0.0,
                 "sigma_partition": 0.3264,
-                "sigma_total": 0.988575,
-                "sigma_wall_field": 0.933136,
-                "wall_moment": 0.060228
+                "sigma_total": 0.988581,
+                "sigma_total_from_H25": 0.988581,
+                "sigma_wall_field": 0.933143,
+                "wall_moment": 0.060229
               }
             },
             "resolution_radius_Mpc": 1.0,
-            "sigma_ratio_II_over_I": 1.028344
+            "sigma_ratio_II_over_I": 1.028342,
+            "unconditional_mean_conditional_contrast_II": -0.651497
           },
           "r_s_2_Mpc": {
-            "ball_variance_unmasked_density": 0.701038,
+            "ball_variance_unconditionally_normalised_carrier": 0.701047,
+            "ball_variance_unmasked_conditional_density_II": 0.153108,
             "calibration_rel": 0.0,
-            "density_point_variance": 3.928127,
-            "latent_point_variance": 1.594959,
-            "latent_scale_lambda": 0.869532,
+            "conditional_density_covariance_ratio_II_over_I": 0.218399,
+            "conditional_normaliser_ratio_m_II": 2.139809,
+            "density_point_variance": 3.928192,
+            "latent_point_variance": 1.594972,
+            "latent_scale_lambda": 0.869535,
             "laws": {
               "II_same_field": {
-                "cross_term": 0.399105,
+                "both_walls_conditional_density_covariance_ball": 1.097277,
+                "conditional_normaliser_ratio_m": 2.139809,
+                "cross_term": 0.399107,
                 "partition_wall_moment": 0.013803,
                 "sigma_partition": 0.3264,
-                "sigma_total": 1.149218,
-                "sigma_wall_field": 0.902806,
-                "wall_moment": 0.056377
+                "sigma_total": 1.149224,
+                "sigma_total_from_H25": 1.149224,
+                "sigma_wall_field": 0.902813,
+                "wall_moment": 0.056378
               },
               "I_independent": {
+                "both_walls_conditional_density_covariance_ball": 0.751491,
+                "conditional_normaliser_ratio_m": 1.0,
                 "cross_term": 0.0,
-                "partition_wall_moment": -0.0,
+                "partition_wall_moment": 0.0,
                 "sigma_partition": 0.3264,
-                "sigma_total": 0.968545,
-                "sigma_wall_field": 0.911889,
-                "wall_moment": 0.057517
+                "sigma_total": 0.96855,
+                "sigma_total_from_H25": 0.96855,
+                "sigma_wall_field": 0.911895,
+                "wall_moment": 0.057518
               }
             },
             "resolution_radius_Mpc": 2.0,
-            "sigma_ratio_II_over_I": 1.186541
+            "sigma_ratio_II_over_I": 1.18654,
+            "unconditional_mean_conditional_contrast_II": -0.532668
           },
           "r_s_4_Mpc": {
-            "ball_variance_unmasked_density": 0.701038,
+            "ball_variance_unconditionally_normalised_carrier": 0.701047,
+            "ball_variance_unmasked_conditional_density_II": 0.266025,
             "calibration_rel": 0.0,
-            "density_point_variance": 1.628979,
-            "latent_point_variance": 0.966596,
-            "latent_scale_lambda": 0.998429,
+            "conditional_density_covariance_ratio_II_over_I": 0.379468,
+            "conditional_normaliser_ratio_m_II": 1.623351,
+            "density_point_variance": 1.629002,
+            "latent_point_variance": 0.966604,
+            "latent_scale_lambda": 0.998434,
             "laws": {
               "II_same_field": {
-                "cross_term": 0.445916,
+                "both_walls_conditional_density_covariance_ball": 1.277632,
+                "conditional_normaliser_ratio_m": 1.623351,
+                "cross_term": 0.445918,
                 "partition_wall_moment": 0.015422,
                 "sigma_partition": 0.3264,
-                "sigma_total": 1.232992,
-                "sigma_wall_field": 0.983776,
-                "wall_moment": 0.066943
+                "sigma_total": 1.232998,
+                "sigma_total_from_H25": 1.232998,
+                "sigma_wall_field": 0.983783,
+                "wall_moment": 0.066944
               },
               "I_independent": {
-                "cross_term": -0.0,
-                "partition_wall_moment": -0.0,
+                "both_walls_conditional_density_covariance_ball": 0.725311,
+                "conditional_normaliser_ratio_m": 1.0,
+                "cross_term": 0.0,
+                "partition_wall_moment": 0.0,
                 "sigma_partition": 0.3264,
-                "sigma_total": 0.953473,
-                "sigma_wall_field": 0.895865,
-                "wall_moment": 0.055513
+                "sigma_total": 0.953478,
+                "sigma_total_from_H25": 0.953478,
+                "sigma_wall_field": 0.89587,
+                "wall_moment": 0.055514
               }
             },
             "resolution_radius_Mpc": 4.0,
-            "sigma_ratio_II_over_I": 1.293159
+            "sigma_ratio_II_over_I": 1.293158,
+            "unconditional_mean_conditional_contrast_II": -0.38399
           }
         },
+        "not_shared": [
+          "the conditionally normalised wall density: its unconditional covariance in law II is law I's divided by m_II^2 (conditional_normaliser_ratio_m_II)",
+          "the both-walls conditional covariance C_W(r) - 1, which with P11 fixes the total by (H25)"
+        ],
         "pair_class": "NONNEGATIVE_LOGNORMAL_DENSITY_LAWS",
         "shared_constraints": [
           "f_v0",
           "partition covariance (identical P11(r))",
-          "unconditional wall-density covariance exp(lam^2 xi_s) - 1",
-          "conditional mass normalisation"
+          "latent Gaussian carrier law (covariance lam^2 xi_s); equivalently the unconditionally normalised carrier exp(lam s)/E[exp(lam s)], covariance exp(lam^2 xi_s) - 1",
+          "normalisation convention E[psi | wall] = 1"
         ]
       },
+      "radial_quadrature": {
+        "first_panel_included": true,
+        "h25_identity_max_rel": 2.22e-16,
+        "intervals": 1440,
+        "refinement_max_rel_vs_half": 8.27134e-07
+      },
       "signed_gaussian_pair": {
-        "conditional_wall_mean_mu_law_II": 5.004603,
-        "ell_Mpc": 0.291722,
+        "conditional_wall_mean_mu_law_II": 5.004607,
+        "ell_Mpc": 0.291721,
         "laws": {
           "II_same_field": {
-            "cross_term": 0.036477,
-            "partition_wall_moment": 0.001262,
+            "both_walls_conditional_density_covariance_ball": 0.043189408,
+            "cross_term": 0.036477473,
+            "partition_wall_moment": 0.001261555,
             "sigma_partition": 0.3264,
-            "sigma_total": 0.392827,
-            "sigma_wall_field": 0.106296,
-            "wall_moment": 0.000782
+            "sigma_total": 0.392845563,
+            "sigma_total_from_H25": 0.392845563,
+            "sigma_wall_field": 0.106363544,
+            "wall_moment": 0.000782523
           },
           "I_independent": {
+            "both_walls_conditional_density_covariance_ball": 0.755929587,
             "cross_term": 0.0,
             "partition_wall_moment": 0.0,
             "sigma_partition": 0.3264,
-            "sigma_total": 0.971073,
-            "sigma_wall_field": 0.914575,
-            "wall_moment": 0.057856
+            "sigma_total": 0.971082379,
+            "sigma_total_from_H25": 0.971082379,
+            "sigma_wall_field": 0.914584073,
+            "wall_moment": 0.05785738
           }
         },
         "negative_wall_density_probability": {
@@ -2038,7 +2219,7 @@
         },
         "pair_class": "SIGNED_GAUSSIAN_CARRIER_SURROGATE",
         "radius_Mpc": 10.954402,
-        "sigma_ratio_II_over_I": 0.404529
+        "sigma_ratio_II_over_I": 0.404544
       }
     }
   },
@@ -2126,6 +2307,31 @@
     "tolerance_audit_missing": 0,
     "validator_1F_C_R": "PASS",
     "windows_dual_interpreter_gate": "NOT_RUN_IN_THIS_SESSION (commands in the validation record)"
+  },
+  "verification_delta_remediated_tree": {
+    "evidence_gates": "36 / 36 on both interpreters at 248a06b",
+    "full_suites": {
+      "CPython 3.11.17": {
+        "collected": 1178,
+        "failed": 0,
+        "passed": 1146,
+        "seconds": 335,
+        "skipped": 32
+      },
+      "CPython 3.13.16": {
+        "collected": 1178,
+        "failed": 0,
+        "passed": 1146,
+        "seconds": 339,
+        "skipped": 32
+      },
+      "command": "OPENBLAS_NUM_THREADS=1 python -B -W error -m pytest -q -p no:cacheprovider -rs"
+    },
+    "phase_tests": 42,
+    "record": "reports/phase1g_h_delta_audit_remediation.md (sec. 3)",
+    "tolerance_audit_missing": 0,
+    "validator": "PASS (52 JSON round trips)",
+    "windows_gate": "not run"
   },
   "verification_remediated_tree": {
     "evidence_gates": "32 / 32 on both interpreters at c1b4482",

@@ -1,17 +1,22 @@
 # Phase 1G-H — Global matter-variance definition and minimal closure
 
 Classification: `RESEARCH_PHASE_WITH_EXPERIMENTAL_RUNTIME` (conditional,
-model-internal, `NON_OBSERVATIONAL`). Date: 2026-10-06, revised 2026-10-07.
+model-internal, `NON_OBSERVATIONAL`). Date: 2026-10-06, revised 2026-10-07
+and 2026-10-08.
 Base: `main` = `origin/main` = `8d3cdd0533035858c42269cb1dff1a20dcafc7da`
 (PR #4 merge, the frozen F/G checkpoint), local branch
 `phase-1g-h-global-variance-closure` (first commit: the F/G freeze-status
 alignment, `phase1g_fg_freeze_status_successor.md`).
 Remote: the session branch `ccr-555e67be-u11yht`, pushed with the owner's
-approval of 2026-10-06 (Sec. 1); not merged into `main`.
+approvals of 2026-10-06 and 2026-10-08 (Sec. 1;
+[`phase1g_h_publication_successor.md`](phase1g_h_publication_successor.md));
+not merged into `main`.
 Companions: [`phase1g_h_global_variance_closure_inventory.json`](phase1g_h_global_variance_closure_inventory.json),
 [`phase1g_h_global_variance_closure_validation.md`](phase1g_h_global_variance_closure_validation.md),
-the independent audit [`phase1g_h_independent_audit.md`](phase1g_h_independent_audit.md)
-and the remediation record [`phase1g_h_audit_remediation.md`](phase1g_h_audit_remediation.md).
+the independent audit [`phase1g_h_independent_audit.md`](phase1g_h_independent_audit.md),
+the remediation record [`phase1g_h_audit_remediation.md`](phase1g_h_audit_remediation.md),
+the delta audit [`phase1g_h_delta_audit.md`](phase1g_h_delta_audit.md) and its
+remediation record [`phase1g_h_delta_audit_remediation.md`](phase1g_h_delta_audit_remediation.md).
 
 **Revision of 2026-10-07.** An independent audit of the text at `d4d693d`
 returned `REJECT` for its closure claims (15 findings, GH-F1 … GH-F15), with
@@ -19,6 +24,16 @@ every other area `ACCEPT_WITH_CORRECTIONS`; the numbers reproduced. This
 revision applies the owner's decisions D1–D4 of 2026-10-07 and the audit's
 corrections. The audited text stays in Git at `d4d693d`; the remediation
 record maps every finding to its change.
+
+**Revision of 2026-10-08.** An independent delta audit of the remediated
+text at `89cb041` (published at `5c325e1`) returned `REJECT` for the
+remaining positive-density common-covariance claim and for completeness
+claims, with provenance and numerics `ACCEPT` and every other area
+`ACCEPT_WITH_CORRECTIONS`; it resolved 8 of the 15 original findings, found
+6 partly resolved and 1 open, and raised six new findings (GH-DF1 …
+GH-DF6). This revision applies its corrections; the text it audited stays in
+Git at `89cb041`, and the delta-audit remediation record maps every finding
+to its change.
 Runtime: `src/timescape_fsigma8/global_variance.py` (experimental).
 Evidence: `scripts/phase1g_h_global_variance_closure_numerics.py` (writes the
 git-ignored `artifacts/independent/phase1g_h_global_variance_closure.json`
@@ -29,7 +44,7 @@ Cited as [GM] arXiv:2511.17160v2; [W07] arXiv:0709.0732v2; [W09]
 arXiv:0909.0749v2; [NW15] arXiv:1410.3470v2; [JLH13] arXiv:1304.6087v2;
 [SvdW04] astro-ph/0311260; [EH98] astro-ph/9709112; and the frozen project
 records [1G-A] … [1G-G] with their owner-decision and successor records
-(Sec. 13). Equations (H1)–(H24) are new to this report unless a primary
+(Sec. 13). Equations (H1)–(H25) are new to this report unless a primary
 source is named next to them.
 
 ## 1. Scope, authorisation and verdict
@@ -56,12 +71,24 @@ Gaussian pair requalified as a signed surrogate plus a nonnegative lognormal
 pair; D4, direct values primary, with post-hoc normalised and reclosure
 variants. Local commits only; any push needs a separate approval.
 
+**Publication and confirmation (2026-10-08).** The owner approved pushing
+the audit commit and the two remediation commits to the session branch
+(«Si, fai push») and confirmed the two push approvals of 2026-10-06
+(«Si, confermo», audit finding GH-F15); the record is
+`phase1g_h_publication_successor.md`. The delta audit was then published,
+with the owner's authorisation, on the branch `phase-1g-h-delta-audit`.
+
+**Delta-audit remediation (2026-10-08).** The owner approved the remediation
+plan for the delta audit («Perfetto, procedi»): every new finding is a
+correction (no owner decision); local commits only, any push needs a
+separate approval.
+
 **Distinction recorded as asked.** Everything below that goes beyond the
 approved records is an explicitly named hypothesis (H-A6 … H-A9, the seed
 closures, the homogeneity-premise readings). None is promoted to a Timescape
 law; the owner decides (Sec. 9).
 
-**Verdict** (revised 2026-10-07).
+**Verdict** (revised 2026-10-07 and 2026-10-08).
 
 1. **A — a proposed definition, not a closed one** (Sec. 2; owner decision
    D1). The statistic is the *formal tangent statistic*: the rms of the
@@ -104,7 +131,7 @@ law; the owner decides (Sec. 9).
      response's declared validity (H-A8; ε_rms 1.21 / 1.13);
    - the same with the 1G-F median radius as a heuristic seed-scale prior:
      **0.811** and **0.816** (ε_rms 0.77 / 0.74, below the adopted ε = 1
-     threshold, with no controlled error estimate);
+     threshold, with no controlled error estimate of the truncation);
    - the constant-share interval (H15) under H-A7 and the adopted reading
      "rms ≤ 10% at 100 h̄⁻¹ Mpc" of [W09]'s homogeneity premise:
      **[0.261, 0.998]** ([GM]) and **[0.369, 1.162]** ([NW15]). It holds only
@@ -125,11 +152,16 @@ law; the owner decides (Sec. 9).
    hybrid variance at 8 h⁻¹ Mpc. The original Gaussian pair (0.97 against
    0.39) is a signed-carrier surrogate whose wall density is negative with
    conditional probability ≈ 0.45 (GH-F5). Nonnegative lognormal pairs that
-   share f_v0, the partition covariance, the unconditional wall-density
-   covariance and the mass normalisation still differ: law II / law I =
-   0.92–1.29 across lognormal resolution radii of 1–4 Mpc and both
-   scenarios. The non-uniqueness survives within nonnegative density laws,
-   with a smaller and construction-dependent size and sign.
+   share f_v0, the partition covariance and the latent carrier law still
+   differ: law II / law I = 0.92–1.29 across lognormal resolution radii of
+   1–4 Mpc and both scenarios. They do not share the conditionally
+   normalised wall-density covariance, which in law II is law I's divided by
+   m_II² = 2.6–8.2 (delta audit GH-DF1). By the identity (H25) the total is
+   fixed by the two-point wall probability P11(r) and the both-walls
+   conditional density correlation C_W(r); the pairs differ through C_W,
+   i.e. the joint law of geometry and density. The non-uniqueness survives
+   within nonnegative density laws at a fixed carrier law, with a smaller
+   and construction-dependent size and sign.
 
 Every number here is conditional and model-internal. `SIGMA8_AUTHORIZATION`,
 `FSIGMA8_AUTHORIZATION`, `RSD_AUTHORIZATION`, `OBSERVATIONAL_AUTHORIZATION`
@@ -595,17 +627,24 @@ so that the premise rms is 0.0999. At `8 h̄⁻¹ Mpc` the statistic is then
 end (evidence `step_share_counterexample`; the audit found 7.246 and 10.349
 with a slightly different k_cut). Such a kernel is a formal object, not a
 physical void response. It shows that (H15) bounds constant shares only, and
-that a near-constant closure needs its own bound: for the small PBS seeds
-the propagator varies by at most 0.12% across the R8 window (Sec. 5.3), so
-their position relative to the interval is meaningful to that accuracy.
+that a near-constant closure needs its own bound. For the small PBS seeds
+the integrated quantity `G_eff/G(0) − 1` of Sec. 5.3 is −0.08% to −0.12%,
+but it is a spectrum-weighted average at the target radius: it is not a
+pointwise bound on `G(k)/G(0) − 1` over the noncompact support of the top
+hat, and it does not bound the premise integral. No accuracy is derived for
+the position of these closures relative to the interval (delta audit
+GH-DF4).
 
 ### 5.3 Radius range and scale dependence
 
-Propagator scale dependence across the R8 window, `G_eff/G(0) − 1`:
-−0.09% to −0.12% (1G-D [W09]-radius seed), −0.005% (1G-F-median seed) and
-−17% to −24% ([SvdW04] seed, whose radius is inside the R8 range). Small
-seeds therefore make the statistic a scale-independent multiple of σ_u to
-better than 0.2%; Figure `propagator_scale_dependence.png` shows G(k)/G(0).
+Integrated scale dependence at the target radius, `G_eff/G(0) − 1` with
+`G_eff = σ/σ_u` (a spectrum- and window-weighted average, not a pointwise
+bound on G(k)/G(0) − 1; GH-DF4), at the radii of conventions (a)–(c):
+−0.08% to −0.12% (1G-D [W09]-radius seed), −0.004% to −0.005% (1G-F-median
+seed) and −17% to −24% ([SvdW04] seed, whose radius is inside the R8 range;
+both scenarios). For the
+small seeds σ is therefore G(0)σ_u to better than 0.2% at these radii;
+Figure `propagator_scale_dependence.png` shows G(k)/G(0).
 Radius scan at convention (c) (direct normalisation):
 
 | L (h̄⁻¹ Mpc) | 6 | 7 | 8 | 9 | 10 | 12 |
@@ -717,6 +756,22 @@ which keeps all three cross terms. M must be positive semidefinite and
 correlated partition and fields and x > 0: (H18) equals the sample variance
 to 10⁻¹⁰, with cross terms well above round-off.
 
+**Empty voids (added 2026-10-08, delta audit GH-DF1).** With x = 0 and the
+wall density written `ψ = 1 + δ_w`, normalised on the walls
+(`E[ψ | wall] = 1`), the global contrast is `δ = χ_w ψ/f_w − 1`, so
+
+```text
+1 + ξ_δ(r) = P11(r) C_W(r) / f_w²,   P11(r) = P(both points in walls),
+C_W(r) = E[ψ1 ψ2 | both points in walls],                                             (H25)
+```
+
+and the ball variance is the pair average of ξ_δ. (H25) is (H18) at x = 0
+written in other variables (the evidence checks the two to 10⁻¹²). Two laws
+with the same P11(r) and the same C_W(r) have the same variance; a
+difference at fixed f_v0 and P11 is a difference of the both-walls
+conditional density correlation, i.e. of the joint law of geometry and
+density.
+
 ### 6.2 1G-E as the independent special case
 
 With `δ_v = 0`, E3 (`E[AB] = 0`) and 1G-E's normalisation
@@ -747,17 +802,18 @@ P(k) does not establish it. For any joint law,
 [0.637, 1.244] ([NW15]) around the E3 values 0.987 / 0.988. The end points
 need perfect (anti)correlation and need not be physically attainable.
 
-### 6.3 A constructive non-uniqueness (revised 2026-10-07)
+### 6.3 A constructive non-uniqueness (revised 2026-10-07 and 2026-10-08)
 
-Two pairs of joint laws are built. Within each pair the two laws share the
-acquired constraints: f_v0; the partition covariance (voids are `{g < c}`,
-`Φ(c) = f_v0`, g a unit Gaussian mask field; for law II g is the wall carrier
-smoothed with a Gaussian of width ℓ, calibrated so that the partition rms in
-the ball equals the 1G-E/F reference value, and law I uses an independent
-field with the same covariance); the unconditional covariance of the wall
-carrier; and the conditional mass normalisation. Law I: mask independent of
-the wall field; law II: voids where the same field is low (the "same
-primordial field" double-counting case).
+Two pairs of joint laws are built. Within each pair the two laws share
+f_v0, the partition covariance P11(r) (voids are `{g < c}`, `Φ(c) = f_v0`,
+g a unit Gaussian mask field; for law II g is the wall carrier smoothed with
+a Gaussian of width ℓ, calibrated so that the partition rms in the ball
+equals the 1G-E/F reference value, and law I uses an independent field with
+the same covariance) and the law of the wall carrier as an unconditional
+field. They differ in how the walls sample the carrier: law I, mask
+independent of the wall field; law II, voids where the same field is low
+(the "same primordial field" case). By (H25) the difference is entirely a
+difference of C_W(r).
 
 **Signed Gaussian pair (requalified, D3).** The wall field is the 1G-E/F
 wall-internal linear field (growth D_wall(t0), photon-frame compression
@@ -774,51 +830,76 @@ integrals of the bivariate normal (H21), coded in
 verified against the bivariate CDF (10⁻¹⁰), analytic special cases (10⁻¹²)
 and direct 4-variate Monte Carlo:
 
-| Convention (b) | ℓ (Mpc) | Law I σ_part / wall / cross / **total** | Law II σ_part / wall / cross / **total** |
-|---|---|---|---|
-| [GM], R = 10.954 Mpc | 0.292 | 0.326 / 0.915 / 0 / **0.971** | 0.326 / 0.106 / +0.036 / **0.393** |
-| [NW15], R = 13.115 Mpc | 0.599 | 0.304 / 0.930 / 0 / **0.978** | 0.304 / 0.160 / +0.050 / **0.409** |
+| Convention (b) | ℓ (Mpc) | Law I σ_part / wall / cross / **total** | Law II σ_part / wall / cross / **total** | ⟨C_W − 1⟩ I / II |
+|---|---|---|---|---|
+| [GM], R = 10.954 Mpc | 0.292 | 0.326 / 0.915 / 0 / **0.971** | 0.326 / 0.106 / +0.036 / **0.393** | 0.756 / 0.043 |
+| [NW15], R = 13.115 Mpc | 0.599 | 0.304 / 0.930 / 0 / **0.978** | 0.304 / 0.160 / +0.050 / **0.409** | 0.791 / 0.069 |
 
-In law II the drop comes from the masked wall auto-variance, which the
-phase-conditional recentring reduces (the walls sit where the carrier is
-high); the integrated wall–partition cross term is positive, not a
-cancelling negative term (the audited text described a cancellation).
+⟨C_W − 1⟩ is the both-walls conditional covariance averaged with the pair
+weight P11 over the ball. In law II the drop comes from the masked wall
+auto-variance, which the phase-conditional recentring reduces (the walls
+sit where the carrier is high); the integrated wall–partition cross term is
+positive, not a cancelling negative term (the audited text described a
+cancellation).
 
-**Nonnegative lognormal pairs (D3).** The latent Gaussian field is the same
-carrier smoothed with a Gaussian of radius r_s, `a = λ s` (r_s, the
-resolution of the lognormal transform, is a declared construction
-parameter); the wall density is proportional to `e^a` and normalised on the
-walls, `1 + δ_w = e^a / E[e^a | wall] ≥ 0`. Law II takes the signed pair's
-mask, law I an independent mask with the same covariance. Both laws share
-f_v0, the partition covariance, the unconditional wall-density covariance
-`exp(λ² ξ_s) − 1` and the mass normalisation; λ sets the ball variance of the
-unmasked density equal to the signed carrier's (0.701 / 0.734). The
-moments follow from exponential tilting of the Gaussian vector
-`(g1, g2, a1, a2)` and two-threshold orthant probabilities
-(`bivariate_normal_orthant_probability`), checked by 4-variate Monte Carlo:
+**Nonnegative lognormal pairs (D3; narrowed 2026-10-08, GH-DF1).** The latent
+Gaussian field is the same carrier smoothed with a Gaussian of radius r_s,
+`a = λ s`; the wall density is `ψ = e^a / E[e^a | wall] ≥ 0`, normalised on
+the walls. Law II takes the signed pair's mask, law I an independent mask
+with the same covariance. Both laws share f_v0, P11(r), the latent carrier
+law (covariance `λ² ξ_s`; equivalently the unconditionally normalised
+carrier `e^a / E[e^a]`, covariance `exp(λ² ξ_s) − 1`) and the convention
+`E[ψ | wall] = 1`. They do **not** share the conditionally normalised wall
+density itself: in law II its normaliser exceeds law I's by
+`m_II = Q(c − κ0)/f_w` (κ0 the one-point covariance of mask and latent
+field), so its unconditional covariance is law I's divided by m_II². The
+2026-10-07 text listed that covariance among the shared constraints; this
+was wrong (delta audit GH-DF1). Two choices are free and declared: the
+latent smoothing radius r_s (1, 2, 4 Mpc; without smoothing the ball
+integrals are not resolved near r = 0) and the calibration of λ, which sets
+the ball variance of the unconditionally normalised carrier equal to the
+signed carrier's (0.701 / 0.734). The moments follow from exponential
+tilting of the Gaussian vector `(g1, g2, a1, a2)` and two-threshold orthant
+probabilities (`bivariate_normal_orthant_probability`), checked by
+4-variate Monte Carlo (including the shared carrier covariance and the
+m_II⁻² ratio):
 
-| Scenario, R as above | r_s (Mpc) | latent point variance | density point variance | law I wall / total | law II wall / cross / total | II / I |
-|---|---|---|---|---|---|---|
-| [GM] | 1 | 2.68 | 13.64 | 0.933 / 0.989 | 0.773 / +0.330 / 1.017 | 1.03 |
-| [GM] | 2 | 1.59 | 3.93 | 0.912 / 0.969 | 0.903 / +0.399 / 1.149 | 1.19 |
-| [GM] | 4 | 0.97 | 1.63 | 0.896 / 0.953 | 0.984 / +0.446 / 1.233 | 1.29 |
-| [NW15] | 1 | 3.35 | 27.59 | 0.958 / 1.005 | 0.712 / +0.255 / 0.924 | 0.92 |
-| [NW15] | 2 | 1.99 | 6.33 | 0.933 / 0.981 | 0.809 / +0.314 / 1.030 | 1.05 |
-| [NW15] | 4 | 1.17 | 2.23 | 0.915 / 0.964 | 0.919 / +0.374 / 1.145 | 1.19 |
+| Scenario, R as above | r_s (Mpc) | latent point variance | density point variance | m_II | law I wall / total | law II wall / cross / total | ⟨C_W − 1⟩ I / II | II / I |
+|---|---|---|---|---|---|---|---|---|
+| [GM] | 1 | 2.68 | 13.64 | 2.87 | 0.933 / 0.989 | 0.773 / +0.330 / 1.017 | 0.787 / 0.838 | 1.03 |
+| [GM] | 2 | 1.59 | 3.93 | 2.14 | 0.912 / 0.969 | 0.903 / +0.399 / 1.149 | 0.751 / 1.097 | 1.19 |
+| [GM] | 4 | 0.97 | 1.63 | 1.62 | 0.896 / 0.953 | 0.984 / +0.446 / 1.233 | 0.725 / 1.278 | 1.29 |
+| [NW15] | 1 | 3.35 | 27.59 | 2.47 | 0.958 / 1.005 | 0.712 / +0.255 / 0.924 | 0.841 / 0.698 | 0.92 |
+| [NW15] | 2 | 1.99 | 6.33 | 2.10 | 0.933 / 0.981 | 0.809 / +0.314 / 1.030 | 0.798 / 0.887 | 1.05 |
+| [NW15] | 4 | 1.17 | 2.23 | 1.67 | 0.915 / 0.964 | 0.919 / +0.374 / 1.145 | 0.766 / 1.116 | 1.19 |
 
 The signed pair is the λ → 0 limit of this construction on the unsmoothed
-carrier: its wall moments over λ² and cross moments over λ reproduce the
-signed ones to 0.9% / 0.6% at a latent variance of 10⁻⁴ (evidence gate).
+carrier (`e^a/E[e^a | wall] = 1 + a − E[a | wall] + O(a²)`): its wall
+moments over λ² and cross moments over λ approach the signed ones, within
+0.93% / 0.64% at a latent variance of 10⁻⁴. This is a local numerical check
+at one small amplitude with an empirical 5% gate, not an asymptotic theorem.
 
-**Reading.** Both pairs share the stated constraints between their two laws
-and differ in the ball variance. Within nonnegative laws the difference is
-−8% to +29% across r_s = 1–4 Mpc and both scenarios, and its
-sign depends on the construction; the factor 2.5 of the signed pair is a
-property of that surrogate (its negative-density fraction and recentring),
-not of the constraints. The result still shows that a size distribution (or
-a partition covariance), a volume fraction and a wall spectrum do **not** fix
-the nonlinear variance at 8 h⁻¹ Mpc: the joint law of geometry and density
-is a further, independent input. Neither pair solves the gravitational
+**Radial quadrature (corrected 2026-10-08).** The ball pair integrals now
+include the first radial panel `[0, 2R/480]`, which the 2026-10-07 grid
+omitted; the integrand vanishes at r = 0, where the pair density has a
+double zero. On 1440 intervals, refinement against 720 changes no rms by more
+than 1.0×10⁻⁶ (an evidence gate). The small signed law-II wall moments move
+by 1.3×10⁻³ / 6.6×10⁻⁴ relative, to 7.8252×10⁻⁴ / 3.5532×10⁻³ (the delta
+audit's values); no value printed in this report changes.
+
+**Reading.** Within each pair f_v0, P11(r) and the carrier law are fixed and
+the ball variance differs; by (H25) the difference lies entirely in the
+both-walls conditional density correlation C_W(r). Within nonnegative laws
+the difference is −8% to +29% across r_s = 1–4 Mpc and both scenarios, and
+its sign depends on the construction (r_s and the λ calibration are free
+choices); the factor 2.5 of the signed pair is a property of that surrogate
+(its negative-density fraction and recentring), not of the constraints. The
+result shows that a volume fraction, a partition covariance (or a size
+distribution) and a wall carrier spectrum do **not** fix the nonlinear
+variance at 8 h⁻¹ Mpc: the joint law of geometry and density, through C_W,
+is a further, independent input. It does not show non-uniqueness at a fixed
+conditionally normalised wall-density covariance, and at fixed P11 and C_W
+the variance is unique by (H25). Neither pair solves the gravitational
 dynamics; this is a kinematic counterexample about the statistical inputs,
 not a no-go result for the Einstein or Timescape equations.
 
@@ -862,9 +943,10 @@ the PBS closure needs a seed model and an external seed scale.
 
 ## 8. Adversarial self-check (not an independent audit)
 
-*Written before the independent audit of 2026-10-07, which is the
-authoritative review; its findings and the corrected readings are in the
-remediation record. Two items below are corrected in place.*
+*Written before the independent audit of 2026-10-07 and brought up to date
+with the delta audit of 2026-10-08 (GH-DF3): every item states the current
+reading. The two audits are the authoritative reviews; their findings and
+the corrections are mapped in the two remediation records.*
 
 - **Means.** The contrast is relative to the global volume mean; regions are
   sampled by mass; at first order both give zero mean, and the connected
@@ -879,10 +961,15 @@ remediation record. Two items below are corrected in place.*
 - **Mass and volume.** The void share is volume only (empty voids); the wall
   share conserves mass; the split sums to the region's early contrast
   (p + (1 − p) = 1), so no mode is counted twice in the linear statistic.
-  In the nonlinear covariance the double counting is explicit (law II).
-- **Circular normalisation.** The anchor corrects the transfer function at
-  Planck parameters only; the interval uses [W09]'s homogeneity statement,
-  not σ8. Neither calibrates to the quantity reported.
+  In the nonlinear covariance, law II changes the masked wall auto-variance,
+  with a positive integrated wall–partition cross term (Sec. 6.3); double
+  counting is not the mechanism (GH-DE5).
+- **Circular normalisation.** The post-hoc factor is an empirical output
+  normalisation at fixed closure; rescaling the input spectrum and
+  recomputing the PBS share is a distinct variant; neither is a verified
+  transfer recalibration (Sec. 5.4; GH-DE2). The interval uses an adopted
+  reading of [W09]'s homogeneity premise, not σ8. Neither calibrates to the
+  quantity reported.
 - **Undeclared dependences found and declared:** z_LS = 1090 and the neglect
   of radiation at last scattering (it rescales δ_L(LS) and σ_s alike, so ε is
   unchanged and the wall term changes through 1 − p; the earlier estimate
@@ -891,17 +978,24 @@ remediation record. Two items below are corrected in place.*
   tracker fit (f_v0, H0); the single seed scale and Gaussian threshold; the
   γ_w0 ambiguity in converting the 1G-F radius (a 37% change of R_s changes
   p by roughly 10%); H-A6 ignores wall–void boundary coupling; S1 goes beyond
-  [GM]'s flat walls (but is required, Sec. 3.3); H-A8 at R8.
+  [GM]'s flat walls; the flat-wall cap requires wall-density freedom if
+  exact empty voids and the early Gaussian field are kept, but it does not
+  select the whole of S1 (Sec. 3.3; GH-DE3); H-A8 at R8.
 - **Numbers that could be wrong.** The GT law-II collapse of the wall term was
   checked analytically by a linear-response estimate and numerically by
   direct 4-variate Monte Carlo of the covariance kernels. That is correct for
   the signed surrogate; the audit showed that the surrogate has negative
-  densities, and the nonnegative pairs of Sec. 6.3 do not collapse.
+  densities, and the nonnegative pairs of Sec. 6.3 do not collapse. Those
+  pairs fix the carrier law, not the conditionally normalised wall-density
+  covariance (GH-DF1); the ball integrals now include the first radial
+  panel.
 
 ## 9. Decisions requested from the owner
 
 Each is separate. Status after the independent audit and the owner's
-remediation decisions D1–D4 of 2026-10-07 is given under each item.
+remediation decisions D1–D4 of 2026-10-07, and after the delta audit of
+2026-10-08 (whose recommendations agree with the revised ones below), is
+given under each item.
 
 1. **H-OD1, definition and radius convention.**
    - [ ] Adopt the definition of Sec. 2 as the project's σ8-analogue, with
@@ -915,6 +1009,8 @@ remediation decisions D1–D4 of 2026-10-07 is given under each item.
      σ8-analogue is not decided. Revised recommendation, with the audit: keep
      it a proposal at least until a delta audit. Convention (c) stays the
      preferred named convention, (a) the fixed-mass comparison.
+   - *Status (2026-10-08):* open; the delta audit recommends keeping the
+     formal tangent a named research proposal.
 2. **H-OD2, the void-share closure for a reference value.**
    - [ ] **β:** PBS seed with the 1G-F volume-weighted median radius:
      0.811 / 0.816 at (c) (0.787 / 0.792 post-hoc); below the adopted ε = 1
@@ -932,6 +1028,8 @@ remediation decisions D1–D4 of 2026-10-07 is given under each item.
      select no physical reference value yet; if one is used experimentally,
      β is a heuristic prior, α a formal extrapolation (H-A8) and γ a
      constant-share statement.
+   - *Status (2026-10-08):* open; the delta audit recommends no physical
+     reference value yet.
 3. **H-OD3, status tokens** (proposals; the registry rules matter).
    - [ ] Add two tokens through the existing addition mechanism (no validator
      change): `GLOBAL_MEAN_LINEAR_STATISTIC_DEFINITION =
@@ -950,12 +1048,17 @@ remediation decisions D1–D4 of 2026-10-07 is given under each item.
    - *Status (2026-10-07):* open. Revised recommendation, with the audit:
      defer both options and keep every token unchanged at least until a
      delta audit of this remediation.
+   - *Status (2026-10-08):* open; the delta audit recommends deferring token
+     promotion and keeping every token and authorisation unchanged.
 4. **H-OD4, the runtime.**
    - [ ] Keep `global_variance.py` experimental until an independent audit.
      *(Recommended.)*
    - [ ] Promote it to a package runtime.
    - *Status (2026-10-07):* open; recommendation unchanged. The record and
      orthant contracts were hardened (GH-F9, GH-F10).
+   - *Status (2026-10-08):* open; the records now recompute their results
+     from their inputs (GH-DF2) and the defensive checks have their own tests
+     (GH-DF5).
 5. **H-OD5, publication.** Push, pull request, merge, audit, freeze or tag of
    this phase: none is authorised by the task; each needs a separate
    decision.
@@ -964,9 +1067,18 @@ remediation decisions D1–D4 of 2026-10-07 is given under each item.
    - *Audit performed* (2026-10-07): `phase1g_h_independent_audit.md`,
      `REJECT` of the closure claims; published by the owner on the branch
      `phase-1g-h-independent-audit` (`816dd00`). The remediation of
-     2026-10-07 is committed locally on top of it.
-   - Open: a delta audit of the remediation, pull request, merge, freeze and
-     tag.
+     2026-10-07 was committed on top of it.
+   - *Push decided* (owner, 2026-10-08): the audit commit and the two
+     remediation commits on the session branch (`89cb041`); the two approvals
+     of 2026-10-06 confirmed (GH-F15); see
+     `phase1g_h_publication_successor.md`.
+   - *Delta audit performed* (2026-10-08): `phase1g_h_delta_audit.md`,
+     `REJECT` of the remaining common-covariance and completeness claims;
+     published with the owner's authorisation on the branch
+     `phase-1g-h-delta-audit` (`5c325e1`). The delta-audit remediation is committed locally on top of
+     it.
+   - Open: an audit of the delta-audit remediation, the push of its commits,
+     pull request, merge, freeze and tag.
 
 ## 10. Implementation and usage
 
@@ -991,7 +1103,10 @@ remediation decisions D1–D4 of 2026-10-07 is given under each item.
   - Every exported record re-validates its fields in `__post_init__`
     (finite values, variant consistency, tracker identities, interval
     identities; `RECORD_IDENTITY_RTOL`), so a replaced field that breaks an
-    invariant is refused (GH-F9).
+    invariant is refused (GH-F9), and recomputes each result and diagnostic
+    from its stored inputs with the factory's own function, so a replaced
+    input that no longer reproduces the stored results is refused (GH-DF2).
+    Construction therefore costs about twice the computation.
 - **One case:**
 
   ```bash
@@ -1008,39 +1123,44 @@ remediation decisions D1–D4 of 2026-10-07 is given under each item.
   PYTHONPATH=src OPENBLAS_NUM_THREADS=1 python -B -W error scripts/phase1g_h_global_variance_closure_numerics.py
   ```
 
-  It takes about 30–70 s, writes the JSON artifact (strict JSON, no
+  It takes about 80 s, writes the JSON artifact (strict JSON, no
   non-finite numbers) and three figures (`sigma_vs_void_share.png`,
   `radius_scan.png`, `propagator_scale_dependence.png`), and exits nonzero
-  if one of its 32 declared gates fails. Since the remediation it also
+  if one of its 36 declared gates fails. Since the remediation it also
   writes `ensemble_vs_tangent_example`, `scale_separation`,
   `flat_wall_cap_exceedance`, `step_share_counterexample`,
   `pbs_reclosure_under_spectrum_rescaling`, the negative-density
-  probabilities and the `nonnegative_lognormal_pair`.
+  probabilities and the `nonnegative_lognormal_pair`; since the delta-audit
+  remediation, the law-II normaliser ratios, ⟨C_W − 1⟩, the (H25) check and
+  the radial refinement of the constructive pairs.
 
 ## 11. Verification summary
 
 Details, commands, versions and logs are in the validation record.
 
-- **Phase tests:** `tests/test_phase1g_h_global_variance.py`, 35 tests
-  (28 before the remediation; seven added for GH-F1, F3, F4, F5, F6, F10 and
-  F11, and the tamper test extended for GH-F9), covering the categories asked
-  for. They check dimensions and k/R units
+- **Phase tests:** `tests/test_phase1g_h_global_variance.py`, 42 tests
+  (28 originally; seven added for GH-F1, F3, F4, F5, F6, F10 and F11 and the
+  tamper test extended for GH-F9; seven added for GH-DF1, DF2 and DF5, with
+  the tamper test now requiring each invariant's own message), covering the
+  categories asked for. They check dimensions and k/R units
   (photon-comoving Mpc), window and mass normalisation, and the homogeneous,
   single-phase and EdS limits. They check real-space against Fourier (2×10⁻⁵)
   and A_s scaling. They check positive-semidefiniteness and cross-term
   bounds, and recover 1G-D, 1G-E and 1G-F numbers. They check perturbative
   convergence of the exact spherical region, quadrature and k-tail
   convergence, and the refusal of incomplete or out-of-class configurations.
-- **Evidence gates:** 32 declared gates, all passing (1G-D reproduction, A_s
+- **Evidence gates:** 36 declared gates, all passing (1G-D reproduction, A_s
   scaling, refined quadrature, the 1G-E reproduction within its propagated
   rounding budget (GH-F11), orthant CDF and analytic cases, two-barrier
   finite differences, the step-kernel premise, the constant-share reclosure
-  identity, the lognormal calibration and its linear limit).
+  identity, the lognormal calibration and its linear limit, and, since
+  2026-10-08, the radial refinement of the constructive pairs and the (H25)
+  identity).
 - **Governance:** the tolerance audit reports 0 comparisons without explicit
   tolerances; the 1F-C-R validator reports `PASS`.
 - **Full suites** (warnings as errors) on CPython 3.13.16 and 3.11.17 (Linux):
-  see the validation record (original tree) and the remediation record
-  (remediated tree). The Windows 3.14.3 / 3.11.9 gate was not run in these
+  see the validation record (original tree) and the two remediation records
+  (remediated trees). The Windows 3.14.3 / 3.11.9 gate was not run in these
   sessions; its commands are listed in the validation record.
 
 ## 12. Preservation, status and limitations
@@ -1049,7 +1169,8 @@ Details, commands, versions and logs are in the validation record.
   tag; every existing package module, test and status token; the
   independent audit's files. Outside the 1G-H files, the phase touched
   README.md and CLAUDE.md (current-status text) and, in the remediation, its
-  own F/G freeze-status successor record (GH-F14).
+  own F/G freeze-status successor record (GH-F14). The delta audit's files
+  are unchanged as well.
 - **F/G freeze.** The F/G freeze attests its own checkpoint. It does not
   derive σ8; 1G-H builds on it without editing it. R2-N4 is relevant only if
   H-OD3's second option is chosen.
@@ -1064,9 +1185,11 @@ Details, commands, versions and logs are in the validation record.
   quantified); the EH98 no-wiggle transfer; A_s from a ΛCDM fit and an
   empirical Planck normalisation (D4); empty voids in the propagator
   (finite-density voids are treated only in the covariance and the M3
-  alternative); the lognormal pairs' resolution radius is a construction
-  parameter; no time-dependent mergers or mass transfer (1G-G); and nothing
-  observational.
+  alternative); the lognormal pairs' resolution radius and λ calibration
+  are free construction choices, and the pairs fix the carrier law, not the
+  conditionally normalised wall-density covariance (GH-DF1); the integrated
+  scale dependence is not a pointwise bound (GH-DF4); no time-dependent
+  mergers or mass transfer (1G-G); and nothing observational.
 
 ## 13. Sources, versions and equation numbering
 
@@ -1086,8 +1209,8 @@ text were wrong (GH-F13); the full values were always those of the inventory.
 Equation numbers are those of the e-print LaTeX sources (sequential display
 numbering, as reconstructed in 1G-A for [GM]); the journal HTML may differ.
 Downloads stayed in the session scratchpad; no upstream code was copied.
-(H1)–(H24) are this report's: (H1)–(H5), (H13), (H17)–(H20) and (H23)
-follow from the definitions with [GM] Sec. 3 and (5.4)–(5.6). (H6)–(H9) add
+(H1)–(H25) are this report's: (H1)–(H5), (H13), (H17)–(H20), (H23) and
+(H25) follow from the definitions with [GM] Sec. 3 and (5.4)–(5.6). (H6)–(H9) add
 A1–A5, H-A6 and H-A9 (the tangent model). (H12) is 1G-D's Sec. 7 response with the compression term
 and window added here. (H22) applies [SvdW04] Eq. (3) to conditional walks.
 None of them is attributed to a source as already derived.

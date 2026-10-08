@@ -1,0 +1,34 @@
+.........................................ss............................. [  6%]
+........................................................................ [ 12%]
+........................................................................ [ 18%]
+........................................................................ [ 24%]
+........................................................................ [ 30%]
+.................s...................................................... [ 36%]
+........................................................................ [ 42%]
+........................................................................ [ 48%]
+........................................................................ [ 55%]
+........................................................................ [ 61%]
+........................................................................ [ 67%]
+.......................................s................................ [ 73%]
+........................................................................ [ 79%]
+................................s..s.................................... [ 85%]
+........................................................................ [ 91%]
+...................................................s.sssssssssssssssssss [ 97%]
+ssssss....................                                               [100%]
+=========================== short test summary info ============================
+SKIPPED [1] tests/test_anchored_density_growth.py:609: Phase 1D-D validation artifact absent; run scripts/validate_anchored_density_growth.py
+SKIPPED [1] tests/test_b2_artifact_schema.py:47: B2 artifact absent (phase1c_b2_oracle_comparison.json); run scripts/validate_barotropic_perturbations.py
+SKIPPED [1] tests/test_growth_convergence_purity.py:246: growth validation artifact absent; run scripts/validate_growth_pipeline.py
+SKIPPED [3] tests/phase1g_owner_decisions_test_utils.py:115: owner-decisions artifact absent (run scripts/phase1g_owner_decisions_numerics.py)
+SKIPPED [1] tests/test_vs_upstream_barotropic_oracle.py:76: barotropic oracle absent; run extraction script
+SKIPPED [3] tests/test_vs_upstream_barotropic_oracle.py:121: barotropic oracle absent; run extraction script
+SKIPPED [1] tests/test_vs_upstream_oracle.py:69: upstream oracle not extracted (run scripts/extract_upstream_oracle.py)
+SKIPPED [13] tests/test_vs_upstream_oracle.py:77: upstream oracle not extracted (run scripts/extract_upstream_oracle.py)
+SKIPPED [1] tests/test_vs_upstream_oracle.py:107: upstream oracle not extracted (run scripts/extract_upstream_oracle.py)
+SKIPPED [2] tests/test_vs_upstream_oracle.py:120: upstream oracle not extracted (run scripts/extract_upstream_oracle.py)
+SKIPPED [1] tests/test_vs_upstream_oracle.py:138: upstream oracle not extracted (run scripts/extract_upstream_oracle.py)
+SKIPPED [1] tests/test_vs_upstream_perturbation_oracle.py:67: clean perturbation oracle absent; run extraction script
+SKIPPED [1] tests/test_vs_upstream_perturbation_oracle.py:77: clean perturbation oracle absent; run extraction script
+SKIPPED [2] tests/test_vs_upstream_perturbation_oracle.py:84: clean perturbation oracle absent; run extraction script
+1146 passed, 32 skipped in 334.67s (0:05:34)
+exit 0
