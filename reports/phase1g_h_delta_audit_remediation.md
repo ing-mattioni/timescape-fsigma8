@@ -15,6 +15,27 @@ the first remediation record and its inventory, README.md and CLAUDE.md.
 New: [`phase1g_h_publication_successor.md`](phase1g_h_publication_successor.md)
 and its inventory.
 
+**Status note (2026-10-08, after the second delta audit).** This record
+states the remediation as of its commit `226e52d` and is not rewritten. Its
+two commits and the delta-audit commit were pushed the same day
+(`89cb041 → 226e52d`, event P7 of the publication successor, Sec. 6), so
+"Nothing is pushed" (Sec. 0) and the push item of Sec. 4 are superseded
+(erratum GH-D2E2). The second delta audit
+([`phase1g_h_delta_audit_2.md`](phase1g_h_delta_audit_2.md),
+`ACCEPT_WITH_CORRECTIONS`) found GH-DF1 … GH-DF6 resolved, GH-DE1 … GH-DE5
+applied and GH-DE6 applied in an equivalent form. Its erratum GH-D2E1
+corrects the regression row of Sec. 3, which skipped the gate blocks: every
+common *physical* leaf outside the pairs is bitwise identical, and three
+gate read-outs of pair quantities changed by at most 1.2×10⁻⁵ absolute;
+inside `gaussian_threshold_pair`, 160 common leaves changed (156 numeric, 140
+of them by more than 10⁻¹² relative, and 4 constraint texts), 6 were renamed
+(`ball_variance_unmasked_density` → `ball_variance_unconditionally_normalised_carrier`)
+and 106 exist only in the new artifact (those 6 new names and 100 new
+leaves); 16 leaves were added outside (gates, gate definitions,
+`G_ode_cross_check`). The
+corrections of that audit are in
+[`phase1g_h_delta_audit_2_remediation.md`](phase1g_h_delta_audit_2_remediation.md).
+
 ## 0. Summary
 
 - **Delta-audit outcome.** `REJECT` (SCIENCE) for the claim that the

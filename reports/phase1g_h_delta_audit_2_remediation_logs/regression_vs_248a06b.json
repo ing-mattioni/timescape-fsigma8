@@ -1,0 +1,42 @@
+{
+ "old_environment": {
+  "git_head": "248a06bfeb655337bc499607180c49008b5f34ea",
+  "implementation": "CPython",
+  "matplotlib": "3.11.2",
+  "numpy": "2.5.3",
+  "platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
+  "python": "3.13.16",
+  "scipy": "1.18.1",
+  "src_scripts_tests_dirty": false
+ },
+ "new_environment": {
+  "git_head": "9ad54253c4ec40cede5690da6659be28e0bd0a2d",
+  "implementation": "CPython",
+  "matplotlib": "3.11.2",
+  "numpy": "2.5.3",
+  "platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
+  "python": "3.13.16",
+  "scipy": "1.18.1",
+  "src_scripts_tests_dirty": false
+ },
+ "common_leaves": 3840,
+ "numeric_common_leaves": 3197,
+ "numeric_changed": [],
+ "text_changed": [],
+ "only_old": [
+  "gates/physics/NW15_CMB_FIT constructive pairs (H25) identity/limit",
+  "gates/physics/NW15_CMB_FIT constructive pairs (H25) identity/pass",
+  "gates/physics/NW15_CMB_FIT constructive pairs (H25) identity/value",
+  "gates/physics/PAPER_REFERENCE constructive pairs (H25) identity/limit",
+  "gates/physics/PAPER_REFERENCE constructive pairs (H25) identity/pass",
+  "gates/physics/PAPER_REFERENCE constructive pairs (H25) identity/value"
+ ],
+ "only_new": [
+  "gates/numerics/NW15_CMB_FIT constructive pairs (H25) identity/limit",
+  "gates/numerics/NW15_CMB_FIT constructive pairs (H25) identity/pass",
+  "gates/numerics/NW15_CMB_FIT constructive pairs (H25) identity/value",
+  "gates/numerics/PAPER_REFERENCE constructive pairs (H25) identity/limit",
+  "gates/numerics/PAPER_REFERENCE constructive pairs (H25) identity/pass",
+  "gates/numerics/PAPER_REFERENCE constructive pairs (H25) identity/value"
+ ]
+}

@@ -2,7 +2,7 @@
 
 Classification: `RESEARCH_PHASE_WITH_EXPERIMENTAL_RUNTIME` (conditional,
 model-internal, `NON_OBSERVATIONAL`). Date: 2026-10-06, revised 2026-10-07
-and 2026-10-08.
+and twice on 2026-10-08.
 Base: `main` = `origin/main` = `8d3cdd0533035858c42269cb1dff1a20dcafc7da`
 (PR #4 merge, the frozen F/G checkpoint), local branch
 `phase-1g-h-global-variance-closure` (first commit: the F/G freeze-status
@@ -10,13 +10,17 @@ alignment, `phase1g_fg_freeze_status_successor.md`).
 Remote: the session branch `ccr-555e67be-u11yht`, pushed with the owner's
 approvals of 2026-10-06 and 2026-10-08 (Sec. 1;
 [`phase1g_h_publication_successor.md`](phase1g_h_publication_successor.md));
-not merged into `main`.
+not merged into `main`. Its remote head is `226e52d` (2026-10-08, P7); the
+second delta audit (published on `ccr-ac582de6-vho99i` at `e517028`) and
+its remediation are on the local branch and not pushed.
 Companions: [`phase1g_h_global_variance_closure_inventory.json`](phase1g_h_global_variance_closure_inventory.json),
 [`phase1g_h_global_variance_closure_validation.md`](phase1g_h_global_variance_closure_validation.md),
 the independent audit [`phase1g_h_independent_audit.md`](phase1g_h_independent_audit.md),
 the remediation record [`phase1g_h_audit_remediation.md`](phase1g_h_audit_remediation.md),
 the delta audit [`phase1g_h_delta_audit.md`](phase1g_h_delta_audit.md) and its
-remediation record [`phase1g_h_delta_audit_remediation.md`](phase1g_h_delta_audit_remediation.md).
+remediation record [`phase1g_h_delta_audit_remediation.md`](phase1g_h_delta_audit_remediation.md),
+the second delta audit [`phase1g_h_delta_audit_2.md`](phase1g_h_delta_audit_2.md) and its
+remediation record [`phase1g_h_delta_audit_2_remediation.md`](phase1g_h_delta_audit_2_remediation.md).
 
 **Revision of 2026-10-07.** An independent audit of the text at `d4d693d`
 returned `REJECT` for its closure claims (15 findings, GH-F1 … GH-F15), with
@@ -34,6 +38,17 @@ claims, with provenance and numerics `ACCEPT` and every other area
 GH-DF6). This revision applies its corrections; the text it audited stays in
 Git at `89cb041`, and the delta-audit remediation record maps every finding
 to its change.
+
+**Second revision of 2026-10-08.** A second independent delta audit of the
+text at `226e52d` (published at `e517028`) returned
+`ACCEPT_WITH_CORRECTIONS`: provenance, science, numerics, implementation and
+task compliance `ACCEPT`; governance, tests and documentation
+`ACCEPT_WITH_CORRECTIONS`. It found GH-DF1 … GH-DF6 and GH-F3 … GH-F14
+resolved and GH-F15 confirmed by the owner, and raised two LOW and four INFO
+findings (GH-D2F1 … GH-D2F6), none a scientific blocker. This revision
+applies them: publication records, tests, typed records and wording; no
+number changes. The text it audited stays in Git at `226e52d`; the second
+remediation record maps every finding to its change.
 Runtime: `src/timescape_fsigma8/global_variance.py` (experimental).
 Evidence: `scripts/phase1g_h_global_variance_closure_numerics.py` (writes the
 git-ignored `artifacts/independent/phase1g_h_global_variance_closure.json`
@@ -766,7 +781,9 @@ C_W(r) = E[ψ1 ψ2 | both points in walls],                                     
 ```
 
 and the ball variance is the pair average of ξ_δ. (H25) is (H18) at x = 0
-written in other variables (the evidence checks the two to 10⁻¹²). Two laws
+written in other variables. The evidence compares the two on the same kernel
+arrays to 10⁻¹²: a consistency check of the (H18) assembly, not of the
+kernels, which the tests check by sampling (second delta audit GH-D2F2). Two laws
 with the same P11(r) and the same C_W(r) have the same variance; a
 difference at fixed f_v0 and P11 is a difference of the both-walls
 conditional density correlation, i.e. of the joint law of geometry and
@@ -897,7 +914,12 @@ choices); the factor 2.5 of the signed pair is a property of that surrogate
 result shows that a volume fraction, a partition covariance (or a size
 distribution) and a wall carrier spectrum do **not** fix the nonlinear
 variance at 8 h⁻¹ Mpc: the joint law of geometry and density, through C_W,
-is a further, independent input. It does not show non-uniqueness at a fixed
+is a further, independent input. In the latent-Gaussian constructions of
+this section that input is the mask–carrier dependence, the covariances κ0
+and κ(r) of mask and latent field: once it is specified, f_v0, P11(r) and
+the carrier law fix C_W(r) and the variance, and mask–carrier independence
+(law I, the E3 case of 1G-E) fixes them with no further input (second delta
+audit GH-D2F6). It does not show non-uniqueness at a fixed
 conditionally normalised wall-density covariance, and at fixed P11 and C_W
 the variance is unique by (H25). Neither pair solves the gravitational
 dynamics; this is a kinematic counterexample about the statistical inputs,
@@ -993,9 +1015,9 @@ the corrections are mapped in the two remediation records.*
 ## 9. Decisions requested from the owner
 
 Each is separate. Status after the independent audit and the owner's
-remediation decisions D1–D4 of 2026-10-07, and after the delta audit of
-2026-10-08 (whose recommendations agree with the revised ones below), is
-given under each item.
+remediation decisions D1–D4 of 2026-10-07, and after the delta audit and
+the second delta audit of 2026-10-08 (whose recommendations agree with the
+revised ones below), is given under each item.
 
 1. **H-OD1, definition and radius convention.**
    - [ ] Adopt the definition of Sec. 2 as the project's σ8-analogue, with
@@ -1011,6 +1033,8 @@ given under each item.
      preferred named convention, (a) the fixed-mass comparison.
    - *Status (2026-10-08):* open; the delta audit recommends keeping the
      formal tangent a named research proposal.
+   - *Status (2026-10-08, second delta audit):* open; that audit concurs,
+     with (c) preferred and (a) as the fixed-mass comparison.
 2. **H-OD2, the void-share closure for a reference value.**
    - [ ] **β:** PBS seed with the 1G-F volume-weighted median radius:
      0.811 / 0.816 at (c) (0.787 / 0.792 post-hoc); below the adopted ε = 1
@@ -1030,6 +1054,10 @@ given under each item.
      constant-share statement.
    - *Status (2026-10-08):* open; the delta audit recommends no physical
      reference value yet.
+   - *Status (2026-10-08, second delta audit):* open; that audit concurs (the
+     median seed a heuristic prior below ε = 1, the [W09] seed a
+     nonperturbative formal extrapolation, the interval valid only in its
+     class).
 3. **H-OD3, status tokens** (proposals; the registry rules matter).
    - [ ] Add two tokens through the existing addition mechanism (no validator
      change): `GLOBAL_MEAN_LINEAR_STATISTIC_DEFINITION =
@@ -1050,6 +1078,9 @@ given under each item.
      delta audit of this remediation.
    - *Status (2026-10-08):* open; the delta audit recommends deferring token
      promotion and keeping every token and authorisation unchanged.
+   - *Status (2026-10-08, second delta audit):* open; that audit recommends no
+     token change ((H25) and the C_W reading belong in this report, not in a
+     token).
 4. **H-OD4, the runtime.**
    - [ ] Keep `global_variance.py` experimental until an independent audit.
      *(Recommended.)*
@@ -1059,6 +1090,10 @@ given under each item.
    - *Status (2026-10-08):* open; the records now recompute their results
      from their inputs (GH-DF2) and the defensive checks have their own tests
      (GH-DF5).
+   - *Status (2026-10-08, second delta audit):* open; that audit recommends
+     keeping the runtime experimental and running the Windows gate before
+     any promotion. Its test gaps are closed (GH-D2F2) and a float result
+     must now be stored as a float (GH-D2F4).
 5. **H-OD5, publication.** Push, pull request, merge, audit, freeze or tag of
    this phase: none is authorised by the task; each needs a separate
    decision.
@@ -1075,10 +1110,20 @@ given under each item.
    - *Delta audit performed* (2026-10-08): `phase1g_h_delta_audit.md`,
      `REJECT` of the remaining common-covariance and completeness claims;
      published with the owner's authorisation on the branch
-     `phase-1g-h-delta-audit` (`5c325e1`). The delta-audit remediation is committed locally on top of
-     it.
-   - Open: an audit of the delta-audit remediation, the push of its commits,
-     pull request, merge, freeze and tag.
+     `phase-1g-h-delta-audit` (`5c325e1`). The delta-audit remediation was
+     committed on top of it.
+   - *Push decided* (owner, 2026-10-08): the delta-audit commit and the two
+     commits of its remediation on the session branch (`226e52d`, P7 of the
+     publication successor).
+   - *Second delta audit performed* (2026-10-08): `phase1g_h_delta_audit_2.md`,
+     `ACCEPT_WITH_CORRECTIONS`, no scientific blocker; the owner confirmed
+     the GH-F15 approvals directly to its auditor (P8); published on the
+     owner's instruction on the branch `ccr-ac582de6-vho99i` (`e517028`, P9).
+     Its remediation is committed locally on top of it.
+   - Open: the push of the second delta audit and its remediation; the
+     owner's Windows gate (CPython 3.14.3 / 3.11.9, never run on a 1G-H
+     tree); an optional cross-family check of Sec. 6 (the second delta audit
+     shares the author's model family); pull request, merge, freeze and tag.
 
 ## 10. Implementation and usage
 
@@ -1106,6 +1151,8 @@ given under each item.
     invariant is refused (GH-F9), and recomputes each result and diagnostic
     from its stored inputs with the factory's own function, so a replaced
     input that no longer reproduces the stored results is refused (GH-DF2).
+    A float result must be stored as a float, and validated scalar inputs
+    are stored as floats, so the records serialise as strict JSON (GH-D2F4).
     Construction therefore costs about twice the computation.
 - **One case:**
 
@@ -1123,7 +1170,7 @@ given under each item.
   PYTHONPATH=src OPENBLAS_NUM_THREADS=1 python -B -W error scripts/phase1g_h_global_variance_closure_numerics.py
   ```
 
-  It takes about 80 s, writes the JSON artifact (strict JSON, no
+  It takes about 50–80 s, writes the JSON artifact (strict JSON, no
   non-finite numbers) and three figures (`sigma_vs_void_share.png`,
   `radius_scan.png`, `propagator_scale_dependence.png`), and exits nonzero
   if one of its 36 declared gates fails. Since the remediation it also
@@ -1138,11 +1185,15 @@ given under each item.
 
 Details, commands, versions and logs are in the validation record.
 
-- **Phase tests:** `tests/test_phase1g_h_global_variance.py`, 42 tests
+- **Phase tests:** `tests/test_phase1g_h_global_variance.py`, 49 tests
   (28 originally; seven added for GH-F1, F3, F4, F5, F6, F10 and F11 and the
   tamper test extended for GH-F9; seven added for GH-DF1, DF2 and DF5, with
-  the tamper test now requiring each invariant's own message), covering the
-  categories asked for. They check dimensions and k/R units
+  the tamper test now requiring each invariant's own message; seven added
+  for GH-D2F2 and GH-D2F4: the pair-weighted C_W and the m_II⁻² read-outs, a
+  Monte Carlo of C_W and m_II with ψ normalised by the sample wall mean, the
+  Simpson error ratio of the radial estimator, the binding tolerance and two
+  record identities, the pinned gate thresholds, and float-typed results),
+  covering the categories asked for. They check dimensions and k/R units
   (photon-comoving Mpc), window and mass normalisation, and the homogeneous,
   single-phase and EdS limits. They check real-space against Fourier (2×10⁻⁵)
   and A_s scaling. They check positive-semidefiniteness and cross-term
@@ -1155,7 +1206,8 @@ Details, commands, versions and logs are in the validation record.
   finite differences, the step-kernel premise, the constant-share reclosure
   identity, the lognormal calibration and its linear limit, and, since
   2026-10-08, the radial refinement of the constructive pairs and the (H25)
-  identity).
+  consistency check of the (H18) assembly, a numerics gate since the second
+  delta audit).
 - **Governance:** the tolerance audit reports 0 comparisons without explicit
   tolerances; the 1F-C-R validator reports `PASS`.
 - **Full suites** (warnings as errors) on CPython 3.13.16 and 3.11.17 (Linux):
@@ -1169,8 +1221,8 @@ Details, commands, versions and logs are in the validation record.
   tag; every existing package module, test and status token; the
   independent audit's files. Outside the 1G-H files, the phase touched
   README.md and CLAUDE.md (current-status text) and, in the remediation, its
-  own F/G freeze-status successor record (GH-F14). The delta audit's files
-  are unchanged as well.
+  own F/G freeze-status successor record (GH-F14). The files of the delta
+  audit and of the second delta audit are unchanged as well.
 - **F/G freeze.** The F/G freeze attests its own checkpoint. It does not
   derive σ8; 1G-H builds on it without editing it. R2-N4 is relevant only if
   H-OD3's second option is chosen.

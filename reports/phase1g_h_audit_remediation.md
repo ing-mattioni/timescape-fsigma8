@@ -25,6 +25,14 @@ corrections are in
 The commits of this record were pushed on 2026-10-08 and the owner confirmed
 the two push approvals of GH-F15 the same day
 ([`phase1g_h_publication_successor.md`](phase1g_h_publication_successor.md)).
+*Added after the second delta audit
+([`phase1g_h_delta_audit_2.md`](phase1g_h_delta_audit_2.md), GH-D2F5):* that
+audit finds GH-F3 … GH-F14 resolved, GH-F1 and GH-F2 resolved by owner
+decision and GH-F15 `RESOLVED_OWNER_CONFIRMED`. The "same shared
+constraints" of the D3 row (Sec. 1) are narrowed by GH-DF1: the lognormal
+pairs share f_v0, P11(r) and the latent carrier law, not the conditionally
+normalised wall density. The inventory's `files_changed_sha256` describe the
+bytes of `89cb041`.
 
 ## 0. Summary
 

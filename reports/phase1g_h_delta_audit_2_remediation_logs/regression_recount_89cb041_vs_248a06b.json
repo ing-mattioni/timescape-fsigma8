@@ -1,0 +1,65 @@
+{
+ "inside": {
+  "common": 204,
+  "numeric_changed": 156,
+  "numeric_changed_beyond_1e-12_rel": 140,
+  "text_changed": 4,
+  "max_abs_numeric_change": 0.0007719476316552232,
+  "only_old": 6,
+  "only_new": 106,
+  "only_old_keys": [
+   "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/ball_variance_unmasked_density",
+   "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/ball_variance_unmasked_density",
+   "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/ball_variance_unmasked_density",
+   "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/ball_variance_unmasked_density",
+   "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/ball_variance_unmasked_density",
+   "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/ball_variance_unmasked_density"
+  ],
+  "examples": []
+ },
+ "outside": {
+  "common": 3517,
+  "numeric_changed": 3,
+  "numeric_changed_beyond_1e-12_rel": 3,
+  "text_changed": 0,
+  "max_abs_numeric_change": 1.1450464257434234e-05,
+  "only_old": 0,
+  "only_new": 16,
+  "only_old_keys": [],
+  "examples": [
+   [
+    "gates/numerics/PAPER_REFERENCE lognormal ball-variance calibration/value",
+    3.3306690738754696e-16,
+    0.0
+   ],
+   [
+    "gates/physics/NW15_CMB_FIT lognormal linear limit reproduces the signed pair/value",
+    0.006414056975155402,
+    0.006409916363450341
+   ],
+   [
+    "gates/physics/PAPER_REFERENCE lognormal linear limit reproduces the signed pair/value",
+    0.009305549563680238,
+    0.009294099099422803
+   ]
+  ],
+  "only_new_keys": [
+   "cases/NW15_CMB_FIT/growth/G_ode_cross_check",
+   "cases/PAPER_REFERENCE/growth/G_ode_cross_check",
+   "gate_definitions/h25_identity_rel",
+   "gate_definitions/radial_refinement_rel",
+   "gates/numerics/NW15_CMB_FIT constructive pairs radial refinement/limit",
+   "gates/numerics/NW15_CMB_FIT constructive pairs radial refinement/pass",
+   "gates/numerics/NW15_CMB_FIT constructive pairs radial refinement/value",
+   "gates/numerics/PAPER_REFERENCE constructive pairs radial refinement/limit",
+   "gates/numerics/PAPER_REFERENCE constructive pairs radial refinement/pass",
+   "gates/numerics/PAPER_REFERENCE constructive pairs radial refinement/value",
+   "gates/physics/NW15_CMB_FIT constructive pairs (H25) identity/limit",
+   "gates/physics/NW15_CMB_FIT constructive pairs (H25) identity/pass",
+   "gates/physics/NW15_CMB_FIT constructive pairs (H25) identity/value",
+   "gates/physics/PAPER_REFERENCE constructive pairs (H25) identity/limit",
+   "gates/physics/PAPER_REFERENCE constructive pairs (H25) identity/pass",
+   "gates/physics/PAPER_REFERENCE constructive pairs (H25) identity/value"
+  ]
+ }
+}

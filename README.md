@@ -143,15 +143,19 @@ that predate the freeze are resolved in the
 - **Status.** These are conditional numbers, not an observational σ8, and no
   σ8 authorization is granted.
 - **Phase 1G-H (proposed; on the branch `ccr-555e67be-u11yht`, pushed with
-  owner approvals on 2026-10-06 and 2026-10-08; independently audited on
-  2026-10-07 and remediated; delta-audited on 2026-10-08 and remediated
-  locally; not merged into `main`, frozen or tagged)**
+  owner approvals on 2026-10-06 and 2026-10-08, remote head `226e52d`;
+  independently audited on 2026-10-07 and remediated; delta-audited on
+  2026-10-08 and remediated; a second delta audit the same day accepted it
+  with corrections, which are applied locally and not pushed; not merged
+  into `main`, frozen or tagged)**
   ([report](reports/phase1g_h_global_variance_closure.md),
   [validation](reports/phase1g_h_global_variance_closure_validation.md),
   [audit](reports/phase1g_h_independent_audit.md),
   [remediation](reports/phase1g_h_audit_remediation.md),
   [delta audit](reports/phase1g_h_delta_audit.md),
   [delta remediation](reports/phase1g_h_delta_audit_remediation.md),
+  [second delta audit](reports/phase1g_h_delta_audit_2.md),
+  [second remediation](reports/phase1g_h_delta_audit_2_remediation.md),
   [publication](reports/phase1g_h_publication_successor.md)):
   - *Audits.* The independent audit rejected the closure claims of the
     audited text (definition "closed", structure "derived", interval
@@ -161,7 +165,11 @@ that predate the freeze are resolved in the
     the remaining claim that the nonnegative pairs share the wall-density
     covariance and the completeness claims, and asked for record binding,
     tests and wording fixes; all six of its findings are corrections, now
-    applied.
+    applied. The second delta audit (2026-10-08, same model family as the
+    author) found them resolved and no scientific blocker; its two LOW and
+    four INFO findings (publication record, tests, typed records, wording)
+    are applied. The owner's Windows gate and the decisions on pull
+    request, merge, freeze and tag remain open.
   - *Definition (proposed).* The formal tangent statistic: the rms of the
     early Gaussian field propagated with the zero-amplitude tangent of the
     global contrast of Lagrangian top-hat regions (dust foliation, global

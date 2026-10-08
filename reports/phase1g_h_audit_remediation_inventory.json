@@ -495,6 +495,34 @@
       ]
     }
   },
+  "status_note_2026_10_08_after_second_delta_audit": {
+    "files_changed_sha256": "describe the bytes of 89cb041",
+    "narrowed_wording": "the 'same shared constraints' of owner decision D3 are narrowed by GH-DF1: the lognormal pairs share f_v0, P11(r) and the latent carrier law, not the conditionally normalised wall density (GH-D2F5)",
+    "second_delta_audit": "reports/phase1g_h_delta_audit_2.md (commit e5170285e1d4b4aa72e907a3a79110d05584c0d9)",
+    "verified_finding_outcomes": {
+      "RESOLVED": [
+        "GH-F3",
+        "GH-F4",
+        "GH-F5",
+        "GH-F6",
+        "GH-F7",
+        "GH-F8",
+        "GH-F9",
+        "GH-F10",
+        "GH-F11",
+        "GH-F12",
+        "GH-F13",
+        "GH-F14"
+      ],
+      "RESOLVED_BY_OWNER_DECISION": [
+        "GH-F1",
+        "GH-F2"
+      ],
+      "RESOLVED_OWNER_CONFIRMED": [
+        "GH-F15"
+      ]
+    }
+  },
   "status_tokens": {
     "added": [],
     "changed": []

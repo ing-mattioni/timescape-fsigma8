@@ -107,7 +107,7 @@
   "evidence": {
     "artifact": "artifacts/independent/phase1g_h_global_variance_closure.json (git-ignored, regenerable)",
     "artifact_raw_sha256_meaning": "one exact output and environment (includes the git head), not a cross-platform gate",
-    "artifact_sha256_py313_run": "91aaca79ad0d0d86ad3208c8cd854e9d03839ef1f8c2d0026ff7a5cf8ff89884",
+    "artifact_sha256_py313_run": "357a7035cedabf17a63437d72e348fcdee2ad9e529c4c50f4e2e95a7926b44c2",
     "cross_interpreter_check": {
       "interpreters": [
         "CPython 3.13.16 (NumPy 2.5.3, SciPy 1.18.1)",
@@ -117,7 +117,7 @@
       "max_relative_difference": 0.0,
       "numeric_leaves_compared": 3201,
       "rule": "every numeric leaf equal (environment and figures ignored); labels and keys exactly",
-      "tree": "delta-audit remediated code 248a06bfeb655337bc499607180c49008b5f34ea (2026-10-08)"
+      "tree": "second delta-audit remediated code 9ad54253c4ec40cede5690da6659be28e0bd0a2d (2026-10-08)"
     },
     "delta_audit_remediation_additions": [
       "radial_refinement_rel and h25_identity_rel gates (declared before their first evaluation)",
@@ -160,7 +160,7 @@
       "nonnegative_lognormal_pair"
     ],
     "run_environment": {
-      "git_head": "248a06bfeb655337bc499607180c49008b5f34ea",
+      "git_head": "9ad54253c4ec40cede5690da6659be28e0bd0a2d",
       "implementation": "CPython",
       "matplotlib": "3.11.2",
       "numpy": "2.5.3",
@@ -169,7 +169,11 @@
       "scipy": "1.18.1",
       "src_scripts_tests_dirty": false
     },
-    "script": "scripts/phase1g_h_global_variance_closure_numerics.py"
+    "script": "scripts/phase1g_h_global_variance_closure_numerics.py",
+    "second_delta_audit_remediation_changes": [
+      "the (H25) gate is a consistency check of the (H18) assembly on the same kernel arrays and sits in the numerics block (same value and limit)",
+      "no numeric leaf changes (regression against 248a06b in the second remediation record)"
+    ]
   },
   "files": {
     "added": {
@@ -177,9 +181,9 @@
       "scripts/phase1g_h_configs/gm_bare_pbs_w09_seed.json": "286cea0cb071b8381fe16025ac99d0d596c8d704282d869ebfe23d80026b3986",
       "scripts/phase1g_h_configs/nw15_equal_mass_constant_share.json": "41d442557b90a00ddd3d26f263eecea12b982c046656750fa9a1696b6c4d9288",
       "scripts/phase1g_h_global_variance_case.py": "e1b583f39f5b81c0b6c2ba5df1877de11bf091011c7c663bd81c9abee1de57f5",
-      "scripts/phase1g_h_global_variance_closure_numerics.py": "73d2f02ca03bbf918d0d6d5f5eb2ce81291c02422f8680448861c2a9a89829cc",
-      "src/timescape_fsigma8/global_variance.py": "4f7db52fdde9295047eeed78597effe3152dfc4cc9d562f24f665cf826968f69",
-      "tests/test_phase1g_h_global_variance.py": "7026c7fc7f2230afd8b89f7df42f814d5f78f864c3da25e720f666a9a9ab8b8e"
+      "scripts/phase1g_h_global_variance_closure_numerics.py": "c16418d3041e6bec6b2e09bf46ef73402e01af23ed7e7df4136831980c744c1c",
+      "src/timescape_fsigma8/global_variance.py": "9147e3e4fee0a354b1a1a4257752ee84b6b945cf33d379d750ddc35f2dfbb1b2",
+      "tests/test_phase1g_h_global_variance.py": "9841173e7ad5fb925184e4f5a62a1fd9e919201fbb756b10923a722cf682a35e"
     },
     "added_in_delta_audit_remediation": [
       "reports/phase1g_h_delta_audit_remediation.md",
@@ -187,6 +191,11 @@
       "reports/phase1g_h_delta_audit_remediation_logs/",
       "reports/phase1g_h_publication_successor.md",
       "reports/phase1g_h_publication_successor_inventory.json"
+    ],
+    "added_in_second_delta_audit_remediation": [
+      "reports/phase1g_h_delta_audit_2_remediation.md",
+      "reports/phase1g_h_delta_audit_2_remediation_inventory.json",
+      "reports/phase1g_h_delta_audit_2_remediation_logs/"
     ],
     "added_reports": [
       "reports/phase1g_h_global_variance_closure.md",
@@ -223,7 +232,23 @@
       "README.md",
       "CLAUDE.md"
     ],
-    "unchanged": "every frozen report, inventory, audit, evidence file, tag, existing package module (other than global_variance.py), test (other than the 1G-H file) and status token; the files of the independent audit and of the delta audit"
+    "changed_in_second_delta_audit_remediation": [
+      "src/timescape_fsigma8/global_variance.py",
+      "tests/test_phase1g_h_global_variance.py",
+      "scripts/phase1g_h_global_variance_closure_numerics.py",
+      "reports/phase1g_h_global_variance_closure.md",
+      "reports/phase1g_h_global_variance_closure_inventory.json",
+      "reports/phase1g_h_global_variance_closure_validation.md",
+      "reports/phase1g_h_audit_remediation.md",
+      "reports/phase1g_h_audit_remediation_inventory.json",
+      "reports/phase1g_h_delta_audit_remediation.md",
+      "reports/phase1g_h_delta_audit_remediation_inventory.json",
+      "reports/phase1g_h_publication_successor.md",
+      "reports/phase1g_h_publication_successor_inventory.json",
+      "README.md",
+      "CLAUDE.md"
+    ],
+    "unchanged": "every frozen report, inventory, audit, evidence file, tag, existing package module (other than global_variance.py), test (other than the 1G-H file) and status token; the files of the independent audit, of the delta audit and of the second delta audit"
   },
   "limitations": [
     "formal tangent statistic, not the ensemble response of the true contrast (D1)",
@@ -272,7 +297,7 @@
     "H-OD2": "void-share closure for a reference value: beta (1G-F-median seed, recommended), alpha (1G-D [W09]-radius seed), gamma (interval only)",
     "H-OD3": "status tokens: add GLOBAL_MEAN_LINEAR_STATISTIC_DEFINITION = DERIVED_FROM_VERIFIED_DEFINITIONS and GLOBAL_MEAN_LINEAR_STATISTIC_COMPUTATION = DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION (recommended; no validator change), or change LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC (needs an approved validator extension for a second chained change; R2-N4 then relevant)",
     "H-OD4": "keep global_variance.py experimental until an independent audit (recommended), or promote",
-    "H-OD5": "push / pull request / merge / audit / freeze / tag: separate decisions; pushes to the session branch were decided by the owner on 2026-10-06 and 2026-10-08 (publication block); an independent audit (2026-10-07) and a delta audit (2026-10-08) were performed; the push of the delta-audit remediation, pull request, merge, freeze and tag remain open"
+    "H-OD5": "push / pull request / merge / audit / freeze / tag: separate decisions; pushes to the session branch were decided by the owner on 2026-10-06 and 2026-10-08 (publication block); an independent audit (2026-10-07), a delta audit and a second delta audit (2026-10-08) were performed; the push of the second delta-audit remediation, pull request, merge, freeze and tag remain open"
   },
   "owner_decisions_status_2026_10_07": {
     "H-OD1": "narrowed by D1 to the formal tangent statistic and kept a proposal; adoption as the sigma8 analogue not decided",
@@ -282,11 +307,11 @@
     "H-OD5": "push decided; audit performed; delta audit, pull request, merge, freeze and tag open"
   },
   "owner_decisions_status_2026_10_08": {
-    "H-OD1": "open; the delta audit recommends keeping the formal tangent a named research proposal",
-    "H-OD2": "open; the delta audit recommends no physical reference value yet",
-    "H-OD3": "open; the delta audit recommends deferring token promotion; tokens and authorisations unchanged",
-    "H-OD4": "open; keep experimental (records now recompute their results from their inputs, GH-DF2)",
-    "H-OD5": "pushes of 2026-10-06 and 2026-10-08 decided; audit and delta audit performed; push of the delta-audit remediation, pull request, merge, freeze and tag open"
+    "H-OD1": "open; the delta audit recommends keeping the formal tangent a named research proposal; the second delta audit concurs ((c) preferred, (a) as the fixed-mass comparison)",
+    "H-OD2": "open; the delta audit recommends no physical reference value yet; the second delta audit concurs",
+    "H-OD3": "open; the delta audit recommends deferring token promotion; tokens and authorisations unchanged; the second delta audit concurs (no token change)",
+    "H-OD4": "open; keep experimental (records recompute their results from their inputs, GH-DF2; float results must be floats, GH-D2F4); the second delta audit recommends the Windows gate before any promotion",
+    "H-OD5": "pushes of 2026-10-06 and 2026-10-08 decided; audit, delta audit and second delta audit performed; push of the second delta-audit remediation, pull request, merge, freeze and tag open; the second delta audit finds no scientific blocker and asks for the P7 record, the LOW corrections and the Windows gate first"
   },
   "phase": "1G-H",
   "publication": {
@@ -305,6 +330,11 @@
         "action": "push of the audit commit 816dd004763f8de1a8bb09cba9e427a1bd2bb3d1 and the remediation commits c1b448295a631786a2831b05e01650dd2cef73de and 89cb041f901b51a3f90fa6831aab1b4553c1772c to the session branch ccr-555e67be-u11yht (fast-forward from d4d693d)",
         "date": "2026-10-08",
         "verbatim": "Si, fai push"
+      },
+      {
+        "action": "push of the delta-audit commit 5c325e1fd05b343f6d5e93f931038794de4373a2 and the delta-audit remediation commits 248a06bfeb655337bc499607180c49008b5f34ea and 226e52d2e4157d0130b2a9dfaffd71834c6017d9 to the session branch ccr-555e67be-u11yht (fast-forward from 89cb041)",
+        "date": "2026-10-08",
+        "verbatim": "Fai push e prepara il prompt per un nuovo audit"
       }
     ],
     "authorization_block": "records the task statement, which granted local commits only; these approvals are separate, later owner actions",
@@ -314,11 +344,17 @@
         "action": "confirmation of the two approvals of 2026-10-06 recorded above (audit finding GH-F15)",
         "date": "2026-10-08",
         "verbatim": "Si, confermo"
+      },
+      {
+        "action": "direct confirmation of the two approvals of 2026-10-06 to the auditor of the second delta audit (GH-F15 RESOLVED_OWNER_CONFIRMED)",
+        "date": "2026-10-08",
+        "recorded_in": "reports/phase1g_h_delta_audit_2.md",
+        "verbatim": "Confermo le due approvazioni di push registrate (GH-F15)"
       }
     ],
     "delta_audit_publication": "branch phase-1g-h-delta-audit at 5c325e1fd05b343f6d5e93f931038794de4373a2 (tree a5b810e81d125827a17a9cf87b013ead51232080, parent 89cb041), published with the owner's authorisation from the auditing session (owner's report of 2026-10-08)",
     "first_pushed_head": "0572e416504bcdfaa5831b6d482b687ef6fae582",
-    "h_od5_status": "pushes decided (session branch only, 2026-10-06 and 2026-10-08); independent audit and delta audit performed; push of the delta-audit remediation, pull request, merge, freeze and tag remain open",
+    "h_od5_status": "pushes decided (session branch only, 2026-10-06 and 2026-10-08); independent audit, delta audit and second delta audit performed; push of the second delta-audit remediation, pull request, merge, freeze and tag remain open",
     "main": "8d3cdd0533035858c42269cb1dff1a20dcafc7da (unchanged)",
     "not_done": [
       "pull request",
@@ -326,10 +362,21 @@
       "tag creation or change",
       "freeze declaration",
       "release",
-      "push of the delta-audit remediation commits (needs a separate approval)"
+      "push of the second delta-audit commits 6411650 and e517028 and of the second delta-audit remediation commits (needs a separate approval)"
     ],
-    "pushed_head_2026_10_08": "89cb041f901b51a3f90fa6831aab1b4553c1772c",
-    "record": "reports/phase1g_h_publication_successor.md"
+    "pushed_head_2026_10_08": "226e52d2e4157d0130b2a9dfaffd71834c6017d9",
+    "pushed_heads_2026_10_08": [
+      {
+        "event": "P5",
+        "head": "89cb041f901b51a3f90fa6831aab1b4553c1772c"
+      },
+      {
+        "event": "P7",
+        "head": "226e52d2e4157d0130b2a9dfaffd71834c6017d9"
+      }
+    ],
+    "record": "reports/phase1g_h_publication_successor.md",
+    "second_delta_audit_publication": "branch ccr-ac582de6-vho99i at e5170285e1d4b4aa72e907a3a79110d05584c0d9 (tree 45ce98f9d21e93e355ba25812063aec270700116, parent 64116509554cc0d711660da4d81ad95c3f450a6d, a child of 226e52d), published on the owner's instruction in the auditing session (P9 of the publication successor)"
   },
   "r2_n4_relevance": "only if H-OD3's second option (a chained change of LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC) is chosen",
   "report": "reports/phase1g_h_global_variance_closure.md",
@@ -1736,6 +1783,7 @@
     "audited_commit": "d4d693d73f995e2245a5720be227273b3639eda9",
     "audited_text_preserved_at": "d4d693d73f995e2245a5720be227273b3639eda9",
     "date": "2026-10-07",
+    "historical": "2026-10-07 block, not rewritten; D3's 'same shared constraints' is narrowed by GH-DF1 (the pairs share the latent carrier law, not the conditionally normalised wall density): see revision_delta_audit and reports/phase1g_h_delta_audit_2_remediation.md (GH-D2F5)",
     "kind": "INDEPENDENT_AUDIT_REMEDIATION",
     "owner_approval_verbatim": "Procedi, usa le scelte raccomandate per i punti 1-4",
     "owner_decisions": {
@@ -1776,6 +1824,49 @@
     },
     "owner_approval_verbatim": "Perfetto, procedi",
     "remediation_record": "reports/phase1g_h_delta_audit_remediation.md"
+  },
+  "revision_second_delta_audit": {
+    "audited_commit": "226e52d2e4157d0130b2a9dfaffd71834c6017d9",
+    "auditor_independence": "same model family as the author (Claude); procedural independence only; the two earlier audits were OpenAI Codex",
+    "blind_checkpoint_commit": "64116509554cc0d711660da4d81ad95c3f450a6d",
+    "date": "2026-10-08",
+    "delta_findings_after_second_delta_audit": {
+      "GH-DF1..GH-DF6": "RESOLVED"
+    },
+    "errata": [
+      "GH-D2E1",
+      "GH-D2E2"
+    ],
+    "kind": "SECOND_DELTA_AUDIT_REMEDIATION",
+    "new_findings": {
+      "GH-D2F1": "LOW",
+      "GH-D2F2": "LOW",
+      "GH-D2F3": "INFO",
+      "GH-D2F4": "INFO",
+      "GH-D2F5": "INFO",
+      "GH-D2F6": "INFO"
+    },
+    "original_findings_after_second_delta_audit": {
+      "RESOLVED": 12,
+      "RESOLVED_BY_OWNER_DECISION": 2,
+      "RESOLVED_OWNER_CONFIRMED": 1
+    },
+    "owner_approval_verbatim": "Perfetto, procedi",
+    "readiness_token": "NO_SCIENTIFIC_BLOCKER_READY_FOR_OWNER_DECISION_AFTER_LOW_CORRECTIONS_P7_RECORD_AND_WINDOWS_GATE",
+    "remediation_record": "reports/phase1g_h_delta_audit_2_remediation.md",
+    "second_delta_audit_commit": "e5170285e1d4b4aa72e907a3a79110d05584c0d9",
+    "second_delta_audit_report": "reports/phase1g_h_delta_audit_2.md",
+    "verdict": {
+      "DOCUMENTATION": "ACCEPT_WITH_CORRECTIONS",
+      "GOVERNANCE": "ACCEPT_WITH_CORRECTIONS",
+      "IMPLEMENTATION": "ACCEPT",
+      "NUMERICS": "ACCEPT",
+      "PROVENANCE": "ACCEPT",
+      "SCIENCE": "ACCEPT",
+      "TASK_COMPLIANCE": "ACCEPT",
+      "TESTS": "ACCEPT_WITH_CORRECTIONS",
+      "overall": "ACCEPT_WITH_CORRECTIONS"
+    }
   },
   "schema_version": 1,
   "sources": {
@@ -1831,7 +1922,8 @@
     }
   },
   "tests": {
-    "count": 42,
+    "count": 49,
+    "count_after_delta_remediation": 42,
     "count_after_first_remediation": 35,
     "count_before_remediation": 28,
     "file": "tests/test_phase1g_h_global_variance.py"
@@ -2356,6 +2448,60 @@
     "record": "reports/phase1g_h_audit_remediation.md (sec. 3)",
     "tolerance_audit_missing": 0,
     "validator": "PASS (49 JSON round trips)",
+    "windows_gate": "not run"
+  },
+  "verification_second_delta_remediated_tree": {
+    "evidence_gates": "36 / 36 on CPython 3.13.16 and 36 / 36 on 3.11.17",
+    "full_suites": {
+      "CPython 3.11.17": {
+        "collected": 1185,
+        "errors": 0,
+        "failed": 0,
+        "passed": 1153,
+        "rc": 0,
+        "seconds": 281,
+        "skipped": 32
+      },
+      "CPython 3.13.16": {
+        "collected": 1185,
+        "errors": 0,
+        "failed": 0,
+        "passed": 1153,
+        "rc": 0,
+        "seconds": 281,
+        "skipped": 32
+      },
+      "command": "OPENBLAS_NUM_THREADS=1 python -B -W error -m pytest -q -p no:cacheprovider -rs"
+    },
+    "mutation_testing": {
+      "by_origin": {
+        "author": {
+          "KILLED_BY_TESTS": 9,
+          "NOT_APPLIED": 1
+        },
+        "baseline": {
+          "BASELINE_PASS": 1
+        },
+        "delta": {
+          "KILLED_BY_TESTS": 21,
+          "SURVIVED": 2
+        },
+        "own": {
+          "KILLED_BY_TESTS": 22,
+          "SURVIVED": 1
+        },
+        "round3": {
+          "KILLED_BY_TESTS": 4
+        }
+      },
+      "extra": {
+        "AUTH_D1_binding_off_adapted": "KILLED_BY_TESTS"
+      }
+    },
+    "phase_tests": 49,
+    "record": "reports/phase1g_h_delta_audit_2_remediation.md (sec. 3)",
+    "tolerance_audit_missing": 0,
+    "validator": "PASS (54 JSON round trips)",
     "windows_gate": "not run"
   }
 }

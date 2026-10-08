@@ -225,6 +225,22 @@
     "GH-DE6": "dated status note in reports/phase1g_h_audit_remediation.md"
   },
   "schema_version": 1,
+  "status_note_2026_10_08_after_second_delta_audit": {
+    "corrections": "reports/phase1g_h_delta_audit_2_remediation.md",
+    "erratum_GH-D2E1": {
+      "correct_reading": "every common physical leaf outside the pairs is bitwise identical; three gate read-outs of pair quantities changed by at most 1.2e-5 absolute; inside gaussian_threshold_pair 160 common leaves changed (156 numeric, 140 of them by more than 1e-12 relative, 4 constraint texts), 6 were renamed (ball_variance_unmasked_density -> ball_variance_unconditionally_normalised_carrier) and 106 exist only in the new artifact (those 6 new names and 100 new leaves); 16 leaves were added outside (gates, gate definitions, G_ode_cross_check)",
+      "recount": "reports/phase1g_h_delta_audit_2_remediation.md section 3 (same comparison, recounted by the author)",
+      "superseded_field": "verification.regression_vs_89cb041"
+    },
+    "note": "this inventory states the remediation as of its commit 226e52d and is not rewritten",
+    "publication": "the two commits of this record and the delta-audit commit were pushed on 2026-10-08 (89cb041 -> 226e52d; reports/phase1g_h_publication_successor.md section 6, P7); commits.branch, commits.pushed and the push item of open_items are superseded (erratum GH-D2E2)",
+    "second_delta_audit": "reports/phase1g_h_delta_audit_2.md (commit e5170285e1d4b4aa72e907a3a79110d05584c0d9; ACCEPT_WITH_CORRECTIONS)",
+    "verified_outcomes": {
+      "GH-DE1..GH-DE5": "APPLIED",
+      "GH-DE6": "APPLIED_EQUIVALENT",
+      "GH-DF1..GH-DF6": "RESOLVED"
+    }
+  },
   "status_tokens": {
     "added": [],
     "changed": []
