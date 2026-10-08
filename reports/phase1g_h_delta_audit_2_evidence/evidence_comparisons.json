@@ -1,0 +1,148 @@
+{
+ "cross_interpreter_226e52d_py313_vs_py311": {
+  "n_A": 3854,
+  "n_B": 3851,
+  "numeric_common": 3201,
+  "numeric_changed": 0,
+  "other_changed": 0,
+  "only_A": 3,
+  "only_B": 0,
+  "max_abs": 0.0,
+  "max_rel": 0.0
+ },
+ "py313_226e52d_vs_248a06b": {
+  "n_A": 3854,
+  "n_B": 3854,
+  "numeric_common": 3201,
+  "numeric_changed": 0,
+  "other_changed": 0,
+  "only_A": 0,
+  "only_B": 0,
+  "max_abs": 0.0,
+  "max_rel": 0.0
+ },
+ "regression_py313_5c325e1_vs_226e52d": {
+  "n_A": 3735,
+  "n_B": 3854,
+  "numeric_common": 3093,
+  "numeric_changed": 159,
+  "other_changed": 4,
+  "only_A": 6,
+  "only_B": 125,
+  "max_abs": 0.0007719476316552232,
+  "max_rel": 0.001274657409871316,
+  "changed_numeric_by_region": {
+   "outside": 3,
+   "inside_gaussian_threshold_pair": 156
+  },
+  "changed_text_by_region": {
+   "inside_gaussian_threshold_pair": 4
+  },
+  "only_old_by_region": {
+   "inside_gaussian_threshold_pair": 6
+  },
+  "only_new_by_region": {
+   "outside": 16,
+   "inside_gaussian_threshold_pair": 106
+  },
+  "outside_changed": [
+   [
+    "/gates/numerics/PAPER_REFERENCE lognormal ball-variance calibration/value",
+    3.3306690738754696e-16,
+    0.0
+   ],
+   [
+    "/gates/physics/NW15_CMB_FIT lognormal linear limit reproduces the signed pair/value",
+    0.006414056975155402,
+    0.006409916363450341
+   ],
+   [
+    "/gates/physics/PAPER_REFERENCE lognormal linear limit reproduces the signed pair/value",
+    0.009305549563680238,
+    0.009294099099422803
+   ]
+  ],
+  "renamed_old_paths": [
+   "/two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/ball_variance_unmasked_density",
+   "/two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/ball_variance_unmasked_density",
+   "/two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/ball_variance_unmasked_density",
+   "/two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/ball_variance_unmasked_density",
+   "/two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/ball_variance_unmasked_density",
+   "/two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/ball_variance_unmasked_density"
+  ],
+  "changed_inside_beyond_1e-15_rel": 140
+ },
+ "regression_py311_5c325e1_vs_226e52d": {
+  "n_A": 3735,
+  "n_B": 3851,
+  "numeric_common": 3093,
+  "numeric_changed": 159,
+  "other_changed": 4,
+  "only_A": 6,
+  "only_B": 122,
+  "max_abs": 0.0007719476316552232,
+  "max_rel": 0.001274657409871316,
+  "changed_numeric_by_region": {
+   "outside": 3,
+   "inside_gaussian_threshold_pair": 156
+  },
+  "changed_text_by_region": {
+   "inside_gaussian_threshold_pair": 4
+  },
+  "only_old_by_region": {
+   "inside_gaussian_threshold_pair": 6
+  },
+  "only_new_by_region": {
+   "outside": 16,
+   "inside_gaussian_threshold_pair": 106
+  },
+  "outside_changed": [
+   [
+    "/gates/numerics/PAPER_REFERENCE lognormal ball-variance calibration/value",
+    3.3306690738754696e-16,
+    0.0
+   ],
+   [
+    "/gates/physics/NW15_CMB_FIT lognormal linear limit reproduces the signed pair/value",
+    0.006414056975155402,
+    0.006409916363450341
+   ],
+   [
+    "/gates/physics/PAPER_REFERENCE lognormal linear limit reproduces the signed pair/value",
+    0.009305549563680238,
+    0.009294099099422803
+   ]
+  ],
+  "renamed_old_paths": [
+   "/two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/ball_variance_unmasked_density",
+   "/two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/ball_variance_unmasked_density",
+   "/two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/ball_variance_unmasked_density",
+   "/two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/ball_variance_unmasked_density",
+   "/two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/ball_variance_unmasked_density",
+   "/two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/ball_variance_unmasked_density"
+  ],
+  "changed_inside_beyond_1e-15_rel": 140
+ },
+ "delta_saved_py311_89cb041_vs_audit_py311_5c325e1": {
+  "n_A": 3735,
+  "n_B": 3735,
+  "numeric_common": 3099,
+  "numeric_changed": 0,
+  "other_changed": 0,
+  "only_A": 0,
+  "only_B": 0,
+  "max_abs": 0.0,
+  "max_rel": 0.0
+ },
+ "delta_saved_py312_89cb041_vs_audit_py313_5c325e1": {
+  "n_A": 3735,
+  "n_B": 3735,
+  "numeric_common": 3099,
+  "numeric_changed": 0,
+  "other_changed": 0,
+  "only_A": 0,
+  "only_B": 0,
+  "max_abs": 0.0,
+  "max_rel": 0.0
+ }
+}

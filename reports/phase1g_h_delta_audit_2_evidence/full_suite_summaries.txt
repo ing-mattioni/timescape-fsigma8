@@ -1,0 +1,7 @@
+Tree 226e52d plus this audit's evidence files (first run):
+CPython 3.13.16: 1178 passed in 236.23s (0:03:56)
+CPython 3.11.17: 1178 passed in 234.30s (0:03:54)
+Final tree of this audit (report, inventory and evidence staged):
+CPython 3.13.16: 1178 passed in 237.87s (0:03:57)
+CPython 3.11.17: 1178 passed in 235.16s (0:03:55)
+Command: OPENBLAS_NUM_THREADS=1 python -B -W error -m pytest -q -p no:cacheprovider -rs (0 skipped, 0 failed in every run)

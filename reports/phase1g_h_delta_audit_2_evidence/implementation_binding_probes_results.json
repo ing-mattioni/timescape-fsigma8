@@ -1,0 +1,307 @@
+{
+ "summary": {
+  "total": 32,
+  "as_expected": 30,
+  "unexpected": [
+   "TY1_sigma_as_Fraction",
+   "TY7_sigma_within_rtol"
+  ],
+  "accepted": [
+   "TOL1_quadrature_looser_tolerances",
+   "TOL3_growth_checks_looser_cross_check",
+   "TOL6_seed_quadrature_looser",
+   "G1_growth_G_x2",
+   "ID3_void_share_spectrum_equal_copy",
+   "ID4_deepcopy_sigma_record",
+   "ID5_pickle_roundtrip_then_replace",
+   "ID6_radius_equal_copy",
+   "TY1_sigma_as_Fraction",
+   "TY2_sigma_as_numpy_float64",
+   "CO1_interval_other_target_coherent",
+   "CO3_premise_provenance_text",
+   "CO4_matching_provenance_text"
+  ],
+  "accepted_non_strict_json": [
+   "TY1_sigma_as_Fraction"
+  ],
+  "refused_non_contract_error": []
+ },
+ "probes": [
+  {
+   "id": "DA1_spectrum_As_x4",
+   "expect": "refuse",
+   "note": "",
+   "accepted": false,
+   "exception": "GlobalVarianceContractError",
+   "message": "void_share must be evaluated with this record's density and early spectrum",
+   "as_expected": true
+  },
+  {
+   "id": "DA2_radius_x2",
+   "expect": "refuse",
+   "note": "",
+   "accepted": false,
+   "exception": "GlobalVarianceContractError",
+   "message": "sigma record: unit_growth_sigma differs from its recomputation from the stored inputs",
+   "as_expected": true
+  },
+  {
+   "id": "DA3_quadrature_33_17",
+   "expect": "refuse",
+   "note": "",
+   "accepted": false,
+   "exception": "GlobalVarianceContractError",
+   "message": "sigma record: the stored inputs do not reproduce a valid result (variance quadrature not converged at R = 10.1041 Mpc: relative change 9.387e-03 exceeds 1.000e-06)",
+   "as_expected": true
+  },
+  {
+   "id": "DA4_seed_radius_x2",
+   "expect": "refuse",
+   "note": "",
+   "accepted": false,
+   "exception": "GlobalVarianceContractError",
+   "message": "void share: share_k0 differs from its recomputation from the stored inputs",
+   "as_expected": true
+  },
+  {
+   "id": "DA5_premise_rms_999",
+   "expect": "refuse",
+   "note": "",
+   "accepted": false,
+   "exception": "GlobalVarianceContractError",
+   "message": "interval record: target_premise_rms differs from its recomputation from the stored inputs",
+   "as_expected": true
+  },
+  {
+   "id": "TOL1_quadrature_looser_tolerances",
+   "expect": "accept",
+   "note": "values identical; the record states a looser contract it satisfies",
+   "accepted": true,
+   "strict_json": true,
+   "as_expected": true
+  },
+  {
+   "id": "TOL2_quadrature_tolerance_below_achieved",
+   "expect": "refuse",
+   "note": "a contract the stored result does not meet",
+   "accepted": false,
+   "exception": "GlobalVarianceContractError",
+   "message": "quadrature diagnostics are inconsistent or failed",
+   "as_expected": true
+  },
+  {
+   "id": "TOL3_growth_checks_looser_cross_check",
+   "expect": "accept",
+   "note": "values identical; looser stated contract",
+   "accepted": true,
+   "strict_json": true,
+   "as_expected": true
+  },
+  {
+   "id": "TOL4_growth_checks_tolerance_below_achieved",
+   "expect": "refuse",
+   "note": "",
+   "accepted": false,
+   "exception": "GlobalVarianceContractError",
+   "message": "cross-check diagnostic wall_share_ode_vs_closed_form_rel missing or failed",
+   "as_expected": true
+  },
+  {
+   "id": "TOL5_growth_checks_ode_rtol_changed",
+   "expect": "refuse",
+   "note": "integration changes the diagnostics",
+   "accepted": false,
+   "exception": "GlobalVarianceContractError",
+   "message": "growth record: diagnostics differs from its recomputation from the stored inputs",
+   "as_expected": true
+  },
+  {
+   "id": "TOL6_seed_quadrature_looser",
+   "expect": "accept",
+   "note": "",
+   "accepted": true,
+   "strict_json": true,
+   "as_expected": true
+  },
+  {
+   "id": "G1_growth_G_x2",
+   "expect": "accept",
+   "note": "G cancels; accepted only if the ODE diagnostics are reproduced",
+   "accepted": true,
+   "strict_json": true,
+   "as_expected": true
+  },
+  {
+   "id": "ID1_sigma_density_equal_copy",
+   "expect": "refuse",
+   "note": "object identity required by design",
+   "accepted": false,
+   "exception": "GlobalVarianceContractError",
+   "message": "void_share must be evaluated with this record's density and early spectrum",
+   "as_expected": true
+  },
+  {
+   "id": "ID2_sigma_spectrum_equal_copy",
+   "expect": "refuse",
+   "note": "an equal spectrum built anew",
+   "accepted": false,
+   "exception": "GlobalVarianceContractError",
+   "message": "void_share must be evaluated with this record's density and early spectrum",
+   "as_expected": true
+  },
+  {
+   "id": "ID3_void_share_spectrum_equal_copy",
+   "expect": "accept",
+   "note": "the void share alone has no identity contract with the spectrum",
+   "accepted": true,
+   "strict_json": true,
+   "as_expected": true
+  },
+  {
+   "id": "ID4_deepcopy_sigma_record",
+   "expect": "accept",
+   "note": "",
+   "accepted": true,
+   "strict_json": true,
+   "as_expected": true
+  },
+  {
+   "id": "ID5_pickle_roundtrip_then_replace",
+   "expect": "accept",
+   "note": "pickle keeps shared references; replace re-runs __post_init__",
+   "accepted": true,
+   "strict_json": true,
+   "as_expected": true
+  },
+  {
+   "id": "ID6_radius_equal_copy",
+   "expect": "accept",
+   "note": "",
+   "accepted": true,
+   "strict_json": true,
+   "as_expected": true
+  },
+  {
+   "id": "TY1_sigma_as_Fraction",
+   "expect": "refuse",
+   "note": "an exact Fraction of the stored float",
+   "accepted": true,
+   "strict_json": false,
+   "json_error": "TypeError: Object of type Fraction is not JSON serializable",
+   "as_expected": false
+  },
+  {
+   "id": "TY2_sigma_as_numpy_float64",
+   "expect": "accept",
+   "note": "",
+   "accepted": true,
+   "strict_json": true,
+   "as_expected": true
+  },
+  {
+   "id": "TY3_interval_target_inside_as_int",
+   "expect": "refuse",
+   "note": "",
+   "accepted": false,
+   "exception": "GlobalVarianceContractError",
+   "message": "target_inside must be a bool",
+   "as_expected": true
+  },
+  {
+   "id": "TY4_interval_target_inside_as_numpy_bool",
+   "expect": "refuse",
+   "note": "",
+   "accepted": false,
+   "exception": "GlobalVarianceContractError",
+   "message": "target_inside must be a bool",
+   "as_expected": true
+  },
+  {
+   "id": "TY5_regime_as_other_string",
+   "expect": "refuse",
+   "note": "",
+   "accepted": false,
+   "exception": "GlobalVarianceContractError",
+   "message": "void_response_regime is inconsistent",
+   "as_expected": true
+  },
+  {
+   "id": "TY6_void_share_nu_as_string",
+   "expect": "refuse",
+   "note": "",
+   "accepted": false,
+   "exception": "GlobalVarianceContractError",
+   "message": "nu must be a real scalar, not '3.7327225038848457'",
+   "as_expected": true
+  },
+  {
+   "id": "TY7_sigma_within_rtol",
+   "expect": "accept",
+   "note": "inside RECORD_IDENTITY_RTOL by design",
+   "accepted": false,
+   "exception": "GlobalVarianceContractError",
+   "message": "effective_propagator must be the ratio",
+   "as_expected": false
+  },
+  {
+   "id": "CO1_interval_other_target_coherent",
+   "expect": "accept",
+   "note": "a genuine record for another target",
+   "accepted": true,
+   "strict_json": true,
+   "as_expected": true
+  },
+  {
+   "id": "CO2_interval_target_swapped_values_kept",
+   "expect": "refuse",
+   "note": "",
+   "accepted": false,
+   "exception": "GlobalVarianceContractError",
+   "message": "interval fields violate (H15) for this target",
+   "as_expected": true
+  },
+  {
+   "id": "CO3_premise_provenance_text",
+   "expect": "accept",
+   "note": "free-text provenance is not bound (metadata)",
+   "accepted": true,
+   "strict_json": true,
+   "as_expected": true
+  },
+  {
+   "id": "CO4_matching_provenance_text",
+   "expect": "accept",
+   "note": "free-text provenance is not bound",
+   "accepted": true,
+   "strict_json": true,
+   "as_expected": true
+  },
+  {
+   "id": "CO5_interval_premise_other_convention",
+   "expect": "refuse",
+   "note": "",
+   "accepted": false,
+   "exception": "GlobalVarianceContractError",
+   "message": "premise_radius must resolve the premise's radius",
+   "as_expected": true
+  },
+  {
+   "id": "CO6_status_field_relabelled",
+   "expect": "refuse",
+   "note": "",
+   "accepted": false,
+   "exception": "GlobalVarianceContractError",
+   "message": "amplitude_status must be NOT_OBSERVATIONAL_SIGMA_8",
+   "as_expected": true
+  },
+  {
+   "id": "RT1_sigma_void_share_from_other_growth",
+   "expect": "refuse",
+   "note": "",
+   "accepted": false,
+   "exception": "GlobalVarianceContractError",
+   "message": "void_share must be evaluated for this growth record",
+   "as_expected": true
+  }
+ ]
+}

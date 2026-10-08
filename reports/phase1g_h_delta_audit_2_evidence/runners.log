@@ -1,0 +1,12 @@
+== scripts/phase1g_h_configs/gm_bare_pbs_f_median_seed.json
+      "max_linear_rms": 0.1,
+      "provenance": "[W09] ll. 327-335, 455-458 read as rms <= 0.1 in the top hat of 100 h_bare^-1 Mpc",
+    "target_premise_rms": 0.08122218802632224,
+== scripts/phase1g_h_configs/gm_bare_pbs_w09_seed.json
+      "max_linear_rms": 0.1,
+      "provenance": "[W09] ll. 327-335, 455-458 read as rms <= 0.1 in the top hat of 100 h_bare^-1 Mpc",
+    "target_premise_rms": 0.11246786672884228,
+== scripts/phase1g_h_configs/nw15_equal_mass_constant_share.json
+      "when the void-volume response rms exceeds 1 the linear void response is applied beyond its declared validity (H-A8, formal extrapolation); below 1 no controlled truncation error is established either",
+    "linear_sigma": 0.9181569463963312,
+    "quantity_label": "conditional_global_mean_linear_rms_lagrangian_top_hat",

@@ -1,0 +1,1052 @@
+[
+ {
+  "origin": "baseline",
+  "id": "baseline",
+  "file": null,
+  "old": "",
+  "new": "",
+  "tests_rc": 0,
+  "tests_summary": "42 passed in 9.40s",
+  "failed_tests": [],
+  "evidence_rc": 0,
+  "evidence_failures": [],
+  "evidence_tail": [
+   "  radial refinement max rel. change 1.01e-06 (1440 intervals); (H25) max rel. 0.0e+00",
+   "all 36 gates pass"
+  ],
+  "outcome": "BASELINE_PASS"
+ },
+ {
+  "origin": "delta",
+  "id": "M1_wall_exponent",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "d_w = g0 * f_w0 ** (4.0 / 3.0) / (g_ls * f_wls ** (4.0 / 3.0))",
+  "new": "d_w = g0 * f_w0 / (g_ls * f_wls)",
+  "replacements": 1,
+  "mutated_sha256": "a9de80226add1f2a34f602f2ebc60ae7596d106899e8f4777547faac8432f007",
+  "tests_rc": 1,
+  "tests_summary": "13 failed, 20 passed, 9 errors in 3.73s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_growth_factors_against_an_independent_tracker[GM]",
+   "tests/test_phase1g_h_global_variance.py::test_growth_factors_against_an_independent_tracker[NW15]",
+   "tests/test_phase1g_h_global_variance.py::test_small_void_fraction_limit_is_einstein_de_sitter",
+   "tests/test_phase1g_h_global_variance.py::test_variance_equals_real_space_pair_density_integral",
+   "tests/test_phase1g_h_global_variance.py::test_unit_growth_sigma_matches_lagrangian_sigma_runtime",
+   "tests/test_phase1g_h_global_variance.py::test_reproduces_1g_d_owner_decision_void_response[GM]",
+   "tests/test_phase1g_h_global_variance.py::test_reproduces_1g_d_owner_decision_void_response[NW15]",
+   "tests/test_phase1g_h_global_variance.py::test_constant_share_variance_scales_with_A_s_and_pbs_void_term_does_not",
+   "tests/test_phase1g_h_global_variance.py::test_terms_of_the_propagator_add_coherently_for_a_constant_share",
+   "tests/test_phase1g_h_global_variance.py::test_records_reject_tampering",
+   "tests/test_phase1g_h_global_variance.py::test_naming_rule_statuses_and_isolation",
+   "tests/test_phase1g_h_global_variance.py::test_example_configurations_run_and_require_every_choice",
+   "tests/test_phase1g_h_global_variance.py::test_gh_df2_records_bind_results_to_their_inputs"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "delta",
+  "id": "M2_remove_wall_gamma",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "d_w = g0 * f_w0 ** (4.0 / 3.0) / (g_ls * f_wls ** (4.0 / 3.0))",
+  "new": "d_w = f_w0 ** (4.0 / 3.0) / f_wls ** (4.0 / 3.0)",
+  "replacements": 1,
+  "mutated_sha256": "5085f1041eb912b6721e8e4745b1f1d70c03f4ae9467a1843585a6e9f63d413c",
+  "tests_rc": 1,
+  "tests_summary": "13 failed, 20 passed, 9 errors in 3.72s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_growth_factors_against_an_independent_tracker[GM]",
+   "tests/test_phase1g_h_global_variance.py::test_growth_factors_against_an_independent_tracker[NW15]",
+   "tests/test_phase1g_h_global_variance.py::test_small_void_fraction_limit_is_einstein_de_sitter",
+   "tests/test_phase1g_h_global_variance.py::test_variance_equals_real_space_pair_density_integral",
+   "tests/test_phase1g_h_global_variance.py::test_unit_growth_sigma_matches_lagrangian_sigma_runtime",
+   "tests/test_phase1g_h_global_variance.py::test_reproduces_1g_d_owner_decision_void_response[GM]",
+   "tests/test_phase1g_h_global_variance.py::test_reproduces_1g_d_owner_decision_void_response[NW15]",
+   "tests/test_phase1g_h_global_variance.py::test_constant_share_variance_scales_with_A_s_and_pbs_void_term_does_not",
+   "tests/test_phase1g_h_global_variance.py::test_terms_of_the_propagator_add_coherently_for_a_constant_share",
+   "tests/test_phase1g_h_global_variance.py::test_records_reject_tampering",
+   "tests/test_phase1g_h_global_variance.py::test_naming_rule_statuses_and_isolation",
+   "tests/test_phase1g_h_global_variance.py::test_example_configurations_run_and_require_every_choice",
+   "tests/test_phase1g_h_global_variance.py::test_gh_df2_records_bind_results_to_their_inputs"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "delta",
+  "id": "M3_missing_void_redshift",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "d_v = fv0 / (f_vls * (1.0 + z_ls))",
+  "new": "d_v = fv0 / f_vls",
+  "replacements": 1,
+  "mutated_sha256": "f697c471032a049b1fdbf740b1b3c3d3d977d9cc701a07b483774a6e7484782e",
+  "tests_rc": 1,
+  "tests_summary": "13 failed, 20 passed, 9 errors in 4.38s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_growth_factors_against_an_independent_tracker[GM]",
+   "tests/test_phase1g_h_global_variance.py::test_growth_factors_against_an_independent_tracker[NW15]",
+   "tests/test_phase1g_h_global_variance.py::test_small_void_fraction_limit_is_einstein_de_sitter",
+   "tests/test_phase1g_h_global_variance.py::test_variance_equals_real_space_pair_density_integral",
+   "tests/test_phase1g_h_global_variance.py::test_unit_growth_sigma_matches_lagrangian_sigma_runtime",
+   "tests/test_phase1g_h_global_variance.py::test_reproduces_1g_d_owner_decision_void_response[GM]",
+   "tests/test_phase1g_h_global_variance.py::test_reproduces_1g_d_owner_decision_void_response[NW15]",
+   "tests/test_phase1g_h_global_variance.py::test_constant_share_variance_scales_with_A_s_and_pbs_void_term_does_not",
+   "tests/test_phase1g_h_global_variance.py::test_terms_of_the_propagator_add_coherently_for_a_constant_share",
+   "tests/test_phase1g_h_global_variance.py::test_records_reject_tampering",
+   "tests/test_phase1g_h_global_variance.py::test_naming_rule_statuses_and_isolation",
+   "tests/test_phase1g_h_global_variance.py::test_example_configurations_run_and_require_every_choice",
+   "tests/test_phase1g_h_global_variance.py::test_gh_df2_records_bind_results_to_their_inputs"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "delta",
+  "id": "M4_reverse_compression",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "compression = (f_vls if closure.compression",
+  "new": "compression = (-f_vls if closure.compression",
+  "replacements": 1,
+  "mutated_sha256": "ed61937950483557346ec86212da62d05957d6ffd7f27cef0b7cf7cdec9f613a",
+  "tests_rc": 1,
+  "tests_summary": "7 failed, 35 passed in 7.30s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gaussian_threshold_share_independent_evaluation",
+   "tests/test_phase1g_h_global_variance.py::test_admissible_interval_logic",
+   "tests/test_phase1g_h_global_variance.py::test_records_reject_tampering",
+   "tests/test_phase1g_h_global_variance.py::test_gh_f3_void_share_is_f_v_minus_the_regional_fraction_derivative",
+   "tests/test_phase1g_h_global_variance.py::test_gh_f6_post_hoc_anchoring_differs_from_pbs_reclosure",
+   "tests/test_phase1g_h_global_variance.py::test_gh_df2_records_bind_results_to_their_inputs",
+   "tests/test_phase1g_h_global_variance.py::test_gh_df5_pbs_reclosure_rescales_the_input_spectrum_by_the_factor_squared"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "delta",
+  "id": "M5_seed_window_unity",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "w = top_hat_window(x=k * self.closure.seed_radius_Mpc)",
+  "new": "w = np.ones_like(k)",
+  "replacements": 1,
+  "mutated_sha256": "90b0741b4828a573c79074156df1c67c731cb31723a659f62cd522c1ad21df82",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 41 passed in 10.58s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gaussian_threshold_share_independent_evaluation"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "delta",
+  "id": "M6_swap_phase_weights",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "w = np.array([alpha, a_w, a_v])",
+  "new": "w = np.array([alpha, a_v, a_w])",
+  "replacements": 1,
+  "mutated_sha256": "e80d90a24424e46b1158613f7ac6fe5b3bc6d711696f929f8771db61d5607b6a",
+  "tests_rc": 1,
+  "tests_summary": "5 failed, 37 passed in 9.71s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_two_phase_variance_assembly_on_a_synthetic_field",
+   "tests/test_phase1g_h_global_variance.py::test_e3_special_case_is_the_1g_e_mass_conserving_formula",
+   "tests/test_phase1g_h_global_variance.py::test_gh_f11_1g_e_reference_reproduces_within_its_rounding_budget",
+   "tests/test_phase1g_h_global_variance.py::test_gh_df1_law_summary_satisfies_h25_and_includes_the_first_radial_panel",
+   "tests/test_phase1g_h_global_variance.py::test_gh_df1_lognormal_laws_report_the_law_ii_normaliser"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "delta",
+  "id": "M7_shift_orthant_lower",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "lo = max(c1, -_ORTHANT_HALF_WIDTH)",
+  "new": "lo = max(c1 + 0.1, -_ORTHANT_HALF_WIDTH)",
+  "replacements": 1,
+  "mutated_sha256": "58ab3a2b2b2abea116dc8a68fae78f41fff3bafddba534f62fcdedc9b364587d",
+  "tests_rc": 1,
+  "tests_summary": "6 failed, 36 passed in 8.47s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_orthant_moments_against_bivariate_cdf_and_monte_carlo",
+   "tests/test_phase1g_h_global_variance.py::test_gaussian_threshold_pair_covariance_formulas_by_monte_carlo",
+   "tests/test_phase1g_h_global_variance.py::test_gh_f5_lognormal_mask_kernels_by_monte_carlo",
+   "tests/test_phase1g_h_global_variance.py::test_gh_f10_orthant_quadrature_meets_its_accuracy_contract",
+   "tests/test_phase1g_h_global_variance.py::test_gh_df1_lognormal_laws_share_the_carrier_not_the_conditional_density",
+   "tests/test_phase1g_h_global_variance.py::test_gh_df1_lognormal_laws_report_the_law_ii_normaliser"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "delta",
+  "id": "M8_reverse_barrier_response",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "return (d_c - d_l) / (d_c - d_v)",
+  "new": "return (d_c + d_l) / (d_c - d_v)",
+  "replacements": 1,
+  "mutated_sha256": "0edff6edbff7474e1ed1e7db99d554c25fb9e63a56f7fbd7c5e593160fa9eb2e",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 41 passed in 9.97s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_two_barrier_mass_fraction_and_global_bias"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "delta",
+  "id": "N1_growth_record_validation_off",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "if self.fv0 != self.background.fv0:",
+  "new": "if False:",
+  "replacements": 1,
+  "mutated_sha256": "31c7e06218a52022ba3aa619da36fcc909c795c63f0142e1db766c4641d38fb0",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 41 passed in 8.90s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_df5_defensive_invariants_are_exercised"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "delta",
+  "id": "N2_void_share_record_validation_off",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "if p0 != self.closure.share:",
+  "new": "if False:",
+  "replacements": 1,
+  "mutated_sha256": "32af3b70276ae3976d9524f5320dafd227a474ffb5353be6782da7e338d388f0",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 41 passed in 7.97s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_records_reject_tampering"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "delta",
+  "id": "N3_sigma_record_validation_off",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "if self.effective_propagator != self.linear_sigma / self.unit_growth_sigma:",
+  "new": "if False:",
+  "replacements": 1,
+  "mutated_sha256": "14c7d48383db93fd03b5e5c94a6a6c924847d7c50fad3f1f086f8de73bbaa05f",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 41 passed in 9.48s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_records_reject_tampering"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "delta",
+  "id": "N4_interval_record_validation_off",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "if self.target_inside != (self.premise_compatible\n                                  and self.lower <= self.target_value <= self.upper):",
+  "new": "if False:",
+  "replacements": 1,
+  "mutated_sha256": "ea565005a6dc8d5fb3ab646a8cade00169f2bb6ca5f2b73fd816fd35cd31a651",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 41 passed in 9.45s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_df5_defensive_invariants_are_exercised"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "delta",
+  "id": "N5_orthant_centre_split_off",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "for b in (u_star - 8.0 * width, u_star, u_star + 8.0 * width):",
+  "new": "for b in (u_star - 8.0 * width, u_star + 8.0 * width):",
+  "replacements": 1,
+  "mutated_sha256": "b49915f1ef76ec2b8156c422a77310e5d204899e5409847f47bd1cf3fcc2aa08",
+  "tests_rc": 0,
+  "tests_summary": "42 passed in 8.49s",
+  "failed_tests": [],
+  "evidence_rc": 0,
+  "evidence_failures": [],
+  "evidence_tail": [
+   "  radial refinement max rel. change 1.01e-06 (1440 intervals); (H25) max rel. 2.2e-16",
+   "all 36 gates pass"
+  ],
+  "outcome": "SURVIVED"
+ },
+ {
+  "origin": "delta",
+  "id": "N6_orthant_transition_edges_off",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "for b in (u_star - 8.0 * width, u_star, u_star + 8.0 * width):",
+  "new": "for b in (u_star,):",
+  "replacements": 1,
+  "mutated_sha256": "745fd22d283a0699e6a5dd692e691b28bfd3cde0f2958365e693320f09ae3ebb",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 41 passed in 10.32s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_f10_orthant_quadrature_meets_its_accuracy_contract"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "delta",
+  "id": "N7_orthant_refinement_off",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "previous = evaluate(n)\n    while True:",
+  "new": "previous = evaluate(n)\n    return previous, n, 0.0\n    while True:",
+  "replacements": 1,
+  "mutated_sha256": "447edb5ea4dab4506a55f462733548add47e544df8831aeaeeb62d24d19092ac",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 41 passed in 9.95s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_f10_orthant_quadrature_meets_its_accuracy_contract"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "delta",
+  "id": "N8_frechet_gate_off",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "if not lower - tol <= p11 <= upper + tol:",
+  "new": "if False:",
+  "replacements": 1,
+  "mutated_sha256": "828b07497fd3ddc6e60cc26224d900870a638a2b156b7c02c1e3fc984fb035b7",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 41 passed in 9.38s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_df5_defensive_invariants_are_exercised"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "delta",
+  "id": "N9_void_share_identity_text_sign_reversed",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "``p = f_v,LS - d f_v,L/d delta_L``",
+  "new": "``p = f_v,LS + d f_v,L/d delta_L``",
+  "replacements": 2,
+  "mutated_sha256": "2be6ed2e081f1f082a0eaa9a54da6b06b66a911a0d49562ba54e6e717a0803de",
+  "tests_rc": 0,
+  "tests_summary": "42 passed in 9.05s",
+  "failed_tests": [],
+  "evidence_rc": 0,
+  "evidence_failures": [],
+  "evidence_tail": [
+   "  radial refinement max rel. change 1.01e-06 (1440 intervals); (H25) max rel. 0.0e+00",
+   "all 36 gates pass"
+  ],
+  "outcome": "SURVIVED"
+ },
+ {
+  "origin": "delta",
+  "id": "N9b_pbs_executable_response_sign_reversed",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "threshold = phi_nu / sigma_s",
+  "new": "threshold = -phi_nu / sigma_s",
+  "replacements": 1,
+  "mutated_sha256": "b6153da0aa4cd62aaa7d14bbae63b032b281d3e06fb5255309d88e30e30466d5",
+  "tests_rc": 1,
+  "tests_summary": "10 failed, 32 passed in 9.10s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gaussian_threshold_share_independent_evaluation",
+   "tests/test_phase1g_h_global_variance.py::test_reproduces_1g_d_owner_decision_void_response[GM]",
+   "tests/test_phase1g_h_global_variance.py::test_reproduces_1g_d_owner_decision_void_response[NW15]",
+   "tests/test_phase1g_h_global_variance.py::test_constant_share_variance_scales_with_A_s_and_pbs_void_term_does_not",
+   "tests/test_phase1g_h_global_variance.py::test_admissible_interval_logic",
+   "tests/test_phase1g_h_global_variance.py::test_records_reject_tampering",
+   "tests/test_phase1g_h_global_variance.py::test_gh_f3_void_share_is_f_v_minus_the_regional_fraction_derivative",
+   "tests/test_phase1g_h_global_variance.py::test_gh_f6_post_hoc_anchoring_differs_from_pbs_reclosure",
+   "tests/test_phase1g_h_global_variance.py::test_gh_df2_records_bind_results_to_their_inputs",
+   "tests/test_phase1g_h_global_variance.py::test_gh_df5_pbs_reclosure_rescales_the_input_spectrum_by_the_factor_squared"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "delta",
+  "id": "N10_reclosure_factor_unsquared",
+  "file": "scripts/phase1g_h_global_variance_closure_numerics.py",
+  "old": "spec_re = early_spectrum(2.100e-9 * anchor_factor ** 2)",
+  "new": "spec_re = early_spectrum(2.100e-9 * anchor_factor)",
+  "replacements": 1,
+  "mutated_sha256": "16f5f3e1afb2243603fe03e4a049d54dd6b592d1c0876f732c9ec40389ecfae1",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 41 passed in 9.43s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_df5_pbs_reclosure_rescales_the_input_spectrum_by_the_factor_squared"
+  ],
+  "evidence_rc": 1,
+  "evidence_failures": [
+   "GATE FAILURES:"
+  ],
+  "evidence_tail": [
+   "  physics: NW15_CMB_FIT c_bare_volume_average constant share reclosure equals post-hoc = 1.504e-02 > 1.000e-10",
+   "  physics: NW15_CMB_FIT a_equal_mass constant share reclosure equals post-hoc = 1.504e-02 > 1.000e-10"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "delta",
+  "id": "N11_lognormal_wall_normalization_off",
+  "file": "scripts/phase1g_h_global_variance_closure_numerics.py",
+  "old": "q0 = float(ndtr(-(c - kappa0)))",
+  "new": "q0 = f_w",
+  "replacements": 1,
+  "mutated_sha256": "00df056730cf321d59c6751182ac6e93c8b9bad98558bd64708c254ad5228cc5",
+  "tests_rc": 1,
+  "tests_summary": "3 failed, 39 passed in 12.42s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_f5_lognormal_mask_kernels_by_monte_carlo",
+   "tests/test_phase1g_h_global_variance.py::test_gh_df1_lognormal_laws_share_the_carrier_not_the_conditional_density",
+   "tests/test_phase1g_h_global_variance.py::test_gh_df1_lognormal_laws_report_the_law_ii_normaliser"
+  ],
+  "evidence_rc": 1,
+  "evidence_failures": [],
+  "evidence_tail": [
+   "        f\"moment matrix is not positive semidefinite (min eigenvalue {float(np.min(eig)):.3e})\")",
+   "timescape_fsigma8.global_variance.GlobalVarianceContractError: moment matrix is not positive semidefinite (min eigenvalue -3.314e-02)"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "delta",
+  "id": "N12_lognormal_lambda_not_squared",
+  "file": "scripts/phase1g_h_global_variance_closure_numerics.py",
+  "old": "math.exp(lam * lam * xi_lat_r)",
+  "new": "math.exp(lam * xi_lat_r)",
+  "replacements": 1,
+  "mutated_sha256": "5c455ef596a654bea51ee527cc9be5bd66bea2f6e29cbd356df424b51a8c8790",
+  "tests_rc": 1,
+  "tests_summary": "2 failed, 40 passed in 9.42s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_f5_lognormal_mask_kernels_by_monte_carlo",
+   "tests/test_phase1g_h_global_variance.py::test_gh_df1_lognormal_laws_share_the_carrier_not_the_conditional_density"
+  ],
+  "evidence_rc": 1,
+  "evidence_failures": [
+   "GATE FAILURES:"
+  ],
+  "evidence_tail": [
+   "  physics: PAPER_REFERENCE lognormal linear limit reproduces the signed pair = 5.610e+04 > 5.000e-02",
+   "  physics: NW15_CMB_FIT lognormal linear limit reproduces the signed pair = 2.978e+04 > 5.000e-02"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "delta",
+  "id": "N13_rounding_output_half_unit_off",
+  "file": "scripts/phase1g_h_global_variance_closure_numerics.py",
+  "old": "return half_unit * (sigma_partition / sigma_total + sigma_internal / sigma_total + 1.0)",
+  "new": "return half_unit * (sigma_partition / sigma_total + sigma_internal / sigma_total)",
+  "replacements": 1,
+  "mutated_sha256": "bf319e95410a6c2a260b97b5cdd4d3f1e9398c2a656a316d99e09a2bd18179d0",
+  "tests_rc": 1,
+  "tests_summary": "2 failed, 40 passed in 10.72s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_f11_1g_e_reference_reproduces_within_its_rounding_budget",
+   "tests/test_phase1g_h_global_variance.py::test_gh_df5_rounding_budget_needs_the_output_half_unit"
+  ],
+  "evidence_rc": 0,
+  "evidence_failures": [],
+  "evidence_tail": [
+   "  radial refinement max rel. change 1.01e-06 (1440 intervals); (H25) max rel. 0.0e+00",
+   "all 36 gates pass"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "delta",
+  "id": "N14_step_cutoff_shifted",
+  "file": "scripts/phase1g_h_global_variance_closure_numerics.py",
+  "old": "k_cut = math.exp(log_k)",
+  "new": "k_cut = math.exp(log_k) * 0.9",
+  "replacements": 1,
+  "mutated_sha256": "286bbf7c1c9966753c49736cc4fd477ca5890b7b59f0be30ffbd8bd40309316b",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 41 passed in 10.62s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_f4_scale_dependent_share_escapes_the_constant_share_interval"
+  ],
+  "evidence_rc": 1,
+  "evidence_failures": [
+   "GATE FAILURES:"
+  ],
+  "evidence_tail": [
+   "  physics: PAPER_REFERENCE step kernel satisfies the premise = 1.020e+00 > 1.000e+00",
+   "  physics: NW15_CMB_FIT step kernel satisfies the premise = 1.247e+00 > 1.000e+00"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "author",
+  "id": "AUTH_N1_growth_fv0_check_off",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "if self.fv0 != self.background.fv0:",
+  "new": "if False:",
+  "replacements": 1,
+  "mutated_sha256": "31c7e06218a52022ba3aa619da36fcc909c795c63f0142e1db766c4641d38fb0",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 41 passed in 8.82s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_df5_defensive_invariants_are_exercised"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "author",
+  "id": "AUTH_N4_interval_target_inside_off",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "if self.target_inside != (self.premise_compatible\n                                  and self.lower <= self.target_value <= self.upper):",
+  "new": "if False:",
+  "replacements": 1,
+  "mutated_sha256": "ea565005a6dc8d5fb3ab646a8cade00169f2bb6ca5f2b73fd816fd35cd31a651",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 41 passed in 10.70s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_df5_defensive_invariants_are_exercised"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "author",
+  "id": "AUTH_N8_frechet_gate_off",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "if not lower - tol <= p11 <= upper + tol:",
+  "new": "if False:",
+  "replacements": 1,
+  "mutated_sha256": "828b07497fd3ddc6e60cc26224d900870a638a2b156b7c02c1e3fc984fb035b7",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 41 passed in 9.45s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_df5_defensive_invariants_are_exercised"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "author",
+  "id": "AUTH_N13_rounding_output_half_unit_off",
+  "file": "scripts/phase1g_h_global_variance_closure_numerics.py",
+  "old": "return half_unit * (sigma_partition / sigma_total + sigma_internal / sigma_total + 1.0)",
+  "new": "return half_unit * (sigma_partition / sigma_total + sigma_internal / sigma_total)",
+  "replacements": 1,
+  "mutated_sha256": "bf319e95410a6c2a260b97b5cdd4d3f1e9398c2a656a316d99e09a2bd18179d0",
+  "tests_rc": 1,
+  "tests_summary": "2 failed, 40 passed in 9.41s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_f11_1g_e_reference_reproduces_within_its_rounding_budget",
+   "tests/test_phase1g_h_global_variance.py::test_gh_df5_rounding_budget_needs_the_output_half_unit"
+  ],
+  "evidence_rc": 0,
+  "evidence_failures": [],
+  "evidence_tail": [
+   "  radial refinement max rel. change 1.01e-06 (1440 intervals); (H25) max rel. 0.0e+00",
+   "all 36 gates pass"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "author",
+  "id": "AUTH_D1_binding_off",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "    for name, expected in values.items():\n        if not _same(getattr(record, name), expected):",
+  "new": "    for name, expected in ():\n        if not _same(getattr(record, name), expected):",
+  "replacements": 1,
+  "mutated_sha256": "f18ae3b8475c93b68390bd16213820ff88125a2f7432d10a21f6ebf2222d7c85",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 41 passed in 8.65s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_df2_records_bind_results_to_their_inputs"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "author",
+  "id": "AUTH_D2_sigma_spectrum_identity_off",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "        if (self.void_share.density is not self.density\n                or self.void_share.early_spectrum is not self.early_spectrum):",
+  "new": "        if False:",
+  "replacements": 1,
+  "mutated_sha256": "666677279aea3f57a436f7701135c0b82d16398a2dedb3ed15d2299a6ec43f94",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 41 passed in 8.76s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_df2_records_bind_results_to_their_inputs"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "author",
+  "id": "AUTH_D3_radius_reresolution_off",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "        if resolve_lagrangian_radius(spec=self.radius.spec, density=self.density) != self.radius:",
+  "new": "        if False:",
+  "replacements": 1,
+  "mutated_sha256": "76c65bfef03b3ea78432be95093089e0c71ab89b1d0f40d6d2e2b28313dec903",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 41 passed in 9.73s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_df2_records_bind_results_to_their_inputs"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "author",
+  "id": "AUTH_D4_symmetry_check_off",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "    if not abs(e1 - e2) <= 10.0 * tol:",
+  "new": "    if False:",
+  "replacements": 1,
+  "mutated_sha256": "76856eb1f91e542797a2f1331e23c582bc6756ac357090a8745649e93e402a8b",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 41 passed in 9.60s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_df5_defensive_invariants_are_exercised"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "author",
+  "id": "AUTH_D5_lognormal_normaliser_unit",
+  "file": "scripts/phase1g_h_global_variance_closure_numerics.py",
+  "old": "            float(ndtr(-(c - kappa0))) / f_w if correlated else 1.0)",
+  "new": "            1.0)",
+  "replacements": 1,
+  "mutated_sha256": "495a6a877a75e25943dd964ad269a529dcf4ecd7d3806030c0f5aa785013f378",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 41 passed in 10.49s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_df1_lognormal_laws_report_the_law_ii_normaliser"
+  ],
+  "evidence_rc": 0,
+  "evidence_failures": [],
+  "evidence_tail": [
+   "  radial refinement max rel. change 1.01e-06 (1440 intervals); (H25) max rel. 0.0e+00",
+   "all 36 gates pass"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "author",
+  "id": "AUTH_D6_ball_first_panel_dropped",
+  "file": "scripts/phase1g_h_global_variance_closure_numerics.py",
+  "old": "        y = np.concatenate(([0.0], self.pair * np.asarray(values, dtype=float)))\n        if coarse:\n            return float(simpson(y[::2], x=self.u_full[::2]))\n        return float(simpson(y, x=self.u_full))",
+  "new": "        y = self.pair * np.asarray(values, dtype=float)\n        if coarse:\n            return float(simpson(y[::2], x=self.u[::2]))\n        return float(simpson(y, x=self.u))",
+  "replacements": 1,
+  "mutated_sha256": "fbeca3ae6d32dad60a3ea4bbd64e0b5b0c41b62f6c5ea27e6071e6db8e9db191",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 41 passed in 10.27s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_df1_law_summary_satisfies_h25_and_includes_the_first_radial_panel"
+  ],
+  "evidence_rc": 1,
+  "evidence_failures": [
+   "GATE FAILURES:"
+  ],
+  "evidence_tail": [
+   "  numerics: PAPER_REFERENCE constructive pairs radial refinement = 1.283e-05 > 1.000e-05",
+   "  numerics: NW15_CMB_FIT constructive pairs radial refinement = 1.753e-05 > 1.000e-05"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "own",
+  "id": "A01_same_tolerance_widened",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "and _close(float(stored), float(expected)))",
+  "new": "and math.isclose(float(stored), float(expected), rel_tol=1e-3))",
+  "replacements": 1,
+  "mutated_sha256": "e1e5ff6bf27c71e75d83291509d9625abe784e46b9d430237dd5281802c1a6e4",
+  "tests_rc": 0,
+  "tests_summary": "42 passed in 8.45s",
+  "failed_tests": [],
+  "evidence_rc": 0,
+  "evidence_failures": [],
+  "evidence_tail": [
+   "  radial refinement max rel. change 1.01e-06 (1440 intervals); (H25) max rel. 0.0e+00",
+   "all 36 gates pass"
+  ],
+  "outcome": "SURVIVED"
+ },
+ {
+  "origin": "own",
+  "id": "A02_same_bool_type_check_off",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "return type(stored) is type(expected) and stored == expected",
+  "new": "return stored == expected",
+  "replacements": 1,
+  "mutated_sha256": "604d5ee6349d7bd03cd54422c829f361d13605870ba093c4d011b3b3fc6ebd43",
+  "tests_rc": 0,
+  "tests_summary": "42 passed in 9.60s",
+  "failed_tests": [],
+  "evidence_rc": 0,
+  "evidence_failures": [],
+  "evidence_tail": [
+   "  radial refinement max rel. change 1.01e-06 (1440 intervals); (H25) max rel. 0.0e+00",
+   "all 36 gates pass"
+  ],
+  "outcome": "SURVIVED"
+ },
+ {
+  "origin": "own",
+  "id": "A03_same_tuple_elements_unchecked",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "and all(_same(a, b) for a, b in zip(stored, expected)))",
+  "new": "and True)",
+  "replacements": 1,
+  "mutated_sha256": "dbc9b3d6a3504a562a838ff4ac55321e8f18ac2cabc40d04b08244216bc22f94",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 41 passed in 9.61s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_df2_records_bind_results_to_their_inputs"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "own",
+  "id": "A04_interval_convention_check_off",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "    if premise.radius.convention is not target.radius.spec.convention:\n        raise",
+  "new": "    if False:\n        raise",
+  "replacements": 1,
+  "mutated_sha256": "896e749f447c8f2cf2eb86726e670736fa2d1955e6e9ba9fc24ff03fee308a00",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 41 passed in 9.33s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_admissible_interval_logic"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "own",
+  "id": "A05_growth_assumptions_check_off",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "if _strings(self.assumptions, \"assumptions\") != _GROWTH_ASSUMPTIONS:",
+  "new": "if False:",
+  "replacements": 1,
+  "mutated_sha256": "bfb02e85bab4c0853ac37dc2a33af3412119a0ce30f0e3779529da27ba5e56fc",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 41 passed in 11.14s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_df2_records_bind_results_to_their_inputs"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "own",
+  "id": "A06_sigma_caveats_check_off",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "if _strings(self.caveats, \"caveats\") != _GLOBAL_CAVEATS:",
+  "new": "if False:",
+  "replacements": 1,
+  "mutated_sha256": "bc36de5074e6ae02accc6daa7fba1a86e6c08287368f7572fe0bda46f0bf7488",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 41 passed in 10.52s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_df2_records_bind_results_to_their_inputs"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "own",
+  "id": "A07_interval_assumptions_check_off",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "if _strings(self.class_assumptions, \"class_assumptions\") != _INTERVAL_ASSUMPTIONS:",
+  "new": "if False:",
+  "replacements": 1,
+  "mutated_sha256": "bf0e69cf3574c733ce5dc7132d47d6638e66440a1536e698b1fb5cb88b3345fa",
+  "tests_rc": 0,
+  "tests_summary": "42 passed in 9.55s",
+  "failed_tests": [],
+  "evidence_rc": 0,
+  "evidence_failures": [],
+  "evidence_tail": [
+   "  radial refinement max rel. change 1.01e-06 (1440 intervals); (H25) max rel. 0.0e+00",
+   "all 36 gates pass"
+  ],
+  "outcome": "SURVIVED"
+ },
+ {
+  "origin": "own",
+  "id": "A08_numerical_error_not_converted",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "except GlobalVarianceNumericalError as exc:",
+  "new": "except ZeroDivisionError as exc:",
+  "replacements": 1,
+  "mutated_sha256": "f1b2bd67b38d4e6a936a6528a79b31df0284f11a5a04c276ea531ea69c079256",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 41 passed in 8.93s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_df2_records_bind_results_to_their_inputs"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "own",
+  "id": "A09_void_share_background_identity_off",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "if self.density.background is not self.growth.background:",
+  "new": "if False:",
+  "replacements": 1,
+  "mutated_sha256": "2149ee61b85aa2d77133b711f3acac3ce86ecac011a285c1d12f59c9c2537e9b",
+  "tests_rc": 0,
+  "tests_summary": "42 passed in 9.27s",
+  "failed_tests": [],
+  "evidence_rc": 0,
+  "evidence_failures": [],
+  "evidence_tail": [
+   "  radial refinement max rel. change 1.01e-06 (1440 intervals); (H25) max rel. 0.0e+00",
+   "all 36 gates pass"
+  ],
+  "outcome": "SURVIVED"
+ },
+ {
+  "origin": "own",
+  "id": "A10_growth_binding_off",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "_bind_recomputed(self, lambda: _two_phase_growth_values(",
+  "new": "(lambda *_a, **_k: None)(self, lambda: _two_phase_growth_values(",
+  "replacements": 1,
+  "mutated_sha256": "2ce9428f23a0a45f2f5691ef1f5e4448a616a32c534db894c0f5d2f788f01438",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 41 passed in 7.76s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_df2_records_bind_results_to_their_inputs"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "own",
+  "id": "A11_void_share_binding_off",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "_bind_recomputed(self, lambda: _void_share_values(",
+  "new": "(lambda *_a, **_k: None)(self, lambda: _void_share_values(",
+  "replacements": 1,
+  "mutated_sha256": "1f43c6073b20b5459d60f01067335f5de3630f54a99cdb66656094736cfccc0b",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 41 passed in 10.34s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_df2_records_bind_results_to_their_inputs"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "own",
+  "id": "A12_sigma_binding_off",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "_bind_recomputed(self, lambda: _global_sigma_values(",
+  "new": "(lambda *_a, **_k: None)(self, lambda: _global_sigma_values(",
+  "replacements": 1,
+  "mutated_sha256": "171a2e42599281a4491d76b071d613b6d1b8f2931d3b5ea42d6e033702f88a69",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 41 passed in 9.13s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_df2_records_bind_results_to_their_inputs"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "own",
+  "id": "A13_interval_binding_off",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "_bind_recomputed(self, lambda: _interval_values(self.target, self.premise),",
+  "new": "(lambda *_a, **_k: None)(self, lambda: _interval_values(self.target, self.premise),",
+  "replacements": 1,
+  "mutated_sha256": "1bdc3e75e06e3489a31795343352db846d284c10a550320036ad6fdd6445ae4a",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 41 passed in 11.07s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_df2_records_bind_results_to_their_inputs"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "own",
+  "id": "A14_record_identity_rtol_5pct",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "RECORD_IDENTITY_RTOL = 1e-12",
+  "new": "RECORD_IDENTITY_RTOL = 5e-2",
+  "replacements": 1,
+  "mutated_sha256": "2f6393128f5c6a321ee12d21be745b027f13e8923767247a1fc4d4c39157bf91",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 41 passed in 10.77s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_records_reject_tampering"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "own",
+  "id": "A15_ball_coarse_equals_fine",
+  "file": "scripts/phase1g_h_global_variance_closure_numerics.py",
+  "old": "return float(simpson(y[::2], x=self.u_full[::2]))",
+  "new": "return float(simpson(y, x=self.u_full))",
+  "replacements": 1,
+  "mutated_sha256": "424c88f53c8bf010ae9351afe553d8aebfed60cd94128fb36667f33f91db7049",
+  "tests_rc": 0,
+  "tests_summary": "42 passed in 9.96s",
+  "failed_tests": [],
+  "evidence_rc": 0,
+  "evidence_failures": [],
+  "evidence_tail": [
+   "  radial refinement max rel. change 0.00e+00 (1440 intervals); (H25) max rel. 0.0e+00",
+   "all 36 gates pass"
+  ],
+  "outcome": "SURVIVED"
+ },
+ {
+  "origin": "own",
+  "id": "A16_ball_coarse_stride_3",
+  "file": "scripts/phase1g_h_global_variance_closure_numerics.py",
+  "old": "return float(simpson(y[::2], x=self.u_full[::2]))",
+  "new": "return float(simpson(y[::3], x=self.u_full[::3]))",
+  "replacements": 1,
+  "mutated_sha256": "4922ad6219884957499e6dfb149d89263a6a24ba2db7de2872dd8df5af03888f",
+  "tests_rc": 0,
+  "tests_summary": "42 passed in 10.00s",
+  "failed_tests": [],
+  "evidence_rc": 1,
+  "evidence_failures": [
+   "GATE FAILURES:"
+  ],
+  "evidence_tail": [
+   "  numerics: PAPER_REFERENCE constructive pairs radial refinement = 2.846e-04 > 1.000e-05",
+   "  numerics: NW15_CMB_FIT constructive pairs radial refinement = 1.768e-04 > 1.000e-05"
+  ],
+  "outcome": "KILLED_BY_EVIDENCE_ONLY"
+ },
+ {
+  "origin": "own",
+  "id": "A17_h25_sum_cross_once",
+  "file": "scripts/phase1g_h_global_variance_closure_numerics.py",
+  "old": "math.sqrt(ball.integral(c_chi + k_ww + 2.0 * k_pw) / f_w ** 2)",
+  "new": "math.sqrt(ball.integral(c_chi + k_ww + k_pw) / f_w ** 2)",
+  "replacements": 1,
+  "mutated_sha256": "95a0db62340314251228dd503e61723ed9097370cfe42b2c55128b54c3b1d6bc",
+  "tests_rc": 1,
+  "tests_summary": "2 failed, 40 passed in 9.51s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_df1_law_summary_satisfies_h25_and_includes_the_first_radial_panel",
+   "tests/test_phase1g_h_global_variance.py::test_gh_df1_lognormal_laws_report_the_law_ii_normaliser"
+  ],
+  "evidence_rc": 1,
+  "evidence_failures": [
+   "GATE FAILURES:"
+  ],
+  "evidence_tail": [
+   "  physics: PAPER_REFERENCE constructive pairs (H25) identity = 8.326e-02 > 1.000e-12",
+   "  physics: NW15_CMB_FIT constructive pairs (H25) identity = 7.773e-02 > 1.000e-12"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "own",
+  "id": "A18_cw_unweighted_average",
+  "file": "scripts/phase1g_h_global_variance_closure_numerics.py",
+  "old": "ball.integral(k_ww + 2.0 * k_pw) / ball.integral(p11),",
+  "new": "ball.integral(k_ww + 2.0 * k_pw) / ball.integral(np.ones_like(p11)),",
+  "replacements": 1,
+  "mutated_sha256": "f454134d82306bc6b29f5571adff68c6f83a63f01801431dfa2e329d5d75eed9",
+  "tests_rc": 0,
+  "tests_summary": "42 passed in 11.88s",
+  "failed_tests": [],
+  "evidence_rc": 0,
+  "evidence_failures": [],
+  "evidence_tail": [
+   "  radial refinement max rel. change 1.01e-06 (1440 intervals); (H25) max rel. 0.0e+00",
+   "all 36 gates pass"
+  ],
+  "outcome": "SURVIVED"
+ },
+ {
+  "origin": "own",
+  "id": "A19_lambda_calibration_off_by_1pct",
+  "file": "scripts/phase1g_h_global_variance_closure_numerics.py",
+  "old": "carrier_ball(l2) - ball_target",
+  "new": "carrier_ball(l2) - 1.01 * ball_target",
+  "replacements": 1,
+  "mutated_sha256": "f9e9229f67975cb85304e638768d566ba38256a5a0d35b712d13e1da459350c6",
+  "tests_rc": 0,
+  "tests_summary": "42 passed in 9.22s",
+  "failed_tests": [],
+  "evidence_rc": 1,
+  "evidence_failures": [
+   "GATE FAILURES:"
+  ],
+  "evidence_tail": [
+   "  numerics: PAPER_REFERENCE lognormal ball-variance calibration = 1.000e-02 > 1.000e-09",
+   "  numerics: NW15_CMB_FIT lognormal ball-variance calibration = 1.000e-02 > 1.000e-09"
+  ],
+  "outcome": "KILLED_BY_EVIDENCE_ONLY"
+ },
+ {
+  "origin": "own",
+  "id": "A20_covariance_ratio_not_squared",
+  "file": "scripts/phase1g_h_global_variance_closure_numerics.py",
+  "old": "1.0 / m_ii ** 2",
+  "new": "1.0 / m_ii",
+  "replacements": 1,
+  "mutated_sha256": "489c7c2af7debbf64e9b36a0f11983ac3d404a485106fb13a6e49b039d1e745a",
+  "tests_rc": 0,
+  "tests_summary": "42 passed in 9.00s",
+  "failed_tests": [],
+  "evidence_rc": 0,
+  "evidence_failures": [],
+  "evidence_tail": [
+   "  radial refinement max rel. change 1.01e-06 (1440 intervals); (H25) max rel. 0.0e+00",
+   "all 36 gates pass"
+  ],
+  "outcome": "SURVIVED"
+ },
+ {
+  "origin": "own",
+  "id": "A21_lognormal_cross_kernel_normaliser_off",
+  "file": "scripts/phase1g_h_global_variance_closure_numerics.py",
+  "old": "e_p = f_w * _orthant_p(rho, c - kappa_r, c - kappa0) / q0",
+  "new": "e_p = f_w * _orthant_p(rho, c - kappa_r, c - kappa0) / f_w",
+  "replacements": 1,
+  "mutated_sha256": "d4c193499886ad9a5041aa1c51c93437b1b46b29065a20ee8af23315e564a47a",
+  "tests_rc": 1,
+  "tests_summary": "2 failed, 40 passed in 12.52s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_f5_lognormal_mask_kernels_by_monte_carlo",
+   "tests/test_phase1g_h_global_variance.py::test_gh_df1_lognormal_laws_report_the_law_ii_normaliser"
+  ],
+  "evidence_rc": 1,
+  "evidence_failures": [],
+  "evidence_tail": [
+   "    raise GlobalVarianceContractError(f\"{name} must be non-negative\")",
+   "timescape_fsigma8.global_variance.GlobalVarianceContractError: wall_field must be non-negative"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "own",
+  "id": "A22_h25_gate_disabled",
+  "file": "scripts/phase1g_h_global_variance_closure_numerics.py",
+  "old": "\"h25_identity_rel\": 1e-12",
+  "new": "\"h25_identity_rel\": 1.0",
+  "replacements": 1,
+  "mutated_sha256": "a49eaa41465b059dd4f9a312d0f4e13e97d1f3fd653675ff39e42acacbf352b6",
+  "tests_rc": 0,
+  "tests_summary": "42 passed in 9.69s",
+  "failed_tests": [],
+  "evidence_rc": 0,
+  "evidence_failures": [],
+  "evidence_tail": [
+   "  radial refinement max rel. change 1.01e-06 (1440 intervals); (H25) max rel. 0.0e+00",
+   "all 36 gates pass"
+  ],
+  "outcome": "SURVIVED"
+ },
+ {
+  "origin": "own",
+  "id": "A23_radial_gate_disabled",
+  "file": "scripts/phase1g_h_global_variance_closure_numerics.py",
+  "old": "\"radial_refinement_rel\": 1e-5",
+  "new": "\"radial_refinement_rel\": 1.0",
+  "replacements": 1,
+  "mutated_sha256": "316a6ce950c04a4e6d78f59ac5e648ba5fd54a1920f500db30e6ce8f7a19d49c",
+  "tests_rc": 0,
+  "tests_summary": "42 passed in 9.43s",
+  "failed_tests": [],
+  "evidence_rc": 0,
+  "evidence_failures": [],
+  "evidence_tail": [
+   "  radial refinement max rel. change 1.01e-06 (1440 intervals); (H25) max rel. 0.0e+00",
+   "all 36 gates pass"
+  ],
+  "outcome": "SURVIVED"
+ }
+]

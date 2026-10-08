@@ -1,0 +1,3670 @@
+{
+ "schema_version": 1,
+ "title": "Phase 1G-H second independent delta audit of the remediation",
+ "phase": "1G-H",
+ "report": "reports/phase1g_h_delta_audit_2.md",
+ "audit_classification": "INDEPENDENT_DELTA_AUDIT",
+ "audit_date": "2026-10-08",
+ "auditor": {
+  "name": "Claude (Anthropic), Claude Code cloud session",
+  "independence": "same model family as the author (a Claude session); not the system of the two earlier audits (OpenAI Codex); no contact with the author or access to its conversation; procedural independence only"
+ },
+ "audited_commits": {
+  "base": {
+   "commit": "5c325e1fd05b343f6d5e93f931038794de4373a2",
+   "tree": "a5b810e81d125827a17a9cf87b013ead51232080",
+   "parent": "89cb041f901b51a3f90fa6831aab1b4553c1772c"
+  },
+  "code": {
+   "commit": "248a06bfeb655337bc499607180c49008b5f34ea",
+   "tree": "cb57dcf23323939f8e8260bbb303b0ec2221c185"
+  },
+  "head": {
+   "commit": "226e52d2e4157d0130b2a9dfaffd71834c6017d9",
+   "tree": "4db0f0f75a91321ae37b7cd7d7c6381c0c76c5c9"
+  },
+  "branch": "ccr-555e67be-u11yht (remote head 226e52d, no drift)",
+  "changed_paths": {
+   "M": 10,
+   "A": 13
+  }
+ },
+ "checkpoint": {
+  "file": "reports/phase1g_h_delta_audit_2_evidence/BLIND_CHECKPOINT.md",
+  "sha256": "c5f744e31a2a63a08c8aa0984faf6ebc9e18296e36c1cf7d7203d554162754ac",
+  "local_commit": "64116509554cc0d711660da4d81ad95c3f450a6d",
+  "committed_utc": "2026-10-08T16:54:01Z",
+  "blind_to": "the author's full-precision artifact values, logs, new evidence-script functions and test expectations",
+  "not_blind_to": "three-decimal values quoted in the prompt, the revised report and the remediation record (read for model definitions)"
+ },
+ "environment": [
+  {
+   "python": "3.13.16",
+   "implementation": "CPython",
+   "platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
+   "numpy": "2.5.3",
+   "scipy": "1.18.1",
+   "matplotlib": "3.11.2",
+   "pytest": "9.1.1"
+  },
+  {
+   "python": "3.11.17",
+   "implementation": "CPython",
+   "platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
+   "numpy": "2.4.6",
+   "scipy": "1.17.1",
+   "matplotlib": "3.11.2",
+   "pytest": "9.1.1"
+  }
+ ],
+ "scope": {
+  "in": [
+   "commits 248a06b and 226e52d over 5c325e1",
+   "GH-DF1..DF6, GH-DE1..DE6",
+   "final status of GH-F1..F15",
+   "regression of unchanged parts"
+  ],
+  "out": [
+   "a new full audit of unchanged 1G-H parts",
+   "frozen phases 1G-A..1G-G",
+   "Windows (not available)"
+  ]
+ },
+ "method": [
+  "blind reconstruction with own code before reading the author's numbers (Owen's T, Stein moments, exponential tilting, QAWO Hankel transforms, Gauss-Legendre ball quadrature)",
+  "reproduction on CPython 3.13.16 and 3.11.17 with every input regenerated",
+  "regression against 5c325e1 and comparison with the delta audit's saved evidence",
+  "32 record-binding probes",
+  "56-mutant campaign in disposable copies",
+  "inventory reconciliation, lexical search, SHA-256 checks, read-only remote state"
+ ],
+ "verdict": {
+  "PROVENANCE": "ACCEPT",
+  "GOVERNANCE": "ACCEPT_WITH_CORRECTIONS",
+  "SCIENCE": "ACCEPT",
+  "NUMERICS": "ACCEPT",
+  "IMPLEMENTATION": "ACCEPT",
+  "TESTS": "ACCEPT_WITH_CORRECTIONS",
+  "DOCUMENTATION": "ACCEPT_WITH_CORRECTIONS",
+  "TASK_COMPLIANCE": "ACCEPT",
+  "overall": "ACCEPT_WITH_CORRECTIONS"
+ },
+ "tag_readiness": "NO_SCIENTIFIC_BLOCKER_READY_FOR_OWNER_DECISION_AFTER_LOW_CORRECTIONS_P7_RECORD_AND_WINDOWS_GATE",
+ "delta_finding_resolution": {
+  "GH-DF1": {
+   "outcome": "RESOLVED",
+   "reason": "shared constraints narrowed at every current location; m_II, 1/m_II^2, <C_W - 1> reproduce blind; (H25) exact"
+  },
+  "GH-DF2": {
+   "outcome": "RESOLVED",
+   "reason": "five accepted replacements refused; 27 further probes pass only tolerance-looser, metadata or type substitutions"
+  },
+  "GH-DF3": {
+   "outcome": "RESOLVED",
+   "reason": "section 8 current; dated note supersedes the count; no active retired claim"
+  },
+  "GH-DF4": {
+   "outcome": "RESOLVED",
+   "reason": "integrated reading; -0.0799% .. -0.1242% reproduces -0.08% .. -0.12%"
+  },
+  "GH-DF5": {
+   "outcome": "RESOLVED",
+   "reason": "requested tests exist and kill their mutants; new gaps are GH-D2F2"
+  },
+  "GH-DF6": {
+   "outcome": "RESOLVED",
+   "reason": "qualifier beside every README/CLAUDE median value"
+  }
+ },
+ "delta_errata_resolution": {
+  "GH-DE1": "APPLIED",
+  "GH-DE2": "APPLIED",
+  "GH-DE3": "APPLIED",
+  "GH-DE4": "APPLIED",
+  "GH-DE5": "APPLIED",
+  "GH-DE6": "APPLIED_EQUIVALENT"
+ },
+ "radial_quadrature_claims": {
+  "previous_status": "VERIFIED_WITH_DEVIATION (4)",
+  "status": "VERIFIED",
+  "signed_law_II_wall_moments_audit": [
+   0.0007825229276,
+   0.003553181863
+  ],
+  "author": [
+   0.000782522965,
+   0.00355318191
+  ],
+  "first_panel_share": [
+   0.0008346,
+   0.0003729
+  ]
+ },
+ "original_finding_status": {
+  "GH-F1": "RESOLVED_BY_OWNER_DECISION",
+  "GH-F2": "RESOLVED_BY_OWNER_DECISION",
+  "GH-F3": "RESOLVED",
+  "GH-F4": "RESOLVED",
+  "GH-F5": "RESOLVED",
+  "GH-F6": "RESOLVED",
+  "GH-F7": "RESOLVED",
+  "GH-F8": "RESOLVED",
+  "GH-F9": "RESOLVED",
+  "GH-F10": "RESOLVED",
+  "GH-F11": "RESOLVED",
+  "GH-F12": "RESOLVED",
+  "GH-F13": "RESOLVED",
+  "GH-F14": "RESOLVED",
+  "GH-F15": "RESOLVED_OWNER_CONFIRMED"
+ },
+ "owner_confirmation_gh_f15": {
+  "date": "2026-10-08",
+  "verbatim": "Confermo le due approvazioni di push registrate (GH-F15)",
+  "given_to": "the auditor of this second delta audit, in the handoff message",
+  "tree_record": "reports/phase1g_h_publication_successor.md P4"
+ },
+ "finding_counts": {
+  "LOW": 2,
+  "INFO": 4
+ },
+ "findings": [
+  {
+   "id": "GH-D2F1",
+   "title": "Today's push (P7) is unrecorded and its superseded statements are incompletely listed",
+   "area": "GOVERNANCE",
+   "severity": "LOW",
+   "relates_to": "NEW",
+   "statement": "The fast-forward 89cb041 -> 226e52d of 2026-10-08 followed the commits; statements that read as current are superseded and the publication successor's dated-statement table lists only one of them.",
+   "evidence": "git ls-remote (head 226e52d); lexical search (report section 9)",
+   "consequence": "README, CLAUDE and the inventories present the second remediation as unpublished.",
+   "locations": [
+    "reports/phase1g_h_delta_audit_remediation.md sections 0 and 4",
+    "reports/phase1g_h_delta_audit_remediation_inventory.json commits, open_items",
+    "reports/phase1g_h_publication_successor.md section 3 and section 4 last row",
+    "reports/phase1g_h_publication_successor_inventory.json state_2026_10_08",
+    "reports/phase1g_h_global_variance_closure.md section 9 H-OD5",
+    "reports/phase1g_h_global_variance_closure_inventory.json publication.pushed_head_2026_10_08, publication.not_done, publication.h_od5_status, owner_decisions_status_2026_10_08.H-OD5",
+    "README.md 1G-H entry ('remediated locally')",
+    "CLAUDE.md 1G-H entry ('at 89cb041', 'remediated locally on top of it')"
+   ],
+   "resolution_class": "CORRECTION",
+   "suggested_resolution": "Add a dated 2026-10-08 publication entry P7 (89cb041 -> 226e52d carrying 5c325e1, 248a06b, 226e52d; remote head verified; authorisation as quoted by the owner) and the direct GH-F15 confirmation; extend the current-reading table to the listed statements; keep historical text; update the README/CLAUDE current summaries."
+  },
+  {
+   "id": "GH-D2F2",
+   "title": "New reported quantities and the new gates are weakly protected",
+   "area": "TESTS",
+   "severity": "LOW",
+   "relates_to": "GH-DF5",
+   "statement": "<C_W - 1> and 1/m_II^2 are untested (mutants A18, A20 survive tests and gates); the radial refinement estimator can be made vacuous (A15); the binding tolerance (A01) and the interval class_assumptions binding (A07) are untested; the (H25) gate compares two sums of the same kernel arrays; in the GH-DF1 test the m^-2 ratio holds by construction and m cancels in the E[chi chi psi psi] check.",
+   "evidence": "mutation_results.json; implementation code reading; blind reconstruction (values correct)",
+   "consequence": "Future edits could change printed <C_W - 1> or 1/m_II^2 values or weaken the binding without a failing test or gate. No present numerical error.",
+   "locations": [
+    "scripts/phase1g_h_global_variance_closure_numerics.py:_law_summary, _Ball.integral, lognormal_pairs",
+    "src/timescape_fsigma8/global_variance.py:_same, AdmissibleGlobalLinearInterval.__post_init__",
+    "tests/test_phase1g_h_global_variance.py:test_gh_df1_*"
+   ],
+   "resolution_class": "CORRECTION",
+   "suggested_resolution": "Add a synthetic-kernel test of both_walls_conditional_density_covariance_ball and of conditional_density_covariance_ratio_II_over_I; a Monte Carlo test of E[psi1 psi2 | both walls] with psi normalised by the sample conditional mean; a _Ball test with a known coarse/fine difference; tampers at 2*RECORD_IDENTITY_RTOL and of class_assumptions; describe the (H25) gate as a consistency check of the (H18) assembly."
+  },
+  {
+   "id": "GH-D2F3",
+   "title": "The regression statement of the second remediation is not literally reproducible",
+   "area": "DOCUMENTATION",
+   "severity": "INFO",
+   "relates_to": "GH-DF1",
+   "statement": "Three gate read-outs outside the pairs changed; counts inside are 160 changed (156 numeric, 140 beyond round-off, 4 text), 6 renamed, 106 added (16 added outside), not 130 / 6 / 108.",
+   "evidence": "evidence_comparisons.json",
+   "consequence": "None for physical values; the verification record overstates its precision.",
+   "locations": [
+    "reports/phase1g_h_delta_audit_remediation.md section 3",
+    "reports/phase1g_h_delta_audit_remediation_inventory.json verification.regression_vs_89cb041"
+   ],
+   "resolution_class": "CORRECTION",
+   "suggested_resolution": "Erratum GH-D2E1."
+  },
+  {
+   "id": "GH-D2F4",
+   "title": "Typed records accept any numbers.Real; a Fraction breaks strict JSON",
+   "area": "IMPLEMENTATION",
+   "severity": "INFO",
+   "relates_to": "GH-F9",
+   "statement": "dataclasses.replace(record, linear_sigma=Fraction(record.linear_sigma)) passes every invariant and the binding; to_json_dict then fails json.dumps (TypeError). Pre-existing at 5c325e1; not reported by earlier audits (NEW).",
+   "evidence": "implementation_binding_probes_results.json (TY1); check at 5c325e1",
+   "consequence": "The strict-JSON contract is not enforced at construction.",
+   "locations": [
+    "src/timescape_fsigma8/global_variance.py:_real, _positive and record __post_init__"
+   ],
+   "resolution_class": "CORRECTION",
+   "suggested_resolution": "Coerce validated scalars to float in __post_init__ (as LastScatteringMatching does) or require float."
+  },
+  {
+   "id": "GH-D2F5",
+   "title": "Historical blocks keep the refuted 'same shared constraints' wording without a pointer",
+   "area": "DOCUMENTATION",
+   "severity": "INFO",
+   "relates_to": "GH-DF1",
+   "statement": "The first remediation record (D3 row, l. 61), its inventory (l. 113) and the regenerated 1G-H inventory revision.owner_decisions.D3 still say 'with the same shared constraints'; the dated status note names the counts and GH-DE6 but not GH-DF1; the record's files_changed_sha256 describe 89cb041 without saying so.",
+   "evidence": "lexical search; SHA-256 of blobs",
+   "consequence": "Minor risk of reading a 2026-10-07 statement as current.",
+   "locations": [
+    "reports/phase1g_h_audit_remediation.md:61",
+    "reports/phase1g_h_audit_remediation_inventory.json:113",
+    "reports/phase1g_h_global_variance_closure_inventory.json revision.owner_decisions.D3"
+   ],
+   "resolution_class": "CORRECTION",
+   "suggested_resolution": "One sentence in the dated note (pairs share the carrier law, not the conditionally normalised density, GH-DF1; hashes refer to 89cb041); mark the inventory block historical."
+  },
+  {
+   "id": "GH-D2F6",
+   "title": "State the missing input as the mask-carrier dependence",
+   "area": "SCIENCE",
+   "severity": "INFO",
+   "relates_to": "GH-DF1",
+   "statement": "Under mask-carrier independence (E3, law I) f_v0, P11 and the carrier law fix C_W and the hybrid variance; the pairs show that the mask-carrier dependence (kappa0, kappa(r)) is the further input.",
+   "evidence": "own derivation (report section 6.4)",
+   "consequence": "None; the current reading is correct.",
+   "locations": [
+    "reports/phase1g_h_global_variance_closure.md section 6.3 Reading"
+   ],
+   "resolution_class": "NO_ACTION",
+   "suggested_resolution": "Optional sharper wording in section 6.3."
+  }
+ ],
+ "errata_of_second_remediation": [
+  {
+   "id": "GH-D2E1",
+   "location": "reports/phase1g_h_delta_audit_remediation.md section 3; inventory verification.regression_vs_89cb041",
+   "quoted": "every common leaf outside two_phase_covariance/*/gaussian_threshold_pair bitwise identical; inside it, 130 leaves changed (the radial panel and the narrowed constraint texts), 6 renamed, 108 added",
+   "correct_reading": "every common physical leaf outside the pairs is bitwise identical; three gate read-outs of pair quantities change at <= 1.2e-5 absolute; inside, 160 changed (156 numeric, 140 beyond round-off, 4 constraint texts), 6 renamed, 106 added; 16 added outside"
+  },
+  {
+   "id": "GH-D2E2",
+   "location": "reports/phase1g_h_delta_audit_remediation.md section 0; reports/phase1g_h_publication_successor.md section 3",
+   "quoted": "Commits ... Nothing is pushed. / ccr-555e67be-u11yht = 89cb041 ... is not pushed",
+   "correct_reading": "pushed to ccr-555e67be-u11yht on 2026-10-08 (89cb041 -> 226e52d); true as of its commit, to be read through a dated P7 record"
+  }
+ ],
+ "mutation_testing": {
+  "counts": {
+   "author:KILLED_BY_TESTS": 10,
+   "baseline:BASELINE_PASS": 1,
+   "delta:KILLED_BY_TESTS": 21,
+   "delta:SURVIVED": 2,
+   "own:KILLED_BY_EVIDENCE_ONLY": 2,
+   "own:KILLED_BY_TESTS": 12,
+   "own:SURVIVED": 9
+  },
+  "survivors": [
+   "N5_orthant_centre_split_off",
+   "N9_void_share_identity_text_sign_reversed",
+   "A01_same_tolerance_widened",
+   "A02_same_bool_type_check_off",
+   "A07_interval_assumptions_check_off",
+   "A09_void_share_background_identity_off",
+   "A15_ball_coarse_equals_fine",
+   "A18_cw_unweighted_average",
+   "A20_covariance_ratio_not_squared",
+   "A22_h25_gate_disabled",
+   "A23_radial_gate_disabled"
+  ],
+  "killed_by_evidence_only": [
+   "A16_ball_coarse_stride_3",
+   "A19_lambda_calibration_off_by_1pct"
+  ]
+ },
+ "binding_probes": {
+  "total": 32,
+  "as_expected": 30,
+  "unexpected": [
+   "TY1_sigma_as_Fraction",
+   "TY7_sigma_within_rtol"
+  ],
+  "accepted": [
+   "TOL1_quadrature_looser_tolerances",
+   "TOL3_growth_checks_looser_cross_check",
+   "TOL6_seed_quadrature_looser",
+   "G1_growth_G_x2",
+   "ID3_void_share_spectrum_equal_copy",
+   "ID4_deepcopy_sigma_record",
+   "ID5_pickle_roundtrip_then_replace",
+   "ID6_radius_equal_copy",
+   "TY1_sigma_as_Fraction",
+   "TY2_sigma_as_numpy_float64",
+   "CO1_interval_other_target_coherent",
+   "CO3_premise_provenance_text",
+   "CO4_matching_provenance_text"
+  ],
+  "accepted_non_strict_json": [
+   "TY1_sigma_as_Fraction"
+  ],
+  "refused_non_contract_error": []
+ },
+ "reproduction": {
+  "full_suites": {
+   "CPython 3.13.16": {
+    "collected": 1178,
+    "passed": 1178,
+    "skipped": 0,
+    "failed": 0,
+    "seconds": 236
+   },
+   "CPython 3.11.17": {
+    "collected": 1178,
+    "passed": 1178,
+    "skipped": 0,
+    "failed": 0,
+    "seconds": 234
+   },
+   "command": "OPENBLAS_NUM_THREADS=1 python -B -W error -m pytest -q -p no:cacheprovider -rs",
+   "inputs_regenerated": [
+    "execute_upstream_notebook",
+    "extract_upstream_oracle",
+    "extract_upstream_perturbation_oracle",
+    "extract_upstream_barotropic_oracle",
+    "compare_to_oracle",
+    "validate_clean_perturbations",
+    "validate_barotropic_perturbations",
+    "validate_growth_pipeline",
+    "validate_anchored_density_growth",
+    "phase1g_owner_decisions_numerics (124/124 gates)"
+   ]
+  },
+  "evidence": {
+   "gates": "36/36 on both",
+   "numeric_leaves_identical": 3201,
+   "artifact_sha256_248a06b_py313": "91aaca79ad0d0d86ad3208c8cd854e9d03839ef1f8c2d0026ff7a5cf8ff89884"
+  },
+  "comparisons": {
+   "cross_interpreter_226e52d_py313_vs_py311": {
+    "n_A": 3854,
+    "n_B": 3851,
+    "numeric_common": 3201,
+    "numeric_changed": 0,
+    "other_changed": 0,
+    "only_A": 3,
+    "only_B": 0,
+    "max_abs": 0.0,
+    "max_rel": 0.0
+   },
+   "py313_226e52d_vs_248a06b": {
+    "n_A": 3854,
+    "n_B": 3854,
+    "numeric_common": 3201,
+    "numeric_changed": 0,
+    "other_changed": 0,
+    "only_A": 0,
+    "only_B": 0,
+    "max_abs": 0.0,
+    "max_rel": 0.0
+   },
+   "regression_py313_5c325e1_vs_226e52d": {
+    "n_A": 3735,
+    "n_B": 3854,
+    "numeric_common": 3093,
+    "numeric_changed": 159,
+    "other_changed": 4,
+    "only_A": 6,
+    "only_B": 125,
+    "max_abs": 0.0007719476316552232,
+    "max_rel": 0.001274657409871316,
+    "changed_numeric_by_region": {
+     "outside": 3,
+     "inside_gaussian_threshold_pair": 156
+    },
+    "changed_text_by_region": {
+     "inside_gaussian_threshold_pair": 4
+    },
+    "only_old_by_region": {
+     "inside_gaussian_threshold_pair": 6
+    },
+    "only_new_by_region": {
+     "outside": 16,
+     "inside_gaussian_threshold_pair": 106
+    },
+    "changed_inside_beyond_1e-15_rel": 140
+   },
+   "regression_py311_5c325e1_vs_226e52d": {
+    "n_A": 3735,
+    "n_B": 3851,
+    "numeric_common": 3093,
+    "numeric_changed": 159,
+    "other_changed": 4,
+    "only_A": 6,
+    "only_B": 122,
+    "max_abs": 0.0007719476316552232,
+    "max_rel": 0.001274657409871316,
+    "changed_numeric_by_region": {
+     "outside": 3,
+     "inside_gaussian_threshold_pair": 156
+    },
+    "changed_text_by_region": {
+     "inside_gaussian_threshold_pair": 4
+    },
+    "only_old_by_region": {
+     "inside_gaussian_threshold_pair": 6
+    },
+    "only_new_by_region": {
+     "outside": 16,
+     "inside_gaussian_threshold_pair": 106
+    },
+    "changed_inside_beyond_1e-15_rel": 140
+   },
+   "delta_saved_py311_89cb041_vs_audit_py311_5c325e1": {
+    "n_A": 3735,
+    "n_B": 3735,
+    "numeric_common": 3099,
+    "numeric_changed": 0,
+    "other_changed": 0,
+    "only_A": 0,
+    "only_B": 0,
+    "max_abs": 0.0,
+    "max_rel": 0.0
+   },
+   "delta_saved_py312_89cb041_vs_audit_py313_5c325e1": {
+    "n_A": 3735,
+    "n_B": 3735,
+    "numeric_common": 3099,
+    "numeric_changed": 0,
+    "other_changed": 0,
+    "only_A": 0,
+    "only_B": 0,
+    "max_abs": 0.0,
+    "max_rel": 0.0
+   }
+  },
+  "runner": [
+   0.810772,
+   1.121363,
+   0.918157
+  ],
+  "validator": "PASS (53 JSON with this inventory)",
+  "tolerance_audit": {
+   "comparisons": 739,
+   "missing": 0
+  },
+  "diff_check": "clean"
+ },
+ "claims": [
+  {
+   "id": "GH-D2C0001",
+   "claim": "evidence value GM R_Mpc",
+   "status": "VERIFIED",
+   "declared": 10.9544023004,
+   "audit_value": 10.9544023004,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0002",
+   "claim": "evidence value GM ell",
+   "status": "VERIFIED",
+   "declared": 0.291721007898,
+   "audit_value": 0.291721007937,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0003",
+   "claim": "evidence value GM mu_II",
+   "status": "VERIFIED",
+   "declared": 5.00460672771,
+   "audit_value": 5.00460672758,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0004",
+   "claim": "evidence value GM pair_norm",
+   "status": "VERIFIED",
+   "declared": 1.0,
+   "audit_value": 1.0,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0005",
+   "claim": "evidence value GM signed I sigma_part",
+   "status": "VERIFIED",
+   "declared": 0.3264,
+   "audit_value": 0.3264,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0006",
+   "claim": "evidence value GM signed I sigma_wall",
+   "status": "VERIFIED",
+   "declared": 0.914584073111,
+   "audit_value": 0.914584072773,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0007",
+   "claim": "evidence value GM signed I cross",
+   "status": "VERIFIED",
+   "declared": 1.0,
+   "audit_value": 1.0,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0008",
+   "claim": "evidence value GM signed I total",
+   "status": "VERIFIED",
+   "declared": 0.971082378991,
+   "audit_value": 0.971082378673,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0009",
+   "claim": "evidence value GM signed I <C_W-1>",
+   "status": "VERIFIED",
+   "declared": 0.755929586651,
+   "audit_value": 0.755929586093,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0010",
+   "claim": "evidence value GM signed I wall_moment",
+   "status": "VERIFIED",
+   "declared": 0.0578573802689,
+   "audit_value": 0.0578573802261,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0011",
+   "claim": "evidence value GM signed II sigma_part",
+   "status": "VERIFIED",
+   "declared": 0.3264,
+   "audit_value": 0.3264,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0012",
+   "claim": "evidence value GM signed II sigma_wall",
+   "status": "VERIFIED",
+   "declared": 0.106363543533,
+   "audit_value": 0.106363540959,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0013",
+   "claim": "evidence value GM signed II cross",
+   "status": "VERIFIED",
+   "declared": 0.0364774727626,
+   "audit_value": 0.036477472805,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0014",
+   "claim": "evidence value GM signed II total",
+   "status": "VERIFIED",
+   "declared": 0.392845562728,
+   "audit_value": 0.392845562086,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0015",
+   "claim": "evidence value GM signed II <C_W-1>",
+   "status": "VERIFIED",
+   "declared": 0.0431894079303,
+   "audit_value": 0.0431894074738,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0016",
+   "claim": "evidence value GM signed II wall_moment",
+   "status": "VERIFIED",
+   "declared": 0.00078252296548,
+   "audit_value": 0.000782522927606,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0017",
+   "claim": "evidence value GM rs1 lambda",
+   "status": "VERIFIED",
+   "declared": 0.813736670989,
+   "audit_value": 0.813736670975,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0018",
+   "claim": "evidence value GM rs1 latent var",
+   "status": "VERIFIED",
+   "declared": 2.68369906988,
+   "audit_value": 2.68369906985,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0019",
+   "claim": "evidence value GM rs1 density var",
+   "status": "VERIFIED",
+   "declared": 13.6391444831,
+   "audit_value": 13.6391444827,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0020",
+   "claim": "evidence value GM rs1 m_II",
+   "status": "VERIFIED",
+   "declared": 2.86941347484,
+   "audit_value": 2.86941347489,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0021",
+   "claim": "evidence value GM rs1 1/m_II^2",
+   "status": "VERIFIED",
+   "declared": 0.121454534311,
+   "audit_value": 0.121454534307,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0022",
+   "claim": "evidence value GM rs1 unmasked II ball var",
+   "status": "VERIFIED",
+   "declared": 0.0851453203593,
+   "audit_value": 0.0851453203547,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0023",
+   "claim": "evidence value GM rs1 II/I",
+   "status": "VERIFIED",
+   "declared": 1.02834214402,
+   "audit_value": 1.02834214408,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0024",
+   "claim": "evidence value GM rs1 I sigma_wall",
+   "status": "VERIFIED",
+   "declared": 0.933143225409,
+   "audit_value": 0.933143225338,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0025",
+   "claim": "evidence value GM rs1 I total",
+   "status": "VERIFIED",
+   "declared": 0.988581427666,
+   "audit_value": 0.988581427599,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0026",
+   "claim": "evidence value GM rs1 I <C_W-1>",
+   "status": "VERIFIED",
+   "declared": 0.786920193905,
+   "audit_value": 0.786920193786,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0027",
+   "claim": "evidence value GM rs1 I m",
+   "status": "VERIFIED",
+   "declared": 1.0,
+   "audit_value": 1.0,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0028",
+   "claim": "evidence value GM rs1 II sigma_wall",
+   "status": "VERIFIED",
+   "declared": 0.772699531807,
+   "audit_value": 0.772699531777,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0029",
+   "claim": "evidence value GM rs1 II cross",
+   "status": "VERIFIED",
+   "declared": 0.329873921451,
+   "audit_value": 0.329873921466,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0030",
+   "claim": "evidence value GM rs1 II total",
+   "status": "VERIFIED",
+   "declared": 1.01659994487,
+   "audit_value": 1.01659994485,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0031",
+   "claim": "evidence value GM rs1 II <C_W-1>",
+   "status": "VERIFIED",
+   "declared": 0.837693200871,
+   "audit_value": 0.837693200844,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0032",
+   "claim": "evidence value GM rs1 II m",
+   "status": "VERIFIED",
+   "declared": 2.86941347484,
+   "audit_value": 2.86941347489,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0033",
+   "claim": "evidence value GM rs2 lambda",
+   "status": "VERIFIED",
+   "declared": 0.869535108753,
+   "audit_value": 0.869535108736,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0034",
+   "claim": "evidence value GM rs2 latent var",
+   "status": "VERIFIED",
+   "declared": 1.59497218227,
+   "audit_value": 1.59497218225,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0035",
+   "claim": "evidence value GM rs2 density var",
+   "status": "VERIFIED",
+   "declared": 3.92819197909,
+   "audit_value": 3.92819197899,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0036",
+   "claim": "evidence value GM rs2 m_II",
+   "status": "VERIFIED",
+   "declared": 2.13980856119,
+   "audit_value": 2.13980856123,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0037",
+   "claim": "evidence value GM rs2 1/m_II^2",
+   "status": "VERIFIED",
+   "declared": 0.218398755086,
+   "audit_value": 0.218398755077,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0038",
+   "claim": "evidence value GM rs2 unmasked II ball var",
+   "status": "VERIFIED",
+   "declared": 0.153107762286,
+   "audit_value": 0.153107762277,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0039",
+   "claim": "evidence value GM rs2 II/I",
+   "status": "VERIFIED",
+   "declared": 1.18654001436,
+   "audit_value": 1.18654001438,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0040",
+   "claim": "evidence value GM rs2 I sigma_wall",
+   "status": "VERIFIED",
+   "declared": 0.911895007829,
+   "audit_value": 0.911895007805,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0041",
+   "claim": "evidence value GM rs2 I total",
+   "status": "VERIFIED",
+   "declared": 0.968550187292,
+   "audit_value": 0.96855018727,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0042",
+   "claim": "evidence value GM rs2 I <C_W-1>",
+   "status": "VERIFIED",
+   "declared": 0.751490944597,
+   "audit_value": 0.751490944559,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0043",
+   "claim": "evidence value GM rs2 I m",
+   "status": "VERIFIED",
+   "declared": 1.0,
+   "audit_value": 1.0,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0044",
+   "claim": "evidence value GM rs2 II sigma_wall",
+   "status": "VERIFIED",
+   "declared": 0.902812805224,
+   "audit_value": 0.902812805201,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0045",
+   "claim": "evidence value GM rs2 II cross",
+   "status": "VERIFIED",
+   "declared": 0.399106853815,
+   "audit_value": 0.399106853831,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0046",
+   "claim": "evidence value GM rs2 II total",
+   "status": "VERIFIED",
+   "declared": 1.14922355314,
+   "audit_value": 1.14922355313,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0047",
+   "claim": "evidence value GM rs2 II <C_W-1>",
+   "status": "VERIFIED",
+   "declared": 1.09727723427,
+   "audit_value": 1.09727723425,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0048",
+   "claim": "evidence value GM rs2 II m",
+   "status": "VERIFIED",
+   "declared": 2.13980856119,
+   "audit_value": 2.13980856123,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0049",
+   "claim": "evidence value GM rs4 lambda",
+   "status": "VERIFIED",
+   "declared": 0.998433753839,
+   "audit_value": 0.998433753818,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0050",
+   "claim": "evidence value GM rs4 latent var",
+   "status": "VERIFIED",
+   "declared": 0.966604356653,
+   "audit_value": 0.966604356639,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0051",
+   "claim": "evidence value GM rs4 density var",
+   "status": "VERIFIED",
+   "declared": 1.62900213187,
+   "audit_value": 1.62900213183,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0052",
+   "claim": "evidence value GM rs4 m_II",
+   "status": "VERIFIED",
+   "declared": 1.62335065177,
+   "audit_value": 1.62335065179,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0053",
+   "claim": "evidence value GM rs4 1/m_II^2",
+   "status": "VERIFIED",
+   "declared": 0.379468141754,
+   "audit_value": 0.379468141743,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0054",
+   "claim": "evidence value GM rs4 unmasked II ball var",
+   "status": "VERIFIED",
+   "declared": 0.266024950646,
+   "audit_value": 0.266024950633,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0055",
+   "claim": "evidence value GM rs4 II/I",
+   "status": "VERIFIED",
+   "declared": 1.29315799749,
+   "audit_value": 1.2931579975,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0056",
+   "claim": "evidence value GM rs4 I sigma_wall",
+   "status": "VERIFIED",
+   "declared": 0.895870361189,
+   "audit_value": 0.895870361177,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0057",
+   "claim": "evidence value GM rs4 I total",
+   "status": "VERIFIED",
+   "declared": 0.953478192754,
+   "audit_value": 0.953478192742,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0058",
+   "claim": "evidence value GM rs4 I <C_W-1>",
+   "status": "VERIFIED",
+   "declared": 0.72531124858,
+   "audit_value": 0.72531124856,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0059",
+   "claim": "evidence value GM rs4 I m",
+   "status": "VERIFIED",
+   "declared": 1.0,
+   "audit_value": 1.0,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0060",
+   "claim": "evidence value GM rs4 II sigma_wall",
+   "status": "VERIFIED",
+   "declared": 0.983783070478,
+   "audit_value": 0.983783070464,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0061",
+   "claim": "evidence value GM rs4 II cross",
+   "status": "VERIFIED",
+   "declared": 0.445917855913,
+   "audit_value": 0.445917855931,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0062",
+   "claim": "evidence value GM rs4 II total",
+   "status": "VERIFIED",
+   "declared": 1.23299795039,
+   "audit_value": 1.23299795039,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0063",
+   "claim": "evidence value GM rs4 II <C_W-1>",
+   "status": "VERIFIED",
+   "declared": 1.27763196059,
+   "audit_value": 1.27763196058,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0064",
+   "claim": "evidence value GM rs4 II m",
+   "status": "VERIFIED",
+   "declared": 1.62335065177,
+   "audit_value": 1.62335065179,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0065",
+   "claim": "evidence value NW15 R_Mpc",
+   "status": "VERIFIED",
+   "declared": 13.1147540984,
+   "audit_value": 13.1147540984,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0066",
+   "claim": "evidence value NW15 ell",
+   "status": "VERIFIED",
+   "declared": 0.59873224844,
+   "audit_value": 0.598732248471,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0067",
+   "claim": "evidence value NW15 mu_II",
+   "status": "VERIFIED",
+   "declared": 3.7888358781,
+   "audit_value": 3.78883587808,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0068",
+   "claim": "evidence value NW15 pair_norm",
+   "status": "VERIFIED",
+   "declared": 1.0,
+   "audit_value": 1.0,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0069",
+   "claim": "evidence value NW15 signed I sigma_part",
+   "status": "VERIFIED",
+   "declared": 0.3036,
+   "audit_value": 0.3036,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0070",
+   "claim": "evidence value NW15 signed I sigma_wall",
+   "status": "VERIFIED",
+   "declared": 0.929622131396,
+   "audit_value": 0.929622131204,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0071",
+   "claim": "evidence value NW15 signed I cross",
+   "status": "VERIFIED",
+   "declared": 1.0,
+   "audit_value": 1.0,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0072",
+   "claim": "evidence value NW15 signed I total",
+   "status": "VERIFIED",
+   "declared": 0.977941852658,
+   "audit_value": 0.977941852476,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0073",
+   "claim": "evidence value NW15 signed I <C_W-1>",
+   "status": "VERIFIED",
+   "declared": 0.791264148473,
+   "audit_value": 0.791264148147,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0074",
+   "claim": "evidence value NW15 signed I wall_moment",
+   "status": "VERIFIED",
+   "declared": 0.120234907151,
+   "audit_value": 0.120234907101,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0075",
+   "claim": "evidence value NW15 signed II sigma_part",
+   "status": "VERIFIED",
+   "declared": 0.3036,
+   "audit_value": 0.3036,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0076",
+   "claim": "evidence value NW15 signed II sigma_wall",
+   "status": "VERIFIED",
+   "declared": 0.15980850528,
+   "audit_value": 0.159808504177,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0077",
+   "claim": "evidence value NW15 signed II cross",
+   "status": "VERIFIED",
+   "declared": 0.049911949895,
+   "audit_value": 0.0499119499118,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0078",
+   "claim": "evidence value NW15 signed II total",
+   "status": "VERIFIED",
+   "declared": 0.409418695536,
+   "audit_value": 0.409418695127,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0079",
+   "claim": "evidence value NW15 signed II <C_W-1>",
+   "status": "VERIFIED",
+   "declared": 0.0690831132229,
+   "audit_value": 0.0690831129157,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0080",
+   "claim": "evidence value NW15 signed II wall_moment",
+   "status": "VERIFIED",
+   "declared": 0.00355318191183,
+   "audit_value": 0.0035531818628,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0081",
+   "claim": "evidence value NW15 rs1 lambda",
+   "status": "VERIFIED",
+   "declared": 0.785149918582,
+   "audit_value": 0.785149918565,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0082",
+   "claim": "evidence value NW15 rs1 latent var",
+   "status": "VERIFIED",
+   "declared": 3.3531090824,
+   "audit_value": 3.35310908234,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0083",
+   "claim": "evidence value NW15 rs1 density var",
+   "status": "VERIFIED",
+   "declared": 27.5914888934,
+   "audit_value": 27.5914888919,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0084",
+   "claim": "evidence value NW15 rs1 m_II",
+   "status": "VERIFIED",
+   "declared": 2.47411348793,
+   "audit_value": 2.47411348793,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0085",
+   "claim": "evidence value NW15 rs1 1/m_II^2",
+   "status": "VERIFIED",
+   "declared": 0.163365657948,
+   "audit_value": 0.163365657948,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0086",
+   "claim": "evidence value NW15 rs1 unmasked II ball var",
+   "status": "VERIFIED",
+   "declared": 0.119990536585,
+   "audit_value": 0.11999053658,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0087",
+   "claim": "evidence value NW15 rs1 II/I",
+   "status": "VERIFIED",
+   "declared": 0.919394747017,
+   "audit_value": 0.919394747059,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0088",
+   "claim": "evidence value NW15 rs1 I sigma_wall",
+   "status": "VERIFIED",
+   "declared": 0.958275986869,
+   "audit_value": 0.958275986802,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0089",
+   "claim": "evidence value NW15 rs1 I total",
+   "status": "VERIFIED",
+   "declared": 1.00521929299,
+   "audit_value": 1.00521929293,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0090",
+   "claim": "evidence value NW15 rs1 I <C_W-1>",
+   "status": "VERIFIED",
+   "declared": 0.840794361919,
+   "audit_value": 0.840794361803,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0091",
+   "claim": "evidence value NW15 rs1 I m",
+   "status": "VERIFIED",
+   "declared": 1.0,
+   "audit_value": 1.0,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0092",
+   "claim": "evidence value NW15 rs1 II sigma_wall",
+   "status": "VERIFIED",
+   "declared": 0.711840782289,
+   "audit_value": 0.711840782265,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0093",
+   "claim": "evidence value NW15 rs1 II cross",
+   "status": "VERIFIED",
+   "declared": 0.255243065897,
+   "audit_value": 0.255243065901,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0094",
+   "claim": "evidence value NW15 rs1 II total",
+   "status": "VERIFIED",
+   "declared": 0.92419333758,
+   "audit_value": 0.924193337563,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0095",
+   "claim": "evidence value NW15 rs1 II <C_W-1>",
+   "status": "VERIFIED",
+   "declared": 0.697655401784,
+   "audit_value": 0.697655401757,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0096",
+   "claim": "evidence value NW15 rs1 II m",
+   "status": "VERIFIED",
+   "declared": 2.47411348793,
+   "audit_value": 2.47411348793,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0097",
+   "claim": "evidence value NW15 rs2 lambda",
+   "status": "VERIFIED",
+   "declared": 0.839193025724,
+   "audit_value": 0.839193025704,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0098",
+   "claim": "evidence value NW15 rs2 latent var",
+   "status": "VERIFIED",
+   "declared": 1.99253411786,
+   "audit_value": 1.99253411781,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0099",
+   "claim": "evidence value NW15 rs2 density var",
+   "status": "VERIFIED",
+   "declared": 6.33409569618,
+   "audit_value": 6.33409569584,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0100",
+   "claim": "evidence value NW15 rs2 m_II",
+   "status": "VERIFIED",
+   "declared": 2.10432510848,
+   "audit_value": 2.10432510849,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0101",
+   "claim": "evidence value NW15 rs2 1/m_II^2",
+   "status": "VERIFIED",
+   "declared": 0.225826199492,
+   "audit_value": 0.225826199491,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0102",
+   "claim": "evidence value NW15 rs2 unmasked II ball var",
+   "status": "VERIFIED",
+   "declared": 0.165867215865,
+   "audit_value": 0.165867215859,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0103",
+   "claim": "evidence value NW15 rs2 II/I",
+   "status": "VERIFIED",
+   "declared": 1.04950468408,
+   "audit_value": 1.04950468409,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0104",
+   "claim": "evidence value NW15 rs2 I sigma_wall",
+   "status": "VERIFIED",
+   "declared": 0.933293193452,
+   "audit_value": 0.933293193425,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0105",
+   "claim": "evidence value NW15 rs2 I total",
+   "status": "VERIFIED",
+   "declared": 0.981432190701,
+   "audit_value": 0.981432190675,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0106",
+   "claim": "evidence value NW15 rs2 I <C_W-1>",
+   "status": "VERIFIED",
+   "declared": 0.797525865265,
+   "audit_value": 0.79752586522,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0107",
+   "claim": "evidence value NW15 rs2 I m",
+   "status": "VERIFIED",
+   "declared": 1.0,
+   "audit_value": 1.0,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0108",
+   "claim": "evidence value NW15 rs2 II sigma_wall",
+   "status": "VERIFIED",
+   "declared": 0.808987681809,
+   "audit_value": 0.808987681786,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0109",
+   "claim": "evidence value NW15 rs2 II cross",
+   "status": "VERIFIED",
+   "declared": 0.314302394371,
+   "audit_value": 0.314302394373,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0110",
+   "claim": "evidence value NW15 rs2 II total",
+   "status": "VERIFIED",
+   "declared": 1.03001768125,
+   "audit_value": 1.03001768123,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0111",
+   "claim": "evidence value NW15 rs2 II <C_W-1>",
+   "status": "VERIFIED",
+   "declared": 0.88700553774,
+   "audit_value": 0.887005537708,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0112",
+   "claim": "evidence value NW15 rs2 II m",
+   "status": "VERIFIED",
+   "declared": 2.10432510848,
+   "audit_value": 2.10432510849,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0113",
+   "claim": "evidence value NW15 rs4 lambda",
+   "status": "VERIFIED",
+   "declared": 0.949341994343,
+   "audit_value": 0.949341994318,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0114",
+   "claim": "evidence value NW15 rs4 latent var",
+   "status": "VERIFIED",
+   "declared": 1.17099657397,
+   "audit_value": 1.17099657393,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0115",
+   "claim": "evidence value NW15 rs4 density var",
+   "status": "VERIFIED",
+   "declared": 2.22520519302,
+   "audit_value": 2.22520519292,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0116",
+   "claim": "evidence value NW15 rs4 m_II",
+   "status": "VERIFIED",
+   "declared": 1.66857879122,
+   "audit_value": 1.66857879122,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0117",
+   "claim": "evidence value NW15 rs4 1/m_II^2",
+   "status": "VERIFIED",
+   "declared": 0.359175381561,
+   "audit_value": 0.35917538156,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0118",
+   "claim": "evidence value NW15 rs4 unmasked II ball var",
+   "status": "VERIFIED",
+   "declared": 0.263810933723,
+   "audit_value": 0.263810933712,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0119",
+   "claim": "evidence value NW15 rs4 II/I",
+   "status": "VERIFIED",
+   "declared": 1.18790489714,
+   "audit_value": 1.18790489714,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0120",
+   "claim": "evidence value NW15 rs4 I sigma_wall",
+   "status": "VERIFIED",
+   "declared": 0.914755533759,
+   "audit_value": 0.91475553374,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0121",
+   "claim": "evidence value NW15 rs4 I total",
+   "status": "VERIFIED",
+   "declared": 0.963820858118,
+   "audit_value": 0.9638208581,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0122",
+   "claim": "evidence value NW15 rs4 I <C_W-1>",
+   "status": "VERIFIED",
+   "declared": 0.766158582193,
+   "audit_value": 0.766158582161,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0123",
+   "claim": "evidence value NW15 rs4 I m",
+   "status": "VERIFIED",
+   "declared": 1.0,
+   "audit_value": 1.0,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0124",
+   "claim": "evidence value NW15 rs4 II sigma_wall",
+   "status": "VERIFIED",
+   "declared": 0.919143473136,
+   "audit_value": 0.919143473114,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0125",
+   "claim": "evidence value NW15 rs4 II cross",
+   "status": "VERIFIED",
+   "declared": 0.373861335708,
+   "audit_value": 0.37386133571,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0126",
+   "claim": "evidence value NW15 rs4 II total",
+   "status": "VERIFIED",
+   "declared": 1.14492751732,
+   "audit_value": 1.1449275173,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0127",
+   "claim": "evidence value NW15 rs4 II <C_W-1>",
+   "status": "VERIFIED",
+   "declared": 1.11583614002,
+   "audit_value": 1.11583613998,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0128",
+   "claim": "evidence value NW15 rs4 II m",
+   "status": "VERIFIED",
+   "declared": 1.66857879122,
+   "audit_value": 1.66857879122,
+   "method": "BLIND_INDEPENDENT_RECONSTRUCTION (Owen's T, Stein, tilting, QAWO, Gauss-Legendre 32x64)",
+   "tolerance": {
+    "relative": 1e-07
+   },
+   "location": "artifacts/independent/phase1g_h_global_variance_closure.json two_phase_covariance"
+  },
+  {
+   "id": "GH-D2C0129",
+   "claim": "1G-H inventory numeric leaves (results, anchoring, two_phase_covariance, ensemble example) match the regenerated artifact within half a unit of the last printed digit",
+   "status": "VERIFIED",
+   "declared": 1193,
+   "audit_value": 1193,
+   "method": "INVENTORY_VS_REGENERATED_ARTIFACT (path rules of the delta audit; 6 radial leaves by hand)",
+   "tolerance": {
+    "absolute": "half a unit of the last printed digit, floor 2e-12"
+   },
+   "location": "reports/phase1g_h_global_variance_closure_inventory.json"
+  },
+  {
+   "id": "GH-D2C0130",
+   "claim": "evidence gate numerics/NW15_CMB_FIT constructive pairs radial refinement (CPython 3.13.16)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-05
+   },
+   "location": "/gates/numerics/NW15_CMB_FIT constructive pairs radial refinement"
+  },
+  {
+   "id": "GH-D2C0131",
+   "claim": "evidence gate numerics/NW15_CMB_FIT lognormal ball-variance calibration (CPython 3.13.16)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-09
+   },
+   "location": "/gates/numerics/NW15_CMB_FIT lognormal ball-variance calibration"
+  },
+  {
+   "id": "GH-D2C0132",
+   "claim": "evidence gate numerics/NW15_CMB_FIT refined quadrature (CPython 3.13.16)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 2e-06
+   },
+   "location": "/gates/numerics/NW15_CMB_FIT refined quadrature"
+  },
+  {
+   "id": "GH-D2C0133",
+   "claim": "evidence gate numerics/PAPER_REFERENCE constructive pairs radial refinement (CPython 3.13.16)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-05
+   },
+   "location": "/gates/numerics/PAPER_REFERENCE constructive pairs radial refinement"
+  },
+  {
+   "id": "GH-D2C0134",
+   "claim": "evidence gate numerics/PAPER_REFERENCE lognormal ball-variance calibration (CPython 3.13.16)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-09
+   },
+   "location": "/gates/numerics/PAPER_REFERENCE lognormal ball-variance calibration"
+  },
+  {
+   "id": "GH-D2C0135",
+   "claim": "evidence gate numerics/PAPER_REFERENCE refined quadrature (CPython 3.13.16)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 2e-06
+   },
+   "location": "/gates/numerics/PAPER_REFERENCE refined quadrature"
+  },
+  {
+   "id": "GH-D2C0136",
+   "claim": "evidence gate numerics/orthant P11 vs bivariate CDF (CPython 3.13.16)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-10
+   },
+   "location": "/gates/numerics/orthant P11 vs bivariate CDF"
+  },
+  {
+   "id": "GH-D2C0137",
+   "claim": "evidence gate numerics/orthant analytic special cases (CPython 3.13.16)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-12
+   },
+   "location": "/gates/numerics/orthant analytic special cases"
+  },
+  {
+   "id": "GH-D2C0138",
+   "claim": "evidence gate physics/NW15_CMB_FIT M3 bias finite difference compressed_with_long_mode (CPython 3.13.16)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-06
+   },
+   "location": "/gates/physics/NW15_CMB_FIT M3 bias finite difference compressed_with_long_mode"
+  },
+  {
+   "id": "GH-D2C0139",
+   "claim": "evidence gate physics/NW15_CMB_FIT M3 bias finite difference universal_wall_density (CPython 3.13.16)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-06
+   },
+   "location": "/gates/physics/NW15_CMB_FIT M3 bias finite difference universal_wall_density"
+  },
+  {
+   "id": "GH-D2C0140",
+   "claim": "evidence gate physics/NW15_CMB_FIT PBS void term A_s independence x0.5 (CPython 3.13.16)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 0.002
+   },
+   "location": "/gates/physics/NW15_CMB_FIT PBS void term A_s independence x0.5"
+  },
+  {
+   "id": "GH-D2C0141",
+   "claim": "evidence gate physics/NW15_CMB_FIT PBS void term A_s independence x2 (CPython 3.13.16)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 0.002
+   },
+   "location": "/gates/physics/NW15_CMB_FIT PBS void term A_s independence x2"
+  },
+  {
+   "id": "GH-D2C0142",
+   "claim": "evidence gate physics/NW15_CMB_FIT a_equal_mass constant share reclosure equals post-hoc (CPython 3.13.16)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-10
+   },
+   "location": "/gates/physics/NW15_CMB_FIT a_equal_mass constant share reclosure equals post-hoc"
+  },
+  {
+   "id": "GH-D2C0143",
+   "claim": "evidence gate physics/NW15_CMB_FIT c_bare_volume_average constant share reclosure equals post-hoc (CPython 3.13.16)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-10
+   },
+   "location": "/gates/physics/NW15_CMB_FIT c_bare_volume_average constant share reclosure equals post-hoc"
+  },
+  {
+   "id": "GH-D2C0144",
+   "claim": "evidence gate physics/NW15_CMB_FIT constant share A_s scaling x0.5 (CPython 3.13.16)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-10
+   },
+   "location": "/gates/physics/NW15_CMB_FIT constant share A_s scaling x0.5"
+  },
+  {
+   "id": "GH-D2C0145",
+   "claim": "evidence gate physics/NW15_CMB_FIT constant share A_s scaling x2 (CPython 3.13.16)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-10
+   },
+   "location": "/gates/physics/NW15_CMB_FIT constant share A_s scaling x2"
+  },
+  {
+   "id": "GH-D2C0146",
+   "claim": "evidence gate physics/NW15_CMB_FIT constructive pairs (H25) identity (CPython 3.13.16)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-12
+   },
+   "location": "/gates/physics/NW15_CMB_FIT constructive pairs (H25) identity"
+  },
+  {
+   "id": "GH-D2C0147",
+   "claim": "evidence gate physics/NW15_CMB_FIT lognormal linear limit reproduces the signed pair (CPython 3.13.16)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 0.05
+   },
+   "location": "/gates/physics/NW15_CMB_FIT lognormal linear limit reproduces the signed pair"
+  },
+  {
+   "id": "GH-D2C0148",
+   "claim": "evidence gate physics/NW15_CMB_FIT step kernel satisfies the premise (CPython 3.13.16)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1.0
+   },
+   "location": "/gates/physics/NW15_CMB_FIT step kernel satisfies the premise"
+  },
+  {
+   "id": "GH-D2C0149",
+   "claim": "evidence gate physics/PAPER_REFERENCE M3 bias finite difference compressed_with_long_mode (CPython 3.13.16)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-06
+   },
+   "location": "/gates/physics/PAPER_REFERENCE M3 bias finite difference compressed_with_long_mode"
+  },
+  {
+   "id": "GH-D2C0150",
+   "claim": "evidence gate physics/PAPER_REFERENCE M3 bias finite difference universal_wall_density (CPython 3.13.16)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-06
+   },
+   "location": "/gates/physics/PAPER_REFERENCE M3 bias finite difference universal_wall_density"
+  },
+  {
+   "id": "GH-D2C0151",
+   "claim": "evidence gate physics/PAPER_REFERENCE PBS void term A_s independence x0.5 (CPython 3.13.16)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 0.002
+   },
+   "location": "/gates/physics/PAPER_REFERENCE PBS void term A_s independence x0.5"
+  },
+  {
+   "id": "GH-D2C0152",
+   "claim": "evidence gate physics/PAPER_REFERENCE PBS void term A_s independence x2 (CPython 3.13.16)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 0.002
+   },
+   "location": "/gates/physics/PAPER_REFERENCE PBS void term A_s independence x2"
+  },
+  {
+   "id": "GH-D2C0153",
+   "claim": "evidence gate physics/PAPER_REFERENCE a_equal_mass constant share reclosure equals post-hoc (CPython 3.13.16)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-10
+   },
+   "location": "/gates/physics/PAPER_REFERENCE a_equal_mass constant share reclosure equals post-hoc"
+  },
+  {
+   "id": "GH-D2C0154",
+   "claim": "evidence gate physics/PAPER_REFERENCE c_bare_volume_average constant share reclosure equals post-hoc (CPython 3.13.16)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-10
+   },
+   "location": "/gates/physics/PAPER_REFERENCE c_bare_volume_average constant share reclosure equals post-hoc"
+  },
+  {
+   "id": "GH-D2C0155",
+   "claim": "evidence gate physics/PAPER_REFERENCE constant share A_s scaling x0.5 (CPython 3.13.16)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-10
+   },
+   "location": "/gates/physics/PAPER_REFERENCE constant share A_s scaling x0.5"
+  },
+  {
+   "id": "GH-D2C0156",
+   "claim": "evidence gate physics/PAPER_REFERENCE constant share A_s scaling x2 (CPython 3.13.16)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-10
+   },
+   "location": "/gates/physics/PAPER_REFERENCE constant share A_s scaling x2"
+  },
+  {
+   "id": "GH-D2C0157",
+   "claim": "evidence gate physics/PAPER_REFERENCE constructive pairs (H25) identity (CPython 3.13.16)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-12
+   },
+   "location": "/gates/physics/PAPER_REFERENCE constructive pairs (H25) identity"
+  },
+  {
+   "id": "GH-D2C0158",
+   "claim": "evidence gate physics/PAPER_REFERENCE lognormal linear limit reproduces the signed pair (CPython 3.13.16)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 0.05
+   },
+   "location": "/gates/physics/PAPER_REFERENCE lognormal linear limit reproduces the signed pair"
+  },
+  {
+   "id": "GH-D2C0159",
+   "claim": "evidence gate physics/PAPER_REFERENCE step kernel satisfies the premise (CPython 3.13.16)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1.0
+   },
+   "location": "/gates/physics/PAPER_REFERENCE step kernel satisfies the premise"
+  },
+  {
+   "id": "GH-D2C0160",
+   "claim": "evidence gate reproduction/NW15_CMB_FIT A_v vs 1G-D printed (CPython 3.13.16)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 0.5
+   },
+   "location": "/gates/reproduction/NW15_CMB_FIT A_v vs 1G-D printed"
+  },
+  {
+   "id": "GH-D2C0161",
+   "claim": "evidence gate reproduction/NW15_CMB_FIT E reference reproduction within its rounding budget (CPython 3.13.16)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 0.00011294418099511322
+   },
+   "location": "/gates/reproduction/NW15_CMB_FIT E reference reproduction within its rounding budget"
+  },
+  {
+   "id": "GH-D2C0162",
+   "claim": "evidence gate reproduction/NW15_CMB_FIT X_SU vs 1G-D printed (CPython 3.13.16)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 0.0005
+   },
+   "location": "/gates/reproduction/NW15_CMB_FIT X_SU vs 1G-D printed"
+  },
+  {
+   "id": "GH-D2C0163",
+   "claim": "evidence gate reproduction/PAPER_REFERENCE A_v vs 1G-D printed (CPython 3.13.16)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 0.5
+   },
+   "location": "/gates/reproduction/PAPER_REFERENCE A_v vs 1G-D printed"
+  },
+  {
+   "id": "GH-D2C0164",
+   "claim": "evidence gate reproduction/PAPER_REFERENCE E reference reproduction within its rounding budget (CPython 3.13.16)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 0.00011372040818308998
+   },
+   "location": "/gates/reproduction/PAPER_REFERENCE E reference reproduction within its rounding budget"
+  },
+  {
+   "id": "GH-D2C0165",
+   "claim": "evidence gate reproduction/PAPER_REFERENCE X_SU vs 1G-D printed (CPython 3.13.16)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 0.0005
+   },
+   "location": "/gates/reproduction/PAPER_REFERENCE X_SU vs 1G-D printed"
+  },
+  {
+   "id": "GH-D2C0166",
+   "claim": "evidence gate numerics/NW15_CMB_FIT constructive pairs radial refinement (CPython 3.11.17)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-05
+   },
+   "location": "/gates/numerics/NW15_CMB_FIT constructive pairs radial refinement"
+  },
+  {
+   "id": "GH-D2C0167",
+   "claim": "evidence gate numerics/NW15_CMB_FIT lognormal ball-variance calibration (CPython 3.11.17)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-09
+   },
+   "location": "/gates/numerics/NW15_CMB_FIT lognormal ball-variance calibration"
+  },
+  {
+   "id": "GH-D2C0168",
+   "claim": "evidence gate numerics/NW15_CMB_FIT refined quadrature (CPython 3.11.17)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 2e-06
+   },
+   "location": "/gates/numerics/NW15_CMB_FIT refined quadrature"
+  },
+  {
+   "id": "GH-D2C0169",
+   "claim": "evidence gate numerics/PAPER_REFERENCE constructive pairs radial refinement (CPython 3.11.17)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-05
+   },
+   "location": "/gates/numerics/PAPER_REFERENCE constructive pairs radial refinement"
+  },
+  {
+   "id": "GH-D2C0170",
+   "claim": "evidence gate numerics/PAPER_REFERENCE lognormal ball-variance calibration (CPython 3.11.17)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-09
+   },
+   "location": "/gates/numerics/PAPER_REFERENCE lognormal ball-variance calibration"
+  },
+  {
+   "id": "GH-D2C0171",
+   "claim": "evidence gate numerics/PAPER_REFERENCE refined quadrature (CPython 3.11.17)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 2e-06
+   },
+   "location": "/gates/numerics/PAPER_REFERENCE refined quadrature"
+  },
+  {
+   "id": "GH-D2C0172",
+   "claim": "evidence gate numerics/orthant P11 vs bivariate CDF (CPython 3.11.17)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-10
+   },
+   "location": "/gates/numerics/orthant P11 vs bivariate CDF"
+  },
+  {
+   "id": "GH-D2C0173",
+   "claim": "evidence gate numerics/orthant analytic special cases (CPython 3.11.17)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-12
+   },
+   "location": "/gates/numerics/orthant analytic special cases"
+  },
+  {
+   "id": "GH-D2C0174",
+   "claim": "evidence gate physics/NW15_CMB_FIT M3 bias finite difference compressed_with_long_mode (CPython 3.11.17)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-06
+   },
+   "location": "/gates/physics/NW15_CMB_FIT M3 bias finite difference compressed_with_long_mode"
+  },
+  {
+   "id": "GH-D2C0175",
+   "claim": "evidence gate physics/NW15_CMB_FIT M3 bias finite difference universal_wall_density (CPython 3.11.17)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-06
+   },
+   "location": "/gates/physics/NW15_CMB_FIT M3 bias finite difference universal_wall_density"
+  },
+  {
+   "id": "GH-D2C0176",
+   "claim": "evidence gate physics/NW15_CMB_FIT PBS void term A_s independence x0.5 (CPython 3.11.17)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 0.002
+   },
+   "location": "/gates/physics/NW15_CMB_FIT PBS void term A_s independence x0.5"
+  },
+  {
+   "id": "GH-D2C0177",
+   "claim": "evidence gate physics/NW15_CMB_FIT PBS void term A_s independence x2 (CPython 3.11.17)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 0.002
+   },
+   "location": "/gates/physics/NW15_CMB_FIT PBS void term A_s independence x2"
+  },
+  {
+   "id": "GH-D2C0178",
+   "claim": "evidence gate physics/NW15_CMB_FIT a_equal_mass constant share reclosure equals post-hoc (CPython 3.11.17)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-10
+   },
+   "location": "/gates/physics/NW15_CMB_FIT a_equal_mass constant share reclosure equals post-hoc"
+  },
+  {
+   "id": "GH-D2C0179",
+   "claim": "evidence gate physics/NW15_CMB_FIT c_bare_volume_average constant share reclosure equals post-hoc (CPython 3.11.17)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-10
+   },
+   "location": "/gates/physics/NW15_CMB_FIT c_bare_volume_average constant share reclosure equals post-hoc"
+  },
+  {
+   "id": "GH-D2C0180",
+   "claim": "evidence gate physics/NW15_CMB_FIT constant share A_s scaling x0.5 (CPython 3.11.17)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-10
+   },
+   "location": "/gates/physics/NW15_CMB_FIT constant share A_s scaling x0.5"
+  },
+  {
+   "id": "GH-D2C0181",
+   "claim": "evidence gate physics/NW15_CMB_FIT constant share A_s scaling x2 (CPython 3.11.17)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-10
+   },
+   "location": "/gates/physics/NW15_CMB_FIT constant share A_s scaling x2"
+  },
+  {
+   "id": "GH-D2C0182",
+   "claim": "evidence gate physics/NW15_CMB_FIT constructive pairs (H25) identity (CPython 3.11.17)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-12
+   },
+   "location": "/gates/physics/NW15_CMB_FIT constructive pairs (H25) identity"
+  },
+  {
+   "id": "GH-D2C0183",
+   "claim": "evidence gate physics/NW15_CMB_FIT lognormal linear limit reproduces the signed pair (CPython 3.11.17)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 0.05
+   },
+   "location": "/gates/physics/NW15_CMB_FIT lognormal linear limit reproduces the signed pair"
+  },
+  {
+   "id": "GH-D2C0184",
+   "claim": "evidence gate physics/NW15_CMB_FIT step kernel satisfies the premise (CPython 3.11.17)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1.0
+   },
+   "location": "/gates/physics/NW15_CMB_FIT step kernel satisfies the premise"
+  },
+  {
+   "id": "GH-D2C0185",
+   "claim": "evidence gate physics/PAPER_REFERENCE M3 bias finite difference compressed_with_long_mode (CPython 3.11.17)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-06
+   },
+   "location": "/gates/physics/PAPER_REFERENCE M3 bias finite difference compressed_with_long_mode"
+  },
+  {
+   "id": "GH-D2C0186",
+   "claim": "evidence gate physics/PAPER_REFERENCE M3 bias finite difference universal_wall_density (CPython 3.11.17)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-06
+   },
+   "location": "/gates/physics/PAPER_REFERENCE M3 bias finite difference universal_wall_density"
+  },
+  {
+   "id": "GH-D2C0187",
+   "claim": "evidence gate physics/PAPER_REFERENCE PBS void term A_s independence x0.5 (CPython 3.11.17)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 0.002
+   },
+   "location": "/gates/physics/PAPER_REFERENCE PBS void term A_s independence x0.5"
+  },
+  {
+   "id": "GH-D2C0188",
+   "claim": "evidence gate physics/PAPER_REFERENCE PBS void term A_s independence x2 (CPython 3.11.17)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 0.002
+   },
+   "location": "/gates/physics/PAPER_REFERENCE PBS void term A_s independence x2"
+  },
+  {
+   "id": "GH-D2C0189",
+   "claim": "evidence gate physics/PAPER_REFERENCE a_equal_mass constant share reclosure equals post-hoc (CPython 3.11.17)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-10
+   },
+   "location": "/gates/physics/PAPER_REFERENCE a_equal_mass constant share reclosure equals post-hoc"
+  },
+  {
+   "id": "GH-D2C0190",
+   "claim": "evidence gate physics/PAPER_REFERENCE c_bare_volume_average constant share reclosure equals post-hoc (CPython 3.11.17)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-10
+   },
+   "location": "/gates/physics/PAPER_REFERENCE c_bare_volume_average constant share reclosure equals post-hoc"
+  },
+  {
+   "id": "GH-D2C0191",
+   "claim": "evidence gate physics/PAPER_REFERENCE constant share A_s scaling x0.5 (CPython 3.11.17)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-10
+   },
+   "location": "/gates/physics/PAPER_REFERENCE constant share A_s scaling x0.5"
+  },
+  {
+   "id": "GH-D2C0192",
+   "claim": "evidence gate physics/PAPER_REFERENCE constant share A_s scaling x2 (CPython 3.11.17)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-10
+   },
+   "location": "/gates/physics/PAPER_REFERENCE constant share A_s scaling x2"
+  },
+  {
+   "id": "GH-D2C0193",
+   "claim": "evidence gate physics/PAPER_REFERENCE constructive pairs (H25) identity (CPython 3.11.17)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1e-12
+   },
+   "location": "/gates/physics/PAPER_REFERENCE constructive pairs (H25) identity"
+  },
+  {
+   "id": "GH-D2C0194",
+   "claim": "evidence gate physics/PAPER_REFERENCE lognormal linear limit reproduces the signed pair (CPython 3.11.17)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 0.05
+   },
+   "location": "/gates/physics/PAPER_REFERENCE lognormal linear limit reproduces the signed pair"
+  },
+  {
+   "id": "GH-D2C0195",
+   "claim": "evidence gate physics/PAPER_REFERENCE step kernel satisfies the premise (CPython 3.11.17)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 1.0
+   },
+   "location": "/gates/physics/PAPER_REFERENCE step kernel satisfies the premise"
+  },
+  {
+   "id": "GH-D2C0196",
+   "claim": "evidence gate reproduction/NW15_CMB_FIT A_v vs 1G-D printed (CPython 3.11.17)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 0.5
+   },
+   "location": "/gates/reproduction/NW15_CMB_FIT A_v vs 1G-D printed"
+  },
+  {
+   "id": "GH-D2C0197",
+   "claim": "evidence gate reproduction/NW15_CMB_FIT E reference reproduction within its rounding budget (CPython 3.11.17)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 0.00011294418099511322
+   },
+   "location": "/gates/reproduction/NW15_CMB_FIT E reference reproduction within its rounding budget"
+  },
+  {
+   "id": "GH-D2C0198",
+   "claim": "evidence gate reproduction/NW15_CMB_FIT X_SU vs 1G-D printed (CPython 3.11.17)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 0.0005
+   },
+   "location": "/gates/reproduction/NW15_CMB_FIT X_SU vs 1G-D printed"
+  },
+  {
+   "id": "GH-D2C0199",
+   "claim": "evidence gate reproduction/PAPER_REFERENCE A_v vs 1G-D printed (CPython 3.11.17)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 0.5
+   },
+   "location": "/gates/reproduction/PAPER_REFERENCE A_v vs 1G-D printed"
+  },
+  {
+   "id": "GH-D2C0200",
+   "claim": "evidence gate reproduction/PAPER_REFERENCE E reference reproduction within its rounding budget (CPython 3.11.17)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 0.00011372040818308998
+   },
+   "location": "/gates/reproduction/PAPER_REFERENCE E reference reproduction within its rounding budget"
+  },
+  {
+   "id": "GH-D2C0201",
+   "claim": "evidence gate reproduction/PAPER_REFERENCE X_SU vs 1G-D printed (CPython 3.11.17)",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "SAME_CODE_GATE_RERUN",
+   "tolerance": {
+    "limit": 0.0005
+   },
+   "location": "/gates/reproduction/PAPER_REFERENCE X_SU vs 1G-D printed"
+  },
+  {
+   "id": "GH-D2C0202",
+   "claim": "23 changed paths between 5c325e1 and 226e52d (10 M, 13 A), none outside the declared set",
+   "status": "VERIFIED",
+   "declared": 23,
+   "audit_value": 23,
+   "method": "GIT_DIFF_NAME_STATUS",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0203",
+   "claim": "files of the first audit and of the delta audit byte-identical to 5c325e1",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "GIT_DIFF_NAME_STATUS",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0204",
+   "claim": "runner and configurations unchanged since 5c325e1",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "GIT_DIFF_NAME_STATUS",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0205",
+   "claim": "every package module other than global_variance.py equal to 8d3cdd0",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "GIT_DIFF_NAME_STATUS",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0206",
+   "claim": "remote heads: main 8d3cdd0, ccr-555e67be-u11yht 226e52d, phase-1g-h-independent-audit 816dd00, phase-1g-h-delta-audit 5c325e1",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "GIT_LS_REMOTE",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0207",
+   "claim": "38 annotated tags unchanged (76 refs); no D v2 tag or branch",
+   "status": "VERIFIED",
+   "declared": 38,
+   "audit_value": 38,
+   "method": "GIT_LS_REMOTE vs delta-audit snapshot",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0208",
+   "claim": "pull requests #1-#4 closed, none from a 1G-H branch; no release",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "GITHUB_LISTINGS",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0209",
+   "claim": "P1: 0572e41 descends from 8d3cdd0 via 7900374, fd7331f",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "GIT_ANCESTRY",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0210",
+   "claim": "P2: d4d693d is a child of 0572e41",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "GIT_ANCESTRY",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0211",
+   "claim": "P3: 816dd00 tree 759ab21d, parent d4d693d",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "GIT_OBJECTS",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0212",
+   "claim": "P5: d4d693d..89cb041 = 816dd00, c1b4482, 89cb041",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "GIT_ANCESTRY",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0213",
+   "claim": "P6: 5c325e1 tree a5b810e8, parent 89cb041, 110 added files under reports/phase1g_h_delta_audit*",
+   "status": "VERIFIED",
+   "declared": 110,
+   "audit_value": 110,
+   "method": "GIT_DIFF_NAME_STATUS",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0214",
+   "claim": "P6: the auditing session's local commit b4abbe8 is not on origin",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "GIT_CAT_FILE (object absent)",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0215",
+   "claim": "owner authorisations quoted for P1, P2, P4, P5, P6 and the plan approval",
+   "status": "NOT_VERIFIABLE",
+   "declared": "verbatim quotes",
+   "audit_value": null,
+   "method": "OFF_REPOSITORY",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0216",
+   "claim": "evidence: 36 / 36 gates on CPython 3.13.16 and 3.11.17",
+   "status": "VERIFIED",
+   "declared": 36,
+   "audit_value": 36,
+   "method": "SAME_CODE_RERUN",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0217",
+   "claim": "evidence: 3201 numeric leaves identical across interpreters",
+   "status": "VERIFIED",
+   "declared": 3201,
+   "audit_value": 3201,
+   "method": "LEAF_COMPARISON",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0218",
+   "claim": "evidence artifact SHA-256 91aaca79...9884 on CPython 3.13.16 at 248a06b",
+   "status": "VERIFIED",
+   "declared": "91aaca79ad0d0d86ad3208c8cd854e9d03839ef1f8c2d0026ff7a5cf8ff89884",
+   "audit_value": "91aaca79ad0d0d86ad3208c8cd854e9d03839ef1f8c2d0026ff7a5cf8ff89884",
+   "method": "SAME_CODE_RERUN at 248a06b",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0219",
+   "claim": "regression vs 89cb041: every common leaf outside the pairs bitwise identical; inside 130 changed, 6 renamed, 108 added",
+   "status": "VERIFIED_WITH_DEVIATION",
+   "declared": "130/6/108, outside identical",
+   "audit_value": "outside: 3 gate read-outs changed (<= 1.2e-5 abs); inside: 160 changed (156 numeric, 140 beyond round-off, 4 text), 6 renamed, 106 added; 16 added outside",
+   "method": "LEAF_COMPARISON (same interpreter, both interpreters)",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0220",
+   "claim": "runner: 0.810772, 1.121363, 0.918157",
+   "status": "VERIFIED",
+   "declared": [
+    0.810772,
+    1.121363,
+    0.918157
+   ],
+   "audit_value": [
+    0.810772,
+    1.121363,
+    0.918157
+   ],
+   "method": "SAME_CODE_RERUN",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0221",
+   "claim": "validator 1F-C-R PASS with 52 JSON (53 with this inventory)",
+   "status": "VERIFIED",
+   "declared": 52,
+   "audit_value": 52,
+   "method": "SAME_CODE_RERUN",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0222",
+   "claim": "tolerance audit: 739 comparisons, 0 without tolerance",
+   "status": "VERIFIED",
+   "declared": 739,
+   "audit_value": 739,
+   "method": "SAME_CODE_RERUN",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0223",
+   "claim": "full suites: 1178 collected; 1146 passed, 32 skipped (author environment without regenerated inputs)",
+   "status": "VERIFIED",
+   "declared": 1178,
+   "audit_value": 1178,
+   "method": "FULL_SUITE after regenerating every input: 1178 passed, 0 skipped, 0 failed on both interpreters",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0224",
+   "claim": "42 phase tests pass",
+   "status": "VERIFIED",
+   "declared": 42,
+   "audit_value": 42,
+   "method": "PYTEST",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0225",
+   "claim": "delta audit's 23 mutants: 21 killed; N5 and N9 survive",
+   "status": "VERIFIED",
+   "declared": 21,
+   "audit_value": 21,
+   "method": "MUTATION_CAMPAIGN",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0226",
+   "claim": "author's 10 mutants all killed",
+   "status": "VERIFIED",
+   "declared": 10,
+   "audit_value": 10,
+   "method": "MUTATION_CAMPAIGN",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0227",
+   "claim": "the delta audit's five accepted replacements are refused",
+   "status": "VERIFIED",
+   "declared": 5,
+   "audit_value": 5,
+   "method": "BINDING_PROBES",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0228",
+   "claim": "unchanged copies of genuine records are accepted",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "BINDING_PROBES (ID4-ID6) and phase test",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0229",
+   "claim": "(H25) equals the (H18) assembly to <= 2.2e-16 (gate 1e-12)",
+   "status": "VERIFIED",
+   "declared": 2.2e-16,
+   "audit_value": 2.220446049250313e-16,
+   "method": "SAME_CODE_RERUN and own derivation (algebraic identity)",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0230",
+   "claim": "(H25) is (H18) at x = 0 in other variables",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "OWN_DERIVATION",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0231",
+   "claim": "at fixed P11 and C_W the variance is unique",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "OWN_DERIVATION (tautological given H25)",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0232",
+   "claim": "the ordering of the totals follows <C_W - 1>",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "OWN_DERIVATION: sigma^2 = sigma_part^2 + (1 + sigma_part^2)<C_W - 1>; residual <= 2.2e-16",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0233",
+   "claim": "m_II = 2.869 / 2.140 / 1.623 (GM) and 2.474 / 2.104 / 1.669 (NW15)",
+   "status": "VERIFIED",
+   "declared": [
+    2.869,
+    2.14,
+    1.623,
+    2.474,
+    2.104,
+    1.669
+   ],
+   "audit_value": [
+    2.869413475,
+    2.139808561,
+    1.623350652,
+    2.474113488,
+    2.104325108,
+    1.668578791
+   ],
+   "method": "BLIND_RECONSTRUCTION",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0234",
+   "claim": "covariance ratios 1/m_II^2 0.121-0.379",
+   "status": "VERIFIED",
+   "declared": [
+    0.121,
+    0.379
+   ],
+   "audit_value": [
+    0.121454534,
+    0.379468142
+   ],
+   "method": "BLIND_RECONSTRUCTION",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0235",
+   "claim": "<C_W - 1> signed 0.756 / 0.043 (GM) and 0.791 / 0.069 (NW15)",
+   "status": "VERIFIED",
+   "declared": [
+    0.756,
+    0.043,
+    0.791,
+    0.069
+   ],
+   "audit_value": [
+    0.755929586,
+    0.043189407,
+    0.791264148,
+    0.069083113
+   ],
+   "method": "BLIND_RECONSTRUCTION",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0236",
+   "claim": "<C_W - 1> lognormal 0.725-0.841 (law I), 0.698-1.278 (law II)",
+   "status": "VERIFIED",
+   "declared": [
+    0.725,
+    0.841,
+    0.698,
+    1.278
+   ],
+   "audit_value": [
+    0.725311249,
+    0.840794362,
+    0.697655402,
+    1.277631961
+   ],
+   "method": "BLIND_RECONSTRUCTION",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0237",
+   "claim": "law II / law I = 0.92-1.29",
+   "status": "VERIFIED",
+   "declared": [
+    0.92,
+    1.29
+   ],
+   "audit_value": [
+    0.919394747,
+    1.293157998
+   ],
+   "method": "BLIND_RECONSTRUCTION",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0238",
+   "claim": "unmasked law-II ball variance 0.085 (GM, 1 Mpc) against 0.701",
+   "status": "VERIFIED",
+   "declared": [
+    0.085,
+    0.701
+   ],
+   "audit_value": [
+    0.08514532,
+    0.701046864
+   ],
+   "method": "BLIND_RECONSTRUCTION",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0239",
+   "claim": "signed law-II wall moments 7.82523e-4 / 3.55318e-3",
+   "status": "VERIFIED",
+   "declared": [
+    0.000782523,
+    0.00355318
+   ],
+   "audit_value": [
+    0.0007825229276,
+    0.003553181863
+   ],
+   "method": "BLIND_RECONSTRUCTION (Gauss-Legendre)",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0240",
+   "claim": "radial refinement observed 8.3e-7 / 1.0e-6 (gate 1e-5)",
+   "status": "VERIFIED",
+   "declared": [
+    8.3e-07,
+    1e-06
+   ],
+   "audit_value": [
+    8.271341681576061e-07,
+    1.011654765847858e-06
+   ],
+   "method": "SAME_CODE_RERUN; true error <= 2.4e-8 by Gauss-Legendre",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0241",
+   "claim": "pair density integrates to 1 to 1e-12 (0.99999993 before)",
+   "status": "VERIFIED",
+   "declared": [
+    1.0,
+    0.99999993
+   ],
+   "audit_value": [
+    1.0000000000009304,
+    0.999999927831579
+   ],
+   "method": "SAME_CODE_RERUN and own first-panel weight",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0242",
+   "claim": "radial fix moves the signed law-II wall moments by 1.3e-3 / 6.6e-4 relative",
+   "status": "VERIFIED",
+   "declared": [
+    0.0013,
+    0.00066
+   ],
+   "audit_value": [
+    0.0012747,
+    0.000664
+   ],
+   "method": "LEAF_COMPARISON 5c325e1 vs 226e52d",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0243",
+   "claim": "any published rms moves by at most 6.4e-4; totals at most 5.1e-5; no printed value changes",
+   "status": "VERIFIED",
+   "declared": [
+    0.00064,
+    5.1e-05
+   ],
+   "audit_value": [
+    0.0006379,
+    5.063e-05
+   ],
+   "method": "LEAF_COMPARISON",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0244",
+   "claim": "first radial panel share of the signed law-II wall moment",
+   "status": "VERIFIED",
+   "declared": null,
+   "audit_value": [
+    0.0008346,
+    0.0003729
+   ],
+   "method": "OWN_COMPUTATION (informational)",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0245",
+   "claim": "integrated scale dependence of the [W09] seed -0.08% to -0.12% over (a)-(c) and both scenarios",
+   "status": "VERIFIED",
+   "declared": [
+    -0.08,
+    -0.12
+   ],
+   "audit_value": [
+    -0.0799,
+    -0.1242
+   ],
+   "method": "ARTIFACT scale_dependence_rel",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0246",
+   "claim": "1G-F median seed -0.004% to -0.005%; [SvdW04] seed -17% to -24%",
+   "status": "VERIFIED",
+   "declared": [
+    -0.004,
+    -0.005,
+    -17,
+    -24
+   ],
+   "audit_value": [
+    -0.0037,
+    -0.0053,
+    -17.45,
+    -23.93
+   ],
+   "method": "ARTIFACT scale_dependence_rel",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0247",
+   "claim": "lognormal linear limit within 0.93% / 0.64% (gate 5%)",
+   "status": "VERIFIED",
+   "declared": [
+    0.0093,
+    0.0064
+   ],
+   "audit_value": [
+    0.009294099099422803,
+    0.006409916363450341
+   ],
+   "method": "SAME_CODE_RERUN",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0248",
+   "claim": "records recompute every result and diagnostic from their stored inputs",
+   "status": "VERIFIED",
+   "declared": true,
+   "audit_value": true,
+   "method": "CODE_READING and 32 BINDING_PROBES",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0249",
+   "claim": "the 1G-H inventory file SHA-256 declarations match 226e52d",
+   "status": "VERIFIED",
+   "declared": 7,
+   "audit_value": 7,
+   "method": "SHA256 of git blobs",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0250",
+   "claim": "seven primary-source SHA-256 values",
+   "status": "VERIFIED",
+   "declared": 7,
+   "audit_value": 7,
+   "method": "FRESH_ARXIV_DOWNLOAD",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0251",
+   "claim": "the four new gates were declared before their first evaluation",
+   "status": "NOT_VERIFIABLE",
+   "declared": true,
+   "audit_value": null,
+   "method": "same commit as the code; author's statement",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0252",
+   "claim": "construction costs about twice the computation",
+   "status": "NOT_VERIFIABLE",
+   "declared": "13-15 s vs 7 s",
+   "audit_value": "phase file 9-11 s under parallel load",
+   "method": "TIMING (not controlled)",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  },
+  {
+   "id": "GH-D2C0253",
+   "claim": "evidence script takes about 80 s",
+   "status": "VERIFIED_WITH_DEVIATION",
+   "declared": 80,
+   "audit_value": [
+    53,
+    46
+   ],
+   "method": "TIMING (3.13 with figures, 3.11 without)",
+   "tolerance": null,
+   "location": "second remediation records / prompt"
+  }
+ ],
+ "claim_counts": {
+  "VERIFIED": 248,
+  "NOT_VERIFIABLE": 3,
+  "VERIFIED_WITH_DEVIATION": 2
+ },
+ "owner_decisions": {
+  "H-OD1": "recommend: keep the formal tangent as a named research proposal; (c) preferred, (a) comparison",
+  "H-OD2": "recommend: no physical reference value",
+  "H-OD3": "recommend: no token change; LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC NOT_DERIVED; five authorisations NOT_GRANTED",
+  "H-OD4": "recommend: keep experimental; apply GH-D2F2 (and optionally GH-D2F4); Windows gate before promotion",
+  "H-OD5": "recommend: no scientific blocker; before merge/freeze record P7 and the direct GH-F15 confirmation, apply GH-D2F1/GH-D2F2, run the Windows gate, take each action by explicit owner decision; consider a cross-family spot check; never create the D v2 reference",
+  "P7_record": "dated entry: 2026-10-08 fast-forward of ccr-555e67be-u11yht 89cb041 -> 226e52d (5c325e1, 248a06b, 226e52d); remote head verified by this audit; authorisation as quoted by the owner: 'Fai push e prepara il prompt per un nuovo audit'",
+  "GH-F15_record": "dated confirmation event: 'Confermo le due approvazioni di push registrate (GH-F15)', given directly to this auditor on 2026-10-08; status RESOLVED_OWNER_CONFIRMED",
+  "this_audit_publication": "separate owner decision; designated session branch only if approved"
+ },
+ "preservation": {
+  "existing_files_changed_by_this_audit": 0,
+  "tokens_changed": 0,
+  "authorizations_changed": 0,
+  "observational_authorizations": {
+   "SIGMA8_AUTHORIZATION": "NOT_GRANTED",
+   "FSIGMA8_AUTHORIZATION": "NOT_GRANTED",
+   "RSD_AUTHORIZATION": "NOT_GRANTED",
+   "OBSERVATIONAL_AUTHORIZATION": "NOT_GRANTED",
+   "UNIQUE_TIMESCAPE_PREDICTION": "NOT_GRANTED"
+  },
+  "remote_actions": "none (no push, PR, merge, tag, freeze, release, issue or comment)",
+  "d_v2_reference_created": false
+ },
+ "limitations": [
+  "same model family as the author; procedural independence only",
+  "checkpoint not blind to three-decimal values quoted in the prompt, report and records",
+  "tracker and EH98 provider reused from the first audit",
+  "Windows CPython 3.14.3 / 3.11.9 not available; the owner's gate remains unmet",
+  "owner approvals quoted in records are not verifiable from the repository; only the GH-F15 confirmation was received directly",
+  "ref snapshots do not show transient remote events",
+  "mutation testing on the 42 phase tests and the evidence script only",
+  "no spatial-lattice simulation, Boltzmann recalibration, dynamics or observational reduction",
+  "one log of this audit's own 3.11 suite run was written by mistake to the container's filesystem root (outside the repository); its content is summarised in full_suite_summaries.txt"
+ ],
+ "severity_scale": [
+  "HIGH",
+  "MEDIUM-HIGH",
+  "MEDIUM",
+  "LOW-MEDIUM",
+  "LOW",
+  "INFO"
+ ],
+ "sources": {
+  "primary": {
+   "EH98": {
+    "id": "astro-ph/9709112v1",
+    "file": "trans.tex",
+    "sha256": "5f2ac6b413df8b738c95f6650152b7e82d7c36f6d9b3a618da540e9739dce17f",
+    "match": true
+   },
+   "GM": {
+    "id": "arXiv:2511.17160v2",
+    "file": "main.tex",
+    "sha256": "f9cadfa03ecc9a74b0a8f432ae4b13422daeb219f253756bcd877b4b75077c59",
+    "match": true
+   },
+   "JLH13": {
+    "id": "arXiv:1304.6087v2",
+    "file": "voids_mnras.tex",
+    "sha256": "cf6fc77a31b395138ac3a027d008698556534e81cfb27c39853d3a99c7b07c4e",
+    "match": true
+   },
+   "NW15": {
+    "id": "arXiv:1410.3470v2",
+    "file": "cmb1.tex",
+    "sha256": "5688c9ac7123a5c2ef3508e39cb3134c2fe9e3d5e56996a4d4a4d101d7b74673",
+    "match": true
+   },
+   "SvdW04": {
+    "id": "astro-ph/0311260v1",
+    "file": "e-print tarball",
+    "sha256": "4b7ad599f54b3199e0448df1c2eecf4e724401e9ffda7b0f50a3efe7fecdb79b",
+    "match": true
+   },
+   "W07": {
+    "id": "arXiv:0709.0732v2",
+    "file": "solution.tex",
+    "sha256": "221662c987e454729ef8202c87fa697c5882b5b7daaecdedb50a7cba8ffe6cd8",
+    "match": true
+   },
+   "W09": {
+    "id": "arXiv:0909.0749v2",
+    "file": "observe.tex",
+    "sha256": "2b0324d127440e9a053a7cb37102d7655cca228a63cd2222843e879989b4b531",
+    "match": true
+   }
+  },
+  "retrieval": "fresh arXiv e-print downloads on 2026-10-08 into a scratch directory outside the repository; not bundled",
+  "upstream": {
+   "commit": "590c6fd5332acb15f5683ebf392a0d7ce54983c5",
+   "notebook_sha256_lf": "628c441288d67854e0380518841dede3680bddab610e9ef5cea04937455cea2a"
+  },
+  "audit_evidence": {
+   "BLIND_CHECKPOINT.md": "c5f744e31a2a63a08c8aa0984faf6ebc9e18296e36c1cf7d7203d554162754ac",
+   "README.md": "827220e9877e7a7daf9f5079d561750bf66cd5961e5438fcaf83d5d8c0dfe05d",
+   "blind_first_panel.py": "4199048246e678ee7af842a042a586065274738cc17563ee77b75630b6729a10",
+   "blind_h25_mII_cw.py": "484f44c3e0985d488162bc4d5b4d0c10df1c201af12341b9e0802df22a216796",
+   "blind_vs_author_comparison.txt": "6552eba1f7848d9c9cffb51c0da05c33ecdde6be24d10d0f04e5b0fd3aa2e793",
+   "build_inventory.py": "f21c33da203f8082d5fdd51811e139e5061ffa13760ae3dcc099c2bdf11b3026",
+   "environment.jsonl": "979202601cb3a2fa15c8fdb1111952853d4ba419ef9e9fc8536f4ce1f65f27c6",
+   "evidence_artifact_hashes.txt": "24c80313897a5e4ce4b15395b72b73bb34ef70636d170b52c59f2eccf9d44078",
+   "evidence_comparisons.json": "7b2deded0c570ea3f5b653b18057b86c325d3f793abb135d7a035b3ab55a9a3a",
+   "evidence_py311_226e52d.log": "b5e2bd6535a46e5f61cbb805ec2d5117eaec4d69a97b67967a7476280d8b208c",
+   "evidence_py313_226e52d.log": "e7492c62cd89ec3752f63136cd8c4b4f687d19f16c78dfe4d8b7766889e203d1",
+   "evidence_py313_248a06b.log": "5b01b82c313df93c5a8133da2d797a6244587e40c17d6deac8e93787640cc829",
+   "evidence_py313_5c325e1.log": "eb6372e26a3db364695698544def786bc2dc14627a824642293cb8aa009c1200",
+   "first_audit_provider.py": "3fb848ddcae96c78825c3ed2a60b8c912c74dc1b26543a5b0cf8507ebddbd78c",
+   "first_panel.json": "c704cae515755cd8c8c0701406dfefaa3a3f936a3896d85e91907f10a674744a",
+   "first_panel_32.json": "2699892a8f27daaef2d88d59bc4db0f9aba87c49b4ff069e18f7d735be8840bd",
+   "full_suite_summaries.txt": "5a4e806e76a2cf3fb9d269637dbb8c474688052355c6074b00b1a45c862b155e",
+   "implementation_binding_probes.py": "dd19450e6414df6cc71279144dc14a539c170427a331e44908d796e5e6cca64e",
+   "implementation_binding_probes_results.json": "92f6e54f01956bd7e83de7c51d4fd4d15a5fcf0a74d7cce08e9cee961fd15eb4",
+   "inventory_reconciliation.py": "535edbc40b7d010838593b67de70282fa0bc5311d5ea1836a6d1b0484de9a1a8",
+   "inventory_reconciliation_results.json": "9382d8938d0ce42cc5a4f0908798969f45463add4c42d4f9d3ea0c80d99a70bc",
+   "mutation_campaign.log": "96f172cc8fe9ae6c4b559c4715df41ea3e9052d8b0b4eadc12cd4ceeb88792e8",
+   "mutation_campaign.py": "99bafb3413cbf17cb515c6495a11fb6f0ed3ae147598ea1f099cef1fc36781d4",
+   "mutation_results.json": "f1d3601a1daacf628aee19f964757288512f10a4dbd61e91cc5ee94e1c964d47",
+   "run_16x48.json": "0f4cfd942a64db365814579b7c152d6cb9c7597bbc94982b77c48dc5895feedf",
+   "run_32x64.json": "5de9657d114590aa34297ac0b4f4b2f4ac136d1586cc13c20640206b81f7df5d",
+   "run_4x24.json": "22c87d90701ded02cf704a6a4b2b98fc5d7249c579546e03d5dedc0b06038f25",
+   "runners.log": "f34a62947f61fb959efa39cff0c97f2d949cf9d0d672284be315a8e035138836",
+   "runners_summary.txt": "7bfc847711f49b36c1bc7756cd8d4c1802ebd15e335ef503556d8231c6303850"
+  }
+ }
+}
