@@ -1,0 +1,64 @@
+{
+ "GM": {
+  "first_panel": {
+   "I": {
+    "wall_moment_unnormalised": 8.813594875515205e-07,
+    "cross_moment_unnormalised": 0.0,
+    "partition_moment_unnormalised": 1.3619995016002173e-08
+   },
+   "II": {
+    "wall_moment_unnormalised": 6.531070717095489e-07,
+    "cross_moment_unnormalised": 8.293143573736603e-10,
+    "partition_moment_unnormalised": 1.3619995016002173e-08
+   },
+   "pair_weight": 7.216842102579291e-08
+  },
+  "rest": {
+   "I": {
+    "wall_moment_unnormalised": 0.05785649886665449,
+    "cross_moment_unnormalised": 0.0,
+    "partition_moment_unnormalised": 0.007369041366245171
+   },
+   "II": {
+    "wall_moment_unnormalised": 0.0007818698205340442,
+    "cross_moment_unnormalised": 0.0012615543289104093,
+    "partition_moment_unnormalised": 0.007369041366245171
+   },
+   "pair_weight": 0.9999999278315792
+  },
+  "signed_II_wall_moment_total": 0.0007825229276057537,
+  "first_panel_share_of_signed_II_wall": 0.0008346171705253774,
+  "first_panel_pair_weight": 7.216842102579291e-08
+ },
+ "NW15": {
+  "first_panel": {
+   "I": {
+    "wall_moment_unnormalised": 1.585989360185589e-06,
+    "cross_moment_unnormalised": 0.0,
+    "partition_moment_unnormalised": 1.6609730120677268e-08
+   },
+   "II": {
+    "wall_moment_unnormalised": 1.3250094538126725e-06,
+    "cross_moment_unnormalised": 6.616768697196274e-10,
+    "partition_moment_unnormalised": 1.6609730120677268e-08
+   },
+   "pair_weight": 7.216842102579291e-08
+  },
+  "rest": {
+   "I": {
+    "wall_moment_unnormalised": 0.12023332111175772,
+    "cross_moment_unnormalised": 0.0,
+    "partition_moment_unnormalised": 0.012823915142109872
+   },
+   "II": {
+    "wall_moment_unnormalised": 0.0035518568533429683,
+    "cross_moment_unnormalised": 0.003472099177965872,
+    "partition_moment_unnormalised": 0.012823915142109872
+   },
+   "pair_weight": 0.999999927831579
+  },
+  "signed_II_wall_moment_total": 0.003553181862796781,
+  "first_panel_share_of_signed_II_wall": 0.0003729078625797473,
+  "first_panel_pair_weight": 7.216842102579291e-08
+ }
+}
