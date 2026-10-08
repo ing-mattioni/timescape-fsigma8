@@ -1,0 +1,10 @@
+.........................F.........                                      [100%]
+=================================== FAILURES ===================================
+________________________ test_records_reject_tampering _________________________
+tests/test_phase1g_h_global_variance.py:616: in test_records_reject_tampering
+    with pytest.raises(gv.GlobalVarianceContractError, match="closure's share"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE GlobalVarianceContractError
+=========================== short test summary info ============================
+FAILED tests/test_phase1g_h_global_variance.py::test_records_reject_tampering
+1 failed, 34 passed in 10.88s

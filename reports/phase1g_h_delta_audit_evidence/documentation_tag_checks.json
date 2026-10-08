@@ -1,0 +1,343 @@
+{
+  "remote_retrieved_at": "2026-10-08T14:09:17.473Z",
+  "all_38": [
+    {
+      "ref": "refs/tags/phase-1b-background-v1",
+      "remote_object": "f678010a5a8584495a81402c17a6b529291de58c",
+      "local_object": "f678010a5a8584495a81402c17a6b529291de58c",
+      "matches": true,
+      "object_hash_valid": true
+    },
+    {
+      "ref": "refs/tags/phase-1c-a-equation-audit-v1",
+      "remote_object": "1bb5679e85659c40b091476fe5a63bffdd8cf2ff",
+      "local_object": "1bb5679e85659c40b091476fe5a63bffdd8cf2ff",
+      "matches": true,
+      "object_hash_valid": true
+    },
+    {
+      "ref": "refs/tags/phase-1c-b1-clean-systems-v1",
+      "remote_object": "b0fed30d513b67ca9f53b84a79f47be2ad024846",
+      "local_object": "b0fed30d513b67ca9f53b84a79f47be2ad024846",
+      "matches": true,
+      "object_hash_valid": true
+    },
+    {
+      "ref": "refs/tags/phase-1c-b2-barotropic-v1",
+      "remote_object": "cf90bcc8377632252dd8f0732d6d36c939e5bf7b",
+      "local_object": "cf90bcc8377632252dd8f0732d6d36c939e5bf7b",
+      "matches": true,
+      "object_hash_valid": true
+    },
+    {
+      "ref": "refs/tags/phase-1d-a-growth-observable-audit-v1",
+      "remote_object": "ff6d27a70fdc6743788523ef1e02f9caf6a66daf",
+      "local_object": "ff6d27a70fdc6743788523ef1e02f9caf6a66daf",
+      "matches": true,
+      "object_hash_valid": true
+    },
+    {
+      "ref": "refs/tags/phase-1d-b-growth-pipeline-v1",
+      "remote_object": "7713cb348890416c1e864afabc1109081291d88e",
+      "local_object": "7713cb348890416c1e864afabc1109081291d88e",
+      "matches": true,
+      "object_hash_valid": true
+    },
+    {
+      "ref": "refs/tags/phase-1d-c-observable-closure-audit-v1",
+      "remote_object": "36edbdd33241e0e125e73fe7e7344ae6adc3e880",
+      "local_object": "36edbdd33241e0e125e73fe7e7344ae6adc3e880",
+      "matches": true,
+      "object_hash_valid": true
+    },
+    {
+      "ref": "refs/tags/phase-1d-d-anchored-density-growth-v1",
+      "remote_object": "d42519aff3f6028c8d71eb7ef478b79201e422c3",
+      "local_object": "d42519aff3f6028c8d71eb7ef478b79201e422c3",
+      "matches": true,
+      "object_hash_valid": true
+    },
+    {
+      "ref": "refs/tags/phase-1d-d-t-d3-frame-mapping-v1",
+      "remote_object": "dfa48eef28c19f3e948ffe1e84c732464f265775",
+      "local_object": "dfa48eef28c19f3e948ffe1e84c732464f265775",
+      "matches": true,
+      "object_hash_valid": true
+    },
+    {
+      "ref": "refs/tags/phase-1e-a-dressed-observable-bridge-audit-v1",
+      "remote_object": "bdcbaaca20aed707d43944fc2cd5096b636243b1",
+      "local_object": "bdcbaaca20aed707d43944fc2cd5096b636243b1",
+      "matches": true,
+      "object_hash_valid": true
+    },
+    {
+      "ref": "refs/tags/phase-1e-b-dressed-lightcone-velocity-derivation-v1",
+      "remote_object": "a08230b0ab275993d9e8645d55532a1336c5f637",
+      "local_object": "a08230b0ab275993d9e8645d55532a1336c5f637",
+      "matches": true,
+      "object_hash_valid": true
+    },
+    {
+      "ref": "refs/tags/phase-1e-c-perturbed-dressed-geometry-transfer-closure-v1",
+      "remote_object": "0a6dbe6ac27991d6119a4ebc4e84e4a005f3d988",
+      "local_object": "0a6dbe6ac27991d6119a4ebc4e84e4a005f3d988",
+      "matches": true,
+      "object_hash_valid": true
+    },
+    {
+      "ref": "refs/tags/phase-1e-d-regional-matching-dynamics-v1",
+      "remote_object": "00a9d7e44418496b71ad95cd19390ba79bb3448d",
+      "local_object": "00a9d7e44418496b71ad95cd19390ba79bb3448d",
+      "matches": true,
+      "object_hash_valid": true
+    },
+    {
+      "ref": "refs/tags/phase-1e-e-transfer-realization-selection-v1",
+      "remote_object": "602178e639e3a750a719754fd15b6e61d0850ca8",
+      "local_object": "602178e639e3a750a719754fd15b6e61d0850ca8",
+      "matches": true,
+      "object_hash_valid": true
+    },
+    {
+      "ref": "refs/tags/phase-1e-f-h1-transfer-realization-v1",
+      "remote_object": "50f9b3b8ae84169b9a0109c307d4ba2277ef2cd3",
+      "local_object": "50f9b3b8ae84169b9a0109c307d4ba2277ef2cd3",
+      "matches": true,
+      "object_hash_valid": true
+    },
+    {
+      "ref": "refs/tags/phase-1e-f-h1-transfer-realization-v2",
+      "remote_object": "58238a9aeb62033d3bacf5f7e737dea024adb669",
+      "local_object": "58238a9aeb62033d3bacf5f7e737dea024adb669",
+      "matches": true,
+      "object_hash_valid": true
+    },
+    {
+      "ref": "refs/tags/phase-1e-g-continuum-h1-realization-v1",
+      "remote_object": "064963b54a2e7eac242bf5296b83f14b0821a4bb",
+      "local_object": "064963b54a2e7eac242bf5296b83f14b0821a4bb",
+      "matches": true,
+      "object_hash_valid": true
+    },
+    {
+      "ref": "refs/tags/phase-1e-g-continuum-h1-realization-v2",
+      "remote_object": "668c73e9e3ef864bb20ee61783a4088ca2acbe73",
+      "local_object": "668c73e9e3ef864bb20ee61783a4088ca2acbe73",
+      "matches": true,
+      "object_hash_valid": true
+    },
+    {
+      "ref": "refs/tags/phase-1e-g-continuum-h1-realization-v3",
+      "remote_object": "7f7b1a72770cb2efbe90976c2ac7b17df885a331",
+      "local_object": "7f7b1a72770cb2efbe90976c2ac7b17df885a331",
+      "matches": true,
+      "object_hash_valid": true
+    },
+    {
+      "ref": "refs/tags/phase-1e-g-continuum-h1-realization-v4",
+      "remote_object": "97c66c812fcbca6c7612fb220970a60cb340f9d4",
+      "local_object": "97c66c812fcbca6c7612fb220970a60cb340f9d4",
+      "matches": true,
+      "object_hash_valid": true
+    },
+    {
+      "ref": "refs/tags/phase-1f-a-h1-broken-density-spectral-boost-v1",
+      "remote_object": "c9cd0c5519052d08cf607e725b45dbf8a0cd8a9b",
+      "local_object": "c9cd0c5519052d08cf607e725b45dbf8a0cd8a9b",
+      "matches": true,
+      "object_hash_valid": true
+    },
+    {
+      "ref": "refs/tags/phase-1f-a-h1-broken-density-spectral-boost-v2",
+      "remote_object": "e2ccb27a4d7e8f60c0c6b0536bde01769af397e9",
+      "local_object": "e2ccb27a4d7e8f60c0c6b0536bde01769af397e9",
+      "matches": true,
+      "object_hash_valid": true
+    },
+    {
+      "ref": "refs/tags/phase-1f-b-dust-wall-boost-dynamics-v1",
+      "remote_object": "d784074049148fad65632fe91848eada8923bb7a",
+      "local_object": "d784074049148fad65632fe91848eada8923bb7a",
+      "matches": true,
+      "object_hash_valid": true
+    },
+    {
+      "ref": "refs/tags/phase-1f-b-dust-wall-boost-dynamics-v2",
+      "remote_object": "bd1facf1fce246ef6fb42d02f03c5da6c2eef3a0",
+      "local_object": "bd1facf1fce246ef6fb42d02f03c5da6c2eef3a0",
+      "matches": true,
+      "object_hash_valid": true
+    },
+    {
+      "ref": "refs/tags/phase-1f-b-dust-wall-boost-dynamics-v3",
+      "remote_object": "61dc9cf7602908b563158554d1b991a8d7059ab7",
+      "local_object": "61dc9cf7602908b563158554d1b991a8d7059ab7",
+      "matches": true,
+      "object_hash_valid": true
+    },
+    {
+      "ref": "refs/tags/phase-1f-c-r-astra-audit-remediation-v1",
+      "remote_object": "3956bfdb3f7dcbffbade69414f69bff0efa94f6c",
+      "local_object": "3956bfdb3f7dcbffbade69414f69bff0efa94f6c",
+      "matches": true,
+      "object_hash_valid": true
+    },
+    {
+      "ref": "refs/tags/phase-1f-c-r-astra-audit-remediation-v2",
+      "remote_object": "841cfb7b435c0042b5835d09aaa71e002b7e6062",
+      "local_object": "841cfb7b435c0042b5835d09aaa71e002b7e6062",
+      "matches": true,
+      "object_hash_valid": true
+    },
+    {
+      "ref": "refs/tags/phase-1f-c-r-post-remediation-review-v1",
+      "remote_object": "d4084287023c77414461a8b5ad465bcc76030998",
+      "local_object": "d4084287023c77414461a8b5ad465bcc76030998",
+      "matches": true,
+      "object_hash_valid": true
+    },
+    {
+      "ref": "refs/tags/phase-1f-c-wall-common-spacetime-geometry-v1",
+      "remote_object": "ef3b180e080e299f26316f9f5a30982776378e1e",
+      "local_object": "ef3b180e080e299f26316f9f5a30982776378e1e",
+      "matches": true,
+      "object_hash_valid": true
+    },
+    {
+      "ref": "refs/tags/phase-1f-c-wall-common-spacetime-geometry-v2",
+      "remote_object": "0afeb8fffac66dc182f6edd5885936d6e2779eaf",
+      "local_object": "0afeb8fffac66dc182f6edd5885936d6e2779eaf",
+      "matches": true,
+      "object_hash_valid": true
+    },
+    {
+      "ref": "refs/tags/phase-1f-d-necessary-bound-v1",
+      "remote_object": "dc04502d31fdd7cd0d1db199aed02e83066687b4",
+      "local_object": "dc04502d31fdd7cd0d1db199aed02e83066687b4",
+      "matches": true,
+      "object_hash_valid": true
+    },
+    {
+      "ref": "refs/tags/phase-1g-a-sigma8-derivation-path-v1",
+      "remote_object": "f5fceeae4491afaa418fa1e37322e97a8a924280",
+      "local_object": "f5fceeae4491afaa418fa1e37322e97a8a924280",
+      "matches": true,
+      "object_hash_valid": true
+    },
+    {
+      "ref": "refs/tags/phase-1g-b-lagrangian-sigma-v1",
+      "remote_object": "a279464a52eb767e6840be8774375eac7885d5c3",
+      "local_object": "a279464a52eb767e6840be8774375eac7885d5c3",
+      "matches": true,
+      "object_hash_valid": true
+    },
+    {
+      "ref": "refs/tags/phase-1g-c-two-scale-growth-law-v1",
+      "remote_object": "88e96be855e5aca117e6ac12872fdb5070494b59",
+      "local_object": "88e96be855e5aca117e6ac12872fdb5070494b59",
+      "matches": true,
+      "object_hash_valid": true
+    },
+    {
+      "ref": "refs/tags/phase-1g-d-separate-universe-growth-v1",
+      "remote_object": "e2a3b303e2441dd94971a32b7ec327a44f2af000",
+      "local_object": "e2a3b303e2441dd94971a32b7ec327a44f2af000",
+      "matches": true,
+      "object_hash_valid": true
+    },
+    {
+      "ref": "refs/tags/phase-1g-e-two-phase-sigma-v1",
+      "remote_object": "2a48639c8cdf6217d6b1c8293a06722eba48e38d",
+      "local_object": "2a48639c8cdf6217d6b1c8293a06722eba48e38d",
+      "matches": true,
+      "object_hash_valid": true
+    },
+    {
+      "ref": "refs/tags/phase-1g-f-void-population-v1",
+      "remote_object": "ca52c94d6ecad2be62016b019d652d9bc6e89dd2",
+      "local_object": "ca52c94d6ecad2be62016b019d652d9bc6e89dd2",
+      "matches": true,
+      "object_hash_valid": true
+    },
+    {
+      "ref": "refs/tags/phase-1g-g-void-evolution-v1",
+      "remote_object": "d151bd45242eff50ca7fa62bbd50453375737117",
+      "local_object": "d151bd45242eff50ca7fa62bbd50453375737117",
+      "matches": true,
+      "object_hash_valid": true
+    }
+  ],
+  "seven_math_signature_checks": [
+    {
+      "tag": "phase-1g-a-sigma8-derivation-path-v1",
+      "tag_object": "f5fceeae4491afaa418fa1e37322e97a8a924280",
+      "matches_first_audit_object": true,
+      "embedded_fingerprint_expected": "SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y",
+      "check_returncode": 0,
+      "stdout": "Good \"git\" signature with ED25519 key SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y\n",
+      "stderr": "",
+      "owner_trust": "NOT_VERIFIABLE_NO_ESTABLISHED_TRUST_CONFIGURATION"
+    },
+    {
+      "tag": "phase-1g-b-lagrangian-sigma-v1",
+      "tag_object": "a279464a52eb767e6840be8774375eac7885d5c3",
+      "matches_first_audit_object": true,
+      "embedded_fingerprint_expected": "SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y",
+      "check_returncode": 0,
+      "stdout": "Good \"git\" signature with ED25519 key SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y\n",
+      "stderr": "",
+      "owner_trust": "NOT_VERIFIABLE_NO_ESTABLISHED_TRUST_CONFIGURATION"
+    },
+    {
+      "tag": "phase-1g-c-two-scale-growth-law-v1",
+      "tag_object": "88e96be855e5aca117e6ac12872fdb5070494b59",
+      "matches_first_audit_object": true,
+      "embedded_fingerprint_expected": "SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y",
+      "check_returncode": 0,
+      "stdout": "Good \"git\" signature with ED25519 key SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y\n",
+      "stderr": "",
+      "owner_trust": "NOT_VERIFIABLE_NO_ESTABLISHED_TRUST_CONFIGURATION"
+    },
+    {
+      "tag": "phase-1g-d-separate-universe-growth-v1",
+      "tag_object": "e2a3b303e2441dd94971a32b7ec327a44f2af000",
+      "matches_first_audit_object": true,
+      "embedded_fingerprint_expected": "SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y",
+      "check_returncode": 0,
+      "stdout": "Good \"git\" signature with ED25519 key SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y\n",
+      "stderr": "",
+      "owner_trust": "NOT_VERIFIABLE_NO_ESTABLISHED_TRUST_CONFIGURATION"
+    },
+    {
+      "tag": "phase-1g-e-two-phase-sigma-v1",
+      "tag_object": "2a48639c8cdf6217d6b1c8293a06722eba48e38d",
+      "matches_first_audit_object": true,
+      "embedded_fingerprint_expected": "SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y",
+      "check_returncode": 0,
+      "stdout": "Good \"git\" signature with ED25519 key SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y\n",
+      "stderr": "",
+      "owner_trust": "NOT_VERIFIABLE_NO_ESTABLISHED_TRUST_CONFIGURATION"
+    },
+    {
+      "tag": "phase-1g-f-void-population-v1",
+      "tag_object": "ca52c94d6ecad2be62016b019d652d9bc6e89dd2",
+      "matches_first_audit_object": true,
+      "embedded_fingerprint_expected": "SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y",
+      "check_returncode": 0,
+      "stdout": "Good \"git\" signature with ED25519 key SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y\n",
+      "stderr": "",
+      "owner_trust": "NOT_VERIFIABLE_NO_ESTABLISHED_TRUST_CONFIGURATION"
+    },
+    {
+      "tag": "phase-1g-g-void-evolution-v1",
+      "tag_object": "d151bd45242eff50ca7fa62bbd50453375737117",
+      "matches_first_audit_object": true,
+      "embedded_fingerprint_expected": "SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y",
+      "check_returncode": 0,
+      "stdout": "Good \"git\" signature with ED25519 key SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y\n",
+      "stderr": "",
+      "owner_trust": "NOT_VERIFIABLE_NO_ESTABLISHED_TRUST_CONFIGURATION"
+    }
+  ]
+}

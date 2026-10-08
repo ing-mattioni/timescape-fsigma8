@@ -1,0 +1,286 @@
+{
+  "GM": {
+    "480_False": {
+      "signed_moments": {
+        "I": {
+          "wall_moment": 0.05785652953763906,
+          "partition_wall_moment": 0.0
+        },
+        "II": {
+          "wall_moment": 0.0007818947170326327,
+          "partition_wall_moment": 0.001261554024404744
+        }
+      },
+      "negative_density_given_wall": {
+        "I": 0.4475903899294116,
+        "II": 0.4429427612109914
+      },
+      "linear_limit": {
+        "lambda_latent": 0.00131751587942798,
+        "latent_variance": 0.0001,
+        "laws": {
+          "I": {
+            "wall_moment_over_lambda2": 0.05785660391102794,
+            "partition_wall_moment_over_lambda": 0.0,
+            "wall_relative_to_signed": 1.2854796074268648e-06,
+            "cross_relative_to_signed": null
+          },
+          "II": {
+            "wall_moment_over_lambda2": 0.000789167276354494,
+            "partition_wall_moment_over_lambda": 0.0012717323820811378,
+            "wall_relative_to_signed": 0.009301200229950846,
+            "cross_relative_to_signed": 0.008068110821648267
+          }
+        }
+      },
+      "conditional_mean_signed_II": 5.004605549417315
+    },
+    "720_False": {
+      "signed_moments": {
+        "I": {
+          "wall_moment": 0.05785711104867682,
+          "partition_wall_moment": 0.0
+        },
+        "II": {
+          "wall_moment": 0.0007823167504393534,
+          "partition_wall_moment": 0.0012615547388539305
+        }
+      },
+      "negative_density_given_wall": {
+        "I": 0.4475903899294116,
+        "II": 0.4429427612109914
+      },
+      "linear_limit": {
+        "lambda_latent": 0.00131751587942798,
+        "latent_variance": 0.0001,
+        "laws": {
+          "I": {
+            "wall_moment_over_lambda2": 0.0578571854452605,
+            "partition_wall_moment_over_lambda": 0.0,
+            "wall_relative_to_signed": 1.2858675852989165e-06,
+            "cross_relative_to_signed": null
+          },
+          "II": {
+            "wall_moment_over_lambda2": 0.0007895895310389567,
+            "partition_wall_moment_over_lambda": 0.0012717330964046453,
+            "wall_relative_to_signed": 0.009296465396553044,
+            "cross_relative_to_signed": 0.008068106152858245
+          }
+        }
+      },
+      "conditional_mean_signed_II": 5.004605549417315
+    },
+    "720_True": {
+      "signed_moments": {
+        "I": {
+          "wall_moment": 0.05785738681878655,
+          "partition_wall_moment": 0.0
+        },
+        "II": {
+          "wall_moment": 0.0007825244344776197,
+          "partition_wall_moment": 0.0012615549010295299
+        }
+      },
+      "negative_density_given_wall": {
+        "I": 0.4475903899294116,
+        "II": 0.4429427612109914
+      },
+      "linear_limit": {
+        "lambda_latent": 0.00131751587942798,
+        "latent_variance": 0.0001,
+        "laws": {
+          "I": {
+            "wall_moment_over_lambda2": 0.05785746122937333,
+            "partition_wall_moment_over_lambda": 0.0,
+            "wall_relative_to_signed": 1.2861034843769659e-06,
+            "cross_relative_to_signed": null
+          },
+          "II": {
+            "wall_moment_over_lambda2": 0.0007897972994956363,
+            "partition_wall_moment_over_lambda": 0.0012717332585347096,
+            "wall_relative_to_signed": 0.00929410596983038,
+            "cross_relative_to_signed": 0.008068105079591437
+          }
+        }
+      },
+      "conditional_mean_signed_II": 5.004605549417315
+    },
+    "1440_True": {
+      "signed_moments": {
+        "I": {
+          "wall_moment": 0.0578573854171997,
+          "partition_wall_moment": 0.0
+        },
+        "II": {
+          "wall_moment": 0.0007825231404976358,
+          "partition_wall_moment": 0.0012615549233365268
+        }
+      },
+      "negative_density_given_wall": {
+        "I": 0.4475903899294116,
+        "II": 0.4429427612109914
+      },
+      "linear_limit": {
+        "lambda_latent": 0.00131751587942798,
+        "latent_variance": 0.0001,
+        "laws": {
+          "I": {
+            "wall_moment_over_lambda2": 0.05785745982642997,
+            "partition_wall_moment_over_lambda": 0.0,
+            "wall_relative_to_signed": 1.2860800697733765e-06,
+            "cross_relative_to_signed": null
+          },
+          "II": {
+            "wall_moment_over_lambda2": 0.0007897960138431737,
+            "partition_wall_moment_over_lambda": 0.0012717332808293228,
+            "wall_relative_to_signed": 0.009294131980445819,
+            "cross_relative_to_signed": 0.008068104927113628
+          }
+        }
+      },
+      "conditional_mean_signed_II": 5.004605549417315
+    }
+  },
+  "NW15": {
+    "480_False": {
+      "signed_moments": {
+        "I": {
+          "wall_moment": 0.1202334168809803,
+          "partition_wall_moment": 0.0
+        },
+        "II": {
+          "wall_moment": 0.003551946217079908,
+          "partition_wall_moment": 0.003472098927007845
+        }
+      },
+      "negative_density_given_wall": {
+        "I": 0.4547664390874776,
+        "II": 0.4526979112151219
+      },
+      "linear_limit": {
+        "lambda_latent": 0.0011362776301984286,
+        "latent_variance": 0.0001,
+        "laws": {
+          "I": {
+            "wall_moment_over_lambda2": 0.12023354629708569,
+            "partition_wall_moment_over_lambda": 0.0,
+            "wall_relative_to_signed": 1.076373846276013e-06,
+            "cross_relative_to_signed": null
+          },
+          "II": {
+            "wall_moment_over_lambda2": 0.0035747214077675215,
+            "partition_wall_moment_over_lambda": 0.003490662323390438,
+            "wall_relative_to_signed": 0.006412031403543406,
+            "cross_relative_to_signed": 0.005346448005325355
+          }
+        }
+      },
+      "conditional_mean_signed_II": 3.788835250871475
+    },
+    "720_False": {
+      "signed_moments": {
+        "I": {
+          "wall_moment": 0.12023441230846761,
+          "partition_wall_moment": 0.0
+        },
+        "II": {
+          "wall_moment": 0.0035527586357901567,
+          "partition_wall_moment": 0.0034720995113814977
+        }
+      },
+      "negative_density_given_wall": {
+        "I": 0.4547664390874776,
+        "II": 0.4526979112151219
+      },
+      "linear_limit": {
+        "lambda_latent": 0.0011362776301984286,
+        "latent_variance": 0.0001,
+        "laws": {
+          "I": {
+            "wall_moment_over_lambda2": 0.1202345417555603,
+            "partition_wall_moment_over_lambda": 0.0,
+            "wall_relative_to_signed": 1.0766226590241956e-06,
+            "cross_relative_to_signed": null
+          },
+          "II": {
+            "wall_moment_over_lambda2": 0.0035755341213478155,
+            "partition_wall_moment_over_lambda": 0.003490662907546002,
+            "wall_relative_to_signed": 0.006410648144858699,
+            "cross_relative_to_signed": 0.005346447042676505
+          }
+        }
+      },
+      "conditional_mean_signed_II": 3.788835250871475
+    },
+    "720_True": {
+      "signed_moments": {
+        "I": {
+          "wall_moment": 0.12023492102483994,
+          "partition_wall_moment": 0.0
+        },
+        "II": {
+          "wall_moment": 0.0035531897585996215,
+          "partition_wall_moment": 0.0034720996413664124
+        }
+      },
+      "negative_density_given_wall": {
+        "I": 0.4547664390874776,
+        "II": 0.4526979112151219
+      },
+      "linear_limit": {
+        "lambda_latent": 0.0011362776301984286,
+        "latent_variance": 0.0001,
+        "laws": {
+          "I": {
+            "wall_moment_over_lambda2": 0.12023505050193554,
+            "partition_wall_moment_over_lambda": 0.0,
+            "wall_relative_to_signed": 1.0768676395045418e-06,
+            "cross_relative_to_signed": null
+          },
+          "II": {
+            "wall_moment_over_lambda2": 0.003575965308116459,
+            "partition_wall_moment_over_lambda": 0.003490663037472962,
+            "wall_relative_to_signed": 0.006409888315622503,
+            "cross_relative_to_signed": 0.005346446825830187
+          }
+        }
+      },
+      "conditional_mean_signed_II": 3.788835250871475
+    },
+    "1440_True": {
+      "signed_moments": {
+        "I": {
+          "wall_moment": 0.12023491379400322,
+          "partition_wall_moment": 0.0
+        },
+        "II": {
+          "wall_moment": 0.0035531825914794455,
+          "partition_wall_moment": 0.0034720996585018
+        }
+      },
+      "negative_density_given_wall": {
+        "I": 0.4547664390874776,
+        "II": 0.4526979112151219
+      },
+      "linear_limit": {
+        "lambda_latent": 0.0011362776301984286,
+        "latent_variance": 0.0001,
+        "laws": {
+          "I": {
+            "wall_moment_over_lambda2": 0.12023504326604671,
+            "partition_wall_moment_over_lambda": 0.0,
+            "wall_relative_to_signed": 1.0768256857307534e-06,
+            "cross_relative_to_signed": null
+          },
+          "II": {
+            "wall_moment_over_lambda2": 0.0035759581717132293,
+            "partition_wall_moment_over_lambda": 0.0034906630545977354,
+            "wall_relative_to_signed": 0.006409909889911081,
+            "cross_relative_to_signed": 0.005346446796387516
+          }
+        }
+      },
+      "conditional_mean_signed_II": 3.788835250871475
+    }
+  }
+}

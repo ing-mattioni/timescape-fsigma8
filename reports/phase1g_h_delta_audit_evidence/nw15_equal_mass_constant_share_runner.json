@@ -1,0 +1,149 @@
+{
+  "record": {
+    "background": {
+      "H0_dressed_km_s_Mpc": 61.0,
+      "fv0": 0.627,
+      "label": "NW15_CMB_FIT",
+      "source": "Nazer & Wiltshire, arXiv:1410.3470v2 (Timescape CMB fit; as 1G-A/B/D)"
+    },
+    "caveats": [
+      "conditional, model-internal global-mean linear statistic; not an observational amplitude, not comparable with survey or CMB values without a Timescape reduction",
+      "the void share p(k) is an external closure (VOID_ONSET_RESPONSE = EXTERNAL_CLOSURE_INPUT); the value is conditional on it",
+      "linear means the formal zero-amplitude tangent (linear extrapolation) around the smooth two-phase tracker state, a proposed definition (owner decision D1, 2026-10-07); it is not the ensemble-mean response of the true region contrast and ignores the zeroth-order partition fluctuations on the region scale",
+      "when the void-volume response rms exceeds 1 the linear void response is applied beyond its declared validity (H-A8, formal extrapolation); below 1 no controlled truncation error is established either",
+      "seed-indexed void accounting H-A9: equal to the material-domain volume only with scale separation (void radius much smaller than the region radius)",
+      "regional laws A1-A5 and void autonomy H-A6 assumed; the regional embedding stays NOT_DERIVED",
+      "early spectrum is a PROVISIONAL_MODEL_IMPORT; the radius identification is CONVENTION_DEPENDENT"
+    ],
+    "early_spectrum": {
+      "A_s": 2.1e-09,
+      "T_cmb_K": 2.7255,
+      "baryon_fraction": 0.1563275916312396,
+      "import_status": "PROVISIONAL_MODEL_IMPORT",
+      "k_pivot_per_Mpc": 0.05,
+      "n_s": 0.9649,
+      "provenance": "Planck 2018 VI (arXiv:1807.06209) Table 2, TT,TE,EE+lowE+lensing; T_cmb 2.7255 K",
+      "transfer_model": "eisenstein_hu_1998_zero_baryon_oscillation"
+    },
+    "effective_propagator": 0.9014349762801498,
+    "flat_wall_capacity_ratio": 18.40052477915805,
+    "frames": {
+      "field": "dust rest-mass density on the dust-orthogonal foliation",
+      "linear_order": "formal zero-amplitude tangent of the regional contrast map around the smooth two-phase tracker state, applied to the early Gaussian field (linear extrapolation); smoothing rule G_R(k) = G(k) W(kR); not the ensemble-mean response of the true contrast",
+      "mean": "global Buchert volume average on the same slice",
+      "radius": "photon_normalised_comoving_Mpc (Lagrangian top hat)",
+      "time": "dust proper time t (common time), present epoch t0",
+      "void_accounting": "seed-indexed (H-A9): bubbles assigned to the region containing their seed; equals the material-domain volume only with scale separation"
+    },
+    "growth": {
+      "assumptions": [
+        "A1-A5 (1G-C and its owner decisions): walls are Einstein-de Sitter regions in the common time t, which the wall matter clocks (A5)",
+        "H-A6 void autonomy: each empty void region expands as Milne, V_v proportional to t^3, independently of the surrounding wall density; no wall-void volume transfer (1G-G G5 with J = 0)",
+        "all matter in walls (empty voids, the tracker's rho_v = 0)",
+        "growing modes only: the wall bang-time mode t^-1 and decaying void modes are absent (regular growing-mode initial conditions)",
+        "matter-era photon normalisation at the explicit matching redshift; radiation at last scattering neglected"
+      ],
+      "background": {
+        "H0_dressed_km_s_Mpc": 61.0,
+        "fv0": 0.627,
+        "label": "NW15_CMB_FIT",
+        "source": "Nazer & Wiltshire, arXiv:1410.3470v2 (Timescape CMB fit; as 1G-A/B/D)"
+      },
+      "checks": {
+        "identity_tolerance": 1e-12,
+        "ode_atol": 1e-14,
+        "ode_cross_check_tolerance": 1e-08,
+        "ode_method": "DOP853 (scipy.integrate.solve_ivp)",
+        "ode_rtol": 1e-11,
+        "root_xtol_fraction": 1e-17
+      },
+      "diagnostics": {
+        "finite_t_photon_identity_rel": 4.440892098500626e-16,
+        "gamma_w0_identity_rel": 0.0,
+        "gamma_w_ls_identity_rel": 0.0,
+        "one_time_scale_identity_rel": 1.1102230246251565e-16,
+        "redshift_root_rel": 0.0,
+        "void_ode_nfev": 4166.0,
+        "void_share_ode_vs_closed_form_rel": 5.995204332975845e-15,
+        "void_volume_ode_vs_package_rel": 5.995204332975845e-15,
+        "wall_ode_nfev": 1226.0,
+        "wall_share_ode_vs_closed_form_rel": 4.777289674962049e-13
+      },
+      "evidence_class": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "f_v_ls": 5.0734750052150474e-05,
+      "fv0": 0.627,
+      "gamma_w0": 1.3135,
+      "gamma_w_ls": 1.0000253673750261,
+      "matching": {
+        "provenance": "1G-D Sec. 6 and 1G-F: photon-normalised last scattering, a_LS = 1/1091",
+        "z_last_scattering": 1090.0
+      },
+      "t_ls_over_t0": 3.0183448047383194e-05,
+      "void_share_growth": 11.327583314531257,
+      "void_to_wall_growth_ratio": 32.117646701977165,
+      "wall_share_growth": 0.3526903268985125
+    },
+    "linear_sigma": 0.9181569463963312,
+    "omega_m_per_photon": 0.13093722890629916,
+    "propagator_k0": 0.9014349762801497,
+    "quadrature": {
+      "comparison_grid_value": 0.9181569462414518,
+      "config": {
+        "comparison_grid_points": 4001,
+        "grid_points": 8001,
+        "k_max_per_Mpc": 300.0,
+        "k_min_per_Mpc": 1e-06,
+        "quadrature": "composite Simpson in ln k (scipy.integrate.simpson)",
+        "self_convergence_tolerance": 1e-06,
+        "truncation_tolerance": 1e-08
+      },
+      "relative_change": 1.6868506591549703e-10,
+      "truncation_envelope_fraction": 3.3922578303542225e-12
+    },
+    "quantity_label": "conditional_global_mean_linear_rms_lagrangian_top_hat",
+    "radius": {
+      "convention_status": "CONVENTION_DEPENDENT",
+      "formula": "R = R_ref (omega_ref / omega_m_eff)^(1/3)",
+      "frame": "photon_normalised_comoving_Mpc",
+      "omega_m_R_cubed_Mpc3": 239.2878338278932,
+      "radius_Mpc": 12.226040335296787,
+      "spec": {
+        "convention": "equal_lagrangian_mass_to_reference",
+        "explicit_radius_Mpc": "NOT_APPLICABLE",
+        "length_h_inverse_Mpc": "NOT_APPLICABLE",
+        "reference_omega_m": 0.14309694000000003,
+        "reference_radius_Mpc": 11.869436201780415
+      }
+    },
+    "share_terms_coherence": 1.0000000000000002,
+    "status": {
+      "amplitude_identity": "NOT_OBSERVATIONAL_SIGMA_8",
+      "classification": "CONDITIONAL_MODEL_INTERNAL_GLOBAL_MEAN_LINEAR_MASS_VARIANCE",
+      "growth_rate_product": "NOT_FSIGMA8",
+      "module": "EXPERIMENTAL_CONDITIONAL_RESEARCH_RUNTIME",
+      "observational": "NON_OBSERVATIONAL",
+      "phase": "1G-H"
+    },
+    "unit_growth_sigma": 1.0185503897188304,
+    "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
+    "void_share": {
+      "closure": {
+        "closure": "constant_void_share",
+        "evidence_class": "EXAMPLE_INPUT",
+        "provenance": "illustrative explicit share (example only)",
+        "share": 0.05,
+        "status": "EXTERNAL_CLOSURE_INPUT"
+      },
+      "compression_share": "NOT_APPLICABLE",
+      "kind": "constant",
+      "nu": "NOT_APPLICABLE",
+      "share_k0": 0.05,
+      "sigma_seed": "NOT_APPLICABLE",
+      "threshold_share_k0": "NOT_APPLICABLE",
+      "void_onset_response": "NOT_APPLICABLE"
+    },
+    "void_share_rms": 0.5768857199794166,
+    "void_volume_response_rms": 0.9200729186274588,
+    "wall_share_rms": 0.3412712264169145
+  }
+}

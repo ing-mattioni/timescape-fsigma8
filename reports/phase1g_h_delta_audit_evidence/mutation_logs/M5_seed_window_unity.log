@@ -1,0 +1,13 @@
+..........F........................                                      [100%]
+=================================== FAILURES ===================================
+_____________ test_gaussian_threshold_share_independent_evaluation _____________
+tests/test_phase1g_h_global_variance.py:335: in test_gaussian_threshold_share_independent_evaluation
+    assert pk[3] == pytest.approx(growth_gm.f_v_ls, abs=1e-6 * p0, rel=0.0)
+E   assert np.float64(0.1108033498886438) == 9.47106208987...e-05 ± 1.1e-07
+E
+E     comparison failed
+E     Obtained: 0.1108033498886438
+E     Expected: 9.471062089872824e-05 ± 1.1e-07
+=========================== short test summary info ============================
+FAILED tests/test_phase1g_h_global_variance.py::test_gaussian_threshold_share_independent_evaluation
+1 failed, 34 passed in 15.15s

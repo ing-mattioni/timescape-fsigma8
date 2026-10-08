@@ -1,0 +1,74 @@
+GM {
+  "signed_moments": {
+    "I": {
+      "wall_moment": 0.05785711104867682,
+      "partition_wall_moment": 0.0
+    },
+    "II": {
+      "wall_moment": 0.0007823167504393534,
+      "partition_wall_moment": 0.0012615547388539305
+    }
+  },
+  "negative_density_given_wall": {
+    "I": 0.4475903899294116,
+    "II": 0.4429427612109914
+  },
+  "linear_limit": {
+    "lambda_latent": 0.00131751587942798,
+    "latent_variance": 0.0001,
+    "laws": {
+      "I": {
+        "wall_moment_over_lambda2": 0.0578571854452605,
+        "partition_wall_moment_over_lambda": 0.0,
+        "wall_relative_to_signed": 1.2858675852989165e-06,
+        "cross_relative_to_signed": null
+      },
+      "II": {
+        "wall_moment_over_lambda2": 0.0007895895310389567,
+        "partition_wall_moment_over_lambda": 0.0012717330964046453,
+        "wall_relative_to_signed": 0.009296465396553044,
+        "cross_relative_to_signed": 0.008068106152858245
+      }
+    }
+  },
+  "conditional_mean_signed_II": 5.004605549417315
+}
+signedwall [('I', 1.6231473314309852e-05), ('II', 0.0010124220364648995)]
+linearwall [('I', 1.6231858856130543e-05), ('II', 0.001003412510913293)]
+NW15 {
+  "signed_moments": {
+    "I": {
+      "wall_moment": 0.12023441230846761,
+      "partition_wall_moment": 0.0
+    },
+    "II": {
+      "wall_moment": 0.0035527586357901567,
+      "partition_wall_moment": 0.0034720995113814977
+    }
+  },
+  "negative_density_given_wall": {
+    "I": 0.4547664390874776,
+    "II": 0.4526979112151219
+  },
+  "linear_limit": {
+    "lambda_latent": 0.0011362776301984286,
+    "latent_variance": 0.0001,
+    "laws": {
+      "I": {
+        "wall_moment_over_lambda2": 0.1202345417555603,
+        "partition_wall_moment_over_lambda": 0.0,
+        "wall_relative_to_signed": 1.0766226590241956e-06,
+        "cross_relative_to_signed": null
+      },
+      "II": {
+        "wall_moment_over_lambda2": 0.0035755341213478155,
+        "partition_wall_moment_over_lambda": 0.003490662907546002,
+        "wall_relative_to_signed": 0.006410648144858699,
+        "cross_relative_to_signed": 0.005346447042676505
+      }
+    }
+  },
+  "conditional_mean_signed_II": 3.788835250871475
+}
+signedwall [('I', 1.7502548068204504e-05), ('II', 0.0005450497583532332)]
+linearwall [('I', 1.7502789378509576e-05), ('II', 0.000541660807001465)]

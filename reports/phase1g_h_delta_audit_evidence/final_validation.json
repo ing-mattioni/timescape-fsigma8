@@ -1,0 +1,98 @@
+{
+  "all_commands_passed": true,
+  "audited_head": "89cb041f901b51a3f90fa6831aab1b4553c1772c",
+  "existing_tracked_files_changed": [],
+  "finished_at": "2026-10-08T14:42:09.062948+00:00",
+  "governance_result": "PASS",
+  "orchestration_note": "Both full suites and all child checks completed with exit 0. The initial manifest guard mistook newly staged, authorized audit additions for modifications. The guard was corrected and this manifest compiled from unchanged logs and JUnit; no scientific command or test was altered or rerun. Pytest durations are JUnit durations; orchestration timers for other commands are not reconstructed.",
+  "report_json_recursive_unique_keys_checked": 117,
+  "results": {
+    "diff_check": {
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "final_staged_diff_check.log"
+    },
+    "governance": {
+      "command": [
+        "/workspace/scratch/031c29bb1e06/repo/.venv/bin/python",
+        "-B",
+        "-W",
+        "error",
+        "scripts/validate_phase1f_c_r_astra_remediation.py"
+      ],
+      "exit_code": 0,
+      "json_roundtrips": 50,
+      "log": "final_governance.log",
+      "status": "PASS"
+    },
+    "pytest_py311": {
+      "command": [
+        "/workspace/scratch/031c29bb1e06/repo/.venv311/bin/python",
+        "-B",
+        "-W",
+        "error",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "-rs",
+        "--junitxml=/workspace/scratch/031c29bb1e06/repo/reports/phase1g_h_delta_audit_evidence/final_pytest_py311.xml"
+      ],
+      "exit_code": 0,
+      "junit": {
+        "errors": 0,
+        "failures": 0,
+        "passed": 1171,
+        "skipped": 0,
+        "tests": 1171
+      },
+      "junit_duration_seconds": 248.925,
+      "junit_timestamp": "2026-10-08T16:36:29.282891+02:00",
+      "log": "final_pytest_py311.log"
+    },
+    "pytest_py312": {
+      "command": [
+        "/workspace/scratch/031c29bb1e06/repo/.venv/bin/python",
+        "-B",
+        "-W",
+        "error",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "-rs",
+        "--junitxml=/workspace/scratch/031c29bb1e06/repo/reports/phase1g_h_delta_audit_evidence/final_pytest_py312.xml"
+      ],
+      "exit_code": 0,
+      "junit": {
+        "errors": 0,
+        "failures": 0,
+        "passed": 1171,
+        "skipped": 0,
+        "tests": 1171
+      },
+      "junit_duration_seconds": 247.531,
+      "junit_timestamp": "2026-10-08T16:36:28.972613+02:00",
+      "log": "final_pytest_py312.log"
+    },
+    "tolerances": {
+      "command": [
+        "/workspace/scratch/031c29bb1e06/repo/.venv/bin/python",
+        "-B",
+        "scripts/audit_numerical_tolerances.py"
+      ],
+      "comparisons": 728,
+      "exit_code": 0,
+      "log": "final_tolerances.log",
+      "missing_count": 0
+    }
+  },
+  "top_level_report_jsons": 50
+}

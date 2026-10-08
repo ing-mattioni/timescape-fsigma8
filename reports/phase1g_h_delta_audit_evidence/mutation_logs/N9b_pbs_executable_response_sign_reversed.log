@@ -1,0 +1,128 @@
+..........FFFF.F.........F...F..F..                                      [100%]
+=================================== FAILURES ===================================
+_____________ test_gaussian_threshold_share_independent_evaluation _____________
+tests/test_phase1g_h_global_variance.py:312: in test_gaussian_threshold_share_independent_evaluation
+    res = run(GM, closure, radius("c"))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_phase1g_h_global_variance.py:82: in run
+    return gv.conditional_global_linear_sigma(
+src/timescape_fsigma8/global_variance.py:1268: in conditional_global_linear_sigma
+    share = evaluate_void_share(closure=void_share_closure, growth=growth, density=density,
+src/timescape_fsigma8/global_variance.py:1059: in evaluate_void_share
+    return EvaluatedVoidShare(closure=closure, growth=growth, kind="gaussian_threshold_seed",
+<string>:12: in __init__
+    ???
+src/timescape_fsigma8/global_variance.py:901: in __post_init__
+    raise GlobalVarianceContractError(
+E   timescape_fsigma8.global_variance.GlobalVarianceContractError: void share -0.11061392864684634 lies outside [0, 1] (monotone class H-A7)
+____________ test_reproduces_1g_d_owner_decision_void_response[GM] _____________
+tests/test_phase1g_h_global_variance.py:344: in test_reproduces_1g_d_owner_decision_void_response
+    res = run(bg_in, closure, radius("a"))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_phase1g_h_global_variance.py:82: in run
+    return gv.conditional_global_linear_sigma(
+src/timescape_fsigma8/global_variance.py:1268: in conditional_global_linear_sigma
+    share = evaluate_void_share(closure=void_share_closure, growth=growth, density=density,
+src/timescape_fsigma8/global_variance.py:1059: in evaluate_void_share
+    return EvaluatedVoidShare(closure=closure, growth=growth, kind="gaussian_threshold_seed",
+<string>:12: in __init__
+    ???
+src/timescape_fsigma8/global_variance.py:901: in __post_init__
+    raise GlobalVarianceContractError(
+E   timescape_fsigma8.global_variance.GlobalVarianceContractError: void share -0.11070863926774507 lies outside [0, 1] (monotone class H-A7)
+___________ test_reproduces_1g_d_owner_decision_void_response[NW15] ____________
+tests/test_phase1g_h_global_variance.py:344: in test_reproduces_1g_d_owner_decision_void_response
+    res = run(bg_in, closure, radius("a"))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_phase1g_h_global_variance.py:82: in run
+    return gv.conditional_global_linear_sigma(
+src/timescape_fsigma8/global_variance.py:1268: in conditional_global_linear_sigma
+    share = evaluate_void_share(closure=void_share_closure, growth=growth, density=density,
+src/timescape_fsigma8/global_variance.py:1059: in evaluate_void_share
+    return EvaluatedVoidShare(closure=closure, growth=growth, kind="gaussian_threshold_seed",
+<string>:12: in __init__
+    ???
+src/timescape_fsigma8/global_variance.py:901: in __post_init__
+    raise GlobalVarianceContractError(
+E   timescape_fsigma8.global_variance.GlobalVarianceContractError: void share -0.060103539731158104 lies outside [0, 1] (monotone class H-A7)
+___ test_constant_share_variance_scales_with_A_s_and_pbs_void_term_does_not ____
+tests/test_phase1g_h_global_variance.py:358: in test_constant_share_variance_scales_with_A_s_and_pbs_void_term_does_not
+    b = run(GM, clo, rad)
+        ^^^^^^^^^^^^^^^^^
+tests/test_phase1g_h_global_variance.py:82: in run
+    return gv.conditional_global_linear_sigma(
+src/timescape_fsigma8/global_variance.py:1268: in conditional_global_linear_sigma
+    share = evaluate_void_share(closure=void_share_closure, growth=growth, density=density,
+src/timescape_fsigma8/global_variance.py:1059: in evaluate_void_share
+    return EvaluatedVoidShare(closure=closure, growth=growth, kind="gaussian_threshold_seed",
+<string>:12: in __init__
+    ???
+src/timescape_fsigma8/global_variance.py:901: in __post_init__
+    raise GlobalVarianceContractError(
+E   timescape_fsigma8.global_variance.GlobalVarianceContractError: void share -0.11070863926774507 lies outside [0, 1] (monotone class H-A7)
+________________________ test_admissible_interval_logic ________________________
+tests/test_phase1g_h_global_variance.py:377: in test_admissible_interval_logic
+    target = run(GM, tracker_seed(GM, growth_gm, 15.0,
+tests/test_phase1g_h_global_variance.py:82: in run
+    return gv.conditional_global_linear_sigma(
+src/timescape_fsigma8/global_variance.py:1268: in conditional_global_linear_sigma
+    share = evaluate_void_share(closure=void_share_closure, growth=growth, density=density,
+src/timescape_fsigma8/global_variance.py:1059: in evaluate_void_share
+    return EvaluatedVoidShare(closure=closure, growth=growth, kind="gaussian_threshold_seed",
+<string>:12: in __init__
+    ???
+src/timescape_fsigma8/global_variance.py:901: in __post_init__
+    raise GlobalVarianceContractError(
+E   timescape_fsigma8.global_variance.GlobalVarianceContractError: void share -0.11061392864684634 lies outside [0, 1] (monotone class H-A7)
+________________________ test_records_reject_tampering _________________________
+tests/test_phase1g_h_global_variance.py:618: in test_records_reject_tampering
+    pbs = run(GM, tracker_seed(GM, res.growth, 15.0, gv.SeedVolumeCompression.COMPRESSED_WITH_REGION),
+tests/test_phase1g_h_global_variance.py:82: in run
+    return gv.conditional_global_linear_sigma(
+src/timescape_fsigma8/global_variance.py:1268: in conditional_global_linear_sigma
+    share = evaluate_void_share(closure=void_share_closure, growth=growth, density=density,
+src/timescape_fsigma8/global_variance.py:1059: in evaluate_void_share
+    return EvaluatedVoidShare(closure=closure, growth=growth, kind="gaussian_threshold_seed",
+<string>:12: in __init__
+    ???
+src/timescape_fsigma8/global_variance.py:901: in __post_init__
+    raise GlobalVarianceContractError(
+E   timescape_fsigma8.global_variance.GlobalVarianceContractError: void share -0.11061392864684634 lies outside [0, 1] (monotone class H-A7)
+_____ test_gh_f3_void_share_is_f_v_minus_the_regional_fraction_derivative ______
+tests/test_phase1g_h_global_variance.py:753: in test_gh_f3_void_share_is_f_v_minus_the_regional_fraction_derivative
+    share = gv.evaluate_void_share(closure=tracker_seed(GM, growth_gm, 15.0, compression),
+src/timescape_fsigma8/global_variance.py:1059: in evaluate_void_share
+    return EvaluatedVoidShare(closure=closure, growth=growth, kind="gaussian_threshold_seed",
+<string>:12: in __init__
+    ???
+src/timescape_fsigma8/global_variance.py:901: in __post_init__
+    raise GlobalVarianceContractError(
+E   timescape_fsigma8.global_variance.GlobalVarianceContractError: void share -0.11061392864684634 lies outside [0, 1] (monotone class H-A7)
+___________ test_gh_f6_post_hoc_anchoring_differs_from_pbs_reclosure ___________
+tests/test_phase1g_h_global_variance.py:809: in test_gh_f6_post_hoc_anchoring_differs_from_pbs_reclosure
+    pbs, pbs_re = (run(GM, seed, radius("c"), A_s=a) for a in (2.1e-9, 2.1e-9 * factor ** 2))
+    ^^^^^^^^^^^
+tests/test_phase1g_h_global_variance.py:809: in <genexpr>
+    pbs, pbs_re = (run(GM, seed, radius("c"), A_s=a) for a in (2.1e-9, 2.1e-9 * factor ** 2))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_phase1g_h_global_variance.py:82: in run
+    return gv.conditional_global_linear_sigma(
+src/timescape_fsigma8/global_variance.py:1268: in conditional_global_linear_sigma
+    share = evaluate_void_share(closure=void_share_closure, growth=growth, density=density,
+src/timescape_fsigma8/global_variance.py:1059: in evaluate_void_share
+    return EvaluatedVoidShare(closure=closure, growth=growth, kind="gaussian_threshold_seed",
+<string>:12: in __init__
+    ???
+src/timescape_fsigma8/global_variance.py:901: in __post_init__
+    raise GlobalVarianceContractError(
+E   timescape_fsigma8.global_variance.GlobalVarianceContractError: void share -0.11061392864684634 lies outside [0, 1] (monotone class H-A7)
+=========================== short test summary info ============================
+FAILED tests/test_phase1g_h_global_variance.py::test_gaussian_threshold_share_independent_evaluation
+FAILED tests/test_phase1g_h_global_variance.py::test_reproduces_1g_d_owner_decision_void_response[GM]
+FAILED tests/test_phase1g_h_global_variance.py::test_reproduces_1g_d_owner_decision_void_response[NW15]
+FAILED tests/test_phase1g_h_global_variance.py::test_constant_share_variance_scales_with_A_s_and_pbs_void_term_does_not
+FAILED tests/test_phase1g_h_global_variance.py::test_admissible_interval_logic
+FAILED tests/test_phase1g_h_global_variance.py::test_records_reject_tampering
+FAILED tests/test_phase1g_h_global_variance.py::test_gh_f3_void_share_is_f_v_minus_the_regional_fraction_derivative
+FAILED tests/test_phase1g_h_global_variance.py::test_gh_f6_post_hoc_anchoring_differs_from_pbs_reclosure
+8 failed, 27 passed in 10.61s

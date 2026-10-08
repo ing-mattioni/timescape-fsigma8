@@ -1,0 +1,185 @@
+....FFFEFFEFFFFE........EFFF.EE.E..                                      [100%]
+==================================== ERRORS ====================================
+_ ERROR at setup of test_linear_propagator_is_the_small_amplitude_limit_of_the_exact_region _
+tests/test_phase1g_h_global_variance.py:91: in growth_gm
+    return gv.two_phase_global_growth(background=GM, matching=MATCHING, checks=CHECKS, G=G)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/timescape_fsigma8/global_variance.py:770: in two_phase_global_growth
+    raise GlobalVarianceNumericalError(
+E   timescape_fsigma8.global_variance.GlobalVarianceNumericalError: two-phase growth cross-check void_share_ode_vs_closed_form_rel = 9.991e-01 exceeds 1.000e-08
+____ ERROR at setup of test_gaussian_threshold_share_independent_evaluation ____
+tests/test_phase1g_h_global_variance.py:91: in growth_gm
+    return gv.two_phase_global_growth(background=GM, matching=MATCHING, checks=CHECKS, G=G)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/timescape_fsigma8/global_variance.py:770: in two_phase_global_growth
+    raise GlobalVarianceNumericalError(
+E   timescape_fsigma8.global_variance.GlobalVarianceNumericalError: two-phase growth cross-check void_share_ode_vs_closed_form_rel = 9.991e-01 exceeds 1.000e-08
+_______________ ERROR at setup of test_admissible_interval_logic _______________
+tests/test_phase1g_h_global_variance.py:91: in growth_gm
+    return gv.two_phase_global_growth(background=GM, matching=MATCHING, checks=CHECKS, G=G)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/timescape_fsigma8/global_variance.py:770: in two_phase_global_growth
+    raise GlobalVarianceNumericalError(
+E   timescape_fsigma8.global_variance.GlobalVarianceNumericalError: two-phase growth cross-check void_share_ode_vs_closed_form_rel = 9.991e-01 exceeds 1.000e-08
+____________ ERROR at setup of test_closures_and_inputs_fail_closed ____________
+tests/test_phase1g_h_global_variance.py:91: in growth_gm
+    return gv.two_phase_global_growth(background=GM, matching=MATCHING, checks=CHECKS, G=G)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/timescape_fsigma8/global_variance.py:770: in two_phase_global_growth
+    raise GlobalVarianceNumericalError(
+E   timescape_fsigma8.global_variance.GlobalVarianceNumericalError: two-phase growth cross-check void_share_ode_vs_closed_form_rel = 9.991e-01 exceeds 1.000e-08
+_ ERROR at setup of test_gh_f3_void_share_is_f_v_minus_the_regional_fraction_derivative _
+tests/test_phase1g_h_global_variance.py:91: in growth_gm
+    return gv.two_phase_global_growth(background=GM, matching=MATCHING, checks=CHECKS, G=G)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/timescape_fsigma8/global_variance.py:770: in two_phase_global_growth
+    raise GlobalVarianceNumericalError(
+E   timescape_fsigma8.global_variance.GlobalVarianceNumericalError: two-phase growth cross-check void_share_ode_vs_closed_form_rel = 9.991e-01 exceeds 1.000e-08
+_ ERROR at setup of test_gh_f4_scale_dependent_share_escapes_the_constant_share_interval _
+tests/test_phase1g_h_global_variance.py:91: in growth_gm
+    return gv.two_phase_global_growth(background=GM, matching=MATCHING, checks=CHECKS, G=G)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/timescape_fsigma8/global_variance.py:770: in two_phase_global_growth
+    raise GlobalVarianceNumericalError(
+E   timescape_fsigma8.global_variance.GlobalVarianceNumericalError: two-phase growth cross-check void_share_ode_vs_closed_form_rel = 9.991e-01 exceeds 1.000e-08
+__ ERROR at setup of test_gh_f6_post_hoc_anchoring_differs_from_pbs_reclosure __
+tests/test_phase1g_h_global_variance.py:91: in growth_gm
+    return gv.two_phase_global_growth(background=GM, matching=MATCHING, checks=CHECKS, G=G)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/timescape_fsigma8/global_variance.py:770: in two_phase_global_growth
+    raise GlobalVarianceNumericalError(
+E   timescape_fsigma8.global_variance.GlobalVarianceNumericalError: two-phase growth cross-check void_share_ode_vs_closed_form_rel = 9.991e-01 exceeds 1.000e-08
+=================================== FAILURES ===================================
+____________ test_growth_factors_against_an_independent_tracker[GM] ____________
+tests/test_phase1g_h_global_variance.py:209: in test_growth_factors_against_an_independent_tracker
+    growth = gv.two_phase_global_growth(background=bg_in, matching=MATCHING, checks=CHECKS, G=G)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/timescape_fsigma8/global_variance.py:770: in two_phase_global_growth
+    raise GlobalVarianceNumericalError(
+E   timescape_fsigma8.global_variance.GlobalVarianceNumericalError: two-phase growth cross-check void_share_ode_vs_closed_form_rel = 9.991e-01 exceeds 1.000e-08
+___________ test_growth_factors_against_an_independent_tracker[NW15] ___________
+tests/test_phase1g_h_global_variance.py:209: in test_growth_factors_against_an_independent_tracker
+    growth = gv.two_phase_global_growth(background=bg_in, matching=MATCHING, checks=CHECKS, G=G)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/timescape_fsigma8/global_variance.py:770: in two_phase_global_growth
+    raise GlobalVarianceNumericalError(
+E   timescape_fsigma8.global_variance.GlobalVarianceNumericalError: two-phase growth cross-check void_share_ode_vs_closed_form_rel = 9.991e-01 exceeds 1.000e-08
+_____________ test_small_void_fraction_limit_is_einstein_de_sitter _____________
+tests/test_phase1g_h_global_variance.py:226: in test_small_void_fraction_limit_is_einstein_de_sitter
+    growth = gv.two_phase_global_growth(background=bg_in, matching=MATCHING, checks=CHECKS, G=G)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/timescape_fsigma8/global_variance.py:770: in two_phase_global_growth
+    raise GlobalVarianceNumericalError(
+E   timescape_fsigma8.global_variance.GlobalVarianceNumericalError: two-phase growth cross-check void_share_ode_vs_closed_form_rel = 9.991e-01 exceeds 1.000e-08
+____________ test_variance_equals_real_space_pair_density_integral _____________
+tests/test_phase1g_h_global_variance.py:283: in test_variance_equals_real_space_pair_density_integral
+    res = run(GM, constant(0.07), radius("explicit", 10.0))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_phase1g_h_global_variance.py:82: in run
+    return gv.conditional_global_linear_sigma(
+src/timescape_fsigma8/global_variance.py:1264: in conditional_global_linear_sigma
+    growth = two_phase_global_growth(background=background, matching=matching,
+src/timescape_fsigma8/global_variance.py:770: in two_phase_global_growth
+    raise GlobalVarianceNumericalError(
+E   timescape_fsigma8.global_variance.GlobalVarianceNumericalError: two-phase growth cross-check void_share_ode_vs_closed_form_rel = 9.991e-01 exceeds 1.000e-08
+___________ test_unit_growth_sigma_matches_lagrangian_sigma_runtime ____________
+tests/test_phase1g_h_global_variance.py:301: in test_unit_growth_sigma_matches_lagrangian_sigma_runtime
+    res = run(GM, constant(0.0), radius("a"))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_phase1g_h_global_variance.py:82: in run
+    return gv.conditional_global_linear_sigma(
+src/timescape_fsigma8/global_variance.py:1264: in conditional_global_linear_sigma
+    growth = two_phase_global_growth(background=background, matching=matching,
+src/timescape_fsigma8/global_variance.py:770: in two_phase_global_growth
+    raise GlobalVarianceNumericalError(
+E   timescape_fsigma8.global_variance.GlobalVarianceNumericalError: two-phase growth cross-check void_share_ode_vs_closed_form_rel = 9.991e-01 exceeds 1.000e-08
+____________ test_reproduces_1g_d_owner_decision_void_response[GM] _____________
+tests/test_phase1g_h_global_variance.py:342: in test_reproduces_1g_d_owner_decision_void_response
+    growth = gv.two_phase_global_growth(background=bg_in, matching=MATCHING, checks=CHECKS, G=G)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/timescape_fsigma8/global_variance.py:770: in two_phase_global_growth
+    raise GlobalVarianceNumericalError(
+E   timescape_fsigma8.global_variance.GlobalVarianceNumericalError: two-phase growth cross-check void_share_ode_vs_closed_form_rel = 9.991e-01 exceeds 1.000e-08
+___________ test_reproduces_1g_d_owner_decision_void_response[NW15] ____________
+tests/test_phase1g_h_global_variance.py:342: in test_reproduces_1g_d_owner_decision_void_response
+    growth = gv.two_phase_global_growth(background=bg_in, matching=MATCHING, checks=CHECKS, G=G)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/timescape_fsigma8/global_variance.py:770: in two_phase_global_growth
+    raise GlobalVarianceNumericalError(
+E   timescape_fsigma8.global_variance.GlobalVarianceNumericalError: two-phase growth cross-check void_share_ode_vs_closed_form_rel = 9.991e-01 exceeds 1.000e-08
+___ test_constant_share_variance_scales_with_A_s_and_pbs_void_term_does_not ____
+tests/test_phase1g_h_global_variance.py:352: in test_constant_share_variance_scales_with_A_s_and_pbs_void_term_does_not
+    base = run(GM, constant(0.08), rad)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_phase1g_h_global_variance.py:82: in run
+    return gv.conditional_global_linear_sigma(
+src/timescape_fsigma8/global_variance.py:1264: in conditional_global_linear_sigma
+    growth = two_phase_global_growth(background=background, matching=matching,
+src/timescape_fsigma8/global_variance.py:770: in two_phase_global_growth
+    raise GlobalVarianceNumericalError(
+E   timescape_fsigma8.global_variance.GlobalVarianceNumericalError: two-phase growth cross-check void_share_ode_vs_closed_form_rel = 9.991e-01 exceeds 1.000e-08
+_______ test_terms_of_the_propagator_add_coherently_for_a_constant_share _______
+tests/test_phase1g_h_global_variance.py:367: in test_terms_of_the_propagator_add_coherently_for_a_constant_share
+    res = run(NW15, constant(0.05), radius("c"))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_phase1g_h_global_variance.py:82: in run
+    return gv.conditional_global_linear_sigma(
+src/timescape_fsigma8/global_variance.py:1264: in conditional_global_linear_sigma
+    growth = two_phase_global_growth(background=background, matching=matching,
+src/timescape_fsigma8/global_variance.py:770: in two_phase_global_growth
+    raise GlobalVarianceNumericalError(
+E   timescape_fsigma8.global_variance.GlobalVarianceNumericalError: two-phase growth cross-check void_share_ode_vs_closed_form_rel = 9.991e-01 exceeds 1.000e-08
+________________________ test_records_reject_tampering _________________________
+tests/test_phase1g_h_global_variance.py:606: in test_records_reject_tampering
+    res = run(GM, constant(0.05), radius("c"))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_phase1g_h_global_variance.py:82: in run
+    return gv.conditional_global_linear_sigma(
+src/timescape_fsigma8/global_variance.py:1264: in conditional_global_linear_sigma
+    growth = two_phase_global_growth(background=background, matching=matching,
+src/timescape_fsigma8/global_variance.py:770: in two_phase_global_growth
+    raise GlobalVarianceNumericalError(
+E   timescape_fsigma8.global_variance.GlobalVarianceNumericalError: two-phase growth cross-check void_share_ode_vs_closed_form_rel = 9.991e-01 exceeds 1.000e-08
+___________________ test_naming_rule_statuses_and_isolation ____________________
+tests/test_phase1g_h_global_variance.py:665: in test_naming_rule_statuses_and_isolation
+    res = run(GM, constant(0.05), radius("c"))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_phase1g_h_global_variance.py:82: in run
+    return gv.conditional_global_linear_sigma(
+src/timescape_fsigma8/global_variance.py:1264: in conditional_global_linear_sigma
+    growth = two_phase_global_growth(background=background, matching=matching,
+src/timescape_fsigma8/global_variance.py:770: in two_phase_global_growth
+    raise GlobalVarianceNumericalError(
+E   timescape_fsigma8.global_variance.GlobalVarianceNumericalError: two-phase growth cross-check void_share_ode_vs_closed_form_rel = 9.991e-01 exceeds 1.000e-08
+___________ test_example_configurations_run_and_require_every_choice ___________
+tests/test_phase1g_h_global_variance.py:695: in test_example_configurations_run_and_require_every_choice
+    out = module.run(config)
+          ^^^^^^^^^^^^^^^^^^
+scripts/phase1g_h_global_variance_case.py:85: in run
+    record = gv.conditional_global_linear_sigma(
+src/timescape_fsigma8/global_variance.py:1264: in conditional_global_linear_sigma
+    growth = two_phase_global_growth(background=background, matching=matching,
+src/timescape_fsigma8/global_variance.py:770: in two_phase_global_growth
+    raise GlobalVarianceNumericalError(
+E   timescape_fsigma8.global_variance.GlobalVarianceNumericalError: two-phase growth cross-check void_share_ode_vs_closed_form_rel = 9.991e-01 exceeds 1.000e-08
+=========================== short test summary info ============================
+FAILED tests/test_phase1g_h_global_variance.py::test_growth_factors_against_an_independent_tracker[GM]
+FAILED tests/test_phase1g_h_global_variance.py::test_growth_factors_against_an_independent_tracker[NW15]
+FAILED tests/test_phase1g_h_global_variance.py::test_small_void_fraction_limit_is_einstein_de_sitter
+FAILED tests/test_phase1g_h_global_variance.py::test_variance_equals_real_space_pair_density_integral
+FAILED tests/test_phase1g_h_global_variance.py::test_unit_growth_sigma_matches_lagrangian_sigma_runtime
+FAILED tests/test_phase1g_h_global_variance.py::test_reproduces_1g_d_owner_decision_void_response[GM]
+FAILED tests/test_phase1g_h_global_variance.py::test_reproduces_1g_d_owner_decision_void_response[NW15]
+FAILED tests/test_phase1g_h_global_variance.py::test_constant_share_variance_scales_with_A_s_and_pbs_void_term_does_not
+FAILED tests/test_phase1g_h_global_variance.py::test_terms_of_the_propagator_add_coherently_for_a_constant_share
+FAILED tests/test_phase1g_h_global_variance.py::test_records_reject_tampering
+FAILED tests/test_phase1g_h_global_variance.py::test_naming_rule_statuses_and_isolation
+FAILED tests/test_phase1g_h_global_variance.py::test_example_configurations_run_and_require_every_choice
+ERROR tests/test_phase1g_h_global_variance.py::test_linear_propagator_is_the_small_amplitude_limit_of_the_exact_region
+ERROR tests/test_phase1g_h_global_variance.py::test_gaussian_threshold_share_independent_evaluation
+ERROR tests/test_phase1g_h_global_variance.py::test_admissible_interval_logic
+ERROR tests/test_phase1g_h_global_variance.py::test_closures_and_inputs_fail_closed
+ERROR tests/test_phase1g_h_global_variance.py::test_gh_f3_void_share_is_f_v_minus_the_regional_fraction_derivative
+ERROR tests/test_phase1g_h_global_variance.py::test_gh_f4_scale_dependent_share_escapes_the_constant_share_interval
+ERROR tests/test_phase1g_h_global_variance.py::test_gh_f6_post_hoc_anchoring_differs_from_pbs_reclosure
+12 failed, 16 passed, 7 errors in 10.34s

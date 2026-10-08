@@ -1,0 +1,56 @@
+{
+  "audited_commit": "89cb041f901b51a3f90fa6831aab1b4553c1772c",
+  "scope": "Implementation GH-F9/F10/F11 and requested mutation campaign; no audited source edits or git/remote writes",
+  "source_sha256": {
+    "src/timescape_fsigma8/global_variance.py": "71fa240f309e6992edac07c61714b894471a05c1d29a0843b11c3bec6137527c",
+    "scripts/phase1g_h_global_variance_closure_numerics.py": "568bf7591330875c9c09956663863ce5631fb07eb32e33e35002a7bec8a2e20c",
+    "tests/test_phase1g_h_global_variance.py": "2a7b827424b3e931e8b0ff4941b8ffb97462ed44de7d343d43a384a9c77cdef6"
+  },
+  "findings": {
+    "GH-F9": "PARTIALLY_RESOLVED",
+    "GH-F10": "RESOLVED_IN_TESTED_NUMERICAL_SCOPE",
+    "GH-F11": "RESOLVED_AS_ROUNDED_REFERENCE_REPRODUCTION"
+  },
+  "contract_probe_summary": {
+    "old_rejected": 19,
+    "old_total": 19,
+    "new_accepted": 5,
+    "new_total": 5,
+    "orthant_total": 99,
+    "orthant_returned": 99,
+    "orthant_bad": 0,
+    "orthant_max_absolute_error": 6.661338147750939e-15
+  },
+  "old_orthant_probes": {
+    "unique": 21,
+    "returned": 20,
+    "fail_closed": 1,
+    "max_analytic_absolute_error": 5.184741524999481e-14
+  },
+  "mutations": {
+    "baseline_tests": "35 passed in 14.55s",
+    "total_mutants": 23,
+    "killed_by_repository_tests_or_evidence": 17,
+    "survived_repository_tests_and_executed_evidence": 6,
+    "survivors": [
+      "N1_growth_record_validation_off",
+      "N4_interval_record_validation_off",
+      "N5_orthant_centre_split_off",
+      "N8_frechet_gate_off",
+      "N9_void_share_identity_text_sign_reversed",
+      "N13_rounding_output_half_unit_off"
+    ],
+    "survivors_distinguished_by_added_audit_probes": [
+      "N1_growth_record_validation_off",
+      "N4_interval_record_validation_off",
+      "N8_frechet_gate_off"
+    ]
+  },
+  "limitations": [
+    "Only the 35 Phase1G-H repository tests were rerun in each mutation copy; no full-suite mutation claim.",
+    "Full H evidence was executed for script mutants N10 through N14 only; root separately executes baseline.",
+    "p=f_v\u2212df_v,L/d\u03b4 has no exported executable helper: N9 mutates docstring text, N9b exercises the executable threshold sign counterpart.",
+    "Adaptive quadrature comparisons support accuracy for the stated grid; no rigorous universal quadrature error theorem is claimed.",
+    "Removing centre split with both transition edges retained was numerically benign in99 audited cases."
+  ]
+}

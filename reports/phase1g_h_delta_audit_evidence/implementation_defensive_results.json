@@ -1,0 +1,190 @@
+[
+  {
+    "mutation_id": "baseline",
+    "returncode": 0,
+    "source_module": "/workspace/scratch/031c29bb1e06/audit_work/implementation/mutations/baseline/src/timescape_fsigma8/global_variance.py",
+    "checks": [
+      {
+        "id": "background_fv0_consistency",
+        "rejected": true,
+        "message": "fv0 must be the background's f_v0"
+      },
+      {
+        "id": "constant_void_share_consistency",
+        "rejected": true,
+        "message": "share_k0 must equal the closure's share"
+      },
+      {
+        "id": "effective_propagator_ratio",
+        "rejected": true,
+        "message": "effective_propagator must be the ratio"
+      },
+      {
+        "id": "interval_target_inside_flag",
+        "rejected": true,
+        "message": "target_inside is inconsistent"
+      },
+      {
+        "id": "frechet_rejects_injected_invalid_quadrature",
+        "rejected": true,
+        "message": "orthant probability 2.0 outside its bounds [0.0, 0.5]"
+      }
+    ]
+  },
+  {
+    "mutation_id": "N1_growth_record_validation_off",
+    "returncode": 0,
+    "source_module": "/workspace/scratch/031c29bb1e06/audit_work/implementation/mutations/N1_growth_record_validation_off/src/timescape_fsigma8/global_variance.py",
+    "checks": [
+      {
+        "id": "background_fv0_consistency",
+        "rejected": false
+      },
+      {
+        "id": "constant_void_share_consistency",
+        "rejected": true,
+        "message": "share_k0 must equal the closure's share"
+      },
+      {
+        "id": "effective_propagator_ratio",
+        "rejected": true,
+        "message": "effective_propagator must be the ratio"
+      },
+      {
+        "id": "interval_target_inside_flag",
+        "rejected": true,
+        "message": "target_inside is inconsistent"
+      },
+      {
+        "id": "frechet_rejects_injected_invalid_quadrature",
+        "rejected": true,
+        "message": "orthant probability 2.0 outside its bounds [0.0, 0.5]"
+      }
+    ]
+  },
+  {
+    "mutation_id": "N2_void_share_record_validation_off",
+    "returncode": 0,
+    "source_module": "/workspace/scratch/031c29bb1e06/audit_work/implementation/mutations/N2_void_share_record_validation_off/src/timescape_fsigma8/global_variance.py",
+    "checks": [
+      {
+        "id": "background_fv0_consistency",
+        "rejected": true,
+        "message": "fv0 must be the background's f_v0"
+      },
+      {
+        "id": "constant_void_share_consistency",
+        "rejected": false
+      },
+      {
+        "id": "effective_propagator_ratio",
+        "rejected": true,
+        "message": "effective_propagator must be the ratio"
+      },
+      {
+        "id": "interval_target_inside_flag",
+        "rejected": true,
+        "message": "target_inside is inconsistent"
+      },
+      {
+        "id": "frechet_rejects_injected_invalid_quadrature",
+        "rejected": true,
+        "message": "orthant probability 2.0 outside its bounds [0.0, 0.5]"
+      }
+    ]
+  },
+  {
+    "mutation_id": "N3_sigma_record_validation_off",
+    "returncode": 0,
+    "source_module": "/workspace/scratch/031c29bb1e06/audit_work/implementation/mutations/N3_sigma_record_validation_off/src/timescape_fsigma8/global_variance.py",
+    "checks": [
+      {
+        "id": "background_fv0_consistency",
+        "rejected": true,
+        "message": "fv0 must be the background's f_v0"
+      },
+      {
+        "id": "constant_void_share_consistency",
+        "rejected": true,
+        "message": "share_k0 must equal the closure's share"
+      },
+      {
+        "id": "effective_propagator_ratio",
+        "rejected": false
+      },
+      {
+        "id": "interval_target_inside_flag",
+        "rejected": true,
+        "message": "target_inside is inconsistent"
+      },
+      {
+        "id": "frechet_rejects_injected_invalid_quadrature",
+        "rejected": true,
+        "message": "orthant probability 2.0 outside its bounds [0.0, 0.5]"
+      }
+    ]
+  },
+  {
+    "mutation_id": "N4_interval_record_validation_off",
+    "returncode": 0,
+    "source_module": "/workspace/scratch/031c29bb1e06/audit_work/implementation/mutations/N4_interval_record_validation_off/src/timescape_fsigma8/global_variance.py",
+    "checks": [
+      {
+        "id": "background_fv0_consistency",
+        "rejected": true,
+        "message": "fv0 must be the background's f_v0"
+      },
+      {
+        "id": "constant_void_share_consistency",
+        "rejected": true,
+        "message": "share_k0 must equal the closure's share"
+      },
+      {
+        "id": "effective_propagator_ratio",
+        "rejected": true,
+        "message": "effective_propagator must be the ratio"
+      },
+      {
+        "id": "interval_target_inside_flag",
+        "rejected": false
+      },
+      {
+        "id": "frechet_rejects_injected_invalid_quadrature",
+        "rejected": true,
+        "message": "orthant probability 2.0 outside its bounds [0.0, 0.5]"
+      }
+    ]
+  },
+  {
+    "mutation_id": "N8_frechet_gate_off",
+    "returncode": 0,
+    "source_module": "/workspace/scratch/031c29bb1e06/audit_work/implementation/mutations/N8_frechet_gate_off/src/timescape_fsigma8/global_variance.py",
+    "checks": [
+      {
+        "id": "background_fv0_consistency",
+        "rejected": true,
+        "message": "fv0 must be the background's f_v0"
+      },
+      {
+        "id": "constant_void_share_consistency",
+        "rejected": true,
+        "message": "share_k0 must equal the closure's share"
+      },
+      {
+        "id": "effective_propagator_ratio",
+        "rejected": true,
+        "message": "effective_propagator must be the ratio"
+      },
+      {
+        "id": "interval_target_inside_flag",
+        "rejected": true,
+        "message": "target_inside is inconsistent"
+      },
+      {
+        "id": "frechet_rejects_injected_invalid_quadrature",
+        "rejected": false,
+        "accepted_value": 2.0
+      }
+    ]
+  }
+]

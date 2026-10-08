@@ -1,0 +1,80 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/031c29bb1e06/repo/.venv311/lib/python3.11/site-packages/traitlets/traitlets.py", line 652, in get
+    value = obj._trait_values[self.name]
+            ~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+KeyError: 'ip'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/scratch/031c29bb1e06/repo/.venv311/lib/python3.11/site-packages/jupyter_client/localinterfaces.py", line 256, in _load_ips
+    return _load_ips_psutil()
+           ^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/031c29bb1e06/repo/.venv311/lib/python3.11/site-packages/jupyter_client/localinterfaces.py", line 172, in _load_ips_psutil
+    for iface, ifaddresses in psutil.net_if_addrs().items():
+                              ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/031c29bb1e06/repo/.venv311/lib/python3.11/site-packages/psutil/__init__.py", line 2246, in net_if_addrs
+    rawlist = _psplatform.net_if_addrs()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 1] Operation not permitted
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/scratch/031c29bb1e06/repo/scripts/extract_upstream_oracle.py", line 110, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/workspace/scratch/031c29bb1e06/repo/scripts/extract_upstream_oracle.py", line 84, in main
+    client.execute()
+  File "/workspace/scratch/031c29bb1e06/repo/.venv311/lib/python3.11/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/workspace/scratch/031c29bb1e06/repo/.venv311/lib/python3.11/site-packages/nbclient/client.py", line 693, in async_execute
+    async with self.async_setup_kernel(**kwargs):
+  File "/root/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/031c29bb1e06/repo/.venv311/lib/python3.11/site-packages/nbclient/client.py", line 648, in async_setup_kernel
+    await self.async_start_new_kernel(**kwargs)
+  File "/workspace/scratch/031c29bb1e06/repo/.venv311/lib/python3.11/site-packages/nbclient/client.py", line 550, in async_start_new_kernel
+    await ensure_async(self.km.start_kernel(extra_arguments=self.extra_arguments, **kwargs))
+  File "/workspace/scratch/031c29bb1e06/repo/.venv311/lib/python3.11/site-packages/jupyter_core/utils/__init__.py", line 214, in ensure_async
+    result = await obj
+             ^^^^^^^^^
+  File "/workspace/scratch/031c29bb1e06/repo/.venv311/lib/python3.11/site-packages/jupyter_client/manager.py", line 116, in wrapper
+    raise e
+  File "/workspace/scratch/031c29bb1e06/repo/.venv311/lib/python3.11/site-packages/jupyter_client/manager.py", line 107, in wrapper
+    out = await method(self, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/031c29bb1e06/repo/.venv311/lib/python3.11/site-packages/jupyter_client/manager.py", line 528, in _async_start_kernel
+    kernel_cmd, kw = await self._async_pre_start_kernel(**kw)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/031c29bb1e06/repo/.venv311/lib/python3.11/site-packages/jupyter_client/manager.py", line 493, in _async_pre_start_kernel
+    kw = await self.provisioner.pre_launch(**kw)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/031c29bb1e06/repo/.venv311/lib/python3.11/site-packages/jupyter_client/provisioning/local_provisioner.py", line 200, in pre_launch
+    if km.transport == "tcp" and not is_local_ip(km.ip):
+                                                 ^^^^^
+  File "/workspace/scratch/031c29bb1e06/repo/.venv311/lib/python3.11/site-packages/traitlets/traitlets.py", line 705, in __get__
+    return self.get(obj, cls)  # type:ignore[return-value]
+           ^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/031c29bb1e06/repo/.venv311/lib/python3.11/site-packages/traitlets/traitlets.py", line 655, in get
+    default = obj.trait_defaults(self.name)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/031c29bb1e06/repo/.venv311/lib/python3.11/site-packages/traitlets/traitlets.py", line 1904, in trait_defaults
+    return self._get_trait_default_generator(names[0])(self)  # type:ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/031c29bb1e06/repo/.venv311/lib/python3.11/site-packages/jupyter_client/connect.py", line 387, in _ip_default
+    return localhost()
+           ^^^^^^^^^^^
+  File "/workspace/scratch/031c29bb1e06/repo/.venv311/lib/python3.11/site-packages/jupyter_client/localinterfaces.py", line 69, in ips_loaded
+    _load_ips()
+  File "/workspace/scratch/031c29bb1e06/repo/.venv311/lib/python3.11/site-packages/jupyter_client/localinterfaces.py", line 58, in wrapped
+    ret = f(**kwargs)
+          ^^^^^^^^^^^
+  File "/workspace/scratch/031c29bb1e06/repo/.venv311/lib/python3.11/site-packages/jupyter_client/localinterfaces.py", line 290, in _load_ips
+    warn("Unexpected error discovering local network interfaces: %s" % e, stacklevel=2)
+UserWarning: Unexpected error discovering local network interfaces: [Errno 1] Operation not permitted

@@ -1,0 +1,373 @@
+[
+  {
+    "id": "GH-E1",
+    "finding": "GH-F1",
+    "source_path": "reports/phase1g_h_global_variance_closure.md",
+    "original_line_start": 49,
+    "original_line_end": 55,
+    "original_quote_exact_at_source": true,
+    "authored_quote": "1. **A — the definition is closed** (Sec. 2). The Timescape global-mean\n   linear statistic is the rms of the first-order, ensemble-mean response of\n   the global density contrast of a Lagrangian top-hat region to the early\n   Gaussian field, on the dust foliation, relative to the global volume mean,\n   at the present epoch, with the radius fixed by an explicit convention\n   (recommended: `8 h̄⁻¹ Mpc` of present volume-average proper length, i.e.\n   `R·H_D0 = 800 km/s`). In the FLRW limit it is the standard linear σ8.",
+    "correct_reading": "Definition remains a proposal until ensemble response, mass sampling and window handling are resolved. The tangent surrogate has the stated FLRW perturbative limit; this does not identify the finite-small-scale ensemble propagator with standard linear sigma8.",
+    "revision_range": [
+      66,
+      79
+    ],
+    "revised_excerpt": "1. **A — a proposed definition, not a closed one** (Sec. 2; owner decision\n   D1). The statistic is the *formal tangent statistic*: the rms of the\n   linearly propagated early Gaussian field, i.e. the zero-amplitude tangent\n   G(k) of the global-contrast map of a Lagrangian top-hat region around the\n   smooth two-phase tracker state, with the smoothing rule\n   `G_R(k) = G(k) W(kR)`, on the dust foliation, relative to the global\n   volume mean, at the present epoch, with an explicit radius convention\n   (preferred: (c), `8 h̄⁻¹ Mpc` of present volume-average proper radius,\n   `R_proper·H_D0 = 800 km/s`). It is the analogue of ΛCDM's linear σ8 (the\n   growth factor applied to the early field) and reduces to it without voids.\n   It is **not** the ensemble-mean response of the true region contrast:\n   averaging the derivative of the exact identity (H3) over finite\n   small-scale fluctuations differs from the tangent (audit GH-F1), and the\n   tangent treats the two-phase state as smooth on the region scale.",
+    "replacement_present": true,
+    "qualification": "Precise cited passage repaired; semantic residuals elsewhere are separately evaluated."
+  },
+  {
+    "id": "GH-E2",
+    "finding": "GH-F2",
+    "source_path": "reports/phase1g_h_global_variance_closure.md",
+    "original_line_start": 56,
+    "original_line_end": 65,
+    "original_quote_exact_at_source": true,
+    "authored_quote": "2. **The structure is derived** (Sec. 3). Under the regional laws A1–A5 of\n   [1G-C], with each empty void expanding as Milne independently of its\n   surroundings (H-A6), the global linear propagator of *any* Lagrangian\n   region is exactly\n   `G(k) = (1 − p(k))·D_W + p(k)·D_V` (H9), where p is the fraction of the\n   early contrast carried by the void volume. `D_W` and `D_V` follow in closed\n   form from the tracker and are verified independently: `D_W = 0.2306`,\n   `D_V = 7.133` for [GM] (f_v0 = 0.737), `0.3527` and `11.33` for [NW15]\n   (f_v0 = 0.627). This removes 1G-D's restriction of the mode decomposition\n   to super-cell regions.",
+    "correct_reading": "The propagator is derived for the stipulated phase-accounting tangent. Extension to every transported material region requires a boundary/volume allocation prescription; super-cell restrictions have not thereby been removed unconditionally.",
+    "revision_range": [
+      80,
+      93
+    ],
+    "revised_excerpt": "2. **The propagator is derived within the tangent model** (Sec. 3). Under the\n   regional laws A1–A5 of [1G-C], void autonomy H-A6 and seed-indexed void\n   accounting H-A9 (owner decision D2: each bubble's volume belongs to the\n   region containing its seed), the propagator of any Lagrangian region is\n   `G(k) = (1 − p(k))·D_W + p(k)·D_V` (H9), with `D_W = 0.2306`,\n   `D_V = 7.133` for [GM] (f_v0 = 0.737) and `0.3527`, `11.33` for [NW15]\n   (f_v0 = 0.627), verified independently. The seed-indexed void volume equals\n   the volume of the transported material region only when void radii are\n   much smaller than R; at `8 h̄⁻¹ Mpc` the ratio is 0.33 / 0.39 (1G-F median)\n   and 1.49 / 1.59 ([W09] radius). The extension of 1G-D's mode structure\n   below the super-cell scale therefore holds for the seed-indexed statistic,\n   not for the material-domain volume (GH-F2).\n3. **One input is missing, and it is decisive** (Sec. 4): the void share\n   p(k), defined by `p δ_L(LS) = f_v,LS ε`, i.e. `p = f_v,LS − ∂f_v,L/∂δ_L`",
+    "replacement_present": true,
+    "qualification": "Precise cited passage repaired; semantic residuals elsewhere are separately evaluated."
+  },
+  {
+    "id": "GH-E3",
+    "finding": "GH-F3",
+    "source_path": "reports/phase1g_h_global_variance_closure.md",
+    "original_line_start": 332,
+    "original_line_end": 339,
+    "original_quote_exact_at_source": true,
+    "authored_quote": "```text\np(k) = −∂f_v,LS[region]/∂δ_L(k) |_(matching epoch, tracker ensemble),\n```\n\nthe linear bias of the void-seed volume fraction with respect to the early\nlong-wavelength density, is the single missing input. It equals 1G-D's\nvoid-onset response through `p = f_v,LS A_v` (k → 0) and has the same status,\n`VOID_ONSET_RESPONSE = EXTERNAL_CLOSURE_INPUT`.",
+    "correct_reading": "For a regional void volume fraction: p=f_v,LS−partial f_v,LS[region]/partial delta_L at the matching epoch. The alternative minus derivative needs a fixed-reference-volume variable, not the regional fraction.",
+    "revision_range": [
+      409,
+      420
+    ],
+    "revised_excerpt": "```text\np(k) δ_L(LS) = f_v,LS ε,   i.e.   p(k) = f_v,LS − ∂f_v,L/∂δ_L(k) |_(matching epoch),\n```\n\nwith f_v,L the region's void volume fraction, `f_v,L = f_v,LS (1 + δ_L)/(1 + ε)`\nfrom (H3) (corrected after audit GH-F3; the earlier form omitted f_v,LS), is\nthe single missing input of the tangent statistic. A uniformly compressed\nregion has p = f_v,LS. With 1G-D's threshold response\n`A_v = φ(ν)/(σ_s Φ(−ν))`, `p(k → 0) = f_v,LS (1 + A_v)` when the seed volume\nis compressed with its region and `f_v,LS A_v` for the threshold shift\nalone; it has the status of 1G-D's void-onset response,\n`VOID_ONSET_RESPONSE = EXTERNAL_CLOSURE_INPUT`.",
+    "replacement_present": true,
+    "qualification": "Precise cited passage repaired; semantic residuals elsewhere are separately evaluated."
+  },
+  {
+    "id": "GH-E4",
+    "finding": "GH-F4",
+    "source_path": "reports/phase1g_h_global_variance_closure.md",
+    "original_line_start": 453,
+    "original_line_end": 458,
+    "original_quote_exact_at_source": true,
+    "authored_quote": "### 5.2 Closure-independent interval (H15)\n\nIf p is scale independent between R8 and R_hom, `σ(R) = G(p) σ_u(R)`. The\nmonotone class gives the lower end (p = f_v,LS). The background's own\nhomogeneity premise, read as \"the global linear rms does not exceed η in the\ntop hat of radius R_hom\", gives `G ≤ η/σ_u(R_hom)`, hence",
+    "correct_reading": "Conditional constant-share interval: p must be constant, or justified as effectively constant with a quantified error, over spectral support of both windows. The homogeneity reading is an additional premise.",
+    "revision_range": [
+      547,
+      566
+    ],
+    "revised_excerpt": "### 5.2 Constant-share interval (H15)\n\nIf p is constant over the spectral support of both windows (the R8 and R_hom\ntop hats), `σ(R) = G(p) σ_u(R)`. The monotone class gives the lower end\n(p = f_v,LS). The background's own homogeneity premise, read as \"the global\nlinear rms does not exceed η in the top hat of radius R_hom\", gives\n`G ≤ η/σ_u(R_hom)` (capped at p = 1), hence\n\n```text\nG(f_v,LS) σ_u(R8) ≤ σ_lin(R8) ≤ η σ_u(R8)/σ_u(R_hom).                                  (H15)\n```\n\nThe premise is an assumption of the background construction, not a derived\nbound: [W09] ll. 327–335 (\"100 h⁻¹ Mpc or somewhat larger\"; cells whose\ndensity has \"a standard deviation of order several percent\") and ll. 455–458\n(\"a scale above which the variance in density contrasts is bounded at the\n10% level\"). [GM] l. 602 places the averaging domain \"well above the scale\nof statistical homogeneity\". [W09] speaks of the density fluctuations of\ncoarse dust cells; reading it as this mass-weighted Lagrangian tangent\nstatistic, in a top hat of radius R_hom rather than a cell side, with the",
+    "replacement_present": true,
+    "qualification": "Precise cited passage repaired; semantic residuals elsewhere are separately evaluated."
+  },
+  {
+    "id": "GH-E5",
+    "finding": "GH-F4",
+    "source_path": "reports/phase1g_h_global_variance_closure.md",
+    "original_line_start": 480,
+    "original_line_end": 484,
+    "original_quote_exact_at_source": true,
+    "authored_quote": "The 1G-F-median seed lies inside the first two readings for both scenarios;\nthe [W09]-radius seed violates the first reading mildly for [GM] (0.1125\nagainst 0.10 at 100 h̄⁻¹ Mpc). The interval is the strongest\nclosure-independent statement of this phase; its width is the residual\ndependence on p.",
+    "correct_reading": "This is the strongest interval within the explicitly restricted constant-share model. It is not closure-independent over arbitrary scale-dependent monotone p(k).",
+    "revision_range": [
+      582,
+      600
+    ],
+    "revised_excerpt": "changes the premise and is withdrawn (GH-F6). The 1G-F-median seed lies\ninside the first two readings for both scenarios; the [W09]-radius seed\nviolates the first reading mildly for [GM] (0.1125 against 0.10 at\n100 h̄⁻¹ Mpc). Within the constant-share class this interval is the strongest\nstatement of this phase, and its width is the residual dependence on p.\n\n**Scale-dependent shares are not bounded (GH-F4).** The derivation needs p\nconstant over the spectral support of both windows; \"between R8 and R_hom\"\nin the audited text hid the broad k support of the two top hats. A\ncounterexample inside H-A7 at every k: `p(k) = f_v,LS` for `k < k_cut` and 1\nabove, with `k_cut = 0.0660 Mpc⁻¹` ([GM]) or `0.0691 Mpc⁻¹` ([NW15]) chosen\nso that the premise rms is 0.0999. At `8 h̄⁻¹ Mpc` the statistic is then\n7.246 ([GM]) and 10.35 ([NW15]), 7.3 and 8.9 times the constant-share upper\nend (evidence `step_share_counterexample`; the audit found 7.246 and 10.349\nwith a slightly different k_cut). Such a kernel is a formal object, not a\nphysical void response. It shows that (H15) bounds constant shares only, and\nthat a near-constant closure needs its own bound: for the small PBS seeds\nthe propagator varies by at most 0.12% across the R8 window (Sec. 5.3), so\ntheir position relative to the interval is meaningful to that accuracy.",
+    "replacement_present": true,
+    "qualification": "Precise cited passage repaired; semantic residuals elsewhere are separately evaluated."
+  },
+  {
+    "id": "GH-E6",
+    "finding": "GH-F5",
+    "source_path": "reports/phase1g_h_global_variance_closure.md",
+    "original_line_start": 612,
+    "original_line_end": 621,
+    "original_quote_exact_at_source": true,
+    "authored_quote": "Two realisable two-phase laws are built with exactly the same acquired\nconstraints: f_v0; the same partition covariance (voids are `{g < c}`,\n`Φ(c) = f_v0`, for a unit Gaussian field g, calibrated so the partition rms\nin the ball equals the 1G-E/F reference value); the same wall-field\ncovariance (the 1G-E/F wall-internal linear field: growth D_wall(t0),\nphoton-frame compression s = D_wall, Planck-anchored); and the same\nconditional mass normalisation. **Law I:** g independent of the wall field.\n**Law II:** g is the wall field itself, smoothed with a Gaussian of width ℓ\n(voids where the same linear field is low; the \"same primordial field\"\ndouble-counting case). All moments follow from orthant integrals of the",
+    "correct_reading": "Two realizable signed Gaussian carrier/mask laws share the unconditional carrier covariance and the constructed partition covariance. Their matter-density surrogates are not nonnegative, and phase-conditioned wall covariances differ.",
+    "revision_range": [
+      752,
+      775
+    ],
+    "revised_excerpt": "Two pairs of joint laws are built. Within each pair the two laws share the\nacquired constraints: f_v0; the partition covariance (voids are `{g < c}`,\n`Φ(c) = f_v0`, g a unit Gaussian mask field; for law II g is the wall carrier\nsmoothed with a Gaussian of width ℓ, calibrated so that the partition rms in\nthe ball equals the 1G-E/F reference value, and law I uses an independent\nfield with the same covariance); the unconditional covariance of the wall\ncarrier; and the conditional mass normalisation. Law I: mask independent of\nthe wall field; law II: voids where the same field is low (the \"same\nprimordial field\" double-counting case).\n\n**Signed Gaussian pair (requalified, D3).** The wall field is the 1G-E/F\nwall-internal linear field (growth D_wall(t0), photon-frame compression\ns = D_wall, Planck normalised), recentred on the walls:\n`1 + δ_w = 1 + w − μ` with `μ = E[w | wall]` (0 for law I; 5.00 /\n3.79 for law II). These are realisable *signed* carrier and\nmask laws, not matter-density laws: the wall density is negative with\nconditional probability 0.448 / 0.443 ([GM] I / II) and\n0.455 / 0.453 ([NW15]) (GH-F5). The shared covariance is that of\nthe unconditional carrier; the phase-conditioned (masked) wall covariance\ndiffers between I and II by construction. All moments follow from orthant\nintegrals of the bivariate normal (H21), coded in\n`bivariate_normal_orthant_moments` with an explicit accuracy contract and\nverified against the bivariate CDF (10⁻¹⁰), analytic special cases (10⁻¹²)\nand direct 4-variate Monte Carlo:",
+    "replacement_present": true,
+    "qualification": "Precise cited passage repaired; semantic residuals elsewhere are separately evaluated."
+  },
+  {
+    "id": "GH-E7",
+    "finding": "GH-F5",
+    "source_path": "reports/phase1g_h_global_variance_closure.md",
+    "original_line_start": 630,
+    "original_line_end": 638,
+    "original_quote_exact_at_source": true,
+    "authored_quote": "In law II the walls sit where the field is high: after the phase-conditional\nmean is removed, the long-wavelength response of the wall term nearly\ncancels against the partition shift, and the ball variance falls by a factor\n2.5. Both laws are admissible surrogates, not solutions of the gravitational\ndynamics. The result proves that a size distribution (or a partition\ncovariance), a volume fraction and a wall spectrum do **not** fix the\nnonlinear variance at 8 h⁻¹ Mpc: the joint law of geometry and density is a\nfurther, independent input. This is a kinematic counterexample showing\nthat the statistical inputs are insufficient; it is not a no-go result for",
+    "correct_reading": "The masked wall auto-variance decreases after conditional recentering; the integrated wall-partition cross term is positive. The construction establishes underdetermination in the signed surrogate class, not yet for positive matter-density laws.",
+    "revision_range": [
+      783,
+      831
+    ],
+    "revised_excerpt": "phase-conditional recentring reduces (the walls sit where the carrier is\nhigh); the integrated wall–partition cross term is positive, not a\ncancelling negative term (the audited text described a cancellation).\n\n**Nonnegative lognormal pairs (D3).** The latent Gaussian field is the same\ncarrier smoothed with a Gaussian of radius r_s, `a = λ s` (r_s, the\nresolution of the lognormal transform, is a declared construction\nparameter); the wall density is proportional to `e^a` and normalised on the\nwalls, `1 + δ_w = e^a / E[e^a | wall] ≥ 0`. Law II takes the signed pair's\nmask, law I an independent mask with the same covariance. Both laws share\nf_v0, the partition covariance, the unconditional wall-density covariance\n`exp(λ² ξ_s) − 1` and the mass normalisation; λ sets the ball variance of the\nunmasked density equal to the signed carrier's (0.701 / 0.734). The\nmoments follow from exponential tilting of the Gaussian vector\n`(g1, g2, a1, a2)` and two-threshold orthant probabilities\n(`bivariate_normal_orthant_probability`), checked by 4-variate Monte Carlo:\n\n| Scenario, R as above | r_s (Mpc) | latent point variance | density point variance | law I wall / total | law II wall / cross / total | II / I |\n|---|---|---|---|---|---|---|\n| [GM] | 1 | 2.68 | 13.64 | 0.933 / 0.989 | 0.773 / +0.330 / 1.017 | 1.03 |\n| [GM] | 2 | 1.59 | 3.93 | 0.912 / 0.969 | 0.903 / +0.399 / 1.149 | 1.19 |\n| [GM] | 4 | 0.97 | 1.63 | 0.896 / 0.953 | 0.984 / +0.446 / 1.233 | 1.29 |\n| [NW15] | 1 | 3.35 | 27.59 | 0.958 / 1.005 | 0.712 / +0.255 / 0.924 | 0.92 |\n| [NW15] | 2 | 1.99 | 6.33 | 0.933 / 0.981 | 0.809 / +0.314 / 1.030 | 1.05 |\n| [NW15] | 4 | 1.17 | 2.23 | 0.915 / 0.964 | 0.919 / +0.374 / 1.145 | 1.19 |\n\nThe signed pair is the λ → 0 limit of this construction on the unsmoothed\ncarrier: its wall moments over λ² and cross moments over λ reproduce the\nsigned ones to 0.9% / 0.6% at a latent variance of 10⁻⁴ (evidence gate).\n\n**Reading.** Both pairs share the stated constraints between their two laws\nand differ in the ball variance. Within nonnegative laws the difference is\n−8% to +29% across r_s = 1–4 Mpc and both scenarios, and its\nsign depends on the construction; the factor 2.5 of the signed pair is a\nproperty of that surrogate (its negative-density fraction and recentring),\nnot of the constraints. The result still shows that a size distribution (or\na partition covariance), a volume fraction and a wall spectrum do **not** fix\nthe nonlinear variance at 8 h⁻¹ Mpc: the joint law of geometry and density\nis a further, independent input. Neither pair solves the gravitational\ndynamics; this is a kinematic counterexample about the statistical inputs,\nnot a no-go result for the Einstein or Timescape equations.\n\n## 7. Closure assessment\n\n| Result | Status | Why |\n|---|---|---|\n| **A — definition** | **proposed** (D1) | Sec. 2: the formal tangent statistic, with its smoothing rule, field, frame, foliation, mean, time, epoch, window, scale convention ((c) preferred), h, linear order and ensemble; FLRW limit verified. The ensemble-mean response of the true contrast is not computed (GH-F1) |\n| **B — conditional calculation** | **closed for the formal statistic, given one external closure and H-A9** | Sec. 3 derives the propagator within the tangent model; Sec. 4 identifies p(k); with an explicit closure the chain is implemented, converged and tested; the constant-share interval (H15) bounds constant shares only |\n| **C — Timescape prediction** | **not reached** | p(k) is not derived from the theory; the ensemble and material-domain statistics also need the joint small-scale law and a transport map |",
+    "replacement_present": true,
+    "qualification": "Precise cited passage repaired; semantic residuals elsewhere are separately evaluated."
+  },
+  {
+    "id": "GH-E8",
+    "finding": "GH-F6",
+    "source_path": "reports/phase1g_h_global_variance_closure.md",
+    "original_line_start": 522,
+    "original_line_end": 527,
+    "original_quote_exact_at_source": true,
+    "authored_quote": "- **Anchoring.** The pipeline's \"Planck-anchored\" values multiply the direct\n  values by `0.8111/σ_EH98,Planck = 0.8111/0.83569 = 0.97058`: the ratio of the\n  Boltzmann-code σ8 to the EH98 value at the Planck parameters (BAO wiggles\n  and the 0.06 eV neutrinos missing from EH98). The late-time ΛCDM growth\n  cancels exactly; the calibration uses a known ΛCDM σ8 only to correct the\n  transfer function, never the predicted quantity. Both values are given.",
+    "correct_reading": "The factor is a fixed-closure empirical reference normalization unless the input spectrum and PBS closure are consistently recalibrated. Exact transfer-only cancellation of LCDM growth has not been established by an independent Boltzmann comparison.",
+    "revision_range": [
+      644,
+      676
+    ],
+    "revised_excerpt": "  Planck-normalised variants are reported beside them; neither is a\n  verified transfer recalibration (GH-F6):\n  - *post-hoc*: the finished value times\n    `0.8111/σ_EH98,Planck = 0.8111/0.835689 = 0.970577`, the ratio of the\n    Planck σ8 to the EH98 value at the Planck parameters (BAO wiggles and the\n    0.06 eV neutrinos are missing from EH98): an empirical output\n    normalisation at fixed closure;\n  - *reclosure*: the input spectrum rescaled by the factor squared, so that\n    the PBS threshold share is recomputed (`p − f_v,LS ∝ 1/σ_s`).\n\n  For a constant share the two agree exactly; for the PBS closures they\n  differ by 1.7–2.3% (direct / post-hoc / reclosure; evidence\n  `pbs_reclosure_under_spectrum_rescaling`):\n\n  | Closure | [GM] (c) | [NW15] (c) | [GM] (a) | [NW15] (a) |\n  |---|---|---|---|---|\n  | PBS, [W09]-radius seed (H-A8) | 1.121 / 1.088 / 1.114 | 1.057 / 1.026 / 1.046 | 0.975 / 0.946 / 0.968 | 1.031 / 1.000 / 1.020 |\n  | PBS, 1G-F median seed | 0.811 / 0.787 / 0.803 | 0.816 / 0.792 / 0.805 | 0.704 / 0.684 / 0.698 | 0.796 / 0.773 / 0.785 |\n  | constant share, p = f_v,LS | 0.261 / 0.253 / 0.253 | 0.369 / 0.358 / 0.358 | 0.227 / 0.220 / 0.220 | 0.360 / 0.349 / 0.349 |\n\n  The factor cancels the late ΛCDM growth only for a common\n  scale-independent growth, which the massive-neutrino Boltzmann reference\n  does not establish; no Timescape value is fitted to it.\n- **Amplitude scaling (H16).** At fixed transfer and fixed closure,\n  `σ² ∝ A_s` (tested to 10⁻¹⁰ for a constant share). The PBS closure is not\n  fixed under a change of A_s: with f_v,LS fixed by the tracker,\n  `p ∝ 1/σ_s ∝ A_s^{−1/2}`, so the void term is independent of A_s (tested to\n  10⁻¹⁰ without the compression term) and only the wall term scales. Across\n  A_s × {½, 2}: `d ln σ/d ln A_s` = 0.10–0.13 ([GM]) and 0.16–0.19 ([NW15]),\n  not ½. This is a property of a background whose void fraction is fixed\n  independently of the early amplitude; it is not imposed on any nonlinear\n  model.\n",
+    "replacement_present": true,
+    "qualification": "Precise cited passage repaired; semantic residuals elsewhere are separately evaluated."
+  },
+  {
+    "id": "GH-E9",
+    "finding": "GH-F7",
+    "source_path": "reports/phase1g_h_global_variance_closure.md",
+    "original_line_start": 305,
+    "original_line_end": 311,
+    "original_quote_exact_at_source": true,
+    "authored_quote": "  At last scattering the cap is `f_v,LS/f_w,LS = 9.47×10⁻⁵` ([GM]) and\n  `5.07×10⁻⁵` ([NW15]). The early rms contrast exceeds it on every scale below\n  **99 h⁻¹ Mpc** ([GM], 135.6 Mpc photon-comoving) and **127 h⁻¹ Mpc**\n  ([NW15], 208.8 Mpc), dressed h; at 8 h̄⁻¹ Mpc it exceeds it 10.9-fold\n  ([GM]). On these scales the overdense half of the early field cannot be\n  represented without wall-density perturbations: 1G-D's assumption S1\n  (wall curvature, beyond [GM]'s flat walls) is *necessary*, not optional.",
+    "correct_reading": "The cap excludes the Gaussian tail above it (about 46.36% in the quoted GM case), not every overdense fluctuation. Retaining exact empty voids and the early field requires wall-density freedom, but does not uniquely require all S1 assumptions.",
+    "revision_range": [
+      373,
+      390
+    ],
+    "revised_excerpt": "  regionally), (H3) gives `1/(1 + δ_L) = f_w + f_v/(1 + ε) > f_w`, so\n\n  ```text\n  δ_L < f_v/f_w   for every void volume.                                              (H13)\n  ```\n\n  At last scattering the cap is `f_v,LS/f_w,LS = 9.47×10⁻⁵` ([GM]) and\n  `5.07×10⁻⁵` ([NW15]). The early rms contrast exceeds it on every scale below\n  **99 h⁻¹ Mpc** ([GM], 135.6 Mpc photon-comoving) and **127 h⁻¹ Mpc**\n  ([NW15], 208.8 Mpc), dressed h; at 8 h̄⁻¹ Mpc it exceeds it 10.9-fold\n  ([GM]) and 18.9-fold ([NW15]). The part of the Gaussian early field above\n  the cap — 46.4% of it at 8 h̄⁻¹ Mpc for [GM] and 47.9% for [NW15], not the\n  whole overdense half — cannot be represented with empty voids and\n  universal walls. If exact empty voids and the adopted early field are\n  retained, wall-density perturbations are therefore necessary. This does not\n  select the complete S1 dynamics of 1G-D; relaxing another premise is an\n  alternative (GH-F7). That the capacity radius falls at W09's homogeneity\n  scale is recorded as a numerical observation, not interpreted.",
+    "replacement_present": true,
+    "qualification": "Precise cited passage repaired; semantic residuals elsewhere are separately evaluated."
+  },
+  {
+    "id": "GH-E10",
+    "finding": "GH-F8",
+    "source_path": "reports/phase1g_h_global_variance_closure.md",
+    "original_line_start": 394,
+    "original_line_end": 400,
+    "original_quote_exact_at_source": true,
+    "authored_quote": "1G-D found the void-onset response perturbative only above R*(ε = 1) = 9.9 /\n8.6 h⁻¹ Mpc. At 8 h̄⁻¹ Mpc, ε_rms = 1.21 / 1.13 for the [W09]-radius seed\n(`VOID_RESPONSE_NONPERTURBATIVE`) and 0.77 / 0.74 for the 1G-F-median seed\n(perturbative). Applying the linear response where ε_rms > 1 is an\nextension below the closure's declared validity: **H-A8** states it\nexplicitly. The statistic is then formal (linearly extrapolated), as σ8 is in\nΛCDM, and must not be read as the physical variance.",
+    "correct_reading": "W09-seed values use H-A8 formal extrapolation. Median epsilon rms below 1 passes the selected onset threshold; it does not establish a small expansion parameter or a controlled truncation error.",
+    "revision_range": [
+      480,
+      495
+    ],
+    "revised_excerpt": "```text\nε_rms(R) = [(1 + z_LS) f_v,LS]⁻¹ [∫ dln k Δ²_u p(k)² W²(kR)]^{1/2}.                    (H14)\n```\n\n1G-D found the void-onset response perturbative only above R*(ε = 1) = 9.9 /\n8.6 h⁻¹ Mpc. At 8 h̄⁻¹ Mpc, ε_rms = 1.21 / 1.13 for the [W09]-radius seed\n(`VOID_RESPONSE_NONPERTURBATIVE`) and 0.77 / 0.74 for the 1G-F-median seed,\nbelow the adopted ε = 1 threshold. That threshold is a diagnostic: being\nbelow it does not make ε a controlled small parameter with an error bound.\nApplying the linear response where ε_rms > 1 is an extension below the\nclosure's declared validity: **H-A8** states it explicitly, and every\n[W09]-seed value carries it. The statistic is then formal (linearly\nextrapolated), as σ8 is in ΛCDM, and must not be read as the physical\nvariance.\n\n### 4.4 Alternative closure: the excursion-set two-barrier response (H22)",
+    "replacement_present": true,
+    "qualification": "Precise cited passage repaired; semantic residuals elsewhere are separately evaluated."
+  },
+  {
+    "id": "GH-E11",
+    "finding": "GH-F8",
+    "source_path": "reports/phase1g_h_global_variance_closure.md",
+    "original_line_start": 717,
+    "original_line_end": 723,
+    "original_quote_exact_at_source": true,
+    "authored_quote": "2. **H-OD2, the void-share closure for a reference value.**\n   - [ ] **β:** PBS seed with the 1G-F volume-weighted median radius:\n     0.811 / 0.816 at (c) (0.787 / 0.792 anchored); perturbative at R8;\n     inside the [W09] premise for both scenarios. *(Recommended, always\n     reported with the interval.)* It uses the project's own early-spectrum\n     population rather than an external radius; its weak points are 1G-F's\n     conditional status and the single-scale idealisation.",
+    "correct_reading": "Beta imports the F median only as a heuristic seed-scale prior; its dynamical identification with initially empty tracker voids is not derived. Its response is below the chosen epsilon=1 threshold, with no controlled error estimate.",
+    "revision_range": [
+      918,
+      938
+    ],
+    "revised_excerpt": "2. **H-OD2, the void-share closure for a reference value.**\n   - [ ] **β:** PBS seed with the 1G-F volume-weighted median radius:\n     0.811 / 0.816 at (c) (0.787 / 0.792 post-hoc); below the adopted ε = 1\n     threshold at R8, without a controlled error estimate; inside the [W09]\n     premise for both scenarios. The 1G-F median is a heuristic seed-scale\n     prior; its weak points are 1G-F's conditional status, the missing\n     dynamical identification with empty tracker voids and the single-scale\n     idealisation.\n   - [ ] **α:** PBS seed with the [W09] 15 h⁻¹ Mpc radius (the 1G-D primary):\n     1.121 / 1.057 at (c); non-perturbative at R8 (ε_rms 1.21 / 1.13); mildly\n     outside the 10%-at-100 premise for [GM].\n   - [ ] **γ:** no reference value; report only the constant-share interval\n     (H15) with the 10%-at-100 reading: [0.261, 0.998] / [0.369, 1.162] at (c).\n   - *Status (2026-10-07):* open. Revised recommendation, with the audit:\n     select no physical reference value yet; if one is used experimentally,\n     β is a heuristic prior, α a formal extrapolation (H-A8) and γ a\n     constant-share statement.\n3. **H-OD3, status tokens** (proposals; the registry rules matter).\n   - [ ] Add two tokens through the existing addition mechanism (no validator\n     change): `GLOBAL_MEAN_LINEAR_STATISTIC_DEFINITION =\n     DERIVED_FROM_VERIFIED_DEFINITIONS` and",
+    "replacement_present": true,
+    "qualification": "Precise cited passage repaired; semantic residuals elsewhere are separately evaluated."
+  },
+  {
+    "id": "GH-E12",
+    "finding": "GH-F11",
+    "source_path": "reports/phase1g_h_global_variance_closure_validation.md",
+    "original_line_start": 112,
+    "original_line_end": 113,
+    "original_quote_exact_at_source": true,
+    "authored_quote": "  - the 1G-E/F reference σ reproduced from its components (6×10⁻⁴, printed\n    digits);",
+    "correct_reading": "A 6e-4 absolute gate does not guarantee agreement of four-decimal printed digits. State a justified full-precision tolerance or explicit propagated rounding budget.",
+    "revision_range": [
+      122,
+      125
+    ],
+    "revised_excerpt": "  - the 1G-E/F reference σ reproduced from its components (6×10⁻⁴; corrected\n    2026-10-07: that limit did not protect the printed fourth decimal, GH-F11;\n    the remediated gate uses the propagated rounding budget of the\n    four-decimal inputs, about 1.1×10⁻⁴);",
+    "replacement_present": true,
+    "qualification": "Precise cited passage repaired; semantic residuals elsewhere are separately evaluated."
+  },
+  {
+    "id": "GH-E13",
+    "finding": "GH-F12",
+    "source_path": "reports/phase1g_h_global_variance_closure.md",
+    "original_line_start": 511,
+    "original_line_end": 517,
+    "original_quote_exact_at_source": true,
+    "authored_quote": "- **Inputs.** A_s = 2.100×10⁻⁹, n_s = 0.9649, k_p = 0.05 Mpc⁻¹ and\n  f_b = ω_b/ω_m = 0.02237/0.14310 (Planck 2018, TT,TE,EE+lowE+lensing);\n  the EH98 zero-baryon transfer at the per-photon density\n  `ω_m,eff = ½(1 − f_v0)(2 + f_v0)(H_D0/100)²` = 0.12048 ([GM]) and 0.13094\n  ([NW15]) ([1G-A] Sec. 6.2); T_cmb = 2.7255 K; matter-era Poisson\n  normalisation `Δ² = (4/25) A_s (k/k_p)^{n_s−1} (k/aH)⁴ T²`; matching at\n  z_LS = 1090. No late-time ΛCDM growth enters the spectrum.",
+    "correct_reading": "Use the baryon-corrected EH98 no-wiggle transfer with the effective shape and sound-scale prescriptions used by the approved provider; literal zero baryon is a different calculation.",
+    "revision_range": [
+      627,
+      641
+    ],
+    "revised_excerpt": "- **Inputs.** A_s = 2.100×10⁻⁹, n_s = 0.9649, k_p = 0.05 Mpc⁻¹ and\n  f_b = ω_b/ω_ref = 0.02237/0.14309694 (ω_ref = 0.315 × 0.674², printed\n  0.14310; Planck 2018, TT,TE,EE+lowE+lensing), held fixed when the density\n  changes; the EH98 **zero-baryon-oscillation (no-wiggle)** transfer — the T0\n  form with the baryon shape suppression α_Γ and the sound-horizon term,\n  EH98 Eqs. (26) and (28)–(31), as implemented by `lagrangian_sigma` (1G-B),\n  not the literal zero-baryon transfer, which gives different unit variances\n  (≈ 1.500 / 1.382 against 1.128 / 1.044; GH-F12) — at the per-photon density\n  `ω_m,eff = ½(1 − f_v0)(2 + f_v0)(H_D0/100)²` = 0.12048 ([GM]) and 0.13094\n  ([NW15]) ([1G-A] Sec. 6.2); T_cmb = 2.7255 K; matter-era Poisson\n  normalisation `Δ² = (4/25) A_s (k/k_p)^{n_s−1} (k/aH)⁴ T²`; matching at\n  z_LS = 1090. No late-time ΛCDM growth enters the spectrum.\n- **A_s is an import, not a Timescape fit.** [NW15] state that they treat\n  A_s \"as a nuisance parameter that we cannot constrain\", with τ degenerate\n  (l. 1422–1428). The Planck A_s is a ΛCDM fit; this is recorded as",
+    "replacement_present": true,
+    "qualification": "Precise cited passage repaired; semantic residuals elsewhere are separately evaluated."
+  },
+  {
+    "id": "GH-E14",
+    "finding": "GH-F13",
+    "source_path": "reports/phase1g_h_global_variance_closure.md",
+    "original_line_start": 188,
+    "original_line_end": 188,
+    "original_quote_exact_at_source": true,
+    "authored_quote": "| **(c) recommended** | `R = (L/h̄)/γ_w0`, L = 8 | the region whose present volume-average proper radius is `8/h̄` Mpc, `h̄ = H_D0/100`; equivalently `M = (4π/3)⟨ρ⟩_D0 (8/h̄ Mpc)³` (H24) and `R·H_D0 = 800 km/s` | only global-average quantities on the slice |",
+    "correct_reading": "For R denoting photon-comoving radius, gamma_w0 R H_D0=800 km/s; equivalently R_proper H_D0=800 with R_proper=gamma_w0 R.",
+    "revision_range": [
+      244,
+      252
+    ],
+    "revised_excerpt": "| **(c) preferred** | `R = (L/h̄)/γ_w0`, L = 8 | the region whose present volume-average proper radius is `R_proper = γ_w0 R = 8/h̄` Mpc, `h̄ = H_D0/100`; equivalently `M = (4π/3)⟨ρ⟩_D0 (8/h̄ Mpc)³` (H24) and `R_proper·H_D0 = 800 km/s` | only global-average quantities on the slice |\n| (a) | `R = R_ref (ω_ref/ω_m,eff)^{1/3}` | equal Lagrangian mass to ΛCDM's M8 | a reference model; the comparison convention |\n| (b) | `R = L/h_dressed` | wall-comoving length with the dressed h | the underived dressed spatial map |\n\nConvention (c) generalises ΛCDM's definition (`R·H0 = 800 km/s` with the\nbackground's own expansion rate) to a background whose global expansion rate\nis the bare H_D0. It is a named, defensible convention, not one selected by\nthe background (GH-F13). R in the table is photon-comoving; the 800 km/s\nidentity holds for the present proper radius `γ_w0 R`. Using the dressed h in a length",
+    "replacement_present": true,
+    "qualification": "Precise cited passage repaired; semantic residuals elsewhere are separately evaluated."
+  },
+  {
+    "id": "GH-E15",
+    "finding": "GH-F13",
+    "source_path": "reports/phase1g_h_global_variance_closure.md",
+    "original_line_start": 839,
+    "original_line_end": 842,
+    "original_quote_exact_at_source": true,
+    "authored_quote": "| [W07] | arXiv:0709.0732v2, `solution.tex` | `221662c9…7c6cd8` | regional EdS/Milne laws (via 1G-C) |\n| [NW15] | arXiv:1410.3470v2, `cmb1.tex` | `5688c9ac…4b74673` | A_s a nuisance parameter (ll. 1422–1428); f_v0 = 0.627, H0 ≈ 61 |\n| [JLH13] | arXiv:1304.6087v2, `voids_mnras.tex` | `cf6fc77a…dce17f` | Eq. (2) (linear variance); (A8)–(A12) via 1G-F |\n| [SvdW04] | astro-ph/0311260v1, `voids.tex` | e-print `4b7ad599…16f8841` | Eqs. (1)–(3), Eq. (3) the void mass fraction |",
+    "correct_reading": "The full inventory hashes reproduce; replace abbreviated suffixes with verified hashes (W07 ends fe6cd8, NW15 ends d7b74673, JLH13 ends 07c4e, SvdW04 archive ends fecdb79b).",
+    "revision_range": [
+      1077,
+      1080
+    ],
+    "revised_excerpt": "| [W07] | arXiv:0709.0732v2, `solution.tex` | `221662c987e454729ef8202c87fa697c5882b5b7daaecdedb50a7cba8ffe6cd8` | regional EdS/Milne laws (via 1G-C) |\n| [NW15] | arXiv:1410.3470v2, `cmb1.tex` | `5688c9ac7123a5c2ef3508e39cb3134c2fe9e3d5e56996a4d4a4d101d7b74673` | A_s a nuisance parameter (ll. 1422–1428); f_v0 = 0.627, H0 ≈ 61 |\n| [JLH13] | arXiv:1304.6087v2, `voids_mnras.tex` | `cf6fc77a31b395138ac3a027d008698556534e81cfb27c39853d3a99c7b07c4e` | Eq. (2) (linear variance); (A8)–(A12) via 1G-F |\n| [SvdW04] | astro-ph/0311260v1, `voids.tex` | e-print tarball `4b7ad599f54b3199e0448df1c2eecf4e724401e9ffda7b0f50a3efe7fecdb79b` | Eqs. (1)–(3), Eq. (3) the void mass fraction |",
+    "replacement_present": true,
+    "qualification": "Precise cited passage repaired; semantic residuals elsewhere are separately evaluated."
+  },
+  {
+    "id": "GH-E16",
+    "finding": "GH-F14",
+    "source_path": "reports/phase1g_fg_freeze_status_successor.md",
+    "original_line_start": 101,
+    "original_line_end": 104,
+    "original_quote_exact_at_source": true,
+    "authored_quote": "Each row quotes the historical statement exactly. It was correct when\nwritten; the current reading follows from §2. The files are not edited.\n\n| # | Document (SHA-256 at `8d3cdd0`) | Location | Historical statement (verbatim) | Written | Current reading (2026-10-06) |",
+    "correct_reading": "Rows give literal quotes with line-wrap normalization, except explicitly reformatted/joined spans. Identify the exceptions and provide full S13 base hashes and individual locations; identify the map as non-exhaustive or add remaining historical status statements.",
+    "revision_range": [
+      101,
+      133
+    ],
+    "revised_excerpt": "Each row quotes the historical statement literally, with line wrapping\nnormalised; S7 and S10 join separate spans of their source (S7 a bulleted\nlist joined with semicolons, S10 two passages joined with a slash). Each\nstatement was correct when written; the current reading follows from §2. The\nfiles are not edited. Rows S1–S13 are this record's 2026-10-06 selection;\nS14–S16 were added on 2026-10-07 after the independent audit of Phase 1G-H\n(finding GH-F14) found them unmapped. The map is not claimed to be\nexhaustive.\n\n| # | Document (SHA-256 at `8d3cdd0`) | Location | Historical statement (literal; joined spans marked) | Written | Current reading (2026-10-06; S14–S16 2026-10-07) |\n|---|---|---|---|---|---|\n| S1 | `phase1g_f_volume_budget_successor.md` (`3208c539…`) | header, l. 32–33 | \"This revised local deliverable has not been frozen; the audit does not certify subsequent edits.\" | 2026-10-02 | Frozen: merged into `main` by PR #4 at `8d3cdd0…`, tagged `phase-1g-f-void-population-v1`. The second clause stays true: neither audit certifies edits after its own scope. |\n| S2 | same | §6, l. 316–317 | \"It is not frozen, and no tag, merge or release is implied.\" | 2026-10-06 (integration revision) | Merged (PR #4) and frozen at `8d3cdd0…`, tag `phase-1g-f-void-population-v1`. No release exists. |\n| S3 | `phase1g_f_volume_budget_successor_inventory.json` (`6b09f475…`) | key `integration_state` | `\"LOCAL_REVIEWABLE_UNMERGED_UNTAGGED\"` | 2026-10-02 / 2026-10-06 | `MERGED_FROZEN_TAGGED` at `8d3cdd0…` (inventory key `current_integration_state` of this record) |\n| S4 | `phase1g_g_void_evolution.md` (`41560ed5…`) | header, l. 5–6 | \"This is a local research proposal, not a frozen implementation phase or a new Timescape prediction.\" | 2026-10-01 | Frozen report-only research phase, tag `phase-1g-g-void-evolution-v1` at `8d3cdd0…`. \"Not a frozen implementation phase\" stays true in the sense that G adds no package runtime; \"not a new Timescape prediction\" is unchanged. |\n| S5 | same | §8, l. 283–284 | \"No freeze, tag, merge or release is implied.\" | 2026-10-06 (integration revision) | Merged (PR #4), frozen and tagged (`phase-1g-g-void-evolution-v1`). No release exists. |\n| S6 | `phase1g_g_void_evolution_inventory.json` (`3ce6a587…`) | key `integration_state` | `\"LOCAL_REVIEWABLE_UNMERGED_UNTAGGED\"` | 2026-10-01 / 2026-10-06 | `MERGED_FROZEN_TAGGED` at `8d3cdd0…` |\n| S7 | `phase1g_fg_remediation_integration.md` (`ec41f322…`) | §8 item 1, l. 175–180 | \"Owner approvals, each separate: merging into `main` (through a pull request); any annotated phase tag; any release. None is authorized.\" (bulleted list joined with semicolons) | 2026-10-06 | Merge and the two tags were later approved and executed by the owner (PR #4; tags of §2.1). A release is still neither approved nor created. Items 2–4 of that section are unchanged. |\n| S8 | `phase1g_fg_remediation_integration_inventory.json` (`241054f2…`) | `authorization.…scope_summary` | \"local commits and ordinary push of this phase branch to origin; no main push, force push, merge, PR, tag, release, scientific freeze, status or observational-authorization change\" | 2026-10-06 | Correct as the scope of that authorization. The later merge, freeze and tags rest on separate owner actions (§2), not on that authorization. |\n| S9 | `phase1g_fg_successor_validation.md` (`438a0063…`) | \"Documentation state verified against GitHub\", l. 114 | \"No 1G-F tag was returned.\" | 2026-10-01 | `phase-1g-f-void-population-v1` exists (§2.1). |\n| S10 | same | l. 24–25 and l. 70–73 | \"No push, PR, remote mutation, phase tag or independent adversarial audit was performed.\" / \"Before a formal phase freeze, apply in a real checkout, run the existing two-environment gates with their required artifacts, obtain the independent audit and record the actual commit.\" | 2026-10-01 | Those freeze requirements were met later: two independent audits (2026-10-02, 2026-10-06), the integration record (actual commit `8f3131f…`), the owner's two-interpreter freeze preflight and the tags. |\n| S11 | `phase1g_fg_independent_scientific_audit.md` (`6bb8edec…`) | CLAUDE.md check table, l. 515 | \"σ track: main at fb5d952, 1G-A…E v1 tags, no 1G-F tag\" | 2026-10-02 | Audit observation, correct then. `main` is now at `8d3cdd0…` and carries the 1G-F and 1G-G tags. The audit is not edited. |\n| S12 | `phase1g_fg_remediation_independent_audit.md` (`46f3aef7…`) | §0.1, l. 36–38 | \"The corrections can be integrated: committed locally on the phase branch by the owner. Nothing in this audit authorises a merge, tag or remote action.\" | 2026-10-06 | Still true of the audit. The integration, merge and tags happened afterwards on separate owner authority. |\n| S13 | `README.md` (`85d78ff8…`), `CLAUDE.md` (`2d96e25c…`) | README l. 29–30 and l. 114; CLAUDE l. 259, l. 260–261, l. 106 and l. 434–435 (in the order of the quotes) | \"not merged into `main`, frozen or tagged\"; \"Nothing is frozen or tagged\"; \"no 1G-F tag was found\"; \"unmerged deliverables on the phase branch\"; \"but not frozen\"; \"No phase freeze, tag, merge or release is implied\" (six separate phrases) | 2026-10-01 to 2026-10-06 | Current documentation: updated directly in the same commit as this record, pointing here. |\n| S14 | `phase1g_f_void_population.md` (`fe8fd8f1…`) | §14, l. 638–639 | \"Nothing is merged or tagged.\" | 2026-09-29 | Merged by PR #4 and frozen at `8d3cdd0…`, tag `phase-1g-f-void-population-v1`. The frozen F report is not edited. |\n| S15 | `phase1g_fg_remediation_integration.md` (`ec41f322…`) | §3, l. 79–80 | '\"Not merged, frozen or tagged\" is kept.' | 2026-10-06 | The kept README sentence (S13) was replaced when the merge, freeze and tags followed (§2). |\n| S16 | `phase1g_fg_remediation_integration_inventory.json` (`241054f2…`) | `open_before_freeze[0]` | \"separate owner approvals for merge into main (PR), annotated tag, release\" | 2026-10-06 | Merge and the two tags were later approved and executed by the owner; a release is neither approved nor created. |\n\n**Readings explicitly not changed:**\n- `phase1g_fg_audit_remediation_inventory.json` keeps\n  `\"actual_remediation_commit\": null`. The integration record already gives\n  the actual commit, `8f3131f…`; this record does not edit either.\n- The three commits stay distinct: the remediation/integration commit",
+    "replacement_present": true,
+    "qualification": "Precise cited passage repaired; semantic residuals elsewhere are separately evaluated."
+  },
+  {
+    "id": "GH-E17",
+    "finding": "GH-F14",
+    "source_path": "reports/phase1g_h_global_variance_closure_inventory.json",
+    "original_line_start": 197,
+    "original_line_end": 197,
+    "original_quote_exact_at_source": true,
+    "authored_quote": "    \"H-OD5\": \"push / pull request / merge / audit / freeze / tag: separate decisions, none authorised\"",
+    "correct_reading": "According to the later publication block, phase-branch push was decided; PR, merge, audit, freeze and tag remain separate open decisions. Owner confirmation of the recorded off-repository approvals remains required for this audit.",
+    "revision_range": null,
+    "revised_excerpt": "\"push / pull request / merge / audit / freeze / tag: separate decisions; the push to the session branch was decided by the owner on 2026-10-06 (publication block); an independent audit was performed on 2026-10-07; pull request, merge, freeze and tag remain open\"",
+    "replacement_present": true,
+    "qualification": "Precise cited passage repaired; semantic residuals elsewhere are separately evaluated."
+  },
+  {
+    "id": "GH-E18",
+    "finding": "GH-F14",
+    "source_path": "reports/phase1g_h_global_variance_closure_validation.md",
+    "original_line_start": 38,
+    "original_line_end": 44,
+    "original_quote_exact_at_source": true,
+    "authored_quote": "- When these commits were made, nothing had been pushed. With the owner's\n  approval of 2026-10-06, given afterwards, they were pushed to the session\n  branch `ccr-555e67be-u11yht` (new on `origin` at\n  `0572e416504bcdfaa5831b6d482b687ef6fae582`, a fast-forward from\n  `8d3cdd0`), followed, with a second approval, by the documentation-only\n  commit that adds this paragraph. `main` is unchanged. No tag, branch D v2,\n  pull request or release was created.",
+    "correct_reading": "The record describes creation of a new remote ref at 0572e416, descended from 8d3cdd0, and a subsequent fast-forward of that existing ref. Ancestry is verified; historical remote transactions and their permission cannot be certified from the current snapshot alone.",
+    "revision_range": [
+      45,
+      51
+    ],
+    "revised_excerpt": "- When these commits were made, nothing had been pushed. With the owner's\n  approval of 2026-10-06, given afterwards, they were pushed to the session\n  branch `ccr-555e67be-u11yht`: the remote branch was created at\n  `0572e416504bcdfaa5831b6d482b687ef6fae582` (a descendant of `8d3cdd0`;\n  corrected 2026-10-07: the creation of a remote ref is not a fast-forward),\n  then fast-forwarded, with a second approval, to the documentation-only\n  commit that adds this paragraph. `main` is unchanged. No tag, branch D v2,",
+    "replacement_present": true,
+    "qualification": "Precise cited passage repaired; semantic residuals elsewhere are separately evaluated."
+  },
+  {
+    "id": "GH-E19",
+    "finding": "GH-F13",
+    "source_path": "reports/phase1g_h_global_variance_closure.md",
+    "original_line_start": 381,
+    "original_line_end": 381,
+    "original_quote_exact_at_source": true,
+    "authored_quote": "| [SvdW04] factor 1.72 (1G-D alternative) | 11.94 | 0.4049 | 2.643 | 3.36 | 14.30 | 0.2494 | 2.454 | 3.47 |",
+    "correct_reading": "NW15 SvdW epsilon rms is 3.464711295525395, which rounds to 3.46 rather than 3.47. Independent and author evidence values agree.",
+    "revision_range": [
+      466,
+      466
+    ],
+    "revised_excerpt": "| [SvdW04] factor 1.72 (1G-D alternative) | 11.94 | 0.4049 | 2.643 | 3.36 | 14.30 | 0.2494 | 2.454 | 3.46 |",
+    "replacement_present": true,
+    "qualification": "Precise cited passage repaired; semantic residuals elsewhere are separately evaluated."
+  },
+  {
+    "id": "GH-E20",
+    "finding": "GH-F13",
+    "source_path": "reports/phase1g_h_global_variance_closure.md",
+    "original_line_start": 443,
+    "original_line_end": 443,
+    "original_quote_exact_at_source": true,
+    "authored_quote": "| strict flat walls, p = 1 | 8.045 | 6.990 | 7.645 | 11.83 | 11.54 | 11.00 |",
+    "correct_reading": "GM convention (a) p=1 sigma is 6.989454191183194 in author evidence (independently reproduced); its three-decimal rounding is 6.989, not 6.990.",
+    "revision_range": [
+      537,
+      537
+    ],
+    "revised_excerpt": "| strict flat walls, p = 1 | 8.045 | 6.989 | 7.645 | 11.83 | 11.54 | 11.00 |",
+    "replacement_present": true,
+    "qualification": "Precise cited passage repaired; semantic residuals elsewhere are separately evaluated."
+  },
+  {
+    "id": "GH-E21",
+    "finding": "GH-F13",
+    "source_path": "reports/phase1g_h_global_variance_closure.md",
+    "original_line_start": 498,
+    "original_line_end": 498,
+    "original_quote_exact_at_source": true,
+    "authored_quote": "| [GM] PBS [W09] seed | 1.332 | 1.217 | 1.121 | 1.041 | 0.972 | 0.858 |",
+    "correct_reading": "GM W09-seed sigma at L=10 is 0.9714906429839393 in author evidence (independently reproduced); its three-decimal rounding is 0.971, not 0.972.",
+    "revision_range": [
+      614,
+      614
+    ],
+    "revised_excerpt": "| [GM] PBS [W09] seed | 1.332 | 1.217 | 1.121 | 1.041 | 0.971 | 0.858 |",
+    "replacement_present": true,
+    "qualification": "Precise cited passage repaired; semantic residuals elsewhere are separately evaluated."
+  },
+  {
+    "id": "GH-E22",
+    "finding": "GH-F13",
+    "source_path": "reports/phase1g_h_global_variance_closure.md",
+    "original_line_start": 499,
+    "original_line_end": 499,
+    "original_quote_exact_at_source": true,
+    "authored_quote": "| [NW15] monotone lower | 0.444 | 0.403 | 0.369 | 0.341 | 0.316 | 0.277 |",
+    "correct_reading": "NW15 monotone-lower sigma at L=9 is 0.3404986518322571 in author evidence (independently reproduced); its three-decimal rounding is 0.340, not 0.341.",
+    "revision_range": [
+      615,
+      615
+    ],
+    "revised_excerpt": "| [NW15] monotone lower | 0.444 | 0.403 | 0.369 | 0.340 | 0.316 | 0.277 |",
+    "replacement_present": true,
+    "qualification": "Precise cited passage repaired; semantic residuals elsewhere are separately evaluated."
+  }
+]

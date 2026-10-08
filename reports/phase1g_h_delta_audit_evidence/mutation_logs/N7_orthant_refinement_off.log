@@ -1,0 +1,16 @@
+.................................F.                                      [100%]
+=================================== FAILURES ===================================
+__________ test_gh_f10_orthant_quadrature_meets_its_accuracy_contract __________
+tests/test_phase1g_h_global_variance.py:821: in test_gh_f10_orthant_quadrature_meets_its_accuracy_contract
+    assert prob(0.0, -100.0, -100.0) == pytest.approx(1.0, abs=1e-12, rel=0.0)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_phase1g_h_global_variance.py:818: in prob
+    return gv.bivariate_normal_orthant_probability(correlation=rho, threshold_1=c1,
+src/timescape_fsigma8/global_variance.py:1694: in bivariate_normal_orthant_probability
+    _check_orthant_probability(p11, c1, c2, tol)
+src/timescape_fsigma8/global_variance.py:1673: in _check_orthant_probability
+    raise GlobalVarianceNumericalError(
+E   timescape_fsigma8.global_variance.GlobalVarianceNumericalError: orthant probability 0.9527690924725558 outside its bounds [1.0, 1.0]
+=========================== short test summary info ============================
+FAILED tests/test_phase1g_h_global_variance.py::test_gh_f10_orthant_quadrature_meets_its_accuracy_contract
+1 failed, 34 passed in 7.34s
