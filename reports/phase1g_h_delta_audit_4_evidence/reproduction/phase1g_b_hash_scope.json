@@ -1,0 +1,388 @@
+{
+  "actual_audited_hash": "a77118bb954aba118a1445cda899a63cf9786478e3181f8e3995d63955006d5c",
+  "actual_baseline_hash": "6c9198bae110c0d00cea90dee20074f48a29ff142c79556f3fcb7460ce27fb7f",
+  "historical_hash_matches": [
+    {
+      "altered_fields": [
+        "provenance.repository_head",
+        "provenance.platform",
+        "provenance.working_tree_changes_present"
+      ],
+      "author_platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
+      "dirty": true,
+      "head": "18bf2fb",
+      "sha256": "5746cc76e932ad0db3e253ee5aa5f0032227e65afba1699a09ea1f2c32d13c8d",
+      "source": "baseline",
+      "target_match": true
+    },
+    {
+      "altered_fields": [
+        "provenance.repository_head",
+        "provenance.platform",
+        "provenance.working_tree_changes_present"
+      ],
+      "author_platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
+      "dirty": true,
+      "head": "18bf2fb",
+      "sha256": "5746cc76e932ad0db3e253ee5aa5f0032227e65afba1699a09ea1f2c32d13c8d",
+      "source": "audited",
+      "target_match": true
+    }
+  ],
+  "identical_with_that_one_leaf_removed": true,
+  "interpretation": "Present executions are committed worktrees with different HEAD values. Historical same-HEAD/working-state artifact equivalence is consistent with numeric equivalence; it must not be generalized to byte identity across committed trees.",
+  "only_changed_actual_leaf": "provenance.repository_head",
+  "reconstructions": [
+    {
+      "altered_fields": [
+        "provenance.repository_head"
+      ],
+      "head": "18bf2fb",
+      "sha256": "6c9198bae110c0d00cea90dee20074f48a29ff142c79556f3fcb7460ce27fb7f",
+      "source": "baseline",
+      "target_match": false
+    },
+    {
+      "altered_fields": [
+        "provenance.repository_head"
+      ],
+      "head": "c6028e9",
+      "sha256": "c79dd3a6a9efd4755f35d9e99575bd64a2e6258de833be2ceebd1741d32069b3",
+      "source": "baseline",
+      "target_match": false
+    },
+    {
+      "altered_fields": [
+        "provenance.repository_head"
+      ],
+      "head": "6926a63",
+      "sha256": "3f8d3023f24d8e4b6ded6523e1d38e53f20233865bc9cf31deecf9fee0e61aa0",
+      "source": "baseline",
+      "target_match": false
+    },
+    {
+      "altered_fields": [
+        "provenance.repository_head"
+      ],
+      "head": "36d127f",
+      "sha256": "94ce8a73437f95e399553a9f4962fc78d026c823044e5e20042d5bb7870708bb",
+      "source": "baseline",
+      "target_match": false
+    },
+    {
+      "altered_fields": [
+        "provenance.repository_head"
+      ],
+      "head": "027b7a4",
+      "sha256": "a77118bb954aba118a1445cda899a63cf9786478e3181f8e3995d63955006d5c",
+      "source": "baseline",
+      "target_match": false
+    },
+    {
+      "altered_fields": [
+        "provenance.repository_head"
+      ],
+      "head": "18bf2fb",
+      "sha256": "6c9198bae110c0d00cea90dee20074f48a29ff142c79556f3fcb7460ce27fb7f",
+      "source": "audited",
+      "target_match": false
+    },
+    {
+      "altered_fields": [
+        "provenance.repository_head"
+      ],
+      "head": "c6028e9",
+      "sha256": "c79dd3a6a9efd4755f35d9e99575bd64a2e6258de833be2ceebd1741d32069b3",
+      "source": "audited",
+      "target_match": false
+    },
+    {
+      "altered_fields": [
+        "provenance.repository_head"
+      ],
+      "head": "6926a63",
+      "sha256": "3f8d3023f24d8e4b6ded6523e1d38e53f20233865bc9cf31deecf9fee0e61aa0",
+      "source": "audited",
+      "target_match": false
+    },
+    {
+      "altered_fields": [
+        "provenance.repository_head"
+      ],
+      "head": "36d127f",
+      "sha256": "94ce8a73437f95e399553a9f4962fc78d026c823044e5e20042d5bb7870708bb",
+      "source": "audited",
+      "target_match": false
+    },
+    {
+      "altered_fields": [
+        "provenance.repository_head"
+      ],
+      "head": "027b7a4",
+      "sha256": "a77118bb954aba118a1445cda899a63cf9786478e3181f8e3995d63955006d5c",
+      "source": "audited",
+      "target_match": false
+    },
+    {
+      "altered_fields": [
+        "provenance.repository_head",
+        "provenance.platform",
+        "provenance.working_tree_changes_present"
+      ],
+      "author_platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
+      "dirty": false,
+      "head": "18bf2fb",
+      "sha256": "3145ca3f13e31c34936879eb866a238ba9a66d34be8412ec6155b60b27f7fa85",
+      "source": "baseline",
+      "target_match": false
+    },
+    {
+      "altered_fields": [
+        "provenance.repository_head",
+        "provenance.platform",
+        "provenance.working_tree_changes_present"
+      ],
+      "author_platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
+      "dirty": true,
+      "head": "18bf2fb",
+      "sha256": "5746cc76e932ad0db3e253ee5aa5f0032227e65afba1699a09ea1f2c32d13c8d",
+      "source": "baseline",
+      "target_match": true
+    },
+    {
+      "altered_fields": [
+        "provenance.repository_head",
+        "provenance.platform",
+        "provenance.working_tree_changes_present"
+      ],
+      "author_platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
+      "dirty": false,
+      "head": "c6028e9",
+      "sha256": "9ec0c3668f6fc2c7f125b9b3b83a66bd742fe65ddbd2e804a27f5128e329bd70",
+      "source": "baseline",
+      "target_match": false
+    },
+    {
+      "altered_fields": [
+        "provenance.repository_head",
+        "provenance.platform",
+        "provenance.working_tree_changes_present"
+      ],
+      "author_platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
+      "dirty": true,
+      "head": "c6028e9",
+      "sha256": "dcb753fb26f557c7d4b1f83f746c34860299a1c381412a094928b6f73237cffb",
+      "source": "baseline",
+      "target_match": false
+    },
+    {
+      "altered_fields": [
+        "provenance.repository_head",
+        "provenance.platform",
+        "provenance.working_tree_changes_present"
+      ],
+      "author_platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
+      "dirty": false,
+      "head": "6926a63",
+      "sha256": "f612948e37b8571f883120494897770765af243f5744950ed0131153f6dd3fd5",
+      "source": "baseline",
+      "target_match": false
+    },
+    {
+      "altered_fields": [
+        "provenance.repository_head",
+        "provenance.platform",
+        "provenance.working_tree_changes_present"
+      ],
+      "author_platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
+      "dirty": true,
+      "head": "6926a63",
+      "sha256": "de7709947ae1f48b0adf8af8944e2b5e57108e33d5fa76ed7fd9c122110f6814",
+      "source": "baseline",
+      "target_match": false
+    },
+    {
+      "altered_fields": [
+        "provenance.repository_head",
+        "provenance.platform",
+        "provenance.working_tree_changes_present"
+      ],
+      "author_platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
+      "dirty": false,
+      "head": "36d127f",
+      "sha256": "9ffa4b967df0f136dc89cb78e0c60045fedd759354a894509f6c8097038b8f03",
+      "source": "baseline",
+      "target_match": false
+    },
+    {
+      "altered_fields": [
+        "provenance.repository_head",
+        "provenance.platform",
+        "provenance.working_tree_changes_present"
+      ],
+      "author_platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
+      "dirty": true,
+      "head": "36d127f",
+      "sha256": "aa1be2f73ecd01543d1eb9ad3cb26f65e3aaa50e21224992b1a98099a8a84b82",
+      "source": "baseline",
+      "target_match": false
+    },
+    {
+      "altered_fields": [
+        "provenance.repository_head",
+        "provenance.platform",
+        "provenance.working_tree_changes_present"
+      ],
+      "author_platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
+      "dirty": false,
+      "head": "027b7a4",
+      "sha256": "2ee3357ffa65ee770b6513884ee58bd1a04b84a1fb85165705b63646f2ae32da",
+      "source": "baseline",
+      "target_match": false
+    },
+    {
+      "altered_fields": [
+        "provenance.repository_head",
+        "provenance.platform",
+        "provenance.working_tree_changes_present"
+      ],
+      "author_platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
+      "dirty": true,
+      "head": "027b7a4",
+      "sha256": "a7e9d3a569ef63a43512f114192551fb4c6bcf906d39b3efa20e8883f4ba1a9e",
+      "source": "baseline",
+      "target_match": false
+    },
+    {
+      "altered_fields": [
+        "provenance.repository_head",
+        "provenance.platform",
+        "provenance.working_tree_changes_present"
+      ],
+      "author_platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
+      "dirty": false,
+      "head": "18bf2fb",
+      "sha256": "3145ca3f13e31c34936879eb866a238ba9a66d34be8412ec6155b60b27f7fa85",
+      "source": "audited",
+      "target_match": false
+    },
+    {
+      "altered_fields": [
+        "provenance.repository_head",
+        "provenance.platform",
+        "provenance.working_tree_changes_present"
+      ],
+      "author_platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
+      "dirty": true,
+      "head": "18bf2fb",
+      "sha256": "5746cc76e932ad0db3e253ee5aa5f0032227e65afba1699a09ea1f2c32d13c8d",
+      "source": "audited",
+      "target_match": true
+    },
+    {
+      "altered_fields": [
+        "provenance.repository_head",
+        "provenance.platform",
+        "provenance.working_tree_changes_present"
+      ],
+      "author_platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
+      "dirty": false,
+      "head": "c6028e9",
+      "sha256": "9ec0c3668f6fc2c7f125b9b3b83a66bd742fe65ddbd2e804a27f5128e329bd70",
+      "source": "audited",
+      "target_match": false
+    },
+    {
+      "altered_fields": [
+        "provenance.repository_head",
+        "provenance.platform",
+        "provenance.working_tree_changes_present"
+      ],
+      "author_platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
+      "dirty": true,
+      "head": "c6028e9",
+      "sha256": "dcb753fb26f557c7d4b1f83f746c34860299a1c381412a094928b6f73237cffb",
+      "source": "audited",
+      "target_match": false
+    },
+    {
+      "altered_fields": [
+        "provenance.repository_head",
+        "provenance.platform",
+        "provenance.working_tree_changes_present"
+      ],
+      "author_platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
+      "dirty": false,
+      "head": "6926a63",
+      "sha256": "f612948e37b8571f883120494897770765af243f5744950ed0131153f6dd3fd5",
+      "source": "audited",
+      "target_match": false
+    },
+    {
+      "altered_fields": [
+        "provenance.repository_head",
+        "provenance.platform",
+        "provenance.working_tree_changes_present"
+      ],
+      "author_platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
+      "dirty": true,
+      "head": "6926a63",
+      "sha256": "de7709947ae1f48b0adf8af8944e2b5e57108e33d5fa76ed7fd9c122110f6814",
+      "source": "audited",
+      "target_match": false
+    },
+    {
+      "altered_fields": [
+        "provenance.repository_head",
+        "provenance.platform",
+        "provenance.working_tree_changes_present"
+      ],
+      "author_platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
+      "dirty": false,
+      "head": "36d127f",
+      "sha256": "9ffa4b967df0f136dc89cb78e0c60045fedd759354a894509f6c8097038b8f03",
+      "source": "audited",
+      "target_match": false
+    },
+    {
+      "altered_fields": [
+        "provenance.repository_head",
+        "provenance.platform",
+        "provenance.working_tree_changes_present"
+      ],
+      "author_platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
+      "dirty": true,
+      "head": "36d127f",
+      "sha256": "aa1be2f73ecd01543d1eb9ad3cb26f65e3aaa50e21224992b1a98099a8a84b82",
+      "source": "audited",
+      "target_match": false
+    },
+    {
+      "altered_fields": [
+        "provenance.repository_head",
+        "provenance.platform",
+        "provenance.working_tree_changes_present"
+      ],
+      "author_platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
+      "dirty": false,
+      "head": "027b7a4",
+      "sha256": "2ee3357ffa65ee770b6513884ee58bd1a04b84a1fb85165705b63646f2ae32da",
+      "source": "audited",
+      "target_match": false
+    },
+    {
+      "altered_fields": [
+        "provenance.repository_head",
+        "provenance.platform",
+        "provenance.working_tree_changes_present"
+      ],
+      "author_platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
+      "dirty": true,
+      "head": "027b7a4",
+      "sha256": "a7e9d3a569ef63a43512f114192551fb4c6bcf906d39b3efa20e8883f4ba1a9e",
+      "source": "audited",
+      "target_match": false
+    }
+  ],
+  "target": "5746cc76e932ad0db3e253ee5aa5f0032227e65afba1699a09ea1f2c32d13c8d"
+}

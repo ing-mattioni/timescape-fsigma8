@@ -1,0 +1,33 @@
+{
+ "groups": {
+  "baseline": {
+   "BASELINE_PASS": 1
+  },
+  "delta": {
+   "KILLED_BY_TESTS": 21,
+   "SURVIVED": 2
+  },
+  "author": {
+   "KILLED_BY_TESTS": 9,
+   "NOT_APPLIED": 1
+  },
+  "own": {
+   "KILLED_BY_TESTS": 22,
+   "SURVIVED": 1
+  },
+  "round3": {
+   "KILLED_BY_TESTS": 4
+  }
+ },
+ "compared_to_third_audit_saved_campaign": "reports/phase1g_h_delta_audit_3_evidence/mutation_adapted_results.json",
+ "outcome_changes": [],
+ "all_genuine_test_kills": true,
+ "survivors": [
+  "N5_orthant_centre_split_off",
+  "N9_void_share_identity_text_sign_reversed",
+  "A02_same_bool_type_check_off"
+ ],
+ "not_applied": [
+  "AUTH_D1_binding_off"
+ ]
+}

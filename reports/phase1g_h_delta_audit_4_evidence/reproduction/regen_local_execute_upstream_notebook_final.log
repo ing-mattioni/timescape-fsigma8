@@ -1,0 +1,7 @@
+Executing ACPT_Timescape.ipynb at upstream commit 590c6fd5332acb15f5683ebf392a0d7ce54983c5
+Executed copy : artifacts/upstream/ACPT_Timescape.executed.ipynb
+Execution log : artifacts/upstream/execution_log.json
+Duration      : 34.9 s
+Figures       : All_Perturbations_Timescape.pdf, Bar_Dusts_Timescape.pdf, Bar_Eff_Timescape.pdf, TImescape_energy_balance.pdf, Timescape_wcs.pdf
+Warnings      : 1
+SUCCESS — all cells executed without error.

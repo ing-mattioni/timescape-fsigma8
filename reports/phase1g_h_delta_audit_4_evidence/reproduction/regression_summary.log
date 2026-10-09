@@ -1,0 +1,138 @@
+{
+  "same_interpreter_baseline_vs_audited": {
+    "common_leaves": 3827,
+    "numeric_common": 3185,
+    "numeric_changed": 0,
+    "other_changed": 2
+  },
+  "same_interpreter_after_key_rename": {
+    "common_leaves": 3843,
+    "numeric_common": 3201,
+    "numeric_changed": 0,
+    "other_changed": 2
+  },
+  "method": "Own recursive flatten; bool excluded from numeric count; type-sensitive IEEE-754 binary64 equality; environment and figure metadata excluded; figure and validator bytes checked separately.",
+  "cross_interpreter": {
+    "common_leaves": 3843,
+    "numeric_common": 3201,
+    "numeric_changed": 0,
+    "other_changed": 0
+  },
+  "gates": {
+    "numerics": {
+      "count": 10,
+      "passed": 10
+    },
+    "physics": {
+      "count": 20,
+      "passed": 20
+    },
+    "reproduction": {
+      "count": 6,
+      "passed": 6
+    }
+  },
+  "figures": [
+    {
+      "name": "propagator_scale_dependence.png",
+      "baseline_sha256": "bcac3ef2dd6a5bc22d170a2bccd667e854fdf7bb710a73d570f99b8721609917",
+      "audited_sha256": "bcac3ef2dd6a5bc22d170a2bccd667e854fdf7bb710a73d570f99b8721609917",
+      "byte_identical": true
+    },
+    {
+      "name": "radius_scan.png",
+      "baseline_sha256": "bdb399974949f5a0d5fc84a1ad04b0c720fceb48fa7aaf7a7e064c5b25947ac5",
+      "audited_sha256": "bdb399974949f5a0d5fc84a1ad04b0c720fceb48fa7aaf7a7e064c5b25947ac5",
+      "byte_identical": true
+    },
+    {
+      "name": "sigma_vs_void_share.png",
+      "baseline_sha256": "d8cc903da95fb48a1fd1e27e0645819bd08c995aba0b060ca7bcd261bb39b56f",
+      "audited_sha256": "d8cc903da95fb48a1fd1e27e0645819bd08c995aba0b060ca7bcd261bb39b56f",
+      "byte_identical": true
+    }
+  ],
+  "phase1g_b_validator": {
+    "baseline_sha256": "6c9198bae110c0d00cea90dee20074f48a29ff142c79556f3fcb7460ce27fb7f",
+    "audited_sha256": "a77118bb954aba118a1445cda899a63cf9786478e3181f8e3995d63955006d5c",
+    "byte_identical": false,
+    "full_leaf_comparison": {
+      "common_leaves": 1933,
+      "numeric_common": 1471,
+      "numeric_changed": 0,
+      "other_changed": 1,
+      "differences": [
+        {
+          "path": "provenance/repository_head",
+          "old": "18bf2fbef880fdfb3c292956aa1f000720930abf",
+          "new": "027b7a413fcee0786b861d5903272e4653d227ed",
+          "numeric": false
+        }
+      ],
+      "only_old": [],
+      "only_new": []
+    },
+    "identical_except_repository_head": true
+  },
+  "artifact_hashes": {
+    "evidence_baseline_py313": "5a7ae180c92ee4d5b84ab5432bf4c0bdd6781244ad18b18f528cbaf694e5e34f",
+    "evidence_main_py313": "62d9f739cfa4afcda8a5ecc19797443c641a42de8b798db22585f30db22e37b9",
+    "evidence_secondary_py311": "ee16e8b280268f6b668d7abc830bf7d14447db25c9e9c728b843862b06da61e2"
+  },
+  "current_inventory": {
+    "matched": 1193,
+    "unmatched": [],
+    "deviations": []
+  },
+  "scalar_campaign": {
+    "probes": 1446,
+    "accepted": [
+      456,
+      416
+    ],
+    "accepted_non_strict_json": [
+      129,
+      98
+    ],
+    "accepted_nonfinite": [
+      8,
+      0
+    ],
+    "changed": 40,
+    "changed_by_record": {
+      "LCDMReferenceLinearSigma": 18,
+      "AnchoredLagrangianSigmaRatio": 10,
+      "ConditionalGlobalLinearSigma": 12
+    },
+    "new_acceptances": []
+  },
+  "renamed_leaves": {
+    "count": 16,
+    "all_bitwise_equal": true
+  },
+  "vs_third_saved_audit_values": {
+    "count": 1193,
+    "exact_equal": 1193,
+    "unmatched": []
+  },
+  "runner": [
+    {
+      "case": "gm_bare_pbs_f_median_seed",
+      "byte_identical": true,
+      "sha256": "0c46534485d680cffce6349b772dcc94739d3a808e682b4498fa0720ff153191",
+      "linear_sigma": 0.8107722668657138
+    },
+    {
+      "case": "gm_bare_pbs_w09_seed",
+      "byte_identical": true,
+      "sha256": "4763cf39e2f368c4825ea17b324e441536745782e364cb0251e87d7376f98e97",
+      "linear_sigma": 1.1213626602036537
+    },
+    {
+      "case": "nw15_equal_mass_constant_share",
+      "byte_identical": true,
+      "sha256": "a73c98c9ae463650b6bfe3cdc3bf1db20fa083f0765d8bfd0c0789b67b2c84fd",
+      "linear_sigma": 0.9181569463963312
+    }
+  ]
+}

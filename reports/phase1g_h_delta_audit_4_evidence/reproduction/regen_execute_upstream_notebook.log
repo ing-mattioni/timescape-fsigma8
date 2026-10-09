@@ -1,0 +1,49 @@
+/workspace/scratch/1605b2925963/.venv313/lib/python3.13/site-packages/jupyter_client/localinterfaces.py:58: UserWarning: Unexpected error discovering local network interfaces: [Errno 1] Operation not permitted
+  ret = f(**kwargs)
+/workspace/scratch/1605b2925963/.venv313/lib/python3.13/site-packages/jupyter_client/localinterfaces.py:58: UserWarning: Unexpected error discovering local network interfaces: [Errno 1] Operation not permitted
+  ret = f(**kwargs)
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+Operation not permitted (src/ip_resolver.cpp:542)
+FAILED — first failing cell: None
+Traceback (most recent call last):
+  File "/workspace/scratch/1605b2925963/repo/scripts/execute_upstream_notebook.py", line 146, in main
+    client.execute()
+    ~~~~~~~~~~~~~~^^
+  File "/workspace/scratch/1605b2925963/.venv313/lib/python3.13/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "/root/.local/share/uv/python/cpython-3.13.16-linux-x86_64-gnu/lib/python3.13/asyncio/base_events.py", line 726, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/workspace/scratch/1605b2925963/.venv313/lib/python3.13/site-packages/nbclient/client.py", line 693, in async_execute
+    async with self.async_setup_kernel(**kwargs):
+               ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/root/.local/share/uv/python/cpython-3.13.16-linux-x86_64-gnu/lib/python3.13/contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/1605b2925963/.venv313/lib/python3.13/site-packages/nbclient/client.py", line 651, in async_setup_kernel
+    await self.async_start_new_kernel_client()
+  File "/workspace/scratch/1605b2925963/.venv313/lib/python3.13/site-packages/nbclient/client.py", line 566, in async_start_new_kernel_client
+    await ensure_async(self.kc.wait_for_ready(timeout=self.startup_timeout))
+  File "/workspace/scratch/1605b2925963/.venv313/lib/python3.13/site-packages/jupyter_core/utils/__init__.py", line 214, in ensure_async
+    result = await obj
+             ^^^^^^^^^
+  File "/workspace/scratch/1605b2925963/.venv313/lib/python3.13/site-packages/jupyter_client/client.py", line 207, in _async_wait_for_ready
+    raise RuntimeError(msg)
+RuntimeError: Kernel died before replying to kernel_info
+
+Executing ACPT_Timescape.ipynb at upstream commit 590c6fd5332acb15f5683ebf392a0d7ce54983c5
+Executed copy : artifacts/upstream/ACPT_Timescape.executed.ipynb
+Execution log : artifacts/upstream/execution_log.json
+Duration      : 3.4 s
+Figures       : (none)
+Warnings      : 0
+Exception ignored in atexit callback <bound method run_sync.<locals>.wrapped of <nbclient.client.NotebookClient object at 0x7f6aeca57a10>>:
+Traceback (most recent call last):
+  File "/workspace/scratch/1605b2925963/.venv313/lib/python3.13/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+  File "/root/.local/share/uv/python/cpython-3.13.16-linux-x86_64-gnu/lib/python3.13/asyncio/base_events.py", line 726, in run_until_complete
+    return future.result()
+  File "/workspace/scratch/1605b2925963/.venv313/lib/python3.13/site-packages/nbclient/client.py", line 504, in _async_cleanup_kernel
+    assert self.km is not None
+AssertionError:

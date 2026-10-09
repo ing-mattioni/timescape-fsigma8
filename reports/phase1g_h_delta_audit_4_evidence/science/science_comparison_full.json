@@ -1,0 +1,217 @@
+{
+  "comparison_source": "/workspace/scratch/1605b2925963/audit_work/reproduction/evidence_main_py313.json",
+  "comparison_source_sha256": "62d9f739cfa4afcda8a5ecc19797443c641a42de8b798db22585f30db22e37b9",
+  "comparison_kind": "FULL_PRECISION_FRESH_RUNTIME",
+  "claims": [
+    {
+      "id": "PAPER_REFERENCE/DW",
+      "status": "VERIFIED",
+      "independent_value": 0.23061457227250512,
+      "source_value": 0.23061457227250548,
+      "absolute_error": 3.608224830031759e-16,
+      "relative_error": 1.5646126758061513e-15,
+      "absolute_tolerance": 1e-12,
+      "method": "direct exact finite-LS tracker and regional growth formula"
+    },
+    {
+      "id": "PAPER_REFERENCE/DV",
+      "status": "VERIFIED",
+      "independent_value": 7.132537333227973,
+      "source_value": 7.132537333227989,
+      "absolute_error": 1.5987211554602254e-14,
+      "relative_error": 2.241448001978685e-15,
+      "absolute_tolerance": 1e-12,
+      "method": "direct exact finite-LS tracker and regional growth formula"
+    },
+    {
+      "id": "PAPER_REFERENCE/W09/sigma_direct",
+      "status": "VERIFIED",
+      "independent_value": 1.1213626602034692,
+      "source_value": 1.1213626602036537,
+      "absolute_error": 1.8451906669270102e-13,
+      "relative_error": 1.6454896639699953e-13,
+      "absolute_tolerance": 1e-09,
+      "method": "independent EH98 Fourier integral at convention c, unit-spectrum + PBS seed"
+    },
+    {
+      "id": "PAPER_REFERENCE/F_median/sigma_direct",
+      "status": "VERIFIED",
+      "independent_value": 0.810772266865035,
+      "source_value": 0.8107722668657138,
+      "absolute_error": 6.787903572558207e-13,
+      "relative_error": 8.372145730636431e-13,
+      "absolute_tolerance": 1e-09,
+      "method": "independent EH98 Fourier integral at convention c, unit-spectrum + PBS seed"
+    },
+    {
+      "id": "PAPER_REFERENCE/constant_share_interval/lower",
+      "status": "VERIFIED",
+      "independent_value": 0.2608656251274673,
+      "source_value": 0.2608656251293685,
+      "absolute_error": 1.9012014185193493e-12,
+      "relative_error": 7.288048847281068e-12,
+      "absolute_tolerance": 1e-09,
+      "method": "constant G(p), adopted W09 premise at 100 hbar inverse Mpc; bound only in constant-share class"
+    },
+    {
+      "id": "PAPER_REFERENCE/constant_share_interval/upper",
+      "status": "VERIFIED",
+      "independent_value": 0.9982675559021565,
+      "source_value": 0.9982675560571134,
+      "absolute_error": 1.5495682514909959e-10,
+      "relative_error": 1.5522574505089307e-10,
+      "absolute_tolerance": 1e-09,
+      "method": "constant G(p), adopted W09 premise at 100 hbar inverse Mpc; bound only in constant-share class"
+    },
+    {
+      "id": "PAPER_REFERENCE/signed/I_independent/product_excess",
+      "status": "VERIFIED",
+      "independent_value": 0.7559295860892861,
+      "source_value": 0.7559295866508712,
+      "absolute_error": 5.615851117468651e-10,
+      "relative_error": 7.429066432429972e-10,
+      "absolute_tolerance": 1e-06,
+      "method": "independent truncated Gaussian generating-function derivatives/exponential tilt; Plackett GL128 and composite radial GL1600"
+    },
+    {
+      "id": "PAPER_REFERENCE/signed/II_same_field/product_excess",
+      "status": "VERIFIED",
+      "independent_value": 0.043189407473617214,
+      "source_value": 0.04318940793032056,
+      "absolute_error": 4.567033487501426e-10,
+      "relative_error": 1.0574429487131727e-08,
+      "absolute_tolerance": 1e-06,
+      "method": "independent truncated Gaussian generating-function derivatives/exponential tilt; Plackett GL128 and composite radial GL1600"
+    },
+    {
+      "id": "PAPER_REFERENCE/lognormal/I_independent/product_excess",
+      "status": "VERIFIED",
+      "independent_value": 0.7869201937811277,
+      "source_value": 0.7869201939046357,
+      "absolute_error": 1.235080926420551e-10,
+      "relative_error": 1.5695123037727334e-10,
+      "absolute_tolerance": 1e-06,
+      "method": "independent truncated Gaussian generating-function derivatives/exponential tilt; Plackett GL128 and composite radial GL1600"
+    },
+    {
+      "id": "PAPER_REFERENCE/lognormal/II_same_field/product_excess",
+      "status": "VERIFIED",
+      "independent_value": 0.8376932008382652,
+      "source_value": 0.8376932008709476,
+      "absolute_error": 3.268241233200797e-11,
+      "relative_error": 3.901477569356913e-11,
+      "absolute_tolerance": 1e-06,
+      "method": "independent truncated Gaussian generating-function derivatives/exponential tilt; Plackett GL128 and composite radial GL1600"
+    },
+    {
+      "id": "NW15_CMB_FIT/DW",
+      "status": "VERIFIED",
+      "independent_value": 0.3526903268985117,
+      "source_value": 0.3526903268985125,
+      "absolute_error": 7.771561172376096e-16,
+      "relative_error": 2.2035084547732384e-15,
+      "absolute_tolerance": 1e-12,
+      "method": "direct exact finite-LS tracker and regional growth formula"
+    },
+    {
+      "id": "NW15_CMB_FIT/DV",
+      "status": "VERIFIED",
+      "independent_value": 11.327583314531227,
+      "source_value": 11.327583314531257,
+      "absolute_error": 3.019806626980426e-14,
+      "relative_error": 2.6658878095441205e-15,
+      "absolute_tolerance": 1e-12,
+      "method": "direct exact finite-LS tracker and regional growth formula"
+    },
+    {
+      "id": "NW15_CMB_FIT/W09/sigma_direct",
+      "status": "VERIFIED",
+      "independent_value": 1.0566325994707644,
+      "source_value": 1.0566325994699088,
+      "absolute_error": 8.555378627761456e-13,
+      "relative_error": 8.096833877786391e-13,
+      "absolute_tolerance": 1e-09,
+      "method": "independent EH98 Fourier integral at convention c, unit-spectrum + PBS seed"
+    },
+    {
+      "id": "NW15_CMB_FIT/F_median/sigma_direct",
+      "status": "VERIFIED",
+      "independent_value": 0.8160588130081785,
+      "source_value": 0.8160588130066785,
+      "absolute_error": 1.500022328571049e-12,
+      "relative_error": 1.838130174765692e-12,
+      "absolute_tolerance": 1e-09,
+      "method": "independent EH98 Fourier integral at convention c, unit-spectrum + PBS seed"
+    },
+    {
+      "id": "NW15_CMB_FIT/constant_share_interval/lower",
+      "status": "VERIFIED",
+      "independent_value": 0.36885943313006087,
+      "source_value": 0.3688594331269559,
+      "absolute_error": 3.1049607329691753e-12,
+      "relative_error": 8.417734383657458e-12,
+      "absolute_tolerance": 1e-09,
+      "method": "constant G(p), adopted W09 premise at 100 hbar inverse Mpc; bound only in constant-share class"
+    },
+    {
+      "id": "NW15_CMB_FIT/constant_share_interval/upper",
+      "status": "VERIFIED",
+      "independent_value": 1.161784484340578,
+      "source_value": 1.1617844837353175,
+      "absolute_error": 6.052605083795015e-10,
+      "relative_error": 5.209748596688906e-10,
+      "absolute_tolerance": 1e-09,
+      "method": "constant G(p), adopted W09 premise at 100 hbar inverse Mpc; bound only in constant-share class"
+    },
+    {
+      "id": "NW15_CMB_FIT/signed/I_independent/product_excess",
+      "status": "VERIFIED",
+      "independent_value": 0.7912641481428393,
+      "source_value": 0.7912641484729672,
+      "absolute_error": 3.3012792499675925e-10,
+      "relative_error": 4.172158256302418e-10,
+      "absolute_tolerance": 1e-06,
+      "method": "independent truncated Gaussian generating-function derivatives/exponential tilt; Plackett GL128 and composite radial GL1600"
+    },
+    {
+      "id": "NW15_CMB_FIT/signed/II_same_field/product_excess",
+      "status": "VERIFIED",
+      "independent_value": 0.06908311291541125,
+      "source_value": 0.06908311322288978,
+      "absolute_error": 3.074785287493498e-10,
+      "relative_error": 4.450849337917082e-09,
+      "absolute_tolerance": 1e-06,
+      "method": "independent truncated Gaussian generating-function derivatives/exponential tilt; Plackett GL128 and composite radial GL1600"
+    },
+    {
+      "id": "NW15_CMB_FIT/lognormal/I_independent/product_excess",
+      "status": "VERIFIED",
+      "independent_value": 0.8407943617975306,
+      "source_value": 0.840794361918869,
+      "absolute_error": 1.2133838378503015e-10,
+      "relative_error": 1.443139836334184e-10,
+      "absolute_tolerance": 1e-06,
+      "method": "independent truncated Gaussian generating-function derivatives/exponential tilt; Plackett GL128 and composite radial GL1600"
+    },
+    {
+      "id": "NW15_CMB_FIT/lognormal/II_same_field/product_excess",
+      "status": "VERIFIED",
+      "independent_value": 0.697655401752882,
+      "source_value": 0.6976554017835588,
+      "absolute_error": 3.0676794438022625e-11,
+      "relative_error": 4.397127057225857e-11,
+      "absolute_tolerance": 1e-06,
+      "method": "independent truncated Gaussian generating-function derivatives/exponential tilt; Plackett GL128 and composite radial GL1600"
+    }
+  ],
+  "claim_counts": {
+    "total": 20,
+    "VERIFIED": 20,
+    "VERIFIED_WITH_DEVIATION": 0
+  },
+  "inventory_two_phase_numeric_content_unchanged_after_rename": true,
+  "GH-D3F5_resolution": {
+    "status": "RESOLVED",
+    "reason": "Product-moment terminology and keys corrected; historical covariance string explicitly annotated. Independent new centred values show equality for law I and a difference for law II."
+  }
+}

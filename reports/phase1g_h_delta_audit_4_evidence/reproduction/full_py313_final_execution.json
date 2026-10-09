@@ -1,0 +1,22 @@
+{
+  "name": "full_py313_final",
+  "command": [
+    "/workspace/scratch/1605b2925963/.venv313/bin/python",
+    "-B",
+    "-W",
+    "error",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "-rs"
+  ],
+  "cwd": "/workspace/scratch/1605b2925963/repo",
+  "returncode": 0,
+  "elapsed_seconds": 473.394,
+  "environment": {
+    "OPENBLAS_NUM_THREADS": "1",
+    "PYTHONPATH": "/workspace/scratch/1605b2925963/repo/src"
+  }
+}

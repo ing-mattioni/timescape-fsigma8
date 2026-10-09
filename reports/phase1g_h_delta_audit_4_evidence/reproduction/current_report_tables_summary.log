@@ -1,0 +1,7 @@
+{
+  "claim_counts": {
+    "VERIFIED": 310
+  },
+  "deviations": [],
+  "scope": "All numeric data cells in current report Tables3.2,4.2,5.1,5.2,5.3,5.4,6.3signed,6.3lognormal; source hashes and historical reference/context tables separately reconciled."
+}

@@ -1,0 +1,155 @@
+[
+ {
+  "id": "X01_growth_json_check_removed",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "        _require_strict_json(self.to_json_dict(), \"growth record\")\n",
+  "new": "",
+  "tests": [
+   "tests/test_phase1g_h_global_variance.py"
+  ],
+  "origin": "fourth_delta_audit",
+  "note": ""
+ },
+ {
+  "id": "X02_void_share_json_check_removed",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "        _require_strict_json(self.to_json_dict(), \"void share\")\n",
+  "new": "",
+  "tests": [
+   "tests/test_phase1g_h_global_variance.py"
+  ],
+  "origin": "fourth_delta_audit",
+  "note": ""
+ },
+ {
+  "id": "X03_premise_json_check_removed",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "        _require_strict_json(self.to_metadata(), \"homogeneity premise\")\n",
+  "new": "",
+  "tests": [
+   "tests/test_phase1g_h_global_variance.py"
+  ],
+  "origin": "fourth_delta_audit",
+  "note": ""
+ },
+ {
+  "id": "X04_interval_json_check_removed",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "        _require_strict_json(self.to_json_dict(), \"interval record\")\n",
+  "new": "",
+  "tests": [
+   "tests/test_phase1g_h_global_variance.py"
+  ],
+  "origin": "fourth_delta_audit",
+  "note": ""
+ },
+ {
+  "id": "X05_growth_json_before_validation",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "    def __post_init__(self) -> None:\n        _require(self.background, TimescapeTrackerInput, \"background\")\n        _require(self.matching, LastScatteringMatching, \"matching\")\n        _require(self.checks, TwoPhaseGrowthChecks, \"checks\")\n        for name in (\"fv0\", \"gamma_w0\", \"t_ls_over_t0\", \"f_v_ls\", \"gamma_w_ls\",\n                     \"wall_share_growth\", \"void_share_growth\"):\n            _positive(getattr(self, name), name)\n        if self.fv0 != self.background.fv0:\n            raise GlobalVarianceContractError(\"fv0 must be the background's f_v0\")\n        if self.evidence_class != PROPAGATOR_EVIDENCE_CLASS:\n            raise GlobalVarianceContractError(\"evidence_class must be PROPAGATOR_EVIDENCE_CLASS\")\n        # Record invariants: (H8) re-evaluated from the stored inputs.\n        f_w0, f_wls = 1.0 - self.fv0, 1.0 - self.f_v_ls\n        d_w = self.gamma_w0 * f_w0 ** (4.0 / 3.0) / (self.gamma_w_ls * f_wls ** (4.0 / 3.0))\n        d_v = self.fv0 / (self.f_v_ls * (1.0 + self.matching.z_last_scattering))\n        tol = self.checks.identity_tolerance\n        if not (math.isclose(self.wall_share_growth, d_w, rel_tol=tol, abs_tol=0.0)\n                and math.isclose(self.void_share_growth, d_v, rel_tol=tol, abs_tol=0.0)):\n            raise GlobalVarianceContractError(\"growth factors violate (H8)\")\n        if not (math.isclose(self.gamma_w0, 1.0 + self.fv0 / 2.0, rel_tol=tol, abs_tol=0.0)\n                and math.isclose(self.gamma_w_ls, 1.0 + self.f_v_ls / 2.0, rel_tol=tol,\n                                 abs_tol=0.0)):\n            raise GlobalVarianceContractError(\"gamma_w must equal 1 + f_v/2 ([GM] p. 25)\")\n        # Tracker consistency of the matching epoch (audit GH-F9): the time\n        # ratio lies in (0, 1), f_v grows with t, the one-time-scale law\n        # f_v = t/(t + tau) with tau/t0 = f_w0/f_v0 links t_LS to f_v,LS, and\n        # the finite-t identity (H23) links t_LS to z_LS.\n        t_ratio = self.t_ls_over_t0\n        if not (0.0 < t_ratio < 1.0 and 0.0 < self.f_v_ls < self.fv0 < 1.0):\n            raise GlobalVarianceContractError(\n                \"need 0 < t_LS/t0 < 1 and 0 < f_v,LS < f_v0 < 1 (tracker ordering)\")\n        one_scale = t_ratio / (t_ratio + f_w0 / self.fv0)\n        h23 = (t_ratio ** (-2.0 / 3.0) / (1.0 + self.matching.z_last_scattering)) / (\n            self.gamma_w0 * f_w0 ** (1.0 / 3.0) / (self.gamma_w_ls * f_wls ** (1.0 / 3.0)))\n        if not (math.isclose(self.f_v_ls, one_scale, rel_tol=tol, abs_tol=0.0)\n                and math.isclose(h23, 1.0, rel_tol=tol, abs_tol=0.0)):\n            raise GlobalVarianceContractError(\n                \"t_LS/t0, f_v,LS and z_LS violate the tracker identities (H23)\")\n        # Diagnostics: finite, non-negative, every check present and within\n        # its declared tolerance.\n        if not isinstance(self.diagnostics, tuple):\n            raise GlobalVarianceContractError(\"diagnostics must be a tuple of (name, value) pairs\")\n        diag = {}\n        for item in self.diagnostics:\n            if not (isinstance(item, tuple) and len(item) == 2):\n                raise GlobalVarianceContractError(\"diagnostics must be (name, value) pairs\")\n            name, value = item\n            diag[_nonempty(name, \"diagnostic name\")] = _real(value, f\"diagnostic {name}\")\n            if diag[name] < 0.0:\n                raise GlobalVarianceContractError(f\"diagnostic {name} must be non-negative\")\n        for name in _GROWTH_IDENTITY_DIAGNOSTICS:\n            if name not in diag or not diag[name] <= tol:\n                raise GlobalVarianceContractError(f\"identity diagnostic {name} missing or failed\")\n        for name in _GROWTH_CROSS_DIAGNOSTICS:\n            if name not in diag or not diag[name] <= self.checks.ode_cross_check_tolerance:\n                raise GlobalVarianceContractError(f\"cross-check diagnostic {name} missing or failed\")\n        if _strings(self.assumptions, \"assumptions\") != _GROWTH_ASSUMPTIONS:\n            raise GlobalVarianceContractError(\"assumptions must be the module's growth assumptions\")\n        # Binding (delta audit GH-DF2): results and diagnostics recomputed.\n        # G is stored as a float (second delta audit GH-D2F4).\n        G = _positive(self.G, \"G\")\n        object.__setattr__(self, \"G\", G)\n        _bind_recomputed(self, lambda: _two_phase_growth_values(\n            self.background, self.matching, self.checks, G), \"growth record\")\n        _require_strict_json(self.to_json_dict(), \"growth record\")\n\n",
+  "new": "    def __post_init__(self) -> None:\n        _require_strict_json(self.to_json_dict(), \"growth record\")\n        _require(self.background, TimescapeTrackerInput, \"background\")\n        _require(self.matching, LastScatteringMatching, \"matching\")\n        _require(self.checks, TwoPhaseGrowthChecks, \"checks\")\n        for name in (\"fv0\", \"gamma_w0\", \"t_ls_over_t0\", \"f_v_ls\", \"gamma_w_ls\",\n                     \"wall_share_growth\", \"void_share_growth\"):\n            _positive(getattr(self, name), name)\n        if self.fv0 != self.background.fv0:\n            raise GlobalVarianceContractError(\"fv0 must be the background's f_v0\")\n        if self.evidence_class != PROPAGATOR_EVIDENCE_CLASS:\n            raise GlobalVarianceContractError(\"evidence_class must be PROPAGATOR_EVIDENCE_CLASS\")\n        # Record invariants: (H8) re-evaluated from the stored inputs.\n        f_w0, f_wls = 1.0 - self.fv0, 1.0 - self.f_v_ls\n        d_w = self.gamma_w0 * f_w0 ** (4.0 / 3.0) / (self.gamma_w_ls * f_wls ** (4.0 / 3.0))\n        d_v = self.fv0 / (self.f_v_ls * (1.0 + self.matching.z_last_scattering))\n        tol = self.checks.identity_tolerance\n        if not (math.isclose(self.wall_share_growth, d_w, rel_tol=tol, abs_tol=0.0)\n                and math.isclose(self.void_share_growth, d_v, rel_tol=tol, abs_tol=0.0)):\n            raise GlobalVarianceContractError(\"growth factors violate (H8)\")\n        if not (math.isclose(self.gamma_w0, 1.0 + self.fv0 / 2.0, rel_tol=tol, abs_tol=0.0)\n                and math.isclose(self.gamma_w_ls, 1.0 + self.f_v_ls / 2.0, rel_tol=tol,\n                                 abs_tol=0.0)):\n            raise GlobalVarianceContractError(\"gamma_w must equal 1 + f_v/2 ([GM] p. 25)\")\n        # Tracker consistency of the matching epoch (audit GH-F9): the time\n        # ratio lies in (0, 1), f_v grows with t, the one-time-scale law\n        # f_v = t/(t + tau) with tau/t0 = f_w0/f_v0 links t_LS to f_v,LS, and\n        # the finite-t identity (H23) links t_LS to z_LS.\n        t_ratio = self.t_ls_over_t0\n        if not (0.0 < t_ratio < 1.0 and 0.0 < self.f_v_ls < self.fv0 < 1.0):\n            raise GlobalVarianceContractError(\n                \"need 0 < t_LS/t0 < 1 and 0 < f_v,LS < f_v0 < 1 (tracker ordering)\")\n        one_scale = t_ratio / (t_ratio + f_w0 / self.fv0)\n        h23 = (t_ratio ** (-2.0 / 3.0) / (1.0 + self.matching.z_last_scattering)) / (\n            self.gamma_w0 * f_w0 ** (1.0 / 3.0) / (self.gamma_w_ls * f_wls ** (1.0 / 3.0)))\n        if not (math.isclose(self.f_v_ls, one_scale, rel_tol=tol, abs_tol=0.0)\n                and math.isclose(h23, 1.0, rel_tol=tol, abs_tol=0.0)):\n            raise GlobalVarianceContractError(\n                \"t_LS/t0, f_v,LS and z_LS violate the tracker identities (H23)\")\n        # Diagnostics: finite, non-negative, every check present and within\n        # its declared tolerance.\n        if not isinstance(self.diagnostics, tuple):\n            raise GlobalVarianceContractError(\"diagnostics must be a tuple of (name, value) pairs\")\n        diag = {}\n        for item in self.diagnostics:\n            if not (isinstance(item, tuple) and len(item) == 2):\n                raise GlobalVarianceContractError(\"diagnostics must be (name, value) pairs\")\n            name, value = item\n            diag[_nonempty(name, \"diagnostic name\")] = _real(value, f\"diagnostic {name}\")\n            if diag[name] < 0.0:\n                raise GlobalVarianceContractError(f\"diagnostic {name} must be non-negative\")\n        for name in _GROWTH_IDENTITY_DIAGNOSTICS:\n            if name not in diag or not diag[name] <= tol:\n                raise GlobalVarianceContractError(f\"identity diagnostic {name} missing or failed\")\n        for name in _GROWTH_CROSS_DIAGNOSTICS:\n            if name not in diag or not diag[name] <= self.checks.ode_cross_check_tolerance:\n                raise GlobalVarianceContractError(f\"cross-check diagnostic {name} missing or failed\")\n        if _strings(self.assumptions, \"assumptions\") != _GROWTH_ASSUMPTIONS:\n            raise GlobalVarianceContractError(\"assumptions must be the module's growth assumptions\")\n        # Binding (delta audit GH-DF2): results and diagnostics recomputed.\n        # G is stored as a float (second delta audit GH-D2F4).\n        G = _positive(self.G, \"G\")\n        object.__setattr__(self, \"G\", G)\n        _bind_recomputed(self, lambda: _two_phase_growth_values(\n            self.background, self.matching, self.checks, G), \"growth record\")\n\n",
+  "tests": [
+   "tests/test_phase1g_h_global_variance.py"
+  ],
+  "origin": "fourth_delta_audit",
+  "note": ""
+ },
+ {
+  "id": "X06_growth_ratio_approximate_1e8",
+  "file": "src/timescape_fsigma8/lagrangian_sigma.py",
+  "old": "self.growth_ratio == (ts.growth.growth_today_photon_normalised\n                                      / ref.growth_today_photon_normalised)",
+  "new": "math.isclose(self.growth_ratio, ts.growth.growth_today_photon_normalised\n                                      / ref.growth_today_photon_normalised, rel_tol=1e-8, abs_tol=0.0)",
+  "tests": [
+   "tests/test_phase1g_b_lagrangian_sigma.py",
+   "tests/test_phase1g_b_owner_decisions.py",
+   "tests/test_phase1g_b_contract_hardening.py"
+  ],
+  "origin": "fourth_delta_audit",
+  "note": ""
+ },
+ {
+  "id": "X07_growth_ratio_operands_swapped",
+  "file": "src/timescape_fsigma8/lagrangian_sigma.py",
+  "old": "self.growth_ratio == (ts.growth.growth_today_photon_normalised\n                                      / ref.growth_today_photon_normalised)",
+  "new": "self.growth_ratio == (ref.growth_today_photon_normalised\n                                      / ts.growth.growth_today_photon_normalised)",
+  "tests": [
+   "tests/test_phase1g_b_lagrangian_sigma.py",
+   "tests/test_phase1g_b_owner_decisions.py",
+   "tests/test_phase1g_b_contract_hardening.py"
+  ],
+  "origin": "fourth_delta_audit",
+  "note": ""
+ },
+ {
+  "id": "X08_growth_ratio_float_conversion",
+  "file": "src/timescape_fsigma8/lagrangian_sigma.py",
+  "old": "self.growth_ratio == (ts.growth.growth_today_photon_normalised",
+  "new": "float(self.growth_ratio) == (ts.growth.growth_today_photon_normalised",
+  "tests": [
+   "tests/test_phase1g_b_lagrangian_sigma.py",
+   "tests/test_phase1g_b_owner_decisions.py",
+   "tests/test_phase1g_b_contract_hardening.py"
+  ],
+  "origin": "fourth_delta_audit",
+  "note": "A desirable stricter-policy change; a survivor is a precision-limit coverage gap, not an accepted unsafe defect."
+ },
+ {
+  "id": "X09_simpson_exact_error_budget_to_1pct",
+  "file": "tests/test_phase1g_h_global_variance.py",
+  "old": "pytest.approx(error, rel=2e-3, abs=0.0)",
+  "new": "pytest.approx(error, rel=1e-2, abs=0.0)",
+  "tests": [
+   "tests/test_phase1g_h_global_variance.py"
+  ],
+  "origin": "fourth_delta_audit",
+  "note": ""
+ },
+ {
+  "id": "X10_simpson_ratio_budget_to_1pct",
+  "file": "tests/test_phase1g_h_global_variance.py",
+  "old": "pytest.approx(16.0, rel=5e-3, abs=0.0)",
+  "new": "pytest.approx(16.0, rel=1e-2, abs=0.0)",
+  "tests": [
+   "tests/test_phase1g_h_global_variance.py"
+  ],
+  "origin": "fourth_delta_audit",
+  "note": ""
+ },
+ {
+  "id": "X11_growth_ratio_approximate_1e12",
+  "file": "src/timescape_fsigma8/lagrangian_sigma.py",
+  "old": "self.growth_ratio == (ts.growth.growth_today_photon_normalised\n                                      / ref.growth_today_photon_normalised)",
+  "new": "math.isclose(self.growth_ratio, ts.growth.growth_today_photon_normalised\n                                      / ref.growth_today_photon_normalised, rel_tol=1e-12, abs_tol=0.0)",
+  "tests": [
+   "tests/test_phase1g_b_lagrangian_sigma.py",
+   "tests/test_phase1g_b_owner_decisions.py",
+   "tests/test_phase1g_b_contract_hardening.py"
+  ],
+  "origin": "fourth_delta_audit",
+  "note": ""
+ },
+ {
+  "id": "D1_adapted_binding_disabled",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "    for name, expected in values.items():\n        stored = getattr(record, name)",
+  "new": "    for name, expected in ():\n        stored = getattr(record, name)",
+  "tests": [
+   "tests/test_phase1g_h_global_variance.py"
+  ],
+  "origin": "fourth_delta_audit",
+  "note": ""
+ },
+ {
+  "id": "X12_lcdm_relative_change_float_conversion",
+  "file": "src/timescape_fsigma8/lagrangian_sigma.py",
+  "old": "if not (self.quadrature_relative_change\n                == abs(self.sigma_unit_growth",
+  "new": "if not (float(self.quadrature_relative_change)\n                == abs(self.sigma_unit_growth",
+  "tests": [
+   "tests/test_phase1g_b_lagrangian_sigma.py",
+   "tests/test_phase1g_b_owner_decisions.py",
+   "tests/test_phase1g_b_contract_hardening.py"
+  ],
+  "origin": "fourth_delta_audit",
+  "note": "Desirable stricter-policy probe."
+ }
+]

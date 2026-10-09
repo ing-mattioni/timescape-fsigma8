@@ -1,0 +1,33 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/workspace/scratch/1605b2925963/.venv313/lib/python3.13/site-packages/ipykernel_launcher.py", line 18, in <module>
+    app.launch_new_instance()
+    ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/workspace/scratch/1605b2925963/.venv313/lib/python3.13/site-packages/traitlets/config/application.py", line 1079, in launch_instance
+    app.initialize(argv)
+    ~~~~~~~~~~~~~~^^^^^^
+  File "/workspace/scratch/1605b2925963/.venv313/lib/python3.13/site-packages/traitlets/config/application.py", line 117, in inner
+    return method(app, *args, **kwargs)
+  File "/workspace/scratch/1605b2925963/.venv313/lib/python3.13/site-packages/ipykernel/kernelapp.py", line 721, in initialize
+    self.init_sockets()
+    ~~~~~~~~~~~~~~~~~^^
+  File "/workspace/scratch/1605b2925963/.venv313/lib/python3.13/site-packages/ipykernel/kernelapp.py", line 373, in init_sockets
+    self.shell_port = self._bind_socket(self.shell_socket, self.shell_port)
+                      ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/1605b2925963/.venv313/lib/python3.13/site-packages/ipykernel/kernelapp.py", line 280, in _bind_socket
+    return self._try_bind_socket(s, port)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/workspace/scratch/1605b2925963/.venv313/lib/python3.13/site-packages/ipykernel/kernelapp.py", line 266, in _try_bind_socket
+    s.bind("ipc://%s" % path)
+    ~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/1605b2925963/.venv313/lib/python3.13/site-packages/zmq/sugar/socket.py", line 322, in bind
+    super().bind(addr)
+    ~~~~~~~~~~~~^^^^^^
+  File "zmq/backend/cython/_zmq.py", line 1009, in zmq.backend.cython._zmq.Socket.bind
+    _check_rc(rc)
+
+  File "zmq/backend/cython/_zmq.py", line 190, in zmq.backend.cython._zmq._check_rc
+    raise ZMQError(errno)
+
+zmq.error.ZMQError: Operation not permitted (addr='ipc:///tmp/audit4_kernel_7djr6yeb/channel-1')

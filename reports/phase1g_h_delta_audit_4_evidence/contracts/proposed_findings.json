@@ -1,0 +1,23 @@
+[
+ {
+  "id": "GH-D4F1",
+  "title": "Nested strict-JSON guards for seed-share and interval exports lack behavioral tests",
+  "area": "TESTS",
+  "severity": "LOW",
+  "relates_to": "GH-D3F2",
+  "resolution_class": "CORRECTION",
+  "statement": "The current strict-JSON implementation correctly rejects malformed nested exports, but removing the EvaluatedVoidShare or AdmissibleGlobalLinearInterval export check survives all 53 phase tests and all 36 evidence gates. These are behaviorally distinct survivors, rather than redundant guards: exact Fraction substitutions in the seed quadrature and the interval's resolved premise radius remain numerically bound yet are not JSON serializable.",
+  "evidence": [
+   "own_independent_results.json: X02 and X04 survive phase tests and H evidence",
+   "json_seed_witness_results.json: baseline rejects equal Fraction seed_quadrature.truncation_tolerance; X02 accepts a non-strict export",
+   "json_interval_witness_results.json: baseline rejects equal Fraction premise_radius.radius_Mpc; X04 accepts a non-strict export"
+  ],
+  "consequence": "A future refactoring could omit either export guard without any committed phase test or numerical gate detecting loss of the public strict-JSON contract. No current implementation counterexample or changed scientific number was found.",
+  "locations": [
+   "src/timescape_fsigma8/global_variance.py: EvaluatedVoidShare.__post_init__/to_json_dict",
+   "src/timescape_fsigma8/global_variance.py: AdmissibleGlobalLinearInterval.__post_init__/to_json_dict",
+   "tests/test_phase1g_h_global_variance.py: test_gh_d3f2_nested_inputs_must_export_as_strict_json"
+  ],
+  "suggested_resolution": "Add constructor/replace tests that require the dedicated strict-JSON refusal for an equal unsupported scalar in an evaluated Gaussian-threshold seed quadrature and in an interval's resolved premise radius. The correction should kill X02 and X04 without changing the runtime or the scientific formulas."
+ }
+]

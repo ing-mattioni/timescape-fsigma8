@@ -1,0 +1,15 @@
+[
+ {
+  "variant": "baseline",
+  "accepted": false,
+  "exception": "GlobalVarianceContractError",
+  "message": "interval record: the export is not strict JSON (Object of type Fraction is not JSON serializable); pass native float and int scalars, also inside nested input records"
+ },
+ {
+  "variant": "X04_interval_json_check_removed",
+  "accepted": true,
+  "stored_type": "Fraction",
+  "strict_json": false,
+  "message": "Object of type Fraction is not JSON serializable"
+ }
+]

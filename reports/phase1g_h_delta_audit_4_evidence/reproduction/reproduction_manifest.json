@@ -1,0 +1,514 @@
+{
+  "audited_head": "027b7a413fcee0786b861d5903272e4653d227ed",
+  "baseline_head": "18bf2fbef880fdfb3c292956aa1f000720930abf",
+  "environments": {
+    "311": {
+      "executable": "/workspace/scratch/1605b2925963/.venv311/bin/python",
+      "full_python": "3.11.17 (main, Oct  3 2026, 01:05:36) [Clang 22.1.3 ]",
+      "matplotlib": "3.11.2",
+      "module_path": "/workspace/scratch/1605b2925963/repo/src/timescape_fsigma8/global_variance.py",
+      "numpy": "2.4.6",
+      "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+      "pluggy": "1.6.0",
+      "pytest": "9.1.1",
+      "python": "3.11.17",
+      "scipy": "1.17.1"
+    },
+    "313": {
+      "executable": "/workspace/scratch/1605b2925963/.venv313/bin/python",
+      "full_python": "3.13.16 (main, Oct  3 2026, 01:06:22) [Clang 22.1.3 ]",
+      "matplotlib": "3.11.2",
+      "module_path": "/workspace/scratch/1605b2925963/repo/src/timescape_fsigma8/global_variance.py",
+      "numpy": "2.5.3",
+      "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+      "pluggy": "1.6.0",
+      "pytest": "9.1.1",
+      "python": "3.13.16",
+      "scipy": "1.18.1"
+    }
+  },
+  "executions": {
+    "evidence_baseline_py313_execution": {
+      "command": [
+        "/workspace/scratch/1605b2925963/.venv313/bin/python",
+        "-B",
+        "-W",
+        "error",
+        "scripts/phase1g_h_global_variance_closure_numerics.py"
+      ],
+      "cwd": "/workspace/scratch/1605b2925963/baseline",
+      "elapsed_seconds": 172.442,
+      "environment": {
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONPATH": "/workspace/scratch/1605b2925963/baseline/src"
+      },
+      "name": "evidence_baseline_py313",
+      "returncode": 0
+    },
+    "evidence_main_py313_execution": {
+      "command": [
+        "/workspace/scratch/1605b2925963/.venv313/bin/python",
+        "-B",
+        "-W",
+        "error",
+        "scripts/phase1g_h_global_variance_closure_numerics.py"
+      ],
+      "cwd": "/workspace/scratch/1605b2925963/repo",
+      "elapsed_seconds": 174.299,
+      "environment": {
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONPATH": "/workspace/scratch/1605b2925963/repo/src"
+      },
+      "name": "evidence_main_py313",
+      "returncode": 0
+    },
+    "evidence_secondary_py311_execution": {
+      "command": [
+        "/workspace/scratch/1605b2925963/.venv311/bin/python",
+        "-B",
+        "-W",
+        "error",
+        "scripts/phase1g_h_global_variance_closure_numerics.py",
+        "--no-figures"
+      ],
+      "cwd": "/workspace/scratch/1605b2925963/repo",
+      "elapsed_seconds": 127.932,
+      "environment": {
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONPATH": "/workspace/scratch/1605b2925963/repo/src"
+      },
+      "name": "evidence_secondary_py311",
+      "returncode": 0
+    },
+    "full_py311_execution": {
+      "command": [
+        "/workspace/scratch/1605b2925963/.venv311/bin/python",
+        "-B",
+        "-W",
+        "error",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "-rs"
+      ],
+      "cwd": "/workspace/scratch/1605b2925963/repo",
+      "elapsed_seconds": 475.995,
+      "environment": {
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONPATH": "/workspace/scratch/1605b2925963/repo/src"
+      },
+      "name": "full_py311",
+      "returncode": 0
+    },
+    "full_py313_execution": {
+      "command": [
+        "/workspace/scratch/1605b2925963/.venv313/bin/python",
+        "-B",
+        "-W",
+        "error",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "-rs"
+      ],
+      "cwd": "/workspace/scratch/1605b2925963/repo",
+      "elapsed_seconds": 425.105,
+      "environment": {
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONPATH": "/workspace/scratch/1605b2925963/repo/src"
+      },
+      "name": "full_py313",
+      "returncode": 0
+    },
+    "phase1g_b_baseline_execution": {
+      "command": [
+        "/workspace/scratch/1605b2925963/.venv313/bin/python",
+        "-B",
+        "-W",
+        "error",
+        "scripts/validate_phase1g_b_lagrangian_sigma.py"
+      ],
+      "cwd": "/workspace/scratch/1605b2925963/baseline",
+      "elapsed_seconds": 17.996,
+      "environment": {
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONPATH": "/workspace/scratch/1605b2925963/baseline/src"
+      },
+      "name": "phase1g_b_baseline",
+      "returncode": 0
+    },
+    "phase1g_b_main_execution": {
+      "command": [
+        "/workspace/scratch/1605b2925963/.venv313/bin/python",
+        "-B",
+        "-W",
+        "error",
+        "scripts/validate_phase1g_b_lagrangian_sigma.py"
+      ],
+      "cwd": "/workspace/scratch/1605b2925963/repo",
+      "elapsed_seconds": 33.636,
+      "environment": {
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONPATH": "/workspace/scratch/1605b2925963/repo/src"
+      },
+      "name": "phase1g_b_main",
+      "returncode": 0
+    },
+    "regen_execute_upstream_notebook_execution": {
+      "command": [
+        "/workspace/scratch/1605b2925963/.venv313/bin/python",
+        "-B",
+        "scripts/execute_upstream_notebook.py"
+      ],
+      "cwd": "/workspace/scratch/1605b2925963/repo",
+      "elapsed_seconds": 4.724,
+      "environment": {
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONPATH": "/workspace/scratch/1605b2925963/repo/src"
+      },
+      "name": "regen_execute_upstream_notebook",
+      "returncode": 1
+    },
+    "regen_local_execute_upstream_notebook_execution": {
+      "command": [
+        "/workspace/scratch/1605b2925963/.venv313/bin/python",
+        "-B",
+        "/workspace/scratch/1605b2925963/audit_work/reproduction/execute_notebook_local.py",
+        "execute_upstream_notebook"
+      ],
+      "cwd": "/workspace/scratch/1605b2925963/repo",
+      "elapsed_seconds": 30.363,
+      "environment": {
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONPATH": "/workspace/scratch/1605b2925963/repo/src"
+      },
+      "name": "regen_local_execute_upstream_notebook",
+      "returncode": 0
+    },
+    "regen_local_extract_upstream_barotropic_oracle_execution": {
+      "command": [
+        "/workspace/scratch/1605b2925963/.venv313/bin/python",
+        "-B",
+        "/workspace/scratch/1605b2925963/audit_work/reproduction/execute_notebook_local.py",
+        "extract_upstream_barotropic_oracle"
+      ],
+      "cwd": "/workspace/scratch/1605b2925963/repo",
+      "elapsed_seconds": 4.359,
+      "environment": {
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONPATH": "/workspace/scratch/1605b2925963/repo/src"
+      },
+      "name": "regen_local_extract_upstream_barotropic_oracle",
+      "returncode": 0
+    },
+    "regen_local_extract_upstream_oracle_execution": {
+      "command": [
+        "/workspace/scratch/1605b2925963/.venv313/bin/python",
+        "-B",
+        "/workspace/scratch/1605b2925963/audit_work/reproduction/execute_notebook_local.py",
+        "extract_upstream_oracle"
+      ],
+      "cwd": "/workspace/scratch/1605b2925963/repo",
+      "elapsed_seconds": 3.412,
+      "environment": {
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONPATH": "/workspace/scratch/1605b2925963/repo/src"
+      },
+      "name": "regen_local_extract_upstream_oracle",
+      "returncode": 0
+    },
+    "regen_local_extract_upstream_perturbation_oracle_execution": {
+      "command": [
+        "/workspace/scratch/1605b2925963/.venv313/bin/python",
+        "-B",
+        "/workspace/scratch/1605b2925963/audit_work/reproduction/execute_notebook_local.py",
+        "extract_upstream_perturbation_oracle"
+      ],
+      "cwd": "/workspace/scratch/1605b2925963/repo",
+      "elapsed_seconds": 3.022,
+      "environment": {
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONPATH": "/workspace/scratch/1605b2925963/repo/src"
+      },
+      "name": "regen_local_extract_upstream_perturbation_oracle",
+      "returncode": 0
+    },
+    "regen_phase1g_owner_decisions_numerics_execution": {
+      "command": [
+        "/workspace/scratch/1605b2925963/.venv313/bin/python",
+        "-B",
+        "-W",
+        "error",
+        "scripts/phase1g_owner_decisions_numerics.py"
+      ],
+      "cwd": "/workspace/scratch/1605b2925963/repo",
+      "elapsed_seconds": 924.425,
+      "environment": {
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONPATH": "/workspace/scratch/1605b2925963/repo/src"
+      },
+      "name": "regen_phase1g_owner_decisions_numerics",
+      "returncode": 0
+    },
+    "regen_validate_anchored_density_growth_execution": {
+      "command": [
+        "/workspace/scratch/1605b2925963/.venv313/bin/python",
+        "-B",
+        "-W",
+        "error",
+        "scripts/validate_anchored_density_growth.py"
+      ],
+      "cwd": "/workspace/scratch/1605b2925963/baseline",
+      "elapsed_seconds": 920.61,
+      "environment": {
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONPATH": "/workspace/scratch/1605b2925963/baseline/src"
+      },
+      "name": "regen_validate_anchored_density_growth",
+      "returncode": 0
+    },
+    "regen_validate_barotropic_perturbations_execution": {
+      "command": [
+        "/workspace/scratch/1605b2925963/.venv313/bin/python",
+        "-B",
+        "-W",
+        "error",
+        "scripts/validate_barotropic_perturbations.py"
+      ],
+      "cwd": "/workspace/scratch/1605b2925963/repo",
+      "elapsed_seconds": 41.297,
+      "environment": {
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONPATH": "/workspace/scratch/1605b2925963/repo/src"
+      },
+      "name": "regen_validate_barotropic_perturbations",
+      "returncode": 0
+    },
+    "regen_validate_growth_pipeline_execution": {
+      "command": [
+        "/workspace/scratch/1605b2925963/.venv313/bin/python",
+        "-B",
+        "-W",
+        "error",
+        "scripts/validate_growth_pipeline.py"
+      ],
+      "cwd": "/workspace/scratch/1605b2925963/repo",
+      "elapsed_seconds": 106.659,
+      "environment": {
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONPATH": "/workspace/scratch/1605b2925963/repo/src"
+      },
+      "name": "regen_validate_growth_pipeline",
+      "returncode": 0
+    },
+    "runner_baseline_gm_bare_pbs_f_median_seed_execution": {
+      "command": [
+        "/workspace/scratch/1605b2925963/.venv313/bin/python",
+        "-B",
+        "-W",
+        "error",
+        "scripts/phase1g_h_global_variance_case.py",
+        "--config",
+        "/workspace/scratch/1605b2925963/baseline/scripts/phase1g_h_configs/gm_bare_pbs_f_median_seed.json",
+        "--output",
+        "/workspace/scratch/1605b2925963/audit_work/reproduction/runner_baseline_gm_bare_pbs_f_median_seed.json"
+      ],
+      "cwd": "/workspace/scratch/1605b2925963/baseline",
+      "elapsed_seconds": 0.878,
+      "environment": {
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONPATH": "/workspace/scratch/1605b2925963/baseline/src"
+      },
+      "name": "runner_baseline_gm_bare_pbs_f_median_seed",
+      "returncode": 0
+    },
+    "runner_baseline_gm_bare_pbs_w09_seed_execution": {
+      "command": [
+        "/workspace/scratch/1605b2925963/.venv313/bin/python",
+        "-B",
+        "-W",
+        "error",
+        "scripts/phase1g_h_global_variance_case.py",
+        "--config",
+        "/workspace/scratch/1605b2925963/baseline/scripts/phase1g_h_configs/gm_bare_pbs_w09_seed.json",
+        "--output",
+        "/workspace/scratch/1605b2925963/audit_work/reproduction/runner_baseline_gm_bare_pbs_w09_seed.json"
+      ],
+      "cwd": "/workspace/scratch/1605b2925963/baseline",
+      "elapsed_seconds": 0.83,
+      "environment": {
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONPATH": "/workspace/scratch/1605b2925963/baseline/src"
+      },
+      "name": "runner_baseline_gm_bare_pbs_w09_seed",
+      "returncode": 0
+    },
+    "runner_baseline_nw15_equal_mass_constant_share_execution": {
+      "command": [
+        "/workspace/scratch/1605b2925963/.venv313/bin/python",
+        "-B",
+        "-W",
+        "error",
+        "scripts/phase1g_h_global_variance_case.py",
+        "--config",
+        "/workspace/scratch/1605b2925963/baseline/scripts/phase1g_h_configs/nw15_equal_mass_constant_share.json",
+        "--output",
+        "/workspace/scratch/1605b2925963/audit_work/reproduction/runner_baseline_nw15_equal_mass_constant_share.json"
+      ],
+      "cwd": "/workspace/scratch/1605b2925963/baseline",
+      "elapsed_seconds": 0.63,
+      "environment": {
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONPATH": "/workspace/scratch/1605b2925963/baseline/src"
+      },
+      "name": "runner_baseline_nw15_equal_mass_constant_share",
+      "returncode": 0
+    },
+    "runner_main_gm_bare_pbs_f_median_seed_execution": {
+      "command": [
+        "/workspace/scratch/1605b2925963/.venv313/bin/python",
+        "-B",
+        "-W",
+        "error",
+        "scripts/phase1g_h_global_variance_case.py",
+        "--config",
+        "/workspace/scratch/1605b2925963/repo/scripts/phase1g_h_configs/gm_bare_pbs_f_median_seed.json",
+        "--output",
+        "/workspace/scratch/1605b2925963/audit_work/reproduction/runner_main_gm_bare_pbs_f_median_seed.json"
+      ],
+      "cwd": "/workspace/scratch/1605b2925963/repo",
+      "elapsed_seconds": 1.435,
+      "environment": {
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONPATH": "/workspace/scratch/1605b2925963/repo/src"
+      },
+      "name": "runner_main_gm_bare_pbs_f_median_seed",
+      "returncode": 0
+    },
+    "runner_main_gm_bare_pbs_w09_seed_execution": {
+      "command": [
+        "/workspace/scratch/1605b2925963/.venv313/bin/python",
+        "-B",
+        "-W",
+        "error",
+        "scripts/phase1g_h_global_variance_case.py",
+        "--config",
+        "/workspace/scratch/1605b2925963/repo/scripts/phase1g_h_configs/gm_bare_pbs_w09_seed.json",
+        "--output",
+        "/workspace/scratch/1605b2925963/audit_work/reproduction/runner_main_gm_bare_pbs_w09_seed.json"
+      ],
+      "cwd": "/workspace/scratch/1605b2925963/repo",
+      "elapsed_seconds": 1.527,
+      "environment": {
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONPATH": "/workspace/scratch/1605b2925963/repo/src"
+      },
+      "name": "runner_main_gm_bare_pbs_w09_seed",
+      "returncode": 0
+    },
+    "runner_main_nw15_equal_mass_constant_share_execution": {
+      "command": [
+        "/workspace/scratch/1605b2925963/.venv313/bin/python",
+        "-B",
+        "-W",
+        "error",
+        "scripts/phase1g_h_global_variance_case.py",
+        "--config",
+        "/workspace/scratch/1605b2925963/repo/scripts/phase1g_h_configs/nw15_equal_mass_constant_share.json",
+        "--output",
+        "/workspace/scratch/1605b2925963/audit_work/reproduction/runner_main_nw15_equal_mass_constant_share.json"
+      ],
+      "cwd": "/workspace/scratch/1605b2925963/repo",
+      "elapsed_seconds": 1.174,
+      "environment": {
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONPATH": "/workspace/scratch/1605b2925963/repo/src"
+      },
+      "name": "runner_main_nw15_equal_mass_constant_share",
+      "returncode": 0
+    },
+    "scalar_after_execution": {
+      "command": [
+        "/workspace/scratch/1605b2925963/.venv313/bin/python",
+        "-B",
+        "-W",
+        "error",
+        "/workspace/scratch/1605b2925963/repo/reports/phase1g_h_delta_audit_3_evidence/implementation_scalar_probes.py",
+        "/workspace/scratch/1605b2925963/repo",
+        "/workspace/scratch/1605b2925963/audit_work/reproduction/scalar_after.json"
+      ],
+      "cwd": "/workspace/scratch/1605b2925963/repo",
+      "elapsed_seconds": 29.223,
+      "environment": {
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONPATH": "/workspace/scratch/1605b2925963/repo/src"
+      },
+      "name": "scalar_after",
+      "returncode": 0
+    },
+    "scalar_before_execution": {
+      "command": [
+        "/workspace/scratch/1605b2925963/.venv313/bin/python",
+        "-B",
+        "-W",
+        "error",
+        "/workspace/scratch/1605b2925963/repo/reports/phase1g_h_delta_audit_3_evidence/implementation_scalar_probes.py",
+        "/workspace/scratch/1605b2925963/oldscalar",
+        "/workspace/scratch/1605b2925963/audit_work/reproduction/scalar_before.json"
+      ],
+      "cwd": "/workspace/scratch/1605b2925963/oldscalar",
+      "elapsed_seconds": 27.065,
+      "environment": {
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONPATH": "/workspace/scratch/1605b2925963/oldscalar/src"
+      },
+      "name": "scalar_before",
+      "returncode": 0
+    }
+  },
+  "no_source_edits": true,
+  "notebook_execution": {
+    "code_cells": 20,
+    "deviation": "Published nbclient/Jupyter-kernel execution could not start: sandbox denied TCP and IPC ZMQ socket bind. This adapter does not reproduce Jupyter transport or rich display outputs; numeric cells and declared savefig outputs regenerated.",
+    "figures": [
+      "All_Perturbations_Timescape.pdf",
+      "Bar_Dusts_Timescape.pdf",
+      "Bar_Eff_Timescape.pdf",
+      "TImescape_energy_balance.pdf",
+      "Timescape_wcs.pdf"
+    ],
+    "method": "Fresh Python process with external no-socket adapter; exact notebook cells compiled verbatim, sequential fresh namespace; original notebook and project scripts unchanged.",
+    "success": true,
+    "warnings": [
+      "cell 17: <upstream-cell-17>:15: UserWarning: Creating legend with loc=\"best\" can be slow with large amounts of data."
+    ]
+  },
+  "regenerated_artifact_hashes": {
+    "artifacts/independent/phase1c_b2_convergence.json": "2fa97a65467c05b30fdd8fff25f4611cf94bf757e36e8fa6e37b14a7f8ff1a5f",
+    "artifacts/independent/phase1c_b2_d2_d3_factorial.json": "65ff4e59fad1d35651f6c7005509a67f93aceee8e6b2e7ae199b3eb53320d26b",
+    "artifacts/independent/phase1c_b2_figure_endpoints.json": "c81a51c7e350c19b3e0e2ba50a79ebf7219b51ffe75e682de4aaf30351d91d1d",
+    "artifacts/independent/phase1c_b2_oracle_comparison.json": "0426d5e89874d453897d0ab24f1ba350bdc6b47808e04842e7584ea7af58bee1",
+    "artifacts/independent/phase1c_b2_scenario_effects.json": "e6ec00fe5ac48a657f39d4c813cb7c96a5faf105bb9f220f0afda7df4a67a380",
+    "artifacts/independent/phase1d_b_growth_validation.json": "9c2c4e4bcef04a8f231094aed69e1c8ae8c33e7b8a47ff71c33b0ffd1d3fe08e",
+    "artifacts/independent/phase1d_d_anchored_density_growth_validation.json": "20c294d9f3724f4cae9febfa356ceb41d4ba85740532b704f770868685a81235",
+    "artifacts/independent/phase1g_b_lagrangian_sigma.json": "a77118bb954aba118a1445cda899a63cf9786478e3181f8e3995d63955006d5c",
+    "artifacts/independent/phase1g_h_global_variance_closure.json": "ee16e8b280268f6b668d7abc830bf7d14447db25c9e9c728b843862b06da61e2",
+    "artifacts/independent/phase1g_owner_decisions.json": "54231e6b6491e5b947357ae6bc5edd870c40da11495cb6f1c1890b449a443236",
+    "artifacts/upstream/execution_log.json": "b030b29c70cca952e52b52a9d7f026bbb940d3a388d85fbd2d705e6240160dee",
+    "artifacts/upstream/oracle_background.json": "b318e26360c385817d3fb74a85d9bef9c4e8867c8e6956c739f1726c4383452a",
+    "artifacts/upstream/oracle_barotropic_perturbations.json": "d7851f42f4369365c528dd94f23fe03c38482d8d91957d634f9cc55df24a7858",
+    "artifacts/upstream/oracle_clean_perturbations.json": "4e550c74cd4a5630da1cc4e939133e508029494dda5b8342437023cb5acbd2d8"
+  },
+  "repository_head_at_manifest": "027b7a413fcee0786b861d5903272e4653d227ed",
+  "tree_at_manifest": "4431f10aa7269e67466dab4859ab20f4beac4059",
+  "upstream": {
+    "head": "590c6fd5332acb15f5683ebf392a0d7ce54983c5",
+    "notebook_sha256": "628c441288d67854e0380518841dede3680bddab610e9ef5cea04937455cea2a",
+    "status": ""
+  },
+  "windows_owner_gate": "NOT_RUN: Linux host, CPython3.14.3/3.11.9 Windows unavailable"
+}

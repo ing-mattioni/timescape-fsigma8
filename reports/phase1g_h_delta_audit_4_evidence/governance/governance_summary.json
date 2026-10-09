@@ -1,0 +1,1106 @@
+{
+  "verdict": {
+    "PROVENANCE": "ACCEPT",
+    "GOVERNANCE": "ACCEPT",
+    "DOCUMENTATION": "ACCEPT_WITH_CORRECTIONS",
+    "TASK_COMPLIANCE": "ACCEPT"
+  },
+  "sources": [
+    "provenance_checks.json",
+    "remote_snapshot.json",
+    "lexical_checks.json",
+    "governance_review.md"
+  ],
+  "claims": [
+    {
+      "id": "GOV01",
+      "claim": "Exact four-commit graph/trees",
+      "status": "VERIFIED",
+      "auditor_value": {
+        "18bf2fbef880fdfb3c292956aa1f000720930abf": {
+          "tree": "b191b76c9976d21aad82bf9ff6d133af5a822bf2",
+          "parents": [
+            "4d71bd4fe918ef8a0b71c178a7180c4d291294b0"
+          ]
+        },
+        "c6028e9046934ef6de234f0b58fbe18e6f3bead1": {
+          "tree": "cac3e608b20d69fe5eb6f505566638ea082fa0cd",
+          "parents": [
+            "18bf2fbef880fdfb3c292956aa1f000720930abf"
+          ]
+        },
+        "6926a636c100d232247e39d71d5b2d6e71a6f917": {
+          "tree": "0ebd45cac9aa74bd44dd0f3ba8307a3c8ad08ead",
+          "parents": [
+            "c6028e9046934ef6de234f0b58fbe18e6f3bead1"
+          ]
+        },
+        "36d127f8edcb306aa503cb4d8b7b10417dc33a51": {
+          "tree": "c66a4ad5374df9db1cf5acad869cf03b268d5500",
+          "parents": [
+            "6926a636c100d232247e39d71d5b2d6e71a6f917"
+          ]
+        },
+        "027b7a413fcee0786b861d5903272e4653d227ed": {
+          "tree": "4431f10aa7269e67466dab4859ab20f4beac4059",
+          "parents": [
+            "36d127f8edcb306aa503cb4d8b7b10417dc33a51"
+          ]
+        },
+        "ed0ec0c9c8783519a53759a265b6ce37e6c0e607": {
+          "tree": "afba6630d02cb04d941ddb8b42092d7884e79786",
+          "parents": [
+            "4bf2718e7557ace3fdc0abffaa73587f1162f776"
+          ]
+        },
+        "4d71bd4fe918ef8a0b71c178a7180c4d291294b0": {
+          "tree": "6d5e848faa7b72d829e44a9a2d79e70c3a34acb6",
+          "parents": [
+            "ed0ec0c9c8783519a53759a265b6ce37e6c0e607"
+          ]
+        }
+      },
+      "method": "git show at immutable IDs",
+      "tolerance": "exact"
+    },
+    {
+      "id": "GOV02",
+      "claim": "54 delta paths: 13 M / 41 A",
+      "status": "VERIFIED",
+      "auditor_value": {
+        "M": 13,
+        "A": 41
+      },
+      "method": "git diff --name-status exact base/head",
+      "tolerance": "exact"
+    },
+    {
+      "id": "GOV03",
+      "claim": "Preservation older_audits",
+      "status": "VERIFIED",
+      "auditor_value": {
+        "count": 241,
+        "changed": []
+      },
+      "method": "git show blob equality",
+      "tolerance": "exact"
+    },
+    {
+      "id": "GOV04",
+      "claim": "Preservation other_package_vs_frozen",
+      "status": "VERIFIED",
+      "auditor_value": {
+        "count": 56,
+        "changed": []
+      },
+      "method": "git show blob equality",
+      "tolerance": "exact"
+    },
+    {
+      "id": "GOV05",
+      "claim": "Preservation frozen_1g_reports",
+      "status": "VERIFIED",
+      "auditor_value": {
+        "count": 111,
+        "changed": []
+      },
+      "method": "git show blob equality",
+      "tolerance": "exact"
+    },
+    {
+      "id": "GOV06",
+      "claim": "Preservation runner_configs",
+      "status": "VERIFIED",
+      "auditor_value": {
+        "count": 4,
+        "changed": []
+      },
+      "method": "git show blob equality",
+      "tolerance": "exact"
+    },
+    {
+      "id": "GOV07",
+      "claim": "Preservation lagrangian_sigma_base_vs_frozen",
+      "status": "VERIFIED",
+      "auditor_value": true,
+      "method": "git show blob equality",
+      "tolerance": "exact"
+    },
+    {
+      "id": "GOV08",
+      "claim": "Preservation status_module",
+      "status": "VERIFIED",
+      "auditor_value": true,
+      "method": "git show blob equality",
+      "tolerance": "exact"
+    },
+    {
+      "id": "GOV09",
+      "claim": "38 annotated tags unchanged; 76 logical ref+peeled entries",
+      "status": "VERIFIED",
+      "auditor_value": {
+        "tag_count": 38,
+        "logical_count": 76,
+        "tag_objects_match_prior": true
+      },
+      "method": "Fresh GET tag refs vs third-audit snapshot; native local git cat-file peeling",
+      "tolerance": "exact"
+    },
+    {
+      "id": "GOV10",
+      "claim": "1G-B v1 remains fb5d952",
+      "status": "VERIFIED",
+      "auditor_value": {
+        "object_sha": "a279464a52eb767e6840be8774375eac7885d5c3",
+        "peeled_sha": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f",
+        "type": "commit"
+      },
+      "method": "Fresh annotated-tag SHA plus local object peeling",
+      "tolerance": "exact"
+    },
+    {
+      "id": "GOV11",
+      "claim": "Expected current remote heads",
+      "status": "VERIFIED",
+      "auditor_value": {
+        "refs/heads/ccr-555e67be-u11yht": "027b7a413fcee0786b861d5903272e4653d227ed",
+        "refs/heads/ccr-ac582de6-vho99i": "e5170285e1d4b4aa72e907a3a79110d05584c0d9",
+        "refs/heads/claude/zealous-rubin-1m3vf4": "63ca316b87399fc323713338a07519f8bce52113",
+        "refs/heads/experiment/ltb-cmc-background": "28a87a18aed9f85a0e65624fea76b26dfd459a0f",
+        "refs/heads/main": "8d3cdd0533035858c42269cb1dff1a20dcafc7da",
+        "refs/heads/phase-1c-perturbations": "878a97e83357025c78e2fee7bf458c3b22a207d3",
+        "refs/heads/phase-1d-b-growth-pipeline": "93d956d0020f0edec34a44cd9d19f30c085aecc7",
+        "refs/heads/phase-1d-c-observable-closure-audit": "81148eb6be8add842b538e2a21c5cf9782f9e49e",
+        "refs/heads/phase-1d-d-anchored-density-growth": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+        "refs/heads/phase-1d-d-t-d3-frame-mapping": "f960a9054ae9db3a7c378557ac3a2938c5ff7ef0",
+        "refs/heads/phase-1e-a-dressed-observable-bridge-audit": "f4044cbe10a7fbd59d1b14131e2d2e31100984ef",
+        "refs/heads/phase-1e-b-dressed-lightcone-velocity-derivation": "8634f14a35c22983413672075fa7f37f03fd663d",
+        "refs/heads/phase-1e-c-perturbed-dressed-geometry-transfer-closure": "fcbf9c29a28c586044150e6910e1637bc3f6975b",
+        "refs/heads/phase-1e-d-regional-matching-dynamics-design": "2fd3ed2006821bc162fb740bd773f2d0b6e5e0b4",
+        "refs/heads/phase-1e-e-transfer-realization-selection": "1f2800c9685b7ab4c2bbbef3e93d1767073cc783",
+        "refs/heads/phase-1e-f-h1-transfer-realization": "1e0a1772aa01ef312a9c3cae6d3e65c8b4f9cbdd",
+        "refs/heads/phase-1e-g-continuum-h1-realization": "d262099ce3fe977af628ff233abed411e70a3c85",
+        "refs/heads/phase-1f-a-h1-broken-density-spectral-boost": "87af7976b82b0b38e2c3e77dfc9458e664034c5d",
+        "refs/heads/phase-1f-c-r-f4-audit-recovery": "7d5d8ce376554b42bc8374f21ec1223eda3b982f",
+        "refs/heads/phase-1f-d-necessary-bound": "3cd1685855bd78f2833ee91340794bee44b5e48d",
+        "refs/heads/phase-1g-f-successor-g-evolution": "3d3d46ed68fde7e6d4100fe518a76731bd2cf9e9",
+        "refs/heads/phase-1g-h-delta-audit": "5c325e1fd05b343f6d5e93f931038794de4373a2",
+        "refs/heads/phase-1g-h-delta-audit-3": "18bf2fbef880fdfb3c292956aa1f000720930abf",
+        "refs/heads/phase-1g-h-independent-audit": "816dd004763f8de1a8bb09cba9e427a1bd2bb3d1",
+        "refs/heads/phase-1g-owner-decisions": "3c70185cb3eb3aa3734995a2fde43bc25462086e"
+      },
+      "method": "Read-only GitHub matching refs snapshot",
+      "tolerance": "exact"
+    },
+    {
+      "id": "GOV12",
+      "claim": "No 1G-H PR, no release, no forbidden D-v2 branch/tag",
+      "status": "VERIFIED",
+      "auditor_value": {
+        "prs": [
+          {
+            "number": 4,
+            "state": "closed",
+            "head": "phase-1g-f-successor-g-evolution",
+            "merged_at": "2026-10-06T13:12:04Z"
+          },
+          {
+            "number": 3,
+            "state": "closed",
+            "head": "phase-1g-owner-decisions",
+            "merged_at": "2026-09-30T15:55:07Z"
+          },
+          {
+            "number": 2,
+            "state": "closed",
+            "head": "claude/zealous-rubin-1m3vf4",
+            "merged_at": "2026-09-30T06:42:06Z"
+          },
+          {
+            "number": 1,
+            "state": "closed",
+            "head": "claude/loving-dijkstra-esoj6f",
+            "merged_at": "2026-09-23T12:32:02Z"
+          }
+        ],
+        "release_count": 0,
+        "forbidden_ref": false
+      },
+      "method": "Fresh GET full collections (4 PRs/0 releases/25 branches/38 tags; no pagination needed)",
+      "tolerance": "exact"
+    },
+    {
+      "id": "GOV13",
+      "claim": "P11/P13/P14/P15 graph compatibility",
+      "status": "VERIFIED",
+      "auditor_value": {
+        "P11": [
+          "ed0ec0c9c8783519a53759a265b6ce37e6c0e607"
+        ],
+        "P13": [
+          "4d71bd4fe918ef8a0b71c178a7180c4d291294b0",
+          "18bf2fbef880fdfb3c292956aa1f000720930abf"
+        ],
+        "P14": [
+          "4d71bd4fe918ef8a0b71c178a7180c4d291294b0",
+          "18bf2fbef880fdfb3c292956aa1f000720930abf",
+          "c6028e9046934ef6de234f0b58fbe18e6f3bead1",
+          "6926a636c100d232247e39d71d5b2d6e71a6f917",
+          "36d127f8edcb306aa503cb4d8b7b10417dc33a51"
+        ],
+        "P15": [
+          "027b7a413fcee0786b861d5903272e4653d227ed"
+        ],
+        "P13_paths": [
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3.md"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/BLIND_SCIENCE_CHECKPOINT.md"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/README.md"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/active_summary_values.json"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/anchored_density_clean_py312.log"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/barotropic_validation_py312.log"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/blind_science_checks.py"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/blind_science_checks_results.json"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/blind_science_reconstruction.py"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/blind_science_refinement.py"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/blind_science_refinement_results.json"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/blind_science_results.json"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/environment_py311.json"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/environment_py312.json"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/evidence_py311_ed0ec0c.log"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/evidence_py312_248a06b.log"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/evidence_py312_ed0ec0c.log"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/final_validation.json"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/full_py311.log"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/full_py312_final.log"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/growth_pipeline_py312.log"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/implementation_binding_rerun_results.json"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/implementation_monte_carlo_budget.py"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/implementation_monte_carlo_budget_results.json"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/implementation_scalar_probes.py"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/implementation_scalar_probes_results.json"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/implementation_survivor_probes.py"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/implementation_survivor_probes_results.json"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/mutation_adapted_results.json"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/mutation_extra_campaign.py"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/mutation_extra_results.json"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/oracle_background_py312.log"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/oracle_barotropic_py312.log"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/oracle_clean_py312.log"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/owner_decisions_py312.log"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/post_checkpoint_science_compare.py"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/post_checkpoint_science_results.json"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/printed_tables_summary.json"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/provenance_audit.py"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/provenance_documentation_checks.json"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/provenance_proposed_resolutions.json"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/provenance_remote_snapshot.json"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/provenance_result.json"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/provenance_review.md"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/reconcile_printed_tables.py"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/reproduction_compare.py"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/reproduction_comparison_summary.log"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/reproduction_report_tables_summary.log"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/reproduction_summary.json"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/runner_comparison.json"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/science_comparison.md"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/second_delta_saved_hash_reconstruction.json"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/source_hash_checks.json"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/tolerance_audit.log"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/upstream_pin.log"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_evidence/validator_final.log"
+          ],
+          [
+            "A",
+            "reports/phase1g_h_delta_audit_3_inventory.json"
+          ]
+        ]
+      },
+      "method": "git rev-list; git diff --name-status",
+      "tolerance": "exact"
+    },
+    {
+      "id": "GOV14",
+      "claim": "P13 checkpoint tree and 57 added paths",
+      "status": "VERIFIED",
+      "auditor_value": {
+        "checkpoint_tree": "6d5e848faa7b72d829e44a9a2d79e70c3a34acb6",
+        "file_count": 57,
+        "all_added_under_audit": true
+      },
+      "method": "Git blobs and tree IDs; retained audit inventory",
+      "tolerance": "exact"
+    },
+    {
+      "id": "GOV15",
+      "claim": "Historical push actor/time, exact preceding remote state and private approval words",
+      "status": "NOT_VERIFIABLE",
+      "auditor_value": "Present user handoff: Eccolo, no repeated historical confirmation",
+      "method": "Current snapshot establishes state/graph only; private transcripts not inspected",
+      "tolerance": null
+    },
+    {
+      "id": "GOV16",
+      "claim": "Current summaries correctly name last-recorded P14",
+      "status": "VERIFIED",
+      "auditor_value": "P14 ed0ec0c..36d127f; current observed ref 027b7a4 is separately timestamped",
+      "method": "README/CLAUDE/report/inventory vs successor \u00a78.3 and dated \u00a79.2",
+      "tolerance": "exact"
+    },
+    {
+      "id": "GOV17",
+      "claim": "P15 need not induce endless successor commits",
+      "status": "VERIFIED_WITH_DEVIATION",
+      "auditor_value": "P15 exists as a current ref/ancestry fact, deliberately not yet in tree; next authorized substantive addendum sufficient",
+      "method": "Governance judgment based on explicitly dated after-P14 state and last-recorded promise",
+      "tolerance": null
+    },
+    {
+      "id": "GOV18",
+      "claim": "12 required current source hash declarations",
+      "status": "VERIFIED",
+      "auditor_value": {
+        "matched": 12,
+        "checked": 12
+      },
+      "method": "SHA256 Git blobs vs inventory",
+      "tolerance": "exact"
+    },
+    {
+      "id": "GOV19",
+      "claim": "56 third-audit report/evidence source hashes",
+      "status": "VERIFIED",
+      "auditor_value": {
+        "matched": 56,
+        "checked": 56
+      },
+      "method": "SHA256 tracked files vs preserved third-audit inventory",
+      "tolerance": "exact"
+    },
+    {
+      "id": "GOV20",
+      "claim": "57 top-level report JSONs valid unique and finite",
+      "status": "VERIFIED",
+      "auditor_value": {
+        "count": 57,
+        "invalid": []
+      },
+      "method": "json.loads duplicate-key hook and nonfinite parser rejection",
+      "tolerance": "exact"
+    },
+    {
+      "id": "GOV21",
+      "claim": "36 log/evidence files; scratch paths abbreviated",
+      "status": "VERIFIED",
+      "auditor_value": {
+        "files": 36,
+        "raw_scratch_paths": 0
+      },
+      "method": "Full read/parse/hash all 36 files; path regex plus manual repository-path distinction",
+      "tolerance": "exact"
+    },
+    {
+      "id": "GOV22",
+      "claim": "full_suite_py313.log records 1207 passed / zero skipped or failed",
+      "status": "VERIFIED",
+      "auditor_value": [
+        "1207 passed in 337.58s (0:05:37)",
+        "rc=0 seconds=338"
+      ],
+      "method": "Historical complete pytest log; independently confirms record/log consistency, not fresh execution",
+      "tolerance": "exact"
+    },
+    {
+      "id": "GOV23",
+      "claim": "full_suite_py311.log records 1207 passed / zero skipped or failed",
+      "status": "VERIFIED",
+      "auditor_value": [
+        "1207 passed in 337.34s (0:05:37)",
+        "rc=0 seconds=338"
+      ],
+      "method": "Historical complete pytest log; independently confirms record/log consistency, not fresh execution",
+      "tolerance": "exact"
+    },
+    {
+      "id": "GOV24",
+      "claim": "full_suite_final_py313.log records 1207 passed / zero skipped or failed",
+      "status": "VERIFIED",
+      "auditor_value": [
+        "1207 passed in 332.82s (0:05:32)",
+        "rc=0 seconds=334"
+      ],
+      "method": "Historical complete pytest log; independently confirms record/log consistency, not fresh execution",
+      "tolerance": "exact"
+    },
+    {
+      "id": "GOV25",
+      "claim": "full_suite_final_py311.log records 1207 passed / zero skipped or failed",
+      "status": "VERIFIED",
+      "auditor_value": [
+        "1207 passed in 331.62s (0:05:31)",
+        "rc=0 seconds=333"
+      ],
+      "method": "Historical complete pytest log; independently confirms record/log consistency, not fresh execution",
+      "tolerance": "exact"
+    },
+    {
+      "id": "GOV26",
+      "claim": "Evidence logs record 36/36 gates",
+      "status": "VERIFIED",
+      "auditor_value": {
+        "evidence_py313.log": [
+          "all 36 gates pass",
+          "rc=0 seconds=79"
+        ],
+        "evidence_py311.log": [
+          "all 36 gates pass",
+          "rc=0 seconds=69"
+        ]
+      },
+      "method": "Full historical log inspection; fresh reproduction separate",
+      "tolerance": "exact"
+    },
+    {
+      "id": "GOV27",
+      "claim": "Author validator PASS/57 and tolerance audit 750/0",
+      "status": "VERIFIED",
+      "auditor_value": {
+        "status": "PASS",
+        "json_roundtrips": 57,
+        "comparisons": 750,
+        "missing": 0
+      },
+      "method": "Parse historical validator/tolerance logs; fresh final-tree checks separate",
+      "tolerance": "exact"
+    },
+    {
+      "id": "GOV28",
+      "claim": "Source module uppercase status/constants unchanged",
+      "status": "VERIFIED",
+      "auditor_value": {
+        "src/timescape_fsigma8/global_variance.py": true,
+        "src/timescape_fsigma8/lagrangian_sigma.py": true
+      },
+      "method": "AST exact uppercase assignments at base/head",
+      "tolerance": "exact"
+    },
+    {
+      "id": "GOV29",
+      "claim": "Scientific inventory subtrees unchanged except documented CW key/wording",
+      "status": "VERIFIED",
+      "auditor_value": {
+        "unchanged": [
+          "anchoring",
+          "assumptions",
+          "authorization",
+          "base",
+          "definition",
+          "ensemble_vs_tangent_example",
+          "equations",
+          "limitations",
+          "missing_input",
+          "observational_authorizations",
+          "r2_n4_relevance",
+          "results",
+          "status_tokens",
+          "verdict"
+        ],
+        "covariance": "16 renamed scalar keys preserve values; two not_shared text leaves change"
+      },
+      "method": "Parsed base/head subtree equality and exact remap",
+      "tolerance": "exact"
+    },
+    {
+      "id": "GOV30",
+      "claim": "Requested lexical phrases have no active residual",
+      "status": "VERIFIED",
+      "auditor_value": {
+        "matching_lines": 711,
+        "categories": {
+          "LEGITIMATE_CURRENT_REFERENCE_OR_CONVENTION": 4,
+          "HISTORICAL_DATED_AUDIT_SUMMARY": 1,
+          "LEGITIMATE": 69,
+          "FROZEN_OR_DATED_HISTORICAL_RECORD": 10,
+          "HISTORICAL_OR_EXPLICIT_EVIDENCE": 556,
+          "LEGITIMATE_CURRENT_REFERENCE_OR_FORMULA": 24,
+          "HISTORICAL_LABEL_WITH_EXPLICIT_RENAME_NOTE": 3,
+          "HISTORICAL_EVENT_OR_CONVENTION": 43,
+          "EXPLICIT_FORMER_KEY_DOCSTRING": 1
+        },
+        "term_counts": {
+          "not pushed": 38,
+          "Nothing is pushed": 45,
+          "remote head": 61,
+          "P11": 439,
+          "P1\u2013P13": 0,
+          "49 phase tests": 3,
+          "49 tests": 1,
+          "conditional_density_covariance_ball": 113,
+          "both-walls conditional covariance": 6,
+          "strict JSON holds by construction": 6,
+          "store floats": 10,
+          "32 skipped": 22
+        },
+        "residuals": []
+      },
+      "method": "All tracked text paths; manual review distinguishes P11 formulas, historical audits/mutants, and active docstring rename",
+      "tolerance": "exact"
+    },
+    {
+      "id": "GOV31",
+      "claim": "git diff --check exact delta",
+      "status": "VERIFIED",
+      "auditor_value": {
+        "rc": 0
+      },
+      "method": "git diff --check",
+      "tolerance": "exact"
+    },
+    {
+      "id": "GOV32",
+      "claim": "Windows 3.14.3/3.11.9 owner gate",
+      "status": "NOT_VERIFIABLE",
+      "auditor_value": "NOT RUN here and no completed historical 1G-H Windows gate supplied",
+      "method": "Linux environment only",
+      "tolerance": null
+    },
+    {
+      "id": "TIME_full_suite_py313.log",
+      "claim": "Reported integer pytest seconds",
+      "status": "VERIFIED",
+      "auditor_value": 338,
+      "method": "Round completed pytest time, not wrapper wall seconds",
+      "tolerance": "nearest second"
+    },
+    {
+      "id": "TIME_full_suite_py311.log",
+      "claim": "Reported integer pytest seconds",
+      "status": "VERIFIED",
+      "auditor_value": 337,
+      "method": "Round completed pytest time, not wrapper wall seconds",
+      "tolerance": "nearest second"
+    },
+    {
+      "id": "TIME_full_suite_final_py313.log",
+      "claim": "Reported integer pytest seconds",
+      "status": "VERIFIED",
+      "auditor_value": 333,
+      "method": "Round completed pytest time, not wrapper wall seconds",
+      "tolerance": "nearest second"
+    },
+    {
+      "id": "TIME_full_suite_final_py311.log",
+      "claim": "Reported integer pytest seconds",
+      "status": "VERIFIED",
+      "auditor_value": 332,
+      "method": "Round completed pytest time, not wrapper wall seconds",
+      "tolerance": "nearest second"
+    }
+  ],
+  "claim_counts": {
+    "VERIFIED": 33,
+    "NOT_VERIFIABLE": 2,
+    "VERIFIED_WITH_DEVIATION": 1
+  },
+  "preservation": {
+    "older_audits": {
+      "count": 241,
+      "changed": []
+    },
+    "other_package_vs_frozen": {
+      "count": 56,
+      "changed": []
+    },
+    "frozen_1g_reports": {
+      "count": 111,
+      "changed": []
+    },
+    "runner_configs": {
+      "count": 4,
+      "changed": []
+    },
+    "lagrangian_sigma_base_vs_frozen": true,
+    "status_module": true
+  },
+  "third_delta_finding_resolution": {
+    "GH-D3F1": {
+      "outcome": "RESOLVED",
+      "reason": "Chronological P11-P14 record and explicit last-recorded convention; P15 remains a documented next-addendum item."
+    },
+    "GH-D3F2": "implementation stream",
+    "GH-D3F3": "tests stream",
+    "GH-D3F4": {
+      "governance": "ACCEPT",
+      "outcome": "implementation adjudication required",
+      "reason": "Separate owner-approved successor follows GB-OD precedent; tags/frozen records preserved; main divergence optional clarity improvement."
+    },
+    "GH-D3F5": {
+      "documentation": "corrected",
+      "outcome": "science stream verifies independent centered-moment distinction",
+      "reason": "All 16 active result keys renamed with preserved values; historical old inventory label explicitly annotated."
+    }
+  },
+  "third_delta_errata_resolution": {
+    "GH-D3E1": "APPLIED",
+    "GH-D3E2": "APPLIED",
+    "GH-D3E3": "APPLIED"
+  },
+  "original_finding_status": {
+    "GH-F1": "RESOLVED_BY_OWNER_DECISION",
+    "GH-F2": "RESOLVED_BY_OWNER_DECISION",
+    "GH-F3": "RESOLVED",
+    "GH-F4": "RESOLVED",
+    "GH-F5": "RESOLVED",
+    "GH-F6": "RESOLVED",
+    "GH-F7": "RESOLVED",
+    "GH-F8": "RESOLVED",
+    "GH-F9": "RESOLVED",
+    "GH-F10": "RESOLVED",
+    "GH-F11": "RESOLVED",
+    "GH-F12": "RESOLVED",
+    "GH-F13": "RESOLVED",
+    "GH-F14": "RESOLVED",
+    "GH-F15": "RESOLVED_OWNER_CONFIRMED"
+  },
+  "delta_finding_status": {
+    "GH-DF1": "RESOLVED",
+    "GH-DF2": "RESOLVED",
+    "GH-DF3": "RESOLVED",
+    "GH-DF4": "RESOLVED",
+    "GH-DF5": "RESOLVED",
+    "GH-DF6": "RESOLVED"
+  },
+  "second_delta_finding_status": {
+    "GH-D2F1": "RESOLVED",
+    "GH-D2F2": {
+      "outcome": "RESOLVED",
+      "reason": "Requested tests kill the previously targeted mutants; H25 is honestly labeled numerical assembly consistency. New branch-coverage limitations are GH-D3F3."
+    },
+    "GH-D2F3": {
+      "outcome": "RESOLVED",
+      "reason": "Dated erratum and inventory/log agree with independent recount, including six renames, 100 additional inside leaves and the 1e-12 relative criterion."
+    },
+    "GH-D2F4": {
+      "outcome": "PARTIALLY_RESOLVED",
+      "reason": "Named H float outputs/input conversions are correct; genuine H records retain nested non-JSON scalars. New GH-D3F2; universal strict-JSON claim is false."
+    },
+    "GH-D2F5": {
+      "outcome": "RESOLVED",
+      "reason": "Historical shared-constraints wording and hash scope clarified by additions only; original records remain available in Git."
+    },
+    "GH-D2F6": {
+      "outcome": "RESOLVED",
+      "reason": "Independent derivation confirms signed/lognormal latent-Gaussian identifiability with mask\u2013carrier covariances fixed. Independence fixes law I."
+    }
+  },
+  "findings": [
+    {
+      "id": "GH-D4F2",
+      "title": "Current validation summary still names two remediation records",
+      "area": "DOCUMENTATION",
+      "severity": "INFO",
+      "relates_to": "NEW",
+      "statement": "Current H report \u00a711 points to two remediation records although four now exist.",
+      "evidence": [
+        "All four remediation report files and report header/scope-note links",
+        "Current summary lines 1283-1284"
+      ],
+      "consequence": "The latest 1207-case validation source is underspecified in the local summary; no physical numerical, status, or authorization result changes.",
+      "locations": [
+        "reports/phase1g_h_global_variance_closure.md \u00a711:1283-1284"
+      ],
+      "resolution_class": "CORRECTION",
+      "suggested_resolution": "Point explicitly to the third-delta remediation record or say all remediation records without a stale count."
+    }
+  ],
+  "errata": [
+    {
+      "id": "GH-D4E1",
+      "quote": "see the validation record (original tree) and the two remediation records (remediated trees).",
+      "location": "reports/phase1g_h_global_variance_closure.md \u00a711:1283-1284",
+      "correct_reading": "Four remediation records now exist; point explicitly to the latest third-delta remediation record.",
+      "severity": "INFO",
+      "scope": "Pre-existing unchanged sentence missed earlier; current summary now includes four rounds.",
+      "finding": "GH-D4F2"
+    },
+    {
+      "id": "GH-D4E2",
+      "quote": "Status tokens, the five `NOT_GRANTED` authorisations, equations, tolerances, frozen records, tags, the files of the four audits, and every package module other than `global_variance.py` and, under its own successor, `lagrangian_sigma.py`.",
+      "location": "reports/phase1g_h_delta_audit_3_remediation.md \u00a70, Unchanged bullet:60-63; inventory unchanged list",
+      "correct_reading": "Runtime/evidence numerical tolerances are unchanged. Simpson TEST acceptance tolerances were deliberately tightened from 1e-2 to 2e-3/5e-3, fully disclosed in \u00a72; this broad summary should specify its narrower scope.",
+      "severity": "INFO",
+      "scope": "Nonblocking precision erratum only; no hidden model or runtime change.",
+      "finding": null
+    }
+  ],
+  "authorization_classification": {
+    "current_direct_confirmations": [],
+    "private_historical_approvals": "REPORTED_NOT_INDEPENDENTLY_AUTHENTICATED_HERE",
+    "P12": "Prior audit direct confirmation preserved; not repeated in this handoff",
+    "unauthorized_remote_action_established": false
+  },
+  "recommendations": {
+    "P15": "Record once in next already-authorized substantive-work addendum; exact range 36d127f..027b7a4, supersede dated \u00a79.2/companion, avoid self-recording chain.",
+    "1G-B_main_divergence": "Optional explicit note: constructor changes are session-branch only until separately authorized merge; tag remains immutable historical attestation.",
+    "H-OD1": "Keep named research proposal; (c) preferred convention, (a) fixed-mass comparison.",
+    "H-OD2": "Select no physical reference closure; preserve seed/premise qualifiers.",
+    "H-OD3": "No status/token/observational promotion.",
+    "H-OD4": "Keep experimental; complete Windows gate before promotion.",
+    "H-OD5": "PR/merge/freeze/tag separate owner decisions; no action here."
+  },
+  "limitations": [
+    "No Windows runtime or new Windows execution.",
+    "Current snapshot/ancestry cannot authenticate historical actor/time/private approvals.",
+    "Log consistency is not fresh numerical/test execution; final root streams supply that evidence.",
+    "No primary scientific-paper re-download in reduced governance review.",
+    "Exact float32 binding policy adequacy delegated to implementation/test streams."
+  ],
+  "log_hashes": [
+    {
+      "file": "compare_evidence.py",
+      "bytes": 1789,
+      "sha256": "70be973b4295d94eac4722afb84c515410ccb9f2c582b8d80d88cef443cf34ee"
+    },
+    {
+      "file": "cross_interpreter_313_vs_311.json",
+      "bytes": 783,
+      "sha256": "5d70d4641c4243455537cc70fb6d1094697bc7759aaff24773776e0d34bed136"
+    },
+    {
+      "file": "evidence_head.txt",
+      "bytes": 41,
+      "sha256": "53bc160629d766fd8d6412d59cdc860ba4050e3fc4a6e471a498e47aa2793ef5"
+    },
+    {
+      "file": "evidence_py311.log",
+      "bytes": 13929,
+      "sha256": "aade1e0c37573a7285ecac171ea86aeab0edff1d6889eaa9963025be35b1c1b8"
+    },
+    {
+      "file": "evidence_py313.log",
+      "bytes": 13929,
+      "sha256": "ae0b4607e52cc6f0ffcf0a8c98fc37d971a2f356a4dbc86a9dd3b94b09385ada"
+    },
+    {
+      "file": "extra_mutants.log",
+      "bytes": 139,
+      "sha256": "cde0c541f5bd128e4bbb9fa2d036634028b15a391db025f9b69ac0fdc0a96898"
+    },
+    {
+      "file": "extra_mutants_definitions.json",
+      "bytes": 526,
+      "sha256": "48df1bac0652bfab469ec5acab12ab97b8dc07dbd03c4bff4362e59726f86e20"
+    },
+    {
+      "file": "extra_mutants_results.json",
+      "bytes": 1317,
+      "sha256": "b259c1805e0caa8823046c38c03c1f79e018b4853db0d22c26c93a96fe56f0f4"
+    },
+    {
+      "file": "full_suite_final_py311.log",
+      "bytes": 1410,
+      "sha256": "508e27e8dffaffa4d899e73d72bcd9830eb23b929818811dca44e73e0cb3911a"
+    },
+    {
+      "file": "full_suite_final_py313.log",
+      "bytes": 1410,
+      "sha256": "a51a1ece529988bf4fa2be1df8d50ea550ed010b947850244265d9570b5dd581"
+    },
+    {
+      "file": "full_suite_py311.log",
+      "bytes": 1410,
+      "sha256": "eeb2317e6b4a96e085ac3b52e7dacfe4d0a4072a17f87f9f0550e0e182af3f1b"
+    },
+    {
+      "file": "full_suite_py313.log",
+      "bytes": 1410,
+      "sha256": "6e28f2fbab47d3d08f40eef2c58d8a50500ee6ec29838058a76cea9ccd0980da"
+    },
+    {
+      "file": "phase1g_b_validation_after.log",
+      "bytes": 1617,
+      "sha256": "317c7ff2a3d3739f8d349482bd4f25c14a7bf62cfd169c3cd09de336254a2016"
+    },
+    {
+      "file": "phase1g_b_validation_before.log",
+      "bytes": 1617,
+      "sha256": "317c7ff2a3d3739f8d349482bd4f25c14a7bf62cfd169c3cd09de336254a2016"
+    },
+    {
+      "file": "regen_anchored_density.log",
+      "bytes": 1320,
+      "sha256": "8af9b067c9c33e370eabd238aea21d6b94deb6449deee5464c2b004de98ef921"
+    },
+    {
+      "file": "regen_execute_upstream_notebook.log",
+      "bytes": 725,
+      "sha256": "638c4b3672e67b1df81471a21f7ca59ec36650d33eb442aae708cd575c684c1b"
+    },
+    {
+      "file": "regen_extract_upstream_barotropic_oracle.log",
+      "bytes": 403,
+      "sha256": "25824bc881084ab1c3ccbe4b6de514b59a2a54e1791daf18dd7e828e1b16a3fc"
+    },
+    {
+      "file": "regen_extract_upstream_oracle.log",
+      "bytes": 396,
+      "sha256": "8d1694f2f4db784545ec3582d7adf3184bab98d6aed4942b7bb22afb64d920db"
+    },
+    {
+      "file": "regen_extract_upstream_perturbation_oracle.log",
+      "bytes": 385,
+      "sha256": "ecd33e8009c8d517aa6e58e10dee29bf45e9ddd485306d36321e4f21d0cbfdd2"
+    },
+    {
+      "file": "regen_inputs.sh",
+      "bytes": 585,
+      "sha256": "3b6c7ece10d2c29222c75ff71c671cd1f90b44e20480f6229cbe9263ca05ce3b"
+    },
+    {
+      "file": "regen_owner_decisions.log",
+      "bytes": 76,
+      "sha256": "27dcdbde42284505053ba67af8d2aee14b8331978f9bcdc59ef810a6b24a8102"
+    },
+    {
+      "file": "regen_owner_mc.sh",
+      "bytes": 358,
+      "sha256": "83b56b22c36163f99b0981d8aa8c51e9730355bed3ab5c3c848bed36bd1d52f5"
+    },
+    {
+      "file": "regen_validate_barotropic_perturbations.log",
+      "bytes": 437,
+      "sha256": "14020bbdc7dbac797f3584a2bfb68bc8cef3f5dbf8dcb111351a834aa91733a5"
+    },
+    {
+      "file": "regen_validate_growth_pipeline.log",
+      "bytes": 296,
+      "sha256": "e8bb203ef6c1260675e7c01067e20f70a38f3fa8ee002949e981a9dbd230c918"
+    },
+    {
+      "file": "regression_vs_9ad5425.json",
+      "bytes": 6760,
+      "sha256": "387e37c0e0c9595759eac05225431f28139bbcbf756db588a372c6410b03e2e4"
+    },
+    {
+      "file": "round4_kills_beyond_baseline.json",
+      "bytes": 4527,
+      "sha256": "925e37dd86e8fb134c5fe0030857c1fefde9495b1722b3ade40f5ec8ac961483"
+    },
+    {
+      "file": "round4_mutant_definitions.json",
+      "bytes": 7152,
+      "sha256": "3f77cbdfb19c6adc18f644dca779601c5466c25c3d31fdd7f61ec6927d695aaa"
+    },
+    {
+      "file": "round4_mutant_results.json",
+      "bytes": 15637,
+      "sha256": "dacf2834372223b586d1d2856d6c15d2343ae70524a6b5a5de5516488e802924"
+    },
+    {
+      "file": "round4_mutants.log",
+      "bytes": 2674,
+      "sha256": "30e04165f1b84dd90e7f1c289cc56ec1214909e0ad5c3c9ee7935e71c79c615a"
+    },
+    {
+      "file": "run_mutants_r4.py",
+      "bytes": 3594,
+      "sha256": "10935448bffee4a87c429c7cbafa7a55630d24aacecadf9a478a047a6e7b6062"
+    },
+    {
+      "file": "scalar_probes_comparison.json",
+      "bytes": 14269,
+      "sha256": "e6ab4178afff882b3dd4489823628ec674cb4511811cfed40949c40e93e34ff4"
+    },
+    {
+      "file": "second_delta_audit_campaign_rerun.json",
+      "bytes": 50372,
+      "sha256": "b7d7d1ec49081176dd6b14e0c7d359b51d315c274106b9f16ef86eff200d6f1a"
+    },
+    {
+      "file": "second_delta_audit_campaign_rerun.log",
+      "bytes": 8673,
+      "sha256": "d7dad8b1b85baf37a9f61726ac33f87f282dd02d81ef58334ee60567abd19c66"
+    },
+    {
+      "file": "suite_head.txt",
+      "bytes": 41,
+      "sha256": "53bc160629d766fd8d6412d59cdc860ba4050e3fc4a6e471a498e47aa2793ef5"
+    },
+    {
+      "file": "tolerance_audit.log",
+      "bytes": 64,
+      "sha256": "4d88ddcde8f93e4d2a7e913827ee11c952ee838d6be7ee202939d44a1108f273"
+    },
+    {
+      "file": "validator.log",
+      "bytes": 5857,
+      "sha256": "8e7728a04bf89b2737cb52eecda1933fe95c4a69a0c819ca56d82edc52e036ab"
+    }
+  ]
+}
