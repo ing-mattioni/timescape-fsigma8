@@ -1,0 +1,13 @@
+{
+  "mask_H25_finite_distribution_residual": -1.1102230246251565e-16,
+  "Plackett_vs_adaptive_conditional_tail_max_abs": 2.7755575615628914e-17,
+  "tail_independent_limit_abs": 0.0,
+  "tail_coincident_limit_abs": 5.551115123125783e-17,
+  "lognormal_m_normalisation_quadrature_residual": 1.1102230246251565e-15,
+  "ball_density_norm_abs": 2.220446049250313e-15,
+  "ball_window_pair_identity_max_abs": 5.662137425588298e-15,
+  "signed_Gaussian_first_moment_regression_vs_tilt_abs": 1.1102230246251565e-16,
+  "signed_Gaussian_second_moment_regression_vs_tilt_abs": 2.7755575615628914e-17,
+  "dimensions": "k in Mpc^-1, r/ell/r_s in Mpc, covariances and all variances dimensionless; G cancels from omega_m",
+  "limiting_interpretation": "law I kappa0=kappa(r)=0 gives m=1 and C_W=1+xi (signed), exp(KY) (lognormal); fixed P11 and C_W specify unique variance"
+}
