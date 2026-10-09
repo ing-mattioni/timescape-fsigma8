@@ -1,0 +1,454 @@
+{
+ "interpreter": "3.13.16 (main, Oct  1 2026, 15:40:24) [GCC 13.3.0]",
+ "probes": 1446,
+ "script": "reports/phase1g_h_delta_audit_3_evidence/implementation_scalar_probes.py (unchanged, read only)",
+ "trees": {
+  "before": "ed0ec0c (git archive of src and tests)",
+  "after": "6926a63 working tree (src and tests committed)"
+ },
+ "accepted": [
+  456,
+  416
+ ],
+ "accepted_non_strict_json": [
+  129,
+  98
+ ],
+ "accepted_non_strict_by_record_before": {
+  "VolumeAverageGrowthNumerics": 10,
+  "WallRegionalGrowthChecks": 5,
+  "LagrangianSigmaQuadrature": 11,
+  "TimescapeGrowthFactor": 9,
+  "EarlyMatterDensityPerPhoton": 13,
+  "ResolvedLagrangianRadius": 6,
+  "ConditionalLagrangianSigma": 12,
+  "LCDMReferenceLinearSigma": 33,
+  "AnchoredLagrangianSigmaRatio": 18,
+  "ConditionalGlobalLinearSigma": 12
+ },
+ "accepted_non_strict_by_record_after": {
+  "VolumeAverageGrowthNumerics": 10,
+  "WallRegionalGrowthChecks": 5,
+  "LagrangianSigmaQuadrature": 11,
+  "TimescapeGrowthFactor": 9,
+  "EarlyMatterDensityPerPhoton": 13,
+  "ResolvedLagrangianRadius": 6,
+  "ConditionalLagrangianSigma": 12,
+  "LCDMReferenceLinearSigma": 19,
+  "AnchoredLagrangianSigmaRatio": 13
+ },
+ "accepted_nonfinite": [
+  8,
+  0
+ ],
+ "changed": 40,
+ "changed_kinds": {
+  "((True, False), (False, None))": 31,
+  "((True, True), (False, None))": 9
+ },
+ "changed_by_record": {
+  "LCDMReferenceLinearSigma": 18,
+  "AnchoredLagrangianSigmaRatio": 10,
+  "ConditionalGlobalLinearSigma": 12
+ },
+ "new_acceptances": [],
+ "nested_and_unbound": {
+  "nested.quadrature.k_min_per_Mpc.Fraction": {
+   "before": [
+    true,
+    false
+   ],
+   "after": [
+    false,
+    null
+   ],
+   "message_after": "sigma record: the export is not strict JSON (Object of type Fraction is not JSON serializable); pass native float and in"
+  },
+  "nested.quadrature.k_min_per_Mpc.np_float32": {
+   "before": [
+    false,
+    null
+   ],
+   "after": [
+    false,
+    null
+   ],
+   "message_after": "sigma record: quadrature_relative_change differs from its recomputation from the stored inputs"
+  },
+  "nested.quadrature.k_min_per_Mpc.np_int64": {
+   "before": [
+    false,
+    null
+   ],
+   "after": [
+    false,
+    null
+   ],
+   "message_after": "k_min_per_Mpc must be positive"
+  },
+  "nested.quadrature.k_max_per_Mpc.Fraction": {
+   "before": [
+    true,
+    false
+   ],
+   "after": [
+    false,
+    null
+   ],
+   "message_after": "sigma record: the export is not strict JSON (Object of type Fraction is not JSON serializable); pass native float and in"
+  },
+  "nested.quadrature.k_max_per_Mpc.np_float32": {
+   "before": [
+    true,
+    false
+   ],
+   "after": [
+    false,
+    null
+   ],
+   "message_after": "sigma record: the export is not strict JSON (Object of type float32 is not JSON serializable); pass native float and int"
+  },
+  "nested.quadrature.k_max_per_Mpc.np_int64": {
+   "before": [
+    true,
+    false
+   ],
+   "after": [
+    false,
+    null
+   ],
+   "message_after": "sigma record: the export is not strict JSON (Object of type int64 is not JSON serializable); pass native float and int s"
+  },
+  "nested.quadrature.self_convergence_tolerance.Fraction": {
+   "before": [
+    true,
+    false
+   ],
+   "after": [
+    false,
+    null
+   ],
+   "message_after": "sigma record: the export is not strict JSON (Object of type Fraction is not JSON serializable); pass native float and in"
+  },
+  "nested.quadrature.self_convergence_tolerance.np_float32": {
+   "before": [
+    true,
+    false
+   ],
+   "after": [
+    false,
+    null
+   ],
+   "message_after": "sigma record: the export is not strict JSON (Object of type float32 is not JSON serializable); pass native float and int"
+  },
+  "nested.quadrature.self_convergence_tolerance.np_int64": {
+   "before": [
+    false,
+    null
+   ],
+   "after": [
+    false,
+    null
+   ],
+   "message_after": "self_convergence_tolerance must be positive"
+  },
+  "nested.quadrature.truncation_tolerance.Fraction": {
+   "before": [
+    true,
+    false
+   ],
+   "after": [
+    false,
+    null
+   ],
+   "message_after": "sigma record: the export is not strict JSON (Object of type Fraction is not JSON serializable); pass native float and in"
+  },
+  "nested.quadrature.truncation_tolerance.np_float32": {
+   "before": [
+    true,
+    false
+   ],
+   "after": [
+    false,
+    null
+   ],
+   "message_after": "sigma record: the export is not strict JSON (Object of type float32 is not JSON serializable); pass native float and int"
+  },
+  "nested.quadrature.truncation_tolerance.np_int64": {
+   "before": [
+    false,
+    null
+   ],
+   "after": [
+    false,
+    null
+   ],
+   "message_after": "truncation_tolerance must be positive"
+  },
+  "nested.quadrature.grid_points.Fraction": {
+   "before": [
+    false,
+    null
+   ],
+   "after": [
+    false,
+    null
+   ],
+   "message_after": "grid_points must be an integer"
+  },
+  "nested.quadrature.grid_points.np_float32": {
+   "before": [
+    false,
+    null
+   ],
+   "after": [
+    false,
+    null
+   ],
+   "message_after": "grid_points must be an integer"
+  },
+  "nested.quadrature.grid_points.np_int64": {
+   "before": [
+    true,
+    false
+   ],
+   "after": [
+    false,
+    null
+   ],
+   "message_after": "sigma record: the export is not strict JSON (Object of type int64 is not JSON serializable); pass native float and int s"
+  },
+  "nested.quadrature.comparison_grid_points.Fraction": {
+   "before": [
+    false,
+    null
+   ],
+   "after": [
+    false,
+    null
+   ],
+   "message_after": "comparison_grid_points must be an integer"
+  },
+  "nested.quadrature.comparison_grid_points.np_float32": {
+   "before": [
+    false,
+    null
+   ],
+   "after": [
+    false,
+    null
+   ],
+   "message_after": "comparison_grid_points must be an integer"
+  },
+  "nested.quadrature.comparison_grid_points.np_int64": {
+   "before": [
+    true,
+    false
+   ],
+   "after": [
+    false,
+    null
+   ],
+   "message_after": "sigma record: the export is not strict JSON (Object of type int64 is not JSON serializable); pass native float and int s"
+  },
+  "nested.density.omega_m_per_photon.Fraction": {
+   "before": [
+    true,
+    false
+   ],
+   "after": [
+    false,
+    null
+   ],
+   "message_after": "sigma record: the export is not strict JSON (Object of type Fraction is not JSON serializable); pass native float and in"
+  },
+  "nested.density.identity_tolerance.Fraction": {
+   "before": [
+    true,
+    true
+   ],
+   "after": [
+    true,
+    true
+   ],
+   "message_after": ""
+  },
+  "nested.density.G.Fraction": {
+   "before": [
+    true,
+    true
+   ],
+   "after": [
+    true,
+    true
+   ],
+   "message_after": ""
+  },
+  "nested.radius.radius_Mpc.Fraction": {
+   "before": [
+    false,
+    null
+   ],
+   "after": [
+    false,
+    null
+   ],
+   "message_after": "x must be a real numeric array, not dtype object"
+  },
+  "nested.radius.omega_m_R_cubed_Mpc3.Fraction": {
+   "before": [
+    true,
+    false
+   ],
+   "after": [
+    false,
+    null
+   ],
+   "message_after": "sigma record: the export is not strict JSON (Object of type Fraction is not JSON serializable); pass native float and in"
+  },
+  "unbound.lcdm.truncation_envelope_fraction.nan": {
+   "before": [
+    true,
+    false
+   ],
+   "after": [
+    false,
+    null
+   ],
+   "message_after": "truncation_envelope_fraction must be finite"
+  },
+  "unbound.lcdm.quadrature_relative_change.nan": {
+   "before": [
+    true,
+    false
+   ],
+   "after": [
+    false,
+    null
+   ],
+   "message_after": "quadrature_relative_change must be finite"
+  },
+  "unbound.anchor.growth_ratio.999": {
+   "before": [
+    true,
+    true
+   ],
+   "after": [
+    false,
+    null
+   ],
+   "message_after": "growth_ratio, early_spectrum_factor, sigma_ratio and the anchor offset must be the ratios of the stored timescape and re"
+  },
+  "unbound.anchor.early_spectrum_factor.999": {
+   "before": [
+    true,
+    true
+   ],
+   "after": [
+    false,
+    null
+   ],
+   "message_after": "growth_ratio, early_spectrum_factor, sigma_ratio and the anchor offset must be the ratios of the stored timescape and re"
+  }
+ },
+ "remaining_non_strict_after": [
+  "AnchoredLagrangianSigmaRatio_22.anchor_consistency_tolerance.Fraction",
+  "AnchoredLagrangianSigmaRatio_22.anchor_consistency_tolerance.np_float32",
+  "AnchoredLagrangianSigmaRatio_22.anchor_value.Fraction",
+  "AnchoredLagrangianSigmaRatio_22.anchored_linear_sigma.Fraction",
+  "AnchoredLagrangianSigmaRatio_22.anchored_linear_sigma.np_float32",
+  "AnchoredLagrangianSigmaRatio_22.early_spectrum_factor.Fraction",
+  "AnchoredLagrangianSigmaRatio_22.early_spectrum_factor.np_float32",
+  "AnchoredLagrangianSigmaRatio_22.growth_ratio.Fraction",
+  "AnchoredLagrangianSigmaRatio_22.growth_ratio.np_float32",
+  "AnchoredLagrangianSigmaRatio_22.reference_offset_from_anchor.Fraction",
+  "AnchoredLagrangianSigmaRatio_22.reference_offset_from_anchor.np_float32",
+  "AnchoredLagrangianSigmaRatio_22.sigma_ratio.Fraction",
+  "AnchoredLagrangianSigmaRatio_22.sigma_ratio.np_float32",
+  "ConditionalLagrangianSigma_20.linear_sigma.Fraction",
+  "ConditionalLagrangianSigma_20.linear_sigma.np_float32",
+  "ConditionalLagrangianSigma_20.quadrature_relative_change.Fraction",
+  "ConditionalLagrangianSigma_20.quadrature_relative_change.np_float32",
+  "ConditionalLagrangianSigma_20.quadrature_relative_change.np_int64",
+  "ConditionalLagrangianSigma_20.sigma_unit_growth.Fraction",
+  "ConditionalLagrangianSigma_20.sigma_unit_growth_comparison_grid.Fraction",
+  "ConditionalLagrangianSigma_20.sigma_unit_growth_comparison_grid.np_float32",
+  "ConditionalLagrangianSigma_20.sigma_unit_growth_comparison_grid.np_int64",
+  "ConditionalLagrangianSigma_20.truncation_envelope_fraction.Fraction",
+  "ConditionalLagrangianSigma_20.truncation_envelope_fraction.np_float32",
+  "ConditionalLagrangianSigma_20.truncation_envelope_fraction.np_int64",
+  "EarlyMatterDensityPerPhoton_18.G.Fraction",
+  "EarlyMatterDensityPerPhoton_18.G.np_float32",
+  "EarlyMatterDensityPerPhoton_18.G.np_int64",
+  "EarlyMatterDensityPerPhoton_18.HD0_bare_km_s_Mpc.Fraction",
+  "EarlyMatterDensityPerPhoton_18.bare_Omega_M0.Fraction",
+  "EarlyMatterDensityPerPhoton_18.closed_form.Fraction",
+  "EarlyMatterDensityPerPhoton_18.gamma_w0.Fraction",
+  "EarlyMatterDensityPerPhoton_18.identity_relative_residual.Fraction",
+  "EarlyMatterDensityPerPhoton_18.identity_relative_residual.np_float32",
+  "EarlyMatterDensityPerPhoton_18.identity_tolerance.Fraction",
+  "EarlyMatterDensityPerPhoton_18.identity_tolerance.np_float32",
+  "EarlyMatterDensityPerPhoton_18.omega_m_bare.Fraction",
+  "EarlyMatterDensityPerPhoton_18.omega_m_per_photon.Fraction",
+  "LCDMReferenceLinearSigma_21.growth_today_photon_normalised.Fraction",
+  "LCDMReferenceLinearSigma_21.growth_today_photon_normalised.np_float32",
+  "LCDMReferenceLinearSigma_21.linear_sigma.Fraction",
+  "LCDMReferenceLinearSigma_21.linear_sigma.np_float32",
+  "LCDMReferenceLinearSigma_21.omega_m.Fraction",
+  "LCDMReferenceLinearSigma_21.omega_m.np_float32",
+  "LCDMReferenceLinearSigma_21.omega_m_R_cubed_Mpc3.Fraction",
+  "LCDMReferenceLinearSigma_21.omega_m_R_cubed_Mpc3.np_float32",
+  "LCDMReferenceLinearSigma_21.omega_m_R_cubed_Mpc3.np_int64",
+  "LCDMReferenceLinearSigma_21.quadrature_relative_change.Fraction",
+  "LCDMReferenceLinearSigma_21.quadrature_relative_change.np_float32",
+  "LCDMReferenceLinearSigma_21.radius_Mpc.Fraction",
+  "LCDMReferenceLinearSigma_21.radius_Mpc.np_float32",
+  "LCDMReferenceLinearSigma_21.radius_Mpc.np_int64",
+  "LCDMReferenceLinearSigma_21.sigma_unit_growth.Fraction",
+  "LCDMReferenceLinearSigma_21.sigma_unit_growth_comparison_grid.Fraction",
+  "LCDMReferenceLinearSigma_21.truncation_envelope_fraction.Fraction",
+  "LCDMReferenceLinearSigma_21.truncation_envelope_fraction.np_float32",
+  "LCDMReferenceLinearSigma_21.truncation_envelope_fraction.np_int64",
+  "LagrangianSigmaQuadrature_16.comparison_grid_points.np_int64",
+  "LagrangianSigmaQuadrature_16.grid_points.np_int64",
+  "LagrangianSigmaQuadrature_16.k_max_per_Mpc.Fraction",
+  "LagrangianSigmaQuadrature_16.k_max_per_Mpc.np_float32",
+  "LagrangianSigmaQuadrature_16.k_max_per_Mpc.np_int64",
+  "LagrangianSigmaQuadrature_16.k_min_per_Mpc.Fraction",
+  "LagrangianSigmaQuadrature_16.k_min_per_Mpc.np_float32",
+  "LagrangianSigmaQuadrature_16.self_convergence_tolerance.Fraction",
+  "LagrangianSigmaQuadrature_16.self_convergence_tolerance.np_float32",
+  "LagrangianSigmaQuadrature_16.truncation_tolerance.Fraction",
+  "LagrangianSigmaQuadrature_16.truncation_tolerance.np_float32",
+  "ResolvedLagrangianRadius_19.omega_m_R_cubed_Mpc3.Fraction",
+  "ResolvedLagrangianRadius_19.omega_m_R_cubed_Mpc3.np_float32",
+  "ResolvedLagrangianRadius_19.omega_m_R_cubed_Mpc3.np_int64",
+  "ResolvedLagrangianRadius_19.radius_Mpc.Fraction",
+  "ResolvedLagrangianRadius_19.radius_Mpc.np_float32",
+  "ResolvedLagrangianRadius_19.radius_Mpc.np_int64",
+  "TimescapeGrowthFactor_17.G.Fraction",
+  "TimescapeGrowthFactor_17.G.np_float32",
+  "TimescapeGrowthFactor_17.G.np_int64",
+  "TimescapeGrowthFactor_17.fv0.Fraction",
+  "TimescapeGrowthFactor_17.gamma_w0.Fraction",
+  "TimescapeGrowthFactor_17.growth_relative_to_volume_average_eds.Fraction",
+  "TimescapeGrowthFactor_17.growth_today_photon_normalised.Fraction",
+  "TimescapeGrowthFactor_17.growth_today_photon_normalised.np_float32",
+  "TimescapeGrowthFactor_17.log_growth_relative_to_volume_average_eds.Fraction",
+  "VolumeAverageGrowthNumerics_14.comparison_early_time_fraction.Fraction",
+  "VolumeAverageGrowthNumerics_14.comparison_early_time_fraction.np_float32",
+  "VolumeAverageGrowthNumerics_14.comparison_grid_points.np_int64",
+  "VolumeAverageGrowthNumerics_14.early_limit_tolerance.Fraction",
+  "VolumeAverageGrowthNumerics_14.early_limit_tolerance.np_float32",
+  "VolumeAverageGrowthNumerics_14.early_time_fraction.Fraction",
+  "VolumeAverageGrowthNumerics_14.early_time_fraction.np_float32",
+  "VolumeAverageGrowthNumerics_14.grid_points.np_int64",
+  "VolumeAverageGrowthNumerics_14.grid_refinement_tolerance.Fraction",
+  "VolumeAverageGrowthNumerics_14.grid_refinement_tolerance.np_float32",
+  "WallRegionalGrowthChecks_15.check_grid_points.np_int64",
+  "WallRegionalGrowthChecks_15.early_time_fraction.Fraction",
+  "WallRegionalGrowthChecks_15.early_time_fraction.np_float32",
+  "WallRegionalGrowthChecks_15.identity_tolerance.Fraction",
+  "WallRegionalGrowthChecks_15.identity_tolerance.np_float32"
+ ]
+}

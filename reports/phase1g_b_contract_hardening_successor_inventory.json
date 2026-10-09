@@ -1,0 +1,104 @@
+{
+  "changes": {
+    "AnchoredLagrangianSigmaRatio.__post_init__": [
+      "growth_ratio, early_spectrum_factor, sigma_ratio and reference_offset_from_anchor equal the expressions of anchor_lagrangian_sigma on the stored records",
+      "early_spectrum_differences names exactly the differing early-spectrum inputs"
+    ],
+    "LCDMReferenceLinearSigma.__post_init__": [
+      "quadrature_relative_change and truncation_envelope_fraction finite real and non-negative",
+      "quadrature_relative_change == abs(sigma_unit_growth / sigma_unit_growth_comparison_grid - 1)",
+      "both diagnostics within the quadrature's self_convergence_tolerance and truncation_tolerance"
+    ]
+  },
+  "classification": "CONTRACT_HARDENING_SUCCESSOR_RECORD",
+  "code_commit": "6926a636c100d232247e39d71d5b2d6e71a6f917",
+  "date": "2026-10-09",
+  "equivalence": {
+    "artifact": "artifacts/independent/phase1g_b_lagrangian_sigma.json",
+    "existing_1g_b_tests": 124,
+    "interpreter": "CPython 3.13.16",
+    "script": "scripts/validate_phase1g_b_lagrangian_sigma.py",
+    "sha256_after": "5746cc76e932ad0db3e253ee5aa5f0032227e65afba1699a09ea1f2c32d13c8d",
+    "sha256_before": "5746cc76e932ad0db3e253ee5aa5f0032227e65afba1699a09ea1f2c32d13c8d"
+  },
+  "finding": {
+    "area": "IMPLEMENTATION",
+    "id": "GH-D3F4",
+    "resolution_class": "OWNER_DECISION",
+    "severity": "LOW-MEDIUM",
+    "source": "reports/phase1g_h_delta_audit_3.md section 10"
+  },
+  "full_suites": "reports/phase1g_h_delta_audit_3_remediation.md section 3",
+  "limits": [
+    "factory-only contracts of anchor_lagrangian_sigma are not repeated in the record",
+    "scalars are not normalised: 1G-B records, these two included, store Real scalars as given (GH-D3F2); their own exports are unchanged",
+    "the exact equalities follow Python/NumPy comparison rules: a numpy.float32 compares with a Python float in single precision, so a float32 rounding of the exact value passes and is stored as float32 (binding to the precision of the stored scalar type)"
+  ],
+  "mutants": {
+    "definitions": "reports/phase1g_h_delta_audit_3_remediation_logs/round4_mutant_definitions.json",
+    "ids": [
+      "L01",
+      "L02",
+      "L03",
+      "L04",
+      "L05"
+    ],
+    "outcome": "all killed by the new tests"
+  },
+  "observational_authorizations": {
+    "FSIGMA8_AUTHORIZATION": "NOT_GRANTED",
+    "OBSERVATIONAL_AUTHORIZATION": "NOT_GRANTED",
+    "RSD_AUTHORIZATION": "NOT_GRANTED",
+    "SIGMA8_AUTHORIZATION": "NOT_GRANTED",
+    "UNIQUE_TIMESCAPE_PREDICTION": "NOT_GRANTED"
+  },
+  "owner_approval": {
+    "date": "2026-10-09",
+    "option": "(a) separate 1G-B contract-hardening successor, separate commit and record, bit-identical numerical outputs, no tag change",
+    "verbatim": "Perfetto, procedi"
+  },
+  "phase": "1G-B",
+  "precedent": "reports/phase1g_b_owner_decisions_successor.md (GB-OD2 ... GB-OD6, 2026-09-30)",
+  "record": "reports/phase1g_b_contract_hardening_successor.md",
+  "scalar_probes": {
+    "accepted_nonfinite": [
+      8,
+      0
+    ],
+    "accepted_to_refused": {
+      "AnchoredLagrangianSigmaRatio": 10,
+      "LCDMReferenceLinearSigma": 18
+    },
+    "comparison": "reports/phase1g_h_delta_audit_3_remediation_logs/scalar_probes_comparison.json",
+    "factor_999_probes": "refused",
+    "interpreter": "CPython 3.13.16",
+    "probes": 1446,
+    "refused_to_accepted": 0,
+    "remaining_accepted_non_strict_on_these_records": 32,
+    "script": "reports/phase1g_h_delta_audit_3_evidence/implementation_scalar_probes.py (unchanged, read only)",
+    "trees": [
+      "ed0ec0c",
+      "this change"
+    ]
+  },
+  "schema_version": 1,
+  "status_tokens": {
+    "added": [],
+    "changed": []
+  },
+  "tests": {
+    "count": 18,
+    "file": "tests/test_phase1g_b_contract_hardening.py"
+  },
+  "title": "Phase 1G-B contract-hardening successor (2026-10-09)",
+  "unchanged": [
+    "equations",
+    "tolerances",
+    "defaults",
+    "factories",
+    "output keys",
+    "status tokens",
+    "the frozen 1G-B report and audit records",
+    "every tag"
+  ]
+}

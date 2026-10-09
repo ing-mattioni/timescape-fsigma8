@@ -10,7 +10,9 @@ successor").
 **Addendum of 2026-10-08 (after the second delta audit):** Sec. 6 records
 events P7–P9 and supersedes the state of Sec. 3. Secs. 1–5 keep their
 wording. **Addendum of 2026-10-09:** Sec. 7 records event P10 and supersedes
-the state of Sec. 6.2.
+the state of Sec. 6.2. **Second addendum of 2026-10-09 (after the third delta
+audit):** Sec. 8 records events P11–P13, supersedes the state of Sec. 7.2 and
+sets the convention for current summaries.
 
 ## 1. Purpose
 
@@ -175,3 +177,63 @@ later local commit; its push needs a separate approval.
 
 The limits of Sec. 5 apply: the repository confirms the refs, not the
 owner's words.
+
+## 8. Second addendum of 2026-10-09 (after the third delta audit)
+
+Added with the third delta-audit remediation
+([`phase1g_h_delta_audit_3_remediation.md`](phase1g_h_delta_audit_3_remediation.md)),
+as requested by the third delta audit
+([`phase1g_h_delta_audit_3.md`](phase1g_h_delta_audit_3.md), finding GH-D3F1
+and §11). Remote facts were verified read-only on 2026-10-09 (`git ls-remote`,
+`git log`).
+
+### 8.1 Events
+
+| # | Date | Event | Remote evidence | Authorisation (owner's words, verbatim) |
+|---|---|---|---|---|
+| P11 | 2026-10-09 | Fast-forward of `ccr-555e67be-u11yht` from `4bf2718` to `ed0ec0c9c8783519a53759a265b6ce37e6c0e607`, carrying only `ed0ec0c` (the record of P10) | push output `4bf2718..ed0ec0c`; branch head `ed0ec0c`, also observed by the third delta audit | «Sì, pubblica anche ed0ec0c» |
+| P12 | 2026-10-09 | The owner's direct confirmation of P10 and P11 to the auditor of the third delta audit | none (off-repository); recorded in `phase1g_h_delta_audit_3.md` §3 | «Confermo le autorizzazioni P10 e P11», as that audit records it |
+| P13 | 2026-10-09 | Third delta audit published on `phase-1g-h-delta-audit-3` at `18bf2fbef880fdfb3c292956aa1f000720930abf` (parent `4d71bd4`, the blind checkpoint, whose parent is `ed0ec0c`; 57 added files, all under `reports/phase1g_h_delta_audit_3*`). The publishing connector re-hashed the auditing session's local commits `c62ad87` and `d9342c4`; `4d71bd4` has the checkpoint tree `6d5e848faa7b72d829e44a9a2d79e70c3a34acb6` recorded in the audit's inventory | branch head `18bf2fb`; `git diff --name-status ed0ec0c 18bf2fb` | the owner's authorisation in the auditing session, as the handoff pasted here on 2026-10-09 reports it; no verbatim words are available in this session |
+
+The pushes P10 and P11 are covered by separate approvals («Sì, fai push»,
+«Sì, pubblica anche ed0ec0c»), and P12 confirms both directly to an auditor.
+The local fast-forward of this session's branch to `18bf2fb`, before the
+third remediation, is not a remote event.
+
+### 8.2 State on 2026-10-09 after P13 (supersedes Sec. 7.2)
+
+- `main` = `8d3cdd0533035858c42269cb1dff1a20dcafc7da` (unchanged).
+- `ccr-555e67be-u11yht` = `ed0ec0c` on `origin`. The local branch carries, not
+  pushed, `4d71bd4` and `18bf2fb` (the third delta audit) and the commits of
+  the third remediation; their push needs a separate approval.
+- `phase-1g-h-delta-audit-3` = `18bf2fb`; `ccr-ac582de6-vho99i` = `e517028`;
+  `phase-1g-h-independent-audit` = `816dd00`; `phase-1g-h-delta-audit` =
+  `5c325e1`.
+- 76 tag refs (38 annotated tags), unchanged. No pull request from a 1G-H
+  branch, no release, no `phase-1g-d-separate-universe-growth-v2` tag or
+  branch.
+
+### 8.3 Convention for current summaries
+
+A commit cannot record its own push. From this addendum on, README.md,
+CLAUDE.md, the header of `phase1g_h_global_variance_closure.md` and its
+inventory name the **last recorded publication event** (P-number, range,
+date) and point here; they no longer state the remote head as a current
+fact. A later push is recorded once, in the next chronological addendum of
+this record, and does not make those summaries false.
+
+### 8.4 Current reading of further dated statements
+
+| Statement (literal) | Location | Written | Current reading |
+|---|---|---|---|
+| "Its remote head is `4bf2718` (2026-10-09, P10)" | `phase1g_h_global_variance_closure.md` header | 2026-10-09 | Replaced with this addendum by the last recorded event (Sec. 8.3). |
+| "remote head `4bf2718`" | README.md, CLAUDE.md | 2026-10-09 | Replaced with this addendum by the last recorded event. |
+| `publication.pushed_head_2026_10_09` = `4bf2718` | `phase1g_h_global_variance_closure_inventory.json` | 2026-10-09 | Historical; `publication.last_recorded_event` is added with this addendum. |
+| "`ccr-555e67be-u11yht` = `4bf2718` on `origin`" | this record, Sec. 7.2, and its inventory `addendum_2026_10_09.state_after_p10` | 2026-10-09 | Superseded by Sec. 8.2. |
+| "The record of P10 is itself a later local commit; its push needs a separate approval." | this record, Sec. 7.1 | 2026-10-09 | Pushed by P11. |
+
+### 8.5 Limits
+
+The limits of Sec. 5 apply. P13's authorisation is reported, not quoted.
+The third delta audit notes that current refs show state and ancestry, not
+the actor or time of a historical push.

@@ -1,0 +1,67 @@
+{
+ "baseline_failures_in_scratch_copy": [
+  "tests/test_phase1g_b_owner_decisions.py::test_gb_od3_the_frozen_inventory_is_pinned_to_its_certified_blob"
+ ],
+ "cause": "the scratch copy is not a git repository, so the 1G-B owner-decisions test that reads the certified blob with git cannot run there; it passes in the repository (full suites)",
+ "kills_beyond_baseline": {
+  "B01_record_identity_rtol_10pct_drift": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_d2f2_evidence_thresholds_are_pinned",
+   "tests/test_phase1g_h_global_variance.py::test_gh_d3f3_binding_tolerance_boundary_with_a_literal_rtol"
+  ],
+  "B02_same_rejects_float_subclasses": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_d3f3_float_results_accept_float64_and_subclasses_but_not_float32"
+  ],
+  "B03_same_accepts_numpy_float32": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_d3f3_float_results_accept_float64_and_subclasses_but_not_float32"
+  ],
+  "B07_p11_weight_denominator_1ppm": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_d2f2_law_summary_reports_the_pair_weighted_both_walls_covariance"
+  ],
+  "B08_lognormal_calibration_1ppm": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_d2f2_lognormal_pairs_report_the_inverse_square_of_the_law_ii_normaliser"
+  ],
+  "B09_reported_lambda_1ppm": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_d2f2_lognormal_pairs_report_the_inverse_square_of_the_law_ii_normaliser"
+  ],
+  "B10_one_growth_tolerance_not_converted": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_d3f3_every_growth_check_and_g_are_stored_as_floats"
+  ],
+  "J01_strict_json_check_disabled": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_d3f2_nested_inputs_must_export_as_strict_json"
+  ],
+  "J02_sigma_record_json_check_removed": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_d3f2_nested_inputs_must_export_as_strict_json"
+  ],
+  "J03_float32_refusal_via_message_branch_off": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_d2f4_float_results_must_be_floats_and_scalar_inputs_are_stored_as_floats",
+   "tests/test_phase1g_h_global_variance.py::test_gh_d3f3_float_results_accept_float64_and_subclasses_but_not_float32"
+  ],
+  "L01_lcdm_diagnostics_finiteness_off": [
+   "tests/test_phase1g_b_contract_hardening.py::test_lcdm_reference_diagnostics_must_be_finite_and_nonnegative[nan-must",
+   "tests/test_phase1g_b_contract_hardening.py::test_lcdm_reference_diagnostics_must_be_finite_and_nonnegative[nan-must",
+   "tests/test_phase1g_b_contract_hardening.py::test_lcdm_reference_diagnostics_must_be_finite_and_nonnegative[inf-must",
+   "tests/test_phase1g_b_contract_hardening.py::test_lcdm_reference_diagnostics_must_be_finite_and_nonnegative[inf-must",
+   "tests/test_phase1g_b_contract_hardening.py::test_lcdm_reference_diagnostics_must_be_finite_and_nonnegative[-inf-must",
+   "tests/test_phase1g_b_contract_hardening.py::test_lcdm_reference_diagnostics_must_be_finite_and_nonnegative[-inf-must",
+   "tests/test_phase1g_b_contract_hardening.py::test_lcdm_reference_diagnostics_must_be_finite_and_nonnegative[-1e-12-must",
+   "tests/test_phase1g_b_contract_hardening.py::test_lcdm_reference_diagnostics_must_be_finite_and_nonnegative[-1e-12-must",
+   "tests/test_phase1g_b_contract_hardening.py::test_lcdm_reference_diagnostics_must_be_finite_and_nonnegative[value4-must",
+   "tests/test_phase1g_b_contract_hardening.py::test_lcdm_reference_diagnostics_must_be_finite_and_nonnegative[value4-must"
+  ],
+  "L02_lcdm_diagnostics_binding_off": [
+   "tests/test_phase1g_b_contract_hardening.py::test_lcdm_reference_diagnostics_are_bound_to_the_quadrature"
+  ],
+  "L03_anchored_ratio_binding_off": [
+   "tests/test_phase1g_b_contract_hardening.py::test_anchored_ratio_factors_are_bound_to_the_stored_records[growth_ratio]",
+   "tests/test_phase1g_b_contract_hardening.py::test_anchored_ratio_factors_are_bound_to_the_stored_records[early_spectrum_factor]",
+   "tests/test_phase1g_b_contract_hardening.py::test_anchored_ratio_factors_are_bound_to_the_stored_records[reference_offset_from_anchor]",
+   "tests/test_phase1g_b_contract_hardening.py::test_anchored_ratio_refuses_a_consistent_but_unbound_sigma_ratio"
+  ],
+  "L04_anchored_differences_binding_off": [
+   "tests/test_phase1g_b_contract_hardening.py::test_anchored_ratio_names_exactly_the_differing_early_spectrum_inputs"
+  ],
+  "L05_anchored_offset_unbound": [
+   "tests/test_phase1g_b_contract_hardening.py::test_anchored_ratio_factors_are_bound_to_the_stored_records[reference_offset_from_anchor]"
+  ]
+ }
+}

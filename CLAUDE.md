@@ -107,8 +107,9 @@ outputs carry `NON_OBSERVATIONAL`, `NOT_OBSERVATIONAL_SIGMA_8` and
 and it changes no status token. Promotion, pull request, merge, freeze and
 tagging remain open owner decisions (H-OD1…H-OD5); of H-OD5 the owner
 approved only pushes to the session branch `ccr-555e67be-u11yht`
-(2026-10-06, 2026-10-08 and 2026-10-09), and three independent audits
-(2026-10-07, 2026-10-08 twice) were published on their own branches.
+(2026-10-06, 2026-10-08 and 2026-10-09), and four independent audits
+(2026-10-07, 2026-10-08 twice, 2026-10-09) were published on their own
+branches.
 
 Everything else in the list above stays unimplemented.
 
@@ -343,6 +344,13 @@ current interpretation; frozen records remain unchanged.
     ω_m fit range [0.025, 0.5] and record invariants; a `model_caveat` on
     `TimescapeGrowthFactor`; an independent g_TS regression. Every numeric
     output is bit-identical.
+  - Contract-hardening successor (owner approval 2026-10-09, on finding
+    GH-D3F4 of the third 1G-H delta audit;
+    `phase1g_b_contract_hardening_successor.md`): `LCDMReferenceLinearSigma`
+    refuses non-finite or unbound quadrature diagnostics and
+    `AnchoredLagrangianSigmaRatio` binds its ratios, offset and listed
+    early-spectrum differences to its stored records. Record invariants
+    only; the 1G-B validation artifact is byte-identical.
 - **1G-C:** two-scale growth law (report-only,
   `phase1g_c_two_scale_growth_law.md`).
   - Kinematically, the tracker is empty Milne voids plus EdS walls in common
@@ -464,8 +472,9 @@ current interpretation; frozen records remain unchanged.
     (PR #4), freeze and tags followed on the owner's separate authority
     (`phase1g_fg_freeze_status_successor.md`); no release exists.
 - **1G-H (proposed; pushed with owner approvals of 2026-10-06, 2026-10-08 and
-  2026-10-09 to the session branch `ccr-555e67be-u11yht` (remote head
-  `4bf2718`; record `phase1g_h_publication_successor.md`, events P1–P10),
+  2026-10-09 to the session branch `ccr-555e67be-u11yht` (last recorded
+  publication event P11, `ed0ec0c`; record `phase1g_h_publication_successor.md`,
+  events P1–P13; summaries name the last recorded event, not the remote head),
   developed locally as `phase-1g-h-global-variance-closure`; independently
   audited 2026-10-07 (`phase1g_h_independent_audit.md`, published by the owner on
   `phase-1g-h-independent-audit` at `816dd00`) and remediated
@@ -475,8 +484,12 @@ current interpretation; frozen records remain unchanged.
   (`phase1g_h_delta_audit_remediation.md`, pushed in P7); second delta audit
   2026-10-08 (`phase1g_h_delta_audit_2.md`, published on the owner's
   instruction on `ccr-ac582de6-vho99i` at `e517028`) and remediated on top
-  of it (`phase1g_h_delta_audit_2_remediation.md`, pushed in P10); not
-  merged into `main`, frozen or tagged; no pull request):** global
+  of it (`phase1g_h_delta_audit_2_remediation.md`, pushed in P10); third
+  delta audit 2026-10-09 (`phase1g_h_delta_audit_3.md`, OpenAI GPT-6 family,
+  published on `phase-1g-h-delta-audit-3` at `18bf2fb`) and remediated on
+  top of it (`phase1g_h_delta_audit_3_remediation.md`, with the separate
+  `phase1g_b_contract_hardening_successor.md`); not merged into `main`,
+  frozen or tagged; no pull request):** global
   matter-variance definition and minimal closure
   (`phase1g_h_global_variance_closure.md`, inventory, validation record;
   runtime `global_variance.py`; evidence
@@ -510,7 +523,21 @@ current interpretation; frozen records remain unchanged.
     Applied with owner approval ("Perfetto, procedi"): publication events
     P7–P9; float results must be floats; the (H25) gate is a consistency
     check of the (H18) assembly; 49 phase tests, 36 gates; no number changes.
-    Open: the Windows gate, an optional cross-family check, H-OD1…H-OD5.
+  - Third delta audit (2026-10-09; OpenAI GPT-6 family):
+    `ACCEPT_WITH_CORRECTIONS`, SCIENCE `ACCEPT`, no scientific blocker; the
+    blind cross-family reconstruction of §6 and of the main conditional
+    values is `CROSS_FAMILY_VERIFIED_WITH_DEVIATION` (58/58; the deviation
+    is the auditor's own initial recipe). GH-D2F1 and D2F4 partly
+    resolved, the rest resolved; findings GH-D3F1 (LOW: P11 and stale
+    remote-head summaries), D3F2 (LOW: nested inputs broke strict JSON),
+    D3F3 (LOW: test gaps), D3F4 (LOW-MEDIUM, owner decision: unbound fields
+    in two frozen 1G-B records), D3F5 (INFO: C_W − 1 is a product-moment
+    excess, not a centred covariance). Applied with owner approval
+    ("Perfetto, procedi", option (a) for D3F4): events P11–P13 and the
+    last-recorded-event convention; every H record refuses a non-strict-JSON
+    export; 53 phase tests; key `both_walls_product_moment_excess_ball`; a
+    1G-B contract-hardening successor (two records, outputs bit-identical).
+    Open: the Windows gate, H-OD1…H-OD5.
   - A (definition) proposed, not closed (D1): the formal tangent statistic —
     the early Gaussian field propagated with the zero-amplitude tangent of
     the global contrast `(M_L/V_L)/(M_D/V_D) − 1` of Lagrangian top hats,

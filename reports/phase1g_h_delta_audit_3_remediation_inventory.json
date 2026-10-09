@@ -1,0 +1,401 @@
+{
+  "classification": "THIRD_DELTA_AUDIT_REMEDIATION_RECORD",
+  "commits": {
+    "branch": "ccr-555e67be-u11yht (local; on top of the third delta-audit commit 18bf2fb)",
+    "code_1g_b": "6926a636c100d232247e39d71d5b2d6e71a6f917",
+    "code_1g_h": "c6028e9046934ef6de234f0b58fbe18e6f3bead1",
+    "pushed": false,
+    "records": "the commit carrying this inventory (its hash cannot be inside itself)"
+  },
+  "date": "2026-10-09",
+  "errata": [
+    {
+      "id": "GH-D3E1",
+      "status": "APPLIED",
+      "where": "record section 2; pointer in reports/phase1g_h_delta_audit_2_remediation.md and errata_pointer_2026_10_09 in its inventory"
+    },
+    {
+      "id": "GH-D3E2",
+      "status": "APPLIED",
+      "where": "as GH-D3E1"
+    },
+    {
+      "id": "GH-D3E3",
+      "status": "APPLIED",
+      "where": "src/timescape_fsigma8/global_variance.py _same docstring"
+    }
+  ],
+  "files_changed_sha256": {
+    "scripts/phase1g_h_global_variance_closure_numerics.py": "a5fd601fecc06c57526fd644632d2595f75086457cc7eeb825a301e45c284981",
+    "src/timescape_fsigma8/global_variance.py": "96934ea62d22c2bff07ff6edf00631b0fe556579d29f02ea0efa27b79af9bf4b",
+    "src/timescape_fsigma8/lagrangian_sigma.py": "e9bab68ee010df9ed249565413d578f739322ee644d8197a128615006319bd3a",
+    "tests/test_phase1g_b_contract_hardening.py": "90cab4583be45395b7cd996a7e8c2c3f651f1c26196245196f57658d5dee26d4",
+    "tests/test_phase1g_h_global_variance.py": "201cc8fa928bf52a333314cc52888c552b36dfc2b9ed91fa374af3eff679ca62"
+  },
+  "findings": [
+    {
+      "area": "GOVERNANCE",
+      "changes": [
+        "reports/phase1g_h_publication_successor.md section 8 (P11, P12, P13; convention 8.3) and its inventory",
+        "reports/phase1g_h_global_variance_closure.md header and section 9",
+        "reports/phase1g_h_global_variance_closure_inventory.json publication, owner_decisions_status_2026_10_09, owner_decisions_requested.H-OD5",
+        "README.md, CLAUDE.md"
+      ],
+      "id": "GH-D3F1",
+      "severity": "LOW",
+      "status": "ADDRESSED"
+    },
+    {
+      "area": "IMPLEMENTATION",
+      "audit_nested_counterexamples": "all 12 refused (10 quadrature, density omega_m_per_photon, radius omega_m_R_cubed_Mpc3); scalar_probes_comparison.json",
+      "audit_probes_rerun": {
+        "accepted": [
+          456,
+          416
+        ],
+        "accepted_non_strict_by_record_after": {
+          "AnchoredLagrangianSigmaRatio": 13,
+          "ConditionalLagrangianSigma": 12,
+          "EarlyMatterDensityPerPhoton": 13,
+          "LCDMReferenceLinearSigma": 19,
+          "LagrangianSigmaQuadrature": 11,
+          "ResolvedLagrangianRadius": 6,
+          "TimescapeGrowthFactor": 9,
+          "VolumeAverageGrowthNumerics": 10,
+          "WallRegionalGrowthChecks": 5
+        },
+        "accepted_non_strict_json": [
+          129,
+          98
+        ],
+        "accepted_nonfinite": [
+          8,
+          0
+        ],
+        "changed_by_record": {
+          "AnchoredLagrangianSigmaRatio": 10,
+          "ConditionalGlobalLinearSigma": 12,
+          "LCDMReferenceLinearSigma": 18
+        },
+        "interpreter": "3.13.16 (main, Oct  1 2026, 15:40:24) [GCC 13.3.0]",
+        "new_acceptances": [],
+        "probes": 1446
+      },
+      "changes": [
+        "_require_strict_json at the end of __post_init__ of nine records",
+        "module docstring and report section 10 state the guarantee",
+        "test_gh_d3f2_nested_inputs_must_export_as_strict_json"
+      ],
+      "id": "GH-D3F2",
+      "severity": "LOW",
+      "status": "ADDRESSED"
+    },
+    {
+      "area": "TESTS",
+      "changes": [
+        "four tests and one assertion (tests.added)",
+        "Monte Carlo normaliser from the first point of each draw; budget described as conservative",
+        "Simpson tolerances 2e-3 and 5e-3"
+      ],
+      "id": "GH-D3F3",
+      "kills": [
+        "B01",
+        "B02",
+        "B03",
+        "B10"
+      ],
+      "severity": "LOW",
+      "status": "ADDRESSED"
+    },
+    {
+      "area": "IMPLEMENTATION",
+      "changes": [
+        "reports/phase1g_b_contract_hardening_successor.md and its inventory",
+        "src/timescape_fsigma8/lagrangian_sigma.py (LCDMReferenceLinearSigma, AnchoredLagrangianSigmaRatio __post_init__)",
+        "tests/test_phase1g_b_contract_hardening.py (18 cases)"
+      ],
+      "decision": "option (a)",
+      "equivalence": "1G-B validation artifact byte-identical (sha256 5746cc76e932ad0db3e253ee5aa5f0032227e65afba1699a09ea1f2c32d13c8d before and after)",
+      "id": "GH-D3F4",
+      "kills": [
+        "L01",
+        "L02",
+        "L03",
+        "L04",
+        "L05"
+      ],
+      "limit": "scalars are not normalised; a numpy.float32 rounding of the exact value compares equal in single precision and is stored as float32",
+      "severity": "LOW-MEDIUM",
+      "status": "ADDRESSED_BY_OWNER_DECISION"
+    },
+    {
+      "area": "SCIENCE",
+      "changes": [
+        "report section 6.3 wording",
+        "evidence key renamed (16 leaves, values bitwise equal)",
+        "evidence script docstring records the former key name"
+      ],
+      "id": "GH-D3F5",
+      "severity": "INFO",
+      "status": "ADDRESSED"
+    }
+  ],
+  "logs": "reports/phase1g_h_delta_audit_3_remediation_logs/",
+  "mutation_testing": {
+    "extra": {
+      "AUTH_D1_binding_off_adapted": "KILLED_BY_TESTS"
+    },
+    "round4": {
+      "baseline_note": "the scratch copy is not a git repository, so one 1G-B owner-decisions test that reads a certified blob with git fails there; every kill has at least one other failing test (round4_kills_beyond_baseline.json); the test passes in the repository (full suites)",
+      "by_origin": {
+        "baseline": {
+          "BASELINE_FAIL": 1
+        },
+        "round4": {
+          "KILLED_BY_TESTS": 8
+        },
+        "third_delta_audit": {
+          "KILLED_BY_TESTS": 7,
+          "SURVIVED": 3
+        }
+      },
+      "definitions": "reports/phase1g_h_delta_audit_3_remediation_logs/round4_mutant_definitions.json",
+      "results": "reports/phase1g_h_delta_audit_3_remediation_logs/round4_mutant_results.json",
+      "runner": "reports/phase1g_h_delta_audit_3_remediation_logs/run_mutants_r4.py",
+      "surviving_classified": {
+        "B04_monte_carlo_budget_doubled": "test-tolerance loosening only; the audit's classification (no runtime defect)",
+        "B05_simpson_error_ratio_budget_x10": "test-tolerance loosening only; the audit's classification (no runtime defect)",
+        "B06_lognormal_calibration_inside_budget": "inside the declared 1e-9 calibration budget; legitimate survivor (the audit's classification)"
+      }
+    },
+    "second_delta_audit_campaign_rerun": {
+      "by_origin": {
+        "author": {
+          "KILLED_BY_TESTS": 9,
+          "NOT_APPLIED": 1
+        },
+        "baseline": {
+          "BASELINE_PASS": 1
+        },
+        "delta": {
+          "KILLED_BY_TESTS": 21,
+          "SURVIVED": 2
+        },
+        "own": {
+          "KILLED_BY_TESTS": 22,
+          "SURVIVED": 1
+        },
+        "round3": {
+          "KILLED_BY_TESTS": 4
+        }
+      },
+      "not_applied": {
+        "AUTH_D1_binding_off": "superseded by AUTH_D1_binding_off_adapted (extra)"
+      },
+      "results": "reports/phase1g_h_delta_audit_3_remediation_logs/second_delta_audit_campaign_rerun.json",
+      "script": "generated by reports/phase1g_h_delta_audit_2_remediation_logs/make_campaign.py from reports/phase1g_h_delta_audit_2_evidence/mutation_campaign.py (sha256 edabc3cebba2c1732d20d44ce4b644af40e76be0de59eb70081f537d4d538049, regenerated byte-identically)",
+      "surviving_classified": {
+        "A02_same_bool_type_check_off": "benign, as classified by the second delta audit",
+        "N5_orthant_centre_split_off": "benign, as classified by the delta audit",
+        "N9_void_share_identity_text_sign_reversed": "docstring-only mutant"
+      }
+    },
+    "tree": "6926a636c100d232247e39d71d5b2d6e71a6f917 (the same src, scripts and tests bytes: the working-tree diff hash was unchanged from the start of the campaign to the code commits)"
+  },
+  "numbers": {
+    "case_runner_outputs_byte_identical_to_round_3": true,
+    "regression_vs_9ad5425_same_interpreter": {
+      "numeric_leaves_changed": 0,
+      "numeric_leaves_compared": 3185,
+      "renamed_leaves": {
+        "all_bitwise_equal": true,
+        "count": 16,
+        "new_key": "both_walls_product_moment_excess_ball",
+        "old_key": "both_walls_conditional_density_covariance_ball"
+      },
+      "text_leaves_changed": [
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/not_shared/1",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/not_shared/1"
+      ]
+    },
+    "report_values_changed": 0
+  },
+  "observational_authorizations": {
+    "FSIGMA8_AUTHORIZATION": "NOT_GRANTED",
+    "OBSERVATIONAL_AUTHORIZATION": "NOT_GRANTED",
+    "RSD_AUTHORIZATION": "NOT_GRANTED",
+    "SIGMA8_AUTHORIZATION": "NOT_GRANTED",
+    "UNIQUE_TIMESCAPE_PREDICTION": "NOT_GRANTED"
+  },
+  "open_items": [
+    "push of 4d71bd4, 18bf2fb and the three commits of this remediation (separate approval; recorded afterwards as P14)",
+    "Windows gate (CPython 3.14.3 / 3.11.9)",
+    "owner decisions H-OD1 ... H-OD5",
+    "scalar normalisation of 1G-B records (GH-D3F2 for lagrangian_sigma.py), if wanted",
+    "C: prediction and observation not reached"
+  ],
+  "owner_approval": {
+    "date": "2026-10-09",
+    "scope": "the plan of section 1, with option (a) for GH-D3F4",
+    "verbatim": "Perfetto, procedi"
+  },
+  "phase": "1G-H",
+  "plan": {
+    "GH-D3E1_E2_E3": "E1, E2 in the record and a one-line pointer; E3 in the _same docstring",
+    "GH-D3F1": "events P11-P13 in section 8 of the publication successor; current summaries name the last recorded publication event and point to the record",
+    "GH-D3F2": "every 1G-H record refuses construction unless its export, nested 1G-B inputs included, is strict JSON; lagrangian_sigma.py scalars are not normalised",
+    "GH-D3F3": "the audit's tests, a literal binding-tolerance bound, pinned RECORD_IDENTITY_RTOL, independent Monte Carlo normaliser and conservative-budget wording, tighter Simpson tolerances",
+    "GH-D3F4": "option (a): separate 1G-B contract-hardening successor, separate commit and record",
+    "GH-D3F5": "wording; key both_walls_conditional_density_covariance_ball renamed both_walls_product_moment_excess_ball (same values)"
+  },
+  "record": "reports/phase1g_h_delta_audit_3_remediation.md",
+  "schema_version": 1,
+  "status_tokens": {
+    "added": [],
+    "changed": []
+  },
+  "tests": {
+    "added": [
+      "test_gh_d3f3_every_growth_check_and_g_are_stored_as_floats",
+      "test_gh_d3f3_float_results_accept_float64_and_subclasses_but_not_float32",
+      "test_gh_d3f3_binding_tolerance_boundary_with_a_literal_rtol",
+      "test_gh_d3f2_nested_inputs_must_export_as_strict_json"
+    ],
+    "count": 53,
+    "count_before": 49,
+    "extended": [
+      "test_gh_d2f2_evidence_thresholds_are_pinned (RECORD_IDENTITY_RTOL == 1e-12)"
+    ],
+    "file": "tests/test_phase1g_h_global_variance.py",
+    "related_1g_b": {
+      "count": 18,
+      "file": "tests/test_phase1g_b_contract_hardening.py"
+    },
+    "revised": [
+      "the conditional wall-density Monte Carlo test (independent normaliser, conservative budget)",
+      "the Simpson half-resolution test (2e-3, 5e-3)",
+      "the both-walls law-summary test (renamed key)"
+    ]
+  },
+  "third_delta_audit": {
+    "audited_commit": "ed0ec0c9c8783519a53759a265b6ce37e6c0e607",
+    "auditor_independence": "OpenAI Codex, GPT-6 family (exact version not exposed); a different model family from the author (Claude)",
+    "blind_checkpoint": "4d71bd4fe918ef8a0b71c178a7180c4d291294b0",
+    "commit": "18bf2fbef880fdfb3c292956aa1f000720930abf",
+    "cross_family_check": "CROSS_FAMILY_VERIFIED_WITH_DEVIATION (58/58 quantities, largest absolute difference 6.1e-10; deviation = the auditor's own initial recipe, disclosed and corrected)",
+    "inventory": "reports/phase1g_h_delta_audit_3_inventory.json",
+    "readiness_token": "NO_SCIENTIFIC_BLOCKER_PENDING_CONTRACT_TEST_P11_CORRECTIONS_WINDOWS_GATE_AND_OWNER_DECISIONS",
+    "rehashed_from": {
+      "checkpoint": "c62ad87",
+      "report": "d9342c4"
+    },
+    "report": "reports/phase1g_h_delta_audit_3.md",
+    "verdict": {
+      "DOCUMENTATION": "ACCEPT_WITH_CORRECTIONS",
+      "GOVERNANCE": "ACCEPT_WITH_CORRECTIONS",
+      "IMPLEMENTATION": "ACCEPT_WITH_CORRECTIONS",
+      "NUMERICS": "ACCEPT",
+      "PROVENANCE": "ACCEPT",
+      "SCIENCE": "ACCEPT",
+      "TASK_COMPLIANCE": "ACCEPT",
+      "TESTS": "ACCEPT_WITH_CORRECTIONS",
+      "overall": "ACCEPT_WITH_CORRECTIONS"
+    }
+  },
+  "title": "Phase 1G-H remediation of the third independent delta audit",
+  "unchanged": [
+    "status tokens",
+    "the five NOT_GRANTED observational authorisations",
+    "equations",
+    "tolerances",
+    "frozen records",
+    "tags",
+    "the files of the four audits",
+    "every package module other than global_variance.py and, under its own successor, lagrangian_sigma.py"
+  ],
+  "verification": {
+    "case_runner": {
+      "gm_bare_pbs_f_median_seed": 0.810772,
+      "gm_bare_pbs_w09_seed": 1.121363,
+      "nw15_equal_mass_constant_share": 0.918157
+    },
+    "diff_check": "clean",
+    "evidence": {
+      "artifact_sha256_py313": "027b8e124488f2f6bffa71c2082dfb73da60083435cca207a3f0f546ae1a34a2",
+      "cross_interpreter_max_rel": 0.0,
+      "cross_interpreter_note": "the 3.11 run uses --no-figures, so its figure list is empty",
+      "cross_interpreter_numeric_changed": 0,
+      "cross_interpreter_numeric_leaves": 3201,
+      "cross_interpreter_only_one_side": 0,
+      "cross_interpreter_text_changed": 0,
+      "gates": "36 / 36 on CPython 3.13.16 and 36 / 36 on 3.11.17",
+      "tree": "6926a636c100d232247e39d71d5b2d6e71a6f917 (src, scripts, tests clean)"
+    },
+    "full_suites": {
+      "CPython 3.11.17": {
+        "collected": 1207,
+        "errors": 0,
+        "failed": 0,
+        "passed": 1207,
+        "rc": 0,
+        "seconds": 337,
+        "skipped": 0
+      },
+      "CPython 3.13.16": {
+        "collected": 1207,
+        "errors": 0,
+        "failed": 0,
+        "passed": 1207,
+        "rc": 0,
+        "seconds": 338,
+        "skipped": 0
+      },
+      "command": "OPENBLAS_NUM_THREADS=1 python -B -W error -m pytest -q -p no:cacheprovider -rs"
+    },
+    "full_suites_rerun_on_final_documentation": {
+      "CPython 3.11.17": {
+        "failed": 0,
+        "passed": 1207,
+        "seconds": 332,
+        "skipped": 0
+      },
+      "CPython 3.13.16": {
+        "failed": 0,
+        "passed": 1207,
+        "seconds": 333,
+        "skipped": 0
+      },
+      "logs": "reports/phase1g_h_delta_audit_3_remediation_logs/full_suite_final_py313.log, full_suite_final_py311.log",
+      "scope": "every byte of the documentation commit except the sentence recording this rerun and these two logs"
+    },
+    "input_regeneration": {
+      "logs": "reports/phase1g_h_delta_audit_3_remediation_logs/regen_*.log",
+      "note": "git-ignored artifacts only; no tracked file changed; the upstream clone was read only",
+      "scripts": [
+        "execute_upstream_notebook",
+        "extract_upstream_oracle",
+        "extract_upstream_perturbation_oracle",
+        "extract_upstream_barotropic_oracle",
+        "validate_growth_pipeline",
+        "validate_barotropic_perturbations",
+        "phase1g_owner_decisions_numerics (898 s)",
+        "validate_anchored_density_growth (clean worktree at 18bf2fb, 731 s)"
+      ]
+    },
+    "not_run": [
+      "Windows CPython 3.14.3 / 3.11.9"
+    ],
+    "skip_causes": "none (inputs regenerated, below)",
+    "tolerance_audit": {
+      "comparisons": 750,
+      "missing": 0
+    },
+    "tolerance_audit_note": "one comparison more than round 3: the pytest.approx (rel 1e-14) of the new 1G-B decomposition test",
+    "validator": {
+      "json_roundtrips": 57,
+      "log": "reports/phase1g_h_delta_audit_3_remediation_logs/validator.log",
+      "script": "scripts/validate_phase1f_c_r_astra_remediation.py",
+      "status": "PASS"
+    }
+  }
+}

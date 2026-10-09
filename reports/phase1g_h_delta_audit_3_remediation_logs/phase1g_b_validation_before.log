@@ -1,0 +1,22 @@
+written artifacts/independent/phase1g_b_lagrangian_sigma.json
+V1_volume_average_growth_vs_script_rel: max 5.127e-13 (n=6) gate 1.0e-10 PASS
+V1_wall_growth_vs_script_rel: max 2.220e-16 (n=3) gate 1.0e-13 PASS
+V2_per_photon_density_vs_script_rel: max 4.441e-16 (n=27) gate 1.0e-13 PASS
+V3_radius_vs_script_rel: max 2.220e-16 (n=27) gate 1.0e-13 PASS
+V3_early_spectrum_factor_vs_script_rel: max 2.220e-16 (n=27) gate 1.0e-10 PASS
+V3_anchored_sigma_vs_script_rel: max 5.130e-13 (n=63) gate 1.0e-10 PASS
+V3_lcdm_reference_vs_script_rel: max 0.000e+00 (n=1) gate 1.0e-12 PASS
+V4_growth_grid_refinement_abs_log: max 3.997e-15 (n=6) gate 1.0e-07 PASS
+V4_growth_early_limit_abs_log: max 1.892e-05 (n=6) gate 1.0e-04 PASS
+V4_growth_extrapolated_limit_abs_log: max 2.099e-08 (n=2) gate 1.0e-07 PASS
+V4_quadrature_refinement_rel: max 1.940e-10 (n=30) gate 1.0e-06 PASS
+V4_quadrature_k_range_rel: max 8.678e-12 (n=3) gate 1.0e-08 PASS
+V5_wall_identities_max_rel: max 1.332e-15 (n=3) gate 1.0e-13 PASS
+V5_small_fv0_first_order_coefficient_abs: max 4.078e-05 (n=2) gate 1.0e-04 PASS
+V5_H0_and_G_invariance_rel: max 8.999e-12 (n=9) gate 1.0e-10 PASS
+V5_window_threshold_continuity_rel: max 2.598e-14 (n=1) gate 1.0e-13 PASS
+V6_lcdm_reference_offset_from_anchor_abs: max 3.032e-02 (n=1) gate 5.0e-02 PASS
+V7_inventory_growth_six_decimals_abs: max 4.227e-07 (n=11) gate 5.0e-07 PASS
+V7_inventory_fv0_scan_four_decimals_abs: max 4.942e-05 (n=20) gate 5.0e-05 PASS
+V7_inventory_sigma_table_four_decimals_abs: max 4.990e-05 (n=44) gate 5.0e-05 PASS
+V7_inventory_per_photon_density_five_decimals_abs: max 4.879e-06 (n=3) gate 5.0e-06 PASS

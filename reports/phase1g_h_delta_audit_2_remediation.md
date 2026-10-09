@@ -22,7 +22,9 @@ commit `4bf2718` and is not rewritten. Its two commits and the two commits
 of the second delta audit were pushed on 2026-10-09 (`226e52d → 4bf2718`,
 event P10 of [`phase1g_h_publication_successor.md`](phase1g_h_publication_successor.md),
 Sec. 7), so "Nothing is pushed" (Sec. 0) and the push item of Sec. 4 are
-superseded.
+superseded. Errata GH-D3E1 and GH-D3E2 of the third delta audit correct
+Secs. 1 and 2 (strict JSON was not yet transitive): see
+[`phase1g_h_delta_audit_3_remediation.md`](phase1g_h_delta_audit_3_remediation.md).
 
 ## 0. Summary
 

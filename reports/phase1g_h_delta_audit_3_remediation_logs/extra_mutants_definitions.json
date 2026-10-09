@@ -1,0 +1,7 @@
+[
+ {"id": "AUTH_D1_binding_off_adapted", "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "    for name, expected in values.items():\n        stored = getattr(record, name)",
+  "new": "    for name, expected in ():\n        stored = getattr(record, name)",
+  "adapted_from": "AUTH_D1_binding_off (reports/phase1g_h_delta_audit_remediation_logs/own_mutants_definitions.json)",
+  "reason": "GH-D2F4 inserted 'stored = getattr(record, name)' into the binding loop; the mutant again skips every binding comparison"}
+]

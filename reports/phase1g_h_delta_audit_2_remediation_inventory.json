@@ -83,6 +83,14 @@
       "where": "dated note of reports/phase1g_h_delta_audit_remediation.md; reports/phase1g_h_publication_successor.md section 6"
     }
   ],
+  "errata_pointer_2026_10_09": {
+    "corrections": "reports/phase1g_h_delta_audit_3_remediation.md",
+    "errata": [
+      "GH-D3E1 (section 1: strict JSON did not yet hold transitively)",
+      "GH-D3E2 (section 2: imported 1G-B records do not all store native floats)"
+    ],
+    "source": "reports/phase1g_h_delta_audit_3.md section 9"
+  },
   "files_changed_sha256": {
     "scripts/phase1g_h_global_variance_closure_numerics.py": "c16418d3041e6bec6b2e09bf46ef73402e01af23ed7e7df4136831980c744c1c",
     "src/timescape_fsigma8/global_variance.py": "9147e3e4fee0a354b1a1a4257752ee84b6b945cf33d379d750ddc35f2dfbb1b2",

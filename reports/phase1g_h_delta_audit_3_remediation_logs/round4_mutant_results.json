@@ -1,0 +1,368 @@
+[
+ {
+  "id": "baseline",
+  "file": null,
+  "tests": [
+   "tests/test_phase1g_h_global_variance.py",
+   "tests/test_phase1g_b_lagrangian_sigma.py",
+   "tests/test_phase1g_b_owner_decisions.py",
+   "tests/test_phase1g_b_contract_hardening.py"
+  ],
+  "origin": "baseline",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 194 passed in 26.04s",
+  "failed_tests": [
+   "tests/test_phase1g_b_owner_decisions.py::test_gb_od3_the_frozen_inventory_is_pinned_to_its_certified_blob"
+  ],
+  "outcome": "BASELINE_FAIL"
+ },
+ {
+  "id": "B01_record_identity_rtol_10pct_drift",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "RECORD_IDENTITY_RTOL = 1e-12",
+  "new": "RECORD_IDENTITY_RTOL = 1.1e-12",
+  "tests": [
+   "tests/test_phase1g_h_global_variance.py"
+  ],
+  "origin": "third_delta_audit",
+  "replacements": 1,
+  "mutated_sha256": "27c4647bf13b82a1d3fec7e0945b0446d3796f67b79ff7cfc18f576256f1383e",
+  "tests_rc": 1,
+  "tests_summary": "2 failed, 51 passed in 16.89s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_d2f2_evidence_thresholds_are_pinned",
+   "tests/test_phase1g_h_global_variance.py::test_gh_d3f3_binding_tolerance_boundary_with_a_literal_rtol"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "id": "B02_same_rejects_float_subclasses",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "isinstance(stored, float) and math.isfinite(stored)",
+  "new": "type(stored) is float and math.isfinite(stored)",
+  "tests": [
+   "tests/test_phase1g_h_global_variance.py"
+  ],
+  "origin": "third_delta_audit",
+  "replacements": 1,
+  "mutated_sha256": "7b86aa4dd93d07fcb292850bba6919c3ff2a0ab1e6958cb918d3ae8bf9d940dd",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 52 passed in 19.38s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_d3f3_float_results_accept_float64_and_subclasses_but_not_float32"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "id": "B03_same_accepts_numpy_float32",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "isinstance(stored, float)",
+  "new": "isinstance(stored, (float, np.floating))",
+  "tests": [
+   "tests/test_phase1g_h_global_variance.py"
+  ],
+  "origin": "third_delta_audit",
+  "replacements": 2,
+  "mutated_sha256": "15c875a051a52866826bcbc557dcbd35653e9ab87b47d26eb418c03d6909a411",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 52 passed in 18.27s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_d3f3_float_results_accept_float64_and_subclasses_but_not_float32"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "id": "B04_monte_carlo_budget_doubled",
+  "file": "tests/test_phase1g_h_global_variance.py",
+  "old": "<= 5 *",
+  "new": "<= 10 *",
+  "tests": [
+   "tests/test_phase1g_h_global_variance.py"
+  ],
+  "origin": "third_delta_audit",
+  "replacements": 12,
+  "mutated_sha256": "553bf175974b74f7f5efb5bc9d285e775a782a97320546667c73b3939b374ca3",
+  "tests_rc": 0,
+  "tests_summary": "53 passed in 18.83s",
+  "failed_tests": [],
+  "outcome": "SURVIVED"
+ },
+ {
+  "id": "B05_simpson_error_ratio_budget_x10",
+  "file": "tests/test_phase1g_h_global_variance.py",
+  "old": "pytest.approx(16.0, rel=5e-3, abs=0.0)",
+  "new": "pytest.approx(16.0, rel=5e-2, abs=0.0)",
+  "tests": [
+   "tests/test_phase1g_h_global_variance.py"
+  ],
+  "origin": "third_delta_audit",
+  "replacements": 1,
+  "mutated_sha256": "f93809bda596f045ab5b4c33bd1acc2b917ddf30fbb1a5fa8f12b5e7f0a0a8a1",
+  "tests_rc": 0,
+  "tests_summary": "53 passed in 18.40s",
+  "failed_tests": [],
+  "outcome": "SURVIVED"
+ },
+ {
+  "id": "B06_lognormal_calibration_inside_budget",
+  "file": "scripts/phase1g_h_global_variance_closure_numerics.py",
+  "old": "carrier_ball(l2) - ball_target",
+  "new": "carrier_ball(l2) - (1.0 + 1e-10) * ball_target",
+  "tests": [
+   "tests/test_phase1g_h_global_variance.py"
+  ],
+  "origin": "third_delta_audit",
+  "replacements": 1,
+  "mutated_sha256": "d2579940d6a9586f4f69539b8f0eede08775d7cf59c0aa9c8d0f662712eb7b04",
+  "tests_rc": 0,
+  "tests_summary": "53 passed in 19.53s",
+  "failed_tests": [],
+  "evidence_rc": 0,
+  "evidence_failures": [],
+  "outcome": "SURVIVED"
+ },
+ {
+  "id": "B07_p11_weight_denominator_1ppm",
+  "file": "scripts/phase1g_h_global_variance_closure_numerics.py",
+  "old": "ball.integral(k_ww + 2.0 * k_pw) / ball.integral(p11),",
+  "new": "ball.integral(k_ww + 2.0 * k_pw) / (1.000001 * ball.integral(p11)),",
+  "tests": [
+   "tests/test_phase1g_h_global_variance.py"
+  ],
+  "origin": "third_delta_audit",
+  "replacements": 1,
+  "mutated_sha256": "a6fe0234e6c54febf57b303c40e60e2491b8268af109f8656e61e45b828253a9",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 52 passed in 19.39s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_d2f2_law_summary_reports_the_pair_weighted_both_walls_covariance"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "id": "B08_lognormal_calibration_1ppm",
+  "file": "scripts/phase1g_h_global_variance_closure_numerics.py",
+  "old": "carrier_ball(l2) - ball_target",
+  "new": "carrier_ball(l2) - 1.000001 * ball_target",
+  "tests": [
+   "tests/test_phase1g_h_global_variance.py"
+  ],
+  "origin": "third_delta_audit",
+  "replacements": 1,
+  "mutated_sha256": "4285a9a3e20032b2af660beb128e5ca519086d8187368d0d88f50023a82c49a7",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 52 passed in 20.92s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_d2f2_lognormal_pairs_report_the_inverse_square_of_the_law_ii_normaliser"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "id": "B09_reported_lambda_1ppm",
+  "file": "scripts/phase1g_h_global_variance_closure_numerics.py",
+  "old": "\"latent_scale_lambda\": math.sqrt(lam2),",
+  "new": "\"latent_scale_lambda\": 1.000001 * math.sqrt(lam2),",
+  "tests": [
+   "tests/test_phase1g_h_global_variance.py"
+  ],
+  "origin": "third_delta_audit",
+  "replacements": 1,
+  "mutated_sha256": "bc174ec366299a9ea50597e7d8788c01077442f9e5284888923c6c1895da7f78",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 52 passed in 16.41s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_d2f2_lognormal_pairs_report_the_inverse_square_of_the_law_ii_normaliser"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "id": "B10_one_growth_tolerance_not_converted",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "object.__setattr__(self, name, _positive(getattr(self, name), name))",
+  "new": "object.__setattr__(self, name, _positive(getattr(self, name), name)) if name != \"ode_atol\" else _positive(getattr(self, name), name)",
+  "tests": [
+   "tests/test_phase1g_h_global_variance.py"
+  ],
+  "origin": "third_delta_audit",
+  "replacements": 1,
+  "mutated_sha256": "4b59754f0a315b5f09ca3182e3e90dac2fce1f6497146337b799e24f6d5d3385",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 52 passed in 16.53s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_d3f3_every_growth_check_and_g_are_stored_as_floats"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "id": "J01_strict_json_check_disabled",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "    try:\n        json.dumps(export, allow_nan=False)",
+  "new": "    return\n    try:\n        json.dumps(export, allow_nan=False)",
+  "tests": [
+   "tests/test_phase1g_h_global_variance.py"
+  ],
+  "origin": "round4",
+  "replacements": 1,
+  "mutated_sha256": "bf1a753546cc93520d261e2c575585878e38586d15314467b4df8d532fe0fefc",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 52 passed in 15.43s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_d3f2_nested_inputs_must_export_as_strict_json"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "id": "J02_sigma_record_json_check_removed",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "        _require_strict_json(self.to_json_dict(), \"sigma record\")\n",
+  "new": "",
+  "tests": [
+   "tests/test_phase1g_h_global_variance.py"
+  ],
+  "origin": "round4",
+  "replacements": 1,
+  "mutated_sha256": "b7c9ca56331d6dc698655d9dfc8486fc2040baedc3f256127996ccfd82900f81",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 52 passed in 18.92s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_d3f2_nested_inputs_must_export_as_strict_json"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "id": "J03_float32_refusal_via_message_branch_off",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "        if isinstance(expected, float) and not isinstance(stored, float):",
+  "new": "        if False:",
+  "tests": [
+   "tests/test_phase1g_h_global_variance.py"
+  ],
+  "origin": "round4",
+  "replacements": 1,
+  "mutated_sha256": "130e327dbf0a3f7b4e4a618aa4406c7e32ef7a52f308f38f4fb7545d42852e8d",
+  "tests_rc": 1,
+  "tests_summary": "2 failed, 51 passed in 17.81s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_d2f4_float_results_must_be_floats_and_scalar_inputs_are_stored_as_floats",
+   "tests/test_phase1g_h_global_variance.py::test_gh_d3f3_float_results_accept_float64_and_subclasses_but_not_float32"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "id": "L01_lcdm_diagnostics_finiteness_off",
+  "file": "src/timescape_fsigma8/lagrangian_sigma.py",
+  "old": "        for name in (\"quadrature_relative_change\", \"truncation_envelope_fraction\"):\n            if _real(getattr(self, name), name) < 0.0:\n                raise LagrangianSigmaContractError(f\"{name} must be nonnegative\")\n        if not (self.quadrature_relative_change\n                == abs(self.sigma_unit_growth / self.sigma_unit_growth_comparison_grid - 1.0)",
+  "new": "        if not (self.quadrature_relative_change\n                == abs(self.sigma_unit_growth / self.sigma_unit_growth_comparison_grid - 1.0)",
+  "tests": [
+   "tests/test_phase1g_b_lagrangian_sigma.py",
+   "tests/test_phase1g_b_owner_decisions.py",
+   "tests/test_phase1g_b_contract_hardening.py"
+  ],
+  "origin": "round4",
+  "replacements": 1,
+  "mutated_sha256": "c3c9e42f538b49efe3c4e5d587462190087841725801fda4a3e6635d1077a4d6",
+  "tests_rc": 1,
+  "tests_summary": "11 failed, 131 passed in 7.67s",
+  "failed_tests": [
+   "tests/test_phase1g_b_owner_decisions.py::test_gb_od3_the_frozen_inventory_is_pinned_to_its_certified_blob",
+   "tests/test_phase1g_b_contract_hardening.py::test_lcdm_reference_diagnostics_must_be_finite_and_nonnegative[nan-must",
+   "tests/test_phase1g_b_contract_hardening.py::test_lcdm_reference_diagnostics_must_be_finite_and_nonnegative[nan-must",
+   "tests/test_phase1g_b_contract_hardening.py::test_lcdm_reference_diagnostics_must_be_finite_and_nonnegative[inf-must",
+   "tests/test_phase1g_b_contract_hardening.py::test_lcdm_reference_diagnostics_must_be_finite_and_nonnegative[inf-must",
+   "tests/test_phase1g_b_contract_hardening.py::test_lcdm_reference_diagnostics_must_be_finite_and_nonnegative[-inf-must",
+   "tests/test_phase1g_b_contract_hardening.py::test_lcdm_reference_diagnostics_must_be_finite_and_nonnegative[-inf-must",
+   "tests/test_phase1g_b_contract_hardening.py::test_lcdm_reference_diagnostics_must_be_finite_and_nonnegative[-1e-12-must",
+   "tests/test_phase1g_b_contract_hardening.py::test_lcdm_reference_diagnostics_must_be_finite_and_nonnegative[-1e-12-must",
+   "tests/test_phase1g_b_contract_hardening.py::test_lcdm_reference_diagnostics_must_be_finite_and_nonnegative[value4-must",
+   "tests/test_phase1g_b_contract_hardening.py::test_lcdm_reference_diagnostics_must_be_finite_and_nonnegative[value4-must"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "id": "L02_lcdm_diagnostics_binding_off",
+  "file": "src/timescape_fsigma8/lagrangian_sigma.py",
+  "old": "            raise LagrangianSigmaContractError(\"quadrature diagnostics are inconsistent or failed\")\n        if self.linear_sigma != self.growth_today_photon_normalised * self.sigma_unit_growth:",
+  "new": "            pass\n        if self.linear_sigma != self.growth_today_photon_normalised * self.sigma_unit_growth:",
+  "tests": [
+   "tests/test_phase1g_b_lagrangian_sigma.py",
+   "tests/test_phase1g_b_owner_decisions.py",
+   "tests/test_phase1g_b_contract_hardening.py"
+  ],
+  "origin": "round4",
+  "replacements": 1,
+  "mutated_sha256": "b882bcfc7a2a0cda0e6fff541ef51f42a64664dfc04079ae360448ef04c62b6c",
+  "tests_rc": 1,
+  "tests_summary": "2 failed, 140 passed in 7.25s",
+  "failed_tests": [
+   "tests/test_phase1g_b_owner_decisions.py::test_gb_od3_the_frozen_inventory_is_pinned_to_its_certified_blob",
+   "tests/test_phase1g_b_contract_hardening.py::test_lcdm_reference_diagnostics_are_bound_to_the_quadrature"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "id": "L03_anchored_ratio_binding_off",
+  "file": "src/timescape_fsigma8/lagrangian_sigma.py",
+  "old": "        if not (self.growth_ratio == (ts.growth.growth_today_photon_normalised",
+  "new": "        if False and not (self.growth_ratio == (ts.growth.growth_today_photon_normalised",
+  "tests": [
+   "tests/test_phase1g_b_lagrangian_sigma.py",
+   "tests/test_phase1g_b_owner_decisions.py",
+   "tests/test_phase1g_b_contract_hardening.py"
+  ],
+  "origin": "round4",
+  "replacements": 1,
+  "mutated_sha256": "ba222538983f26661004de09b1b7a42bd16e026ce881d35a20090240b70eb51f",
+  "tests_rc": 1,
+  "tests_summary": "5 failed, 137 passed in 6.79s",
+  "failed_tests": [
+   "tests/test_phase1g_b_owner_decisions.py::test_gb_od3_the_frozen_inventory_is_pinned_to_its_certified_blob",
+   "tests/test_phase1g_b_contract_hardening.py::test_anchored_ratio_factors_are_bound_to_the_stored_records[growth_ratio]",
+   "tests/test_phase1g_b_contract_hardening.py::test_anchored_ratio_factors_are_bound_to_the_stored_records[early_spectrum_factor]",
+   "tests/test_phase1g_b_contract_hardening.py::test_anchored_ratio_factors_are_bound_to_the_stored_records[reference_offset_from_anchor]",
+   "tests/test_phase1g_b_contract_hardening.py::test_anchored_ratio_refuses_a_consistent_but_unbound_sigma_ratio"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "id": "L04_anchored_differences_binding_off",
+  "file": "src/timescape_fsigma8/lagrangian_sigma.py",
+  "old": "        if self.early_spectrum_differences != differences:",
+  "new": "        if False:",
+  "tests": [
+   "tests/test_phase1g_b_lagrangian_sigma.py",
+   "tests/test_phase1g_b_owner_decisions.py",
+   "tests/test_phase1g_b_contract_hardening.py"
+  ],
+  "origin": "round4",
+  "replacements": 1,
+  "mutated_sha256": "775bb100e0e25145b3c3732a2cdcd29bdac07cf8625f9091ad71880b6896a136",
+  "tests_rc": 1,
+  "tests_summary": "2 failed, 140 passed in 7.61s",
+  "failed_tests": [
+   "tests/test_phase1g_b_owner_decisions.py::test_gb_od3_the_frozen_inventory_is_pinned_to_its_certified_blob",
+   "tests/test_phase1g_b_contract_hardening.py::test_anchored_ratio_names_exactly_the_differing_early_spectrum_inputs"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "id": "L05_anchored_offset_unbound",
+  "file": "src/timescape_fsigma8/lagrangian_sigma.py",
+  "old": "                and self.reference_offset_from_anchor\n                == ref.linear_sigma / self.anchor_value - 1.0):",
+  "new": "                ):",
+  "tests": [
+   "tests/test_phase1g_b_lagrangian_sigma.py",
+   "tests/test_phase1g_b_owner_decisions.py",
+   "tests/test_phase1g_b_contract_hardening.py"
+  ],
+  "origin": "round4",
+  "replacements": 1,
+  "mutated_sha256": "e7f0418bde2fb41d0ba7ea5866bf0d9c9632dbe641698946d4b9a8b745ac23d8",
+  "tests_rc": 1,
+  "tests_summary": "2 failed, 140 passed in 7.47s",
+  "failed_tests": [
+   "tests/test_phase1g_b_owner_decisions.py::test_gb_od3_the_frozen_inventory_is_pinned_to_its_certified_blob",
+   "tests/test_phase1g_b_contract_hardening.py::test_anchored_ratio_factors_are_bound_to_the_stored_records[reference_offset_from_anchor]"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ }
+]

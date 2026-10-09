@@ -143,11 +143,12 @@ that predate the freeze are resolved in the
 - **Status.** These are conditional numbers, not an observational σ8, and no
   σ8 authorization is granted.
 - **Phase 1G-H (proposed; on the branch `ccr-555e67be-u11yht`, pushed with
-  owner approvals on 2026-10-06, 2026-10-08 and 2026-10-09, remote head
-  `4bf2718`; independently audited on 2026-10-07 and remediated;
-  delta-audited on 2026-10-08 and remediated; a second delta audit the same
-  day accepted it with corrections, which are applied; not merged into
-  `main`, frozen or tagged)**
+  owner approvals on 2026-10-06, 2026-10-08 and 2026-10-09; last recorded
+  publication event P11, `ed0ec0c`, in the publication record; independently
+  audited on 2026-10-07 and remediated; delta-audited on 2026-10-08 and
+  remediated; a second delta audit the same day and a third, cross-family
+  delta audit on 2026-10-09 accepted it with corrections, which are applied;
+  not merged into `main`, frozen or tagged)**
   ([report](reports/phase1g_h_global_variance_closure.md),
   [validation](reports/phase1g_h_global_variance_closure_validation.md),
   [audit](reports/phase1g_h_independent_audit.md),
@@ -156,6 +157,9 @@ that predate the freeze are resolved in the
   [delta remediation](reports/phase1g_h_delta_audit_remediation.md),
   [second delta audit](reports/phase1g_h_delta_audit_2.md),
   [second remediation](reports/phase1g_h_delta_audit_2_remediation.md),
+  [third delta audit](reports/phase1g_h_delta_audit_3.md),
+  [third remediation](reports/phase1g_h_delta_audit_3_remediation.md),
+  [1G-B hardening](reports/phase1g_b_contract_hardening_successor.md),
   [publication](reports/phase1g_h_publication_successor.md)):
   - *Audits.* The independent audit rejected the closure claims of the
     audited text (definition "closed", structure "derived", interval
@@ -168,8 +172,14 @@ that predate the freeze are resolved in the
     applied. The second delta audit (2026-10-08, same model family as the
     author) found them resolved and no scientific blocker; its two LOW and
     four INFO findings (publication record, tests, typed records, wording)
-    are applied. The owner's Windows gate and the decisions on pull
-    request, merge, freeze and tag remain open.
+    are applied. The third delta audit (2026-10-09, OpenAI GPT-6 family)
+    reproduced Sec. 6 and the main conditional values independently (58 of
+    58 quantities) and found no scientific blocker; its corrections (a
+    publication convention, strict JSON for nested inputs, tests, wording)
+    are applied, and by owner decision a separate successor hardens two
+    1G-B record contracts with bit-identical outputs. The owner's Windows
+    gate and the decisions on pull request, merge, freeze and tag remain
+    open.
   - *Definition (proposed).* The formal tangent statistic: the rms of the
     early Gaussian field propagated with the zero-amplitude tangent of the
     global contrast of Lagrangian top-hat regions (dust foliation, global

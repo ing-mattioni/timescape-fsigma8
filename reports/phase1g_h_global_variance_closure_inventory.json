@@ -107,7 +107,7 @@
   "evidence": {
     "artifact": "artifacts/independent/phase1g_h_global_variance_closure.json (git-ignored, regenerable)",
     "artifact_raw_sha256_meaning": "one exact output and environment (includes the git head), not a cross-platform gate",
-    "artifact_sha256_py313_run": "357a7035cedabf17a63437d72e348fcdee2ad9e529c4c50f4e2e95a7926b44c2",
+    "artifact_sha256_py313_run": "027b8e124488f2f6bffa71c2082dfb73da60083435cca207a3f0f546ae1a34a2",
     "cross_interpreter_check": {
       "interpreters": [
         "CPython 3.13.16 (NumPy 2.5.3, SciPy 1.18.1)",
@@ -117,7 +117,7 @@
       "max_relative_difference": 0.0,
       "numeric_leaves_compared": 3201,
       "rule": "every numeric leaf equal (environment and figures ignored); labels and keys exactly",
-      "tree": "second delta-audit remediated code 9ad54253c4ec40cede5690da6659be28e0bd0a2d (2026-10-08)"
+      "tree": "third delta-audit remediated code c6028e9046934ef6de234f0b58fbe18e6f3bead1 with 6926a636c100d232247e39d71d5b2d6e71a6f917 (2026-10-09)"
     },
     "delta_audit_remediation_additions": [
       "radial_refinement_rel and h25_identity_rel gates (declared before their first evaluation)",
@@ -160,7 +160,7 @@
       "nonnegative_lognormal_pair"
     ],
     "run_environment": {
-      "git_head": "9ad54253c4ec40cede5690da6659be28e0bd0a2d",
+      "git_head": "6926a636c100d232247e39d71d5b2d6e71a6f917",
       "implementation": "CPython",
       "matplotlib": "3.11.2",
       "numpy": "2.5.3",
@@ -173,6 +173,12 @@
     "second_delta_audit_remediation_changes": [
       "the (H25) gate is a consistency check of the (H18) assembly on the same kernel arrays and sits in the numerics block (same value and limit)",
       "no numeric leaf changes (regression against 248a06b in the second remediation record)"
+    ],
+    "third_delta_audit_remediation_changes": [
+      "key both_walls_conditional_density_covariance_ball renamed both_walls_product_moment_excess_ball (same values; GH-D3F5)",
+      "the not_shared item names the both-walls conditional product moment C_W(r)",
+      "the delta-audit addition listed above as 'both-walls conditional covariance <C_W - 1> per law' is this product-moment excess",
+      "no numeric leaf changes (regression against 9ad5425: 0 of 3185 numeric leaves changed; third remediation record sec. 3)"
     ]
   },
   "files": {
@@ -181,9 +187,9 @@
       "scripts/phase1g_h_configs/gm_bare_pbs_w09_seed.json": "286cea0cb071b8381fe16025ac99d0d596c8d704282d869ebfe23d80026b3986",
       "scripts/phase1g_h_configs/nw15_equal_mass_constant_share.json": "41d442557b90a00ddd3d26f263eecea12b982c046656750fa9a1696b6c4d9288",
       "scripts/phase1g_h_global_variance_case.py": "e1b583f39f5b81c0b6c2ba5df1877de11bf091011c7c663bd81c9abee1de57f5",
-      "scripts/phase1g_h_global_variance_closure_numerics.py": "c16418d3041e6bec6b2e09bf46ef73402e01af23ed7e7df4136831980c744c1c",
-      "src/timescape_fsigma8/global_variance.py": "9147e3e4fee0a354b1a1a4257752ee84b6b945cf33d379d750ddc35f2dfbb1b2",
-      "tests/test_phase1g_h_global_variance.py": "9841173e7ad5fb925184e4f5a62a1fd9e919201fbb756b10923a722cf682a35e"
+      "scripts/phase1g_h_global_variance_closure_numerics.py": "a5fd601fecc06c57526fd644632d2595f75086457cc7eeb825a301e45c284981",
+      "src/timescape_fsigma8/global_variance.py": "96934ea62d22c2bff07ff6edf00631b0fe556579d29f02ea0efa27b79af9bf4b",
+      "tests/test_phase1g_h_global_variance.py": "201cc8fa928bf52a333314cc52888c552b36dfc2b9ed91fa374af3eff679ca62"
     },
     "added_in_delta_audit_remediation": [
       "reports/phase1g_h_delta_audit_remediation.md",
@@ -196,6 +202,14 @@
       "reports/phase1g_h_delta_audit_2_remediation.md",
       "reports/phase1g_h_delta_audit_2_remediation_inventory.json",
       "reports/phase1g_h_delta_audit_2_remediation_logs/"
+    ],
+    "added_in_third_delta_audit_remediation": [
+      "reports/phase1g_h_delta_audit_3_remediation.md",
+      "reports/phase1g_h_delta_audit_3_remediation_inventory.json",
+      "reports/phase1g_h_delta_audit_3_remediation_logs/",
+      "reports/phase1g_b_contract_hardening_successor.md",
+      "reports/phase1g_b_contract_hardening_successor_inventory.json",
+      "tests/test_phase1g_b_contract_hardening.py"
     ],
     "added_reports": [
       "reports/phase1g_h_global_variance_closure.md",
@@ -248,6 +262,21 @@
       "README.md",
       "CLAUDE.md"
     ],
+    "changed_in_third_delta_audit_remediation": [
+      "src/timescape_fsigma8/global_variance.py",
+      "tests/test_phase1g_h_global_variance.py",
+      "scripts/phase1g_h_global_variance_closure_numerics.py",
+      "src/timescape_fsigma8/lagrangian_sigma.py (separate commit, 1G-B contract-hardening successor)",
+      "reports/phase1g_h_global_variance_closure.md",
+      "reports/phase1g_h_global_variance_closure_inventory.json",
+      "reports/phase1g_h_global_variance_closure_validation.md",
+      "reports/phase1g_h_delta_audit_2_remediation.md",
+      "reports/phase1g_h_delta_audit_2_remediation_inventory.json",
+      "reports/phase1g_h_publication_successor.md",
+      "reports/phase1g_h_publication_successor_inventory.json",
+      "README.md",
+      "CLAUDE.md"
+    ],
     "changed_with_publication_record_2026_10_09": [
       "reports/phase1g_h_publication_successor.md",
       "reports/phase1g_h_publication_successor_inventory.json",
@@ -258,7 +287,7 @@
       "README.md",
       "CLAUDE.md"
     ],
-    "unchanged": "every frozen report, inventory, audit, evidence file, tag, existing package module (other than global_variance.py), test (other than the 1G-H file) and status token; the files of the independent audit, of the delta audit and of the second delta audit"
+    "unchanged": "every frozen report, inventory, audit, evidence file, tag, existing package module (other than global_variance.py and, under its own successor, lagrangian_sigma.py), test (other than the 1G-H file; the 1G-B contract-hardening file is new) and status token; the files of the independent audit and of the three delta audits"
   },
   "limitations": [
     "formal tangent statistic, not the ensemble response of the true contrast (D1)",
@@ -307,7 +336,7 @@
     "H-OD2": "void-share closure for a reference value: beta (1G-F-median seed, recommended), alpha (1G-D [W09]-radius seed), gamma (interval only)",
     "H-OD3": "status tokens: add GLOBAL_MEAN_LINEAR_STATISTIC_DEFINITION = DERIVED_FROM_VERIFIED_DEFINITIONS and GLOBAL_MEAN_LINEAR_STATISTIC_COMPUTATION = DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION (recommended; no validator change), or change LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC (needs an approved validator extension for a second chained change; R2-N4 then relevant)",
     "H-OD4": "keep global_variance.py experimental until an independent audit (recommended), or promote",
-    "H-OD5": "push / pull request / merge / audit / freeze / tag: separate decisions; pushes to the session branch were decided by the owner on 2026-10-06 and 2026-10-08 (publication block); an independent audit (2026-10-07), a delta audit and a second delta audit (2026-10-08) were performed; the second delta audit and its remediation were pushed on 2026-10-09 (P10); pull request, merge, freeze and tag remain open"
+    "H-OD5": "push / pull request / merge / audit / freeze / tag: separate decisions; pushes to the session branch were decided by the owner on 2026-10-06 and 2026-10-08 (publication block); an independent audit (2026-10-07), a delta audit and a second delta audit (2026-10-08) were performed; the second delta audit and its remediation were pushed on 2026-10-09 (P10, P11); a third delta audit (2026-10-09) was performed; the push of its remediation, pull request, merge, freeze and tag remain open"
   },
   "owner_decisions_status_2026_10_07": {
     "H-OD1": "narrowed by D1 to the formal tangent statistic and kept a proposal; adoption as the sigma8 analogue not decided",
@@ -324,8 +353,8 @@
     "H-OD5": "pushes of 2026-10-06 and 2026-10-08 decided; audit, delta audit and second delta audit performed; push of the second delta-audit remediation, pull request, merge, freeze and tag open; the second delta audit finds no scientific blocker and asks for the P7 record, the LOW corrections and the Windows gate first"
   },
   "owner_decisions_status_2026_10_09": {
-    "H-OD1..H-OD4": "as on 2026-10-08",
-    "H-OD5": "pushes of 2026-10-06, 2026-10-08 and 2026-10-09 decided (P10: 226e52d -> 4bf2718); audit, delta audit and second delta audit performed; Windows gate, pull request, merge, freeze and tag open"
+    "H-OD1..H-OD4": "as on 2026-10-08; the third delta audit concurs (H-OD4: nested-export, test and documentation contracts corrected; 1G-B hardening done as a separate owner-approved successor)",
+    "H-OD5": "pushes of 2026-10-06, 2026-10-08 and 2026-10-09 decided (P10, P11); audit, delta audit, second and third delta audits performed; push of the third remediation, Windows gate, pull request, merge, freeze and tag open"
   },
   "phase": "1G-H",
   "publication": {
@@ -354,6 +383,11 @@
         "action": "push of the second delta-audit commits 64116509554cc0d711660da4d81ad95c3f450a6d and e5170285e1d4b4aa72e907a3a79110d05584c0d9 and the second delta-audit remediation commits 9ad54253c4ec40cede5690da6659be28e0bd0a2d and 4bf2718e7557ace3fdc0abffaa73587f1162f776 to the session branch ccr-555e67be-u11yht (fast-forward from 226e52d)",
         "date": "2026-10-09",
         "verbatim": "Sì, fai push"
+      },
+      {
+        "action": "push of the P10 record ed0ec0c9c8783519a53759a265b6ce37e6c0e607 to the session branch ccr-555e67be-u11yht (fast-forward from 4bf2718)",
+        "date": "2026-10-09",
+        "verbatim": "Sì, pubblica anche ed0ec0c"
       }
     ],
     "authorization_block": "records the task statement, which granted local commits only; these approvals are separate, later owner actions",
@@ -369,18 +403,32 @@
         "date": "2026-10-08",
         "recorded_in": "reports/phase1g_h_delta_audit_2.md",
         "verbatim": "Confermo le due approvazioni di push registrate (GH-F15)"
+      },
+      {
+        "action": "direct confirmation of P10 and P11 to the auditor of the third delta audit",
+        "date": "2026-10-09",
+        "recorded_in": "reports/phase1g_h_delta_audit_3.md",
+        "verbatim": "Confermo le autorizzazioni P10 e P11"
       }
     ],
     "delta_audit_publication": "branch phase-1g-h-delta-audit at 5c325e1fd05b343f6d5e93f931038794de4373a2 (tree a5b810e81d125827a17a9cf87b013ead51232080, parent 89cb041), published with the owner's authorisation from the auditing session (owner's report of 2026-10-08)",
     "first_pushed_head": "0572e416504bcdfaa5831b6d482b687ef6fae582",
-    "h_od5_status": "pushes decided (session branch only, 2026-10-06, 2026-10-08 and 2026-10-09); independent audit, delta audit and second delta audit performed; pull request, merge, freeze and tag remain open",
+    "h_od5_status": "pushes decided (session branch only, 2026-10-06, 2026-10-08 and 2026-10-09); independent audit, delta audit, second and third delta audits performed; push of the third remediation, pull request, merge, freeze and tag remain open",
+    "last_recorded_event": {
+      "convention": "later events are recorded there; this block is not a remote-head snapshot",
+      "date": "2026-10-09",
+      "id": "P11",
+      "range": "4bf2718..ed0ec0c",
+      "record": "reports/phase1g_h_publication_successor.md section 8"
+    },
     "main": "8d3cdd0533035858c42269cb1dff1a20dcafc7da (unchanged)",
     "not_done": [
       "pull request",
       "merge",
       "tag creation or change",
       "freeze declaration",
-      "release"
+      "release",
+      "push of the third delta-audit commits 4d71bd4 and 18bf2fb and of the third remediation commits (needs a separate approval)"
     ],
     "pushed_head_2026_10_08": "226e52d2e4157d0130b2a9dfaffd71834c6017d9",
     "pushed_head_2026_10_09": "4bf2718e7557ace3fdc0abffaa73587f1162f776",
@@ -395,7 +443,8 @@
       }
     ],
     "record": "reports/phase1g_h_publication_successor.md",
-    "second_delta_audit_publication": "branch ccr-ac582de6-vho99i at e5170285e1d4b4aa72e907a3a79110d05584c0d9 (tree 45ce98f9d21e93e355ba25812063aec270700116, parent 64116509554cc0d711660da4d81ad95c3f450a6d, a child of 226e52d), published on the owner's instruction in the auditing session (P9 of the publication successor)"
+    "second_delta_audit_publication": "branch ccr-ac582de6-vho99i at e5170285e1d4b4aa72e907a3a79110d05584c0d9 (tree 45ce98f9d21e93e355ba25812063aec270700116, parent 64116509554cc0d711660da4d81ad95c3f450a6d, a child of 226e52d), published on the owner's instruction in the auditing session (P9 of the publication successor)",
+    "third_delta_audit_publication": "branch phase-1g-h-delta-audit-3 at 18bf2fbef880fdfb3c292956aa1f000720930abf (parent 4d71bd4fe918ef8a0b71c178a7180c4d291294b0, the blind checkpoint, child of ed0ec0c), published with the owner's authorisation in the auditing session (P13 of the publication successor)"
   },
   "r2_n4_relevance": "only if H-OD3's second option (a chained change of LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC) is chosen",
   "report": "reports/phase1g_h_global_variance_closure.md",
@@ -1887,6 +1936,56 @@
       "overall": "ACCEPT_WITH_CORRECTIONS"
     }
   },
+  "revision_third_delta_audit": {
+    "audited_commit": "ed0ec0c9c8783519a53759a265b6ce37e6c0e607",
+    "auditor_independence": "OpenAI Codex, GPT-6 family (exact version not exposed); a different family from the author (Claude); compartmentalized scientific blinding",
+    "blind_checkpoint_commit": "4d71bd4fe918ef8a0b71c178a7180c4d291294b0",
+    "cross_family_check": "CROSS_FAMILY_VERIFIED_WITH_DEVIATION (58/58 quantities; deviation = auditor's own initial recipe)",
+    "date": "2026-10-09",
+    "earlier_findings_regression": "none",
+    "errata": [
+      "GH-D3E1",
+      "GH-D3E2",
+      "GH-D3E3"
+    ],
+    "kind": "THIRD_DELTA_AUDIT_REMEDIATION",
+    "new_findings": {
+      "GH-D3F1": "LOW",
+      "GH-D3F2": "LOW",
+      "GH-D3F3": "LOW",
+      "GH-D3F4": "LOW-MEDIUM",
+      "GH-D3F5": "INFO"
+    },
+    "owner_approval_verbatim": "Perfetto, procedi",
+    "owner_decision_GH-D3F4": "option (a): separate 1G-B contract-hardening successor (reports/phase1g_b_contract_hardening_successor.md)",
+    "readiness_token": "NO_SCIENTIFIC_BLOCKER_PENDING_CONTRACT_TEST_P11_CORRECTIONS_WINDOWS_GATE_AND_OWNER_DECISIONS",
+    "remediation_record": "reports/phase1g_h_delta_audit_3_remediation.md",
+    "second_delta_findings_after_third_delta_audit": {
+      "PARTIALLY_RESOLVED": [
+        "GH-D2F1",
+        "GH-D2F4"
+      ],
+      "RESOLVED": [
+        "GH-D2F2",
+        "GH-D2F3",
+        "GH-D2F5",
+        "GH-D2F6"
+      ]
+    },
+    "third_delta_audit_commit": "18bf2fbef880fdfb3c292956aa1f000720930abf",
+    "third_delta_audit_report": "reports/phase1g_h_delta_audit_3.md",
+    "verdict": {
+      "DOCUMENTATION": "ACCEPT_WITH_CORRECTIONS",
+      "GOVERNANCE": "ACCEPT_WITH_CORRECTIONS",
+      "IMPLEMENTATION": "ACCEPT_WITH_CORRECTIONS",
+      "NUMERICS": "ACCEPT",
+      "PROVENANCE": "ACCEPT",
+      "SCIENCE": "ACCEPT",
+      "TASK_COMPLIANCE": "ACCEPT",
+      "TESTS": "ACCEPT_WITH_CORRECTIONS",
+      "overall": "ACCEPT_WITH_CORRECTIONS"
+    }
+  },
   "schema_version": 1,
   "sources": {
     "EH98": {
@@ -1941,11 +2040,16 @@
     }
   },
   "tests": {
-    "count": 49,
+    "count": 53,
     "count_after_delta_remediation": 42,
     "count_after_first_remediation": 35,
+    "count_after_second_delta_remediation": 49,
     "count_before_remediation": 28,
-    "file": "tests/test_phase1g_h_global_variance.py"
+    "file": "tests/test_phase1g_h_global_variance.py",
+    "related_1g_b_contract_hardening": {
+      "count": 18,
+      "file": "tests/test_phase1g_b_contract_hardening.py"
+    }
   },
   "title": "Global matter-variance definition and minimal closure",
   "two_phase_covariance": {
@@ -1988,7 +2092,7 @@
             "latent_scale_lambda": 0.78515,
             "laws": {
               "II_same_field": {
-                "both_walls_conditional_density_covariance_ball": 0.697655,
+                "both_walls_product_moment_excess_ball": 0.697655,
                 "conditional_normaliser_ratio_m": 2.474113,
                 "cross_term": 0.255243,
                 "partition_wall_moment": 0.017756,
@@ -1999,7 +2103,7 @@
                 "wall_moment": 0.070499
               },
               "I_independent": {
-                "both_walls_conditional_density_covariance_ball": 0.840794,
+                "both_walls_product_moment_excess_ball": 0.840794,
                 "conditional_normaliser_ratio_m": 1.0,
                 "cross_term": 0.0,
                 "partition_wall_moment": 0.0,
@@ -2025,7 +2129,7 @@
             "latent_scale_lambda": 0.839193,
             "laws": {
               "II_same_field": {
-                "both_walls_conditional_density_covariance_ball": 0.887006,
+                "both_walls_product_moment_excess_ball": 0.887006,
                 "conditional_normaliser_ratio_m": 2.104325,
                 "cross_term": 0.314302,
                 "partition_wall_moment": 0.021864,
@@ -2036,7 +2140,7 @@
                 "wall_moment": 0.091055
               },
               "I_independent": {
-                "both_walls_conditional_density_covariance_ball": 0.797526,
+                "both_walls_product_moment_excess_ball": 0.797526,
                 "conditional_normaliser_ratio_m": 1.0,
                 "cross_term": 0.0,
                 "partition_wall_moment": 0.0,
@@ -2062,7 +2166,7 @@
             "latent_scale_lambda": 0.949342,
             "laws": {
               "II_same_field": {
-                "both_walls_conditional_density_covariance_ball": 1.115836,
+                "both_walls_product_moment_excess_ball": 1.115836,
                 "conditional_normaliser_ratio_m": 1.668579,
                 "cross_term": 0.373861,
                 "partition_wall_moment": 0.026007,
@@ -2073,7 +2177,7 @@
                 "wall_moment": 0.11754
               },
               "I_independent": {
-                "both_walls_conditional_density_covariance_ball": 0.766159,
+                "both_walls_product_moment_excess_ball": 0.766159,
                 "conditional_normaliser_ratio_m": 1.0,
                 "cross_term": 0.0,
                 "partition_wall_moment": 0.0,
@@ -2091,7 +2195,7 @@
         },
         "not_shared": [
           "the conditionally normalised wall density: its unconditional covariance in law II is law I's divided by m_II^2 (conditional_normaliser_ratio_m_II)",
-          "the both-walls conditional covariance C_W(r) - 1, which with P11 fixes the total by (H25)"
+          "the both-walls conditional product moment C_W(r) = E[psi1 psi2 | both in walls], which with P11 fixes the total by (H25)"
         ],
         "pair_class": "NONNEGATIVE_LOGNORMAL_DENSITY_LAWS",
         "shared_constraints": [
@@ -2112,7 +2216,7 @@
         "ell_Mpc": 0.598732,
         "laws": {
           "II_same_field": {
-            "both_walls_conditional_density_covariance_ball": 0.069083113,
+            "both_walls_product_moment_excess_ball": 0.069083113,
             "cross_term": 0.04991195,
             "partition_wall_moment": 0.0034721,
             "sigma_partition": 0.3036,
@@ -2122,7 +2226,7 @@
             "wall_moment": 0.003553182
           },
           "I_independent": {
-            "both_walls_conditional_density_covariance_ball": 0.791264148,
+            "both_walls_product_moment_excess_ball": 0.791264148,
             "cross_term": 0.0,
             "partition_wall_moment": 0.0,
             "sigma_partition": 0.3036,
@@ -2180,7 +2284,7 @@
             "latent_scale_lambda": 0.813737,
             "laws": {
               "II_same_field": {
-                "both_walls_conditional_density_covariance_ball": 0.837693,
+                "both_walls_product_moment_excess_ball": 0.837693,
                 "conditional_normaliser_ratio_m": 2.869413,
                 "cross_term": 0.329874,
                 "partition_wall_moment": 0.011409,
@@ -2191,7 +2295,7 @@
                 "wall_moment": 0.041298
               },
               "I_independent": {
-                "both_walls_conditional_density_covariance_ball": 0.78692,
+                "both_walls_product_moment_excess_ball": 0.78692,
                 "conditional_normaliser_ratio_m": 1.0,
                 "cross_term": 0.0,
                 "partition_wall_moment": 0.0,
@@ -2217,7 +2321,7 @@
             "latent_scale_lambda": 0.869535,
             "laws": {
               "II_same_field": {
-                "both_walls_conditional_density_covariance_ball": 1.097277,
+                "both_walls_product_moment_excess_ball": 1.097277,
                 "conditional_normaliser_ratio_m": 2.139809,
                 "cross_term": 0.399107,
                 "partition_wall_moment": 0.013803,
@@ -2228,7 +2332,7 @@
                 "wall_moment": 0.056378
               },
               "I_independent": {
-                "both_walls_conditional_density_covariance_ball": 0.751491,
+                "both_walls_product_moment_excess_ball": 0.751491,
                 "conditional_normaliser_ratio_m": 1.0,
                 "cross_term": 0.0,
                 "partition_wall_moment": 0.0,
@@ -2254,7 +2358,7 @@
             "latent_scale_lambda": 0.998434,
             "laws": {
               "II_same_field": {
-                "both_walls_conditional_density_covariance_ball": 1.277632,
+                "both_walls_product_moment_excess_ball": 1.277632,
                 "conditional_normaliser_ratio_m": 1.623351,
                 "cross_term": 0.445918,
                 "partition_wall_moment": 0.015422,
@@ -2265,7 +2369,7 @@
                 "wall_moment": 0.066944
               },
               "I_independent": {
-                "both_walls_conditional_density_covariance_ball": 0.725311,
+                "both_walls_product_moment_excess_ball": 0.725311,
                 "conditional_normaliser_ratio_m": 1.0,
                 "cross_term": 0.0,
                 "partition_wall_moment": 0.0,
@@ -2283,7 +2387,7 @@
         },
         "not_shared": [
           "the conditionally normalised wall density: its unconditional covariance in law II is law I's divided by m_II^2 (conditional_normaliser_ratio_m_II)",
-          "the both-walls conditional covariance C_W(r) - 1, which with P11 fixes the total by (H25)"
+          "the both-walls conditional product moment C_W(r) = E[psi1 psi2 | both in walls], which with P11 fixes the total by (H25)"
         ],
         "pair_class": "NONNEGATIVE_LOGNORMAL_DENSITY_LAWS",
         "shared_constraints": [
@@ -2304,7 +2408,7 @@
         "ell_Mpc": 0.291721,
         "laws": {
           "II_same_field": {
-            "both_walls_conditional_density_covariance_ball": 0.043189408,
+            "both_walls_product_moment_excess_ball": 0.043189408,
             "cross_term": 0.036477473,
             "partition_wall_moment": 0.001261555,
             "sigma_partition": 0.3264,
@@ -2314,7 +2418,7 @@
             "wall_moment": 0.000782523
           },
           "I_independent": {
-            "both_walls_conditional_density_covariance_ball": 0.755929587,
+            "both_walls_product_moment_excess_ball": 0.755929587,
             "cross_term": 0.0,
             "partition_wall_moment": 0.0,
             "sigma_partition": 0.3264,
@@ -2521,6 +2625,84 @@
     "record": "reports/phase1g_h_delta_audit_2_remediation.md (sec. 3)",
     "tolerance_audit_missing": 0,
     "validator": "PASS (54 JSON round trips)",
+    "windows_gate": "not run"
+  },
+  "verification_third_delta_remediated_tree": {
+    "case_runner": {
+      "gm_bare_pbs_f_median_seed": 0.810772,
+      "gm_bare_pbs_w09_seed": 1.121363,
+      "nw15_equal_mass_constant_share": 0.918157
+    },
+    "code": {
+      "1G-B": "6926a636c100d232247e39d71d5b2d6e71a6f917",
+      "1G-H": "c6028e9046934ef6de234f0b58fbe18e6f3bead1"
+    },
+    "evidence_gates": "36 / 36 on CPython 3.13.16 and 36 / 36 on 3.11.17",
+    "full_suites": {
+      "CPython 3.11.17": {
+        "collected": 1207,
+        "errors": 0,
+        "failed": 0,
+        "passed": 1207,
+        "rc": 0,
+        "seconds": 337,
+        "skipped": 0
+      },
+      "CPython 3.13.16": {
+        "collected": 1207,
+        "errors": 0,
+        "failed": 0,
+        "passed": 1207,
+        "rc": 0,
+        "seconds": 338,
+        "skipped": 0
+      },
+      "command": "OPENBLAS_NUM_THREADS=1 python -B -W error -m pytest -q -p no:cacheprovider -rs"
+    },
+    "mutation_testing": {
+      "extra": {
+        "AUTH_D1_binding_off_adapted": "KILLED_BY_TESTS"
+      },
+      "round4": {
+        "baseline": {
+          "BASELINE_FAIL": 1
+        },
+        "round4": {
+          "KILLED_BY_TESTS": 8
+        },
+        "third_delta_audit": {
+          "KILLED_BY_TESTS": 7,
+          "SURVIVED": 3
+        }
+      },
+      "second_audit_campaign_rerun": {
+        "author": {
+          "KILLED_BY_TESTS": 9,
+          "NOT_APPLIED": 1
+        },
+        "baseline": {
+          "BASELINE_PASS": 1
+        },
+        "delta": {
+          "KILLED_BY_TESTS": 21,
+          "SURVIVED": 2
+        },
+        "own": {
+          "KILLED_BY_TESTS": 22,
+          "SURVIVED": 1
+        },
+        "round3": {
+          "KILLED_BY_TESTS": 4
+        }
+      }
+    },
+    "phase_tests": 53,
+    "record": "reports/phase1g_h_delta_audit_3_remediation.md (sec. 3)",
+    "tolerance_audit": {
+      "comparisons": 750,
+      "missing": 0
+    },
+    "validator": "PASS (57 JSON round trips)",
     "windows_gate": "not run"
   }
 }
