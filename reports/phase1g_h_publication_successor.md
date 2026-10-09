@@ -312,3 +312,41 @@ fourth remediation will be recorded once, in the next addendum.
 | "The record of P14 (the commit carrying this section) is a later local commit; its push needs a separate approval." | this record, Sec. 9.2 | 2026-10-09 | Pushed by P15. |
 | "`ccr-555e67be-u11yht` = `36d127f` on `origin`." | this record, Sec. 9.2, and its inventory `addendum_2026_10_09_after_p14.state_after_p14` | 2026-10-09 | Superseded by Sec. 10.2. |
 | "Last recorded publication event: P14" (and its equivalents) | README.md, CLAUDE.md, the 1G-H report header and inventory | 2026-10-09 | Updated to the last recorded push P15 (Sec. 10.3). |
+
+## 11. Fifth addendum of 2026-10-09 (P17; pull request, merge and tag decided)
+
+Added with the owner decisions successor
+([`phase1g_h_owner_decisions_successor.md`](phase1g_h_owner_decisions_successor.md)).
+Remote facts were verified read-only on 2026-10-09 (push output,
+`git ls-remote`).
+
+### 11.1 Event
+
+| # | Date | Event | Remote evidence | Authorisation (owner's words, verbatim) |
+|---|---|---|---|---|
+| P17 | 2026-10-09 | Fast-forward of `ccr-555e67be-u11yht` from `027b7a4` to `22ace890caca5e571e83d322b446db3a05f78cc0`, carrying `fc804a0` (the fourth delta audit), `a243bf1` (tests) and `22ace89` (documentation) | push output `027b7a4..22ace89`; branch head `22ace89` | «fai il fast-forward di origin/ccr-555e67be-u11yht da 027b7a4 a 22ace89» |
+
+### 11.2 Decided, not yet performed when this section is committed
+
+The owner decided, on 2026-10-09, a pull request from `ccr-555e67be-u11yht`
+into `main`, its merge, the freeze and the tag
+`phase-1g-h-global-variance-closure-v1` («… e poi fai PR, merge, freeze e
+tag»; owner decisions successor, Sec. 4). The push of this section's commit
+(P18), the pull request, the merge commit and the tag are recorded by a
+later successor, as for the F/G freeze.
+
+### 11.3 State on 2026-10-09 after P17 (supersedes Sec. 10.2)
+
+- `main` = `8d3cdd0533035858c42269cb1dff1a20dcafc7da` (unchanged).
+- `ccr-555e67be-u11yht` = `22ace89` on `origin`; this section's commit is a
+  later local commit.
+- Audit branches, tags (76 refs, 38 annotated), pull requests (four, all
+  closed, none from a 1G-H branch) and releases (none) as in Sec. 10.2.
+
+### 11.4 Current reading of further dated statements
+
+| Statement (literal) | Location | Written | Current reading |
+|---|---|---|---|
+| "Nothing is pushed: the push of `fc804a0` and these two commits needs a separate approval." | `phase1g_h_delta_audit_4_remediation.md` Sec. 0 and the push item of its Sec. 4 | 2026-10-09 | Pushed by P17; a dated status note in that record points here. |
+| "`ccr-555e67be-u11yht` = `027b7a4` on `origin`. The local branch carries, not pushed, `fc804a0` …" | this record, Sec. 10.2, and its inventory `addendum_2026_10_09_after_fourth_delta_audit.state_after_p16` | 2026-10-09 | Superseded by Sec. 11.3. |
+| "Last recorded push of the session branch: P15" (and its equivalents) | README.md, CLAUDE.md, the 1G-H report header and inventory | 2026-10-09 | Updated to P17. |

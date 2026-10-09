@@ -226,6 +226,10 @@
       "reports/phase1g_h_global_variance_closure_validation.md",
       "reports/phase1g_h_global_variance_closure_logs/"
     ],
+    "added_with_owner_decisions_2026_10_09": [
+      "reports/phase1g_h_owner_decisions_successor.md",
+      "reports/phase1g_h_owner_decisions_successor_inventory.json"
+    ],
     "changed": [
       "README.md",
       "CLAUDE.md"
@@ -356,11 +360,11 @@
     "UNIQUE_TIMESCAPE_PREDICTION": "NOT_GRANTED"
   },
   "owner_decisions_requested": {
-    "H-OD1": "adopt the definition with convention (c) primary and (a) for comparison (recommended), or (a) primary, or keep as proposal",
-    "H-OD2": "void-share closure for a reference value: beta (1G-F-median seed, recommended), alpha (1G-D [W09]-radius seed), gamma (interval only)",
-    "H-OD3": "status tokens: add GLOBAL_MEAN_LINEAR_STATISTIC_DEFINITION = DERIVED_FROM_VERIFIED_DEFINITIONS and GLOBAL_MEAN_LINEAR_STATISTIC_COMPUTATION = DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION (recommended; no validator change), or change LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC (needs an approved validator extension for a second chained change; R2-N4 then relevant)",
-    "H-OD4": "keep global_variance.py experimental until an independent audit (recommended), or promote",
-    "H-OD5": "push / pull request / merge / audit / freeze / tag: separate decisions; pushes to the session branch were decided by the owner on 2026-10-06 and 2026-10-08 (publication block); an independent audit (2026-10-07), a delta audit and a second delta audit (2026-10-08) were performed; the second delta audit and its remediation were pushed on 2026-10-09 (P10, P11); a third delta audit (2026-10-09) was performed and pushed with its remediation (P14); a fourth delta audit (2026-10-09) was performed; pull request, merge, freeze and tag remain open"
+    "H-OD1": "adopt the definition with convention (c) primary and (a) for comparison (recommended), or (a) primary, or keep as proposal; DECIDED 2026-10-09: see owner_decisions_status_2026_10_09.decided",
+    "H-OD2": "void-share closure for a reference value: beta (1G-F-median seed, recommended), alpha (1G-D [W09]-radius seed), gamma (interval only); DECIDED 2026-10-09: see owner_decisions_status_2026_10_09.decided",
+    "H-OD3": "status tokens: add GLOBAL_MEAN_LINEAR_STATISTIC_DEFINITION = DERIVED_FROM_VERIFIED_DEFINITIONS and GLOBAL_MEAN_LINEAR_STATISTIC_COMPUTATION = DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION (recommended; no validator change), or change LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC (needs an approved validator extension for a second chained change; R2-N4 then relevant); DECIDED 2026-10-09: see owner_decisions_status_2026_10_09.decided",
+    "H-OD4": "keep global_variance.py experimental until an independent audit (recommended), or promote; DECIDED 2026-10-09: see owner_decisions_status_2026_10_09.decided",
+    "H-OD5": "push / pull request / merge / audit / freeze / tag: separate decisions; pushes to the session branch were decided by the owner on 2026-10-06 and 2026-10-08 (publication block); an independent audit (2026-10-07), a delta audit and a second delta audit (2026-10-08) were performed; the second delta audit and its remediation were pushed on 2026-10-09 (P10, P11); a third delta audit (2026-10-09) was performed and pushed with its remediation (P14); a fourth delta audit (2026-10-09) was performed; pull request, merge, freeze and tag remain open; DECIDED 2026-10-09: see owner_decisions_status_2026_10_09.decided"
   },
   "owner_decisions_status_2026_10_07": {
     "H-OD1": "narrowed by D1 to the formal tangent statistic and kept a proposal; adoption as the sigma8 analogue not decided",
@@ -380,6 +384,16 @@
     "1G-B_scalar_precision_policy": "option (a), 2026-10-09 (\"Procedi con il piano e l'opzione (a)\"): the documented float32 limit stays; a uniform policy would need a separate successor",
     "H-OD1..H-OD4": "as on 2026-10-08; the third delta audit concurs (H-OD4: nested-export, test and documentation contracts corrected; 1G-B hardening done as a separate owner-approved successor)",
     "H-OD5": "pushes of 2026-10-06, 2026-10-08 and 2026-10-09 decided (P10, P11, P14, P15); audit and four delta audits performed; Windows gate, pull request, merge, freeze and tag open",
+    "decided": {
+      "H-OD1": "keep the formal tangent statistic as a named research proposal (not the project's sigma8 analogue); convention (c) preferred, (a) the fixed-mass comparison",
+      "H-OD2": "no physical reference value; beta a heuristic prior, alpha a formal extrapolation, gamma an interval for constant shares only",
+      "H-OD3": "no token change; the five observational authorisations stay NOT_GRANTED",
+      "H-OD4": "the runtime stays experimental; promotion is a new decision",
+      "H-OD5": "pull request into main, merge with a merge commit, freeze of the 1G-H records at that commit, annotated tag phase-1g-h-global-variance-closure-v1",
+      "record": "reports/phase1g_h_owner_decisions_successor.md",
+      "verbatim": "Ho eseguito le test suite su windows, tutto ok. Dunque Implementa le raccomandazioni dell'audit su H-OD1…H-OD5 e poi fai PR, merge, freeze e tag",
+      "windows_gate": "owner's report: test suites pass on Windows ('tutto ok'); interpreters, counts and commit not stated"
+    },
     "fourth_delta_audit_recommendations": "H-OD1 formal proposal with convention (c) and comparison (a); H-OD2 no reference value; H-OD3 no token change; H-OD4 experimental until the Windows gate; H-OD5 separate decisions; recorded, not decided"
   },
   "phase": "1G-H",
@@ -424,6 +438,17 @@
         "action": "push of the P14 record 027b7a413fcee0786b861d5903272e4653d227ed to the session branch ccr-555e67be-u11yht (fast-forward from 36d127f)",
         "date": "2026-10-09",
         "verbatim": "Pubblica, fai il fast-forward"
+      },
+      {
+        "action": "push of the fourth delta-audit commit fc804a0f71f47904e86388f378295f72ba15cdd8 and the fourth remediation commits a243bf13bb27fb77c54ff05be004c47efe6e6784 and 22ace890caca5e571e83d322b446db3a05f78cc0 to the session branch ccr-555e67be-u11yht (fast-forward from 027b7a4)",
+        "date": "2026-10-09",
+        "verbatim": "fai il fast-forward di origin/ccr-555e67be-u11yht da 027b7a4 a 22ace89"
+      },
+      {
+        "action": "pull request from ccr-555e67be-u11yht into main, its merge, the freeze and the tag phase-1g-h-global-variance-closure-v1 (with the push of the commit carrying the owner decisions successor)",
+        "date": "2026-10-09",
+        "recorded_by": "reports/phase1g_h_owner_decisions_successor.md section 4; the resulting hashes are recorded by a later successor",
+        "verbatim": "Ho eseguito le test suite su windows, tutto ok. Dunque Implementa le raccomandazioni dell'audit su H-OD1…H-OD5 e poi fai PR, merge, freeze e tag"
       }
     ],
     "authorization_block": "records the task statement, which granted local commits only; these approvals are separate, later owner actions",
@@ -447,25 +472,27 @@
         "verbatim": "Confermo le autorizzazioni P10 e P11"
       }
     ],
+    "decided_not_yet_performed_when_committed": [
+      "push of the commit carrying the owner decisions successor (P18)",
+      "pull request into main",
+      "merge (merge commit)",
+      "freeze",
+      "annotated tag phase-1g-h-global-variance-closure-v1"
+    ],
     "delta_audit_publication": "branch phase-1g-h-delta-audit at 5c325e1fd05b343f6d5e93f931038794de4373a2 (tree a5b810e81d125827a17a9cf87b013ead51232080, parent 89cb041), published with the owner's authorisation from the auditing session (owner's report of 2026-10-08)",
     "first_pushed_head": "0572e416504bcdfaa5831b6d482b687ef6fae582",
     "fourth_delta_audit_publication": "branch phase-1g-h-delta-audit-4 at fc804a0f71f47904e86388f378295f72ba15cdd8 (parent 027b7a4; reported to have the tree and parent of the auditing session's local commit f332353), published with the owner's authorisation in the auditing session (P16 of the publication successor)",
-    "h_od5_status": "pushes decided (session branch only, 2026-10-06, 2026-10-08 and 2026-10-09, P15 the last recorded); independent audit and four delta audits performed; pull request, merge, freeze and tag remain open",
+    "h_od5_status": "decided 2026-10-09: pull request, merge, freeze and tag (owner decisions successor section 4); pushes to the session branch decided on 2026-10-06, 2026-10-08 and 2026-10-09 (P17 the last recorded); independent audit and four delta audits performed",
     "last_recorded_event": {
       "convention": "the last recorded push of the session branch (publication successor section 10.3); later events are recorded there; this block is not a remote-head snapshot",
       "date": "2026-10-09",
-      "id": "P15",
-      "range": "36d127f..027b7a4",
-      "record": "reports/phase1g_h_publication_successor.md section 10"
+      "id": "P17",
+      "range": "027b7a4..22ace89",
+      "record": "reports/phase1g_h_publication_successor.md section 11"
     },
     "main": "8d3cdd0533035858c42269cb1dff1a20dcafc7da (unchanged)",
     "not_done": [
-      "pull request",
-      "merge",
-      "tag creation or change",
-      "freeze declaration",
-      "release",
-      "push of the fourth delta-audit commit fc804a0 and of the fourth remediation commits (needs a separate approval)"
+      "release"
     ],
     "pushed_head_2026_10_08": "226e52d2e4157d0130b2a9dfaffd71834c6017d9",
     "pushed_head_2026_10_09": "4bf2718e7557ace3fdc0abffaa73587f1162f776",

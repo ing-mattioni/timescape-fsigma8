@@ -14,7 +14,7 @@ explicit human approval.
 
 ## How work is organised
 
-Work proceeds in numbered phases (1A → 1G-G on main, F/G frozen at `8d3cdd0`), each of which is either
+Work proceeds in numbered phases (1A → 1G-G on main, F/G frozen at `8d3cdd0`; 1G-H decided for merge, freeze and tag on 2026-10-09), each of which is either
 an **audit** (report-only, no code) or an **implementation** gated by a prior
 audit. The pattern is rigid and should be followed for new phases:
 
@@ -104,12 +104,14 @@ linear statistic — the formal tangent statistic, a proposed σ8 analogue
 2026-10-07) — for an explicitly supplied void-share closure. It is experimental (no other module imports it), its
 outputs carry `NON_OBSERVATIONAL`, `NOT_OBSERVATIONAL_SIGMA_8` and
 `EXPERIMENTAL_CONDITIONAL_RESEARCH_RUNTIME`, it follows the same naming rule,
-and it changes no status token. Promotion, pull request, merge, freeze and
-tagging remain open owner decisions (H-OD1…H-OD5); of H-OD5 the owner
-approved only pushes to the session branch `ccr-555e67be-u11yht`
-(2026-10-06, 2026-10-08 and 2026-10-09), and five independent audits
-(2026-10-07, 2026-10-08 twice, 2026-10-09 twice) were published on their own
-branches.
+and it changes no status token. Owner decisions H-OD1…H-OD5 (2026-10-09,
+`phase1g_h_owner_decisions_successor.md`, adopting the fourth delta audit's
+recommendations): the statistic stays a named research proposal, no
+physical reference value, no token change, the runtime stays experimental
+(promotion would be a new decision), and a pull request into `main`, merge,
+freeze and tag `phase-1g-h-global-variance-closure-v1` are decided. Five
+independent audits (2026-10-07, 2026-10-08 twice, 2026-10-09 twice) were
+published on their own branches.
 
 Everything else in the list above stays unimplemented.
 
@@ -478,8 +480,8 @@ current interpretation; frozen records remain unchanged.
     (`phase1g_fg_freeze_status_successor.md`); no release exists.
 - **1G-H (proposed; pushed with owner approvals of 2026-10-06, 2026-10-08 and
   2026-10-09 to the session branch `ccr-555e67be-u11yht` (last recorded
-  push P15, `027b7a4`; record `phase1g_h_publication_successor.md`,
-  events P1–P16; summaries name the last recorded push of the session
+  push P17, `22ace89`; record `phase1g_h_publication_successor.md`,
+  events P1–P17; summaries name the last recorded push of the session
   branch, not the remote head),
   developed locally as `phase-1g-h-global-variance-closure`; independently
   audited 2026-10-07 (`phase1g_h_independent_audit.md`, published by the owner on
@@ -497,8 +499,11 @@ current interpretation; frozen records remain unchanged.
   `phase1g_b_contract_hardening_successor.md`, pushed in P14); fourth delta
   audit 2026-10-09 (`phase1g_h_delta_audit_4.md`, OpenAI GPT-6 family,
   published on `phase-1g-h-delta-audit-4` at `fc804a0`) and remediated on top
-  of it (`phase1g_h_delta_audit_4_remediation.md`); not merged into `main`,
-  frozen or tagged; no pull request):** global
+  of it (`phase1g_h_delta_audit_4_remediation.md`, pushed in P17); owner
+  decisions of 2026-10-09 (`phase1g_h_owner_decisions_successor.md`): pull
+  request into `main`, merge, freeze and tag
+  `phase-1g-h-global-variance-closure-v1`, with the hashes recorded by a
+  later successor):** global
   matter-variance definition and minimal closure
   (`phase1g_h_global_variance_closure.md`, inventory, validation record;
   runtime `global_variance.py`; evidence
@@ -557,8 +562,17 @@ current interpretation; frozen records remain unchanged.
     GH-D4E1…E4. Applied with owner approval ("Procedi con il piano e
     l'opzione (a)"): 54 phase tests, a one-ULP 1G-B test (22 cases), scoped
     wording, events P15–P16; the float32 limit stays documented; no code or
-    number changes.
-    Open: the Windows gate, H-OD1…H-OD5.
+    number changes; pushed in P17.
+  - Owner decisions (2026-10-09, "Ho eseguito le test suite su windows,
+    tutto ok. Dunque Implementa le raccomandazioni dell'audit su
+    H-OD1…H-OD5 e poi fai PR, merge, freeze e tag";
+    `phase1g_h_owner_decisions_successor.md`): Windows gate reported
+    passing (interpreters and counts not stated); H-OD1 research proposal,
+    (c) preferred; H-OD2 no reference value; H-OD3 no token change; H-OD4
+    experimental runtime; H-OD5 pull request, merge (merge commit), freeze
+    of the 1G-H records at the merge commit and the annotated, unsigned tag
+    `phase-1g-h-global-variance-closure-v1`. The hashes are recorded by a
+    later successor.
   - A (definition) proposed, not closed (D1): the formal tangent statistic —
     the early Gaussian field propagated with the zero-amplitude tangent of
     the global contrast `(M_L/V_L)/(M_D/V_D) − 1` of Lagrangian top hats,

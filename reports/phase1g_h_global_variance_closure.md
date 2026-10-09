@@ -2,7 +2,7 @@
 
 Classification: `RESEARCH_PHASE_WITH_EXPERIMENTAL_RUNTIME` (conditional,
 model-internal, `NON_OBSERVATIONAL`). Date: 2026-10-06, revised 2026-10-07,
-twice on 2026-10-08 and twice on 2026-10-09.
+twice on 2026-10-08 and three times on 2026-10-09.
 Base: `main` = `origin/main` = `8d3cdd0533035858c42269cb1dff1a20dcafc7da`
 (PR #4 merge, the frozen F/G checkpoint), local branch
 `phase-1g-h-global-variance-closure` (first commit: the F/G freeze-status
@@ -10,9 +10,13 @@ alignment, `phase1g_fg_freeze_status_successor.md`).
 Remote: the session branch `ccr-555e67be-u11yht`, pushed with the owner's
 approvals of 2026-10-06, 2026-10-08 and 2026-10-09 (Sec. 1;
 [`phase1g_h_publication_successor.md`](phase1g_h_publication_successor.md));
-not merged into `main`. Last recorded push of the session branch: P15
-(`36d127f..027b7a4`, 2026-10-09); later events are recorded there, not
-here (convention of its Sec. 8.3, clarified in its Sec. 10.3).
+not merged into `main` when this text was last revised. Last recorded push
+of the session branch: P17 (`027b7a4..22ace89`, 2026-10-09); later events
+are recorded there, not here (convention of its Sec. 8.3, clarified in its
+Sec. 10.3). On 2026-10-09 the owner decided H-OD1 … H-OD5 (Sec. 9): a pull
+request into `main`, its merge, the freeze of these records and the tag
+`phase-1g-h-global-variance-closure-v1`
+([`phase1g_h_owner_decisions_successor.md`](phase1g_h_owner_decisions_successor.md)).
 Companions: [`phase1g_h_global_variance_closure_inventory.json`](phase1g_h_global_variance_closure_inventory.json),
 [`phase1g_h_global_variance_closure_validation.md`](phase1g_h_global_variance_closure_validation.md),
 the independent audit [`phase1g_h_independent_audit.md`](phase1g_h_independent_audit.md),
@@ -84,6 +88,13 @@ This revision applies them: tests for two strict-JSON guards, a one-ULP
 test of the 1G-B bindings (an audit recommendation), and scoped wording; no
 code or number changes. The text it audited stays in Git at `027b7a4`; the
 fourth remediation record maps every finding to its change.
+
+**Owner decisions of 2026-10-09.** The owner reported the Windows gate
+passing and adopted the fourth delta audit's recommendations on H-OD1 …
+H-OD5 (Sec. 9): the formal tangent statistic stays a named research
+proposal with convention (c) preferred, no physical reference value, no
+token change, an experimental runtime, and a pull request, merge, freeze
+and tag. No equation, number or token changes.
 Runtime: `src/timescape_fsigma8/global_variance.py` (experimental).
 Evidence: `scripts/phase1g_h_global_variance_closure_numerics.py` (writes the
 git-ignored `artifacts/independent/phase1g_h_global_variance_closure.json`
@@ -1100,6 +1111,11 @@ given under each item.
    - *Status (2026-10-08, second delta audit):* open; that audit concurs,
      with (c) preferred and (a) as the fixed-mass comparison.
    - *Status (2026-10-09, third delta audit):* open; that audit concurs.
+   - *Decision (owner, 2026-10-09, adopting the fourth delta audit's recommendation;
+     [`phase1g_h_owner_decisions_successor.md`](phase1g_h_owner_decisions_successor.md)):* keep the
+     formal tangent statistic as a named research proposal, not the
+     project's σ8 analogue; convention (c) preferred, (a) the fixed-mass
+     comparison.
 2. **H-OD2, the void-share closure for a reference value.**
    - [ ] **β:** PBS seed with the 1G-F volume-weighted median radius:
      0.811 / 0.816 at (c) (0.787 / 0.792 post-hoc); below the adopted ε = 1
@@ -1124,6 +1140,10 @@ given under each item.
      nonperturbative formal extrapolation, the interval valid only in its
      class).
    - *Status (2026-10-09, third delta audit):* open; that audit concurs.
+   - *Decision (owner, 2026-10-09, adopting the fourth delta audit's recommendation;
+     [`phase1g_h_owner_decisions_successor.md`](phase1g_h_owner_decisions_successor.md)):* no physical
+     reference value; β stays a heuristic prior, α a formal extrapolation
+     and γ an interval for constant shares only.
 3. **H-OD3, status tokens** (proposals; the registry rules matter).
    - [ ] Add two tokens through the existing addition mechanism (no validator
      change): `GLOBAL_MEAN_LINEAR_STATISTIC_DEFINITION =
@@ -1148,6 +1168,10 @@ given under each item.
      token change ((H25) and the C_W reading belong in this report, not in a
      token).
    - *Status (2026-10-09, third delta audit):* open; that audit concurs.
+   - *Decision (owner, 2026-10-09, adopting the fourth delta audit's recommendation;
+     [`phase1g_h_owner_decisions_successor.md`](phase1g_h_owner_decisions_successor.md)):* no token
+     change; neither option is taken, and the five observational
+     authorisations stay `NOT_GRANTED`.
 4. **H-OD4, the runtime.**
    - [ ] Keep `global_variance.py` experimental until an independent audit.
      *(Recommended.)*
@@ -1167,6 +1191,10 @@ given under each item.
      deciding the scope of 1G-B hardening (done by owner decision: a
      separate successor, GH-D3F4); the Windows gate remains before any
      promotion.
+   - *Decision (owner, 2026-10-09, adopting the fourth delta audit's recommendation;
+     [`phase1g_h_owner_decisions_successor.md`](phase1g_h_owner_decisions_successor.md)):* the runtime
+     stays experimental; the owner reports the Windows gate passing; any
+     promotion is a new decision.
 5. **H-OD5, publication.** Push, pull request, merge, audit, freeze or tag of
    this phase: none is authorised by the task; each needs a separate
    decision.
@@ -1213,8 +1241,14 @@ given under each item.
      `ACCEPT_WITH_CORRECTIONS`, no scientific blocker; published on the
      branch `phase-1g-h-delta-audit-4` (`fc804a0`, P16). Its remediation was
      committed on top of it.
-   - Open: the owner's Windows gate (CPython 3.14.3 / 3.11.9, never run on a 1G-H
-     tree); pull request, merge, freeze and tag.
+   - *Push decided* (owner, 2026-10-09): the fourth-delta-audit commit and
+     the two commits of its remediation on the session branch (`22ace89`,
+     P17).
+   - *Windows gate* (owner's report, 2026-10-09): "tutto ok".
+   - *Pull request, merge, freeze and tag decided* (owner, 2026-10-09): a pull
+     request into `main`, merged with a merge commit; these records frozen at
+     that commit; the annotated tag `phase-1g-h-global-variance-closure-v1`
+     on it. The resulting hashes are recorded by a later successor.
 
 ## 10. Implementation and usage
 
@@ -1329,6 +1363,10 @@ Details, commands, versions and logs are in the validation record.
 - **F/G freeze.** The F/G freeze attests its own checkpoint. It does not
   derive σ8; 1G-H builds on it without editing it. R2-N4 is relevant only if
   H-OD3's second option is chosen.
+- **Status (owner decisions of 2026-10-09).** Experimental runtime, research
+  proposal, no reference value, no token change; decided for merge, freeze
+  and tag. The frozen records are listed in the owner decisions successor,
+  Sec. 4; later corrections are made by successor records.
 - **No D v2.** No `phase-1g-d-separate-universe-growth-v2` tag or branch is
   created; the approved D successor is part of the F/G checkpoint.
 - **Limitations:** the statistic is the formal tangent, not the ensemble

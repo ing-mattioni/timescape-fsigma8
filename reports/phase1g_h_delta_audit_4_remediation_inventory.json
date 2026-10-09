@@ -186,6 +186,11 @@
   },
   "record": "reports/phase1g_h_delta_audit_4_remediation.md",
   "schema_version": 1,
+  "status_note_2026_10_09": {
+    "note": "this inventory states the remediation as of its commit 22ace89 and is not rewritten",
+    "owner_decisions": "reports/phase1g_h_owner_decisions_successor.md (H-OD1 ... H-OD5, Windows gate)",
+    "publication": "the two commits of this record and the fourth delta-audit commit were pushed on 2026-10-09 (027b7a4 -> 22ace89; reports/phase1g_h_publication_successor.md section 11, P17); commits.branch, commits.pushed and the push item of open_items are superseded"
+  },
   "status_tokens": {
     "added": [],
     "changed": []

@@ -23,6 +23,14 @@ and its inventory, README.md and CLAUDE.md. Tests:
 `tests/test_phase1g_b_contract_hardening.py`. No package module and no
 script changes.
 
+**Status note (2026-10-09).** This record states the remediation as of its
+commit `22ace89` and is not rewritten. Its two commits and the fourth
+delta-audit commit were pushed on 2026-10-09 (`027b7a4 → 22ace89`, event P17
+of [`phase1g_h_publication_successor.md`](phase1g_h_publication_successor.md),
+Sec. 11), so "Nothing is pushed" (Sec. 0) and the push item of Sec. 4 are
+superseded. The owner's decisions on H-OD1 … H-OD5 and the Windows gate
+are in [`phase1g_h_owner_decisions_successor.md`](phase1g_h_owner_decisions_successor.md).
+
 ## 0. Summary
 
 - **Fourth delta-audit outcome.** `ACCEPT_WITH_CORRECTIONS`: PROVENANCE,

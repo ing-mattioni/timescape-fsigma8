@@ -142,14 +142,17 @@ that predate the freeze are resolved in the
   ([successor record](reports/phase1g_e_status_addition_successor.md)).
 - **Status.** These are conditional numbers, not an observational σ8, and no
   σ8 authorization is granted.
-- **Phase 1G-H (proposed; on the branch `ccr-555e67be-u11yht`, pushed with
-  owner approvals on 2026-10-06, 2026-10-08 and 2026-10-09; last recorded
-  push P15, `027b7a4`, in the publication record; independently
+- **Phase 1G-H (proposed research statistic; developed on the branch
+  `ccr-555e67be-u11yht`, pushed with owner approvals on 2026-10-06,
+  2026-10-08 and 2026-10-09; last recorded push P17, `22ace89`, in the
+  publication record; independently
   audited on 2026-10-07 and remediated; delta-audited on 2026-10-08 and
   remediated; a second delta audit the same day and a third and a fourth,
   cross-family, delta audit on 2026-10-09 accepted it with corrections,
-  which are applied;
-  not merged into `main`, frozen or tagged)**
+  which are applied; on 2026-10-09 the owner decided H-OD1 … H-OD5
+  and its pull request into `main`, merge, freeze and tag
+  `phase-1g-h-global-variance-closure-v1`, whose hashes a later successor
+  records)**
   ([report](reports/phase1g_h_global_variance_closure.md),
   [validation](reports/phase1g_h_global_variance_closure_validation.md),
   [audit](reports/phase1g_h_independent_audit.md),
@@ -162,6 +165,7 @@ that predate the freeze are resolved in the
   [third remediation](reports/phase1g_h_delta_audit_3_remediation.md),
   [fourth delta audit](reports/phase1g_h_delta_audit_4.md),
   [fourth remediation](reports/phase1g_h_delta_audit_4_remediation.md),
+  [owner decisions](reports/phase1g_h_owner_decisions_successor.md),
   [1G-B hardening](reports/phase1g_b_contract_hardening_successor.md),
   [publication](reports/phase1g_h_publication_successor.md)):
   - *Audits.* The independent audit rejected the closure claims of the
@@ -184,9 +188,11 @@ that predate the freeze are resolved in the
     (2026-10-09, OpenAI GPT-6 family) found those corrections resolved, every
     earlier finding unregressed and no scientific blocker; its two LOW and
     one INFO findings (tests for two strict-JSON guards, scoped wording) are
-    applied, with a one-ULP test of the 1G-B bindings. The owner's Windows
-    gate and the decisions on pull request, merge, freeze and tag remain
-    open.
+    applied, with a one-ULP test of the 1G-B bindings. The owner reported
+    the Windows gate passing and adopted that audit's recommendations: the
+    statistic stays a named research proposal (convention (c) preferred),
+    no physical reference value, no token change, an experimental runtime;
+    and a pull request, merge, freeze and tag.
   - *Definition (proposed).* The formal tangent statistic: the rms of the
     early Gaussian field propagated with the zero-amplitude tangent of the
     global contrast of Lagrangian top-hat regions (dust foliation, global
