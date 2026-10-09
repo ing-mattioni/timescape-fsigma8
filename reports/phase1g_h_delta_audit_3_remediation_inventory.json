@@ -250,6 +250,10 @@
   },
   "record": "reports/phase1g_h_delta_audit_3_remediation.md",
   "schema_version": 1,
+  "status_note_2026_10_09": {
+    "note": "this inventory states the remediation as of its commit 36d127f and is not rewritten",
+    "publication": "the three commits of this record and the two third delta-audit commits were pushed on 2026-10-09 (ed0ec0c -> 36d127f; reports/phase1g_h_publication_successor.md section 9, P14); commits.branch, commits.pushed and the push item of open_items are superseded"
+  },
   "status_tokens": {
     "added": [],
     "changed": []

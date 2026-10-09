@@ -144,7 +144,7 @@ that predate the freeze are resolved in the
   σ8 authorization is granted.
 - **Phase 1G-H (proposed; on the branch `ccr-555e67be-u11yht`, pushed with
   owner approvals on 2026-10-06, 2026-10-08 and 2026-10-09; last recorded
-  publication event P11, `ed0ec0c`, in the publication record; independently
+  publication event P14, `36d127f`, in the publication record; independently
   audited on 2026-10-07 and remediated; delta-audited on 2026-10-08 and
   remediated; a second delta audit the same day and a third, cross-family
   delta audit on 2026-10-09 accepted it with corrections, which are applied;

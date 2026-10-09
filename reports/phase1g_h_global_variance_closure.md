@@ -10,8 +10,8 @@ alignment, `phase1g_fg_freeze_status_successor.md`).
 Remote: the session branch `ccr-555e67be-u11yht`, pushed with the owner's
 approvals of 2026-10-06, 2026-10-08 and 2026-10-09 (Sec. 1;
 [`phase1g_h_publication_successor.md`](phase1g_h_publication_successor.md));
-not merged into `main`. Last recorded publication event: P11
-(`4bf2718..ed0ec0c`, 2026-10-09); later events are recorded there, not
+not merged into `main`. Last recorded publication event: P14
+(`ed0ec0c..36d127f`, 2026-10-09); later events are recorded there, not
 here (convention of its Sec. 8.3).
 Companions: [`phase1g_h_global_variance_closure_inventory.json`](phase1g_h_global_variance_closure_inventory.json),
 [`phase1g_h_global_variance_closure_validation.md`](phase1g_h_global_variance_closure_validation.md),
@@ -131,8 +131,8 @@ P10 («Sì, pubblica anche ed0ec0c», P11), confirmed P10 and P11 directly to th
 third delta auditor (P12) and had that audit published on
 `phase-1g-h-delta-audit-3` (P13). The owner approved the plan for its
 corrections («Perfetto, procedi»), with option (a) for GH-D3F4: a separate
-1G-B contract-hardening successor. Local commits only; any push needs a
-separate approval.
+1G-B contract-hardening successor. Those commits were then pushed with
+the audit commits («Sì, fai push», P14, 2026-10-09).
 
 **Distinction recorded as asked.** Everything below that goes beyond the
 approved records is an explicitly named hypothesis (H-A6 … H-A9, the seed
@@ -1179,10 +1179,12 @@ given under each item.
      `ACCEPT_WITH_CORRECTIONS`, no scientific blocker, cross-family check of
      Sec. 6 verified; the owner confirmed P10 and P11 directly to its auditor
      (P12); published on the branch `phase-1g-h-delta-audit-3` (`18bf2fb`,
-     P13). Its remediation and the 1G-B successor are committed locally on
-     top of it.
-   - Open: the push of the third delta audit and its remediation; the
-     owner's Windows gate (CPython 3.14.3 / 3.11.9, never run on a 1G-H
+     P13). Its remediation and the 1G-B successor were committed on top
+     of it.
+   - *Push decided* (owner, 2026-10-09): the two third-delta-audit commits
+     and the three commits of its remediation on the session branch
+     (`36d127f`, P14).
+   - Open: the owner's Windows gate (CPython 3.14.3 / 3.11.9, never run on a 1G-H
      tree); pull request, merge, freeze and tag.
 
 ## 10. Implementation and usage

@@ -24,6 +24,13 @@ and its inventory. Code: `global_variance.py`, the evidence script (one key
 and its wording) and the phase tests; in a separate commit,
 `lagrangian_sigma.py` and `tests/test_phase1g_b_contract_hardening.py`.
 
+**Status note (2026-10-09).** This record states the remediation as of its
+commit `36d127f` and is not rewritten. Its three commits and the two commits
+of the third delta audit were pushed on 2026-10-09 (`ed0ec0c → 36d127f`,
+event P14 of [`phase1g_h_publication_successor.md`](phase1g_h_publication_successor.md),
+Sec. 9), so "Nothing is pushed" (Sec. 0) and the push item of Sec. 4 are
+superseded.
+
 ## 0. Summary
 
 - **Third delta-audit outcome.** `ACCEPT_WITH_CORRECTIONS`: PROVENANCE,

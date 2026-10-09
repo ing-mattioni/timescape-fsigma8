@@ -237,3 +237,33 @@ this record, and does not make those summaries false.
 The limits of Sec. 5 apply. P13's authorisation is reported, not quoted.
 The third delta audit notes that current refs show state and ancestry, not
 the actor or time of a historical push.
+
+## 9. Third addendum of 2026-10-09 (push P14)
+
+Added in a documentation commit after the push, by the convention of
+Sec. 8.3. Remote facts were verified read-only on 2026-10-09 (push output,
+`git ls-remote`).
+
+### 9.1 Event
+
+| # | Date | Event | Remote evidence | Authorisation (owner's words, verbatim) |
+|---|---|---|---|---|
+| P14 | 2026-10-09 | Fast-forward of `ccr-555e67be-u11yht` from `ed0ec0c` to `36d127f8edcb306aa503cb4d8b7b10417dc33a51`, carrying the third delta audit (`4d71bd4`, `18bf2fb`) and its remediation (`c6028e9`, 1G-H code; `6926a63`, 1G-B contract hardening; `36d127f`, documentation) | push output `ed0ec0c..36d127f`; branch head `36d127f` | «Sì, fai push» |
+
+### 9.2 State on 2026-10-09 after P14 (supersedes Sec. 8.2)
+
+- `main` = `8d3cdd0533035858c42269cb1dff1a20dcafc7da` (unchanged).
+- `ccr-555e67be-u11yht` = `36d127f` on `origin`. The record of P14 (the
+  commit carrying this section) is a later local commit; its push needs a
+  separate approval.
+- `phase-1g-h-delta-audit-3` = `18bf2fb`, now also an ancestor of the
+  session branch; the other audit branches as in Sec. 8.2.
+- Tags, pull requests and releases as in Sec. 8.2.
+
+### 9.3 Current reading of further dated statements
+
+| Statement (literal) | Location | Written | Current reading |
+|---|---|---|---|
+| "Nothing is pushed: the push of `4d71bd4`, `18bf2fb` and these three commits needs a separate approval." | `phase1g_h_delta_audit_3_remediation.md` Sec. 0, and the push item of its Sec. 4 | 2026-10-09 | Pushed by P14; a dated status note in that record points here. |
+| "`ccr-555e67be-u11yht` = `ed0ec0c` on `origin`. The local branch carries, not pushed, …" | this record, Sec. 8.2, and its inventory `addendum_2026_10_09_after_third_delta_audit.state_after_p13` | 2026-10-09 | Superseded by Sec. 9.2. |
+| "Last recorded publication event: P11" | README.md, CLAUDE.md, the 1G-H report header and inventory | 2026-10-09 | Updated to P14 with this addendum (Sec. 8.3). |

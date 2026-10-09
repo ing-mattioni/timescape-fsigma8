@@ -473,8 +473,8 @@ current interpretation; frozen records remain unchanged.
     (`phase1g_fg_freeze_status_successor.md`); no release exists.
 - **1G-H (proposed; pushed with owner approvals of 2026-10-06, 2026-10-08 and
   2026-10-09 to the session branch `ccr-555e67be-u11yht` (last recorded
-  publication event P11, `ed0ec0c`; record `phase1g_h_publication_successor.md`,
-  events P1–P13; summaries name the last recorded event, not the remote head),
+  publication event P14, `36d127f`; record `phase1g_h_publication_successor.md`,
+  events P1–P14; summaries name the last recorded event, not the remote head),
   developed locally as `phase-1g-h-global-variance-closure`; independently
   audited 2026-10-07 (`phase1g_h_independent_audit.md`, published by the owner on
   `phase-1g-h-independent-audit` at `816dd00`) and remediated
@@ -536,7 +536,8 @@ current interpretation; frozen records remain unchanged.
     ("Perfetto, procedi", option (a) for D3F4): events P11–P13 and the
     last-recorded-event convention; every H record refuses a non-strict-JSON
     export; 53 phase tests; key `both_walls_product_moment_excess_ball`; a
-    1G-B contract-hardening successor (two records, outputs bit-identical).
+    1G-B contract-hardening successor (two records, outputs bit-identical);
+    pushed with the audit commits in P14 ("Sì, fai push").
     Open: the Windows gate, H-OD1…H-OD5.
   - A (definition) proposed, not closed (D1): the formal tangent statistic —
     the early Gaussian field propagated with the zero-amplitude tangent of
