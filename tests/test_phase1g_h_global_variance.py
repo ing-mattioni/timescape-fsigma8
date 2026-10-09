@@ -1326,3 +1326,27 @@ def test_gh_d3f2_nested_inputs_must_export_as_strict_json():
         json.dumps(record.to_json_dict(), allow_nan=False)
     for record in (res.growth.matching, res.growth.checks, res.void_share.closure, premise):
         json.dumps(record.to_metadata(), allow_nan=False)
+
+
+def test_gh_d4f1_seed_share_and_interval_exports_must_be_strict_json(growth_gm):
+    """The seed-share and interval records refuse an equal Fraction in a nested input (GH-D4F1).
+
+    Each refusal must come from that record's own check (mutants X02, X04 of
+    the fourth delta audit remove one of them).
+    """
+    density = ls.early_matter_density_per_photon(background=growth_gm.background,
+                                                 identity_tolerance=1e-13, G=G)
+    seed_quadrature = dataclasses.replace(
+        SEED_QUAD, truncation_tolerance=Fraction(SEED_QUAD.truncation_tolerance))
+    with pytest.raises(gv.GlobalVarianceContractError, match="^void share: the export is not strict JSON"):
+        gv.evaluate_void_share(
+            closure=tracker_seed(GM, growth_gm, 15.0, gv.SeedVolumeCompression.COMPRESSED_WITH_REGION),
+            growth=growth_gm, density=density, early_spectrum=spectrum(), seed_quadrature=seed_quadrature)
+    res = run(GM, constant(0.05), radius("c"))
+    premise = gv.HomogeneityPremise(radius=radius("c", 100.0), max_linear_rms=0.1, provenance="test")
+    iv = gv.admissible_global_linear_interval(target=res, premise=premise)
+    premise_radius = dataclasses.replace(iv.premise_radius,
+                                         radius_Mpc=Fraction(iv.premise_radius.radius_Mpc))
+    with pytest.raises(gv.GlobalVarianceContractError,
+                       match="^interval record: the export is not strict JSON"):
+        dataclasses.replace(iv, premise_radius=premise_radius)

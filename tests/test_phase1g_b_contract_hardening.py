@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import dataclasses
 import json
+import math
 from decimal import Decimal
 from functools import lru_cache
 
@@ -111,3 +112,27 @@ def test_the_decomposition_holds_to_rounding():
     record = anchored()
     assert record.sigma_ratio == pytest.approx(record.growth_ratio * record.early_spectrum_factor,
                                                rel=1e-14, abs=0.0)
+
+
+@pytest.mark.parametrize("field", ["growth_ratio", "early_spectrum_factor",
+                                   "reference_offset_from_anchor"])
+def test_anchored_ratio_binding_of_native_floats_is_exact_to_one_ulp(field):
+    """A native float one ULP away from the factory expression is refused.
+
+    The equalities are exact for native floats (fourth delta audit, mutant X11;
+    the owner kept this policy, option (a) of 2026-10-09). A numpy.float32
+    rounding is a separate, documented limit (successor record, Sec. 3).
+    """
+    record = anchored()
+    value = getattr(record, field)
+    for changed in (math.nextafter(value, math.inf), math.nextafter(value, -math.inf)):
+        with pytest.raises(ls.LagrangianSigmaContractError, match="must be the ratios"):
+            dataclasses.replace(record, **{field: changed})
+
+
+def test_lcdm_relative_change_binding_of_native_floats_is_exact_to_one_ulp():
+    ref = reference()
+    value = ref.quadrature_relative_change
+    for changed in (math.nextafter(value, math.inf), math.nextafter(value, -math.inf)):
+        with pytest.raises(ls.LagrangianSigmaContractError, match="quadrature diagnostics"):
+            dataclasses.replace(ref, quadrature_relative_change=changed)
