@@ -1587,6 +1587,18 @@ class LCDMReferenceLinearSigma:
                      "omega_m_R_cubed_Mpc3", "sigma_unit_growth",
                      "sigma_unit_growth_comparison_grid", "linear_sigma"):
             _positive(getattr(self, name), name)
+        # Record invariants (1G-B contract-hardening successor, 2026-10-09, on
+        # finding GH-D3F4 of the third 1G-H delta audit): finite, non-negative
+        # quadrature diagnostics, equal to the expression of ``_quadrature``
+        # and within the declared quadrature tolerances.
+        for name in ("quadrature_relative_change", "truncation_envelope_fraction"):
+            if _real(getattr(self, name), name) < 0.0:
+                raise LagrangianSigmaContractError(f"{name} must be nonnegative")
+        if not (self.quadrature_relative_change
+                == abs(self.sigma_unit_growth / self.sigma_unit_growth_comparison_grid - 1.0)
+                and self.quadrature_relative_change <= self.quadrature.self_convergence_tolerance
+                and self.truncation_envelope_fraction <= self.quadrature.truncation_tolerance):
+            raise LagrangianSigmaContractError("quadrature diagnostics are inconsistent or failed")
         if self.linear_sigma != self.growth_today_photon_normalised * self.sigma_unit_growth:
             raise LagrangianSigmaContractError(
                 "linear_sigma must equal growth_today_photon_normalised * sigma_unit_growth")
@@ -1703,6 +1715,26 @@ class AnchoredLagrangianSigmaRatio:
         if self.anchored_linear_sigma != self.sigma_ratio * self.anchor_value:
             raise LagrangianSigmaContractError(
                 "anchored_linear_sigma must equal sigma_ratio * anchor_value")
+        # Record invariants (1G-B contract-hardening successor, 2026-10-09, on
+        # finding GH-D3F4 of the third 1G-H delta audit): every derived field
+        # is the expression of ``anchor_lagrangian_sigma`` on the stored
+        # records, so sigma_ratio = growth_ratio * early_spectrum_factor holds
+        # through its factors (to rounding).
+        ts, ref = self.timescape, self.reference
+        if not (self.growth_ratio == (ts.growth.growth_today_photon_normalised
+                                      / ref.growth_today_photon_normalised)
+                and self.early_spectrum_factor == ts.sigma_unit_growth / ref.sigma_unit_growth
+                and self.sigma_ratio == ts.linear_sigma / ref.linear_sigma
+                and self.reference_offset_from_anchor
+                == ref.linear_sigma / self.anchor_value - 1.0):
+            raise LagrangianSigmaContractError(
+                "growth_ratio, early_spectrum_factor, sigma_ratio and the anchor offset must be "
+                "the ratios of the stored timescape and reference records")
+        differences = tuple(name for name in _EARLY_SPECTRUM_COMPARED
+                            if getattr(ts.early_spectrum, name) != getattr(ref.early_spectrum, name))
+        if self.early_spectrum_differences != differences:
+            raise LagrangianSigmaContractError(
+                "early_spectrum_differences must name the early-spectrum inputs that differ")
         _check_statuses(self, _RESULT_STATUSES)
 
     def to_json_dict(self) -> dict:
