@@ -31,6 +31,13 @@ event P14 of [`phase1g_h_publication_successor.md`](phase1g_h_publication_succes
 Sec. 9), so "Nothing is pushed" (Sec. 0) and the push item of Sec. 4 are
 superseded.
 
+**Errata pointer (2026-10-09, after the fourth delta audit).** Three
+statements of this record are read as corrected in
+[`phase1g_h_delta_audit_4_remediation.md`](phase1g_h_delta_audit_4_remediation.md),
+Sec. 2 (GH-D4E2 … GH-D4E4): what "tolerances" covers in Sec. 0, the scope
+of the 1G-B byte-equality in Secs. 0 and 3, and which LCDM diagnostic is
+bound in Sec. 2.
+
 ## 0. Summary
 
 - **Third delta-audit outcome.** `ACCEPT_WITH_CORRECTIONS`: PROVENANCE,

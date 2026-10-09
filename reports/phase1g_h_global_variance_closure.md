@@ -2,7 +2,7 @@
 
 Classification: `RESEARCH_PHASE_WITH_EXPERIMENTAL_RUNTIME` (conditional,
 model-internal, `NON_OBSERVATIONAL`). Date: 2026-10-06, revised 2026-10-07,
-twice on 2026-10-08 and on 2026-10-09.
+twice on 2026-10-08 and twice on 2026-10-09.
 Base: `main` = `origin/main` = `8d3cdd0533035858c42269cb1dff1a20dcafc7da`
 (PR #4 merge, the frozen F/G checkpoint), local branch
 `phase-1g-h-global-variance-closure` (first commit: the F/G freeze-status
@@ -10,9 +10,9 @@ alignment, `phase1g_fg_freeze_status_successor.md`).
 Remote: the session branch `ccr-555e67be-u11yht`, pushed with the owner's
 approvals of 2026-10-06, 2026-10-08 and 2026-10-09 (Sec. 1;
 [`phase1g_h_publication_successor.md`](phase1g_h_publication_successor.md));
-not merged into `main`. Last recorded publication event: P14
-(`ed0ec0c..36d127f`, 2026-10-09); later events are recorded there, not
-here (convention of its Sec. 8.3).
+not merged into `main`. Last recorded push of the session branch: P15
+(`36d127f..027b7a4`, 2026-10-09); later events are recorded there, not
+here (convention of its Sec. 8.3, clarified in its Sec. 10.3).
 Companions: [`phase1g_h_global_variance_closure_inventory.json`](phase1g_h_global_variance_closure_inventory.json),
 [`phase1g_h_global_variance_closure_validation.md`](phase1g_h_global_variance_closure_validation.md),
 the independent audit [`phase1g_h_independent_audit.md`](phase1g_h_independent_audit.md),
@@ -23,6 +23,8 @@ the second delta audit [`phase1g_h_delta_audit_2.md`](phase1g_h_delta_audit_2.md
 remediation record [`phase1g_h_delta_audit_2_remediation.md`](phase1g_h_delta_audit_2_remediation.md),
 the third delta audit [`phase1g_h_delta_audit_3.md`](phase1g_h_delta_audit_3.md) and its
 remediation record [`phase1g_h_delta_audit_3_remediation.md`](phase1g_h_delta_audit_3_remediation.md),
+the fourth delta audit [`phase1g_h_delta_audit_4.md`](phase1g_h_delta_audit_4.md) and its
+remediation record [`phase1g_h_delta_audit_4_remediation.md`](phase1g_h_delta_audit_4_remediation.md),
 and the 1G-B contract-hardening successor
 [`phase1g_b_contract_hardening_successor.md`](phase1g_b_contract_hardening_successor.md).
 
@@ -68,6 +70,20 @@ for nested inputs, tests, the C_W − 1 wording and, by owner decision, a
 separate 1G-B contract-hardening successor; no number changes. The text it
 audited stays in Git at `ed0ec0c`; the third remediation record maps every
 finding to its change.
+
+**Second revision of 2026-10-09.** A fourth independent delta audit, again
+from the OpenAI GPT-6 family, of the text at `027b7a4` (published at
+`fc804a0`) returned `ACCEPT_WITH_CORRECTIONS`: provenance, governance,
+science, numerics, implementation and task compliance `ACCEPT`; tests and
+documentation `ACCEPT_WITH_CORRECTIONS`. It found GH-D3F1 … GH-D3F5
+resolved and every earlier finding unregressed, reproduced 20 of 20
+full-precision values and computed the centred both-walls covariances that
+confirm GH-D3F5. It raised two LOW and one INFO findings (GH-D4F1 …
+GH-D4F3) and four errata (GH-D4E1 … GH-D4E4), none a scientific blocker.
+This revision applies them: tests for two strict-JSON guards, a one-ULP
+test of the 1G-B bindings (an audit recommendation), and scoped wording; no
+code or number changes. The text it audited stays in Git at `027b7a4`; the
+fourth remediation record maps every finding to its change.
 Runtime: `src/timescape_fsigma8/global_variance.py` (experimental).
 Evidence: `scripts/phase1g_h_global_variance_closure_numerics.py` (writes the
 git-ignored `artifacts/independent/phase1g_h_global_variance_closure.json`
@@ -133,6 +149,13 @@ third delta auditor (P12) and had that audit published on
 corrections («Perfetto, procedi»), with option (a) for GH-D3F4: a separate
 1G-B contract-hardening successor. Those commits were then pushed with
 the audit commits («Sì, fai push», P14, 2026-10-09).
+
+**Fourth delta audit (2026-10-09).** The owner approved pushing the record
+of P14 («Pubblica, fai il fast-forward», P15) and had a fourth delta audit
+published on `phase-1g-h-delta-audit-4` (P16). The owner approved the plan
+for its corrections with option (a) for the 1G-B scalar-precision policy:
+keep the documented limit («Procedi con il piano e l'opzione (a)»). Local
+commits only; any push needs a separate approval.
 
 **Distinction recorded as asked.** Everything below that goes beyond the
 approved records is an explicitly named hypothesis (H-A6 … H-A9, the seed
@@ -1184,6 +1207,12 @@ given under each item.
    - *Push decided* (owner, 2026-10-09): the two third-delta-audit commits
      and the three commits of its remediation on the session branch
      (`36d127f`, P14).
+   - *Push decided* (owner, 2026-10-09): the record of P14 on the session
+     branch (`027b7a4`, P15).
+   - *Fourth delta audit performed* (2026-10-09): `phase1g_h_delta_audit_4.md`,
+     `ACCEPT_WITH_CORRECTIONS`, no scientific blocker; published on the
+     branch `phase-1g-h-delta-audit-4` (`fc804a0`, P16). Its remediation was
+     committed on top of it.
    - Open: the owner's Windows gate (CPython 3.14.3 / 3.11.9, never run on a 1G-H
      tree); pull request, merge, freeze and tag.
 
@@ -1250,7 +1279,7 @@ given under each item.
 
 Details, commands, versions and logs are in the validation record.
 
-- **Phase tests:** `tests/test_phase1g_h_global_variance.py`, 53 tests
+- **Phase tests:** `tests/test_phase1g_h_global_variance.py`, 54 tests
   (28 originally; seven added for GH-F1, F3, F4, F5, F6, F10 and F11 and the
   tamper test extended for GH-F9; seven added for GH-DF1, DF2 and DF5, with
   the tamper test now requiring each invariant's own message; seven added
@@ -1260,9 +1289,11 @@ Details, commands, versions and logs are in the validation record.
   record identities, the pinned gate thresholds, and float-typed results;
   four added for GH-D3F2 and GH-D3F3: every converted input, float64 and
   float subclasses accepted and float32 refused, the binding tolerance with
-  a literal bound, and strict JSON with nested inputs), covering the
+  a literal bound, and strict JSON with nested inputs; one added for
+  GH-D4F1: the seed-share and interval exports), covering the
   categories asked for. The 1G-B hardening has its own tests
-  (`tests/test_phase1g_b_contract_hardening.py`, 18). They check dimensions and k/R units
+  (`tests/test_phase1g_b_contract_hardening.py`, 22: 18, and four one-ULP
+  cases after the fourth delta audit). They check dimensions and k/R units
   (photon-comoving Mpc), window and mass normalisation, and the homogeneous,
   single-phase and EdS limits. They check real-space against Fourier (2×10⁻⁵)
   and A_s scaling. They check positive-semidefiniteness and cross-term
@@ -1280,8 +1311,9 @@ Details, commands, versions and logs are in the validation record.
 - **Governance:** the tolerance audit reports 0 comparisons without explicit
   tolerances; the 1F-C-R validator reports `PASS`.
 - **Full suites** (warnings as errors) on CPython 3.13.16 and 3.11.17 (Linux):
-  see the validation record (original tree) and the two remediation records
-  (remediated trees). The Windows 3.14.3 / 3.11.9 gate was not run in these
+  see the validation record (original tree) and the five remediation
+  records (remediated trees; the latest,
+  `phase1g_h_delta_audit_4_remediation.md`, covers the current tree). The Windows 3.14.3 / 3.11.9 gate was not run in these
   sessions; its commands are listed in the validation record.
 
 ## 12. Preservation, status and limitations
@@ -1290,7 +1322,7 @@ Details, commands, versions and logs are in the validation record.
   tag; every status token; every existing package module and test except
   `lagrangian_sigma.py`, changed by its own owner-approved 1G-B
   contract-hardening successor (2026-10-09; record invariants only,
-  computed values bit-identical); the files of the four audits. Outside the
+  computed values bit-identical); the files of the five audits. Outside the
   1G-H files, the phase touched README.md and CLAUDE.md (current-status
   text) and, in the remediation, its own F/G freeze-status successor record
   (GH-F14).

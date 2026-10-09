@@ -7,7 +7,7 @@ Logs: [`phase1g_h_global_variance_closure_logs/`](phase1g_h_global_variance_clos
 Everything below was run in this session, on Linux, unless it is marked as
 quoted from an earlier record.
 
-**Scope (note of 2026-10-07, extended twice on 2026-10-08 and on
+**Scope (note of 2026-10-07, extended twice on 2026-10-08 and twice on
 2026-10-09).** This record
 validates the original tree (`fd7331f` with its documentation, published at
 `d4d693d`). The tree remediated after the independent audit is validated in
@@ -16,8 +16,10 @@ tree remediated after the delta audit in
 [`phase1g_h_delta_audit_remediation.md`](phase1g_h_delta_audit_remediation.md),
 the tree remediated after the second delta audit in
 [`phase1g_h_delta_audit_2_remediation.md`](phase1g_h_delta_audit_2_remediation.md),
-and the tree remediated after the third delta audit in
-[`phase1g_h_delta_audit_3_remediation.md`](phase1g_h_delta_audit_3_remediation.md);
+the tree remediated after the third delta audit in
+[`phase1g_h_delta_audit_3_remediation.md`](phase1g_h_delta_audit_3_remediation.md),
+and the tree remediated after the fourth delta audit in
+[`phase1g_h_delta_audit_4_remediation.md`](phase1g_h_delta_audit_4_remediation.md);
 later publication events are recorded in
 [`phase1g_h_publication_successor.md`](phase1g_h_publication_successor.md).
 Two sentences below are corrected in place (GH-F14, GH-F11); nothing else is

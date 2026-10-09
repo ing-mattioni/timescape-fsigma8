@@ -130,6 +130,10 @@
       "artifacts/independent/phase1g_h/radius_scan.png",
       "artifacts/independent/phase1g_h/propagator_scale_dependence.png"
     ],
+    "fourth_delta_audit_remediation_changes": [
+      "none: the runtime and the evidence script are unchanged",
+      "regression against 6926a63 on CPython 3.13.16: 0 of 3201 numeric leaves changed, no text leaf changed, no leaf added or removed; figures byte-identical"
+    ],
     "gates": {
       "D_owner_A_v_printed_digits": 0.5,
       "D_owner_X_SU_printed_digits": 0.0005,
@@ -189,7 +193,7 @@
       "scripts/phase1g_h_global_variance_case.py": "e1b583f39f5b81c0b6c2ba5df1877de11bf091011c7c663bd81c9abee1de57f5",
       "scripts/phase1g_h_global_variance_closure_numerics.py": "a5fd601fecc06c57526fd644632d2595f75086457cc7eeb825a301e45c284981",
       "src/timescape_fsigma8/global_variance.py": "96934ea62d22c2bff07ff6edf00631b0fe556579d29f02ea0efa27b79af9bf4b",
-      "tests/test_phase1g_h_global_variance.py": "201cc8fa928bf52a333314cc52888c552b36dfc2b9ed91fa374af3eff679ca62"
+      "tests/test_phase1g_h_global_variance.py": "ff0407c913c713143def6d423096a69e18a8c1f4fe0c96d6f9e7791ad488be7b"
     },
     "added_in_delta_audit_remediation": [
       "reports/phase1g_h_delta_audit_remediation.md",
@@ -197,6 +201,11 @@
       "reports/phase1g_h_delta_audit_remediation_logs/",
       "reports/phase1g_h_publication_successor.md",
       "reports/phase1g_h_publication_successor_inventory.json"
+    ],
+    "added_in_fourth_delta_audit_remediation": [
+      "reports/phase1g_h_delta_audit_4_remediation.md",
+      "reports/phase1g_h_delta_audit_4_remediation_inventory.json",
+      "reports/phase1g_h_delta_audit_4_remediation_logs/"
     ],
     "added_in_second_delta_audit_remediation": [
       "reports/phase1g_h_delta_audit_2_remediation.md",
@@ -230,6 +239,21 @@
       "reports/phase1g_h_global_variance_closure_validation.md",
       "reports/phase1g_h_audit_remediation.md",
       "reports/phase1g_h_audit_remediation_inventory.json",
+      "README.md",
+      "CLAUDE.md"
+    ],
+    "changed_in_fourth_delta_audit_remediation": [
+      "tests/test_phase1g_h_global_variance.py",
+      "tests/test_phase1g_b_contract_hardening.py",
+      "reports/phase1g_h_global_variance_closure.md",
+      "reports/phase1g_h_global_variance_closure_inventory.json",
+      "reports/phase1g_h_global_variance_closure_validation.md",
+      "reports/phase1g_h_delta_audit_3_remediation.md",
+      "reports/phase1g_h_delta_audit_3_remediation_inventory.json",
+      "reports/phase1g_b_contract_hardening_successor.md",
+      "reports/phase1g_b_contract_hardening_successor_inventory.json",
+      "reports/phase1g_h_publication_successor.md",
+      "reports/phase1g_h_publication_successor_inventory.json",
       "README.md",
       "CLAUDE.md"
     ],
@@ -287,7 +311,7 @@
       "README.md",
       "CLAUDE.md"
     ],
-    "unchanged": "every frozen report, inventory, audit, evidence file, tag, existing package module (other than global_variance.py and, under its own successor, lagrangian_sigma.py), test (other than the 1G-H file; the 1G-B contract-hardening file is new) and status token; the files of the independent audit and of the three delta audits"
+    "unchanged": "every frozen report, inventory, audit, evidence file, tag, package module and script (the fourth remediation changes tests and records only), test other than the 1G-H file and the 1G-B contract-hardening file, and status token; the files of the independent audit and of the four delta audits"
   },
   "limitations": [
     "formal tangent statistic, not the ensemble response of the true contrast (D1)",
@@ -336,7 +360,7 @@
     "H-OD2": "void-share closure for a reference value: beta (1G-F-median seed, recommended), alpha (1G-D [W09]-radius seed), gamma (interval only)",
     "H-OD3": "status tokens: add GLOBAL_MEAN_LINEAR_STATISTIC_DEFINITION = DERIVED_FROM_VERIFIED_DEFINITIONS and GLOBAL_MEAN_LINEAR_STATISTIC_COMPUTATION = DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION (recommended; no validator change), or change LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC (needs an approved validator extension for a second chained change; R2-N4 then relevant)",
     "H-OD4": "keep global_variance.py experimental until an independent audit (recommended), or promote",
-    "H-OD5": "push / pull request / merge / audit / freeze / tag: separate decisions; pushes to the session branch were decided by the owner on 2026-10-06 and 2026-10-08 (publication block); an independent audit (2026-10-07), a delta audit and a second delta audit (2026-10-08) were performed; the second delta audit and its remediation were pushed on 2026-10-09 (P10, P11); a third delta audit (2026-10-09) was performed and pushed with its remediation (P14); pull request, merge, freeze and tag remain open"
+    "H-OD5": "push / pull request / merge / audit / freeze / tag: separate decisions; pushes to the session branch were decided by the owner on 2026-10-06 and 2026-10-08 (publication block); an independent audit (2026-10-07), a delta audit and a second delta audit (2026-10-08) were performed; the second delta audit and its remediation were pushed on 2026-10-09 (P10, P11); a third delta audit (2026-10-09) was performed and pushed with its remediation (P14); a fourth delta audit (2026-10-09) was performed; pull request, merge, freeze and tag remain open"
   },
   "owner_decisions_status_2026_10_07": {
     "H-OD1": "narrowed by D1 to the formal tangent statistic and kept a proposal; adoption as the sigma8 analogue not decided",
@@ -353,8 +377,10 @@
     "H-OD5": "pushes of 2026-10-06 and 2026-10-08 decided; audit, delta audit and second delta audit performed; push of the second delta-audit remediation, pull request, merge, freeze and tag open; the second delta audit finds no scientific blocker and asks for the P7 record, the LOW corrections and the Windows gate first"
   },
   "owner_decisions_status_2026_10_09": {
+    "1G-B_scalar_precision_policy": "option (a), 2026-10-09 (\"Procedi con il piano e l'opzione (a)\"): the documented float32 limit stays; a uniform policy would need a separate successor",
     "H-OD1..H-OD4": "as on 2026-10-08; the third delta audit concurs (H-OD4: nested-export, test and documentation contracts corrected; 1G-B hardening done as a separate owner-approved successor)",
-    "H-OD5": "pushes of 2026-10-06, 2026-10-08 and 2026-10-09 decided (P10, P11, P14); audit, delta audit, second and third delta audits performed; Windows gate, pull request, merge, freeze and tag open"
+    "H-OD5": "pushes of 2026-10-06, 2026-10-08 and 2026-10-09 decided (P10, P11, P14, P15); audit and four delta audits performed; Windows gate, pull request, merge, freeze and tag open",
+    "fourth_delta_audit_recommendations": "H-OD1 formal proposal with convention (c) and comparison (a); H-OD2 no reference value; H-OD3 no token change; H-OD4 experimental until the Windows gate; H-OD5 separate decisions; recorded, not decided"
   },
   "phase": "1G-H",
   "publication": {
@@ -393,6 +419,11 @@
         "action": "push of the third delta-audit commits 4d71bd4fe918ef8a0b71c178a7180c4d291294b0 and 18bf2fbef880fdfb3c292956aa1f000720930abf and the third remediation commits c6028e9046934ef6de234f0b58fbe18e6f3bead1, 6926a636c100d232247e39d71d5b2d6e71a6f917 and 36d127f8edcb306aa503cb4d8b7b10417dc33a51 to the session branch ccr-555e67be-u11yht (fast-forward from ed0ec0c)",
         "date": "2026-10-09",
         "verbatim": "Sì, fai push"
+      },
+      {
+        "action": "push of the P14 record 027b7a413fcee0786b861d5903272e4653d227ed to the session branch ccr-555e67be-u11yht (fast-forward from 36d127f)",
+        "date": "2026-10-09",
+        "verbatim": "Pubblica, fai il fast-forward"
       }
     ],
     "authorization_block": "records the task statement, which granted local commits only; these approvals are separate, later owner actions",
@@ -418,13 +449,14 @@
     ],
     "delta_audit_publication": "branch phase-1g-h-delta-audit at 5c325e1fd05b343f6d5e93f931038794de4373a2 (tree a5b810e81d125827a17a9cf87b013ead51232080, parent 89cb041), published with the owner's authorisation from the auditing session (owner's report of 2026-10-08)",
     "first_pushed_head": "0572e416504bcdfaa5831b6d482b687ef6fae582",
-    "h_od5_status": "pushes decided (session branch only, 2026-10-06, 2026-10-08 and 2026-10-09, P14 the last recorded); independent audit, delta audit, second and third delta audits performed; pull request, merge, freeze and tag remain open",
+    "fourth_delta_audit_publication": "branch phase-1g-h-delta-audit-4 at fc804a0f71f47904e86388f378295f72ba15cdd8 (parent 027b7a4; reported to have the tree and parent of the auditing session's local commit f332353), published with the owner's authorisation in the auditing session (P16 of the publication successor)",
+    "h_od5_status": "pushes decided (session branch only, 2026-10-06, 2026-10-08 and 2026-10-09, P15 the last recorded); independent audit and four delta audits performed; pull request, merge, freeze and tag remain open",
     "last_recorded_event": {
-      "convention": "later events are recorded there; this block is not a remote-head snapshot",
+      "convention": "the last recorded push of the session branch (publication successor section 10.3); later events are recorded there; this block is not a remote-head snapshot",
       "date": "2026-10-09",
-      "id": "P14",
-      "range": "ed0ec0c..36d127f",
-      "record": "reports/phase1g_h_publication_successor.md section 9"
+      "id": "P15",
+      "range": "36d127f..027b7a4",
+      "record": "reports/phase1g_h_publication_successor.md section 10"
     },
     "main": "8d3cdd0533035858c42269cb1dff1a20dcafc7da (unchanged)",
     "not_done": [
@@ -432,7 +464,8 @@
       "merge",
       "tag creation or change",
       "freeze declaration",
-      "release"
+      "release",
+      "push of the fourth delta-audit commit fc804a0 and of the fourth remediation commits (needs a separate approval)"
     ],
     "pushed_head_2026_10_08": "226e52d2e4157d0130b2a9dfaffd71834c6017d9",
     "pushed_head_2026_10_09": "4bf2718e7557ace3fdc0abffaa73587f1162f776",
@@ -1897,6 +1930,50 @@
     "owner_approval_verbatim": "Perfetto, procedi",
     "remediation_record": "reports/phase1g_h_delta_audit_remediation.md"
   },
+  "revision_fourth_delta_audit": {
+    "audited_commit": "027b7a413fcee0786b861d5903272e4653d227ed",
+    "auditor_independence": "OpenAI Codex, GPT-6 family (exact version not exposed); a different family from the author (Claude)",
+    "date": "2026-10-09",
+    "earlier_findings_regression": "none; every GH-D2F# resolved within its scope",
+    "errata": [
+      "GH-D4E1",
+      "GH-D4E2",
+      "GH-D4E3",
+      "GH-D4E4"
+    ],
+    "fourth_delta_audit_commit": "fc804a0f71f47904e86388f378295f72ba15cdd8",
+    "fourth_delta_audit_report": "reports/phase1g_h_delta_audit_4.md",
+    "kind": "FOURTH_DELTA_AUDIT_REMEDIATION",
+    "new_findings": {
+      "GH-D4F1": "LOW",
+      "GH-D4F2": "INFO",
+      "GH-D4F3": "LOW"
+    },
+    "owner_approval_verbatim": "Procedi con il piano e l'opzione (a)",
+    "readiness_token": "NO_SCIENTIFIC_BLOCKER_PENDING_TEST_COVERAGE_DOCUMENTATION_WINDOWS_GATE_AND_OWNER_DECISIONS",
+    "remediation_record": "reports/phase1g_h_delta_audit_4_remediation.md",
+    "science": "20/20 full-precision values reproduced (largest difference 6.05e-10); centred both-walls covariances confirm GH-D3F5",
+    "third_delta_findings_after_fourth_delta_audit": {
+      "RESOLVED": [
+        "GH-D3F1",
+        "GH-D3F2",
+        "GH-D3F3",
+        "GH-D3F4",
+        "GH-D3F5"
+      ]
+    },
+    "verdict": {
+      "DOCUMENTATION": "ACCEPT_WITH_CORRECTIONS",
+      "GOVERNANCE": "ACCEPT",
+      "IMPLEMENTATION": "ACCEPT",
+      "NUMERICS": "ACCEPT",
+      "PROVENANCE": "ACCEPT",
+      "SCIENCE": "ACCEPT",
+      "TASK_COMPLIANCE": "ACCEPT",
+      "TESTS": "ACCEPT_WITH_CORRECTIONS",
+      "overall": "ACCEPT_WITH_CORRECTIONS"
+    }
+  },
   "revision_second_delta_audit": {
     "audited_commit": "226e52d2e4157d0130b2a9dfaffd71834c6017d9",
     "auditor_independence": "same model family as the author (Claude); procedural independence only; the two earlier audits were OpenAI Codex",
@@ -2044,14 +2121,15 @@
     }
   },
   "tests": {
-    "count": 53,
+    "count": 54,
     "count_after_delta_remediation": 42,
     "count_after_first_remediation": 35,
     "count_after_second_delta_remediation": 49,
+    "count_after_third_delta_remediation": 53,
     "count_before_remediation": 28,
     "file": "tests/test_phase1g_h_global_variance.py",
     "related_1g_b_contract_hardening": {
-      "count": 18,
+      "count": 22,
       "file": "tests/test_phase1g_b_contract_hardening.py"
     }
   },
@@ -2550,6 +2628,85 @@
     "record": "reports/phase1g_h_delta_audit_remediation.md (sec. 3)",
     "tolerance_audit_missing": 0,
     "validator": "PASS (52 JSON round trips)",
+    "windows_gate": "not run"
+  },
+  "verification_fourth_delta_remediated_tree": {
+    "case_runner": {
+      "gm_bare_pbs_f_median_seed": 0.810772,
+      "gm_bare_pbs_w09_seed": 1.121363,
+      "nw15_equal_mass_constant_share": 0.918157
+    },
+    "code": {
+      "runtime": "unchanged since c6028e9 (1G-H) and 6926a63 (1G-B)",
+      "tests": "a243bf13bb27fb77c54ff05be004c47efe6e6784"
+    },
+    "evidence_gates": "36 / 36 on CPython 3.13.16 and 36 / 36 on 3.11.17",
+    "full_suites": {
+      "CPython 3.11.17": {
+        "collected": 1212,
+        "errors": 0,
+        "failed": 0,
+        "passed": 1212,
+        "rc": 0,
+        "seconds": 361,
+        "skipped": 0
+      },
+      "CPython 3.13.16": {
+        "collected": 1212,
+        "errors": 0,
+        "failed": 0,
+        "passed": 1212,
+        "rc": 0,
+        "seconds": 364,
+        "skipped": 0
+      },
+      "command": "OPENBLAS_NUM_THREADS=1 python -B -W error -m pytest -q -p no:cacheprovider -rs"
+    },
+    "mutation_testing": {
+      "fourth_delta_audit_mutants": {
+        "D1_adapted_binding_disabled": "KILLED_BY_TESTS",
+        "X01_growth_json_check_removed": "SURVIVED",
+        "X02_void_share_json_check_removed": "KILLED_BY_TESTS",
+        "X03_premise_json_check_removed": "SURVIVED",
+        "X04_interval_json_check_removed": "KILLED_BY_TESTS",
+        "X05_growth_json_before_validation": "KILLED_BY_TESTS",
+        "X06_growth_ratio_approximate_1e8": "KILLED_BY_TESTS",
+        "X07_growth_ratio_operands_swapped": "KILLED_BY_TESTS",
+        "X08_growth_ratio_float_conversion": "SURVIVED_BEYOND_BASELINE",
+        "X09_simpson_exact_error_budget_to_1pct": "SURVIVED",
+        "X10_simpson_ratio_budget_to_1pct": "SURVIVED",
+        "X11_growth_ratio_approximate_1e12": "KILLED_BY_TESTS",
+        "X12_lcdm_relative_change_float_conversion": "SURVIVED_BEYOND_BASELINE"
+      },
+      "round4_mutants_rerun": {
+        "B01_record_identity_rtol_10pct_drift": "KILLED_BY_TESTS",
+        "B02_same_rejects_float_subclasses": "KILLED_BY_TESTS",
+        "B03_same_accepts_numpy_float32": "KILLED_BY_TESTS",
+        "B04_monte_carlo_budget_doubled": "SURVIVED",
+        "B05_simpson_error_ratio_budget_x10": "SURVIVED",
+        "B06_lognormal_calibration_inside_budget": "SURVIVED",
+        "B07_p11_weight_denominator_1ppm": "KILLED_BY_TESTS",
+        "B08_lognormal_calibration_1ppm": "KILLED_BY_TESTS",
+        "B09_reported_lambda_1ppm": "KILLED_BY_TESTS",
+        "B10_one_growth_tolerance_not_converted": "KILLED_BY_TESTS",
+        "J01_strict_json_check_disabled": "KILLED_BY_TESTS",
+        "J02_sigma_record_json_check_removed": "KILLED_BY_TESTS",
+        "J03_float32_refusal_via_message_branch_off": "KILLED_BY_TESTS",
+        "L01_lcdm_diagnostics_finiteness_off": "KILLED_BY_TESTS",
+        "L02_lcdm_diagnostics_binding_off": "KILLED_BY_TESTS",
+        "L03_anchored_ratio_binding_off": "KILLED_BY_TESTS",
+        "L04_anchored_differences_binding_off": "KILLED_BY_TESTS",
+        "L05_anchored_offset_unbound": "KILLED_BY_TESTS"
+      }
+    },
+    "phase_tests": 54,
+    "record": "reports/phase1g_h_delta_audit_4_remediation.md (sec. 3)",
+    "related_1g_b_contract_hardening_tests": 22,
+    "tolerance_audit": {
+      "comparisons": 750,
+      "missing": 0
+    },
+    "validator": "PASS (59 JSON round trips)",
     "windows_gate": "not run"
   },
   "verification_remediated_tree": {

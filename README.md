@@ -144,10 +144,11 @@ that predate the freeze are resolved in the
   σ8 authorization is granted.
 - **Phase 1G-H (proposed; on the branch `ccr-555e67be-u11yht`, pushed with
   owner approvals on 2026-10-06, 2026-10-08 and 2026-10-09; last recorded
-  publication event P14, `36d127f`, in the publication record; independently
+  push P15, `027b7a4`, in the publication record; independently
   audited on 2026-10-07 and remediated; delta-audited on 2026-10-08 and
-  remediated; a second delta audit the same day and a third, cross-family
-  delta audit on 2026-10-09 accepted it with corrections, which are applied;
+  remediated; a second delta audit the same day and a third and a fourth,
+  cross-family, delta audit on 2026-10-09 accepted it with corrections,
+  which are applied;
   not merged into `main`, frozen or tagged)**
   ([report](reports/phase1g_h_global_variance_closure.md),
   [validation](reports/phase1g_h_global_variance_closure_validation.md),
@@ -159,6 +160,8 @@ that predate the freeze are resolved in the
   [second remediation](reports/phase1g_h_delta_audit_2_remediation.md),
   [third delta audit](reports/phase1g_h_delta_audit_3.md),
   [third remediation](reports/phase1g_h_delta_audit_3_remediation.md),
+  [fourth delta audit](reports/phase1g_h_delta_audit_4.md),
+  [fourth remediation](reports/phase1g_h_delta_audit_4_remediation.md),
   [1G-B hardening](reports/phase1g_b_contract_hardening_successor.md),
   [publication](reports/phase1g_h_publication_successor.md)):
   - *Audits.* The independent audit rejected the closure claims of the
@@ -177,7 +180,11 @@ that predate the freeze are resolved in the
     58 quantities) and found no scientific blocker; its corrections (a
     publication convention, strict JSON for nested inputs, tests, wording)
     are applied, and by owner decision a separate successor hardens two
-    1G-B record contracts with bit-identical outputs. The owner's Windows
+    1G-B record contracts with bit-identical outputs. The fourth delta audit
+    (2026-10-09, OpenAI GPT-6 family) found those corrections resolved, every
+    earlier finding unregressed and no scientific blocker; its two LOW and
+    one INFO findings (tests for two strict-JSON guards, scoped wording) are
+    applied, with a one-ULP test of the 1G-B bindings. The owner's Windows
     gate and the decisions on pull request, merge, freeze and tag remain
     open.
   - *Definition (proposed).* The formal tangent statistic: the rms of the

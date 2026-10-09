@@ -164,6 +164,59 @@
     },
     "supersedes": "section 6.2 of this record and addendum_2026_10_08_after_second_delta_audit.state_after_p9"
   },
+  "addendum_2026_10_09_after_fourth_delta_audit": {
+    "added_with": "reports/phase1g_h_delta_audit_4_remediation.md",
+    "convention_clarification": "current summaries name the last recorded push of the session branch (the event that changes its remote head: P11, P14, now P15); audit publications on their own branches and confirmations are recorded here but do not move that pointer; sections 8 and 9 already applied it this way",
+    "dated_statements": [
+      {
+        "current_reading": "pushed by P15",
+        "location": "this record section 9.2",
+        "statement": "The record of P14 (the commit carrying this section) is a later local commit; its push needs a separate approval.",
+        "written": "2026-10-09"
+      },
+      {
+        "current_reading": "superseded by section 10.2",
+        "location": "this record section 9.2; addendum_2026_10_09_after_p14.state_after_p14",
+        "statement": "ccr-555e67be-u11yht = 36d127f on origin",
+        "written": "2026-10-09"
+      },
+      {
+        "current_reading": "updated to the last recorded push P15 (section 10.3)",
+        "location": "README.md, CLAUDE.md, reports/phase1g_h_global_variance_closure.md header and inventory",
+        "statement": "Last recorded publication event: P14 (and its equivalents)",
+        "written": "2026-10-09"
+      }
+    ],
+    "events": [
+      {
+        "authorisation_verbatim": "Pubblica, fai il fast-forward",
+        "date": "2026-10-09",
+        "event": "fast-forward of ccr-555e67be-u11yht from 36d127f to 027b7a413fcee0786b861d5903272e4653d227ed, carrying only 027b7a4 (the record of P14)",
+        "id": "P15",
+        "remote_evidence": "push output 36d127f..027b7a4; branch head 027b7a4, also observed by the fourth delta audit"
+      },
+      {
+        "authorisation_verbatim": "not available in this session",
+        "date": "2026-10-09",
+        "event": "fourth delta audit published on phase-1g-h-delta-audit-4 at fc804a0f71f47904e86388f378295f72ba15cdd8 (parent 027b7a4; 83 added files under reports/phase1g_h_delta_audit_4*); the auditing session reports that fc804a0 has the tree and parent of its local commit f332353",
+        "id": "P16",
+        "note": "the owner's authorisation in the auditing session, as the handoff pasted on 2026-10-09 reports it",
+        "remote_evidence": "branch head fc804a0; git diff --name-status 027b7a4 fc804a0"
+      }
+    ],
+    "record_section": "reports/phase1g_h_publication_successor.md section 10",
+    "requested_by": "reports/phase1g_h_delta_audit_4.md (sections 3 and 11: record P15 once in the next authorised substantive addendum)",
+    "state_after_p16": {
+      "ccr-555e67be-u11yht": "027b7a413fcee0786b861d5903272e4653d227ed on origin; the local branch carries, not pushed, fc804a0 (fourth delta audit) and the commits of the fourth remediation",
+      "d_v2_tag_or_branch": "absent",
+      "main": "8d3cdd0533035858c42269cb1dff1a20dcafc7da (unchanged)",
+      "other_audit_branches": "as in state_after_p13",
+      "phase-1g-h-delta-audit-4": "fc804a0f71f47904e86388f378295f72ba15cdd8",
+      "pull_requests": "four, all closed, none from a 1G-H branch",
+      "releases": "none",
+      "tags": "76 tag refs (38 annotated tags), unchanged"
+    }
+  },
   "addendum_2026_10_09_after_p14": {
     "convention": "section 8.3: added in a documentation commit after the push; the commit cannot record its own push",
     "dated_statements": [

@@ -1,0 +1,28 @@
+{
+ "old_environment": {
+  "git_head": "6926a636c100d232247e39d71d5b2d6e71a6f917",
+  "implementation": "CPython",
+  "matplotlib": "3.11.2",
+  "numpy": "2.5.3",
+  "platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
+  "python": "3.13.16",
+  "scipy": "1.18.1",
+  "src_scripts_tests_dirty": false
+ },
+ "new_environment": {
+  "git_head": "a243bf13bb27fb77c54ff05be004c47efe6e6784",
+  "implementation": "CPython",
+  "matplotlib": "3.11.2",
+  "numpy": "2.5.3",
+  "platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
+  "python": "3.13.16",
+  "scipy": "1.18.1",
+  "src_scripts_tests_dirty": false
+ },
+ "common_leaves": 3846,
+ "numeric_common_leaves": 3201,
+ "numeric_changed": [],
+ "text_changed": [],
+ "only_old": [],
+ "only_new": []
+}

@@ -107,8 +107,8 @@ outputs carry `NON_OBSERVATIONAL`, `NOT_OBSERVATIONAL_SIGMA_8` and
 and it changes no status token. Promotion, pull request, merge, freeze and
 tagging remain open owner decisions (H-OD1…H-OD5); of H-OD5 the owner
 approved only pushes to the session branch `ccr-555e67be-u11yht`
-(2026-10-06, 2026-10-08 and 2026-10-09), and four independent audits
-(2026-10-07, 2026-10-08 twice, 2026-10-09) were published on their own
+(2026-10-06, 2026-10-08 and 2026-10-09), and five independent audits
+(2026-10-07, 2026-10-08 twice, 2026-10-09 twice) were published on their own
 branches.
 
 Everything else in the list above stays unimplemented.
@@ -350,7 +350,12 @@ current interpretation; frozen records remain unchanged.
     refuses non-finite or unbound quadrature diagnostics and
     `AnchoredLagrangianSigmaRatio` binds its ratios, offset and listed
     early-spectrum differences to its stored records. Record invariants
-    only; the 1G-B validation artifact is byte-identical.
+    only; the scientific content of the 1G-B validation artifact is
+    identical (byte-identical at an unchanged HEAD; across commits only
+    `provenance.repository_head` differs). After the fourth 1G-H delta audit
+    the native-float bindings are tested to one ULP, and by owner decision
+    (option (a)) the `numpy.float32` precision limit stays documented
+    (successor §6).
 - **1G-C:** two-scale growth law (report-only,
   `phase1g_c_two_scale_growth_law.md`).
   - Kinematically, the tracker is empty Milne voids plus EdS walls in common
@@ -473,8 +478,9 @@ current interpretation; frozen records remain unchanged.
     (`phase1g_fg_freeze_status_successor.md`); no release exists.
 - **1G-H (proposed; pushed with owner approvals of 2026-10-06, 2026-10-08 and
   2026-10-09 to the session branch `ccr-555e67be-u11yht` (last recorded
-  publication event P14, `36d127f`; record `phase1g_h_publication_successor.md`,
-  events P1–P14; summaries name the last recorded event, not the remote head),
+  push P15, `027b7a4`; record `phase1g_h_publication_successor.md`,
+  events P1–P16; summaries name the last recorded push of the session
+  branch, not the remote head),
   developed locally as `phase-1g-h-global-variance-closure`; independently
   audited 2026-10-07 (`phase1g_h_independent_audit.md`, published by the owner on
   `phase-1g-h-independent-audit` at `816dd00`) and remediated
@@ -488,7 +494,10 @@ current interpretation; frozen records remain unchanged.
   delta audit 2026-10-09 (`phase1g_h_delta_audit_3.md`, OpenAI GPT-6 family,
   published on `phase-1g-h-delta-audit-3` at `18bf2fb`) and remediated on
   top of it (`phase1g_h_delta_audit_3_remediation.md`, with the separate
-  `phase1g_b_contract_hardening_successor.md`); not merged into `main`,
+  `phase1g_b_contract_hardening_successor.md`, pushed in P14); fourth delta
+  audit 2026-10-09 (`phase1g_h_delta_audit_4.md`, OpenAI GPT-6 family,
+  published on `phase-1g-h-delta-audit-4` at `fc804a0`) and remediated on top
+  of it (`phase1g_h_delta_audit_4_remediation.md`); not merged into `main`,
   frozen or tagged; no pull request):** global
   matter-variance definition and minimal closure
   (`phase1g_h_global_variance_closure.md`, inventory, validation record;
@@ -538,6 +547,17 @@ current interpretation; frozen records remain unchanged.
     export; 53 phase tests; key `both_walls_product_moment_excess_ball`; a
     1G-B contract-hardening successor (two records, outputs bit-identical);
     pushed with the audit commits in P14 ("Sì, fai push").
+  - Fourth delta audit (2026-10-09; OpenAI GPT-6 family):
+    `ACCEPT_WITH_CORRECTIONS`; every area `ACCEPT` except TESTS and
+    DOCUMENTATION; GH-D3F1…F5 resolved, errata applied, no regression;
+    20/20 full-precision values reproduced; centred both-walls covariances
+    confirm GH-D3F5. Findings GH-D4F1 (LOW: no test for the seed-share and
+    interval strict-JSON guards), D4F2 (INFO: a stale "two remediation
+    records"), D4F3 (LOW: scope of the 1G-B byte-equality) and errata
+    GH-D4E1…E4. Applied with owner approval ("Procedi con il piano e
+    l'opzione (a)"): 54 phase tests, a one-ULP 1G-B test (22 cases), scoped
+    wording, events P15–P16; the float32 limit stays documented; no code or
+    number changes.
     Open: the Windows gate, H-OD1…H-OD5.
   - A (definition) proposed, not closed (D1): the formal tangent statistic —
     the early Gaussian field propagated with the zero-amplitude tangent of

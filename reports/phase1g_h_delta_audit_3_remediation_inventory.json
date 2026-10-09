@@ -25,6 +25,16 @@
       "where": "src/timescape_fsigma8/global_variance.py _same docstring"
     }
   ],
+  "errata_pointer_2026_10_09": {
+    "corrections": "reports/phase1g_h_delta_audit_4_remediation.md section 2",
+    "errata": [
+      "GH-D4E2 (unchanged: tolerances -> runtime and evidence tolerances; test thresholds tightened)",
+      "GH-D4E3 (1G-B artifact byte-identical -> at unchanged HEAD 18bf2fb in the working tree; scientific content identical across commits)",
+      "GH-D4E4 (LCDM diagnostics: only the relative change is bound to a recomputation; the truncation envelope is finite, non-negative and capped)"
+    ],
+    "note": "this inventory is not rewritten; the equivalence entry of finding GH-D3F4 is read with GH-D4E3",
+    "source": "reports/phase1g_h_delta_audit_4.md section 9"
+  },
   "files_changed_sha256": {
     "scripts/phase1g_h_global_variance_closure_numerics.py": "a5fd601fecc06c57526fd644632d2595f75086457cc7eeb825a301e45c284981",
     "src/timescape_fsigma8/global_variance.py": "96934ea62d22c2bff07ff6edf00631b0fe556579d29f02ea0efa27b79af9bf4b",

@@ -267,3 +267,48 @@ Sec. 8.3. Remote facts were verified read-only on 2026-10-09 (push output,
 | "Nothing is pushed: the push of `4d71bd4`, `18bf2fb` and these three commits needs a separate approval." | `phase1g_h_delta_audit_3_remediation.md` Sec. 0, and the push item of its Sec. 4 | 2026-10-09 | Pushed by P14; a dated status note in that record points here. |
 | "`ccr-555e67be-u11yht` = `ed0ec0c` on `origin`. The local branch carries, not pushed, …" | this record, Sec. 8.2, and its inventory `addendum_2026_10_09_after_third_delta_audit.state_after_p13` | 2026-10-09 | Superseded by Sec. 9.2. |
 | "Last recorded publication event: P11" | README.md, CLAUDE.md, the 1G-H report header and inventory | 2026-10-09 | Updated to P14 with this addendum (Sec. 8.3). |
+
+## 10. Fourth addendum of 2026-10-09 (P15, P16)
+
+Added with the fourth delta-audit remediation
+([`phase1g_h_delta_audit_4_remediation.md`](phase1g_h_delta_audit_4_remediation.md)),
+as recommended by the fourth delta audit
+([`phase1g_h_delta_audit_4.md`](phase1g_h_delta_audit_4.md), Sec. 3 and
+Sec. 11). Remote facts were verified read-only on 2026-10-09
+(`git ls-remote`, `git log`).
+
+### 10.1 Events
+
+| # | Date | Event | Remote evidence | Authorisation (owner's words, verbatim) |
+|---|---|---|---|---|
+| P15 | 2026-10-09 | Fast-forward of `ccr-555e67be-u11yht` from `36d127f` to `027b7a413fcee0786b861d5903272e4653d227ed`, carrying only `027b7a4` (the record of P14) | push output `36d127f..027b7a4`; branch head `027b7a4`, also observed by the fourth delta audit | «Pubblica, fai il fast-forward» |
+| P16 | 2026-10-09 | Fourth delta audit published on `phase-1g-h-delta-audit-4` at `fc804a0f71f47904e86388f378295f72ba15cdd8` (parent `027b7a4`; 83 added files, all under `reports/phase1g_h_delta_audit_4*`). The auditing session reports that `fc804a0` has the tree and parent of its local commit `f332353` | branch head `fc804a0`; `git diff --name-status 027b7a4 fc804a0` | the owner's authorisation in the auditing session, as the handoff pasted here on 2026-10-09 reports it; no verbatim words are available in this session |
+
+### 10.2 State on 2026-10-09 after P16 (supersedes Sec. 9.2)
+
+- `main` = `8d3cdd0533035858c42269cb1dff1a20dcafc7da` (unchanged).
+- `ccr-555e67be-u11yht` = `027b7a4` on `origin`. The local branch carries,
+  not pushed, `fc804a0` (the fourth delta audit) and the commits of the
+  fourth remediation; their push needs a separate approval.
+- `phase-1g-h-delta-audit-4` = `fc804a0`; the other audit branches as in
+  Sec. 8.2.
+- 76 tag refs (38 annotated tags), unchanged. Four pull requests exist, all
+  closed and none from a 1G-H branch; no release; no
+  `phase-1g-d-separate-universe-growth-v2` tag or branch.
+
+### 10.3 Clarification of the convention of Sec. 8.3
+
+Current summaries name the **last recorded push of the session branch**:
+the event that changes its remote head (P11, then P14, now P15). Audit
+publications on their own branches and confirmations are recorded here but
+do not move that pointer. Secs. 8 and 9 already applied the convention this
+way: the summaries named P11 while P13 was the latest event. The push of the
+fourth remediation will be recorded once, in the next addendum.
+
+### 10.4 Current reading of further dated statements
+
+| Statement (literal) | Location | Written | Current reading |
+|---|---|---|---|
+| "The record of P14 (the commit carrying this section) is a later local commit; its push needs a separate approval." | this record, Sec. 9.2 | 2026-10-09 | Pushed by P15. |
+| "`ccr-555e67be-u11yht` = `36d127f` on `origin`." | this record, Sec. 9.2, and its inventory `addendum_2026_10_09_after_p14.state_after_p14` | 2026-10-09 | Superseded by Sec. 10.2. |
+| "Last recorded publication event: P14" (and its equivalents) | README.md, CLAUDE.md, the 1G-H report header and inventory | 2026-10-09 | Updated to the last recorded push P15 (Sec. 10.3). |

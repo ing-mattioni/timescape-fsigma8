@@ -1,4 +1,35 @@
 {
+  "addendum_2026_10_09_after_fourth_delta_audit": {
+    "audit": "reports/phase1g_h_delta_audit_4.md (GH-D3F4 RESOLVED within the chosen scope; GH-D4F3, GH-D4E3, GH-D4E4; X11 recommendation)",
+    "bindings_stated_exactly": [
+      "LCDMReferenceLinearSigma.quadrature_relative_change: recomputed from the two stored unit sigmas",
+      "LCDMReferenceLinearSigma.truncation_envelope_fraction: finite, non-negative, within the declared tolerance; not re-integrated (a within-budget value such as 0 is accepted)",
+      "LCDMReferenceLinearSigma.omega_m, growth_today_photon_normalised, omega_m_R_cubed_Mpc3: domain checks only",
+      "AnchoredLagrangianSigmaRatio: anchor_value and anchor_consistency_tolerance remain inputs; the four derived outputs and early_spectrum_differences are bound"
+    ],
+    "code_changed": false,
+    "equivalence_scope": "sha256 5746cc76e932ad0db3e253ee5aa5f0032227e65afba1699a09ea1f2c32d13c8d obtained twice at the unchanged HEAD 18bf2fb on the same platform, before and after the code change in the working tree; at different committed heads only provenance.repository_head differs (the fourth audit reconstructed the hash from both); scientific content identical",
+    "mutants": {
+      "X06_growth_ratio_approximate_1e8": "killed",
+      "X07_growth_ratio_operands_swapped": "killed",
+      "X08_growth_ratio_float_conversion": "survives (stricter than the chosen policy)",
+      "X11_growth_ratio_approximate_1e12": "killed",
+      "X12_lcdm_relative_change_float_conversion": "survives (stricter than the chosen policy)"
+    },
+    "owner_decision": {
+      "choice": "keep the documented scalar-precision limit (exact Python/NumPy equality; a numpy.float32 rounding passes and is stored as float32); a uniform policy would need a separate successor",
+      "date": "2026-10-09",
+      "verbatim": "Procedi con il piano e l'opzione (a)"
+    },
+    "record_section": "reports/phase1g_b_contract_hardening_successor.md section 6",
+    "tests_added": [
+      "test_anchored_ratio_binding_of_native_floats_is_exact_to_one_ulp[growth_ratio]",
+      "test_anchored_ratio_binding_of_native_floats_is_exact_to_one_ulp[early_spectrum_factor]",
+      "test_anchored_ratio_binding_of_native_floats_is_exact_to_one_ulp[reference_offset_from_anchor]",
+      "test_lcdm_relative_change_binding_of_native_floats_is_exact_to_one_ulp"
+    ],
+    "tests_count": 22
+  },
   "changes": {
     "AnchoredLagrangianSigmaRatio.__post_init__": [
       "growth_ratio, early_spectrum_factor, sigma_ratio and reference_offset_from_anchor equal the expressions of anchor_lagrangian_sigma on the stored records",

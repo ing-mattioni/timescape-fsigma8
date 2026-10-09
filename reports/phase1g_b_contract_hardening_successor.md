@@ -105,3 +105,41 @@ No status token, observational authorisation or frozen record changes; the
 five authorisations stay `NOT_GRANTED`. The change is part of the 1G-H
 session branch, in its own commit, and follows that branch's publication
 decisions.
+
+## 6. Addendum of 2026-10-09 (after the fourth delta audit)
+
+The fourth 1G-H delta audit
+([`phase1g_h_delta_audit_4.md`](phase1g_h_delta_audit_4.md)) found GH-D3F4
+resolved within the scope chosen here. Its remediation
+([`phase1g_h_delta_audit_4_remediation.md`](phase1g_h_delta_audit_4_remediation.md))
+adds the following; `lagrangian_sigma.py` is not changed again.
+
+- **Exactness to one ULP (audit recommendation, mutant X11).** Four test
+  cases: `growth_ratio`, `early_spectrum_factor` and
+  `reference_offset_from_anchor` of `AnchoredLagrangianSigmaRatio`, and the
+  relative change of `LCDMReferenceLinearSigma`, are each refused one ULP
+  above and one ULP below the factory value. The file now has 22 cases. A
+  comparison relaxed to a relative tolerance of 10⁻¹² (X11) is now killed.
+  A comparison after `float()` (X08, X12) still survives: it is stricter
+  than the policy below, not weaker.
+- **Scalar-precision policy (owner decision, 2026-10-09, verbatim «Procedi
+  con il piano e l'opzione (a)»).** The limit of Sec. 3 stays as documented:
+  exact equality under Python and NumPy comparison rules for native floats.
+  A `numpy.float32` rounding of the exact value passes and is stored as
+  `float32`. A uniform scalar or precision policy would need a separate
+  successor.
+- **Scope of the byte-equality of Sec. 4 (GH-D4F3).** The SHA-256
+  `5746cc76…c13c8d` was obtained twice at the unchanged HEAD `18bf2fb`, on
+  the same platform, before and after the code change in the working tree.
+  At different committed heads the artifact differs only in
+  `provenance.repository_head`; the audit reconstructed `5746cc76…` from
+  both by restoring that provenance. The scientific content is identical.
+- **Bindings, stated exactly (GH-D4E4).** Of the two diagnostics, only
+  `quadrature_relative_change` is recomputed, from the two stored unit
+  sigmas. `truncation_envelope_fraction` is finite, non-negative and within
+  the declared tolerance, but it is not re-integrated from the spectrum, so
+  another value within that budget (for example 0) is accepted. `omega_m`,
+  `growth_today_photon_normalised` and `omega_m_R_cubed_Mpc3` are checked
+  for their domain only. The anchor value and its consistency tolerance
+  remain inputs; the four derived outputs and the list of differing inputs
+  are bound.
