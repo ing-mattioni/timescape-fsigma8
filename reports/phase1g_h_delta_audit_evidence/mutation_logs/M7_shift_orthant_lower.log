@@ -1,0 +1,39 @@
+....................FF.........F.F.                                      [100%]
+=================================== FAILURES ===================================
+__________ test_orthant_moments_against_bivariate_cdf_and_monte_carlo __________
+tests/test_phase1g_h_global_variance.py:478: in test_orthant_moments_against_bivariate_cdf_and_monte_carlo
+    mom = gv.bivariate_normal_orthant_moments(correlation=rho, threshold=c, nodes=32,
+src/timescape_fsigma8/global_variance.py:1715: in bivariate_normal_orthant_moments
+    raise GlobalVarianceNumericalError("orthant moments violate E[1 1 g1] = E[1 1 g2]")
+E   timescape_fsigma8.global_variance.GlobalVarianceNumericalError: orthant moments violate E[1 1 g1] = E[1 1 g2]
+_______ test_gaussian_threshold_pair_covariance_formulas_by_monte_carlo ________
+tests/test_phase1g_h_global_variance.py:503: in test_gaussian_threshold_pair_covariance_formulas_by_monte_carlo
+    mom = gv.bivariate_normal_orthant_moments(correlation=rho, threshold=c, nodes=32,
+src/timescape_fsigma8/global_variance.py:1715: in bivariate_normal_orthant_moments
+    raise GlobalVarianceNumericalError("orthant moments violate E[1 1 g1] = E[1 1 g2]")
+E   timescape_fsigma8.global_variance.GlobalVarianceNumericalError: orthant moments violate E[1 1 g1] = E[1 1 g2]
+_______________ test_gh_f5_lognormal_mask_kernels_by_monte_carlo _______________
+tests/test_phase1g_h_global_variance.py:795: in test_gh_f5_lognormal_mask_kernels_by_monte_carlo
+    p11, kww, kpw = ev.lognormal_mask_kernels(rho=rho, c=c, f_w=f_w, lam=lam, xi_lat_r=xsr,
+scripts/phase1g_h_global_variance_closure_numerics.py:402: in lognormal_mask_kernels
+    p11 = _orthant(rho, c)["P11"]
+          ^^^^^^^^^^^^^^^^
+scripts/phase1g_h_global_variance_closure_numerics.py:372: in _orthant
+    return gv.bivariate_normal_orthant_moments(
+src/timescape_fsigma8/global_variance.py:1715: in bivariate_normal_orthant_moments
+    raise GlobalVarianceNumericalError("orthant moments violate E[1 1 g1] = E[1 1 g2]")
+E   timescape_fsigma8.global_variance.GlobalVarianceNumericalError: orthant moments violate E[1 1 g1] = E[1 1 g2]
+__________ test_gh_f10_orthant_quadrature_meets_its_accuracy_contract __________
+tests/test_phase1g_h_global_variance.py:823: in test_gh_f10_orthant_quadrature_meets_its_accuracy_contract
+    assert prob(rho, 0.0, 0.0) == pytest.approx(0.25 + math.asin(rho) / (2 * math.pi),
+E   assert 0.46017216272296846 == 0.4997749209022009 ± 1.0e-12
+E
+E     comparison failed
+E     Obtained: 0.46017216272296846
+E     Expected: 0.4997749209022009 ± 1.0e-12
+=========================== short test summary info ============================
+FAILED tests/test_phase1g_h_global_variance.py::test_orthant_moments_against_bivariate_cdf_and_monte_carlo
+FAILED tests/test_phase1g_h_global_variance.py::test_gaussian_threshold_pair_covariance_formulas_by_monte_carlo
+FAILED tests/test_phase1g_h_global_variance.py::test_gh_f5_lognormal_mask_kernels_by_monte_carlo
+FAILED tests/test_phase1g_h_global_variance.py::test_gh_f10_orthant_quadrature_meets_its_accuracy_contract
+4 failed, 31 passed in 4.96s

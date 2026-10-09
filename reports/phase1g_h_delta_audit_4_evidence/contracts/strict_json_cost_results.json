@@ -1,0 +1,6 @@
+{
+ "iterations": 10000,
+ "method": "minimum of3\u00d710000 repeats; avoids constructor recomputation",
+ "check_on_precomputed_export_ms": 0.09817154879999634,
+ "export_plus_check_ms": 0.11339308480000909
+}

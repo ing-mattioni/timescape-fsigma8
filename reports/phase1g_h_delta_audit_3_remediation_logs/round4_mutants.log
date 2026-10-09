@@ -1,0 +1,19 @@
+{"id": "baseline", "outcome": "BASELINE_FAIL", "tests_summary": "1 failed, 194 passed in 26.04s", "evidence_rc": null}
+{"id": "B01_record_identity_rtol_10pct_drift", "outcome": "KILLED_BY_TESTS", "tests_summary": "2 failed, 51 passed in 16.89s", "evidence_rc": null}
+{"id": "B02_same_rejects_float_subclasses", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 52 passed in 19.38s", "evidence_rc": null}
+{"id": "B03_same_accepts_numpy_float32", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 52 passed in 18.27s", "evidence_rc": null}
+{"id": "B04_monte_carlo_budget_doubled", "outcome": "SURVIVED", "tests_summary": "53 passed in 18.83s", "evidence_rc": null}
+{"id": "B05_simpson_error_ratio_budget_x10", "outcome": "SURVIVED", "tests_summary": "53 passed in 18.40s", "evidence_rc": null}
+{"id": "B06_lognormal_calibration_inside_budget", "outcome": "SURVIVED", "tests_summary": "53 passed in 19.53s", "evidence_rc": 0}
+{"id": "B07_p11_weight_denominator_1ppm", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 52 passed in 19.39s", "evidence_rc": null}
+{"id": "B08_lognormal_calibration_1ppm", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 52 passed in 20.92s", "evidence_rc": null}
+{"id": "B09_reported_lambda_1ppm", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 52 passed in 16.41s", "evidence_rc": null}
+{"id": "B10_one_growth_tolerance_not_converted", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 52 passed in 16.53s", "evidence_rc": null}
+{"id": "J01_strict_json_check_disabled", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 52 passed in 15.43s", "evidence_rc": null}
+{"id": "J02_sigma_record_json_check_removed", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 52 passed in 18.92s", "evidence_rc": null}
+{"id": "J03_float32_refusal_via_message_branch_off", "outcome": "KILLED_BY_TESTS", "tests_summary": "2 failed, 51 passed in 17.81s", "evidence_rc": null}
+{"id": "L01_lcdm_diagnostics_finiteness_off", "outcome": "KILLED_BY_TESTS", "tests_summary": "11 failed, 131 passed in 7.67s", "evidence_rc": null}
+{"id": "L02_lcdm_diagnostics_binding_off", "outcome": "KILLED_BY_TESTS", "tests_summary": "2 failed, 140 passed in 7.25s", "evidence_rc": null}
+{"id": "L03_anchored_ratio_binding_off", "outcome": "KILLED_BY_TESTS", "tests_summary": "5 failed, 137 passed in 6.79s", "evidence_rc": null}
+{"id": "L04_anchored_differences_binding_off", "outcome": "KILLED_BY_TESTS", "tests_summary": "2 failed, 140 passed in 7.61s", "evidence_rc": null}
+{"id": "L05_anchored_offset_unbound", "outcome": "KILLED_BY_TESTS", "tests_summary": "2 failed, 140 passed in 7.47s", "evidence_rc": null}

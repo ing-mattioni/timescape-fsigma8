@@ -1,0 +1,127 @@
+{
+  "authorisation": {
+    "date": "2026-10-09",
+    "verbatim": "Ho eseguito le test suite su windows, tutto ok. Dunque Implementa le raccomandazioni dell'audit su H-OD1…H-OD5 e poi fai PR, merge, freeze e tag"
+  },
+  "branch": "ccr-555e67be-u11yht, on top of 22ace890caca5e571e83d322b446db3a05f78cc0",
+  "classification": "OWNER_DECISIONS_SUCCESSOR_RECORD",
+  "date": "2026-10-09",
+  "decisions": {
+    "H-OD1": {
+      "choice": "keep the definition as a named research proposal (the formal tangent statistic)",
+      "convention": "(c) preferred (8 h-bar^-1 Mpc, R_proper H_D0 = 800 km/s); (a) the fixed-mass comparison",
+      "not_decided": "adoption as the project's sigma8 analogue"
+    },
+    "H-OD2": {
+      "choice": "no physical reference value",
+      "reported_with_qualifiers": {
+        "alpha": "[W09] seed, formal extrapolation: 1.121 / 1.057 at (c)",
+        "beta": "median seed, heuristic prior: 0.811 / 0.816 at (c)",
+        "gamma": "constant-share interval, constant shares only: [0.261, 0.998] / [0.369, 1.162] at (c)"
+      }
+    },
+    "H-OD3": {
+      "choice": "no token change",
+      "declined_for_now": [
+        "GLOBAL_MEAN_LINEAR_STATISTIC_DEFINITION addition",
+        "GLOBAL_MEAN_LINEAR_STATISTIC_COMPUTATION addition",
+        "change of LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC (stays NOT_DERIVED)"
+      ]
+    },
+    "H-OD4": {
+      "choice": "global_variance.py stays experimental",
+      "promotion": "a new decision"
+    },
+    "H-OD5": {
+      "carries": "the experimental runtime, evidence, tests and records, and the 1G-B contract-hardening successor (record invariants of lagrangian_sigma.py); phase-1g-b-lagrangian-sigma-v1 keeps attesting fb5d952",
+      "choice": "pull request, merge, freeze and tag",
+      "freeze": "the 1G-H records (report, inventory, validation record, the five remediation records, the publication successor, this record and the 1G-B contract-hardening successor, with inventories and logs) become frozen historical records at the merge commit; later corrections by successor records only",
+      "hashes": "pull request number, merge commit and tag object are recorded by a later successor (with the push P18 of this record)",
+      "merge": "merge commit (as PR #4); main 8d3cdd0 is an ancestor of the branch",
+      "pull_request": "ccr-555e67be-u11yht -> main",
+      "tag": {
+        "kind": "annotated",
+        "name": "phase-1g-h-global-variance-closure-v1",
+        "note": "the session cannot sign with the owner's key; the F/G tags are SSH-signed by the owner",
+        "signed": false,
+        "target": "the merge commit"
+      }
+    }
+  },
+  "not_decided_or_done": [
+    "release",
+    "status-token or authorisation change",
+    "observational statistic, sigma8 or fsigma8",
+    "level C (prediction, observation)"
+  ],
+  "observational_authorizations": {
+    "FSIGMA8_AUTHORIZATION": "NOT_GRANTED",
+    "OBSERVATIONAL_AUTHORIZATION": "NOT_GRANTED",
+    "RSD_AUTHORIZATION": "NOT_GRANTED",
+    "SIGMA8_AUTHORIZATION": "NOT_GRANTED",
+    "UNIQUE_TIMESCAPE_PREDICTION": "NOT_GRANTED"
+  },
+  "phase": "1G-H",
+  "recommendations_source": "reports/phase1g_h_delta_audit_4.md section 11",
+  "record": "reports/phase1g_h_owner_decisions_successor.md",
+  "schema_version": 1,
+  "status_tokens": {
+    "added": [],
+    "changed": []
+  },
+  "title": "Phase 1G-H owner decisions successor record (H-OD1 ... H-OD5)",
+  "unchanged": [
+    "equations",
+    "initial conditions",
+    "units",
+    "sign conventions",
+    "tolerances",
+    "status tokens",
+    "the five NOT_GRANTED observational authorisations",
+    "package modules",
+    "scripts",
+    "tests"
+  ],
+  "validation": {
+    "command": "OPENBLAS_NUM_THREADS=1 python -B -W error -m pytest -q -p no:cacheprovider -rs",
+    "diff_check": "clean",
+    "full_suites": {
+      "CPython 3.11.17": {
+        "failed": 0,
+        "passed": 1212,
+        "seconds": 369,
+        "skipped": 0
+      },
+      "CPython 3.13.16": {
+        "failed": 0,
+        "passed": 1212,
+        "seconds": 363,
+        "skipped": 0
+      }
+    },
+    "interpreters": [
+      "CPython 3.13.16 (Linux)",
+      "CPython 3.11.17 (Linux)"
+    ],
+    "scope": "the final bytes of this commit except this validation entry",
+    "validator": {
+      "json_roundtrips": 60,
+      "status": "PASS"
+    },
+    "windows": "owner's report (section 2)"
+  },
+  "windows_gate": {
+    "not_stated": [
+      "interpreters",
+      "counts",
+      "commit"
+    ],
+    "note": "commits after a243bf1 change documentation only",
+    "project_interpreters": [
+      "CPython 3.14.3",
+      "CPython 3.11.9"
+    ],
+    "status": "reported passing by the owner",
+    "verbatim": "tutto ok"
+  }
+}

@@ -1,0 +1,234 @@
+[
+ {
+  "origin": "baseline",
+  "id": "baseline",
+  "file": null,
+  "old": "",
+  "new": "",
+  "tests_rc": 0,
+  "tests_summary": "49 passed in 26.16s",
+  "failed_tests": [],
+  "evidence_rc": 0,
+  "evidence_failures": [],
+  "evidence_tail": [
+   "  radial refinement max rel. change 1.01e-06 (1440 intervals); (H25) max rel. 0.0e+00",
+   "all 36 gates pass"
+  ],
+  "outcome": "BASELINE_PASS"
+ },
+ {
+  "origin": "extra",
+  "id": "AUTH_D1_binding_off_adapted",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "    for name, expected in values.items():\n        stored = getattr(record, name)",
+  "new": "    for name, expected in ():\n        stored = getattr(record, name)",
+  "replacements": 1,
+  "mutated_sha256": "5fdea8c1fe00becab62f054fdf7627bdf5f307d9b6101d337707e37708159d53",
+  "tests_rc": 1,
+  "tests_summary": "3 failed, 46 passed in 35.63s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_df2_records_bind_results_to_their_inputs",
+   "tests/test_phase1g_h_global_variance.py::test_gh_d2f2_binding_boundary_and_record_identities",
+   "tests/test_phase1g_h_global_variance.py::test_gh_d2f4_float_results_must_be_floats_and_scalar_inputs_are_stored_as_floats"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "extra",
+  "id": "B01_record_identity_rtol_10pct_drift",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "RECORD_IDENTITY_RTOL = 1e-12",
+  "new": "RECORD_IDENTITY_RTOL = 1.1e-12",
+  "replacements": 1,
+  "mutated_sha256": "d2e3dd3a99d97ec7610a3dc15cbaa6a277f987dcb9ba3a1efeff91cafd6f8ade",
+  "tests_rc": 0,
+  "tests_summary": "49 passed in 25.83s",
+  "failed_tests": [],
+  "evidence_rc": 0,
+  "evidence_failures": [],
+  "evidence_tail": [
+   "  radial refinement max rel. change 1.01e-06 (1440 intervals); (H25) max rel. 0.0e+00",
+   "all 36 gates pass"
+  ],
+  "outcome": "SURVIVED"
+ },
+ {
+  "origin": "extra",
+  "id": "B02_same_rejects_float_subclasses",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "isinstance(stored, float) and math.isfinite(stored)",
+  "new": "type(stored) is float and math.isfinite(stored)",
+  "replacements": 1,
+  "mutated_sha256": "f24360e7f0eedfe2742744abb35ac51adeb59cdab5137afb5eb8387aac4123c1",
+  "tests_rc": 0,
+  "tests_summary": "49 passed in 36.52s",
+  "failed_tests": [],
+  "evidence_rc": 0,
+  "evidence_failures": [],
+  "evidence_tail": [
+   "  radial refinement max rel. change 1.01e-06 (1440 intervals); (H25) max rel. 0.0e+00",
+   "all 36 gates pass"
+  ],
+  "outcome": "SURVIVED"
+ },
+ {
+  "origin": "extra",
+  "id": "B03_same_accepts_numpy_float32",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "isinstance(stored, float)",
+  "new": "isinstance(stored, (float, np.floating))",
+  "replacements": 2,
+  "mutated_sha256": "a406485ed686c08eef514ab65df5f4dedc51985ecd87f208b03892569959bfe4",
+  "tests_rc": 0,
+  "tests_summary": "49 passed in 26.48s",
+  "failed_tests": [],
+  "evidence_rc": 0,
+  "evidence_failures": [],
+  "evidence_tail": [
+   "  radial refinement max rel. change 1.01e-06 (1440 intervals); (H25) max rel. 0.0e+00",
+   "all 36 gates pass"
+  ],
+  "outcome": "SURVIVED"
+ },
+ {
+  "origin": "extra",
+  "id": "B04_monte_carlo_budget_doubled",
+  "file": "tests/test_phase1g_h_global_variance.py",
+  "old": "<= 5 *",
+  "new": "<= 10 *",
+  "replacements": 12,
+  "mutated_sha256": "288bb2d51ac91ebbeca387b53fab1f1fd9f01b10f471ceade4cf06a767d41d82",
+  "tests_rc": 0,
+  "tests_summary": "49 passed in 26.25s",
+  "failed_tests": [],
+  "evidence_rc": 0,
+  "evidence_failures": [],
+  "evidence_tail": [
+   "  radial refinement max rel. change 1.01e-06 (1440 intervals); (H25) max rel. 0.0e+00",
+   "all 36 gates pass"
+  ],
+  "outcome": "SURVIVED"
+ },
+ {
+  "origin": "extra",
+  "id": "B05_simpson_error_ratio_budget_x10",
+  "file": "tests/test_phase1g_h_global_variance.py",
+  "old": "pytest.approx(16.0, rel=1e-2, abs=0.0)",
+  "new": "pytest.approx(16.0, rel=1e-1, abs=0.0)",
+  "replacements": 1,
+  "mutated_sha256": "293a8881594b59bae39c31e93a39a6134b357162f4184850b53bb9e335e7ff0d",
+  "tests_rc": 0,
+  "tests_summary": "49 passed in 13.40s",
+  "failed_tests": [],
+  "evidence_rc": 0,
+  "evidence_failures": [],
+  "evidence_tail": [
+   "  radial refinement max rel. change 1.01e-06 (1440 intervals); (H25) max rel. 0.0e+00",
+   "all 36 gates pass"
+  ],
+  "outcome": "SURVIVED"
+ },
+ {
+  "origin": "extra",
+  "id": "B06_lognormal_calibration_inside_budget",
+  "file": "scripts/phase1g_h_global_variance_closure_numerics.py",
+  "old": "carrier_ball(l2) - ball_target",
+  "new": "carrier_ball(l2) - (1.0 + 1e-10) * ball_target",
+  "replacements": 1,
+  "mutated_sha256": "badd481e45ff2e11dea882dff9b869265aec11423b363d2dee40ed0d883fd8e5",
+  "tests_rc": 0,
+  "tests_summary": "49 passed in 11.64s",
+  "failed_tests": [],
+  "evidence_rc": 0,
+  "evidence_failures": [],
+  "evidence_tail": [
+   "  radial refinement max rel. change 1.01e-06 (1440 intervals); (H25) max rel. 2.2e-16",
+   "all 36 gates pass"
+  ],
+  "outcome": "SURVIVED"
+ },
+ {
+  "origin": "extra",
+  "id": "B07_p11_weight_denominator_1ppm",
+  "file": "scripts/phase1g_h_global_variance_closure_numerics.py",
+  "old": "ball.integral(k_ww + 2.0 * k_pw) / ball.integral(p11),",
+  "new": "ball.integral(k_ww + 2.0 * k_pw) / (1.000001 * ball.integral(p11)),",
+  "replacements": 1,
+  "mutated_sha256": "f02e99d0fc28d388b43c85975aaec091f2752274e736e10ba70bdc27220fa087",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 48 passed in 11.10s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_d2f2_law_summary_reports_the_pair_weighted_both_walls_covariance"
+  ],
+  "evidence_rc": 0,
+  "evidence_failures": [],
+  "evidence_tail": [
+   "  radial refinement max rel. change 1.01e-06 (1440 intervals); (H25) max rel. 0.0e+00",
+   "all 36 gates pass"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "extra",
+  "id": "B08_lognormal_calibration_1ppm",
+  "file": "scripts/phase1g_h_global_variance_closure_numerics.py",
+  "old": "carrier_ball(l2) - ball_target",
+  "new": "carrier_ball(l2) - 1.000001 * ball_target",
+  "replacements": 1,
+  "mutated_sha256": "4460dfa7c860b5ee5bd169d309cbfc9938454590dcc9f89751e004ae035d9512",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 48 passed in 11.05s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_d2f2_lognormal_pairs_report_the_inverse_square_of_the_law_ii_normaliser"
+  ],
+  "evidence_rc": 1,
+  "evidence_failures": [
+   "GATE FAILURES:"
+  ],
+  "evidence_tail": [
+   "  numerics: PAPER_REFERENCE lognormal ball-variance calibration = 1.000e-06 > 1.000e-09",
+   "  numerics: NW15_CMB_FIT lognormal ball-variance calibration = 1.000e-06 > 1.000e-09"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "extra",
+  "id": "B09_reported_lambda_1ppm",
+  "file": "scripts/phase1g_h_global_variance_closure_numerics.py",
+  "old": "\"latent_scale_lambda\": math.sqrt(lam2),",
+  "new": "\"latent_scale_lambda\": 1.000001 * math.sqrt(lam2),",
+  "replacements": 1,
+  "mutated_sha256": "18d05b3fabb32e392c40087bf53d217b067a7a8d25cf35a1b7c0481734649143",
+  "tests_rc": 1,
+  "tests_summary": "1 failed, 48 passed in 10.37s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_d2f2_lognormal_pairs_report_the_inverse_square_of_the_law_ii_normaliser"
+  ],
+  "evidence_rc": 0,
+  "evidence_failures": [],
+  "evidence_tail": [
+   "  radial refinement max rel. change 1.01e-06 (1440 intervals); (H25) max rel. 0.0e+00",
+   "all 36 gates pass"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ },
+ {
+  "origin": "extra",
+  "id": "B10_one_growth_tolerance_not_converted",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "object.__setattr__(self, name, _positive(getattr(self, name), name))",
+  "new": "object.__setattr__(self, name, _positive(getattr(self, name), name)) if name != \"ode_atol\" else _positive(getattr(self, name), name)",
+  "replacements": 1,
+  "mutated_sha256": "df04a75704b254b8a16eb4eabd0c599113f0daeb4eeb929eca9272638b5d156e",
+  "tests_rc": 0,
+  "tests_summary": "49 passed in 10.51s",
+  "failed_tests": [],
+  "evidence_rc": 0,
+  "evidence_failures": [],
+  "evidence_tail": [
+   "  radial refinement max rel. change 1.01e-06 (1440 intervals); (H25) max rel. 0.0e+00",
+   "all 36 gates pass"
+  ],
+  "outcome": "SURVIVED"
+ }
+]

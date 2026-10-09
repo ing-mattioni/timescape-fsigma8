@@ -1,0 +1,1996 @@
+{
+  "retrieved_at_utc": "2026-10-09T11:01:50.505Z",
+  "branches": [
+    {
+      "ref": "refs/heads/ccr-555e67be-u11yht",
+      "node_id": "REF_kwDOTZch8b5yZWZzL2hlYWRzL2Njci01NTVlNjdiZS11MTF5aHQ",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/ccr-555e67be-u11yht",
+      "object": {
+        "sha": "027b7a413fcee0786b861d5903272e4653d227ed",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/027b7a413fcee0786b861d5903272e4653d227ed"
+      }
+    },
+    {
+      "ref": "refs/heads/ccr-ac582de6-vho99i",
+      "node_id": "REF_kwDOTZch8b5yZWZzL2hlYWRzL2Njci1hYzU4MmRlNi12aG85OWk",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/ccr-ac582de6-vho99i",
+      "object": {
+        "sha": "e5170285e1d4b4aa72e907a3a79110d05584c0d9",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/e5170285e1d4b4aa72e907a3a79110d05584c0d9"
+      }
+    },
+    {
+      "ref": "refs/heads/claude/zealous-rubin-1m3vf4",
+      "node_id": "REF_kwDOTZch8doAJnJlZnMvaGVhZHMvY2xhdWRlL3plYWxvdXMtcnViaW4tMW0zdmY0",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/claude/zealous-rubin-1m3vf4",
+      "object": {
+        "sha": "63ca316b87399fc323713338a07519f8bce52113",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/63ca316b87399fc323713338a07519f8bce52113"
+      }
+    },
+    {
+      "ref": "refs/heads/experiment/ltb-cmc-background",
+      "node_id": "REF_kwDOTZch8doAKHJlZnMvaGVhZHMvZXhwZXJpbWVudC9sdGItY21jLWJhY2tncm91bmQ",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/experiment/ltb-cmc-background",
+      "object": {
+        "sha": "28a87a18aed9f85a0e65624fea76b26dfd459a0f",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/28a87a18aed9f85a0e65624fea76b26dfd459a0f"
+      }
+    },
+    {
+      "ref": "refs/heads/main",
+      "node_id": "REF_kwDOTZch8a9yZWZzL2hlYWRzL21haW4",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/main",
+      "object": {
+        "sha": "8d3cdd0533035858c42269cb1dff1a20dcafc7da",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/8d3cdd0533035858c42269cb1dff1a20dcafc7da"
+      }
+    },
+    {
+      "ref": "refs/heads/phase-1c-perturbations",
+      "node_id": "REF_kwDOTZch8doAIXJlZnMvaGVhZHMvcGhhc2UtMWMtcGVydHVyYmF0aW9ucw",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/phase-1c-perturbations",
+      "object": {
+        "sha": "878a97e83357025c78e2fee7bf458c3b22a207d3",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/878a97e83357025c78e2fee7bf458c3b22a207d3"
+      }
+    },
+    {
+      "ref": "refs/heads/phase-1d-b-growth-pipeline",
+      "node_id": "REF_kwDOTZch8doAJXJlZnMvaGVhZHMvcGhhc2UtMWQtYi1ncm93dGgtcGlwZWxpbmU",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/phase-1d-b-growth-pipeline",
+      "object": {
+        "sha": "93d956d0020f0edec34a44cd9d19f30c085aecc7",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/93d956d0020f0edec34a44cd9d19f30c085aecc7"
+      }
+    },
+    {
+      "ref": "refs/heads/phase-1d-c-observable-closure-audit",
+      "node_id": "REF_kwDOTZch8doALnJlZnMvaGVhZHMvcGhhc2UtMWQtYy1vYnNlcnZhYmxlLWNsb3N1cmUtYXVkaXQ",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/phase-1d-c-observable-closure-audit",
+      "object": {
+        "sha": "81148eb6be8add842b538e2a21c5cf9782f9e49e",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/81148eb6be8add842b538e2a21c5cf9782f9e49e"
+      }
+    },
+    {
+      "ref": "refs/heads/phase-1d-d-anchored-density-growth",
+      "node_id": "REF_kwDOTZch8doALXJlZnMvaGVhZHMvcGhhc2UtMWQtZC1hbmNob3JlZC1kZW5zaXR5LWdyb3d0aA",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/phase-1d-d-anchored-density-growth",
+      "object": {
+        "sha": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/7ea266c2cb00aac8afdef71e51a18aea5fb7d39c"
+      }
+    },
+    {
+      "ref": "refs/heads/phase-1d-d-t-d3-frame-mapping",
+      "node_id": "REF_kwDOTZch8doAKHJlZnMvaGVhZHMvcGhhc2UtMWQtZC10LWQzLWZyYW1lLW1hcHBpbmc",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/phase-1d-d-t-d3-frame-mapping",
+      "object": {
+        "sha": "f960a9054ae9db3a7c378557ac3a2938c5ff7ef0",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/f960a9054ae9db3a7c378557ac3a2938c5ff7ef0"
+      }
+    },
+    {
+      "ref": "refs/heads/phase-1e-a-dressed-observable-bridge-audit",
+      "node_id": "REF_kwDOTZch8doANXJlZnMvaGVhZHMvcGhhc2UtMWUtYS1kcmVzc2VkLW9ic2VydmFibGUtYnJpZGdlLWF1ZGl0",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/phase-1e-a-dressed-observable-bridge-audit",
+      "object": {
+        "sha": "f4044cbe10a7fbd59d1b14131e2d2e31100984ef",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/f4044cbe10a7fbd59d1b14131e2d2e31100984ef"
+      }
+    },
+    {
+      "ref": "refs/heads/phase-1e-b-dressed-lightcone-velocity-derivation",
+      "node_id": "REF_kwDOTZch8doAO3JlZnMvaGVhZHMvcGhhc2UtMWUtYi1kcmVzc2VkLWxpZ2h0Y29uZS12ZWxvY2l0eS1kZXJpdmF0aW9u",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/phase-1e-b-dressed-lightcone-velocity-derivation",
+      "object": {
+        "sha": "8634f14a35c22983413672075fa7f37f03fd663d",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/8634f14a35c22983413672075fa7f37f03fd663d"
+      }
+    },
+    {
+      "ref": "refs/heads/phase-1e-c-perturbed-dressed-geometry-transfer-closure",
+      "node_id": "REF_kwDOTZch8doAQXJlZnMvaGVhZHMvcGhhc2UtMWUtYy1wZXJ0dXJiZWQtZHJlc3NlZC1nZW9tZXRyeS10cmFuc2Zlci1jbG9zdXJl",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/phase-1e-c-perturbed-dressed-geometry-transfer-closure",
+      "object": {
+        "sha": "fcbf9c29a28c586044150e6910e1637bc3f6975b",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/fcbf9c29a28c586044150e6910e1637bc3f6975b"
+      }
+    },
+    {
+      "ref": "refs/heads/phase-1e-d-regional-matching-dynamics-design",
+      "node_id": "REF_kwDOTZch8doAN3JlZnMvaGVhZHMvcGhhc2UtMWUtZC1yZWdpb25hbC1tYXRjaGluZy1keW5hbWljcy1kZXNpZ24",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/phase-1e-d-regional-matching-dynamics-design",
+      "object": {
+        "sha": "2fd3ed2006821bc162fb740bd773f2d0b6e5e0b4",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/2fd3ed2006821bc162fb740bd773f2d0b6e5e0b4"
+      }
+    },
+    {
+      "ref": "refs/heads/phase-1e-e-transfer-realization-selection",
+      "node_id": "REF_kwDOTZch8doANHJlZnMvaGVhZHMvcGhhc2UtMWUtZS10cmFuc2Zlci1yZWFsaXphdGlvbi1zZWxlY3Rpb24",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/phase-1e-e-transfer-realization-selection",
+      "object": {
+        "sha": "1f2800c9685b7ab4c2bbbef3e93d1767073cc783",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/1f2800c9685b7ab4c2bbbef3e93d1767073cc783"
+      }
+    },
+    {
+      "ref": "refs/heads/phase-1e-f-h1-transfer-realization",
+      "node_id": "REF_kwDOTZch8doALXJlZnMvaGVhZHMvcGhhc2UtMWUtZi1oMS10cmFuc2Zlci1yZWFsaXphdGlvbg",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/phase-1e-f-h1-transfer-realization",
+      "object": {
+        "sha": "1e0a1772aa01ef312a9c3cae6d3e65c8b4f9cbdd",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/1e0a1772aa01ef312a9c3cae6d3e65c8b4f9cbdd"
+      }
+    },
+    {
+      "ref": "refs/heads/phase-1e-g-continuum-h1-realization",
+      "node_id": "REF_kwDOTZch8doALnJlZnMvaGVhZHMvcGhhc2UtMWUtZy1jb250aW51dW0taDEtcmVhbGl6YXRpb24",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/phase-1e-g-continuum-h1-realization",
+      "object": {
+        "sha": "d262099ce3fe977af628ff233abed411e70a3c85",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/d262099ce3fe977af628ff233abed411e70a3c85"
+      }
+    },
+    {
+      "ref": "refs/heads/phase-1f-a-h1-broken-density-spectral-boost",
+      "node_id": "REF_kwDOTZch8doANnJlZnMvaGVhZHMvcGhhc2UtMWYtYS1oMS1icm9rZW4tZGVuc2l0eS1zcGVjdHJhbC1ib29zdA",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/phase-1f-a-h1-broken-density-spectral-boost",
+      "object": {
+        "sha": "87af7976b82b0b38e2c3e77dfc9458e664034c5d",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/87af7976b82b0b38e2c3e77dfc9458e664034c5d"
+      }
+    },
+    {
+      "ref": "refs/heads/phase-1f-c-r-f4-audit-recovery",
+      "node_id": "REF_kwDOTZch8doAKXJlZnMvaGVhZHMvcGhhc2UtMWYtYy1yLWY0LWF1ZGl0LXJlY292ZXJ5",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/phase-1f-c-r-f4-audit-recovery",
+      "object": {
+        "sha": "7d5d8ce376554b42bc8374f21ec1223eda3b982f",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/7d5d8ce376554b42bc8374f21ec1223eda3b982f"
+      }
+    },
+    {
+      "ref": "refs/heads/phase-1f-d-necessary-bound",
+      "node_id": "REF_kwDOTZch8doAJXJlZnMvaGVhZHMvcGhhc2UtMWYtZC1uZWNlc3NhcnktYm91bmQ",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/phase-1f-d-necessary-bound",
+      "object": {
+        "sha": "3cd1685855bd78f2833ee91340794bee44b5e48d",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/3cd1685855bd78f2833ee91340794bee44b5e48d"
+      }
+    },
+    {
+      "ref": "refs/heads/phase-1g-f-successor-g-evolution",
+      "node_id": "REF_kwDOTZch8doAK3JlZnMvaGVhZHMvcGhhc2UtMWctZi1zdWNjZXNzb3ItZy1ldm9sdXRpb24",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/phase-1g-f-successor-g-evolution",
+      "object": {
+        "sha": "3d3d46ed68fde7e6d4100fe518a76731bd2cf9e9",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/3d3d46ed68fde7e6d4100fe518a76731bd2cf9e9"
+      }
+    },
+    {
+      "ref": "refs/heads/phase-1g-h-delta-audit",
+      "node_id": "REF_kwDOTZch8doAIXJlZnMvaGVhZHMvcGhhc2UtMWctaC1kZWx0YS1hdWRpdA",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/phase-1g-h-delta-audit",
+      "object": {
+        "sha": "5c325e1fd05b343f6d5e93f931038794de4373a2",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/5c325e1fd05b343f6d5e93f931038794de4373a2"
+      }
+    },
+    {
+      "ref": "refs/heads/phase-1g-h-delta-audit-3",
+      "node_id": "REF_kwDOTZch8doAI3JlZnMvaGVhZHMvcGhhc2UtMWctaC1kZWx0YS1hdWRpdC0z",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/phase-1g-h-delta-audit-3",
+      "object": {
+        "sha": "18bf2fbef880fdfb3c292956aa1f000720930abf",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/18bf2fbef880fdfb3c292956aa1f000720930abf"
+      }
+    },
+    {
+      "ref": "refs/heads/phase-1g-h-independent-audit",
+      "node_id": "REF_kwDOTZch8doAJ3JlZnMvaGVhZHMvcGhhc2UtMWctaC1pbmRlcGVuZGVudC1hdWRpdA",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/phase-1g-h-independent-audit",
+      "object": {
+        "sha": "816dd004763f8de1a8bb09cba9e427a1bd2bb3d1",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/816dd004763f8de1a8bb09cba9e427a1bd2bb3d1"
+      }
+    },
+    {
+      "ref": "refs/heads/phase-1g-owner-decisions",
+      "node_id": "REF_kwDOTZch8doAI3JlZnMvaGVhZHMvcGhhc2UtMWctb3duZXItZGVjaXNpb25z",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/phase-1g-owner-decisions",
+      "object": {
+        "sha": "3c70185cb3eb3aa3734995a2fde43bc25462086e",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/3c70185cb3eb3aa3734995a2fde43bc25462086e"
+      }
+    }
+  ],
+  "tags": [
+    {
+      "ref": "refs/tags/phase-1b-background-v1",
+      "node_id": "REF_kwDOTZch8doAIHJlZnMvdGFncy9waGFzZS0xYi1iYWNrZ3JvdW5kLXYx",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/tags/phase-1b-background-v1",
+      "object": {
+        "sha": "f678010a5a8584495a81402c17a6b529291de58c",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags/f678010a5a8584495a81402c17a6b529291de58c"
+      }
+    },
+    {
+      "ref": "refs/tags/phase-1c-a-equation-audit-v1",
+      "node_id": "REF_kwDOTZch8doAJnJlZnMvdGFncy9waGFzZS0xYy1hLWVxdWF0aW9uLWF1ZGl0LXYx",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/tags/phase-1c-a-equation-audit-v1",
+      "object": {
+        "sha": "1bb5679e85659c40b091476fe5a63bffdd8cf2ff",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags/1bb5679e85659c40b091476fe5a63bffdd8cf2ff"
+      }
+    },
+    {
+      "ref": "refs/tags/phase-1c-b1-clean-systems-v1",
+      "node_id": "REF_kwDOTZch8doAJnJlZnMvdGFncy9waGFzZS0xYy1iMS1jbGVhbi1zeXN0ZW1zLXYx",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/tags/phase-1c-b1-clean-systems-v1",
+      "object": {
+        "sha": "b0fed30d513b67ca9f53b84a79f47be2ad024846",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags/b0fed30d513b67ca9f53b84a79f47be2ad024846"
+      }
+    },
+    {
+      "ref": "refs/tags/phase-1c-b2-barotropic-v1",
+      "node_id": "REF_kwDOTZch8doAI3JlZnMvdGFncy9waGFzZS0xYy1iMi1iYXJvdHJvcGljLXYx",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/tags/phase-1c-b2-barotropic-v1",
+      "object": {
+        "sha": "cf90bcc8377632252dd8f0732d6d36c939e5bf7b",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags/cf90bcc8377632252dd8f0732d6d36c939e5bf7b"
+      }
+    },
+    {
+      "ref": "refs/tags/phase-1d-a-growth-observable-audit-v1",
+      "node_id": "REF_kwDOTZch8doAL3JlZnMvdGFncy9waGFzZS0xZC1hLWdyb3d0aC1vYnNlcnZhYmxlLWF1ZGl0LXYx",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/tags/phase-1d-a-growth-observable-audit-v1",
+      "object": {
+        "sha": "ff6d27a70fdc6743788523ef1e02f9caf6a66daf",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags/ff6d27a70fdc6743788523ef1e02f9caf6a66daf"
+      }
+    },
+    {
+      "ref": "refs/tags/phase-1d-b-growth-pipeline-v1",
+      "node_id": "REF_kwDOTZch8doAJ3JlZnMvdGFncy9waGFzZS0xZC1iLWdyb3d0aC1waXBlbGluZS12MQ",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/tags/phase-1d-b-growth-pipeline-v1",
+      "object": {
+        "sha": "7713cb348890416c1e864afabc1109081291d88e",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags/7713cb348890416c1e864afabc1109081291d88e"
+      }
+    },
+    {
+      "ref": "refs/tags/phase-1d-c-observable-closure-audit-v1",
+      "node_id": "REF_kwDOTZch8doAMHJlZnMvdGFncy9waGFzZS0xZC1jLW9ic2VydmFibGUtY2xvc3VyZS1hdWRpdC12MQ",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/tags/phase-1d-c-observable-closure-audit-v1",
+      "object": {
+        "sha": "36edbdd33241e0e125e73fe7e7344ae6adc3e880",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags/36edbdd33241e0e125e73fe7e7344ae6adc3e880"
+      }
+    },
+    {
+      "ref": "refs/tags/phase-1d-d-anchored-density-growth-v1",
+      "node_id": "REF_kwDOTZch8doAL3JlZnMvdGFncy9waGFzZS0xZC1kLWFuY2hvcmVkLWRlbnNpdHktZ3Jvd3RoLXYx",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/tags/phase-1d-d-anchored-density-growth-v1",
+      "object": {
+        "sha": "d42519aff3f6028c8d71eb7ef478b79201e422c3",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags/d42519aff3f6028c8d71eb7ef478b79201e422c3"
+      }
+    },
+    {
+      "ref": "refs/tags/phase-1d-d-t-d3-frame-mapping-v1",
+      "node_id": "REF_kwDOTZch8doAKnJlZnMvdGFncy9waGFzZS0xZC1kLXQtZDMtZnJhbWUtbWFwcGluZy12MQ",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/tags/phase-1d-d-t-d3-frame-mapping-v1",
+      "object": {
+        "sha": "dfa48eef28c19f3e948ffe1e84c732464f265775",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags/dfa48eef28c19f3e948ffe1e84c732464f265775"
+      }
+    },
+    {
+      "ref": "refs/tags/phase-1e-a-dressed-observable-bridge-audit-v1",
+      "node_id": "REF_kwDOTZch8doAN3JlZnMvdGFncy9waGFzZS0xZS1hLWRyZXNzZWQtb2JzZXJ2YWJsZS1icmlkZ2UtYXVkaXQtdjE",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/tags/phase-1e-a-dressed-observable-bridge-audit-v1",
+      "object": {
+        "sha": "bdcbaaca20aed707d43944fc2cd5096b636243b1",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags/bdcbaaca20aed707d43944fc2cd5096b636243b1"
+      }
+    },
+    {
+      "ref": "refs/tags/phase-1e-b-dressed-lightcone-velocity-derivation-v1",
+      "node_id": "REF_kwDOTZch8doAPXJlZnMvdGFncy9waGFzZS0xZS1iLWRyZXNzZWQtbGlnaHRjb25lLXZlbG9jaXR5LWRlcml2YXRpb24tdjE",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/tags/phase-1e-b-dressed-lightcone-velocity-derivation-v1",
+      "object": {
+        "sha": "a08230b0ab275993d9e8645d55532a1336c5f637",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags/a08230b0ab275993d9e8645d55532a1336c5f637"
+      }
+    },
+    {
+      "ref": "refs/tags/phase-1e-c-perturbed-dressed-geometry-transfer-closure-v1",
+      "node_id": "REF_kwDOTZch8doAQ3JlZnMvdGFncy9waGFzZS0xZS1jLXBlcnR1cmJlZC1kcmVzc2VkLWdlb21ldHJ5LXRyYW5zZmVyLWNsb3N1cmUtdjE",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/tags/phase-1e-c-perturbed-dressed-geometry-transfer-closure-v1",
+      "object": {
+        "sha": "0a6dbe6ac27991d6119a4ebc4e84e4a005f3d988",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags/0a6dbe6ac27991d6119a4ebc4e84e4a005f3d988"
+      }
+    },
+    {
+      "ref": "refs/tags/phase-1e-d-regional-matching-dynamics-v1",
+      "node_id": "REF_kwDOTZch8doAMnJlZnMvdGFncy9waGFzZS0xZS1kLXJlZ2lvbmFsLW1hdGNoaW5nLWR5bmFtaWNzLXYx",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/tags/phase-1e-d-regional-matching-dynamics-v1",
+      "object": {
+        "sha": "00a9d7e44418496b71ad95cd19390ba79bb3448d",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags/00a9d7e44418496b71ad95cd19390ba79bb3448d"
+      }
+    },
+    {
+      "ref": "refs/tags/phase-1e-e-transfer-realization-selection-v1",
+      "node_id": "REF_kwDOTZch8doANnJlZnMvdGFncy9waGFzZS0xZS1lLXRyYW5zZmVyLXJlYWxpemF0aW9uLXNlbGVjdGlvbi12MQ",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/tags/phase-1e-e-transfer-realization-selection-v1",
+      "object": {
+        "sha": "602178e639e3a750a719754fd15b6e61d0850ca8",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags/602178e639e3a750a719754fd15b6e61d0850ca8"
+      }
+    },
+    {
+      "ref": "refs/tags/phase-1e-f-h1-transfer-realization-v1",
+      "node_id": "REF_kwDOTZch8doAL3JlZnMvdGFncy9waGFzZS0xZS1mLWgxLXRyYW5zZmVyLXJlYWxpemF0aW9uLXYx",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/tags/phase-1e-f-h1-transfer-realization-v1",
+      "object": {
+        "sha": "50f9b3b8ae84169b9a0109c307d4ba2277ef2cd3",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags/50f9b3b8ae84169b9a0109c307d4ba2277ef2cd3"
+      }
+    },
+    {
+      "ref": "refs/tags/phase-1e-f-h1-transfer-realization-v2",
+      "node_id": "REF_kwDOTZch8doAL3JlZnMvdGFncy9waGFzZS0xZS1mLWgxLXRyYW5zZmVyLXJlYWxpemF0aW9uLXYy",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/tags/phase-1e-f-h1-transfer-realization-v2",
+      "object": {
+        "sha": "58238a9aeb62033d3bacf5f7e737dea024adb669",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags/58238a9aeb62033d3bacf5f7e737dea024adb669"
+      }
+    },
+    {
+      "ref": "refs/tags/phase-1e-g-continuum-h1-realization-v1",
+      "node_id": "REF_kwDOTZch8doAMHJlZnMvdGFncy9waGFzZS0xZS1nLWNvbnRpbnV1bS1oMS1yZWFsaXphdGlvbi12MQ",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/tags/phase-1e-g-continuum-h1-realization-v1",
+      "object": {
+        "sha": "064963b54a2e7eac242bf5296b83f14b0821a4bb",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags/064963b54a2e7eac242bf5296b83f14b0821a4bb"
+      }
+    },
+    {
+      "ref": "refs/tags/phase-1e-g-continuum-h1-realization-v2",
+      "node_id": "REF_kwDOTZch8doAMHJlZnMvdGFncy9waGFzZS0xZS1nLWNvbnRpbnV1bS1oMS1yZWFsaXphdGlvbi12Mg",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/tags/phase-1e-g-continuum-h1-realization-v2",
+      "object": {
+        "sha": "668c73e9e3ef864bb20ee61783a4088ca2acbe73",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags/668c73e9e3ef864bb20ee61783a4088ca2acbe73"
+      }
+    },
+    {
+      "ref": "refs/tags/phase-1e-g-continuum-h1-realization-v3",
+      "node_id": "REF_kwDOTZch8doAMHJlZnMvdGFncy9waGFzZS0xZS1nLWNvbnRpbnV1bS1oMS1yZWFsaXphdGlvbi12Mw",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/tags/phase-1e-g-continuum-h1-realization-v3",
+      "object": {
+        "sha": "7f7b1a72770cb2efbe90976c2ac7b17df885a331",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags/7f7b1a72770cb2efbe90976c2ac7b17df885a331"
+      }
+    },
+    {
+      "ref": "refs/tags/phase-1e-g-continuum-h1-realization-v4",
+      "node_id": "REF_kwDOTZch8doAMHJlZnMvdGFncy9waGFzZS0xZS1nLWNvbnRpbnV1bS1oMS1yZWFsaXphdGlvbi12NA",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/tags/phase-1e-g-continuum-h1-realization-v4",
+      "object": {
+        "sha": "97c66c812fcbca6c7612fb220970a60cb340f9d4",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags/97c66c812fcbca6c7612fb220970a60cb340f9d4"
+      }
+    },
+    {
+      "ref": "refs/tags/phase-1f-a-h1-broken-density-spectral-boost-v1",
+      "node_id": "REF_kwDOTZch8doAOHJlZnMvdGFncy9waGFzZS0xZi1hLWgxLWJyb2tlbi1kZW5zaXR5LXNwZWN0cmFsLWJvb3N0LXYx",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/tags/phase-1f-a-h1-broken-density-spectral-boost-v1",
+      "object": {
+        "sha": "c9cd0c5519052d08cf607e725b45dbf8a0cd8a9b",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags/c9cd0c5519052d08cf607e725b45dbf8a0cd8a9b"
+      }
+    },
+    {
+      "ref": "refs/tags/phase-1f-a-h1-broken-density-spectral-boost-v2",
+      "node_id": "REF_kwDOTZch8doAOHJlZnMvdGFncy9waGFzZS0xZi1hLWgxLWJyb2tlbi1kZW5zaXR5LXNwZWN0cmFsLWJvb3N0LXYy",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/tags/phase-1f-a-h1-broken-density-spectral-boost-v2",
+      "object": {
+        "sha": "e2ccb27a4d7e8f60c0c6b0536bde01769af397e9",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags/e2ccb27a4d7e8f60c0c6b0536bde01769af397e9"
+      }
+    },
+    {
+      "ref": "refs/tags/phase-1f-b-dust-wall-boost-dynamics-v1",
+      "node_id": "REF_kwDOTZch8doAMHJlZnMvdGFncy9waGFzZS0xZi1iLWR1c3Qtd2FsbC1ib29zdC1keW5hbWljcy12MQ",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/tags/phase-1f-b-dust-wall-boost-dynamics-v1",
+      "object": {
+        "sha": "d784074049148fad65632fe91848eada8923bb7a",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags/d784074049148fad65632fe91848eada8923bb7a"
+      }
+    },
+    {
+      "ref": "refs/tags/phase-1f-b-dust-wall-boost-dynamics-v2",
+      "node_id": "REF_kwDOTZch8doAMHJlZnMvdGFncy9waGFzZS0xZi1iLWR1c3Qtd2FsbC1ib29zdC1keW5hbWljcy12Mg",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/tags/phase-1f-b-dust-wall-boost-dynamics-v2",
+      "object": {
+        "sha": "bd1facf1fce246ef6fb42d02f03c5da6c2eef3a0",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags/bd1facf1fce246ef6fb42d02f03c5da6c2eef3a0"
+      }
+    },
+    {
+      "ref": "refs/tags/phase-1f-b-dust-wall-boost-dynamics-v3",
+      "node_id": "REF_kwDOTZch8doAMHJlZnMvdGFncy9waGFzZS0xZi1iLWR1c3Qtd2FsbC1ib29zdC1keW5hbWljcy12Mw",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/tags/phase-1f-b-dust-wall-boost-dynamics-v3",
+      "object": {
+        "sha": "61dc9cf7602908b563158554d1b991a8d7059ab7",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags/61dc9cf7602908b563158554d1b991a8d7059ab7"
+      }
+    },
+    {
+      "ref": "refs/tags/phase-1f-c-r-astra-audit-remediation-v1",
+      "node_id": "REF_kwDOTZch8doAMXJlZnMvdGFncy9waGFzZS0xZi1jLXItYXN0cmEtYXVkaXQtcmVtZWRpYXRpb24tdjE",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/tags/phase-1f-c-r-astra-audit-remediation-v1",
+      "object": {
+        "sha": "3956bfdb3f7dcbffbade69414f69bff0efa94f6c",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags/3956bfdb3f7dcbffbade69414f69bff0efa94f6c"
+      }
+    },
+    {
+      "ref": "refs/tags/phase-1f-c-r-astra-audit-remediation-v2",
+      "node_id": "REF_kwDOTZch8doAMXJlZnMvdGFncy9waGFzZS0xZi1jLXItYXN0cmEtYXVkaXQtcmVtZWRpYXRpb24tdjI",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/tags/phase-1f-c-r-astra-audit-remediation-v2",
+      "object": {
+        "sha": "841cfb7b435c0042b5835d09aaa71e002b7e6062",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags/841cfb7b435c0042b5835d09aaa71e002b7e6062"
+      }
+    },
+    {
+      "ref": "refs/tags/phase-1f-c-r-post-remediation-review-v1",
+      "node_id": "REF_kwDOTZch8doAMXJlZnMvdGFncy9waGFzZS0xZi1jLXItcG9zdC1yZW1lZGlhdGlvbi1yZXZpZXctdjE",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/tags/phase-1f-c-r-post-remediation-review-v1",
+      "object": {
+        "sha": "d4084287023c77414461a8b5ad465bcc76030998",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags/d4084287023c77414461a8b5ad465bcc76030998"
+      }
+    },
+    {
+      "ref": "refs/tags/phase-1f-c-wall-common-spacetime-geometry-v1",
+      "node_id": "REF_kwDOTZch8doANnJlZnMvdGFncy9waGFzZS0xZi1jLXdhbGwtY29tbW9uLXNwYWNldGltZS1nZW9tZXRyeS12MQ",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/tags/phase-1f-c-wall-common-spacetime-geometry-v1",
+      "object": {
+        "sha": "ef3b180e080e299f26316f9f5a30982776378e1e",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags/ef3b180e080e299f26316f9f5a30982776378e1e"
+      }
+    },
+    {
+      "ref": "refs/tags/phase-1f-c-wall-common-spacetime-geometry-v2",
+      "node_id": "REF_kwDOTZch8doANnJlZnMvdGFncy9waGFzZS0xZi1jLXdhbGwtY29tbW9uLXNwYWNldGltZS1nZW9tZXRyeS12Mg",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/tags/phase-1f-c-wall-common-spacetime-geometry-v2",
+      "object": {
+        "sha": "0afeb8fffac66dc182f6edd5885936d6e2779eaf",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags/0afeb8fffac66dc182f6edd5885936d6e2779eaf"
+      }
+    },
+    {
+      "ref": "refs/tags/phase-1f-d-necessary-bound-v1",
+      "node_id": "REF_kwDOTZch8doAJ3JlZnMvdGFncy9waGFzZS0xZi1kLW5lY2Vzc2FyeS1ib3VuZC12MQ",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/tags/phase-1f-d-necessary-bound-v1",
+      "object": {
+        "sha": "dc04502d31fdd7cd0d1db199aed02e83066687b4",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags/dc04502d31fdd7cd0d1db199aed02e83066687b4"
+      }
+    },
+    {
+      "ref": "refs/tags/phase-1g-a-sigma8-derivation-path-v1",
+      "node_id": "REF_kwDOTZch8doALnJlZnMvdGFncy9waGFzZS0xZy1hLXNpZ21hOC1kZXJpdmF0aW9uLXBhdGgtdjE",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/tags/phase-1g-a-sigma8-derivation-path-v1",
+      "object": {
+        "sha": "f5fceeae4491afaa418fa1e37322e97a8a924280",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags/f5fceeae4491afaa418fa1e37322e97a8a924280"
+      }
+    },
+    {
+      "ref": "refs/tags/phase-1g-b-lagrangian-sigma-v1",
+      "node_id": "REF_kwDOTZch8doAKHJlZnMvdGFncy9waGFzZS0xZy1iLWxhZ3JhbmdpYW4tc2lnbWEtdjE",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/tags/phase-1g-b-lagrangian-sigma-v1",
+      "object": {
+        "sha": "a279464a52eb767e6840be8774375eac7885d5c3",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags/a279464a52eb767e6840be8774375eac7885d5c3"
+      }
+    },
+    {
+      "ref": "refs/tags/phase-1g-c-two-scale-growth-law-v1",
+      "node_id": "REF_kwDOTZch8doALHJlZnMvdGFncy9waGFzZS0xZy1jLXR3by1zY2FsZS1ncm93dGgtbGF3LXYx",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/tags/phase-1g-c-two-scale-growth-law-v1",
+      "object": {
+        "sha": "88e96be855e5aca117e6ac12872fdb5070494b59",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags/88e96be855e5aca117e6ac12872fdb5070494b59"
+      }
+    },
+    {
+      "ref": "refs/tags/phase-1g-d-separate-universe-growth-v1",
+      "node_id": "REF_kwDOTZch8doAMHJlZnMvdGFncy9waGFzZS0xZy1kLXNlcGFyYXRlLXVuaXZlcnNlLWdyb3d0aC12MQ",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/tags/phase-1g-d-separate-universe-growth-v1",
+      "object": {
+        "sha": "e2a3b303e2441dd94971a32b7ec327a44f2af000",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags/e2a3b303e2441dd94971a32b7ec327a44f2af000"
+      }
+    },
+    {
+      "ref": "refs/tags/phase-1g-e-two-phase-sigma-v1",
+      "node_id": "REF_kwDOTZch8doAJ3JlZnMvdGFncy9waGFzZS0xZy1lLXR3by1waGFzZS1zaWdtYS12MQ",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/tags/phase-1g-e-two-phase-sigma-v1",
+      "object": {
+        "sha": "2a48639c8cdf6217d6b1c8293a06722eba48e38d",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags/2a48639c8cdf6217d6b1c8293a06722eba48e38d"
+      }
+    },
+    {
+      "ref": "refs/tags/phase-1g-f-void-population-v1",
+      "node_id": "REF_kwDOTZch8doAJ3JlZnMvdGFncy9waGFzZS0xZy1mLXZvaWQtcG9wdWxhdGlvbi12MQ",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/tags/phase-1g-f-void-population-v1",
+      "object": {
+        "sha": "ca52c94d6ecad2be62016b019d652d9bc6e89dd2",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags/ca52c94d6ecad2be62016b019d652d9bc6e89dd2"
+      }
+    },
+    {
+      "ref": "refs/tags/phase-1g-g-void-evolution-v1",
+      "node_id": "REF_kwDOTZch8doAJnJlZnMvdGFncy9waGFzZS0xZy1nLXZvaWQtZXZvbHV0aW9uLXYx",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/tags/phase-1g-g-void-evolution-v1",
+      "object": {
+        "sha": "d151bd45242eff50ca7fa62bbd50453375737117",
+        "type": "tag",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags/d151bd45242eff50ca7fa62bbd50453375737117"
+      }
+    }
+  ],
+  "pull_requests": [
+    {
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls/4",
+      "id": 4759164851,
+      "node_id": "PR_kwDOTZch8c8AAAABG6sXsw",
+      "html_url": "https://github.com/ing-mattioni/timescape-fsigma8/pull/4",
+      "diff_url": "https://github.com/ing-mattioni/timescape-fsigma8/pull/4.diff",
+      "patch_url": "https://github.com/ing-mattioni/timescape-fsigma8/pull/4.patch",
+      "issue_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues/4",
+      "number": 4,
+      "state": "closed",
+      "locked": false,
+      "title": "Phase 1G-F/G successors, audit remediation and independent audits",
+      "user": {
+        "login": "ing-mattioni",
+        "id": 181735481,
+        "node_id": "U_kgDOCtUQOQ",
+        "avatar_url": "https://avatars.githubusercontent.com/u/181735481?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ing-mattioni",
+        "html_url": "https://github.com/ing-mattioni",
+        "followers_url": "https://api.github.com/users/ing-mattioni/followers",
+        "following_url": "https://api.github.com/users/ing-mattioni/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ing-mattioni/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ing-mattioni/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ing-mattioni/subscriptions",
+        "organizations_url": "https://api.github.com/users/ing-mattioni/orgs",
+        "repos_url": "https://api.github.com/users/ing-mattioni/repos",
+        "events_url": "https://api.github.com/users/ing-mattioni/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ing-mattioni/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "body": "## Summary\n\nIntegrates the Phase 1G-F/G successor work and its audit trail on top of `main` (`fb5d952`). The work is in two commits:\n\n- `8f3131f`: the integration.\n- `3d3d46e`: provenance; it records the integration commit's hash.\n\n### Science (conditional, report-only)\n\n- **F volume-budget successor.**\n  - Fixed-domain cumulative void volumes (F2) replace the frozen truncated-universe radius cuts (F3).\n  - A complete frozen → current supersession map.\n  - F2 values for the frozen [W09]-comparison percentages:\n    - 62–73% → 49–71%;\n    - 40–68% → 20–54%;\n    - ≤10% → ≤4.3% (collapse threshold).\n- **G void-evolution research.**\n  - Conserved volume moments under additive mergers.\n  - The transfer constraints between finite-density seeds and the tracker.\n  - A tested analytic kinetic benchmark. It is not a Timescape merger law.\n\n### Status changes and decisions\n\n- **One status change, owner-approved on 2026-10-02 («si confermo»).** `LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC` becomes `NOT_DERIVED` through a registered D successor that links explicitly to the original addition record. That record keeps the historical value.\n- **Frozen F verdict 2 is split.** The Milne-rate asymptote is derived; the finite-time identification of the seeds with exactly empty tracker voids is `NOT_DERIVED`.\n\n### Audit trail\n\n- First independent audit (2026-10-02).\n- Remediation record.\n- Independent delta audit (2026-10-06): `ACCEPT` for science and for the implementation and registry; `ACCEPT_WITH_CORRECTIONS` for provenance, with no integration blocker.\n- Its residual findings R2-N1–N3 are closed in `reports/phase1g_fg_remediation_integration.md`.\n- The audit evidence is preserved byte-for-byte, including the 14 recovered first-audit files. `.gitattributes` marks the evidence and log directories `-text -whitespace`.\n\n### Unchanged\n\n- No equation, tolerance, initial condition or numerical output changes. The only code edits are:\n  - the registry validator's predecessor-link check;\n  - the status value above;\n  - one caveat string and one docstring.\n- `SIGMA8_AUTHORIZATION`, `FSIGMA8_AUTHORIZATION`, `RSD_AUTHORIZATION`, `OBSERVATIONAL_AUTHORIZATION` and `UNIQUE_TIMESCAPE_PREDICTION` remain `NOT_GRANTED`.\n\n## Verification\n\n- **Full suites** on the final content, run with `python -B -W error -m pytest -q -p no:cacheprovider` and `OPENBLAS_NUM_THREADS=1`:\n  - CPython 3.14.3: **1136 passed, 0 skipped, 0 failed**;\n  - CPython 3.11.9: **1136 passed, 0 skipped, 0 failed**.\n- `git diff --check` and `git diff --cached --check` are clean.\n- The 1F-C-R validator reports `PASS`.\n- Artifacts, the tracked frozen reports, both audits and the evidence manifest are unchanged.\n- Logs are in `reports/phase1g_fg_remediation_integration_logs/`.\n\n## Not included\n\nThis merge is not a scientific freeze. It creates no phase tag and no release; each would need separate approval.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n",
+      "created_at": "2026-10-06T13:07:25Z",
+      "updated_at": "2026-10-06T13:12:04Z",
+      "closed_at": "2026-10-06T13:12:04Z",
+      "merged_at": "2026-10-06T13:12:04Z",
+      "merge_commit_sha": "8d3cdd0533035858c42269cb1dff1a20dcafc7da",
+      "assignees": [],
+      "requested_reviewers": [],
+      "requested_teams": [],
+      "labels": [],
+      "milestone": null,
+      "draft": false,
+      "commits_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls/4/commits",
+      "review_comments_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls/4/comments",
+      "review_comment_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls/comments{/number}",
+      "comments_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues/4/comments",
+      "statuses_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/statuses/3d3d46ed68fde7e6d4100fe518a76731bd2cf9e9",
+      "head": {
+        "label": "ing-mattioni:phase-1g-f-successor-g-evolution",
+        "ref": "phase-1g-f-successor-g-evolution",
+        "sha": "3d3d46ed68fde7e6d4100fe518a76731bd2cf9e9",
+        "user": {
+          "login": "ing-mattioni",
+          "id": 181735481,
+          "node_id": "U_kgDOCtUQOQ",
+          "avatar_url": "https://avatars.githubusercontent.com/u/181735481?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/ing-mattioni",
+          "html_url": "https://github.com/ing-mattioni",
+          "followers_url": "https://api.github.com/users/ing-mattioni/followers",
+          "following_url": "https://api.github.com/users/ing-mattioni/following{/other_user}",
+          "gists_url": "https://api.github.com/users/ing-mattioni/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/ing-mattioni/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/ing-mattioni/subscriptions",
+          "organizations_url": "https://api.github.com/users/ing-mattioni/orgs",
+          "repos_url": "https://api.github.com/users/ing-mattioni/repos",
+          "events_url": "https://api.github.com/users/ing-mattioni/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/ing-mattioni/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "repo": {
+          "id": 1301750257,
+          "node_id": "R_kgDOTZch8Q",
+          "name": "timescape-fsigma8",
+          "full_name": "ing-mattioni/timescape-fsigma8",
+          "private": true,
+          "owner": {
+            "login": "ing-mattioni",
+            "id": 181735481,
+            "node_id": "U_kgDOCtUQOQ",
+            "avatar_url": "https://avatars.githubusercontent.com/u/181735481?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/ing-mattioni",
+            "html_url": "https://github.com/ing-mattioni",
+            "followers_url": "https://api.github.com/users/ing-mattioni/followers",
+            "following_url": "https://api.github.com/users/ing-mattioni/following{/other_user}",
+            "gists_url": "https://api.github.com/users/ing-mattioni/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/ing-mattioni/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/ing-mattioni/subscriptions",
+            "organizations_url": "https://api.github.com/users/ing-mattioni/orgs",
+            "repos_url": "https://api.github.com/users/ing-mattioni/repos",
+            "events_url": "https://api.github.com/users/ing-mattioni/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/ing-mattioni/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "html_url": "https://github.com/ing-mattioni/timescape-fsigma8",
+          "description": null,
+          "fork": false,
+          "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8",
+          "forks_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/forks",
+          "keys_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/keys{/key_id}",
+          "collaborators_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/collaborators{/collaborator}",
+          "teams_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/teams",
+          "hooks_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/hooks",
+          "issue_events_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues/events{/number}",
+          "events_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/events",
+          "assignees_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/assignees{/user}",
+          "branches_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/branches{/branch}",
+          "tags_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/tags",
+          "blobs_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/blobs{/sha}",
+          "git_tags_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags{/sha}",
+          "git_refs_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs{/sha}",
+          "trees_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/trees{/sha}",
+          "statuses_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/statuses/{sha}",
+          "languages_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/languages",
+          "stargazers_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/stargazers",
+          "contributors_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/contributors",
+          "subscribers_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/subscribers",
+          "subscription_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/subscription",
+          "commits_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/commits{/sha}",
+          "git_commits_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits{/sha}",
+          "comments_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/comments{/number}",
+          "issue_comment_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues/comments{/number}",
+          "contents_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/contents/{+path}",
+          "compare_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/compare/{base}...{head}",
+          "merges_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/merges",
+          "archive_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/{archive_format}{/ref}",
+          "downloads_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/downloads",
+          "issues_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues{/number}",
+          "pulls_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls{/number}",
+          "milestones_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/milestones{/number}",
+          "notifications_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/notifications{?since,all,participating}",
+          "labels_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/labels{/name}",
+          "releases_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/releases{/id}",
+          "deployments_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/deployments",
+          "created_at": "2026-07-15T15:12:41Z",
+          "updated_at": "2026-10-06T13:12:11Z",
+          "pushed_at": "2026-10-09T09:47:19Z",
+          "git_url": "git://github.com/ing-mattioni/timescape-fsigma8.git",
+          "ssh_url": "git@github.com:ing-mattioni/timescape-fsigma8.git",
+          "clone_url": "https://github.com/ing-mattioni/timescape-fsigma8.git",
+          "svn_url": "https://github.com/ing-mattioni/timescape-fsigma8",
+          "homepage": null,
+          "size": 4817,
+          "stargazers_count": 0,
+          "watchers_count": 0,
+          "language": "Python",
+          "has_issues": true,
+          "has_projects": true,
+          "has_downloads": false,
+          "has_wiki": false,
+          "has_pages": false,
+          "has_discussions": false,
+          "forks_count": 0,
+          "mirror_url": null,
+          "archived": false,
+          "disabled": false,
+          "open_issues_count": 0,
+          "license": null,
+          "allow_forking": true,
+          "is_template": false,
+          "web_commit_signoff_required": false,
+          "has_pull_requests": true,
+          "pull_request_creation_policy": "all",
+          "topics": [],
+          "visibility": "private",
+          "forks": 0,
+          "open_issues": 0,
+          "watchers": 0,
+          "default_branch": "main"
+        }
+      },
+      "base": {
+        "label": "ing-mattioni:main",
+        "ref": "main",
+        "sha": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f",
+        "user": {
+          "login": "ing-mattioni",
+          "id": 181735481,
+          "node_id": "U_kgDOCtUQOQ",
+          "avatar_url": "https://avatars.githubusercontent.com/u/181735481?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/ing-mattioni",
+          "html_url": "https://github.com/ing-mattioni",
+          "followers_url": "https://api.github.com/users/ing-mattioni/followers",
+          "following_url": "https://api.github.com/users/ing-mattioni/following{/other_user}",
+          "gists_url": "https://api.github.com/users/ing-mattioni/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/ing-mattioni/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/ing-mattioni/subscriptions",
+          "organizations_url": "https://api.github.com/users/ing-mattioni/orgs",
+          "repos_url": "https://api.github.com/users/ing-mattioni/repos",
+          "events_url": "https://api.github.com/users/ing-mattioni/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/ing-mattioni/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "repo": {
+          "id": 1301750257,
+          "node_id": "R_kgDOTZch8Q",
+          "name": "timescape-fsigma8",
+          "full_name": "ing-mattioni/timescape-fsigma8",
+          "private": true,
+          "owner": {
+            "login": "ing-mattioni",
+            "id": 181735481,
+            "node_id": "U_kgDOCtUQOQ",
+            "avatar_url": "https://avatars.githubusercontent.com/u/181735481?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/ing-mattioni",
+            "html_url": "https://github.com/ing-mattioni",
+            "followers_url": "https://api.github.com/users/ing-mattioni/followers",
+            "following_url": "https://api.github.com/users/ing-mattioni/following{/other_user}",
+            "gists_url": "https://api.github.com/users/ing-mattioni/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/ing-mattioni/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/ing-mattioni/subscriptions",
+            "organizations_url": "https://api.github.com/users/ing-mattioni/orgs",
+            "repos_url": "https://api.github.com/users/ing-mattioni/repos",
+            "events_url": "https://api.github.com/users/ing-mattioni/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/ing-mattioni/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "html_url": "https://github.com/ing-mattioni/timescape-fsigma8",
+          "description": null,
+          "fork": false,
+          "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8",
+          "forks_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/forks",
+          "keys_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/keys{/key_id}",
+          "collaborators_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/collaborators{/collaborator}",
+          "teams_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/teams",
+          "hooks_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/hooks",
+          "issue_events_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues/events{/number}",
+          "events_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/events",
+          "assignees_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/assignees{/user}",
+          "branches_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/branches{/branch}",
+          "tags_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/tags",
+          "blobs_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/blobs{/sha}",
+          "git_tags_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags{/sha}",
+          "git_refs_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs{/sha}",
+          "trees_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/trees{/sha}",
+          "statuses_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/statuses/{sha}",
+          "languages_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/languages",
+          "stargazers_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/stargazers",
+          "contributors_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/contributors",
+          "subscribers_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/subscribers",
+          "subscription_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/subscription",
+          "commits_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/commits{/sha}",
+          "git_commits_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits{/sha}",
+          "comments_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/comments{/number}",
+          "issue_comment_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues/comments{/number}",
+          "contents_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/contents/{+path}",
+          "compare_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/compare/{base}...{head}",
+          "merges_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/merges",
+          "archive_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/{archive_format}{/ref}",
+          "downloads_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/downloads",
+          "issues_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues{/number}",
+          "pulls_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls{/number}",
+          "milestones_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/milestones{/number}",
+          "notifications_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/notifications{?since,all,participating}",
+          "labels_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/labels{/name}",
+          "releases_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/releases{/id}",
+          "deployments_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/deployments",
+          "created_at": "2026-07-15T15:12:41Z",
+          "updated_at": "2026-10-06T13:12:11Z",
+          "pushed_at": "2026-10-09T09:47:19Z",
+          "git_url": "git://github.com/ing-mattioni/timescape-fsigma8.git",
+          "ssh_url": "git@github.com:ing-mattioni/timescape-fsigma8.git",
+          "clone_url": "https://github.com/ing-mattioni/timescape-fsigma8.git",
+          "svn_url": "https://github.com/ing-mattioni/timescape-fsigma8",
+          "homepage": null,
+          "size": 4817,
+          "stargazers_count": 0,
+          "watchers_count": 0,
+          "language": "Python",
+          "has_issues": true,
+          "has_projects": true,
+          "has_downloads": false,
+          "has_wiki": false,
+          "has_pages": false,
+          "has_discussions": false,
+          "forks_count": 0,
+          "mirror_url": null,
+          "archived": false,
+          "disabled": false,
+          "open_issues_count": 0,
+          "license": null,
+          "allow_forking": true,
+          "is_template": false,
+          "web_commit_signoff_required": false,
+          "has_pull_requests": true,
+          "pull_request_creation_policy": "all",
+          "topics": [],
+          "visibility": "private",
+          "forks": 0,
+          "open_issues": 0,
+          "watchers": 0,
+          "default_branch": "main"
+        }
+      },
+      "_links": {
+        "self": {
+          "href": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls/4"
+        },
+        "html": {
+          "href": "https://github.com/ing-mattioni/timescape-fsigma8/pull/4"
+        },
+        "issue": {
+          "href": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues/4"
+        },
+        "comments": {
+          "href": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues/4/comments"
+        },
+        "review_comments": {
+          "href": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls/4/comments"
+        },
+        "review_comment": {
+          "href": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls/comments{/number}"
+        },
+        "commits": {
+          "href": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls/4/commits"
+        },
+        "statuses": {
+          "href": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/statuses/3d3d46ed68fde7e6d4100fe518a76731bd2cf9e9"
+        }
+      },
+      "author_association": "OWNER",
+      "auto_merge": null,
+      "assignee": null,
+      "active_lock_reason": null
+    },
+    {
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls/3",
+      "id": 4692852705,
+      "node_id": "PR_kwDOTZch8c8AAAABF7c_4Q",
+      "html_url": "https://github.com/ing-mattioni/timescape-fsigma8/pull/3",
+      "diff_url": "https://github.com/ing-mattioni/timescape-fsigma8/pull/3.diff",
+      "patch_url": "https://github.com/ing-mattioni/timescape-fsigma8/pull/3.patch",
+      "issue_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues/3",
+      "number": 3,
+      "state": "closed",
+      "locked": false,
+      "title": "Phase 1G owner decisions (2026-09-30) and Windows validation",
+      "user": {
+        "login": "ing-mattioni",
+        "id": 181735481,
+        "node_id": "U_kgDOCtUQOQ",
+        "avatar_url": "https://avatars.githubusercontent.com/u/181735481?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ing-mattioni",
+        "html_url": "https://github.com/ing-mattioni",
+        "followers_url": "https://api.github.com/users/ing-mattioni/followers",
+        "following_url": "https://api.github.com/users/ing-mattioni/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ing-mattioni/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ing-mattioni/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ing-mattioni/subscriptions",
+        "organizations_url": "https://api.github.com/users/ing-mattioni/orgs",
+        "repos_url": "https://api.github.com/users/ing-mattioni/repos",
+        "events_url": "https://api.github.com/users/ing-mattioni/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ing-mattioni/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "body": "## Summary\n\nApplies the owner decisions of 2026-09-30 for Phases 1G-A to 1G-E and records the Windows validation.\n\n- **Windows validation** (`reports/phase1g_windows_validation_record.md`): preflight at `63ca316` gives 1049 passed, 0 failed, 0 skipped on CPython 3.14.3 and 3.11.9, the same as Linux. Every recorded 1G-A to 1G-F number is reproduced.\n- **1G-F portability:** the frozen 1G-F script imports the Unix-only `resource` module. With owner approval it now runs through `scripts/run_phase1g_f_portable.py`; the frozen script is unchanged.\n- **One successor record per phase** (`reports/phase1g_<x>_owner_decisions_successor.md` plus canonical inventory). Every ticked decision is applied, and every blocking one for 1G-A, C, D and E.\n- **Evidence script:** `scripts/phase1g_owner_decisions_numerics.py` passes 124/124 gates, with identical results on both interpreters.\n- **1G-B OD2 to OD6** are code changes with tests:\n  - the naming-rule wording;\n  - a hardened status validator;\n  - contract hardening;\n  - a `model_caveat` field on `TimescapeGrowthFactor`;\n  - an independent g_TS regression.\n\n  Every numeric output is bit-identical.\n- **Scope:** no token value, equation or tolerance changes, and no frozen report, inventory or phase script is edited. Three token comments change: A5 (1G-C), and for 1G-D the Mészáros/barotropic wording and the void-response figure.\n\n## Validation (Windows, final HEAD)\n\n- Full suites: 1093 passed, 0 failed, 0 skipped on CPython 3.14.3 and 3.11.9.\n- 1F-C-R validator with `--producers`: PASS.\n- Tolerance audit: 638 comparisons, 0 missing.\n- Linux run: not done yet; the owner will run it later.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n",
+      "created_at": "2026-09-30T15:54:54Z",
+      "updated_at": "2026-09-30T15:55:07Z",
+      "closed_at": "2026-09-30T15:55:07Z",
+      "merged_at": "2026-09-30T15:55:07Z",
+      "merge_commit_sha": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f",
+      "assignees": [],
+      "requested_reviewers": [],
+      "requested_teams": [],
+      "labels": [],
+      "milestone": null,
+      "draft": false,
+      "commits_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls/3/commits",
+      "review_comments_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls/3/comments",
+      "review_comment_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls/comments{/number}",
+      "comments_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues/3/comments",
+      "statuses_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/statuses/3c70185cb3eb3aa3734995a2fde43bc25462086e",
+      "head": {
+        "label": "ing-mattioni:phase-1g-owner-decisions",
+        "ref": "phase-1g-owner-decisions",
+        "sha": "3c70185cb3eb3aa3734995a2fde43bc25462086e",
+        "user": {
+          "login": "ing-mattioni",
+          "id": 181735481,
+          "node_id": "U_kgDOCtUQOQ",
+          "avatar_url": "https://avatars.githubusercontent.com/u/181735481?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/ing-mattioni",
+          "html_url": "https://github.com/ing-mattioni",
+          "followers_url": "https://api.github.com/users/ing-mattioni/followers",
+          "following_url": "https://api.github.com/users/ing-mattioni/following{/other_user}",
+          "gists_url": "https://api.github.com/users/ing-mattioni/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/ing-mattioni/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/ing-mattioni/subscriptions",
+          "organizations_url": "https://api.github.com/users/ing-mattioni/orgs",
+          "repos_url": "https://api.github.com/users/ing-mattioni/repos",
+          "events_url": "https://api.github.com/users/ing-mattioni/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/ing-mattioni/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "repo": {
+          "id": 1301750257,
+          "node_id": "R_kgDOTZch8Q",
+          "name": "timescape-fsigma8",
+          "full_name": "ing-mattioni/timescape-fsigma8",
+          "private": true,
+          "owner": {
+            "login": "ing-mattioni",
+            "id": 181735481,
+            "node_id": "U_kgDOCtUQOQ",
+            "avatar_url": "https://avatars.githubusercontent.com/u/181735481?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/ing-mattioni",
+            "html_url": "https://github.com/ing-mattioni",
+            "followers_url": "https://api.github.com/users/ing-mattioni/followers",
+            "following_url": "https://api.github.com/users/ing-mattioni/following{/other_user}",
+            "gists_url": "https://api.github.com/users/ing-mattioni/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/ing-mattioni/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/ing-mattioni/subscriptions",
+            "organizations_url": "https://api.github.com/users/ing-mattioni/orgs",
+            "repos_url": "https://api.github.com/users/ing-mattioni/repos",
+            "events_url": "https://api.github.com/users/ing-mattioni/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/ing-mattioni/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "html_url": "https://github.com/ing-mattioni/timescape-fsigma8",
+          "description": null,
+          "fork": false,
+          "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8",
+          "forks_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/forks",
+          "keys_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/keys{/key_id}",
+          "collaborators_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/collaborators{/collaborator}",
+          "teams_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/teams",
+          "hooks_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/hooks",
+          "issue_events_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues/events{/number}",
+          "events_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/events",
+          "assignees_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/assignees{/user}",
+          "branches_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/branches{/branch}",
+          "tags_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/tags",
+          "blobs_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/blobs{/sha}",
+          "git_tags_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags{/sha}",
+          "git_refs_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs{/sha}",
+          "trees_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/trees{/sha}",
+          "statuses_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/statuses/{sha}",
+          "languages_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/languages",
+          "stargazers_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/stargazers",
+          "contributors_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/contributors",
+          "subscribers_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/subscribers",
+          "subscription_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/subscription",
+          "commits_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/commits{/sha}",
+          "git_commits_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits{/sha}",
+          "comments_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/comments{/number}",
+          "issue_comment_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues/comments{/number}",
+          "contents_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/contents/{+path}",
+          "compare_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/compare/{base}...{head}",
+          "merges_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/merges",
+          "archive_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/{archive_format}{/ref}",
+          "downloads_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/downloads",
+          "issues_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues{/number}",
+          "pulls_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls{/number}",
+          "milestones_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/milestones{/number}",
+          "notifications_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/notifications{?since,all,participating}",
+          "labels_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/labels{/name}",
+          "releases_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/releases{/id}",
+          "deployments_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/deployments",
+          "created_at": "2026-07-15T15:12:41Z",
+          "updated_at": "2026-10-06T13:12:11Z",
+          "pushed_at": "2026-10-09T09:47:19Z",
+          "git_url": "git://github.com/ing-mattioni/timescape-fsigma8.git",
+          "ssh_url": "git@github.com:ing-mattioni/timescape-fsigma8.git",
+          "clone_url": "https://github.com/ing-mattioni/timescape-fsigma8.git",
+          "svn_url": "https://github.com/ing-mattioni/timescape-fsigma8",
+          "homepage": null,
+          "size": 4817,
+          "stargazers_count": 0,
+          "watchers_count": 0,
+          "language": "Python",
+          "has_issues": true,
+          "has_projects": true,
+          "has_downloads": false,
+          "has_wiki": false,
+          "has_pages": false,
+          "has_discussions": false,
+          "forks_count": 0,
+          "mirror_url": null,
+          "archived": false,
+          "disabled": false,
+          "open_issues_count": 0,
+          "license": null,
+          "allow_forking": true,
+          "is_template": false,
+          "web_commit_signoff_required": false,
+          "has_pull_requests": true,
+          "pull_request_creation_policy": "all",
+          "topics": [],
+          "visibility": "private",
+          "forks": 0,
+          "open_issues": 0,
+          "watchers": 0,
+          "default_branch": "main"
+        }
+      },
+      "base": {
+        "label": "ing-mattioni:main",
+        "ref": "main",
+        "sha": "63ca316b87399fc323713338a07519f8bce52113",
+        "user": {
+          "login": "ing-mattioni",
+          "id": 181735481,
+          "node_id": "U_kgDOCtUQOQ",
+          "avatar_url": "https://avatars.githubusercontent.com/u/181735481?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/ing-mattioni",
+          "html_url": "https://github.com/ing-mattioni",
+          "followers_url": "https://api.github.com/users/ing-mattioni/followers",
+          "following_url": "https://api.github.com/users/ing-mattioni/following{/other_user}",
+          "gists_url": "https://api.github.com/users/ing-mattioni/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/ing-mattioni/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/ing-mattioni/subscriptions",
+          "organizations_url": "https://api.github.com/users/ing-mattioni/orgs",
+          "repos_url": "https://api.github.com/users/ing-mattioni/repos",
+          "events_url": "https://api.github.com/users/ing-mattioni/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/ing-mattioni/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "repo": {
+          "id": 1301750257,
+          "node_id": "R_kgDOTZch8Q",
+          "name": "timescape-fsigma8",
+          "full_name": "ing-mattioni/timescape-fsigma8",
+          "private": true,
+          "owner": {
+            "login": "ing-mattioni",
+            "id": 181735481,
+            "node_id": "U_kgDOCtUQOQ",
+            "avatar_url": "https://avatars.githubusercontent.com/u/181735481?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/ing-mattioni",
+            "html_url": "https://github.com/ing-mattioni",
+            "followers_url": "https://api.github.com/users/ing-mattioni/followers",
+            "following_url": "https://api.github.com/users/ing-mattioni/following{/other_user}",
+            "gists_url": "https://api.github.com/users/ing-mattioni/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/ing-mattioni/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/ing-mattioni/subscriptions",
+            "organizations_url": "https://api.github.com/users/ing-mattioni/orgs",
+            "repos_url": "https://api.github.com/users/ing-mattioni/repos",
+            "events_url": "https://api.github.com/users/ing-mattioni/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/ing-mattioni/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "html_url": "https://github.com/ing-mattioni/timescape-fsigma8",
+          "description": null,
+          "fork": false,
+          "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8",
+          "forks_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/forks",
+          "keys_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/keys{/key_id}",
+          "collaborators_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/collaborators{/collaborator}",
+          "teams_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/teams",
+          "hooks_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/hooks",
+          "issue_events_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues/events{/number}",
+          "events_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/events",
+          "assignees_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/assignees{/user}",
+          "branches_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/branches{/branch}",
+          "tags_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/tags",
+          "blobs_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/blobs{/sha}",
+          "git_tags_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags{/sha}",
+          "git_refs_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs{/sha}",
+          "trees_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/trees{/sha}",
+          "statuses_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/statuses/{sha}",
+          "languages_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/languages",
+          "stargazers_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/stargazers",
+          "contributors_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/contributors",
+          "subscribers_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/subscribers",
+          "subscription_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/subscription",
+          "commits_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/commits{/sha}",
+          "git_commits_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits{/sha}",
+          "comments_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/comments{/number}",
+          "issue_comment_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues/comments{/number}",
+          "contents_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/contents/{+path}",
+          "compare_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/compare/{base}...{head}",
+          "merges_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/merges",
+          "archive_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/{archive_format}{/ref}",
+          "downloads_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/downloads",
+          "issues_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues{/number}",
+          "pulls_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls{/number}",
+          "milestones_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/milestones{/number}",
+          "notifications_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/notifications{?since,all,participating}",
+          "labels_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/labels{/name}",
+          "releases_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/releases{/id}",
+          "deployments_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/deployments",
+          "created_at": "2026-07-15T15:12:41Z",
+          "updated_at": "2026-10-06T13:12:11Z",
+          "pushed_at": "2026-10-09T09:47:19Z",
+          "git_url": "git://github.com/ing-mattioni/timescape-fsigma8.git",
+          "ssh_url": "git@github.com:ing-mattioni/timescape-fsigma8.git",
+          "clone_url": "https://github.com/ing-mattioni/timescape-fsigma8.git",
+          "svn_url": "https://github.com/ing-mattioni/timescape-fsigma8",
+          "homepage": null,
+          "size": 4817,
+          "stargazers_count": 0,
+          "watchers_count": 0,
+          "language": "Python",
+          "has_issues": true,
+          "has_projects": true,
+          "has_downloads": false,
+          "has_wiki": false,
+          "has_pages": false,
+          "has_discussions": false,
+          "forks_count": 0,
+          "mirror_url": null,
+          "archived": false,
+          "disabled": false,
+          "open_issues_count": 0,
+          "license": null,
+          "allow_forking": true,
+          "is_template": false,
+          "web_commit_signoff_required": false,
+          "has_pull_requests": true,
+          "pull_request_creation_policy": "all",
+          "topics": [],
+          "visibility": "private",
+          "forks": 0,
+          "open_issues": 0,
+          "watchers": 0,
+          "default_branch": "main"
+        }
+      },
+      "_links": {
+        "self": {
+          "href": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls/3"
+        },
+        "html": {
+          "href": "https://github.com/ing-mattioni/timescape-fsigma8/pull/3"
+        },
+        "issue": {
+          "href": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues/3"
+        },
+        "comments": {
+          "href": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues/3/comments"
+        },
+        "review_comments": {
+          "href": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls/3/comments"
+        },
+        "review_comment": {
+          "href": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls/comments{/number}"
+        },
+        "commits": {
+          "href": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls/3/commits"
+        },
+        "statuses": {
+          "href": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/statuses/3c70185cb3eb3aa3734995a2fde43bc25462086e"
+        }
+      },
+      "author_association": "OWNER",
+      "auto_merge": null,
+      "assignee": null,
+      "active_lock_reason": null
+    },
+    {
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls/2",
+      "id": 4684175415,
+      "node_id": "PR_kwDOTZch8c8AAAABFzLYNw",
+      "html_url": "https://github.com/ing-mattioni/timescape-fsigma8/pull/2",
+      "diff_url": "https://github.com/ing-mattioni/timescape-fsigma8/pull/2.diff",
+      "patch_url": "https://github.com/ing-mattioni/timescape-fsigma8/pull/2.patch",
+      "issue_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues/2",
+      "number": 2,
+      "state": "closed",
+      "locked": false,
+      "title": "Phase 1G: adversarial audits 1G-A–1G-E, 1G-E token, Phase 1G-F",
+      "user": {
+        "login": "ing-mattioni",
+        "id": 181735481,
+        "node_id": "U_kgDOCtUQOQ",
+        "avatar_url": "https://avatars.githubusercontent.com/u/181735481?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ing-mattioni",
+        "html_url": "https://github.com/ing-mattioni",
+        "followers_url": "https://api.github.com/users/ing-mattioni/followers",
+        "following_url": "https://api.github.com/users/ing-mattioni/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ing-mattioni/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ing-mattioni/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ing-mattioni/subscriptions",
+        "organizations_url": "https://api.github.com/users/ing-mattioni/orgs",
+        "repos_url": "https://api.github.com/users/ing-mattioni/repos",
+        "events_url": "https://api.github.com/users/ing-mattioni/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ing-mattioni/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "body": "Four commits on top of `6f7937c`: one per item, plus the owner-approved test fix. No tags were created. Nothing in this PR changes an equation, an existing status token or an implementation.\n\n## Items done\n\n**A — approved 1G-E token (`ad1ac35`).**\n- Adds `TWO_PHASE_MASS_VARIANCE_8_H_INV_MPC = \"DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION\"` through a new successor record, `reports/phase1g_e_status_addition_successor.md` with its canonical inventory. The record quotes your approvals verbatim, dated 2026-09-29.\n- The record is registered as the third entry of `STATUS_SUCCESSOR_RECORDS`; the validator logic is unchanged.\n- New regression `tests/test_phase1g_e_status_addition.py` (5 tests). The precedent test now allows later registered records and still pins its six additions.\n\n**B — independent adversarial audits of 1G-A to 1G-E (`b96c290`).**\n- One subagent per phase, each in an isolated worktree of `6f7937c` without the other audits' conclusions.\n- Each re-derived the load-bearing results from the arXiv LaTeX e-prints and recomputed the key numbers with its own code: `reports/phase1g_{a..e}_adversarial_audit.md` plus inventories.\n- Consolidation and errata: `reports/phase1g_adversarial_audit_errata_successor.md`.\n  - 29 lead-verified errata are applied as successor readings; the frozen reports are untouched.\n  - 3 round-off-level items are recorded but not applied, because they are platform-dependent.\n  - 4 docstring citations are fixed. The executable AST is unchanged and the 1G-B artifact is numerically bit-identical.\n\n**C — Phase 1G-F, a self-consistent void population (`e02430b`).** Report-only, with numerical evidence: `reports/phase1g_f_void_population.md`, its inventory, and `scripts/phase1g_f_void_population_numerics.py`.\n\n**GB-F1 fix (`738f3c3`), owner decision 2026-09-30, option A (test only).**\n- `test_top_hat_window_limits_series_and_envelope` no longer asserts bitwise evenness of the top-hat window. It now uses `assert_allclose(rtol=1e-15, atol=0.0)`, with a comment explaining that NumPy's AVX-512 `x ** 3` is not exactly odd (measured ≤ 2.9e−16 relative).\n- `lagrangian_sigma.py` is unchanged.\n- The decision is recorded in Sec. 10 of the consolidation record and in its `owner_resolutions` block.\n\n## Audit verdicts\n\n| Phase | Verdict | Tag readiness | Findings (HIGH / MED-HIGH / MED / LOW-MED / LOW) |\n|---|---|---|---|\n| 1G-A | ACCEPT_WITH_CORRECTIONS | NOT_READY_OWNER_DECISION_REQUIRED | 0 / 0 / 2 / 1 / 8 |\n| 1G-B | ACCEPT_WITH_CORRECTIONS | GB-F1 is now resolved; ready once your Windows run passes | 0 / 0 / 0 / 2 / 8 |\n| 1G-C | ACCEPT_WITH_CORRECTIONS | NOT_READY_OWNER_DECISION_REQUIRED | 0 / 1 / 2 / 1 / 5 |\n| 1G-D | ACCEPT_WITH_CORRECTIONS | NOT_READY_OWNER_DECISION_REQUIRED | 0 / 1 / 3 / 1 / 5 |\n| 1G-E | ACCEPT_WITH_CORRECTIONS | NOT_READY_OWNER_DECISION_REQUIRED | 0 / 2 / 2 / 1 / 2 |\n\nNo audit found an error in an implemented equation. Every load-bearing number reproduced, including α = 1.70695, ω_m,eff, X∞, the EH98 check (cross-checked with CAMB), the separate-universe modes and all 60 1G-E table values.\n\n## Findings still open for your decisions\n\nThe full list is in Sec. 6 of the consolidation. These block tagging:\n- **GC-F1 (MED-HIGH).** The 1G-C wall σ is the wall-internal linear statistic. \"Mass-weighted σ(M8)\", \"supersedes\" and \"settled\" overstate it.\n- **GD-F1 (MED-HIGH).** The 1G-D void-seed scale uses the EdS factor 1.72, but the tracker grows voids by (f_v0/f_vi)^{1/3} ≈ 4–20. With a tracker-consistent seed, A_v σ(R8) falls from 2.6–4.3 to 1.05–1.5, and X_SU from 2.75–3.95 to 1.30–1.63.\n- **GE-F1 (MED-HIGH).** For δ_v ≠ −1, the 1G-E formula breaks mass conservation. The correct form is `δ_v²σ²_part + (f_w − f_v δ_v)²σ²_int`, confirmed independently in 1G-F.\n- **GE-F2 (MED-HIGH).** [W09] says 30 h⁻¹ Mpc voids fill 40–50%, not all of f_v0.\n- **The MEDIUM items:**\n  - GA-F1: the App. B \"backward-parabolic\" verdict depends on the printed (4.15) sign;\n  - GA-F2: the [NW15] row uses Planck's f_b, while [NW15]'s own fit has f_b ≈ 0.18;\n  - GA-F3: the \"αk ≈ 875\" unit chain;\n  - GC-F2 and GC-F3: an evidence class, and an unstated clock assumption (A5);\n  - GD-F2 to GD-F5;\n  - GE-F3, GE-F4 and GE-F5.\n- **Lead observation L1.** 1G-E's radius R = 8/h is photon-normalised. In that frame the wall compression is `D_wall = γ_w0 f_w^{1/3}` (0.877/0.946), not `f_w^{1/3}`. The frame-consistent 1G-E primary would be σ = 1.759 / 1.523, instead of 1.572 / 1.357.\n\n## 1G-F headline (conditional, model-internal, not an observational σ8)\n\nConditions (F1–F6):\n- Sheth–van de Weygaert two-barrier excursion set;\n- Jennings–Li–Hu corrected EdS thresholds (δ_v = −2.7172, r_NL/r_L = 1.6967), re-derived: SvdW04's own Θ_sc = 3.53 fails its (A29);\n- the 1G-A early spectrum;\n- the growth clock as an explicit closure: wall EdS in t, volume-average CGI, or the 1G-D separate-universe response;\n- Boolean voids;\n- 1G-E's E1/E3/E4 with the GE-F1 formula.\n\nResults:\n- **f_v0 test.** The void *mass* fraction 1 − 𝒟 = 0.28–0.38 is clock-independent. The tracker's f_v0 is reproduced only under the tracker's own two-scale volume budget (0.66–0.79 at all sizes). JLH13 volume conservation, which N-body simulations validate in ΛCDM, gives ≤ 0.38 for every clock.\n- **Void sizes.** With the wall clock, voids are small: the volume-weighted median is 2.4–2.8 h⁻¹ Mpc, f_v0 needs voids ≥ 0.5–2 h⁻¹ Mpc counted, and ≥ 10 h⁻¹ Mpc voids fill ~4%, not 40–50%. Near-empty voids are sub-Mpc.\n- **History.** No fixed threshold reproduces f_v(t) = t/(t+τ).\n- **σ at 8 h⁻¹ Mpc.** The self-consistent polydisperse two-phase value is ≈ 0.99 with empty voids, for both parameter sets. 1G-E's 1.36–1.57 requires 1G-D's disputed PBS response.\n- **Monte Carlo.** An exact class-binned coverage test agrees with the polydisperse Boolean covariance to ≤ 2.3% at the gated points.\n- **Status tokens.** Three are proposed; none is added.\n\n## Tests and checks (Linux x86-64, AVX-512)\n\n| | CPython 3.13.12 | CPython 3.11.15 |\n|---|---|---|\n| Preflight at `6f7937c` | 1043 passed, 1 failed, 0 skipped | 1043 passed, 1 failed, 0 skipped |\n| At `e02430b` (items A–C) | 1048 passed, 1 failed, 0 skipped | 1048 passed, 1 failed, 0 skipped |\n| **Head `738f3c3` (GB-F1 fixed)** | **1049 passed, 0 failed, 0 skipped** | **1049 passed, 0 failed, 0 skipped** |\n\n- **The failure before the fix** was GB-F1. 1049 = your Windows baseline of 1044 plus the 5 new tests.\n- **No skips:** all oracles and artifacts were regenerated from the pinned upstream clone, whose sha256_lf was verified.\n- **Python 3.14 is not installed** in this container, so 3.13.12 was used. Windows was not re-run.\n- **Checks:** `validate_phase1f_c_r_astra_remediation.py --producers` PASS on both interpreters, and the tolerance audit finds 634 comparisons with 0 missing.\n- **Phase 1G scripts:**\n  - Every `scripts/phase1g_*` numerics script and `validate_phase1g_b_lagrangian_sigma.py` exit 0 on both interpreters, with identical printed output.\n  - The 1G-F artifact is identical across interpreters apart from the environment block.\n  - The 1G-D artifact differs only in its round-off (4.11) residuals, ≤ 1.9e−15.\n\n## Tag commands (for you to run locally, signed)\n\n**Readiness:**\n- 1G-B is ready once your Windows run passes.\n- 1G-A, 1G-C, 1G-D and 1G-E still have blocking owner decisions.\n\nAfter you resolve a phase's decisions, tag the resolution commit on `main`. The full commands and messages are in Sec. 7 of `reports/phase1g_adversarial_audit_errata_successor.md`, for example:\n\n```\ngit tag -s -a phase-1g-b-lagrangian-sigma-v1 <commit> -m \"Phase 1G-B v1: ...\"\ngit tag -s -a phase-1g-a-sigma8-derivation-path-v1 <commit> -m \"Phase 1G-A v1: ...\"\n```\n\n`SIGMA8_AUTHORIZATION` and the other `NOT_GRANTED` tokens are unchanged.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nhttps://claude.ai/code/session_017uGtJbru7rHXqBaHjPZXQW",
+      "created_at": "2026-09-30T00:28:37Z",
+      "updated_at": "2026-09-30T06:42:06Z",
+      "closed_at": "2026-09-30T06:42:06Z",
+      "merged_at": "2026-09-30T06:42:06Z",
+      "merge_commit_sha": "63ca316b87399fc323713338a07519f8bce52113",
+      "assignees": [],
+      "requested_reviewers": [],
+      "requested_teams": [],
+      "labels": [],
+      "milestone": null,
+      "draft": false,
+      "commits_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls/2/commits",
+      "review_comments_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls/2/comments",
+      "review_comment_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls/comments{/number}",
+      "comments_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues/2/comments",
+      "statuses_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/statuses/738f3c32658b8a23a42958d36c492dfeecba61be",
+      "head": {
+        "label": "ing-mattioni:claude/zealous-rubin-1m3vf4",
+        "ref": "claude/zealous-rubin-1m3vf4",
+        "sha": "738f3c32658b8a23a42958d36c492dfeecba61be",
+        "user": {
+          "login": "ing-mattioni",
+          "id": 181735481,
+          "node_id": "U_kgDOCtUQOQ",
+          "avatar_url": "https://avatars.githubusercontent.com/u/181735481?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/ing-mattioni",
+          "html_url": "https://github.com/ing-mattioni",
+          "followers_url": "https://api.github.com/users/ing-mattioni/followers",
+          "following_url": "https://api.github.com/users/ing-mattioni/following{/other_user}",
+          "gists_url": "https://api.github.com/users/ing-mattioni/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/ing-mattioni/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/ing-mattioni/subscriptions",
+          "organizations_url": "https://api.github.com/users/ing-mattioni/orgs",
+          "repos_url": "https://api.github.com/users/ing-mattioni/repos",
+          "events_url": "https://api.github.com/users/ing-mattioni/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/ing-mattioni/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "repo": {
+          "id": 1301750257,
+          "node_id": "R_kgDOTZch8Q",
+          "name": "timescape-fsigma8",
+          "full_name": "ing-mattioni/timescape-fsigma8",
+          "private": true,
+          "owner": {
+            "login": "ing-mattioni",
+            "id": 181735481,
+            "node_id": "U_kgDOCtUQOQ",
+            "avatar_url": "https://avatars.githubusercontent.com/u/181735481?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/ing-mattioni",
+            "html_url": "https://github.com/ing-mattioni",
+            "followers_url": "https://api.github.com/users/ing-mattioni/followers",
+            "following_url": "https://api.github.com/users/ing-mattioni/following{/other_user}",
+            "gists_url": "https://api.github.com/users/ing-mattioni/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/ing-mattioni/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/ing-mattioni/subscriptions",
+            "organizations_url": "https://api.github.com/users/ing-mattioni/orgs",
+            "repos_url": "https://api.github.com/users/ing-mattioni/repos",
+            "events_url": "https://api.github.com/users/ing-mattioni/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/ing-mattioni/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "html_url": "https://github.com/ing-mattioni/timescape-fsigma8",
+          "description": null,
+          "fork": false,
+          "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8",
+          "forks_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/forks",
+          "keys_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/keys{/key_id}",
+          "collaborators_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/collaborators{/collaborator}",
+          "teams_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/teams",
+          "hooks_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/hooks",
+          "issue_events_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues/events{/number}",
+          "events_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/events",
+          "assignees_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/assignees{/user}",
+          "branches_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/branches{/branch}",
+          "tags_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/tags",
+          "blobs_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/blobs{/sha}",
+          "git_tags_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags{/sha}",
+          "git_refs_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs{/sha}",
+          "trees_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/trees{/sha}",
+          "statuses_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/statuses/{sha}",
+          "languages_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/languages",
+          "stargazers_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/stargazers",
+          "contributors_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/contributors",
+          "subscribers_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/subscribers",
+          "subscription_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/subscription",
+          "commits_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/commits{/sha}",
+          "git_commits_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits{/sha}",
+          "comments_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/comments{/number}",
+          "issue_comment_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues/comments{/number}",
+          "contents_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/contents/{+path}",
+          "compare_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/compare/{base}...{head}",
+          "merges_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/merges",
+          "archive_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/{archive_format}{/ref}",
+          "downloads_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/downloads",
+          "issues_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues{/number}",
+          "pulls_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls{/number}",
+          "milestones_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/milestones{/number}",
+          "notifications_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/notifications{?since,all,participating}",
+          "labels_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/labels{/name}",
+          "releases_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/releases{/id}",
+          "deployments_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/deployments",
+          "created_at": "2026-07-15T15:12:41Z",
+          "updated_at": "2026-10-06T13:12:11Z",
+          "pushed_at": "2026-10-09T09:47:19Z",
+          "git_url": "git://github.com/ing-mattioni/timescape-fsigma8.git",
+          "ssh_url": "git@github.com:ing-mattioni/timescape-fsigma8.git",
+          "clone_url": "https://github.com/ing-mattioni/timescape-fsigma8.git",
+          "svn_url": "https://github.com/ing-mattioni/timescape-fsigma8",
+          "homepage": null,
+          "size": 4817,
+          "stargazers_count": 0,
+          "watchers_count": 0,
+          "language": "Python",
+          "has_issues": true,
+          "has_projects": true,
+          "has_downloads": false,
+          "has_wiki": false,
+          "has_pages": false,
+          "has_discussions": false,
+          "forks_count": 0,
+          "mirror_url": null,
+          "archived": false,
+          "disabled": false,
+          "open_issues_count": 0,
+          "license": null,
+          "allow_forking": true,
+          "is_template": false,
+          "web_commit_signoff_required": false,
+          "has_pull_requests": true,
+          "pull_request_creation_policy": "all",
+          "topics": [],
+          "visibility": "private",
+          "forks": 0,
+          "open_issues": 0,
+          "watchers": 0,
+          "default_branch": "main"
+        }
+      },
+      "base": {
+        "label": "ing-mattioni:main",
+        "ref": "main",
+        "sha": "6f7937ce5681900898f5e0a6482a953f0fa3e5a0",
+        "user": {
+          "login": "ing-mattioni",
+          "id": 181735481,
+          "node_id": "U_kgDOCtUQOQ",
+          "avatar_url": "https://avatars.githubusercontent.com/u/181735481?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/ing-mattioni",
+          "html_url": "https://github.com/ing-mattioni",
+          "followers_url": "https://api.github.com/users/ing-mattioni/followers",
+          "following_url": "https://api.github.com/users/ing-mattioni/following{/other_user}",
+          "gists_url": "https://api.github.com/users/ing-mattioni/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/ing-mattioni/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/ing-mattioni/subscriptions",
+          "organizations_url": "https://api.github.com/users/ing-mattioni/orgs",
+          "repos_url": "https://api.github.com/users/ing-mattioni/repos",
+          "events_url": "https://api.github.com/users/ing-mattioni/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/ing-mattioni/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "repo": {
+          "id": 1301750257,
+          "node_id": "R_kgDOTZch8Q",
+          "name": "timescape-fsigma8",
+          "full_name": "ing-mattioni/timescape-fsigma8",
+          "private": true,
+          "owner": {
+            "login": "ing-mattioni",
+            "id": 181735481,
+            "node_id": "U_kgDOCtUQOQ",
+            "avatar_url": "https://avatars.githubusercontent.com/u/181735481?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/ing-mattioni",
+            "html_url": "https://github.com/ing-mattioni",
+            "followers_url": "https://api.github.com/users/ing-mattioni/followers",
+            "following_url": "https://api.github.com/users/ing-mattioni/following{/other_user}",
+            "gists_url": "https://api.github.com/users/ing-mattioni/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/ing-mattioni/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/ing-mattioni/subscriptions",
+            "organizations_url": "https://api.github.com/users/ing-mattioni/orgs",
+            "repos_url": "https://api.github.com/users/ing-mattioni/repos",
+            "events_url": "https://api.github.com/users/ing-mattioni/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/ing-mattioni/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "html_url": "https://github.com/ing-mattioni/timescape-fsigma8",
+          "description": null,
+          "fork": false,
+          "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8",
+          "forks_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/forks",
+          "keys_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/keys{/key_id}",
+          "collaborators_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/collaborators{/collaborator}",
+          "teams_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/teams",
+          "hooks_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/hooks",
+          "issue_events_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues/events{/number}",
+          "events_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/events",
+          "assignees_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/assignees{/user}",
+          "branches_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/branches{/branch}",
+          "tags_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/tags",
+          "blobs_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/blobs{/sha}",
+          "git_tags_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags{/sha}",
+          "git_refs_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs{/sha}",
+          "trees_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/trees{/sha}",
+          "statuses_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/statuses/{sha}",
+          "languages_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/languages",
+          "stargazers_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/stargazers",
+          "contributors_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/contributors",
+          "subscribers_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/subscribers",
+          "subscription_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/subscription",
+          "commits_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/commits{/sha}",
+          "git_commits_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits{/sha}",
+          "comments_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/comments{/number}",
+          "issue_comment_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues/comments{/number}",
+          "contents_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/contents/{+path}",
+          "compare_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/compare/{base}...{head}",
+          "merges_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/merges",
+          "archive_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/{archive_format}{/ref}",
+          "downloads_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/downloads",
+          "issues_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues{/number}",
+          "pulls_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls{/number}",
+          "milestones_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/milestones{/number}",
+          "notifications_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/notifications{?since,all,participating}",
+          "labels_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/labels{/name}",
+          "releases_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/releases{/id}",
+          "deployments_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/deployments",
+          "created_at": "2026-07-15T15:12:41Z",
+          "updated_at": "2026-10-06T13:12:11Z",
+          "pushed_at": "2026-10-09T09:47:19Z",
+          "git_url": "git://github.com/ing-mattioni/timescape-fsigma8.git",
+          "ssh_url": "git@github.com:ing-mattioni/timescape-fsigma8.git",
+          "clone_url": "https://github.com/ing-mattioni/timescape-fsigma8.git",
+          "svn_url": "https://github.com/ing-mattioni/timescape-fsigma8",
+          "homepage": null,
+          "size": 4817,
+          "stargazers_count": 0,
+          "watchers_count": 0,
+          "language": "Python",
+          "has_issues": true,
+          "has_projects": true,
+          "has_downloads": false,
+          "has_wiki": false,
+          "has_pages": false,
+          "has_discussions": false,
+          "forks_count": 0,
+          "mirror_url": null,
+          "archived": false,
+          "disabled": false,
+          "open_issues_count": 0,
+          "license": null,
+          "allow_forking": true,
+          "is_template": false,
+          "web_commit_signoff_required": false,
+          "has_pull_requests": true,
+          "pull_request_creation_policy": "all",
+          "topics": [],
+          "visibility": "private",
+          "forks": 0,
+          "open_issues": 0,
+          "watchers": 0,
+          "default_branch": "main"
+        }
+      },
+      "_links": {
+        "self": {
+          "href": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls/2"
+        },
+        "html": {
+          "href": "https://github.com/ing-mattioni/timescape-fsigma8/pull/2"
+        },
+        "issue": {
+          "href": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues/2"
+        },
+        "comments": {
+          "href": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues/2/comments"
+        },
+        "review_comments": {
+          "href": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls/2/comments"
+        },
+        "review_comment": {
+          "href": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls/comments{/number}"
+        },
+        "commits": {
+          "href": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls/2/commits"
+        },
+        "statuses": {
+          "href": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/statuses/738f3c32658b8a23a42958d36c492dfeecba61be"
+        }
+      },
+      "author_association": "OWNER",
+      "auto_merge": null,
+      "assignee": null,
+      "active_lock_reason": null
+    },
+    {
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls/1",
+      "id": 4613593979,
+      "node_id": "PR_kwDOTZch8c8AAAABEv3bew",
+      "html_url": "https://github.com/ing-mattioni/timescape-fsigma8/pull/1",
+      "diff_url": "https://github.com/ing-mattioni/timescape-fsigma8/pull/1.diff",
+      "patch_url": "https://github.com/ing-mattioni/timescape-fsigma8/pull/1.patch",
+      "issue_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues/1",
+      "number": 1,
+      "state": "closed",
+      "locked": false,
+      "title": "Independent post-remediation review (F1–F9) and its fixes",
+      "user": {
+        "login": "ing-mattioni",
+        "id": 181735481,
+        "node_id": "U_kgDOCtUQOQ",
+        "avatar_url": "https://avatars.githubusercontent.com/u/181735481?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/ing-mattioni",
+        "html_url": "https://github.com/ing-mattioni",
+        "followers_url": "https://api.github.com/users/ing-mattioni/followers",
+        "following_url": "https://api.github.com/users/ing-mattioni/following{/other_user}",
+        "gists_url": "https://api.github.com/users/ing-mattioni/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/ing-mattioni/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/ing-mattioni/subscriptions",
+        "organizations_url": "https://api.github.com/users/ing-mattioni/orgs",
+        "repos_url": "https://api.github.com/users/ing-mattioni/repos",
+        "events_url": "https://api.github.com/users/ing-mattioni/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/ing-mattioni/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "body": "## Summary\n\nThis PR adds an independent review of Phases 1A–1F-C-R and the fixes for all nine of its findings. The review is `reports/phase1f_c_r_post_remediation_independent_audit.md`.\n\nIt confirmed the paper-level equations and every re-computed number.\n\nNo historical report or inventory is modified: the 1F-C-R validator checks that all 52 historical reports are byte-identical. Superseded statements are corrected in new successor documents instead.\n\n## Commits\n\n- **`4746386` — review report and inventory.** Nine findings: F1–F9.\n- **`fb1705a` — F1, initial conditions carry a decaying mode.**\n  - The paper/notebook ICs transplant the ΛCDM growing-mode rate, so they contain a decaying mode. This inflates Δ_d(t0) by up to about 14% and biases Candidate A's G by +0.4% to +3.0%.\n  - Adds the explicit, non-default convention `RateUnitConvention.TIMESCAPE_REGULAR_GROWING_MODE` (`perturbations/growing_mode.py`) for the Mészáros and comoving systems. The barotropic system rejects it and fails closed.\n  - With it, growth-normalised results no longer depend on the start epoch or the H0 preset (spread ≤ 8e-13, versus about 1.3e-2 before).\n  - Validation report: `phase1f_c_r_f1_growing_mode_initial_conditions_validation.md`.\n- **`c62bc74` — F3, H1 closure not demonstrated.**\n  - Adds a mandatory `H1KinematicGatePolicy`. Under `ENFORCE` the runtime fails closed unless:\n    - J_Ξ = 0, as the CLK-H1 clock branch requires;\n    - 13 background identities hold: the regional Hamiltonian, Raychaudhuri and continuity equations; the two-region identities, with K_D as an explicit input; and GM (3.8)–(3.10).\n  - Only enforced results carry the closure status tokens; unenforced results are labelled `ALGEBRAIC_VALIDATION_ONLY`.\n  - Nontrivial states that pass every gate exist at an instant for flat 1E-G geometries.\n  - Two new findings are recorded for decision:\n    - with the tested heterogeneous void geometry, only the trivial state passes the gates;\n    - unequal regional clocks are incompatible with GM (3.8) unless Σf_rα_rΘ_r = Σf_rΘ_r.\n  - Validation report: `phase1f_c_r_f3_h1_kinematic_gates_validation.md`.\n- **`ae00246` — F2, F5–F9, and the first part of F4.**\n  - **F2 and F9:** successor errata, pinned by `tests/test_review_errata.py`.\n    - F2: the bare-to-dressed factor peaks at 8/7 around z ≈ 2.0, so the quoted range 1.025–1.084 was wrong.\n    - F9: the 1C-A wavenumber factor is 1.25955, as the code already implements.\n  - **F5:** `CLAUDE.md`'s scope firewall is reconciled with the conditional Candidate A.\n  - **F6:** checks no longer depend on the checkout:\n    - `UPSTREAM.lock` pins the notebook by a line-ending-independent SHA-256;\n    - the 1D-D and 1F-C-R validators check ancestry against recorded commits instead of branch names or `main` equality;\n    - missing local files and unpublished tags are reported explicitly instead of crashing.\n  - **F7:** `G` is mandatory in the six background density functions.\n  - **F8:** `CLAUDE.md`, `README.md` and `pyproject.toml` are updated.\n  - **F4:** a provenance record and a map from each specification citation to a committed report.\n- **`6d533ef` — 1D-D regeneration result.** The 1D-D artifact was regenerated off its branch by ancestry. All gates passed, and the values match the frozen 1D-D report to about 6e-16.\n- **`058fb86` — F4 closed as a documented permanent gap.** The project owner confirmed that the three specifications, three audits, the H1 decision record and the `phase-1f-b` tag objects are not available.\n  - Report: `phase1f_c_r_f2_f4_f9_remediation.md` and its inventory.\n\n## Validation\n\n- **Full suite:** 723 passed, 1 skipped on Python 3.13.12 and on Python 3.11.15.\n- **`validate_growing_mode_initial_conditions.py` and `validate_h1_kinematic_gates.py`:** all gates pass.\n- **`validate_anchored_density_growth.py`:** all gates pass. Its embedded suites passed on both Python versions.\n- **`validate_phase1f_c_r_astra_remediation.py`:** `PASS_WITH_ABSENT_LOCAL_PROVENANCE`.\n  - 20 preserved equations certified.\n  - 24 of 27 tags verified; the other 3 tags are unpublished.\n  - 52 historical reports unchanged.\n  - Absent: the 3 audits covered by F4.\n  - Later changes to the preserved equations (F1, F7) are reported as drift.\n- **Unchanged artifacts:** the 1F-A artifact regenerates byte-for-byte, and the barotropic oracle re-extracts with identical data.\n\n## Scope\n\n- No observational, σ8, fσ8, RSD or likelihood quantity is added.\n- Paper/notebook reproduction still uses the legacy IC conventions.\n- Both D3 branches remain.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nhttps://claude.ai/code/session_01SW7WwGx1rCvHs9hQayH3iN\n\n---\n_Generated by [Claude Code](https://claude.ai/code/session_01SW7WwGx1rCvHs9hQayH3iN)_",
+      "created_at": "2026-09-23T12:31:50Z",
+      "updated_at": "2026-09-23T12:38:39Z",
+      "closed_at": "2026-09-23T12:32:02Z",
+      "merged_at": "2026-09-23T12:32:02Z",
+      "merge_commit_sha": "ce550753f2e0270ddd29b2e81f99cb23b8bf8780",
+      "assignees": [],
+      "requested_reviewers": [],
+      "requested_teams": [],
+      "labels": [],
+      "milestone": null,
+      "draft": false,
+      "commits_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls/1/commits",
+      "review_comments_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls/1/comments",
+      "review_comment_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls/comments{/number}",
+      "comments_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues/1/comments",
+      "statuses_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/statuses/058fb860c53cb2812bbe6dedac24f9ba5cbd1b85",
+      "head": {
+        "label": "ing-mattioni:claude/loving-dijkstra-esoj6f",
+        "ref": "claude/loving-dijkstra-esoj6f",
+        "sha": "058fb860c53cb2812bbe6dedac24f9ba5cbd1b85",
+        "user": {
+          "login": "ing-mattioni",
+          "id": 181735481,
+          "node_id": "U_kgDOCtUQOQ",
+          "avatar_url": "https://avatars.githubusercontent.com/u/181735481?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/ing-mattioni",
+          "html_url": "https://github.com/ing-mattioni",
+          "followers_url": "https://api.github.com/users/ing-mattioni/followers",
+          "following_url": "https://api.github.com/users/ing-mattioni/following{/other_user}",
+          "gists_url": "https://api.github.com/users/ing-mattioni/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/ing-mattioni/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/ing-mattioni/subscriptions",
+          "organizations_url": "https://api.github.com/users/ing-mattioni/orgs",
+          "repos_url": "https://api.github.com/users/ing-mattioni/repos",
+          "events_url": "https://api.github.com/users/ing-mattioni/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/ing-mattioni/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "repo": {
+          "id": 1301750257,
+          "node_id": "R_kgDOTZch8Q",
+          "name": "timescape-fsigma8",
+          "full_name": "ing-mattioni/timescape-fsigma8",
+          "private": true,
+          "owner": {
+            "login": "ing-mattioni",
+            "id": 181735481,
+            "node_id": "U_kgDOCtUQOQ",
+            "avatar_url": "https://avatars.githubusercontent.com/u/181735481?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/ing-mattioni",
+            "html_url": "https://github.com/ing-mattioni",
+            "followers_url": "https://api.github.com/users/ing-mattioni/followers",
+            "following_url": "https://api.github.com/users/ing-mattioni/following{/other_user}",
+            "gists_url": "https://api.github.com/users/ing-mattioni/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/ing-mattioni/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/ing-mattioni/subscriptions",
+            "organizations_url": "https://api.github.com/users/ing-mattioni/orgs",
+            "repos_url": "https://api.github.com/users/ing-mattioni/repos",
+            "events_url": "https://api.github.com/users/ing-mattioni/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/ing-mattioni/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "html_url": "https://github.com/ing-mattioni/timescape-fsigma8",
+          "description": null,
+          "fork": false,
+          "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8",
+          "forks_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/forks",
+          "keys_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/keys{/key_id}",
+          "collaborators_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/collaborators{/collaborator}",
+          "teams_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/teams",
+          "hooks_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/hooks",
+          "issue_events_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues/events{/number}",
+          "events_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/events",
+          "assignees_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/assignees{/user}",
+          "branches_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/branches{/branch}",
+          "tags_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/tags",
+          "blobs_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/blobs{/sha}",
+          "git_tags_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags{/sha}",
+          "git_refs_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs{/sha}",
+          "trees_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/trees{/sha}",
+          "statuses_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/statuses/{sha}",
+          "languages_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/languages",
+          "stargazers_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/stargazers",
+          "contributors_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/contributors",
+          "subscribers_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/subscribers",
+          "subscription_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/subscription",
+          "commits_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/commits{/sha}",
+          "git_commits_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits{/sha}",
+          "comments_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/comments{/number}",
+          "issue_comment_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues/comments{/number}",
+          "contents_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/contents/{+path}",
+          "compare_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/compare/{base}...{head}",
+          "merges_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/merges",
+          "archive_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/{archive_format}{/ref}",
+          "downloads_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/downloads",
+          "issues_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues{/number}",
+          "pulls_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls{/number}",
+          "milestones_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/milestones{/number}",
+          "notifications_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/notifications{?since,all,participating}",
+          "labels_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/labels{/name}",
+          "releases_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/releases{/id}",
+          "deployments_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/deployments",
+          "created_at": "2026-07-15T15:12:41Z",
+          "updated_at": "2026-10-06T13:12:11Z",
+          "pushed_at": "2026-10-09T09:47:19Z",
+          "git_url": "git://github.com/ing-mattioni/timescape-fsigma8.git",
+          "ssh_url": "git@github.com:ing-mattioni/timescape-fsigma8.git",
+          "clone_url": "https://github.com/ing-mattioni/timescape-fsigma8.git",
+          "svn_url": "https://github.com/ing-mattioni/timescape-fsigma8",
+          "homepage": null,
+          "size": 4817,
+          "stargazers_count": 0,
+          "watchers_count": 0,
+          "language": "Python",
+          "has_issues": true,
+          "has_projects": true,
+          "has_downloads": false,
+          "has_wiki": false,
+          "has_pages": false,
+          "has_discussions": false,
+          "forks_count": 0,
+          "mirror_url": null,
+          "archived": false,
+          "disabled": false,
+          "open_issues_count": 0,
+          "license": null,
+          "allow_forking": true,
+          "is_template": false,
+          "web_commit_signoff_required": false,
+          "has_pull_requests": true,
+          "pull_request_creation_policy": "all",
+          "topics": [],
+          "visibility": "private",
+          "forks": 0,
+          "open_issues": 0,
+          "watchers": 0,
+          "default_branch": "main"
+        }
+      },
+      "base": {
+        "label": "ing-mattioni:main",
+        "ref": "main",
+        "sha": "118b8f3af3c1360b0da74df8e9a9cb3ba1fed83a",
+        "user": {
+          "login": "ing-mattioni",
+          "id": 181735481,
+          "node_id": "U_kgDOCtUQOQ",
+          "avatar_url": "https://avatars.githubusercontent.com/u/181735481?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/ing-mattioni",
+          "html_url": "https://github.com/ing-mattioni",
+          "followers_url": "https://api.github.com/users/ing-mattioni/followers",
+          "following_url": "https://api.github.com/users/ing-mattioni/following{/other_user}",
+          "gists_url": "https://api.github.com/users/ing-mattioni/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/ing-mattioni/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/ing-mattioni/subscriptions",
+          "organizations_url": "https://api.github.com/users/ing-mattioni/orgs",
+          "repos_url": "https://api.github.com/users/ing-mattioni/repos",
+          "events_url": "https://api.github.com/users/ing-mattioni/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/ing-mattioni/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "repo": {
+          "id": 1301750257,
+          "node_id": "R_kgDOTZch8Q",
+          "name": "timescape-fsigma8",
+          "full_name": "ing-mattioni/timescape-fsigma8",
+          "private": true,
+          "owner": {
+            "login": "ing-mattioni",
+            "id": 181735481,
+            "node_id": "U_kgDOCtUQOQ",
+            "avatar_url": "https://avatars.githubusercontent.com/u/181735481?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/ing-mattioni",
+            "html_url": "https://github.com/ing-mattioni",
+            "followers_url": "https://api.github.com/users/ing-mattioni/followers",
+            "following_url": "https://api.github.com/users/ing-mattioni/following{/other_user}",
+            "gists_url": "https://api.github.com/users/ing-mattioni/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/ing-mattioni/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/ing-mattioni/subscriptions",
+            "organizations_url": "https://api.github.com/users/ing-mattioni/orgs",
+            "repos_url": "https://api.github.com/users/ing-mattioni/repos",
+            "events_url": "https://api.github.com/users/ing-mattioni/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/ing-mattioni/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          },
+          "html_url": "https://github.com/ing-mattioni/timescape-fsigma8",
+          "description": null,
+          "fork": false,
+          "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8",
+          "forks_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/forks",
+          "keys_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/keys{/key_id}",
+          "collaborators_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/collaborators{/collaborator}",
+          "teams_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/teams",
+          "hooks_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/hooks",
+          "issue_events_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues/events{/number}",
+          "events_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/events",
+          "assignees_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/assignees{/user}",
+          "branches_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/branches{/branch}",
+          "tags_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/tags",
+          "blobs_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/blobs{/sha}",
+          "git_tags_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/tags{/sha}",
+          "git_refs_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs{/sha}",
+          "trees_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/trees{/sha}",
+          "statuses_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/statuses/{sha}",
+          "languages_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/languages",
+          "stargazers_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/stargazers",
+          "contributors_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/contributors",
+          "subscribers_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/subscribers",
+          "subscription_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/subscription",
+          "commits_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/commits{/sha}",
+          "git_commits_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits{/sha}",
+          "comments_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/comments{/number}",
+          "issue_comment_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues/comments{/number}",
+          "contents_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/contents/{+path}",
+          "compare_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/compare/{base}...{head}",
+          "merges_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/merges",
+          "archive_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/{archive_format}{/ref}",
+          "downloads_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/downloads",
+          "issues_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues{/number}",
+          "pulls_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls{/number}",
+          "milestones_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/milestones{/number}",
+          "notifications_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/notifications{?since,all,participating}",
+          "labels_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/labels{/name}",
+          "releases_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/releases{/id}",
+          "deployments_url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/deployments",
+          "created_at": "2026-07-15T15:12:41Z",
+          "updated_at": "2026-10-06T13:12:11Z",
+          "pushed_at": "2026-10-09T09:47:19Z",
+          "git_url": "git://github.com/ing-mattioni/timescape-fsigma8.git",
+          "ssh_url": "git@github.com:ing-mattioni/timescape-fsigma8.git",
+          "clone_url": "https://github.com/ing-mattioni/timescape-fsigma8.git",
+          "svn_url": "https://github.com/ing-mattioni/timescape-fsigma8",
+          "homepage": null,
+          "size": 4817,
+          "stargazers_count": 0,
+          "watchers_count": 0,
+          "language": "Python",
+          "has_issues": true,
+          "has_projects": true,
+          "has_downloads": false,
+          "has_wiki": false,
+          "has_pages": false,
+          "has_discussions": false,
+          "forks_count": 0,
+          "mirror_url": null,
+          "archived": false,
+          "disabled": false,
+          "open_issues_count": 0,
+          "license": null,
+          "allow_forking": true,
+          "is_template": false,
+          "web_commit_signoff_required": false,
+          "has_pull_requests": true,
+          "pull_request_creation_policy": "all",
+          "topics": [],
+          "visibility": "private",
+          "forks": 0,
+          "open_issues": 0,
+          "watchers": 0,
+          "default_branch": "main"
+        }
+      },
+      "_links": {
+        "self": {
+          "href": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls/1"
+        },
+        "html": {
+          "href": "https://github.com/ing-mattioni/timescape-fsigma8/pull/1"
+        },
+        "issue": {
+          "href": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues/1"
+        },
+        "comments": {
+          "href": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/issues/1/comments"
+        },
+        "review_comments": {
+          "href": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls/1/comments"
+        },
+        "review_comment": {
+          "href": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls/comments{/number}"
+        },
+        "commits": {
+          "href": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/pulls/1/commits"
+        },
+        "statuses": {
+          "href": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/statuses/058fb860c53cb2812bbe6dedac24f9ba5cbd1b85"
+        }
+      },
+      "author_association": "OWNER",
+      "auto_merge": null,
+      "assignee": null,
+      "active_lock_reason": null
+    }
+  ],
+  "releases": []
+}

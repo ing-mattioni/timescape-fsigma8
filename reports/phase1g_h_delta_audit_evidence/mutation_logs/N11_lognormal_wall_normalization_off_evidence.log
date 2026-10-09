@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/031c29bb1e06/audit_work/implementation/mutations/N11_lognormal_wall_normalization_off/scripts/phase1g_h_global_variance_closure_numerics.py", line 1158, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/workspace/scratch/031c29bb1e06/audit_work/implementation/mutations/N11_lognormal_wall_normalization_off/scripts/phase1g_h_global_variance_closure_numerics.py", line 1012, in main
+    gtp = gt_pair(bg_in, growth, density, R_b, sp, anchor["factor"])
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/031c29bb1e06/audit_work/implementation/mutations/N11_lognormal_wall_normalization_off/scripts/phase1g_h_global_variance_closure_numerics.py", line 618, in gt_pair
+    lognormal = lognormal_pairs(f_v0, c, u, pair, k, lnk, d2, ell, xi_w, rho_g, laws)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/031c29bb1e06/audit_work/implementation/mutations/N11_lognormal_wall_normalization_off/scripts/phase1g_h_global_variance_closure_numerics.py", line 483, in lognormal_pairs
+    laws = _lognormal_laws(f_v0, c, u, pair, rho_g, math.sqrt(lam2), xi_s, cross0, cross)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/031c29bb1e06/audit_work/implementation/mutations/N11_lognormal_wall_normalization_off/scripts/phase1g_h_global_variance_closure_numerics.py", line 441, in _lognormal_laws
+    var = gv.two_phase_global_variance(void_volume_fraction=f_v0,
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/031c29bb1e06/audit_work/implementation/mutations/N11_lognormal_wall_normalization_off/src/timescape_fsigma8/global_variance.py", line 1560, in two_phase_global_variance
+    raise GlobalVarianceContractError(
+timescape_fsigma8.global_variance.GlobalVarianceContractError: moment matrix is not positive semidefinite (min eigenvalue -3.314e-02)

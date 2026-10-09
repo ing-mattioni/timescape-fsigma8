@@ -1,0 +1,5 @@
+{
+  "fresh_factory_accepts_33_17": false,
+  "exception": "GlobalVarianceNumericalError",
+  "message": "variance quadrature not converged at R = 10.1041 Mpc: relative change 9.387e-03 exceeds 1.000e-06"
+}

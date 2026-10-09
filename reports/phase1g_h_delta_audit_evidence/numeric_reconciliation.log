@@ -1,0 +1,210 @@
+{
+  "cross_interpreter": {
+    "common_numeric_count": 3099,
+    "max_absolute": 0.0,
+    "max_relative": 0.0,
+    "largest_relative": [
+      {
+        "path": "/cases/NW15_CMB_FIT/propagator_k_dependence/pbs_svdw04_seed_compressed/16",
+        "left": 3.089513393490977,
+        "right": 3.089513393490977,
+        "absolute": 0.0,
+        "relative": 0.0
+      },
+      {
+        "path": "/cases/NW15_CMB_FIT/seed_radii_Mpc/tracker_seed_W09_15/R_s_Mpc",
+        "left": 0.8097370448269178,
+        "right": 0.8097370448269178,
+        "absolute": 0.0,
+        "relative": 0.0
+      },
+      {
+        "path": "/cases/PAPER_REFERENCE/seed_radius_sensitivity/svdw04_factor_1.72/scale_dependence_rel",
+        "left": -0.22540129535911013,
+        "right": -0.22540129535911013,
+        "absolute": 0.0,
+        "relative": 0.0
+      },
+      {
+        "path": "/two_phase_covariance/NW15_CMB_FIT/finite_density_weights_x_shell/partition_weight",
+        "left": 1.586237898823874,
+        "right": 1.586237898823874,
+        "absolute": 0.0,
+        "relative": 0.0
+      },
+      {
+        "path": "/cases/PAPER_REFERENCE/propagator_k_dependence/pbs_tracker_seed_compressed/77",
+        "left": 0.9942272498370428,
+        "right": 0.9942272498370428,
+        "absolute": 0.0,
+        "relative": 0.0
+      },
+      {
+        "path": "/cases/NW15_CMB_FIT/propagator_k_dependence/k_per_Mpc/96",
+        "left": 1.0,
+        "right": 1.0,
+        "absolute": 0.0,
+        "relative": 0.0
+      },
+      {
+        "path": "/cases/PAPER_REFERENCE/conventions/b_dressed_wall_comoving/radius_scan/1/length_h_inverse_Mpc",
+        "left": 7.0,
+        "right": 7.0,
+        "absolute": 0.0,
+        "relative": 0.0
+      },
+      {
+        "path": "/cases/NW15_CMB_FIT/propagator_k_dependence/k_per_Mpc/75",
+        "left": 0.1333521432163324,
+        "right": 0.1333521432163324,
+        "absolute": 0.0,
+        "relative": 0.0
+      },
+      {
+        "path": "/cases/PAPER_REFERENCE/conventions/a_equal_mass/closures/pbs_tracker_seed_threshold_only_1G_D/share_terms_coherence",
+        "left": 0.9999928741732302,
+        "right": 0.9999928741732302,
+        "absolute": 0.0,
+        "relative": 0.0
+      },
+      {
+        "path": "/cases/NW15_CMB_FIT/conventions/c_bare_volume_average/intervals/W09_10pct_at_100/propagator_upper",
+        "left": 1.1126109404218285,
+        "right": 1.1126109404218285,
+        "absolute": 0.0,
+        "relative": 0.0
+      },
+      {
+        "path": "/cases/NW15_CMB_FIT/m3_two_barrier_alternative/compressed_with_long_mode/linear_sigma_direct_A_s",
+        "left": 1.3373848858296222,
+        "right": 1.3373848858296222,
+        "absolute": 0.0,
+        "relative": 0.0
+      },
+      {
+        "path": "/cases/PAPER_REFERENCE/conventions/a_equal_mass/closures/strict_flat_walls_p1/void_share_rms",
+        "left": 6.989454191183194,
+        "right": 6.989454191183194,
+        "absolute": 0.0,
+        "relative": 0.0
+      }
+    ],
+    "added": [],
+    "removed": []
+  },
+  "same_interpreter_delta": {
+    "common_numeric_count": 2729,
+    "max_absolute": 6.483702463810914e-13,
+    "max_relative": 1.0,
+    "largest_relative": [
+      {
+        "path": "/two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/laws/I_independent/cross_term",
+        "left": 1.1102230246251565e-16,
+        "right": 0.0,
+        "absolute": 1.1102230246251565e-16,
+        "relative": 1.0
+      },
+      {
+        "path": "/two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/laws/II_same_field/sigma_wall_field",
+        "left": 0.10629573337772688,
+        "right": 0.10629573337778782,
+        "absolute": 6.093736626411328e-14,
+        "relative": 5.73281394536642e-13
+      },
+      {
+        "path": "/two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/partition_smoothing_ell_Mpc",
+        "left": 0.29172179150286703,
+        "right": 0.2917217915027375,
+        "absolute": 1.295075158225245e-13,
+        "relative": 4.4394186377143415e-13
+      },
+      {
+        "path": "/two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/partition_smoothing_ell_Mpc",
+        "left": 0.5987332406330573,
+        "right": 0.598733240632837,
+        "absolute": 2.2037927038809357e-13,
+        "relative": 3.6807588994905383e-13
+      },
+      {
+        "path": "/two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/laws/II_same_field/cauchy_schwarz/lower",
+        "left": 0.2201042666222778,
+        "right": 0.22010426662221677,
+        "absolute": 6.103451077876798e-14,
+        "relative": 2.772981719773277e-13
+      },
+      {
+        "path": "/two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/laws/II_same_field/cauchy_schwarz/lower",
+        "left": 0.1438445450761056,
+        "right": 0.14384454507607902,
+        "absolute": 2.65898414397725e-14,
+        "relative": 1.8485123245865377e-13
+      },
+      {
+        "path": "/two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/laws/II_same_field/sigma_wall_field",
+        "left": 0.1597554549239269,
+        "right": 0.1597554549239535,
+        "absolute": 2.65898414397725e-14,
+        "relative": 1.6644089838703629e-13
+      },
+      {
+        "path": "/two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/laws/II_same_field/cauchy_schwarz/upper",
+        "left": 0.4326957333777316,
+        "right": 0.4326957333777924,
+        "absolute": 6.078471059822732e-14,
+        "relative": 1.4047910785650245e-13
+      },
+      {
+        "path": "/two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/laws/II_same_field/cross_term",
+        "left": 0.036477424242976036,
+        "right": 0.036477424242981116,
+        "absolute": 5.079270337660091e-15,
+        "relative": 1.3924421592452297e-13
+      },
+      {
+        "path": "/two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/conditional_wall_mean_mu_law_II",
+        "left": 5.004602794959214,
+        "right": 5.004602794959863,
+        "absolute": 6.483702463810914e-13,
+        "relative": 1.2955478645259626e-13
+      },
+      {
+        "path": "/two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/conditional_wall_mean_mu_law_II",
+        "left": 3.7888337759103288,
+        "right": 3.7888337759107955,
+        "absolute": 4.667377595524158e-13,
+        "relative": 1.231877108254022e-13
+      },
+      {
+        "path": "/two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/sigma_ratio_II_over_I",
+        "left": 0.404528795677408,
+        "right": 0.40452879567743505,
+        "absolute": 2.7033930649622562e-14,
+        "relative": 6.682819848300489e-14
+      }
+    ],
+    "added": [
+      "/cases/NW15_CMB_FIT/conventions/a_equal_mass/pbs_reclosure_under_spectrum_rescaling/A_s_factor",
+      "/cases/NW15_CMB_FIT/conventions/a_equal_mass/pbs_reclosure_under_spectrum_rescaling/interval_W09_10pct_at_100_reclosure/lower",
+      "/cases/NW15_CMB_FIT/conventions/a_equal_mass/pbs_reclosure_under_spectrum_rescaling/interval_W09_10pct_at_100_reclosure/share_upper",
+      "/cases/NW15_CMB_FIT/conventions/a_equal_mass/pbs_reclosure_under_spectrum_rescaling/interval_W09_10pct_at_100_reclosure/upper",
+      "/cases/NW15_CMB_FIT/conventions/a_equal_mass/pbs_reclosure_under_spectrum_rescaling/monotone_lower_p_fvLS/direct",
+      "/cases/NW15_CMB_FIT/conventions/a_equal_mass/pbs_reclosure_under_spectrum_rescaling/monotone_lower_p_fvLS/post_hoc_fixed_closure",
+      "/cases/NW15_CMB_FIT/conventions/a_equal_mass/pbs_reclosure_under_spectrum_rescaling/monotone_lower_p_fvLS/reclosure",
+      "/cases/NW15_CMB_FIT/conventions/a_equal_mass/pbs_reclosure_under_spectrum_rescaling/monotone_lower_p_fvLS/reclosure_over_post_hoc",
+      "/cases/NW15_CMB_FIT/conventions/a_equal_mass/pbs_reclosure_under_spectrum_rescaling/monotone_lower_p_fvLS/share_k0_direct",
+      "/cases/NW15_CMB_FIT/conventions/a_equal_mass/pbs_reclosure_under_spectrum_rescaling/monotone_lower_p_fvLS/share_k0_reclosure",
+      "/cases/NW15_CMB_FIT/conventions/a_equal_mass/pbs_reclosure_under_spectrum_rescaling/pbs_tracker_seed_F_median_compressed/direct",
+      "/cases/NW15_CMB_FIT/conventions/a_equal_mass/pbs_reclosure_under_spectrum_rescaling/pbs_tracker_seed_F_median_compressed/post_hoc_fixed_closure",
+      "/cases/NW15_CMB_FIT/conventions/a_equal_mass/pbs_reclosure_under_spectrum_rescaling/pbs_tracker_seed_F_median_compressed/reclosure",
+      "/cases/NW15_CMB_FIT/conventions/a_equal_mass/pbs_reclosure_under_spectrum_rescaling/pbs_tracker_seed_F_median_compressed/reclosure_over_post_hoc",
+      "/cases/NW15_CMB_FIT/conventions/a_equal_mass/pbs_reclosure_under_spectrum_rescaling/pbs_tracker_seed_F_median_compressed/share_k0_direct",
+      "/cases/NW15_CMB_FIT/conventions/a_equal_mass/pbs_reclosure_under_spectrum_rescaling/pbs_tracker_seed_F_median_compressed/share_k0_reclosure",
+      "/cases/NW15_CMB_FIT/conventions/a_equal_mass/pbs_reclosure_under_spectrum_rescaling/pbs_tracker_seed_compressed/direct",
+      "/cases/NW15_CMB_FIT/conventions/a_equal_mass/pbs_reclosure_under_spectrum_rescaling/pbs_tracker_seed_compressed/post_hoc_fixed_closure",
+      "/cases/NW15_CMB_FIT/conventions/a_equal_mass/pbs_reclosure_under_spectrum_rescaling/pbs_tracker_seed_compressed/reclosure",
+      "/cases/NW15_CMB_FIT/conventions/a_equal_mass/pbs_reclosure_under_spectrum_rescaling/pbs_tracker_seed_compressed/reclosure_over_post_hoc",
+      "/cases/NW15_CMB_FIT/conventions/a_equal_mass/pbs_reclosure_under_spectrum_rescaling/pbs_tracker_seed_compressed/share_k0_direct",
+      "/cases/NW15_CMB_FIT/conventions/a_equal_mass/pbs_reclosure_under_spectrum_rescaling/pbs_tracker_seed_compressed/share_k0_reclosure",
+      "/cases/NW15_CMB_FIT/conventions/c_bare_volume_average/pbs_reclosure_under_spectrum_rescaling/A_s_factor",
+      "/cases/NW15_CMB_FIT/conventions/c_bare_volume_average/pbs_reclosure_under_spectrum_rescaling/interval_W09_10pct_at_100_reclosure/lower",
+      "/cases/NW15_CMB_FIT/conventions/c_bare_volume_average/pbs_reclosure_under_spectrum_rescaling/interva

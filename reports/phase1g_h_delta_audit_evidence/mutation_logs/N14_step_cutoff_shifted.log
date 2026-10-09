@@ -1,0 +1,9 @@
+..............................F....                                      [100%]
+=================================== FAILURES ===================================
+_____ test_gh_f4_scale_dependent_share_escapes_the_constant_share_interval _____
+tests/test_phase1g_h_global_variance.py:774: in test_gh_f4_scale_dependent_share_escapes_the_constant_share_interval
+    assert out["premise_rms"] <= 0.1
+E   assert 0.10199152930846266 <= 0.1
+=========================== short test summary info ============================
+FAILED tests/test_phase1g_h_global_variance.py::test_gh_f4_scale_dependent_share_escapes_the_constant_share_interval
+1 failed, 34 passed in 17.88s

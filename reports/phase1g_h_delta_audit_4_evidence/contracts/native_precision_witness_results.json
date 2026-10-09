@@ -1,0 +1,17 @@
+[
+ {
+  "variant": "baseline",
+  "accepted": false,
+  "exception": "LagrangianSigmaContractError",
+  "message": "growth_ratio, early_spectrum_factor, sigma_ratio and the anchor offset must be the ratios of the stored timescape and reference records"
+ },
+ {
+  "variant": "X11_growth_ratio_approximate_1e12",
+  "exact_native_equality": false,
+  "original": 1.1129452345080468,
+  "one_ulp_change": 1.112945234508047,
+  "accepted": true,
+  "stored_type": "float",
+  "strict_json": true
+ }
+]

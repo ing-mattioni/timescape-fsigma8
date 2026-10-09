@@ -1,0 +1,102 @@
+[
+ {
+  "file": "contracts_summary.md",
+  "sha256": "22d37213c64827a2a5367f95b9f372126dbc46a11623fac904b11113ab36540d",
+  "bytes": 11239
+ },
+ {
+  "file": "r4_results.json",
+  "sha256": "340cfce3963537561631720441a182fb41580e1221054d781bce14ea65e38152",
+  "bytes": 15642
+ },
+ {
+  "file": "r4_kills_beyond_baseline.json",
+  "sha256": "0064ff539bcfa176a74a331cf32a65a58727c1abe1db54fd26ccbd757f641c6d",
+  "bytes": 7673
+ },
+ {
+  "file": "generated_campaign.py",
+  "sha256": "edabc3cebba2c1732d20d44ce4b644af40e76be0de59eb70081f537d4d538049",
+  "bytes": 11200
+ },
+ {
+  "file": "scalar_comparison.json",
+  "sha256": "2bdad706cda5b9aaea087dcb495d3e4c5f451172c7d6e509fb513b98c12589f6",
+  "bytes": 12251
+ },
+ {
+  "file": "own_definitions.json",
+  "sha256": "eedf38b9a83c0077c206135b218c3901565465ac17b6ad228476ec7761729424",
+  "bytes": 14731
+ },
+ {
+  "file": "own_results.json",
+  "sha256": "d38b4d8de5dbce505d2a8429de2631dd009442269d00bdb49276e419445250a4",
+  "bytes": 24455
+ },
+ {
+  "file": "own_independent_results.json",
+  "sha256": "e5e03026423b9bf97de6bd82d5904142ebcfc5427277bf4e34b179cdb3120816",
+  "bytes": 10593
+ },
+ {
+  "file": "own_lcdm_gate_results.json",
+  "sha256": "5e469f087e630f2aa97ad90ec30cc253010feb314b33359de71975ef7fa66b28",
+  "bytes": 1577
+ },
+ {
+  "file": "precision_json_results.json",
+  "sha256": "75fb18b2f7d909d9e03920110470885e70c6008e1bdace95179ce3e03a22d842",
+  "bytes": 4252
+ },
+ {
+  "file": "precision_json_results_py311.json",
+  "sha256": "e88ecb00bace60bae4d7e30b2ee1ffee2739ba897339218f25ed950cfa367620",
+  "bytes": 4252
+ },
+ {
+  "file": "json_seed_witness_results.json",
+  "sha256": "0120a7835857a16a3b9a93826cc59ad3ad71fd753c3dcaee7d334f21b5eeec7f",
+  "bytes": 473
+ },
+ {
+  "file": "json_interval_witness_results.json",
+  "sha256": "276574188444c0ce6b0ba535bb6c88ea10c49acf7fc7bc501023a2556881e421",
+  "bytes": 476
+ },
+ {
+  "file": "native_precision_witness_results.json",
+  "sha256": "418043bb1a2c9d027bf21afc16122c495bcc8a5e308942ebe12f78552eba3064",
+  "bytes": 486
+ },
+ {
+  "file": "current_monte_carlo_budget_results.json",
+  "sha256": "9d81079bda704fd61f73caeba5d443ab5130b703a67a856ebcd4de1c3ed6d9c8",
+  "bytes": 1470
+ },
+ {
+  "file": "strict_json_cost_results.json",
+  "sha256": "d4033eb25102ba39547f809adf088c0510c34dcf0c897ac3902266cca8795b17",
+  "bytes": 206
+ },
+ {
+  "file": "proposed_findings.json",
+  "sha256": "ea680bff54decbc06e6728226aa67cc16bd0e061a8bbb00a91ee1672cd70d995",
+  "bytes": 1976
+ },
+ {
+  "file": "contracts_summary.json",
+  "sha256": "0f55d4f83fd165f72f9851e082821b5274fd60ced07628643a720030cc7f40b0",
+  "bytes": 14190
+ },
+ {
+  "file": "campaign_results.json",
+  "sha256": "7b38ff7ac9c2406e068d7512d0415e7809652372a638cc7b0965e4c453ada0f3",
+  "bytes": 50312
+ },
+ {
+  "file": "campaign_comparison.json",
+  "sha256": "7e085e8861aaf2d49b4556ab1d7e0dc9df68bdac9df211a56730e1fe974f3bf9",
+  "bytes": 642
+ }
+]

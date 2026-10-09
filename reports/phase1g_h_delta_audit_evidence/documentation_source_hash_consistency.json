@@ -1,0 +1,65 @@
+[
+  {
+    "source": "EH98",
+    "inventory_hash": "5f2ac6b413df8b738c95f6650152b7e82d7c36f6d9b3a618da540e9739dce17f",
+    "first_audit_verified_hash": "5f2ac6b413df8b738c95f6650152b7e82d7c36f6d9b3a618da540e9739dce17f",
+    "matches_first_audit": true,
+    "full_hash_present_in_current_report": true,
+    "fresh_source_download_hash_repeated": false,
+    "scope": "Comparison against preserved source-hash evidence; primary archives were not present in this restored scratch workspace."
+  },
+  {
+    "source": "GM",
+    "inventory_hash": "f9cadfa03ecc9a74b0a8f432ae4b13422daeb219f253756bcd877b4b75077c59",
+    "first_audit_verified_hash": "f9cadfa03ecc9a74b0a8f432ae4b13422daeb219f253756bcd877b4b75077c59",
+    "matches_first_audit": true,
+    "full_hash_present_in_current_report": true,
+    "fresh_source_download_hash_repeated": false,
+    "scope": "Comparison against preserved source-hash evidence; primary archives were not present in this restored scratch workspace."
+  },
+  {
+    "source": "JLH13",
+    "inventory_hash": "cf6fc77a31b395138ac3a027d008698556534e81cfb27c39853d3a99c7b07c4e",
+    "first_audit_verified_hash": "cf6fc77a31b395138ac3a027d008698556534e81cfb27c39853d3a99c7b07c4e",
+    "matches_first_audit": true,
+    "full_hash_present_in_current_report": true,
+    "fresh_source_download_hash_repeated": false,
+    "scope": "Comparison against preserved source-hash evidence; primary archives were not present in this restored scratch workspace."
+  },
+  {
+    "source": "NW15",
+    "inventory_hash": "5688c9ac7123a5c2ef3508e39cb3134c2fe9e3d5e56996a4d4a4d101d7b74673",
+    "first_audit_verified_hash": "5688c9ac7123a5c2ef3508e39cb3134c2fe9e3d5e56996a4d4a4d101d7b74673",
+    "matches_first_audit": true,
+    "full_hash_present_in_current_report": true,
+    "fresh_source_download_hash_repeated": false,
+    "scope": "Comparison against preserved source-hash evidence; primary archives were not present in this restored scratch workspace."
+  },
+  {
+    "source": "SvdW04",
+    "inventory_hash": "4b7ad599f54b3199e0448df1c2eecf4e724401e9ffda7b0f50a3efe7fecdb79b",
+    "first_audit_verified_hash": "4b7ad599f54b3199e0448df1c2eecf4e724401e9ffda7b0f50a3efe7fecdb79b",
+    "matches_first_audit": true,
+    "full_hash_present_in_current_report": true,
+    "fresh_source_download_hash_repeated": false,
+    "scope": "Comparison against preserved source-hash evidence; primary archives were not present in this restored scratch workspace."
+  },
+  {
+    "source": "W07",
+    "inventory_hash": "221662c987e454729ef8202c87fa697c5882b5b7daaecdedb50a7cba8ffe6cd8",
+    "first_audit_verified_hash": "221662c987e454729ef8202c87fa697c5882b5b7daaecdedb50a7cba8ffe6cd8",
+    "matches_first_audit": true,
+    "full_hash_present_in_current_report": true,
+    "fresh_source_download_hash_repeated": false,
+    "scope": "Comparison against preserved source-hash evidence; primary archives were not present in this restored scratch workspace."
+  },
+  {
+    "source": "W09",
+    "inventory_hash": "2b0324d127440e9a053a7cb37102d7655cca228a63cd2222843e879989b4b531",
+    "first_audit_verified_hash": "2b0324d127440e9a053a7cb37102d7655cca228a63cd2222843e879989b4b531",
+    "matches_first_audit": true,
+    "full_hash_present_in_current_report": true,
+    "fresh_source_download_hash_repeated": false,
+    "scope": "Comparison against preserved source-hash evidence; primary archives were not present in this restored scratch workspace."
+  }
+]

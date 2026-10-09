@@ -1,0 +1,130 @@
+GM R_Mpc                           author 10.9544023004  mine 10.9544023004  rel 1.11e-16
+GM ell                             author 0.291721007898  mine 0.291721007937  rel 1.31e-10
+GM mu_II                           author 5.00460672771  mine 5.00460672758  rel 2.51e-11
+GM pair_norm                       author 1  mine 1  rel 9.30e-13
+GM signed I sigma_part             author 0.3264  mine 0.3264  rel 2.00e-15
+GM signed I sigma_wall             author 0.914584073111  mine 0.914584072773  rel 3.69e-10
+GM signed I cross                  author 1  mine 1  rel 0.00e+00
+GM signed I total                  author 0.971082378991  mine 0.971082378673  rel 3.27e-10
+GM signed I <C_W-1>                author 0.755929586651  mine 0.755929586093  rel 7.37e-10
+GM signed I wall_moment            author 0.0578573802689  mine 0.0578573802261  rel 7.38e-10
+GM signed II sigma_part            author 0.3264  mine 0.3264  rel 2.00e-15
+GM signed II sigma_wall            author 0.106363543533  mine 0.106363540959  rel 2.42e-08
+GM signed II cross                 author 0.0364774727626  mine 0.036477472805  rel 1.16e-09
+GM signed II total                 author 0.392845562728  mine 0.392845562086  rel 1.64e-09
+GM signed II <C_W-1>               author 0.0431894079303  mine 0.0431894074738  rel 1.06e-08
+GM signed II wall_moment           author 0.00078252296548  mine 0.000782522927606  rel 4.84e-08
+GM rs1 lambda                      author 0.813736670989  mine 0.813736670975  rel 1.80e-11
+GM rs1 latent var                  author 2.68369906988  mine 2.68369906985  rel 9.50e-12
+GM rs1 density var                 author 13.6391444831  mine 13.6391444827  rel 2.74e-11
+GM rs1 m_II                        author 2.86941347484  mine 2.86941347489  rel 1.71e-11
+GM rs1 1/m_II^2                    author 0.121454534311  mine 0.121454534307  rel 3.41e-11
+GM rs1 unmasked II ball var        author 0.0851453203593  mine 0.0851453203547  rel 5.42e-11
+GM rs1 II/I                        author 1.02834214402  mine 1.02834214408  rel 5.29e-11
+GM rs1 I sigma_wall                author 0.933143225409  mine 0.933143225338  rel 7.61e-11
+GM rs1 I total                     author 0.988581427666  mine 0.988581427599  rel 6.78e-11
+GM rs1 I <C_W-1>                   author 0.786920193905  mine 0.786920193786  rel 1.51e-10
+GM rs1 I m                         author 1  mine 1  rel 0.00e+00
+GM rs1 II sigma_wall               author 0.772699531807  mine 0.772699531777  rel 3.84e-11
+GM rs1 II cross                    author 0.329873921451  mine 0.329873921466  rel 4.53e-11
+GM rs1 II total                    author 1.01659994487  mine 1.01659994485  rel 1.49e-11
+GM rs1 II <C_W-1>                  author 0.837693200871  mine 0.837693200844  rel 3.25e-11
+GM rs1 II m                        author 2.86941347484  mine 2.86941347489  rel 1.71e-11
+GM rs2 lambda                      author 0.869535108753  mine 0.869535108736  rel 1.98e-11
+GM rs2 latent var                  author 1.59497218227  mine 1.59497218225  rel 1.31e-11
+GM rs2 density var                 author 3.92819197909  mine 3.92819197899  rel 2.61e-11
+GM rs2 m_II                        author 2.13980856119  mine 2.13980856123  rel 1.94e-11
+GM rs2 1/m_II^2                    author 0.218398755086  mine 0.218398755077  rel 3.87e-11
+GM rs2 unmasked II ball var        author 0.153107762286  mine 0.153107762277  rel 5.88e-11
+GM rs2 II/I                        author 1.18654001436  mine 1.18654001438  rel 1.30e-11
+GM rs2 I sigma_wall                author 0.911895007829  mine 0.911895007805  rel 2.56e-11
+GM rs2 I total                     author 0.968550187292  mine 0.96855018727  rel 2.27e-11
+GM rs2 I <C_W-1>                   author 0.751490944597  mine 0.751490944559  rel 5.04e-11
+GM rs2 I m                         author 1  mine 1  rel 0.00e+00
+GM rs2 II sigma_wall               author 0.902812805224  mine 0.902812805201  rel 2.57e-11
+GM rs2 II cross                    author 0.399106853815  mine 0.399106853831  rel 4.04e-11
+GM rs2 II total                    author 1.14922355314  mine 1.14922355313  rel 9.76e-12
+GM rs2 II <C_W-1>                  author 1.09727723427  mine 1.09727723425  rel 2.04e-11
+GM rs2 II m                        author 2.13980856119  mine 2.13980856123  rel 1.94e-11
+GM rs4 lambda                      author 0.998433753839  mine 0.998433753818  rel 2.05e-11
+GM rs4 latent var                  author 0.966604356653  mine 0.966604356639  rel 1.46e-11
+GM rs4 density var                 author 1.62900213187  mine 1.62900213183  rel 2.27e-11
+GM rs4 m_II                        author 1.62335065177  mine 1.62335065179  rel 1.49e-11
+GM rs4 1/m_II^2                    author 0.379468141754  mine 0.379468141743  rel 2.97e-11
+GM rs4 unmasked II ball var        author 0.266024950646  mine 0.266024950633  rel 4.98e-11
+GM rs4 II/I                        author 1.29315799749  mine 1.2931579975  rel 9.04e-12
+GM rs4 I sigma_wall                author 0.895870361189  mine 0.895870361177  rel 1.41e-11
+GM rs4 I total                     author 0.953478192754  mine 0.953478192742  rel 1.24e-11
+GM rs4 I <C_W-1>                   author 0.72531124858  mine 0.72531124856  rel 2.73e-11
+GM rs4 I m                         author 1  mine 1  rel 0.00e+00
+GM rs4 II sigma_wall               author 0.983783070478  mine 0.983783070464  rel 1.46e-11
+GM rs4 II cross                    author 0.445917855913  mine 0.445917855931  rel 4.01e-11
+GM rs4 II total                    author 1.23299795039  mine 1.23299795039  rel 3.40e-12
+GM rs4 II <C_W-1>                  author 1.27763196059  mine 1.27763196058  rel 6.46e-12
+GM rs4 II m                        author 1.62335065177  mine 1.62335065179  rel 1.49e-11
+NW15 R_Mpc                         author 13.1147540984  mine 13.1147540984  rel 0.00e+00
+NW15 ell                           author 0.59873224844  mine 0.598732248471  rel 5.05e-11
+NW15 mu_II                         author 3.7888358781  mine 3.78883587808  rel 3.69e-12
+NW15 pair_norm                     author 1  mine 1  rel 9.30e-13
+NW15 signed I sigma_part           author 0.3036  mine 0.3036  rel 1.07e-13
+NW15 signed I sigma_wall           author 0.929622131396  mine 0.929622131204  rel 2.06e-10
+NW15 signed I cross                author 1  mine 1  rel 0.00e+00
+NW15 signed I total                author 0.977941852658  mine 0.977941852476  rel 1.86e-10
+NW15 signed I <C_W-1>              author 0.791264148473  mine 0.791264148147  rel 4.11e-10
+NW15 signed I wall_moment          author 0.120234907151  mine 0.120234907101  rel 4.12e-10
+NW15 signed II sigma_part          author 0.3036  mine 0.3036  rel 1.07e-13
+NW15 signed II sigma_wall          author 0.15980850528  mine 0.159808504177  rel 6.90e-09
+NW15 signed II cross               author 0.049911949895  mine 0.0499119499118  rel 3.37e-10
+NW15 signed II total               author 0.409418695536  mine 0.409418695127  rel 1.00e-09
+NW15 signed II <C_W-1>             author 0.0690831132229  mine 0.0690831129157  rel 4.45e-09
+NW15 signed II wall_moment         author 0.00355318191183  mine 0.0035531818628  rel 1.38e-08
+NW15 rs1 lambda                    author 0.785149918582  mine 0.785149918565  rel 2.11e-11
+NW15 rs1 latent var                author 3.3531090824  mine 3.35310908234  rel 1.58e-11
+NW15 rs1 density var               author 27.5914888934  mine 27.5914888919  rel 5.48e-11
+NW15 rs1 m_II                      author 2.47411348793  mine 2.47411348793  rel 1.76e-13
+NW15 rs1 1/m_II^2                  author 0.163365657948  mine 0.163365657948  rel 3.53e-13
+NW15 rs1 unmasked II ball var      author 0.119990536585  mine 0.11999053658  rel 3.73e-11
+NW15 rs1 II/I                      author 0.919394747017  mine 0.919394747059  rel 4.56e-11
+NW15 rs1 I sigma_wall              author 0.958275986869  mine 0.958275986802  rel 6.95e-11
+NW15 rs1 I total                   author 1.00521929299  mine 1.00521929293  rel 6.32e-11
+NW15 rs1 I <C_W-1>                 author 0.840794361919  mine 0.840794361803  rel 1.38e-10
+NW15 rs1 I m                       author 1  mine 1  rel 0.00e+00
+NW15 rs1 II sigma_wall             author 0.711840782289  mine 0.711840782265  rel 3.34e-11
+NW15 rs1 II cross                  author 0.255243065897  mine 0.255243065901  rel 1.53e-11
+NW15 rs1 II total                  author 0.92419333758  mine 0.924193337563  rel 1.76e-11
+NW15 rs1 II <C_W-1>                author 0.697655401784  mine 0.697655401757  rel 3.85e-11
+NW15 rs1 II m                      author 2.47411348793  mine 2.47411348793  rel 1.76e-13
+NW15 rs2 lambda                    author 0.839193025724  mine 0.839193025704  rel 2.48e-11
+NW15 rs2 latent var                author 1.99253411786  mine 1.99253411781  rel 2.31e-11
+NW15 rs2 density var               author 6.33409569618  mine 6.33409569584  rel 5.33e-11
+NW15 rs2 m_II                      author 2.10432510848  mine 2.10432510849  rel 1.71e-12
+NW15 rs2 1/m_II^2                  author 0.225826199492  mine 0.225826199491  rel 3.42e-12
+NW15 rs2 unmasked II ball var      author 0.165867215865  mine 0.165867215859  rel 4.03e-11
+NW15 rs2 II/I                      author 1.04950468408  mine 1.04950468409  rel 9.36e-12
+NW15 rs2 I sigma_wall              author 0.933293193452  mine 0.933293193425  rel 2.90e-11
+NW15 rs2 I total                   author 0.981432190701  mine 0.981432190675  rel 2.62e-11
+NW15 rs2 I <C_W-1>                 author 0.797525865265  mine 0.79752586522  rel 5.71e-11
+NW15 rs2 I m                       author 1  mine 1  rel 0.00e+00
+NW15 rs2 II sigma_wall             author 0.808987681809  mine 0.808987681786  rel 2.92e-11
+NW15 rs2 II cross                  author 0.314302394371  mine 0.314302394373  rel 7.87e-12
+NW15 rs2 II total                  author 1.03001768125  mine 1.03001768123  rel 1.69e-11
+NW15 rs2 II <C_W-1>                author 0.88700553774  mine 0.887005537708  rel 3.61e-11
+NW15 rs2 II m                      author 2.10432510848  mine 2.10432510849  rel 1.71e-12
+NW15 rs4 lambda                    author 0.949341994343  mine 0.949341994318  rel 2.63e-11
+NW15 rs4 latent var                author 1.17099657397  mine 1.17099657393  rel 2.62e-11
+NW15 rs4 density var               author 2.22520519302  mine 2.22520519292  rel 4.45e-11
+NW15 rs4 m_II                      author 1.66857879122  mine 1.66857879122  rel 2.05e-12
+NW15 rs4 1/m_II^2                  author 0.359175381561  mine 0.35917538156  rel 4.09e-12
+NW15 rs4 unmasked II ball var      author 0.263810933723  mine 0.263810933712  rel 4.10e-11
+NW15 rs4 II/I                      author 1.18790489714  mine 1.18790489714  rel 4.14e-12
+NW15 rs4 I sigma_wall              author 0.914755533759  mine 0.91475553374  rel 2.10e-11
+NW15 rs4 I total                   author 0.963820858118  mine 0.9638208581  rel 1.90e-11
+NW15 rs4 I <C_W-1>                 author 0.766158582193  mine 0.766158582161  rel 4.12e-11
+NW15 rs4 I m                       author 1  mine 1  rel 0.00e+00
+NW15 rs4 II sigma_wall             author 0.919143473136  mine 0.919143473114  rel 2.43e-11
+NW15 rs4 II cross                  author 0.373861335708  mine 0.37386133571  rel 5.95e-12
+NW15 rs4 II total                  author 1.14492751732  mine 1.1449275173  rel 1.48e-11
+NW15 rs4 II <C_W-1>                author 1.11583614002  mine 1.11583613998  rel 3.10e-11
+NW15 rs4 II m                      author 1.66857879122  mine 1.66857879122  rel 2.05e-12
+MAX REL 4.8400838892348474e-08 ['GM signed II wall_moment']
+n compared 128

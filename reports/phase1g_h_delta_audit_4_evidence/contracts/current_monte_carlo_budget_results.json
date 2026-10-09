@@ -1,0 +1,37 @@
+{
+ "scope": "revised one-point-normalizer test error budgets; empirical fixed seed; not an assurance of arbitrary statistical tails",
+ "results": [
+  {
+   "law": "I_independent",
+   "sample_normalizer": 1.0005458751405847,
+   "analytic_normalizer": 1.0,
+   "one_point_normalizer_se": 0.0013071555133064982,
+   "draw_influence_normalizer_se": 0.001307155513306498,
+   "pair_over_one_point_normalizer_se": 0.9999999999999999,
+   "normalizer_error_in_pair_se": 0.4176053537837076,
+   "sample_cw": 1.3385363406287294,
+   "analytic_cw": 1.3337573041233846,
+   "test_cw_error_budget": 0.009398880979162583,
+   "pair_aware_cw_se": 0.005073176635254587,
+   "test_budget_over_pair_se": 1.852661883256292,
+   "cw_error_in_pair_se": 0.9420205226315779,
+   "test_cw_relative_5budget": 0.035234599841010884
+  },
+  {
+   "law": "II_same_field",
+   "sample_normalizer": 1.5520688821568414,
+   "analytic_normalizer": 1.5492183116759652,
+   "one_point_normalizer_se": 0.001798527248574784,
+   "draw_influence_normalizer_se": 0.0017985272485747843,
+   "pair_over_one_point_normalizer_se": 1.0000000000000002,
+   "normalizer_error_in_pair_se": 1.5849470632902587,
+   "sample_cw": 1.3727217727623713,
+   "analytic_cw": 1.3674485780096952,
+   "test_cw_error_budget": 0.008000520201382729,
+   "pair_aware_cw_se": 0.003999008526013024,
+   "test_budget_over_pair_se": 2.0006259424905943,
+   "cw_error_in_pair_se": 1.3186255338978727,
+   "test_cw_relative_5budget": 0.029253459069837156
+  }
+ ]
+}

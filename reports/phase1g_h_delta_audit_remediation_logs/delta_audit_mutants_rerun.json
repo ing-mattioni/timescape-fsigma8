@@ -1,0 +1,269 @@
+[
+  {
+    "id": "M1_wall_exponent",
+    "replacements": 1,
+    "outcome": "KILLED",
+    "summary": "13 failed, 20 passed, 9 errors in 9.45s",
+    "failed_tests": [
+      "tests/test_phase1g_h_global_variance.py::test_growth_factors_against_an_independent_tracker[GM]",
+      "tests/test_phase1g_h_global_variance.py::test_growth_factors_against_an_independent_tracker[NW15]",
+      "tests/test_phase1g_h_global_variance.py::test_small_void_fraction_limit_is_einstein_de_sitter",
+      "tests/test_phase1g_h_global_variance.py::test_variance_equals_real_space_pair_density_integral",
+      "tests/test_phase1g_h_global_variance.py::test_unit_growth_sigma_matches_lagrangian_sigma_runtime",
+      "tests/test_phase1g_h_global_variance.py::test_reproduces_1g_d_owner_decision_void_response[GM]",
+      "tests/test_phase1g_h_global_variance.py::test_reproduces_1g_d_owner_decision_void_response[NW15]",
+      "tests/test_phase1g_h_global_variance.py::test_constant_share_variance_scales_with_A_s_and_pbs_void_term_does_not",
+      "tests/test_phase1g_h_global_variance.py::test_terms_of_the_propagator_add_coherently_for_a_constant_share",
+      "tests/test_phase1g_h_global_variance.py::test_records_reject_tampering",
+      "tests/test_phase1g_h_global_variance.py::test_naming_rule_statuses_and_isolation",
+      "tests/test_phase1g_h_global_variance.py::test_example_configurations_run_and_require_every_choice",
+      "tests/test_phase1g_h_global_variance.py::test_gh_df2_records_bind_results_to_their_inputs"
+    ]
+  },
+  {
+    "id": "M2_remove_wall_gamma",
+    "replacements": 1,
+    "outcome": "KILLED",
+    "summary": "13 failed, 20 passed, 9 errors in 9.58s",
+    "failed_tests": [
+      "tests/test_phase1g_h_global_variance.py::test_growth_factors_against_an_independent_tracker[GM]",
+      "tests/test_phase1g_h_global_variance.py::test_growth_factors_against_an_independent_tracker[NW15]",
+      "tests/test_phase1g_h_global_variance.py::test_small_void_fraction_limit_is_einstein_de_sitter",
+      "tests/test_phase1g_h_global_variance.py::test_variance_equals_real_space_pair_density_integral",
+      "tests/test_phase1g_h_global_variance.py::test_unit_growth_sigma_matches_lagrangian_sigma_runtime",
+      "tests/test_phase1g_h_global_variance.py::test_reproduces_1g_d_owner_decision_void_response[GM]",
+      "tests/test_phase1g_h_global_variance.py::test_reproduces_1g_d_owner_decision_void_response[NW15]",
+      "tests/test_phase1g_h_global_variance.py::test_constant_share_variance_scales_with_A_s_and_pbs_void_term_does_not",
+      "tests/test_phase1g_h_global_variance.py::test_terms_of_the_propagator_add_coherently_for_a_constant_share",
+      "tests/test_phase1g_h_global_variance.py::test_records_reject_tampering",
+      "tests/test_phase1g_h_global_variance.py::test_naming_rule_statuses_and_isolation",
+      "tests/test_phase1g_h_global_variance.py::test_example_configurations_run_and_require_every_choice",
+      "tests/test_phase1g_h_global_variance.py::test_gh_df2_records_bind_results_to_their_inputs"
+    ]
+  },
+  {
+    "id": "M3_missing_void_redshift",
+    "replacements": 1,
+    "outcome": "KILLED",
+    "summary": "13 failed, 20 passed, 9 errors in 9.09s",
+    "failed_tests": [
+      "tests/test_phase1g_h_global_variance.py::test_growth_factors_against_an_independent_tracker[GM]",
+      "tests/test_phase1g_h_global_variance.py::test_growth_factors_against_an_independent_tracker[NW15]",
+      "tests/test_phase1g_h_global_variance.py::test_small_void_fraction_limit_is_einstein_de_sitter",
+      "tests/test_phase1g_h_global_variance.py::test_variance_equals_real_space_pair_density_integral",
+      "tests/test_phase1g_h_global_variance.py::test_unit_growth_sigma_matches_lagrangian_sigma_runtime",
+      "tests/test_phase1g_h_global_variance.py::test_reproduces_1g_d_owner_decision_void_response[GM]",
+      "tests/test_phase1g_h_global_variance.py::test_reproduces_1g_d_owner_decision_void_response[NW15]",
+      "tests/test_phase1g_h_global_variance.py::test_constant_share_variance_scales_with_A_s_and_pbs_void_term_does_not",
+      "tests/test_phase1g_h_global_variance.py::test_terms_of_the_propagator_add_coherently_for_a_constant_share",
+      "tests/test_phase1g_h_global_variance.py::test_records_reject_tampering",
+      "tests/test_phase1g_h_global_variance.py::test_naming_rule_statuses_and_isolation",
+      "tests/test_phase1g_h_global_variance.py::test_example_configurations_run_and_require_every_choice",
+      "tests/test_phase1g_h_global_variance.py::test_gh_df2_records_bind_results_to_their_inputs"
+    ]
+  },
+  {
+    "id": "M4_reverse_compression",
+    "replacements": 1,
+    "outcome": "KILLED",
+    "summary": "7 failed, 35 passed in 12.08s",
+    "failed_tests": [
+      "tests/test_phase1g_h_global_variance.py::test_gaussian_threshold_share_independent_evaluation",
+      "tests/test_phase1g_h_global_variance.py::test_admissible_interval_logic",
+      "tests/test_phase1g_h_global_variance.py::test_records_reject_tampering",
+      "tests/test_phase1g_h_global_variance.py::test_gh_f3_void_share_is_f_v_minus_the_regional_fraction_derivative",
+      "tests/test_phase1g_h_global_variance.py::test_gh_f6_post_hoc_anchoring_differs_from_pbs_reclosure",
+      "tests/test_phase1g_h_global_variance.py::test_gh_df2_records_bind_results_to_their_inputs",
+      "tests/test_phase1g_h_global_variance.py::test_gh_df5_pbs_reclosure_rescales_the_input_spectrum_by_the_factor_squared"
+    ]
+  },
+  {
+    "id": "M5_seed_window_unity",
+    "replacements": 1,
+    "outcome": "KILLED",
+    "summary": "1 failed, 41 passed in 13.28s",
+    "failed_tests": [
+      "tests/test_phase1g_h_global_variance.py::test_gaussian_threshold_share_independent_evaluation"
+    ]
+  },
+  {
+    "id": "M6_swap_phase_weights",
+    "replacements": 1,
+    "outcome": "KILLED",
+    "summary": "5 failed, 37 passed in 15.35s",
+    "failed_tests": [
+      "tests/test_phase1g_h_global_variance.py::test_two_phase_variance_assembly_on_a_synthetic_field",
+      "tests/test_phase1g_h_global_variance.py::test_e3_special_case_is_the_1g_e_mass_conserving_formula",
+      "tests/test_phase1g_h_global_variance.py::test_gh_f11_1g_e_reference_reproduces_within_its_rounding_budget",
+      "tests/test_phase1g_h_global_variance.py::test_gh_df1_law_summary_satisfies_h25_and_includes_the_first_radial_panel",
+      "tests/test_phase1g_h_global_variance.py::test_gh_df1_lognormal_laws_report_the_law_ii_normaliser"
+    ]
+  },
+  {
+    "id": "M7_shift_orthant_lower",
+    "replacements": 1,
+    "outcome": "KILLED",
+    "summary": "6 failed, 36 passed in 12.68s",
+    "failed_tests": [
+      "tests/test_phase1g_h_global_variance.py::test_orthant_moments_against_bivariate_cdf_and_monte_carlo",
+      "tests/test_phase1g_h_global_variance.py::test_gaussian_threshold_pair_covariance_formulas_by_monte_carlo",
+      "tests/test_phase1g_h_global_variance.py::test_gh_f5_lognormal_mask_kernels_by_monte_carlo",
+      "tests/test_phase1g_h_global_variance.py::test_gh_f10_orthant_quadrature_meets_its_accuracy_contract",
+      "tests/test_phase1g_h_global_variance.py::test_gh_df1_lognormal_laws_share_the_carrier_not_the_conditional_density",
+      "tests/test_phase1g_h_global_variance.py::test_gh_df1_lognormal_laws_report_the_law_ii_normaliser"
+    ]
+  },
+  {
+    "id": "M8_reverse_barrier_response",
+    "replacements": 1,
+    "outcome": "KILLED",
+    "summary": "1 failed, 41 passed in 14.57s",
+    "failed_tests": [
+      "tests/test_phase1g_h_global_variance.py::test_two_barrier_mass_fraction_and_global_bias"
+    ]
+  },
+  {
+    "id": "N1_growth_record_validation_off",
+    "replacements": 1,
+    "outcome": "KILLED",
+    "summary": "1 failed, 41 passed in 14.13s",
+    "failed_tests": [
+      "tests/test_phase1g_h_global_variance.py::test_gh_df5_defensive_invariants_are_exercised"
+    ]
+  },
+  {
+    "id": "N2_void_share_record_validation_off",
+    "replacements": 1,
+    "outcome": "KILLED",
+    "summary": "1 failed, 41 passed in 13.46s",
+    "failed_tests": [
+      "tests/test_phase1g_h_global_variance.py::test_records_reject_tampering"
+    ]
+  },
+  {
+    "id": "N3_sigma_record_validation_off",
+    "replacements": 1,
+    "outcome": "KILLED",
+    "summary": "1 failed, 41 passed in 13.57s",
+    "failed_tests": [
+      "tests/test_phase1g_h_global_variance.py::test_records_reject_tampering"
+    ]
+  },
+  {
+    "id": "N4_interval_record_validation_off",
+    "replacements": 1,
+    "outcome": "KILLED",
+    "summary": "1 failed, 41 passed in 14.07s",
+    "failed_tests": [
+      "tests/test_phase1g_h_global_variance.py::test_gh_df5_defensive_invariants_are_exercised"
+    ]
+  },
+  {
+    "id": "N5_orthant_centre_split_off",
+    "replacements": 1,
+    "outcome": "SURVIVED",
+    "summary": "42 passed in 14.28s",
+    "failed_tests": []
+  },
+  {
+    "id": "N6_orthant_transition_edges_off",
+    "replacements": 1,
+    "outcome": "KILLED",
+    "summary": "1 failed, 41 passed in 13.95s",
+    "failed_tests": [
+      "tests/test_phase1g_h_global_variance.py::test_gh_f10_orthant_quadrature_meets_its_accuracy_contract"
+    ]
+  },
+  {
+    "id": "N7_orthant_refinement_off",
+    "replacements": 1,
+    "outcome": "KILLED",
+    "summary": "1 failed, 41 passed in 16.41s",
+    "failed_tests": [
+      "tests/test_phase1g_h_global_variance.py::test_gh_f10_orthant_quadrature_meets_its_accuracy_contract"
+    ]
+  },
+  {
+    "id": "N8_frechet_gate_off",
+    "replacements": 1,
+    "outcome": "KILLED",
+    "summary": "1 failed, 41 passed in 13.45s",
+    "failed_tests": [
+      "tests/test_phase1g_h_global_variance.py::test_gh_df5_defensive_invariants_are_exercised"
+    ]
+  },
+  {
+    "id": "N9_void_share_identity_text_sign_reversed",
+    "replacements": 2,
+    "outcome": "SURVIVED",
+    "summary": "42 passed in 13.37s",
+    "failed_tests": []
+  },
+  {
+    "id": "N9b_pbs_executable_response_sign_reversed",
+    "replacements": 1,
+    "outcome": "KILLED",
+    "summary": "10 failed, 32 passed in 12.82s",
+    "failed_tests": [
+      "tests/test_phase1g_h_global_variance.py::test_gaussian_threshold_share_independent_evaluation",
+      "tests/test_phase1g_h_global_variance.py::test_reproduces_1g_d_owner_decision_void_response[GM]",
+      "tests/test_phase1g_h_global_variance.py::test_reproduces_1g_d_owner_decision_void_response[NW15]",
+      "tests/test_phase1g_h_global_variance.py::test_constant_share_variance_scales_with_A_s_and_pbs_void_term_does_not",
+      "tests/test_phase1g_h_global_variance.py::test_admissible_interval_logic",
+      "tests/test_phase1g_h_global_variance.py::test_records_reject_tampering",
+      "tests/test_phase1g_h_global_variance.py::test_gh_f3_void_share_is_f_v_minus_the_regional_fraction_derivative",
+      "tests/test_phase1g_h_global_variance.py::test_gh_f6_post_hoc_anchoring_differs_from_pbs_reclosure",
+      "tests/test_phase1g_h_global_variance.py::test_gh_df2_records_bind_results_to_their_inputs",
+      "tests/test_phase1g_h_global_variance.py::test_gh_df5_pbs_reclosure_rescales_the_input_spectrum_by_the_factor_squared"
+    ]
+  },
+  {
+    "id": "N10_reclosure_factor_unsquared",
+    "replacements": 1,
+    "outcome": "KILLED",
+    "summary": "1 failed, 41 passed in 15.86s",
+    "failed_tests": [
+      "tests/test_phase1g_h_global_variance.py::test_gh_df5_pbs_reclosure_rescales_the_input_spectrum_by_the_factor_squared"
+    ]
+  },
+  {
+    "id": "N11_lognormal_wall_normalization_off",
+    "replacements": 1,
+    "outcome": "KILLED",
+    "summary": "3 failed, 39 passed in 14.92s",
+    "failed_tests": [
+      "tests/test_phase1g_h_global_variance.py::test_gh_f5_lognormal_mask_kernels_by_monte_carlo",
+      "tests/test_phase1g_h_global_variance.py::test_gh_df1_lognormal_laws_share_the_carrier_not_the_conditional_density",
+      "tests/test_phase1g_h_global_variance.py::test_gh_df1_lognormal_laws_report_the_law_ii_normaliser"
+    ]
+  },
+  {
+    "id": "N12_lognormal_lambda_not_squared",
+    "replacements": 1,
+    "outcome": "KILLED",
+    "summary": "2 failed, 40 passed in 13.88s",
+    "failed_tests": [
+      "tests/test_phase1g_h_global_variance.py::test_gh_f5_lognormal_mask_kernels_by_monte_carlo",
+      "tests/test_phase1g_h_global_variance.py::test_gh_df1_lognormal_laws_share_the_carrier_not_the_conditional_density"
+    ]
+  },
+  {
+    "id": "N13_rounding_output_half_unit_off",
+    "replacements": 1,
+    "outcome": "KILLED",
+    "summary": "2 failed, 40 passed in 14.29s",
+    "failed_tests": [
+      "tests/test_phase1g_h_global_variance.py::test_gh_f11_1g_e_reference_reproduces_within_its_rounding_budget",
+      "tests/test_phase1g_h_global_variance.py::test_gh_df5_rounding_budget_needs_the_output_half_unit"
+    ]
+  },
+  {
+    "id": "N14_step_cutoff_shifted",
+    "replacements": 1,
+    "outcome": "KILLED",
+    "summary": "1 failed, 41 passed in 12.85s",
+    "failed_tests": [
+      "tests/test_phase1g_h_global_variance.py::test_gh_f4_scale_dependent_share_escapes_the_constant_share_interval"
+    ]
+  }
+]

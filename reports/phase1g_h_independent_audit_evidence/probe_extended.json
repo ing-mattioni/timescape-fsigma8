@@ -1,0 +1,337 @@
+{
+  "environment": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0"
+  },
+  "all_exported_functions_keyword_only_no_defaults": {
+    "empty_void_region_contrast": true,
+    "two_phase_region_contrast": true,
+    "linear_two_phase_contrast_coefficients": true,
+    "strict_flat_wall_contrast_cap": true,
+    "two_phase_global_growth": true,
+    "tracker_consistent_seed_radius": true,
+    "unit_growth_lagrangian_sigma": true,
+    "evaluate_void_share": true,
+    "global_linear_propagator": true,
+    "conditional_global_linear_sigma": true,
+    "admissible_global_linear_interval": true,
+    "two_phase_global_variance": true,
+    "cauchy_schwarz_total_rms_interval": true,
+    "bivariate_normal_orthant_moments": true,
+    "two_barrier_void_mass_fraction": true,
+    "two_barrier_global_linear_bias": true
+  },
+  "dataclasses_frozen_keyword_only": {
+    "LastScatteringMatching": {
+      "frozen": true,
+      "all_kw_only": true
+    },
+    "TwoPhaseGrowthChecks": {
+      "frozen": true,
+      "all_kw_only": true
+    },
+    "ConstantVoidShare": {
+      "frozen": true,
+      "all_kw_only": true
+    },
+    "GaussianThresholdSeedVoidShare": {
+      "frozen": true,
+      "all_kw_only": true
+    },
+    "HomogeneityPremise": {
+      "frozen": true,
+      "all_kw_only": true
+    },
+    "TwoPhaseSmoothedMoments": {
+      "frozen": true,
+      "all_kw_only": true
+    },
+    "TwoPhaseGlobalGrowth": {
+      "frozen": true,
+      "all_kw_only": true
+    },
+    "EvaluatedVoidShare": {
+      "frozen": true,
+      "all_kw_only": true
+    },
+    "ConditionalGlobalLinearSigma": {
+      "frozen": true,
+      "all_kw_only": true
+    },
+    "AdmissibleGlobalLinearInterval": {
+      "frozen": true,
+      "all_kw_only": true
+    }
+  },
+  "constant_p0": {
+    "accepted": true,
+    "json_nonfinite": false,
+    "closure_p": 0.05,
+    "output_p": [
+      0.95
+    ]
+  },
+  "growth_time": {
+    "accepted": true,
+    "json_nonfinite": false
+  },
+  "growth_diagnostics": {
+    "accepted": true,
+    "json_nonfinite": true
+  },
+  "pbs_nan": {
+    "kernel_is_nan": true,
+    "json_nonfinite": true
+  },
+  "share_upper_nan": {
+    "accepted": true,
+    "json_nonfinite": true
+  },
+  "share_lower_negative": {
+    "accepted": true,
+    "json_nonfinite": false
+  },
+  "upper_inf": {
+    "accepted": true,
+    "json_nonfinite": true
+  },
+  "gm_bare_pbs_f_median_seed": {
+    "linear_sigma": 0.8107722668657138,
+    "all_nested_names_clean": true,
+    "top_level_key_removals": {
+      "background": "SystemExit",
+      "matching": "SystemExit",
+      "early_spectrum": "SystemExit",
+      "radius": "SystemExit",
+      "void_share": "SystemExit",
+      "quadrature": "SystemExit",
+      "seed_quadrature": "SystemExit",
+      "growth_checks": "SystemExit",
+      "density_identity_tolerance": "SystemExit",
+      "G": "SystemExit",
+      "homogeneity_premise": "SystemExit"
+    },
+    "nested_leaf_key_removals": {
+      "background.H0_dressed_km_s_Mpc": "TypeError",
+      "background.fv0": "TypeError",
+      "background.label": "TypeError",
+      "background.source": "TypeError",
+      "early_spectrum.A_s": "TypeError",
+      "early_spectrum.T_cmb_K": "TypeError",
+      "early_spectrum.baryon_fraction": "TypeError",
+      "early_spectrum.import_status": "TypeError",
+      "early_spectrum.k_pivot_per_Mpc": "TypeError",
+      "early_spectrum.n_s": "TypeError",
+      "early_spectrum.provenance": "TypeError",
+      "early_spectrum.transfer_model": "KeyError",
+      "homogeneity_premise.max_linear_rms": "KeyError",
+      "homogeneity_premise.provenance": "KeyError",
+      "homogeneity_premise.radius": "KeyError",
+      "matching.provenance": "TypeError",
+      "matching.z_last_scattering": "TypeError",
+      "radius.convention": "KeyError",
+      "radius.explicit_radius_Mpc": "TypeError",
+      "radius.length_h_inverse_Mpc": "TypeError",
+      "radius.reference_omega_m": "TypeError",
+      "radius.reference_radius_Mpc": "TypeError",
+      "seed_quadrature.comparison_grid_points": "TypeError",
+      "seed_quadrature.grid_points": "TypeError",
+      "seed_quadrature.k_max_per_Mpc": "TypeError",
+      "seed_quadrature.k_min_per_Mpc": "TypeError",
+      "seed_quadrature.self_convergence_tolerance": "TypeError",
+      "seed_quadrature.truncation_tolerance": "TypeError",
+      "void_share.closure": "KeyError",
+      "void_share.compression": "KeyError",
+      "void_share.h_for_void_radius": "KeyError",
+      "void_share.present_void_radius_h_inverse_Mpc": "KeyError",
+      "void_share.provenance": "KeyError"
+    }
+  },
+  "gm_bare_pbs_w09_seed": {
+    "linear_sigma": 1.1213626602036537,
+    "all_nested_names_clean": true,
+    "top_level_key_removals": {
+      "background": "SystemExit",
+      "matching": "SystemExit",
+      "early_spectrum": "SystemExit",
+      "radius": "SystemExit",
+      "void_share": "SystemExit",
+      "quadrature": "SystemExit",
+      "seed_quadrature": "SystemExit",
+      "growth_checks": "SystemExit",
+      "density_identity_tolerance": "SystemExit",
+      "G": "SystemExit",
+      "homogeneity_premise": "SystemExit"
+    },
+    "nested_leaf_key_removals": {
+      "background.H0_dressed_km_s_Mpc": "TypeError",
+      "background.fv0": "TypeError",
+      "background.label": "TypeError",
+      "background.source": "TypeError",
+      "early_spectrum.A_s": "TypeError",
+      "early_spectrum.T_cmb_K": "TypeError",
+      "early_spectrum.baryon_fraction": "TypeError",
+      "early_spectrum.import_status": "TypeError",
+      "early_spectrum.k_pivot_per_Mpc": "TypeError",
+      "early_spectrum.n_s": "TypeError",
+      "early_spectrum.provenance": "TypeError",
+      "early_spectrum.transfer_model": "KeyError",
+      "homogeneity_premise.max_linear_rms": "KeyError",
+      "homogeneity_premise.provenance": "KeyError",
+      "homogeneity_premise.radius": "KeyError",
+      "matching.provenance": "TypeError",
+      "matching.z_last_scattering": "TypeError",
+      "radius.convention": "KeyError",
+      "radius.explicit_radius_Mpc": "TypeError",
+      "radius.length_h_inverse_Mpc": "TypeError",
+      "radius.reference_omega_m": "TypeError",
+      "radius.reference_radius_Mpc": "TypeError",
+      "seed_quadrature.comparison_grid_points": "TypeError",
+      "seed_quadrature.grid_points": "TypeError",
+      "seed_quadrature.k_max_per_Mpc": "TypeError",
+      "seed_quadrature.k_min_per_Mpc": "TypeError",
+      "seed_quadrature.self_convergence_tolerance": "TypeError",
+      "seed_quadrature.truncation_tolerance": "TypeError",
+      "void_share.closure": "KeyError",
+      "void_share.compression": "KeyError",
+      "void_share.h_for_void_radius": "KeyError",
+      "void_share.present_void_radius_h_inverse_Mpc": "KeyError",
+      "void_share.provenance": "KeyError"
+    }
+  },
+  "nw15_equal_mass_constant_share": {
+    "linear_sigma": 0.9181569463963312,
+    "all_nested_names_clean": true,
+    "top_level_key_removals": {
+      "background": "SystemExit",
+      "matching": "SystemExit",
+      "early_spectrum": "SystemExit",
+      "radius": "SystemExit",
+      "void_share": "SystemExit",
+      "quadrature": "SystemExit",
+      "seed_quadrature": "SystemExit",
+      "growth_checks": "SystemExit",
+      "density_identity_tolerance": "SystemExit",
+      "G": "SystemExit",
+      "homogeneity_premise": "SystemExit"
+    },
+    "nested_leaf_key_removals": {
+      "background.H0_dressed_km_s_Mpc": "TypeError",
+      "background.fv0": "TypeError",
+      "background.label": "TypeError",
+      "background.source": "TypeError",
+      "early_spectrum.A_s": "TypeError",
+      "early_spectrum.T_cmb_K": "TypeError",
+      "early_spectrum.baryon_fraction": "TypeError",
+      "early_spectrum.import_status": "TypeError",
+      "early_spectrum.k_pivot_per_Mpc": "TypeError",
+      "early_spectrum.n_s": "TypeError",
+      "early_spectrum.provenance": "TypeError",
+      "early_spectrum.transfer_model": "KeyError",
+      "matching.provenance": "TypeError",
+      "matching.z_last_scattering": "TypeError",
+      "radius.convention": "KeyError",
+      "radius.explicit_radius_Mpc": "TypeError",
+      "radius.length_h_inverse_Mpc": "TypeError",
+      "radius.reference_omega_m": "TypeError",
+      "radius.reference_radius_Mpc": "TypeError",
+      "void_share.closure": "KeyError",
+      "void_share.evidence_class": "KeyError",
+      "void_share.provenance": "KeyError",
+      "void_share.share": "KeyError"
+    }
+  },
+  "orthant_closed_form_probes": [
+    {
+      "rho": 0.0,
+      "threshold": -100.0,
+      "nodes": 16,
+      "P11": 0.6594424508944757,
+      "exact": 1.0,
+      "error": -0.34055754910552427
+    },
+    {
+      "rho": 0.0,
+      "threshold": -100.0,
+      "nodes": 64,
+      "P11": 1.002185860137736,
+      "exact": 1.0,
+      "error": 0.0021858601377360287
+    },
+    {
+      "rho": 0.0,
+      "threshold": -100.0,
+      "nodes": 400,
+      "P11": 1.000000000000024,
+      "exact": 1.0,
+      "error": 2.398081733190338e-14
+    },
+    {
+      "rho": 0.999999,
+      "threshold": 0.0,
+      "nodes": 200,
+      "P11": 0.4997765138789958,
+      "exact": 0.4997749209022009,
+      "error": 1.5929767949174334e-06
+    },
+    {
+      "rho": 0.999999,
+      "threshold": 0.0,
+      "nodes": 400,
+      "P11": 0.49977492083514413,
+      "exact": 0.4997749209022009,
+      "error": -6.705674904239345e-11
+    },
+    {
+      "rho": 0.999999,
+      "threshold": 0.0,
+      "nodes": 800,
+      "P11": 0.4997749209021951,
+      "exact": 0.4997749209022009,
+      "error": -5.773159728050814e-15
+    },
+    {
+      "rho": -0.999999,
+      "threshold": 0.0,
+      "nodes": 200,
+      "P11": 0.00022348612099333957,
+      "exact": 0.0002250790977990913,
+      "error": -1.5929768057517302e-06
+    }
+  ],
+  "cdf_determinism_probe": {
+    "range": 0.0,
+    "values": [
+      0.25721839848986117,
+      0.25721839848986117,
+      0.25721839848986117,
+      0.25721839848986117,
+      0.25721839848986117,
+      0.25721839848986117,
+      0.25721839848986117,
+      0.25721839848986117,
+      0.25721839848986117,
+      0.25721839848986117,
+      0.25721839848986117,
+      0.25721839848986117,
+      0.25721839848986117,
+      0.25721839848986117,
+      0.25721839848986117,
+      0.25721839848986117,
+      0.25721839848986117,
+      0.25721839848986117,
+      0.25721839848986117,
+      0.25721839848986117
+    ],
+    "signature": "(x, *, lower_limit=None, rng=None)"
+  },
+  "array_writeable": false,
+  "array_write_rejected": true,
+  "root_precision": {
+    "root_fraction": 3.380088555844234e-05,
+    "absolute_tolerance_fraction": 1e-17,
+    "relative_tolerance_at_root": 2.958502369031078e-13,
+    "ulp_fraction": 6.776263578034403e-21
+  }
+}

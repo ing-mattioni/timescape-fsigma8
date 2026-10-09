@@ -1,0 +1,2896 @@
+{
+  "anchoring": {
+    "anchor": 0.8111,
+    "factor": 0.97057677,
+    "g_lcdm_qplus0": 0.787812602,
+    "lcdm_eh98_linear_sigma": 0.83568866,
+    "meaning": "empirical post-hoc output normalisation at fixed closure (owner decision D4): multiplies a finished direct value by the ratio of the Planck sigma at 8 Mpc/h to the EH98 value at the Planck parameters.  It is not a verified transfer recalibration: a rescaled input spectrum changes the PBS share (see pbs_reclosure_under_spectrum_rescaling), and the late-time growth cancels only for a common scale-independent growth",
+    "policy": "D4: direct values primary; post-hoc (fixed closure) and reclosure (rescaled input spectrum, PBS share recomputed) reported beside them; the post-hoc interval scaling is withdrawn",
+    "provenance": "Planck 2018 VI (arXiv:1807.06209) Table 2, TT,TE,EE+lowE+lensing"
+  },
+  "assumptions": {
+    "A1-A5": "1G-C regional laws with owner decisions: walls EdS in common time t clocked by the wall matter",
+    "H-A6": "void autonomy: each empty void region expands as Milne independently of the surrounding wall density; no wall-void volume transfer (1G-G J = 0)",
+    "H-A7": "monotone response f_v,LS <= p <= 1 at k -> 0: an added class assumption, not a tracker theorem; the PBS top-hat kernel leaves it slightly at large k",
+    "H-A8": "linear response applied where the void-volume response rms exceeds 1 (formal, linearly extrapolated statistic)",
+    "H-A9": "seed-indexed void accounting (owner decision D2): a bubble's volume belongs to the region containing its seed; equals the transported material-region volume only with scale separation (void/region radius 0.33/0.39 for the 1G-F median, 1.49/1.59 for [W09], at 8/h_bare Mpc)",
+    "S1": "wall-density (curvature) perturbations admitted (1G-D); (H13) shows wall-density freedom is necessary below ~99/127 h^-1 Mpc if exact empty voids and the early field are kept; it does not select the full S1 dynamics (GH-F7)",
+    "closure": "explicit void share p(k) (constant, or Gaussian-threshold peak-background split with an explicit seed radius)",
+    "early_spectrum": "PROVISIONAL_MODEL_IMPORT: Planck 2018 A_s, n_s, k_p, f_b = 0.02237/0.14309694; EH98 zero-baryon-oscillation (no-wiggle) transfer with the baryon shape suppression, Eqs. (26), (28)-(31), at omega_m,eff; matter-era normalisation at z = 1090, radiation neglected (correction not quantified)",
+    "radius": "CONVENTION_DEPENDENT, explicit"
+  },
+  "authorization": {
+    "granted": [
+      "research and development phase: sources, derivations, numerical experiments, experimental modules, scripts, configurations, tests, reports, current-documentation updates",
+      "exploration of additional hypotheses in isolated experimental implementations, named, motivated and compared",
+      "a dedicated local branch from the updated main and local commits"
+    ],
+    "not_granted": [
+      "push",
+      "pull request",
+      "merge",
+      "tag creation or change",
+      "freeze declaration",
+      "release",
+      "change of a scientific token or observational authorization",
+      "promotion of an explored hypothesis to project law"
+    ],
+    "source": "owner task statement of 2026-10-06 (Timescape-fsigma8 - incarico cloud per chiudere la definizione di sigma8)"
+  },
+  "base": {
+    "branch": "phase-1g-h-global-variance-closure",
+    "f_g_freeze_record": "reports/phase1g_fg_freeze_status_successor.md",
+    "freeze_status_alignment_commit": "79003742fb1f284693d6659e329b2c6b7f7927f0",
+    "main": "8d3cdd0533035858c42269cb1dff1a20dcafc7da",
+    "runtime_commit": "fd7331f321702ed8c20d32ea805e7b9537d44726"
+  },
+  "classification": "RESEARCH_PHASE_WITH_EXPERIMENTAL_RUNTIME",
+  "d_v2_tag_or_branch_created": false,
+  "date": "2026-10-06 (revised 2026-10-07 and 2026-10-08)",
+  "definition": {
+    "contrast": "(H1) 1 + delta_L = (M_L/V_L)/(M_D/V_D)",
+    "ensemble": "statistic of the early Gaussian field: centres uniform in Lagrangian (early photon-normalised) coordinates; mass and volume weighting differ only beyond first order; connected variance of the tangent field",
+    "field": "dust rest-mass density (CDM + baryons after decoupling), dust rest frame",
+    "flrw_limit": "standard linear top-hat variance ([JLH13] Eq. (2)); D_W -> 1 - (5/6) f_v0",
+    "foliation_time": "dust-orthogonal foliation of [GM] Sec. 3; dust proper time t (common time); present epoch f_v(t0) = f_v0",
+    "linear": "formal tangent statistic (owner decision D1): zero-amplitude tangent of the global-contrast map of a Lagrangian top hat around the smooth two-phase tracker state, applied to the early Gaussian field (linear extrapolation, as LCDM's linear sigma at 8 Mpc/h)",
+    "mean": "global Buchert volume average <rho>_D = M_D/V_D on the same slice",
+    "not_the_ensemble_response": "the ensemble-mean response of the true contrast (cross-propagator <delta_L delta_0*>'/P_0) averages the derivative of (H3) over finite small-scale fluctuations and differs from the tangent (two-state example: 0.27468 against f_w = 0.263); not computed (GH-F1)",
+    "radius_conventions": {
+      "a_comparison": "equal Lagrangian mass to the reference LCDM M8",
+      "b_diagnostic": "L/h_dressed wall-comoving (needs the underived dressed map)",
+      "c_preferred": "R = (L/h_bare)/gamma_w0 photon-comoving, L = 8: present volume-average proper radius R_proper = gamma_w0 R = 8/h_bare Mpc, R_proper*H_D0 = 800 km/s (H24); a named, defensible convention, not selected by the background"
+    },
+    "region": "Lagrangian top hat: dust elements with early photon-normalised comoving labels within radius R",
+    "smoothing_rule": "G_R(k) = G(k) W(kR), G the unsmoothed carrier of a Lagrangian point; exact for the tangent, stated as part of the definition",
+    "statistic": "(H10) sigma^2 = int dln k Delta^2_u G^2 W^2(kR); real-space (H11)"
+  },
+  "ensemble_vs_tangent_example": {
+    "mean_derivative_central_difference": 0.274683481738,
+    "mean_derivative_exact": 0.27468348168,
+    "mean_reciprocal_density": 1.0,
+    "tangent_at_zero_amplitude": 0.263,
+    "void_volume_fraction": 0.737,
+    "wall_contrasts": [
+      -0.3333333333333333,
+      1.0
+    ]
+  },
+  "equations": {
+    "H1": "global contrast of a Lagrangian region (definition)",
+    "H10": "formal tangent statistic (spectral), smoothing rule G_R = G W",
+    "H11": "real-space pair-density form",
+    "H12": "Gaussian-threshold peak-background void share with compression term and seed window",
+    "H13": "strict flat-wall cap delta_L < f_v/f_w",
+    "H14": "rms void-volume response",
+    "H15": "constant-share interval (monotone lower end, adopted homogeneity-premise upper end); not a bound for scale-dependent shares",
+    "H16": "amplitude scaling: sigma^2 ~ A_s at fixed closure; PBS void term A_s-independent",
+    "H17": "two-phase density decomposition with conditional normalisation",
+    "H18": "complete covariance with cross terms",
+    "H19": "1G-E mass-conserving formula as special case",
+    "H2": "exact finite-density two-phase contrast",
+    "H20": "Cauchy-Schwarz bound",
+    "H21": "bivariate-normal orthant probabilities and moments with an accuracy contract; signed Gaussian and nonnegative lognormal constructive pairs (the latter at a fixed latent carrier law, GH-DF1)",
+    "H22": "two-barrier void mass fraction response (gambler's ruin) and M3 global bias",
+    "H23": "finite-t identity (t0/t)^(2/3)/(1+z) = gamma_w0 f_w0^(1/3)/(gamma_w f_w^(1/3))",
+    "H24": "mass label of convention (c)",
+    "H25": "empty voids, psi normalised on the walls: 1 + xi_delta(r) = P11(r) C_W(r)/f_w^2 with C_W the both-walls conditional density correlation; the ball variance depends on P11 and C_W only ((H18) at x = 0)",
+    "H3": "exact empty-void specific-volume identity",
+    "H4": "linearisation delta_L = f_w delta_w + f_v epsilon",
+    "H5": "finite-density linear coefficients",
+    "H6": "regional evolution: delta_w = C t^(2/3) + C' t^-1, epsilon const (A1-A5, H-A6)",
+    "H7": "growth of a region with void share p",
+    "H8": "D_W, D_V closed forms",
+    "H9": "propagator G = (1-p) D_W + p D_V within the tangent model (A1-A5, H-A6, H-A9)",
+    "provenance": "H1-H5, H13, H17-H20, H23 and H25 follow from the definitions with [GM] Sec. 3 and (5.4)-(5.6); H6-H9 add A1-A5, H-A6 and H-A9 (the tangent model); H12 extends [1G-D] Sec. 7; H22 applies [SvdW04] Eq. (3) to conditional walks; none is attributed to a source as already derived"
+  },
+  "evidence": {
+    "artifact": "artifacts/independent/phase1g_h_global_variance_closure.json (git-ignored, regenerable)",
+    "artifact_raw_sha256_meaning": "one exact output and environment (includes the git head), not a cross-platform gate",
+    "artifact_sha256_py313_run": "027b8e124488f2f6bffa71c2082dfb73da60083435cca207a3f0f546ae1a34a2",
+    "cross_interpreter_check": {
+      "interpreters": [
+        "CPython 3.13.16 (NumPy 2.5.3, SciPy 1.18.1)",
+        "CPython 3.11.17 (NumPy 2.4.6, SciPy 1.17.1)"
+      ],
+      "label_or_key_mismatches": 0,
+      "max_relative_difference": 0.0,
+      "numeric_leaves_compared": 3201,
+      "rule": "every numeric leaf equal (environment and figures ignored); labels and keys exactly",
+      "tree": "third delta-audit remediated code c6028e9046934ef6de234f0b58fbe18e6f3bead1 with 6926a636c100d232247e39d71d5b2d6e71a6f917 (2026-10-09)"
+    },
+    "delta_audit_remediation_additions": [
+      "radial_refinement_rel and h25_identity_rel gates (declared before their first evaluation)",
+      "law-II conditional normaliser ratios m_II and covariance ratios 1/m_II^2",
+      "both-walls conditional covariance <C_W - 1> per law",
+      "first radial panel of the ball pair integrals"
+    ],
+    "figures": [
+      "artifacts/independent/phase1g_h/sigma_vs_void_share.png",
+      "artifacts/independent/phase1g_h/radius_scan.png",
+      "artifacts/independent/phase1g_h/propagator_scale_dependence.png"
+    ],
+    "fourth_delta_audit_remediation_changes": [
+      "none: the runtime and the evidence script are unchanged",
+      "regression against 6926a63 on CPython 3.13.16: 0 of 3201 numeric leaves changed, no text leaf changed, no leaf added or removed; figures byte-identical"
+    ],
+    "gates": {
+      "D_owner_A_v_printed_digits": 0.5,
+      "D_owner_X_SU_printed_digits": 0.0005,
+      "E_reference_printed_half_unit": 5e-05,
+      "constant_share_A_s_scaling_rel": 1e-10,
+      "gt_orthant_P11_vs_bivariate_cdf_abs": 1e-10,
+      "h25_identity_rel": 1e-12,
+      "lognormal_ball_variance_calibration_rel": 1e-09,
+      "lognormal_linear_limit_rel": 0.05,
+      "m3_bias_finite_difference_rel": 1e-06,
+      "orthant_analytic_cases_abs": 1e-12,
+      "pbs_void_term_A_s_independence_rel": 0.002,
+      "radial_refinement_rel": 1e-05,
+      "reclosure_constant_share_rel": 1e-10,
+      "refined_quadrature_rel": 2e-06,
+      "step_kernel_premise_ratio": 1.0
+    },
+    "gates_passed": 36,
+    "gates_total": 36,
+    "remediation_sections": [
+      "ensemble_vs_tangent_example",
+      "orthant_analytic_cases",
+      "scale_separation",
+      "flat_wall_cap_exceedance",
+      "step_share_counterexample",
+      "pbs_reclosure_under_spectrum_rescaling",
+      "negative_wall_density_probability",
+      "nonnegative_lognormal_pair"
+    ],
+    "run_environment": {
+      "git_head": "6926a636c100d232247e39d71d5b2d6e71a6f917",
+      "implementation": "CPython",
+      "matplotlib": "3.11.2",
+      "numpy": "2.5.3",
+      "platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
+      "python": "3.13.16",
+      "scipy": "1.18.1",
+      "src_scripts_tests_dirty": false
+    },
+    "script": "scripts/phase1g_h_global_variance_closure_numerics.py",
+    "second_delta_audit_remediation_changes": [
+      "the (H25) gate is a consistency check of the (H18) assembly on the same kernel arrays and sits in the numerics block (same value and limit)",
+      "no numeric leaf changes (regression against 248a06b in the second remediation record)"
+    ],
+    "third_delta_audit_remediation_changes": [
+      "key both_walls_conditional_density_covariance_ball renamed both_walls_product_moment_excess_ball (same values; GH-D3F5)",
+      "the not_shared item names the both-walls conditional product moment C_W(r)",
+      "the delta-audit addition listed above as 'both-walls conditional covariance <C_W - 1> per law' is this product-moment excess",
+      "no numeric leaf changes (regression against 9ad5425: 0 of 3185 numeric leaves changed; third remediation record sec. 3)"
+    ]
+  },
+  "files": {
+    "added": {
+      "scripts/phase1g_h_configs/gm_bare_pbs_f_median_seed.json": "fce37d4e6bef9b778e68ec5bcb306051e07518020622ecbdb9c1c1847d2ba581",
+      "scripts/phase1g_h_configs/gm_bare_pbs_w09_seed.json": "286cea0cb071b8381fe16025ac99d0d596c8d704282d869ebfe23d80026b3986",
+      "scripts/phase1g_h_configs/nw15_equal_mass_constant_share.json": "41d442557b90a00ddd3d26f263eecea12b982c046656750fa9a1696b6c4d9288",
+      "scripts/phase1g_h_global_variance_case.py": "e1b583f39f5b81c0b6c2ba5df1877de11bf091011c7c663bd81c9abee1de57f5",
+      "scripts/phase1g_h_global_variance_closure_numerics.py": "a5fd601fecc06c57526fd644632d2595f75086457cc7eeb825a301e45c284981",
+      "src/timescape_fsigma8/global_variance.py": "96934ea62d22c2bff07ff6edf00631b0fe556579d29f02ea0efa27b79af9bf4b",
+      "tests/test_phase1g_h_global_variance.py": "ff0407c913c713143def6d423096a69e18a8c1f4fe0c96d6f9e7791ad488be7b"
+    },
+    "added_in_delta_audit_remediation": [
+      "reports/phase1g_h_delta_audit_remediation.md",
+      "reports/phase1g_h_delta_audit_remediation_inventory.json",
+      "reports/phase1g_h_delta_audit_remediation_logs/",
+      "reports/phase1g_h_publication_successor.md",
+      "reports/phase1g_h_publication_successor_inventory.json"
+    ],
+    "added_in_fourth_delta_audit_remediation": [
+      "reports/phase1g_h_delta_audit_4_remediation.md",
+      "reports/phase1g_h_delta_audit_4_remediation_inventory.json",
+      "reports/phase1g_h_delta_audit_4_remediation_logs/"
+    ],
+    "added_in_second_delta_audit_remediation": [
+      "reports/phase1g_h_delta_audit_2_remediation.md",
+      "reports/phase1g_h_delta_audit_2_remediation_inventory.json",
+      "reports/phase1g_h_delta_audit_2_remediation_logs/"
+    ],
+    "added_in_third_delta_audit_remediation": [
+      "reports/phase1g_h_delta_audit_3_remediation.md",
+      "reports/phase1g_h_delta_audit_3_remediation_inventory.json",
+      "reports/phase1g_h_delta_audit_3_remediation_logs/",
+      "reports/phase1g_b_contract_hardening_successor.md",
+      "reports/phase1g_b_contract_hardening_successor_inventory.json",
+      "tests/test_phase1g_b_contract_hardening.py"
+    ],
+    "added_reports": [
+      "reports/phase1g_h_global_variance_closure.md",
+      "reports/phase1g_h_global_variance_closure_inventory.json",
+      "reports/phase1g_h_global_variance_closure_validation.md",
+      "reports/phase1g_h_global_variance_closure_logs/"
+    ],
+    "added_with_owner_decisions_2026_10_09": [
+      "reports/phase1g_h_owner_decisions_successor.md",
+      "reports/phase1g_h_owner_decisions_successor_inventory.json"
+    ],
+    "changed": [
+      "README.md",
+      "CLAUDE.md"
+    ],
+    "changed_in_delta_audit_remediation": [
+      "src/timescape_fsigma8/global_variance.py",
+      "tests/test_phase1g_h_global_variance.py",
+      "scripts/phase1g_h_global_variance_closure_numerics.py",
+      "reports/phase1g_h_global_variance_closure.md",
+      "reports/phase1g_h_global_variance_closure_inventory.json",
+      "reports/phase1g_h_global_variance_closure_validation.md",
+      "reports/phase1g_h_audit_remediation.md",
+      "reports/phase1g_h_audit_remediation_inventory.json",
+      "README.md",
+      "CLAUDE.md"
+    ],
+    "changed_in_fourth_delta_audit_remediation": [
+      "tests/test_phase1g_h_global_variance.py",
+      "tests/test_phase1g_b_contract_hardening.py",
+      "reports/phase1g_h_global_variance_closure.md",
+      "reports/phase1g_h_global_variance_closure_inventory.json",
+      "reports/phase1g_h_global_variance_closure_validation.md",
+      "reports/phase1g_h_delta_audit_3_remediation.md",
+      "reports/phase1g_h_delta_audit_3_remediation_inventory.json",
+      "reports/phase1g_b_contract_hardening_successor.md",
+      "reports/phase1g_b_contract_hardening_successor_inventory.json",
+      "reports/phase1g_h_publication_successor.md",
+      "reports/phase1g_h_publication_successor_inventory.json",
+      "README.md",
+      "CLAUDE.md"
+    ],
+    "changed_in_remediation": [
+      "src/timescape_fsigma8/global_variance.py",
+      "tests/test_phase1g_h_global_variance.py",
+      "scripts/phase1g_h_global_variance_closure_numerics.py",
+      "scripts/phase1g_h_global_variance_case.py",
+      "reports/phase1g_h_global_variance_closure.md",
+      "reports/phase1g_h_global_variance_closure_inventory.json",
+      "reports/phase1g_h_global_variance_closure_validation.md",
+      "reports/phase1g_fg_freeze_status_successor.md",
+      "reports/phase1g_fg_freeze_status_successor_inventory.json",
+      "README.md",
+      "CLAUDE.md"
+    ],
+    "changed_in_second_delta_audit_remediation": [
+      "src/timescape_fsigma8/global_variance.py",
+      "tests/test_phase1g_h_global_variance.py",
+      "scripts/phase1g_h_global_variance_closure_numerics.py",
+      "reports/phase1g_h_global_variance_closure.md",
+      "reports/phase1g_h_global_variance_closure_inventory.json",
+      "reports/phase1g_h_global_variance_closure_validation.md",
+      "reports/phase1g_h_audit_remediation.md",
+      "reports/phase1g_h_audit_remediation_inventory.json",
+      "reports/phase1g_h_delta_audit_remediation.md",
+      "reports/phase1g_h_delta_audit_remediation_inventory.json",
+      "reports/phase1g_h_publication_successor.md",
+      "reports/phase1g_h_publication_successor_inventory.json",
+      "README.md",
+      "CLAUDE.md"
+    ],
+    "changed_in_third_delta_audit_remediation": [
+      "src/timescape_fsigma8/global_variance.py",
+      "tests/test_phase1g_h_global_variance.py",
+      "scripts/phase1g_h_global_variance_closure_numerics.py",
+      "src/timescape_fsigma8/lagrangian_sigma.py (separate commit, 1G-B contract-hardening successor)",
+      "reports/phase1g_h_global_variance_closure.md",
+      "reports/phase1g_h_global_variance_closure_inventory.json",
+      "reports/phase1g_h_global_variance_closure_validation.md",
+      "reports/phase1g_h_delta_audit_2_remediation.md",
+      "reports/phase1g_h_delta_audit_2_remediation_inventory.json",
+      "reports/phase1g_h_publication_successor.md",
+      "reports/phase1g_h_publication_successor_inventory.json",
+      "README.md",
+      "CLAUDE.md"
+    ],
+    "changed_with_publication_record_2026_10_09": [
+      "reports/phase1g_h_publication_successor.md",
+      "reports/phase1g_h_publication_successor_inventory.json",
+      "reports/phase1g_h_delta_audit_2_remediation.md",
+      "reports/phase1g_h_delta_audit_2_remediation_inventory.json",
+      "reports/phase1g_h_global_variance_closure.md",
+      "reports/phase1g_h_global_variance_closure_inventory.json",
+      "README.md",
+      "CLAUDE.md"
+    ],
+    "unchanged": "every frozen report, inventory, audit, evidence file, tag, package module and script (the fourth remediation changes tests and records only), test other than the 1G-H file and the 1G-B contract-hardening file, and status token; the files of the independent audit and of the four delta audits"
+  },
+  "limitations": [
+    "formal tangent statistic, not the ensemble response of the true contrast (D1)",
+    "seed-indexed void accounting H-A9 without scale separation at R8 (D2)",
+    "H-A6 ignores wall-void boundary coupling",
+    "single-scale Gaussian-threshold seeds",
+    "1G-F median radius as a heuristic seed-scale prior; its conversion ambiguity (factor gamma_w0)",
+    "void response beyond its validity for the [W09] seed (H-A8)",
+    "matching at z = 1090 without radiation (correction not quantified)",
+    "EH98 no-wiggle transfer",
+    "A_s from a LCDM fit; empirical Planck normalisation (D4)",
+    "empty voids in the propagator (finite-density voids only in the covariance and the M3 alternative)",
+    "lognormal pairs: the resolution radius and the lam calibration are free construction choices; the pairs fix the latent carrier law, not the conditionally normalised wall-density covariance (GH-DF1)",
+    "the integrated scale dependence G_eff/G(0) - 1 is not a pointwise or two-window bound (GH-DF4)",
+    "no time-dependent mergers or mass transfer (1G-G)",
+    "nothing observational"
+  ],
+  "missing_input": {
+    "beyond_the_tangent_statistic": "the ensemble statistic of the true contrast and the material-domain volume below the super-cell scale also need the joint small-scale law and a transport map (GH-F1, GH-F2)",
+    "object": "p(k) defined by p delta_L(LS) = f_v,LS epsilon, i.e. p = f_v,LS - d f_v,L/d delta_L(k) for the region's void volume fraction at the matching epoch (corrected, GH-F3); p(k->0) = f_v,LS (1 + A_v) with 1G-D's threshold response A_v when the seed volume is compressed with its region, f_v,LS A_v for the threshold shift alone",
+    "sensitivity_dsigma_c_dp": {
+      "NW15_CMB_FIT": 11.46,
+      "PAPER_REFERENCE": 7.785
+    },
+    "status": "EXTERNAL_CLOSURE_INPUT (VOID_ONSET_RESPONSE)",
+    "what_would_determine_it": [
+      "a void-formation model reproducing the tracker f_v(t) from the early spectrum (excursion set with calibrated barrier, or an LTB-CMC ensemble), whose peak-background split gives p(k)",
+      "a statistic fixing G where the void response is linear: global linear rms at ~100 h^-1 Mpc, or the void-fraction / large-scale-density cross-correlation (both need the observational reduction)"
+    ],
+    "why_undetermined": [
+      "tracker f_v,LS fixed by late-time parameters, not by formation on the early field",
+      "A1-A5 and H-A6 propagate any split but do not choose it",
+      "the 1G-F population is not the tracker's (constant void fraction)",
+      "the PBS closure needs a seed model and an external seed scale"
+    ]
+  },
+  "observational_authorizations": {
+    "FSIGMA8_AUTHORIZATION": "NOT_GRANTED",
+    "OBSERVATIONAL_AUTHORIZATION": "NOT_GRANTED",
+    "RSD_AUTHORIZATION": "NOT_GRANTED",
+    "SIGMA8_AUTHORIZATION": "NOT_GRANTED",
+    "UNIQUE_TIMESCAPE_PREDICTION": "NOT_GRANTED"
+  },
+  "owner_decisions_requested": {
+    "H-OD1": "adopt the definition with convention (c) primary and (a) for comparison (recommended), or (a) primary, or keep as proposal; DECIDED 2026-10-09: see owner_decisions_status_2026_10_09.decided",
+    "H-OD2": "void-share closure for a reference value: beta (1G-F-median seed, recommended), alpha (1G-D [W09]-radius seed), gamma (interval only); DECIDED 2026-10-09: see owner_decisions_status_2026_10_09.decided",
+    "H-OD3": "status tokens: add GLOBAL_MEAN_LINEAR_STATISTIC_DEFINITION = DERIVED_FROM_VERIFIED_DEFINITIONS and GLOBAL_MEAN_LINEAR_STATISTIC_COMPUTATION = DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION (recommended; no validator change), or change LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC (needs an approved validator extension for a second chained change; R2-N4 then relevant); DECIDED 2026-10-09: see owner_decisions_status_2026_10_09.decided",
+    "H-OD4": "keep global_variance.py experimental until an independent audit (recommended), or promote; DECIDED 2026-10-09: see owner_decisions_status_2026_10_09.decided",
+    "H-OD5": "push / pull request / merge / audit / freeze / tag: separate decisions; pushes to the session branch were decided by the owner on 2026-10-06 and 2026-10-08 (publication block); an independent audit (2026-10-07), a delta audit and a second delta audit (2026-10-08) were performed; the second delta audit and its remediation were pushed on 2026-10-09 (P10, P11); a third delta audit (2026-10-09) was performed and pushed with its remediation (P14); a fourth delta audit (2026-10-09) was performed; pull request, merge, freeze and tag remain open; DECIDED 2026-10-09: see owner_decisions_status_2026_10_09.decided"
+  },
+  "owner_decisions_status_2026_10_07": {
+    "H-OD1": "narrowed by D1 to the formal tangent statistic and kept a proposal; adoption as the sigma8 analogue not decided",
+    "H-OD2": "open; revised recommendation with the audit: no physical reference value yet",
+    "H-OD3": "open; revised recommendation with the audit: defer both token options, tokens unchanged",
+    "H-OD4": "open; keep experimental (record and orthant contracts hardened)",
+    "H-OD5": "push decided; audit performed; delta audit, pull request, merge, freeze and tag open"
+  },
+  "owner_decisions_status_2026_10_08": {
+    "H-OD1": "open; the delta audit recommends keeping the formal tangent a named research proposal; the second delta audit concurs ((c) preferred, (a) as the fixed-mass comparison)",
+    "H-OD2": "open; the delta audit recommends no physical reference value yet; the second delta audit concurs",
+    "H-OD3": "open; the delta audit recommends deferring token promotion; tokens and authorisations unchanged; the second delta audit concurs (no token change)",
+    "H-OD4": "open; keep experimental (records recompute their results from their inputs, GH-DF2; float results must be floats, GH-D2F4); the second delta audit recommends the Windows gate before any promotion",
+    "H-OD5": "pushes of 2026-10-06 and 2026-10-08 decided; audit, delta audit and second delta audit performed; push of the second delta-audit remediation, pull request, merge, freeze and tag open; the second delta audit finds no scientific blocker and asks for the P7 record, the LOW corrections and the Windows gate first"
+  },
+  "owner_decisions_status_2026_10_09": {
+    "1G-B_scalar_precision_policy": "option (a), 2026-10-09 (\"Procedi con il piano e l'opzione (a)\"): the documented float32 limit stays; a uniform policy would need a separate successor",
+    "H-OD1..H-OD4": "as on 2026-10-08; the third delta audit concurs (H-OD4: nested-export, test and documentation contracts corrected; 1G-B hardening done as a separate owner-approved successor)",
+    "H-OD5": "pushes of 2026-10-06, 2026-10-08 and 2026-10-09 decided (P10, P11, P14, P15); audit and four delta audits performed; Windows gate, pull request, merge, freeze and tag open",
+    "decided": {
+      "H-OD1": "keep the formal tangent statistic as a named research proposal (not the project's sigma8 analogue); convention (c) preferred, (a) the fixed-mass comparison",
+      "H-OD2": "no physical reference value; beta a heuristic prior, alpha a formal extrapolation, gamma an interval for constant shares only",
+      "H-OD3": "no token change; the five observational authorisations stay NOT_GRANTED",
+      "H-OD4": "the runtime stays experimental; promotion is a new decision",
+      "H-OD5": "pull request into main, merge with a merge commit, freeze of the 1G-H records at that commit, annotated tag phase-1g-h-global-variance-closure-v1",
+      "record": "reports/phase1g_h_owner_decisions_successor.md",
+      "verbatim": "Ho eseguito le test suite su windows, tutto ok. Dunque Implementa le raccomandazioni dell'audit su H-OD1…H-OD5 e poi fai PR, merge, freeze e tag",
+      "windows_gate": "owner's report: test suites pass on Windows ('tutto ok'); interpreters, counts and commit not stated"
+    },
+    "fourth_delta_audit_recommendations": "H-OD1 formal proposal with convention (c) and comparison (a); H-OD2 no reference value; H-OD3 no token change; H-OD4 experimental until the Windows gate; H-OD5 separate decisions; recorded, not decided"
+  },
+  "phase": "1G-H",
+  "publication": {
+    "approvals": [
+      {
+        "action": "push of the phase commits 79003742fb1f284693d6659e329b2c6b7f7927f0, fd7331f321702ed8c20d32ea805e7b9537d44726 and 0572e416504bcdfaa5831b6d482b687ef6fae582 to the session branch ccr-555e67be-u11yht",
+        "date": "2026-10-06",
+        "verbatim": "Sì, procedi con il push sul branch designato"
+      },
+      {
+        "action": "documentation-only update of the push status (this block, the report, the validation record, the F/G freeze-status record, README.md and CLAUDE.md) and its push to the same branch",
+        "date": "2026-10-06",
+        "verbatim": "Sì, correggi la documentazione e fai il push"
+      },
+      {
+        "action": "push of the audit commit 816dd004763f8de1a8bb09cba9e427a1bd2bb3d1 and the remediation commits c1b448295a631786a2831b05e01650dd2cef73de and 89cb041f901b51a3f90fa6831aab1b4553c1772c to the session branch ccr-555e67be-u11yht (fast-forward from d4d693d)",
+        "date": "2026-10-08",
+        "verbatim": "Si, fai push"
+      },
+      {
+        "action": "push of the delta-audit commit 5c325e1fd05b343f6d5e93f931038794de4373a2 and the delta-audit remediation commits 248a06bfeb655337bc499607180c49008b5f34ea and 226e52d2e4157d0130b2a9dfaffd71834c6017d9 to the session branch ccr-555e67be-u11yht (fast-forward from 89cb041)",
+        "date": "2026-10-08",
+        "verbatim": "Fai push e prepara il prompt per un nuovo audit"
+      },
+      {
+        "action": "push of the second delta-audit commits 64116509554cc0d711660da4d81ad95c3f450a6d and e5170285e1d4b4aa72e907a3a79110d05584c0d9 and the second delta-audit remediation commits 9ad54253c4ec40cede5690da6659be28e0bd0a2d and 4bf2718e7557ace3fdc0abffaa73587f1162f776 to the session branch ccr-555e67be-u11yht (fast-forward from 226e52d)",
+        "date": "2026-10-09",
+        "verbatim": "Sì, fai push"
+      },
+      {
+        "action": "push of the P10 record ed0ec0c9c8783519a53759a265b6ce37e6c0e607 to the session branch ccr-555e67be-u11yht (fast-forward from 4bf2718)",
+        "date": "2026-10-09",
+        "verbatim": "Sì, pubblica anche ed0ec0c"
+      },
+      {
+        "action": "push of the third delta-audit commits 4d71bd4fe918ef8a0b71c178a7180c4d291294b0 and 18bf2fbef880fdfb3c292956aa1f000720930abf and the third remediation commits c6028e9046934ef6de234f0b58fbe18e6f3bead1, 6926a636c100d232247e39d71d5b2d6e71a6f917 and 36d127f8edcb306aa503cb4d8b7b10417dc33a51 to the session branch ccr-555e67be-u11yht (fast-forward from ed0ec0c)",
+        "date": "2026-10-09",
+        "verbatim": "Sì, fai push"
+      },
+      {
+        "action": "push of the P14 record 027b7a413fcee0786b861d5903272e4653d227ed to the session branch ccr-555e67be-u11yht (fast-forward from 36d127f)",
+        "date": "2026-10-09",
+        "verbatim": "Pubblica, fai il fast-forward"
+      },
+      {
+        "action": "push of the fourth delta-audit commit fc804a0f71f47904e86388f378295f72ba15cdd8 and the fourth remediation commits a243bf13bb27fb77c54ff05be004c47efe6e6784 and 22ace890caca5e571e83d322b446db3a05f78cc0 to the session branch ccr-555e67be-u11yht (fast-forward from 027b7a4)",
+        "date": "2026-10-09",
+        "verbatim": "fai il fast-forward di origin/ccr-555e67be-u11yht da 027b7a4 a 22ace89"
+      },
+      {
+        "action": "pull request from ccr-555e67be-u11yht into main, its merge, the freeze and the tag phase-1g-h-global-variance-closure-v1 (with the push of the commit carrying the owner decisions successor)",
+        "date": "2026-10-09",
+        "recorded_by": "reports/phase1g_h_owner_decisions_successor.md section 4; the resulting hashes are recorded by a later successor",
+        "verbatim": "Ho eseguito le test suite su windows, tutto ok. Dunque Implementa le raccomandazioni dell'audit su H-OD1…H-OD5 e poi fai PR, merge, freeze e tag"
+      }
+    ],
+    "authorization_block": "records the task statement, which granted local commits only; these approvals are separate, later owner actions",
+    "branch": "ccr-555e67be-u11yht",
+    "confirmations": [
+      {
+        "action": "confirmation of the two approvals of 2026-10-06 recorded above (audit finding GH-F15)",
+        "date": "2026-10-08",
+        "verbatim": "Si, confermo"
+      },
+      {
+        "action": "direct confirmation of the two approvals of 2026-10-06 to the auditor of the second delta audit (GH-F15 RESOLVED_OWNER_CONFIRMED)",
+        "date": "2026-10-08",
+        "recorded_in": "reports/phase1g_h_delta_audit_2.md",
+        "verbatim": "Confermo le due approvazioni di push registrate (GH-F15)"
+      },
+      {
+        "action": "direct confirmation of P10 and P11 to the auditor of the third delta audit",
+        "date": "2026-10-09",
+        "recorded_in": "reports/phase1g_h_delta_audit_3.md",
+        "verbatim": "Confermo le autorizzazioni P10 e P11"
+      }
+    ],
+    "decided_not_yet_performed_when_committed": [
+      "push of the commit carrying the owner decisions successor (P18)",
+      "pull request into main",
+      "merge (merge commit)",
+      "freeze",
+      "annotated tag phase-1g-h-global-variance-closure-v1"
+    ],
+    "delta_audit_publication": "branch phase-1g-h-delta-audit at 5c325e1fd05b343f6d5e93f931038794de4373a2 (tree a5b810e81d125827a17a9cf87b013ead51232080, parent 89cb041), published with the owner's authorisation from the auditing session (owner's report of 2026-10-08)",
+    "first_pushed_head": "0572e416504bcdfaa5831b6d482b687ef6fae582",
+    "fourth_delta_audit_publication": "branch phase-1g-h-delta-audit-4 at fc804a0f71f47904e86388f378295f72ba15cdd8 (parent 027b7a4; reported to have the tree and parent of the auditing session's local commit f332353), published with the owner's authorisation in the auditing session (P16 of the publication successor)",
+    "h_od5_status": "decided 2026-10-09: pull request, merge, freeze and tag (owner decisions successor section 4); pushes to the session branch decided on 2026-10-06, 2026-10-08 and 2026-10-09 (P17 the last recorded); independent audit and four delta audits performed",
+    "last_recorded_event": {
+      "convention": "the last recorded push of the session branch (publication successor section 10.3); later events are recorded there; this block is not a remote-head snapshot",
+      "date": "2026-10-09",
+      "id": "P17",
+      "range": "027b7a4..22ace89",
+      "record": "reports/phase1g_h_publication_successor.md section 11"
+    },
+    "main": "8d3cdd0533035858c42269cb1dff1a20dcafc7da (unchanged)",
+    "not_done": [
+      "release"
+    ],
+    "pushed_head_2026_10_08": "226e52d2e4157d0130b2a9dfaffd71834c6017d9",
+    "pushed_head_2026_10_09": "4bf2718e7557ace3fdc0abffaa73587f1162f776",
+    "pushed_heads_2026_10_08": [
+      {
+        "event": "P5",
+        "head": "89cb041f901b51a3f90fa6831aab1b4553c1772c"
+      },
+      {
+        "event": "P7",
+        "head": "226e52d2e4157d0130b2a9dfaffd71834c6017d9"
+      }
+    ],
+    "record": "reports/phase1g_h_publication_successor.md",
+    "second_delta_audit_publication": "branch ccr-ac582de6-vho99i at e5170285e1d4b4aa72e907a3a79110d05584c0d9 (tree 45ce98f9d21e93e355ba25812063aec270700116, parent 64116509554cc0d711660da4d81ad95c3f450a6d, a child of 226e52d), published on the owner's instruction in the auditing session (P9 of the publication successor)",
+    "third_delta_audit_publication": "branch phase-1g-h-delta-audit-3 at 18bf2fbef880fdfb3c292956aa1f000720930abf (parent 4d71bd4fe918ef8a0b71c178a7180c4d291294b0, the blind checkpoint, child of ed0ec0c), published with the owner's authorisation in the auditing session (P13 of the publication successor)"
+  },
+  "r2_n4_relevance": "only if H-OD3's second option (a chained change of LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC) is chosen",
+  "report": "reports/phase1g_h_global_variance_closure.md",
+  "results": {
+    "NW15_CMB_FIT": {
+      "a_s_scaling_pbs_tracker_seed": {
+        "x0.5": {
+          "d_ln_sigma_d_ln_A_s": 0.155607,
+          "void_share_rms_ratio": 0.9997526,
+          "wall_share_rms_ratio": 0.688405
+        },
+        "x2": {
+          "d_ln_sigma_d_ln_A_s": 0.19484,
+          "void_share_rms_ratio": 1.0003499,
+          "wall_share_rms_ratio": 1.440661
+        }
+      },
+      "conventions": {
+        "a_equal_mass": {
+          "closures": {
+            "monotone_lower_p_fvLS": {
+              "linear_sigma_direct_A_s": 0.3598,
+              "linear_sigma_post_hoc_normalised": 0.349214,
+              "propagator_k0": 0.353247,
+              "radius_Mpc": 12.22604,
+              "scale_dependence_rel": 0.0,
+              "share_k0": 5.07e-05,
+              "unit_growth_sigma": 1.01855,
+              "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
+              "void_volume_response_rms": 0.0009
+            },
+            "pbs_svdw04_seed_compressed": {
+              "linear_sigma_direct_A_s": 2.423698,
+              "linear_sigma_post_hoc_normalised": 2.352385,
+              "propagator_k0": 3.089525,
+              "radius_Mpc": 12.22604,
+              "scale_dependence_rel": -0.229799,
+              "share_k0": 0.2493724,
+              "unit_growth_sigma": 1.01855,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 3.426
+            },
+            "pbs_tracker_seed_F_median_compressed": {
+              "linear_sigma_direct_A_s": 0.796018,
+              "linear_sigma_post_hoc_normalised": 0.772597,
+              "propagator_k0": 0.781557,
+              "radius_Mpc": 12.22604,
+              "scale_dependence_rel": -4.6e-05,
+              "share_k0": 0.039077,
+              "unit_growth_sigma": 1.01855,
+              "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
+              "void_volume_response_rms": 0.719
+            },
+            "pbs_tracker_seed_compressed": {
+              "linear_sigma_direct_A_s": 1.03074,
+              "linear_sigma_post_hoc_normalised": 1.000412,
+              "propagator_k0": 1.012877,
+              "radius_Mpc": 12.22604,
+              "scale_dependence_rel": -0.000898,
+              "share_k0": 0.0601543,
+              "unit_growth_sigma": 1.01855,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 1.1054
+            },
+            "pbs_tracker_seed_threshold_only_1G_D": {
+              "linear_sigma_direct_A_s": 1.030173,
+              "linear_sigma_post_hoc_normalised": 0.999862,
+              "propagator_k0": 1.01232,
+              "radius_Mpc": 12.22604,
+              "scale_dependence_rel": -0.000899,
+              "share_k0": 0.0601035,
+              "unit_growth_sigma": 1.01855,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 1.1045
+            },
+            "strict_flat_walls_p1": {
+              "linear_sigma_direct_A_s": 11.537714,
+              "linear_sigma_post_hoc_normalised": 11.198238,
+              "propagator_k0": 11.327583,
+              "radius_Mpc": 12.22604,
+              "scale_dependence_rel": 0.0,
+              "share_k0": 1.0,
+              "unit_growth_sigma": 1.01855,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 18.4015
+            },
+            "wall_mode_p0": {
+              "linear_sigma_direct_A_s": 0.359233,
+              "linear_sigma_post_hoc_normalised": 0.348663,
+              "propagator_k0": 0.35269,
+              "radius_Mpc": 12.22604,
+              "scale_dependence_rel": 0.0,
+              "share_k0": 0.0,
+              "unit_growth_sigma": 1.01855,
+              "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
+              "void_volume_response_rms": 0.0
+            }
+          },
+          "intervals": {
+            "W09_10pct_at_100": {
+              "class": "CONSTANT_SHARE_ONLY",
+              "lower": 0.3598,
+              "lower_post_hoc_withdrawn": 0.349214,
+              "premise_max_linear_rms": 0.1,
+              "premise_radius_Mpc": 152.825504,
+              "primary_rms_at_premise": 0.086653,
+              "primary_target_inside": true,
+              "share_upper": 0.074368,
+              "upper": 1.190556,
+              "upper_post_hoc_withdrawn": 1.155526
+            },
+            "W09_10pct_at_150": {
+              "class": "CONSTANT_SHARE_ONLY",
+              "lower": 0.3598,
+              "lower_post_hoc_withdrawn": 0.349214,
+              "premise_max_linear_rms": 0.1,
+              "premise_radius_Mpc": 229.238256,
+              "primary_rms_at_premise": 0.048882,
+              "primary_target_inside": true,
+              "share_upper": 0.156663,
+              "upper": 2.110489,
+              "upper_post_hoc_withdrawn": 2.048391
+            },
+            "W09_several_pct_6pct_at_100": {
+              "class": "CONSTANT_SHARE_ONLY",
+              "lower": 0.3598,
+              "lower_post_hoc_withdrawn": 0.349214,
+              "premise_max_linear_rms": 0.06,
+              "premise_radius_Mpc": 152.825504,
+              "primary_rms_at_premise": 0.086653,
+              "primary_target_inside": false,
+              "share_upper": 0.031766,
+              "upper": 0.714333,
+              "upper_post_hoc_withdrawn": 0.693315
+            },
+            "cell_side_100_as_sphere_62": {
+              "class": "CONSTANT_SHARE_ONLY",
+              "lower": 0.3598,
+              "lower_post_hoc_withdrawn": 0.349214,
+              "premise_max_linear_rms": 0.1,
+              "premise_radius_Mpc": 94.805377,
+              "primary_rms_at_premise": 0.158016,
+              "primary_target_inside": false,
+              "share_upper": 0.026267,
+              "upper": 0.652862,
+              "upper_post_hoc_withdrawn": 0.633653
+            }
+          },
+          "normalisation_variants": {
+            "A_s_factor": 0.942019266,
+            "interval_W09_10pct_at_100_reclosure": {
+              "lower": 0.349214,
+              "share_upper": 0.077597,
+              "upper": 1.190556
+            },
+            "monotone_lower_p_fvLS": {
+              "direct": 0.3598,
+              "post_hoc_fixed_closure": 0.349214,
+              "reclosure": 0.349214,
+              "reclosure_over_post_hoc": 1.0,
+              "share_k0_direct": 5.1e-05,
+              "share_k0_reclosure": 5.1e-05
+            },
+            "pbs_tracker_seed_F_median_compressed": {
+              "direct": 0.796018,
+              "post_hoc_fixed_closure": 0.772597,
+              "reclosure": 0.785432,
+              "reclosure_over_post_hoc": 1.016613,
+              "share_k0_direct": 0.039077,
+              "share_k0_reclosure": 0.04026
+            },
+            "pbs_tracker_seed_compressed": {
+              "direct": 1.03074,
+              "post_hoc_fixed_closure": 1.000412,
+              "reclosure": 1.020153,
+              "reclosure_over_post_hoc": 1.019733,
+              "share_k0_direct": 0.060154,
+              "share_k0_reclosure": 0.061976
+            }
+          },
+          "radius_scan": [
+            {
+              "length_h_inverse_Mpc": 6.0,
+              "monotone_lower_p_fvLS": 0.433494,
+              "pbs_svdw04_seed_compressed": 2.629517,
+              "pbs_tracker_seed_compressed": 1.241167,
+              "radius_Mpc": 9.16953
+            },
+            {
+              "length_h_inverse_Mpc": 7.0,
+              "monotone_lower_p_fvLS": 0.393055,
+              "pbs_svdw04_seed_compressed": 2.527962,
+              "pbs_tracker_seed_compressed": 1.125755,
+              "radius_Mpc": 10.697785
+            },
+            {
+              "length_h_inverse_Mpc": 8.0,
+              "monotone_lower_p_fvLS": 0.3598,
+              "pbs_svdw04_seed_compressed": 2.423698,
+              "pbs_tracker_seed_compressed": 1.03074,
+              "radius_Mpc": 12.22604
+            },
+            {
+              "length_h_inverse_Mpc": 9.0,
+              "monotone_lower_p_fvLS": 0.331847,
+              "pbs_svdw04_seed_compressed": 2.319487,
+              "pbs_tracker_seed_compressed": 0.950814,
+              "radius_Mpc": 13.754295
+            },
+            {
+              "length_h_inverse_Mpc": 10.0,
+              "monotone_lower_p_fvLS": 0.307947,
+              "pbs_svdw04_seed_compressed": 2.217357,
+              "pbs_tracker_seed_compressed": 0.882439,
+              "radius_Mpc": 15.28255
+            },
+            {
+              "length_h_inverse_Mpc": 12.0,
+              "monotone_lower_p_fvLS": 0.269069,
+              "pbs_svdw04_seed_compressed": 2.024461,
+              "pbs_tracker_seed_compressed": 0.771156,
+              "radius_Mpc": 18.339061
+            }
+          ]
+        },
+        "b_dressed_wall_comoving": {
+          "closures": {
+            "monotone_lower_p_fvLS": {
+              "linear_sigma_direct_A_s": 0.342991,
+              "linear_sigma_post_hoc_normalised": 0.332899,
+              "propagator_k0": 0.353247,
+              "radius_Mpc": 13.114754,
+              "scale_dependence_rel": 0.0,
+              "share_k0": 5.07e-05,
+              "unit_growth_sigma": 0.970965,
+              "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
+              "void_volume_response_rms": 0.0009
+            },
+            "pbs_svdw04_seed_compressed": {
+              "linear_sigma_direct_A_s": 2.362945,
+              "linear_sigma_post_hoc_normalised": 2.293419,
+              "propagator_k0": 3.089525,
+              "radius_Mpc": 13.114754,
+              "scale_dependence_rel": -0.212305,
+              "share_k0": 0.2493724,
+              "unit_growth_sigma": 0.970965,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 3.3479
+            },
+            "pbs_tracker_seed_F_median_compressed": {
+              "linear_sigma_direct_A_s": 0.758833,
+              "linear_sigma_post_hoc_normalised": 0.736506,
+              "propagator_k0": 0.781557,
+              "radius_Mpc": 13.114754,
+              "scale_dependence_rel": -4.1e-05,
+              "share_k0": 0.039077,
+              "unit_growth_sigma": 0.970965,
+              "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
+              "void_volume_response_rms": 0.6854
+            },
+            "pbs_tracker_seed_compressed": {
+              "linear_sigma_direct_A_s": 0.982682,
+              "linear_sigma_post_hoc_normalised": 0.953768,
+              "propagator_k0": 1.012877,
+              "radius_Mpc": 13.114754,
+              "scale_dependence_rel": -0.000799,
+              "share_k0": 0.0601543,
+              "unit_growth_sigma": 0.970965,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 1.0539
+            },
+            "pbs_tracker_seed_threshold_only_1G_D": {
+              "linear_sigma_direct_A_s": 0.982141,
+              "linear_sigma_post_hoc_normalised": 0.953244,
+              "propagator_k0": 1.01232,
+              "radius_Mpc": 13.114754,
+              "scale_dependence_rel": -0.0008,
+              "share_k0": 0.0601035,
+              "unit_growth_sigma": 0.970965,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 1.053
+            },
+            "strict_flat_walls_p1": {
+              "linear_sigma_direct_A_s": 10.998687,
+              "linear_sigma_post_hoc_normalised": 10.67507,
+              "propagator_k0": 11.327583,
+              "radius_Mpc": 13.114754,
+              "scale_dependence_rel": 0.0,
+              "share_k0": 1.0,
+              "unit_growth_sigma": 0.970965,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 17.5418
+            },
+            "wall_mode_p0": {
+              "linear_sigma_direct_A_s": 0.34245,
+              "linear_sigma_post_hoc_normalised": 0.332374,
+              "propagator_k0": 0.35269,
+              "radius_Mpc": 13.114754,
+              "scale_dependence_rel": 0.0,
+              "share_k0": 0.0,
+              "unit_growth_sigma": 0.970965,
+              "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
+              "void_volume_response_rms": 0.0
+            }
+          },
+          "intervals": {
+            "W09_10pct_at_100": {
+              "class": "CONSTANT_SHARE_ONLY",
+              "lower": 0.342991,
+              "lower_post_hoc_withdrawn": 0.332899,
+              "premise_max_linear_rms": 0.1,
+              "premise_radius_Mpc": 163.934426,
+              "primary_rms_at_premise": 0.078816,
+              "primary_target_inside": true,
+              "share_upper": 0.084958,
+              "upper": 1.24778,
+              "upper_post_hoc_withdrawn": 1.211067
+            },
+            "W09_10pct_at_150": {
+              "class": "CONSTANT_SHARE_ONLY",
+              "lower": 0.342991,
+              "lower_post_hoc_withdrawn": 0.332899,
+              "premise_max_linear_rms": 0.1,
+              "premise_radius_Mpc": 245.901639,
+              "primary_rms_at_premise": 0.04401,
+              "primary_target_inside": true,
+              "share_upper": 0.177563,
+              "upper": 2.234603,
+              "upper_post_hoc_withdrawn": 2.168854
+            },
+            "W09_several_pct_6pct_at_100": {
+              "class": "CONSTANT_SHARE_ONLY",
+              "lower": 0.342991,
+              "lower_post_hoc_withdrawn": 0.332899,
+              "premise_max_linear_rms": 0.06,
+              "premise_radius_Mpc": 163.934426,
+              "primary_rms_at_premise": 0.078816,
+              "primary_target_inside": false,
+              "share_upper": 0.03812,
+              "upper": 0.748668,
+              "upper_post_hoc_withdrawn": 0.72664
+            },
+            "cell_side_100_as_sphere_62": {
+              "class": "CONSTANT_SHARE_ONLY",
+              "lower": 0.342991,
+              "lower_post_hoc_withdrawn": 0.332899,
+              "premise_max_linear_rms": 0.1,
+              "premise_radius_Mpc": 101.696802,
+              "primary_rms_at_premise": 0.145315,
+              "primary_target_inside": false,
+              "share_upper": 0.031372,
+              "upper": 0.676762,
+              "upper_post_hoc_withdrawn": 0.656849
+            }
+          },
+          "radius_scan": [
+            {
+              "length_h_inverse_Mpc": 6.0,
+              "monotone_lower_p_fvLS": 0.414815,
+              "pbs_svdw04_seed_compressed": 2.585766,
+              "pbs_tracker_seed_compressed": 1.187878,
+              "radius_Mpc": 9.836066
+            },
+            {
+              "length_h_inverse_Mpc": 7.0,
+              "monotone_lower_p_fvLS": 0.375373,
+              "pbs_svdw04_seed_compressed": 2.475056,
+              "pbs_tracker_seed_compressed": 1.075246,
+              "radius_Mpc": 11.47541
+            },
+            {
+              "length_h_inverse_Mpc": 8.0,
+              "monotone_lower_p_fvLS": 0.342991,
+              "pbs_svdw04_seed_compressed": 2.362945,
+              "pbs_tracker_seed_compressed": 0.982682,
+              "radius_Mpc": 13.114754
+            },
+            {
+              "length_h_inverse_Mpc": 9.0,
+              "monotone_lower_p_fvLS": 0.315813,
+              "pbs_svdw04_seed_compressed": 2.252337,
+              "pbs_tracker_seed_compressed": 0.904947,
+              "radius_Mpc": 14.754098
+            },
+            {
+              "length_h_inverse_Mpc": 10.0,
+              "monotone_lower_p_fvLS": 0.292611,
+              "pbs_svdw04_seed_compressed": 2.14525,
+              "pbs_tracker_seed_compressed": 0.83855,
+              "radius_Mpc": 16.393443
+            },
+            {
+              "length_h_inverse_Mpc": 12.0,
+              "monotone_lower_p_fvLS": 0.254948,
+              "pbs_svdw04_seed_compressed": 1.946203,
+              "pbs_tracker_seed_compressed": 0.73072,
+              "radius_Mpc": 19.672131
+            }
+          ]
+        },
+        "c_bare_volume_average": {
+          "closures": {
+            "monotone_lower_p_fvLS": {
+              "linear_sigma_direct_A_s": 0.368859,
+              "linear_sigma_post_hoc_normalised": 0.358006,
+              "propagator_k0": 0.353247,
+              "radius_Mpc": 11.781424,
+              "scale_dependence_rel": 0.0,
+              "share_k0": 5.07e-05,
+              "unit_growth_sigma": 1.044197,
+              "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
+              "void_volume_response_rms": 0.001
+            },
+            "pbs_svdw04_seed_compressed": {
+              "linear_sigma_direct_A_s": 2.454134,
+              "linear_sigma_post_hoc_normalised": 2.381925,
+              "propagator_k0": 3.089525,
+              "radius_Mpc": 11.781424,
+              "scale_dependence_rel": -0.239281,
+              "share_k0": 0.2493724,
+              "unit_growth_sigma": 1.044197,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 3.4647
+            },
+            "pbs_tracker_seed_F_median_compressed": {
+              "linear_sigma_direct_A_s": 0.816059,
+              "linear_sigma_post_hoc_normalised": 0.792048,
+              "propagator_k0": 0.781557,
+              "radius_Mpc": 11.781424,
+              "scale_dependence_rel": -4.9e-05,
+              "share_k0": 0.039077,
+              "unit_growth_sigma": 1.044197,
+              "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
+              "void_volume_response_rms": 0.7371
+            },
+            "pbs_tracker_seed_compressed": {
+              "linear_sigma_direct_A_s": 1.056633,
+              "linear_sigma_post_hoc_normalised": 1.025543,
+              "propagator_k0": 1.012877,
+              "radius_Mpc": 11.781424,
+              "scale_dependence_rel": -0.000955,
+              "share_k0": 0.0601543,
+              "unit_growth_sigma": 1.044197,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 1.1331
+            },
+            "pbs_tracker_seed_threshold_only_1G_D": {
+              "linear_sigma_direct_A_s": 1.056051,
+              "linear_sigma_post_hoc_normalised": 1.024979,
+              "propagator_k0": 1.01232,
+              "radius_Mpc": 11.781424,
+              "scale_dependence_rel": -0.000956,
+              "share_k0": 0.0601035,
+              "unit_growth_sigma": 1.044197,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 1.1322
+            },
+            "strict_flat_walls_p1": {
+              "linear_sigma_direct_A_s": 11.828223,
+              "linear_sigma_post_hoc_normalised": 11.480199,
+              "propagator_k0": 11.327583,
+              "radius_Mpc": 11.781424,
+              "scale_dependence_rel": 0.0,
+              "share_k0": 1.0,
+              "unit_growth_sigma": 1.044197,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 18.8648
+            },
+            "wall_mode_p0": {
+              "linear_sigma_direct_A_s": 0.368278,
+              "linear_sigma_post_hoc_normalised": 0.357442,
+              "propagator_k0": 0.35269,
+              "radius_Mpc": 11.781424,
+              "scale_dependence_rel": 0.0,
+              "share_k0": 0.0,
+              "unit_growth_sigma": 1.044197,
+              "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
+              "void_volume_response_rms": 0.0
+            }
+          },
+          "intervals": {
+            "W09_10pct_at_100": {
+              "class": "CONSTANT_SHARE_ONLY",
+              "lower": 0.368859,
+              "lower_post_hoc_withdrawn": 0.358006,
+              "premise_max_linear_rms": 0.1,
+              "premise_radius_Mpc": 147.267802,
+              "primary_rms_at_premise": 0.091034,
+              "primary_target_inside": true,
+              "share_upper": 0.069242,
+              "upper": 1.161784,
+              "upper_post_hoc_withdrawn": 1.127601
+            },
+            "W09_10pct_at_150": {
+              "class": "CONSTANT_SHARE_ONLY",
+              "lower": 0.368859,
+              "lower_post_hoc_withdrawn": 0.358006,
+              "premise_max_linear_rms": 0.1,
+              "premise_radius_Mpc": 220.901703,
+              "primary_rms_at_premise": 0.051634,
+              "primary_target_inside": true,
+              "share_upper": 0.146603,
+              "upper": 2.048339,
+              "upper_post_hoc_withdrawn": 1.98807
+            },
+            "W09_several_pct_6pct_at_100": {
+              "class": "CONSTANT_SHARE_ONLY",
+              "lower": 0.368859,
+              "lower_post_hoc_withdrawn": 0.358006,
+              "premise_max_linear_rms": 0.06,
+              "premise_radius_Mpc": 147.267802,
+              "primary_rms_at_premise": 0.091034,
+              "primary_target_inside": false,
+              "share_upper": 0.028691,
+              "upper": 0.697071,
+              "upper_post_hoc_withdrawn": 0.676561
+            },
+            "cell_side_100_as_sphere_62": {
+              "class": "CONSTANT_SHARE_ONLY",
+              "lower": 0.368859,
+              "lower_post_hoc_withdrawn": 0.358006,
+              "premise_max_linear_rms": 0.1,
+              "premise_radius_Mpc": 91.357653,
+              "primary_rms_at_premise": 0.165068,
+              "primary_target_inside": false,
+              "share_upper": 0.023772,
+              "upper": 0.640708,
+              "upper_post_hoc_withdrawn": 0.621857
+            }
+          },
+          "normalisation_variants": {
+            "A_s_factor": 0.942019266,
+            "interval_W09_10pct_at_100_reclosure": {
+              "lower": 0.358006,
+              "share_upper": 0.072315,
+              "upper": 1.161784
+            },
+            "monotone_lower_p_fvLS": {
+              "direct": 0.368859,
+              "post_hoc_fixed_closure": 0.358006,
+              "reclosure": 0.358006,
+              "reclosure_over_post_hoc": 1.0,
+              "share_k0_direct": 5.1e-05,
+              "share_k0_reclosure": 5.1e-05
+            },
+            "pbs_tracker_seed_F_median_compressed": {
+              "direct": 0.816059,
+              "post_hoc_fixed_closure": 0.792048,
+              "reclosure": 0.805206,
+              "reclosure_over_post_hoc": 1.016613,
+              "share_k0_direct": 0.039077,
+              "share_k0_reclosure": 0.04026
+            },
+            "pbs_tracker_seed_compressed": {
+              "direct": 1.056633,
+              "post_hoc_fixed_closure": 1.025543,
+              "reclosure": 1.04578,
+              "reclosure_over_post_hoc": 1.019733,
+              "share_k0_direct": 0.060154,
+              "share_k0_reclosure": 0.061976
+            }
+          },
+          "radius_scan": [
+            {
+              "length_h_inverse_Mpc": 6.0,
+              "monotone_lower_p_fvLS": 0.443536,
+              "pbs_svdw04_seed_compressed": 2.650991,
+              "pbs_tracker_seed_compressed": 1.269802,
+              "radius_Mpc": 8.836068
+            },
+            {
+              "length_h_inverse_Mpc": 7.0,
+              "monotone_lower_p_fvLS": 0.402573,
+              "pbs_svdw04_seed_compressed": 2.554198,
+              "pbs_tracker_seed_compressed": 1.152934,
+              "radius_Mpc": 10.308746
+            },
+            {
+              "length_h_inverse_Mpc": 8.0,
+              "monotone_lower_p_fvLS": 0.368859,
+              "pbs_svdw04_seed_compressed": 2.454134,
+              "pbs_tracker_seed_compressed": 1.056633,
+              "radius_Mpc": 11.781424
+            },
+            {
+              "length_h_inverse_Mpc": 9.0,
+              "monotone_lower_p_fvLS": 0.340499,
+              "pbs_svdw04_seed_compressed": 2.353451,
+              "pbs_tracker_seed_compressed": 0.975556,
+              "radius_Mpc": 13.254102
+            },
+            {
+              "length_h_inverse_Mpc": 10.0,
+              "monotone_lower_p_fvLS": 0.316231,
+              "pbs_svdw04_seed_compressed": 2.254156,
+              "pbs_tracker_seed_compressed": 0.906141,
+              "radius_Mpc": 14.72678
+            },
+            {
+              "length_h_inverse_Mpc": 12.0,
+              "monotone_lower_p_fvLS": 0.276713,
+              "pbs_svdw04_seed_compressed": 2.065016,
+              "pbs_tracker_seed_compressed": 0.793041,
+              "radius_Mpc": 17.672136
+            }
+          ]
+        }
+      },
+      "flat_wall_cap_exceedance": {
+        "capacity_ratio_at_target": 18.863833,
+        "gaussian_fraction_above_cap": 0.478861
+      },
+      "flat_wall_capacity": {
+        "cap_f_v_ls_over_f_w_ls": 5.074e-05,
+        "radius_Mpc": 208.79964858,
+        "radius_bare_h_inv_Mpc": 141.78228092,
+        "radius_dressed_h_inv_Mpc": 127.36778563
+      },
+      "growth": {
+        "f_v_ls": 5.0734750052150474e-05,
+        "gamma_w0": 1.3135,
+        "gamma_w_ls": 1.0000253673750261,
+        "t_ls_over_t0": 3.0183448047383194e-05,
+        "void_share_growth": 11.327583314531257,
+        "void_to_wall_growth_ratio": 32.117646701977165,
+        "wall_share_growth": 0.3526903268985125
+      },
+      "h_bare": 0.5169661631649954,
+      "h_dressed": 0.61,
+      "m3_two_barrier_alternative": {
+        "C1_clock_growth_today": 0.945503,
+        "compressed_with_long_mode": {
+          "bias": 1.354601,
+          "equivalent_tracker_share": 0.084565,
+          "global_growth_today": 1.280779,
+          "linear_sigma_c_direct": 1.337385
+        },
+        "note": "1G-F's M3 budget: void volume fraction 0.751969 (not the tracker's f_v0), finite-density voids x = 0.2047; a different conditional model, compared by its equivalent tracker share only",
+        "universal_wall_density": {
+          "bias": 0.354601,
+          "equivalent_tracker_share": -0.001587,
+          "global_growth_today": 0.335276,
+          "linear_sigma_c_direct": 0.350094
+        }
+      },
+      "omega_m_per_photon": 0.13093722890629916,
+      "refined_quadrature_linear_sigma_c_pbs": 1.056632599,
+      "scale_separation_convention_c": {
+        "F_median_present_void_radius_Mpc": 6.030149,
+        "F_median_ratio": 0.389673,
+        "W09_15_present_void_radius_Mpc": 24.590164,
+        "W09_15_ratio": 1.589035,
+        "present_proper_region_radius_Mpc": 15.474901
+      },
+      "seed_radius_sensitivity": {
+        "svdw04_factor_1.72": {
+          "R_s_Mpc": 14.296607,
+          "linear_sigma_c_direct": 2.454134,
+          "share_k0": 0.2493724,
+          "void_volume_response_rms": 3.4647
+        },
+        "tracker_seed_F_median": {
+          "R_s_Mpc": 0.198569,
+          "linear_sigma_c_direct": 0.816059,
+          "share_k0": 0.039077,
+          "void_volume_response_rms": 0.7371
+        },
+        "tracker_seed_W09_15": {
+          "R_s_Mpc": 0.809737,
+          "linear_sigma_c_direct": 1.056633,
+          "share_k0": 0.0601543,
+          "void_volume_response_rms": 1.1331
+        },
+        "tracker_seed_W09_30": {
+          "R_s_Mpc": 1.619474,
+          "linear_sigma_c_direct": 1.257803,
+          "share_k0": 0.078069,
+          "void_volume_response_rms": 1.4643
+        },
+        "tracker_seed_W09_7.5": {
+          "R_s_Mpc": 0.404869,
+          "linear_sigma_c_direct": 0.917515,
+          "share_k0": 0.0479444,
+          "void_volume_response_rms": 0.9041
+        }
+      },
+      "step_share_counterexample": {
+        "constant_share_upper": 1.161784484,
+        "k_cut_per_Mpc": 0.069092695,
+        "premise_eta": 0.1,
+        "premise_radius_Mpc": 147.267801886,
+        "premise_rms": 0.0999,
+        "ratio_to_constant_share_upper": 8.911209325,
+        "share_high_k": 1.0,
+        "share_low_k": 5.0735e-05,
+        "target_radius_Mpc": 11.781424151,
+        "target_rms": 10.352904725
+      }
+    },
+    "PAPER_REFERENCE": {
+      "a_s_scaling_pbs_tracker_seed": {
+        "x0.5": {
+          "d_ln_sigma_d_ln_A_s": 0.101809,
+          "void_share_rms_ratio": 0.9997492,
+          "wall_share_rms_ratio": 0.670707
+        },
+        "x2": {
+          "d_ln_sigma_d_ln_A_s": 0.13272,
+          "void_share_rms_ratio": 1.0003546,
+          "wall_share_rms_ratio": 1.465691
+        }
+      },
+      "conventions": {
+        "a_equal_mass": {
+          "closures": {
+            "monotone_lower_p_fvLS": {
+              "linear_sigma_direct_A_s": 0.226629,
+              "linear_sigma_post_hoc_normalised": 0.219961,
+              "propagator_k0": 0.231268,
+              "radius_Mpc": 12.570168,
+              "scale_dependence_rel": 0.0,
+              "share_k0": 9.47e-05,
+              "unit_growth_sigma": 0.979939,
+              "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
+              "void_volume_response_rms": 0.0009
+            },
+            "pbs_svdw04_seed_compressed": {
+              "linear_sigma_direct_A_s": 2.447443,
+              "linear_sigma_post_hoc_normalised": 2.375432,
+              "propagator_k0": 3.025404,
+              "radius_Mpc": 12.570168,
+              "scale_dependence_rel": -0.174475,
+              "share_k0": 0.4049291,
+              "unit_growth_sigma": 0.979939,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 3.1232
+            },
+            "pbs_tracker_seed_F_median_compressed": {
+              "linear_sigma_direct_A_s": 0.704376,
+              "linear_sigma_post_hoc_normalised": 0.683651,
+              "propagator_k0": 0.718822,
+              "radius_Mpc": 12.570168,
+              "scale_dependence_rel": -3.7e-05,
+              "share_k0": 0.070735,
+              "unit_growth_sigma": 0.979939,
+              "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
+              "void_volume_response_rms": 0.6708
+            },
+            "pbs_tracker_seed_compressed": {
+              "linear_sigma_direct_A_s": 0.974562,
+              "linear_sigma_post_hoc_normalised": 0.945887,
+              "propagator_k0": 0.995371,
+              "radius_Mpc": 12.570168,
+              "scale_dependence_rel": -0.000862,
+              "share_k0": 0.1108033,
+              "unit_growth_sigma": 0.979939,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 1.0496
+            },
+            "pbs_tracker_seed_threshold_only_1G_D": {
+              "linear_sigma_direct_A_s": 0.973922,
+              "linear_sigma_post_hoc_normalised": 0.945266,
+              "propagator_k0": 0.994717,
+              "radius_Mpc": 12.570168,
+              "scale_dependence_rel": -0.000863,
+              "share_k0": 0.1107086,
+              "unit_growth_sigma": 0.979939,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 1.0487
+            },
+            "strict_flat_walls_p1": {
+              "linear_sigma_direct_A_s": 6.989454,
+              "linear_sigma_post_hoc_normalised": 6.783802,
+              "propagator_k0": 7.132537,
+              "radius_Mpc": 12.570168,
+              "scale_dependence_rel": 0.0,
+              "share_k0": 1.0,
+              "unit_growth_sigma": 0.979939,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 9.4837
+            },
+            "wall_mode_p0": {
+              "linear_sigma_direct_A_s": 0.225988,
+              "linear_sigma_post_hoc_normalised": 0.219339,
+              "propagator_k0": 0.230615,
+              "radius_Mpc": 12.570168,
+              "scale_dependence_rel": 0.0,
+              "share_k0": 0.0,
+              "unit_growth_sigma": 0.979939,
+              "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
+              "void_volume_response_rms": 0.0
+            }
+          },
+          "intervals": {
+            "W09_10pct_at_100": {
+              "class": "CONSTANT_SHARE_ONLY",
+              "lower": 0.226629,
+              "lower_post_hoc_withdrawn": 0.219961,
+              "premise_max_linear_rms": 0.1,
+              "premise_radius_Mpc": 157.1271,
+              "primary_rms_at_premise": 0.084955,
+              "primary_target_inside": true,
+              "share_upper": 0.136341,
+              "upper": 1.148125,
+              "upper_post_hoc_withdrawn": 1.114343
+            },
+            "W09_10pct_at_150": {
+              "class": "CONSTANT_SHARE_ONLY",
+              "lower": 0.226629,
+              "lower_post_hoc_withdrawn": 0.219961,
+              "premise_max_linear_rms": 0.1,
+              "premise_radius_Mpc": 235.69065,
+              "primary_rms_at_premise": 0.048209,
+              "primary_target_inside": true,
+              "share_upper": 0.265735,
+              "upper": 2.023276,
+              "upper_post_hoc_withdrawn": 1.963744
+            },
+            "W09_several_pct_6pct_at_100": {
+              "class": "CONSTANT_SHARE_ONLY",
+              "lower": 0.226629,
+              "lower_post_hoc_withdrawn": 0.219961,
+              "premise_max_linear_rms": 0.06,
+              "premise_radius_Mpc": 157.1271,
+              "primary_rms_at_premise": 0.084955,
+              "primary_target_inside": false,
+              "share_upper": 0.068439,
+              "upper": 0.688875,
+              "upper_post_hoc_withdrawn": 0.668606
+            },
+            "cell_side_100_as_sphere_62": {
+              "class": "CONSTANT_SHARE_ONLY",
+              "lower": 0.226629,
+              "lower_post_hoc_withdrawn": 0.219961,
+              "premise_max_linear_rms": 0.1,
+              "premise_radius_Mpc": 97.473874,
+              "primary_rms_at_premise": 0.153755,
+              "primary_target_inside": false,
+              "share_upper": 0.06038,
+              "upper": 0.634366,
+              "upper_post_hoc_withdrawn": 0.615701
+            }
+          },
+          "normalisation_variants": {
+            "A_s_factor": 0.942019266,
+            "interval_W09_10pct_at_100_reclosure": {
+              "lower": 0.219961,
+              "share_upper": 0.141487,
+              "upper": 1.148125
+            },
+            "monotone_lower_p_fvLS": {
+              "direct": 0.226629,
+              "post_hoc_fixed_closure": 0.219961,
+              "reclosure": 0.219961,
+              "reclosure_over_post_hoc": 1.0,
+              "share_k0_direct": 9.5e-05,
+              "share_k0_reclosure": 9.5e-05
+            },
+            "pbs_tracker_seed_F_median_compressed": {
+              "direct": 0.704376,
+              "post_hoc_fixed_closure": 0.683651,
+              "reclosure": 0.697708,
+              "reclosure_over_post_hoc": 1.020561,
+              "share_k0_direct": 0.070735,
+              "share_k0_reclosure": 0.072876
+            },
+            "pbs_tracker_seed_compressed": {
+              "direct": 0.974562,
+              "post_hoc_fixed_closure": 0.945887,
+              "reclosure": 0.967894,
+              "reclosure_over_post_hoc": 1.023266,
+              "share_k0_direct": 0.110803,
+              "share_k0_reclosure": 0.11416
+            }
+          },
+          "radius_scan": [
+            {
+              "length_h_inverse_Mpc": 6.0,
+              "monotone_lower_p_fvLS": 0.272286,
+              "pbs_svdw04_seed_compressed": 2.697046,
+              "pbs_tracker_seed_compressed": 1.170277,
+              "radius_Mpc": 9.427626
+            },
+            {
+              "length_h_inverse_Mpc": 7.0,
+              "monotone_lower_p_fvLS": 0.247245,
+              "pbs_svdw04_seed_compressed": 2.571979,
+              "pbs_tracker_seed_compressed": 1.062986,
+              "radius_Mpc": 10.998897
+            },
+            {
+              "length_h_inverse_Mpc": 8.0,
+              "monotone_lower_p_fvLS": 0.226629,
+              "pbs_svdw04_seed_compressed": 2.447443,
+              "pbs_tracker_seed_compressed": 0.974562,
+              "radius_Mpc": 12.570168
+            },
+            {
+              "length_h_inverse_Mpc": 9.0,
+              "monotone_lower_p_fvLS": 0.209282,
+              "pbs_svdw04_seed_compressed": 2.326547,
+              "pbs_tracker_seed_compressed": 0.900103,
+              "radius_Mpc": 14.141439
+            },
+            {
+              "length_h_inverse_Mpc": 10.0,
+              "monotone_lower_p_fvLS": 0.194434,
+              "pbs_svdw04_seed_compressed": 2.211246,
+              "pbs_tracker_seed_compressed": 0.836341,
+              "radius_Mpc": 15.71271
+            },
+            {
+              "length_h_inverse_Mpc": 12.0,
+              "monotone_lower_p_fvLS": 0.170248,
+              "pbs_svdw04_seed_compressed": 2.000824,
+              "pbs_tracker_seed_compressed": 0.732419,
+              "radius_Mpc": 18.855252
+            }
+          ]
+        },
+        "b_dressed_wall_comoving": {
+          "closures": {
+            "monotone_lower_p_fvLS": {
+              "linear_sigma_direct_A_s": 0.247886,
+              "linear_sigma_post_hoc_normalised": 0.240593,
+              "propagator_k0": 0.231268,
+              "radius_Mpc": 10.954402,
+              "scale_dependence_rel": 0.0,
+              "share_k0": 9.47e-05,
+              "unit_growth_sigma": 1.071856,
+              "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
+              "void_volume_response_rms": 0.001
+            },
+            "pbs_svdw04_seed_compressed": {
+              "linear_sigma_direct_A_s": 2.57553,
+              "linear_sigma_post_hoc_normalised": 2.49975,
+              "propagator_k0": 3.025404,
+              "radius_Mpc": 10.954402,
+              "scale_dependence_rel": -0.205769,
+              "share_k0": 0.4049291,
+              "unit_growth_sigma": 1.071856,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 3.2779
+            },
+            "pbs_tracker_seed_F_median_compressed": {
+              "linear_sigma_direct_A_s": 0.770437,
+              "linear_sigma_post_hoc_normalised": 0.747769,
+              "propagator_k0": 0.718822,
+              "radius_Mpc": 10.954402,
+              "scale_dependence_rel": -4.7e-05,
+              "share_k0": 0.070735,
+              "unit_growth_sigma": 1.071856,
+              "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
+              "void_volume_response_rms": 0.7337
+            },
+            "pbs_tracker_seed_compressed": {
+              "linear_sigma_direct_A_s": 1.065737,
+              "linear_sigma_post_hoc_normalised": 1.034379,
+              "propagator_k0": 0.995371,
+              "radius_Mpc": 10.954402,
+              "scale_dependence_rel": -0.001085,
+              "share_k0": 0.1108033,
+              "unit_growth_sigma": 1.071856,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 1.1478
+            },
+            "pbs_tracker_seed_threshold_only_1G_D": {
+              "linear_sigma_direct_A_s": 1.065036,
+              "linear_sigma_post_hoc_normalised": 1.033699,
+              "propagator_k0": 0.994717,
+              "radius_Mpc": 10.954402,
+              "scale_dependence_rel": -0.001085,
+              "share_k0": 0.1107086,
+              "unit_growth_sigma": 1.071856,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 1.1468
+            },
+            "strict_flat_walls_p1": {
+              "linear_sigma_direct_A_s": 7.645052,
+              "linear_sigma_post_hoc_normalised": 7.42011,
+              "propagator_k0": 7.132537,
+              "radius_Mpc": 10.954402,
+              "scale_dependence_rel": 0.0,
+              "share_k0": 1.0,
+              "unit_growth_sigma": 1.071856,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 10.3732
+            },
+            "wall_mode_p0": {
+              "linear_sigma_direct_A_s": 0.247186,
+              "linear_sigma_post_hoc_normalised": 0.239913,
+              "propagator_k0": 0.230615,
+              "radius_Mpc": 10.954402,
+              "scale_dependence_rel": 0.0,
+              "share_k0": 0.0,
+              "unit_growth_sigma": 1.071856,
+              "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
+              "void_volume_response_rms": 0.0
+            }
+          },
+          "intervals": {
+            "W09_10pct_at_100": {
+              "class": "CONSTANT_SHARE_ONLY",
+              "lower": 0.247886,
+              "lower_post_hoc_withdrawn": 0.240593,
+              "premise_max_linear_rms": 0.1,
+              "premise_radius_Mpc": 136.930029,
+              "primary_rms_at_premise": 0.101573,
+              "primary_target_inside": false,
+              "share_upper": 0.108567,
+              "upper": 1.050353,
+              "upper_post_hoc_withdrawn": 1.019448
+            },
+            "W09_10pct_at_150": {
+              "class": "CONSTANT_SHARE_ONLY",
+              "lower": 0.247886,
+              "lower_post_hoc_withdrawn": 0.240593,
+              "premise_max_linear_rms": 0.1,
+              "premise_radius_Mpc": 205.395043,
+              "primary_rms_at_premise": 0.058825,
+              "primary_target_inside": true,
+              "share_upper": 0.211747,
+              "upper": 1.813662,
+              "upper_post_hoc_withdrawn": 1.760298
+            },
+            "W09_several_pct_6pct_at_100": {
+              "class": "CONSTANT_SHARE_ONLY",
+              "lower": 0.247886,
+              "lower_post_hoc_withdrawn": 0.240593,
+              "premise_max_linear_rms": 0.06,
+              "premise_radius_Mpc": 136.930029,
+              "primary_rms_at_premise": 0.101573,
+              "primary_target_inside": false,
+              "share_upper": 0.051775,
+              "upper": 0.630212,
+              "upper_post_hoc_withdrawn": 0.611669
+            },
+            "cell_side_100_as_sphere_62": {
+              "class": "CONSTANT_SHARE_ONLY",
+              "lower": 0.247886,
+              "lower_post_hoc_withdrawn": 0.240593,
+              "premise_max_linear_rms": 0.1,
+              "premise_radius_Mpc": 84.944611,
+              "primary_rms_at_premise": 0.180065,
+              "primary_target_inside": false,
+              "share_upper": 0.046675,
+              "upper": 0.592479,
+              "upper_post_hoc_withdrawn": 0.575046
+            }
+          },
+          "radius_scan": [
+            {
+              "length_h_inverse_Mpc": 6.0,
+              "monotone_lower_p_fvLS": 0.29575,
+              "pbs_svdw04_seed_compressed": 2.791124,
+              "pbs_tracker_seed_compressed": 1.27066,
+              "radius_Mpc": 8.215802
+            },
+            {
+              "length_h_inverse_Mpc": 7.0,
+              "monotone_lower_p_fvLS": 0.269532,
+              "pbs_svdw04_seed_compressed": 2.684602,
+              "pbs_tracker_seed_compressed": 1.158483,
+              "radius_Mpc": 9.585102
+            },
+            {
+              "length_h_inverse_Mpc": 8.0,
+              "monotone_lower_p_fvLS": 0.247886,
+              "pbs_svdw04_seed_compressed": 2.57553,
+              "pbs_tracker_seed_compressed": 1.065737,
+              "radius_Mpc": 10.954402
+            },
+            {
+              "length_h_inverse_Mpc": 9.0,
+              "monotone_lower_p_fvLS": 0.229623,
+              "pbs_svdw04_seed_compressed": 2.466802,
+              "pbs_tracker_seed_compressed": 0.987407,
+              "radius_Mpc": 12.323703
+            },
+            {
+              "length_h_inverse_Mpc": 10.0,
+              "monotone_lower_p_fvLS": 0.213949,
+              "pbs_svdw04_seed_compressed": 2.360546,
+              "pbs_tracker_seed_compressed": 0.920142,
+              "radius_Mpc": 13.693003
+            },
+            {
+              "length_h_inverse_Mpc": 12.0,
+              "monotone_lower_p_fvLS": 0.188323,
+              "pbs_svdw04_seed_compressed": 2.160664,
+              "pbs_tracker_seed_compressed": 0.810086,
+              "radius_Mpc": 16.431603
+            }
+          ]
+        },
+        "c_bare_volume_average": {
+          "closures": {
+            "monotone_lower_p_fvLS": {
+              "linear_sigma_direct_A_s": 0.260866,
+              "linear_sigma_post_hoc_normalised": 0.25319,
+              "propagator_k0": 0.231268,
+              "radius_Mpc": 10.10408,
+              "scale_dependence_rel": 0.0,
+              "share_k0": 9.47e-05,
+              "unit_growth_sigma": 1.127979,
+              "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
+              "void_volume_response_rms": 0.001
+            },
+            "pbs_svdw04_seed_compressed": {
+              "linear_sigma_direct_A_s": 2.643389,
+              "linear_sigma_post_hoc_normalised": 2.565612,
+              "propagator_k0": 3.025404,
+              "radius_Mpc": 10.10408,
+              "scale_dependence_rel": -0.225401,
+              "share_k0": 0.4049291,
+              "unit_growth_sigma": 1.127979,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 3.3589
+            },
+            "pbs_tracker_seed_F_median_compressed": {
+              "linear_sigma_direct_A_s": 0.810772,
+              "linear_sigma_post_hoc_normalised": 0.786917,
+              "propagator_k0": 0.718822,
+              "radius_Mpc": 10.10408,
+              "scale_dependence_rel": -5.3e-05,
+              "share_k0": 0.070735,
+              "unit_growth_sigma": 1.127979,
+              "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
+              "void_volume_response_rms": 0.7721
+            },
+            "pbs_tracker_seed_compressed": {
+              "linear_sigma_direct_A_s": 1.121363,
+              "linear_sigma_post_hoc_normalised": 1.088369,
+              "propagator_k0": 0.995371,
+              "radius_Mpc": 10.10408,
+              "scale_dependence_rel": -0.001242,
+              "share_k0": 0.1108033,
+              "unit_growth_sigma": 1.127979,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 1.2076
+            },
+            "pbs_tracker_seed_threshold_only_1G_D": {
+              "linear_sigma_direct_A_s": 1.120625,
+              "linear_sigma_post_hoc_normalised": 1.087653,
+              "propagator_k0": 0.994717,
+              "radius_Mpc": 10.10408,
+              "scale_dependence_rel": -0.001243,
+              "share_k0": 0.1107086,
+              "unit_growth_sigma": 1.127979,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 1.2066
+            },
+            "strict_flat_walls_p1": {
+              "linear_sigma_direct_A_s": 8.045349,
+              "linear_sigma_post_hoc_normalised": 7.808629,
+              "propagator_k0": 7.132537,
+              "radius_Mpc": 10.10408,
+              "scale_dependence_rel": 0.0,
+              "share_k0": 1.0,
+              "unit_growth_sigma": 1.127979,
+              "void_response_regime": "VOID_RESPONSE_NONPERTURBATIVE",
+              "void_volume_response_rms": 10.9163
+            },
+            "wall_mode_p0": {
+              "linear_sigma_direct_A_s": 0.260128,
+              "linear_sigma_post_hoc_normalised": 0.252474,
+              "propagator_k0": 0.230615,
+              "radius_Mpc": 10.10408,
+              "scale_dependence_rel": 0.0,
+              "share_k0": 0.0,
+              "unit_growth_sigma": 1.127979,
+              "void_response_regime": "VOID_RESPONSE_PERTURBATIVE",
+              "void_volume_response_rms": 0.0
+            }
+          },
+          "intervals": {
+            "W09_10pct_at_100": {
+              "class": "CONSTANT_SHARE_ONLY",
+              "lower": 0.260866,
+              "lower_post_hoc_withdrawn": 0.25319,
+              "premise_max_linear_rms": 0.1,
+              "premise_radius_Mpc": 126.301,
+              "primary_rms_at_premise": 0.112468,
+              "primary_target_inside": false,
+              "share_upper": 0.094813,
+              "upper": 0.998268,
+              "upper_post_hoc_withdrawn": 0.968895
+            },
+            "W09_10pct_at_150": {
+              "class": "CONSTANT_SHARE_ONLY",
+              "lower": 0.260866,
+              "lower_post_hoc_withdrawn": 0.25319,
+              "premise_max_linear_rms": 0.1,
+              "premise_radius_Mpc": 189.451499,
+              "primary_rms_at_premise": 0.065906,
+              "primary_target_inside": true,
+              "share_upper": 0.185406,
+              "upper": 1.703551,
+              "upper_post_hoc_withdrawn": 1.653427
+            },
+            "W09_several_pct_6pct_at_100": {
+              "class": "CONSTANT_SHARE_ONLY",
+              "lower": 0.260866,
+              "lower_post_hoc_withdrawn": 0.25319,
+              "premise_max_linear_rms": 0.06,
+              "premise_radius_Mpc": 126.301,
+              "primary_rms_at_premise": 0.112468,
+              "primary_target_inside": false,
+              "share_upper": 0.043522,
+              "upper": 0.598961,
+              "upper_post_hoc_withdrawn": 0.581337
+            },
+            "cell_side_100_as_sphere_62": {
+              "class": "CONSTANT_SHARE_ONLY",
+              "lower": 0.260866,
+              "lower_post_hoc_withdrawn": 0.25319,
+              "premise_max_linear_rms": 0.1,
+              "premise_radius_Mpc": 78.350887,
+              "primary_rms_at_premise": 0.197081,
+              "primary_target_inside": false,
+              "share_upper": 0.03976,
+              "upper": 0.569666,
+              "upper_post_hoc_withdrawn": 0.552904
+            }
+          },
+          "normalisation_variants": {
+            "A_s_factor": 0.942019266,
+            "interval_W09_10pct_at_100_reclosure": {
+              "lower": 0.25319,
+              "share_upper": 0.0987,
+              "upper": 0.998268
+            },
+            "monotone_lower_p_fvLS": {
+              "direct": 0.260866,
+              "post_hoc_fixed_closure": 0.25319,
+              "reclosure": 0.25319,
+              "reclosure_over_post_hoc": 1.0,
+              "share_k0_direct": 9.5e-05,
+              "share_k0_reclosure": 9.5e-05
+            },
+            "pbs_tracker_seed_F_median_compressed": {
+              "direct": 0.810772,
+              "post_hoc_fixed_closure": 0.786917,
+              "reclosure": 0.803097,
+              "reclosure_over_post_hoc": 1.020561,
+              "share_k0_direct": 0.070735,
+              "share_k0_reclosure": 0.072876
+            },
+            "pbs_tracker_seed_compressed": {
+              "direct": 1.121363,
+              "post_hoc_fixed_closure": 1.088369,
+              "reclosure": 1.113687,
+              "reclosure_over_post_hoc": 1.023263,
+              "share_k0_direct": 0.110803,
+              "share_k0_reclosure": 0.11416
+            }
+          },
+          "radius_scan": [
+            {
+              "length_h_inverse_Mpc": 6.0,
+              "monotone_lower_p_fvLS": 0.310014,
+              "pbs_svdw04_seed_compressed": 2.838852,
+              "pbs_tracker_seed_compressed": 1.331603,
+              "radius_Mpc": 7.57806
+            },
+            {
+              "length_h_inverse_Mpc": 7.0,
+              "monotone_lower_p_fvLS": 0.283111,
+              "pbs_svdw04_seed_compressed": 2.743018,
+              "pbs_tracker_seed_compressed": 1.216608,
+              "radius_Mpc": 8.84107
+            },
+            {
+              "length_h_inverse_Mpc": 8.0,
+              "monotone_lower_p_fvLS": 0.260866,
+              "pbs_svdw04_seed_compressed": 2.643389,
+              "pbs_tracker_seed_compressed": 1.121363,
+              "radius_Mpc": 10.10408
+            },
+            {
+              "length_h_inverse_Mpc": 9.0,
+              "monotone_lower_p_fvLS": 0.242068,
+              "pbs_svdw04_seed_compressed": 2.542614,
+              "pbs_tracker_seed_compressed": 1.04079,
+              "radius_Mpc": 11.36709
+            },
+            {
+              "length_h_inverse_Mpc": 10.0,
+              "monotone_lower_p_fvLS": 0.225913,
+              "pbs_svdw04_seed_compressed": 2.442749,
+              "pbs_tracker_seed_compressed": 0.971491,
+              "radius_Mpc": 12.6301
+            },
+            {
+              "length_h_inverse_Mpc": 12.0,
+              "monotone_lower_p_fvLS": 0.199445,
+              "pbs_svdw04_seed_compressed": 2.251369,
+              "pbs_tracker_seed_compressed": 0.857863,
+              "radius_Mpc": 15.15612
+            }
+          ]
+        }
+      },
+      "flat_wall_cap_exceedance": {
+        "capacity_ratio_at_target": 10.915315,
+        "gaussian_fraction_above_cap": 0.463502
+      },
+      "flat_wall_capacity": {
+        "cap_f_v_ls_over_f_w_ls": 9.472e-05,
+        "radius_Mpc": 135.58344052,
+        "radius_bare_h_inv_Mpc": 107.34945953,
+        "radius_dressed_h_inv_Mpc": 99.01658661
+      },
+      "growth": {
+        "f_v_ls": 9.471062089872824e-05,
+        "gamma_w0": 1.3685,
+        "gamma_w_ls": 1.0000473553104494,
+        "t_ls_over_t0": 3.380088555844234e-05,
+        "void_share_growth": 7.132537333227989,
+        "void_to_wall_growth_ratio": 30.928389576352675,
+        "wall_share_growth": 0.23061457227250548
+      },
+      "h_bare": 0.5785600077340819,
+      "h_dressed": 0.7303000000000001,
+      "m3_two_barrier_alternative": {
+        "C1_clock_growth_today": 0.876778,
+        "compressed_with_long_mode": {
+          "bias": 1.354601,
+          "equivalent_tracker_share": 0.138667,
+          "global_growth_today": 1.187685,
+          "linear_sigma_c_direct": 1.339683
+        },
+        "note": "1G-F's M3 budget: void volume fraction 0.751969 (not the tracker's f_v0), finite-density voids x = 0.2047; a different conditional model, compared by its equivalent tracker share only",
+        "universal_wall_density": {
+          "bias": 0.354601,
+          "equivalent_tracker_share": 0.011633,
+          "global_growth_today": 0.310907,
+          "linear_sigma_c_direct": 0.350696
+        }
+      },
+      "omega_m_per_photon": 0.12047512089055853,
+      "refined_quadrature_linear_sigma_c_pbs": 1.12136266,
+      "scale_separation_convention_c": {
+        "F_median_present_void_radius_Mpc": 4.505875,
+        "F_median_ratio": 0.325865,
+        "W09_15_present_void_radius_Mpc": 20.539504,
+        "W09_15_ratio": 1.485417,
+        "present_proper_region_radius_Mpc": 13.827433
+      },
+      "seed_radius_sensitivity": {
+        "svdw04_factor_1.72": {
+          "R_s_Mpc": 11.941572,
+          "linear_sigma_c_direct": 2.643389,
+          "share_k0": 0.4049291,
+          "void_volume_response_rms": 3.3589
+        },
+        "tracker_seed_F_median": {
+          "R_s_Mpc": 0.166154,
+          "linear_sigma_c_direct": 0.810772,
+          "share_k0": 0.070735,
+          "void_volume_response_rms": 0.7721
+        },
+        "tracker_seed_W09_15": {
+          "R_s_Mpc": 0.757395,
+          "linear_sigma_c_direct": 1.121363,
+          "share_k0": 0.1108033,
+          "void_volume_response_rms": 1.2076
+        },
+        "tracker_seed_W09_30": {
+          "R_s_Mpc": 1.514789,
+          "linear_sigma_c_direct": 1.364007,
+          "share_k0": 0.1426947,
+          "void_volume_response_rms": 1.5479
+        },
+        "tracker_seed_W09_7.5": {
+          "R_s_Mpc": 0.378697,
+          "linear_sigma_c_direct": 0.951697,
+          "share_k0": 0.0888672,
+          "void_volume_response_rms": 0.9697
+        }
+      },
+      "step_share_counterexample": {
+        "constant_share_upper": 0.998267556,
+        "k_cut_per_Mpc": 0.066043199,
+        "premise_eta": 0.1,
+        "premise_radius_Mpc": 126.300999666,
+        "premise_rms": 0.0999,
+        "ratio_to_constant_share_upper": 7.259065513,
+        "share_high_k": 1.0,
+        "share_low_k": 9.4711e-05,
+        "target_radius_Mpc": 10.104079973,
+        "target_rms": 7.246489589
+      }
+    }
+  },
+  "revision": {
+    "audit_commit": "816dd004763f8de1a8bb09cba9e427a1bd2bb3d1",
+    "audit_report": "reports/phase1g_h_independent_audit.md",
+    "audit_verdict": {
+      "SCIENCE": "REJECT",
+      "other_areas": "ACCEPT_WITH_CORRECTIONS",
+      "overall": "REJECT"
+    },
+    "audited_commit": "d4d693d73f995e2245a5720be227273b3639eda9",
+    "audited_text_preserved_at": "d4d693d73f995e2245a5720be227273b3639eda9",
+    "date": "2026-10-07",
+    "historical": "2026-10-07 block, not rewritten; D3's 'same shared constraints' is narrowed by GH-DF1 (the pairs share the latent carrier law, not the conditionally normalised wall density): see revision_delta_audit and reports/phase1g_h_delta_audit_2_remediation.md (GH-D2F5)",
+    "kind": "INDEPENDENT_AUDIT_REMEDIATION",
+    "owner_approval_verbatim": "Procedi, usa le scelte raccomandate per i punti 1-4",
+    "owner_decisions": {
+      "D1": "GH-F1: the statistic is the formal tangent statistic (linear extrapolation of the early field with the zero-amplitude tangent propagator and the smoothing rule G_R = G W), presented as a proposal, not a closed definition",
+      "D2": "GH-F2: seed-indexed void accounting H-A9 with the scale-separation condition declared; the material-domain extension below the super-cell scale is not proved",
+      "D3": "GH-F5: the Gaussian pair requalified as a signed-carrier surrogate and its mechanism corrected; nonnegative lognormal pairs with the same shared constraints added",
+      "D4": "GH-F6: direct values primary; post-hoc fixed-closure normalisation and PBS reclosure under a rescaled input spectrum reported beside them"
+    },
+    "remediation_record": "reports/phase1g_h_audit_remediation.md"
+  },
+  "revision_delta_audit": {
+    "audited_text_preserved_at": "89cb041f901b51a3f90fa6831aab1b4553c1772c",
+    "date": "2026-10-08",
+    "delta_audit_commit": "5c325e1fd05b343f6d5e93f931038794de4373a2",
+    "delta_audit_report": "reports/phase1g_h_delta_audit.md",
+    "delta_audit_verdict": {
+      "NUMERICS": "ACCEPT",
+      "PROVENANCE": "ACCEPT",
+      "SCIENCE": "REJECT",
+      "other_areas": "ACCEPT_WITH_CORRECTIONS",
+      "overall": "REJECT"
+    },
+    "delta_audited_commit": "89cb041f901b51a3f90fa6831aab1b4553c1772c",
+    "kind": "DELTA_AUDIT_REMEDIATION",
+    "new_findings": [
+      "GH-DF1",
+      "GH-DF2",
+      "GH-DF3",
+      "GH-DF4",
+      "GH-DF5",
+      "GH-DF6"
+    ],
+    "original_findings_after_delta_audit": {
+      "OPEN_OWNER_CONFIRMATION": 1,
+      "PARTIALLY_RESOLVED": 6,
+      "RESOLVED": 6,
+      "RESOLVED_BY_OWNER_DECISION": 2
+    },
+    "owner_approval_verbatim": "Perfetto, procedi",
+    "remediation_record": "reports/phase1g_h_delta_audit_remediation.md"
+  },
+  "revision_fourth_delta_audit": {
+    "audited_commit": "027b7a413fcee0786b861d5903272e4653d227ed",
+    "auditor_independence": "OpenAI Codex, GPT-6 family (exact version not exposed); a different family from the author (Claude)",
+    "date": "2026-10-09",
+    "earlier_findings_regression": "none; every GH-D2F# resolved within its scope",
+    "errata": [
+      "GH-D4E1",
+      "GH-D4E2",
+      "GH-D4E3",
+      "GH-D4E4"
+    ],
+    "fourth_delta_audit_commit": "fc804a0f71f47904e86388f378295f72ba15cdd8",
+    "fourth_delta_audit_report": "reports/phase1g_h_delta_audit_4.md",
+    "kind": "FOURTH_DELTA_AUDIT_REMEDIATION",
+    "new_findings": {
+      "GH-D4F1": "LOW",
+      "GH-D4F2": "INFO",
+      "GH-D4F3": "LOW"
+    },
+    "owner_approval_verbatim": "Procedi con il piano e l'opzione (a)",
+    "readiness_token": "NO_SCIENTIFIC_BLOCKER_PENDING_TEST_COVERAGE_DOCUMENTATION_WINDOWS_GATE_AND_OWNER_DECISIONS",
+    "remediation_record": "reports/phase1g_h_delta_audit_4_remediation.md",
+    "science": "20/20 full-precision values reproduced (largest difference 6.05e-10); centred both-walls covariances confirm GH-D3F5",
+    "third_delta_findings_after_fourth_delta_audit": {
+      "RESOLVED": [
+        "GH-D3F1",
+        "GH-D3F2",
+        "GH-D3F3",
+        "GH-D3F4",
+        "GH-D3F5"
+      ]
+    },
+    "verdict": {
+      "DOCUMENTATION": "ACCEPT_WITH_CORRECTIONS",
+      "GOVERNANCE": "ACCEPT",
+      "IMPLEMENTATION": "ACCEPT",
+      "NUMERICS": "ACCEPT",
+      "PROVENANCE": "ACCEPT",
+      "SCIENCE": "ACCEPT",
+      "TASK_COMPLIANCE": "ACCEPT",
+      "TESTS": "ACCEPT_WITH_CORRECTIONS",
+      "overall": "ACCEPT_WITH_CORRECTIONS"
+    }
+  },
+  "revision_second_delta_audit": {
+    "audited_commit": "226e52d2e4157d0130b2a9dfaffd71834c6017d9",
+    "auditor_independence": "same model family as the author (Claude); procedural independence only; the two earlier audits were OpenAI Codex",
+    "blind_checkpoint_commit": "64116509554cc0d711660da4d81ad95c3f450a6d",
+    "date": "2026-10-08",
+    "delta_findings_after_second_delta_audit": {
+      "GH-DF1..GH-DF6": "RESOLVED"
+    },
+    "errata": [
+      "GH-D2E1",
+      "GH-D2E2"
+    ],
+    "kind": "SECOND_DELTA_AUDIT_REMEDIATION",
+    "new_findings": {
+      "GH-D2F1": "LOW",
+      "GH-D2F2": "LOW",
+      "GH-D2F3": "INFO",
+      "GH-D2F4": "INFO",
+      "GH-D2F5": "INFO",
+      "GH-D2F6": "INFO"
+    },
+    "original_findings_after_second_delta_audit": {
+      "RESOLVED": 12,
+      "RESOLVED_BY_OWNER_DECISION": 2,
+      "RESOLVED_OWNER_CONFIRMED": 1
+    },
+    "owner_approval_verbatim": "Perfetto, procedi",
+    "readiness_token": "NO_SCIENTIFIC_BLOCKER_READY_FOR_OWNER_DECISION_AFTER_LOW_CORRECTIONS_P7_RECORD_AND_WINDOWS_GATE",
+    "remediation_record": "reports/phase1g_h_delta_audit_2_remediation.md",
+    "second_delta_audit_commit": "e5170285e1d4b4aa72e907a3a79110d05584c0d9",
+    "second_delta_audit_report": "reports/phase1g_h_delta_audit_2.md",
+    "verdict": {
+      "DOCUMENTATION": "ACCEPT_WITH_CORRECTIONS",
+      "GOVERNANCE": "ACCEPT_WITH_CORRECTIONS",
+      "IMPLEMENTATION": "ACCEPT",
+      "NUMERICS": "ACCEPT",
+      "PROVENANCE": "ACCEPT",
+      "SCIENCE": "ACCEPT",
+      "TASK_COMPLIANCE": "ACCEPT",
+      "TESTS": "ACCEPT_WITH_CORRECTIONS",
+      "overall": "ACCEPT_WITH_CORRECTIONS"
+    }
+  },
+  "revision_third_delta_audit": {
+    "audited_commit": "ed0ec0c9c8783519a53759a265b6ce37e6c0e607",
+    "auditor_independence": "OpenAI Codex, GPT-6 family (exact version not exposed); a different family from the author (Claude); compartmentalized scientific blinding",
+    "blind_checkpoint_commit": "4d71bd4fe918ef8a0b71c178a7180c4d291294b0",
+    "cross_family_check": "CROSS_FAMILY_VERIFIED_WITH_DEVIATION (58/58 quantities; deviation = auditor's own initial recipe)",
+    "date": "2026-10-09",
+    "earlier_findings_regression": "none",
+    "errata": [
+      "GH-D3E1",
+      "GH-D3E2",
+      "GH-D3E3"
+    ],
+    "kind": "THIRD_DELTA_AUDIT_REMEDIATION",
+    "new_findings": {
+      "GH-D3F1": "LOW",
+      "GH-D3F2": "LOW",
+      "GH-D3F3": "LOW",
+      "GH-D3F4": "LOW-MEDIUM",
+      "GH-D3F5": "INFO"
+    },
+    "owner_approval_verbatim": "Perfetto, procedi",
+    "owner_decision_GH-D3F4": "option (a): separate 1G-B contract-hardening successor (reports/phase1g_b_contract_hardening_successor.md)",
+    "readiness_token": "NO_SCIENTIFIC_BLOCKER_PENDING_CONTRACT_TEST_P11_CORRECTIONS_WINDOWS_GATE_AND_OWNER_DECISIONS",
+    "remediation_record": "reports/phase1g_h_delta_audit_3_remediation.md",
+    "second_delta_findings_after_third_delta_audit": {
+      "PARTIALLY_RESOLVED": [
+        "GH-D2F1",
+        "GH-D2F4"
+      ],
+      "RESOLVED": [
+        "GH-D2F2",
+        "GH-D2F3",
+        "GH-D2F5",
+        "GH-D2F6"
+      ]
+    },
+    "third_delta_audit_commit": "18bf2fbef880fdfb3c292956aa1f000720930abf",
+    "third_delta_audit_report": "reports/phase1g_h_delta_audit_3.md",
+    "verdict": {
+      "DOCUMENTATION": "ACCEPT_WITH_CORRECTIONS",
+      "GOVERNANCE": "ACCEPT_WITH_CORRECTIONS",
+      "IMPLEMENTATION": "ACCEPT_WITH_CORRECTIONS",
+      "NUMERICS": "ACCEPT",
+      "PROVENANCE": "ACCEPT",
+      "SCIENCE": "ACCEPT",
+      "TASK_COMPLIANCE": "ACCEPT",
+      "TESTS": "ACCEPT_WITH_CORRECTIONS",
+      "overall": "ACCEPT_WITH_CORRECTIONS"
+    }
+  },
+  "schema_version": 1,
+  "sources": {
+    "EH98": {
+      "file": "trans.tex",
+      "id": "astro-ph/9709112v1",
+      "sha256": "5f2ac6b413df8b738c95f6650152b7e82d7c36f6d9b3a618da540e9739dce17f"
+    },
+    "GM": {
+      "file": "main.tex",
+      "id": "arXiv:2511.17160v2",
+      "sha256": "f9cadfa03ecc9a74b0a8f432ae4b13422daeb219f253756bcd877b4b75077c59"
+    },
+    "JLH13": {
+      "file": "voids_mnras.tex",
+      "id": "arXiv:1304.6087v2",
+      "sha256": "cf6fc77a31b395138ac3a027d008698556534e81cfb27c39853d3a99c7b07c4e"
+    },
+    "NW15": {
+      "file": "cmb1.tex",
+      "id": "arXiv:1410.3470v2",
+      "sha256": "5688c9ac7123a5c2ef3508e39cb3134c2fe9e3d5e56996a4d4a4d101d7b74673",
+      "used": "A_s a nuisance parameter they cannot constrain (ll. 1422-1428); f_v0 0.627, H0 ~ 61"
+    },
+    "SvdW04": {
+      "eprint_sha256": "4b7ad599f54b3199e0448df1c2eecf4e724401e9ffda7b0f50a3efe7fecdb79b",
+      "file": "voids.tex (e-print tarball)",
+      "id": "astro-ph/0311260v1"
+    },
+    "W07": {
+      "file": "solution.tex",
+      "id": "arXiv:0709.0732v2",
+      "sha256": "221662c987e454729ef8202c87fa697c5882b5b7daaecdedb50a7cba8ffe6cd8"
+    },
+    "W09": {
+      "file": "observe.tex",
+      "id": "arXiv:0909.0749v2",
+      "sha256": "2b0324d127440e9a053a7cb37102d7655cca228a63cd2222843e879989b4b531"
+    },
+    "numbering_note": "e-print LaTeX equation numbering (sequential display numbering); the journal HTML may differ"
+  },
+  "status_tokens": {
+    "added": [],
+    "changed": [],
+    "read_at_run": {
+      "FSIGMA8_AUTHORIZATION": "NOT_GRANTED",
+      "LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC": "NOT_DERIVED",
+      "OBSERVATIONAL_AUTHORIZATION": "NOT_GRANTED",
+      "RSD_AUTHORIZATION": "NOT_GRANTED",
+      "SIGMA8_AUTHORIZATION": "NOT_GRANTED",
+      "UNIQUE_TIMESCAPE_PREDICTION": "NOT_GRANTED",
+      "VOID_ONSET_RESPONSE": "EXTERNAL_CLOSURE_INPUT"
+    }
+  },
+  "tests": {
+    "count": 54,
+    "count_after_delta_remediation": 42,
+    "count_after_first_remediation": 35,
+    "count_after_second_delta_remediation": 49,
+    "count_after_third_delta_remediation": 53,
+    "count_before_remediation": 28,
+    "file": "tests/test_phase1g_h_global_variance.py",
+    "related_1g_b_contract_hardening": {
+      "count": 22,
+      "file": "tests/test_phase1g_b_contract_hardening.py"
+    }
+  },
+  "title": "Global matter-variance definition and minimal closure",
+  "two_phase_covariance": {
+    "NW15_CMB_FIT": {
+      "E_reference_reproduction": {
+        "reproduced": 0.9880976925385465,
+        "rounding_budget": 0.00011294418099511322,
+        "sigma_int": 0.9403,
+        "sigma_part": 0.3036,
+        "sigma_printed": 0.9881
+      },
+      "cauchy_schwarz_on_E_reference": {
+        "independent": 0.988098,
+        "lower": 0.6367,
+        "upper": 1.2439
+      },
+      "finite_density_weights_x_shell": {
+        "partition_weight": 1.586238,
+        "void_contrast_global": -0.591667,
+        "void_weight": 0.408333,
+        "wall_weight": 1.994571
+      },
+      "nonnegative_lognormal_pairs": {
+        "ball_variance_signed_carrier": 0.734491,
+        "free_construction_choices": [
+          "latent smoothing radius r_s (1, 2, 4 Mpc)",
+          "lam calibrated to the ball variance of the signed carrier"
+        ],
+        "linear_limit_max_rel_difference": 0.00640992,
+        "linear_limit_scope": "local numerical check at one small amplitude with an empirical gate; not an asymptotic theorem",
+        "members": {
+          "r_s_1_Mpc": {
+            "ball_variance_unconditionally_normalised_carrier": 0.734491,
+            "ball_variance_unmasked_conditional_density_II": 0.119991,
+            "calibration_rel": 0.0,
+            "conditional_density_covariance_ratio_II_over_I": 0.163366,
+            "conditional_normaliser_ratio_m_II": 2.474113,
+            "density_point_variance": 27.591489,
+            "latent_point_variance": 3.353109,
+            "latent_scale_lambda": 0.78515,
+            "laws": {
+              "II_same_field": {
+                "both_walls_product_moment_excess_ball": 0.697655,
+                "conditional_normaliser_ratio_m": 2.474113,
+                "cross_term": 0.255243,
+                "partition_wall_moment": 0.017756,
+                "sigma_partition": 0.3036,
+                "sigma_total": 0.924193,
+                "sigma_total_from_H25": 0.924193,
+                "sigma_wall_field": 0.711841,
+                "wall_moment": 0.070499
+              },
+              "I_independent": {
+                "both_walls_product_moment_excess_ball": 0.840794,
+                "conditional_normaliser_ratio_m": 1.0,
+                "cross_term": 0.0,
+                "partition_wall_moment": 0.0,
+                "sigma_partition": 0.3036,
+                "sigma_total": 1.005219,
+                "sigma_total_from_H25": 1.005219,
+                "sigma_wall_field": 0.958276,
+                "wall_moment": 0.127761
+              }
+            },
+            "resolution_radius_Mpc": 1.0,
+            "sigma_ratio_II_over_I": 0.919395,
+            "unconditional_mean_conditional_contrast_II": -0.595815
+          },
+          "r_s_2_Mpc": {
+            "ball_variance_unconditionally_normalised_carrier": 0.734491,
+            "ball_variance_unmasked_conditional_density_II": 0.165867,
+            "calibration_rel": 0.0,
+            "conditional_density_covariance_ratio_II_over_I": 0.225826,
+            "conditional_normaliser_ratio_m_II": 2.104325,
+            "density_point_variance": 6.334096,
+            "latent_point_variance": 1.992534,
+            "latent_scale_lambda": 0.839193,
+            "laws": {
+              "II_same_field": {
+                "both_walls_product_moment_excess_ball": 0.887006,
+                "conditional_normaliser_ratio_m": 2.104325,
+                "cross_term": 0.314302,
+                "partition_wall_moment": 0.021864,
+                "sigma_partition": 0.3036,
+                "sigma_total": 1.030018,
+                "sigma_total_from_H25": 1.030018,
+                "sigma_wall_field": 0.808988,
+                "wall_moment": 0.091055
+              },
+              "I_independent": {
+                "both_walls_product_moment_excess_ball": 0.797526,
+                "conditional_normaliser_ratio_m": 1.0,
+                "cross_term": 0.0,
+                "partition_wall_moment": 0.0,
+                "sigma_partition": 0.3036,
+                "sigma_total": 0.981432,
+                "sigma_total_from_H25": 0.981432,
+                "sigma_wall_field": 0.933293,
+                "wall_moment": 0.121186
+              }
+            },
+            "resolution_radius_Mpc": 2.0,
+            "sigma_ratio_II_over_I": 1.049505,
+            "unconditional_mean_conditional_contrast_II": -0.524788
+          },
+          "r_s_4_Mpc": {
+            "ball_variance_unconditionally_normalised_carrier": 0.734491,
+            "ball_variance_unmasked_conditional_density_II": 0.263811,
+            "calibration_rel": 0.0,
+            "conditional_density_covariance_ratio_II_over_I": 0.359175,
+            "conditional_normaliser_ratio_m_II": 1.668579,
+            "density_point_variance": 2.225205,
+            "latent_point_variance": 1.170997,
+            "latent_scale_lambda": 0.949342,
+            "laws": {
+              "II_same_field": {
+                "both_walls_product_moment_excess_ball": 1.115836,
+                "conditional_normaliser_ratio_m": 1.668579,
+                "cross_term": 0.373861,
+                "partition_wall_moment": 0.026007,
+                "sigma_partition": 0.3036,
+                "sigma_total": 1.144928,
+                "sigma_total_from_H25": 1.144928,
+                "sigma_wall_field": 0.919143,
+                "wall_moment": 0.11754
+              },
+              "I_independent": {
+                "both_walls_product_moment_excess_ball": 0.766159,
+                "conditional_normaliser_ratio_m": 1.0,
+                "cross_term": 0.0,
+                "partition_wall_moment": 0.0,
+                "sigma_partition": 0.3036,
+                "sigma_total": 0.963821,
+                "sigma_total_from_H25": 0.963821,
+                "sigma_wall_field": 0.914756,
+                "wall_moment": 0.11642
+              }
+            },
+            "resolution_radius_Mpc": 4.0,
+            "sigma_ratio_II_over_I": 1.187905,
+            "unconditional_mean_conditional_contrast_II": -0.400688
+          }
+        },
+        "not_shared": [
+          "the conditionally normalised wall density: its unconditional covariance in law II is law I's divided by m_II^2 (conditional_normaliser_ratio_m_II)",
+          "the both-walls conditional product moment C_W(r) = E[psi1 psi2 | both in walls], which with P11 fixes the total by (H25)"
+        ],
+        "pair_class": "NONNEGATIVE_LOGNORMAL_DENSITY_LAWS",
+        "shared_constraints": [
+          "f_v0",
+          "partition covariance (identical P11(r))",
+          "latent Gaussian carrier law (covariance lam^2 xi_s); equivalently the unconditionally normalised carrier exp(lam s)/E[exp(lam s)], covariance exp(lam^2 xi_s) - 1",
+          "normalisation convention E[psi | wall] = 1"
+        ]
+      },
+      "radial_quadrature": {
+        "first_panel_included": true,
+        "h25_identity_max_rel": 0.0,
+        "intervals": 1440,
+        "refinement_max_rel_vs_half": 1.011655e-06
+      },
+      "signed_gaussian_pair": {
+        "conditional_wall_mean_mu_law_II": 3.788836,
+        "ell_Mpc": 0.598732,
+        "laws": {
+          "II_same_field": {
+            "both_walls_product_moment_excess_ball": 0.069083113,
+            "cross_term": 0.04991195,
+            "partition_wall_moment": 0.0034721,
+            "sigma_partition": 0.3036,
+            "sigma_total": 0.409418696,
+            "sigma_total_from_H25": 0.409418696,
+            "sigma_wall_field": 0.159808505,
+            "wall_moment": 0.003553182
+          },
+          "I_independent": {
+            "both_walls_product_moment_excess_ball": 0.791264148,
+            "cross_term": 0.0,
+            "partition_wall_moment": 0.0,
+            "sigma_partition": 0.3036,
+            "sigma_total": 0.977941853,
+            "sigma_total_from_H25": 0.977941853,
+            "sigma_wall_field": 0.929622131,
+            "wall_moment": 0.120234907
+          }
+        },
+        "negative_wall_density_probability": {
+          "II_same_field": 0.452698,
+          "I_independent": 0.454766
+        },
+        "pair_class": "SIGNED_GAUSSIAN_CARRIER_SURROGATE",
+        "radius_Mpc": 13.114754,
+        "sigma_ratio_II_over_I": 0.418653
+      }
+    },
+    "PAPER_REFERENCE": {
+      "E_reference_reproduction": {
+        "reproduced": 0.9871248755856575,
+        "rounding_budget": 0.00011372040818308998,
+        "sigma_int": 0.9316,
+        "sigma_part": 0.3264,
+        "sigma_printed": 0.9871
+      },
+      "cauchy_schwarz_on_E_reference": {
+        "independent": 0.987125,
+        "lower": 0.6052,
+        "upper": 1.258
+      },
+      "finite_density_weights_x_shell": {
+        "partition_weight": 1.921516,
+        "void_contrast_global": -0.505359,
+        "void_weight": 0.494641,
+        "wall_weight": 2.416157
+      },
+      "nonnegative_lognormal_pairs": {
+        "ball_variance_signed_carrier": 0.701047,
+        "free_construction_choices": [
+          "latent smoothing radius r_s (1, 2, 4 Mpc)",
+          "lam calibrated to the ball variance of the signed carrier"
+        ],
+        "linear_limit_max_rel_difference": 0.0092941,
+        "linear_limit_scope": "local numerical check at one small amplitude with an empirical gate; not an asymptotic theorem",
+        "members": {
+          "r_s_1_Mpc": {
+            "ball_variance_unconditionally_normalised_carrier": 0.701047,
+            "ball_variance_unmasked_conditional_density_II": 0.085145,
+            "calibration_rel": 0.0,
+            "conditional_density_covariance_ratio_II_over_I": 0.121455,
+            "conditional_normaliser_ratio_m_II": 2.869413,
+            "density_point_variance": 13.639144,
+            "latent_point_variance": 2.683699,
+            "latent_scale_lambda": 0.813737,
+            "laws": {
+              "II_same_field": {
+                "both_walls_product_moment_excess_ball": 0.837693,
+                "conditional_normaliser_ratio_m": 2.869413,
+                "cross_term": 0.329874,
+                "partition_wall_moment": 0.011409,
+                "sigma_partition": 0.3264,
+                "sigma_total": 1.0166,
+                "sigma_total_from_H25": 1.0166,
+                "sigma_wall_field": 0.7727,
+                "wall_moment": 0.041298
+              },
+              "I_independent": {
+                "both_walls_product_moment_excess_ball": 0.78692,
+                "conditional_normaliser_ratio_m": 1.0,
+                "cross_term": 0.0,
+                "partition_wall_moment": 0.0,
+                "sigma_partition": 0.3264,
+                "sigma_total": 0.988581,
+                "sigma_total_from_H25": 0.988581,
+                "sigma_wall_field": 0.933143,
+                "wall_moment": 0.060229
+              }
+            },
+            "resolution_radius_Mpc": 1.0,
+            "sigma_ratio_II_over_I": 1.028342,
+            "unconditional_mean_conditional_contrast_II": -0.651497
+          },
+          "r_s_2_Mpc": {
+            "ball_variance_unconditionally_normalised_carrier": 0.701047,
+            "ball_variance_unmasked_conditional_density_II": 0.153108,
+            "calibration_rel": 0.0,
+            "conditional_density_covariance_ratio_II_over_I": 0.218399,
+            "conditional_normaliser_ratio_m_II": 2.139809,
+            "density_point_variance": 3.928192,
+            "latent_point_variance": 1.594972,
+            "latent_scale_lambda": 0.869535,
+            "laws": {
+              "II_same_field": {
+                "both_walls_product_moment_excess_ball": 1.097277,
+                "conditional_normaliser_ratio_m": 2.139809,
+                "cross_term": 0.399107,
+                "partition_wall_moment": 0.013803,
+                "sigma_partition": 0.3264,
+                "sigma_total": 1.149224,
+                "sigma_total_from_H25": 1.149224,
+                "sigma_wall_field": 0.902813,
+                "wall_moment": 0.056378
+              },
+              "I_independent": {
+                "both_walls_product_moment_excess_ball": 0.751491,
+                "conditional_normaliser_ratio_m": 1.0,
+                "cross_term": 0.0,
+                "partition_wall_moment": 0.0,
+                "sigma_partition": 0.3264,
+                "sigma_total": 0.96855,
+                "sigma_total_from_H25": 0.96855,
+                "sigma_wall_field": 0.911895,
+                "wall_moment": 0.057518
+              }
+            },
+            "resolution_radius_Mpc": 2.0,
+            "sigma_ratio_II_over_I": 1.18654,
+            "unconditional_mean_conditional_contrast_II": -0.532668
+          },
+          "r_s_4_Mpc": {
+            "ball_variance_unconditionally_normalised_carrier": 0.701047,
+            "ball_variance_unmasked_conditional_density_II": 0.266025,
+            "calibration_rel": 0.0,
+            "conditional_density_covariance_ratio_II_over_I": 0.379468,
+            "conditional_normaliser_ratio_m_II": 1.623351,
+            "density_point_variance": 1.629002,
+            "latent_point_variance": 0.966604,
+            "latent_scale_lambda": 0.998434,
+            "laws": {
+              "II_same_field": {
+                "both_walls_product_moment_excess_ball": 1.277632,
+                "conditional_normaliser_ratio_m": 1.623351,
+                "cross_term": 0.445918,
+                "partition_wall_moment": 0.015422,
+                "sigma_partition": 0.3264,
+                "sigma_total": 1.232998,
+                "sigma_total_from_H25": 1.232998,
+                "sigma_wall_field": 0.983783,
+                "wall_moment": 0.066944
+              },
+              "I_independent": {
+                "both_walls_product_moment_excess_ball": 0.725311,
+                "conditional_normaliser_ratio_m": 1.0,
+                "cross_term": 0.0,
+                "partition_wall_moment": 0.0,
+                "sigma_partition": 0.3264,
+                "sigma_total": 0.953478,
+                "sigma_total_from_H25": 0.953478,
+                "sigma_wall_field": 0.89587,
+                "wall_moment": 0.055514
+              }
+            },
+            "resolution_radius_Mpc": 4.0,
+            "sigma_ratio_II_over_I": 1.293158,
+            "unconditional_mean_conditional_contrast_II": -0.38399
+          }
+        },
+        "not_shared": [
+          "the conditionally normalised wall density: its unconditional covariance in law II is law I's divided by m_II^2 (conditional_normaliser_ratio_m_II)",
+          "the both-walls conditional product moment C_W(r) = E[psi1 psi2 | both in walls], which with P11 fixes the total by (H25)"
+        ],
+        "pair_class": "NONNEGATIVE_LOGNORMAL_DENSITY_LAWS",
+        "shared_constraints": [
+          "f_v0",
+          "partition covariance (identical P11(r))",
+          "latent Gaussian carrier law (covariance lam^2 xi_s); equivalently the unconditionally normalised carrier exp(lam s)/E[exp(lam s)], covariance exp(lam^2 xi_s) - 1",
+          "normalisation convention E[psi | wall] = 1"
+        ]
+      },
+      "radial_quadrature": {
+        "first_panel_included": true,
+        "h25_identity_max_rel": 2.22e-16,
+        "intervals": 1440,
+        "refinement_max_rel_vs_half": 8.27134e-07
+      },
+      "signed_gaussian_pair": {
+        "conditional_wall_mean_mu_law_II": 5.004607,
+        "ell_Mpc": 0.291721,
+        "laws": {
+          "II_same_field": {
+            "both_walls_product_moment_excess_ball": 0.043189408,
+            "cross_term": 0.036477473,
+            "partition_wall_moment": 0.001261555,
+            "sigma_partition": 0.3264,
+            "sigma_total": 0.392845563,
+            "sigma_total_from_H25": 0.392845563,
+            "sigma_wall_field": 0.106363544,
+            "wall_moment": 0.000782523
+          },
+          "I_independent": {
+            "both_walls_product_moment_excess_ball": 0.755929587,
+            "cross_term": 0.0,
+            "partition_wall_moment": 0.0,
+            "sigma_partition": 0.3264,
+            "sigma_total": 0.971082379,
+            "sigma_total_from_H25": 0.971082379,
+            "sigma_wall_field": 0.914584073,
+            "wall_moment": 0.05785738
+          }
+        },
+        "negative_wall_density_probability": {
+          "II_same_field": 0.442943,
+          "I_independent": 0.44759
+        },
+        "pair_class": "SIGNED_GAUSSIAN_CARRIER_SURROGATE",
+        "radius_Mpc": 10.954402,
+        "sigma_ratio_II_over_I": 0.404544
+      }
+    }
+  },
+  "validation_record": "reports/phase1g_h_global_variance_closure_validation.md",
+  "verdict": {
+    "A_definition": "PROPOSED_FORMAL_TANGENT_DEFINITION",
+    "B_conditional_calculation": "CLOSED_FOR_THE_FORMAL_TANGENT_STATISTIC_GIVEN_ONE_EXTERNAL_CLOSURE_AND_H_A9",
+    "C_observational_interpretation": "NOT_REACHED_FIREWALL",
+    "C_timescape_prediction": "NOT_REACHED",
+    "superseded_audited_readings": {
+      "A_definition": "CLOSED",
+      "B_conditional_calculation": "CLOSED_GIVEN_ONE_EXTERNAL_CLOSURE_VOID_SHARE"
+    }
+  },
+  "verification": {
+    "baseline_this_session": {
+      "CPython 3.11.17": {
+        "collected": 1136,
+        "failed": 0,
+        "passed": 1103,
+        "seconds": 358,
+        "skipped": 33
+      },
+      "CPython 3.13.16": {
+        "collected": 1136,
+        "failed": 0,
+        "passed": 1103,
+        "seconds": 365,
+        "skipped": 33
+      },
+      "tree": "8d3cdd0533035858c42269cb1dff1a20dcafc7da"
+    },
+    "diff_check": "clean",
+    "freeze_preflight_quoted_not_rerun": {
+      "CPython 3.11.9 (Windows)": {
+        "failed": 0,
+        "passed": 1136,
+        "seconds": 501,
+        "skipped": 0
+      },
+      "CPython 3.14.3 (Windows)": {
+        "failed": 0,
+        "passed": 1136,
+        "seconds": 505,
+        "skipped": 0
+      },
+      "source": "owner's report of 2026-10-06; tag messages",
+      "tree": "8d3cdd0533035858c42269cb1dff1a20dcafc7da"
+    },
+    "full_suites_final": {
+      "CPython 3.11.17": {
+        "collected": 1164,
+        "failed": 0,
+        "passed": 1132,
+        "seconds": 378,
+        "skipped": 32
+      },
+      "CPython 3.13.16": {
+        "collected": 1164,
+        "failed": 0,
+        "passed": 1132,
+        "seconds": 378,
+        "skipped": 32
+      },
+      "command": "OPENBLAS_NUM_THREADS=1 python -B -W error -m pytest -q -p no:cacheprovider -rs",
+      "logs": [
+        "reports/phase1g_h_global_variance_closure_logs/full_suite_py313.log",
+        "reports/phase1g_h_global_variance_closure_logs/full_suite_py311.log"
+      ],
+      "skip_causes": {
+        "1D-B growth validation artifact absent": 1,
+        "1D-D validation artifact absent": 1,
+        "B2 artifact absent": 1,
+        "barotropic oracle absent": 4,
+        "clean perturbation oracle absent": 4,
+        "owner-decisions artifact absent": 3,
+        "upstream oracle not extracted": 18
+      },
+      "tree": "fd7331f + the report, inventory and README/CLAUDE of the following commit"
+    },
+    "record": "reports/phase1g_h_global_variance_closure_validation.md",
+    "targeted": {
+      "tests/test_phase1g_h_global_variance.py": 28
+    },
+    "tolerance_audit_missing": 0,
+    "validator_1F_C_R": "PASS",
+    "windows_dual_interpreter_gate": "NOT_RUN_IN_THIS_SESSION (commands in the validation record)"
+  },
+  "verification_delta_remediated_tree": {
+    "evidence_gates": "36 / 36 on both interpreters at 248a06b",
+    "full_suites": {
+      "CPython 3.11.17": {
+        "collected": 1178,
+        "failed": 0,
+        "passed": 1146,
+        "seconds": 335,
+        "skipped": 32
+      },
+      "CPython 3.13.16": {
+        "collected": 1178,
+        "failed": 0,
+        "passed": 1146,
+        "seconds": 339,
+        "skipped": 32
+      },
+      "command": "OPENBLAS_NUM_THREADS=1 python -B -W error -m pytest -q -p no:cacheprovider -rs"
+    },
+    "phase_tests": 42,
+    "record": "reports/phase1g_h_delta_audit_remediation.md (sec. 3)",
+    "tolerance_audit_missing": 0,
+    "validator": "PASS (52 JSON round trips)",
+    "windows_gate": "not run"
+  },
+  "verification_fourth_delta_remediated_tree": {
+    "case_runner": {
+      "gm_bare_pbs_f_median_seed": 0.810772,
+      "gm_bare_pbs_w09_seed": 1.121363,
+      "nw15_equal_mass_constant_share": 0.918157
+    },
+    "code": {
+      "runtime": "unchanged since c6028e9 (1G-H) and 6926a63 (1G-B)",
+      "tests": "a243bf13bb27fb77c54ff05be004c47efe6e6784"
+    },
+    "evidence_gates": "36 / 36 on CPython 3.13.16 and 36 / 36 on 3.11.17",
+    "full_suites": {
+      "CPython 3.11.17": {
+        "collected": 1212,
+        "errors": 0,
+        "failed": 0,
+        "passed": 1212,
+        "rc": 0,
+        "seconds": 361,
+        "skipped": 0
+      },
+      "CPython 3.13.16": {
+        "collected": 1212,
+        "errors": 0,
+        "failed": 0,
+        "passed": 1212,
+        "rc": 0,
+        "seconds": 364,
+        "skipped": 0
+      },
+      "command": "OPENBLAS_NUM_THREADS=1 python -B -W error -m pytest -q -p no:cacheprovider -rs"
+    },
+    "mutation_testing": {
+      "fourth_delta_audit_mutants": {
+        "D1_adapted_binding_disabled": "KILLED_BY_TESTS",
+        "X01_growth_json_check_removed": "SURVIVED",
+        "X02_void_share_json_check_removed": "KILLED_BY_TESTS",
+        "X03_premise_json_check_removed": "SURVIVED",
+        "X04_interval_json_check_removed": "KILLED_BY_TESTS",
+        "X05_growth_json_before_validation": "KILLED_BY_TESTS",
+        "X06_growth_ratio_approximate_1e8": "KILLED_BY_TESTS",
+        "X07_growth_ratio_operands_swapped": "KILLED_BY_TESTS",
+        "X08_growth_ratio_float_conversion": "SURVIVED_BEYOND_BASELINE",
+        "X09_simpson_exact_error_budget_to_1pct": "SURVIVED",
+        "X10_simpson_ratio_budget_to_1pct": "SURVIVED",
+        "X11_growth_ratio_approximate_1e12": "KILLED_BY_TESTS",
+        "X12_lcdm_relative_change_float_conversion": "SURVIVED_BEYOND_BASELINE"
+      },
+      "round4_mutants_rerun": {
+        "B01_record_identity_rtol_10pct_drift": "KILLED_BY_TESTS",
+        "B02_same_rejects_float_subclasses": "KILLED_BY_TESTS",
+        "B03_same_accepts_numpy_float32": "KILLED_BY_TESTS",
+        "B04_monte_carlo_budget_doubled": "SURVIVED",
+        "B05_simpson_error_ratio_budget_x10": "SURVIVED",
+        "B06_lognormal_calibration_inside_budget": "SURVIVED",
+        "B07_p11_weight_denominator_1ppm": "KILLED_BY_TESTS",
+        "B08_lognormal_calibration_1ppm": "KILLED_BY_TESTS",
+        "B09_reported_lambda_1ppm": "KILLED_BY_TESTS",
+        "B10_one_growth_tolerance_not_converted": "KILLED_BY_TESTS",
+        "J01_strict_json_check_disabled": "KILLED_BY_TESTS",
+        "J02_sigma_record_json_check_removed": "KILLED_BY_TESTS",
+        "J03_float32_refusal_via_message_branch_off": "KILLED_BY_TESTS",
+        "L01_lcdm_diagnostics_finiteness_off": "KILLED_BY_TESTS",
+        "L02_lcdm_diagnostics_binding_off": "KILLED_BY_TESTS",
+        "L03_anchored_ratio_binding_off": "KILLED_BY_TESTS",
+        "L04_anchored_differences_binding_off": "KILLED_BY_TESTS",
+        "L05_anchored_offset_unbound": "KILLED_BY_TESTS"
+      }
+    },
+    "phase_tests": 54,
+    "record": "reports/phase1g_h_delta_audit_4_remediation.md (sec. 3)",
+    "related_1g_b_contract_hardening_tests": 22,
+    "tolerance_audit": {
+      "comparisons": 750,
+      "missing": 0
+    },
+    "validator": "PASS (59 JSON round trips)",
+    "windows_gate": "not run"
+  },
+  "verification_remediated_tree": {
+    "evidence_gates": "32 / 32 on both interpreters at c1b4482",
+    "full_suites": {
+      "CPython 3.11.17": {
+        "collected": 1171,
+        "failed": 0,
+        "passed": 1139,
+        "seconds": 292,
+        "skipped": 32
+      },
+      "CPython 3.13.16": {
+        "collected": 1171,
+        "failed": 0,
+        "passed": 1139,
+        "seconds": 294,
+        "skipped": 32
+      },
+      "command": "OPENBLAS_NUM_THREADS=1 python -B -W error -m pytest -q -p no:cacheprovider -rs"
+    },
+    "phase_tests": 35,
+    "record": "reports/phase1g_h_audit_remediation.md (sec. 3)",
+    "tolerance_audit_missing": 0,
+    "validator": "PASS (49 JSON round trips)",
+    "windows_gate": "not run"
+  },
+  "verification_second_delta_remediated_tree": {
+    "evidence_gates": "36 / 36 on CPython 3.13.16 and 36 / 36 on 3.11.17",
+    "full_suites": {
+      "CPython 3.11.17": {
+        "collected": 1185,
+        "errors": 0,
+        "failed": 0,
+        "passed": 1153,
+        "rc": 0,
+        "seconds": 281,
+        "skipped": 32
+      },
+      "CPython 3.13.16": {
+        "collected": 1185,
+        "errors": 0,
+        "failed": 0,
+        "passed": 1153,
+        "rc": 0,
+        "seconds": 281,
+        "skipped": 32
+      },
+      "command": "OPENBLAS_NUM_THREADS=1 python -B -W error -m pytest -q -p no:cacheprovider -rs"
+    },
+    "mutation_testing": {
+      "by_origin": {
+        "author": {
+          "KILLED_BY_TESTS": 9,
+          "NOT_APPLIED": 1
+        },
+        "baseline": {
+          "BASELINE_PASS": 1
+        },
+        "delta": {
+          "KILLED_BY_TESTS": 21,
+          "SURVIVED": 2
+        },
+        "own": {
+          "KILLED_BY_TESTS": 22,
+          "SURVIVED": 1
+        },
+        "round3": {
+          "KILLED_BY_TESTS": 4
+        }
+      },
+      "extra": {
+        "AUTH_D1_binding_off_adapted": "KILLED_BY_TESTS"
+      }
+    },
+    "phase_tests": 49,
+    "record": "reports/phase1g_h_delta_audit_2_remediation.md (sec. 3)",
+    "tolerance_audit_missing": 0,
+    "validator": "PASS (54 JSON round trips)",
+    "windows_gate": "not run"
+  },
+  "verification_third_delta_remediated_tree": {
+    "case_runner": {
+      "gm_bare_pbs_f_median_seed": 0.810772,
+      "gm_bare_pbs_w09_seed": 1.121363,
+      "nw15_equal_mass_constant_share": 0.918157
+    },
+    "code": {
+      "1G-B": "6926a636c100d232247e39d71d5b2d6e71a6f917",
+      "1G-H": "c6028e9046934ef6de234f0b58fbe18e6f3bead1"
+    },
+    "evidence_gates": "36 / 36 on CPython 3.13.16 and 36 / 36 on 3.11.17",
+    "full_suites": {
+      "CPython 3.11.17": {
+        "collected": 1207,
+        "errors": 0,
+        "failed": 0,
+        "passed": 1207,
+        "rc": 0,
+        "seconds": 337,
+        "skipped": 0
+      },
+      "CPython 3.13.16": {
+        "collected": 1207,
+        "errors": 0,
+        "failed": 0,
+        "passed": 1207,
+        "rc": 0,
+        "seconds": 338,
+        "skipped": 0
+      },
+      "command": "OPENBLAS_NUM_THREADS=1 python -B -W error -m pytest -q -p no:cacheprovider -rs"
+    },
+    "mutation_testing": {
+      "extra": {
+        "AUTH_D1_binding_off_adapted": "KILLED_BY_TESTS"
+      },
+      "round4": {
+        "baseline": {
+          "BASELINE_FAIL": 1
+        },
+        "round4": {
+          "KILLED_BY_TESTS": 8
+        },
+        "third_delta_audit": {
+          "KILLED_BY_TESTS": 7,
+          "SURVIVED": 3
+        }
+      },
+      "second_audit_campaign_rerun": {
+        "author": {
+          "KILLED_BY_TESTS": 9,
+          "NOT_APPLIED": 1
+        },
+        "baseline": {
+          "BASELINE_PASS": 1
+        },
+        "delta": {
+          "KILLED_BY_TESTS": 21,
+          "SURVIVED": 2
+        },
+        "own": {
+          "KILLED_BY_TESTS": 22,
+          "SURVIVED": 1
+        },
+        "round3": {
+          "KILLED_BY_TESTS": 4
+        }
+      }
+    },
+    "phase_tests": 53,
+    "record": "reports/phase1g_h_delta_audit_3_remediation.md (sec. 3)",
+    "tolerance_audit": {
+      "comparisons": 750,
+      "missing": 0
+    },
+    "validator": "PASS (57 JSON round trips)",
+    "windows_gate": "not run"
+  }
+}

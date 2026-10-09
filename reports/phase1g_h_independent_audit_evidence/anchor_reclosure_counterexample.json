@@ -1,0 +1,30 @@
+{
+  "GM": {
+    "W09": {
+      "direct": 1.1213626602034823,
+      "fixed_closure_posthoc": 1.0883685482071022,
+      "self_consistent_uniform_spectral_rescaling": 1.1136871963770667,
+      "relative_difference": 0.023262936265176615
+    },
+    "F_median": {
+      "direct": 0.8107722668649465,
+      "fixed_closure_posthoc": 0.7869167275948526,
+      "self_consistent_uniform_spectral_rescaling": 0.8030967576508983,
+      "relative_difference": 0.02056129891341696
+    }
+  },
+  "NW15": {
+    "W09": {
+      "direct": 1.0566325994707766,
+      "fixed_closure_posthoc": 1.0255430549699467,
+      "self_consistent_uniform_spectral_rescaling": 1.0457796043980343,
+      "relative_difference": 0.01973252057046082
+    },
+    "F_median": {
+      "direct": 0.816058813008135,
+      "fixed_closure_posthoc": 0.7920477264724574,
+      "self_consistent_uniform_spectral_rescaling": 0.805205777135792,
+      "relative_difference": 0.01661269923964892
+    }
+  }
+}

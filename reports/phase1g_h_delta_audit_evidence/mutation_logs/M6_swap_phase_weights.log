@@ -1,0 +1,28 @@
+................FF................F                                      [100%]
+=================================== FAILURES ===================================
+____________ test_two_phase_variance_assembly_on_a_synthetic_field _____________
+tests/test_phase1g_h_global_variance.py:427: in test_two_phase_variance_assembly_on_a_synthetic_field
+    assert out["variance"] == pytest.approx(float(np.mean(delta_R ** 2)), rel=1e-10, abs=0.0)
+E   assert 0.12951867030977454 == 0.24599643140997027 ± 2.5e-11
+E
+E     comparison failed
+E     Obtained: 0.12951867030977454
+E     Expected: 0.24599643140997027 ± 2.5e-11
+___________ test_e3_special_case_is_the_1g_e_mass_conserving_formula ___________
+tests/test_phase1g_h_global_variance.py:443: in test_e3_special_case_is_the_1g_e_mass_conserving_formula
+    assert out["variance"] == pytest.approx(e_formula, rel=1e-13, abs=0.0)
+E   assert 0.1089 == 0.9738000000000001 ± 9.7e-14
+E
+E     comparison failed
+E     Obtained: 0.1089
+E     Expected: 0.9738000000000001 ± 9.7e-14
+_______ test_gh_f11_1g_e_reference_reproduces_within_its_rounding_budget _______
+tests/test_phase1g_h_global_variance.py:859: in test_gh_f11_1g_e_reference_reproduces_within_its_rounding_budget
+    assert abs(var["rms"] - total) <= budget < 1.2e-4
+E   assert 0.6607 <= 0.00024270833333333333
+E    +  where 0.6607 = abs((0.3264 - 0.9871))
+=========================== short test summary info ============================
+FAILED tests/test_phase1g_h_global_variance.py::test_two_phase_variance_assembly_on_a_synthetic_field
+FAILED tests/test_phase1g_h_global_variance.py::test_e3_special_case_is_the_1g_e_mass_conserving_formula
+FAILED tests/test_phase1g_h_global_variance.py::test_gh_f11_1g_e_reference_reproduces_within_its_rounding_budget
+3 failed, 32 passed in 11.67s

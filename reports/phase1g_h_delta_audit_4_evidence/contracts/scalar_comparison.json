@@ -1,0 +1,298 @@
+{
+ "count_old": 1446,
+ "count_new": 1446,
+ "accepted_old": 456,
+ "accepted_new": 416,
+ "non_strict_old": 129,
+ "non_strict_new": 98,
+ "nonfinite_old": 8,
+ "nonfinite_new": 0,
+ "changed_by_record": {
+  "LCDMReferenceLinearSigma": 18,
+  "AnchoredLagrangianSigmaRatio": 10,
+  "ConditionalGlobalLinearSigma": 12
+ },
+ "new_acceptances": [],
+ "changes": [
+  {
+   "id": "LCDMReferenceLinearSigma_21.sigma_unit_growth.np_float32",
+   "record": "LCDMReferenceLinearSigma",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "quadrature diagnostics are inconsistent or failed"
+  },
+  {
+   "id": "LCDMReferenceLinearSigma_21.sigma_unit_growth_comparison_grid.np_float32",
+   "record": "LCDMReferenceLinearSigma",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "quadrature diagnostics are inconsistent or failed"
+  },
+  {
+   "id": "LCDMReferenceLinearSigma_21.sigma_unit_growth_comparison_grid.int",
+   "record": "LCDMReferenceLinearSigma",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "quadrature diagnostics are inconsistent or failed"
+  },
+  {
+   "id": "LCDMReferenceLinearSigma_21.sigma_unit_growth_comparison_grid.np_int64",
+   "record": "LCDMReferenceLinearSigma",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "quadrature diagnostics are inconsistent or failed"
+  },
+  {
+   "id": "LCDMReferenceLinearSigma_21.quadrature_relative_change.Decimal",
+   "record": "LCDMReferenceLinearSigma",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "quadrature_relative_change must be a real scalar, not Decimal('1.590787501726254E-10')"
+  },
+  {
+   "id": "LCDMReferenceLinearSigma_21.quadrature_relative_change.int",
+   "record": "LCDMReferenceLinearSigma",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "quadrature diagnostics are inconsistent or failed"
+  },
+  {
+   "id": "LCDMReferenceLinearSigma_21.quadrature_relative_change.np_int64",
+   "record": "LCDMReferenceLinearSigma",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "quadrature diagnostics are inconsistent or failed"
+  },
+  {
+   "id": "LCDMReferenceLinearSigma_21.quadrature_relative_change.bool",
+   "record": "LCDMReferenceLinearSigma",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "quadrature_relative_change must be a real scalar, not True"
+  },
+  {
+   "id": "LCDMReferenceLinearSigma_21.quadrature_relative_change.nan",
+   "record": "LCDMReferenceLinearSigma",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "quadrature_relative_change must be finite"
+  },
+  {
+   "id": "LCDMReferenceLinearSigma_21.quadrature_relative_change.positive_inf",
+   "record": "LCDMReferenceLinearSigma",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "quadrature_relative_change must be finite"
+  },
+  {
+   "id": "LCDMReferenceLinearSigma_21.quadrature_relative_change.negative_inf",
+   "record": "LCDMReferenceLinearSigma",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "quadrature_relative_change must be finite"
+  },
+  {
+   "id": "LCDMReferenceLinearSigma_21.truncation_envelope_fraction.Decimal",
+   "record": "LCDMReferenceLinearSigma",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "truncation_envelope_fraction must be a real scalar, not Decimal('4.004195683877756E-12')"
+  },
+  {
+   "id": "LCDMReferenceLinearSigma_21.truncation_envelope_fraction.bool",
+   "record": "LCDMReferenceLinearSigma",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "truncation_envelope_fraction must be a real scalar, not True"
+  },
+  {
+   "id": "LCDMReferenceLinearSigma_21.truncation_envelope_fraction.nan",
+   "record": "LCDMReferenceLinearSigma",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "truncation_envelope_fraction must be finite"
+  },
+  {
+   "id": "LCDMReferenceLinearSigma_21.truncation_envelope_fraction.positive_inf",
+   "record": "LCDMReferenceLinearSigma",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "truncation_envelope_fraction must be finite"
+  },
+  {
+   "id": "LCDMReferenceLinearSigma_21.truncation_envelope_fraction.negative_inf",
+   "record": "LCDMReferenceLinearSigma",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "truncation_envelope_fraction must be finite"
+  },
+  {
+   "id": "AnchoredLagrangianSigmaRatio_22.anchor_value.np_float32",
+   "record": "AnchoredLagrangianSigmaRatio",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "growth_ratio, early_spectrum_factor, sigma_ratio and the anchor offset must be the ratios of the stored timescape and reference records"
+  },
+  {
+   "id": "AnchoredLagrangianSigmaRatio_22.reference_offset_from_anchor.Decimal",
+   "record": "AnchoredLagrangianSigmaRatio",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "growth_ratio, early_spectrum_factor, sigma_ratio and the anchor offset must be the ratios of the stored timescape and reference records"
+  },
+  {
+   "id": "AnchoredLagrangianSigmaRatio_22.reference_offset_from_anchor.int",
+   "record": "AnchoredLagrangianSigmaRatio",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "growth_ratio, early_spectrum_factor, sigma_ratio and the anchor offset must be the ratios of the stored timescape and reference records"
+  },
+  {
+   "id": "AnchoredLagrangianSigmaRatio_22.reference_offset_from_anchor.np_int64",
+   "record": "AnchoredLagrangianSigmaRatio",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "growth_ratio, early_spectrum_factor, sigma_ratio and the anchor offset must be the ratios of the stored timescape and reference records"
+  },
+  {
+   "id": "AnchoredLagrangianSigmaRatio_22.growth_ratio.int",
+   "record": "AnchoredLagrangianSigmaRatio",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "growth_ratio, early_spectrum_factor, sigma_ratio and the anchor offset must be the ratios of the stored timescape and reference records"
+  },
+  {
+   "id": "AnchoredLagrangianSigmaRatio_22.growth_ratio.np_int64",
+   "record": "AnchoredLagrangianSigmaRatio",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "growth_ratio, early_spectrum_factor, sigma_ratio and the anchor offset must be the ratios of the stored timescape and reference records"
+  },
+  {
+   "id": "AnchoredLagrangianSigmaRatio_22.early_spectrum_factor.int",
+   "record": "AnchoredLagrangianSigmaRatio",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "growth_ratio, early_spectrum_factor, sigma_ratio and the anchor offset must be the ratios of the stored timescape and reference records"
+  },
+  {
+   "id": "AnchoredLagrangianSigmaRatio_22.early_spectrum_factor.np_int64",
+   "record": "AnchoredLagrangianSigmaRatio",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "growth_ratio, early_spectrum_factor, sigma_ratio and the anchor offset must be the ratios of the stored timescape and reference records"
+  },
+  {
+   "id": "nested.quadrature.k_min_per_Mpc.Fraction",
+   "record": "ConditionalGlobalLinearSigma",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "sigma record: the export is not strict JSON (Object of type Fraction is not JSON serializable); pass native float and int scalars, also inside nested input records"
+  },
+  {
+   "id": "nested.quadrature.k_max_per_Mpc.Fraction",
+   "record": "ConditionalGlobalLinearSigma",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "sigma record: the export is not strict JSON (Object of type Fraction is not JSON serializable); pass native float and int scalars, also inside nested input records"
+  },
+  {
+   "id": "nested.quadrature.k_max_per_Mpc.np_float32",
+   "record": "ConditionalGlobalLinearSigma",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "sigma record: the export is not strict JSON (Object of type float32 is not JSON serializable); pass native float and int scalars, also inside nested input records"
+  },
+  {
+   "id": "nested.quadrature.k_max_per_Mpc.np_int64",
+   "record": "ConditionalGlobalLinearSigma",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "sigma record: the export is not strict JSON (Object of type int64 is not JSON serializable); pass native float and int scalars, also inside nested input records"
+  },
+  {
+   "id": "nested.quadrature.self_convergence_tolerance.Fraction",
+   "record": "ConditionalGlobalLinearSigma",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "sigma record: the export is not strict JSON (Object of type Fraction is not JSON serializable); pass native float and int scalars, also inside nested input records"
+  },
+  {
+   "id": "nested.quadrature.self_convergence_tolerance.np_float32",
+   "record": "ConditionalGlobalLinearSigma",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "sigma record: the export is not strict JSON (Object of type float32 is not JSON serializable); pass native float and int scalars, also inside nested input records"
+  },
+  {
+   "id": "nested.quadrature.truncation_tolerance.Fraction",
+   "record": "ConditionalGlobalLinearSigma",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "sigma record: the export is not strict JSON (Object of type Fraction is not JSON serializable); pass native float and int scalars, also inside nested input records"
+  },
+  {
+   "id": "nested.quadrature.truncation_tolerance.np_float32",
+   "record": "ConditionalGlobalLinearSigma",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "sigma record: the export is not strict JSON (Object of type float32 is not JSON serializable); pass native float and int scalars, also inside nested input records"
+  },
+  {
+   "id": "nested.quadrature.grid_points.np_int64",
+   "record": "ConditionalGlobalLinearSigma",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "sigma record: the export is not strict JSON (Object of type int64 is not JSON serializable); pass native float and int scalars, also inside nested input records"
+  },
+  {
+   "id": "nested.quadrature.comparison_grid_points.np_int64",
+   "record": "ConditionalGlobalLinearSigma",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "sigma record: the export is not strict JSON (Object of type int64 is not JSON serializable); pass native float and int scalars, also inside nested input records"
+  },
+  {
+   "id": "nested.density.omega_m_per_photon.Fraction",
+   "record": "ConditionalGlobalLinearSigma",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "sigma record: the export is not strict JSON (Object of type Fraction is not JSON serializable); pass native float and int scalars, also inside nested input records"
+  },
+  {
+   "id": "nested.radius.omega_m_R_cubed_Mpc3.Fraction",
+   "record": "ConditionalGlobalLinearSigma",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "sigma record: the export is not strict JSON (Object of type Fraction is not JSON serializable); pass native float and int scalars, also inside nested input records"
+  },
+  {
+   "id": "unbound.lcdm.truncation_envelope_fraction.nan",
+   "record": "LCDMReferenceLinearSigma",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "truncation_envelope_fraction must be finite"
+  },
+  {
+   "id": "unbound.lcdm.quadrature_relative_change.nan",
+   "record": "LCDMReferenceLinearSigma",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "quadrature_relative_change must be finite"
+  },
+  {
+   "id": "unbound.anchor.growth_ratio.999",
+   "record": "AnchoredLagrangianSigmaRatio",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "growth_ratio, early_spectrum_factor, sigma_ratio and the anchor offset must be the ratios of the stored timescape and reference records"
+  },
+  {
+   "id": "unbound.anchor.early_spectrum_factor.999",
+   "record": "AnchoredLagrangianSigmaRatio",
+   "old_accepted": true,
+   "new_accepted": false,
+   "new_message": "growth_ratio, early_spectrum_factor, sigma_ratio and the anchor offset must be the ratios of the stored timescape and reference records"
+  }
+ ]
+}

@@ -21,13 +21,18 @@ positive-core margin; a positive result does not establish existence or
 physical compatibility. No Phase 1F-D geometric or perturbative solver is
 implemented, and the frozen scientific statuses are preserved.
 
-**σ(M) track:** phases 1G-A…1G-F and the 2026-09-30 owner decisions are
-merged on `main` at `fb5d952` (PR #3). The 1G-A…1G-E annotated v1 tags
-resolve to that commit (checked 2026-10-01). The F correction and G research
-linked below are successor records on the phase branch
-`phase-1g-f-successor-g-evolution`. They were independently audited
-(2026-10-02) and delta-audited (2026-10-06). They are not merged into `main`,
-frozen or tagged.
+**σ(M) track:** phases 1G-A…1G-E and the 2026-09-30 owner decisions were
+merged on `main` at `fb5d952` (PR #3); the 1G-A…1G-E annotated v1 tags
+resolve to that commit. The F correction and G research linked below,
+independently audited (2026-10-02) and delta-audited (2026-10-06), were
+merged by PR #4 and frozen at `8d3cdd0`: the signed annotated tags
+`phase-1g-f-void-population-v1` and `phase-1g-g-void-evolution-v1` resolve to
+that commit, and the freeze preflight there gave 1136 passed, 0 skipped,
+0 failed on CPython 3.14.3 and 3.11.9 (owner's report). F/G are frozen as
+conditional results; the next phase toward σ8 is separate, and no
+observational authorization changes. Status sentences in the F/G records
+that predate the freeze are resolved in the
+[freeze-status record](reports/phase1g_fg_freeze_status_successor.md).
 - **Route.** The [σ(M) derivation-path audit](reports/phase1g_a_sigma8_derivation_path_audit.md)
   follows the authors' own proposal: standard early-universe physics, then
   scale-independent growth.
@@ -111,7 +116,10 @@ frozen or tagged.
     remediated tree (1136/0/0 on Python 3.14.3 and 3.11.9).
   - The integration record holds the final-tree runs and the residual
     corrections.
-  - Nothing is frozen or tagged.
+  - Merged by PR #4 and frozen at `8d3cdd0` (tags
+    `phase-1g-f-void-population-v1`, `phase-1g-g-void-evolution-v1`;
+    [freeze-status record](reports/phase1g_fg_freeze_status_successor.md)).
+    No release exists.
 - **Windows validation** ([record](reports/phase1g_windows_validation_record.md)):
   both interpreters pass the full suite, as on Linux, and every recorded
   1G-A…1G-F number reproduces.
@@ -134,6 +142,90 @@ frozen or tagged.
   ([successor record](reports/phase1g_e_status_addition_successor.md)).
 - **Status.** These are conditional numbers, not an observational σ8, and no
   σ8 authorization is granted.
+- **Phase 1G-H (proposed research statistic; developed on the branch
+  `ccr-555e67be-u11yht`, pushed with owner approvals on 2026-10-06,
+  2026-10-08 and 2026-10-09; last recorded push P17, `22ace89`, in the
+  publication record; independently
+  audited on 2026-10-07 and remediated; delta-audited on 2026-10-08 and
+  remediated; a second delta audit the same day and a third and a fourth,
+  cross-family, delta audit on 2026-10-09 accepted it with corrections,
+  which are applied; on 2026-10-09 the owner decided H-OD1 … H-OD5
+  and its pull request into `main`, merge, freeze and tag
+  `phase-1g-h-global-variance-closure-v1`, whose hashes a later successor
+  records)**
+  ([report](reports/phase1g_h_global_variance_closure.md),
+  [validation](reports/phase1g_h_global_variance_closure_validation.md),
+  [audit](reports/phase1g_h_independent_audit.md),
+  [remediation](reports/phase1g_h_audit_remediation.md),
+  [delta audit](reports/phase1g_h_delta_audit.md),
+  [delta remediation](reports/phase1g_h_delta_audit_remediation.md),
+  [second delta audit](reports/phase1g_h_delta_audit_2.md),
+  [second remediation](reports/phase1g_h_delta_audit_2_remediation.md),
+  [third delta audit](reports/phase1g_h_delta_audit_3.md),
+  [third remediation](reports/phase1g_h_delta_audit_3_remediation.md),
+  [fourth delta audit](reports/phase1g_h_delta_audit_4.md),
+  [fourth remediation](reports/phase1g_h_delta_audit_4_remediation.md),
+  [owner decisions](reports/phase1g_h_owner_decisions_successor.md),
+  [1G-B hardening](reports/phase1g_b_contract_hardening_successor.md),
+  [publication](reports/phase1g_h_publication_successor.md)):
+  - *Audits.* The independent audit rejected the closure claims of the
+    audited text (definition "closed", structure "derived", interval
+    "closure-independent", Gaussian laws as physical densities) and accepted
+    the rest with corrections; the numbers reproduced. The owner's decisions
+    D1–D4 (2026-10-07) were applied. The delta audit (2026-10-08) rejected
+    the remaining claim that the nonnegative pairs share the wall-density
+    covariance and the completeness claims, and asked for record binding,
+    tests and wording fixes; all six of its findings are corrections, now
+    applied. The second delta audit (2026-10-08, same model family as the
+    author) found them resolved and no scientific blocker; its two LOW and
+    four INFO findings (publication record, tests, typed records, wording)
+    are applied. The third delta audit (2026-10-09, OpenAI GPT-6 family)
+    reproduced Sec. 6 and the main conditional values independently (58 of
+    58 quantities) and found no scientific blocker; its corrections (a
+    publication convention, strict JSON for nested inputs, tests, wording)
+    are applied, and by owner decision a separate successor hardens two
+    1G-B record contracts with bit-identical outputs. The fourth delta audit
+    (2026-10-09, OpenAI GPT-6 family) found those corrections resolved, every
+    earlier finding unregressed and no scientific blocker; its two LOW and
+    one INFO findings (tests for two strict-JSON guards, scoped wording) are
+    applied, with a one-ULP test of the 1G-B bindings. The owner reported
+    the Windows gate passing and adopted that audit's recommendations: the
+    statistic stays a named research proposal (convention (c) preferred),
+    no physical reference value, no token change, an experimental runtime;
+    and a pull request, merge, freeze and tag.
+  - *Definition (proposed).* The formal tangent statistic: the rms of the
+    early Gaussian field propagated with the zero-amplitude tangent of the
+    global contrast of Lagrangian top-hat regions (dust foliation, global
+    volume mean), with the smoothing rule G_R = G·W(kR) — the analogue of
+    ΛCDM's linear σ8, not the ensemble-mean response of the true contrast.
+    Preferred radius 8 h̄⁻¹ Mpc of present volume-average proper length
+    (R_proper·H_D0 = 800 km/s).
+  - *Derived within that model.* Under the regional wall/void laws, void
+    autonomy and seed-indexed void accounting, every Lagrangian region has
+    the propagator G = (1−p)D_W + p D_V, with D_W = 0.231 / 0.353 and
+    D_V = 7.13 / 11.3 ([GM] / [NW15]); p (defined by p δ = f_v ε) is the one
+    missing input (1G-D's void-onset response, an external closure). Void
+    radii are not small against R at 8 h̄⁻¹ Mpc, so the sub-cell extension
+    holds for the seed-indexed statistic only.
+  - *Conditional values* at 8 h̄⁻¹ Mpc (direct normalisation): 1.121 / 1.057
+    with 1G-D's seed closure (a formal extrapolation of the void response),
+    0.811 / 0.816 with the 1G-F void size as a heuristic seed scale (its
+    void response lies below the adopted ε = 1 threshold, with no
+    controlled error estimate); the constant-share interval
+    [0.26, 1.00] / [0.37, 1.16] under an adopted
+    reading of the background's homogeneity premise, which does not bound
+    scale-dependent shares. Not observational; owner decisions in the report
+    (§9).
+  - *Nonlinear variance.* Joint laws sharing the volume fraction, the
+    partition covariance and the wall carrier law give different
+    8 h⁻¹ Mpc variances: 0.97 vs 0.39 for a signed Gaussian surrogate
+    (negative densities), law II / law I = 0.92–1.29 for nonnegative
+    lognormal laws (which do not share the conditionally normalised
+    wall-density covariance). The difference lies in the both-walls
+    conditional density correlation, i.e. the joint law of geometry and
+    density.
+  - Experimental runtime `timescape_fsigma8.global_variance`; one case:
+    `python scripts/phase1g_h_global_variance_case.py --config scripts/phase1g_h_configs/gm_bare_pbs_f_median_seed.json`.
 
 Imported regional dust-FLRW equations are conditional on their regional
 backgrounds. Their physical embedding into the common Timescape spacetime,
@@ -281,6 +373,8 @@ The earlier implementation milestones below remain useful provenance:
 | `src/timescape_fsigma8/phase1f_c/` | Phase 1F-C conditional wall/common-spacetime kinematic geometry |
 | `src/timescape_fsigma8/phase1f_d.py` | Phase 1F-D conditional scalar positive-core necessary-bound diagnostic (no solver; a positive margin establishes no existence) |
 | `src/timescape_fsigma8/lagrangian_sigma.py` | Phase 1G-B conditional, model-internal, mass-labelled linear σ(M) (explicit growth law, early-spectrum import and radius convention; non-observational) |
+| `src/timescape_fsigma8/global_variance.py` | Phase 1G-H experimental, conditional formal tangent statistic of the global contrast (two-phase propagator, explicit void-share closures, constant-share interval, two-phase covariance, orthant integrals with an accuracy contract; non-observational) |
+| `scripts/phase1g_h_global_variance_closure_numerics.py`, `scripts/phase1g_h_global_variance_case.py`, `scripts/phase1g_h_configs/` | Phase 1G-H evidence, single-case runner and example configurations |
 | `src/timescape_fsigma8/experimental_ltb_cmc/` | Isolated, conditional LTB–CMC experiment outside the phase sequence: CMC-sliced LTB background, tracker-clock comparison, single-age evolution, kappa_star and mixed sensitivities |
 | `src/timescape_fsigma8/components.py` | Tensor-component ontology (coordinate/orthonormal representations, 1F-C-R) |
 | `src/timescape_fsigma8/scientific_status.py` | Current cross-phase scientific classifications (1F-C-R successor record) |

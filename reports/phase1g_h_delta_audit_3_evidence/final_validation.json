@@ -1,0 +1,37 @@
+{
+  "status": "PASS",
+  "closed_utc": "2026-10-09T06:28:31.814059+00:00",
+  "suite_command": "OPENBLAS_NUM_THREADS=1 python -B -W error -m pytest -q -p no:cacheprovider -rs",
+  "py311": {
+    "python": "3.11.17",
+    "passed": 1185,
+    "skipped": 0,
+    "failed": 0,
+    "exit_status": 0,
+    "duration_seconds": 236.46
+  },
+  "py312": {
+    "python": "3.12.14",
+    "passed": 1185,
+    "skipped": 0,
+    "failed": 0,
+    "exit_status": 0,
+    "duration_seconds": 231.22
+  },
+  "final_tree_suite": "Report/inventory present before the final 3.12 run; only auditor prose, validation metadata/logs and evidence hashes finalized afterward. No production or test change.",
+  "validator": {
+    "command": "python -B -W error scripts/validate_phase1f_c_r_astra_remediation.py",
+    "status": "PASS",
+    "json_roundtrips": 55,
+    "exit_status": 0
+  },
+  "diff_check": "PASS",
+  "tolerance_audit": {
+    "comparisons": 749,
+    "missing_count": 0
+  },
+  "windows_gate": "NOT_RUN",
+  "remote_writes": 0,
+  "existing_tracked_files_modified": 0,
+  "checkpoint_files_modified": 0
+}

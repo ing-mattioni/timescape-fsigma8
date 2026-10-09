@@ -1,0 +1,14 @@
+{"id": "baseline", "outcome": "BASELINE_FAIL", "tests_summary": "1 failed, 199 passed in 27.68s", "evidence_rc": null}
+{"id": "X01_growth_json_check_removed", "outcome": "SURVIVED", "tests_summary": "54 passed in 21.05s", "evidence_rc": 0}
+{"id": "X02_void_share_json_check_removed", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 53 passed in 19.60s", "evidence_rc": null}
+{"id": "X03_premise_json_check_removed", "outcome": "SURVIVED", "tests_summary": "54 passed in 20.46s", "evidence_rc": 0}
+{"id": "X04_interval_json_check_removed", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 53 passed in 20.94s", "evidence_rc": null}
+{"id": "X05_growth_json_before_validation", "outcome": "KILLED_BY_TESTS", "tests_summary": "3 failed, 51 passed in 22.65s", "evidence_rc": null}
+{"id": "X06_growth_ratio_approximate_1e8", "outcome": "KILLED_BY_TESTS", "tests_summary": "3 failed, 143 passed in 8.04s", "evidence_rc": null}
+{"id": "X07_growth_ratio_operands_swapped", "outcome": "KILLED_BY_TESTS", "tests_summary": "44 failed, 102 passed in 6.95s", "evidence_rc": null}
+{"id": "X08_growth_ratio_float_conversion", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 145 passed in 8.90s", "evidence_rc": null}
+{"id": "X09_simpson_exact_error_budget_to_1pct", "outcome": "SURVIVED", "tests_summary": "54 passed in 19.36s", "evidence_rc": null}
+{"id": "X10_simpson_ratio_budget_to_1pct", "outcome": "SURVIVED", "tests_summary": "54 passed in 20.87s", "evidence_rc": null}
+{"id": "X11_growth_ratio_approximate_1e12", "outcome": "KILLED_BY_TESTS", "tests_summary": "2 failed, 144 passed in 10.01s", "evidence_rc": null}
+{"id": "D1_adapted_binding_disabled", "outcome": "KILLED_BY_TESTS", "tests_summary": "5 failed, 49 passed in 17.55s", "evidence_rc": null}
+{"id": "X12_lcdm_relative_change_float_conversion", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 145 passed in 7.57s", "evidence_rc": null}

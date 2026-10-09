@@ -1,0 +1,62 @@
+................FF..........                                             [100%]
+=================================== FAILURES ===================================
+____________ test_two_phase_variance_assembly_on_a_synthetic_field _____________
+
+    def test_two_phase_variance_assembly_on_a_synthetic_field():
+        """(H18) equals the sample variance of block-averaged contrasts (any cross terms)."""
+        rng = np.random.default_rng(3)
+        n_blocks, n_cells = 4000, 64
+        g = rng.standard_normal((n_blocks, n_cells)) + 0.8 * rng.standard_normal((n_blocks, 1))
+        chi_v = (g < 0.4).astype(float)
+        chi_w = 1.0 - chi_v
+        f_v = chi_v.mean()
+        raw_w = 0.5 * g + rng.standard_normal(g.shape) * 0.3          # correlated with g
+        raw_v = -0.2 * g + rng.standard_normal(g.shape) * 0.1
+        d_w = raw_w - (chi_w * raw_w).sum() / chi_w.sum()               # conditional normalisation
+        d_v = raw_v - (chi_v * raw_v).sum() / chi_v.sum()
+        x = 0.2
+        a_w = 1.0 / ((1 - f_v) + f_v * x)
+        rho = a_w * chi_w * (1 + d_w) + x * a_w * chi_v * (1 + d_v)
+        assert rho.mean() == pytest.approx(1.0, abs=1e-12, rel=0.0)              # mass normalisation
+        delta_R = rho.mean(axis=1) - 1.0
+        A = chi_w.mean(axis=1) - (1 - f_v)
+        B = (chi_w * d_w).mean(axis=1)
+        C = (chi_v * d_v).mean(axis=1)
+        mom = gv.TwoPhaseSmoothedMoments(
+            var_partition=float(np.mean(A * A)), wall_field=float(np.mean(B * B)),
+            void_field=float(np.mean(C * C)), partition_wall=float(np.mean(A * B)),
+            partition_void=float(np.mean(A * C)), wall_void=float(np.mean(B * C)),
+            provenance="synthetic test")
+        out = gv.two_phase_global_variance(void_volume_fraction=f_v, void_to_wall_density_ratio=x,
+                                           moments=mom)
+>       assert out["variance"] == pytest.approx(float(np.mean(delta_R ** 2)), rel=1e-10, abs=0.0)
+E       assert 0.12951867030977454 == 0.24599643140997027 ± 2.5e-11
+E
+E         comparison failed
+E         Obtained: 0.12951867030977454
+E         Expected: 0.24599643140997027 ± 2.5e-11
+
+tests/test_phase1g_h_global_variance.py:425: AssertionError
+___________ test_e3_special_case_is_the_1g_e_mass_conserving_formula ___________
+
+    def test_e3_special_case_is_the_1g_e_mass_conserving_formula():
+        for f_v, x in ((0.737, 0.0), (0.627, 0.0), (0.737, 0.1), (0.5, 0.3)):
+            f_w = 1 - f_v
+            sp, si = 0.33, 0.93                          # 1G-E normalisation: Var(A)/f_w^2, Var(B)/f_w^2
+            mom = gv.TwoPhaseSmoothedMoments(var_partition=(sp * f_w) ** 2,
+                                             wall_field=(si * f_w) ** 2, void_field=0.0,
+                                             partition_wall=0.0, partition_void=0.0, wall_void=0.0,
+                                             provenance="E3")
+            out = gv.two_phase_global_variance(void_volume_fraction=f_v,
+                                               void_to_wall_density_ratio=x, moments=mom)
+            delta_v = x / (f_w + f_v * x) - 1.0          # void contrast vs the global mean
+            e_formula = delta_v ** 2 * sp ** 2 + (f_w - f_v * delta_v) ** 2 * si ** 2
+>           assert out["variance"] == pytest.approx(e_formula, rel=1e-13, abs=0.0)
+E           assert 0.1089 == 0.9738000000000001 ± 9.7e-14
+E
+E             comparison failed
+E             Obtained: 0.1089
+E             Expected: 0.9738000000000001 ± 9.7e-14
+
+tests/test_phase1g_h_global_variance.py:441: AssertionError
+2 failed, 26 passed in 5.82s

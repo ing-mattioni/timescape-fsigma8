@@ -1,0 +1,20 @@
+[
+ {
+  "id": "AUTH_D1_binding_off_adapted",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "    for name, expected in values.items():\n        stored = getattr(record, name)",
+  "new": "    for name, expected in ():\n        stored = getattr(record, name)",
+  "adapted_from": "AUTH_D1_binding_off (reports/phase1g_h_delta_audit_remediation_logs/own_mutants_definitions.json)",
+  "reason": "GH-D2F4 inserted 'stored = getattr(record, name)' into the binding loop; the mutant again skips every binding comparison",
+  "replacements": 1,
+  "mutated_sha256": "5fdea8c1fe00becab62f054fdf7627bdf5f307d9b6101d337707e37708159d53",
+  "tests_rc": 1,
+  "tests_summary": "3 failed, 46 passed in 14.49s",
+  "failed_tests": [
+   "tests/test_phase1g_h_global_variance.py::test_gh_df2_records_bind_results_to_their_inputs",
+   "tests/test_phase1g_h_global_variance.py::test_gh_d2f2_binding_boundary_and_record_identities",
+   "tests/test_phase1g_h_global_variance.py::test_gh_d2f4_float_results_must_be_floats_and_scalar_inputs_are_stored_as_floats"
+  ],
+  "outcome": "KILLED_BY_TESTS"
+ }
+]

@@ -1,0 +1,26 @@
+{
+  "captured_utc": "2026-10-09T11:30:53.246Z",
+  "method": "Read-only GitHub connector GET; final head drift check",
+  "refs": [
+    {
+      "ref": "refs/heads/main",
+      "node_id": "REF_kwDOTZch8a9yZWZzL2hlYWRzL21haW4",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/main",
+      "object": {
+        "sha": "8d3cdd0533035858c42269cb1dff1a20dcafc7da",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/8d3cdd0533035858c42269cb1dff1a20dcafc7da"
+      }
+    },
+    {
+      "ref": "refs/heads/ccr-555e67be-u11yht",
+      "node_id": "REF_kwDOTZch8b5yZWZzL2hlYWRzL2Njci01NTVlNjdiZS11MTF5aHQ",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/ccr-555e67be-u11yht",
+      "object": {
+        "sha": "027b7a413fcee0786b861d5903272e4653d227ed",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/027b7a413fcee0786b861d5903272e4653d227ed"
+      }
+    }
+  ]
+}

@@ -1,0 +1,246 @@
+{
+  "GM": {
+    "1.0": {
+      "laws": {
+        "I": {
+          "wall_rms": {
+            "independent": 0.9331421561540789,
+            "author": 0.9331362108041373,
+            "relative": 6.371363443724576e-06
+          },
+          "total": {
+            "independent": 0.9885804183737016,
+            "author": 0.9885748064329307,
+            "relative": 5.676799301745916e-06
+          },
+          "cross_term": {
+            "independent": 0.0,
+            "author": 0.0,
+            "relative": 0.0
+          }
+        },
+        "II": {
+          "wall_rms": {
+            "independent": 0.7726986620961128,
+            "author": 0.7726935431696083,
+            "relative": 6.624782295405751e-06
+          },
+          "total": {
+            "independent": 1.0165992330980154,
+            "author": 1.0165948020106337,
+            "relative": 4.358754710276358e-06
+          },
+          "cross_term": {
+            "independent": 0.3298738183303108,
+            "author": 0.3298727198190332,
+            "relative": 3.330106467247518e-06
+          }
+        }
+      },
+      "ratio_independent": 1.02834247391872,
+      "ratio_author": 1.0283438293140479
+    },
+    "2.0": {
+      "laws": {
+        "I": {
+          "wall_rms": {
+            "independent": 0.9118942304399954,
+            "author": 0.9118891417269985,
+            "relative": 5.580407490324291e-06
+          },
+          "total": {
+            "independent": 0.9685494553763329,
+            "author": 0.9685446643287057,
+            "relative": 4.9466460387836975e-06
+          },
+          "cross_term": {
+            "independent": 0.0,
+            "author": 0.0,
+            "relative": 0.0
+          }
+        },
+        "II": {
+          "wall_rms": {
+            "independent": 0.9028119562929857,
+            "author": 0.9028064925800848,
+            "relative": 6.051920257377219e-06
+          },
+          "total": {
+            "independent": 1.1492228260807216,
+            "author": 1.1492179374430613,
+            "relative": 4.253882140980991e-06
+          },
+          "cross_term": {
+            "independent": 0.39910671555935323,
+            "author": 0.39910534469612635,
+            "relative": 3.4348405630879597e-06
+          }
+        }
+      },
+      "ratio_independent": 1.186540160341309,
+      "ratio_author": 1.1865409823299988
+    },
+    "4.0": {
+      "laws": {
+        "I": {
+          "wall_rms": {
+            "independent": 0.895869662932196,
+            "author": 0.8958648574843576,
+            "relative": 5.364032083843284e-06
+          },
+          "total": {
+            "independent": 0.9534775366846804,
+            "author": 0.9534730215771557,
+            "relative": 4.735432909352966e-06
+          },
+          "cross_term": {
+            "independent": 0.0,
+            "author": -1.1102230246251565e-16,
+            "relative": -1.0
+          }
+        },
+        "II": {
+          "wall_rms": {
+            "independent": 0.9837822292502082,
+            "author": 0.9837764546115184,
+            "relative": 5.869868772157005e-06
+          },
+          "total": {
+            "independent": 1.2329972177788622,
+            "author": 1.2329919698458656,
+            "relative": 4.256258860468876e-06
+          },
+          "cross_term": {
+            "independent": 0.4459177044618662,
+            "author": 0.4459161250563757,
+            "relative": 3.5419340134179578e-06
+          }
+        }
+      },
+      "ratio_independent": 1.2931581189275783,
+      "ratio_author": 1.2931587385727525
+    }
+  },
+  "NW15": {
+    "1.0": {
+      "laws": {
+        "I": {
+          "wall_rms": {
+            "independent": 0.9582746802620159,
+            "author": 0.9582664613261883,
+            "relative": 8.576879353849876e-06
+          },
+          "total": {
+            "independent": 1.0052180474062677,
+            "author": 1.0052102122952369,
+            "relative": 7.794500030966489e-06
+          },
+          "cross_term": {
+            "independent": 0.0,
+            "author": 1.1102230246251565e-16,
+            "relative": -1.0
+          }
+        },
+        "II": {
+          "wall_rms": {
+            "independent": 0.7118398272624862,
+            "author": 0.7118331652956409,
+            "relative": 9.35888796704809e-06
+          },
+          "total": {
+            "independent": 0.9241925535316817,
+            "author": 0.9241867773573479,
+            "relative": 6.2500075475036e-06
+          },
+          "cross_term": {
+            "independent": 0.2552429763263237,
+            "author": 0.25524178422732924,
+            "relative": 4.670469602174876e-06
+          }
+        }
+      },
+      "ratio_independent": 0.9193951062820116,
+      "ratio_author": 0.9193965262719676
+    },
+    "2.0": {
+      "laws": {
+        "I": {
+          "wall_rms": {
+            "independent": 0.9332922418844976,
+            "author": 0.9332851740158982,
+            "relative": 7.5731071231821545e-06
+          },
+          "total": {
+            "independent": 0.9814312858075149,
+            "author": 0.9814245646191586,
+            "relative": 6.848400375014663e-06
+          },
+          "cross_term": {
+            "independent": 0.0,
+            "author": 1.1102230246251565e-16,
+            "relative": -1.0
+          }
+        },
+        "II": {
+          "wall_rms": {
+            "independent": 0.8089867778145091,
+            "author": 0.8089801549955091,
+            "relative": 8.186627272754876e-06
+          },
+          "total": {
+            "independent": 1.0300168919331696,
+            "author": 1.0300109492762786,
+            "relative": 5.769508465203188e-06
+          },
+          "cross_term": {
+            "independent": 0.3143022309889643,
+            "author": 0.31430070445244274,
+            "relative": 4.856930003516169e-06
+          }
+        }
+      },
+      "ratio_independent": 1.049504847489836,
+      "ratio_author": 1.0495059797855926
+    },
+    "4.0": {
+      "laws": {
+        "I": {
+          "wall_rms": {
+            "independent": 0.9147546734000662,
+            "author": 0.9147479963241574,
+            "relative": 7.299361065138399e-06
+          },
+          "total": {
+            "independent": 0.9638200415571687,
+            "author": 0.963813704394724,
+            "relative": 6.575090617300106e-06
+          },
+          "cross_term": {
+            "independent": 0.0,
+            "author": 0.0,
+            "relative": 0.0
+          }
+        },
+        "II": {
+          "wall_rms": {
+            "independent": 0.9191425254912219,
+            "author": 0.9191353095797926,
+            "relative": 7.850760768368659e-06
+          },
+          "total": {
+            "independent": 1.1449266700563683,
+            "author": 1.1449200644904527,
+            "relative": 5.769455982518323e-06
+          },
+          "cross_term": {
+            "independent": 0.373861137639982,
+            "author": 0.37385927675646136,
+            "relative": 4.9774972465943534e-06
+          }
+        }
+      },
+      "ratio_independent": 1.1879050244759382,
+      "ratio_author": 1.1879059814878474
+    }
+  }
+}

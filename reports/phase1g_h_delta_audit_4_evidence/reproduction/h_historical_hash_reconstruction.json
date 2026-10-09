@@ -1,0 +1,18 @@
+{
+  "altered_fields": [
+    "environment"
+  ],
+  "author_environment": {
+    "git_head": "6926a636c100d232247e39d71d5b2d6e71a6f917",
+    "implementation": "CPython",
+    "matplotlib": "3.11.2",
+    "numpy": "2.5.3",
+    "platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
+    "python": "3.13.16",
+    "scipy": "1.18.1",
+    "src_scripts_tests_dirty": false
+  },
+  "reconstructed_hash": "027b8e124488f2f6bffa71c2082dfb73da60083435cca207a3f0f546ae1a34a2",
+  "declared_hash": "027b8e124488f2f6bffa71c2082dfb73da60083435cca207a3f0f546ae1a34a2",
+  "match": true
+}

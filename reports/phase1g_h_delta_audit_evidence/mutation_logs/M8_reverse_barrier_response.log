@@ -1,0 +1,13 @@
+......................F............                                      [100%]
+=================================== FAILURES ===================================
+________________ test_two_barrier_mass_fraction_and_global_bias ________________
+tests/test_phase1g_h_global_variance.py:534: in test_two_barrier_mass_fraction_and_global_bias
+    assert n_up / (n_up + n_down) == pytest.approx(
+E   assert 0.5 == 0.26942878143...47 ± 0.0113542
+E
+E     comparison failed
+E     Obtained: 0.5
+E     Expected: 0.26942878143321347 ± 0.0113542
+=========================== short test summary info ============================
+FAILED tests/test_phase1g_h_global_variance.py::test_two_barrier_mass_fraction_and_global_bias
+1 failed, 34 passed in 11.05s

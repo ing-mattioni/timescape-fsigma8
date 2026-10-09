@@ -1,0 +1,17 @@
+...............................F...                                      [100%]
+=================================== FAILURES ===================================
+_______________ test_gh_f5_lognormal_mask_kernels_by_monte_carlo _______________
+tests/test_phase1g_h_global_variance.py:799: in test_gh_f5_lognormal_mask_kernels_by_monte_carlo
+    assert abs(kww - kww_mc.mean()) <= 5 * kww_mc.std() / math.sqrt(kww_mc.size)
+E   assert np.float64(0.10907153785614321) <= ((5 * np.float64(0.5546159443213198)) / 1414.213562373095)
+E    +  where np.float64(0.10907153785614321) = abs((0.14693732721322422 - np.float64(0.037865789357081014)))
+E    +    where np.float64(0.037865789357081014) = <built-in method mean of numpy.ndarray object at 0x7f143a37eb50>()
+E    +      where <built-in method mean of numpy.ndarray object at 0x7f143a37eb50> = array([ 0.        ,  0.        , -0.        , ...,  0.        ,\n        0.14237118,  0.        ], shape=(2000000,)).mean
+E    +  and   np.float64(0.5546159443213198) = <built-in method std of numpy.ndarray object at 0x7f143a37eb50>()
+E    +    where <built-in method std of numpy.ndarray object at 0x7f143a37eb50> = array([ 0.        ,  0.        , -0.        , ...,  0.        ,\n        0.14237118,  0.        ], shape=(2000000,)).std
+E    +  and   1414.213562373095 = <built-in function sqrt>(2000000)
+E    +    where <built-in function sqrt> = math.sqrt
+E    +    and   2000000 = array([ 0.        ,  0.        , -0.        , ...,  0.        ,\n        0.14237118,  0.        ], shape=(2000000,)).size
+=========================== short test summary info ============================
+FAILED tests/test_phase1g_h_global_variance.py::test_gh_f5_lognormal_mask_kernels_by_monte_carlo
+1 failed, 34 passed in 12.41s

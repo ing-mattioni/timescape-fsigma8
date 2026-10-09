@@ -1,0 +1,1634 @@
+....FFFEFFEFFFFE........EFFF                                             [100%]
+==================================== ERRORS ====================================
+_ ERROR at setup of test_linear_propagator_is_the_small_amplitude_limit_of_the_exact_region _
+
+    @pytest.fixture(scope="module")
+    def growth_gm() -> gv.TwoPhaseGlobalGrowth:
+>       return gv.two_phase_global_growth(background=GM, matching=MATCHING, checks=CHECKS, G=G)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_phase1g_h_global_variance.py:89:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+background = TimescapeTrackerInput(label='PAPER_REFERENCE', fv0=0.737, H0_dressed_km_s_Mpc=73.03, source="f_v0: [GM] Sec. 5.1.1; H0: [GM] Sec. 5.1.1 text / Fig. 1 caption, 'H0 = 73.03 km/(s Mpc)' from the best fit of [GM] ref. [80]")
+matching = LastScatteringMatching(z_last_scattering=1090.0, provenance='1G-D a_LS = 1/1091')
+checks = TwoPhaseGrowthChecks(identity_tolerance=1e-12, ode_rtol=1e-11, ode_atol=1e-14, ode_cross_check_tolerance=1e-08, root_xtol_fraction=1e-17)
+G = 1.0
+
+    def two_phase_global_growth(
+        *, background: TimescapeTrackerInput, matching: LastScatteringMatching,
+        checks: TwoPhaseGrowthChecks, G: float,
+    ) -> TwoPhaseGlobalGrowth:
+        """D_W and D_V of the tracker, (H8), with fail-closed independent checks.
+
+        Closed forms from [GM] Eqs. (5.4)-(5.6) and text p. 25:
+        ``(t0/t)^(2/3)/(1 + z) = gamma_w0 f_w0^(1/3)/(gamma_w(t) f_w(t)^(1/3))``
+        (``1 + z = gamma_w a_w0/a_D``, ``a_D proportional to t f_v^(-1/3)``,
+        ``f_v = t/(t + tau)``), hence ``D_W = (f_w0/f_w,LS)(t0/t_LS)^(2/3)/(1+z_LS)``
+        and ``D_V = (f_v0/f_v,LS)/(1 + z_LS)`` (H7)-(H8).  Independent checks: the
+        wall growing mode integrated in common time on the package's regional
+        background ``H_w = H_D - dfv_dt/(3 f_w)``, ``4 pi G rho_w = 4 pi G <rho>_D/f_w``
+        (1G-C Sec. 5), and the void volume ``dV/dt = 3V/t`` against ``f_v a_D^3``.
+        ``G`` is explicit (it cancels; no default).
+        """
+        _require(background, TimescapeTrackerInput, "background")
+        _require(matching, LastScatteringMatching, "matching")
+        _require(checks, TwoPhaseGrowthChecks, "checks")
+        G = _positive(G, "G")
+        p = background.dimensionless_params()
+        z_ls = matching.z_last_scattering
+        t0 = p.t0
+        t_ls = _t_of_redshift(p, z_ls, checks.root_xtol_fraction)
+        z_check = abs(float(bg.redshift(t_ls, p)) - z_ls) / z_ls
+        fv0 = p.fv0
+        f_vls = float(bg.fv(t_ls, p))
+        g0 = float(bg.gamma_w(t0, p))
+        g_ls = float(bg.gamma_w(t_ls, p))
+        f_w0, f_wls = 1.0 - fv0, 1.0 - f_vls
+        d_w = f_w0 ** (4.0 / 3.0) / f_wls ** (4.0 / 3.0)
+        d_v = fv0 / (f_vls * (1.0 + z_ls))
+        # Identity checks against the tracker functions.
+        finite_identity = ((t0 / t_ls) ** (2.0 / 3.0) / (1.0 + z_ls)) / (
+            g0 * f_w0 ** (1.0 / 3.0) / (g_ls * f_wls ** (1.0 / 3.0))) - 1.0
+        tau = t0 * (1.0 - fv0) / fv0
+        one_scale = f_vls / (t_ls / (t_ls + tau)) - 1.0
+        identities = {"finite_t_photon_identity_rel": abs(finite_identity),
+                      "one_time_scale_identity_rel": abs(one_scale),
+                      "redshift_root_rel": z_check,
+                      "gamma_w0_identity_rel": abs(g0 / (1.0 + fv0 / 2.0) - 1.0),
+                      "gamma_w_ls_identity_rel": abs(g_ls / (1.0 + f_vls / 2.0) - 1.0)}
+        for name, value in identities.items():
+            if not value <= checks.identity_tolerance:
+                raise GlobalVarianceNumericalError(
+                    f"two-phase growth identity {name} = {value:.3e} exceeds "
+                    f"{checks.identity_tolerance:.3e}")
+
+        # Independent route 1: wall growing mode in common time on the package's
+        # regional background (no closed form of H_w or rho_w is used).
+        def wall_rhs(t, y):
+            tt = np.array([t])
+            fw = 1.0 - float(bg.fv(tt, p)[0])
+            h_w = float(bg.H_D(tt, p)[0]) - float(bg.dfv_dt(tt, p)[0]) / (3.0 * fw)
+            four_pi_g_rho_w = 4.0 * math.pi * G * float(bg.rho_d(tt, p, G)[0]) / fw
+            return [y[1], -2.0 * h_w * y[1] + four_pi_g_rho_w * y[0]]
+
+        # Growing-mode data at t_LS: delta = 1, d delta/dt = (2/3)/t_LS (EdS in t).
+        sol_w = solve_ivp(wall_rhs, (t_ls, t0), [1.0, 2.0 / (3.0 * t_ls)], method="DOP853",
+                          rtol=checks.ode_rtol, atol=checks.ode_atol)
+        if not sol_w.success:
+            raise GlobalVarianceNumericalError(f"wall-mode integration failed: {sol_w.message}")
+        d_w_ode = (f_w0 / f_wls) * float(sol_w.y[0, -1]) / (1.0 + z_ls)
+        # Independent route 2: void volume dV/dt = 3V/t versus f_v a_D^3.
+        sol_v = solve_ivp(lambda t, y: [3.0 * y[0] / t], (t_ls, t0), [1.0], method="DOP853",
+                          rtol=checks.ode_rtol, atol=checks.ode_atol)
+        if not sol_v.success:
+            raise GlobalVarianceNumericalError(f"void-volume integration failed: {sol_v.message}")
+        vol_ratio_pkg = (fv0 * float(bg.a_D(t0, p)) ** 3) / (f_vls * float(bg.a_D(t_ls, p)) ** 3)
+        domain_ratio = (float(bg.a_D(t0, p)) / float(bg.a_D(t_ls, p))) ** 3
+        # V_v(t0)/V_v(LS) / [V_D(t0)/V_D(LS)] = f_v0/f_v,LS, so D_V = that/(1 + z_LS).
+        d_v_ode = float(sol_v.y[0, -1]) / domain_ratio / (1.0 + z_ls)
+        cross = {"wall_share_ode_vs_closed_form_rel": abs(d_w_ode / d_w - 1.0),
+                 "void_volume_ode_vs_package_rel": abs(float(sol_v.y[0, -1]) / vol_ratio_pkg - 1.0),
+                 "void_share_ode_vs_closed_form_rel": abs(d_v_ode / d_v - 1.0)}
+        for name, value in cross.items():
+            if not value <= checks.ode_cross_check_tolerance:
+>               raise GlobalVarianceNumericalError(
+                    f"two-phase growth cross-check {name} = {value:.3e} exceeds "
+                    f"{checks.ode_cross_check_tolerance:.3e}")
+E               timescape_fsigma8.global_variance.GlobalVarianceNumericalError: two-phase growth cross-check wall_share_ode_vs_closed_form_rel = 3.684e-01 exceeds 1.000e-08
+
+src/timescape_fsigma8/global_variance.py:670: GlobalVarianceNumericalError
+____ ERROR at setup of test_gaussian_threshold_share_independent_evaluation ____
+
+    @pytest.fixture(scope="module")
+    def growth_gm() -> gv.TwoPhaseGlobalGrowth:
+>       return gv.two_phase_global_growth(background=GM, matching=MATCHING, checks=CHECKS, G=G)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_phase1g_h_global_variance.py:89:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+background = TimescapeTrackerInput(label='PAPER_REFERENCE', fv0=0.737, H0_dressed_km_s_Mpc=73.03, source="f_v0: [GM] Sec. 5.1.1; H0: [GM] Sec. 5.1.1 text / Fig. 1 caption, 'H0 = 73.03 km/(s Mpc)' from the best fit of [GM] ref. [80]")
+matching = LastScatteringMatching(z_last_scattering=1090.0, provenance='1G-D a_LS = 1/1091')
+checks = TwoPhaseGrowthChecks(identity_tolerance=1e-12, ode_rtol=1e-11, ode_atol=1e-14, ode_cross_check_tolerance=1e-08, root_xtol_fraction=1e-17)
+G = 1.0
+
+    def two_phase_global_growth(
+        *, background: TimescapeTrackerInput, matching: LastScatteringMatching,
+        checks: TwoPhaseGrowthChecks, G: float,
+    ) -> TwoPhaseGlobalGrowth:
+        """D_W and D_V of the tracker, (H8), with fail-closed independent checks.
+
+        Closed forms from [GM] Eqs. (5.4)-(5.6) and text p. 25:
+        ``(t0/t)^(2/3)/(1 + z) = gamma_w0 f_w0^(1/3)/(gamma_w(t) f_w(t)^(1/3))``
+        (``1 + z = gamma_w a_w0/a_D``, ``a_D proportional to t f_v^(-1/3)``,
+        ``f_v = t/(t + tau)``), hence ``D_W = (f_w0/f_w,LS)(t0/t_LS)^(2/3)/(1+z_LS)``
+        and ``D_V = (f_v0/f_v,LS)/(1 + z_LS)`` (H7)-(H8).  Independent checks: the
+        wall growing mode integrated in common time on the package's regional
+        background ``H_w = H_D - dfv_dt/(3 f_w)``, ``4 pi G rho_w = 4 pi G <rho>_D/f_w``
+        (1G-C Sec. 5), and the void volume ``dV/dt = 3V/t`` against ``f_v a_D^3``.
+        ``G`` is explicit (it cancels; no default).
+        """
+        _require(background, TimescapeTrackerInput, "background")
+        _require(matching, LastScatteringMatching, "matching")
+        _require(checks, TwoPhaseGrowthChecks, "checks")
+        G = _positive(G, "G")
+        p = background.dimensionless_params()
+        z_ls = matching.z_last_scattering
+        t0 = p.t0
+        t_ls = _t_of_redshift(p, z_ls, checks.root_xtol_fraction)
+        z_check = abs(float(bg.redshift(t_ls, p)) - z_ls) / z_ls
+        fv0 = p.fv0
+        f_vls = float(bg.fv(t_ls, p))
+        g0 = float(bg.gamma_w(t0, p))
+        g_ls = float(bg.gamma_w(t_ls, p))
+        f_w0, f_wls = 1.0 - fv0, 1.0 - f_vls
+        d_w = f_w0 ** (4.0 / 3.0) / f_wls ** (4.0 / 3.0)
+        d_v = fv0 / (f_vls * (1.0 + z_ls))
+        # Identity checks against the tracker functions.
+        finite_identity = ((t0 / t_ls) ** (2.0 / 3.0) / (1.0 + z_ls)) / (
+            g0 * f_w0 ** (1.0 / 3.0) / (g_ls * f_wls ** (1.0 / 3.0))) - 1.0
+        tau = t0 * (1.0 - fv0) / fv0
+        one_scale = f_vls / (t_ls / (t_ls + tau)) - 1.0
+        identities = {"finite_t_photon_identity_rel": abs(finite_identity),
+                      "one_time_scale_identity_rel": abs(one_scale),
+                      "redshift_root_rel": z_check,
+                      "gamma_w0_identity_rel": abs(g0 / (1.0 + fv0 / 2.0) - 1.0),
+                      "gamma_w_ls_identity_rel": abs(g_ls / (1.0 + f_vls / 2.0) - 1.0)}
+        for name, value in identities.items():
+            if not value <= checks.identity_tolerance:
+                raise GlobalVarianceNumericalError(
+                    f"two-phase growth identity {name} = {value:.3e} exceeds "
+                    f"{checks.identity_tolerance:.3e}")
+
+        # Independent route 1: wall growing mode in common time on the package's
+        # regional background (no closed form of H_w or rho_w is used).
+        def wall_rhs(t, y):
+            tt = np.array([t])
+            fw = 1.0 - float(bg.fv(tt, p)[0])
+            h_w = float(bg.H_D(tt, p)[0]) - float(bg.dfv_dt(tt, p)[0]) / (3.0 * fw)
+            four_pi_g_rho_w = 4.0 * math.pi * G * float(bg.rho_d(tt, p, G)[0]) / fw
+            return [y[1], -2.0 * h_w * y[1] + four_pi_g_rho_w * y[0]]
+
+        # Growing-mode data at t_LS: delta = 1, d delta/dt = (2/3)/t_LS (EdS in t).
+        sol_w = solve_ivp(wall_rhs, (t_ls, t0), [1.0, 2.0 / (3.0 * t_ls)], method="DOP853",
+                          rtol=checks.ode_rtol, atol=checks.ode_atol)
+        if not sol_w.success:
+            raise GlobalVarianceNumericalError(f"wall-mode integration failed: {sol_w.message}")
+        d_w_ode = (f_w0 / f_wls) * float(sol_w.y[0, -1]) / (1.0 + z_ls)
+        # Independent route 2: void volume dV/dt = 3V/t versus f_v a_D^3.
+        sol_v = solve_ivp(lambda t, y: [3.0 * y[0] / t], (t_ls, t0), [1.0], method="DOP853",
+                          rtol=checks.ode_rtol, atol=checks.ode_atol)
+        if not sol_v.success:
+            raise GlobalVarianceNumericalError(f"void-volume integration failed: {sol_v.message}")
+        vol_ratio_pkg = (fv0 * float(bg.a_D(t0, p)) ** 3) / (f_vls * float(bg.a_D(t_ls, p)) ** 3)
+        domain_ratio = (float(bg.a_D(t0, p)) / float(bg.a_D(t_ls, p))) ** 3
+        # V_v(t0)/V_v(LS) / [V_D(t0)/V_D(LS)] = f_v0/f_v,LS, so D_V = that/(1 + z_LS).
+        d_v_ode = float(sol_v.y[0, -1]) / domain_ratio / (1.0 + z_ls)
+        cross = {"wall_share_ode_vs_closed_form_rel": abs(d_w_ode / d_w - 1.0),
+                 "void_volume_ode_vs_package_rel": abs(float(sol_v.y[0, -1]) / vol_ratio_pkg - 1.0),
+                 "void_share_ode_vs_closed_form_rel": abs(d_v_ode / d_v - 1.0)}
+        for name, value in cross.items():
+            if not value <= checks.ode_cross_check_tolerance:
+>               raise GlobalVarianceNumericalError(
+                    f"two-phase growth cross-check {name} = {value:.3e} exceeds "
+                    f"{checks.ode_cross_check_tolerance:.3e}")
+E               timescape_fsigma8.global_variance.GlobalVarianceNumericalError: two-phase growth cross-check wall_share_ode_vs_closed_form_rel = 3.684e-01 exceeds 1.000e-08
+
+src/timescape_fsigma8/global_variance.py:670: GlobalVarianceNumericalError
+_______________ ERROR at setup of test_admissible_interval_logic _______________
+
+    @pytest.fixture(scope="module")
+    def growth_gm() -> gv.TwoPhaseGlobalGrowth:
+>       return gv.two_phase_global_growth(background=GM, matching=MATCHING, checks=CHECKS, G=G)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_phase1g_h_global_variance.py:89:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+background = TimescapeTrackerInput(label='PAPER_REFERENCE', fv0=0.737, H0_dressed_km_s_Mpc=73.03, source="f_v0: [GM] Sec. 5.1.1; H0: [GM] Sec. 5.1.1 text / Fig. 1 caption, 'H0 = 73.03 km/(s Mpc)' from the best fit of [GM] ref. [80]")
+matching = LastScatteringMatching(z_last_scattering=1090.0, provenance='1G-D a_LS = 1/1091')
+checks = TwoPhaseGrowthChecks(identity_tolerance=1e-12, ode_rtol=1e-11, ode_atol=1e-14, ode_cross_check_tolerance=1e-08, root_xtol_fraction=1e-17)
+G = 1.0
+
+    def two_phase_global_growth(
+        *, background: TimescapeTrackerInput, matching: LastScatteringMatching,
+        checks: TwoPhaseGrowthChecks, G: float,
+    ) -> TwoPhaseGlobalGrowth:
+        """D_W and D_V of the tracker, (H8), with fail-closed independent checks.
+
+        Closed forms from [GM] Eqs. (5.4)-(5.6) and text p. 25:
+        ``(t0/t)^(2/3)/(1 + z) = gamma_w0 f_w0^(1/3)/(gamma_w(t) f_w(t)^(1/3))``
+        (``1 + z = gamma_w a_w0/a_D``, ``a_D proportional to t f_v^(-1/3)``,
+        ``f_v = t/(t + tau)``), hence ``D_W = (f_w0/f_w,LS)(t0/t_LS)^(2/3)/(1+z_LS)``
+        and ``D_V = (f_v0/f_v,LS)/(1 + z_LS)`` (H7)-(H8).  Independent checks: the
+        wall growing mode integrated in common time on the package's regional
+        background ``H_w = H_D - dfv_dt/(3 f_w)``, ``4 pi G rho_w = 4 pi G <rho>_D/f_w``
+        (1G-C Sec. 5), and the void volume ``dV/dt = 3V/t`` against ``f_v a_D^3``.
+        ``G`` is explicit (it cancels; no default).
+        """
+        _require(background, TimescapeTrackerInput, "background")
+        _require(matching, LastScatteringMatching, "matching")
+        _require(checks, TwoPhaseGrowthChecks, "checks")
+        G = _positive(G, "G")
+        p = background.dimensionless_params()
+        z_ls = matching.z_last_scattering
+        t0 = p.t0
+        t_ls = _t_of_redshift(p, z_ls, checks.root_xtol_fraction)
+        z_check = abs(float(bg.redshift(t_ls, p)) - z_ls) / z_ls
+        fv0 = p.fv0
+        f_vls = float(bg.fv(t_ls, p))
+        g0 = float(bg.gamma_w(t0, p))
+        g_ls = float(bg.gamma_w(t_ls, p))
+        f_w0, f_wls = 1.0 - fv0, 1.0 - f_vls
+        d_w = f_w0 ** (4.0 / 3.0) / f_wls ** (4.0 / 3.0)
+        d_v = fv0 / (f_vls * (1.0 + z_ls))
+        # Identity checks against the tracker functions.
+        finite_identity = ((t0 / t_ls) ** (2.0 / 3.0) / (1.0 + z_ls)) / (
+            g0 * f_w0 ** (1.0 / 3.0) / (g_ls * f_wls ** (1.0 / 3.0))) - 1.0
+        tau = t0 * (1.0 - fv0) / fv0
+        one_scale = f_vls / (t_ls / (t_ls + tau)) - 1.0
+        identities = {"finite_t_photon_identity_rel": abs(finite_identity),
+                      "one_time_scale_identity_rel": abs(one_scale),
+                      "redshift_root_rel": z_check,
+                      "gamma_w0_identity_rel": abs(g0 / (1.0 + fv0 / 2.0) - 1.0),
+                      "gamma_w_ls_identity_rel": abs(g_ls / (1.0 + f_vls / 2.0) - 1.0)}
+        for name, value in identities.items():
+            if not value <= checks.identity_tolerance:
+                raise GlobalVarianceNumericalError(
+                    f"two-phase growth identity {name} = {value:.3e} exceeds "
+                    f"{checks.identity_tolerance:.3e}")
+
+        # Independent route 1: wall growing mode in common time on the package's
+        # regional background (no closed form of H_w or rho_w is used).
+        def wall_rhs(t, y):
+            tt = np.array([t])
+            fw = 1.0 - float(bg.fv(tt, p)[0])
+            h_w = float(bg.H_D(tt, p)[0]) - float(bg.dfv_dt(tt, p)[0]) / (3.0 * fw)
+            four_pi_g_rho_w = 4.0 * math.pi * G * float(bg.rho_d(tt, p, G)[0]) / fw
+            return [y[1], -2.0 * h_w * y[1] + four_pi_g_rho_w * y[0]]
+
+        # Growing-mode data at t_LS: delta = 1, d delta/dt = (2/3)/t_LS (EdS in t).
+        sol_w = solve_ivp(wall_rhs, (t_ls, t0), [1.0, 2.0 / (3.0 * t_ls)], method="DOP853",
+                          rtol=checks.ode_rtol, atol=checks.ode_atol)
+        if not sol_w.success:
+            raise GlobalVarianceNumericalError(f"wall-mode integration failed: {sol_w.message}")
+        d_w_ode = (f_w0 / f_wls) * float(sol_w.y[0, -1]) / (1.0 + z_ls)
+        # Independent route 2: void volume dV/dt = 3V/t versus f_v a_D^3.
+        sol_v = solve_ivp(lambda t, y: [3.0 * y[0] / t], (t_ls, t0), [1.0], method="DOP853",
+                          rtol=checks.ode_rtol, atol=checks.ode_atol)
+        if not sol_v.success:
+            raise GlobalVarianceNumericalError(f"void-volume integration failed: {sol_v.message}")
+        vol_ratio_pkg = (fv0 * float(bg.a_D(t0, p)) ** 3) / (f_vls * float(bg.a_D(t_ls, p)) ** 3)
+        domain_ratio = (float(bg.a_D(t0, p)) / float(bg.a_D(t_ls, p))) ** 3
+        # V_v(t0)/V_v(LS) / [V_D(t0)/V_D(LS)] = f_v0/f_v,LS, so D_V = that/(1 + z_LS).
+        d_v_ode = float(sol_v.y[0, -1]) / domain_ratio / (1.0 + z_ls)
+        cross = {"wall_share_ode_vs_closed_form_rel": abs(d_w_ode / d_w - 1.0),
+                 "void_volume_ode_vs_package_rel": abs(float(sol_v.y[0, -1]) / vol_ratio_pkg - 1.0),
+                 "void_share_ode_vs_closed_form_rel": abs(d_v_ode / d_v - 1.0)}
+        for name, value in cross.items():
+            if not value <= checks.ode_cross_check_tolerance:
+>               raise GlobalVarianceNumericalError(
+                    f"two-phase growth cross-check {name} = {value:.3e} exceeds "
+                    f"{checks.ode_cross_check_tolerance:.3e}")
+E               timescape_fsigma8.global_variance.GlobalVarianceNumericalError: two-phase growth cross-check wall_share_ode_vs_closed_form_rel = 3.684e-01 exceeds 1.000e-08
+
+src/timescape_fsigma8/global_variance.py:670: GlobalVarianceNumericalError
+____________ ERROR at setup of test_closures_and_inputs_fail_closed ____________
+
+    @pytest.fixture(scope="module")
+    def growth_gm() -> gv.TwoPhaseGlobalGrowth:
+>       return gv.two_phase_global_growth(background=GM, matching=MATCHING, checks=CHECKS, G=G)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_phase1g_h_global_variance.py:89:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+background = TimescapeTrackerInput(label='PAPER_REFERENCE', fv0=0.737, H0_dressed_km_s_Mpc=73.03, source="f_v0: [GM] Sec. 5.1.1; H0: [GM] Sec. 5.1.1 text / Fig. 1 caption, 'H0 = 73.03 km/(s Mpc)' from the best fit of [GM] ref. [80]")
+matching = LastScatteringMatching(z_last_scattering=1090.0, provenance='1G-D a_LS = 1/1091')
+checks = TwoPhaseGrowthChecks(identity_tolerance=1e-12, ode_rtol=1e-11, ode_atol=1e-14, ode_cross_check_tolerance=1e-08, root_xtol_fraction=1e-17)
+G = 1.0
+
+    def two_phase_global_growth(
+        *, background: TimescapeTrackerInput, matching: LastScatteringMatching,
+        checks: TwoPhaseGrowthChecks, G: float,
+    ) -> TwoPhaseGlobalGrowth:
+        """D_W and D_V of the tracker, (H8), with fail-closed independent checks.
+
+        Closed forms from [GM] Eqs. (5.4)-(5.6) and text p. 25:
+        ``(t0/t)^(2/3)/(1 + z) = gamma_w0 f_w0^(1/3)/(gamma_w(t) f_w(t)^(1/3))``
+        (``1 + z = gamma_w a_w0/a_D``, ``a_D proportional to t f_v^(-1/3)``,
+        ``f_v = t/(t + tau)``), hence ``D_W = (f_w0/f_w,LS)(t0/t_LS)^(2/3)/(1+z_LS)``
+        and ``D_V = (f_v0/f_v,LS)/(1 + z_LS)`` (H7)-(H8).  Independent checks: the
+        wall growing mode integrated in common time on the package's regional
+        background ``H_w = H_D - dfv_dt/(3 f_w)``, ``4 pi G rho_w = 4 pi G <rho>_D/f_w``
+        (1G-C Sec. 5), and the void volume ``dV/dt = 3V/t`` against ``f_v a_D^3``.
+        ``G`` is explicit (it cancels; no default).
+        """
+        _require(background, TimescapeTrackerInput, "background")
+        _require(matching, LastScatteringMatching, "matching")
+        _require(checks, TwoPhaseGrowthChecks, "checks")
+        G = _positive(G, "G")
+        p = background.dimensionless_params()
+        z_ls = matching.z_last_scattering
+        t0 = p.t0
+        t_ls = _t_of_redshift(p, z_ls, checks.root_xtol_fraction)
+        z_check = abs(float(bg.redshift(t_ls, p)) - z_ls) / z_ls
+        fv0 = p.fv0
+        f_vls = float(bg.fv(t_ls, p))
+        g0 = float(bg.gamma_w(t0, p))
+        g_ls = float(bg.gamma_w(t_ls, p))
+        f_w0, f_wls = 1.0 - fv0, 1.0 - f_vls
+        d_w = f_w0 ** (4.0 / 3.0) / f_wls ** (4.0 / 3.0)
+        d_v = fv0 / (f_vls * (1.0 + z_ls))
+        # Identity checks against the tracker functions.
+        finite_identity = ((t0 / t_ls) ** (2.0 / 3.0) / (1.0 + z_ls)) / (
+            g0 * f_w0 ** (1.0 / 3.0) / (g_ls * f_wls ** (1.0 / 3.0))) - 1.0
+        tau = t0 * (1.0 - fv0) / fv0
+        one_scale = f_vls / (t_ls / (t_ls + tau)) - 1.0
+        identities = {"finite_t_photon_identity_rel": abs(finite_identity),
+                      "one_time_scale_identity_rel": abs(one_scale),
+                      "redshift_root_rel": z_check,
+                      "gamma_w0_identity_rel": abs(g0 / (1.0 + fv0 / 2.0) - 1.0),
+                      "gamma_w_ls_identity_rel": abs(g_ls / (1.0 + f_vls / 2.0) - 1.0)}
+        for name, value in identities.items():
+            if not value <= checks.identity_tolerance:
+                raise GlobalVarianceNumericalError(
+                    f"two-phase growth identity {name} = {value:.3e} exceeds "
+                    f"{checks.identity_tolerance:.3e}")
+
+        # Independent route 1: wall growing mode in common time on the package's
+        # regional background (no closed form of H_w or rho_w is used).
+        def wall_rhs(t, y):
+            tt = np.array([t])
+            fw = 1.0 - float(bg.fv(tt, p)[0])
+            h_w = float(bg.H_D(tt, p)[0]) - float(bg.dfv_dt(tt, p)[0]) / (3.0 * fw)
+            four_pi_g_rho_w = 4.0 * math.pi * G * float(bg.rho_d(tt, p, G)[0]) / fw
+            return [y[1], -2.0 * h_w * y[1] + four_pi_g_rho_w * y[0]]
+
+        # Growing-mode data at t_LS: delta = 1, d delta/dt = (2/3)/t_LS (EdS in t).
+        sol_w = solve_ivp(wall_rhs, (t_ls, t0), [1.0, 2.0 / (3.0 * t_ls)], method="DOP853",
+                          rtol=checks.ode_rtol, atol=checks.ode_atol)
+        if not sol_w.success:
+            raise GlobalVarianceNumericalError(f"wall-mode integration failed: {sol_w.message}")
+        d_w_ode = (f_w0 / f_wls) * float(sol_w.y[0, -1]) / (1.0 + z_ls)
+        # Independent route 2: void volume dV/dt = 3V/t versus f_v a_D^3.
+        sol_v = solve_ivp(lambda t, y: [3.0 * y[0] / t], (t_ls, t0), [1.0], method="DOP853",
+                          rtol=checks.ode_rtol, atol=checks.ode_atol)
+        if not sol_v.success:
+            raise GlobalVarianceNumericalError(f"void-volume integration failed: {sol_v.message}")
+        vol_ratio_pkg = (fv0 * float(bg.a_D(t0, p)) ** 3) / (f_vls * float(bg.a_D(t_ls, p)) ** 3)
+        domain_ratio = (float(bg.a_D(t0, p)) / float(bg.a_D(t_ls, p))) ** 3
+        # V_v(t0)/V_v(LS) / [V_D(t0)/V_D(LS)] = f_v0/f_v,LS, so D_V = that/(1 + z_LS).
+        d_v_ode = float(sol_v.y[0, -1]) / domain_ratio / (1.0 + z_ls)
+        cross = {"wall_share_ode_vs_closed_form_rel": abs(d_w_ode / d_w - 1.0),
+                 "void_volume_ode_vs_package_rel": abs(float(sol_v.y[0, -1]) / vol_ratio_pkg - 1.0),
+                 "void_share_ode_vs_closed_form_rel": abs(d_v_ode / d_v - 1.0)}
+        for name, value in cross.items():
+            if not value <= checks.ode_cross_check_tolerance:
+>               raise GlobalVarianceNumericalError(
+                    f"two-phase growth cross-check {name} = {value:.3e} exceeds "
+                    f"{checks.ode_cross_check_tolerance:.3e}")
+E               timescape_fsigma8.global_variance.GlobalVarianceNumericalError: two-phase growth cross-check wall_share_ode_vs_closed_form_rel = 3.684e-01 exceeds 1.000e-08
+
+src/timescape_fsigma8/global_variance.py:670: GlobalVarianceNumericalError
+=================================== FAILURES ===================================
+____________ test_growth_factors_against_an_independent_tracker[GM] ____________
+
+bg_in = TimescapeTrackerInput(label='PAPER_REFERENCE', fv0=0.737, H0_dressed_km_s_Mpc=73.03, source="f_v0: [GM] Sec. 5.1.1; H0: [GM] Sec. 5.1.1 text / Fig. 1 caption, 'H0 = 73.03 km/(s Mpc)' from the best fit of [GM] ref. [80]")
+
+    @pytest.mark.parametrize("bg_in", [GM, NW15], ids=["GM", "NW15"])
+    def test_growth_factors_against_an_independent_tracker(bg_in):
+>       growth = gv.two_phase_global_growth(background=bg_in, matching=MATCHING, checks=CHECKS, G=G)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_phase1g_h_global_variance.py:207:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+background = TimescapeTrackerInput(label='PAPER_REFERENCE', fv0=0.737, H0_dressed_km_s_Mpc=73.03, source="f_v0: [GM] Sec. 5.1.1; H0: [GM] Sec. 5.1.1 text / Fig. 1 caption, 'H0 = 73.03 km/(s Mpc)' from the best fit of [GM] ref. [80]")
+matching = LastScatteringMatching(z_last_scattering=1090.0, provenance='1G-D a_LS = 1/1091')
+checks = TwoPhaseGrowthChecks(identity_tolerance=1e-12, ode_rtol=1e-11, ode_atol=1e-14, ode_cross_check_tolerance=1e-08, root_xtol_fraction=1e-17)
+G = 1.0
+
+    def two_phase_global_growth(
+        *, background: TimescapeTrackerInput, matching: LastScatteringMatching,
+        checks: TwoPhaseGrowthChecks, G: float,
+    ) -> TwoPhaseGlobalGrowth:
+        """D_W and D_V of the tracker, (H8), with fail-closed independent checks.
+
+        Closed forms from [GM] Eqs. (5.4)-(5.6) and text p. 25:
+        ``(t0/t)^(2/3)/(1 + z) = gamma_w0 f_w0^(1/3)/(gamma_w(t) f_w(t)^(1/3))``
+        (``1 + z = gamma_w a_w0/a_D``, ``a_D proportional to t f_v^(-1/3)``,
+        ``f_v = t/(t + tau)``), hence ``D_W = (f_w0/f_w,LS)(t0/t_LS)^(2/3)/(1+z_LS)``
+        and ``D_V = (f_v0/f_v,LS)/(1 + z_LS)`` (H7)-(H8).  Independent checks: the
+        wall growing mode integrated in common time on the package's regional
+        background ``H_w = H_D - dfv_dt/(3 f_w)``, ``4 pi G rho_w = 4 pi G <rho>_D/f_w``
+        (1G-C Sec. 5), and the void volume ``dV/dt = 3V/t`` against ``f_v a_D^3``.
+        ``G`` is explicit (it cancels; no default).
+        """
+        _require(background, TimescapeTrackerInput, "background")
+        _require(matching, LastScatteringMatching, "matching")
+        _require(checks, TwoPhaseGrowthChecks, "checks")
+        G = _positive(G, "G")
+        p = background.dimensionless_params()
+        z_ls = matching.z_last_scattering
+        t0 = p.t0
+        t_ls = _t_of_redshift(p, z_ls, checks.root_xtol_fraction)
+        z_check = abs(float(bg.redshift(t_ls, p)) - z_ls) / z_ls
+        fv0 = p.fv0
+        f_vls = float(bg.fv(t_ls, p))
+        g0 = float(bg.gamma_w(t0, p))
+        g_ls = float(bg.gamma_w(t_ls, p))
+        f_w0, f_wls = 1.0 - fv0, 1.0 - f_vls
+        d_w = f_w0 ** (4.0 / 3.0) / f_wls ** (4.0 / 3.0)
+        d_v = fv0 / (f_vls * (1.0 + z_ls))
+        # Identity checks against the tracker functions.
+        finite_identity = ((t0 / t_ls) ** (2.0 / 3.0) / (1.0 + z_ls)) / (
+            g0 * f_w0 ** (1.0 / 3.0) / (g_ls * f_wls ** (1.0 / 3.0))) - 1.0
+        tau = t0 * (1.0 - fv0) / fv0
+        one_scale = f_vls / (t_ls / (t_ls + tau)) - 1.0
+        identities = {"finite_t_photon_identity_rel": abs(finite_identity),
+                      "one_time_scale_identity_rel": abs(one_scale),
+                      "redshift_root_rel": z_check,
+                      "gamma_w0_identity_rel": abs(g0 / (1.0 + fv0 / 2.0) - 1.0),
+                      "gamma_w_ls_identity_rel": abs(g_ls / (1.0 + f_vls / 2.0) - 1.0)}
+        for name, value in identities.items():
+            if not value <= checks.identity_tolerance:
+                raise GlobalVarianceNumericalError(
+                    f"two-phase growth identity {name} = {value:.3e} exceeds "
+                    f"{checks.identity_tolerance:.3e}")
+
+        # Independent route 1: wall growing mode in common time on the package's
+        # regional background (no closed form of H_w or rho_w is used).
+        def wall_rhs(t, y):
+            tt = np.array([t])
+            fw = 1.0 - float(bg.fv(tt, p)[0])
+            h_w = float(bg.H_D(tt, p)[0]) - float(bg.dfv_dt(tt, p)[0]) / (3.0 * fw)
+            four_pi_g_rho_w = 4.0 * math.pi * G * float(bg.rho_d(tt, p, G)[0]) / fw
+            return [y[1], -2.0 * h_w * y[1] + four_pi_g_rho_w * y[0]]
+
+        # Growing-mode data at t_LS: delta = 1, d delta/dt = (2/3)/t_LS (EdS in t).
+        sol_w = solve_ivp(wall_rhs, (t_ls, t0), [1.0, 2.0 / (3.0 * t_ls)], method="DOP853",
+                          rtol=checks.ode_rtol, atol=checks.ode_atol)
+        if not sol_w.success:
+            raise GlobalVarianceNumericalError(f"wall-mode integration failed: {sol_w.message}")
+        d_w_ode = (f_w0 / f_wls) * float(sol_w.y[0, -1]) / (1.0 + z_ls)
+        # Independent route 2: void volume dV/dt = 3V/t versus f_v a_D^3.
+        sol_v = solve_ivp(lambda t, y: [3.0 * y[0] / t], (t_ls, t0), [1.0], method="DOP853",
+                          rtol=checks.ode_rtol, atol=checks.ode_atol)
+        if not sol_v.success:
+            raise GlobalVarianceNumericalError(f"void-volume integration failed: {sol_v.message}")
+        vol_ratio_pkg = (fv0 * float(bg.a_D(t0, p)) ** 3) / (f_vls * float(bg.a_D(t_ls, p)) ** 3)
+        domain_ratio = (float(bg.a_D(t0, p)) / float(bg.a_D(t_ls, p))) ** 3
+        # V_v(t0)/V_v(LS) / [V_D(t0)/V_D(LS)] = f_v0/f_v,LS, so D_V = that/(1 + z_LS).
+        d_v_ode = float(sol_v.y[0, -1]) / domain_ratio / (1.0 + z_ls)
+        cross = {"wall_share_ode_vs_closed_form_rel": abs(d_w_ode / d_w - 1.0),
+                 "void_volume_ode_vs_package_rel": abs(float(sol_v.y[0, -1]) / vol_ratio_pkg - 1.0),
+                 "void_share_ode_vs_closed_form_rel": abs(d_v_ode / d_v - 1.0)}
+        for name, value in cross.items():
+            if not value <= checks.ode_cross_check_tolerance:
+>               raise GlobalVarianceNumericalError(
+                    f"two-phase growth cross-check {name} = {value:.3e} exceeds "
+                    f"{checks.ode_cross_check_tolerance:.3e}")
+E               timescape_fsigma8.global_variance.GlobalVarianceNumericalError: two-phase growth cross-check wall_share_ode_vs_closed_form_rel = 3.684e-01 exceeds 1.000e-08
+
+src/timescape_fsigma8/global_variance.py:670: GlobalVarianceNumericalError
+___________ test_growth_factors_against_an_independent_tracker[NW15] ___________
+
+bg_in = TimescapeTrackerInput(label='NW15_CMB_FIT', fv0=0.627, H0_dressed_km_s_Mpc=61.0, source='Nazer & Wiltshire, arXiv:1410.3470 (test)')
+
+    @pytest.mark.parametrize("bg_in", [GM, NW15], ids=["GM", "NW15"])
+    def test_growth_factors_against_an_independent_tracker(bg_in):
+>       growth = gv.two_phase_global_growth(background=bg_in, matching=MATCHING, checks=CHECKS, G=G)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_phase1g_h_global_variance.py:207:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+background = TimescapeTrackerInput(label='NW15_CMB_FIT', fv0=0.627, H0_dressed_km_s_Mpc=61.0, source='Nazer & Wiltshire, arXiv:1410.3470 (test)')
+matching = LastScatteringMatching(z_last_scattering=1090.0, provenance='1G-D a_LS = 1/1091')
+checks = TwoPhaseGrowthChecks(identity_tolerance=1e-12, ode_rtol=1e-11, ode_atol=1e-14, ode_cross_check_tolerance=1e-08, root_xtol_fraction=1e-17)
+G = 1.0
+
+    def two_phase_global_growth(
+        *, background: TimescapeTrackerInput, matching: LastScatteringMatching,
+        checks: TwoPhaseGrowthChecks, G: float,
+    ) -> TwoPhaseGlobalGrowth:
+        """D_W and D_V of the tracker, (H8), with fail-closed independent checks.
+
+        Closed forms from [GM] Eqs. (5.4)-(5.6) and text p. 25:
+        ``(t0/t)^(2/3)/(1 + z) = gamma_w0 f_w0^(1/3)/(gamma_w(t) f_w(t)^(1/3))``
+        (``1 + z = gamma_w a_w0/a_D``, ``a_D proportional to t f_v^(-1/3)``,
+        ``f_v = t/(t + tau)``), hence ``D_W = (f_w0/f_w,LS)(t0/t_LS)^(2/3)/(1+z_LS)``
+        and ``D_V = (f_v0/f_v,LS)/(1 + z_LS)`` (H7)-(H8).  Independent checks: the
+        wall growing mode integrated in common time on the package's regional
+        background ``H_w = H_D - dfv_dt/(3 f_w)``, ``4 pi G rho_w = 4 pi G <rho>_D/f_w``
+        (1G-C Sec. 5), and the void volume ``dV/dt = 3V/t`` against ``f_v a_D^3``.
+        ``G`` is explicit (it cancels; no default).
+        """
+        _require(background, TimescapeTrackerInput, "background")
+        _require(matching, LastScatteringMatching, "matching")
+        _require(checks, TwoPhaseGrowthChecks, "checks")
+        G = _positive(G, "G")
+        p = background.dimensionless_params()
+        z_ls = matching.z_last_scattering
+        t0 = p.t0
+        t_ls = _t_of_redshift(p, z_ls, checks.root_xtol_fraction)
+        z_check = abs(float(bg.redshift(t_ls, p)) - z_ls) / z_ls
+        fv0 = p.fv0
+        f_vls = float(bg.fv(t_ls, p))
+        g0 = float(bg.gamma_w(t0, p))
+        g_ls = float(bg.gamma_w(t_ls, p))
+        f_w0, f_wls = 1.0 - fv0, 1.0 - f_vls
+        d_w = f_w0 ** (4.0 / 3.0) / f_wls ** (4.0 / 3.0)
+        d_v = fv0 / (f_vls * (1.0 + z_ls))
+        # Identity checks against the tracker functions.
+        finite_identity = ((t0 / t_ls) ** (2.0 / 3.0) / (1.0 + z_ls)) / (
+            g0 * f_w0 ** (1.0 / 3.0) / (g_ls * f_wls ** (1.0 / 3.0))) - 1.0
+        tau = t0 * (1.0 - fv0) / fv0
+        one_scale = f_vls / (t_ls / (t_ls + tau)) - 1.0
+        identities = {"finite_t_photon_identity_rel": abs(finite_identity),
+                      "one_time_scale_identity_rel": abs(one_scale),
+                      "redshift_root_rel": z_check,
+                      "gamma_w0_identity_rel": abs(g0 / (1.0 + fv0 / 2.0) - 1.0),
+                      "gamma_w_ls_identity_rel": abs(g_ls / (1.0 + f_vls / 2.0) - 1.0)}
+        for name, value in identities.items():
+            if not value <= checks.identity_tolerance:
+                raise GlobalVarianceNumericalError(
+                    f"two-phase growth identity {name} = {value:.3e} exceeds "
+                    f"{checks.identity_tolerance:.3e}")
+
+        # Independent route 1: wall growing mode in common time on the package's
+        # regional background (no closed form of H_w or rho_w is used).
+        def wall_rhs(t, y):
+            tt = np.array([t])
+            fw = 1.0 - float(bg.fv(tt, p)[0])
+            h_w = float(bg.H_D(tt, p)[0]) - float(bg.dfv_dt(tt, p)[0]) / (3.0 * fw)
+            four_pi_g_rho_w = 4.0 * math.pi * G * float(bg.rho_d(tt, p, G)[0]) / fw
+            return [y[1], -2.0 * h_w * y[1] + four_pi_g_rho_w * y[0]]
+
+        # Growing-mode data at t_LS: delta = 1, d delta/dt = (2/3)/t_LS (EdS in t).
+        sol_w = solve_ivp(wall_rhs, (t_ls, t0), [1.0, 2.0 / (3.0 * t_ls)], method="DOP853",
+                          rtol=checks.ode_rtol, atol=checks.ode_atol)
+        if not sol_w.success:
+            raise GlobalVarianceNumericalError(f"wall-mode integration failed: {sol_w.message}")
+        d_w_ode = (f_w0 / f_wls) * float(sol_w.y[0, -1]) / (1.0 + z_ls)
+        # Independent route 2: void volume dV/dt = 3V/t versus f_v a_D^3.
+        sol_v = solve_ivp(lambda t, y: [3.0 * y[0] / t], (t_ls, t0), [1.0], method="DOP853",
+                          rtol=checks.ode_rtol, atol=checks.ode_atol)
+        if not sol_v.success:
+            raise GlobalVarianceNumericalError(f"void-volume integration failed: {sol_v.message}")
+        vol_ratio_pkg = (fv0 * float(bg.a_D(t0, p)) ** 3) / (f_vls * float(bg.a_D(t_ls, p)) ** 3)
+        domain_ratio = (float(bg.a_D(t0, p)) / float(bg.a_D(t_ls, p))) ** 3
+        # V_v(t0)/V_v(LS) / [V_D(t0)/V_D(LS)] = f_v0/f_v,LS, so D_V = that/(1 + z_LS).
+        d_v_ode = float(sol_v.y[0, -1]) / domain_ratio / (1.0 + z_ls)
+        cross = {"wall_share_ode_vs_closed_form_rel": abs(d_w_ode / d_w - 1.0),
+                 "void_volume_ode_vs_package_rel": abs(float(sol_v.y[0, -1]) / vol_ratio_pkg - 1.0),
+                 "void_share_ode_vs_closed_form_rel": abs(d_v_ode / d_v - 1.0)}
+        for name, value in cross.items():
+            if not value <= checks.ode_cross_check_tolerance:
+>               raise GlobalVarianceNumericalError(
+                    f"two-phase growth cross-check {name} = {value:.3e} exceeds "
+                    f"{checks.ode_cross_check_tolerance:.3e}")
+E               timescape_fsigma8.global_variance.GlobalVarianceNumericalError: two-phase growth cross-check wall_share_ode_vs_closed_form_rel = 3.135e-01 exceeds 1.000e-08
+
+src/timescape_fsigma8/global_variance.py:670: GlobalVarianceNumericalError
+_____________ test_small_void_fraction_limit_is_einstein_de_sitter _____________
+
+    def test_small_void_fraction_limit_is_einstein_de_sitter():
+        """D_W -> 1 - (5/6) f_v0 as f_v0 -> 0: the EdS photon-normalised growth."""
+        for fv0 in (1e-3, 1e-4):
+            bg_in = ls.TimescapeTrackerInput(label="small", fv0=fv0, H0_dressed_km_s_Mpc=70.0,
+                                             source="limit test")
+>           growth = gv.two_phase_global_growth(background=bg_in, matching=MATCHING, checks=CHECKS, G=G)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_phase1g_h_global_variance.py:224:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+background = TimescapeTrackerInput(label='small', fv0=0.001, H0_dressed_km_s_Mpc=70.0, source='limit test')
+matching = LastScatteringMatching(z_last_scattering=1090.0, provenance='1G-D a_LS = 1/1091')
+checks = TwoPhaseGrowthChecks(identity_tolerance=1e-12, ode_rtol=1e-11, ode_atol=1e-14, ode_cross_check_tolerance=1e-08, root_xtol_fraction=1e-17)
+G = 1.0
+
+    def two_phase_global_growth(
+        *, background: TimescapeTrackerInput, matching: LastScatteringMatching,
+        checks: TwoPhaseGrowthChecks, G: float,
+    ) -> TwoPhaseGlobalGrowth:
+        """D_W and D_V of the tracker, (H8), with fail-closed independent checks.
+
+        Closed forms from [GM] Eqs. (5.4)-(5.6) and text p. 25:
+        ``(t0/t)^(2/3)/(1 + z) = gamma_w0 f_w0^(1/3)/(gamma_w(t) f_w(t)^(1/3))``
+        (``1 + z = gamma_w a_w0/a_D``, ``a_D proportional to t f_v^(-1/3)``,
+        ``f_v = t/(t + tau)``), hence ``D_W = (f_w0/f_w,LS)(t0/t_LS)^(2/3)/(1+z_LS)``
+        and ``D_V = (f_v0/f_v,LS)/(1 + z_LS)`` (H7)-(H8).  Independent checks: the
+        wall growing mode integrated in common time on the package's regional
+        background ``H_w = H_D - dfv_dt/(3 f_w)``, ``4 pi G rho_w = 4 pi G <rho>_D/f_w``
+        (1G-C Sec. 5), and the void volume ``dV/dt = 3V/t`` against ``f_v a_D^3``.
+        ``G`` is explicit (it cancels; no default).
+        """
+        _require(background, TimescapeTrackerInput, "background")
+        _require(matching, LastScatteringMatching, "matching")
+        _require(checks, TwoPhaseGrowthChecks, "checks")
+        G = _positive(G, "G")
+        p = background.dimensionless_params()
+        z_ls = matching.z_last_scattering
+        t0 = p.t0
+        t_ls = _t_of_redshift(p, z_ls, checks.root_xtol_fraction)
+        z_check = abs(float(bg.redshift(t_ls, p)) - z_ls) / z_ls
+        fv0 = p.fv0
+        f_vls = float(bg.fv(t_ls, p))
+        g0 = float(bg.gamma_w(t0, p))
+        g_ls = float(bg.gamma_w(t_ls, p))
+        f_w0, f_wls = 1.0 - fv0, 1.0 - f_vls
+        d_w = f_w0 ** (4.0 / 3.0) / f_wls ** (4.0 / 3.0)
+        d_v = fv0 / (f_vls * (1.0 + z_ls))
+        # Identity checks against the tracker functions.
+        finite_identity = ((t0 / t_ls) ** (2.0 / 3.0) / (1.0 + z_ls)) / (
+            g0 * f_w0 ** (1.0 / 3.0) / (g_ls * f_wls ** (1.0 / 3.0))) - 1.0
+        tau = t0 * (1.0 - fv0) / fv0
+        one_scale = f_vls / (t_ls / (t_ls + tau)) - 1.0
+        identities = {"finite_t_photon_identity_rel": abs(finite_identity),
+                      "one_time_scale_identity_rel": abs(one_scale),
+                      "redshift_root_rel": z_check,
+                      "gamma_w0_identity_rel": abs(g0 / (1.0 + fv0 / 2.0) - 1.0),
+                      "gamma_w_ls_identity_rel": abs(g_ls / (1.0 + f_vls / 2.0) - 1.0)}
+        for name, value in identities.items():
+            if not value <= checks.identity_tolerance:
+                raise GlobalVarianceNumericalError(
+                    f"two-phase growth identity {name} = {value:.3e} exceeds "
+                    f"{checks.identity_tolerance:.3e}")
+
+        # Independent route 1: wall growing mode in common time on the package's
+        # regional background (no closed form of H_w or rho_w is used).
+        def wall_rhs(t, y):
+            tt = np.array([t])
+            fw = 1.0 - float(bg.fv(tt, p)[0])
+            h_w = float(bg.H_D(tt, p)[0]) - float(bg.dfv_dt(tt, p)[0]) / (3.0 * fw)
+            four_pi_g_rho_w = 4.0 * math.pi * G * float(bg.rho_d(tt, p, G)[0]) / fw
+            return [y[1], -2.0 * h_w * y[1] + four_pi_g_rho_w * y[0]]
+
+        # Growing-mode data at t_LS: delta = 1, d delta/dt = (2/3)/t_LS (EdS in t).
+        sol_w = solve_ivp(wall_rhs, (t_ls, t0), [1.0, 2.0 / (3.0 * t_ls)], method="DOP853",
+                          rtol=checks.ode_rtol, atol=checks.ode_atol)
+        if not sol_w.success:
+            raise GlobalVarianceNumericalError(f"wall-mode integration failed: {sol_w.message}")
+        d_w_ode = (f_w0 / f_wls) * float(sol_w.y[0, -1]) / (1.0 + z_ls)
+        # Independent route 2: void volume dV/dt = 3V/t versus f_v a_D^3.
+        sol_v = solve_ivp(lambda t, y: [3.0 * y[0] / t], (t_ls, t0), [1.0], method="DOP853",
+                          rtol=checks.ode_rtol, atol=checks.ode_atol)
+        if not sol_v.success:
+            raise GlobalVarianceNumericalError(f"void-volume integration failed: {sol_v.message}")
+        vol_ratio_pkg = (fv0 * float(bg.a_D(t0, p)) ** 3) / (f_vls * float(bg.a_D(t_ls, p)) ** 3)
+        domain_ratio = (float(bg.a_D(t0, p)) / float(bg.a_D(t_ls, p))) ** 3
+        # V_v(t0)/V_v(LS) / [V_D(t0)/V_D(LS)] = f_v0/f_v,LS, so D_V = that/(1 + z_LS).
+        d_v_ode = float(sol_v.y[0, -1]) / domain_ratio / (1.0 + z_ls)
+        cross = {"wall_share_ode_vs_closed_form_rel": abs(d_w_ode / d_w - 1.0),
+                 "void_volume_ode_vs_package_rel": abs(float(sol_v.y[0, -1]) / vol_ratio_pkg - 1.0),
+                 "void_share_ode_vs_closed_form_rel": abs(d_v_ode / d_v - 1.0)}
+        for name, value in cross.items():
+            if not value <= checks.ode_cross_check_tolerance:
+>               raise GlobalVarianceNumericalError(
+                    f"two-phase growth cross-check {name} = {value:.3e} exceeds "
+                    f"{checks.ode_cross_check_tolerance:.3e}")
+E               timescape_fsigma8.global_variance.GlobalVarianceNumericalError: two-phase growth cross-check wall_share_ode_vs_closed_form_rel = 5.000e-04 exceeds 1.000e-08
+
+src/timescape_fsigma8/global_variance.py:670: GlobalVarianceNumericalError
+____________ test_variance_equals_real_space_pair_density_integral _____________
+
+    def test_variance_equals_real_space_pair_density_integral():
+        """(H10) in Fourier space equals int P_R(r) xi(r) dr (H11), computed here."""
+>       res = run(GM, constant(0.07), radius("explicit", 10.0))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_phase1g_h_global_variance.py:281:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests/test_phase1g_h_global_variance.py:80: in run
+    return gv.conditional_global_linear_sigma(
+src/timescape_fsigma8/global_variance.py:1103: in conditional_global_linear_sigma
+    growth = two_phase_global_growth(background=background, matching=matching,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+background = TimescapeTrackerInput(label='PAPER_REFERENCE', fv0=0.737, H0_dressed_km_s_Mpc=73.03, source="f_v0: [GM] Sec. 5.1.1; H0: [GM] Sec. 5.1.1 text / Fig. 1 caption, 'H0 = 73.03 km/(s Mpc)' from the best fit of [GM] ref. [80]")
+matching = LastScatteringMatching(z_last_scattering=1090.0, provenance='1G-D a_LS = 1/1091')
+checks = TwoPhaseGrowthChecks(identity_tolerance=1e-12, ode_rtol=1e-11, ode_atol=1e-14, ode_cross_check_tolerance=1e-08, root_xtol_fraction=1e-17)
+G = 1.0
+
+    def two_phase_global_growth(
+        *, background: TimescapeTrackerInput, matching: LastScatteringMatching,
+        checks: TwoPhaseGrowthChecks, G: float,
+    ) -> TwoPhaseGlobalGrowth:
+        """D_W and D_V of the tracker, (H8), with fail-closed independent checks.
+
+        Closed forms from [GM] Eqs. (5.4)-(5.6) and text p. 25:
+        ``(t0/t)^(2/3)/(1 + z) = gamma_w0 f_w0^(1/3)/(gamma_w(t) f_w(t)^(1/3))``
+        (``1 + z = gamma_w a_w0/a_D``, ``a_D proportional to t f_v^(-1/3)``,
+        ``f_v = t/(t + tau)``), hence ``D_W = (f_w0/f_w,LS)(t0/t_LS)^(2/3)/(1+z_LS)``
+        and ``D_V = (f_v0/f_v,LS)/(1 + z_LS)`` (H7)-(H8).  Independent checks: the
+        wall growing mode integrated in common time on the package's regional
+        background ``H_w = H_D - dfv_dt/(3 f_w)``, ``4 pi G rho_w = 4 pi G <rho>_D/f_w``
+        (1G-C Sec. 5), and the void volume ``dV/dt = 3V/t`` against ``f_v a_D^3``.
+        ``G`` is explicit (it cancels; no default).
+        """
+        _require(background, TimescapeTrackerInput, "background")
+        _require(matching, LastScatteringMatching, "matching")
+        _require(checks, TwoPhaseGrowthChecks, "checks")
+        G = _positive(G, "G")
+        p = background.dimensionless_params()
+        z_ls = matching.z_last_scattering
+        t0 = p.t0
+        t_ls = _t_of_redshift(p, z_ls, checks.root_xtol_fraction)
+        z_check = abs(float(bg.redshift(t_ls, p)) - z_ls) / z_ls
+        fv0 = p.fv0
+        f_vls = float(bg.fv(t_ls, p))
+        g0 = float(bg.gamma_w(t0, p))
+        g_ls = float(bg.gamma_w(t_ls, p))
+        f_w0, f_wls = 1.0 - fv0, 1.0 - f_vls
+        d_w = f_w0 ** (4.0 / 3.0) / f_wls ** (4.0 / 3.0)
+        d_v = fv0 / (f_vls * (1.0 + z_ls))
+        # Identity checks against the tracker functions.
+        finite_identity = ((t0 / t_ls) ** (2.0 / 3.0) / (1.0 + z_ls)) / (
+            g0 * f_w0 ** (1.0 / 3.0) / (g_ls * f_wls ** (1.0 / 3.0))) - 1.0
+        tau = t0 * (1.0 - fv0) / fv0
+        one_scale = f_vls / (t_ls / (t_ls + tau)) - 1.0
+        identities = {"finite_t_photon_identity_rel": abs(finite_identity),
+                      "one_time_scale_identity_rel": abs(one_scale),
+                      "redshift_root_rel": z_check,
+                      "gamma_w0_identity_rel": abs(g0 / (1.0 + fv0 / 2.0) - 1.0),
+                      "gamma_w_ls_identity_rel": abs(g_ls / (1.0 + f_vls / 2.0) - 1.0)}
+        for name, value in identities.items():
+            if not value <= checks.identity_tolerance:
+                raise GlobalVarianceNumericalError(
+                    f"two-phase growth identity {name} = {value:.3e} exceeds "
+                    f"{checks.identity_tolerance:.3e}")
+
+        # Independent route 1: wall growing mode in common time on the package's
+        # regional background (no closed form of H_w or rho_w is used).
+        def wall_rhs(t, y):
+            tt = np.array([t])
+            fw = 1.0 - float(bg.fv(tt, p)[0])
+            h_w = float(bg.H_D(tt, p)[0]) - float(bg.dfv_dt(tt, p)[0]) / (3.0 * fw)
+            four_pi_g_rho_w = 4.0 * math.pi * G * float(bg.rho_d(tt, p, G)[0]) / fw
+            return [y[1], -2.0 * h_w * y[1] + four_pi_g_rho_w * y[0]]
+
+        # Growing-mode data at t_LS: delta = 1, d delta/dt = (2/3)/t_LS (EdS in t).
+        sol_w = solve_ivp(wall_rhs, (t_ls, t0), [1.0, 2.0 / (3.0 * t_ls)], method="DOP853",
+                          rtol=checks.ode_rtol, atol=checks.ode_atol)
+        if not sol_w.success:
+            raise GlobalVarianceNumericalError(f"wall-mode integration failed: {sol_w.message}")
+        d_w_ode = (f_w0 / f_wls) * float(sol_w.y[0, -1]) / (1.0 + z_ls)
+        # Independent route 2: void volume dV/dt = 3V/t versus f_v a_D^3.
+        sol_v = solve_ivp(lambda t, y: [3.0 * y[0] / t], (t_ls, t0), [1.0], method="DOP853",
+                          rtol=checks.ode_rtol, atol=checks.ode_atol)
+        if not sol_v.success:
+            raise GlobalVarianceNumericalError(f"void-volume integration failed: {sol_v.message}")
+        vol_ratio_pkg = (fv0 * float(bg.a_D(t0, p)) ** 3) / (f_vls * float(bg.a_D(t_ls, p)) ** 3)
+        domain_ratio = (float(bg.a_D(t0, p)) / float(bg.a_D(t_ls, p))) ** 3
+        # V_v(t0)/V_v(LS) / [V_D(t0)/V_D(LS)] = f_v0/f_v,LS, so D_V = that/(1 + z_LS).
+        d_v_ode = float(sol_v.y[0, -1]) / domain_ratio / (1.0 + z_ls)
+        cross = {"wall_share_ode_vs_closed_form_rel": abs(d_w_ode / d_w - 1.0),
+                 "void_volume_ode_vs_package_rel": abs(float(sol_v.y[0, -1]) / vol_ratio_pkg - 1.0),
+                 "void_share_ode_vs_closed_form_rel": abs(d_v_ode / d_v - 1.0)}
+        for name, value in cross.items():
+            if not value <= checks.ode_cross_check_tolerance:
+>               raise GlobalVarianceNumericalError(
+                    f"two-phase growth cross-check {name} = {value:.3e} exceeds "
+                    f"{checks.ode_cross_check_tolerance:.3e}")
+E               timescape_fsigma8.global_variance.GlobalVarianceNumericalError: two-phase growth cross-check wall_share_ode_vs_closed_form_rel = 3.684e-01 exceeds 1.000e-08
+
+src/timescape_fsigma8/global_variance.py:670: GlobalVarianceNumericalError
+___________ test_unit_growth_sigma_matches_lagrangian_sigma_runtime ____________
+
+    def test_unit_growth_sigma_matches_lagrangian_sigma_runtime():
+        """G = 1 reproduces the validated 1G-B quadrature (same import, same window)."""
+>       res = run(GM, constant(0.0), radius("a"))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_phase1g_h_global_variance.py:299:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests/test_phase1g_h_global_variance.py:80: in run
+    return gv.conditional_global_linear_sigma(
+src/timescape_fsigma8/global_variance.py:1103: in conditional_global_linear_sigma
+    growth = two_phase_global_growth(background=background, matching=matching,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+background = TimescapeTrackerInput(label='PAPER_REFERENCE', fv0=0.737, H0_dressed_km_s_Mpc=73.03, source="f_v0: [GM] Sec. 5.1.1; H0: [GM] Sec. 5.1.1 text / Fig. 1 caption, 'H0 = 73.03 km/(s Mpc)' from the best fit of [GM] ref. [80]")
+matching = LastScatteringMatching(z_last_scattering=1090.0, provenance='1G-D a_LS = 1/1091')
+checks = TwoPhaseGrowthChecks(identity_tolerance=1e-12, ode_rtol=1e-11, ode_atol=1e-14, ode_cross_check_tolerance=1e-08, root_xtol_fraction=1e-17)
+G = 1.0
+
+    def two_phase_global_growth(
+        *, background: TimescapeTrackerInput, matching: LastScatteringMatching,
+        checks: TwoPhaseGrowthChecks, G: float,
+    ) -> TwoPhaseGlobalGrowth:
+        """D_W and D_V of the tracker, (H8), with fail-closed independent checks.
+
+        Closed forms from [GM] Eqs. (5.4)-(5.6) and text p. 25:
+        ``(t0/t)^(2/3)/(1 + z) = gamma_w0 f_w0^(1/3)/(gamma_w(t) f_w(t)^(1/3))``
+        (``1 + z = gamma_w a_w0/a_D``, ``a_D proportional to t f_v^(-1/3)``,
+        ``f_v = t/(t + tau)``), hence ``D_W = (f_w0/f_w,LS)(t0/t_LS)^(2/3)/(1+z_LS)``
+        and ``D_V = (f_v0/f_v,LS)/(1 + z_LS)`` (H7)-(H8).  Independent checks: the
+        wall growing mode integrated in common time on the package's regional
+        background ``H_w = H_D - dfv_dt/(3 f_w)``, ``4 pi G rho_w = 4 pi G <rho>_D/f_w``
+        (1G-C Sec. 5), and the void volume ``dV/dt = 3V/t`` against ``f_v a_D^3``.
+        ``G`` is explicit (it cancels; no default).
+        """
+        _require(background, TimescapeTrackerInput, "background")
+        _require(matching, LastScatteringMatching, "matching")
+        _require(checks, TwoPhaseGrowthChecks, "checks")
+        G = _positive(G, "G")
+        p = background.dimensionless_params()
+        z_ls = matching.z_last_scattering
+        t0 = p.t0
+        t_ls = _t_of_redshift(p, z_ls, checks.root_xtol_fraction)
+        z_check = abs(float(bg.redshift(t_ls, p)) - z_ls) / z_ls
+        fv0 = p.fv0
+        f_vls = float(bg.fv(t_ls, p))
+        g0 = float(bg.gamma_w(t0, p))
+        g_ls = float(bg.gamma_w(t_ls, p))
+        f_w0, f_wls = 1.0 - fv0, 1.0 - f_vls
+        d_w = f_w0 ** (4.0 / 3.0) / f_wls ** (4.0 / 3.0)
+        d_v = fv0 / (f_vls * (1.0 + z_ls))
+        # Identity checks against the tracker functions.
+        finite_identity = ((t0 / t_ls) ** (2.0 / 3.0) / (1.0 + z_ls)) / (
+            g0 * f_w0 ** (1.0 / 3.0) / (g_ls * f_wls ** (1.0 / 3.0))) - 1.0
+        tau = t0 * (1.0 - fv0) / fv0
+        one_scale = f_vls / (t_ls / (t_ls + tau)) - 1.0
+        identities = {"finite_t_photon_identity_rel": abs(finite_identity),
+                      "one_time_scale_identity_rel": abs(one_scale),
+                      "redshift_root_rel": z_check,
+                      "gamma_w0_identity_rel": abs(g0 / (1.0 + fv0 / 2.0) - 1.0),
+                      "gamma_w_ls_identity_rel": abs(g_ls / (1.0 + f_vls / 2.0) - 1.0)}
+        for name, value in identities.items():
+            if not value <= checks.identity_tolerance:
+                raise GlobalVarianceNumericalError(
+                    f"two-phase growth identity {name} = {value:.3e} exceeds "
+                    f"{checks.identity_tolerance:.3e}")
+
+        # Independent route 1: wall growing mode in common time on the package's
+        # regional background (no closed form of H_w or rho_w is used).
+        def wall_rhs(t, y):
+            tt = np.array([t])
+            fw = 1.0 - float(bg.fv(tt, p)[0])
+            h_w = float(bg.H_D(tt, p)[0]) - float(bg.dfv_dt(tt, p)[0]) / (3.0 * fw)
+            four_pi_g_rho_w = 4.0 * math.pi * G * float(bg.rho_d(tt, p, G)[0]) / fw
+            return [y[1], -2.0 * h_w * y[1] + four_pi_g_rho_w * y[0]]
+
+        # Growing-mode data at t_LS: delta = 1, d delta/dt = (2/3)/t_LS (EdS in t).
+        sol_w = solve_ivp(wall_rhs, (t_ls, t0), [1.0, 2.0 / (3.0 * t_ls)], method="DOP853",
+                          rtol=checks.ode_rtol, atol=checks.ode_atol)
+        if not sol_w.success:
+            raise GlobalVarianceNumericalError(f"wall-mode integration failed: {sol_w.message}")
+        d_w_ode = (f_w0 / f_wls) * float(sol_w.y[0, -1]) / (1.0 + z_ls)
+        # Independent route 2: void volume dV/dt = 3V/t versus f_v a_D^3.
+        sol_v = solve_ivp(lambda t, y: [3.0 * y[0] / t], (t_ls, t0), [1.0], method="DOP853",
+                          rtol=checks.ode_rtol, atol=checks.ode_atol)
+        if not sol_v.success:
+            raise GlobalVarianceNumericalError(f"void-volume integration failed: {sol_v.message}")
+        vol_ratio_pkg = (fv0 * float(bg.a_D(t0, p)) ** 3) / (f_vls * float(bg.a_D(t_ls, p)) ** 3)
+        domain_ratio = (float(bg.a_D(t0, p)) / float(bg.a_D(t_ls, p))) ** 3
+        # V_v(t0)/V_v(LS) / [V_D(t0)/V_D(LS)] = f_v0/f_v,LS, so D_V = that/(1 + z_LS).
+        d_v_ode = float(sol_v.y[0, -1]) / domain_ratio / (1.0 + z_ls)
+        cross = {"wall_share_ode_vs_closed_form_rel": abs(d_w_ode / d_w - 1.0),
+                 "void_volume_ode_vs_package_rel": abs(float(sol_v.y[0, -1]) / vol_ratio_pkg - 1.0),
+                 "void_share_ode_vs_closed_form_rel": abs(d_v_ode / d_v - 1.0)}
+        for name, value in cross.items():
+            if not value <= checks.ode_cross_check_tolerance:
+>               raise GlobalVarianceNumericalError(
+                    f"two-phase growth cross-check {name} = {value:.3e} exceeds "
+                    f"{checks.ode_cross_check_tolerance:.3e}")
+E               timescape_fsigma8.global_variance.GlobalVarianceNumericalError: two-phase growth cross-check wall_share_ode_vs_closed_form_rel = 3.684e-01 exceeds 1.000e-08
+
+src/timescape_fsigma8/global_variance.py:670: GlobalVarianceNumericalError
+____________ test_reproduces_1g_d_owner_decision_void_response[GM] _____________
+
+bg_in = TimescapeTrackerInput(label='PAPER_REFERENCE', fv0=0.737, H0_dressed_km_s_Mpc=73.03, source="f_v0: [GM] Sec. 5.1.1; H0: [GM] Sec. 5.1.1 text / Fig. 1 caption, 'H0 = 73.03 km/(s Mpc)' from the best fit of [GM] ref. [80]")
+printed_A_v = 1169, printed_X = 1.263
+
+    @pytest.mark.parametrize("bg_in,printed_A_v,printed_X", [(GM, 1169, 1.263), (NW15, 1185, 1.285)],
+                             ids=["GM", "NW15"])
+    def test_reproduces_1g_d_owner_decision_void_response(bg_in, printed_A_v, printed_X):
+        """1G-D owner decisions (GD-OD1/OD2/OD6/OD7): A_v and X_SU to their printed digits."""
+>       growth = gv.two_phase_global_growth(background=bg_in, matching=MATCHING, checks=CHECKS, G=G)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_phase1g_h_global_variance.py:340:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+background = TimescapeTrackerInput(label='PAPER_REFERENCE', fv0=0.737, H0_dressed_km_s_Mpc=73.03, source="f_v0: [GM] Sec. 5.1.1; H0: [GM] Sec. 5.1.1 text / Fig. 1 caption, 'H0 = 73.03 km/(s Mpc)' from the best fit of [GM] ref. [80]")
+matching = LastScatteringMatching(z_last_scattering=1090.0, provenance='1G-D a_LS = 1/1091')
+checks = TwoPhaseGrowthChecks(identity_tolerance=1e-12, ode_rtol=1e-11, ode_atol=1e-14, ode_cross_check_tolerance=1e-08, root_xtol_fraction=1e-17)
+G = 1.0
+
+    def two_phase_global_growth(
+        *, background: TimescapeTrackerInput, matching: LastScatteringMatching,
+        checks: TwoPhaseGrowthChecks, G: float,
+    ) -> TwoPhaseGlobalGrowth:
+        """D_W and D_V of the tracker, (H8), with fail-closed independent checks.
+
+        Closed forms from [GM] Eqs. (5.4)-(5.6) and text p. 25:
+        ``(t0/t)^(2/3)/(1 + z) = gamma_w0 f_w0^(1/3)/(gamma_w(t) f_w(t)^(1/3))``
+        (``1 + z = gamma_w a_w0/a_D``, ``a_D proportional to t f_v^(-1/3)``,
+        ``f_v = t/(t + tau)``), hence ``D_W = (f_w0/f_w,LS)(t0/t_LS)^(2/3)/(1+z_LS)``
+        and ``D_V = (f_v0/f_v,LS)/(1 + z_LS)`` (H7)-(H8).  Independent checks: the
+        wall growing mode integrated in common time on the package's regional
+        background ``H_w = H_D - dfv_dt/(3 f_w)``, ``4 pi G rho_w = 4 pi G <rho>_D/f_w``
+        (1G-C Sec. 5), and the void volume ``dV/dt = 3V/t`` against ``f_v a_D^3``.
+        ``G`` is explicit (it cancels; no default).
+        """
+        _require(background, TimescapeTrackerInput, "background")
+        _require(matching, LastScatteringMatching, "matching")
+        _require(checks, TwoPhaseGrowthChecks, "checks")
+        G = _positive(G, "G")
+        p = background.dimensionless_params()
+        z_ls = matching.z_last_scattering
+        t0 = p.t0
+        t_ls = _t_of_redshift(p, z_ls, checks.root_xtol_fraction)
+        z_check = abs(float(bg.redshift(t_ls, p)) - z_ls) / z_ls
+        fv0 = p.fv0
+        f_vls = float(bg.fv(t_ls, p))
+        g0 = float(bg.gamma_w(t0, p))
+        g_ls = float(bg.gamma_w(t_ls, p))
+        f_w0, f_wls = 1.0 - fv0, 1.0 - f_vls
+        d_w = f_w0 ** (4.0 / 3.0) / f_wls ** (4.0 / 3.0)
+        d_v = fv0 / (f_vls * (1.0 + z_ls))
+        # Identity checks against the tracker functions.
+        finite_identity = ((t0 / t_ls) ** (2.0 / 3.0) / (1.0 + z_ls)) / (
+            g0 * f_w0 ** (1.0 / 3.0) / (g_ls * f_wls ** (1.0 / 3.0))) - 1.0
+        tau = t0 * (1.0 - fv0) / fv0
+        one_scale = f_vls / (t_ls / (t_ls + tau)) - 1.0
+        identities = {"finite_t_photon_identity_rel": abs(finite_identity),
+                      "one_time_scale_identity_rel": abs(one_scale),
+                      "redshift_root_rel": z_check,
+                      "gamma_w0_identity_rel": abs(g0 / (1.0 + fv0 / 2.0) - 1.0),
+                      "gamma_w_ls_identity_rel": abs(g_ls / (1.0 + f_vls / 2.0) - 1.0)}
+        for name, value in identities.items():
+            if not value <= checks.identity_tolerance:
+                raise GlobalVarianceNumericalError(
+                    f"two-phase growth identity {name} = {value:.3e} exceeds "
+                    f"{checks.identity_tolerance:.3e}")
+
+        # Independent route 1: wall growing mode in common time on the package's
+        # regional background (no closed form of H_w or rho_w is used).
+        def wall_rhs(t, y):
+            tt = np.array([t])
+            fw = 1.0 - float(bg.fv(tt, p)[0])
+            h_w = float(bg.H_D(tt, p)[0]) - float(bg.dfv_dt(tt, p)[0]) / (3.0 * fw)
+            four_pi_g_rho_w = 4.0 * math.pi * G * float(bg.rho_d(tt, p, G)[0]) / fw
+            return [y[1], -2.0 * h_w * y[1] + four_pi_g_rho_w * y[0]]
+
+        # Growing-mode data at t_LS: delta = 1, d delta/dt = (2/3)/t_LS (EdS in t).
+        sol_w = solve_ivp(wall_rhs, (t_ls, t0), [1.0, 2.0 / (3.0 * t_ls)], method="DOP853",
+                          rtol=checks.ode_rtol, atol=checks.ode_atol)
+        if not sol_w.success:
+            raise GlobalVarianceNumericalError(f"wall-mode integration failed: {sol_w.message}")
+        d_w_ode = (f_w0 / f_wls) * float(sol_w.y[0, -1]) / (1.0 + z_ls)
+        # Independent route 2: void volume dV/dt = 3V/t versus f_v a_D^3.
+        sol_v = solve_ivp(lambda t, y: [3.0 * y[0] / t], (t_ls, t0), [1.0], method="DOP853",
+                          rtol=checks.ode_rtol, atol=checks.ode_atol)
+        if not sol_v.success:
+            raise GlobalVarianceNumericalError(f"void-volume integration failed: {sol_v.message}")
+        vol_ratio_pkg = (fv0 * float(bg.a_D(t0, p)) ** 3) / (f_vls * float(bg.a_D(t_ls, p)) ** 3)
+        domain_ratio = (float(bg.a_D(t0, p)) / float(bg.a_D(t_ls, p))) ** 3
+        # V_v(t0)/V_v(LS) / [V_D(t0)/V_D(LS)] = f_v0/f_v,LS, so D_V = that/(1 + z_LS).
+        d_v_ode = float(sol_v.y[0, -1]) / domain_ratio / (1.0 + z_ls)
+        cross = {"wall_share_ode_vs_closed_form_rel": abs(d_w_ode / d_w - 1.0),
+                 "void_volume_ode_vs_package_rel": abs(float(sol_v.y[0, -1]) / vol_ratio_pkg - 1.0),
+                 "void_share_ode_vs_closed_form_rel": abs(d_v_ode / d_v - 1.0)}
+        for name, value in cross.items():
+            if not value <= checks.ode_cross_check_tolerance:
+>               raise GlobalVarianceNumericalError(
+                    f"two-phase growth cross-check {name} = {value:.3e} exceeds "
+                    f"{checks.ode_cross_check_tolerance:.3e}")
+E               timescape_fsigma8.global_variance.GlobalVarianceNumericalError: two-phase growth cross-check wall_share_ode_vs_closed_form_rel = 3.684e-01 exceeds 1.000e-08
+
+src/timescape_fsigma8/global_variance.py:670: GlobalVarianceNumericalError
+___________ test_reproduces_1g_d_owner_decision_void_response[NW15] ____________
+
+bg_in = TimescapeTrackerInput(label='NW15_CMB_FIT', fv0=0.627, H0_dressed_km_s_Mpc=61.0, source='Nazer & Wiltshire, arXiv:1410.3470 (test)')
+printed_A_v = 1185, printed_X = 1.285
+
+    @pytest.mark.parametrize("bg_in,printed_A_v,printed_X", [(GM, 1169, 1.263), (NW15, 1185, 1.285)],
+                             ids=["GM", "NW15"])
+    def test_reproduces_1g_d_owner_decision_void_response(bg_in, printed_A_v, printed_X):
+        """1G-D owner decisions (GD-OD1/OD2/OD6/OD7): A_v and X_SU to their printed digits."""
+>       growth = gv.two_phase_global_growth(background=bg_in, matching=MATCHING, checks=CHECKS, G=G)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_phase1g_h_global_variance.py:340:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+background = TimescapeTrackerInput(label='NW15_CMB_FIT', fv0=0.627, H0_dressed_km_s_Mpc=61.0, source='Nazer & Wiltshire, arXiv:1410.3470 (test)')
+matching = LastScatteringMatching(z_last_scattering=1090.0, provenance='1G-D a_LS = 1/1091')
+checks = TwoPhaseGrowthChecks(identity_tolerance=1e-12, ode_rtol=1e-11, ode_atol=1e-14, ode_cross_check_tolerance=1e-08, root_xtol_fraction=1e-17)
+G = 1.0
+
+    def two_phase_global_growth(
+        *, background: TimescapeTrackerInput, matching: LastScatteringMatching,
+        checks: TwoPhaseGrowthChecks, G: float,
+    ) -> TwoPhaseGlobalGrowth:
+        """D_W and D_V of the tracker, (H8), with fail-closed independent checks.
+
+        Closed forms from [GM] Eqs. (5.4)-(5.6) and text p. 25:
+        ``(t0/t)^(2/3)/(1 + z) = gamma_w0 f_w0^(1/3)/(gamma_w(t) f_w(t)^(1/3))``
+        (``1 + z = gamma_w a_w0/a_D``, ``a_D proportional to t f_v^(-1/3)``,
+        ``f_v = t/(t + tau)``), hence ``D_W = (f_w0/f_w,LS)(t0/t_LS)^(2/3)/(1+z_LS)``
+        and ``D_V = (f_v0/f_v,LS)/(1 + z_LS)`` (H7)-(H8).  Independent checks: the
+        wall growing mode integrated in common time on the package's regional
+        background ``H_w = H_D - dfv_dt/(3 f_w)``, ``4 pi G rho_w = 4 pi G <rho>_D/f_w``
+        (1G-C Sec. 5), and the void volume ``dV/dt = 3V/t`` against ``f_v a_D^3``.
+        ``G`` is explicit (it cancels; no default).
+        """
+        _require(background, TimescapeTrackerInput, "background")
+        _require(matching, LastScatteringMatching, "matching")
+        _require(checks, TwoPhaseGrowthChecks, "checks")
+        G = _positive(G, "G")
+        p = background.dimensionless_params()
+        z_ls = matching.z_last_scattering
+        t0 = p.t0
+        t_ls = _t_of_redshift(p, z_ls, checks.root_xtol_fraction)
+        z_check = abs(float(bg.redshift(t_ls, p)) - z_ls) / z_ls
+        fv0 = p.fv0
+        f_vls = float(bg.fv(t_ls, p))
+        g0 = float(bg.gamma_w(t0, p))
+        g_ls = float(bg.gamma_w(t_ls, p))
+        f_w0, f_wls = 1.0 - fv0, 1.0 - f_vls
+        d_w = f_w0 ** (4.0 / 3.0) / f_wls ** (4.0 / 3.0)
+        d_v = fv0 / (f_vls * (1.0 + z_ls))
+        # Identity checks against the tracker functions.
+        finite_identity = ((t0 / t_ls) ** (2.0 / 3.0) / (1.0 + z_ls)) / (
+            g0 * f_w0 ** (1.0 / 3.0) / (g_ls * f_wls ** (1.0 / 3.0))) - 1.0
+        tau = t0 * (1.0 - fv0) / fv0
+        one_scale = f_vls / (t_ls / (t_ls + tau)) - 1.0
+        identities = {"finite_t_photon_identity_rel": abs(finite_identity),
+                      "one_time_scale_identity_rel": abs(one_scale),
+                      "redshift_root_rel": z_check,
+                      "gamma_w0_identity_rel": abs(g0 / (1.0 + fv0 / 2.0) - 1.0),
+                      "gamma_w_ls_identity_rel": abs(g_ls / (1.0 + f_vls / 2.0) - 1.0)}
+        for name, value in identities.items():
+            if not value <= checks.identity_tolerance:
+                raise GlobalVarianceNumericalError(
+                    f"two-phase growth identity {name} = {value:.3e} exceeds "
+                    f"{checks.identity_tolerance:.3e}")
+
+        # Independent route 1: wall growing mode in common time on the package's
+        # regional background (no closed form of H_w or rho_w is used).
+        def wall_rhs(t, y):
+            tt = np.array([t])
+            fw = 1.0 - float(bg.fv(tt, p)[0])
+            h_w = float(bg.H_D(tt, p)[0]) - float(bg.dfv_dt(tt, p)[0]) / (3.0 * fw)
+            four_pi_g_rho_w = 4.0 * math.pi * G * float(bg.rho_d(tt, p, G)[0]) / fw
+            return [y[1], -2.0 * h_w * y[1] + four_pi_g_rho_w * y[0]]
+
+        # Growing-mode data at t_LS: delta = 1, d delta/dt = (2/3)/t_LS (EdS in t).
+        sol_w = solve_ivp(wall_rhs, (t_ls, t0), [1.0, 2.0 / (3.0 * t_ls)], method="DOP853",
+                          rtol=checks.ode_rtol, atol=checks.ode_atol)
+        if not sol_w.success:
+            raise GlobalVarianceNumericalError(f"wall-mode integration failed: {sol_w.message}")
+        d_w_ode = (f_w0 / f_wls) * float(sol_w.y[0, -1]) / (1.0 + z_ls)
+        # Independent route 2: void volume dV/dt = 3V/t versus f_v a_D^3.
+        sol_v = solve_ivp(lambda t, y: [3.0 * y[0] / t], (t_ls, t0), [1.0], method="DOP853",
+                          rtol=checks.ode_rtol, atol=checks.ode_atol)
+        if not sol_v.success:
+            raise GlobalVarianceNumericalError(f"void-volume integration failed: {sol_v.message}")
+        vol_ratio_pkg = (fv0 * float(bg.a_D(t0, p)) ** 3) / (f_vls * float(bg.a_D(t_ls, p)) ** 3)
+        domain_ratio = (float(bg.a_D(t0, p)) / float(bg.a_D(t_ls, p))) ** 3
+        # V_v(t0)/V_v(LS) / [V_D(t0)/V_D(LS)] = f_v0/f_v,LS, so D_V = that/(1 + z_LS).
+        d_v_ode = float(sol_v.y[0, -1]) / domain_ratio / (1.0 + z_ls)
+        cross = {"wall_share_ode_vs_closed_form_rel": abs(d_w_ode / d_w - 1.0),
+                 "void_volume_ode_vs_package_rel": abs(float(sol_v.y[0, -1]) / vol_ratio_pkg - 1.0),
+                 "void_share_ode_vs_closed_form_rel": abs(d_v_ode / d_v - 1.0)}
+        for name, value in cross.items():
+            if not value <= checks.ode_cross_check_tolerance:
+>               raise GlobalVarianceNumericalError(
+                    f"two-phase growth cross-check {name} = {value:.3e} exceeds "
+                    f"{checks.ode_cross_check_tolerance:.3e}")
+E               timescape_fsigma8.global_variance.GlobalVarianceNumericalError: two-phase growth cross-check wall_share_ode_vs_closed_form_rel = 3.135e-01 exceeds 1.000e-08
+
+src/timescape_fsigma8/global_variance.py:670: GlobalVarianceNumericalError
+___ test_constant_share_variance_scales_with_A_s_and_pbs_void_term_does_not ____
+
+    def test_constant_share_variance_scales_with_A_s_and_pbs_void_term_does_not():
+        rad = radius("c")
+>       base = run(GM, constant(0.08), rad)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_phase1g_h_global_variance.py:350:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests/test_phase1g_h_global_variance.py:80: in run
+    return gv.conditional_global_linear_sigma(
+src/timescape_fsigma8/global_variance.py:1103: in conditional_global_linear_sigma
+    growth = two_phase_global_growth(background=background, matching=matching,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+background = TimescapeTrackerInput(label='PAPER_REFERENCE', fv0=0.737, H0_dressed_km_s_Mpc=73.03, source="f_v0: [GM] Sec. 5.1.1; H0: [GM] Sec. 5.1.1 text / Fig. 1 caption, 'H0 = 73.03 km/(s Mpc)' from the best fit of [GM] ref. [80]")
+matching = LastScatteringMatching(z_last_scattering=1090.0, provenance='1G-D a_LS = 1/1091')
+checks = TwoPhaseGrowthChecks(identity_tolerance=1e-12, ode_rtol=1e-11, ode_atol=1e-14, ode_cross_check_tolerance=1e-08, root_xtol_fraction=1e-17)
+G = 1.0
+
+    def two_phase_global_growth(
+        *, background: TimescapeTrackerInput, matching: LastScatteringMatching,
+        checks: TwoPhaseGrowthChecks, G: float,
+    ) -> TwoPhaseGlobalGrowth:
+        """D_W and D_V of the tracker, (H8), with fail-closed independent checks.
+
+        Closed forms from [GM] Eqs. (5.4)-(5.6) and text p. 25:
+        ``(t0/t)^(2/3)/(1 + z) = gamma_w0 f_w0^(1/3)/(gamma_w(t) f_w(t)^(1/3))``
+        (``1 + z = gamma_w a_w0/a_D``, ``a_D proportional to t f_v^(-1/3)``,
+        ``f_v = t/(t + tau)``), hence ``D_W = (f_w0/f_w,LS)(t0/t_LS)^(2/3)/(1+z_LS)``
+        and ``D_V = (f_v0/f_v,LS)/(1 + z_LS)`` (H7)-(H8).  Independent checks: the
+        wall growing mode integrated in common time on the package's regional
+        background ``H_w = H_D - dfv_dt/(3 f_w)``, ``4 pi G rho_w = 4 pi G <rho>_D/f_w``
+        (1G-C Sec. 5), and the void volume ``dV/dt = 3V/t`` against ``f_v a_D^3``.
+        ``G`` is explicit (it cancels; no default).
+        """
+        _require(background, TimescapeTrackerInput, "background")
+        _require(matching, LastScatteringMatching, "matching")
+        _require(checks, TwoPhaseGrowthChecks, "checks")
+        G = _positive(G, "G")
+        p = background.dimensionless_params()
+        z_ls = matching.z_last_scattering
+        t0 = p.t0
+        t_ls = _t_of_redshift(p, z_ls, checks.root_xtol_fraction)
+        z_check = abs(float(bg.redshift(t_ls, p)) - z_ls) / z_ls
+        fv0 = p.fv0
+        f_vls = float(bg.fv(t_ls, p))
+        g0 = float(bg.gamma_w(t0, p))
+        g_ls = float(bg.gamma_w(t_ls, p))
+        f_w0, f_wls = 1.0 - fv0, 1.0 - f_vls
+        d_w = f_w0 ** (4.0 / 3.0) / f_wls ** (4.0 / 3.0)
+        d_v = fv0 / (f_vls * (1.0 + z_ls))
+        # Identity checks against the tracker functions.
+        finite_identity = ((t0 / t_ls) ** (2.0 / 3.0) / (1.0 + z_ls)) / (
+            g0 * f_w0 ** (1.0 / 3.0) / (g_ls * f_wls ** (1.0 / 3.0))) - 1.0
+        tau = t0 * (1.0 - fv0) / fv0
+        one_scale = f_vls / (t_ls / (t_ls + tau)) - 1.0
+        identities = {"finite_t_photon_identity_rel": abs(finite_identity),
+                      "one_time_scale_identity_rel": abs(one_scale),
+                      "redshift_root_rel": z_check,
+                      "gamma_w0_identity_rel": abs(g0 / (1.0 + fv0 / 2.0) - 1.0),
+                      "gamma_w_ls_identity_rel": abs(g_ls / (1.0 + f_vls / 2.0) - 1.0)}
+        for name, value in identities.items():
+            if not value <= checks.identity_tolerance:
+                raise GlobalVarianceNumericalError(
+                    f"two-phase growth identity {name} = {value:.3e} exceeds "
+                    f"{checks.identity_tolerance:.3e}")
+
+        # Independent route 1: wall growing mode in common time on the package's
+        # regional background (no closed form of H_w or rho_w is used).
+        def wall_rhs(t, y):
+            tt = np.array([t])
+            fw = 1.0 - float(bg.fv(tt, p)[0])
+            h_w = float(bg.H_D(tt, p)[0]) - float(bg.dfv_dt(tt, p)[0]) / (3.0 * fw)
+            four_pi_g_rho_w = 4.0 * math.pi * G * float(bg.rho_d(tt, p, G)[0]) / fw
+            return [y[1], -2.0 * h_w * y[1] + four_pi_g_rho_w * y[0]]
+
+        # Growing-mode data at t_LS: delta = 1, d delta/dt = (2/3)/t_LS (EdS in t).
+        sol_w = solve_ivp(wall_rhs, (t_ls, t0), [1.0, 2.0 / (3.0 * t_ls)], method="DOP853",
+                          rtol=checks.ode_rtol, atol=checks.ode_atol)
+        if not sol_w.success:
+            raise GlobalVarianceNumericalError(f"wall-mode integration failed: {sol_w.message}")
+        d_w_ode = (f_w0 / f_wls) * float(sol_w.y[0, -1]) / (1.0 + z_ls)
+        # Independent route 2: void volume dV/dt = 3V/t versus f_v a_D^3.
+        sol_v = solve_ivp(lambda t, y: [3.0 * y[0] / t], (t_ls, t0), [1.0], method="DOP853",
+                          rtol=checks.ode_rtol, atol=checks.ode_atol)
+        if not sol_v.success:
+            raise GlobalVarianceNumericalError(f"void-volume integration failed: {sol_v.message}")
+        vol_ratio_pkg = (fv0 * float(bg.a_D(t0, p)) ** 3) / (f_vls * float(bg.a_D(t_ls, p)) ** 3)
+        domain_ratio = (float(bg.a_D(t0, p)) / float(bg.a_D(t_ls, p))) ** 3
+        # V_v(t0)/V_v(LS) / [V_D(t0)/V_D(LS)] = f_v0/f_v,LS, so D_V = that/(1 + z_LS).
+        d_v_ode = float(sol_v.y[0, -1]) / domain_ratio / (1.0 + z_ls)
+        cross = {"wall_share_ode_vs_closed_form_rel": abs(d_w_ode / d_w - 1.0),
+                 "void_volume_ode_vs_package_rel": abs(float(sol_v.y[0, -1]) / vol_ratio_pkg - 1.0),
+                 "void_share_ode_vs_closed_form_rel": abs(d_v_ode / d_v - 1.0)}
+        for name, value in cross.items():
+            if not value <= checks.ode_cross_check_tolerance:
+>               raise GlobalVarianceNumericalError(
+                    f"two-phase growth cross-check {name} = {value:.3e} exceeds "
+                    f"{checks.ode_cross_check_tolerance:.3e}")
+E               timescape_fsigma8.global_variance.GlobalVarianceNumericalError: two-phase growth cross-check wall_share_ode_vs_closed_form_rel = 3.684e-01 exceeds 1.000e-08
+
+src/timescape_fsigma8/global_variance.py:670: GlobalVarianceNumericalError
+_______ test_terms_of_the_propagator_add_coherently_for_a_constant_share _______
+
+    def test_terms_of_the_propagator_add_coherently_for_a_constant_share():
+>       res = run(NW15, constant(0.05), radius("c"))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_phase1g_h_global_variance.py:365:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests/test_phase1g_h_global_variance.py:80: in run
+    return gv.conditional_global_linear_sigma(
+src/timescape_fsigma8/global_variance.py:1103: in conditional_global_linear_sigma
+    growth = two_phase_global_growth(background=background, matching=matching,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+background = TimescapeTrackerInput(label='NW15_CMB_FIT', fv0=0.627, H0_dressed_km_s_Mpc=61.0, source='Nazer & Wiltshire, arXiv:1410.3470 (test)')
+matching = LastScatteringMatching(z_last_scattering=1090.0, provenance='1G-D a_LS = 1/1091')
+checks = TwoPhaseGrowthChecks(identity_tolerance=1e-12, ode_rtol=1e-11, ode_atol=1e-14, ode_cross_check_tolerance=1e-08, root_xtol_fraction=1e-17)
+G = 1.0
+
+    def two_phase_global_growth(
+        *, background: TimescapeTrackerInput, matching: LastScatteringMatching,
+        checks: TwoPhaseGrowthChecks, G: float,
+    ) -> TwoPhaseGlobalGrowth:
+        """D_W and D_V of the tracker, (H8), with fail-closed independent checks.
+
+        Closed forms from [GM] Eqs. (5.4)-(5.6) and text p. 25:
+        ``(t0/t)^(2/3)/(1 + z) = gamma_w0 f_w0^(1/3)/(gamma_w(t) f_w(t)^(1/3))``
+        (``1 + z = gamma_w a_w0/a_D``, ``a_D proportional to t f_v^(-1/3)``,
+        ``f_v = t/(t + tau)``), hence ``D_W = (f_w0/f_w,LS)(t0/t_LS)^(2/3)/(1+z_LS)``
+        and ``D_V = (f_v0/f_v,LS)/(1 + z_LS)`` (H7)-(H8).  Independent checks: the
+        wall growing mode integrated in common time on the package's regional
+        background ``H_w = H_D - dfv_dt/(3 f_w)``, ``4 pi G rho_w = 4 pi G <rho>_D/f_w``
+        (1G-C Sec. 5), and the void volume ``dV/dt = 3V/t`` against ``f_v a_D^3``.
+        ``G`` is explicit (it cancels; no default).
+        """
+        _require(background, TimescapeTrackerInput, "background")
+        _require(matching, LastScatteringMatching, "matching")
+        _require(checks, TwoPhaseGrowthChecks, "checks")
+        G = _positive(G, "G")
+        p = background.dimensionless_params()
+        z_ls = matching.z_last_scattering
+        t0 = p.t0
+        t_ls = _t_of_redshift(p, z_ls, checks.root_xtol_fraction)
+        z_check = abs(float(bg.redshift(t_ls, p)) - z_ls) / z_ls
+        fv0 = p.fv0
+        f_vls = float(bg.fv(t_ls, p))
+        g0 = float(bg.gamma_w(t0, p))
+        g_ls = float(bg.gamma_w(t_ls, p))
+        f_w0, f_wls = 1.0 - fv0, 1.0 - f_vls
+        d_w = f_w0 ** (4.0 / 3.0) / f_wls ** (4.0 / 3.0)
+        d_v = fv0 / (f_vls * (1.0 + z_ls))
+        # Identity checks against the tracker functions.
+        finite_identity = ((t0 / t_ls) ** (2.0 / 3.0) / (1.0 + z_ls)) / (
+            g0 * f_w0 ** (1.0 / 3.0) / (g_ls * f_wls ** (1.0 / 3.0))) - 1.0
+        tau = t0 * (1.0 - fv0) / fv0
+        one_scale = f_vls / (t_ls / (t_ls + tau)) - 1.0
+        identities = {"finite_t_photon_identity_rel": abs(finite_identity),
+                      "one_time_scale_identity_rel": abs(one_scale),
+                      "redshift_root_rel": z_check,
+                      "gamma_w0_identity_rel": abs(g0 / (1.0 + fv0 / 2.0) - 1.0),
+                      "gamma_w_ls_identity_rel": abs(g_ls / (1.0 + f_vls / 2.0) - 1.0)}
+        for name, value in identities.items():
+            if not value <= checks.identity_tolerance:
+                raise GlobalVarianceNumericalError(
+                    f"two-phase growth identity {name} = {value:.3e} exceeds "
+                    f"{checks.identity_tolerance:.3e}")
+
+        # Independent route 1: wall growing mode in common time on the package's
+        # regional background (no closed form of H_w or rho_w is used).
+        def wall_rhs(t, y):
+            tt = np.array([t])
+            fw = 1.0 - float(bg.fv(tt, p)[0])
+            h_w = float(bg.H_D(tt, p)[0]) - float(bg.dfv_dt(tt, p)[0]) / (3.0 * fw)
+            four_pi_g_rho_w = 4.0 * math.pi * G * float(bg.rho_d(tt, p, G)[0]) / fw
+            return [y[1], -2.0 * h_w * y[1] + four_pi_g_rho_w * y[0]]
+
+        # Growing-mode data at t_LS: delta = 1, d delta/dt = (2/3)/t_LS (EdS in t).
+        sol_w = solve_ivp(wall_rhs, (t_ls, t0), [1.0, 2.0 / (3.0 * t_ls)], method="DOP853",
+                          rtol=checks.ode_rtol, atol=checks.ode_atol)
+        if not sol_w.success:
+            raise GlobalVarianceNumericalError(f"wall-mode integration failed: {sol_w.message}")
+        d_w_ode = (f_w0 / f_wls) * float(sol_w.y[0, -1]) / (1.0 + z_ls)
+        # Independent route 2: void volume dV/dt = 3V/t versus f_v a_D^3.
+        sol_v = solve_ivp(lambda t, y: [3.0 * y[0] / t], (t_ls, t0), [1.0], method="DOP853",
+                          rtol=checks.ode_rtol, atol=checks.ode_atol)
+        if not sol_v.success:
+            raise GlobalVarianceNumericalError(f"void-volume integration failed: {sol_v.message}")
+        vol_ratio_pkg = (fv0 * float(bg.a_D(t0, p)) ** 3) / (f_vls * float(bg.a_D(t_ls, p)) ** 3)
+        domain_ratio = (float(bg.a_D(t0, p)) / float(bg.a_D(t_ls, p))) ** 3
+        # V_v(t0)/V_v(LS) / [V_D(t0)/V_D(LS)] = f_v0/f_v,LS, so D_V = that/(1 + z_LS).
+        d_v_ode = float(sol_v.y[0, -1]) / domain_ratio / (1.0 + z_ls)
+        cross = {"wall_share_ode_vs_closed_form_rel": abs(d_w_ode / d_w - 1.0),
+                 "void_volume_ode_vs_package_rel": abs(float(sol_v.y[0, -1]) / vol_ratio_pkg - 1.0),
+                 "void_share_ode_vs_closed_form_rel": abs(d_v_ode / d_v - 1.0)}
+        for name, value in cross.items():
+            if not value <= checks.ode_cross_check_tolerance:
+>               raise GlobalVarianceNumericalError(
+                    f"two-phase growth cross-check {name} = {value:.3e} exceeds "
+                    f"{checks.ode_cross_check_tolerance:.3e}")
+E               timescape_fsigma8.global_variance.GlobalVarianceNumericalError: two-phase growth cross-check wall_share_ode_vs_closed_form_rel = 3.135e-01 exceeds 1.000e-08
+
+src/timescape_fsigma8/global_variance.py:670: GlobalVarianceNumericalError
+________________________ test_records_reject_tampering _________________________
+
+    def test_records_reject_tampering():
+>       res = run(GM, constant(0.05), radius("c"))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_phase1g_h_global_variance.py:600:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests/test_phase1g_h_global_variance.py:80: in run
+    return gv.conditional_global_linear_sigma(
+src/timescape_fsigma8/global_variance.py:1103: in conditional_global_linear_sigma
+    growth = two_phase_global_growth(background=background, matching=matching,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+background = TimescapeTrackerInput(label='PAPER_REFERENCE', fv0=0.737, H0_dressed_km_s_Mpc=73.03, source="f_v0: [GM] Sec. 5.1.1; H0: [GM] Sec. 5.1.1 text / Fig. 1 caption, 'H0 = 73.03 km/(s Mpc)' from the best fit of [GM] ref. [80]")
+matching = LastScatteringMatching(z_last_scattering=1090.0, provenance='1G-D a_LS = 1/1091')
+checks = TwoPhaseGrowthChecks(identity_tolerance=1e-12, ode_rtol=1e-11, ode_atol=1e-14, ode_cross_check_tolerance=1e-08, root_xtol_fraction=1e-17)
+G = 1.0
+
+    def two_phase_global_growth(
+        *, background: TimescapeTrackerInput, matching: LastScatteringMatching,
+        checks: TwoPhaseGrowthChecks, G: float,
+    ) -> TwoPhaseGlobalGrowth:
+        """D_W and D_V of the tracker, (H8), with fail-closed independent checks.
+
+        Closed forms from [GM] Eqs. (5.4)-(5.6) and text p. 25:
+        ``(t0/t)^(2/3)/(1 + z) = gamma_w0 f_w0^(1/3)/(gamma_w(t) f_w(t)^(1/3))``
+        (``1 + z = gamma_w a_w0/a_D``, ``a_D proportional to t f_v^(-1/3)``,
+        ``f_v = t/(t + tau)``), hence ``D_W = (f_w0/f_w,LS)(t0/t_LS)^(2/3)/(1+z_LS)``
+        and ``D_V = (f_v0/f_v,LS)/(1 + z_LS)`` (H7)-(H8).  Independent checks: the
+        wall growing mode integrated in common time on the package's regional
+        background ``H_w = H_D - dfv_dt/(3 f_w)``, ``4 pi G rho_w = 4 pi G <rho>_D/f_w``
+        (1G-C Sec. 5), and the void volume ``dV/dt = 3V/t`` against ``f_v a_D^3``.
+        ``G`` is explicit (it cancels; no default).
+        """
+        _require(background, TimescapeTrackerInput, "background")
+        _require(matching, LastScatteringMatching, "matching")
+        _require(checks, TwoPhaseGrowthChecks, "checks")
+        G = _positive(G, "G")
+        p = background.dimensionless_params()
+        z_ls = matching.z_last_scattering
+        t0 = p.t0
+        t_ls = _t_of_redshift(p, z_ls, checks.root_xtol_fraction)
+        z_check = abs(float(bg.redshift(t_ls, p)) - z_ls) / z_ls
+        fv0 = p.fv0
+        f_vls = float(bg.fv(t_ls, p))
+        g0 = float(bg.gamma_w(t0, p))
+        g_ls = float(bg.gamma_w(t_ls, p))
+        f_w0, f_wls = 1.0 - fv0, 1.0 - f_vls
+        d_w = f_w0 ** (4.0 / 3.0) / f_wls ** (4.0 / 3.0)
+        d_v = fv0 / (f_vls * (1.0 + z_ls))
+        # Identity checks against the tracker functions.
+        finite_identity = ((t0 / t_ls) ** (2.0 / 3.0) / (1.0 + z_ls)) / (
+            g0 * f_w0 ** (1.0 / 3.0) / (g_ls * f_wls ** (1.0 / 3.0))) - 1.0
+        tau = t0 * (1.0 - fv0) / fv0
+        one_scale = f_vls / (t_ls / (t_ls + tau)) - 1.0
+        identities = {"finite_t_photon_identity_rel": abs(finite_identity),
+                      "one_time_scale_identity_rel": abs(one_scale),
+                      "redshift_root_rel": z_check,
+                      "gamma_w0_identity_rel": abs(g0 / (1.0 + fv0 / 2.0) - 1.0),
+                      "gamma_w_ls_identity_rel": abs(g_ls / (1.0 + f_vls / 2.0) - 1.0)}
+        for name, value in identities.items():
+            if not value <= checks.identity_tolerance:
+                raise GlobalVarianceNumericalError(
+                    f"two-phase growth identity {name} = {value:.3e} exceeds "
+                    f"{checks.identity_tolerance:.3e}")
+
+        # Independent route 1: wall growing mode in common time on the package's
+        # regional background (no closed form of H_w or rho_w is used).
+        def wall_rhs(t, y):
+            tt = np.array([t])
+            fw = 1.0 - float(bg.fv(tt, p)[0])
+            h_w = float(bg.H_D(tt, p)[0]) - float(bg.dfv_dt(tt, p)[0]) / (3.0 * fw)
+            four_pi_g_rho_w = 4.0 * math.pi * G * float(bg.rho_d(tt, p, G)[0]) / fw
+            return [y[1], -2.0 * h_w * y[1] + four_pi_g_rho_w * y[0]]
+
+        # Growing-mode data at t_LS: delta = 1, d delta/dt = (2/3)/t_LS (EdS in t).
+        sol_w = solve_ivp(wall_rhs, (t_ls, t0), [1.0, 2.0 / (3.0 * t_ls)], method="DOP853",
+                          rtol=checks.ode_rtol, atol=checks.ode_atol)
+        if not sol_w.success:
+            raise GlobalVarianceNumericalError(f"wall-mode integration failed: {sol_w.message}")
+        d_w_ode = (f_w0 / f_wls) * float(sol_w.y[0, -1]) / (1.0 + z_ls)
+        # Independent route 2: void volume dV/dt = 3V/t versus f_v a_D^3.
+        sol_v = solve_ivp(lambda t, y: [3.0 * y[0] / t], (t_ls, t0), [1.0], method="DOP853",
+                          rtol=checks.ode_rtol, atol=checks.ode_atol)
+        if not sol_v.success:
+            raise GlobalVarianceNumericalError(f"void-volume integration failed: {sol_v.message}")
+        vol_ratio_pkg = (fv0 * float(bg.a_D(t0, p)) ** 3) / (f_vls * float(bg.a_D(t_ls, p)) ** 3)
+        domain_ratio = (float(bg.a_D(t0, p)) / float(bg.a_D(t_ls, p))) ** 3
+        # V_v(t0)/V_v(LS) / [V_D(t0)/V_D(LS)] = f_v0/f_v,LS, so D_V = that/(1 + z_LS).
+        d_v_ode = float(sol_v.y[0, -1]) / domain_ratio / (1.0 + z_ls)
+        cross = {"wall_share_ode_vs_closed_form_rel": abs(d_w_ode / d_w - 1.0),
+                 "void_volume_ode_vs_package_rel": abs(float(sol_v.y[0, -1]) / vol_ratio_pkg - 1.0),
+                 "void_share_ode_vs_closed_form_rel": abs(d_v_ode / d_v - 1.0)}
+        for name, value in cross.items():
+            if not value <= checks.ode_cross_check_tolerance:
+>               raise GlobalVarianceNumericalError(
+                    f"two-phase growth cross-check {name} = {value:.3e} exceeds "
+                    f"{checks.ode_cross_check_tolerance:.3e}")
+E               timescape_fsigma8.global_variance.GlobalVarianceNumericalError: two-phase growth cross-check wall_share_ode_vs_closed_form_rel = 3.684e-01 exceeds 1.000e-08
+
+src/timescape_fsigma8/global_variance.py:670: GlobalVarianceNumericalError
+___________________ test_naming_rule_statuses_and_isolation ____________________
+
+    def test_naming_rule_statuses_and_isolation():
+        assert not [n for n in gv.__all__ if any(t in n.lower() for t in FORBIDDEN)]
+        public = [n for n in dir(gv) if not n.startswith("_")]
+        assert not [n for n in public if any(t in n.lower() for t in FORBIDDEN)]
+>       res = run(GM, constant(0.05), radius("c"))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_phase1g_h_global_variance.py:628:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests/test_phase1g_h_global_variance.py:80: in run
+    return gv.conditional_global_linear_sigma(
+src/timescape_fsigma8/global_variance.py:1103: in conditional_global_linear_sigma
+    growth = two_phase_global_growth(background=background, matching=matching,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+background = TimescapeTrackerInput(label='PAPER_REFERENCE', fv0=0.737, H0_dressed_km_s_Mpc=73.03, source="f_v0: [GM] Sec. 5.1.1; H0: [GM] Sec. 5.1.1 text / Fig. 1 caption, 'H0 = 73.03 km/(s Mpc)' from the best fit of [GM] ref. [80]")
+matching = LastScatteringMatching(z_last_scattering=1090.0, provenance='1G-D a_LS = 1/1091')
+checks = TwoPhaseGrowthChecks(identity_tolerance=1e-12, ode_rtol=1e-11, ode_atol=1e-14, ode_cross_check_tolerance=1e-08, root_xtol_fraction=1e-17)
+G = 1.0
+
+    def two_phase_global_growth(
+        *, background: TimescapeTrackerInput, matching: LastScatteringMatching,
+        checks: TwoPhaseGrowthChecks, G: float,
+    ) -> TwoPhaseGlobalGrowth:
+        """D_W and D_V of the tracker, (H8), with fail-closed independent checks.
+
+        Closed forms from [GM] Eqs. (5.4)-(5.6) and text p. 25:
+        ``(t0/t)^(2/3)/(1 + z) = gamma_w0 f_w0^(1/3)/(gamma_w(t) f_w(t)^(1/3))``
+        (``1 + z = gamma_w a_w0/a_D``, ``a_D proportional to t f_v^(-1/3)``,
+        ``f_v = t/(t + tau)``), hence ``D_W = (f_w0/f_w,LS)(t0/t_LS)^(2/3)/(1+z_LS)``
+        and ``D_V = (f_v0/f_v,LS)/(1 + z_LS)`` (H7)-(H8).  Independent checks: the
+        wall growing mode integrated in common time on the package's regional
+        background ``H_w = H_D - dfv_dt/(3 f_w)``, ``4 pi G rho_w = 4 pi G <rho>_D/f_w``
+        (1G-C Sec. 5), and the void volume ``dV/dt = 3V/t`` against ``f_v a_D^3``.
+        ``G`` is explicit (it cancels; no default).
+        """
+        _require(background, TimescapeTrackerInput, "background")
+        _require(matching, LastScatteringMatching, "matching")
+        _require(checks, TwoPhaseGrowthChecks, "checks")
+        G = _positive(G, "G")
+        p = background.dimensionless_params()
+        z_ls = matching.z_last_scattering
+        t0 = p.t0
+        t_ls = _t_of_redshift(p, z_ls, checks.root_xtol_fraction)
+        z_check = abs(float(bg.redshift(t_ls, p)) - z_ls) / z_ls
+        fv0 = p.fv0
+        f_vls = float(bg.fv(t_ls, p))
+        g0 = float(bg.gamma_w(t0, p))
+        g_ls = float(bg.gamma_w(t_ls, p))
+        f_w0, f_wls = 1.0 - fv0, 1.0 - f_vls
+        d_w = f_w0 ** (4.0 / 3.0) / f_wls ** (4.0 / 3.0)
+        d_v = fv0 / (f_vls * (1.0 + z_ls))
+        # Identity checks against the tracker functions.
+        finite_identity = ((t0 / t_ls) ** (2.0 / 3.0) / (1.0 + z_ls)) / (
+            g0 * f_w0 ** (1.0 / 3.0) / (g_ls * f_wls ** (1.0 / 3.0))) - 1.0
+        tau = t0 * (1.0 - fv0) / fv0
+        one_scale = f_vls / (t_ls / (t_ls + tau)) - 1.0
+        identities = {"finite_t_photon_identity_rel": abs(finite_identity),
+                      "one_time_scale_identity_rel": abs(one_scale),
+                      "redshift_root_rel": z_check,
+                      "gamma_w0_identity_rel": abs(g0 / (1.0 + fv0 / 2.0) - 1.0),
+                      "gamma_w_ls_identity_rel": abs(g_ls / (1.0 + f_vls / 2.0) - 1.0)}
+        for name, value in identities.items():
+            if not value <= checks.identity_tolerance:
+                raise GlobalVarianceNumericalError(
+                    f"two-phase growth identity {name} = {value:.3e} exceeds "
+                    f"{checks.identity_tolerance:.3e}")
+
+        # Independent route 1: wall growing mode in common time on the package's
+        # regional background (no closed form of H_w or rho_w is used).
+        def wall_rhs(t, y):
+            tt = np.array([t])
+            fw = 1.0 - float(bg.fv(tt, p)[0])
+            h_w = float(bg.H_D(tt, p)[0]) - float(bg.dfv_dt(tt, p)[0]) / (3.0 * fw)
+            four_pi_g_rho_w = 4.0 * math.pi * G * float(bg.rho_d(tt, p, G)[0]) / fw
+            return [y[1], -2.0 * h_w * y[1] + four_pi_g_rho_w * y[0]]
+
+        # Growing-mode data at t_LS: delta = 1, d delta/dt = (2/3)/t_LS (EdS in t).
+        sol_w = solve_ivp(wall_rhs, (t_ls, t0), [1.0, 2.0 / (3.0 * t_ls)], method="DOP853",
+                          rtol=checks.ode_rtol, atol=checks.ode_atol)
+        if not sol_w.success:
+            raise GlobalVarianceNumericalError(f"wall-mode integration failed: {sol_w.message}")
+        d_w_ode = (f_w0 / f_wls) * float(sol_w.y[0, -1]) / (1.0 + z_ls)
+        # Independent route 2: void volume dV/dt = 3V/t versus f_v a_D^3.
+        sol_v = solve_ivp(lambda t, y: [3.0 * y[0] / t], (t_ls, t0), [1.0], method="DOP853",
+                          rtol=checks.ode_rtol, atol=checks.ode_atol)
+        if not sol_v.success:
+            raise GlobalVarianceNumericalError(f"void-volume integration failed: {sol_v.message}")
+        vol_ratio_pkg = (fv0 * float(bg.a_D(t0, p)) ** 3) / (f_vls * float(bg.a_D(t_ls, p)) ** 3)
+        domain_ratio = (float(bg.a_D(t0, p)) / float(bg.a_D(t_ls, p))) ** 3
+        # V_v(t0)/V_v(LS) / [V_D(t0)/V_D(LS)] = f_v0/f_v,LS, so D_V = that/(1 + z_LS).
+        d_v_ode = float(sol_v.y[0, -1]) / domain_ratio / (1.0 + z_ls)
+        cross = {"wall_share_ode_vs_closed_form_rel": abs(d_w_ode / d_w - 1.0),
+                 "void_volume_ode_vs_package_rel": abs(float(sol_v.y[0, -1]) / vol_ratio_pkg - 1.0),
+                 "void_share_ode_vs_closed_form_rel": abs(d_v_ode / d_v - 1.0)}
+        for name, value in cross.items():
+            if not value <= checks.ode_cross_check_tolerance:
+>               raise GlobalVarianceNumericalError(
+                    f"two-phase growth cross-check {name} = {value:.3e} exceeds "
+                    f"{checks.ode_cross_check_tolerance:.3e}")
+E               timescape_fsigma8.global_variance.GlobalVarianceNumericalError: two-phase growth cross-check wall_share_ode_vs_closed_form_rel = 3.684e-01 exceeds 1.000e-08
+
+src/timescape_fsigma8/global_variance.py:670: GlobalVarianceNumericalError
+___________ test_example_configurations_run_and_require_every_choice ___________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-3/test_example_configurations_ru0')
+
+    def test_example_configurations_run_and_require_every_choice(tmp_path):
+        import importlib.util
+        import json
+
+        path = PROJECT_ROOT / "scripts" / "phase1g_h_global_variance_case.py"
+        spec_ = importlib.util.spec_from_file_location("_phase1g_h_case", path)
+        module = importlib.util.module_from_spec(spec_)
+        spec_.loader.exec_module(module)
+        config = json.loads((PROJECT_ROOT / "scripts" / "phase1g_h_configs"
+                             / "nw15_equal_mass_constant_share.json").read_text(encoding="utf-8"))
+>       out = module.run(config)
+              ^^^^^^^^^^^^^^^^^^
+
+tests/test_phase1g_h_global_variance.py:658:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts/phase1g_h_global_variance_case.py:85: in run
+    record = gv.conditional_global_linear_sigma(
+src/timescape_fsigma8/global_variance.py:1103: in conditional_global_linear_sigma
+    growth = two_phase_global_growth(background=background, matching=matching,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+background = TimescapeTrackerInput(label='NW15_CMB_FIT', fv0=0.627, H0_dressed_km_s_Mpc=61.0, source='Nazer & Wiltshire, arXiv:1410.3470v2 (Timescape CMB fit; as 1G-A/B/D)')
+matching = LastScatteringMatching(z_last_scattering=1090.0, provenance='1G-D Sec. 6 and 1G-F: photon-normalised last scattering, a_LS = 1/1091')
+checks = TwoPhaseGrowthChecks(identity_tolerance=1e-12, ode_rtol=1e-11, ode_atol=1e-14, ode_cross_check_tolerance=1e-08, root_xtol_fraction=1e-17)
+G = 1.0
+
+    def two_phase_global_growth(
+        *, background: TimescapeTrackerInput, matching: LastScatteringMatching,
+        checks: TwoPhaseGrowthChecks, G: float,
+    ) -> TwoPhaseGlobalGrowth:
+        """D_W and D_V of the tracker, (H8), with fail-closed independent checks.
+
+        Closed forms from [GM] Eqs. (5.4)-(5.6) and text p. 25:
+        ``(t0/t)^(2/3)/(1 + z) = gamma_w0 f_w0^(1/3)/(gamma_w(t) f_w(t)^(1/3))``
+        (``1 + z = gamma_w a_w0/a_D``, ``a_D proportional to t f_v^(-1/3)``,
+        ``f_v = t/(t + tau)``), hence ``D_W = (f_w0/f_w,LS)(t0/t_LS)^(2/3)/(1+z_LS)``
+        and ``D_V = (f_v0/f_v,LS)/(1 + z_LS)`` (H7)-(H8).  Independent checks: the
+        wall growing mode integrated in common time on the package's regional
+        background ``H_w = H_D - dfv_dt/(3 f_w)``, ``4 pi G rho_w = 4 pi G <rho>_D/f_w``
+        (1G-C Sec. 5), and the void volume ``dV/dt = 3V/t`` against ``f_v a_D^3``.
+        ``G`` is explicit (it cancels; no default).
+        """
+        _require(background, TimescapeTrackerInput, "background")
+        _require(matching, LastScatteringMatching, "matching")
+        _require(checks, TwoPhaseGrowthChecks, "checks")
+        G = _positive(G, "G")
+        p = background.dimensionless_params()
+        z_ls = matching.z_last_scattering
+        t0 = p.t0
+        t_ls = _t_of_redshift(p, z_ls, checks.root_xtol_fraction)
+        z_check = abs(float(bg.redshift(t_ls, p)) - z_ls) / z_ls
+        fv0 = p.fv0
+        f_vls = float(bg.fv(t_ls, p))
+        g0 = float(bg.gamma_w(t0, p))
+        g_ls = float(bg.gamma_w(t_ls, p))
+        f_w0, f_wls = 1.0 - fv0, 1.0 - f_vls
+        d_w = f_w0 ** (4.0 / 3.0) / f_wls ** (4.0 / 3.0)
+        d_v = fv0 / (f_vls * (1.0 + z_ls))
+        # Identity checks against the tracker functions.
+        finite_identity = ((t0 / t_ls) ** (2.0 / 3.0) / (1.0 + z_ls)) / (
+            g0 * f_w0 ** (1.0 / 3.0) / (g_ls * f_wls ** (1.0 / 3.0))) - 1.0
+        tau = t0 * (1.0 - fv0) / fv0
+        one_scale = f_vls / (t_ls / (t_ls + tau)) - 1.0
+        identities = {"finite_t_photon_identity_rel": abs(finite_identity),
+                      "one_time_scale_identity_rel": abs(one_scale),
+                      "redshift_root_rel": z_check,
+                      "gamma_w0_identity_rel": abs(g0 / (1.0 + fv0 / 2.0) - 1.0),
+                      "gamma_w_ls_identity_rel": abs(g_ls / (1.0 + f_vls / 2.0) - 1.0)}
+        for name, value in identities.items():
+            if not value <= checks.identity_tolerance:
+                raise GlobalVarianceNumericalError(
+                    f"two-phase growth identity {name} = {value:.3e} exceeds "
+                    f"{checks.identity_tolerance:.3e}")
+
+        # Independent route 1: wall growing mode in common time on the package's
+        # regional background (no closed form of H_w or rho_w is used).
+        def wall_rhs(t, y):
+            tt = np.array([t])
+            fw = 1.0 - float(bg.fv(tt, p)[0])
+            h_w = float(bg.H_D(tt, p)[0]) - float(bg.dfv_dt(tt, p)[0]) / (3.0 * fw)
+            four_pi_g_rho_w = 4.0 * math.pi * G * float(bg.rho_d(tt, p, G)[0]) / fw
+            return [y[1], -2.0 * h_w * y[1] + four_pi_g_rho_w * y[0]]
+
+        # Growing-mode data at t_LS: delta = 1, d delta/dt = (2/3)/t_LS (EdS in t).
+        sol_w = solve_ivp(wall_rhs, (t_ls, t0), [1.0, 2.0 / (3.0 * t_ls)], method="DOP853",
+                          rtol=checks.ode_rtol, atol=checks.ode_atol)
+        if not sol_w.success:
+            raise GlobalVarianceNumericalError(f"wall-mode integration failed: {sol_w.message}")
+        d_w_ode = (f_w0 / f_wls) * float(sol_w.y[0, -1]) / (1.0 + z_ls)
+        # Independent route 2: void volume dV/dt = 3V/t versus f_v a_D^3.
+        sol_v = solve_ivp(lambda t, y: [3.0 * y[0] / t], (t_ls, t0), [1.0], method="DOP853",
+                          rtol=checks.ode_rtol, atol=checks.ode_atol)
+        if not sol_v.success:
+            raise GlobalVarianceNumericalError(f"void-volume integration failed: {sol_v.message}")
+        vol_ratio_pkg = (fv0 * float(bg.a_D(t0, p)) ** 3) / (f_vls * float(bg.a_D(t_ls, p)) ** 3)
+        domain_ratio = (float(bg.a_D(t0, p)) / float(bg.a_D(t_ls, p))) ** 3
+        # V_v(t0)/V_v(LS) / [V_D(t0)/V_D(LS)] = f_v0/f_v,LS, so D_V = that/(1 + z_LS).
+        d_v_ode = float(sol_v.y[0, -1]) / domain_ratio / (1.0 + z_ls)
+        cross = {"wall_share_ode_vs_closed_form_rel": abs(d_w_ode / d_w - 1.0),
+                 "void_volume_ode_vs_package_rel": abs(float(sol_v.y[0, -1]) / vol_ratio_pkg - 1.0),
+                 "void_share_ode_vs_closed_form_rel": abs(d_v_ode / d_v - 1.0)}
+        for name, value in cross.items():
+            if not value <= checks.ode_cross_check_tolerance:
+>               raise GlobalVarianceNumericalError(
+                    f"two-phase growth cross-check {name} = {value:.3e} exceeds "
+                    f"{checks.ode_cross_check_tolerance:.3e}")
+E               timescape_fsigma8.global_variance.GlobalVarianceNumericalError: two-phase growth cross-check wall_share_ode_vs_closed_form_rel = 3.135e-01 exceeds 1.000e-08
+
+src/timescape_fsigma8/global_variance.py:670: GlobalVarianceNumericalError
+12 failed, 12 passed, 4 errors in 5.16s

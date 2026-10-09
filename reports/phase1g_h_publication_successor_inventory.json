@@ -1,0 +1,515 @@
+{
+  "addendum_2026_10_08_after_second_delta_audit": {
+    "added_with": "reports/phase1g_h_delta_audit_2_remediation.md",
+    "dated_statements": [
+      {
+        "current_reading": "pushed by P7; a dated note there points here",
+        "location": "reports/phase1g_h_delta_audit_remediation.md sections 0 and 4",
+        "statement": "Commits (local, on ccr-555e67be-u11yht on top of the delta-audit commit 5c325e1) ... Nothing is pushed. / Push of the two commits of this remediation (needs a separate approval)",
+        "written": "2026-10-08"
+      },
+      {
+        "current_reading": "pushed by P7",
+        "location": "reports/phase1g_h_delta_audit_remediation_inventory.json",
+        "statement": "commits.branch '(local; on top of the delta-audit commit 5c325e1)', commits.pushed false, open_items push item",
+        "written": "2026-10-08"
+      },
+      {
+        "current_reading": "superseded by section 6.2 (P7)",
+        "location": "reports/phase1g_h_publication_successor.md section 3; this inventory state_2026_10_08",
+        "statement": "ccr-555e67be-u11yht = 89cb041 ... is not pushed",
+        "written": "2026-10-08"
+      },
+      {
+        "current_reading": "that later record is this addendum (P7)",
+        "location": "reports/phase1g_h_publication_successor.md section 4, last row",
+        "statement": "dated; a later record states its push, if approved",
+        "written": "2026-10-08"
+      },
+      {
+        "current_reading": "updated in place with this addendum",
+        "location": "reports/phase1g_h_global_variance_closure.md section 9",
+        "statement": "H-OD5: committed locally; Open: ... the push of its commits",
+        "written": "2026-10-08"
+      },
+      {
+        "current_reading": "updated in place with this addendum",
+        "location": "reports/phase1g_h_global_variance_closure_inventory.json",
+        "statement": "publication.pushed_head_2026_10_08, publication.not_done, publication.h_od5_status, owner_decisions_status_2026_10_08.H-OD5",
+        "written": "2026-10-08"
+      },
+      {
+        "current_reading": "updated with this addendum",
+        "location": "README.md",
+        "statement": "delta-audited on 2026-10-08 and remediated locally",
+        "written": "2026-10-08"
+      },
+      {
+        "current_reading": "updated with this addendum",
+        "location": "CLAUDE.md",
+        "statement": "at 89cb041; remediated locally on top of it",
+        "written": "2026-10-08"
+      }
+    ],
+    "events": [
+      {
+        "authorisation_verbatim": "Fai push e prepara il prompt per un nuovo audit",
+        "date": "2026-10-08",
+        "event": "fast-forward of ccr-555e67be-u11yht from 89cb041 to 226e52d2e4157d0130b2a9dfaffd71834c6017d9, carrying 5c325e1 (delta audit), 248a06b (code) and 226e52d (documentation) of the delta-audit remediation",
+        "id": "P7",
+        "remote_evidence": "push output 89cb041..226e52d; branch head 226e52d (also verified by the second delta audit)"
+      },
+      {
+        "authorisation_verbatim": "Confermo le due approvazioni di push registrate (GH-F15)",
+        "date": "2026-10-08",
+        "event": "the owner's direct confirmation of P1 and P2 to the auditor of the second delta audit; GH-F15 RESOLVED_OWNER_CONFIRMED",
+        "id": "P8",
+        "note": "as recorded by the second delta audit",
+        "remote_evidence": "none (off-repository); recorded in reports/phase1g_h_delta_audit_2.md section 5 (row GH-F15) and section 11"
+      },
+      {
+        "authorisation_verbatim": "Pubblichati i due commit (`6411650`, `e517028`) sul branch designato di questa sessione, `ccr-ac582de6-vho99i`",
+        "date": "2026-10-08",
+        "event": "second delta audit published on ccr-ac582de6-vho99i, created at e5170285e1d4b4aa72e907a3a79110d05584c0d9 (tree 45ce98f9d21e93e355ba25812063aec270700116); parent 64116509554cc0d711660da4d81ad95c3f450a6d (blind checkpoint), a child of 226e52d",
+        "id": "P9",
+        "note": "the owner's instruction in the auditing session, as it appears in the transcript of that session that the owner pasted into the phase session on 2026-10-08",
+        "remote_evidence": "branch head e517028; git log 226e52d..e517028 lists exactly 6411650 and e517028"
+      }
+    ],
+    "limits": [
+      "as in limits; P9's wording comes from a pasted transcript of another session; the repository confirms the branch and its commits, not the words",
+      "the second delta audit shares the author's model family (its section 12)"
+    ],
+    "record_section": "reports/phase1g_h_publication_successor.md section 6",
+    "requested_by": "reports/phase1g_h_delta_audit_2.md (GH-D2F1, GH-D2E2, section 11 'Recording P7' and 'Recording GH-F15')",
+    "state_after_p9": {
+      "ccr-555e67be-u11yht": "226e52d2e4157d0130b2a9dfaffd71834c6017d9 on origin; the local branch carries, not pushed, 6411650 and e517028 (second delta audit) and the second delta-audit remediation commits",
+      "ccr-ac582de6-vho99i": "e5170285e1d4b4aa72e907a3a79110d05584c0d9",
+      "d_v2_tag_or_branch": "absent",
+      "main": "8d3cdd0533035858c42269cb1dff1a20dcafc7da (unchanged)",
+      "phase-1g-h-delta-audit": "5c325e1fd05b343f6d5e93f931038794de4373a2",
+      "phase-1g-h-independent-audit": "816dd004763f8de1a8bb09cba9e427a1bd2bb3d1",
+      "pull_requests": "#1-#4 closed; none from a 1G-H branch",
+      "releases": "none",
+      "tags": "38 annotated tags unchanged (76 tag refs)"
+    },
+    "supersedes": "section 3 and state_2026_10_08 of this record"
+  },
+  "addendum_2026_10_09": {
+    "dated_statements": [
+      {
+        "current_reading": "pushed by P10; a dated note there points here",
+        "location": "reports/phase1g_h_delta_audit_2_remediation.md sections 0 and 4",
+        "statement": "Nothing is pushed: the push of 6411650, e517028 and these two commits needs a separate approval. / Push of 6411650, e517028 and the two commits of this remediation (needs a separate approval; ...)",
+        "written": "2026-10-08"
+      },
+      {
+        "current_reading": "pushed by P10",
+        "location": "reports/phase1g_h_delta_audit_2_remediation_inventory.json",
+        "statement": "commits.branch '(local; on top of the second delta-audit commit e517028)', commits.pushed false, open_items push item",
+        "written": "2026-10-08"
+      },
+      {
+        "current_reading": "superseded by section 7.2",
+        "location": "reports/phase1g_h_publication_successor.md section 6.2; this inventory addendum_2026_10_08_after_second_delta_audit.state_after_p9",
+        "statement": "The local branch carries, not pushed, 6411650 and e517028 ... their push needs a separate approval.",
+        "written": "2026-10-08"
+      },
+      {
+        "current_reading": "updated in place with this addendum",
+        "location": "reports/phase1g_h_global_variance_closure.md header and section 9",
+        "statement": "Its remote head is 226e52d ...; the second delta audit ... and its remediation are on the local branch and not pushed / H-OD5: Its remediation is committed locally on top of it; Open: the push of the second delta audit and its remediation",
+        "written": "2026-10-08"
+      },
+      {
+        "current_reading": "updated in place with this addendum; owner_decisions_status_2026_10_08 stays dated",
+        "location": "reports/phase1g_h_global_variance_closure_inventory.json",
+        "statement": "publication.not_done (push item), publication.h_od5_status, owner_decisions_requested.H-OD5",
+        "written": "2026-10-08"
+      },
+      {
+        "current_reading": "updated with this addendum",
+        "location": "README.md",
+        "statement": "remote head 226e52d; which are applied locally and not pushed",
+        "written": "2026-10-08"
+      },
+      {
+        "current_reading": "updated with this addendum",
+        "location": "CLAUDE.md",
+        "statement": "(remote head 226e52d; ... events P1-P9); remediated locally on top of it (..., not pushed); (2026-10-06 and 2026-10-08)",
+        "written": "2026-10-08"
+      }
+    ],
+    "events": [
+      {
+        "authorisation_verbatim": "Sì, fai push",
+        "date": "2026-10-09",
+        "event": "fast-forward of ccr-555e67be-u11yht from 226e52d to 4bf2718e7557ace3fdc0abffaa73587f1162f776, carrying 6411650 and e517028 (second delta audit), 9ad5425 (code) and 4bf2718 (documentation) of the second delta-audit remediation",
+        "id": "P10",
+        "note": "answers the request to push the fast-forward to 4bf2718 and then record the event; the record of P10 is a later local commit whose push needs a separate approval",
+        "remote_evidence": "push output 226e52d..4bf2718; branch head 4bf2718 (226e52d immediately before)"
+      }
+    ],
+    "record_section": "reports/phase1g_h_publication_successor.md section 7",
+    "state_after_p10": {
+      "ccr-555e67be-u11yht": "4bf2718e7557ace3fdc0abffaa73587f1162f776",
+      "ccr-ac582de6-vho99i": "e5170285e1d4b4aa72e907a3a79110d05584c0d9 (unchanged)",
+      "d_v2_tag_or_branch": "absent",
+      "main": "8d3cdd0533035858c42269cb1dff1a20dcafc7da (unchanged)",
+      "phase-1g-h-delta-audit": "5c325e1fd05b343f6d5e93f931038794de4373a2 (unchanged)",
+      "phase-1g-h-independent-audit": "816dd004763f8de1a8bb09cba9e427a1bd2bb3d1 (unchanged)",
+      "pull_requests": "none from a 1G-H branch",
+      "releases": "none",
+      "tags": "76 tag refs (38 annotated tags), unchanged"
+    },
+    "supersedes": "section 6.2 of this record and addendum_2026_10_08_after_second_delta_audit.state_after_p9"
+  },
+  "addendum_2026_10_09_after_fourth_delta_audit": {
+    "added_with": "reports/phase1g_h_delta_audit_4_remediation.md",
+    "convention_clarification": "current summaries name the last recorded push of the session branch (the event that changes its remote head: P11, P14, now P15); audit publications on their own branches and confirmations are recorded here but do not move that pointer; sections 8 and 9 already applied it this way",
+    "dated_statements": [
+      {
+        "current_reading": "pushed by P15",
+        "location": "this record section 9.2",
+        "statement": "The record of P14 (the commit carrying this section) is a later local commit; its push needs a separate approval.",
+        "written": "2026-10-09"
+      },
+      {
+        "current_reading": "superseded by section 10.2",
+        "location": "this record section 9.2; addendum_2026_10_09_after_p14.state_after_p14",
+        "statement": "ccr-555e67be-u11yht = 36d127f on origin",
+        "written": "2026-10-09"
+      },
+      {
+        "current_reading": "updated to the last recorded push P15 (section 10.3)",
+        "location": "README.md, CLAUDE.md, reports/phase1g_h_global_variance_closure.md header and inventory",
+        "statement": "Last recorded publication event: P14 (and its equivalents)",
+        "written": "2026-10-09"
+      }
+    ],
+    "events": [
+      {
+        "authorisation_verbatim": "Pubblica, fai il fast-forward",
+        "date": "2026-10-09",
+        "event": "fast-forward of ccr-555e67be-u11yht from 36d127f to 027b7a413fcee0786b861d5903272e4653d227ed, carrying only 027b7a4 (the record of P14)",
+        "id": "P15",
+        "remote_evidence": "push output 36d127f..027b7a4; branch head 027b7a4, also observed by the fourth delta audit"
+      },
+      {
+        "authorisation_verbatim": "not available in this session",
+        "date": "2026-10-09",
+        "event": "fourth delta audit published on phase-1g-h-delta-audit-4 at fc804a0f71f47904e86388f378295f72ba15cdd8 (parent 027b7a4; 83 added files under reports/phase1g_h_delta_audit_4*); the auditing session reports that fc804a0 has the tree and parent of its local commit f332353",
+        "id": "P16",
+        "note": "the owner's authorisation in the auditing session, as the handoff pasted on 2026-10-09 reports it",
+        "remote_evidence": "branch head fc804a0; git diff --name-status 027b7a4 fc804a0"
+      }
+    ],
+    "record_section": "reports/phase1g_h_publication_successor.md section 10",
+    "requested_by": "reports/phase1g_h_delta_audit_4.md (sections 3 and 11: record P15 once in the next authorised substantive addendum)",
+    "state_after_p16": {
+      "ccr-555e67be-u11yht": "027b7a413fcee0786b861d5903272e4653d227ed on origin; the local branch carries, not pushed, fc804a0 (fourth delta audit) and the commits of the fourth remediation",
+      "d_v2_tag_or_branch": "absent",
+      "main": "8d3cdd0533035858c42269cb1dff1a20dcafc7da (unchanged)",
+      "other_audit_branches": "as in state_after_p13",
+      "phase-1g-h-delta-audit-4": "fc804a0f71f47904e86388f378295f72ba15cdd8",
+      "pull_requests": "four, all closed, none from a 1G-H branch",
+      "releases": "none",
+      "tags": "76 tag refs (38 annotated tags), unchanged"
+    }
+  },
+  "addendum_2026_10_09_after_p14": {
+    "convention": "section 8.3: added in a documentation commit after the push; the commit cannot record its own push",
+    "dated_statements": [
+      {
+        "current_reading": "pushed by P14; dated status note in that record",
+        "location": "reports/phase1g_h_delta_audit_3_remediation.md section 0 and the push item of section 4 (and its inventory commits.pushed, open_items)",
+        "statement": "Nothing is pushed: the push of 4d71bd4, 18bf2fb and these three commits needs a separate approval.",
+        "written": "2026-10-09"
+      },
+      {
+        "current_reading": "superseded by section 9.2",
+        "location": "this record section 8.2; addendum_2026_10_09_after_third_delta_audit.state_after_p13",
+        "statement": "ccr-555e67be-u11yht = ed0ec0c on origin; the local branch carries, not pushed, ...",
+        "written": "2026-10-09"
+      },
+      {
+        "current_reading": "updated to P14 with this addendum (section 8.3)",
+        "location": "README.md, CLAUDE.md, reports/phase1g_h_global_variance_closure.md header and inventory",
+        "statement": "Last recorded publication event: P11",
+        "written": "2026-10-09"
+      }
+    ],
+    "events": [
+      {
+        "authorisation_verbatim": "Sì, fai push",
+        "date": "2026-10-09",
+        "event": "fast-forward of ccr-555e67be-u11yht from ed0ec0c to 36d127f8edcb306aa503cb4d8b7b10417dc33a51, carrying 4d71bd4fe918ef8a0b71c178a7180c4d291294b0 and 18bf2fbef880fdfb3c292956aa1f000720930abf (third delta audit), c6028e9046934ef6de234f0b58fbe18e6f3bead1 (1G-H code), 6926a636c100d232247e39d71d5b2d6e71a6f917 (1G-B contract hardening) and 36d127f (documentation)",
+        "id": "P14",
+        "remote_evidence": "push output ed0ec0c..36d127f; git ls-remote branch head 36d127f"
+      }
+    ],
+    "record_section": "reports/phase1g_h_publication_successor.md section 9",
+    "state_after_p14": {
+      "ccr-555e67be-u11yht": "36d127f8edcb306aa503cb4d8b7b10417dc33a51 on origin; the record of P14 is a later local commit whose push needs a separate approval",
+      "main": "8d3cdd0533035858c42269cb1dff1a20dcafc7da (unchanged)",
+      "other_audit_branches": "as in state_after_p13",
+      "phase-1g-h-delta-audit-3": "18bf2fbef880fdfb3c292956aa1f000720930abf (now an ancestor of the session branch)",
+      "tags_pull_requests_releases": "as in state_after_p13"
+    }
+  },
+  "addendum_2026_10_09_after_p17": {
+    "added_with": "reports/phase1g_h_owner_decisions_successor.md",
+    "dated_statements": [
+      {
+        "current_reading": "pushed by P17; dated status note in that record",
+        "location": "reports/phase1g_h_delta_audit_4_remediation.md section 0 and the push item of section 4 (and its inventory commits.pushed, open_items)",
+        "statement": "Nothing is pushed: the push of fc804a0 and these two commits needs a separate approval.",
+        "written": "2026-10-09"
+      },
+      {
+        "current_reading": "superseded by section 11.3",
+        "location": "this record section 10.2; addendum_2026_10_09_after_fourth_delta_audit.state_after_p16",
+        "statement": "ccr-555e67be-u11yht = 027b7a4 on origin; the local branch carries, not pushed, fc804a0 ...",
+        "written": "2026-10-09"
+      },
+      {
+        "current_reading": "updated to P17",
+        "location": "README.md, CLAUDE.md, reports/phase1g_h_global_variance_closure.md header and inventory",
+        "statement": "Last recorded push of the session branch: P15 (and its equivalents)",
+        "written": "2026-10-09"
+      }
+    ],
+    "decided_not_yet_performed": {
+      "actions": [
+        "push of this section's commit (P18)",
+        "pull request ccr-555e67be-u11yht -> main",
+        "merge (merge commit)",
+        "freeze",
+        "annotated tag phase-1g-h-global-variance-closure-v1 on the merge commit"
+      ],
+      "authorisation_verbatim": "Ho eseguito le test suite su windows, tutto ok. Dunque Implementa le raccomandazioni dell'audit su H-OD1…H-OD5 e poi fai PR, merge, freeze e tag",
+      "recorded_by": "a later successor, as for the F/G freeze"
+    },
+    "events": [
+      {
+        "authorisation_verbatim": "fai il fast-forward di origin/ccr-555e67be-u11yht da 027b7a4 a 22ace89",
+        "date": "2026-10-09",
+        "event": "fast-forward of ccr-555e67be-u11yht from 027b7a4 to 22ace890caca5e571e83d322b446db3a05f78cc0, carrying fc804a0 (fourth delta audit), a243bf1 (tests) and 22ace89 (documentation)",
+        "id": "P17",
+        "remote_evidence": "push output 027b7a4..22ace89; branch head 22ace89"
+      }
+    ],
+    "record_section": "reports/phase1g_h_publication_successor.md section 11",
+    "state_after_p17": {
+      "ccr-555e67be-u11yht": "22ace890caca5e571e83d322b446db3a05f78cc0 on origin; this section's commit is a later local commit",
+      "main": "8d3cdd0533035858c42269cb1dff1a20dcafc7da (unchanged)",
+      "others": "as in state_after_p16"
+    }
+  },
+  "addendum_2026_10_09_after_third_delta_audit": {
+    "added_with": "reports/phase1g_h_delta_audit_3_remediation.md",
+    "dated_statements": [
+      {
+        "current_reading": "replaced by the last recorded event (section 8.3)",
+        "location": "reports/phase1g_h_global_variance_closure.md header",
+        "statement": "Its remote head is 4bf2718 (2026-10-09, P10)",
+        "written": "2026-10-09"
+      },
+      {
+        "current_reading": "replaced by the last recorded event",
+        "location": "README.md, CLAUDE.md",
+        "statement": "remote head 4bf2718",
+        "written": "2026-10-09"
+      },
+      {
+        "current_reading": "historical; publication.last_recorded_event added",
+        "location": "reports/phase1g_h_global_variance_closure_inventory.json",
+        "statement": "publication.pushed_head_2026_10_09 = 4bf2718",
+        "written": "2026-10-09"
+      },
+      {
+        "current_reading": "superseded by section 8.2",
+        "location": "this record section 7.2; this inventory addendum_2026_10_09.state_after_p10",
+        "statement": "ccr-555e67be-u11yht = 4bf2718 on origin",
+        "written": "2026-10-09"
+      },
+      {
+        "current_reading": "pushed by P11",
+        "location": "this record section 7.1",
+        "statement": "The record of P10 is itself a later local commit; its push needs a separate approval.",
+        "written": "2026-10-09"
+      }
+    ],
+    "events": [
+      {
+        "authorisation_verbatim": "Sì, pubblica anche ed0ec0c",
+        "date": "2026-10-09",
+        "event": "fast-forward of ccr-555e67be-u11yht from 4bf2718 to ed0ec0c9c8783519a53759a265b6ce37e6c0e607, carrying only ed0ec0c (the record of P10)",
+        "id": "P11",
+        "remote_evidence": "push output 4bf2718..ed0ec0c; branch head ed0ec0c, also observed by the third delta audit"
+      },
+      {
+        "authorisation_verbatim": "Confermo le autorizzazioni P10 e P11",
+        "date": "2026-10-09",
+        "event": "the owner's direct confirmation of P10 and P11 to the auditor of the third delta audit",
+        "id": "P12",
+        "note": "as recorded by the third delta audit",
+        "remote_evidence": "none (off-repository); recorded in reports/phase1g_h_delta_audit_3.md section 3"
+      },
+      {
+        "authorisation_verbatim": "not available in this session",
+        "date": "2026-10-09",
+        "event": "third delta audit published on phase-1g-h-delta-audit-3 at 18bf2fbef880fdfb3c292956aa1f000720930abf (parent 4d71bd4fe918ef8a0b71c178a7180c4d291294b0, the blind checkpoint, whose parent is ed0ec0c; 57 added files under reports/phase1g_h_delta_audit_3*); the connector re-hashed the local commits c62ad87 and d9342c4; 4d71bd4 has the checkpoint tree 6d5e848faa7b72d829e44a9a2d79e70c3a34acb6",
+        "id": "P13",
+        "note": "the owner's authorisation in the auditing session, as the handoff pasted on 2026-10-09 reports it",
+        "remote_evidence": "branch head 18bf2fb; git diff --name-status ed0ec0c 18bf2fb"
+      }
+    ],
+    "limits": [
+      "as in limits; P13's authorisation is reported, not quoted",
+      "current refs show state and ancestry, not the actor or time of a historical push"
+    ],
+    "record_section": "reports/phase1g_h_publication_successor.md section 8",
+    "requested_by": "reports/phase1g_h_delta_audit_3.md (GH-D3F1, section 11)",
+    "state_after_p13": {
+      "ccr-555e67be-u11yht": "ed0ec0c9c8783519a53759a265b6ce37e6c0e607 on origin; the local branch carries, not pushed, 4d71bd4 and 18bf2fb (third delta audit) and the commits of the third remediation",
+      "ccr-ac582de6-vho99i": "e5170285e1d4b4aa72e907a3a79110d05584c0d9",
+      "d_v2_tag_or_branch": "absent",
+      "main": "8d3cdd0533035858c42269cb1dff1a20dcafc7da (unchanged)",
+      "phase-1g-h-delta-audit": "5c325e1fd05b343f6d5e93f931038794de4373a2",
+      "phase-1g-h-delta-audit-3": "18bf2fbef880fdfb3c292956aa1f000720930abf",
+      "phase-1g-h-independent-audit": "816dd004763f8de1a8bb09cba9e427a1bd2bb3d1",
+      "pull_requests": "none from a 1G-H branch",
+      "releases": "none",
+      "tags": "76 tag refs (38 annotated tags), unchanged"
+    },
+    "summary_convention": "README.md, CLAUDE.md, the 1G-H report header and its inventory name the last recorded publication event (P-number, range, date) and point to this record; they do not state the remote head as a current fact; a later push is recorded once in the next addendum",
+    "supersedes": "section 7.2 of this record and addendum_2026_10_09.state_after_p10"
+  },
+  "classification": "PUBLICATION_STATUS_SUCCESSOR",
+  "date": "2026-10-08",
+  "dated_statements": [
+    {
+      "current_reading": "P1 and P2 followed; the same paragraph describes them",
+      "location": "reports/phase1g_h_global_variance_closure_validation.md section 2",
+      "statement": "When these commits were made, nothing had been pushed.",
+      "written": "2026-10-06"
+    },
+    {
+      "current_reading": "pushed by P5",
+      "location": "reports/phase1g_h_audit_remediation.md section 0",
+      "statement": "Commits (local, on ccr-555e67be-u11yht on top of the audit commit 816dd00) ... Nothing is pushed.",
+      "written": "2026-10-07"
+    },
+    {
+      "current_reading": "pushed by P5",
+      "location": "reports/phase1g_h_audit_remediation_inventory.json",
+      "statement": "commits.branch '(local; on top of the audit commit 816dd00)', commits.pushed false",
+      "written": "2026-10-07"
+    },
+    {
+      "current_reading": "confirmed by the owner, P4",
+      "location": "reports/phase1g_h_audit_remediation.md sections 2 and 4; its inventory",
+      "statement": "GH-F15 open: the two recorded approvals still need the owner's confirmation",
+      "written": "2026-10-07"
+    },
+    {
+      "current_reading": "pushed by P5; both files updated with this record",
+      "location": "README.md and CLAUDE.md 1G-H entries at 89cb041",
+      "statement": "remediated locally the same day / remediated locally on top of it",
+      "written": "2026-10-07"
+    },
+    {
+      "current_reading": "dated; a later record states its push, if approved",
+      "location": "reports/phase1g_h_delta_audit_remediation.md and its inventory",
+      "statement": "nothing is pushed (delta-audit remediation)",
+      "written": "2026-10-08"
+    }
+  ],
+  "events": [
+    {
+      "authorisation_verbatim": "Sì, procedi con il push sul branch designato",
+      "date": "2026-10-06",
+      "event": "creation of ccr-555e67be-u11yht on origin at 0572e416504bcdfaa5831b6d482b687ef6fae582 (commits 7900374, fd7331f, 0572e41 above 8d3cdd0)",
+      "id": "P1",
+      "remote_evidence": "0572e41 descends from 8d3cdd0"
+    },
+    {
+      "authorisation_verbatim": "Sì, correggi la documentazione e fai il push",
+      "date": "2026-10-06",
+      "event": "fast-forward of ccr-555e67be-u11yht to d4d693d73f995e2245a5720be227273b3639eda9 (documentation of P1)",
+      "id": "P2",
+      "remote_evidence": "d4d693d is a child of 0572e41"
+    },
+    {
+      "authorisation_verbatim": "published by the owner (records of 2026-10-07)",
+      "date": "2026-10-07",
+      "event": "independent audit published on phase-1g-h-independent-audit at 816dd004763f8de1a8bb09cba9e427a1bd2bb3d1 (tree 759ab21d3a36eeada67c2943e155240dc631b77a, parent d4d693d)",
+      "id": "P3",
+      "remote_evidence": "branch head 816dd00"
+    },
+    {
+      "authorisation_verbatim": "Si, confermo",
+      "date": "2026-10-08",
+      "event": "owner confirmation of P1 and P2 (audit finding GH-F15)",
+      "id": "P4",
+      "note": "given in the session that wrote the phase, not directly to the delta auditor",
+      "question_verbatim": "GH-F15: confermi le due approvazioni di push registrate in precedenza?",
+      "remote_evidence": "none (off-repository)"
+    },
+    {
+      "authorisation_verbatim": "Si, fai push",
+      "date": "2026-10-08",
+      "event": "fast-forward of ccr-555e67be-u11yht from d4d693d to 89cb041f901b51a3f90fa6831aab1b4553c1772c (816dd00, c1b4482, 89cb041)",
+      "id": "P5",
+      "remote_evidence": "push output d4d693d..89cb041; branch head 89cb041"
+    },
+    {
+      "authorisation_verbatim": "the owner's authorisation in the auditing session, as the owner reported it on 2026-10-08",
+      "date": "2026-10-08",
+      "event": "delta audit published on phase-1g-h-delta-audit at 5c325e1fd05b343f6d5e93f931038794de4373a2 (tree a5b810e81d125827a17a9cf87b013ead51232080, parent 89cb041; 110 added files under reports/phase1g_h_delta_audit*)",
+      "id": "P6",
+      "note": "the auditing session's local commit b4abbe8 is not on origin; the auditor reports the same tree",
+      "remote_evidence": "branch head 5c325e1; git diff --name-status 89cb041 5c325e1"
+    }
+  ],
+  "evidence_kinds": {
+    "authorisations": "the owner's words in session chats, quoted verbatim; not verifiable from the repository",
+    "remote_facts": "verified read-only on 2026-10-08: git ls-remote, commit ancestry, GitHub pull-request and release listings"
+  },
+  "historical_bytes_changed": false,
+  "limits": [
+    "authorisations are quoted from session chats; the repository confirms the refs, not the words",
+    "a ref snapshot shows the current state, not every transient remote event"
+  ],
+  "observational_authorizations": {
+    "FSIGMA8_AUTHORIZATION": "NOT_GRANTED",
+    "OBSERVATIONAL_AUTHORIZATION": "NOT_GRANTED",
+    "RSD_AUTHORIZATION": "NOT_GRANTED",
+    "SIGMA8_AUTHORIZATION": "NOT_GRANTED",
+    "UNIQUE_TIMESCAPE_PREDICTION": "NOT_GRANTED"
+  },
+  "phase": "1G-H",
+  "record": "reports/phase1g_h_publication_successor.md",
+  "requested_by": [
+    "reports/phase1g_h_independent_audit.md (GH-F15)",
+    "reports/phase1g_h_delta_audit.md (sections 3 and 11, publication successor)"
+  ],
+  "schema_version": 1,
+  "scientific_content": "none",
+  "state_2026_10_08": {
+    "ccr-555e67be-u11yht": "89cb041f901b51a3f90fa6831aab1b4553c1772c (the delta-audit remediation is committed locally on top of 5c325e1 and not pushed)",
+    "d_v2_tag_or_branch": "absent",
+    "main": "8d3cdd0533035858c42269cb1dff1a20dcafc7da (unchanged)",
+    "phase-1g-h-delta-audit": "5c325e1fd05b343f6d5e93f931038794de4373a2",
+    "phase-1g-h-independent-audit": "816dd004763f8de1a8bb09cba9e427a1bd2bb3d1",
+    "pull_requests": "#1-#4 closed; none from a 1G-H branch",
+    "releases": "none",
+    "tags": "38 annotated tags unchanged (76 tag refs)"
+  },
+  "status_tokens": {
+    "added": [],
+    "changed": []
+  },
+  "title": "Phase 1G-H publication status successor (2026-10-08)"
+}

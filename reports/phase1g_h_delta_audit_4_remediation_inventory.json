@@ -1,0 +1,284 @@
+{
+  "classification": "FOURTH_DELTA_AUDIT_REMEDIATION_RECORD",
+  "commits": {
+    "branch": "ccr-555e67be-u11yht (local; on top of the fourth delta-audit commit fc804a0)",
+    "pushed": false,
+    "records": "the commit carrying this inventory (its hash cannot be inside itself)",
+    "tests": "a243bf13bb27fb77c54ff05be004c47efe6e6784"
+  },
+  "date": "2026-10-09",
+  "errata": [
+    {
+      "id": "GH-D4E1",
+      "status": "APPLIED",
+      "where": "report section 11 (with GH-D4F2)"
+    },
+    {
+      "id": "GH-D4E2",
+      "status": "APPLIED",
+      "where": "this record sections 0 and 2; pointer in the third remediation record"
+    },
+    {
+      "id": "GH-D4E3",
+      "status": "APPLIED",
+      "where": "this record section 2; 1G-B successor section 6; pointer"
+    },
+    {
+      "id": "GH-D4E4",
+      "status": "APPLIED",
+      "where": "this record section 2; 1G-B successor section 6; pointer"
+    }
+  ],
+  "files_changed_sha256": {
+    "tests/test_phase1g_b_contract_hardening.py": "c49fda4485fc620e43fcadf633e2208a74dc8d3c87becc9391f7e1b06f288797",
+    "tests/test_phase1g_h_global_variance.py": "ff0407c913c713143def6d423096a69e18a8c1f4fe0c96d6f9e7791ad488be7b"
+  },
+  "findings": [
+    {
+      "area": "TESTS",
+      "changes": [
+        "test_gh_d4f1_seed_share_and_interval_exports_must_be_strict_json"
+      ],
+      "id": "GH-D4F1",
+      "kills": [
+        "X02_void_share_json_check_removed",
+        "X04_interval_json_check_removed"
+      ],
+      "severity": "LOW",
+      "status": "ADDRESSED",
+      "still_surviving": {
+        "X01_growth_json_check_removed": "redundant guard (audit classification)",
+        "X03_premise_json_check_removed": "redundant guard (audit classification)"
+      }
+    },
+    {
+      "area": "DOCUMENTATION",
+      "changes": [
+        "reports/phase1g_h_global_variance_closure.md section 11"
+      ],
+      "id": "GH-D4F2",
+      "not_changed": "the italic note of report section 8, dated to the delta audit of 2026-10-08",
+      "severity": "INFO",
+      "status": "ADDRESSED"
+    },
+    {
+      "area": "DOCUMENTATION",
+      "changes": [
+        "reports/phase1g_b_contract_hardening_successor.md section 6 and its inventory",
+        "errata pointer in reports/phase1g_h_delta_audit_3_remediation.md and its inventory",
+        "CLAUDE.md 1G-B entry"
+      ],
+      "id": "GH-D4F3",
+      "severity": "LOW",
+      "status": "ADDRESSED"
+    }
+  ],
+  "fourth_delta_audit": {
+    "audited_commit": "027b7a413fcee0786b861d5903272e4653d227ed",
+    "auditor_independence": "OpenAI Codex, GPT-6 family (exact version not exposed); a different family from the author (Claude)",
+    "base": "18bf2fbef880fdfb3c292956aa1f000720930abf",
+    "commit": "fc804a0f71f47904e86388f378295f72ba15cdd8",
+    "inventory": "reports/phase1g_h_delta_audit_4_inventory.json",
+    "readiness_token": "NO_SCIENTIFIC_BLOCKER_PENDING_TEST_COVERAGE_DOCUMENTATION_WINDOWS_GATE_AND_OWNER_DECISIONS",
+    "report": "reports/phase1g_h_delta_audit_4.md",
+    "reported_local_commit": "f332353 (same tree and parent, as the auditing session reports)",
+    "verdict": {
+      "DOCUMENTATION": "ACCEPT_WITH_CORRECTIONS",
+      "GOVERNANCE": "ACCEPT",
+      "IMPLEMENTATION": "ACCEPT",
+      "NUMERICS": "ACCEPT",
+      "PROVENANCE": "ACCEPT",
+      "SCIENCE": "ACCEPT",
+      "TASK_COMPLIANCE": "ACCEPT",
+      "TESTS": "ACCEPT_WITH_CORRECTIONS",
+      "overall": "ACCEPT_WITH_CORRECTIONS"
+    }
+  },
+  "logs": "reports/phase1g_h_delta_audit_4_remediation_logs/",
+  "mutation_testing": {
+    "baseline_note": "in a scratch copy one 1G-B owner-decisions test fails because the copy is not a git repository; 'effective' counts a kill only with another failing test (*_effective.json); the test passes in the repository",
+    "fourth_delta_audit_mutants": {
+      "definitions": "reports/phase1g_h_delta_audit_4_evidence/contracts/own_definitions.json (with a baseline row)",
+      "effective": {
+        "D1_adapted_binding_disabled": "KILLED_BY_TESTS",
+        "X01_growth_json_check_removed": "SURVIVED",
+        "X02_void_share_json_check_removed": "KILLED_BY_TESTS",
+        "X03_premise_json_check_removed": "SURVIVED",
+        "X04_interval_json_check_removed": "KILLED_BY_TESTS",
+        "X05_growth_json_before_validation": "KILLED_BY_TESTS",
+        "X06_growth_ratio_approximate_1e8": "KILLED_BY_TESTS",
+        "X07_growth_ratio_operands_swapped": "KILLED_BY_TESTS",
+        "X08_growth_ratio_float_conversion": "SURVIVED_BEYOND_BASELINE",
+        "X09_simpson_exact_error_budget_to_1pct": "SURVIVED",
+        "X10_simpson_ratio_budget_to_1pct": "SURVIVED",
+        "X11_growth_ratio_approximate_1e12": "KILLED_BY_TESTS",
+        "X12_lcdm_relative_change_float_conversion": "SURVIVED_BEYOND_BASELINE"
+      },
+      "results": "reports/phase1g_h_delta_audit_4_remediation_logs/fourth_audit_mutants_results.json"
+    },
+    "round4_mutants_rerun": {
+      "definitions": "reports/phase1g_h_delta_audit_3_remediation_logs/round4_mutant_definitions.json",
+      "effective": {
+        "B01_record_identity_rtol_10pct_drift": "KILLED_BY_TESTS",
+        "B02_same_rejects_float_subclasses": "KILLED_BY_TESTS",
+        "B03_same_accepts_numpy_float32": "KILLED_BY_TESTS",
+        "B04_monte_carlo_budget_doubled": "SURVIVED",
+        "B05_simpson_error_ratio_budget_x10": "SURVIVED",
+        "B06_lognormal_calibration_inside_budget": "SURVIVED",
+        "B07_p11_weight_denominator_1ppm": "KILLED_BY_TESTS",
+        "B08_lognormal_calibration_1ppm": "KILLED_BY_TESTS",
+        "B09_reported_lambda_1ppm": "KILLED_BY_TESTS",
+        "B10_one_growth_tolerance_not_converted": "KILLED_BY_TESTS",
+        "J01_strict_json_check_disabled": "KILLED_BY_TESTS",
+        "J02_sigma_record_json_check_removed": "KILLED_BY_TESTS",
+        "J03_float32_refusal_via_message_branch_off": "KILLED_BY_TESTS",
+        "L01_lcdm_diagnostics_finiteness_off": "KILLED_BY_TESTS",
+        "L02_lcdm_diagnostics_binding_off": "KILLED_BY_TESTS",
+        "L03_anchored_ratio_binding_off": "KILLED_BY_TESTS",
+        "L04_anchored_differences_binding_off": "KILLED_BY_TESTS",
+        "L05_anchored_offset_unbound": "KILLED_BY_TESTS"
+      },
+      "results": "reports/phase1g_h_delta_audit_4_remediation_logs/round4_mutants_rerun_results.json"
+    },
+    "runner": "reports/phase1g_h_delta_audit_4_remediation_logs/run_mutants.py",
+    "survivors_classified": {
+      "B06": "inside the declared 1e-9 calibration budget",
+      "X01, X03": "redundant guards (audit classification)",
+      "X08, X12": "stricter than the chosen policy (option (a))",
+      "X09, X10, B04, B05": "test-threshold loosening only"
+    }
+  },
+  "numbers": {
+    "regression_vs_6926a63_same_interpreter": {
+      "numeric_leaves_changed": 0,
+      "numeric_leaves_compared": 3201,
+      "only_new": [],
+      "only_old": [],
+      "text_leaves_changed": []
+    },
+    "report_values_changed": 0
+  },
+  "observational_authorizations": {
+    "FSIGMA8_AUTHORIZATION": "NOT_GRANTED",
+    "OBSERVATIONAL_AUTHORIZATION": "NOT_GRANTED",
+    "RSD_AUTHORIZATION": "NOT_GRANTED",
+    "SIGMA8_AUTHORIZATION": "NOT_GRANTED",
+    "UNIQUE_TIMESCAPE_PREDICTION": "NOT_GRANTED"
+  },
+  "open_items": [
+    "push of fc804a0 and the two commits of this remediation (separate approval)",
+    "Windows gate (CPython 3.14.3 / 3.11.9)",
+    "owner decisions H-OD1 ... H-OD5",
+    "a uniform scalar-precision policy for 1G-B records, if wanted (separate successor)",
+    "C: prediction and observation not reached"
+  ],
+  "owner_approval": {
+    "date": "2026-10-09",
+    "scope": "the plan of section 1, with option (a) for the 1G-B scalar-precision policy",
+    "verbatim": "Procedi con il piano e l'opzione (a)"
+  },
+  "phase": "1G-H",
+  "recommendations": {
+    "H-OD1..H-OD5": "recorded in the 1G-H inventory, not decided",
+    "P15": "recorded with P16 in reports/phase1g_h_publication_successor.md section 10; convention clarified in section 10.3",
+    "X11_one_ulp": "four test cases in tests/test_phase1g_b_contract_hardening.py (22 in all); X11 killed",
+    "float32_policy": "owner decision option (a): documented limit kept"
+  },
+  "record": "reports/phase1g_h_delta_audit_4_remediation.md",
+  "schema_version": 1,
+  "status_note_2026_10_09": {
+    "note": "this inventory states the remediation as of its commit 22ace89 and is not rewritten",
+    "owner_decisions": "reports/phase1g_h_owner_decisions_successor.md (H-OD1 ... H-OD5, Windows gate)",
+    "publication": "the two commits of this record and the fourth delta-audit commit were pushed on 2026-10-09 (027b7a4 -> 22ace89; reports/phase1g_h_publication_successor.md section 11, P17); commits.branch, commits.pushed and the push item of open_items are superseded"
+  },
+  "status_tokens": {
+    "added": [],
+    "changed": []
+  },
+  "tests": {
+    "b_count": 22,
+    "b_count_before": 18,
+    "b_file": "tests/test_phase1g_b_contract_hardening.py",
+    "phase_count": 54,
+    "phase_count_before": 53,
+    "phase_file": "tests/test_phase1g_h_global_variance.py"
+  },
+  "title": "Phase 1G-H remediation of the fourth independent delta audit",
+  "unchanged": [
+    "status tokens",
+    "the five NOT_GRANTED observational authorisations",
+    "equations",
+    "runtime and evidence tolerances",
+    "every package module and script",
+    "frozen records",
+    "tags",
+    "the files of the five audits"
+  ],
+  "verification": {
+    "case_runner": {
+      "gm_bare_pbs_f_median_seed": 0.810772,
+      "gm_bare_pbs_w09_seed": 1.121363,
+      "nw15_equal_mass_constant_share": 0.918157
+    },
+    "diff_check": "clean",
+    "evidence": {
+      "artifact_sha256_py313": "942723389409d1e5f04a4a80fea84be2c6f1d2501b4218fc56faa2e844de9624",
+      "cross_interpreter_numeric_changed": 0,
+      "cross_interpreter_numeric_leaves": 3201,
+      "cross_interpreter_only_one_side": 0,
+      "cross_interpreter_text_changed": 0,
+      "gates": "36 / 36 on CPython 3.13.16 and 36 / 36 on 3.11.17",
+      "tree": "a243bf13bb27fb77c54ff05be004c47efe6e6784 (src, scripts, tests clean)"
+    },
+    "full_suites": {
+      "CPython 3.11.17": {
+        "collected": 1212,
+        "errors": 0,
+        "failed": 0,
+        "passed": 1212,
+        "rc": 0,
+        "seconds": 361,
+        "skipped": 0
+      },
+      "CPython 3.13.16": {
+        "collected": 1212,
+        "errors": 0,
+        "failed": 0,
+        "passed": 1212,
+        "rc": 0,
+        "seconds": 364,
+        "skipped": 0
+      },
+      "command": "OPENBLAS_NUM_THREADS=1 python -B -W error -m pytest -q -p no:cacheprovider -rs"
+    },
+    "full_suites_rerun_on_final_documentation": {
+      "CPython 3.11.17": {
+        "failed": 0,
+        "passed": 1212,
+        "seconds": 352,
+        "skipped": 0
+      },
+      "CPython 3.13.16": {
+        "failed": 0,
+        "passed": 1212,
+        "seconds": 351,
+        "skipped": 0
+      },
+      "logs": "reports/phase1g_h_delta_audit_4_remediation_logs/full_suite_final_py313.log, full_suite_final_py311.log",
+      "scope": "every byte of the documentation commit except the sentence recording this rerun and these two logs"
+    },
+    "not_run": [
+      "Windows CPython 3.14.3 / 3.11.9"
+    ],
+    "tolerance_audit": {
+      "comparisons": 750,
+      "missing": 0
+    },
+    "validator": {
+      "json_roundtrips": 59,
+      "log": "reports/phase1g_h_delta_audit_4_remediation_logs/validator.log",
+      "script": "scripts/validate_phase1f_c_r_astra_remediation.py",
+      "status": "PASS"
+    }
+  }
+}

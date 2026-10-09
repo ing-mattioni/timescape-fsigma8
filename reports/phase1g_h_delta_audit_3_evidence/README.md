@@ -1,0 +1,11 @@
+# Third independent delta audit evidence
+
+Read the parent report/inventory for verdicts, claims, methods and limitations. All files here are auditor evidence; no production files are changed. The five files in the immutable blind checkpoint c62ad87d9a51c40d8959d35e0bec58c8b1048a51 remain unchanged. Science-role blinding is compartmentalized; matched-recipe corrections in post_checkpoint_science_compare.py are explicitly post-checkpoint/non-blind.
+
+Scientific verifiers implement their own numerical reconstruction. Scalar, survivor and Monte Carlo programs test the audited implementation read-only. Mutation programs require an external temporary directory and must never target the audited production tree. The adapted campaign is reconstructed by the existing second-remediation make_campaign.py using its recorded definitions; original D1 is stale and the separate extra campaign applies its corrected target. The full per-mutation outputs and classifications are retained here.
+
+reproduction_compare.py takes REPO and external WORK arguments, with a sibling repro_248a06b worktree; its input files are independently regenerated evidence snapshots named evidence_py312_ed0ec0c.json and evidence_py311_ed0ec0c.json. reconcile_printed_tables.py maps report rows/cells to those inputs. Complete claims are in the main audit inventory; compact summaries here avoid duplicating large artifacts. Runner JSON is small, separate comparison evidence. Raw environment-specific artifact hashes are not cross-interpreter gates.
+
+Scalar probe full rows are intentionally summarized, with representative direct/nested counterexamples retained. Accepted_non_strict_json_count spans imported/frozen records as well as H; it is not a claim that 129 ordinary H factory results fail. Twelve nested H counterexamples establish that separate transitive export finding. Some scalar substitutions change numeric values and are labeled accordingly.
+
+full_py311.log retains the valid completion summary after excluding an interrupted setup attempt. final_validation.json and full_py312_final.log record final-tree checks. Setup-time partial suites are not acceptance evidence. The mandatory Windows gate is not run. Remote API evidence is timestamped, read-only, and does not authenticate historical private approval transcripts.

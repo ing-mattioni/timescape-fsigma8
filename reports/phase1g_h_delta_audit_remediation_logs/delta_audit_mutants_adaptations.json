@@ -1,0 +1,16 @@
+[
+  {
+    "id": "M7_shift_orthant_lower",
+    "file": "src/timescape_fsigma8/global_variance.py",
+    "old": "lo = max(c1, -_ORTHANT_HALF_WIDTH)",
+    "new": "lo = max(c1 + 0.1, -_ORTHANT_HALF_WIDTH)",
+    "note": "as adapted in the delta audit's own harness (implementation_mutations.py)"
+  },
+  {
+    "id": "N13_rounding_output_half_unit_off",
+    "file": "scripts/phase1g_h_global_variance_closure_numerics.py",
+    "old": "return half_unit * (sigma_partition / sigma_total + sigma_internal / sigma_total + 1.0)",
+    "new": "return half_unit * (sigma_partition / sigma_total + sigma_internal / sigma_total)",
+    "note": "the budget moved into e_reference_rounding_budget; the audit's other 21 mutants use its strings unchanged"
+  }
+]

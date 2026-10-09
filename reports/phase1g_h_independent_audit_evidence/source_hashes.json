@@ -1,0 +1,44 @@
+{
+  "EH98": {
+    "actual": "5f2ac6b413df8b738c95f6650152b7e82d7c36f6d9b3a618da540e9739dce17f",
+    "expected": "5f2ac6b413df8b738c95f6650152b7e82d7c36f6d9b3a618da540e9739dce17f",
+    "match": true,
+    "path": "sources/EH98/trans.tex"
+  },
+  "GM": {
+    "actual": "f9cadfa03ecc9a74b0a8f432ae4b13422daeb219f253756bcd877b4b75077c59",
+    "expected": "f9cadfa03ecc9a74b0a8f432ae4b13422daeb219f253756bcd877b4b75077c59",
+    "match": true,
+    "path": "sources/GM/main.tex"
+  },
+  "JLH13": {
+    "actual": "cf6fc77a31b395138ac3a027d008698556534e81cfb27c39853d3a99c7b07c4e",
+    "expected": "cf6fc77a31b395138ac3a027d008698556534e81cfb27c39853d3a99c7b07c4e",
+    "match": true,
+    "path": "sources/JLH13/voids_mnras.tex"
+  },
+  "NW15": {
+    "actual": "5688c9ac7123a5c2ef3508e39cb3134c2fe9e3d5e56996a4d4a4d101d7b74673",
+    "expected": "5688c9ac7123a5c2ef3508e39cb3134c2fe9e3d5e56996a4d4a4d101d7b74673",
+    "match": true,
+    "path": "sources/NW15/cmb1.tex"
+  },
+  "SvdW04": {
+    "actual": "4b7ad599f54b3199e0448df1c2eecf4e724401e9ffda7b0f50a3efe7fecdb79b",
+    "expected": "4b7ad599f54b3199e0448df1c2eecf4e724401e9ffda7b0f50a3efe7fecdb79b",
+    "match": true,
+    "path": "sources/SvdW04.tar"
+  },
+  "W07": {
+    "actual": "221662c987e454729ef8202c87fa697c5882b5b7daaecdedb50a7cba8ffe6cd8",
+    "expected": "221662c987e454729ef8202c87fa697c5882b5b7daaecdedb50a7cba8ffe6cd8",
+    "match": true,
+    "path": "sources/W07/solution.tex"
+  },
+  "W09": {
+    "actual": "2b0324d127440e9a053a7cb37102d7655cca228a63cd2222843e879989b4b531",
+    "expected": "2b0324d127440e9a053a7cb37102d7655cca228a63cd2222843e879989b4b531",
+    "match": true,
+    "path": "sources/W09/observe.tex"
+  }
+}

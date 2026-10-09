@@ -1,0 +1,112 @@
+{
+  "record": "reports/phase1g_fg_freeze_status_successor.md",
+  "classification": "FREEZE_STATUS_SUCCESSOR_RECORD",
+  "date": "2026-10-06",
+  "scientific_content": false,
+  "declares_freeze": false,
+  "documents_existing_freeze": true,
+  "authorization": {
+    "source": "owner task statement of 2026-10-06, section 2.1",
+    "verbatim": "Allinea lo stato corrente di F/G al merge, al freeze e ai tag già pubblicati. Questo lavoro è espressamente autorizzato e non richiede un'altra conferma.",
+    "d_v2_decision_verbatim": "non creare `phase-1g-d-separate-universe-growth-v2`, né come tag né come branch.",
+    "not_authorized": ["push", "pull request", "merge", "tag creation or change", "freeze declaration", "release"],
+    "later_owner_approval": {"date": "2026-10-06", "given": "after this record was committed", "action": "push of its commit, with the Phase 1G-H commits, to the session branch ccr-555e67be-u11yht", "not_followed_by": ["pull request", "merge", "tag creation or change", "freeze declaration", "release"]}
+  },
+  "verified_state": {
+    "source_pull_request": {"number": 4, "head": "phase-1g-f-successor-g-evolution", "base": "main", "merged": true, "merged_at": "2026-10-06T13:12:04Z", "verified_by": "GitHub API read (pull_request_read get)"},
+    "merge_commit": "8d3cdd0533035858c42269cb1dff1a20dcafc7da",
+    "frozen_checkpoint": "8d3cdd0533035858c42269cb1dff1a20dcafc7da",
+    "merge_parents": ["fb5d95245bc0cb19ce6cd1438177f1a597bb232f", "3d3d46ed68fde7e6d4100fe518a76731bd2cf9e9"],
+    "merge_tree": "5bcea4170c92c034af0045afb7f9898c2f28359d",
+    "compared_commit": "3d3d46ed68fde7e6d4100fe518a76731bd2cf9e9",
+    "compared_commit_tree": "5bcea4170c92c034af0045afb7f9898c2f28359d",
+    "trees_identical": true,
+    "integration_commit": "8f3131fe19cccd44a29287617145f3300818dfa3",
+    "provenance_commit": "3d3d46ed68fde7e6d4100fe518a76731bd2cf9e9",
+    "ancestors_of_main": {
+      "fb5d95245bc0cb19ce6cd1438177f1a597bb232f": true,
+      "8f3131fe19cccd44a29287617145f3300818dfa3": true,
+      "3d3d46ed68fde7e6d4100fe518a76731bd2cf9e9": true,
+      "8d3cdd0533035858c42269cb1dff1a20dcafc7da": true
+    },
+    "main_at_session_start": "8d3cdd0533035858c42269cb1dff1a20dcafc7da",
+    "origin_main_at_session_start": "8d3cdd0533035858c42269cb1dff1a20dcafc7da",
+    "main_advanced_beyond_checkpoint": false,
+    "clone_was_shallow": true,
+    "history_completed_by": "git fetch --unshallow --tags origin",
+    "chosen_base_head": "8d3cdd0533035858c42269cb1dff1a20dcafc7da",
+    "work_branch": "phase-1g-h-global-variance-closure"
+  },
+  "tags": {
+    "phase-1g-f-void-population-v1": {
+      "tag_object": "ca52c94d6ecad2be62016b019d652d9bc6e89dd2",
+      "target_commit": "8d3cdd0533035858c42269cb1dff1a20dcafc7da",
+      "tagger_date": "2026-10-06T15:32:56+02:00",
+      "remote_tag_object": "ca52c94d6ecad2be62016b019d652d9bc6e89dd2",
+      "message_read": true,
+      "message_suite_statement": "Freeze preflight at this commit: 1136 passed, 0 skipped, 0 failed on CPython 3.14.3 and 3.11.9 (-W error)."
+    },
+    "phase-1g-g-void-evolution-v1": {
+      "tag_object": "d151bd45242eff50ca7fa62bbd50453375737117",
+      "target_commit": "8d3cdd0533035858c42269cb1dff1a20dcafc7da",
+      "tagger_date": "2026-10-06T15:32:56+02:00",
+      "remote_tag_object": "d151bd45242eff50ca7fa62bbd50453375737117",
+      "message_read": true,
+      "message_suite_statement": "Freeze preflight at this commit: 1136 passed, 0 skipped, 0 failed on CPython 3.14.3 and 3.11.9 (-W error)."
+    },
+    "signatures": {
+      "format": "SSH signature, ssh-ed25519, namespace git, hash sha512",
+      "embedded_public_key_fingerprint_all_phase1g_tags": "SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y",
+      "embedded_key_identical_across": ["phase-1g-a-sigma8-derivation-path-v1", "phase-1g-b-lagrangian-sigma-v1", "phase-1g-c-two-scale-growth-law-v1", "phase-1g-d-separate-universe-growth-v1", "phase-1g-e-two-phase-sigma-v1", "phase-1g-f-void-population-v1", "phase-1g-g-void-evolution-v1"],
+      "embedded_key_check_is_signature_verification": false,
+      "cryptographically_verified_in_this_session": false,
+      "reason": "no project trust configuration was used in this session",
+      "verification_status_wording": "freeze e pubblicazione confermati dal resoconto; verifica locale incompleta (firme)"
+    },
+    "d_v1_tag_unchanged": {"tag": "phase-1g-d-separate-universe-growth-v1", "tag_object": "e2a3b303e2441dd94971a32b7ec327a44f2af000", "target_commit": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f"},
+    "tags_created_or_moved_by_this_record": [],
+    "d_v2_tag_or_branch_created": false
+  },
+  "suite_provenance": [
+    {"run": "integration runs on the final content, before the merge", "tree": "content of 8f3131fe19cccd44a29287617145f3300818dfa3", "passed": 1136, "skipped": 0, "failed": 0, "interpreters": {"CPython 3.14.3": "524 s", "CPython 3.11.9": "538 s"}, "source": "reports/phase1g_fg_remediation_integration.md section 5.2", "run_in_this_session": false},
+    {"run": "freeze preflight at the merge commit", "tree": "8d3cdd0533035858c42269cb1dff1a20dcafc7da", "passed": 1136, "skipped": 0, "failed": 0, "warnings_as_errors": true, "interpreters": {"CPython 3.14.3": "505 s", "CPython 3.11.9": "501 s"}, "source": "owner's report of 2026-10-06; tag messages give the counts", "run_in_this_session": false},
+    {"run": "this session's Linux baseline before new work (not a freeze certification)", "tree": "8d3cdd0533035858c42269cb1dff1a20dcafc7da", "passed": 1103, "skipped": 33, "failed": 0, "collected": 1136, "warnings_as_errors": true, "command": "OPENBLAS_NUM_THREADS=1 python -B -W error -m pytest -q -p no:cacheprovider", "interpreters": {"CPython 3.13.16 (NumPy 2.5.3, SciPy 1.18.1, pytest 9.1.1)": "365 s", "CPython 3.11.17 (NumPy 2.4.6, SciPy 1.17.1, pytest 9.1.1)": "358 s"}, "skip_cause": "upstream oracle clone and generated validation artifacts absent in a fresh clone; inputs not fabricated", "run_in_this_session": true}
+  ],
+  "superseded_status_map_policy": {"quotes": "literal with line wrapping normalised; S7 and S10 join separate spans (joined_spans)", "exhaustive": false, "revision": "2026-10-07: S13 base hashes and phrase locations, S14-S16 added (audit finding GH-F14)"},
+  "superseded_status_statements": [
+    {"id": "S1", "file": "reports/phase1g_f_volume_budget_successor.md", "sha256": "3208c53990dd039d3364d8fc4d76d2959f6ea5376b69bfee926a140c8669c5bd", "location": "header, lines 32-33", "historical": "This revised local deliverable has not been frozen; the audit does not certify subsequent edits.", "current": "merged (PR #4) and frozen at 8d3cdd0, tag phase-1g-f-void-population-v1; the audit-scope clause stays true"},
+    {"id": "S2", "file": "reports/phase1g_f_volume_budget_successor.md", "sha256": "3208c53990dd039d3364d8fc4d76d2959f6ea5376b69bfee926a140c8669c5bd", "location": "section 6, lines 316-317", "historical": "It is not frozen, and no tag, merge or release is implied.", "current": "merged, frozen and tagged; no release exists"},
+    {"id": "S3", "file": "reports/phase1g_f_volume_budget_successor_inventory.json", "sha256": "6b09f47539b883be11cd4f15ce0907d4a6bd711f7ea25026fc2a91839a8dd285", "location": "key integration_state", "historical": "LOCAL_REVIEWABLE_UNMERGED_UNTAGGED", "current": "MERGED_FROZEN_TAGGED"},
+    {"id": "S4", "file": "reports/phase1g_g_void_evolution.md", "sha256": "41560ed50c8750762a40242652bec275c338d806f2234923c11ff26385654061", "location": "header, lines 5-6", "historical": "This is a local research proposal, not a frozen implementation phase or a new Timescape prediction.", "current": "frozen report-only research phase, tag phase-1g-g-void-evolution-v1; still no package runtime and no new Timescape prediction"},
+    {"id": "S5", "file": "reports/phase1g_g_void_evolution.md", "sha256": "41560ed50c8750762a40242652bec275c338d806f2234923c11ff26385654061", "location": "section 8, lines 283-284", "historical": "No freeze, tag, merge or release is implied.", "current": "merged, frozen and tagged; no release exists"},
+    {"id": "S6", "file": "reports/phase1g_g_void_evolution_inventory.json", "sha256": "3ce6a5873548679dc64502f1cc8b68146027b163159e7c10b079b6675e7172ac", "location": "key integration_state", "historical": "LOCAL_REVIEWABLE_UNMERGED_UNTAGGED", "current": "MERGED_FROZEN_TAGGED"},
+    {"id": "S7", "file": "reports/phase1g_fg_remediation_integration.md", "sha256": "ec41f322ced6325737f01cbd7f5b89e24f5d39267b2fb7b42e7ae7026ae02551", "location": "section 8 item 1, lines 175-180", "historical": "Owner approvals, each separate: merging into main (through a pull request); any annotated phase tag; any release. None is authorized.", "historical_formatting_note": "bulleted list joined with semicolons", "joined_spans": true, "current": "merge and the two tags were later approved and executed by the owner; a release is neither approved nor created; items 2-4 unchanged"},
+    {"id": "S8", "file": "reports/phase1g_fg_remediation_integration_inventory.json", "sha256": "241054f20980d09e9c5e21c3df2be3cb1c9af56cf299dfec7848d3efde73b6bb", "location": "authorization scope_summary", "historical": "local commits and ordinary push of this phase branch to origin; no main push, force push, merge, PR, tag, release, scientific freeze, status or observational-authorization change", "current": "correct as the scope of that authorization; the merge, freeze and tags rest on separate later owner actions"},
+    {"id": "S9", "file": "reports/phase1g_fg_successor_validation.md", "sha256": "438a0063363c78ec50ae3ce793264215cf7ba4de58e83d434a4d9ffb8e2b278a", "location": "Documentation state verified against GitHub, line 114", "historical": "No 1G-F tag was returned.", "current": "phase-1g-f-void-population-v1 exists, target 8d3cdd0"},
+    {"id": "S10", "file": "reports/phase1g_fg_successor_validation.md", "sha256": "438a0063363c78ec50ae3ce793264215cf7ba4de58e83d434a4d9ffb8e2b278a", "location": "lines 24-25 and 70-73", "joined_spans": true, "historical": "No push, PR, remote mutation, phase tag or independent adversarial audit was performed. / Before a formal phase freeze, apply in a real checkout, run the existing two-environment gates with their required artifacts, obtain the independent audit and record the actual commit.", "current": "requirements met later: two independent audits, integration record with actual commit 8f3131f, owner's two-interpreter freeze preflight, tags"},
+    {"id": "S11", "file": "reports/phase1g_fg_independent_scientific_audit.md", "sha256": "6bb8edecf394989186c86e3ead7f401bcbcc0ac1977bc395008db7019a0c063d", "location": "CLAUDE.md check table, line 515", "historical": "σ track: main at fb5d952, 1G-A…E v1 tags, no 1G-F tag", "current": "main at 8d3cdd0 carries the 1G-F and 1G-G tags; the audit is not edited"},
+    {"id": "S12", "file": "reports/phase1g_fg_remediation_independent_audit.md", "sha256": "46f3aef7f27240f03eb4ef530cebc16a2365f703a93308e165b0c75680389a25", "location": "section 0.1, lines 36-38", "historical": "The corrections can be integrated: committed locally on the phase branch by the owner. Nothing in this audit authorises a merge, tag or remote action.", "current": "still true of the audit; the integration, merge and tags happened afterwards on separate owner authority"},
+    {"id": "S13", "file": "README.md and CLAUDE.md", "location": "sigma-track current-status sections", "base_sha256": {"README.md": "85d78ff8583a30d340a16c545eab5e972b8ffcabbcc409e337345bc4c70d149c", "CLAUDE.md": "2d96e25cf4632395ebe45d9429738198dba9ec06c6f87f5a8bc01b9683f899c6"}, "phrase_locations": {"not merged into `main`, frozen or tagged": "README.md lines 29-30", "Nothing is frozen or tagged": "README.md line 114", "no 1G-F tag was found": "CLAUDE.md line 259", "unmerged deliverables on the phase branch": "CLAUDE.md lines 260-261", "but not frozen": "CLAUDE.md line 106", "No phase freeze, tag, merge or release is implied": "CLAUDE.md lines 434-435"}, "historical": "not merged into main, frozen or tagged; Nothing is frozen or tagged; no 1G-F tag was found; unmerged deliverables on the phase branch; but not frozen; No phase freeze, tag, merge or release is implied", "current": "updated directly in the same commit as this record"},
+    {"id": "S14", "file": "reports/phase1g_f_void_population.md", "sha256": "fe8fd8f1b16c9625a37d86fa7df3e83cd9a881a704386dd8dc52cca80b440003", "location": "section 14, lines 638-639", "historical": "Nothing is merged or tagged.", "written": "2026-09-29", "current": "merged by PR #4 and frozen at 8d3cdd0, tag phase-1g-f-void-population-v1; the frozen F report is not edited", "added": "2026-10-07, audit finding GH-F14"},
+    {"id": "S15", "file": "reports/phase1g_fg_remediation_integration.md", "sha256": "ec41f322ced6325737f01cbd7f5b89e24f5d39267b2fb7b42e7ae7026ae02551", "location": "section 3, lines 79-80", "historical": "\"Not merged, frozen or tagged\" is kept.", "written": "2026-10-06", "current": "the kept README sentence (S13) was replaced when the merge, freeze and tags followed", "added": "2026-10-07, audit finding GH-F14"},
+    {"id": "S16", "file": "reports/phase1g_fg_remediation_integration_inventory.json", "sha256": "241054f20980d09e9c5e21c3df2be3cb1c9af56cf299dfec7848d3efde73b6bb", "location": "open_before_freeze[0]", "historical": "separate owner approvals for merge into main (PR), annotated tag, release", "written": "2026-10-06", "current": "merge and the two tags were later approved and executed by the owner; a release is neither approved nor created", "added": "2026-10-07, audit finding GH-F14"}
+  ],
+  "current_integration_state": {"phase-1g-f": "MERGED_FROZEN_TAGGED", "phase-1g-g": "MERGED_FROZEN_TAGGED", "checkpoint": "8d3cdd0533035858c42269cb1dff1a20dcafc7da", "release": "NONE"},
+  "kept_distinct": {
+    "remediation_integration_commit": "8f3131fe19cccd44a29287617145f3300818dfa3",
+    "provenance_commit": "3d3d46ed68fde7e6d4100fe518a76731bd2cf9e9",
+    "merge_and_frozen_checkpoint": "8d3cdd0533035858c42269cb1dff1a20dcafc7da",
+    "historical_actual_remediation_commit_null_unchanged": "reports/phase1g_fg_audit_remediation_inventory.json"
+  },
+  "d_successor": {"record": "reports/phase1g_d_linear_statistic_status_successor.md", "date": "2026-10-02", "included_in_checkpoint": "8d3cdd0533035858c42269cb1dff1a20dcafc7da", "is_new_phase_d_v2": false},
+  "authorizations_unchanged": {
+    "SIGMA8_AUTHORIZATION": "NOT_GRANTED",
+    "FSIGMA8_AUTHORIZATION": "NOT_GRANTED",
+    "RSD_AUTHORIZATION": "NOT_GRANTED",
+    "OBSERVATIONAL_AUTHORIZATION": "NOT_GRANTED",
+    "UNIQUE_TIMESCAPE_PREDICTION": "NOT_GRANTED",
+    "LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC": "NOT_DERIVED"
+  },
+  "files_changed": ["reports/phase1g_fg_freeze_status_successor.md", "reports/phase1g_fg_freeze_status_successor_inventory.json", "README.md", "CLAUDE.md"],
+  "files_preserved_byte_for_byte": "every F/G report, inventory, audit, log, evidence file and MANIFEST.sha256; every package module, test and status token; every tag"
+}

@@ -1,0 +1,1312 @@
+{
+  "commits": {
+    "18bf2fbef880fdfb3c292956aa1f000720930abf": {
+      "tree": "b191b76c9976d21aad82bf9ff6d133af5a822bf2",
+      "parents": [
+        "4d71bd4fe918ef8a0b71c178a7180c4d291294b0"
+      ]
+    },
+    "c6028e9046934ef6de234f0b58fbe18e6f3bead1": {
+      "tree": "cac3e608b20d69fe5eb6f505566638ea082fa0cd",
+      "parents": [
+        "18bf2fbef880fdfb3c292956aa1f000720930abf"
+      ]
+    },
+    "6926a636c100d232247e39d71d5b2d6e71a6f917": {
+      "tree": "0ebd45cac9aa74bd44dd0f3ba8307a3c8ad08ead",
+      "parents": [
+        "c6028e9046934ef6de234f0b58fbe18e6f3bead1"
+      ]
+    },
+    "36d127f8edcb306aa503cb4d8b7b10417dc33a51": {
+      "tree": "c66a4ad5374df9db1cf5acad869cf03b268d5500",
+      "parents": [
+        "6926a636c100d232247e39d71d5b2d6e71a6f917"
+      ]
+    },
+    "027b7a413fcee0786b861d5903272e4653d227ed": {
+      "tree": "4431f10aa7269e67466dab4859ab20f4beac4059",
+      "parents": [
+        "36d127f8edcb306aa503cb4d8b7b10417dc33a51"
+      ]
+    },
+    "ed0ec0c9c8783519a53759a265b6ce37e6c0e607": {
+      "tree": "afba6630d02cb04d941ddb8b42092d7884e79786",
+      "parents": [
+        "4bf2718e7557ace3fdc0abffaa73587f1162f776"
+      ]
+    },
+    "4d71bd4fe918ef8a0b71c178a7180c4d291294b0": {
+      "tree": "6d5e848faa7b72d829e44a9a2d79e70c3a34acb6",
+      "parents": [
+        "ed0ec0c9c8783519a53759a265b6ce37e6c0e607"
+      ]
+    }
+  },
+  "diff": {
+    "total": 54,
+    "by_status": {
+      "M": 13,
+      "A": 41
+    },
+    "paths": [
+      [
+        "M",
+        "CLAUDE.md"
+      ],
+      [
+        "M",
+        "README.md"
+      ],
+      [
+        "A",
+        "reports/phase1g_b_contract_hardening_successor.md"
+      ],
+      [
+        "A",
+        "reports/phase1g_b_contract_hardening_successor_inventory.json"
+      ],
+      [
+        "M",
+        "reports/phase1g_h_delta_audit_2_remediation.md"
+      ],
+      [
+        "M",
+        "reports/phase1g_h_delta_audit_2_remediation_inventory.json"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_remediation.md"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_remediation_inventory.json"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_remediation_logs/compare_evidence.py"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_remediation_logs/cross_interpreter_313_vs_311.json"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_remediation_logs/evidence_head.txt"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_remediation_logs/evidence_py311.log"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_remediation_logs/evidence_py313.log"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_remediation_logs/extra_mutants.log"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_remediation_logs/extra_mutants_definitions.json"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_remediation_logs/extra_mutants_results.json"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_remediation_logs/full_suite_final_py311.log"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_remediation_logs/full_suite_final_py313.log"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_remediation_logs/full_suite_py311.log"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_remediation_logs/full_suite_py313.log"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_remediation_logs/phase1g_b_validation_after.log"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_remediation_logs/phase1g_b_validation_before.log"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_remediation_logs/regen_anchored_density.log"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_remediation_logs/regen_execute_upstream_notebook.log"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_remediation_logs/regen_extract_upstream_barotropic_oracle.log"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_remediation_logs/regen_extract_upstream_oracle.log"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_remediation_logs/regen_extract_upstream_perturbation_oracle.log"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_remediation_logs/regen_inputs.sh"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_remediation_logs/regen_owner_decisions.log"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_remediation_logs/regen_owner_mc.sh"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_remediation_logs/regen_validate_barotropic_perturbations.log"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_remediation_logs/regen_validate_growth_pipeline.log"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_remediation_logs/regression_vs_9ad5425.json"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_remediation_logs/round4_kills_beyond_baseline.json"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_remediation_logs/round4_mutant_definitions.json"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_remediation_logs/round4_mutant_results.json"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_remediation_logs/round4_mutants.log"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_remediation_logs/run_mutants_r4.py"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_remediation_logs/scalar_probes_comparison.json"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_remediation_logs/second_delta_audit_campaign_rerun.json"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_remediation_logs/second_delta_audit_campaign_rerun.log"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_remediation_logs/suite_head.txt"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_remediation_logs/tolerance_audit.log"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_remediation_logs/validator.log"
+      ],
+      [
+        "M",
+        "reports/phase1g_h_global_variance_closure.md"
+      ],
+      [
+        "M",
+        "reports/phase1g_h_global_variance_closure_inventory.json"
+      ],
+      [
+        "M",
+        "reports/phase1g_h_global_variance_closure_validation.md"
+      ],
+      [
+        "M",
+        "reports/phase1g_h_publication_successor.md"
+      ],
+      [
+        "M",
+        "reports/phase1g_h_publication_successor_inventory.json"
+      ],
+      [
+        "M",
+        "scripts/phase1g_h_global_variance_closure_numerics.py"
+      ],
+      [
+        "M",
+        "src/timescape_fsigma8/global_variance.py"
+      ],
+      [
+        "M",
+        "src/timescape_fsigma8/lagrangian_sigma.py"
+      ],
+      [
+        "A",
+        "tests/test_phase1g_b_contract_hardening.py"
+      ],
+      [
+        "M",
+        "tests/test_phase1g_h_global_variance.py"
+      ]
+    ]
+  },
+  "preservation": {
+    "older_audits": {
+      "count": 241,
+      "changed": []
+    },
+    "other_package_vs_frozen": {
+      "count": 56,
+      "changed": []
+    },
+    "frozen_1g_reports": {
+      "count": 111,
+      "changed": []
+    },
+    "runner_configs": {
+      "count": 4,
+      "changed": []
+    },
+    "lagrangian_sigma_base_vs_frozen": true,
+    "status_module": true
+  },
+  "publication_graph": {
+    "P11": [
+      "ed0ec0c9c8783519a53759a265b6ce37e6c0e607"
+    ],
+    "P13": [
+      "4d71bd4fe918ef8a0b71c178a7180c4d291294b0",
+      "18bf2fbef880fdfb3c292956aa1f000720930abf"
+    ],
+    "P14": [
+      "4d71bd4fe918ef8a0b71c178a7180c4d291294b0",
+      "18bf2fbef880fdfb3c292956aa1f000720930abf",
+      "c6028e9046934ef6de234f0b58fbe18e6f3bead1",
+      "6926a636c100d232247e39d71d5b2d6e71a6f917",
+      "36d127f8edcb306aa503cb4d8b7b10417dc33a51"
+    ],
+    "P15": [
+      "027b7a413fcee0786b861d5903272e4653d227ed"
+    ],
+    "P13_paths": [
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3.md"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/BLIND_SCIENCE_CHECKPOINT.md"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/README.md"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/active_summary_values.json"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/anchored_density_clean_py312.log"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/barotropic_validation_py312.log"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/blind_science_checks.py"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/blind_science_checks_results.json"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/blind_science_reconstruction.py"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/blind_science_refinement.py"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/blind_science_refinement_results.json"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/blind_science_results.json"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/environment_py311.json"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/environment_py312.json"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/evidence_py311_ed0ec0c.log"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/evidence_py312_248a06b.log"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/evidence_py312_ed0ec0c.log"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/final_validation.json"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/full_py311.log"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/full_py312_final.log"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/growth_pipeline_py312.log"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/implementation_binding_rerun_results.json"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/implementation_monte_carlo_budget.py"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/implementation_monte_carlo_budget_results.json"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/implementation_scalar_probes.py"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/implementation_scalar_probes_results.json"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/implementation_survivor_probes.py"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/implementation_survivor_probes_results.json"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/mutation_adapted_results.json"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/mutation_extra_campaign.py"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/mutation_extra_results.json"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/oracle_background_py312.log"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/oracle_barotropic_py312.log"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/oracle_clean_py312.log"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/owner_decisions_py312.log"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/post_checkpoint_science_compare.py"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/post_checkpoint_science_results.json"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/printed_tables_summary.json"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/provenance_audit.py"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/provenance_documentation_checks.json"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/provenance_proposed_resolutions.json"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/provenance_remote_snapshot.json"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/provenance_result.json"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/provenance_review.md"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/reconcile_printed_tables.py"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/reproduction_compare.py"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/reproduction_comparison_summary.log"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/reproduction_report_tables_summary.log"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/reproduction_summary.json"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/runner_comparison.json"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/science_comparison.md"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/second_delta_saved_hash_reconstruction.json"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/source_hash_checks.json"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/tolerance_audit.log"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/upstream_pin.log"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_evidence/validator_final.log"
+      ],
+      [
+        "A",
+        "reports/phase1g_h_delta_audit_3_inventory.json"
+      ]
+    ]
+  },
+  "declared_hash_checks": [
+    {
+      "inventory": "reports/phase1g_h_global_variance_closure_inventory.json",
+      "path": "scripts/phase1g_h_configs/gm_bare_pbs_f_median_seed.json",
+      "expected": "fce37d4e6bef9b778e68ec5bcb306051e07518020622ecbdb9c1c1847d2ba581",
+      "actual": "fce37d4e6bef9b778e68ec5bcb306051e07518020622ecbdb9c1c1847d2ba581",
+      "match": true
+    },
+    {
+      "inventory": "reports/phase1g_h_global_variance_closure_inventory.json",
+      "path": "scripts/phase1g_h_configs/gm_bare_pbs_w09_seed.json",
+      "expected": "286cea0cb071b8381fe16025ac99d0d596c8d704282d869ebfe23d80026b3986",
+      "actual": "286cea0cb071b8381fe16025ac99d0d596c8d704282d869ebfe23d80026b3986",
+      "match": true
+    },
+    {
+      "inventory": "reports/phase1g_h_global_variance_closure_inventory.json",
+      "path": "scripts/phase1g_h_configs/nw15_equal_mass_constant_share.json",
+      "expected": "41d442557b90a00ddd3d26f263eecea12b982c046656750fa9a1696b6c4d9288",
+      "actual": "41d442557b90a00ddd3d26f263eecea12b982c046656750fa9a1696b6c4d9288",
+      "match": true
+    },
+    {
+      "inventory": "reports/phase1g_h_global_variance_closure_inventory.json",
+      "path": "scripts/phase1g_h_global_variance_case.py",
+      "expected": "e1b583f39f5b81c0b6c2ba5df1877de11bf091011c7c663bd81c9abee1de57f5",
+      "actual": "e1b583f39f5b81c0b6c2ba5df1877de11bf091011c7c663bd81c9abee1de57f5",
+      "match": true
+    },
+    {
+      "inventory": "reports/phase1g_h_global_variance_closure_inventory.json",
+      "path": "scripts/phase1g_h_global_variance_closure_numerics.py",
+      "expected": "a5fd601fecc06c57526fd644632d2595f75086457cc7eeb825a301e45c284981",
+      "actual": "a5fd601fecc06c57526fd644632d2595f75086457cc7eeb825a301e45c284981",
+      "match": true
+    },
+    {
+      "inventory": "reports/phase1g_h_global_variance_closure_inventory.json",
+      "path": "src/timescape_fsigma8/global_variance.py",
+      "expected": "96934ea62d22c2bff07ff6edf00631b0fe556579d29f02ea0efa27b79af9bf4b",
+      "actual": "96934ea62d22c2bff07ff6edf00631b0fe556579d29f02ea0efa27b79af9bf4b",
+      "match": true
+    },
+    {
+      "inventory": "reports/phase1g_h_global_variance_closure_inventory.json",
+      "path": "tests/test_phase1g_h_global_variance.py",
+      "expected": "201cc8fa928bf52a333314cc52888c552b36dfc2b9ed91fa374af3eff679ca62",
+      "actual": "201cc8fa928bf52a333314cc52888c552b36dfc2b9ed91fa374af3eff679ca62",
+      "match": true
+    },
+    {
+      "inventory": "reports/phase1g_h_delta_audit_3_remediation_inventory.json",
+      "path": "scripts/phase1g_h_global_variance_closure_numerics.py",
+      "expected": "a5fd601fecc06c57526fd644632d2595f75086457cc7eeb825a301e45c284981",
+      "actual": "a5fd601fecc06c57526fd644632d2595f75086457cc7eeb825a301e45c284981",
+      "match": true
+    },
+    {
+      "inventory": "reports/phase1g_h_delta_audit_3_remediation_inventory.json",
+      "path": "src/timescape_fsigma8/global_variance.py",
+      "expected": "96934ea62d22c2bff07ff6edf00631b0fe556579d29f02ea0efa27b79af9bf4b",
+      "actual": "96934ea62d22c2bff07ff6edf00631b0fe556579d29f02ea0efa27b79af9bf4b",
+      "match": true
+    },
+    {
+      "inventory": "reports/phase1g_h_delta_audit_3_remediation_inventory.json",
+      "path": "src/timescape_fsigma8/lagrangian_sigma.py",
+      "expected": "e9bab68ee010df9ed249565413d578f739322ee644d8197a128615006319bd3a",
+      "actual": "e9bab68ee010df9ed249565413d578f739322ee644d8197a128615006319bd3a",
+      "match": true
+    },
+    {
+      "inventory": "reports/phase1g_h_delta_audit_3_remediation_inventory.json",
+      "path": "tests/test_phase1g_b_contract_hardening.py",
+      "expected": "90cab4583be45395b7cd996a7e8c2c3f651f1c26196245196f57658d5dee26d4",
+      "actual": "90cab4583be45395b7cd996a7e8c2c3f651f1c26196245196f57658d5dee26d4",
+      "match": true
+    },
+    {
+      "inventory": "reports/phase1g_h_delta_audit_3_remediation_inventory.json",
+      "path": "tests/test_phase1g_h_global_variance.py",
+      "expected": "201cc8fa928bf52a333314cc52888c552b36dfc2b9ed91fa374af3eff679ca62",
+      "actual": "201cc8fa928bf52a333314cc52888c552b36dfc2b9ed91fa374af3eff679ca62",
+      "match": true
+    }
+  ],
+  "report_json": {
+    "count": 57,
+    "invalid": []
+  },
+  "logs": [
+    {
+      "file": "compare_evidence.py",
+      "bytes": 1789,
+      "sha256": "70be973b4295d94eac4722afb84c515410ccb9f2c582b8d80d88cef443cf34ee",
+      "lines": 45,
+      "unabbreviated_scratch_paths": [],
+      "tail": [
+        "print(json.dumps({k: (len(v) if isinstance(v, list) else v) for k, v in out.items()",
+        "                  if k not in (\"old_environment\", \"new_environment\")}, indent=1))"
+      ]
+    },
+    {
+      "file": "cross_interpreter_313_vs_311.json",
+      "bytes": 783,
+      "sha256": "5d70d4641c4243455537cc70fb6d1094697bc7759aaff24773776e0d34bed136",
+      "lines": 32,
+      "unabbreviated_scratch_paths": [],
+      "tail": [
+        " \"only_new\": []",
+        "}"
+      ],
+      "json_valid_unique_strict": true
+    },
+    {
+      "file": "evidence_head.txt",
+      "bytes": 41,
+      "sha256": "53bc160629d766fd8d6412d59cdc860ba4050e3fc4a6e471a498e47aa2793ef5",
+      "lines": 1,
+      "unabbreviated_scratch_paths": [],
+      "tail": [
+        "6926a636c100d232247e39d71d5b2d6e71a6f917"
+      ]
+    },
+    {
+      "file": "evidence_py311.log",
+      "bytes": 13929,
+      "sha256": "aade1e0c37573a7285ecac171ea86aeab0edff1d6889eaa9963025be35b1c1b8",
+      "lines": 130,
+      "unabbreviated_scratch_paths": [],
+      "tail": [
+        "all 36 gates pass",
+        "rc=0 seconds=69"
+      ]
+    },
+    {
+      "file": "evidence_py313.log",
+      "bytes": 13929,
+      "sha256": "ae0b4607e52cc6f0ffcf0a8c98fc37d971a2f356a4dbc86a9dd3b94b09385ada",
+      "lines": 130,
+      "unabbreviated_scratch_paths": [],
+      "tail": [
+        "all 36 gates pass",
+        "rc=0 seconds=79"
+      ]
+    },
+    {
+      "file": "extra_mutants.log",
+      "bytes": 139,
+      "sha256": "cde0c541f5bd128e4bbb9fa2d036634028b15a391db025f9b69ac0fdc0a96898",
+      "lines": 1,
+      "unabbreviated_scratch_paths": [],
+      "tail": [
+        "{\"id\": \"AUTH_D1_binding_off_adapted\", \"outcome\": \"KILLED_BY_TESTS\", \"tests_summary\": \"5 failed, 48 passed in 18.89s\", \"evidence_rc\": null}"
+      ]
+    },
+    {
+      "file": "extra_mutants_definitions.json",
+      "bytes": 526,
+      "sha256": "48df1bac0652bfab469ec5acab12ab97b8dc07dbd03c4bff4362e59726f86e20",
+      "lines": 7,
+      "unabbreviated_scratch_paths": [],
+      "tail": [
+        "  \"reason\": \"GH-D2F4 inserted 'stored = getattr(record, name)' into the binding loop; the mutant again skips every binding comparison\"}",
+        "]"
+      ],
+      "json_valid_unique_strict": true
+    },
+    {
+      "file": "extra_mutants_results.json",
+      "bytes": 1317,
+      "sha256": "b259c1805e0caa8823046c38c03c1f79e018b4853db0d22c26c93a96fe56f0f4",
+      "lines": 22,
+      "unabbreviated_scratch_paths": [],
+      "tail": [
+        " }",
+        "]"
+      ],
+      "json_valid_unique_strict": true,
+      "outcomes": {
+        "unspecified KILLED_BY_TESTS": 1
+      }
+    },
+    {
+      "file": "full_suite_final_py311.log",
+      "bytes": 1410,
+      "sha256": "508e27e8dffaffa4d899e73d72bcd9830eb23b929818811dca44e73e0cb3911a",
+      "lines": 19,
+      "unabbreviated_scratch_paths": [],
+      "tail": [
+        "1207 passed in 331.62s (0:05:31)",
+        "rc=0 seconds=333"
+      ]
+    },
+    {
+      "file": "full_suite_final_py313.log",
+      "bytes": 1410,
+      "sha256": "a51a1ece529988bf4fa2be1df8d50ea550ed010b947850244265d9570b5dd581",
+      "lines": 19,
+      "unabbreviated_scratch_paths": [],
+      "tail": [
+        "1207 passed in 332.82s (0:05:32)",
+        "rc=0 seconds=334"
+      ]
+    },
+    {
+      "file": "full_suite_py311.log",
+      "bytes": 1410,
+      "sha256": "eeb2317e6b4a96e085ac3b52e7dacfe4d0a4072a17f87f9f0550e0e182af3f1b",
+      "lines": 19,
+      "unabbreviated_scratch_paths": [],
+      "tail": [
+        "1207 passed in 337.34s (0:05:37)",
+        "rc=0 seconds=338"
+      ]
+    },
+    {
+      "file": "full_suite_py313.log",
+      "bytes": 1410,
+      "sha256": "6e28f2fbab47d3d08f40eef2c58d8a50500ee6ec29838058a76cea9ccd0980da",
+      "lines": 19,
+      "unabbreviated_scratch_paths": [],
+      "tail": [
+        "1207 passed in 337.58s (0:05:37)",
+        "rc=0 seconds=338"
+      ]
+    },
+    {
+      "file": "phase1g_b_validation_after.log",
+      "bytes": 1617,
+      "sha256": "317c7ff2a3d3739f8d349482bd4f25c14a7bf62cfd169c3cd09de336254a2016",
+      "lines": 22,
+      "unabbreviated_scratch_paths": [],
+      "tail": [
+        "V7_inventory_sigma_table_four_decimals_abs: max 4.990e-05 (n=44) gate 5.0e-05 PASS",
+        "V7_inventory_per_photon_density_five_decimals_abs: max 4.879e-06 (n=3) gate 5.0e-06 PASS"
+      ]
+    },
+    {
+      "file": "phase1g_b_validation_before.log",
+      "bytes": 1617,
+      "sha256": "317c7ff2a3d3739f8d349482bd4f25c14a7bf62cfd169c3cd09de336254a2016",
+      "lines": 22,
+      "unabbreviated_scratch_paths": [],
+      "tail": [
+        "V7_inventory_sigma_table_four_decimals_abs: max 4.990e-05 (n=44) gate 5.0e-05 PASS",
+        "V7_inventory_per_photon_density_five_decimals_abs: max 4.879e-06 (n=3) gate 5.0e-06 PASS"
+      ]
+    },
+    {
+      "file": "regen_anchored_density.log",
+      "bytes": 1320,
+      "sha256": "8af9b067c9c33e370eabd238aea21d6b94deb6449deee5464c2b004de98ef921",
+      "lines": 43,
+      "unabbreviated_scratch_paths": [],
+      "tail": [
+        "  \"top_level_section_count\": 25",
+        "}"
+      ]
+    },
+    {
+      "file": "regen_execute_upstream_notebook.log",
+      "bytes": 725,
+      "sha256": "638c4b3672e67b1df81471a21f7ca59ec36650d33eb442aae708cd575c684c1b",
+      "lines": 8,
+      "unabbreviated_scratch_paths": [],
+      "tail": [
+        "Warnings      : 0",
+        "SUCCESS \u2014 all cells executed without error."
+      ]
+    },
+    {
+      "file": "regen_extract_upstream_barotropic_oracle.log",
+      "bytes": 403,
+      "sha256": "25824bc881084ab1c3ccbe4b6de514b59a2a54e1791daf18dd7e828e1b16a3fc",
+      "lines": 2,
+      "unabbreviated_scratch_paths": [],
+      "tail": [
+        "[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.",
+        "Oracle written: artifacts/upstream/oracle_barotropic_perturbations.json (1000 samples x 3 modes; commit/hash unchanged)"
+      ]
+    },
+    {
+      "file": "regen_extract_upstream_oracle.log",
+      "bytes": 396,
+      "sha256": "8d1694f2f4db784545ec3582d7adf3184bab98d6aed4942b7bb22afb64d920db",
+      "lines": 2,
+      "unabbreviated_scratch_paths": [],
+      "tail": [
+        "[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.",
+        "Oracle written: artifacts/upstream/oracle_background.json (501 time samples, 21 quantities, commit 590c6fd5332a)"
+      ]
+    },
+    {
+      "file": "regen_extract_upstream_perturbation_oracle.log",
+      "bytes": 385,
+      "sha256": "ecd33e8009c8d517aa6e58e10dee29bf45e9ddd485306d36321e4f21d0cbfdd2",
+      "lines": 2,
+      "unabbreviated_scratch_paths": [],
+      "tail": [
+        "[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.",
+        "Oracle written: artifacts/upstream/oracle_clean_perturbations.json (1000 samples; notebook unchanged)"
+      ]
+    },
+    {
+      "file": "regen_inputs.sh",
+      "bytes": 585,
+      "sha256": "3b6c7ece10d2c29222c75ff71c671cd1f90b44e20480f6229cbe9263ca05ce3b",
+      "lines": 11,
+      "unabbreviated_scratch_paths": [],
+      "tail": [
+        "  echo \"$s rc=$? seconds=$(( $(date +%s) - t0 ))\"",
+        "done"
+      ]
+    },
+    {
+      "file": "regen_owner_decisions.log",
+      "bytes": 76,
+      "sha256": "27dcdbde42284505053ba67af8d2aee14b8331978f9bcdc59ef810a6b24a8102",
+      "lines": 2,
+      "unabbreviated_scratch_paths": [],
+      "tail": [
+        "124/124 gates pass",
+        "wrote artifacts/independent/phase1g_owner_decisions.json"
+      ]
+    },
+    {
+      "file": "regen_owner_mc.sh",
+      "bytes": 358,
+      "sha256": "83b56b22c36163f99b0981d8aa8c51e9730355bed3ab5c3c848bed36bd1d52f5",
+      "lines": 7,
+      "unabbreviated_scratch_paths": [],
+      "tail": [
+        ".venv/bin/python -B scripts/phase1g_owner_decisions_numerics.py > $R4/regen_owner_decisions.log 2>&1",
+        "echo \"phase1g_owner_decisions_numerics rc=$? seconds=$(( $(date +%s) - t0 ))\""
+      ]
+    },
+    {
+      "file": "regen_validate_barotropic_perturbations.log",
+      "bytes": 437,
+      "sha256": "14020bbdc7dbac797f3584a2bfb68bc8cef3f5dbf8dcb111351a834aa91733a5",
+      "lines": 8,
+      "unabbreviated_scratch_paths": [],
+      "tail": [
+        "Tight explicit worst vs reference: 3.139e-09",
+        "Radau worst vs reference: 2.702e-11"
+      ]
+    },
+    {
+      "file": "regen_validate_growth_pipeline.log",
+      "bytes": 296,
+      "sha256": "e8bb203ef6c1260675e7c01067e20f70a38f3fa8ee002949e981a9dbd230c918",
+      "lines": 8,
+      "unabbreviated_scratch_paths": [],
+      "tail": [
+        "V7: one-factor scenario studies ...",
+        "written artifacts/independent/phase1d_b_growth_validation.json; gates PASSED"
+      ]
+    },
+    {
+      "file": "regression_vs_9ad5425.json",
+      "bytes": 6760,
+      "sha256": "387e37c0e0c9595759eac05225431f28139bbcbf756db588a372c6410b03e2e4",
+      "lines": 79,
+      "unabbreviated_scratch_paths": [],
+      "tail": [
+        " }",
+        "}"
+      ],
+      "json_valid_unique_strict": true
+    },
+    {
+      "file": "round4_kills_beyond_baseline.json",
+      "bytes": 4527,
+      "sha256": "925e37dd86e8fb134c5fe0030857c1fefde9495b1722b3ade40f5ec8ac961483",
+      "lines": 67,
+      "unabbreviated_scratch_paths": [],
+      "tail": [
+        " }",
+        "}"
+      ],
+      "json_valid_unique_strict": true
+    },
+    {
+      "file": "round4_mutant_definitions.json",
+      "bytes": 7152,
+      "sha256": "3f77cbdfb19c6adc18f644dca779601c5466c25c3d31fdd7f61ec6927d695aaa",
+      "lines": 203,
+      "unabbreviated_scratch_paths": [],
+      "tail": [
+        " }",
+        "]"
+      ],
+      "json_valid_unique_strict": true
+    },
+    {
+      "file": "round4_mutant_results.json",
+      "bytes": 15637,
+      "sha256": "dacf2834372223b586d1d2856d6c15d2343ae70524a6b5a5de5516488e802924",
+      "lines": 368,
+      "unabbreviated_scratch_paths": [],
+      "tail": [
+        " }",
+        "]"
+      ],
+      "json_valid_unique_strict": true,
+      "outcomes": {
+        "baseline BASELINE_FAIL": 1,
+        "third_delta_audit KILLED_BY_TESTS": 7,
+        "third_delta_audit SURVIVED": 3,
+        "round4 KILLED_BY_TESTS": 8
+      }
+    },
+    {
+      "file": "round4_mutants.log",
+      "bytes": 2674,
+      "sha256": "30e04165f1b84dd90e7f1c289cc56ec1214909e0ad5c3c9ee7935e71c79c615a",
+      "lines": 19,
+      "unabbreviated_scratch_paths": [],
+      "tail": [
+        "{\"id\": \"L04_anchored_differences_binding_off\", \"outcome\": \"KILLED_BY_TESTS\", \"tests_summary\": \"2 failed, 140 passed in 7.61s\", \"evidence_rc\": null}",
+        "{\"id\": \"L05_anchored_offset_unbound\", \"outcome\": \"KILLED_BY_TESTS\", \"tests_summary\": \"2 failed, 140 passed in 7.47s\", \"evidence_rc\": null}"
+      ]
+    },
+    {
+      "file": "run_mutants_r4.py",
+      "bytes": 3594,
+      "sha256": "10935448bffee4a87c429c7cbafa7a55630d24aacecadf9a478a047a6e7b6062",
+      "lines": 72,
+      "unabbreviated_scratch_paths": [],
+      "tail": [
+        "        print(json.dumps({k: row.get(k) for k in (\"id\", \"outcome\", \"tests_summary\", \"evidence_rc\")}), flush=True)",
+        "OUT.write_text(json.dumps(rows, indent=1) + \"\\n\")"
+      ]
+    },
+    {
+      "file": "scalar_probes_comparison.json",
+      "bytes": 14269,
+      "sha256": "e6ab4178afff882b3dd4489823628ec674cb4511811cfed40949c40e93e34ff4",
+      "lines": 454,
+      "unabbreviated_scratch_paths": [],
+      "tail": [
+        " ]",
+        "}"
+      ],
+      "json_valid_unique_strict": true
+    },
+    {
+      "file": "second_delta_audit_campaign_rerun.json",
+      "bytes": 50372,
+      "sha256": "b7d7d1ec49081176dd6b14e0c7d359b51d315c274106b9f16ef86eff200d6f1a",
+      "lines": 1145,
+      "unabbreviated_scratch_paths": [],
+      "tail": [
+        " }",
+        "]"
+      ],
+      "json_valid_unique_strict": true,
+      "outcomes": {
+        "baseline BASELINE_PASS": 1,
+        "delta KILLED_BY_TESTS": 21,
+        "delta SURVIVED": 2,
+        "author KILLED_BY_TESTS": 9,
+        "author NOT_APPLIED": 1,
+        "own KILLED_BY_TESTS": 22,
+        "own SURVIVED": 1,
+        "round3 KILLED_BY_TESTS": 4
+      }
+    },
+    {
+      "file": "second_delta_audit_campaign_rerun.log",
+      "bytes": 8673,
+      "sha256": "d7dad8b1b85baf37a9f61726ac33f87f282dd02d81ef58334ee60567abd19c66",
+      "lines": 81,
+      "unabbreviated_scratch_paths": [],
+      "tail": [
+        " }",
+        "}"
+      ]
+    },
+    {
+      "file": "suite_head.txt",
+      "bytes": 41,
+      "sha256": "53bc160629d766fd8d6412d59cdc860ba4050e3fc4a6e471a498e47aa2793ef5",
+      "lines": 1,
+      "unabbreviated_scratch_paths": [],
+      "tail": [
+        "6926a636c100d232247e39d71d5b2d6e71a6f917"
+      ]
+    },
+    {
+      "file": "tolerance_audit.log",
+      "bytes": 64,
+      "sha256": "4d88ddcde8f93e4d2a7e913827ee11c952ee838d6be7ee202939d44a1108f273",
+      "lines": 5,
+      "unabbreviated_scratch_paths": [],
+      "tail": [
+        "  \"missing_count\": 0",
+        "}"
+      ]
+    },
+    {
+      "file": "validator.log",
+      "bytes": 5857,
+      "sha256": "8e7728a04bf89b2737cb52eecda1933fe95c4a69a0c819ca56d82edc52e036ab",
+      "lines": 122,
+      "unabbreviated_scratch_paths": [],
+      "tail": [
+        "  \"successor_status_removals\": {}",
+        "}"
+      ]
+    }
+  ],
+  "remote": {
+    "retrieved_at_utc": "2026-10-09T11:01:50.505Z",
+    "branches": {
+      "refs/heads/ccr-555e67be-u11yht": "027b7a413fcee0786b861d5903272e4653d227ed",
+      "refs/heads/ccr-ac582de6-vho99i": "e5170285e1d4b4aa72e907a3a79110d05584c0d9",
+      "refs/heads/claude/zealous-rubin-1m3vf4": "63ca316b87399fc323713338a07519f8bce52113",
+      "refs/heads/experiment/ltb-cmc-background": "28a87a18aed9f85a0e65624fea76b26dfd459a0f",
+      "refs/heads/main": "8d3cdd0533035858c42269cb1dff1a20dcafc7da",
+      "refs/heads/phase-1c-perturbations": "878a97e83357025c78e2fee7bf458c3b22a207d3",
+      "refs/heads/phase-1d-b-growth-pipeline": "93d956d0020f0edec34a44cd9d19f30c085aecc7",
+      "refs/heads/phase-1d-c-observable-closure-audit": "81148eb6be8add842b538e2a21c5cf9782f9e49e",
+      "refs/heads/phase-1d-d-anchored-density-growth": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+      "refs/heads/phase-1d-d-t-d3-frame-mapping": "f960a9054ae9db3a7c378557ac3a2938c5ff7ef0",
+      "refs/heads/phase-1e-a-dressed-observable-bridge-audit": "f4044cbe10a7fbd59d1b14131e2d2e31100984ef",
+      "refs/heads/phase-1e-b-dressed-lightcone-velocity-derivation": "8634f14a35c22983413672075fa7f37f03fd663d",
+      "refs/heads/phase-1e-c-perturbed-dressed-geometry-transfer-closure": "fcbf9c29a28c586044150e6910e1637bc3f6975b",
+      "refs/heads/phase-1e-d-regional-matching-dynamics-design": "2fd3ed2006821bc162fb740bd773f2d0b6e5e0b4",
+      "refs/heads/phase-1e-e-transfer-realization-selection": "1f2800c9685b7ab4c2bbbef3e93d1767073cc783",
+      "refs/heads/phase-1e-f-h1-transfer-realization": "1e0a1772aa01ef312a9c3cae6d3e65c8b4f9cbdd",
+      "refs/heads/phase-1e-g-continuum-h1-realization": "d262099ce3fe977af628ff233abed411e70a3c85",
+      "refs/heads/phase-1f-a-h1-broken-density-spectral-boost": "87af7976b82b0b38e2c3e77dfc9458e664034c5d",
+      "refs/heads/phase-1f-c-r-f4-audit-recovery": "7d5d8ce376554b42bc8374f21ec1223eda3b982f",
+      "refs/heads/phase-1f-d-necessary-bound": "3cd1685855bd78f2833ee91340794bee44b5e48d",
+      "refs/heads/phase-1g-f-successor-g-evolution": "3d3d46ed68fde7e6d4100fe518a76731bd2cf9e9",
+      "refs/heads/phase-1g-h-delta-audit": "5c325e1fd05b343f6d5e93f931038794de4373a2",
+      "refs/heads/phase-1g-h-delta-audit-3": "18bf2fbef880fdfb3c292956aa1f000720930abf",
+      "refs/heads/phase-1g-h-independent-audit": "816dd004763f8de1a8bb09cba9e427a1bd2bb3d1",
+      "refs/heads/phase-1g-owner-decisions": "3c70185cb3eb3aa3734995a2fde43bc25462086e"
+    },
+    "annotated_tag_count": 38,
+    "tag_names_objects_unchanged": true,
+    "tag_count_logical_ref_plus_peeled": 76,
+    "peeled_tags": {
+      "refs/tags/phase-1b-background-v1": {
+        "object_sha": "f678010a5a8584495a81402c17a6b529291de58c",
+        "peeled_sha": "fe8b00fbe8a6bfcd71fa6d7ff5fa4b7cc6b50be4",
+        "type": "commit"
+      },
+      "refs/tags/phase-1c-a-equation-audit-v1": {
+        "object_sha": "1bb5679e85659c40b091476fe5a63bffdd8cf2ff",
+        "peeled_sha": "5d9aa47832c8f02a26c2353d0736531d34dbc59b",
+        "type": "commit"
+      },
+      "refs/tags/phase-1c-b1-clean-systems-v1": {
+        "object_sha": "b0fed30d513b67ca9f53b84a79f47be2ad024846",
+        "peeled_sha": "18b666648649ba1004f7f1219693bab8bc83bc7d",
+        "type": "commit"
+      },
+      "refs/tags/phase-1c-b2-barotropic-v1": {
+        "object_sha": "cf90bcc8377632252dd8f0732d6d36c939e5bf7b",
+        "peeled_sha": "9ec3bcc36bd9d7cc5defe4305c63d44d201a9971",
+        "type": "commit"
+      },
+      "refs/tags/phase-1d-a-growth-observable-audit-v1": {
+        "object_sha": "ff6d27a70fdc6743788523ef1e02f9caf6a66daf",
+        "peeled_sha": "878a97e83357025c78e2fee7bf458c3b22a207d3",
+        "type": "commit"
+      },
+      "refs/tags/phase-1d-b-growth-pipeline-v1": {
+        "object_sha": "7713cb348890416c1e864afabc1109081291d88e",
+        "peeled_sha": "93d956d0020f0edec34a44cd9d19f30c085aecc7",
+        "type": "commit"
+      },
+      "refs/tags/phase-1d-c-observable-closure-audit-v1": {
+        "object_sha": "36edbdd33241e0e125e73fe7e7344ae6adc3e880",
+        "peeled_sha": "81148eb6be8add842b538e2a21c5cf9782f9e49e",
+        "type": "commit"
+      },
+      "refs/tags/phase-1d-d-anchored-density-growth-v1": {
+        "object_sha": "d42519aff3f6028c8d71eb7ef478b79201e422c3",
+        "peeled_sha": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+        "type": "commit"
+      },
+      "refs/tags/phase-1d-d-t-d3-frame-mapping-v1": {
+        "object_sha": "dfa48eef28c19f3e948ffe1e84c732464f265775",
+        "peeled_sha": "f960a9054ae9db3a7c378557ac3a2938c5ff7ef0",
+        "type": "commit"
+      },
+      "refs/tags/phase-1e-a-dressed-observable-bridge-audit-v1": {
+        "object_sha": "bdcbaaca20aed707d43944fc2cd5096b636243b1",
+        "peeled_sha": "f4044cbe10a7fbd59d1b14131e2d2e31100984ef",
+        "type": "commit"
+      },
+      "refs/tags/phase-1e-b-dressed-lightcone-velocity-derivation-v1": {
+        "object_sha": "a08230b0ab275993d9e8645d55532a1336c5f637",
+        "peeled_sha": "8634f14a35c22983413672075fa7f37f03fd663d",
+        "type": "commit"
+      },
+      "refs/tags/phase-1e-c-perturbed-dressed-geometry-transfer-closure-v1": {
+        "object_sha": "0a6dbe6ac27991d6119a4ebc4e84e4a005f3d988",
+        "peeled_sha": "fcbf9c29a28c586044150e6910e1637bc3f6975b",
+        "type": "commit"
+      },
+      "refs/tags/phase-1e-d-regional-matching-dynamics-v1": {
+        "object_sha": "00a9d7e44418496b71ad95cd19390ba79bb3448d",
+        "peeled_sha": "2fd3ed2006821bc162fb740bd773f2d0b6e5e0b4",
+        "type": "commit"
+      },
+      "refs/tags/phase-1e-e-transfer-realization-selection-v1": {
+        "object_sha": "602178e639e3a750a719754fd15b6e61d0850ca8",
+        "peeled_sha": "1f2800c9685b7ab4c2bbbef3e93d1767073cc783",
+        "type": "commit"
+      },
+      "refs/tags/phase-1e-f-h1-transfer-realization-v1": {
+        "object_sha": "50f9b3b8ae84169b9a0109c307d4ba2277ef2cd3",
+        "peeled_sha": "0ad10f45f2e2119a345271449de85aa42469ef49",
+        "type": "commit"
+      },
+      "refs/tags/phase-1e-f-h1-transfer-realization-v2": {
+        "object_sha": "58238a9aeb62033d3bacf5f7e737dea024adb669",
+        "peeled_sha": "1e0a1772aa01ef312a9c3cae6d3e65c8b4f9cbdd",
+        "type": "commit"
+      },
+      "refs/tags/phase-1e-g-continuum-h1-realization-v1": {
+        "object_sha": "064963b54a2e7eac242bf5296b83f14b0821a4bb",
+        "peeled_sha": "75d4f30ae7c63c05e1f0998f5e7e62f4ed3728f1",
+        "type": "commit"
+      },
+      "refs/tags/phase-1e-g-continuum-h1-realization-v2": {
+        "object_sha": "668c73e9e3ef864bb20ee61783a4088ca2acbe73",
+        "peeled_sha": "8fa4ab8fe28c3b4a5598b13b3289f65b83a7f1ca",
+        "type": "commit"
+      },
+      "refs/tags/phase-1e-g-continuum-h1-realization-v3": {
+        "object_sha": "7f7b1a72770cb2efbe90976c2ac7b17df885a331",
+        "peeled_sha": "94c5f8349849628f1533ab69f56d626e16cb4910",
+        "type": "commit"
+      },
+      "refs/tags/phase-1e-g-continuum-h1-realization-v4": {
+        "object_sha": "97c66c812fcbca6c7612fb220970a60cb340f9d4",
+        "peeled_sha": "d262099ce3fe977af628ff233abed411e70a3c85",
+        "type": "commit"
+      },
+      "refs/tags/phase-1f-a-h1-broken-density-spectral-boost-v1": {
+        "object_sha": "c9cd0c5519052d08cf607e725b45dbf8a0cd8a9b",
+        "peeled_sha": "a56fa88b64062761fefc193d7061d1d12ba2dedd",
+        "type": "commit"
+      },
+      "refs/tags/phase-1f-a-h1-broken-density-spectral-boost-v2": {
+        "object_sha": "e2ccb27a4d7e8f60c0c6b0536bde01769af397e9",
+        "peeled_sha": "87af7976b82b0b38e2c3e77dfc9458e664034c5d",
+        "type": "commit"
+      },
+      "refs/tags/phase-1f-b-dust-wall-boost-dynamics-v1": {
+        "object_sha": "d784074049148fad65632fe91848eada8923bb7a",
+        "peeled_sha": "27fd65fd2a05c5b990508d948703897f433b566e",
+        "type": "commit"
+      },
+      "refs/tags/phase-1f-b-dust-wall-boost-dynamics-v2": {
+        "object_sha": "bd1facf1fce246ef6fb42d02f03c5da6c2eef3a0",
+        "peeled_sha": "16440e1a682c8d62d1e1b1d15fe8fad9290fa66a",
+        "type": "commit"
+      },
+      "refs/tags/phase-1f-b-dust-wall-boost-dynamics-v3": {
+        "object_sha": "61dc9cf7602908b563158554d1b991a8d7059ab7",
+        "peeled_sha": "d2f150222cb08565aa9d0822747250309d8aaa67",
+        "type": "commit"
+      },
+      "refs/tags/phase-1f-c-r-astra-audit-remediation-v1": {
+        "object_sha": "3956bfdb3f7dcbffbade69414f69bff0efa94f6c",
+        "peeled_sha": "72d8c51433662947b8981eb970a2bd90a94bbe4e",
+        "type": "commit"
+      },
+      "refs/tags/phase-1f-c-r-astra-audit-remediation-v2": {
+        "object_sha": "841cfb7b435c0042b5835d09aaa71e002b7e6062",
+        "peeled_sha": "118b8f3af3c1360b0da74df8e9a9cb3ba1fed83a",
+        "type": "commit"
+      },
+      "refs/tags/phase-1f-c-r-post-remediation-review-v1": {
+        "object_sha": "d4084287023c77414461a8b5ad465bcc76030998",
+        "peeled_sha": "ce550753f2e0270ddd29b2e81f99cb23b8bf8780",
+        "type": "commit"
+      },
+      "refs/tags/phase-1f-c-wall-common-spacetime-geometry-v1": {
+        "object_sha": "ef3b180e080e299f26316f9f5a30982776378e1e",
+        "peeled_sha": "6a633903fe7355a9892ed61abefece5a7b6f2855",
+        "type": "commit"
+      },
+      "refs/tags/phase-1f-c-wall-common-spacetime-geometry-v2": {
+        "object_sha": "0afeb8fffac66dc182f6edd5885936d6e2779eaf",
+        "peeled_sha": "63d2104575c6a249e5177e47f4a354b660e70e32",
+        "type": "commit"
+      },
+      "refs/tags/phase-1f-d-necessary-bound-v1": {
+        "object_sha": "dc04502d31fdd7cd0d1db199aed02e83066687b4",
+        "peeled_sha": "3cd1685855bd78f2833ee91340794bee44b5e48d",
+        "type": "commit"
+      },
+      "refs/tags/phase-1g-a-sigma8-derivation-path-v1": {
+        "object_sha": "f5fceeae4491afaa418fa1e37322e97a8a924280",
+        "peeled_sha": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f",
+        "type": "commit"
+      },
+      "refs/tags/phase-1g-b-lagrangian-sigma-v1": {
+        "object_sha": "a279464a52eb767e6840be8774375eac7885d5c3",
+        "peeled_sha": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f",
+        "type": "commit"
+      },
+      "refs/tags/phase-1g-c-two-scale-growth-law-v1": {
+        "object_sha": "88e96be855e5aca117e6ac12872fdb5070494b59",
+        "peeled_sha": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f",
+        "type": "commit"
+      },
+      "refs/tags/phase-1g-d-separate-universe-growth-v1": {
+        "object_sha": "e2a3b303e2441dd94971a32b7ec327a44f2af000",
+        "peeled_sha": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f",
+        "type": "commit"
+      },
+      "refs/tags/phase-1g-e-two-phase-sigma-v1": {
+        "object_sha": "2a48639c8cdf6217d6b1c8293a06722eba48e38d",
+        "peeled_sha": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f",
+        "type": "commit"
+      },
+      "refs/tags/phase-1g-f-void-population-v1": {
+        "object_sha": "ca52c94d6ecad2be62016b019d652d9bc6e89dd2",
+        "peeled_sha": "8d3cdd0533035858c42269cb1dff1a20dcafc7da",
+        "type": "commit"
+      },
+      "refs/tags/phase-1g-g-void-evolution-v1": {
+        "object_sha": "d151bd45242eff50ca7fa62bbd50453375737117",
+        "peeled_sha": "8d3cdd0533035858c42269cb1dff1a20dcafc7da",
+        "type": "commit"
+      }
+    },
+    "prs": [
+      {
+        "number": 4,
+        "state": "closed",
+        "head": "phase-1g-f-successor-g-evolution",
+        "merged_at": "2026-10-06T13:12:04Z"
+      },
+      {
+        "number": 3,
+        "state": "closed",
+        "head": "phase-1g-owner-decisions",
+        "merged_at": "2026-09-30T15:55:07Z"
+      },
+      {
+        "number": 2,
+        "state": "closed",
+        "head": "claude/zealous-rubin-1m3vf4",
+        "merged_at": "2026-09-30T06:42:06Z"
+      },
+      {
+        "number": 1,
+        "state": "closed",
+        "head": "claude/loving-dijkstra-esoj6f",
+        "merged_at": "2026-09-23T12:32:02Z"
+      }
+    ],
+    "releases": 0
+  },
+  "diff_check": {
+    "rc": 0
+  },
+  "status_constants_unchanged": {
+    "src/timescape_fsigma8/global_variance.py": true,
+    "src/timescape_fsigma8/lagrangian_sigma.py": true
+  }
+}

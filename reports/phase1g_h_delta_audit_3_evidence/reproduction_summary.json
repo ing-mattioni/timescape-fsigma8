@@ -1,0 +1,341 @@
+{
+  "artifact_hashes": {
+    "py311_ed0ec0c": "0ca46384b46f31042052185067357848a9c23392efde84b5d26d3fd8de0a40c0",
+    "py312_248a06b": "7386417d226c1cb99890df4c09b9cf13956f84c0e39ac47b94ce06ce3333bc40",
+    "py312_ed0ec0c": "b15b070b067a756ecc067d26d057a71501fc7aa238b07178832b0bf93e24a35c"
+  },
+  "claim_counts": {
+    "VERIFIED": 1270
+  },
+  "comparisons": {
+    "cross_interpreter": {
+      "common_leaves": 3843,
+      "common_numeric_leaves": 3201,
+      "differences": [],
+      "max_absolute": 0.0,
+      "max_relative": 0.0,
+      "numeric_changed": 0,
+      "only_new": [],
+      "only_old": [],
+      "other_changed": 0,
+      "detailed_differences_in_main_inventory_claims": false
+    },
+    "same_interpreter_248a06b_vs_ed0ec0c": {
+      "common_leaves": 3837,
+      "common_numeric_leaves": 3197,
+      "differences": [],
+      "max_absolute": 0.0,
+      "max_relative": 0.0,
+      "numeric_changed": 0,
+      "only_new": [
+        "gates/numerics/NW15_CMB_FIT constructive pairs (H25) identity/limit",
+        "gates/numerics/NW15_CMB_FIT constructive pairs (H25) identity/pass",
+        "gates/numerics/NW15_CMB_FIT constructive pairs (H25) identity/value",
+        "gates/numerics/PAPER_REFERENCE constructive pairs (H25) identity/limit",
+        "gates/numerics/PAPER_REFERENCE constructive pairs (H25) identity/pass",
+        "gates/numerics/PAPER_REFERENCE constructive pairs (H25) identity/value"
+      ],
+      "only_old": [
+        "gates/physics/NW15_CMB_FIT constructive pairs (H25) identity/limit",
+        "gates/physics/NW15_CMB_FIT constructive pairs (H25) identity/pass",
+        "gates/physics/NW15_CMB_FIT constructive pairs (H25) identity/value",
+        "gates/physics/PAPER_REFERENCE constructive pairs (H25) identity/limit",
+        "gates/physics/PAPER_REFERENCE constructive pairs (H25) identity/pass",
+        "gates/physics/PAPER_REFERENCE constructive pairs (H25) identity/value"
+      ],
+      "other_changed": 0,
+      "detailed_differences_in_main_inventory_claims": false
+    },
+    "same_interpreter_after_H25_path_move": {
+      "common_leaves": 3843,
+      "common_numeric_leaves": 3201,
+      "differences": [],
+      "max_absolute": 0.0,
+      "max_relative": 0.0,
+      "numeric_changed": 0,
+      "only_new": [],
+      "only_old": [],
+      "other_changed": 0,
+      "detailed_differences_in_main_inventory_claims": false
+    },
+    "saved_delta_89cb041_vs_248a06b": {
+      "common_leaves": 3721,
+      "common_numeric_leaves": 3093,
+      "differences": [],
+      "max_absolute": 0.0007719476316552232,
+      "max_relative": 1.0,
+      "numeric_changed": 159,
+      "only_new": [
+        "cases/NW15_CMB_FIT/growth/G_ode_cross_check",
+        "cases/PAPER_REFERENCE/growth/G_ode_cross_check",
+        "gate_definitions/h25_identity_rel",
+        "gate_definitions/radial_refinement_rel",
+        "gates/numerics/NW15_CMB_FIT constructive pairs radial refinement/limit",
+        "gates/numerics/NW15_CMB_FIT constructive pairs radial refinement/pass",
+        "gates/numerics/NW15_CMB_FIT constructive pairs radial refinement/value",
+        "gates/numerics/PAPER_REFERENCE constructive pairs radial refinement/limit",
+        "gates/numerics/PAPER_REFERENCE constructive pairs radial refinement/pass",
+        "gates/numerics/PAPER_REFERENCE constructive pairs radial refinement/value",
+        "gates/physics/NW15_CMB_FIT constructive pairs (H25) identity/limit",
+        "gates/physics/NW15_CMB_FIT constructive pairs (H25) identity/pass",
+        "gates/physics/NW15_CMB_FIT constructive pairs (H25) identity/value",
+        "gates/physics/PAPER_REFERENCE constructive pairs (H25) identity/limit",
+        "gates/physics/PAPER_REFERENCE constructive pairs (H25) identity/pass",
+        "gates/physics/PAPER_REFERENCE constructive pairs (H25) identity/value",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/h25_identity_max_rel",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/laws/II_same_field/both_walls_conditional_density_covariance_ball",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/laws/II_same_field/radial_refinement_rel",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/laws/II_same_field/sigma_total_from_H25",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/laws/I_independent/both_walls_conditional_density_covariance_ball",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/laws/I_independent/radial_refinement_rel",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/laws/I_independent/sigma_total_from_H25",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/free_construction_choices/0",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/free_construction_choices/1",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/linear_limit/scope",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/ball_variance_unconditionally_normalised_carrier",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/ball_variance_unmasked_conditional_density_II",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/conditional_density_covariance_ratio_II_over_I",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/conditional_normaliser_ratio_m_II",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/laws/II_same_field/both_walls_conditional_density_covariance_ball",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/laws/II_same_field/conditional_normaliser_ratio_m",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/laws/II_same_field/radial_refinement_rel",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/laws/II_same_field/sigma_total_from_H25",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/laws/I_independent/both_walls_conditional_density_covariance_ball",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/laws/I_independent/conditional_normaliser_ratio_m",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/laws/I_independent/radial_refinement_rel",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/laws/I_independent/sigma_total_from_H25",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/unconditional_mean_conditional_contrast_II",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/ball_variance_unconditionally_normalised_carrier",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/ball_variance_unmasked_conditional_density_II",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/conditional_density_covariance_ratio_II_over_I",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/conditional_normaliser_ratio_m_II",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/laws/II_same_field/both_walls_conditional_density_covariance_ball",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/laws/II_same_field/conditional_normaliser_ratio_m",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/laws/II_same_field/radial_refinement_rel",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/laws/II_same_field/sigma_total_from_H25",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/laws/I_independent/both_walls_conditional_density_covariance_ball",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/laws/I_independent/conditional_normaliser_ratio_m",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/laws/I_independent/radial_refinement_rel",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/laws/I_independent/sigma_total_from_H25",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/unconditional_mean_conditional_contrast_II",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/ball_variance_unconditionally_normalised_carrier",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/ball_variance_unmasked_conditional_density_II",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/conditional_density_covariance_ratio_II_over_I",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/conditional_normaliser_ratio_m_II",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/laws/II_same_field/both_walls_conditional_density_covariance_ball",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/laws/II_same_field/conditional_normaliser_ratio_m",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/laws/II_same_field/radial_refinement_rel",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/laws/II_same_field/sigma_total_from_H25",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/laws/I_independent/both_walls_conditional_density_covariance_ball",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/laws/I_independent/conditional_normaliser_ratio_m",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/laws/I_independent/radial_refinement_rel",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/laws/I_independent/sigma_total_from_H25",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/unconditional_mean_conditional_contrast_II",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/not_shared/0",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/not_shared/1",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/radial_intervals",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/radial_refinement_max_rel",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/h25_identity_max_rel",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/laws/II_same_field/both_walls_conditional_density_covariance_ball",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/laws/II_same_field/radial_refinement_rel",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/laws/II_same_field/sigma_total_from_H25",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/laws/I_independent/both_walls_conditional_density_covariance_ball",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/laws/I_independent/radial_refinement_rel",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/laws/I_independent/sigma_total_from_H25",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/free_construction_choices/0",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/free_construction_choices/1",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/linear_limit/scope",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/ball_variance_unconditionally_normalised_carrier",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/ball_variance_unmasked_conditional_density_II",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/conditional_density_covariance_ratio_II_over_I",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/conditional_normaliser_ratio_m_II",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/laws/II_same_field/both_walls_conditional_density_covariance_ball",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/laws/II_same_field/conditional_normaliser_ratio_m",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/laws/II_same_field/radial_refinement_rel",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/laws/II_same_field/sigma_total_from_H25",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/laws/I_independent/both_walls_conditional_density_covariance_ball",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/laws/I_independent/conditional_normaliser_ratio_m",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/laws/I_independent/radial_refinement_rel",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/laws/I_independent/sigma_total_from_H25",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/unconditional_mean_conditional_contrast_II",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/ball_variance_unconditionally_normalised_carrier",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/ball_variance_unmasked_conditional_density_II",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/conditional_density_covariance_ratio_II_over_I",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/conditional_normaliser_ratio_m_II",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/laws/II_same_field/both_walls_conditional_density_covariance_ball",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/laws/II_same_field/conditional_normaliser_ratio_m",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/laws/II_same_field/radial_refinement_rel",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/laws/II_same_field/sigma_total_from_H25",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/laws/I_independent/both_walls_conditional_density_covariance_ball",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/laws/I_independent/conditional_normaliser_ratio_m",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/laws/I_independent/radial_refinement_rel",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/laws/I_independent/sigma_total_from_H25",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/unconditional_mean_conditional_contrast_II",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/ball_variance_unconditionally_normalised_carrier",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/ball_variance_unmasked_conditional_density_II",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/conditional_density_covariance_ratio_II_over_I",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/conditional_normaliser_ratio_m_II",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/laws/II_same_field/both_walls_conditional_density_covariance_ball",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/laws/II_same_field/conditional_normaliser_ratio_m",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/laws/II_same_field/radial_refinement_rel",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/laws/II_same_field/sigma_total_from_H25",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/laws/I_independent/both_walls_conditional_density_covariance_ball",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/laws/I_independent/conditional_normaliser_ratio_m",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/laws/I_independent/radial_refinement_rel",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/laws/I_independent/sigma_total_from_H25",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/unconditional_mean_conditional_contrast_II",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/not_shared/0",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/not_shared/1",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/radial_intervals",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/radial_refinement_max_rel"
+      ],
+      "only_old": [
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/ball_variance_unmasked_density",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/ball_variance_unmasked_density",
+        "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/ball_variance_unmasked_density",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/ball_variance_unmasked_density",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/ball_variance_unmasked_density",
+        "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/ball_variance_unmasked_density"
+      ],
+      "other_changed": 4,
+      "detailed_differences_in_main_inventory_claims": true
+    }
+  },
+  "figures": [
+    {
+      "identical": true,
+      "name": "propagator_scale_dependence.png",
+      "new_sha256": "bcac3ef2dd6a5bc22d170a2bccd667e854fdf7bb710a73d570f99b8721609917",
+      "old_sha256": "bcac3ef2dd6a5bc22d170a2bccd667e854fdf7bb710a73d570f99b8721609917"
+    },
+    {
+      "identical": true,
+      "name": "radius_scan.png",
+      "new_sha256": "bdb399974949f5a0d5fc84a1ad04b0c720fceb48fa7aaf7a7e064c5b25947ac5",
+      "old_sha256": "bdb399974949f5a0d5fc84a1ad04b0c720fceb48fa7aaf7a7e064c5b25947ac5"
+    },
+    {
+      "identical": true,
+      "name": "sigma_vs_void_share.png",
+      "new_sha256": "d8cc903da95fb48a1fd1e27e0645819bd08c995aba0b060ca7bcd261bb39b56f",
+      "old_sha256": "d8cc903da95fb48a1fd1e27e0645819bd08c995aba0b060ca7bcd261bb39b56f"
+    }
+  ],
+  "gates": {
+    "numerics": {
+      "count": 10,
+      "passed": 10
+    },
+    "physics": {
+      "count": 20,
+      "passed": 20
+    },
+    "reproduction": {
+      "count": 6,
+      "passed": 6
+    }
+  },
+  "hashes": [
+    {
+      "actual": "fce37d4e6bef9b778e68ec5bcb306051e07518020622ecbdb9c1c1847d2ba581",
+      "declared": "fce37d4e6bef9b778e68ec5bcb306051e07518020622ecbdb9c1c1847d2ba581",
+      "inventory": "1G-H inventory files.added",
+      "pass": true,
+      "path": "scripts/phase1g_h_configs/gm_bare_pbs_f_median_seed.json"
+    },
+    {
+      "actual": "286cea0cb071b8381fe16025ac99d0d596c8d704282d869ebfe23d80026b3986",
+      "declared": "286cea0cb071b8381fe16025ac99d0d596c8d704282d869ebfe23d80026b3986",
+      "inventory": "1G-H inventory files.added",
+      "pass": true,
+      "path": "scripts/phase1g_h_configs/gm_bare_pbs_w09_seed.json"
+    },
+    {
+      "actual": "41d442557b90a00ddd3d26f263eecea12b982c046656750fa9a1696b6c4d9288",
+      "declared": "41d442557b90a00ddd3d26f263eecea12b982c046656750fa9a1696b6c4d9288",
+      "inventory": "1G-H inventory files.added",
+      "pass": true,
+      "path": "scripts/phase1g_h_configs/nw15_equal_mass_constant_share.json"
+    },
+    {
+      "actual": "e1b583f39f5b81c0b6c2ba5df1877de11bf091011c7c663bd81c9abee1de57f5",
+      "declared": "e1b583f39f5b81c0b6c2ba5df1877de11bf091011c7c663bd81c9abee1de57f5",
+      "inventory": "1G-H inventory files.added",
+      "pass": true,
+      "path": "scripts/phase1g_h_global_variance_case.py"
+    },
+    {
+      "actual": "c16418d3041e6bec6b2e09bf46ef73402e01af23ed7e7df4136831980c744c1c",
+      "declared": "c16418d3041e6bec6b2e09bf46ef73402e01af23ed7e7df4136831980c744c1c",
+      "inventory": "1G-H inventory files.added",
+      "pass": true,
+      "path": "scripts/phase1g_h_global_variance_closure_numerics.py"
+    },
+    {
+      "actual": "9147e3e4fee0a354b1a1a4257752ee84b6b945cf33d379d750ddc35f2dfbb1b2",
+      "declared": "9147e3e4fee0a354b1a1a4257752ee84b6b945cf33d379d750ddc35f2dfbb1b2",
+      "inventory": "1G-H inventory files.added",
+      "pass": true,
+      "path": "src/timescape_fsigma8/global_variance.py"
+    },
+    {
+      "actual": "9841173e7ad5fb925184e4f5a62a1fd9e919201fbb756b10923a722cf682a35e",
+      "declared": "9841173e7ad5fb925184e4f5a62a1fd9e919201fbb756b10923a722cf682a35e",
+      "inventory": "1G-H inventory files.added",
+      "pass": true,
+      "path": "tests/test_phase1g_h_global_variance.py"
+    },
+    {
+      "actual": "c16418d3041e6bec6b2e09bf46ef73402e01af23ed7e7df4136831980c744c1c",
+      "declared": "c16418d3041e6bec6b2e09bf46ef73402e01af23ed7e7df4136831980c744c1c",
+      "inventory": "third-remediation files_changed_sha256",
+      "pass": true,
+      "path": "scripts/phase1g_h_global_variance_closure_numerics.py"
+    },
+    {
+      "actual": "9147e3e4fee0a354b1a1a4257752ee84b6b945cf33d379d750ddc35f2dfbb1b2",
+      "declared": "9147e3e4fee0a354b1a1a4257752ee84b6b945cf33d379d750ddc35f2dfbb1b2",
+      "inventory": "third-remediation files_changed_sha256",
+      "pass": true,
+      "path": "src/timescape_fsigma8/global_variance.py"
+    },
+    {
+      "actual": "9841173e7ad5fb925184e4f5a62a1fd9e919201fbb756b10923a722cf682a35e",
+      "declared": "9841173e7ad5fb925184e4f5a62a1fd9e919201fbb756b10923a722cf682a35e",
+      "inventory": "third-remediation files_changed_sha256",
+      "pass": true,
+      "path": "tests/test_phase1g_h_global_variance.py"
+    }
+  ],
+  "inventory_rounding": {
+    "deviations": [],
+    "matched": 1193,
+    "unmatched": []
+  },
+  "method": {
+    "historical_logs": "recorded prior environment/duration claims cannot be reproduced as present execution; compare semantic result summaries",
+    "numeric_comparison": "exact parsed numeric equality; booleans excluded; environment excluded; figure hash separately",
+    "regression_recount_threshold": "relative difference > 1e-12 using max(abs(old),abs(new))",
+    "rounding": "half-unit of represented inventory precision, minimum abs tolerance 2e-12"
+  },
+  "recount": {
+    "inside": {
+      "common": 204,
+      "max_abs_numeric_change": 0.0007719476316552232,
+      "numeric_changed": 156,
+      "numeric_changed_beyond_1e-12_rel": 140,
+      "only_new": 106,
+      "only_old": 6,
+      "text_changed": 4
+    },
+    "outside": {
+      "common": 3517,
+      "max_abs_numeric_change": 1.1450464257434234e-05,
+      "numeric_changed": 3,
+      "numeric_changed_beyond_1e-12_rel": 3,
+      "only_new": 16,
+      "only_old": 0,
+      "text_changed": 0
+    }
+  }
+}

@@ -1,0 +1,312 @@
+{
+  "date_utc": "2026-10-09T11:06:19.787370+00:00",
+  "stage": "POST_CHECKPOINT_MATCHED_FINITE_LS_RECIPE_EXPLICITLY_NONBLIND_FOR_EXISTING_PRODUCT_VALUES",
+  "author_centred_covariance_values_read": false,
+  "production_module_imported": false,
+  "recipe_correction": "DW=fw0/fwLS*aLS/uLS^(2/3); Dwall=DW*fwLS/fw0. Other independently derived formulas unchanged.",
+  "blind_checkpoint": {
+    "time_utc": "2026-10-09T11:05:14.295239+00:00",
+    "result_sha256": "c16d012100b24c29e42d19067e9cb82f33aa8e1f2ea1bf9d1dcf60ef542aac59",
+    "script_sha256": "502983cdd418c029d7ded134cbb1263ce8aaba923ec408a1f1333d232b627dc9",
+    "author_new_covariance_values_read_before_calculation": false
+  },
+  "script_sha256": "461bd4b19de90f2713c0c28ae3f51ce818c7bae0bc1c979b81ec8310ce708ddc",
+  "cases": {
+    "PAPER_REFERENCE": {
+      "tracker": {
+        "f": 0.737,
+        "H": 73.03,
+        "gamma": 1.3685,
+        "HD": 57.85600077340819,
+        "uLS": 3.380088555844241e-05,
+        "fi": 9.471062089872846e-05,
+        "Dwall": 0.8767784434341327,
+        "DW": 0.23061457227250512,
+        "DV": 7.132537333227973,
+        "om": 0.12047512089055852
+      },
+      "primary": {
+        "R_c_Mpc": 10.104079973310952,
+        "R_hom_c_Mpc": 126.3009996663869,
+        "sigma_unit": 1.127978511897894,
+        "sigma_unit_Rhom": 0.11299360629611115,
+        "p_interval": [
+          9.471062089872846e-05,
+          0.09481289164159742
+        ],
+        "sigma_direct_interval": [
+          0.2608656251274673,
+          0.9982675559021565
+        ],
+        "W09": {
+          "seed_Mpc": 0.7573946306225797,
+          "sigma_seed": 0.0033975735001926556,
+          "sigma_direct": 1.1213626602034692,
+          "sigma_planck_anchored_posthoc": 1.088368548203971,
+          "PBS_share_k0": 0.11080334988867731
+        },
+        "F_median": {
+          "seed_Mpc": 0.1661542226649302,
+          "sigma_seed": 0.005324736635608141,
+          "sigma_direct": 0.810772266865035,
+          "sigma_planck_anchored_posthoc": 0.7869167275926839,
+          "PBS_share_k0": 0.07073496285482604
+        }
+      },
+      "pair": {
+        "R_Mpc": 10.954402300424482,
+        "target_partition_rms": 0.3264,
+        "ell_Mpc": 0.2917210079386034,
+        "signed_mu": 5.004606727560066,
+        "signed_kappa0": 4.03397663622146,
+        "carrier_ball_variance": 0.7010468636704902,
+        "r_s_Mpc": 1.0,
+        "lambda": 0.8137366709755894,
+        "lognormal_kappa0": 1.323338000638904,
+        "conditional_normaliser_m_II": 2.8694134748864495,
+        "ball_weight_norm": 0.9999999999999998,
+        "signed": {
+          "I_independent": {
+            "P11_integral": 0.07653805498627547,
+            "product_moment_excess_ball": 0.7559295860892861,
+            "pair_weighted_pointwise_centred_covariance": 0.7559295860892857,
+            "ball_conditioned_centred_covariance": 0.7559295860892861,
+            "ball_conditioned_mean_psi1": 1.0,
+            "ball_conditioned_mean_psi2": 1.0,
+            "product_minus_pointwise_centred": 0.0,
+            "product_minus_ball_centred": 0.0,
+            "mean_psi_at_separations_Mpc": []
+          },
+          "II_same_field": {
+            "P11_integral": 0.07653805498627547,
+            "product_moment_excess_ball": 0.043189407473617214,
+            "pair_weighted_pointwise_centred_covariance": 0.009755655880674865,
+            "ball_conditioned_centred_covariance": 0.009952291969365534,
+            "ball_conditioned_mean_psi1": 1.016482717759752,
+            "ball_conditioned_mean_psi2": 1.016482717759752,
+            "product_minus_pointwise_centred": 0.033433751592942595,
+            "product_minus_ball_centred": 0.03323711550425168,
+            "mean_psi_at_separations_Mpc": []
+          }
+        },
+        "lognormal": {
+          "I_independent": {
+            "P11_integral": 0.07653805498627547,
+            "product_moment_excess_ball": 0.7869201937811277,
+            "pair_weighted_pointwise_centred_covariance": 0.7869201937811274,
+            "ball_conditioned_centred_covariance": 0.7869201937811277,
+            "ball_conditioned_mean_psi1": 1.0,
+            "ball_conditioned_mean_psi2": 1.0,
+            "product_minus_pointwise_centred": 0.0,
+            "product_minus_ball_centred": 0.0,
+            "mean_psi_at_separations_Mpc": []
+          },
+          "II_same_field": {
+            "P11_integral": 0.07653805498627547,
+            "product_moment_excess_ball": 0.8376932008382652,
+            "pair_weighted_pointwise_centred_covariance": 0.5065966044636834,
+            "ball_conditioned_centred_covariance": 0.5173614585561053,
+            "ball_conditioned_mean_psi1": 1.1490568925349867,
+            "ball_conditioned_mean_psi2": 1.1490568925349867,
+            "product_minus_pointwise_centred": 0.3310965963745818,
+            "product_minus_ball_centred": 0.3203317422821599,
+            "mean_psi_at_separations_Mpc": []
+          }
+        },
+        "asymmetric_tail_direct_quad_checks": [
+          {
+            "r_Mpc": 1.0972267199426828,
+            "rho": 0.5922300888359352,
+            "P_quad": 0.6012728129344451,
+            "P_GL": 0.6012728129344452,
+            "abs_diff": 1.1102230246251565e-16
+          },
+          {
+            "r_Mpc": 5.478987640112476,
+            "rho": 0.13096333715259478,
+            "P_quad": 0.30629082321745277,
+            "P_GL": 0.3062908232174527,
+            "abs_diff": 5.551115123125783e-17
+          },
+          {
+            "r_Mpc": 10.956188790324717,
+            "rho": 0.0524069756710874,
+            "P_quad": 0.23948987735156818,
+            "P_GL": 0.23948987735156813,
+            "abs_diff": 5.551115123125783e-17
+          }
+        ]
+      },
+      "refinement_abs_differences": {
+        "signed.I_independent": {
+          "product_moment_excess_ball": 4.790590146797058e-11,
+          "pair_weighted_pointwise_centred_covariance": 4.790534635645827e-11,
+          "ball_conditioned_centred_covariance": 4.790590146797058e-11
+        },
+        "signed.II_same_field": {
+          "product_moment_excess_ball": 4.7907011690995205e-11,
+          "pair_weighted_pointwise_centred_covariance": 4.790568983170651e-11,
+          "ball_conditioned_centred_covariance": 4.790590146797058e-11
+        },
+        "lognormal.I_independent": {
+          "product_moment_excess_ball": 1.0675749173572058e-10,
+          "pair_weighted_pointwise_centred_covariance": 1.0675715866881319e-10,
+          "ball_conditioned_centred_covariance": 1.0675749173572058e-10
+        },
+        "lognormal.II_same_field": {
+          "product_moment_excess_ball": 9.325451522101957e-11,
+          "pair_weighted_pointwise_centred_covariance": 7.592970696634893e-11,
+          "ball_conditioned_centred_covariance": 7.692757542088202e-11
+        }
+      }
+    },
+    "NW15_CMB_FIT": {
+      "tracker": {
+        "f": 0.627,
+        "H": 61.0,
+        "gamma": 1.3135,
+        "HD": 51.696616316499544,
+        "uLS": 3.0183448047383268e-05,
+        "fi": 5.073475005215061e-05,
+        "Dwall": 0.9455025019917713,
+        "DW": 0.3526903268985117,
+        "DV": 11.327583314531227,
+        "om": 0.13093722890629914
+      },
+      "primary": {
+        "R_c_Mpc": 11.781424150867558,
+        "R_hom_c_Mpc": 147.26780188584445,
+        "sigma_unit": 1.044196530464304,
+        "sigma_unit_Rhom": 0.08987867754637674,
+        "p_interval": [
+          5.073475005215061e-05,
+          0.0692417333772569
+        ],
+        "sigma_direct_interval": [
+          0.36885943313006087,
+          1.161784484340578
+        ],
+        "W09": {
+          "seed_Mpc": 0.8097370448269186,
+          "sigma_seed": 0.0034761351790514607,
+          "sigma_direct": 1.0566325994707644,
+          "sigma_planck_anchored_posthoc": 1.0255430549669966,
+          "PBS_share_k0": 0.06015427448119106
+        },
+        "F_median": {
+          "seed_Mpc": 0.19856863458588078,
+          "sigma_seed": 0.005353519091022287,
+          "sigma_direct": 0.8160588130081785,
+          "sigma_planck_anchored_posthoc": 0.7920477264702304,
+          "PBS_share_k0": 0.039077032273730744
+        }
+      },
+      "pair": {
+        "R_Mpc": 13.114754098360656,
+        "target_partition_rms": 0.3036,
+        "ell_Mpc": 0.5987322484707452,
+        "signed_mu": 3.788835878072951,
+        "signed_kappa0": 3.7332604779578924,
+        "carrier_ball_variance": 0.7344905782919481,
+        "r_s_Mpc": 1.0,
+        "lambda": 0.7851499185658848,
+        "lognormal_kappa0": 1.7483851299024487,
+        "conditional_normaliser_m_II": 2.474113487925912,
+        "ball_weight_norm": 1.0,
+        "signed": {
+          "I_independent": {
+            "P11_integral": 0.15195293175184155,
+            "product_moment_excess_ball": 0.7912641481428393,
+            "pair_weighted_pointwise_centred_covariance": 0.7912641481428391,
+            "ball_conditioned_centred_covariance": 0.7912641481428393,
+            "ball_conditioned_mean_psi1": 1.0,
+            "ball_conditioned_mean_psi2": 1.0,
+            "product_minus_pointwise_centred": 0.0,
+            "product_minus_ball_centred": 0.0,
+            "mean_psi_at_separations_Mpc": []
+          },
+          "II_same_field": {
+            "P11_integral": 0.15195293175184155,
+            "product_moment_excess_ball": 0.06908311291541125,
+            "pair_weighted_pointwise_centred_covariance": 0.022517882191430263,
+            "ball_conditioned_centred_covariance": 0.02286132228354365,
+            "ball_conditioned_mean_psi1": 1.022849837772812,
+            "ball_conditioned_mean_psi2": 1.022849837772812,
+            "product_minus_pointwise_centred": 0.046565230723981,
+            "product_minus_ball_centred": 0.0462217906318676,
+            "mean_psi_at_separations_Mpc": []
+          }
+        },
+        "lognormal": {
+          "I_independent": {
+            "P11_integral": 0.15195293175184155,
+            "product_moment_excess_ball": 0.8407943617975306,
+            "pair_weighted_pointwise_centred_covariance": 0.8407943617975304,
+            "ball_conditioned_centred_covariance": 0.8407943617975306,
+            "ball_conditioned_mean_psi1": 1.0,
+            "ball_conditioned_mean_psi2": 1.0,
+            "product_minus_pointwise_centred": 0.0,
+            "product_minus_ball_centred": 0.0,
+            "mean_psi_at_separations_Mpc": []
+          },
+          "II_same_field": {
+            "P11_integral": 0.15195293175184155,
+            "product_moment_excess_ball": 0.697655401752882,
+            "pair_weighted_pointwise_centred_covariance": 0.4440412052396064,
+            "ball_conditioned_centred_covariance": 0.45029918337596153,
+            "ball_conditioned_mean_psi1": 1.1168510278353692,
+            "ball_conditioned_mean_psi2": 1.1168510278353692,
+            "product_minus_pointwise_centred": 0.25361419651327566,
+            "product_minus_ball_centred": 0.24735621837692046,
+            "mean_psi_at_separations_Mpc": []
+          }
+        },
+        "asymmetric_tail_direct_quad_checks": [
+          {
+            "r_Mpc": 1.3136142189740023,
+            "rho": 0.7642509967746616,
+            "P_quad": 0.8497699462542874,
+            "P_GL": 0.8497699462542874,
+            "abs_diff": 0.0
+          },
+          {
+            "r_Mpc": 6.559515858318266,
+            "rho": 0.17644626725060938,
+            "P_quad": 0.49906218497340255,
+            "P_GL": 0.4990621849734025,
+            "abs_diff": 5.551115123125783e-17
+          },
+          {
+            "r_Mpc": 13.116892907498594,
+            "rho": 0.06663204803548654,
+            "P_quad": 0.4017288218981804,
+            "P_GL": 0.4017288218981803,
+            "abs_diff": 5.551115123125783e-17
+          }
+        ]
+      },
+      "refinement_abs_differences": {
+        "signed.I_independent": {
+          "product_moment_excess_ball": 1.6617146547659445e-08,
+          "pair_weighted_pointwise_centred_covariance": 1.6617146547659445e-08,
+          "ball_conditioned_centred_covariance": 1.6617146547659445e-08
+        },
+        "signed.II_same_field": {
+          "product_moment_excess_ball": 1.661714543743642e-08,
+          "pair_weighted_pointwise_centred_covariance": 1.6617146249287007e-08,
+          "ball_conditioned_centred_covariance": 1.661714632561484e-08
+        },
+        "lognormal.I_independent": {
+          "product_moment_excess_ball": 2.0089782060139783e-08,
+          "pair_weighted_pointwise_centred_covariance": 2.0089782060139783e-08,
+          "ball_conditioned_centred_covariance": 2.0089782060139783e-08
+        },
+        "lognormal.II_same_field": {
+          "product_moment_excess_ball": 1.4792490565795902e-08,
+          "pair_weighted_pointwise_centred_covariance": 1.2462083309738858e-08,
+          "ball_conditioned_centred_covariance": 1.2560513296122622e-08
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+Command: OPENBLAS_NUM_THREADS=1 python -B -W error -m pytest -q -p no:cacheprovider -rs
+Interpreter: CPython 3.11.17; all historical inputs freshly regenerated.
+Completion summary extracted from the completed run; earlier interrupted setup progress excluded.
+1185 passed in 236.46s (0:03:56)
+Exit status: 0

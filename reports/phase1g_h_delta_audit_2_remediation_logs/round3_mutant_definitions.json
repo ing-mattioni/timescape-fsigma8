@@ -1,0 +1,40 @@
+{
+ "adaptations": [
+  {
+   "id": "A01_same_tolerance_widened",
+   "old_audit": [
+    "and _close(float(stored), float(expected)))",
+    "and math.isclose(float(stored), float(expected), rel_tol=1e-3))"
+   ],
+   "old": "and _close(stored, expected))",
+   "new": "and math.isclose(stored, expected, rel_tol=1e-3))",
+   "reason": "GH-D2F4 changed the float branch of _same to compare floats directly; the mutant widens the same comparison to rel_tol 1e-3"
+  }
+ ],
+ "round3_mutants": [
+  {
+   "id": "R01_same_accepts_any_real",
+   "file": "src/timescape_fsigma8/global_variance.py",
+   "old": "    if isinstance(expected, float):\n        return (isinstance(stored, float) and math.isfinite(stored)",
+   "new": "    if isinstance(expected, float):\n        return (isinstance(stored, Real) and math.isfinite(float(stored))"
+  },
+  {
+   "id": "R02_float_type_message_off",
+   "file": "src/timescape_fsigma8/global_variance.py",
+   "old": "        if isinstance(expected, float) and not isinstance(stored, float):",
+   "new": "        if False:"
+  },
+  {
+   "id": "R03_G_not_stored_as_float",
+   "file": "src/timescape_fsigma8/global_variance.py",
+   "old": "        object.__setattr__(self, \"G\", G)\n",
+   "new": ""
+  },
+  {
+   "id": "R04_checks_not_stored_as_float",
+   "file": "src/timescape_fsigma8/global_variance.py",
+   "old": "            object.__setattr__(self, name, _positive(getattr(self, name), name))",
+   "new": "            _positive(getattr(self, name), name)"
+  }
+ ]
+}

@@ -1,0 +1,59 @@
+{
+  "G": 1.0,
+  "background": {
+    "H0_dressed_km_s_Mpc": 73.03,
+    "fv0": 0.737,
+    "label": "PAPER_REFERENCE",
+    "source": "[GM] Sec. 5.1.1 (f_v0 = 0.737, H0 = 73.03 km/s/Mpc)"
+  },
+  "density_identity_tolerance": 1e-13,
+  "early_spectrum": {
+    "A_s": 2.1e-09,
+    "T_cmb_K": 2.7255,
+    "baryon_fraction": 0.1563275916312396,
+    "import_status": "PROVISIONAL_MODEL_IMPORT",
+    "k_pivot_per_Mpc": 0.05,
+    "n_s": 0.9649,
+    "provenance": "Planck 2018 VI (arXiv:1807.06209) Table 2, TT,TE,EE+lowE+lensing; T_cmb 2.7255 K",
+    "transfer_model": "eisenstein_hu_1998_zero_baryon_oscillation"
+  },
+  "growth_checks": "TWO_PHASE_GROWTH_REFERENCE_CHECKS",
+  "homogeneity_premise": {
+    "max_linear_rms": 0.1,
+    "provenance": "[W09] ll. 327-335, 455-458 read as rms <= 0.1 in the top hat of 100 h_bare^-1 Mpc",
+    "radius": {
+      "convention": "bare_length_over_h_bare_volume_average_proper",
+      "explicit_radius_Mpc": "NOT_APPLICABLE",
+      "length_h_inverse_Mpc": 100.0,
+      "reference_omega_m": "NOT_APPLICABLE",
+      "reference_radius_Mpc": "NOT_APPLICABLE"
+    }
+  },
+  "matching": {
+    "provenance": "1G-D Sec. 6 and 1G-F: photon-normalised last scattering, a_LS = 1/1091",
+    "z_last_scattering": 1090.0
+  },
+  "quadrature": "LAGRANGIAN_SIGMA_REFERENCE_QUADRATURE",
+  "radius": {
+    "convention": "bare_length_over_h_bare_volume_average_proper",
+    "explicit_radius_Mpc": "NOT_APPLICABLE",
+    "length_h_inverse_Mpc": 8.0,
+    "reference_omega_m": "NOT_APPLICABLE",
+    "reference_radius_Mpc": "NOT_APPLICABLE"
+  },
+  "seed_quadrature": {
+    "comparison_grid_points": 6001,
+    "grid_points": 12001,
+    "k_max_per_Mpc": 10000.0,
+    "k_min_per_Mpc": 1e-06,
+    "self_convergence_tolerance": 1e-06,
+    "truncation_tolerance": 1e-08
+  },
+  "void_share": {
+    "closure": "gaussian_threshold_seed",
+    "compression": "compressed_with_region",
+    "h_for_void_radius": "dressed",
+    "present_void_radius_h_inverse_Mpc": 15.0,
+    "provenance": "GD-OD1 tracker-consistent seed; [W09] l. 277 30 h^-1 Mpc diameter, dressed h"
+  }
+}

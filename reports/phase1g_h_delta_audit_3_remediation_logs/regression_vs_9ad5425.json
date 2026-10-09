@@ -1,0 +1,79 @@
+{
+ "old_environment": {
+  "git_head": "9ad54253c4ec40cede5690da6659be28e0bd0a2d",
+  "implementation": "CPython",
+  "matplotlib": "3.11.2",
+  "numpy": "2.5.3",
+  "platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
+  "python": "3.13.16",
+  "scipy": "1.18.1",
+  "src_scripts_tests_dirty": false
+ },
+ "new_environment": {
+  "git_head": "6926a636c100d232247e39d71d5b2d6e71a6f917",
+  "implementation": "CPython",
+  "matplotlib": "3.11.2",
+  "numpy": "2.5.3",
+  "platform": "Linux-6.18.44-fc-v80-x86_64-with-glibc2.39",
+  "python": "3.13.16",
+  "scipy": "1.18.1",
+  "src_scripts_tests_dirty": false
+ },
+ "common_leaves": 3830,
+ "numeric_common_leaves": 3185,
+ "numeric_changed": [],
+ "text_changed": [
+  {
+   "leaf": "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/not_shared/1",
+   "old": "the both-walls conditional covariance C_W(r) - 1, which with P11 fixes the total by (H25)",
+   "new": "the both-walls conditional product moment C_W(r) = E[psi1 psi2 | both in walls], which with P11 fixes the total by (H25)"
+  },
+  {
+   "leaf": "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/not_shared/1",
+   "old": "the both-walls conditional covariance C_W(r) - 1, which with P11 fixes the total by (H25)",
+   "new": "the both-walls conditional product moment C_W(r) = E[psi1 psi2 | both in walls], which with P11 fixes the total by (H25)"
+  }
+ ],
+ "only_old": [
+  "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/laws/II_same_field/both_walls_conditional_density_covariance_ball",
+  "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/laws/I_independent/both_walls_conditional_density_covariance_ball",
+  "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/laws/II_same_field/both_walls_conditional_density_covariance_ball",
+  "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/laws/I_independent/both_walls_conditional_density_covariance_ball",
+  "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/laws/II_same_field/both_walls_conditional_density_covariance_ball",
+  "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/laws/I_independent/both_walls_conditional_density_covariance_ball",
+  "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/laws/II_same_field/both_walls_conditional_density_covariance_ball",
+  "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/laws/I_independent/both_walls_conditional_density_covariance_ball",
+  "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/laws/II_same_field/both_walls_conditional_density_covariance_ball",
+  "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/laws/I_independent/both_walls_conditional_density_covariance_ball",
+  "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/laws/II_same_field/both_walls_conditional_density_covariance_ball",
+  "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/laws/I_independent/both_walls_conditional_density_covariance_ball",
+  "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/laws/II_same_field/both_walls_conditional_density_covariance_ball",
+  "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/laws/I_independent/both_walls_conditional_density_covariance_ball",
+  "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/laws/II_same_field/both_walls_conditional_density_covariance_ball",
+  "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/laws/I_independent/both_walls_conditional_density_covariance_ball"
+ ],
+ "only_new": [
+  "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/laws/II_same_field/both_walls_product_moment_excess_ball",
+  "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/laws/I_independent/both_walls_product_moment_excess_ball",
+  "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/laws/II_same_field/both_walls_product_moment_excess_ball",
+  "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/laws/I_independent/both_walls_product_moment_excess_ball",
+  "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/laws/II_same_field/both_walls_product_moment_excess_ball",
+  "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/laws/I_independent/both_walls_product_moment_excess_ball",
+  "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/laws/II_same_field/both_walls_product_moment_excess_ball",
+  "two_phase_covariance/NW15_CMB_FIT/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/laws/I_independent/both_walls_product_moment_excess_ball",
+  "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/laws/II_same_field/both_walls_product_moment_excess_ball",
+  "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/laws/I_independent/both_walls_product_moment_excess_ball",
+  "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/laws/II_same_field/both_walls_product_moment_excess_ball",
+  "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_1_Mpc/laws/I_independent/both_walls_product_moment_excess_ball",
+  "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/laws/II_same_field/both_walls_product_moment_excess_ball",
+  "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_2_Mpc/laws/I_independent/both_walls_product_moment_excess_ball",
+  "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/laws/II_same_field/both_walls_product_moment_excess_ball",
+  "two_phase_covariance/PAPER_REFERENCE/gaussian_threshold_pair/nonnegative_lognormal_pair/members/r_s_4_Mpc/laws/I_independent/both_walls_product_moment_excess_ball"
+ ],
+ "renamed_leaves_equal": {
+  "count": 16,
+  "all_bitwise_equal": true,
+  "old_key": "both_walls_conditional_density_covariance_ball",
+  "new_key": "both_walls_product_moment_excess_ball"
+ }
+}

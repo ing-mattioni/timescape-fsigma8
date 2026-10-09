@@ -1,0 +1,2 @@
+code commit 9ad54253c4ec40cede5690da6659be28e0bd0a2d; src/scripts/tests dirty: False (3.13), False (3.11)
+artifact sha256 (CPython 3.13.16, with figures): 357a7035cedabf17a63437d72e348fcdee2ad9e529c4c50f4e2e95a7926b44c2

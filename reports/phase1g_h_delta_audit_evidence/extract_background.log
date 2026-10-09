@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/031c29bb1e06/repo/scripts/extract_upstream_oracle.py", line 110, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/workspace/scratch/031c29bb1e06/repo/scripts/extract_upstream_oracle.py", line 70, in main
+    import nbformat
+ModuleNotFoundError: No module named 'nbformat'

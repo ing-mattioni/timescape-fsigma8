@@ -1,0 +1,135 @@
+{
+ "baseline_failures": [
+  "tests/test_phase1g_b_owner_decisions.py::test_gb_od3_the_frozen_inventory_is_pinned_to_its_certified_blob"
+ ],
+ "mutants": {
+  "X01_growth_json_check_removed": {
+   "outcome": "SURVIVED",
+   "effective": "SURVIVED",
+   "kills_beyond_baseline": []
+  },
+  "X02_void_share_json_check_removed": {
+   "outcome": "KILLED_BY_TESTS",
+   "effective": "KILLED_BY_TESTS",
+   "kills_beyond_baseline": [
+    "tests/test_phase1g_h_global_variance.py::test_gh_d4f1_seed_share_and_interval_exports_must_be_strict_json"
+   ]
+  },
+  "X03_premise_json_check_removed": {
+   "outcome": "SURVIVED",
+   "effective": "SURVIVED",
+   "kills_beyond_baseline": []
+  },
+  "X04_interval_json_check_removed": {
+   "outcome": "KILLED_BY_TESTS",
+   "effective": "KILLED_BY_TESTS",
+   "kills_beyond_baseline": [
+    "tests/test_phase1g_h_global_variance.py::test_gh_d4f1_seed_share_and_interval_exports_must_be_strict_json"
+   ]
+  },
+  "X05_growth_json_before_validation": {
+   "outcome": "KILLED_BY_TESTS",
+   "effective": "KILLED_BY_TESTS",
+   "kills_beyond_baseline": [
+    "tests/test_phase1g_h_global_variance.py::test_records_reject_tampering",
+    "tests/test_phase1g_h_global_variance.py::test_gh_d2f4_float_results_must_be_floats_and_scalar_inputs_are_stored_as_floats",
+    "tests/test_phase1g_h_global_variance.py::test_gh_d3f3_every_growth_check_and_g_are_stored_as_floats"
+   ]
+  },
+  "X06_growth_ratio_approximate_1e8": {
+   "outcome": "KILLED_BY_TESTS",
+   "effective": "KILLED_BY_TESTS",
+   "kills_beyond_baseline": [
+    "tests/test_phase1g_b_contract_hardening.py::test_anchored_ratio_factors_are_bound_to_the_stored_records[growth_ratio]",
+    "tests/test_phase1g_b_contract_hardening.py::test_anchored_ratio_binding_of_native_floats_is_exact_to_one_ulp[growth_ratio]"
+   ]
+  },
+  "X07_growth_ratio_operands_swapped": {
+   "outcome": "KILLED_BY_TESTS",
+   "effective": "KILLED_BY_TESTS",
+   "kills_beyond_baseline": [
+    "tests/test_phase1g_b_lagrangian_sigma.py::test_volume_average_growth_reproduces_1g_a[PAPER_REFERENCE-comoving-0.402663-0.699461]",
+    "tests/test_phase1g_b_lagrangian_sigma.py::test_volume_average_growth_reproduces_1g_a[PAPER_REFERENCE-meszaros-0.341694-0.593553]",
+    "tests/test_phase1g_b_lagrangian_sigma.py::test_volume_average_growth_reproduces_1g_a[NW15_CMB_FIT-comoving-0.514953-0.858568]",
+    "tests/test_phase1g_b_lagrangian_sigma.py::test_volume_average_growth_reproduces_1g_a[NW15_CMB_FIT-meszaros-0.458563-0.764551]",
+    "tests/test_phase1g_b_lagrangian_sigma.py::test_wall_regional_growth_reproduces_1g_a_and_closed_form[PAPER_REFERENCE-1.112945]",
+    "tests/test_phase1g_b_lagrangian_sigma.py::test_wall_regional_growth_reproduces_1g_a_and_closed_form[NW15_CMB_FIT-1.200172]",
+    "tests/test_phase1g_b_lagrangian_sigma.py::test_anchored_sigma_table_reproduces_1g_a[PAPER_REFERENCE-comoving-equal_mass-12.5702-0.9238-0.5241]",
+    "tests/test_phase1g_b_lagrangian_sigma.py::test_anchored_sigma_table_reproduces_1g_a[PAPER_REFERENCE-comoving-dressed-10.9544-1.0104-0.5733]",
+    "tests/test_phase1g_b_lagrangian_sigma.py::test_anchored_sigma_table_reproduces_1g_a[PAPER_REFERENCE-comoving-bare-10.1041-1.0634-0.6033]",
+    "tests/test_phase1g_b_lagrangian_sigma.py::test_anchored_sigma_table_reproduces_1g_a[PAPER_REFERENCE-meszaros-equal_mass-12.5702-0.9238-0.4447]",
+    "tests/test_phase1g_b_lagrangian_sigma.py::test_anchored_sigma_table_reproduces_1g_a[PAPER_REFERENCE-meszaros-dressed-10.9544-1.0104-0.4865]",
+    "tests/test_phase1g_b_lagrangian_sigma.py::test_anchored_sigma_table_reproduces_1g_a[PAPER_REFERENCE-meszaros-bare-10.1041-1.0634-0.5119]",
+    "tests/test_phase1g_b_lagrangian_sigma.py::test_anchored_sigma_table_reproduces_1g_a[PAPER_REFERENCE-wall-equal_mass-12.5702-0.9238-0.8339]",
+    "tests/test_phase1g_b_lagrangian_sigma.py::test_anchored_sigma_table_reproduces_1g_a[PAPER_REFERENCE-wall-dressed-10.9544-1.0104-0.9121]",
+    "tests/test_phase1g_b_lagrangian_sigma.py::test_anchored_sigma_table_reproduces_1g_a[PAPER_REFERENCE-wall-bare-10.1041-1.0634-0.9599]",
+    "tests/test_phase1g_b_lagrangian_sigma.py::test_anchored_sigma_table_reproduces_1g_a[NW15_CMB_FIT-comoving-equal_mass-12.226-0.9602-0.6687]",
+    "tests/test_phase1g_b_lagrangian_sigma.py::test_anchored_sigma_table_reproduces_1g_a[NW15_CMB_FIT-comoving-dressed-13.1148-0.9153-0.6374]",
+    "tests/test_phase1g_b_lagrangian_sigma.py::test_anchored_sigma_table_reproduces_1g_a[NW15_CMB_FIT-comoving-bare-11.7814-0.9844-0.6855]",
+    "tests/test_phase1g_b_lagrangian_sigma.py::test_anchored_sigma_table_reproduces_1g_a[NW15_CMB_FIT-meszaros-equal_mass-12.226-0.9602-0.5954]",
+    "tests/test_phase1g_b_lagrangian_sigma.py::test_anchored_sigma_table_reproduces_1g_a[NW15_CMB_FIT-meszaros-dressed-13.1148-0.9153-0.5676]",
+    "tests/test_phase1g_b_lagrangian_sigma.py::test_anchored_sigma_table_reproduces_1g_a[NW15_CMB_FIT-meszaros-bare-11.7814-0.9844-0.6104]",
+    "tests/test_phase1g_b_lagrangian_sigma.py::test_anchored_sigma_table_reproduces_1g_a[NW15_CMB_FIT-wall-equal_mass-12.226-0.9602-0.9347]",
+    "tests/test_phase1g_b_lagrangian_sigma.py::test_anchored_sigma_table_reproduces_1g_a[NW15_CMB_FIT-wall-dressed-13.1148-0.9153-0.891]",
+    "tests/test_phase1g_b_lagrangian_sigma.py::test_anchored_sigma_table_reproduces_1g_a[NW15_CMB_FIT-wall-bare-11.7814-0.9844-0.9582]",
+    "tests/test_phase1g_b_lagrangian_sigma.py::test_lcdm_reference_normalisation_within_documented_gate",
+    "tests/test_phase1g_b_lagrangian_sigma.py::test_baryon_fraction_sensitivity_matches_1g_a_band",
+    "tests/test_phase1g_b_lagrangian_sigma.py::test_growth_is_independent_of_H0_time_unit_and_G",
+    "tests/test_phase1g_b_lagrangian_sigma.py::test_naming_firewall_of_1d_c_section_19",
+    "tests/test_phase1g_b_lagrangian_sigma.py::test_status_tokens_are_fixed_and_authorizations_unchanged",
+    "tests/test_phase1g_b_lagrangian_sigma.py::test_records_are_frozen_and_arrays_read_only",
+    "tests/test_phase1g_b_lagrangian_sigma.py::test_result_consistency_is_validated_on_construction",
+    "tests/test_phase1g_b_lagrangian_sigma.py::test_json_serialisation_is_deterministic_and_complete",
+    "tests/test_phase1g_b_lagrangian_sigma.py::test_anchor_contracts_fail_closed",
+    "tests/test_phase1g_b_contract_hardening.py::test_genuine_records_are_accepted_unchanged",
+    "tests/test_phase1g_b_contract_hardening.py::test_anchored_ratio_factors_are_bound_to_the_stored_records[growth_ratio]",
+    "tests/test_phase1g_b_contract_hardening.py::test_anchored_ratio_factors_are_bound_to_the_stored_records[early_spectrum_factor]",
+    "tests/test_phase1g_b_contract_hardening.py::test_anchored_ratio_factors_are_bound_to_the_stored_records[reference_offset_from_anchor]",
+    "tests/test_phase1g_b_contract_hardening.py::test_anchored_ratio_refuses_a_consistent_but_unbound_sigma_ratio",
+    "tests/test_phase1g_b_contract_hardening.py::test_anchored_ratio_names_exactly_the_differing_early_spectrum_inputs",
+    "tests/test_phase1g_b_contract_hardening.py::test_the_decomposition_holds_to_rounding",
+    "tests/test_phase1g_b_contract_hardening.py::test_anchored_ratio_binding_of_native_floats_is_exact_to_one_ulp[growth_ratio]",
+    "tests/test_phase1g_b_contract_hardening.py::test_anchored_ratio_binding_of_native_floats_is_exact_to_one_ulp[early_spectrum_factor]",
+    "tests/test_phase1g_b_contract_hardening.py::test_anchored_ratio_binding_of_native_floats_is_exact_to_one_ulp[reference_offset_from_anchor]"
+   ]
+  },
+  "X08_growth_ratio_float_conversion": {
+   "outcome": "KILLED_BY_TESTS",
+   "effective": "SURVIVED_BEYOND_BASELINE",
+   "kills_beyond_baseline": []
+  },
+  "X09_simpson_exact_error_budget_to_1pct": {
+   "outcome": "SURVIVED",
+   "effective": "SURVIVED",
+   "kills_beyond_baseline": []
+  },
+  "X10_simpson_ratio_budget_to_1pct": {
+   "outcome": "SURVIVED",
+   "effective": "SURVIVED",
+   "kills_beyond_baseline": []
+  },
+  "X11_growth_ratio_approximate_1e12": {
+   "outcome": "KILLED_BY_TESTS",
+   "effective": "KILLED_BY_TESTS",
+   "kills_beyond_baseline": [
+    "tests/test_phase1g_b_contract_hardening.py::test_anchored_ratio_binding_of_native_floats_is_exact_to_one_ulp[growth_ratio]"
+   ]
+  },
+  "D1_adapted_binding_disabled": {
+   "outcome": "KILLED_BY_TESTS",
+   "effective": "KILLED_BY_TESTS",
+   "kills_beyond_baseline": [
+    "tests/test_phase1g_h_global_variance.py::test_gh_df2_records_bind_results_to_their_inputs",
+    "tests/test_phase1g_h_global_variance.py::test_gh_d2f2_binding_boundary_and_record_identities",
+    "tests/test_phase1g_h_global_variance.py::test_gh_d2f4_float_results_must_be_floats_and_scalar_inputs_are_stored_as_floats",
+    "tests/test_phase1g_h_global_variance.py::test_gh_d3f3_float_results_accept_float64_and_subclasses_but_not_float32",
+    "tests/test_phase1g_h_global_variance.py::test_gh_d3f3_binding_tolerance_boundary_with_a_literal_rtol"
+   ]
+  },
+  "X12_lcdm_relative_change_float_conversion": {
+   "outcome": "KILLED_BY_TESTS",
+   "effective": "SURVIVED_BEYOND_BASELINE",
+   "kills_beyond_baseline": []
+  }
+ }
+}

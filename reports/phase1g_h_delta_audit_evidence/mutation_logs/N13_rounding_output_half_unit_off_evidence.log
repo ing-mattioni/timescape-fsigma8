@@ -1,0 +1,127 @@
+wrote artifacts/independent/phase1g_h_global_variance_closure.json (sha256 0d9c0a2fb1887724...)
+anchor factor (Boltzmann/EH98 at Planck) = 0.970577
+
+PAPER_REFERENCE: D_W = 0.230615  D_V = 7.132537  f_v,LS = 9.471062e-05
+  [c_bare_volume_average]  R = 10.1041 Mpc, sigma_u = 1.12798
+    wall_mode_p0                               p0 = 0.00000  G0 = 0.23061  sigma = 0.2601 (anchored 0.2525)  eps_rms = 0.000
+    monotone_lower_p_fvLS                      p0 = 0.00009  G0 = 0.23127  sigma = 0.2609 (anchored 0.2532)  eps_rms = 0.001
+    strict_flat_walls_p1                       p0 = 1.00000  G0 = 7.13254  sigma = 8.0453 (anchored 7.8086)  eps_rms = 10.916
+    pbs_tracker_seed_compressed                p0 = 0.11080  G0 = 0.99537  sigma = 1.1214 (anchored 1.0884)  eps_rms = 1.208
+    pbs_tracker_seed_threshold_only_1G_D       p0 = 0.11071  G0 = 0.99472  sigma = 1.1206 (anchored 1.0877)  eps_rms = 1.207
+    pbs_svdw04_seed_compressed                 p0 = 0.40493  G0 = 3.02540  sigma = 2.6434 (anchored 2.5656)  eps_rms = 3.359
+    pbs_tracker_seed_F_median_compressed       p0 = 0.07073  G0 = 0.71882  sigma = 0.8108 (anchored 0.7869)  eps_rms = 0.772
+    interval W09_10pct_at_100               [0.2609, 0.9983] p <= 0.0948; primary inside: False; primary rms at premise = 0.1125
+    interval W09_10pct_at_150               [0.2609, 1.7036] p <= 0.1854; primary inside: True; primary rms at premise = 0.0659
+    interval W09_several_pct_6pct_at_100    [0.2609, 0.5990] p <= 0.0435; primary inside: False; primary rms at premise = 0.1125
+    interval cell_side_100_as_sphere_62     [0.2609, 0.5697] p <= 0.0398; primary inside: False; primary rms at premise = 0.1971
+  [a_equal_mass]  R = 12.5702 Mpc, sigma_u = 0.97994
+    wall_mode_p0                               p0 = 0.00000  G0 = 0.23061  sigma = 0.2260 (anchored 0.2193)  eps_rms = 0.000
+    monotone_lower_p_fvLS                      p0 = 0.00009  G0 = 0.23127  sigma = 0.2266 (anchored 0.2200)  eps_rms = 0.001
+    strict_flat_walls_p1                       p0 = 1.00000  G0 = 7.13254  sigma = 6.9895 (anchored 6.7838)  eps_rms = 9.484
+    pbs_tracker_seed_compressed                p0 = 0.11080  G0 = 0.99537  sigma = 0.9746 (anchored 0.9459)  eps_rms = 1.050
+    pbs_tracker_seed_threshold_only_1G_D       p0 = 0.11071  G0 = 0.99472  sigma = 0.9739 (anchored 0.9453)  eps_rms = 1.049
+    pbs_svdw04_seed_compressed                 p0 = 0.40493  G0 = 3.02540  sigma = 2.4474 (anchored 2.3754)  eps_rms = 3.123
+    pbs_tracker_seed_F_median_compressed       p0 = 0.07073  G0 = 0.71882  sigma = 0.7044 (anchored 0.6837)  eps_rms = 0.671
+    interval W09_10pct_at_100               [0.2266, 1.1481] p <= 0.1363; primary inside: True; primary rms at premise = 0.0850
+    interval W09_10pct_at_150               [0.2266, 2.0233] p <= 0.2657; primary inside: True; primary rms at premise = 0.0482
+    interval W09_several_pct_6pct_at_100    [0.2266, 0.6889] p <= 0.0684; primary inside: False; primary rms at premise = 0.0850
+    interval cell_side_100_as_sphere_62     [0.2266, 0.6344] p <= 0.0604; primary inside: False; primary rms at premise = 0.1538
+  [b_dressed_wall_comoving]  R = 10.9544 Mpc, sigma_u = 1.07186
+    wall_mode_p0                               p0 = 0.00000  G0 = 0.23061  sigma = 0.2472 (anchored 0.2399)  eps_rms = 0.000
+    monotone_lower_p_fvLS                      p0 = 0.00009  G0 = 0.23127  sigma = 0.2479 (anchored 0.2406)  eps_rms = 0.001
+    strict_flat_walls_p1                       p0 = 1.00000  G0 = 7.13254  sigma = 7.6451 (anchored 7.4201)  eps_rms = 10.373
+    pbs_tracker_seed_compressed                p0 = 0.11080  G0 = 0.99537  sigma = 1.0657 (anchored 1.0344)  eps_rms = 1.148
+    pbs_tracker_seed_threshold_only_1G_D       p0 = 0.11071  G0 = 0.99472  sigma = 1.0650 (anchored 1.0337)  eps_rms = 1.147
+    pbs_svdw04_seed_compressed                 p0 = 0.40493  G0 = 3.02540  sigma = 2.5755 (anchored 2.4998)  eps_rms = 3.278
+    pbs_tracker_seed_F_median_compressed       p0 = 0.07073  G0 = 0.71882  sigma = 0.7704 (anchored 0.7478)  eps_rms = 0.734
+    interval W09_10pct_at_100               [0.2479, 1.0504] p <= 0.1086; primary inside: False; primary rms at premise = 0.1016
+    interval W09_10pct_at_150               [0.2479, 1.8137] p <= 0.2117; primary inside: True; primary rms at premise = 0.0588
+    interval W09_several_pct_6pct_at_100    [0.2479, 0.6302] p <= 0.0518; primary inside: False; primary rms at premise = 0.1016
+    interval cell_side_100_as_sphere_62     [0.2479, 0.5925] p <= 0.0467; primary inside: False; primary rms at premise = 0.1801
+  M3 compressed_with_long_mode: b = 1.35460, G = 1.18769, p_eq = 0.13867
+  M3 universal_wall_density: b = 0.35460, G = 0.31091, p_eq = 0.01163
+  flat-wall capacity radius: 135.58 Mpc
+  fraction above the flat-wall cap at R8: 0.4635
+  void/region radius (c): F median 0.326, W09 1.485
+  step kernel: k_cut = 0.0660432, premise rms 0.09990, target rms 7.2465 (constant-share upper 0.9983)
+  [c_bare_volume_average] pbs_tracker_seed_compressed: direct 1.1214, post-hoc 1.0884, reclosure 1.1137
+  [c_bare_volume_average] pbs_tracker_seed_F_median_compressed: direct 0.8108, post-hoc 0.7869, reclosure 0.8031
+  [a_equal_mass] pbs_tracker_seed_compressed: direct 0.9746, post-hoc 0.9459, reclosure 0.9679
+  [a_equal_mass] pbs_tracker_seed_F_median_compressed: direct 0.7044, post-hoc 0.6837, reclosure 0.6977
+
+NW15_CMB_FIT: D_W = 0.352690  D_V = 11.327583  f_v,LS = 5.073475e-05
+  [c_bare_volume_average]  R = 11.7814 Mpc, sigma_u = 1.04420
+    wall_mode_p0                               p0 = 0.00000  G0 = 0.35269  sigma = 0.3683 (anchored 0.3574)  eps_rms = 0.000
+    monotone_lower_p_fvLS                      p0 = 0.00005  G0 = 0.35325  sigma = 0.3689 (anchored 0.3580)  eps_rms = 0.001
+    strict_flat_walls_p1                       p0 = 1.00000  G0 = 11.32758  sigma = 11.8282 (anchored 11.4802)  eps_rms = 18.865
+    pbs_tracker_seed_compressed                p0 = 0.06015  G0 = 1.01288  sigma = 1.0566 (anchored 1.0255)  eps_rms = 1.133
+    pbs_tracker_seed_threshold_only_1G_D       p0 = 0.06010  G0 = 1.01232  sigma = 1.0561 (anchored 1.0250)  eps_rms = 1.132
+    pbs_svdw04_seed_compressed                 p0 = 0.24937  G0 = 3.08953  sigma = 2.4541 (anchored 2.3819)  eps_rms = 3.465
+    pbs_tracker_seed_F_median_compressed       p0 = 0.03908  G0 = 0.78156  sigma = 0.8161 (anchored 0.7920)  eps_rms = 0.737
+    interval W09_10pct_at_100               [0.3689, 1.1618] p <= 0.0692; primary inside: True; primary rms at premise = 0.0910
+    interval W09_10pct_at_150               [0.3689, 2.0483] p <= 0.1466; primary inside: True; primary rms at premise = 0.0516
+    interval W09_several_pct_6pct_at_100    [0.3689, 0.6971] p <= 0.0287; primary inside: False; primary rms at premise = 0.0910
+    interval cell_side_100_as_sphere_62     [0.3689, 0.6407] p <= 0.0238; primary inside: False; primary rms at premise = 0.1651
+  [a_equal_mass]  R = 12.2260 Mpc, sigma_u = 1.01855
+    wall_mode_p0                               p0 = 0.00000  G0 = 0.35269  sigma = 0.3592 (anchored 0.3487)  eps_rms = 0.000
+    monotone_lower_p_fvLS                      p0 = 0.00005  G0 = 0.35325  sigma = 0.3598 (anchored 0.3492)  eps_rms = 0.001
+    strict_flat_walls_p1                       p0 = 1.00000  G0 = 11.32758  sigma = 11.5377 (anchored 11.1982)  eps_rms = 18.401
+    pbs_tracker_seed_compressed                p0 = 0.06015  G0 = 1.01288  sigma = 1.0307 (anchored 1.0004)  eps_rms = 1.105
+    pbs_tracker_seed_threshold_only_1G_D       p0 = 0.06010  G0 = 1.01232  sigma = 1.0302 (anchored 0.9999)  eps_rms = 1.104
+    pbs_svdw04_seed_compressed                 p0 = 0.24937  G0 = 3.08953  sigma = 2.4237 (anchored 2.3524)  eps_rms = 3.426
+    pbs_tracker_seed_F_median_compressed       p0 = 0.03908  G0 = 0.78156  sigma = 0.7960 (anchored 0.7726)  eps_rms = 0.719
+    interval W09_10pct_at_100               [0.3598, 1.1906] p <= 0.0744; primary inside: True; primary rms at premise = 0.0867
+    interval W09_10pct_at_150               [0.3598, 2.1105] p <= 0.1567; primary inside: True; primary rms at premise = 0.0489
+    interval W09_several_pct_6pct_at_100    [0.3598, 0.7143] p <= 0.0318; primary inside: False; primary rms at premise = 0.0867
+    interval cell_side_100_as_sphere_62     [0.3598, 0.6529] p <= 0.0263; primary inside: False; primary rms at premise = 0.1580
+  [b_dressed_wall_comoving]  R = 13.1148 Mpc, sigma_u = 0.97097
+    wall_mode_p0                               p0 = 0.00000  G0 = 0.35269  sigma = 0.3424 (anchored 0.3324)  eps_rms = 0.000
+    monotone_lower_p_fvLS                      p0 = 0.00005  G0 = 0.35325  sigma = 0.3430 (anchored 0.3329)  eps_rms = 0.001
+    strict_flat_walls_p1                       p0 = 1.00000  G0 = 11.32758  sigma = 10.9987 (anchored 10.6751)  eps_rms = 17.542
+    pbs_tracker_seed_compressed                p0 = 0.06015  G0 = 1.01288  sigma = 0.9827 (anchored 0.9538)  eps_rms = 1.054
+    pbs_tracker_seed_threshold_only_1G_D       p0 = 0.06010  G0 = 1.01232  sigma = 0.9821 (anchored 0.9532)  eps_rms = 1.053
+    pbs_svdw04_seed_compressed                 p0 = 0.24937  G0 = 3.08953  sigma = 2.3629 (anchored 2.2934)  eps_rms = 3.348
+    pbs_tracker_seed_F_median_compressed       p0 = 0.03908  G0 = 0.78156  sigma = 0.7588 (anchored 0.7365)  eps_rms = 0.685
+    interval W09_10pct_at_100               [0.3430, 1.2478] p <= 0.0850; primary inside: True; primary rms at premise = 0.0788
+    interval W09_10pct_at_150               [0.3430, 2.2346] p <= 0.1776; primary inside: True; primary rms at premise = 0.0440
+    interval W09_several_pct_6pct_at_100    [0.3430, 0.7487] p <= 0.0381; primary inside: False; primary rms at premise = 0.0788
+    interval cell_side_100_as_sphere_62     [0.3430, 0.6768] p <= 0.0314; primary inside: False; primary rms at premise = 0.1453
+  M3 compressed_with_long_mode: b = 1.35460, G = 1.28078, p_eq = 0.08456
+  M3 universal_wall_density: b = 0.35460, G = 0.33528, p_eq = -0.00159
+  flat-wall capacity radius: 208.80 Mpc
+  fraction above the flat-wall cap at R8: 0.4789
+  void/region radius (c): F median 0.390, W09 1.589
+  step kernel: k_cut = 0.0690927, premise rms 0.09990, target rms 10.3529 (constant-share upper 1.1618)
+  [c_bare_volume_average] pbs_tracker_seed_compressed: direct 1.0566, post-hoc 1.0255, reclosure 1.0458
+  [c_bare_volume_average] pbs_tracker_seed_F_median_compressed: direct 0.8161, post-hoc 0.7920, reclosure 0.8052
+  [a_equal_mass] pbs_tracker_seed_compressed: direct 1.0307, post-hoc 1.0004, reclosure 1.0202
+  [a_equal_mass] pbs_tracker_seed_F_median_compressed: direct 0.7960, post-hoc 0.7726, reclosure 0.7854
+
+PAPER_REFERENCE GT pair at R = 10.9544 Mpc, ell = 0.2917 Mpc:
+  signed I_independent   sigma_part = 0.3264  sigma_wall = 0.9146  cross = +0.0000  total = 0.9711  P(rho<0|wall) = 0.4476
+  signed II_same_field   sigma_part = 0.3264  sigma_wall = 0.1063  cross = +0.0365  total = 0.3928  P(rho<0|wall) = 0.4429
+  lognormal r_s_1_Mpc: lambda = 0.8137, latent point variance 2.684, density point variance 13.64; II/I = 1.0283
+    I_independent   sigma_part = 0.3264  sigma_wall = 0.9331  cross = +0.0000  total = 0.9886
+    II_same_field   sigma_part = 0.3264  sigma_wall = 0.7727  cross = +0.3299  total = 1.0166
+  lognormal r_s_2_Mpc: lambda = 0.8695, latent point variance 1.595, density point variance 3.93; II/I = 1.1865
+    I_independent   sigma_part = 0.3264  sigma_wall = 0.9119  cross = +0.0000  total = 0.9685
+    II_same_field   sigma_part = 0.3264  sigma_wall = 0.9028  cross = +0.3991  total = 1.1492
+  lognormal r_s_4_Mpc: lambda = 0.9984, latent point variance 0.967, density point variance 1.63; II/I = 1.2932
+    I_independent   sigma_part = 0.3264  sigma_wall = 0.8959  cross = -0.0000  total = 0.9535
+    II_same_field   sigma_part = 0.3264  sigma_wall = 0.9838  cross = +0.4459  total = 1.2330
+  lognormal linear limit: max wall-moment rel. difference 9.31e-03
+
+NW15_CMB_FIT GT pair at R = 13.1148 Mpc, ell = 0.5987 Mpc:
+  signed I_independent   sigma_part = 0.3036  sigma_wall = 0.9296  cross = +0.0000  total = 0.9779  P(rho<0|wall) = 0.4548
+  signed II_same_field   sigma_part = 0.3036  sigma_wall = 0.1598  cross = +0.0499  total = 0.4094  P(rho<0|wall) = 0.4527
+  lognormal r_s_1_Mpc: lambda = 0.7851, latent point variance 3.353, density point variance 27.59; II/I = 0.9194
+    I_independent   sigma_part = 0.3036  sigma_wall = 0.9583  cross = +0.0000  total = 1.0052
+    II_same_field   sigma_part = 0.3036  sigma_wall = 0.7118  cross = +0.2552  total = 0.9242
+  lognormal r_s_2_Mpc: lambda = 0.8392, latent point variance 1.993, density point variance 6.33; II/I = 1.0495
+    I_independent   sigma_part = 0.3036  sigma_wall = 0.9333  cross = +0.0000  total = 0.9814
+    II_same_field   sigma_part = 0.3036  sigma_wall = 0.8090  cross = +0.3143  total = 1.0300
+  lognormal r_s_4_Mpc: lambda = 0.9493, latent point variance 1.171, density point variance 2.23; II/I = 1.1879
+    I_independent   sigma_part = 0.3036  sigma_wall = 0.9147  cross = +0.0000  total = 0.9638
+    II_same_field   sigma_part = 0.3036  sigma_wall = 0.9191  cross = +0.3739  total = 1.1449
+  lognormal linear limit: max wall-moment rel. difference 6.41e-03
+all 32 gates pass

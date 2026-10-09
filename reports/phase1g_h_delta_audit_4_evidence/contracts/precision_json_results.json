@@ -1,0 +1,144 @@
+{
+ "environment": {
+  "python": "3.13.16 (main, Oct  3 2026, 01:06:22) [Clang 22.1.3 ]",
+  "numpy": "2.5.3"
+ },
+ "probes": [
+  {
+   "id": "float32_anchor_growth_ratio",
+   "old_value": 1.1129452345080468,
+   "stored_as_python_float": 1.1129451990127563,
+   "exact_native_equality": false,
+   "numpy_equality": true,
+   "relative_error": 3.189311511839373e-08,
+   "accepted": true,
+   "strict_json": false,
+   "json_error": "Object of type float32 is not JSON serializable"
+  },
+  {
+   "id": "float32_anchor_early_spectrum_factor",
+   "old_value": 1.072560440280522,
+   "stored_as_python_float": 1.072560429573059,
+   "exact_native_equality": false,
+   "numpy_equality": true,
+   "relative_error": 9.983085814273185e-09,
+   "accepted": true,
+   "strict_json": false,
+   "json_error": "Object of type float32 is not JSON serializable"
+  },
+  {
+   "id": "float32_anchor_reference_offset_from_anchor",
+   "old_value": 0.0,
+   "stored_as_python_float": 0.0,
+   "exact_native_equality": true,
+   "numpy_equality": true,
+   "relative_error": 0.0,
+   "accepted": true,
+   "strict_json": false,
+   "json_error": "Object of type float32 is not JSON serializable"
+  },
+  {
+   "id": "float32_reference_quadrature_relative_change",
+   "old_value": 1.590787501726254e-10,
+   "stored_as_python_float": 1.590787501726254e-10,
+   "exact_native_equality": true,
+   "numpy_equality": true,
+   "relative_error": 0.0,
+   "accepted": true,
+   "strict_json": false,
+   "json_error": "Object of type float32 is not JSON serializable"
+  },
+  {
+   "id": "float32_reference_truncation_envelope_fraction",
+   "old_value": 4.004195683877756e-12,
+   "stored_as_python_float": 4.004195846424308e-12,
+   "exact_native_equality": false,
+   "numpy_equality": true,
+   "relative_error": 4.059405804762382e-08,
+   "accepted": true,
+   "strict_json": false,
+   "json_error": "Object of type float32 is not JSON serializable"
+  },
+  {
+   "id": "reference_truncation_zero",
+   "original_value": 4.004195683877756e-12,
+   "note": "finite bounded diagnostic, intentionally not recomputed",
+   "accepted": true,
+   "strict_json": true
+  },
+  {
+   "id": "premise_nonjson_radius",
+   "accepted": true,
+   "strict_json": true
+  },
+  {
+   "id": "growth_nonjson_background",
+   "accepted": true,
+   "strict_json": true
+  },
+  {
+   "id": "identity_boundary_9.5e-13",
+   "requested_relative_drift": 9.5e-13,
+   "actual_relative_drift": 9.499039945862474e-13,
+   "margin_vs_rtol": 0.9499039945862474,
+   "accepted": true,
+   "strict_json": true
+  },
+  {
+   "id": "identity_boundary_1.05e-12",
+   "requested_relative_drift": 1.05e-12,
+   "actual_relative_drift": 1.049979533202081e-12,
+   "margin_vs_rtol": 1.0499795332020812,
+   "accepted": false,
+   "exception": "GlobalVarianceContractError",
+   "message": "sigma record: void_volume_response_rms differs from its recomputation from the stored inputs"
+  }
+ ],
+ "json_coverage": [
+  {
+   "class": "LastScatteringMatching",
+   "last_statement": "_require_strict_json(self.to_metadata(), 'matching')",
+   "json_last": true
+  },
+  {
+   "class": "TwoPhaseGrowthChecks",
+   "last_statement": "_require_strict_json(self.to_metadata(), 'growth checks')",
+   "json_last": true
+  },
+  {
+   "class": "TwoPhaseGlobalGrowth",
+   "last_statement": "_require_strict_json(self.to_json_dict(), 'growth record')",
+   "json_last": true
+  },
+  {
+   "class": "ConstantVoidShare",
+   "last_statement": "_require_strict_json(self.to_metadata(), 'constant void share')",
+   "json_last": true
+  },
+  {
+   "class": "GaussianThresholdSeedVoidShare",
+   "last_statement": "_require_strict_json(self.to_metadata(), 'seed void share')",
+   "json_last": true
+  },
+  {
+   "class": "EvaluatedVoidShare",
+   "last_statement": "_require_strict_json(self.to_json_dict(), 'void share')",
+   "json_last": true
+  },
+  {
+   "class": "ConditionalGlobalLinearSigma",
+   "last_statement": "_require_strict_json(self.to_json_dict(), 'sigma record')",
+   "json_last": true
+  },
+  {
+   "class": "HomogeneityPremise",
+   "last_statement": "_require_strict_json(self.to_metadata(), 'homogeneity premise')",
+   "json_last": true
+  },
+  {
+   "class": "AdmissibleGlobalLinearInterval",
+   "last_statement": "_require_strict_json(self.to_json_dict(), 'interval record')",
+   "json_last": true
+  }
+ ]
+}

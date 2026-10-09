@@ -1,0 +1,29 @@
+......................F.....                                             [100%]
+=================================== FAILURES ===================================
+________________ test_two_barrier_mass_fraction_and_global_bias ________________
+
+    def test_two_barrier_mass_fraction_and_global_bias():
+        d_c = 3 * (12 * math.pi) ** (2 / 3) / 20
+        d_v, x = -2.7171803438378705, 0.20472233400490963
+        m = gv.two_barrier_void_mass_fraction(collapse_threshold=d_c, void_threshold=d_v,
+                                              long_mode_contrast=0.0)
+        assert m == pytest.approx(0.3829709426561785, rel=1e-12, abs=0.0)          # 1G-F successor Sec. 2
+        out = gv.two_barrier_global_linear_bias(collapse_threshold=d_c, void_threshold=d_v,
+                                                void_to_wall_density_ratio=x,
+                                                wall_response=gv.WallLongModeResponse.COMPRESSED_WITH_LONG_MODE)
+        assert out["void_volume_fraction"] == pytest.approx(0.7519694338440862, rel=1e-12, abs=0.0)
+        # Gambler's ruin by a discrete symmetric walk started at delta_l (independent).
+        h = 0.05
+        for dl in (-0.5, 0.0, 0.7):
+            n_up, n_down = round((d_c - dl) / h), round((dl - d_v) / h)
+>           assert n_up / (n_up + n_down) == pytest.approx(
+                gv.two_barrier_void_mass_fraction(collapse_threshold=d_c, void_threshold=d_v,
+                                                  long_mode_contrast=dl), abs=h / (d_c - d_v), rel=0.0)
+E           assert 0.5 == 0.26942878143...47 ± 0.0113542
+E
+E             comparison failed
+E             Obtained: 0.5
+E             Expected: 0.26942878143321347 ± 0.0113542
+
+tests/test_phase1g_h_global_variance.py:530: AssertionError
+1 failed, 27 passed in 5.99s

@@ -1,0 +1,35 @@
+[
+ {
+  "id": "X08_growth_ratio_float_conversion",
+  "gate_rc": 0,
+  "tail": [
+   "V6_lcdm_reference_offset_from_anchor_abs: max 3.032e-02 (n=1) gate 5.0e-02 PASS",
+   "V7_inventory_growth_six_decimals_abs: max 4.227e-07 (n=11) gate 5.0e-07 PASS",
+   "V7_inventory_fv0_scan_four_decimals_abs: max 4.942e-05 (n=20) gate 5.0e-05 PASS",
+   "V7_inventory_sigma_table_four_decimals_abs: max 4.990e-05 (n=44) gate 5.0e-05 PASS",
+   "V7_inventory_per_photon_density_five_decimals_abs: max 4.879e-06 (n=3) gate 5.0e-06 PASS"
+  ]
+ },
+ {
+  "id": "X11_growth_ratio_approximate_1e12",
+  "gate_rc": 0,
+  "tail": [
+   "V6_lcdm_reference_offset_from_anchor_abs: max 3.032e-02 (n=1) gate 5.0e-02 PASS",
+   "V7_inventory_growth_six_decimals_abs: max 4.227e-07 (n=11) gate 5.0e-07 PASS",
+   "V7_inventory_fv0_scan_four_decimals_abs: max 4.942e-05 (n=20) gate 5.0e-05 PASS",
+   "V7_inventory_sigma_table_four_decimals_abs: max 4.990e-05 (n=44) gate 5.0e-05 PASS",
+   "V7_inventory_per_photon_density_five_decimals_abs: max 4.879e-06 (n=3) gate 5.0e-06 PASS"
+  ]
+ },
+ {
+  "id": "X12_lcdm_relative_change_float_conversion",
+  "gate_rc": 0,
+  "tail": [
+   "V6_lcdm_reference_offset_from_anchor_abs: max 3.032e-02 (n=1) gate 5.0e-02 PASS",
+   "V7_inventory_growth_six_decimals_abs: max 4.227e-07 (n=11) gate 5.0e-07 PASS",
+   "V7_inventory_fv0_scan_four_decimals_abs: max 4.942e-05 (n=20) gate 5.0e-05 PASS",
+   "V7_inventory_sigma_table_four_decimals_abs: max 4.990e-05 (n=44) gate 5.0e-05 PASS",
+   "V7_inventory_per_photon_density_five_decimals_abs: max 4.879e-06 (n=3) gate 5.0e-06 PASS"
+  ]
+ }
+]

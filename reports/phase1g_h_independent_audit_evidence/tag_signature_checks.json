@@ -1,0 +1,149 @@
+[
+  {
+    "tag": "phase-1g-a-sigma8-derivation-path-v1",
+    "tag_object": "f5fceeae4491afaa418fa1e37322e97a8a924280",
+    "reconstructed_object_sha": "f5fceeae4491afaa418fa1e37322e97a8a924280",
+    "git_sha_matches": true,
+    "target": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f",
+    "tagger_date_utc": "2026-09-30T15:55:29Z",
+    "embedded_key_fingerprint": "SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y",
+    "cryptographic_check_without_identity_trust": {
+      "command": "ssh-keygen -Y check-novalidate -n git -s SIGNATURE < PAYLOAD",
+      "returncode": 0,
+      "stdout": "Good \"git\" signature with ED25519 key SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y\n",
+      "stderr": ""
+    },
+    "github_verification": {
+      "verified": true,
+      "reason": "valid",
+      "verified_at": "2026-10-01T20:41:57Z"
+    },
+    "owner_trust_verification": "NOT_PERFORMED_NO_ESTABLISHED_TRUST_CONFIG_AVAILABLE"
+  },
+  {
+    "tag": "phase-1g-b-lagrangian-sigma-v1",
+    "tag_object": "a279464a52eb767e6840be8774375eac7885d5c3",
+    "reconstructed_object_sha": "a279464a52eb767e6840be8774375eac7885d5c3",
+    "git_sha_matches": true,
+    "target": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f",
+    "tagger_date_utc": "2026-09-30T15:55:29Z",
+    "embedded_key_fingerprint": "SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y",
+    "cryptographic_check_without_identity_trust": {
+      "command": "ssh-keygen -Y check-novalidate -n git -s SIGNATURE < PAYLOAD",
+      "returncode": 0,
+      "stdout": "Good \"git\" signature with ED25519 key SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y\n",
+      "stderr": ""
+    },
+    "github_verification": {
+      "verified": true,
+      "reason": "valid",
+      "verified_at": "2026-10-01T20:41:57Z"
+    },
+    "owner_trust_verification": "NOT_PERFORMED_NO_ESTABLISHED_TRUST_CONFIG_AVAILABLE"
+  },
+  {
+    "tag": "phase-1g-c-two-scale-growth-law-v1",
+    "tag_object": "88e96be855e5aca117e6ac12872fdb5070494b59",
+    "reconstructed_object_sha": "88e96be855e5aca117e6ac12872fdb5070494b59",
+    "git_sha_matches": true,
+    "target": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f",
+    "tagger_date_utc": "2026-09-30T15:55:30Z",
+    "embedded_key_fingerprint": "SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y",
+    "cryptographic_check_without_identity_trust": {
+      "command": "ssh-keygen -Y check-novalidate -n git -s SIGNATURE < PAYLOAD",
+      "returncode": 0,
+      "stdout": "Good \"git\" signature with ED25519 key SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y\n",
+      "stderr": ""
+    },
+    "github_verification": {
+      "verified": true,
+      "reason": "valid",
+      "verified_at": "2026-10-01T20:41:57Z"
+    },
+    "owner_trust_verification": "NOT_PERFORMED_NO_ESTABLISHED_TRUST_CONFIG_AVAILABLE"
+  },
+  {
+    "tag": "phase-1g-d-separate-universe-growth-v1",
+    "tag_object": "e2a3b303e2441dd94971a32b7ec327a44f2af000",
+    "reconstructed_object_sha": "e2a3b303e2441dd94971a32b7ec327a44f2af000",
+    "git_sha_matches": true,
+    "target": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f",
+    "tagger_date_utc": "2026-09-30T15:55:30Z",
+    "embedded_key_fingerprint": "SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y",
+    "cryptographic_check_without_identity_trust": {
+      "command": "ssh-keygen -Y check-novalidate -n git -s SIGNATURE < PAYLOAD",
+      "returncode": 0,
+      "stdout": "Good \"git\" signature with ED25519 key SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y\n",
+      "stderr": ""
+    },
+    "github_verification": {
+      "verified": true,
+      "reason": "valid",
+      "verified_at": "2026-10-01T20:41:57Z"
+    },
+    "owner_trust_verification": "NOT_PERFORMED_NO_ESTABLISHED_TRUST_CONFIG_AVAILABLE"
+  },
+  {
+    "tag": "phase-1g-e-two-phase-sigma-v1",
+    "tag_object": "2a48639c8cdf6217d6b1c8293a06722eba48e38d",
+    "reconstructed_object_sha": "2a48639c8cdf6217d6b1c8293a06722eba48e38d",
+    "git_sha_matches": true,
+    "target": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f",
+    "tagger_date_utc": "2026-09-30T15:55:30Z",
+    "embedded_key_fingerprint": "SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y",
+    "cryptographic_check_without_identity_trust": {
+      "command": "ssh-keygen -Y check-novalidate -n git -s SIGNATURE < PAYLOAD",
+      "returncode": 0,
+      "stdout": "Good \"git\" signature with ED25519 key SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y\n",
+      "stderr": ""
+    },
+    "github_verification": {
+      "verified": true,
+      "reason": "valid",
+      "verified_at": "2026-10-01T20:41:57Z"
+    },
+    "owner_trust_verification": "NOT_PERFORMED_NO_ESTABLISHED_TRUST_CONFIG_AVAILABLE"
+  },
+  {
+    "tag": "phase-1g-f-void-population-v1",
+    "tag_object": "ca52c94d6ecad2be62016b019d652d9bc6e89dd2",
+    "reconstructed_object_sha": "ca52c94d6ecad2be62016b019d652d9bc6e89dd2",
+    "git_sha_matches": true,
+    "target": "8d3cdd0533035858c42269cb1dff1a20dcafc7da",
+    "tagger_date_utc": "2026-10-06T13:32:56Z",
+    "embedded_key_fingerprint": "SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y",
+    "cryptographic_check_without_identity_trust": {
+      "command": "ssh-keygen -Y check-novalidate -n git -s SIGNATURE < PAYLOAD",
+      "returncode": 0,
+      "stdout": "Good \"git\" signature with ED25519 key SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y\n",
+      "stderr": ""
+    },
+    "github_verification": {
+      "verified": true,
+      "reason": "valid",
+      "verified_at": "2026-10-06T19:21:05Z"
+    },
+    "owner_trust_verification": "NOT_PERFORMED_NO_ESTABLISHED_TRUST_CONFIG_AVAILABLE"
+  },
+  {
+    "tag": "phase-1g-g-void-evolution-v1",
+    "tag_object": "d151bd45242eff50ca7fa62bbd50453375737117",
+    "reconstructed_object_sha": "d151bd45242eff50ca7fa62bbd50453375737117",
+    "git_sha_matches": true,
+    "target": "8d3cdd0533035858c42269cb1dff1a20dcafc7da",
+    "tagger_date_utc": "2026-10-06T13:32:56Z",
+    "embedded_key_fingerprint": "SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y",
+    "cryptographic_check_without_identity_trust": {
+      "command": "ssh-keygen -Y check-novalidate -n git -s SIGNATURE < PAYLOAD",
+      "returncode": 0,
+      "stdout": "Good \"git\" signature with ED25519 key SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y\n",
+      "stderr": ""
+    },
+    "github_verification": {
+      "verified": true,
+      "reason": "valid",
+      "verified_at": "2026-10-06T19:21:05Z"
+    },
+    "owner_trust_verification": "NOT_PERFORMED_NO_ESTABLISHED_TRUST_CONFIG_AVAILABLE"
+  }
+]

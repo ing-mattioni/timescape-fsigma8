@@ -1,0 +1,13 @@
+.................................F.                                      [100%]
+=================================== FAILURES ===================================
+__________ test_gh_f10_orthant_quadrature_meets_its_accuracy_contract __________
+tests/test_phase1g_h_global_variance.py:823: in test_gh_f10_orthant_quadrature_meets_its_accuracy_contract
+    assert prob(rho, 0.0, 0.0) == pytest.approx(0.25 + math.asin(rho) / (2 * math.pi),
+E   assert 3.135781199378967e-33 == 0.00022507909...0913 ± 1.0e-12
+E
+E     comparison failed
+E     Obtained: 3.135781199378967e-33
+E     Expected: 0.0002250790977990913 ± 1.0e-12
+=========================== short test summary info ============================
+FAILED tests/test_phase1g_h_global_variance.py::test_gh_f10_orthant_quadrature_meets_its_accuracy_contract
+1 failed, 34 passed in 13.03s

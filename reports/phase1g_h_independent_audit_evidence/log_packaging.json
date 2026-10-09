@@ -1,0 +1,62 @@
+[
+  {
+    "delivered_sha256": "6ab367ee1a6772df3ee4ceb4291e5fa6cf99a6d7112dadf96cb18c550e05d7af",
+    "original_sha256": "54298271e8b95f4a4a6354d40c7c1794e70cc697914129f7440a4a3d0cdae86f",
+    "path": "reports/phase1g_h_independent_audit.md",
+    "transformation": "Only trailing line whitespace removed; line text, counts and outcomes preserved."
+  },
+  {
+    "delivered_sha256": "3d1906ca1a69da71d93688ac6eefb66e1a578b6d25acf8fa81278d27b6399783",
+    "original_sha256": "2ae3c525cda95417b0d45671d6d218661f3ac60f13e6ccb66afc27458dc8ca50",
+    "path": "reports/phase1g_h_independent_audit_evidence/notebook.log",
+    "transformation": "Only trailing line whitespace removed; line text, counts and outcomes preserved."
+  },
+  {
+    "delivered_sha256": "1a62f2c45d02f44026392580e58ae9c04e5e0def9cd5e092fa8aa5227f2b49fd",
+    "original_sha256": "67aaef0770f0fccb1a582e2dcf9e3913469245d4981e935442b474467662f4a8",
+    "path": "reports/phase1g_h_independent_audit_evidence/mutation_logs/M2_remove_wall_gamma.log",
+    "transformation": "Only trailing line whitespace removed; line text, counts and outcomes preserved."
+  },
+  {
+    "delivered_sha256": "aa159b678e128184fc22b949e3a07ad0fd0ed8016a8cf84b3ec32dc6f6b8febd",
+    "original_sha256": "4cd2a02a90fce29beff9fdabb1a2023f8ad8ba7c82abf39d3d3591c29c8c64cb",
+    "path": "reports/phase1g_h_independent_audit_evidence/mutation_logs/M8_reverse_barrier_response.log",
+    "transformation": "Only trailing line whitespace removed; line text, counts and outcomes preserved."
+  },
+  {
+    "delivered_sha256": "c57ee0d02f31c95fe2140e59991915ff56d9a9ea4cb0511e371f86ac5def875a",
+    "original_sha256": "389be867ae397822cde2e15b0bc11c643383f3bfc9057857456a42ece444966f",
+    "path": "reports/phase1g_h_independent_audit_evidence/mutation_logs/M3_missing_void_redshift.log",
+    "transformation": "Only trailing line whitespace removed; line text, counts and outcomes preserved."
+  },
+  {
+    "delivered_sha256": "f6651d171a4d0f1ebea0a758340289f0144c1a4ebaa68383a3087743721c266a",
+    "original_sha256": "d3cd19703b4617ce6dba652c6408f02b4774e2b7c9665a5634505710d45c861b",
+    "path": "reports/phase1g_h_independent_audit_evidence/mutation_logs/M1_wall_exponent.log",
+    "transformation": "Only trailing line whitespace removed; line text, counts and outcomes preserved."
+  },
+  {
+    "delivered_sha256": "3226f6d99686cc11e27aeb97cf863154645c10cecbae129a240a6c72fcca82ca",
+    "original_sha256": "4b77a54e3e79b203a346af46ba292c7e60c3c631233ada8d2f5bebec1b6e567f",
+    "path": "reports/phase1g_h_independent_audit_evidence/mutation_logs/M7_shift_orthant_lower.log",
+    "transformation": "Only trailing line whitespace removed; line text, counts and outcomes preserved."
+  },
+  {
+    "delivered_sha256": "6343b5e827a6b4dae55f2b848e02a42e30d2d51d7e72b6ba21cd9c84cdf19058",
+    "original_sha256": "e8d48b192e63d2fcfd17703fc904708a633279141ece25165d133f91335a8188",
+    "path": "reports/phase1g_h_independent_audit_evidence/mutation_logs/M5_seed_window_unity.log",
+    "transformation": "Only trailing line whitespace removed; line text, counts and outcomes preserved."
+  },
+  {
+    "delivered_sha256": "526255d81a3345a4d6380eb3fbc85b354edadcf75462d77d9d386dc6d8c9bd32",
+    "original_sha256": "330d5ff2678a49be03066740fcc0d5117e23d377bf51a56fe897f5e9896bbf40",
+    "path": "reports/phase1g_h_independent_audit_evidence/mutation_logs/M6_swap_phase_weights.log",
+    "transformation": "Only trailing line whitespace removed; line text, counts and outcomes preserved."
+  },
+  {
+    "delivered_sha256": "7d243cf747ccf7c7f8b275d8d46ec45901991cee6dbb9e637db2066feb474df7",
+    "original_sha256": "8b174591dd897fa4f88cc4381fcbf290dc1249025a9efb57afcd6ddb3864bee2",
+    "path": "reports/phase1g_h_independent_audit_evidence/mutation_logs/M4_reverse_compression.log",
+    "transformation": "Only trailing line whitespace removed; line text, counts and outcomes preserved."
+  }
+]

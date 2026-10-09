@@ -1,0 +1,8 @@
+Written: artifacts/independent/phase1c_b2_oracle_comparison.json
+Written: artifacts/independent/phase1c_b2_convergence.json
+Written: artifacts/independent/phase1c_b2_d2_d3_factorial.json
+Written: artifacts/independent/phase1c_b2_scenario_effects.json
+Written: artifacts/independent/phase1c_b2_figure_endpoints.json
+Oracle worst normalized L-inf: 1.476e-14
+Tight explicit worst vs reference: 3.139e-09
+Radau worst vs reference: 2.702e-11

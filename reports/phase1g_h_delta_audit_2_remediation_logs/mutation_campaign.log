@@ -1,0 +1,81 @@
+{"id": "baseline", "outcome": "BASELINE_PASS", "tests_summary": "49 passed in 14.61s", "evidence_rc": 0}
+{"id": "M1_wall_exponent", "outcome": "KILLED_BY_TESTS", "tests_summary": "14 failed, 25 passed, 10 errors in 7.89s", "evidence_rc": null}
+{"id": "M2_remove_wall_gamma", "outcome": "KILLED_BY_TESTS", "tests_summary": "14 failed, 25 passed, 10 errors in 7.66s", "evidence_rc": null}
+{"id": "M3_missing_void_redshift", "outcome": "KILLED_BY_TESTS", "tests_summary": "14 failed, 25 passed, 10 errors in 6.87s", "evidence_rc": null}
+{"id": "M4_reverse_compression", "outcome": "KILLED_BY_TESTS", "tests_summary": "8 failed, 41 passed in 12.84s", "evidence_rc": null}
+{"id": "M5_seed_window_unity", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 48 passed in 16.21s", "evidence_rc": null}
+{"id": "M6_swap_phase_weights", "outcome": "KILLED_BY_TESTS", "tests_summary": "6 failed, 43 passed in 15.33s", "evidence_rc": null}
+{"id": "M7_shift_orthant_lower", "outcome": "KILLED_BY_TESTS", "tests_summary": "8 failed, 41 passed in 10.27s", "evidence_rc": null}
+{"id": "M8_reverse_barrier_response", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 48 passed in 14.60s", "evidence_rc": null}
+{"id": "N1_growth_record_validation_off", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 48 passed in 13.95s", "evidence_rc": null}
+{"id": "N2_void_share_record_validation_off", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 48 passed in 15.03s", "evidence_rc": null}
+{"id": "N3_sigma_record_validation_off", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 48 passed in 14.75s", "evidence_rc": null}
+{"id": "N4_interval_record_validation_off", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 48 passed in 12.56s", "evidence_rc": null}
+{"id": "N5_orthant_centre_split_off", "outcome": "SURVIVED", "tests_summary": "49 passed in 12.16s", "evidence_rc": 0}
+{"id": "N6_orthant_transition_edges_off", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 48 passed in 15.24s", "evidence_rc": null}
+{"id": "N7_orthant_refinement_off", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 48 passed in 13.07s", "evidence_rc": null}
+{"id": "N8_frechet_gate_off", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 48 passed in 14.20s", "evidence_rc": null}
+{"id": "N9_void_share_identity_text_sign_reversed", "outcome": "SURVIVED", "tests_summary": "49 passed in 13.90s", "evidence_rc": 0}
+{"id": "N9b_pbs_executable_response_sign_reversed", "outcome": "KILLED_BY_TESTS", "tests_summary": "11 failed, 38 passed in 13.73s", "evidence_rc": null}
+{"id": "N10_reclosure_factor_unsquared", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 48 passed in 15.63s", "evidence_rc": 1}
+{"id": "N11_lognormal_wall_normalization_off", "outcome": "KILLED_BY_TESTS", "tests_summary": "5 failed, 44 passed in 16.65s", "evidence_rc": 1}
+{"id": "N12_lognormal_lambda_not_squared", "outcome": "KILLED_BY_TESTS", "tests_summary": "3 failed, 46 passed in 12.79s", "evidence_rc": 1}
+{"id": "N13_rounding_output_half_unit_off", "outcome": "KILLED_BY_TESTS", "tests_summary": "2 failed, 47 passed in 15.09s", "evidence_rc": 0}
+{"id": "N14_step_cutoff_shifted", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 48 passed in 14.93s", "evidence_rc": 1}
+{"id": "AUTH_N1_growth_fv0_check_off", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 48 passed in 15.90s", "evidence_rc": null}
+{"id": "AUTH_N4_interval_target_inside_off", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 48 passed in 14.40s", "evidence_rc": null}
+{"id": "AUTH_N8_frechet_gate_off", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 48 passed in 14.73s", "evidence_rc": null}
+{"id": "AUTH_N13_rounding_output_half_unit_off", "outcome": "KILLED_BY_TESTS", "tests_summary": "2 failed, 47 passed in 13.68s", "evidence_rc": 0}
+{"id": "AUTH_D1_binding_off", "outcome": "NOT_APPLIED", "tests_summary": null, "evidence_rc": null}
+{"id": "AUTH_D2_sigma_spectrum_identity_off", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 48 passed in 13.59s", "evidence_rc": null}
+{"id": "AUTH_D3_radius_reresolution_off", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 48 passed in 14.66s", "evidence_rc": null}
+{"id": "AUTH_D4_symmetry_check_off", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 48 passed in 13.24s", "evidence_rc": null}
+{"id": "AUTH_D5_lognormal_normaliser_unit", "outcome": "KILLED_BY_TESTS", "tests_summary": "3 failed, 46 passed in 13.26s", "evidence_rc": 0}
+{"id": "AUTH_D6_ball_first_panel_dropped", "outcome": "KILLED_BY_TESTS", "tests_summary": "2 failed, 47 passed in 13.31s", "evidence_rc": 1}
+{"id": "A01_same_tolerance_widened", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 48 passed in 16.31s", "evidence_rc": null}
+{"id": "A02_same_bool_type_check_off", "outcome": "SURVIVED", "tests_summary": "49 passed in 15.72s", "evidence_rc": 0}
+{"id": "A03_same_tuple_elements_unchecked", "outcome": "KILLED_BY_TESTS", "tests_summary": "2 failed, 47 passed in 13.84s", "evidence_rc": null}
+{"id": "A04_interval_convention_check_off", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 48 passed in 13.98s", "evidence_rc": null}
+{"id": "A05_growth_assumptions_check_off", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 48 passed in 14.17s", "evidence_rc": null}
+{"id": "A06_sigma_caveats_check_off", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 48 passed in 12.38s", "evidence_rc": null}
+{"id": "A07_interval_assumptions_check_off", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 48 passed in 13.73s", "evidence_rc": null}
+{"id": "A08_numerical_error_not_converted", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 48 passed in 13.96s", "evidence_rc": null}
+{"id": "A09_void_share_background_identity_off", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 48 passed in 13.90s", "evidence_rc": null}
+{"id": "A10_growth_binding_off", "outcome": "KILLED_BY_TESTS", "tests_summary": "2 failed, 47 passed in 10.56s", "evidence_rc": null}
+{"id": "A11_void_share_binding_off", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 48 passed in 15.16s", "evidence_rc": null}
+{"id": "A12_sigma_binding_off", "outcome": "KILLED_BY_TESTS", "tests_summary": "3 failed, 46 passed in 12.00s", "evidence_rc": null}
+{"id": "A13_interval_binding_off", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 48 passed in 14.62s", "evidence_rc": null}
+{"id": "A14_record_identity_rtol_5pct", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 48 passed in 13.81s", "evidence_rc": null}
+{"id": "A15_ball_coarse_equals_fine", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 48 passed in 13.63s", "evidence_rc": 0}
+{"id": "A16_ball_coarse_stride_3", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 48 passed in 14.25s", "evidence_rc": 1}
+{"id": "A17_h25_sum_cross_once", "outcome": "KILLED_BY_TESTS", "tests_summary": "2 failed, 47 passed in 13.57s", "evidence_rc": 1}
+{"id": "A18_cw_unweighted_average", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 48 passed in 16.03s", "evidence_rc": 0}
+{"id": "A19_lambda_calibration_off_by_1pct", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 48 passed in 13.14s", "evidence_rc": 1}
+{"id": "A20_covariance_ratio_not_squared", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 48 passed in 13.91s", "evidence_rc": 0}
+{"id": "A21_lognormal_cross_kernel_normaliser_off", "outcome": "KILLED_BY_TESTS", "tests_summary": "4 failed, 45 passed in 13.54s", "evidence_rc": 1}
+{"id": "A22_h25_gate_disabled", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 48 passed in 13.42s", "evidence_rc": 0}
+{"id": "A23_radial_gate_disabled", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 48 passed in 13.48s", "evidence_rc": 0}
+{"id": "R01_same_accepts_any_real", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 48 passed in 15.36s", "evidence_rc": null}
+{"id": "R02_float_type_message_off", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 48 passed in 14.36s", "evidence_rc": null}
+{"id": "R03_G_not_stored_as_float", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 48 passed in 13.50s", "evidence_rc": null}
+{"id": "R04_checks_not_stored_as_float", "outcome": "KILLED_BY_TESTS", "tests_summary": "1 failed, 48 passed in 13.14s", "evidence_rc": null}
+{
+ "baseline": {
+  "BASELINE_PASS": 1
+ },
+ "delta": {
+  "KILLED_BY_TESTS": 21,
+  "SURVIVED": 2
+ },
+ "author": {
+  "KILLED_BY_TESTS": 9,
+  "NOT_APPLIED": 1
+ },
+ "own": {
+  "KILLED_BY_TESTS": 22,
+  "SURVIVED": 1
+ },
+ "round3": {
+  "KILLED_BY_TESTS": 4
+ }
+}

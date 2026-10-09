@@ -1,0 +1,768 @@
+{
+  "scope": "Reduced scientific verification, section 5.C",
+  "science_verdict": "ACCEPT",
+  "new_scientific_findings": [],
+  "third_delta_finding_resolution": {
+    "GH-D3F5": "RESOLVED"
+  },
+  "definitions": {
+    "product_moment_excess": "integral(w_R*P11*(CW-1))/integral(w_R*P11)",
+    "pair_weighted_pointwise_centred_covariance": "integral(w_R*P11*(CW-m1(r)*m2(r)))/integral(w_R*P11)",
+    "ball_conditioned_centred_covariance": "E_ball[psi1*psi2|both walls]-E_ball[psi1|both walls]*E_ball[psi2|both walls]"
+  },
+  "matched_results": {
+    "PAPER_REFERENCE": {
+      "tracker": {
+        "f": 0.737,
+        "H": 73.03,
+        "gamma": 1.3685,
+        "HD": 57.85600077340819,
+        "uLS": 3.380088555844241e-05,
+        "fi": 9.471062089872846e-05,
+        "Dwall": 0.8767784434341327,
+        "DW": 0.23061457227250512,
+        "DV": 7.132537333227973,
+        "om": 0.12047512089055852
+      },
+      "primary": {
+        "R_c_Mpc": 10.104079973310952,
+        "R_hom_c_Mpc": 126.3009996663869,
+        "sigma_unit": 1.127978511897894,
+        "sigma_unit_Rhom": 0.11299360629611115,
+        "p_interval": [
+          9.471062089872846e-05,
+          0.09481289164159742
+        ],
+        "sigma_direct_interval": [
+          0.2608656251274673,
+          0.9982675559021565
+        ],
+        "W09": {
+          "seed_Mpc": 0.7573946306225797,
+          "sigma_seed": 0.0033975735001926556,
+          "sigma_direct": 1.1213626602034692,
+          "sigma_planck_anchored_posthoc": 1.088368548203971,
+          "PBS_share_k0": 0.11080334988867731
+        },
+        "F_median": {
+          "seed_Mpc": 0.1661542226649302,
+          "sigma_seed": 0.005324736635608141,
+          "sigma_direct": 0.810772266865035,
+          "sigma_planck_anchored_posthoc": 0.7869167275926839,
+          "PBS_share_k0": 0.07073496285482604
+        }
+      },
+      "pair": {
+        "R_Mpc": 10.954402300424482,
+        "target_partition_rms": 0.3264,
+        "ell_Mpc": 0.2917210079386034,
+        "signed_mu": 5.004606727560066,
+        "signed_kappa0": 4.03397663622146,
+        "carrier_ball_variance": 0.7010468636704902,
+        "r_s_Mpc": 1.0,
+        "lambda": 0.8137366709755894,
+        "lognormal_kappa0": 1.323338000638904,
+        "conditional_normaliser_m_II": 2.8694134748864495,
+        "ball_weight_norm": 0.9999999999999998,
+        "signed": {
+          "I_independent": {
+            "P11_integral": 0.07653805498627547,
+            "product_moment_excess_ball": 0.7559295860892861,
+            "pair_weighted_pointwise_centred_covariance": 0.7559295860892857,
+            "ball_conditioned_centred_covariance": 0.7559295860892861,
+            "ball_conditioned_mean_psi1": 1.0,
+            "ball_conditioned_mean_psi2": 1.0,
+            "product_minus_pointwise_centred": 0.0,
+            "product_minus_ball_centred": 0.0,
+            "mean_psi_at_separations_Mpc": []
+          },
+          "II_same_field": {
+            "P11_integral": 0.07653805498627547,
+            "product_moment_excess_ball": 0.043189407473617214,
+            "pair_weighted_pointwise_centred_covariance": 0.009755655880674865,
+            "ball_conditioned_centred_covariance": 0.009952291969365534,
+            "ball_conditioned_mean_psi1": 1.016482717759752,
+            "ball_conditioned_mean_psi2": 1.016482717759752,
+            "product_minus_pointwise_centred": 0.033433751592942595,
+            "product_minus_ball_centred": 0.03323711550425168,
+            "mean_psi_at_separations_Mpc": []
+          }
+        },
+        "lognormal": {
+          "I_independent": {
+            "P11_integral": 0.07653805498627547,
+            "product_moment_excess_ball": 0.7869201937811277,
+            "pair_weighted_pointwise_centred_covariance": 0.7869201937811274,
+            "ball_conditioned_centred_covariance": 0.7869201937811277,
+            "ball_conditioned_mean_psi1": 1.0,
+            "ball_conditioned_mean_psi2": 1.0,
+            "product_minus_pointwise_centred": 0.0,
+            "product_minus_ball_centred": 0.0,
+            "mean_psi_at_separations_Mpc": []
+          },
+          "II_same_field": {
+            "P11_integral": 0.07653805498627547,
+            "product_moment_excess_ball": 0.8376932008382652,
+            "pair_weighted_pointwise_centred_covariance": 0.5065966044636834,
+            "ball_conditioned_centred_covariance": 0.5173614585561053,
+            "ball_conditioned_mean_psi1": 1.1490568925349867,
+            "ball_conditioned_mean_psi2": 1.1490568925349867,
+            "product_minus_pointwise_centred": 0.3310965963745818,
+            "product_minus_ball_centred": 0.3203317422821599,
+            "mean_psi_at_separations_Mpc": []
+          }
+        },
+        "asymmetric_tail_direct_quad_checks": [
+          {
+            "r_Mpc": 1.0972267199426828,
+            "rho": 0.5922300888359352,
+            "P_quad": 0.6012728129344451,
+            "P_GL": 0.6012728129344452,
+            "abs_diff": 1.1102230246251565e-16
+          },
+          {
+            "r_Mpc": 5.478987640112476,
+            "rho": 0.13096333715259478,
+            "P_quad": 0.30629082321745277,
+            "P_GL": 0.3062908232174527,
+            "abs_diff": 5.551115123125783e-17
+          },
+          {
+            "r_Mpc": 10.956188790324717,
+            "rho": 0.0524069756710874,
+            "P_quad": 0.23948987735156818,
+            "P_GL": 0.23948987735156813,
+            "abs_diff": 5.551115123125783e-17
+          }
+        ]
+      },
+      "refinement_abs_differences": {
+        "signed.I_independent": {
+          "product_moment_excess_ball": 4.790590146797058e-11,
+          "pair_weighted_pointwise_centred_covariance": 4.790534635645827e-11,
+          "ball_conditioned_centred_covariance": 4.790590146797058e-11
+        },
+        "signed.II_same_field": {
+          "product_moment_excess_ball": 4.7907011690995205e-11,
+          "pair_weighted_pointwise_centred_covariance": 4.790568983170651e-11,
+          "ball_conditioned_centred_covariance": 4.790590146797058e-11
+        },
+        "lognormal.I_independent": {
+          "product_moment_excess_ball": 1.0675749173572058e-10,
+          "pair_weighted_pointwise_centred_covariance": 1.0675715866881319e-10,
+          "ball_conditioned_centred_covariance": 1.0675749173572058e-10
+        },
+        "lognormal.II_same_field": {
+          "product_moment_excess_ball": 9.325451522101957e-11,
+          "pair_weighted_pointwise_centred_covariance": 7.592970696634893e-11,
+          "ball_conditioned_centred_covariance": 7.692757542088202e-11
+        }
+      }
+    },
+    "NW15_CMB_FIT": {
+      "tracker": {
+        "f": 0.627,
+        "H": 61.0,
+        "gamma": 1.3135,
+        "HD": 51.696616316499544,
+        "uLS": 3.0183448047383268e-05,
+        "fi": 5.073475005215061e-05,
+        "Dwall": 0.9455025019917713,
+        "DW": 0.3526903268985117,
+        "DV": 11.327583314531227,
+        "om": 0.13093722890629914
+      },
+      "primary": {
+        "R_c_Mpc": 11.781424150867558,
+        "R_hom_c_Mpc": 147.26780188584445,
+        "sigma_unit": 1.044196530464304,
+        "sigma_unit_Rhom": 0.08987867754637674,
+        "p_interval": [
+          5.073475005215061e-05,
+          0.0692417333772569
+        ],
+        "sigma_direct_interval": [
+          0.36885943313006087,
+          1.161784484340578
+        ],
+        "W09": {
+          "seed_Mpc": 0.8097370448269186,
+          "sigma_seed": 0.0034761351790514607,
+          "sigma_direct": 1.0566325994707644,
+          "sigma_planck_anchored_posthoc": 1.0255430549669966,
+          "PBS_share_k0": 0.06015427448119106
+        },
+        "F_median": {
+          "seed_Mpc": 0.19856863458588078,
+          "sigma_seed": 0.005353519091022287,
+          "sigma_direct": 0.8160588130081785,
+          "sigma_planck_anchored_posthoc": 0.7920477264702304,
+          "PBS_share_k0": 0.039077032273730744
+        }
+      },
+      "pair": {
+        "R_Mpc": 13.114754098360656,
+        "target_partition_rms": 0.3036,
+        "ell_Mpc": 0.5987322484707452,
+        "signed_mu": 3.788835878072951,
+        "signed_kappa0": 3.7332604779578924,
+        "carrier_ball_variance": 0.7344905782919481,
+        "r_s_Mpc": 1.0,
+        "lambda": 0.7851499185658848,
+        "lognormal_kappa0": 1.7483851299024487,
+        "conditional_normaliser_m_II": 2.474113487925912,
+        "ball_weight_norm": 1.0,
+        "signed": {
+          "I_independent": {
+            "P11_integral": 0.15195293175184155,
+            "product_moment_excess_ball": 0.7912641481428393,
+            "pair_weighted_pointwise_centred_covariance": 0.7912641481428391,
+            "ball_conditioned_centred_covariance": 0.7912641481428393,
+            "ball_conditioned_mean_psi1": 1.0,
+            "ball_conditioned_mean_psi2": 1.0,
+            "product_minus_pointwise_centred": 0.0,
+            "product_minus_ball_centred": 0.0,
+            "mean_psi_at_separations_Mpc": []
+          },
+          "II_same_field": {
+            "P11_integral": 0.15195293175184155,
+            "product_moment_excess_ball": 0.06908311291541125,
+            "pair_weighted_pointwise_centred_covariance": 0.022517882191430263,
+            "ball_conditioned_centred_covariance": 0.02286132228354365,
+            "ball_conditioned_mean_psi1": 1.022849837772812,
+            "ball_conditioned_mean_psi2": 1.022849837772812,
+            "product_minus_pointwise_centred": 0.046565230723981,
+            "product_minus_ball_centred": 0.0462217906318676,
+            "mean_psi_at_separations_Mpc": []
+          }
+        },
+        "lognormal": {
+          "I_independent": {
+            "P11_integral": 0.15195293175184155,
+            "product_moment_excess_ball": 0.8407943617975306,
+            "pair_weighted_pointwise_centred_covariance": 0.8407943617975304,
+            "ball_conditioned_centred_covariance": 0.8407943617975306,
+            "ball_conditioned_mean_psi1": 1.0,
+            "ball_conditioned_mean_psi2": 1.0,
+            "product_minus_pointwise_centred": 0.0,
+            "product_minus_ball_centred": 0.0,
+            "mean_psi_at_separations_Mpc": []
+          },
+          "II_same_field": {
+            "P11_integral": 0.15195293175184155,
+            "product_moment_excess_ball": 0.697655401752882,
+            "pair_weighted_pointwise_centred_covariance": 0.4440412052396064,
+            "ball_conditioned_centred_covariance": 0.45029918337596153,
+            "ball_conditioned_mean_psi1": 1.1168510278353692,
+            "ball_conditioned_mean_psi2": 1.1168510278353692,
+            "product_minus_pointwise_centred": 0.25361419651327566,
+            "product_minus_ball_centred": 0.24735621837692046,
+            "mean_psi_at_separations_Mpc": []
+          }
+        },
+        "asymmetric_tail_direct_quad_checks": [
+          {
+            "r_Mpc": 1.3136142189740023,
+            "rho": 0.7642509967746616,
+            "P_quad": 0.8497699462542874,
+            "P_GL": 0.8497699462542874,
+            "abs_diff": 0.0
+          },
+          {
+            "r_Mpc": 6.559515858318266,
+            "rho": 0.17644626725060938,
+            "P_quad": 0.49906218497340255,
+            "P_GL": 0.4990621849734025,
+            "abs_diff": 5.551115123125783e-17
+          },
+          {
+            "r_Mpc": 13.116892907498594,
+            "rho": 0.06663204803548654,
+            "P_quad": 0.4017288218981804,
+            "P_GL": 0.4017288218981803,
+            "abs_diff": 5.551115123125783e-17
+          }
+        ]
+      },
+      "refinement_abs_differences": {
+        "signed.I_independent": {
+          "product_moment_excess_ball": 1.6617146547659445e-08,
+          "pair_weighted_pointwise_centred_covariance": 1.6617146547659445e-08,
+          "ball_conditioned_centred_covariance": 1.6617146547659445e-08
+        },
+        "signed.II_same_field": {
+          "product_moment_excess_ball": 1.661714543743642e-08,
+          "pair_weighted_pointwise_centred_covariance": 1.6617146249287007e-08,
+          "ball_conditioned_centred_covariance": 1.661714632561484e-08
+        },
+        "lognormal.I_independent": {
+          "product_moment_excess_ball": 2.0089782060139783e-08,
+          "pair_weighted_pointwise_centred_covariance": 2.0089782060139783e-08,
+          "ball_conditioned_centred_covariance": 2.0089782060139783e-08
+        },
+        "lognormal.II_same_field": {
+          "product_moment_excess_ball": 1.4792490565795902e-08,
+          "pair_weighted_pointwise_centred_covariance": 1.2462083309738858e-08,
+          "ball_conditioned_centred_covariance": 1.2560513296122622e-08
+        }
+      }
+    }
+  },
+  "independence": {
+    "new_centred_values_computed_without_author_centred_values": true,
+    "production_imports": false,
+    "author_formula_source_read": true,
+    "previous_auditor_code_read": true,
+    "initial_checkpoint": {
+      "time_utc": "2026-10-09T11:05:14.295239+00:00",
+      "result_sha256": "c16d012100b24c29e42d19067e9cb82f33aa8e1f2ea1bf9d1dcf60ef542aac59",
+      "script_sha256": "502983cdd418c029d7ded134cbb1263ce8aaba923ec408a1f1333d232b627dc9",
+      "author_new_covariance_values_read_before_calculation": false
+    },
+    "initial_recipe_error": "asymptotic LS normalization inherited from prior verifier; first results retained",
+    "corrected_comparison_stage": "POST_CHECKPOINT_MATCHED_FINITE_LS_RECIPE_EXPLICITLY_NONBLIND_FOR_EXISTING_PRODUCT_VALUES"
+  },
+  "inventory_numeric_preservation": true,
+  "owner_decision_recommendations": {
+    "H-OD1": "Retain formal tangent as research proposal; c preferred named convention, a fixed-mass comparison",
+    "H-OD2": "No physical reference closure; median seed heuristic, W09 PBS formal extrapolation, interval constant-share only",
+    "H-OD3": "No token or observational authorization promotion",
+    "H-OD4": "Keep experimental pending remaining corrections, Windows gate and explicit owner decision",
+    "H-OD5": "Audit publication only after designated branch approval; merge/freeze/tag require separate approval"
+  },
+  "limitations": [
+    "No Windows verification",
+    "No complete renewed audit of scientific parts unchanged",
+    "Source formulas and previously audited definitions were known; this is independent numerical/algebraic implementation, not blind model reconstruction",
+    "Exact served model version to be supplied by root; same-family audit subagent, no author contact"
+  ],
+  "files_sha256": {
+    "independent_science.py": "502983cdd418c029d7ded134cbb1263ce8aaba923ec408a1f1333d232b627dc9",
+    "matched_finite_matching.py": "461bd4b19de90f2713c0c28ae3f51ce818c7bae0bc1c979b81ec8310ce708ddc",
+    "independent_science_matched.json": "b7cfbd1b889963be640025b1b4ac990ae1d2a5b8db0d207c6b4d2b362cc49aca",
+    "science_comparison_full.json": "637aed6d6c83c42d9bec4a2bfe27d23e6e29f505a4feba008e0bfe8551150b9f",
+    "science_comparison_inventory.json": "cd9bae54a88bdfabee5b37cb52765af41a9c66e9eb889c24c0a5498c98c77238",
+    "INDEPENDENT_CHECKPOINT.json": "066975e47662899e3f7eac10e729009104cc7c065906cb0fb7fc416c26ca2ff8",
+    "README.md": "2ba1557780e8d87c6a71aa42750f6614ddadaf7ea867ed8ace164abdd735fdda",
+    "independent_science_blind.json": "c16d012100b24c29e42d19067e9cb82f33aa8e1f2ea1bf9d1dcf60ef542aac59",
+    "compare_science.py": "a4f739530360cb10028bab87abccc38dbaa3ccdec2def23164b35ca0332056b8"
+  },
+  "claims_inventory": [
+    {
+      "id": "PAPER_REFERENCE/DW",
+      "status": "VERIFIED",
+      "independent_value": 0.23061457227250512,
+      "source_value": 0.23061457227250548,
+      "absolute_error": 3.608224830031759e-16,
+      "relative_error": 1.5646126758061513e-15,
+      "absolute_tolerance": 1e-12,
+      "method": "direct exact finite-LS tracker and regional growth formula"
+    },
+    {
+      "id": "PAPER_REFERENCE/DV",
+      "status": "VERIFIED",
+      "independent_value": 7.132537333227973,
+      "source_value": 7.132537333227989,
+      "absolute_error": 1.5987211554602254e-14,
+      "relative_error": 2.241448001978685e-15,
+      "absolute_tolerance": 1e-12,
+      "method": "direct exact finite-LS tracker and regional growth formula"
+    },
+    {
+      "id": "PAPER_REFERENCE/W09/sigma_direct",
+      "status": "VERIFIED",
+      "independent_value": 1.1213626602034692,
+      "source_value": 1.121363,
+      "absolute_error": 3.397965309126505e-07,
+      "relative_error": 3.0302099401589894e-07,
+      "absolute_tolerance": 5.2e-07,
+      "method": "independent EH98 Fourier integral at convention c, unit-spectrum + PBS seed"
+    },
+    {
+      "id": "PAPER_REFERENCE/F_median/sigma_direct",
+      "status": "VERIFIED",
+      "independent_value": 0.810772266865035,
+      "source_value": 0.810772,
+      "absolute_error": 2.668650349590962e-07,
+      "relative_error": 3.2914929839596853e-07,
+      "absolute_tolerance": 5.2e-07,
+      "method": "independent EH98 Fourier integral at convention c, unit-spectrum + PBS seed"
+    },
+    {
+      "id": "PAPER_REFERENCE/constant_share_interval/lower",
+      "status": "VERIFIED",
+      "independent_value": 0.2608656251274673,
+      "source_value": 0.260866,
+      "absolute_error": 3.7487253268242426e-07,
+      "relative_error": 1.4370310147064941e-06,
+      "absolute_tolerance": 5.2e-07,
+      "method": "constant G(p), adopted W09 premise at 100 hbar inverse Mpc; bound only in constant-share class"
+    },
+    {
+      "id": "PAPER_REFERENCE/constant_share_interval/upper",
+      "status": "VERIFIED",
+      "independent_value": 0.9982675559021565,
+      "source_value": 0.998268,
+      "absolute_error": 4.440978434994136e-07,
+      "relative_error": 4.448683554911242e-07,
+      "absolute_tolerance": 5.2e-07,
+      "method": "constant G(p), adopted W09 premise at 100 hbar inverse Mpc; bound only in constant-share class"
+    },
+    {
+      "id": "PAPER_REFERENCE/signed/I_independent/product_excess",
+      "status": "VERIFIED",
+      "independent_value": 0.7559295860892861,
+      "source_value": 0.755929587,
+      "absolute_error": 9.107139486985716e-10,
+      "relative_error": 1.204760290323934e-09,
+      "absolute_tolerance": 5e-08,
+      "method": "independent truncated Gaussian generating-function derivatives/exponential tilt; Plackett GL128 and composite radial GL1600"
+    },
+    {
+      "id": "PAPER_REFERENCE/signed/II_same_field/product_excess",
+      "status": "VERIFIED",
+      "independent_value": 0.043189407473617214,
+      "source_value": 0.043189408,
+      "absolute_error": 5.26382784582502e-10,
+      "relative_error": 1.2187774942006661e-08,
+      "absolute_tolerance": 5e-08,
+      "method": "independent truncated Gaussian generating-function derivatives/exponential tilt; Plackett GL128 and composite radial GL1600"
+    },
+    {
+      "id": "PAPER_REFERENCE/lognormal/I_independent/product_excess",
+      "status": "VERIFIED",
+      "independent_value": 0.7869201937811277,
+      "source_value": 0.78692,
+      "absolute_error": 1.9378112769974365e-07,
+      "relative_error": 2.4625264029347793e-07,
+      "absolute_tolerance": 6e-07,
+      "method": "independent truncated Gaussian generating-function derivatives/exponential tilt; Plackett GL128 and composite radial GL1600"
+    },
+    {
+      "id": "PAPER_REFERENCE/lognormal/II_same_field/product_excess",
+      "status": "VERIFIED",
+      "independent_value": 0.8376932008382652,
+      "source_value": 0.837693,
+      "absolute_error": 2.0083826512973246e-07,
+      "relative_error": 2.39751633509809e-07,
+      "absolute_tolerance": 6e-07,
+      "method": "independent truncated Gaussian generating-function derivatives/exponential tilt; Plackett GL128 and composite radial GL1600"
+    },
+    {
+      "id": "NW15_CMB_FIT/DW",
+      "status": "VERIFIED",
+      "independent_value": 0.3526903268985117,
+      "source_value": 0.3526903268985125,
+      "absolute_error": 7.771561172376096e-16,
+      "relative_error": 2.2035084547732384e-15,
+      "absolute_tolerance": 1e-12,
+      "method": "direct exact finite-LS tracker and regional growth formula"
+    },
+    {
+      "id": "NW15_CMB_FIT/DV",
+      "status": "VERIFIED",
+      "independent_value": 11.327583314531227,
+      "source_value": 11.327583314531257,
+      "absolute_error": 3.019806626980426e-14,
+      "relative_error": 2.6658878095441205e-15,
+      "absolute_tolerance": 1e-12,
+      "method": "direct exact finite-LS tracker and regional growth formula"
+    },
+    {
+      "id": "NW15_CMB_FIT/W09/sigma_direct",
+      "status": "VERIFIED",
+      "independent_value": 1.0566325994707644,
+      "source_value": 1.056633,
+      "absolute_error": 4.005292355557799e-07,
+      "relative_error": 3.790618271015385e-07,
+      "absolute_tolerance": 5.2e-07,
+      "method": "independent EH98 Fourier integral at convention c, unit-spectrum + PBS seed"
+    },
+    {
+      "id": "NW15_CMB_FIT/F_median/sigma_direct",
+      "status": "VERIFIED",
+      "independent_value": 0.8160588130081785,
+      "source_value": 0.816059,
+      "absolute_error": 1.8699182147141613e-07,
+      "relative_error": 2.2914007623396854e-07,
+      "absolute_tolerance": 5.2e-07,
+      "method": "independent EH98 Fourier integral at convention c, unit-spectrum + PBS seed"
+    },
+    {
+      "id": "NW15_CMB_FIT/constant_share_interval/lower",
+      "status": "VERIFIED",
+      "independent_value": 0.36885943313006087,
+      "source_value": 0.368859,
+      "absolute_error": 4.331300608728661e-07,
+      "relative_error": 1.1742428973479463e-06,
+      "absolute_tolerance": 5.2e-07,
+      "method": "constant G(p), adopted W09 premise at 100 hbar inverse Mpc; bound only in constant-share class"
+    },
+    {
+      "id": "NW15_CMB_FIT/constant_share_interval/upper",
+      "status": "VERIFIED",
+      "independent_value": 1.161784484340578,
+      "source_value": 1.161784,
+      "absolute_error": 4.84340578088549e-07,
+      "relative_error": 4.168938271559507e-07,
+      "absolute_tolerance": 5.2e-07,
+      "method": "constant G(p), adopted W09 premise at 100 hbar inverse Mpc; bound only in constant-share class"
+    },
+    {
+      "id": "NW15_CMB_FIT/signed/I_independent/product_excess",
+      "status": "VERIFIED",
+      "independent_value": 0.7912641481428393,
+      "source_value": 0.791264148,
+      "absolute_error": 1.4283929594682832e-10,
+      "relative_error": 1.8052036896638e-10,
+      "absolute_tolerance": 5e-08,
+      "method": "independent truncated Gaussian generating-function derivatives/exponential tilt; Plackett GL128 and composite radial GL1600"
+    },
+    {
+      "id": "NW15_CMB_FIT/signed/II_same_field/product_excess",
+      "status": "VERIFIED",
+      "independent_value": 0.06908311291541125,
+      "source_value": 0.069083113,
+      "absolute_error": 8.458875266903476e-11,
+      "relative_error": 1.2244490584701179e-09,
+      "absolute_tolerance": 5e-08,
+      "method": "independent truncated Gaussian generating-function derivatives/exponential tilt; Plackett GL128 and composite radial GL1600"
+    },
+    {
+      "id": "NW15_CMB_FIT/lognormal/I_independent/product_excess",
+      "status": "VERIFIED",
+      "independent_value": 0.8407943617975306,
+      "source_value": 0.840794,
+      "absolute_error": 3.617975306013932e-07,
+      "relative_error": 4.3030460564822437e-07,
+      "absolute_tolerance": 6e-07,
+      "method": "independent truncated Gaussian generating-function derivatives/exponential tilt; Plackett GL128 and composite radial GL1600"
+    },
+    {
+      "id": "NW15_CMB_FIT/lognormal/II_same_field/product_excess",
+      "status": "VERIFIED",
+      "independent_value": 0.697655401752882,
+      "source_value": 0.697655,
+      "absolute_error": 4.0175288196220293e-07,
+      "relative_error": 5.758618256333043e-07,
+      "absolute_tolerance": 6e-07,
+      "method": "independent truncated Gaussian generating-function derivatives/exponential tilt; Plackett GL128 and composite radial GL1600"
+    }
+  ],
+  "claim_counts_inventory": {
+    "total": 20,
+    "VERIFIED": 20,
+    "VERIFIED_WITH_DEVIATION": 0
+  },
+  "claims": [
+    {
+      "id": "PAPER_REFERENCE/DW",
+      "status": "VERIFIED",
+      "independent_value": 0.23061457227250512,
+      "source_value": 0.23061457227250548,
+      "absolute_error": 3.608224830031759e-16,
+      "relative_error": 1.5646126758061513e-15,
+      "absolute_tolerance": 1e-12,
+      "method": "direct exact finite-LS tracker and regional growth formula"
+    },
+    {
+      "id": "PAPER_REFERENCE/DV",
+      "status": "VERIFIED",
+      "independent_value": 7.132537333227973,
+      "source_value": 7.132537333227989,
+      "absolute_error": 1.5987211554602254e-14,
+      "relative_error": 2.241448001978685e-15,
+      "absolute_tolerance": 1e-12,
+      "method": "direct exact finite-LS tracker and regional growth formula"
+    },
+    {
+      "id": "PAPER_REFERENCE/W09/sigma_direct",
+      "status": "VERIFIED",
+      "independent_value": 1.1213626602034692,
+      "source_value": 1.1213626602036537,
+      "absolute_error": 1.8451906669270102e-13,
+      "relative_error": 1.6454896639699953e-13,
+      "absolute_tolerance": 1e-09,
+      "method": "independent EH98 Fourier integral at convention c, unit-spectrum + PBS seed"
+    },
+    {
+      "id": "PAPER_REFERENCE/F_median/sigma_direct",
+      "status": "VERIFIED",
+      "independent_value": 0.810772266865035,
+      "source_value": 0.8107722668657138,
+      "absolute_error": 6.787903572558207e-13,
+      "relative_error": 8.372145730636431e-13,
+      "absolute_tolerance": 1e-09,
+      "method": "independent EH98 Fourier integral at convention c, unit-spectrum + PBS seed"
+    },
+    {
+      "id": "PAPER_REFERENCE/constant_share_interval/lower",
+      "status": "VERIFIED",
+      "independent_value": 0.2608656251274673,
+      "source_value": 0.2608656251293685,
+      "absolute_error": 1.9012014185193493e-12,
+      "relative_error": 7.288048847281068e-12,
+      "absolute_tolerance": 1e-09,
+      "method": "constant G(p), adopted W09 premise at 100 hbar inverse Mpc; bound only in constant-share class"
+    },
+    {
+      "id": "PAPER_REFERENCE/constant_share_interval/upper",
+      "status": "VERIFIED",
+      "independent_value": 0.9982675559021565,
+      "source_value": 0.9982675560571134,
+      "absolute_error": 1.5495682514909959e-10,
+      "relative_error": 1.5522574505089307e-10,
+      "absolute_tolerance": 1e-09,
+      "method": "constant G(p), adopted W09 premise at 100 hbar inverse Mpc; bound only in constant-share class"
+    },
+    {
+      "id": "PAPER_REFERENCE/signed/I_independent/product_excess",
+      "status": "VERIFIED",
+      "independent_value": 0.7559295860892861,
+      "source_value": 0.7559295866508712,
+      "absolute_error": 5.615851117468651e-10,
+      "relative_error": 7.429066432429972e-10,
+      "absolute_tolerance": 1e-06,
+      "method": "independent truncated Gaussian generating-function derivatives/exponential tilt; Plackett GL128 and composite radial GL1600"
+    },
+    {
+      "id": "PAPER_REFERENCE/signed/II_same_field/product_excess",
+      "status": "VERIFIED",
+      "independent_value": 0.043189407473617214,
+      "source_value": 0.04318940793032056,
+      "absolute_error": 4.567033487501426e-10,
+      "relative_error": 1.0574429487131727e-08,
+      "absolute_tolerance": 1e-06,
+      "method": "independent truncated Gaussian generating-function derivatives/exponential tilt; Plackett GL128 and composite radial GL1600"
+    },
+    {
+      "id": "PAPER_REFERENCE/lognormal/I_independent/product_excess",
+      "status": "VERIFIED",
+      "independent_value": 0.7869201937811277,
+      "source_value": 0.7869201939046357,
+      "absolute_error": 1.235080926420551e-10,
+      "relative_error": 1.5695123037727334e-10,
+      "absolute_tolerance": 1e-06,
+      "method": "independent truncated Gaussian generating-function derivatives/exponential tilt; Plackett GL128 and composite radial GL1600"
+    },
+    {
+      "id": "PAPER_REFERENCE/lognormal/II_same_field/product_excess",
+      "status": "VERIFIED",
+      "independent_value": 0.8376932008382652,
+      "source_value": 0.8376932008709476,
+      "absolute_error": 3.268241233200797e-11,
+      "relative_error": 3.901477569356913e-11,
+      "absolute_tolerance": 1e-06,
+      "method": "independent truncated Gaussian generating-function derivatives/exponential tilt; Plackett GL128 and composite radial GL1600"
+    },
+    {
+      "id": "NW15_CMB_FIT/DW",
+      "status": "VERIFIED",
+      "independent_value": 0.3526903268985117,
+      "source_value": 0.3526903268985125,
+      "absolute_error": 7.771561172376096e-16,
+      "relative_error": 2.2035084547732384e-15,
+      "absolute_tolerance": 1e-12,
+      "method": "direct exact finite-LS tracker and regional growth formula"
+    },
+    {
+      "id": "NW15_CMB_FIT/DV",
+      "status": "VERIFIED",
+      "independent_value": 11.327583314531227,
+      "source_value": 11.327583314531257,
+      "absolute_error": 3.019806626980426e-14,
+      "relative_error": 2.6658878095441205e-15,
+      "absolute_tolerance": 1e-12,
+      "method": "direct exact finite-LS tracker and regional growth formula"
+    },
+    {
+      "id": "NW15_CMB_FIT/W09/sigma_direct",
+      "status": "VERIFIED",
+      "independent_value": 1.0566325994707644,
+      "source_value": 1.0566325994699088,
+      "absolute_error": 8.555378627761456e-13,
+      "relative_error": 8.096833877786391e-13,
+      "absolute_tolerance": 1e-09,
+      "method": "independent EH98 Fourier integral at convention c, unit-spectrum + PBS seed"
+    },
+    {
+      "id": "NW15_CMB_FIT/F_median/sigma_direct",
+      "status": "VERIFIED",
+      "independent_value": 0.8160588130081785,
+      "source_value": 0.8160588130066785,
+      "absolute_error": 1.500022328571049e-12,
+      "relative_error": 1.838130174765692e-12,
+      "absolute_tolerance": 1e-09,
+      "method": "independent EH98 Fourier integral at convention c, unit-spectrum + PBS seed"
+    },
+    {
+      "id": "NW15_CMB_FIT/constant_share_interval/lower",
+      "status": "VERIFIED",
+      "independent_value": 0.36885943313006087,
+      "source_value": 0.3688594331269559,
+      "absolute_error": 3.1049607329691753e-12,
+      "relative_error": 8.417734383657458e-12,
+      "absolute_tolerance": 1e-09,
+      "method": "constant G(p), adopted W09 premise at 100 hbar inverse Mpc; bound only in constant-share class"
+    },
+    {
+      "id": "NW15_CMB_FIT/constant_share_interval/upper",
+      "status": "VERIFIED",
+      "independent_value": 1.161784484340578,
+      "source_value": 1.1617844837353175,
+      "absolute_error": 6.052605083795015e-10,
+      "relative_error": 5.209748596688906e-10,
+      "absolute_tolerance": 1e-09,
+      "method": "constant G(p), adopted W09 premise at 100 hbar inverse Mpc; bound only in constant-share class"
+    },
+    {
+      "id": "NW15_CMB_FIT/signed/I_independent/product_excess",
+      "status": "VERIFIED",
+      "independent_value": 0.7912641481428393,
+      "source_value": 0.7912641484729672,
+      "absolute_error": 3.3012792499675925e-10,
+      "relative_error": 4.172158256302418e-10,
+      "absolute_tolerance": 1e-06,
+      "method": "independent truncated Gaussian generating-function derivatives/exponential tilt; Plackett GL128 and composite radial GL1600"
+    },
+    {
+      "id": "NW15_CMB_FIT/signed/II_same_field/product_excess",
+      "status": "VERIFIED",
+      "independent_value": 0.06908311291541125,
+      "source_value": 0.06908311322288978,
+      "absolute_error": 3.074785287493498e-10,
+      "relative_error": 4.450849337917082e-09,
+      "absolute_tolerance": 1e-06,
+      "method": "independent truncated Gaussian generating-function derivatives/exponential tilt; Plackett GL128 and composite radial GL1600"
+    },
+    {
+      "id": "NW15_CMB_FIT/lognormal/I_independent/product_excess",
+      "status": "VERIFIED",
+      "independent_value": 0.8407943617975306,
+      "source_value": 0.840794361918869,
+      "absolute_error": 1.2133838378503015e-10,
+      "relative_error": 1.443139836334184e-10,
+      "absolute_tolerance": 1e-06,
+      "method": "independent truncated Gaussian generating-function derivatives/exponential tilt; Plackett GL128 and composite radial GL1600"
+    },
+    {
+      "id": "NW15_CMB_FIT/lognormal/II_same_field/product_excess",
+      "status": "VERIFIED",
+      "independent_value": 0.697655401752882,
+      "source_value": 0.6976554017835588,
+      "absolute_error": 3.0676794438022625e-11,
+      "relative_error": 4.397127057225857e-11,
+      "absolute_tolerance": 1e-06,
+      "method": "independent truncated Gaussian generating-function derivatives/exponential tilt; Plackett GL128 and composite radial GL1600"
+    }
+  ],
+  "claim_counts": {
+    "total": 20,
+    "VERIFIED": 20,
+    "VERIFIED_WITH_DEVIATION": 0
+  },
+  "full_precision_source": {
+    "path": "/workspace/scratch/1605b2925963/audit_work/reproduction/evidence_main_py313.json",
+    "sha256": "62d9f739cfa4afcda8a5ecc19797443c641a42de8b798db22585f30db22e37b9"
+  }
+}

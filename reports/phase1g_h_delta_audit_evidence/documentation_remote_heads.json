@@ -1,0 +1,226 @@
+{
+  "retrieved_at": "2026-10-08T14:09:16.956Z",
+  "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads",
+  "data": [
+    {
+      "ref": "refs/heads/ccr-555e67be-u11yht",
+      "node_id": "REF_kwDOTZch8b5yZWZzL2hlYWRzL2Njci01NTVlNjdiZS11MTF5aHQ",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/ccr-555e67be-u11yht",
+      "object": {
+        "sha": "89cb041f901b51a3f90fa6831aab1b4553c1772c",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/89cb041f901b51a3f90fa6831aab1b4553c1772c"
+      }
+    },
+    {
+      "ref": "refs/heads/claude/zealous-rubin-1m3vf4",
+      "node_id": "REF_kwDOTZch8doAJnJlZnMvaGVhZHMvY2xhdWRlL3plYWxvdXMtcnViaW4tMW0zdmY0",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/claude/zealous-rubin-1m3vf4",
+      "object": {
+        "sha": "63ca316b87399fc323713338a07519f8bce52113",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/63ca316b87399fc323713338a07519f8bce52113"
+      }
+    },
+    {
+      "ref": "refs/heads/experiment/ltb-cmc-background",
+      "node_id": "REF_kwDOTZch8doAKHJlZnMvaGVhZHMvZXhwZXJpbWVudC9sdGItY21jLWJhY2tncm91bmQ",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/experiment/ltb-cmc-background",
+      "object": {
+        "sha": "28a87a18aed9f85a0e65624fea76b26dfd459a0f",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/28a87a18aed9f85a0e65624fea76b26dfd459a0f"
+      }
+    },
+    {
+      "ref": "refs/heads/main",
+      "node_id": "REF_kwDOTZch8a9yZWZzL2hlYWRzL21haW4",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/main",
+      "object": {
+        "sha": "8d3cdd0533035858c42269cb1dff1a20dcafc7da",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/8d3cdd0533035858c42269cb1dff1a20dcafc7da"
+      }
+    },
+    {
+      "ref": "refs/heads/phase-1c-perturbations",
+      "node_id": "REF_kwDOTZch8doAIXJlZnMvaGVhZHMvcGhhc2UtMWMtcGVydHVyYmF0aW9ucw",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/phase-1c-perturbations",
+      "object": {
+        "sha": "878a97e83357025c78e2fee7bf458c3b22a207d3",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/878a97e83357025c78e2fee7bf458c3b22a207d3"
+      }
+    },
+    {
+      "ref": "refs/heads/phase-1d-b-growth-pipeline",
+      "node_id": "REF_kwDOTZch8doAJXJlZnMvaGVhZHMvcGhhc2UtMWQtYi1ncm93dGgtcGlwZWxpbmU",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/phase-1d-b-growth-pipeline",
+      "object": {
+        "sha": "93d956d0020f0edec34a44cd9d19f30c085aecc7",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/93d956d0020f0edec34a44cd9d19f30c085aecc7"
+      }
+    },
+    {
+      "ref": "refs/heads/phase-1d-c-observable-closure-audit",
+      "node_id": "REF_kwDOTZch8doALnJlZnMvaGVhZHMvcGhhc2UtMWQtYy1vYnNlcnZhYmxlLWNsb3N1cmUtYXVkaXQ",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/phase-1d-c-observable-closure-audit",
+      "object": {
+        "sha": "81148eb6be8add842b538e2a21c5cf9782f9e49e",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/81148eb6be8add842b538e2a21c5cf9782f9e49e"
+      }
+    },
+    {
+      "ref": "refs/heads/phase-1d-d-anchored-density-growth",
+      "node_id": "REF_kwDOTZch8doALXJlZnMvaGVhZHMvcGhhc2UtMWQtZC1hbmNob3JlZC1kZW5zaXR5LWdyb3d0aA",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/phase-1d-d-anchored-density-growth",
+      "object": {
+        "sha": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/7ea266c2cb00aac8afdef71e51a18aea5fb7d39c"
+      }
+    },
+    {
+      "ref": "refs/heads/phase-1d-d-t-d3-frame-mapping",
+      "node_id": "REF_kwDOTZch8doAKHJlZnMvaGVhZHMvcGhhc2UtMWQtZC10LWQzLWZyYW1lLW1hcHBpbmc",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/phase-1d-d-t-d3-frame-mapping",
+      "object": {
+        "sha": "f960a9054ae9db3a7c378557ac3a2938c5ff7ef0",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/f960a9054ae9db3a7c378557ac3a2938c5ff7ef0"
+      }
+    },
+    {
+      "ref": "refs/heads/phase-1e-a-dressed-observable-bridge-audit",
+      "node_id": "REF_kwDOTZch8doANXJlZnMvaGVhZHMvcGhhc2UtMWUtYS1kcmVzc2VkLW9ic2VydmFibGUtYnJpZGdlLWF1ZGl0",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/phase-1e-a-dressed-observable-bridge-audit",
+      "object": {
+        "sha": "f4044cbe10a7fbd59d1b14131e2d2e31100984ef",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/f4044cbe10a7fbd59d1b14131e2d2e31100984ef"
+      }
+    },
+    {
+      "ref": "refs/heads/phase-1e-b-dressed-lightcone-velocity-derivation",
+      "node_id": "REF_kwDOTZch8doAO3JlZnMvaGVhZHMvcGhhc2UtMWUtYi1kcmVzc2VkLWxpZ2h0Y29uZS12ZWxvY2l0eS1kZXJpdmF0aW9u",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/phase-1e-b-dressed-lightcone-velocity-derivation",
+      "object": {
+        "sha": "8634f14a35c22983413672075fa7f37f03fd663d",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/8634f14a35c22983413672075fa7f37f03fd663d"
+      }
+    },
+    {
+      "ref": "refs/heads/phase-1e-c-perturbed-dressed-geometry-transfer-closure",
+      "node_id": "REF_kwDOTZch8doAQXJlZnMvaGVhZHMvcGhhc2UtMWUtYy1wZXJ0dXJiZWQtZHJlc3NlZC1nZW9tZXRyeS10cmFuc2Zlci1jbG9zdXJl",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/phase-1e-c-perturbed-dressed-geometry-transfer-closure",
+      "object": {
+        "sha": "fcbf9c29a28c586044150e6910e1637bc3f6975b",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/fcbf9c29a28c586044150e6910e1637bc3f6975b"
+      }
+    },
+    {
+      "ref": "refs/heads/phase-1e-d-regional-matching-dynamics-design",
+      "node_id": "REF_kwDOTZch8doAN3JlZnMvaGVhZHMvcGhhc2UtMWUtZC1yZWdpb25hbC1tYXRjaGluZy1keW5hbWljcy1kZXNpZ24",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/phase-1e-d-regional-matching-dynamics-design",
+      "object": {
+        "sha": "2fd3ed2006821bc162fb740bd773f2d0b6e5e0b4",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/2fd3ed2006821bc162fb740bd773f2d0b6e5e0b4"
+      }
+    },
+    {
+      "ref": "refs/heads/phase-1e-e-transfer-realization-selection",
+      "node_id": "REF_kwDOTZch8doANHJlZnMvaGVhZHMvcGhhc2UtMWUtZS10cmFuc2Zlci1yZWFsaXphdGlvbi1zZWxlY3Rpb24",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/phase-1e-e-transfer-realization-selection",
+      "object": {
+        "sha": "1f2800c9685b7ab4c2bbbef3e93d1767073cc783",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/1f2800c9685b7ab4c2bbbef3e93d1767073cc783"
+      }
+    },
+    {
+      "ref": "refs/heads/phase-1e-f-h1-transfer-realization",
+      "node_id": "REF_kwDOTZch8doALXJlZnMvaGVhZHMvcGhhc2UtMWUtZi1oMS10cmFuc2Zlci1yZWFsaXphdGlvbg",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/phase-1e-f-h1-transfer-realization",
+      "object": {
+        "sha": "1e0a1772aa01ef312a9c3cae6d3e65c8b4f9cbdd",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/1e0a1772aa01ef312a9c3cae6d3e65c8b4f9cbdd"
+      }
+    },
+    {
+      "ref": "refs/heads/phase-1e-g-continuum-h1-realization",
+      "node_id": "REF_kwDOTZch8doALnJlZnMvaGVhZHMvcGhhc2UtMWUtZy1jb250aW51dW0taDEtcmVhbGl6YXRpb24",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/phase-1e-g-continuum-h1-realization",
+      "object": {
+        "sha": "d262099ce3fe977af628ff233abed411e70a3c85",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/d262099ce3fe977af628ff233abed411e70a3c85"
+      }
+    },
+    {
+      "ref": "refs/heads/phase-1f-a-h1-broken-density-spectral-boost",
+      "node_id": "REF_kwDOTZch8doANnJlZnMvaGVhZHMvcGhhc2UtMWYtYS1oMS1icm9rZW4tZGVuc2l0eS1zcGVjdHJhbC1ib29zdA",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/phase-1f-a-h1-broken-density-spectral-boost",
+      "object": {
+        "sha": "87af7976b82b0b38e2c3e77dfc9458e664034c5d",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/87af7976b82b0b38e2c3e77dfc9458e664034c5d"
+      }
+    },
+    {
+      "ref": "refs/heads/phase-1f-c-r-f4-audit-recovery",
+      "node_id": "REF_kwDOTZch8doAKXJlZnMvaGVhZHMvcGhhc2UtMWYtYy1yLWY0LWF1ZGl0LXJlY292ZXJ5",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/phase-1f-c-r-f4-audit-recovery",
+      "object": {
+        "sha": "7d5d8ce376554b42bc8374f21ec1223eda3b982f",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/7d5d8ce376554b42bc8374f21ec1223eda3b982f"
+      }
+    },
+    {
+      "ref": "refs/heads/phase-1f-d-necessary-bound",
+      "node_id": "REF_kwDOTZch8doAJXJlZnMvaGVhZHMvcGhhc2UtMWYtZC1uZWNlc3NhcnktYm91bmQ",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/phase-1f-d-necessary-bound",
+      "object": {
+        "sha": "3cd1685855bd78f2833ee91340794bee44b5e48d",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/3cd1685855bd78f2833ee91340794bee44b5e48d"
+      }
+    },
+    {
+      "ref": "refs/heads/phase-1g-f-successor-g-evolution",
+      "node_id": "REF_kwDOTZch8doAK3JlZnMvaGVhZHMvcGhhc2UtMWctZi1zdWNjZXNzb3ItZy1ldm9sdXRpb24",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/phase-1g-f-successor-g-evolution",
+      "object": {
+        "sha": "3d3d46ed68fde7e6d4100fe518a76731bd2cf9e9",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/3d3d46ed68fde7e6d4100fe518a76731bd2cf9e9"
+      }
+    },
+    {
+      "ref": "refs/heads/phase-1g-h-independent-audit",
+      "node_id": "REF_kwDOTZch8doAJ3JlZnMvaGVhZHMvcGhhc2UtMWctaC1pbmRlcGVuZGVudC1hdWRpdA",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/phase-1g-h-independent-audit",
+      "object": {
+        "sha": "816dd004763f8de1a8bb09cba9e427a1bd2bb3d1",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/816dd004763f8de1a8bb09cba9e427a1bd2bb3d1"
+      }
+    },
+    {
+      "ref": "refs/heads/phase-1g-owner-decisions",
+      "node_id": "REF_kwDOTZch8doAI3JlZnMvaGVhZHMvcGhhc2UtMWctb3duZXItZGVjaXNpb25z",
+      "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/refs/heads/phase-1g-owner-decisions",
+      "object": {
+        "sha": "3c70185cb3eb3aa3734995a2fde43bc25462086e",
+        "type": "commit",
+        "url": "https://api.github.com/repos/ing-mattioni/timescape-fsigma8/git/commits/3c70185cb3eb3aa3734995a2fde43bc25462086e"
+      }
+    }
+  ]
+}

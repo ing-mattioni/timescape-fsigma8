@@ -1,0 +1,203 @@
+[
+ {
+  "id": "baseline",
+  "file": null,
+  "tests": [
+   "tests/test_phase1g_h_global_variance.py",
+   "tests/test_phase1g_b_lagrangian_sigma.py",
+   "tests/test_phase1g_b_owner_decisions.py",
+   "tests/test_phase1g_b_contract_hardening.py"
+  ],
+  "origin": "baseline"
+ },
+ {
+  "id": "B01_record_identity_rtol_10pct_drift",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "RECORD_IDENTITY_RTOL = 1e-12",
+  "new": "RECORD_IDENTITY_RTOL = 1.1e-12",
+  "tests": [
+   "tests/test_phase1g_h_global_variance.py"
+  ],
+  "origin": "third_delta_audit"
+ },
+ {
+  "id": "B02_same_rejects_float_subclasses",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "isinstance(stored, float) and math.isfinite(stored)",
+  "new": "type(stored) is float and math.isfinite(stored)",
+  "tests": [
+   "tests/test_phase1g_h_global_variance.py"
+  ],
+  "origin": "third_delta_audit"
+ },
+ {
+  "id": "B03_same_accepts_numpy_float32",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "isinstance(stored, float)",
+  "new": "isinstance(stored, (float, np.floating))",
+  "tests": [
+   "tests/test_phase1g_h_global_variance.py"
+  ],
+  "origin": "third_delta_audit"
+ },
+ {
+  "id": "B04_monte_carlo_budget_doubled",
+  "file": "tests/test_phase1g_h_global_variance.py",
+  "old": "<= 5 *",
+  "new": "<= 10 *",
+  "tests": [
+   "tests/test_phase1g_h_global_variance.py"
+  ],
+  "origin": "third_delta_audit"
+ },
+ {
+  "id": "B05_simpson_error_ratio_budget_x10",
+  "file": "tests/test_phase1g_h_global_variance.py",
+  "old": "pytest.approx(16.0, rel=5e-3, abs=0.0)",
+  "new": "pytest.approx(16.0, rel=5e-2, abs=0.0)",
+  "tests": [
+   "tests/test_phase1g_h_global_variance.py"
+  ],
+  "origin": "third_delta_audit"
+ },
+ {
+  "id": "B06_lognormal_calibration_inside_budget",
+  "file": "scripts/phase1g_h_global_variance_closure_numerics.py",
+  "old": "carrier_ball(l2) - ball_target",
+  "new": "carrier_ball(l2) - (1.0 + 1e-10) * ball_target",
+  "tests": [
+   "tests/test_phase1g_h_global_variance.py"
+  ],
+  "origin": "third_delta_audit"
+ },
+ {
+  "id": "B07_p11_weight_denominator_1ppm",
+  "file": "scripts/phase1g_h_global_variance_closure_numerics.py",
+  "old": "ball.integral(k_ww + 2.0 * k_pw) / ball.integral(p11),",
+  "new": "ball.integral(k_ww + 2.0 * k_pw) / (1.000001 * ball.integral(p11)),",
+  "tests": [
+   "tests/test_phase1g_h_global_variance.py"
+  ],
+  "origin": "third_delta_audit"
+ },
+ {
+  "id": "B08_lognormal_calibration_1ppm",
+  "file": "scripts/phase1g_h_global_variance_closure_numerics.py",
+  "old": "carrier_ball(l2) - ball_target",
+  "new": "carrier_ball(l2) - 1.000001 * ball_target",
+  "tests": [
+   "tests/test_phase1g_h_global_variance.py"
+  ],
+  "origin": "third_delta_audit"
+ },
+ {
+  "id": "B09_reported_lambda_1ppm",
+  "file": "scripts/phase1g_h_global_variance_closure_numerics.py",
+  "old": "\"latent_scale_lambda\": math.sqrt(lam2),",
+  "new": "\"latent_scale_lambda\": 1.000001 * math.sqrt(lam2),",
+  "tests": [
+   "tests/test_phase1g_h_global_variance.py"
+  ],
+  "origin": "third_delta_audit"
+ },
+ {
+  "id": "B10_one_growth_tolerance_not_converted",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "object.__setattr__(self, name, _positive(getattr(self, name), name))",
+  "new": "object.__setattr__(self, name, _positive(getattr(self, name), name)) if name != \"ode_atol\" else _positive(getattr(self, name), name)",
+  "tests": [
+   "tests/test_phase1g_h_global_variance.py"
+  ],
+  "origin": "third_delta_audit"
+ },
+ {
+  "id": "J01_strict_json_check_disabled",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "    try:\n        json.dumps(export, allow_nan=False)",
+  "new": "    return\n    try:\n        json.dumps(export, allow_nan=False)",
+  "tests": [
+   "tests/test_phase1g_h_global_variance.py"
+  ],
+  "origin": "round4"
+ },
+ {
+  "id": "J02_sigma_record_json_check_removed",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "        _require_strict_json(self.to_json_dict(), \"sigma record\")\n",
+  "new": "",
+  "tests": [
+   "tests/test_phase1g_h_global_variance.py"
+  ],
+  "origin": "round4"
+ },
+ {
+  "id": "J03_float32_refusal_via_message_branch_off",
+  "file": "src/timescape_fsigma8/global_variance.py",
+  "old": "        if isinstance(expected, float) and not isinstance(stored, float):",
+  "new": "        if False:",
+  "tests": [
+   "tests/test_phase1g_h_global_variance.py"
+  ],
+  "origin": "round4"
+ },
+ {
+  "id": "L01_lcdm_diagnostics_finiteness_off",
+  "file": "src/timescape_fsigma8/lagrangian_sigma.py",
+  "old": "        for name in (\"quadrature_relative_change\", \"truncation_envelope_fraction\"):\n            if _real(getattr(self, name), name) < 0.0:\n                raise LagrangianSigmaContractError(f\"{name} must be nonnegative\")\n        if not (self.quadrature_relative_change\n                == abs(self.sigma_unit_growth / self.sigma_unit_growth_comparison_grid - 1.0)",
+  "new": "        if not (self.quadrature_relative_change\n                == abs(self.sigma_unit_growth / self.sigma_unit_growth_comparison_grid - 1.0)",
+  "tests": [
+   "tests/test_phase1g_b_lagrangian_sigma.py",
+   "tests/test_phase1g_b_owner_decisions.py",
+   "tests/test_phase1g_b_contract_hardening.py"
+  ],
+  "origin": "round4"
+ },
+ {
+  "id": "L02_lcdm_diagnostics_binding_off",
+  "file": "src/timescape_fsigma8/lagrangian_sigma.py",
+  "old": "            raise LagrangianSigmaContractError(\"quadrature diagnostics are inconsistent or failed\")\n        if self.linear_sigma != self.growth_today_photon_normalised * self.sigma_unit_growth:",
+  "new": "            pass\n        if self.linear_sigma != self.growth_today_photon_normalised * self.sigma_unit_growth:",
+  "tests": [
+   "tests/test_phase1g_b_lagrangian_sigma.py",
+   "tests/test_phase1g_b_owner_decisions.py",
+   "tests/test_phase1g_b_contract_hardening.py"
+  ],
+  "origin": "round4"
+ },
+ {
+  "id": "L03_anchored_ratio_binding_off",
+  "file": "src/timescape_fsigma8/lagrangian_sigma.py",
+  "old": "        if not (self.growth_ratio == (ts.growth.growth_today_photon_normalised",
+  "new": "        if False and not (self.growth_ratio == (ts.growth.growth_today_photon_normalised",
+  "tests": [
+   "tests/test_phase1g_b_lagrangian_sigma.py",
+   "tests/test_phase1g_b_owner_decisions.py",
+   "tests/test_phase1g_b_contract_hardening.py"
+  ],
+  "origin": "round4"
+ },
+ {
+  "id": "L04_anchored_differences_binding_off",
+  "file": "src/timescape_fsigma8/lagrangian_sigma.py",
+  "old": "        if self.early_spectrum_differences != differences:",
+  "new": "        if False:",
+  "tests": [
+   "tests/test_phase1g_b_lagrangian_sigma.py",
+   "tests/test_phase1g_b_owner_decisions.py",
+   "tests/test_phase1g_b_contract_hardening.py"
+  ],
+  "origin": "round4"
+ },
+ {
+  "id": "L05_anchored_offset_unbound",
+  "file": "src/timescape_fsigma8/lagrangian_sigma.py",
+  "old": "                and self.reference_offset_from_anchor\n                == ref.linear_sigma / self.anchor_value - 1.0):",
+  "new": "                ):",
+  "tests": [
+   "tests/test_phase1g_b_lagrangian_sigma.py",
+   "tests/test_phase1g_b_owner_decisions.py",
+   "tests/test_phase1g_b_contract_hardening.py"
+  ],
+  "origin": "round4"
+ }
+]

@@ -1,0 +1,329 @@
+{
+  "classification": "DELTA_AUDIT_REMEDIATION_RECORD",
+  "commits": {
+    "branch": "ccr-555e67be-u11yht (local; on top of the delta-audit commit 5c325e1)",
+    "code": "248a06bfeb655337bc499607180c49008b5f34ea",
+    "pushed": false,
+    "records": "the commit carrying this inventory (its hash cannot be inside itself)"
+  },
+  "date": "2026-10-08",
+  "delta_audit": {
+    "audited_commit": "89cb041f901b51a3f90fa6831aab1b4553c1772c",
+    "delta_audit_commit": "5c325e1fd05b343f6d5e93f931038794de4373a2",
+    "inventory": "reports/phase1g_h_delta_audit_inventory.json",
+    "new_finding_counts": {
+      "LOW": 1,
+      "LOW-MEDIUM": 2,
+      "MEDIUM": 2,
+      "MEDIUM-HIGH": 1
+    },
+    "original_errata": "GH-E1 ... GH-E22 all applied or applied equivalently",
+    "original_findings": {
+      "OPEN_OWNER_CONFIRMATION": [
+        "GH-F15"
+      ],
+      "PARTIALLY_RESOLVED": [
+        "GH-F4",
+        "GH-F5",
+        "GH-F6",
+        "GH-F7",
+        "GH-F8",
+        "GH-F9"
+      ],
+      "RESOLVED": [
+        "GH-F3",
+        "GH-F10",
+        "GH-F11",
+        "GH-F12",
+        "GH-F13",
+        "GH-F14"
+      ],
+      "RESOLVED_BY_OWNER_DECISION": [
+        "GH-F1",
+        "GH-F2"
+      ]
+    },
+    "report": "reports/phase1g_h_delta_audit.md",
+    "tag_readiness": "NOT_READY_SCIENTIFIC_CORRECTION_CONTRACT_REMEDIATION_AND_OWNER_CONFIRMATION_REQUIRED",
+    "verdict": {
+      "DOCUMENTATION": "ACCEPT_WITH_CORRECTIONS",
+      "GOVERNANCE": "ACCEPT_WITH_CORRECTIONS",
+      "IMPLEMENTATION": "ACCEPT_WITH_CORRECTIONS",
+      "NUMERICS": "ACCEPT",
+      "PROVENANCE": "ACCEPT",
+      "SCIENCE": "REJECT",
+      "TASK_COMPLIANCE": "ACCEPT_WITH_CORRECTIONS",
+      "TESTS": "ACCEPT_WITH_CORRECTIONS",
+      "overall": "REJECT"
+    }
+  },
+  "findings": [
+    {
+      "actions": [
+        "shared constraints: f_v0, P11(r), latent carrier law, convention E[psi | wall] = 1 (report sections 1, 6.3; inventory; evidence metadata; README; CLAUDE)",
+        "evidence reports m_II, 1/m_II^2, the unmasked ball variance of the conditionally normalised law-II density and <C_W - 1> per law",
+        "identity (H25) in report section 6.1, gated against (H18) at 1e-12",
+        "r_s and the lam calibration declared free construction choices; discarded first design disclosed",
+        "tests: 4-variate sampling of the shared carrier covariance, the m_II^-2 ratio and (H25); reported m_II; (H18)-(H25) agreement"
+      ],
+      "id": "GH-DF1",
+      "numbers": {
+        "conditional_covariance_ratio_range": [
+          0.121455,
+          0.379468
+        ],
+        "m_II_GM": [
+          2.869413,
+          2.139809,
+          1.623351
+        ],
+        "m_II_NW15": [
+          2.474113,
+          2.104325,
+          1.668579
+        ],
+        "r_s_Mpc": [
+          1,
+          2,
+          4
+        ],
+        "signed_C_W_minus_1_ball_GM": [
+          0.75593,
+          0.043189
+        ],
+        "signed_C_W_minus_1_ball_NW15": [
+          0.791264,
+          0.069083
+        ]
+      },
+      "severity": "MEDIUM-HIGH",
+      "status": "RESOLVED"
+    },
+    {
+      "actions": [
+        "TwoPhaseGlobalGrowth stores G; EvaluatedVoidShare stores density, early_spectrum and seed_quadrature",
+        "every record recomputes its results and diagnostics from its stored inputs (_two_phase_growth_values, _void_share_values, _global_sigma_values, _interval_values) and refuses mismatches beyond RECORD_IDENTITY_RTOL or failing inputs",
+        "sigma record: void share evaluated with its own density and spectrum objects; radius re-resolved from its specification",
+        "growth assumptions, sigma caveats and interval class assumptions bound to the module's",
+        "tests: the five accepted replacements of the delta audit refused, with four further probes; unchanged copies accepted"
+      ],
+      "cost": "construction about twice the computation; evidence values bitwise unchanged",
+      "id": "GH-DF2",
+      "severity": "MEDIUM",
+      "status": "RESOLVED"
+    },
+    {
+      "actions": [
+        "report section 8 states the current readings (GH-DE2, GH-DE3, GH-DE5)",
+        "dated status note in reports/phase1g_h_audit_remediation.md and its inventory with the verified outcomes"
+      ],
+      "id": "GH-DF3",
+      "severity": "MEDIUM",
+      "status": "RESOLVED"
+    },
+    {
+      "actions": [
+        "report sections 5.2 and 5.3: integrated, spectrum- and window-weighted average; no pointwise or two-window bound (GH-DE4)",
+        "range corrected in self-review: [W09] seed -0.08% to -0.12% over conventions (a)-(c) and both scenarios"
+      ],
+      "id": "GH-DF4",
+      "severity": "LOW-MEDIUM",
+      "status": "RESOLVED"
+    },
+    {
+      "actions": [
+        "tests: growth background check, interval target_inside, Frechet and symmetry refusals, rounding-budget output term (e_reference_rounding_budget), reclosure factor; tamper test matches each invariant's message",
+        "mutation testing: delta audit's 23 mutants 21 killed (N5 benign, N9 docstring survive as classified); 10 new mutants killed"
+      ],
+      "id": "GH-DF5",
+      "severity": "LOW-MEDIUM",
+      "status": "RESOLVED"
+    },
+    {
+      "actions": [
+        "README and CLAUDE: below the adopted epsilon = 1 threshold, with no controlled error estimate, beside the median-seed values"
+      ],
+      "id": "GH-DF6",
+      "severity": "LOW",
+      "status": "RESOLVED"
+    }
+  ],
+  "gh_f15": {
+    "note": "given in the session that wrote the phase, not directly to an auditor",
+    "record": "reports/phase1g_h_publication_successor.md (P4)",
+    "status": "CONFIRMED_BY_OWNER_2026_10_08_RECORDED",
+    "verbatim": "Si, confermo"
+  },
+  "observational_authorizations": {
+    "FSIGMA8_AUTHORIZATION": "NOT_GRANTED",
+    "OBSERVATIONAL_AUTHORIZATION": "NOT_GRANTED",
+    "RSD_AUTHORIZATION": "NOT_GRANTED",
+    "SIGMA8_AUTHORIZATION": "NOT_GRANTED",
+    "UNIQUE_TIMESCAPE_PREDICTION": "NOT_GRANTED"
+  },
+  "open_items": [
+    "push of the two commits of this remediation (separate approval)",
+    "a further independent audit before any merge or freeze",
+    "owner decisions H-OD1 ... H-OD5",
+    "Windows gate (CPython 3.14.3 / 3.11.9)",
+    "C: prediction and observation not reached"
+  ],
+  "owner_approval": {
+    "date": "2026-10-08",
+    "scope": "the remediation plan of the record's section 1; local commits only",
+    "verbatim": "Perfetto, procedi"
+  },
+  "partial_original_findings_completed_through": {
+    "GH-F4": "GH-DF4",
+    "GH-F5": "GH-DF1",
+    "GH-F6": "GH-DF3/GH-DE2",
+    "GH-F7": "GH-DF3/GH-DE3",
+    "GH-F8": "GH-DF6",
+    "GH-F9": "GH-DF2, GH-DF5"
+  },
+  "phase": "1G-H",
+  "plan": {
+    "GH-DF1": "narrow the shared constraint to the latent carrier law; report the law-II normaliser m_II and the covariance ratio 1/m_II^2; add identity (H25)",
+    "GH-DF2": "bind every record to its inputs by recomputation in __post_init__ with the factory's pure function",
+    "GH-DF3": "rewrite report section 8 to the current readings; dated status note on the superseded resolution counts",
+    "GH-DF4": "name G_eff/G(0) - 1 an integrated average; withdraw the pointwise bound and the interval-placement accuracy",
+    "GH-DF5": "tests for the surviving defensive invariants, the rounding budget's output term and the reclosure factor",
+    "GH-DF6": "median-seed qualifier beside the summary values in README and CLAUDE"
+  },
+  "published_values": {
+    "constructive_pairs_max_rel_change": {
+      "published_rms": 0.00064,
+      "small_signed_law_II_wall_moment": 0.00127,
+      "totals": 5.1e-05
+    },
+    "outside_constructive_pairs": "bitwise unchanged",
+    "printed_values_changed": "none"
+  },
+  "radial_quadrature": {
+    "claims_verified_with_deviation": 4,
+    "fix": "first panel [0, 2R/480] included (integrand zero at r = 0); 1440 intervals; refinement gate 1e-5 against every other node",
+    "observed_refinement_max_rel": [
+      8.27e-07,
+      1.01e-06
+    ],
+    "pair_density_norm_before_after": [
+      0.9999999283,
+      1.0000000000009
+    ],
+    "signed_law_II_wall_moments": [
+      0.000782523,
+      0.003553182
+    ]
+  },
+  "record": "reports/phase1g_h_delta_audit_remediation.md",
+  "remediation_errata": {
+    "GH-DE1": "report section 6.3 shared constraints",
+    "GH-DE2": "report section 8 normalisation",
+    "GH-DE3": "report section 8 S1",
+    "GH-DE4": "report section 5.2",
+    "GH-DE5": "report section 8 mechanism",
+    "GH-DE6": "dated status note in reports/phase1g_h_audit_remediation.md"
+  },
+  "schema_version": 1,
+  "status_note_2026_10_08_after_second_delta_audit": {
+    "corrections": "reports/phase1g_h_delta_audit_2_remediation.md",
+    "erratum_GH-D2E1": {
+      "correct_reading": "every common physical leaf outside the pairs is bitwise identical; three gate read-outs of pair quantities changed by at most 1.2e-5 absolute; inside gaussian_threshold_pair 160 common leaves changed (156 numeric, 140 of them by more than 1e-12 relative, 4 constraint texts), 6 were renamed (ball_variance_unmasked_density -> ball_variance_unconditionally_normalised_carrier) and 106 exist only in the new artifact (those 6 new names and 100 new leaves); 16 leaves were added outside (gates, gate definitions, G_ode_cross_check)",
+      "recount": "reports/phase1g_h_delta_audit_2_remediation.md section 3 (same comparison, recounted by the author)",
+      "superseded_field": "verification.regression_vs_89cb041"
+    },
+    "note": "this inventory states the remediation as of its commit 226e52d and is not rewritten",
+    "publication": "the two commits of this record and the delta-audit commit were pushed on 2026-10-08 (89cb041 -> 226e52d; reports/phase1g_h_publication_successor.md section 6, P7); commits.branch, commits.pushed and the push item of open_items are superseded (erratum GH-D2E2)",
+    "second_delta_audit": "reports/phase1g_h_delta_audit_2.md (commit e5170285e1d4b4aa72e907a3a79110d05584c0d9; ACCEPT_WITH_CORRECTIONS)",
+    "verified_outcomes": {
+      "GH-DE1..GH-DE5": "APPLIED",
+      "GH-DE6": "APPLIED_EQUIVALENT",
+      "GH-DF1..GH-DF6": "RESOLVED"
+    }
+  },
+  "status_tokens": {
+    "added": [],
+    "changed": []
+  },
+  "title": "Phase 1G-H remediation of the independent delta audit",
+  "unchanged": {
+    "audit_files": "files of the independent audit and of the delta audit unchanged",
+    "frozen_records_and_tags": "unchanged",
+    "other_package_modules": "unchanged",
+    "status_tokens": "no value or comment changed"
+  },
+  "verification": {
+    "case_runner": {
+      "gm_bare_pbs_f_median_seed": 0.810772,
+      "gm_bare_pbs_w09_seed": 1.121363,
+      "nw15_equal_mass_constant_share": 0.918157
+    },
+    "diff_check": "clean",
+    "evidence": {
+      "artifact_sha256_py313": "91aaca79ad0d0d86ad3208c8cd854e9d03839ef1f8c2d0026ff7a5cf8ff89884",
+      "cross_interpreter_numeric_leaves": 3201,
+      "gates": "36 / 36 on CPython 3.13.16 and 3.11.17",
+      "max_relative_difference": 0.0,
+      "tree": "248a06bfeb655337bc499607180c49008b5f34ea (src, scripts, tests clean)"
+    },
+    "full_suites": {
+      "CPython 3.11.17": {
+        "collected": 1178,
+        "failed": 0,
+        "passed": 1146,
+        "seconds": 335,
+        "skipped": 32
+      },
+      "CPython 3.13.16": {
+        "collected": 1178,
+        "failed": 0,
+        "passed": 1146,
+        "seconds": 339,
+        "skipped": 32
+      },
+      "command": "OPENBLAS_NUM_THREADS=1 python -B -W error -m pytest -q -p no:cacheprovider -rs"
+    },
+    "logs": "reports/phase1g_h_delta_audit_remediation_logs/",
+    "mutation_testing": {
+      "delta_audit_mutants": {
+        "killed": 21,
+        "surviving_as_classified": [
+          "N5_orthant_centre_split_off",
+          "N9_void_share_identity_text_sign_reversed"
+        ],
+        "total": 23
+      },
+      "new_mutants": {
+        "killed": 10,
+        "total": 10
+      }
+    },
+    "not_run": [
+      "Windows CPython 3.14.3 / 3.11.9",
+      "upstream notebook and oracle regeneration",
+      "owner-decisions Monte Carlo"
+    ],
+    "phase_tests": {
+      "file": "tests/test_phase1g_h_global_variance.py",
+      "passed": 42
+    },
+    "regression_vs_89cb041": "every common leaf outside two_phase_covariance/*/gaussian_threshold_pair bitwise identical; inside, 130 changed, 6 renamed, 108 added",
+    "skip_causes": {
+      "1D-B growth validation artifact absent": 1,
+      "1D-D validation artifact absent": 1,
+      "B2 artifact absent": 1,
+      "barotropic oracle absent": 4,
+      "clean perturbation oracle absent": 4,
+      "owner-decisions artifact absent": 3,
+      "upstream oracle not extracted": 18
+    },
+    "tolerance_audit": {
+      "comparisons": 739,
+      "missing": 0
+    },
+    "validator": {
+      "json_roundtrips": 52,
+      "status": "PASS"
+    }
+  }
+}
