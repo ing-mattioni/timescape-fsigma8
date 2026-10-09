@@ -31,7 +31,7 @@ Delta-audit remediation (2026-10-08; reports/phase1g_h_delta_audit_remediation.m
 the lognormal pairs share f_v0, P11(r) and the latent carrier law, not the
 conditionally normalised wall-density covariance, whose law-II normaliser
 ratio m_II is reported (GH-DF1); identity (H25) gives the total from P11(r)
-and the both-walls conditional covariance C_W(r); the ball pair integrals
+and the both-walls conditional product moment C_W(r); the ball pair integrals
 include the first radial panel and carry a refinement gate; the rounding
 budget of the 1G-E/F reference is a function the tests exercise (GH-DF5).
 
@@ -41,6 +41,13 @@ consistency check of the (H18) assembly at x = 0 on the same kernel arrays
 (kind numerics); the tests check the kernels by sampling, the reported C_W
 and m_II^-2, the half-resolution estimator, and pin every gate threshold
 (GH-D2F2).
+
+Third delta-audit remediation (2026-10-09;
+reports/phase1g_h_delta_audit_3_remediation.md): C_W - 1 is the excess of the
+both-walls product moment over the one-wall normalisation, not the centred
+both-walls covariance; its pair-weighted ball value is exported as
+``both_walls_product_moment_excess_ball`` (formerly
+``both_walls_conditional_density_covariance_ball``, same value; GH-D3F5).
 """
 
 from __future__ import annotations
@@ -466,8 +473,11 @@ def _law_summary(f_v0: float, ball: _Ball, c_chi, k_ww, k_pw, provenance: str) -
     ``psi`` normalised by ``E[psi | wall] = 1``.  (H25): the ball variance is
     ``< P11(r) C_W(r)/f_w^2 - 1 >`` with ``C_W = E[psi1 psi2 | both in walls]
     = 1 + (k_ww + 2 k_pw)/P11``, so P11 and C_W fix the total.  Reports the
-    pair-weighted both-walls conditional covariance ``<P11 (C_W - 1)>/<P11>``
-    and the relative change of every rms under radial refinement.
+    pair-weighted both-walls product-moment excess ``<P11 (C_W - 1)>/<P11>``
+    and the relative change of every rms under radial refinement.  C_W - 1 is
+    measured from the one-wall normalisation E[psi | wall] = 1; it is not the
+    centred both-walls covariance, which subtracts
+    E[psi1 | both] E[psi2 | both] (third delta audit GH-D3F5).
     """
     f_w = 1.0 - f_v0
     c_chi, k_ww, k_pw = (np.asarray(a, dtype=float) for a in (c_chi, k_ww, k_pw))
@@ -489,7 +499,7 @@ def _law_summary(f_v0: float, ball: _Ball, c_chi, k_ww, k_pw, provenance: str) -
     return {**sig, "cross_term": var["cross_terms"],
             "wall_moment": moments.wall_field, "partition_wall_moment": moments.partition_wall,
             "sigma_total_from_H25": math.sqrt(ball.integral(c_chi + k_ww + 2.0 * k_pw) / f_w ** 2),
-            "both_walls_conditional_density_covariance_ball":
+            "both_walls_product_moment_excess_ball":
                 ball.integral(k_ww + 2.0 * k_pw) / ball.integral(p11),
             "radial_refinement_rel": refinement}
 
@@ -565,7 +575,7 @@ def lognormal_pairs(f_v0: float, c: float, ball: _Ball, k, lnk, d2, ell: float, 
     shared (delta audit GH-DF1): the conditionally normalised wall density
     itself, whose unconditional covariance in law II is law I's divided by
     m_II^2 (``conditional_normaliser_ratio_m``), and the both-walls
-    conditional covariance C_W(r) - 1 that, with P11, fixes the total by
+    conditional product moment C_W(r) that, with P11, fixes the total by
     (H25).  For each r_s, lam (a free calibration choice) makes the ball
     variance of the unconditionally normalised carrier equal to the signed
     carrier's.  The linear-limit member (unsmoothed carrier, latent point
@@ -631,8 +641,8 @@ def lognormal_pairs(f_v0: float, c: float, ball: _Ball, k, lnk, d2, ell: float, 
             "not_shared": [
                 "the conditionally normalised wall density: its unconditional covariance in "
                 "law II is law I's divided by m_II^2 (conditional_normaliser_ratio_m_II)",
-                "the both-walls conditional covariance C_W(r) - 1, which with P11 fixes the "
-                "total by (H25)"],
+                "the both-walls conditional product moment C_W(r) = E[psi1 psi2 | both in "
+                "walls], which with P11 fixes the total by (H25)"],
             "free_construction_choices": [
                 "latent smoothing radius r_s (1, 2, 4 Mpc)",
                 "lam calibrated to the ball variance of the signed carrier"],
@@ -654,8 +664,8 @@ def gt_pair(bg_in, growth, density, R: float, target_sigma_part: float,
     linear field (growth D_wall(t0), photon-frame compression s = D_wall,
     Planck anchored).  Law I: g independent of the carrier; law II: g is the
     smoothed carrier itself.  Both pairs hold f_v0, P11(r) and the carrier law
-    fixed; by (H25) they differ through the both-walls conditional density
-    covariance C_W(r) - 1, i.e. the joint law of geometry and density.
+    fixed; by (H25) they differ through the both-walls conditional product
+    moment C_W(r), i.e. the joint law of geometry and density.
 
     * Signed Gaussian pair (owner decision D3 on audit GH-F5): the wall
       density is ``1 + w - mu`` with the conditional recentring mu, a signed
@@ -1271,7 +1281,7 @@ def _print_summary(results: dict, digest: str) -> None:
                   f"{row['sigma_wall_field']:.4f}  cross = {row['cross_term']:+.4f}  total = "
                   f"{row['sigma_total']:.4f}  P(rho<0|wall) = "
                   f"{gtp['negative_wall_density_probability'][law]:.4f}  <C_W - 1> = "
-                  f"{row['both_walls_conditional_density_covariance_ball']:.4f}")
+                  f"{row['both_walls_product_moment_excess_ball']:.4f}")
         ln = gtp["nonnegative_lognormal_pair"]
         for mname, mem in ln["members"].items():
             print(f"  lognormal {mname}: lambda = {mem['latent_scale_lambda']:.4f}, latent point "
@@ -1283,7 +1293,7 @@ def _print_summary(results: dict, digest: str) -> None:
                 print(f"    {law:15s} sigma_part = {row['sigma_partition']:.4f}  sigma_wall = "
                       f"{row['sigma_wall_field']:.4f}  cross = {row['cross_term']:+.4f}  total = "
                       f"{row['sigma_total']:.4f}  <C_W - 1> = "
-                      f"{row['both_walls_conditional_density_covariance_ball']:.4f}")
+                      f"{row['both_walls_product_moment_excess_ball']:.4f}")
         print(f"  lognormal linear limit: max wall-moment rel. difference "
               f"{ln['linear_limit']['max_wall_moment_rel_difference']:.2e}")
         print(f"  radial refinement max rel. change {gtp['radial_refinement_max_rel']:.2e} "

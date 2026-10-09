@@ -1088,7 +1088,7 @@ def test_gh_d2f2_law_summary_reports_the_pair_weighted_both_walls_covariance():
     k_pw = 0.02 * np.exp(-u / 1.2)
     out = ev._law_summary(f_v, ball, c_chi, k_ww, k_pw, "synthetic kernels")
     c_w = 1.0 + (k_ww + 2.0 * k_pw) / p11
-    assert out["both_walls_conditional_density_covariance_ball"] == pytest.approx(
+    assert out["both_walls_product_moment_excess_ball"] == pytest.approx(
         ball.integral(p11 * (c_w - 1.0)) / ball.integral(p11), rel=1e-12, abs=0.0)
     assert out["sigma_total"] ** 2 == pytest.approx(
         ball.integral(p11 * c_w / f_w ** 2 - 1.0), rel=1e-11, abs=0.0)
@@ -1139,8 +1139,11 @@ def test_gh_d2f2_conditional_wall_density_by_sample_normalised_monte_carlo():
     """C_W(r), m_II and the m_II^-2 covariance against sampling (second delta audit).
 
     psi is the carrier divided by its *sample* mean on the walls, so neither
-    the normaliser nor the covariance ratio is put in by construction; the
-    error budget adds the normaliser's own sampling error.
+    the normaliser nor the covariance ratio is put in by construction.  The
+    normaliser uses the first point of each draw only (independent samples).
+    Each budget is conservative: five times the sum of the independent-sample
+    standard errors of the statistic and of the normaliser term, with no
+    credit for their correlation (third delta audit GH-D3F3).
     """
     ev = _evidence()
     rng = np.random.default_rng(31)
@@ -1158,7 +1161,7 @@ def test_gh_d2f2_conditional_wall_density_by_sample_normalised_monte_carlo():
         chi1, chi2 = z[:, 0] > c, z[:, 1] > c
         carrier1 = np.exp(lam * z[:, 2] - 0.5 * lam * lam * xs0)       # exp(a)/E[exp(a)]
         carrier2 = np.exp(lam * z[:, 3] - 0.5 * lam * lam * xs0)
-        on_wall = np.concatenate((carrier1[chi1], carrier2[chi2]))
+        on_wall = carrier1[chi1]                                        # one point per draw
         m_s = on_wall.mean()                                            # sample E[carrier | wall]
         se_m = on_wall.std() / math.sqrt(on_wall.size)
         m = laws[law]["conditional_normaliser_ratio_m"]
@@ -1182,7 +1185,8 @@ def test_gh_d2f2_ball_half_resolution_estimate_has_the_simpson_error_ratio():
     The ball pair density is a quintic in u with unit integral, so the
     composite Simpson error is exactly ``(h^4/180)[f'''(2R) - f'''(0)] =
     (h^4/180) 45/R^4`` and the coarse error is 16 times the fine one; for a
-    kernel with a sub-Mpc scale the ratio tends to 16 with an O(h^2) correction.
+    kernel with a sub-Mpc scale the ratio tends to 16 with an O(h^2) correction
+    (15.96 here).  Tolerances: round-off is about 1e-4 of the 9.3e-13 error.
     """
     ev = _evidence()
     R = 10.0
@@ -1190,8 +1194,8 @@ def test_gh_d2f2_ball_half_resolution_estimate_has_the_simpson_error_ratio():
     h = 2.0 * R / ev.RADIAL_INTERVALS
     ones = np.ones_like(ball.u)
     error = h ** 4 / 180.0 * 45.0 / R ** 4
-    assert ball.integral(ones) - 1.0 == pytest.approx(error, rel=1e-2, abs=0.0)
-    assert ball.integral(ones, coarse=True) - 1.0 == pytest.approx(16.0 * error, rel=1e-2, abs=0.0)
+    assert ball.integral(ones) - 1.0 == pytest.approx(error, rel=2e-3, abs=0.0)
+    assert ball.integral(ones, coarse=True) - 1.0 == pytest.approx(16.0 * error, rel=2e-3, abs=0.0)
     a = 0.3
 
     def integrand(x):
@@ -1202,7 +1206,7 @@ def test_gh_d2f2_ball_half_resolution_estimate_has_the_simpson_error_ratio():
                  points=[0.5, 1.0, 2.0, 5.0])[0]
     kernel = np.exp(-ball.u / a)
     ratio = (ball.integral(kernel, coarse=True) - exact) / (ball.integral(kernel) - exact)
-    assert ratio == pytest.approx(16.0, rel=1e-2, abs=0.0)
+    assert ratio == pytest.approx(16.0, rel=5e-3, abs=0.0)
 
 
 def test_gh_d2f2_binding_boundary_and_record_identities():
@@ -1243,6 +1247,7 @@ def test_gh_d2f2_evidence_thresholds_are_pinned():
         "reclosure_constant_share_rel": 1e-10, "radial_refinement_rel": 1e-5,
         "h25_identity_rel": 1e-12}
     assert (ev.RADIAL_INTERVALS, ev.ORTHANT_TOLERANCE, ev.ORTHANT_START_NODES) == (1440, 1e-12, 32)
+    assert gv.RECORD_IDENTITY_RTOL == 1e-12                         # GH-D3F3 (mutant B01)
 
 
 def test_gh_d2f4_float_results_must_be_floats_and_scalar_inputs_are_stored_as_floats(growth_gm):
@@ -1262,3 +1267,62 @@ def test_gh_d2f4_float_results_must_be_floats_and_scalar_inputs_are_stored_as_fl
     growth = dataclasses.replace(growth_gm, G=Fraction(1), checks=checks)
     assert type(growth.G) is float and growth == growth_gm
     json.dumps(growth.to_json_dict(), allow_nan=False)
+
+
+# --------------------------------- third delta-audit remediation (2026-10-09)
+def test_gh_d3f3_every_growth_check_and_g_are_stored_as_floats(growth_gm):
+    """All five TwoPhaseGrowthChecks tolerances and G are stored as native floats (mutant B10)."""
+    names = ("identity_tolerance", "ode_rtol", "ode_atol", "ode_cross_check_tolerance",
+             "root_xtol_fraction")
+    checks = dataclasses.replace(CHECKS, **{name: Fraction(getattr(CHECKS, name)) for name in names})
+    for name in names:
+        assert type(getattr(checks, name)) is float
+        assert getattr(checks, name) == getattr(CHECKS, name)
+    growth = dataclasses.replace(growth_gm, G=Fraction(1), checks=checks)
+    assert type(growth.G) is float and growth == growth_gm
+    json.dumps(growth.to_json_dict(), allow_nan=False)
+
+
+def test_gh_d3f3_float_results_accept_float64_and_subclasses_but_not_float32():
+    """numpy.float64 and float subclasses are floats; numpy.float32 is not (mutants B02, B03)."""
+    res = run(GM, constant(0.5), radius("c"))
+
+    class _Float(float):
+        pass
+
+    for value in (np.float64(res.linear_sigma), _Float(res.linear_sigma)):
+        assert dataclasses.replace(res, linear_sigma=value).linear_sigma == res.linear_sigma
+    # 0.5 is exact in float32, so only the type policy can refuse it.
+    with pytest.raises(gv.GlobalVarianceContractError,
+                       match="share_k0 must be a float, not float32"):
+        dataclasses.replace(res.void_share, share_k0=np.float32(0.5))
+
+
+def test_gh_d3f3_binding_tolerance_boundary_with_a_literal_rtol():
+    """1.05e-12 relative is refused and 0.95e-12 accepted, independently of the constant (B01)."""
+    res = run(GM, constant(0.05), radius("c"))
+    eps_rms = res.void_volume_response_rms
+    with pytest.raises(gv.GlobalVarianceContractError, match="void_volume_response_rms differs"):
+        dataclasses.replace(res, void_volume_response_rms=eps_rms * (1.0 + 1.05e-12))
+    dataclasses.replace(res, void_volume_response_rms=eps_rms * (1.0 + 0.95e-12))
+
+
+def test_gh_d3f2_nested_inputs_must_export_as_strict_json():
+    """A Fraction, float32 or int64 inside a nested 1G-B input record is refused (GH-D3F2).
+
+    The values are equal, so the recomputation binding accepts them; only the
+    strict-JSON check of the export refuses the record.
+    """
+    res = run(GM, constant(0.05), radius("c"))
+    for field, value in (("k_min_per_Mpc", Fraction(QUAD.k_min_per_Mpc)),
+                         ("truncation_tolerance", np.float32(QUAD.truncation_tolerance)),
+                         ("grid_points", np.int64(QUAD.grid_points))):
+        quadrature = dataclasses.replace(QUAD, **{field: value})
+        with pytest.raises(gv.GlobalVarianceContractError, match="export is not strict JSON"):
+            dataclasses.replace(res, quadrature=quadrature)
+    premise = gv.HomogeneityPremise(radius=radius("c", 100.0), max_linear_rms=0.1, provenance="test")
+    iv = gv.admissible_global_linear_interval(target=res, premise=premise)
+    for record in (res, res.growth, res.void_share, iv):
+        json.dumps(record.to_json_dict(), allow_nan=False)
+    for record in (res.growth.matching, res.growth.checks, res.void_share.closure, premise):
+        json.dumps(record.to_metadata(), allow_nan=False)

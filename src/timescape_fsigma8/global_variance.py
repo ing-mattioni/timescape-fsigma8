@@ -129,9 +129,10 @@ Records are fail-closed: on construction every public record re-validates
 its fields (audit GH-F9) and recomputes each result and diagnostic from its
 stored inputs with the same pure function its factory uses, refusing any
 record whose inputs do not reproduce its results (delta audit GH-DF2).  A
-float result must be stored as a float, and validated scalar inputs are
-stored as floats, so the records serialise as strict JSON (second delta
-audit GH-D2F4).
+float result must be stored as a float, and this module's own scalar inputs
+are stored as floats (second delta audit GH-D2F4); every record also refuses
+construction unless its export, nested 1G-B input records included, is
+strict JSON (third delta audit GH-D3F2).
 
 References: [GM] Galoppo & Mourier, arXiv:2511.17160v2; [W07] Wiltshire,
 arXiv:0709.0732v2; [W09] Wiltshire, arXiv:0909.0749v2; [JLH13] Jennings,
@@ -145,6 +146,7 @@ is a mandatory keyword-only argument; inapplicable choices are passed as
 
 from __future__ import annotations
 
+import json
 import math
 from dataclasses import dataclass
 from enum import Enum
@@ -385,9 +387,11 @@ def _close(value: float, expected: float) -> bool:
 def _same(stored, expected) -> bool:
     """A stored field equals its recomputation (floats within RECORD_IDENTITY_RTOL).
 
-    A float result must be stored as a finite ``float``: an equal ``Fraction``
-    or ``int`` would pass the comparison but break the strict-JSON contract of
-    ``to_json_dict`` (second delta audit GH-D2F4).
+    A float result must be stored as a finite ``float`` (``numpy.float64`` and
+    other ``float`` subclasses qualify; ``numpy.float32`` does not).  This is a
+    typed-output policy (second delta audit GH-D2F4): an equal ``Fraction``
+    would also break strict JSON, while an equal ``int`` is valid JSON but not
+    the recomputed type (wording corrected after third delta audit GH-D3E3).
     """
     if isinstance(expected, bool) or isinstance(stored, bool):
         return type(stored) is type(expected) and stored == expected
@@ -421,6 +425,21 @@ def _bind_recomputed(record, compute, what: str) -> None:
         if not _same(stored, expected):
             raise GlobalVarianceContractError(
                 f"{what}: {name} differs from its recomputation from the stored inputs")
+
+
+def _require_strict_json(export: dict, what: str) -> None:
+    """The record's export is strict JSON, nested input records included.
+
+    Nested 1G-B records validate their scalars as ``numbers.Real`` without
+    converting them, so a ``Fraction``, ``numpy.float32`` or ``numpy.int64``
+    input would otherwise reach the export (third delta audit GH-D3F2).
+    """
+    try:
+        json.dumps(export, allow_nan=False)
+    except (TypeError, ValueError) as exc:
+        raise GlobalVarianceContractError(
+            f"{what}: the export is not strict JSON ({exc}); pass native float and int "
+            "scalars, also inside nested input records") from exc
 
 
 def _strings(value, name: str) -> tuple[str, ...]:
@@ -569,6 +588,7 @@ class LastScatteringMatching:
             raise GlobalVarianceContractError("z_last_scattering must exceed 1")
         object.__setattr__(self, "z_last_scattering", z)
         _nonempty(self.provenance, "provenance")
+        _require_strict_json(self.to_metadata(), "matching")
 
     def to_metadata(self) -> dict:
         return {"z_last_scattering": self.z_last_scattering, "provenance": self.provenance}
@@ -600,6 +620,7 @@ class TwoPhaseGrowthChecks:
         for name in ("identity_tolerance", "ode_rtol", "ode_atol",
                      "ode_cross_check_tolerance", "root_xtol_fraction"):
             object.__setattr__(self, name, _positive(getattr(self, name), name))
+        _require_strict_json(self.to_metadata(), "growth checks")
 
     def to_metadata(self) -> dict:
         return {"identity_tolerance": self.identity_tolerance, "ode_rtol": self.ode_rtol,
@@ -714,6 +735,7 @@ class TwoPhaseGlobalGrowth:
         object.__setattr__(self, "G", G)
         _bind_recomputed(self, lambda: _two_phase_growth_values(
             self.background, self.matching, self.checks, G), "growth record")
+        _require_strict_json(self.to_json_dict(), "growth record")
 
     def to_json_dict(self) -> dict:
         return {"background": self.background.to_metadata(),
@@ -887,6 +909,7 @@ class ConstantVoidShare:
         object.__setattr__(self, "share", p)
         _nonempty(self.provenance, "provenance")
         _nonempty(self.evidence_class, "evidence_class")
+        _require_strict_json(self.to_metadata(), "constant void share")
 
     def to_metadata(self) -> dict:
         return {"closure": "constant_void_share", "share": self.share,
@@ -919,6 +942,7 @@ class GaussianThresholdSeedVoidShare:
                            _positive(self.seed_radius_Mpc, "seed_radius_Mpc"))
         _nonempty(self.seed_radius_provenance, "seed_radius_provenance")
         _require_enum(self.compression, SeedVolumeCompression, "compression")
+        _require_strict_json(self.to_metadata(), "seed void share")
 
     def to_metadata(self) -> dict:
         return {"closure": "gaussian_threshold_seed_peak_background_split",
@@ -1025,6 +1049,7 @@ class EvaluatedVoidShare:
         _bind_recomputed(self, lambda: _void_share_values(
             self.closure, self.growth, self.density, self.early_spectrum,
             self.seed_quadrature), "void share")
+        _require_strict_json(self.to_json_dict(), "void share")
 
     def share(self, k_per_Mpc: ArrayLike) -> NDArray[np.float64]:
         """p(k), read-only; k in Mpc^-1 (photon-normalised comoving).
@@ -1301,6 +1326,7 @@ class ConditionalGlobalLinearSigma:
         _bind_recomputed(self, lambda: _global_sigma_values(
             self.growth, self.void_share, self.density.omega_m_per_photon,
             self.radius.radius_Mpc, self.early_spectrum, self.quadrature), "sigma record")
+        _require_strict_json(self.to_json_dict(), "sigma record")
 
     def to_json_dict(self) -> dict:
         return {
@@ -1472,6 +1498,7 @@ class HomogeneityPremise:
         object.__setattr__(self, "max_linear_rms",
                            _positive(self.max_linear_rms, "max_linear_rms"))
         _nonempty(self.provenance, "provenance")
+        _require_strict_json(self.to_metadata(), "homogeneity premise")
 
     def to_metadata(self) -> dict:
         return {"radius": self.radius.to_metadata(), "max_linear_rms": self.max_linear_rms,
@@ -1555,6 +1582,7 @@ class AdmissibleGlobalLinearInterval:
         # the target's own rms at the premise radius recomputed.
         _bind_recomputed(self, lambda: _interval_values(self.target, self.premise),
                          "interval record")
+        _require_strict_json(self.to_json_dict(), "interval record")
 
     def to_json_dict(self) -> dict:
         return {"premise": self.premise.to_metadata(),
