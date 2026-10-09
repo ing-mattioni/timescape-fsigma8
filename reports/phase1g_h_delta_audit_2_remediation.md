@@ -17,6 +17,13 @@ earlier remediation records and their inventories, a dated addendum
 and its inventory, README.md and CLAUDE.md. Code: `global_variance.py`, the
 phase tests, and a gate label and docstrings of the evidence script.
 
+**Status note (2026-10-09).** This record states the remediation as of its
+commit `4bf2718` and is not rewritten. Its two commits and the two commits
+of the second delta audit were pushed on 2026-10-09 (`226e52d → 4bf2718`,
+event P10 of [`phase1g_h_publication_successor.md`](phase1g_h_publication_successor.md),
+Sec. 7), so "Nothing is pushed" (Sec. 0) and the push item of Sec. 4 are
+superseded.
+
 ## 0. Summary
 
 - **Second delta-audit outcome.** `ACCEPT_WITH_CORRECTIONS`: PROVENANCE,

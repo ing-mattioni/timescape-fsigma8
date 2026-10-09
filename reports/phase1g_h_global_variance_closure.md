@@ -8,11 +8,11 @@ Base: `main` = `origin/main` = `8d3cdd0533035858c42269cb1dff1a20dcafc7da`
 `phase-1g-h-global-variance-closure` (first commit: the F/G freeze-status
 alignment, `phase1g_fg_freeze_status_successor.md`).
 Remote: the session branch `ccr-555e67be-u11yht`, pushed with the owner's
-approvals of 2026-10-06 and 2026-10-08 (Sec. 1;
+approvals of 2026-10-06, 2026-10-08 and 2026-10-09 (Sec. 1;
 [`phase1g_h_publication_successor.md`](phase1g_h_publication_successor.md));
-not merged into `main`. Its remote head is `226e52d` (2026-10-08, P7); the
-second delta audit (published on `ccr-ac582de6-vho99i` at `e517028`) and
-its remediation are on the local branch and not pushed.
+not merged into `main`. Its remote head is `4bf2718` (2026-10-09, P10),
+which carries the second delta audit (also published on
+`ccr-ac582de6-vho99i` at `e517028`) and its remediation.
 Companions: [`phase1g_h_global_variance_closure_inventory.json`](phase1g_h_global_variance_closure_inventory.json),
 [`phase1g_h_global_variance_closure_validation.md`](phase1g_h_global_variance_closure_validation.md),
 the independent audit [`phase1g_h_independent_audit.md`](phase1g_h_independent_audit.md),
@@ -97,6 +97,15 @@ with the owner's authorisation, on the branch `phase-1g-h-delta-audit`.
 plan for the delta audit («Perfetto, procedi»): every new finding is a
 correction (no owner decision); local commits only, any push needs a
 separate approval.
+
+**Second delta audit and publication (2026-10-08 and 2026-10-09).** The
+owner approved pushing the delta-audit remediation («Fai push e prepara il
+prompt per un nuovo audit», P7), confirmed the GH-F15 approvals directly to
+the second delta auditor (P8) and had that audit published on
+`ccr-ac582de6-vho99i` (P9). The owner approved the plan for its corrections
+(«Perfetto, procedi»; local commits) and then their push with the audit
+commits («Sì, fai push», P10, 2026-10-09). The events are recorded in
+`phase1g_h_publication_successor.md`.
 
 **Distinction recorded as asked.** Everything below that goes beyond the
 approved records is an explicitly named hypothesis (H-A6 … H-A9, the seed
@@ -1119,11 +1128,14 @@ revised ones below), is given under each item.
      `ACCEPT_WITH_CORRECTIONS`, no scientific blocker; the owner confirmed
      the GH-F15 approvals directly to its auditor (P8); published on the
      owner's instruction on the branch `ccr-ac582de6-vho99i` (`e517028`, P9).
-     Its remediation is committed locally on top of it.
-   - Open: the push of the second delta audit and its remediation; the
-     owner's Windows gate (CPython 3.14.3 / 3.11.9, never run on a 1G-H
-     tree); an optional cross-family check of Sec. 6 (the second delta audit
-     shares the author's model family); pull request, merge, freeze and tag.
+     Its remediation was committed on top of it.
+   - *Push decided* (owner, 2026-10-09): the two second-delta-audit commits
+     and the two commits of its remediation on the session branch
+     (`4bf2718`, P10).
+   - Open: the owner's Windows gate (CPython 3.14.3 / 3.11.9, never run on a
+     1G-H tree); an optional cross-family check of Sec. 6 (the second delta
+     audit shares the author's model family); pull request, merge, freeze
+     and tag.
 
 ## 10. Implementation and usage
 

@@ -301,6 +301,10 @@
       "overall": "ACCEPT_WITH_CORRECTIONS"
     }
   },
+  "status_note_2026_10_09": {
+    "note": "this inventory states the remediation as of its commit 4bf2718 and is not rewritten",
+    "publication": "the two commits of this record and the two second delta-audit commits were pushed on 2026-10-09 (226e52d -> 4bf2718; reports/phase1g_h_publication_successor.md section 7, P10); commits.branch, commits.pushed and the push item of open_items are superseded"
+  },
   "status_tokens": {
     "added": [],
     "changed": []

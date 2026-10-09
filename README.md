@@ -143,11 +143,11 @@ that predate the freeze are resolved in the
 - **Status.** These are conditional numbers, not an observational σ8, and no
   σ8 authorization is granted.
 - **Phase 1G-H (proposed; on the branch `ccr-555e67be-u11yht`, pushed with
-  owner approvals on 2026-10-06 and 2026-10-08, remote head `226e52d`;
-  independently audited on 2026-10-07 and remediated; delta-audited on
-  2026-10-08 and remediated; a second delta audit the same day accepted it
-  with corrections, which are applied locally and not pushed; not merged
-  into `main`, frozen or tagged)**
+  owner approvals on 2026-10-06, 2026-10-08 and 2026-10-09, remote head
+  `4bf2718`; independently audited on 2026-10-07 and remediated;
+  delta-audited on 2026-10-08 and remediated; a second delta audit the same
+  day accepted it with corrections, which are applied; not merged into
+  `main`, frozen or tagged)**
   ([report](reports/phase1g_h_global_variance_closure.md),
   [validation](reports/phase1g_h_global_variance_closure_validation.md),
   [audit](reports/phase1g_h_independent_audit.md),

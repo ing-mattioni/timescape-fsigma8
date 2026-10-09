@@ -9,7 +9,8 @@ successor").
 
 **Addendum of 2026-10-08 (after the second delta audit):** Sec. 6 records
 events P7–P9 and supersedes the state of Sec. 3. Secs. 1–5 keep their
-wording.
+wording. **Addendum of 2026-10-09:** Sec. 7 records event P10 and supersedes
+the state of Sec. 6.2.
 
 ## 1. Purpose
 
@@ -132,3 +133,45 @@ Sec. 4 continues with the statements that GH-D2F1 lists:
 The limits of Sec. 5 apply. P9's wording comes from a pasted transcript of
 another session; the repository confirms the branch and its commits, not the
 words. The second delta audit shares the author's model family (its §12).
+
+## 7. Addendum of 2026-10-09 (push of the second delta audit and its remediation)
+
+Remote facts verified read-only on 2026-10-09 (`git ls-remote` before and
+after the push, `git log`).
+
+### 7.1 Event
+
+| # | Date | Event | Remote evidence | Authorisation (owner's words, verbatim) |
+|---|---|---|---|---|
+| P10 | 2026-10-09 | Fast-forward of `ccr-555e67be-u11yht` from `226e52d` to `4bf2718e7557ace3fdc0abffaa73587f1162f776`, carrying `6411650` and `e517028` (the second delta audit) and `9ad5425` (code) and `4bf2718` (documentation) of the second delta-audit remediation | push output `226e52d..4bf2718`; branch head `4bf2718` (the remote head was `226e52d` immediately before) | «Sì, fai push» |
+
+The authorisation answered the request to push the fast-forward to
+`4bf2718` and then to record the event here. The record of P10 is itself a
+later local commit; its push needs a separate approval.
+
+### 7.2 State on 2026-10-09 after P10 (supersedes Sec. 6.2)
+
+- `main` = `8d3cdd0533035858c42269cb1dff1a20dcafc7da` (unchanged).
+- `ccr-555e67be-u11yht` = `4bf2718` on `origin`.
+- `ccr-ac582de6-vho99i` = `e517028`; `phase-1g-h-independent-audit` =
+  `816dd00`; `phase-1g-h-delta-audit` = `5c325e1` (all unchanged).
+- 76 tag refs (38 annotated tags), unchanged. No pull request from a 1G-H
+  branch, no release, no `phase-1g-d-separate-universe-growth-v2` tag or
+  branch.
+
+### 7.3 Current reading of further dated statements
+
+| Statement (literal) | Location | Written | Current reading |
+|---|---|---|---|
+| "Nothing is pushed: the push of `6411650`, `e517028` and these two commits needs a separate approval." and "**Push** of `6411650`, `e517028` and the two commits of this remediation (needs a separate approval; …)" | `phase1g_h_delta_audit_2_remediation.md` §0 and §4 | 2026-10-08 | Pushed by P10; a dated note there points here. |
+| `commits.branch` "(local; on top of the second delta-audit commit e517028)", `commits.pushed: false`, the push item of `open_items` | `phase1g_h_delta_audit_2_remediation_inventory.json` | 2026-10-08 | Pushed by P10. |
+| "The local branch carries, not pushed, `6411650` and `e517028` … their push needs a separate approval." | this record, Sec. 6.2, and its inventory `addendum_2026_10_08_after_second_delta_audit.state_after_p9` | 2026-10-08 | Superseded by Sec. 7.2. |
+| "Its remote head is `226e52d` …; the second delta audit … and its remediation are on the local branch and not pushed"; H-OD5 "Its remediation is committed locally on top of it" and "Open: the push of the second delta audit and its remediation" | `phase1g_h_global_variance_closure.md` header and §9 | 2026-10-08 | Updated in place with this addendum. |
+| `publication.not_done` (push item), `publication.h_od5_status`, `owner_decisions_requested.H-OD5` | `phase1g_h_global_variance_closure_inventory.json` | 2026-10-08 | Updated in place with this addendum; `owner_decisions_status_2026_10_08` stays dated. |
+| "remote head `226e52d`"; "which are applied locally and not pushed" | README.md | 2026-10-08 | Updated with this addendum. |
+| "(remote head `226e52d`; … events P1–P9)"; "remediated locally on top of it (…, not pushed)"; "(2026-10-06 and 2026-10-08)" | CLAUDE.md | 2026-10-08 | Updated with this addendum. |
+
+### 7.4 Limits
+
+The limits of Sec. 5 apply: the repository confirms the refs, not the
+owner's words.

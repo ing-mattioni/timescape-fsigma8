@@ -107,8 +107,8 @@ outputs carry `NON_OBSERVATIONAL`, `NOT_OBSERVATIONAL_SIGMA_8` and
 and it changes no status token. Promotion, pull request, merge, freeze and
 tagging remain open owner decisions (H-OD1…H-OD5); of H-OD5 the owner
 approved only pushes to the session branch `ccr-555e67be-u11yht`
-(2026-10-06 and 2026-10-08), and three independent audits (2026-10-07,
-2026-10-08 twice) were published on their own branches.
+(2026-10-06, 2026-10-08 and 2026-10-09), and three independent audits
+(2026-10-07, 2026-10-08 twice) were published on their own branches.
 
 Everything else in the list above stays unimplemented.
 
@@ -463,19 +463,19 @@ current interpretation; frozen records remain unchanged.
     the separate approved D successor changes one classification. The merge
     (PR #4), freeze and tags followed on the owner's separate authority
     (`phase1g_fg_freeze_status_successor.md`); no release exists.
-- **1G-H (proposed; pushed with owner approvals of 2026-10-06 and 2026-10-08
-  to the session branch `ccr-555e67be-u11yht` (remote head `226e52d`; record
-  `phase1g_h_publication_successor.md`, events P1–P9), developed locally as
-  `phase-1g-h-global-variance-closure`; independently audited 2026-10-07
-  (`phase1g_h_independent_audit.md`, published by the owner on
+- **1G-H (proposed; pushed with owner approvals of 2026-10-06, 2026-10-08 and
+  2026-10-09 to the session branch `ccr-555e67be-u11yht` (remote head
+  `4bf2718`; record `phase1g_h_publication_successor.md`, events P1–P10),
+  developed locally as `phase-1g-h-global-variance-closure`; independently
+  audited 2026-10-07 (`phase1g_h_independent_audit.md`, published by the owner on
   `phase-1g-h-independent-audit` at `816dd00`) and remediated
   (`phase1g_h_audit_remediation.md`); delta-audited 2026-10-08
   (`phase1g_h_delta_audit.md`, published with the owner's authorisation on
   `phase-1g-h-delta-audit` at `5c325e1`) and remediated on top of it
   (`phase1g_h_delta_audit_remediation.md`, pushed in P7); second delta audit
   2026-10-08 (`phase1g_h_delta_audit_2.md`, published on the owner's
-  instruction on `ccr-ac582de6-vho99i` at `e517028`) and remediated locally on
-  top of it (`phase1g_h_delta_audit_2_remediation.md`, not pushed); not
+  instruction on `ccr-ac582de6-vho99i` at `e517028`) and remediated on top
+  of it (`phase1g_h_delta_audit_2_remediation.md`, pushed in P10); not
   merged into `main`, frozen or tagged; no pull request):** global
   matter-variance definition and minimal closure
   (`phase1g_h_global_variance_closure.md`, inventory, validation record;
