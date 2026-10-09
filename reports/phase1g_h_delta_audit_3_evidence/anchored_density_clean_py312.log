@@ -1,0 +1,43 @@
+{
+  "all_gates_passed": true,
+  "output": "artifacts/independent/phase1d_d_anchored_density_growth_validation.json",
+  "second_serialization_byte_identical": true,
+  "sha256": "4829762a5e8506207e13d05678a08f8371dab3cebf6d3f82b6e6604e19adeb6b",
+  "test_environments": {
+    "python_3_11": {
+      "command": "/workspace/scratch/37526605d06d/repro_head_clean/.venv311/bin/python -m pytest -q -p no:cacheprovider --basetemp <system-temp>/timescape_phase1dd_py_3_11_17",
+      "failed": 0,
+      "passed": 1154,
+      "returncode": 0,
+      "same_tracked_source_tree": true,
+      "skipped": 31,
+      "versions": {
+        "numpy": "2.4.6",
+        "pluggy": "1.6.0",
+        "pytest": "9.1.1",
+        "python": "3.11.17",
+        "scipy": "1.17.1"
+      },
+      "warnings": 0,
+      "xfailed": 0
+    },
+    "python_3_12": {
+      "command": "/workspace/scratch/37526605d06d/.venv312/bin/python -m pytest -q -p no:cacheprovider --basetemp <system-temp>/timescape_phase1dd_py_3_12_14",
+      "failed": 0,
+      "passed": 1154,
+      "returncode": 0,
+      "same_tracked_source_tree": true,
+      "skipped": 31,
+      "versions": {
+        "numpy": "2.5.3",
+        "pluggy": "1.6.0",
+        "pytest": "9.1.1",
+        "python": "3.12.14",
+        "scipy": "1.18.1"
+      },
+      "warnings": 0,
+      "xfailed": 0
+    }
+  },
+  "top_level_section_count": 25
+}

@@ -1,0 +1,5 @@
+{
+  "counterexample": "An equal int is strict-JSON serializable; float-result rejection is a separate typed-output policy.",
+  "serialized": "{\"x\": 1}",
+  "remediation_recount_inventory_equals_log": true
+}

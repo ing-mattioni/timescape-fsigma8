@@ -1,0 +1,24 @@
+{
+  "GM": {
+    "ell_Mpc": 5.551115123125783e-17,
+    "carrier_ball_variance": 9.05088226588191e-11,
+    "signed_kappa0": 8.881784197001252e-16,
+    "signed_mu_wall": 8.881784197001252e-16,
+    "signed_I": 4.7906567601785355e-11,
+    "signed_II": 4.790693536316226e-11,
+    "lognormal_lambda_max_abs": 4.831179900577354e-11,
+    "lognormal_mII_max_abs": 6.619238490657153e-11,
+    "lognormal_CW_max_abs": 1.4462897546252407e-10
+  },
+  "NW15": {
+    "ell_Mpc": 0.0,
+    "carrier_ball_variance": 1.6451414452944846e-08,
+    "signed_kappa0": 0.0,
+    "signed_mu_wall": 0.0,
+    "signed_I": 1.661746507064521e-08,
+    "signed_II": 1.6617465084522998e-08,
+    "lognormal_lambda_max_abs": 7.734720974816867e-09,
+    "lognormal_mII_max_abs": 6.543134478675938e-09,
+    "lognormal_CW_max_abs": 2.1503415936763304e-08
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "claim_counts": {
+    "VERIFIED": 1270
+  },
+  "matched_inventory": 1193,
+  "unmatched": [],
+  "deviations": [],
+  "comparisons": {
+    "cross_interpreter": {
+      "common_leaves": 3843,
+      "common_numeric_leaves": 3201,
+      "numeric_changed": 0,
+      "other_changed": 0,
+      "max_absolute": 0.0,
+      "max_relative": 0.0
+    },
+    "same_interpreter_248a06b_vs_ed0ec0c": {
+      "common_leaves": 3837,
+      "common_numeric_leaves": 3197,
+      "numeric_changed": 0,
+      "other_changed": 0,
+      "max_absolute": 0.0,
+      "max_relative": 0.0
+    },
+    "same_interpreter_after_H25_path_move": {
+      "common_leaves": 3843,
+      "common_numeric_leaves": 3201,
+      "numeric_changed": 0,
+      "other_changed": 0,
+      "max_absolute": 0.0,
+      "max_relative": 0.0
+    },
+    "saved_delta_89cb041_vs_248a06b": {
+      "common_leaves": 3721,
+      "common_numeric_leaves": 3093,
+      "numeric_changed": 159,
+      "other_changed": 4,
+      "max_absolute": 0.0007719476316552232,
+      "max_relative": 1.0
+    }
+  },
+  "gates": {
+    "numerics": {
+      "count": 10,
+      "passed": 10
+    },
+    "physics": {
+      "count": 20,
+      "passed": 20
+    },
+    "reproduction": {
+      "count": 6,
+      "passed": 6
+    }
+  },
+  "figures": [
+    {
+      "name": "propagator_scale_dependence.png",
+      "old_sha256": "bcac3ef2dd6a5bc22d170a2bccd667e854fdf7bb710a73d570f99b8721609917",
+      "new_sha256": "bcac3ef2dd6a5bc22d170a2bccd667e854fdf7bb710a73d570f99b8721609917",
+      "identical": true
+    },
+    {
+      "name": "radius_scan.png",
+      "old_sha256": "bdb399974949f5a0d5fc84a1ad04b0c720fceb48fa7aaf7a7e064c5b25947ac5",
+      "new_sha256": "bdb399974949f5a0d5fc84a1ad04b0c720fceb48fa7aaf7a7e064c5b25947ac5",
+      "identical": true
+    },
+    {
+      "name": "sigma_vs_void_share.png",
+      "old_sha256": "d8cc903da95fb48a1fd1e27e0645819bd08c995aba0b060ca7bcd261bb39b56f",
+      "new_sha256": "d8cc903da95fb48a1fd1e27e0645819bd08c995aba0b060ca7bcd261bb39b56f",
+      "identical": true
+    }
+  ]
+}

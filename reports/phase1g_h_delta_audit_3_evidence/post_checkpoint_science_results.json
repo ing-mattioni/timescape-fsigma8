@@ -1,0 +1,846 @@
+{
+  "checkpoint": "c62ad87d9a51c40d8959d35e0bec58c8b1048a51",
+  "stage": "POST_CHECKPOINT_EXPLICITLY_NOT_BLIND",
+  "author_artifact_path": "/workspace/scratch/37526605d06d/audit_work/reproduction/evidence_py312_ed0ec0c.json",
+  "author_artifact_sha256": "b15b070b067a756ecc067d26d057a71501fc7aa238b07178832b0bf93e24a35c",
+  "independence": "Same separately derived spectrum, Gaussian tilt and deterministic Plackett/GL integration; no author H code imported",
+  "matched_recipe_changes": [
+    "finite matching D_W exact instead of asymptotic photon-matter normalization",
+    "D_wall spectrum/compression implied by exact finite matching D_W",
+    "quote 1G-D X_SU using threshold-only p0, keep compressed p0 separate"
+  ],
+  "cases": {
+    "GM": {
+      "tracker": {
+        "fv0": 0.737,
+        "H0": 73.03,
+        "HD0": 57.85600077340819,
+        "gamma": 1.3685,
+        "uLS": 3.380088555844241e-05,
+        "fvi": 9.471062089872846e-05,
+        "Dwall": 0.8767784434341327,
+        "DW": 0.23061457227250512,
+        "DV": 7.132537333227973,
+        "om": 0.12047512089055852,
+        "normalisation_delta_from_blind": -1.5782362603133926e-05
+      },
+      "first_panel": {
+        "R_c_Mpc": 10.104079973310952,
+        "R_hom_c_Mpc": 126.3009996663869,
+        "unit_sigma_direct": 1.127978511897894,
+        "constant_share_sigma_range": [
+          0.2608656251274673,
+          0.9982675559021565
+        ],
+        "constant_share_p_range": [
+          9.471062089872846e-05,
+          0.09481289164159742
+        ],
+        "W09": {
+          "seed_radius_Mpc": 0.7573946306225797,
+          "sigma_seed_direct": 0.0033975735001926556,
+          "p_coefficient": 0.11070863926777857,
+          "sigma_direct": 1.1213626602034692,
+          "A_v_PBS": 1168.9147237895988,
+          "D_SU_PBS": 0.9953707348592796,
+          "X_SU_PBS": 1.2634613004385347,
+          "X_SU_PBS_threshold_only": 1.2626315531251866
+        },
+        "F_median": {
+          "seed_radius_Mpc": 0.1661542226649302,
+          "sigma_seed_direct": 0.005324736635608141,
+          "p_coefficient": 0.07064025223392731,
+          "sigma_direct": 0.810772266865035,
+          "A_v_PBS": 745.8535438117445,
+          "D_SU_PBS": 0.7188218223955686,
+          "X_SU_PBS": 0.9124274229700953
+        }
+      },
+      "latent": {
+        "R_dressed_Mpc": 10.954402300424482,
+        "target_partition_rms_input": 0.3264,
+        "ell_Mpc": 0.29172100793860345,
+        "carrier_ball_variance": 0.7010468636704903,
+        "mask_onepoint_c": 0.63412384852177,
+        "signed_kappa0": 4.03397663622146,
+        "signed_mu_wall": 5.004606727560066,
+        "signed_I": {
+          "P11_weighted_CW_minus_one": 0.7559295860892857,
+          "sigma_total": 0.9710823786714478
+        },
+        "signed_II": {
+          "P11_weighted_CW_minus_one": 0.04318940747361734,
+          "sigma_total": 0.39284556208590776
+        },
+        "lognormal": [
+          {
+            "smoothing_radius_Mpc": 1.0,
+            "lambda": 0.8137366709755894,
+            "lambda_squared": 0.6621673696904348,
+            "kappa0": 1.323338000638904,
+            "m_II": 2.8694134748864495,
+            "inverse_m_II_squared": 0.12145453430664377,
+            "I": {
+              "P11_weighted_CW_minus_one": 0.7869201937811274,
+              "sigma_total": 0.9885814275971889
+            },
+            "II": {
+              "P11_weighted_CW_minus_one": 0.837693200838265,
+              "sigma_total": 1.01659994485008
+            },
+            "total_II_over_I": 1.0283421440770861,
+            "carrier_ball_variance_calibration_residual": -1.1102230246251565e-16
+          },
+          {
+            "smoothing_radius_Mpc": 2.0,
+            "lambda": 0.8695351087369113,
+            "lambda_squared": 0.7560913053261121,
+            "kappa0": 0.7921189016425921,
+            "m_II": 2.1398085612266327,
+            "inverse_m_II_squared": 0.21839875507734133,
+            "I": {
+              "P11_weighted_CW_minus_one": 0.751490944554939,
+              "sigma_total": 0.9685501872676753
+            },
+            "II": {
+              "P11_weighted_CW_minus_one": 1.0972772342445944,
+              "sigma_total": 1.1492235531258908
+            },
+            "total_II_over_I": 1.186540014377472,
+            "carrier_ball_variance_calibration_residual": 0.0
+          },
+          {
+            "smoothing_radius_Mpc": 4.0,
+            "lambda": 0.9984337538187305,
+            "lambda_squared": 0.9968699607645611,
+            "kappa0": 0.44995684343758685,
+            "m_II": 1.6233506517906318,
+            "inverse_m_II_squared": 0.3794681417427068,
+            "I": {
+              "P11_weighted_CW_minus_one": 0.7253112485556147,
+              "sigma_total": 0.9534781927403578
+            },
+            "II": {
+              "P11_weighted_CW_minus_one": 1.277631960575925,
+              "sigma_total": 1.2329979503858437
+            },
+            "total_II_over_I": 1.2931579975018914,
+            "carrier_ball_variance_calibration_residual": 0.0
+          }
+        ],
+        "ball_probability_integral": 0.9999999999999998,
+        "H25_signed_I_expansion_residual": 0.0
+      }
+    },
+    "NW15": {
+      "tracker": {
+        "fv0": 0.627,
+        "H0": 61.0,
+        "HD0": 51.696616316499544,
+        "gamma": 1.3135,
+        "uLS": 3.0183448047383268e-05,
+        "fvi": 5.073475005215061e-05,
+        "Dwall": 0.9455025019917713,
+        "DW": 0.3526903268985117,
+        "DV": 11.327583314531227,
+        "om": 0.13093722890629914,
+        "normalisation_delta_from_blind": -8.45500517054898e-06
+      },
+      "first_panel": {
+        "R_c_Mpc": 11.781424150867558,
+        "R_hom_c_Mpc": 147.26780188584445,
+        "unit_sigma_direct": 1.044196530464304,
+        "constant_share_sigma_range": [
+          0.36885943313006087,
+          1.161784484340578
+        ],
+        "constant_share_p_range": [
+          5.073475005215061e-05,
+          0.0692417333772569
+        ],
+        "W09": {
+          "seed_radius_Mpc": 0.8097370448269186,
+          "sigma_seed_direct": 0.0034761351790514607,
+          "p_coefficient": 0.06010353973113891,
+          "sigma_direct": 1.0566325994707644,
+          "A_v_PBS": 1184.6621826136536,
+          "D_SU_PBS": 1.012877052078269,
+          "X_SU_PBS": 1.2856827236176287,
+          "X_SU_PBS_threshold_only": 1.2849759458242398
+        },
+        "F_median": {
+          "seed_radius_Mpc": 0.19856863458588078,
+          "sigma_seed_direct": 0.005353519091022287,
+          "p_coefficient": 0.039026297523678595,
+          "sigma_direct": 0.8160588130081785,
+          "A_v_PBS": 769.2222290158753,
+          "D_SU_PBS": 0.7815565743769766,
+          "X_SU_PBS": 0.9920589899282342
+        }
+      },
+      "latent": {
+        "R_dressed_Mpc": 13.114754098360656,
+        "target_partition_rms_input": 0.3036,
+        "ell_Mpc": 0.5987322484707452,
+        "carrier_ball_variance": 0.7344905782919481,
+        "mask_onepoint_c": 0.3239181532811331,
+        "signed_kappa0": 3.7332604779578933,
+        "signed_mu_wall": 3.7888358780729523,
+        "signed_I": {
+          "P11_weighted_CW_minus_one": 0.7912641481428391,
+          "sigma_total": 0.9779418524733785
+        },
+        "signed_II": {
+          "P11_weighted_CW_minus_one": 0.0690831129154083,
+          "sigma_total": 0.4094186951262092
+        },
+        "lognormal": [
+          {
+            "smoothing_radius_Mpc": 1.0,
+            "lambda": 0.7851499185658848,
+            "lambda_squared": 0.6164603946240156,
+            "kappa0": 1.7483851299024489,
+            "m_II": 2.474113487925912,
+            "inverse_m_II_squared": 0.16336565794841043,
+            "I": {
+              "P11_weighted_CW_minus_one": 0.8407943617975302,
+              "sigma_total": 1.0052192929285333
+            },
+            "II": {
+              "P11_weighted_CW_minus_one": 0.697655401752882,
+              "sigma_total": 0.9241933375611693
+            },
+            "total_II_over_I": 0.919394747059312,
+            "carrier_ball_variance_calibration_residual": 1.1102230246251565e-16
+          },
+          {
+            "smoothing_radius_Mpc": 2.0,
+            "lambda": 0.8391930257043044,
+            "lambda_squared": 0.7042449343907453,
+            "kappa0": 1.1128129979922663,
+            "m_II": 2.10432510848617,
+            "inverse_m_II_squared": 0.22582619949166213,
+            "I": {
+              "P11_weighted_CW_minus_one": 0.7975258652151657,
+              "sigma_total": 0.9814321906727069
+            },
+            "II": {
+              "P11_weighted_CW_minus_one": 0.8870055377031568,
+              "sigma_total": 1.0300176812315744
+            },
+            "total_II_over_I": 1.0495046840939315,
+            "carrier_ball_variance_calibration_residual": 1.4654943925052066e-14
+          },
+          {
+            "smoothing_radius_Mpc": 4.0,
+            "lambda": 0.9493419943183065,
+            "lambda_squared": 0.9012502221762595,
+            "kappa0": 0.6356553960085658,
+            "m_II": 1.6685787912187193,
+            "inverse_m_II_squared": 0.35917538156055423,
+            "I": {
+              "P11_weighted_CW_minus_one": 0.7661585821565582,
+              "sigma_total": 0.9638208580972665
+            },
+            "II": {
+              "P11_weighted_CW_minus_one": 1.1158361399753867,
+              "sigma_total": 1.144927517300513
+            },
+            "total_II_over_I": 1.1879048971411341,
+            "carrier_ball_variance_calibration_residual": -1.1102230246251565e-16
+          }
+        ],
+        "ball_probability_integral": 1.0,
+        "H25_signed_I_expansion_residual": 1.1102230246251565e-16
+      }
+    }
+  },
+  "claims": [
+    {
+      "id": "GM/DW",
+      "independent": 0.23061457227250512,
+      "author": 0.23061457227250548,
+      "abs_error": 3.608224830031759e-16,
+      "rel_error": 1.5646126758061513e-15,
+      "absolute_tolerance": 1e-12,
+      "status": "VERIFIED",
+      "method": "exact finite-matching formula"
+    },
+    {
+      "id": "GM/DV",
+      "independent": 7.132537333227973,
+      "author": 7.132537333227989,
+      "abs_error": 1.5987211554602254e-14,
+      "rel_error": 2.241448001978685e-15,
+      "absolute_tolerance": 1e-12,
+      "status": "VERIFIED",
+      "method": "Milne void volume formula"
+    },
+    {
+      "id": "GM/W09/sigma_direct",
+      "independent": 1.1213626602034692,
+      "author": 1.1213626602036537,
+      "abs_error": 1.8451906669270102e-13,
+      "rel_error": 1.6454896639699953e-13,
+      "absolute_tolerance": 1e-09,
+      "status": "VERIFIED",
+      "method": "independent EH98 Fourier integral"
+    },
+    {
+      "id": "GM/F_median/sigma_direct",
+      "independent": 0.810772266865035,
+      "author": 0.8107722668657138,
+      "abs_error": 6.787903572558207e-13,
+      "rel_error": 8.372145730636431e-13,
+      "absolute_tolerance": 1e-09,
+      "status": "VERIFIED",
+      "method": "independent EH98 Fourier integral"
+    },
+    {
+      "id": "GM/constant_share_lower",
+      "independent": 0.2608656251274673,
+      "author": 0.2608656251293685,
+      "abs_error": 1.9012014185193493e-12,
+      "rel_error": 7.288048847281068e-12,
+      "absolute_tolerance": 1e-09,
+      "status": "VERIFIED",
+      "method": "independent unit-spectrum and constant-share bound"
+    },
+    {
+      "id": "GM/constant_share_upper",
+      "independent": 0.9982675559021565,
+      "author": 0.9982675560571134,
+      "abs_error": 1.5495682514909959e-10,
+      "rel_error": 1.5522574505089307e-10,
+      "absolute_tolerance": 1e-09,
+      "status": "VERIFIED",
+      "method": "independent unit-spectrum and constant-share bound"
+    },
+    {
+      "id": "GM/W09/Av",
+      "independent": 1168.9147237895988,
+      "author": 1168.9147237892516,
+      "abs_error": 3.4719960240181535e-10,
+      "rel_error": 2.9702731545403424e-13,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "Gaussian-threshold probability derivative"
+    },
+    {
+      "id": "GM/W09/X_SU_threshold_only",
+      "independent": 1.2626315531251866,
+      "author": 1.262631553124895,
+      "abs_error": 2.915445662665661e-13,
+      "rel_error": 2.3090232898506345e-13,
+      "absolute_tolerance": 1e-09,
+      "status": "VERIFIED",
+      "method": "threshold-only seed share k->0, divided by independent LCDM growth integral"
+    },
+    {
+      "id": "GM/signed_I/CW",
+      "independent": 0.7559295860892857,
+      "author": 0.7559295866508712,
+      "abs_error": 5.615854448137725e-10,
+      "rel_error": 7.429070838487272e-10,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "Gaussian-tail Hessian moments and independent GL ball quadrature"
+    },
+    {
+      "id": "GM/signed_II/CW",
+      "independent": 0.04318940747361734,
+      "author": 0.04318940793032056,
+      "abs_error": 4.5670322385005235e-10,
+      "rel_error": 1.0574426595216874e-08,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "Gaussian-tail Hessian moments and independent GL ball quadrature"
+    },
+    {
+      "id": "GM/r_s_1/lambda",
+      "independent": 0.8137366709755894,
+      "author": 0.8137366709894037,
+      "abs_error": 1.3814283050805898e-11,
+      "rel_error": 1.6976355550020166e-11,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "independent lognormal ball-variance calibration"
+    },
+    {
+      "id": "GM/r_s_1/m_II",
+      "independent": 2.8694134748864495,
+      "author": 2.8694134748374602,
+      "abs_error": 4.898925709539981e-11,
+      "rel_error": 1.707291665178189e-11,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "Q(c-kappa0)/fw"
+    },
+    {
+      "id": "GM/r_s_1/inverse_m_squared",
+      "independent": 0.12145453430664377,
+      "author": 0.12145453431079094,
+      "abs_error": 4.147168719548233e-12,
+      "rel_error": 3.41458533687677e-11,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "independent exponential-tilt covariance ratio"
+    },
+    {
+      "id": "GM/r_s_1/total_II_over_I",
+      "independent": 1.0283421440770861,
+      "author": 1.0283421440231917,
+      "abs_error": 5.3894444462798674e-11,
+      "rel_error": 5.2409059354454715e-11,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "H25 ball variances divided"
+    },
+    {
+      "id": "GM/r_s_1/I/CW",
+      "independent": 0.7869201937811274,
+      "author": 0.7869201939046357,
+      "abs_error": 1.2350831468666001e-10,
+      "rel_error": 1.5695151254642675e-10,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "independent deterministic tail quadrature and Gaussian exponential tilt"
+    },
+    {
+      "id": "GM/r_s_1/II/CW",
+      "independent": 0.837693200838265,
+      "author": 0.8376932008709476,
+      "abs_error": 3.268252335431043e-11,
+      "rel_error": 3.9014908226938564e-11,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "independent deterministic tail quadrature and Gaussian exponential tilt"
+    },
+    {
+      "id": "GM/r_s_2/lambda",
+      "independent": 0.8695351087369113,
+      "author": 0.8695351087533661,
+      "abs_error": 1.645483749257437e-11,
+      "rel_error": 1.892371834895237e-11,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "independent lognormal ball-variance calibration"
+    },
+    {
+      "id": "GM/r_s_2/m_II",
+      "independent": 2.1398085612266327,
+      "author": 2.1398085611850104,
+      "abs_error": 4.162226119319712e-11,
+      "rel_error": 1.945139483419349e-11,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "Q(c-kappa0)/fw"
+    },
+    {
+      "id": "GM/r_s_2/inverse_m_squared",
+      "independent": 0.21839875507734133,
+      "author": 0.21839875508583761,
+      "abs_error": 8.496287007275782e-12,
+      "rel_error": 3.8902634788080513e-11,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "independent exponential-tilt covariance ratio"
+    },
+    {
+      "id": "GM/r_s_2/total_II_over_I",
+      "independent": 1.186540014377472,
+      "author": 1.1865400143623241,
+      "abs_error": 1.5147882947985636e-11,
+      "rel_error": 1.2766432454556943e-11,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "H25 ball variances divided"
+    },
+    {
+      "id": "GM/r_s_2/I/CW",
+      "independent": 0.751490944554939,
+      "author": 0.751490944597014,
+      "abs_error": 4.207501014263926e-11,
+      "rel_error": 5.5988712099787074e-11,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "independent deterministic tail quadrature and Gaussian exponential tilt"
+    },
+    {
+      "id": "GM/r_s_2/II/CW",
+      "independent": 1.0972772342445944,
+      "author": 1.0972772342731527,
+      "abs_error": 2.8558266862432902e-11,
+      "rel_error": 2.6026482615717603e-11,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "independent deterministic tail quadrature and Gaussian exponential tilt"
+    },
+    {
+      "id": "GM/r_s_4/lambda",
+      "independent": 0.9984337538187305,
+      "author": 0.9984337538385055,
+      "abs_error": 1.9775070470018363e-11,
+      "rel_error": 1.980609168509435e-11,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "independent lognormal ball-variance calibration"
+    },
+    {
+      "id": "GM/r_s_4/m_II",
+      "independent": 1.6233506517906318,
+      "author": 1.6233506517664158,
+      "abs_error": 2.421596256851899e-11,
+      "rel_error": 1.4917271596354667e-11,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "Q(c-kappa0)/fw"
+    },
+    {
+      "id": "GM/r_s_4/inverse_m_squared",
+      "independent": 0.3794681417427068,
+      "author": 0.37946814175402804,
+      "abs_error": 1.1321221737858878e-11,
+      "rel_error": 2.983444587871968e-11,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "independent exponential-tilt covariance ratio"
+    },
+    {
+      "id": "GM/r_s_4/total_II_over_I",
+      "independent": 1.2931579975018914,
+      "author": 1.2931579974900378,
+      "abs_error": 1.1853629189317871e-11,
+      "rel_error": 9.166419890164419e-12,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "H25 ball variances divided"
+    },
+    {
+      "id": "GM/r_s_4/I/CW",
+      "independent": 0.7253112485556147,
+      "author": 0.7253112485795359,
+      "abs_error": 2.392119835548101e-11,
+      "rel_error": 3.298059750531757e-11,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "independent deterministic tail quadrature and Gaussian exponential tilt"
+    },
+    {
+      "id": "GM/r_s_4/II/CW",
+      "independent": 1.277631960575925,
+      "author": 1.277631960590405,
+      "abs_error": 1.4479972776371142e-11,
+      "rel_error": 1.133344595550022e-11,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "independent deterministic tail quadrature and Gaussian exponential tilt"
+    },
+    {
+      "id": "NW15/DW",
+      "independent": 0.3526903268985117,
+      "author": 0.3526903268985125,
+      "abs_error": 7.771561172376096e-16,
+      "rel_error": 2.2035084547732384e-15,
+      "absolute_tolerance": 1e-12,
+      "status": "VERIFIED",
+      "method": "exact finite-matching formula"
+    },
+    {
+      "id": "NW15/DV",
+      "independent": 11.327583314531227,
+      "author": 11.327583314531257,
+      "abs_error": 3.019806626980426e-14,
+      "rel_error": 2.6658878095441205e-15,
+      "absolute_tolerance": 1e-12,
+      "status": "VERIFIED",
+      "method": "Milne void volume formula"
+    },
+    {
+      "id": "NW15/W09/sigma_direct",
+      "independent": 1.0566325994707644,
+      "author": 1.0566325994699088,
+      "abs_error": 8.555378627761456e-13,
+      "rel_error": 8.096833877786391e-13,
+      "absolute_tolerance": 1e-09,
+      "status": "VERIFIED",
+      "method": "independent EH98 Fourier integral"
+    },
+    {
+      "id": "NW15/F_median/sigma_direct",
+      "independent": 0.8160588130081785,
+      "author": 0.8160588130066785,
+      "abs_error": 1.500022328571049e-12,
+      "rel_error": 1.838130174765692e-12,
+      "absolute_tolerance": 1e-09,
+      "status": "VERIFIED",
+      "method": "independent EH98 Fourier integral"
+    },
+    {
+      "id": "NW15/constant_share_lower",
+      "independent": 0.36885943313006087,
+      "author": 0.3688594331269559,
+      "abs_error": 3.1049607329691753e-12,
+      "rel_error": 8.417734383657458e-12,
+      "absolute_tolerance": 1e-09,
+      "status": "VERIFIED",
+      "method": "independent unit-spectrum and constant-share bound"
+    },
+    {
+      "id": "NW15/constant_share_upper",
+      "independent": 1.161784484340578,
+      "author": 1.1617844837353175,
+      "abs_error": 6.052605083795015e-10,
+      "rel_error": 5.209748596688906e-10,
+      "absolute_tolerance": 1e-09,
+      "status": "VERIFIED",
+      "method": "independent unit-spectrum and constant-share bound"
+    },
+    {
+      "id": "NW15/W09/Av",
+      "independent": 1184.6621826136536,
+      "author": 1184.662182614035,
+      "abs_error": 3.8130565371830016e-10,
+      "rel_error": 3.218686806368075e-13,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "Gaussian-threshold probability derivative"
+    },
+    {
+      "id": "NW15/W09/X_SU_threshold_only",
+      "independent": 1.2849759458242398,
+      "author": 1.2849759458245098,
+      "abs_error": 2.7000623958883807e-13,
+      "rel_error": 2.101255206108839e-13,
+      "absolute_tolerance": 1e-09,
+      "status": "VERIFIED",
+      "method": "threshold-only seed share k->0, divided by independent LCDM growth integral"
+    },
+    {
+      "id": "NW15/signed_I/CW",
+      "independent": 0.7912641481428391,
+      "author": 0.7912641484729672,
+      "abs_error": 3.3012814704136417e-10,
+      "rel_error": 4.172161062503171e-10,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "Gaussian-tail Hessian moments and independent GL ball quadrature"
+    },
+    {
+      "id": "NW15/signed_II/CW",
+      "independent": 0.0690831129154083,
+      "author": 0.06908311322288978,
+      "abs_error": 3.0748147084036503e-10,
+      "rel_error": 4.4508919256187356e-09,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "Gaussian-tail Hessian moments and independent GL ball quadrature"
+    },
+    {
+      "id": "NW15/r_s_1/lambda",
+      "independent": 0.7851499185658848,
+      "author": 0.7851499185815687,
+      "abs_error": 1.568389862427466e-11,
+      "rel_error": 1.997567375745104e-11,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "independent lognormal ball-variance calibration"
+    },
+    {
+      "id": "NW15/r_s_1/m_II",
+      "independent": 2.474113487925912,
+      "author": 2.4741134879266244,
+      "abs_error": 7.123190925995004e-13,
+      "rel_error": 2.8790881908834485e-13,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "Q(c-kappa0)/fw"
+    },
+    {
+      "id": "NW15/r_s_1/inverse_m_squared",
+      "independent": 0.16336565794841043,
+      "author": 0.16336565794831637,
+      "abs_error": 9.406364576136639e-14,
+      "rel_error": 5.757859206316489e-13,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "independent exponential-tilt covariance ratio"
+    },
+    {
+      "id": "NW15/r_s_1/total_II_over_I",
+      "independent": 0.919394747059312,
+      "author": 0.9193947470170488,
+      "abs_error": 4.226319294531322e-11,
+      "rel_error": 4.5968495124031327e-11,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "H25 ball variances divided"
+    },
+    {
+      "id": "NW15/r_s_1/I/CW",
+      "independent": 0.8407943617975302,
+      "author": 0.840794361918869,
+      "abs_error": 1.2133882787424e-10,
+      "rel_error": 1.4431451181156752e-10,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "independent deterministic tail quadrature and Gaussian exponential tilt"
+    },
+    {
+      "id": "NW15/r_s_1/II/CW",
+      "independent": 0.697655401752882,
+      "author": 0.6976554017835588,
+      "abs_error": 3.0676794438022625e-11,
+      "rel_error": 4.397127057225857e-11,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "independent deterministic tail quadrature and Gaussian exponential tilt"
+    },
+    {
+      "id": "NW15/r_s_2/lambda",
+      "independent": 0.8391930257043044,
+      "author": 0.8391930257243148,
+      "abs_error": 2.0010326728936434e-11,
+      "rel_error": 2.384472477195023e-11,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "independent lognormal ball-variance calibration"
+    },
+    {
+      "id": "NW15/r_s_2/m_II",
+      "independent": 2.10432510848617,
+      "author": 2.1043251084842116,
+      "abs_error": 1.958433415438776e-12,
+      "rel_error": 9.306705544417877e-13,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "Q(c-kappa0)/fw"
+    },
+    {
+      "id": "NW15/r_s_2/inverse_m_squared",
+      "independent": 0.22582619949166213,
+      "author": 0.22582619949208252,
+      "abs_error": 4.203859482743155e-13,
+      "rel_error": 1.8615463981585286e-12,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "independent exponential-tilt covariance ratio"
+    },
+    {
+      "id": "NW15/r_s_2/total_II_over_I",
+      "independent": 1.0495046840939315,
+      "author": 1.0495046840837041,
+      "abs_error": 1.0227374502846942e-11,
+      "rel_error": 9.744953650946497e-12,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "H25 ball variances divided"
+    },
+    {
+      "id": "NW15/r_s_2/I/CW",
+      "independent": 0.7975258652151657,
+      "author": 0.7975258652654207,
+      "abs_error": 5.025502236577495e-11,
+      "rel_error": 6.301365830818518e-11,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "independent deterministic tail quadrature and Gaussian exponential tilt"
+    },
+    {
+      "id": "NW15/r_s_2/II/CW",
+      "independent": 0.8870055377031568,
+      "author": 0.8870055377395716,
+      "abs_error": 3.641476009619282e-11,
+      "rel_error": 4.1053588221096705e-11,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "independent deterministic tail quadrature and Gaussian exponential tilt"
+    },
+    {
+      "id": "NW15/r_s_4/lambda",
+      "independent": 0.9493419943183065,
+      "author": 0.9493419943425867,
+      "abs_error": 2.4280244481644786e-11,
+      "rel_error": 2.5575866891318445e-11,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "independent lognormal ball-variance calibration"
+    },
+    {
+      "id": "NW15/r_s_4/m_II",
+      "independent": 1.6685787912187193,
+      "author": 1.6685787912166263,
+      "abs_error": 2.092992446023345e-12,
+      "rel_error": 1.2543563762411615e-12,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "Q(c-kappa0)/fw"
+    },
+    {
+      "id": "NW15/r_s_4/inverse_m_squared",
+      "independent": 0.35917538156055423,
+      "author": 0.3591753815614553,
+      "abs_error": 9.01057006785777e-13,
+      "rel_error": 2.5086825351687005e-12,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "independent exponential-tilt covariance ratio"
+    },
+    {
+      "id": "NW15/r_s_4/total_II_over_I",
+      "independent": 1.1879048971411341,
+      "author": 1.1879048971358526,
+      "abs_error": 5.281552972746795e-12,
+      "rel_error": 4.446107584438032e-12,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "H25 ball variances divided"
+    },
+    {
+      "id": "NW15/r_s_4/I/CW",
+      "independent": 0.7661585821565582,
+      "author": 0.7661585821925904,
+      "abs_error": 3.603217724190699e-11,
+      "rel_error": 4.702965949789431e-11,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "independent deterministic tail quadrature and Gaussian exponential tilt"
+    },
+    {
+      "id": "NW15/r_s_4/II/CW",
+      "independent": 1.1158361399753867,
+      "author": 1.1158361400155334,
+      "abs_error": 4.0146774793470286e-11,
+      "rel_error": 3.5979095275504706e-11,
+      "absolute_tolerance": 1e-06,
+      "status": "VERIFIED",
+      "method": "independent deterministic tail quadrature and Gaussian exponential tilt"
+    },
+    {
+      "id": "GM/W09/X_SU_compressed",
+      "independent": 1.2634613004385347,
+      "author": 1.2634613004382431,
+      "abs_error": 2.915445662665661e-13,
+      "rel_error": 2.3075068952681115e-13,
+      "absolute_tolerance": 1e-09,
+      "status": "VERIFIED",
+      "method": "compressed seed share k->0; independent LCDM growth integral"
+    },
+    {
+      "id": "NW15/W09/X_SU_compressed",
+      "independent": 1.2856827236176287,
+      "author": 1.2856827236178987,
+      "abs_error": 2.7000623958883807e-13,
+      "rel_error": 2.1001000840163981e-13,
+      "absolute_tolerance": 1e-09,
+      "status": "VERIFIED",
+      "method": "compressed seed share k->0; independent LCDM growth integral"
+    }
+  ],
+  "summary": {
+    "claims": 58,
+    "verified": 58,
+    "max_abs_error": 6.052605083795015e-10,
+    "max_relative_error": 1.0574426595216874e-08
+  }
+}

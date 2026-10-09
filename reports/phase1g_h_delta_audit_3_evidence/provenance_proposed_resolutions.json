@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "area_verdicts": {
+    "PROVENANCE": "ACCEPT",
+    "GOVERNANCE": "ACCEPT_WITH_CORRECTIONS",
+    "DOCUMENTATION": "ACCEPT_WITH_CORRECTIONS",
+    "TASK_COMPLIANCE": "ACCEPT"
+  },
+  "finding_resolution": {
+    "GH-D2F1": {
+      "status": "PARTIALLY_RESOLVED",
+      "reason": "Original P7 statements addressed; P10 recorded; P11 missing and current head summaries stale."
+    },
+    "GH-D2F2": {
+      "status": "DEFER_TO_IMPLEMENTATION_REVIEW"
+    },
+    "GH-D2F3": {
+      "status": "RESOLVED",
+      "reason": "Corrected counts present in dated notes; inventory recount equals saved log; independent numerical stream reproduces every count by regenerated248a06b versus saved complete89cb041 artifact."
+    },
+    "GH-D2F4": {
+      "status": "PARTIALLY_RESOLVED",
+      "reason": "Named H float fields hardened; nested imported records still accept non-JSON scalar types."
+    },
+    "GH-D2F5": {
+      "status": "RESOLVED",
+      "reason": "Historical constraint narrowing and hash commit scope explicitly annotated."
+    },
+    "GH-D2F6": {
+      "status": "DEFER_FINAL_SCIENCE_ADJUDICATION",
+      "documentary_status": "QUALIFIER_PRESENT_AND_APPROPRIATE"
+    }
+  },
+  "errata_resolution": {
+    "GH-D2E1": "APPLIED",
+    "GH-D2E2": "APPLIED"
+  },
+  "new_finding_proposals": [
+    {
+      "local_key": "P11_STATUS",
+      "title": "P11 is absent and current publication summaries still name the prior remote head",
+      "area": "GOVERNANCE",
+      "severity": "LOW",
+      "relates_to": "GH-D2F1",
+      "resolution_class": "CORRECTION",
+      "statement": "P7\u2013P10 successor coverage is complete, but P11 advances the author branch to ed0ec0c while current summaries/inventory identify 4bf2718.",
+      "evidence": "Read-only GitHub refs snapshot and current summaries; direct owner confirmation P10/P11.",
+      "consequence": "Misleading current-head state, without an unauthorized-action or scientific consequence.",
+      "locations": [
+        "README.md:146-147",
+        "CLAUDE.md:466-468",
+        "reports/phase1g_h_global_variance_closure.md:13",
+        "reports/phase1g_h_global_variance_closure_inventory.json/publication/pushed_head_2026_10_09",
+        "reports/phase1g_h_publication_successor.md:7"
+      ],
+      "suggested_resolution": "Add one dated P11 successor acknowledgment; use last recorded push event terminology, and distinguish a dated observed remote snapshot. This audit may acknowledge P11, but does not edit current summaries."
+    }
+  ],
+  "errata_proposals": [
+    {
+      "local_key": "STRICT_JSON_SCOPE",
+      "locations": [
+        "reports/phase1g_h_delta_audit_2_remediation.md:1",
+        "reports/phase1g_h_delta_audit_2_remediation.md:2(GH-D2F4)",
+        "reports/phase1g_h_global_variance_closure.md:10",
+        "src/timescape_fsigma8/global_variance.py:128-134"
+      ],
+      "quoted": [
+        "Fail-closed, and strict JSON holds by construction",
+        "The 1G-B records the runtime imports already store floats and are unchanged.",
+        "A float result must be stored as a float, and validated scalar inputs are stored as floats, so the records serialise as strict JSON (GH-D2F4)."
+      ],
+      "correct_reading": "The targeted H float fields are hardened, but imported records embedded in H exports can retain Fraction/NumPy non-native scalar types; universal strict-JSON-by-construction remains false."
+    },
+    {
+      "local_key": "INT_JSON_RATIONALE",
+      "locations": [
+        "src/timescape_fsigma8/global_variance.py:389-393"
+      ],
+      "quoted": "an equal ``Fraction`` or ``int`` would pass the comparison but break the strict-JSON contract of ``to_json_dict``",
+      "correct_reading": "Python int is strict-JSON serializable. Rejection enforces the declared float-result type; Fraction/non-native scalars can break JSON."
+    }
+  ],
+  "publication_authority": {
+    "P10": "DIRECT_CURRENT_OWNER_CONFIRMATION",
+    "P11": "DIRECT_CURRENT_OWNER_CONFIRMATION",
+    "P9": "SECONDARY_PASTED_TRANSCRIPT_NOT_VERIFIABLE",
+    "new_audit_push": "NOT_AUTHORIZED"
+  },
+  "historical_push_evidence": "CURRENT_REFS_AND_GRAPH_COMPATIBILITY_ONLY_NOT_ACTOR_DATE_OR_PRIOR_REF_PROOF",
+  "regression_status": "NO_DOCUMENTARY_STATUS_REGRESSION_FOUND",
+  "recommendations": [
+    "Keep runtime experimental and all observational authorizations unchanged.",
+    "Complete serialization scope correction and current P11 documentation before declaring merge readiness.",
+    "Windows owner gate remains unexecuted unless another workstream actually runs it.",
+    "Prefer chronological successor as canonical publication status; preserve historical complete Git records."
+  ]
+}

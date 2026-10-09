@@ -1,0 +1,37 @@
+{
+ "scope": "synthetic two-point test error budgets; empirical, fixed seed",
+ "results": [
+  {
+   "law": "I_independent",
+   "sample_normalizer": 1.0008383595036363,
+   "analytic_normalizer": 1.0,
+   "naive_normalizer_se": 0.0009243187536292349,
+   "pair_aware_normalizer_se": 0.0010148394293032661,
+   "pair_over_naive_normalizer_se": 1.0979323153604879,
+   "normalizer_error_in_pair_se": 0.8261006415683734,
+   "sample_cw": 1.3377541089340717,
+   "analytic_cw": 1.3337573041233846,
+   "test_cw_error_budget": 0.008368941944618803,
+   "pair_aware_cw_se": 0.004566242524896555,
+   "test_budget_over_pair_se": 1.8327852493573795,
+   "cw_error_in_pair_se": 0.8752940276157667,
+   "test_cw_relative_5budget": 0.031373556188767464
+  },
+  {
+   "law": "II_same_field",
+   "sample_normalizer": 1.5524658603369945,
+   "analytic_normalizer": 1.5492183116759652,
+   "naive_normalizer_se": 0.0012696706557237263,
+   "pair_aware_normalizer_se": 0.0013947394120644384,
+   "pair_over_naive_normalizer_se": 1.0985048805978914,
+   "normalizer_error_in_pair_se": 2.3284268250671873,
+   "sample_cw": 1.3720198302176072,
+   "analytic_cw": 1.3674485780096952,
+   "test_cw_error_budget": 0.0070608428430196275,
+   "pair_aware_cw_se": 0.003486549080446494,
+   "test_budget_over_pair_se": 2.025166627545482,
+   "cw_error_in_pair_se": 1.3111108154331756,
+   "test_cw_relative_5budget": 0.025817580845696582
+  }
+ ]
+}

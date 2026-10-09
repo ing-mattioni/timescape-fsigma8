@@ -1,0 +1,1732 @@
+{
+  "schema_version": 1,
+  "audit_area": "PROVENANCE_GOVERNANCE_DOCUMENTATION",
+  "generated_utc": "2026-10-09T06:02:30.677665+00:00",
+  "remote_snapshot_utc": "2026-10-09T05:50:56.137307+00:00",
+  "audited_base": "e5170285e1d4b4aa72e907a3a79110d05584c0d9",
+  "audited_head": "ed0ec0c9c8783519a53759a265b6ce37e6c0e607",
+  "commits": {
+    "e5170285e1d4b4aa72e907a3a79110d05584c0d9": {
+      "tree": "45ce98f9d21e93e355ba25812063aec270700116",
+      "parents": [
+        "64116509554cc0d711660da4d81ad95c3f450a6d"
+      ],
+      "changed_paths": [
+        "A\treports/phase1g_h_delta_audit_2.md",
+        "M\treports/phase1g_h_delta_audit_2_evidence/README.md",
+        "A\treports/phase1g_h_delta_audit_2_evidence/blind_vs_author_comparison.txt",
+        "A\treports/phase1g_h_delta_audit_2_evidence/build_inventory.py",
+        "A\treports/phase1g_h_delta_audit_2_evidence/environment.jsonl",
+        "A\treports/phase1g_h_delta_audit_2_evidence/evidence_artifact_hashes.txt",
+        "A\treports/phase1g_h_delta_audit_2_evidence/evidence_comparisons.json",
+        "A\treports/phase1g_h_delta_audit_2_evidence/evidence_py311_226e52d.log",
+        "A\treports/phase1g_h_delta_audit_2_evidence/evidence_py313_226e52d.log",
+        "A\treports/phase1g_h_delta_audit_2_evidence/evidence_py313_248a06b.log",
+        "A\treports/phase1g_h_delta_audit_2_evidence/evidence_py313_5c325e1.log",
+        "A\treports/phase1g_h_delta_audit_2_evidence/full_suite_summaries.txt",
+        "A\treports/phase1g_h_delta_audit_2_evidence/implementation_binding_probes.py",
+        "A\treports/phase1g_h_delta_audit_2_evidence/implementation_binding_probes_results.json",
+        "A\treports/phase1g_h_delta_audit_2_evidence/inventory_reconciliation.py",
+        "A\treports/phase1g_h_delta_audit_2_evidence/inventory_reconciliation_results.json",
+        "A\treports/phase1g_h_delta_audit_2_evidence/mutation_campaign.log",
+        "A\treports/phase1g_h_delta_audit_2_evidence/mutation_campaign.py",
+        "A\treports/phase1g_h_delta_audit_2_evidence/mutation_results.json",
+        "A\treports/phase1g_h_delta_audit_2_evidence/runners.log",
+        "A\treports/phase1g_h_delta_audit_2_evidence/runners_summary.txt",
+        "A\treports/phase1g_h_delta_audit_2_inventory.json"
+      ]
+    },
+    "9ad54253c4ec40cede5690da6659be28e0bd0a2d": {
+      "tree": "6e7d84574a0c89b240547542207c1241e4f71344",
+      "parents": [
+        "e5170285e1d4b4aa72e907a3a79110d05584c0d9"
+      ],
+      "changed_paths": [
+        "M\tscripts/phase1g_h_global_variance_closure_numerics.py",
+        "M\tsrc/timescape_fsigma8/global_variance.py",
+        "M\ttests/test_phase1g_h_global_variance.py"
+      ]
+    },
+    "4bf2718e7557ace3fdc0abffaa73587f1162f776": {
+      "tree": "8ca972fada8dff3507616a2603ae6640fe4beedc",
+      "parents": [
+        "9ad54253c4ec40cede5690da6659be28e0bd0a2d"
+      ],
+      "changed_paths": [
+        "M\tCLAUDE.md",
+        "M\tREADME.md",
+        "M\treports/phase1g_h_audit_remediation.md",
+        "M\treports/phase1g_h_audit_remediation_inventory.json",
+        "A\treports/phase1g_h_delta_audit_2_remediation.md",
+        "A\treports/phase1g_h_delta_audit_2_remediation_inventory.json",
+        "A\treports/phase1g_h_delta_audit_2_remediation_logs/compare_evidence.py",
+        "A\treports/phase1g_h_delta_audit_2_remediation_logs/cross_interpreter_313_vs_311.json",
+        "A\treports/phase1g_h_delta_audit_2_remediation_logs/evidence_head.txt",
+        "A\treports/phase1g_h_delta_audit_2_remediation_logs/evidence_py311.log",
+        "A\treports/phase1g_h_delta_audit_2_remediation_logs/evidence_py313.log",
+        "A\treports/phase1g_h_delta_audit_2_remediation_logs/extra_mutants_definitions.json",
+        "A\treports/phase1g_h_delta_audit_2_remediation_logs/extra_mutants_results.json",
+        "A\treports/phase1g_h_delta_audit_2_remediation_logs/full_suite_py311.log",
+        "A\treports/phase1g_h_delta_audit_2_remediation_logs/full_suite_py313.log",
+        "A\treports/phase1g_h_delta_audit_2_remediation_logs/make_campaign.py",
+        "A\treports/phase1g_h_delta_audit_2_remediation_logs/mutation_campaign.log",
+        "A\treports/phase1g_h_delta_audit_2_remediation_logs/regression_count.py",
+        "A\treports/phase1g_h_delta_audit_2_remediation_logs/regression_recount_89cb041_vs_248a06b.json",
+        "A\treports/phase1g_h_delta_audit_2_remediation_logs/regression_vs_248a06b.json",
+        "A\treports/phase1g_h_delta_audit_2_remediation_logs/round3_mutant_definitions.json",
+        "A\treports/phase1g_h_delta_audit_2_remediation_logs/run_extra_mutants.py",
+        "A\treports/phase1g_h_delta_audit_2_remediation_logs/second_delta_audit_mutants_rerun.json",
+        "A\treports/phase1g_h_delta_audit_2_remediation_logs/tolerance_audit.log",
+        "M\treports/phase1g_h_delta_audit_remediation.md",
+        "M\treports/phase1g_h_delta_audit_remediation_inventory.json",
+        "M\treports/phase1g_h_global_variance_closure.md",
+        "M\treports/phase1g_h_global_variance_closure_inventory.json",
+        "M\treports/phase1g_h_global_variance_closure_validation.md",
+        "M\treports/phase1g_h_publication_successor.md",
+        "M\treports/phase1g_h_publication_successor_inventory.json"
+      ]
+    },
+    "ed0ec0c9c8783519a53759a265b6ce37e6c0e607": {
+      "tree": "afba6630d02cb04d941ddb8b42092d7884e79786",
+      "parents": [
+        "4bf2718e7557ace3fdc0abffaa73587f1162f776"
+      ],
+      "changed_paths": [
+        "M\tCLAUDE.md",
+        "M\tREADME.md",
+        "M\treports/phase1g_h_delta_audit_2_remediation.md",
+        "M\treports/phase1g_h_delta_audit_2_remediation_inventory.json",
+        "M\treports/phase1g_h_global_variance_closure.md",
+        "M\treports/phase1g_h_global_variance_closure_inventory.json",
+        "M\treports/phase1g_h_publication_successor.md",
+        "M\treports/phase1g_h_publication_successor_inventory.json"
+      ]
+    }
+  },
+  "changed_files": [
+    [
+      "M",
+      "CLAUDE.md"
+    ],
+    [
+      "M",
+      "README.md"
+    ],
+    [
+      "M",
+      "reports/phase1g_h_audit_remediation.md"
+    ],
+    [
+      "M",
+      "reports/phase1g_h_audit_remediation_inventory.json"
+    ],
+    [
+      "A",
+      "reports/phase1g_h_delta_audit_2_remediation.md"
+    ],
+    [
+      "A",
+      "reports/phase1g_h_delta_audit_2_remediation_inventory.json"
+    ],
+    [
+      "A",
+      "reports/phase1g_h_delta_audit_2_remediation_logs/compare_evidence.py"
+    ],
+    [
+      "A",
+      "reports/phase1g_h_delta_audit_2_remediation_logs/cross_interpreter_313_vs_311.json"
+    ],
+    [
+      "A",
+      "reports/phase1g_h_delta_audit_2_remediation_logs/evidence_head.txt"
+    ],
+    [
+      "A",
+      "reports/phase1g_h_delta_audit_2_remediation_logs/evidence_py311.log"
+    ],
+    [
+      "A",
+      "reports/phase1g_h_delta_audit_2_remediation_logs/evidence_py313.log"
+    ],
+    [
+      "A",
+      "reports/phase1g_h_delta_audit_2_remediation_logs/extra_mutants_definitions.json"
+    ],
+    [
+      "A",
+      "reports/phase1g_h_delta_audit_2_remediation_logs/extra_mutants_results.json"
+    ],
+    [
+      "A",
+      "reports/phase1g_h_delta_audit_2_remediation_logs/full_suite_py311.log"
+    ],
+    [
+      "A",
+      "reports/phase1g_h_delta_audit_2_remediation_logs/full_suite_py313.log"
+    ],
+    [
+      "A",
+      "reports/phase1g_h_delta_audit_2_remediation_logs/make_campaign.py"
+    ],
+    [
+      "A",
+      "reports/phase1g_h_delta_audit_2_remediation_logs/mutation_campaign.log"
+    ],
+    [
+      "A",
+      "reports/phase1g_h_delta_audit_2_remediation_logs/regression_count.py"
+    ],
+    [
+      "A",
+      "reports/phase1g_h_delta_audit_2_remediation_logs/regression_recount_89cb041_vs_248a06b.json"
+    ],
+    [
+      "A",
+      "reports/phase1g_h_delta_audit_2_remediation_logs/regression_vs_248a06b.json"
+    ],
+    [
+      "A",
+      "reports/phase1g_h_delta_audit_2_remediation_logs/round3_mutant_definitions.json"
+    ],
+    [
+      "A",
+      "reports/phase1g_h_delta_audit_2_remediation_logs/run_extra_mutants.py"
+    ],
+    [
+      "A",
+      "reports/phase1g_h_delta_audit_2_remediation_logs/second_delta_audit_mutants_rerun.json"
+    ],
+    [
+      "A",
+      "reports/phase1g_h_delta_audit_2_remediation_logs/tolerance_audit.log"
+    ],
+    [
+      "M",
+      "reports/phase1g_h_delta_audit_remediation.md"
+    ],
+    [
+      "M",
+      "reports/phase1g_h_delta_audit_remediation_inventory.json"
+    ],
+    [
+      "M",
+      "reports/phase1g_h_global_variance_closure.md"
+    ],
+    [
+      "M",
+      "reports/phase1g_h_global_variance_closure_inventory.json"
+    ],
+    [
+      "M",
+      "reports/phase1g_h_global_variance_closure_validation.md"
+    ],
+    [
+      "M",
+      "reports/phase1g_h_publication_successor.md"
+    ],
+    [
+      "M",
+      "reports/phase1g_h_publication_successor_inventory.json"
+    ],
+    [
+      "M",
+      "scripts/phase1g_h_global_variance_closure_numerics.py"
+    ],
+    [
+      "M",
+      "src/timescape_fsigma8/global_variance.py"
+    ],
+    [
+      "M",
+      "tests/test_phase1g_h_global_variance.py"
+    ]
+  ],
+  "expected_diff_matches": true,
+  "unexpected": [],
+  "missing": [],
+  "changed_file_counts": {
+    "M": 14,
+    "A": 20
+  },
+  "preservation": {
+    "previous_audits": {
+      "count": 184,
+      "all_identical": true,
+      "mismatches": []
+    },
+    "package_vs_frozen": {
+      "count": 57,
+      "all_identical": true,
+      "mismatches": []
+    },
+    "frozen_reports": {
+      "count": 111,
+      "all_identical": true,
+      "mismatches": []
+    },
+    "runner_and_configs": {
+      "scripts/phase1g_h_global_variance_case.py": true,
+      "scripts/phase1g_h_configs/gm_bare_pbs_f_median_seed.json": true,
+      "scripts/phase1g_h_configs/gm_bare_pbs_w09_seed.json": true,
+      "scripts/phase1g_h_configs/nw15_equal_mass_constant_share.json": true
+    },
+    "current_inventory_subtrees": {
+      "results": true,
+      "two_phase_covariance": true,
+      "status_tokens": true,
+      "observational_authorizations": true,
+      "assumptions": true,
+      "equations": true,
+      "definition": true,
+      "anchoring": true,
+      "missing_input": true
+    },
+    "historical_additions": {
+      "reports/phase1g_h_audit_remediation.md": {
+        "removed_line_count": 0,
+        "only_additions": true,
+        "original_bytes_available_at": "e5170285e1d4b4aa72e907a3a79110d05584c0d9"
+      },
+      "reports/phase1g_h_audit_remediation_inventory.json": {
+        "removed_line_count": 0,
+        "only_additions": true,
+        "original_bytes_available_at": "e5170285e1d4b4aa72e907a3a79110d05584c0d9"
+      },
+      "reports/phase1g_h_delta_audit_remediation.md": {
+        "removed_line_count": 0,
+        "only_additions": true,
+        "original_bytes_available_at": "e5170285e1d4b4aa72e907a3a79110d05584c0d9"
+      },
+      "reports/phase1g_h_delta_audit_remediation_inventory.json": {
+        "removed_line_count": 0,
+        "only_additions": true,
+        "original_bytes_available_at": "e5170285e1d4b4aa72e907a3a79110d05584c0d9"
+      }
+    }
+  },
+  "remote": {
+    "heads": {
+      "refs/heads/ccr-555e67be-u11yht": "ed0ec0c9c8783519a53759a265b6ce37e6c0e607",
+      "refs/heads/ccr-ac582de6-vho99i": "e5170285e1d4b4aa72e907a3a79110d05584c0d9",
+      "refs/heads/claude/zealous-rubin-1m3vf4": "63ca316b87399fc323713338a07519f8bce52113",
+      "refs/heads/experiment/ltb-cmc-background": "28a87a18aed9f85a0e65624fea76b26dfd459a0f",
+      "refs/heads/main": "8d3cdd0533035858c42269cb1dff1a20dcafc7da",
+      "refs/heads/phase-1c-perturbations": "878a97e83357025c78e2fee7bf458c3b22a207d3",
+      "refs/heads/phase-1d-b-growth-pipeline": "93d956d0020f0edec34a44cd9d19f30c085aecc7",
+      "refs/heads/phase-1d-c-observable-closure-audit": "81148eb6be8add842b538e2a21c5cf9782f9e49e",
+      "refs/heads/phase-1d-d-anchored-density-growth": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+      "refs/heads/phase-1d-d-t-d3-frame-mapping": "f960a9054ae9db3a7c378557ac3a2938c5ff7ef0",
+      "refs/heads/phase-1e-a-dressed-observable-bridge-audit": "f4044cbe10a7fbd59d1b14131e2d2e31100984ef",
+      "refs/heads/phase-1e-b-dressed-lightcone-velocity-derivation": "8634f14a35c22983413672075fa7f37f03fd663d",
+      "refs/heads/phase-1e-c-perturbed-dressed-geometry-transfer-closure": "fcbf9c29a28c586044150e6910e1637bc3f6975b",
+      "refs/heads/phase-1e-d-regional-matching-dynamics-design": "2fd3ed2006821bc162fb740bd773f2d0b6e5e0b4",
+      "refs/heads/phase-1e-e-transfer-realization-selection": "1f2800c9685b7ab4c2bbbef3e93d1767073cc783",
+      "refs/heads/phase-1e-f-h1-transfer-realization": "1e0a1772aa01ef312a9c3cae6d3e65c8b4f9cbdd",
+      "refs/heads/phase-1e-g-continuum-h1-realization": "d262099ce3fe977af628ff233abed411e70a3c85",
+      "refs/heads/phase-1f-a-h1-broken-density-spectral-boost": "87af7976b82b0b38e2c3e77dfc9458e664034c5d",
+      "refs/heads/phase-1f-c-r-f4-audit-recovery": "7d5d8ce376554b42bc8374f21ec1223eda3b982f",
+      "refs/heads/phase-1f-d-necessary-bound": "3cd1685855bd78f2833ee91340794bee44b5e48d",
+      "refs/heads/phase-1g-f-successor-g-evolution": "3d3d46ed68fde7e6d4100fe518a76731bd2cf9e9",
+      "refs/heads/phase-1g-h-delta-audit": "5c325e1fd05b343f6d5e93f931038794de4373a2",
+      "refs/heads/phase-1g-h-independent-audit": "816dd004763f8de1a8bb09cba9e427a1bd2bb3d1",
+      "refs/heads/phase-1g-owner-decisions": "3c70185cb3eb3aa3734995a2fde43bc25462086e"
+    },
+    "tag_count": 38,
+    "all_annotated": true,
+    "tag_map_identical_to_first_delta_snapshot": true,
+    "tag_map": {
+      "refs/tags/phase-1b-background-v1": "f678010a5a8584495a81402c17a6b529291de58c",
+      "refs/tags/phase-1c-a-equation-audit-v1": "1bb5679e85659c40b091476fe5a63bffdd8cf2ff",
+      "refs/tags/phase-1c-b1-clean-systems-v1": "b0fed30d513b67ca9f53b84a79f47be2ad024846",
+      "refs/tags/phase-1c-b2-barotropic-v1": "cf90bcc8377632252dd8f0732d6d36c939e5bf7b",
+      "refs/tags/phase-1d-a-growth-observable-audit-v1": "ff6d27a70fdc6743788523ef1e02f9caf6a66daf",
+      "refs/tags/phase-1d-b-growth-pipeline-v1": "7713cb348890416c1e864afabc1109081291d88e",
+      "refs/tags/phase-1d-c-observable-closure-audit-v1": "36edbdd33241e0e125e73fe7e7344ae6adc3e880",
+      "refs/tags/phase-1d-d-anchored-density-growth-v1": "d42519aff3f6028c8d71eb7ef478b79201e422c3",
+      "refs/tags/phase-1d-d-t-d3-frame-mapping-v1": "dfa48eef28c19f3e948ffe1e84c732464f265775",
+      "refs/tags/phase-1e-a-dressed-observable-bridge-audit-v1": "bdcbaaca20aed707d43944fc2cd5096b636243b1",
+      "refs/tags/phase-1e-b-dressed-lightcone-velocity-derivation-v1": "a08230b0ab275993d9e8645d55532a1336c5f637",
+      "refs/tags/phase-1e-c-perturbed-dressed-geometry-transfer-closure-v1": "0a6dbe6ac27991d6119a4ebc4e84e4a005f3d988",
+      "refs/tags/phase-1e-d-regional-matching-dynamics-v1": "00a9d7e44418496b71ad95cd19390ba79bb3448d",
+      "refs/tags/phase-1e-e-transfer-realization-selection-v1": "602178e639e3a750a719754fd15b6e61d0850ca8",
+      "refs/tags/phase-1e-f-h1-transfer-realization-v1": "50f9b3b8ae84169b9a0109c307d4ba2277ef2cd3",
+      "refs/tags/phase-1e-f-h1-transfer-realization-v2": "58238a9aeb62033d3bacf5f7e737dea024adb669",
+      "refs/tags/phase-1e-g-continuum-h1-realization-v1": "064963b54a2e7eac242bf5296b83f14b0821a4bb",
+      "refs/tags/phase-1e-g-continuum-h1-realization-v2": "668c73e9e3ef864bb20ee61783a4088ca2acbe73",
+      "refs/tags/phase-1e-g-continuum-h1-realization-v3": "7f7b1a72770cb2efbe90976c2ac7b17df885a331",
+      "refs/tags/phase-1e-g-continuum-h1-realization-v4": "97c66c812fcbca6c7612fb220970a60cb340f9d4",
+      "refs/tags/phase-1f-a-h1-broken-density-spectral-boost-v1": "c9cd0c5519052d08cf607e725b45dbf8a0cd8a9b",
+      "refs/tags/phase-1f-a-h1-broken-density-spectral-boost-v2": "e2ccb27a4d7e8f60c0c6b0536bde01769af397e9",
+      "refs/tags/phase-1f-b-dust-wall-boost-dynamics-v1": "d784074049148fad65632fe91848eada8923bb7a",
+      "refs/tags/phase-1f-b-dust-wall-boost-dynamics-v2": "bd1facf1fce246ef6fb42d02f03c5da6c2eef3a0",
+      "refs/tags/phase-1f-b-dust-wall-boost-dynamics-v3": "61dc9cf7602908b563158554d1b991a8d7059ab7",
+      "refs/tags/phase-1f-c-r-astra-audit-remediation-v1": "3956bfdb3f7dcbffbade69414f69bff0efa94f6c",
+      "refs/tags/phase-1f-c-r-astra-audit-remediation-v2": "841cfb7b435c0042b5835d09aaa71e002b7e6062",
+      "refs/tags/phase-1f-c-r-post-remediation-review-v1": "d4084287023c77414461a8b5ad465bcc76030998",
+      "refs/tags/phase-1f-c-wall-common-spacetime-geometry-v1": "ef3b180e080e299f26316f9f5a30982776378e1e",
+      "refs/tags/phase-1f-c-wall-common-spacetime-geometry-v2": "0afeb8fffac66dc182f6edd5885936d6e2779eaf",
+      "refs/tags/phase-1f-d-necessary-bound-v1": "dc04502d31fdd7cd0d1db199aed02e83066687b4",
+      "refs/tags/phase-1g-a-sigma8-derivation-path-v1": "f5fceeae4491afaa418fa1e37322e97a8a924280",
+      "refs/tags/phase-1g-b-lagrangian-sigma-v1": "a279464a52eb767e6840be8774375eac7885d5c3",
+      "refs/tags/phase-1g-c-two-scale-growth-law-v1": "88e96be855e5aca117e6ac12872fdb5070494b59",
+      "refs/tags/phase-1g-d-separate-universe-growth-v1": "e2a3b303e2441dd94971a32b7ec327a44f2af000",
+      "refs/tags/phase-1g-e-two-phase-sigma-v1": "2a48639c8cdf6217d6b1c8293a06722eba48e38d",
+      "refs/tags/phase-1g-f-void-population-v1": "ca52c94d6ecad2be62016b019d652d9bc6e89dd2",
+      "refs/tags/phase-1g-g-void-evolution-v1": "d151bd45242eff50ca7fa62bbd50453375737117"
+    },
+    "peeled_tag_map": {
+      "refs/tags/phase-1b-background-v1": "fe8b00fbe8a6bfcd71fa6d7ff5fa4b7cc6b50be4",
+      "refs/tags/phase-1c-a-equation-audit-v1": "5d9aa47832c8f02a26c2353d0736531d34dbc59b",
+      "refs/tags/phase-1c-b1-clean-systems-v1": "18b666648649ba1004f7f1219693bab8bc83bc7d",
+      "refs/tags/phase-1c-b2-barotropic-v1": "9ec3bcc36bd9d7cc5defe4305c63d44d201a9971",
+      "refs/tags/phase-1d-a-growth-observable-audit-v1": "878a97e83357025c78e2fee7bf458c3b22a207d3",
+      "refs/tags/phase-1d-b-growth-pipeline-v1": "93d956d0020f0edec34a44cd9d19f30c085aecc7",
+      "refs/tags/phase-1d-c-observable-closure-audit-v1": "81148eb6be8add842b538e2a21c5cf9782f9e49e",
+      "refs/tags/phase-1d-d-anchored-density-growth-v1": "7ea266c2cb00aac8afdef71e51a18aea5fb7d39c",
+      "refs/tags/phase-1d-d-t-d3-frame-mapping-v1": "f960a9054ae9db3a7c378557ac3a2938c5ff7ef0",
+      "refs/tags/phase-1e-a-dressed-observable-bridge-audit-v1": "f4044cbe10a7fbd59d1b14131e2d2e31100984ef",
+      "refs/tags/phase-1e-b-dressed-lightcone-velocity-derivation-v1": "8634f14a35c22983413672075fa7f37f03fd663d",
+      "refs/tags/phase-1e-c-perturbed-dressed-geometry-transfer-closure-v1": "fcbf9c29a28c586044150e6910e1637bc3f6975b",
+      "refs/tags/phase-1e-d-regional-matching-dynamics-v1": "2fd3ed2006821bc162fb740bd773f2d0b6e5e0b4",
+      "refs/tags/phase-1e-e-transfer-realization-selection-v1": "1f2800c9685b7ab4c2bbbef3e93d1767073cc783",
+      "refs/tags/phase-1e-f-h1-transfer-realization-v1": "0ad10f45f2e2119a345271449de85aa42469ef49",
+      "refs/tags/phase-1e-f-h1-transfer-realization-v2": "1e0a1772aa01ef312a9c3cae6d3e65c8b4f9cbdd",
+      "refs/tags/phase-1e-g-continuum-h1-realization-v1": "75d4f30ae7c63c05e1f0998f5e7e62f4ed3728f1",
+      "refs/tags/phase-1e-g-continuum-h1-realization-v2": "8fa4ab8fe28c3b4a5598b13b3289f65b83a7f1ca",
+      "refs/tags/phase-1e-g-continuum-h1-realization-v3": "94c5f8349849628f1533ab69f56d626e16cb4910",
+      "refs/tags/phase-1e-g-continuum-h1-realization-v4": "d262099ce3fe977af628ff233abed411e70a3c85",
+      "refs/tags/phase-1f-a-h1-broken-density-spectral-boost-v1": "a56fa88b64062761fefc193d7061d1d12ba2dedd",
+      "refs/tags/phase-1f-a-h1-broken-density-spectral-boost-v2": "87af7976b82b0b38e2c3e77dfc9458e664034c5d",
+      "refs/tags/phase-1f-b-dust-wall-boost-dynamics-v1": "27fd65fd2a05c5b990508d948703897f433b566e",
+      "refs/tags/phase-1f-b-dust-wall-boost-dynamics-v2": "16440e1a682c8d62d1e1b1d15fe8fad9290fa66a",
+      "refs/tags/phase-1f-b-dust-wall-boost-dynamics-v3": "d2f150222cb08565aa9d0822747250309d8aaa67",
+      "refs/tags/phase-1f-c-r-astra-audit-remediation-v1": "72d8c51433662947b8981eb970a2bd90a94bbe4e",
+      "refs/tags/phase-1f-c-r-astra-audit-remediation-v2": "118b8f3af3c1360b0da74df8e9a9cb3ba1fed83a",
+      "refs/tags/phase-1f-c-r-post-remediation-review-v1": "ce550753f2e0270ddd29b2e81f99cb23b8bf8780",
+      "refs/tags/phase-1f-c-wall-common-spacetime-geometry-v1": "6a633903fe7355a9892ed61abefece5a7b6f2855",
+      "refs/tags/phase-1f-c-wall-common-spacetime-geometry-v2": "63d2104575c6a249e5177e47f4a354b660e70e32",
+      "refs/tags/phase-1f-d-necessary-bound-v1": "3cd1685855bd78f2833ee91340794bee44b5e48d",
+      "refs/tags/phase-1g-a-sigma8-derivation-path-v1": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f",
+      "refs/tags/phase-1g-b-lagrangian-sigma-v1": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f",
+      "refs/tags/phase-1g-c-two-scale-growth-law-v1": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f",
+      "refs/tags/phase-1g-d-separate-universe-growth-v1": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f",
+      "refs/tags/phase-1g-e-two-phase-sigma-v1": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f",
+      "refs/tags/phase-1g-f-void-population-v1": "8d3cdd0533035858c42269cb1dff1a20dcafc7da",
+      "refs/tags/phase-1g-g-void-evolution-v1": "8d3cdd0533035858c42269cb1dff1a20dcafc7da"
+    },
+    "virtual_ls_remote_tag_ref_count": 76,
+    "pull_requests": [
+      {
+        "number": 4,
+        "state": "closed",
+        "head": "phase-1g-f-successor-g-evolution",
+        "base": "main",
+        "merged_at": "2026-10-06T13:12:04Z"
+      },
+      {
+        "number": 3,
+        "state": "closed",
+        "head": "phase-1g-owner-decisions",
+        "base": "main",
+        "merged_at": "2026-09-30T15:55:07Z"
+      },
+      {
+        "number": 2,
+        "state": "closed",
+        "head": "claude/zealous-rubin-1m3vf4",
+        "base": "main",
+        "merged_at": "2026-09-30T06:42:06Z"
+      },
+      {
+        "number": 1,
+        "state": "closed",
+        "head": "claude/loving-dijkstra-esoj6f",
+        "base": "main",
+        "merged_at": "2026-09-23T12:32:02Z"
+      }
+    ],
+    "release_count": 0,
+    "forbidden_D_v2_present": false
+  },
+  "publication_graph": {
+    "P7": [
+      "5c325e1fd05b343f6d5e93f931038794de4373a2",
+      "248a06bfeb655337bc499607180c49008b5f34ea",
+      "226e52d2e4157d0130b2a9dfaffd71834c6017d9"
+    ],
+    "P9": [
+      "64116509554cc0d711660da4d81ad95c3f450a6d",
+      "e5170285e1d4b4aa72e907a3a79110d05584c0d9"
+    ],
+    "P10": [
+      "64116509554cc0d711660da4d81ad95c3f450a6d",
+      "e5170285e1d4b4aa72e907a3a79110d05584c0d9",
+      "9ad54253c4ec40cede5690da6659be28e0bd0a2d",
+      "4bf2718e7557ace3fdc0abffaa73587f1162f776"
+    ],
+    "P11": [
+      "ed0ec0c9c8783519a53759a265b6ce37e6c0e607"
+    ]
+  },
+  "owner_authorizations": {
+    "P10": "DIRECTLY_CONFIRMED_CURRENT_HANDOFF",
+    "P11": "DIRECTLY_CONFIRMED_CURRENT_HANDOFF",
+    "P1_P9": "QUOTED_OR_PRIOR_AUDITOR_RECORD_NOT_INDEPENDENTLY_AUTHENTICATED",
+    "P9_provenance": "pasted transcript from a different session, explicitly secondary evidence; current branch+ancestry verified; authorization words NOT_VERIFIABLE here",
+    "new_audit_push": "NOT_AUTHORIZED"
+  },
+  "publication_limits": [
+    "Current refs and exact ancestry verify graph compatibility with the recorded fast-forwards; neither proves historical push actor/date or prior remote head.",
+    "No author session or conversation was accessed.",
+    "Current owner confirmation validates P10/P11 authorization, not a newly proposed audit push."
+  ],
+  "json_validation": {
+    "count": 54,
+    "all_valid": true,
+    "results": [
+      {
+        "path": "reports/phase1c_equation_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1d_a_observable_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1d_c_closure_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1d_d_t_d3_frame_mapping_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1e_a_dressed_observable_bridge_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1e_b_dressed_lightcone_velocity_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1e_c_perturbed_dressed_geometry_transfer_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1e_d_regional_matching_dynamics_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1e_e_transfer_realization_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1e_f_h1_transfer_realization_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1e_g_continuum_h1_realization_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1f_a_h1_carrier_dressed_closure_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1f_b_dust_wall_boost_dynamics_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1f_c_r_astra_audit_remediation_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1f_c_r_astra_audit_remediation_v2_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1f_c_r_f2_f4_f9_remediation_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1f_c_r_post_remediation_independent_audit_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1f_c_wall_common_geometry_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1g_a_adversarial_audit_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1g_a_barotropic_status_successor_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1g_a_owner_decisions_successor_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1g_a_sigma8_derivation_path_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1g_adversarial_audit_errata_successor_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1g_b_adversarial_audit_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1g_b_owner_decisions_successor_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1g_c_adversarial_audit_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1g_c_owner_decisions_successor_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1g_c_two_scale_growth_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1g_d_adversarial_audit_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1g_d_linear_statistic_status_successor_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1g_d_owner_decisions_successor_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1g_d_separate_universe_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1g_e_adversarial_audit_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1g_e_owner_decisions_successor_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1g_e_status_addition_successor_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1g_e_two_phase_sigma_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1g_f_void_population_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1g_f_volume_budget_successor_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1g_fg_audit_remediation_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1g_fg_freeze_status_successor_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1g_fg_independent_scientific_audit_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1g_fg_remediation_independent_audit_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1g_fg_remediation_integration_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1g_g_void_evolution_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1g_h_audit_remediation_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1g_h_delta_audit_2_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1g_h_delta_audit_2_remediation_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1g_h_delta_audit_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1g_h_delta_audit_remediation_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1g_h_global_variance_closure_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1g_h_independent_audit_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1g_h_publication_successor_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1g_status_additions_successor_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      },
+      {
+        "path": "reports/phase1g_windows_validation_record_inventory.json",
+        "valid": true,
+        "unique_keys": true,
+        "strict_nonfinite": true
+      }
+    ]
+  },
+  "sha256_validation": [
+    {
+      "inventory": "reports/phase1g_h_global_variance_closure_inventory.json",
+      "path": "scripts/phase1g_h_configs/gm_bare_pbs_f_median_seed.json",
+      "reference_commit": "ed0ec0c9c8783519a53759a265b6ce37e6c0e607",
+      "recorded_sha256": "fce37d4e6bef9b778e68ec5bcb306051e07518020622ecbdb9c1c1847d2ba581",
+      "measured_sha256": "fce37d4e6bef9b778e68ec5bcb306051e07518020622ecbdb9c1c1847d2ba581",
+      "matches": true
+    },
+    {
+      "inventory": "reports/phase1g_h_global_variance_closure_inventory.json",
+      "path": "scripts/phase1g_h_configs/gm_bare_pbs_w09_seed.json",
+      "reference_commit": "ed0ec0c9c8783519a53759a265b6ce37e6c0e607",
+      "recorded_sha256": "286cea0cb071b8381fe16025ac99d0d596c8d704282d869ebfe23d80026b3986",
+      "measured_sha256": "286cea0cb071b8381fe16025ac99d0d596c8d704282d869ebfe23d80026b3986",
+      "matches": true
+    },
+    {
+      "inventory": "reports/phase1g_h_global_variance_closure_inventory.json",
+      "path": "scripts/phase1g_h_configs/nw15_equal_mass_constant_share.json",
+      "reference_commit": "ed0ec0c9c8783519a53759a265b6ce37e6c0e607",
+      "recorded_sha256": "41d442557b90a00ddd3d26f263eecea12b982c046656750fa9a1696b6c4d9288",
+      "measured_sha256": "41d442557b90a00ddd3d26f263eecea12b982c046656750fa9a1696b6c4d9288",
+      "matches": true
+    },
+    {
+      "inventory": "reports/phase1g_h_global_variance_closure_inventory.json",
+      "path": "scripts/phase1g_h_global_variance_case.py",
+      "reference_commit": "ed0ec0c9c8783519a53759a265b6ce37e6c0e607",
+      "recorded_sha256": "e1b583f39f5b81c0b6c2ba5df1877de11bf091011c7c663bd81c9abee1de57f5",
+      "measured_sha256": "e1b583f39f5b81c0b6c2ba5df1877de11bf091011c7c663bd81c9abee1de57f5",
+      "matches": true
+    },
+    {
+      "inventory": "reports/phase1g_h_global_variance_closure_inventory.json",
+      "path": "scripts/phase1g_h_global_variance_closure_numerics.py",
+      "reference_commit": "ed0ec0c9c8783519a53759a265b6ce37e6c0e607",
+      "recorded_sha256": "c16418d3041e6bec6b2e09bf46ef73402e01af23ed7e7df4136831980c744c1c",
+      "measured_sha256": "c16418d3041e6bec6b2e09bf46ef73402e01af23ed7e7df4136831980c744c1c",
+      "matches": true
+    },
+    {
+      "inventory": "reports/phase1g_h_global_variance_closure_inventory.json",
+      "path": "src/timescape_fsigma8/global_variance.py",
+      "reference_commit": "ed0ec0c9c8783519a53759a265b6ce37e6c0e607",
+      "recorded_sha256": "9147e3e4fee0a354b1a1a4257752ee84b6b945cf33d379d750ddc35f2dfbb1b2",
+      "measured_sha256": "9147e3e4fee0a354b1a1a4257752ee84b6b945cf33d379d750ddc35f2dfbb1b2",
+      "matches": true
+    },
+    {
+      "inventory": "reports/phase1g_h_global_variance_closure_inventory.json",
+      "path": "tests/test_phase1g_h_global_variance.py",
+      "reference_commit": "ed0ec0c9c8783519a53759a265b6ce37e6c0e607",
+      "recorded_sha256": "9841173e7ad5fb925184e4f5a62a1fd9e919201fbb756b10923a722cf682a35e",
+      "measured_sha256": "9841173e7ad5fb925184e4f5a62a1fd9e919201fbb756b10923a722cf682a35e",
+      "matches": true
+    },
+    {
+      "inventory": "reports/phase1g_h_delta_audit_2_remediation_inventory.json",
+      "path": "scripts/phase1g_h_global_variance_closure_numerics.py",
+      "reference_commit": "ed0ec0c9c8783519a53759a265b6ce37e6c0e607",
+      "recorded_sha256": "c16418d3041e6bec6b2e09bf46ef73402e01af23ed7e7df4136831980c744c1c",
+      "measured_sha256": "c16418d3041e6bec6b2e09bf46ef73402e01af23ed7e7df4136831980c744c1c",
+      "matches": true
+    },
+    {
+      "inventory": "reports/phase1g_h_delta_audit_2_remediation_inventory.json",
+      "path": "src/timescape_fsigma8/global_variance.py",
+      "reference_commit": "ed0ec0c9c8783519a53759a265b6ce37e6c0e607",
+      "recorded_sha256": "9147e3e4fee0a354b1a1a4257752ee84b6b945cf33d379d750ddc35f2dfbb1b2",
+      "measured_sha256": "9147e3e4fee0a354b1a1a4257752ee84b6b945cf33d379d750ddc35f2dfbb1b2",
+      "matches": true
+    },
+    {
+      "inventory": "reports/phase1g_h_delta_audit_2_remediation_inventory.json",
+      "path": "tests/test_phase1g_h_global_variance.py",
+      "reference_commit": "ed0ec0c9c8783519a53759a265b6ce37e6c0e607",
+      "recorded_sha256": "9841173e7ad5fb925184e4f5a62a1fd9e919201fbb756b10923a722cf682a35e",
+      "measured_sha256": "9841173e7ad5fb925184e4f5a62a1fd9e919201fbb756b10923a722cf682a35e",
+      "matches": true
+    },
+    {
+      "inventory": "reports/phase1g_h_audit_remediation_inventory.json",
+      "path": "CLAUDE.md",
+      "reference_commit": "89cb041",
+      "recorded_sha256": "1a5daae1610a7b0918b15d88acc7859f5a23700c983938c23ffa2cd24e31fe1e",
+      "measured_sha256": "1a5daae1610a7b0918b15d88acc7859f5a23700c983938c23ffa2cd24e31fe1e",
+      "matches": true
+    },
+    {
+      "inventory": "reports/phase1g_h_audit_remediation_inventory.json",
+      "path": "README.md",
+      "reference_commit": "89cb041",
+      "recorded_sha256": "48722b9e1dec0bf733498842968c44ab3333da88765e90b6f19c4243b6d69913",
+      "measured_sha256": "48722b9e1dec0bf733498842968c44ab3333da88765e90b6f19c4243b6d69913",
+      "matches": true
+    },
+    {
+      "inventory": "reports/phase1g_h_audit_remediation_inventory.json",
+      "path": "reports/phase1g_fg_freeze_status_successor.md",
+      "reference_commit": "89cb041",
+      "recorded_sha256": "e33c5231472e9bae3da69f49aac6b20ca8b5fb7128e43d6affccc6429ec500fe",
+      "measured_sha256": "e33c5231472e9bae3da69f49aac6b20ca8b5fb7128e43d6affccc6429ec500fe",
+      "matches": true
+    },
+    {
+      "inventory": "reports/phase1g_h_audit_remediation_inventory.json",
+      "path": "reports/phase1g_fg_freeze_status_successor_inventory.json",
+      "reference_commit": "89cb041",
+      "recorded_sha256": "2b204efbf5570bca84d6bba735c8ec58b4eeb782371d4730d8b7d25c41c937ab",
+      "measured_sha256": "2b204efbf5570bca84d6bba735c8ec58b4eeb782371d4730d8b7d25c41c937ab",
+      "matches": true
+    },
+    {
+      "inventory": "reports/phase1g_h_audit_remediation_inventory.json",
+      "path": "reports/phase1g_h_audit_remediation.md",
+      "reference_commit": "89cb041",
+      "recorded_sha256": "ba093b14e48772edc8ca355c8bc6e069bc92d429b9e8760780812a810bceb2b3",
+      "measured_sha256": "ba093b14e48772edc8ca355c8bc6e069bc92d429b9e8760780812a810bceb2b3",
+      "matches": true
+    },
+    {
+      "inventory": "reports/phase1g_h_audit_remediation_inventory.json",
+      "path": "reports/phase1g_h_global_variance_closure.md",
+      "reference_commit": "89cb041",
+      "recorded_sha256": "008ae4478a7d07c898554f597aacba2b91c534941d1eba9bf366c570ecf8f8dd",
+      "measured_sha256": "008ae4478a7d07c898554f597aacba2b91c534941d1eba9bf366c570ecf8f8dd",
+      "matches": true
+    },
+    {
+      "inventory": "reports/phase1g_h_audit_remediation_inventory.json",
+      "path": "reports/phase1g_h_global_variance_closure_inventory.json",
+      "reference_commit": "89cb041",
+      "recorded_sha256": "ccc3c2cb935189269da126edbb5046815a69871d176b3c815d3a4a233882e13f",
+      "measured_sha256": "ccc3c2cb935189269da126edbb5046815a69871d176b3c815d3a4a233882e13f",
+      "matches": true
+    },
+    {
+      "inventory": "reports/phase1g_h_audit_remediation_inventory.json",
+      "path": "reports/phase1g_h_global_variance_closure_validation.md",
+      "reference_commit": "89cb041",
+      "recorded_sha256": "29ca3af2adc0acc2c3551fe46c1ef36771b183a198512a465f97abb04b7f2abf",
+      "measured_sha256": "29ca3af2adc0acc2c3551fe46c1ef36771b183a198512a465f97abb04b7f2abf",
+      "matches": true
+    },
+    {
+      "inventory": "reports/phase1g_h_audit_remediation_inventory.json",
+      "path": "scripts/phase1g_h_global_variance_case.py",
+      "reference_commit": "89cb041",
+      "recorded_sha256": "e1b583f39f5b81c0b6c2ba5df1877de11bf091011c7c663bd81c9abee1de57f5",
+      "measured_sha256": "e1b583f39f5b81c0b6c2ba5df1877de11bf091011c7c663bd81c9abee1de57f5",
+      "matches": true
+    },
+    {
+      "inventory": "reports/phase1g_h_audit_remediation_inventory.json",
+      "path": "scripts/phase1g_h_global_variance_closure_numerics.py",
+      "reference_commit": "89cb041",
+      "recorded_sha256": "568bf7591330875c9c09956663863ce5631fb07eb32e33e35002a7bec8a2e20c",
+      "measured_sha256": "568bf7591330875c9c09956663863ce5631fb07eb32e33e35002a7bec8a2e20c",
+      "matches": true
+    },
+    {
+      "inventory": "reports/phase1g_h_audit_remediation_inventory.json",
+      "path": "src/timescape_fsigma8/global_variance.py",
+      "reference_commit": "89cb041",
+      "recorded_sha256": "71fa240f309e6992edac07c61714b894471a05c1d29a0843b11c3bec6137527c",
+      "measured_sha256": "71fa240f309e6992edac07c61714b894471a05c1d29a0843b11c3bec6137527c",
+      "matches": true
+    },
+    {
+      "inventory": "reports/phase1g_h_audit_remediation_inventory.json",
+      "path": "tests/test_phase1g_h_global_variance.py",
+      "reference_commit": "89cb041",
+      "recorded_sha256": "2a7b827424b3e931e8b0ff4941b8ffb97462ed44de7d343d43a384a9c77cdef6",
+      "measured_sha256": "2a7b827424b3e931e8b0ff4941b8ffb97462ed44de7d343d43a384a9c77cdef6",
+      "matches": true
+    }
+  ],
+  "all_required_hashes_match": true,
+  "module_status_and_binding_constants": {
+    "PHASE": {
+      "base": "1G-H",
+      "head": "1G-H",
+      "same": true
+    },
+    "MODULE_STATUS": {
+      "base": "EXPERIMENTAL_CONDITIONAL_RESEARCH_RUNTIME",
+      "head": "EXPERIMENTAL_CONDITIONAL_RESEARCH_RUNTIME",
+      "same": true
+    },
+    "SCIENTIFIC_CLASSIFICATION": {
+      "base": "CONDITIONAL_MODEL_INTERNAL_GLOBAL_MEAN_LINEAR_MASS_VARIANCE",
+      "head": "CONDITIONAL_MODEL_INTERNAL_GLOBAL_MEAN_LINEAR_MASS_VARIANCE",
+      "same": true
+    },
+    "OBSERVATIONAL_STATUS": {
+      "base": "NON_OBSERVATIONAL",
+      "head": "NON_OBSERVATIONAL",
+      "same": true
+    },
+    "AMPLITUDE_STATUS": {
+      "base": "NOT_OBSERVATIONAL_SIGMA_8",
+      "head": "NOT_OBSERVATIONAL_SIGMA_8",
+      "same": true
+    },
+    "GROWTH_RATE_PRODUCT_STATUS": {
+      "base": "NOT_FSIGMA8",
+      "head": "NOT_FSIGMA8",
+      "same": true
+    },
+    "VOID_SHARE_STATUS": {
+      "base": "EXTERNAL_CLOSURE_INPUT",
+      "head": "EXTERNAL_CLOSURE_INPUT",
+      "same": true
+    },
+    "PROPAGATOR_EVIDENCE_CLASS": {
+      "base": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "head": "DERIVED_ONLY_AFTER_ADDITIONAL_ASSUMPTION",
+      "same": true
+    },
+    "NOT_APPLICABLE": {
+      "base": "NOT_APPLICABLE",
+      "head": "NOT_APPLICABLE",
+      "same": true
+    },
+    "VOID_RESPONSE_PERTURBATIVE": {
+      "base": "VOID_RESPONSE_PERTURBATIVE",
+      "head": "VOID_RESPONSE_PERTURBATIVE",
+      "same": true
+    },
+    "VOID_RESPONSE_NONPERTURBATIVE": {
+      "base": "VOID_RESPONSE_NONPERTURBATIVE",
+      "head": "VOID_RESPONSE_NONPERTURBATIVE",
+      "same": true
+    },
+    "RECORD_IDENTITY_RTOL": {
+      "base": 1e-12,
+      "head": 1e-12,
+      "same": true
+    }
+  },
+  "evidence_tolerances_and_thresholds": {
+    "GATES": {
+      "base": {
+        "D_owner_A_v_printed_digits": 0.5,
+        "D_owner_X_SU_printed_digits": 0.0005,
+        "constant_share_A_s_scaling_rel": 1e-10,
+        "pbs_void_term_A_s_independence_rel": 0.002,
+        "refined_quadrature_rel": 2e-06,
+        "E_reference_printed_half_unit": 5e-05,
+        "gt_orthant_P11_vs_bivariate_cdf_abs": 1e-10,
+        "orthant_analytic_cases_abs": 1e-12,
+        "m3_bias_finite_difference_rel": 1e-06,
+        "lognormal_ball_variance_calibration_rel": 1e-09,
+        "lognormal_linear_limit_rel": 0.05,
+        "step_kernel_premise_ratio": 1.0,
+        "reclosure_constant_share_rel": 1e-10,
+        "radial_refinement_rel": 1e-05,
+        "h25_identity_rel": 1e-12
+      },
+      "head": {
+        "D_owner_A_v_printed_digits": 0.5,
+        "D_owner_X_SU_printed_digits": 0.0005,
+        "constant_share_A_s_scaling_rel": 1e-10,
+        "pbs_void_term_A_s_independence_rel": 0.002,
+        "refined_quadrature_rel": 2e-06,
+        "E_reference_printed_half_unit": 5e-05,
+        "gt_orthant_P11_vs_bivariate_cdf_abs": 1e-10,
+        "orthant_analytic_cases_abs": 1e-12,
+        "m3_bias_finite_difference_rel": 1e-06,
+        "lognormal_ball_variance_calibration_rel": 1e-09,
+        "lognormal_linear_limit_rel": 0.05,
+        "step_kernel_premise_ratio": 1.0,
+        "reclosure_constant_share_rel": 1e-10,
+        "radial_refinement_rel": 1e-05,
+        "h25_identity_rel": 1e-12
+      },
+      "same": true
+    },
+    "ORTHANT_TOLERANCE": {
+      "base": 1e-12,
+      "head": 1e-12,
+      "same": true
+    },
+    "ORTHANT_START_NODES": {
+      "base": 32,
+      "head": 32,
+      "same": true
+    },
+    "RADIAL_INTERVALS": {
+      "base": 1440,
+      "head": 1440,
+      "same": true
+    },
+    "IDENTITY_RTOL": {
+      "base": 1e-13,
+      "head": 1e-13,
+      "same": true
+    }
+  },
+  "lexical_occurrences": [
+    {
+      "path": "README.md",
+      "line": 146,
+      "classification": "RESIDUE_P11_REMOTE_HEAD",
+      "text": "  owner approvals on 2026-10-06, 2026-10-08 and 2026-10-09, remote head"
+    },
+    {
+      "path": "CLAUDE.md",
+      "line": 467,
+      "classification": "RESIDUE_P11_REMOTE_HEAD",
+      "text": "  2026-10-09 to the session branch `ccr-555e67be-u11yht` (remote head"
+    },
+    {
+      "path": "CLAUDE.md",
+      "line": 502,
+      "classification": "HISTORICAL_PRIOR_REMEDIATION_TEST_COUNT",
+      "text": "    identity (H25); first radial panel included; 42 phase tests, 36 gates."
+    },
+    {
+      "path": "reports/phase1g_h_audit_remediation.md",
+      "line": 61,
+      "classification": "HISTORICAL_WITH_STATUS_NOTE",
+      "text": "  carries this record (documentation). Nothing is pushed."
+    },
+    {
+      "path": "reports/phase1g_h_audit_remediation.md",
+      "line": 69,
+      "classification": "HISTORICAL_WITH_GH_DF1_POINTER",
+      "text": "| **D3** | GH-F5 | The Gaussian pair is requalified as a signed-carrier surrogate and its mechanism corrected; nonnegative lognormal pairs with the same shared constraints are added | report \u00a71, \u00a76.3; evidence script; tests |"
+    },
+    {
+      "path": "reports/phase1g_h_audit_remediation_inventory.json",
+      "line": 113,
+      "classification": "HISTORICAL_WITH_GH_DF1_POINTER",
+      "text": "        \"nonnegative lognormal pairs (r_s = 1, 2, 4 Mpc) with the same shared constraints; linear limit gated\","
+    },
+    {
+      "path": "reports/phase1g_h_audit_remediation_inventory.json",
+      "line": 500,
+      "classification": "HISTORICAL_WITH_GH_DF1_POINTER",
+      "text": "    \"narrowed_wording\": \"the 'same shared constraints' of owner decision D3 are narrowed by GH-DF1: the lognormal pairs share f_v0, P11(r) and the latent carrier law, not the conditionally normalised wall density (GH-D2F5)\","
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit.md",
+      "line": 87,
+      "classification": "HISTORICAL_AUDIT_OR_REMEDIATION",
+      "text": "The push is physically corroborated by remote refs. \u201cNothing is pushed\u201d and `pushed:false` describe the 2026-10-07 commit-time record; retain them historically and add a dated 2026-10-08 publication successor. README/CLAUDE current summaries should point to it. Remote existence does not prove authorization. GH-F15 remains `OPEN_OWNER_CONFIRMATION`; the handoff contained no direct confirmation of the two earlier approvals. D1\u2013D4 exact chat-point mapping remains `NOT_VERIFIABLE`."
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_2.md",
+      "line": 185,
+      "classification": "HISTORICAL_AUDIT_OR_REMEDIATION",
+      "text": "`226e52d`); the remote head confirms it. The owner's audit handoff gives the"
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_2.md",
+      "line": 198,
+      "classification": "HISTORICAL_AUDIT_OR_REMEDIATION",
+      "text": "bytes, and its GH-F5/D3 lines keep the \"same shared constraints\" wording"
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_2.md",
+      "line": 231,
+      "classification": "HISTORICAL_AUDIT_OR_REMEDIATION",
+      "text": "  \"same shared constraints\" phrases are in historical 2026-10-07 blocks"
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_2.md",
+      "line": 495,
+      "classification": "HISTORICAL_AUDIT_OR_REMEDIATION",
+      "text": "regression count (GH-D2E1) and the \"about 80 s\" run time. The three"
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_2.md",
+      "line": 545,
+      "classification": "HISTORICAL_AUDIT_OR_REMEDIATION",
+      "text": "tree, 42 phase tests with `-W error`, the evidence script for script mutants"
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_2.md",
+      "line": 577,
+      "classification": "HISTORICAL_AUDIT_OR_REMEDIATION",
+      "text": "| \"same shared constraints\" | first remediation record l. 61, its inventory l. 113, 1G-H inventory `revision.owner_decisions.D3` | historical 2026-10-07 blocks without a GH-DF1 pointer (GH-D2F5) |"
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_2.md",
+      "line": 584,
+      "classification": "HISTORICAL_AUDIT_OR_REMEDIATION",
+      "text": "| \"remediated locally\" | CLAUDE l. 474 (delta remediation); publication successor (quoted) | superseded by P7 (GH-D2F1); quotation |"
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_2.md",
+      "line": 585,
+      "classification": "HISTORICAL_AUDIT_OR_REMEDIATION",
+      "text": "| \"Nothing is pushed\" / \"not pushed\" / `\"pushed\": false` | second remediation record \u00a70 and inventory `commits`; publication successor \u00a73 and `state_2026_10_08`; first remediation record \u00a70 (dated) | superseded by P7 (GH-D2F1); dated history |"
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_2.md",
+      "line": 590,
+      "classification": "HISTORICAL_AUDIT_OR_REMEDIATION",
+      "text": "display rounding was found. \"It takes about 80 s\" was 53 s (3.13, with"
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_2.md",
+      "line": 616,
+      "classification": "HISTORICAL_AUDIT_OR_REMEDIATION",
+      "text": "- second remediation record \u00a70 (\"Nothing is pushed\") and \u00a74 (\"Push of the two"
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_2.md",
+      "line": 619,
+      "classification": "HISTORICAL_AUDIT_OR_REMEDIATION",
+      "text": "- publication successor \u00a73 (`ccr-555e67be-u11yht` = `89cb041`; \"not pushed\")"
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_2.md",
+      "line": 625,
+      "classification": "HISTORICAL_AUDIT_OR_REMEDIATION",
+      "text": "- README (\"delta-audited on 2026-10-08 and remediated locally\");"
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_2.md",
+      "line": 626,
+      "classification": "HISTORICAL_AUDIT_OR_REMEDIATION",
+      "text": "- CLAUDE (\"at `89cb041`\"; \"remediated locally on top of it\")."
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_2.md",
+      "line": 635,
+      "classification": "HISTORICAL_AUDIT_OR_REMEDIATION",
+      "text": "(`89cb041 \u2192 226e52d`, carrying `5c325e1`, `248a06b`, `226e52d`; remote head"
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_2.md",
+      "line": 710,
+      "classification": "HISTORICAL_AUDIT_OR_REMEDIATION",
+      "text": "### GH-D2F5 \u2014 Historical blocks keep the refuted \"same shared constraints\" wording without a pointer"
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_2.md",
+      "line": 716,
+      "classification": "HISTORICAL_AUDIT_OR_REMEDIATION",
+      "text": "still say \"nonnegative lognormal pairs with the same shared constraints\","
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_2.md",
+      "line": 820,
+      "classification": "HISTORICAL_AUDIT_OR_REMEDIATION",
+      "text": "- Mutation testing covered the 42 phase tests and, where relevant, the"
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_2_evidence/mutation_results.json",
+      "line": 928,
+      "classification": "HISTORICAL_WITH_STATUS_NOTE",
+      "text": "   \"  physics: PAPER_REFERENCE constructive pairs (H25) identity = 8.326e-02 > 1.000e-12\","
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_2_evidence/mutation_results.json",
+      "line": 929,
+      "classification": "HISTORICAL_WITH_STATUS_NOTE",
+      "text": "   \"  physics: NW15_CMB_FIT constructive pairs (H25) identity = 7.773e-02 > 1.000e-12\""
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_2_inventory.json",
+      "line": 26,
+      "classification": "HISTORICAL_AUDIT_OR_REMEDIATION",
+      "text": "  \"branch\": \"ccr-555e67be-u11yht (remote head 226e52d, no drift)\","
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_2_inventory.json",
+      "line": 187,
+      "classification": "HISTORICAL_AUDIT_OR_REMEDIATION",
+      "text": "    \"README.md 1G-H entry ('remediated locally')\","
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_2_inventory.json",
+      "line": 188,
+      "classification": "HISTORICAL_AUDIT_OR_REMEDIATION",
+      "text": "    \"CLAUDE.md 1G-H entry ('at 89cb041', 'remediated locally on top of it')\""
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_2_inventory.json",
+      "line": 191,
+      "classification": "HISTORICAL_AUDIT_OR_REMEDIATION",
+      "text": "   \"suggested_resolution\": \"Add a dated 2026-10-08 publication entry P7 (89cb041 -> 226e52d carrying 5c325e1, 248a06b, 226e52d; remote head verified; authorisation as quoted by the owner) and the direct GH-F15 confirmation; extend the current-reading table to the listed statements; keep historical text; update the README/CLAUDE current summaries.\""
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_2_inventory.json",
+      "line": 243,
+      "classification": "HISTORICAL_AUDIT_OR_REMEDIATION",
+      "text": "   \"title\": \"Historical blocks keep the refuted 'same shared constraints' wording without a pointer\","
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_2_inventory.json",
+      "line": 247,
+      "classification": "HISTORICAL_AUDIT_OR_REMEDIATION",
+      "text": "   \"statement\": \"The first remediation record (D3 row, l. 61), its inventory (l. 113) and the regenerated 1G-H inventory revision.owner_decisions.D3 still say 'with the same shared constraints'; the dated status note names the counts and GH-DE6 but not GH-DF1; the record's files_changed_sha256 describe 89cb041 without saying so.\","
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_2_inventory.json",
+      "line": 284,
+      "classification": "HISTORICAL_AUDIT_OR_REMEDIATION",
+      "text": "   \"quoted\": \"Commits ... Nothing is pushed. / ccr-555e67be-u11yht = 89cb041 ... is not pushed\","
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_2_inventory.json",
+      "line": 2231,
+      "classification": "HISTORICAL_AUDIT_OR_REMEDIATION",
+      "text": "   \"claim\": \"evidence gate physics/NW15_CMB_FIT constructive pairs (H25) identity (CPython 3.13.16)\","
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_2_inventory.json",
+      "line": 2239,
+      "classification": "HISTORICAL_AUDIT_OR_REMEDIATION",
+      "text": "   \"location\": \"/gates/physics/NW15_CMB_FIT constructive pairs (H25) identity\""
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_2_inventory.json",
+      "line": 2363,
+      "classification": "HISTORICAL_AUDIT_OR_REMEDIATION",
+      "text": "   \"claim\": \"evidence gate physics/PAPER_REFERENCE constructive pairs (H25) identity (CPython 3.13.16)\","
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_2_inventory.json",
+      "line": 2371,
+      "classification": "HISTORICAL_AUDIT_OR_REMEDIATION",
+      "text": "   \"location\": \"/gates/physics/PAPER_REFERENCE constructive pairs (H25) identity\""
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_2_inventory.json",
+      "line": 2663,
+      "classification": "HISTORICAL_AUDIT_OR_REMEDIATION",
+      "text": "   \"claim\": \"evidence gate physics/NW15_CMB_FIT constructive pairs (H25) identity (CPython 3.11.17)\","
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_2_inventory.json",
+      "line": 2671,
+      "classification": "HISTORICAL_AUDIT_OR_REMEDIATION",
+      "text": "   \"location\": \"/gates/physics/NW15_CMB_FIT constructive pairs (H25) identity\""
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_2_inventory.json",
+      "line": 2795,
+      "classification": "HISTORICAL_AUDIT_OR_REMEDIATION",
+      "text": "   \"claim\": \"evidence gate physics/PAPER_REFERENCE constructive pairs (H25) identity (CPython 3.11.17)\","
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_2_inventory.json",
+      "line": 2803,
+      "classification": "HISTORICAL_AUDIT_OR_REMEDIATION",
+      "text": "   \"location\": \"/gates/physics/PAPER_REFERENCE constructive pairs (H25) identity\""
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_2_inventory.json",
+      "line": 2943,
+      "classification": "HISTORICAL_AUDIT_OR_REMEDIATION",
+      "text": "   \"claim\": \"remote heads: main 8d3cdd0, ccr-555e67be-u11yht 226e52d, phase-1g-h-independent-audit 816dd00, phase-1g-h-delta-audit 5c325e1\","
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_2_inventory.json",
+      "line": 3131,
+      "classification": "HISTORICAL_AUDIT_OR_REMEDIATION",
+      "text": "   \"claim\": \"42 phase tests pass\","
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_2_inventory.json",
+      "line": 3528,
+      "classification": "HISTORICAL_AUDIT_OR_REMEDIATION",
+      "text": "   \"claim\": \"evidence script takes about 80 s\","
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_2_inventory.json",
+      "line": 3551,
+      "classification": "HISTORICAL_AUDIT_OR_REMEDIATION",
+      "text": "  \"P7_record\": \"dated entry: 2026-10-08 fast-forward of ccr-555e67be-u11yht 89cb041 -> 226e52d (5c325e1, 248a06b, 226e52d); remote head verified by this audit; authorisation as quoted by the owner: 'Fai push e prepara il prompt per un nuovo audit'\","
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_2_inventory.json",
+      "line": 3576,
+      "classification": "HISTORICAL_AUDIT_OR_REMEDIATION",
+      "text": "  \"mutation testing on the 42 phase tests and the evidence script only\","
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_evidence/documentation_lexicon_classification.json",
+      "line": 118,
+      "classification": "HISTORICAL_WITH_GH_DF1_POINTER",
+      "text": "    \"text\": \"    pairs with the same shared constraints give law II / law I = 0.92\u20131.29:\","
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_evidence/documentation_lexicon_classification.json",
+      "line": 119,
+      "classification": "HISTORICAL_WITH_GH_DF1_POINTER",
+      "text": "    \"context\": \"    them (GH-F6).\\n  - Two-phase covariance with cross terms; the signed Gaussian pair (0.97 vs\\n    0.39) has negative wall densities (P \u2248 0.45); nonnegative lognormal\\n    pairs with the same shared constraints give law II / law I = 0.92\u20131.29:\\n    the nonlinear hybrid variance needs the joint law of geometry and\\n    density (GH-F5).\\n  - C (prediction, observation) not reached; owner decisions H-OD1\u2026H-OD5 in\","
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_evidence/documentation_lexicon_classification.json",
+      "line": 471,
+      "classification": "HISTORICAL_WITH_GH_DF1_POINTER",
+      "text": "    \"context\": \"\\n| Decision | Finding | Choice (recommended option) | Applied in |\\n|---|---|---|---|\\n| **D1** | GH-F1 | The statistic is the *formal tangent statistic* \u2014 the early Gaussian field propagated with the zero-amplitude tangent of the regional contrast map, smoothing rule `G_R = G W(kR)`, the analogue of \u039bCDM's linear \u03c38 \u2014 presented as a proposal, not a closed definition | report \u00a71, \u00a72, \u00a77; module docstring and record texts; README, CLAUDE |\\n| **D2** | GH-F2 | Seed-indexed void accounting H-A9 with the scale-separation condition declared; the material-domain extension below the super-cell scale is not proved | report \u00a71, \u00a73.1\u20133.2; module; README, CLAUDE |\\n| **D3** | GH-F5 | The Gaussian pair is requalified as a signed-carrier surrogate and its mechanism corrected; nonnegative lognormal pairs with the same shared constraints are added | report \u00a71, \u00a76.3; evidence script; tests |\\n| **D4** | GH-F6 | Direct values primary; post-hoc (fixed-closure) normalisation and PBS reclosure under a rescaled input spectrum reported beside them; the post-hoc scaling of the interval withdrawn | report \u00a75.1\u20135.5; evidence script; inventory |\","
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_evidence/documentation_lexicon_classification.json",
+      "line": 481,
+      "classification": "HISTORICAL_WITH_GH_DF1_POINTER",
+      "text": "    \"text\": \"| **D3** | GH-F5 | The Gaussian pair is requalified as a signed-carrier surrogate and its mechanism corrected; nonnegative lognormal pairs with the same shared constraints are added | report \u00a71, \u00a76.3; evidence script; tests |\","
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_evidence/documentation_lexicon_classification.json",
+      "line": 482,
+      "classification": "HISTORICAL_WITH_GH_DF1_POINTER",
+      "text": "    \"context\": \"|---|---|---|---|\\n| **D1** | GH-F1 | The statistic is the *formal tangent statistic* \u2014 the early Gaussian field propagated with the zero-amplitude tangent of the regional contrast map, smoothing rule `G_R = G W(kR)`, the analogue of \u039bCDM's linear \u03c38 \u2014 presented as a proposal, not a closed definition | report \u00a71, \u00a72, \u00a77; module docstring and record texts; README, CLAUDE |\\n| **D2** | GH-F2 | Seed-indexed void accounting H-A9 with the scale-separation condition declared; the material-domain extension below the super-cell scale is not proved | report \u00a71, \u00a73.1\u20133.2; module; README, CLAUDE |\\n| **D3** | GH-F5 | The Gaussian pair is requalified as a signed-carrier surrogate and its mechanism corrected; nonnegative lognormal pairs with the same shared constraints are added | report \u00a71, \u00a76.3; evidence script; tests |\\n| **D4** | GH-F6 | Direct values primary; post-hoc (fixed-closure) normalisation and PBS reclosure under a rescaled input spectrum reported beside them; the post-hoc scaling of the interval withdrawn | report \u00a75.1\u20135.5; evidence script; inventory |\\n\\n## 2. Finding-by-finding resolution\","
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_evidence/documentation_lexicon_classification.json",
+      "line": 493,
+      "classification": "HISTORICAL_WITH_GH_DF1_POINTER",
+      "text": "    \"context\": \"| **D1** | GH-F1 | The statistic is the *formal tangent statistic* \u2014 the early Gaussian field propagated with the zero-amplitude tangent of the regional contrast map, smoothing rule `G_R = G W(kR)`, the analogue of \u039bCDM's linear \u03c38 \u2014 presented as a proposal, not a closed definition | report \u00a71, \u00a72, \u00a77; module docstring and record texts; README, CLAUDE |\\n| **D2** | GH-F2 | Seed-indexed void accounting H-A9 with the scale-separation condition declared; the material-domain extension below the super-cell scale is not proved | report \u00a71, \u00a73.1\u20133.2; module; README, CLAUDE |\\n| **D3** | GH-F5 | The Gaussian pair is requalified as a signed-carrier surrogate and its mechanism corrected; nonnegative lognormal pairs with the same shared constraints are added | report \u00a71, \u00a76.3; evidence script; tests |\\n| **D4** | GH-F6 | Direct values primary; post-hoc (fixed-closure) normalisation and PBS reclosure under a rescaled input spectrum reported beside them; the post-hoc scaling of the interval withdrawn | report \u00a75.1\u20135.5; evidence script; inventory |\\n\\n## 2. Finding-by-finding resolution\\n\","
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_evidence/documentation_lexicon_classification.json",
+      "line": 2352,
+      "classification": "HISTORICAL_WITH_GH_DF1_POINTER",
+      "text": "    \"context\": \"    \\\"kind\\\": \\\"INDEPENDENT_AUDIT_REMEDIATION\\\",\\n    \\\"owner_approval_verbatim\\\": \\\"Procedi, usa le scelte raccomandate per i punti 1-4\\\",\\n    \\\"owner_decisions\\\": {\\n      \\\"D1\\\": \\\"GH-F1: the statistic is the formal tangent statistic (linear extrapolation of the early field with the zero-amplitude tangent propagator and the smoothing rule G_R = G W), presented as a proposal, not a closed definition\\\",\\n      \\\"D2\\\": \\\"GH-F2: seed-indexed void accounting H-A9 with the scale-separation condition declared; the material-domain extension below the super-cell scale is not proved\\\",\\n      \\\"D3\\\": \\\"GH-F5: the Gaussian pair requalified as a signed-carrier surrogate and its mechanism corrected; nonnegative lognormal pairs with the same shared constraints added\\\",\\n      \\\"D4\\\": \\\"GH-F6: direct values primary; post-hoc fixed-closure normalisation and PBS reclosure under a rescaled input spectrum reported beside them\\\"\","
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_evidence/documentation_lexicon_classification.json",
+      "line": 2362,
+      "classification": "HISTORICAL_WITH_GH_DF1_POINTER",
+      "text": "    \"text\": \"      \\\"D3\\\": \\\"GH-F5: the Gaussian pair requalified as a signed-carrier surrogate and its mechanism corrected; nonnegative lognormal pairs with the same shared constraints added\\\",\","
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_evidence/documentation_lexicon_classification.json",
+      "line": 2363,
+      "classification": "HISTORICAL_WITH_GH_DF1_POINTER",
+      "text": "    \"context\": \"    \\\"owner_decisions\\\": {\\n      \\\"D1\\\": \\\"GH-F1: the statistic is the formal tangent statistic (linear extrapolation of the early field with the zero-amplitude tangent propagator and the smoothing rule G_R = G W), presented as a proposal, not a closed definition\\\",\\n      \\\"D2\\\": \\\"GH-F2: seed-indexed void accounting H-A9 with the scale-separation condition declared; the material-domain extension below the super-cell scale is not proved\\\",\\n      \\\"D3\\\": \\\"GH-F5: the Gaussian pair requalified as a signed-carrier surrogate and its mechanism corrected; nonnegative lognormal pairs with the same shared constraints added\\\",\\n      \\\"D4\\\": \\\"GH-F6: direct values primary; post-hoc fixed-closure normalisation and PBS reclosure under a rescaled input spectrum reported beside them\\\"\\n    },\\n    \\\"remediation_record\\\": \\\"reports/phase1g_h_audit_remediation.md\\\"\","
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_evidence/documentation_lexicon_classification.json",
+      "line": 2374,
+      "classification": "HISTORICAL_WITH_GH_DF1_POINTER",
+      "text": "    \"context\": \"      \\\"D1\\\": \\\"GH-F1: the statistic is the formal tangent statistic (linear extrapolation of the early field with the zero-amplitude tangent propagator and the smoothing rule G_R = G W), presented as a proposal, not a closed definition\\\",\\n      \\\"D2\\\": \\\"GH-F2: seed-indexed void accounting H-A9 with the scale-separation condition declared; the material-domain extension below the super-cell scale is not proved\\\",\\n      \\\"D3\\\": \\\"GH-F5: the Gaussian pair requalified as a signed-carrier surrogate and its mechanism corrected; nonnegative lognormal pairs with the same shared constraints added\\\",\\n      \\\"D4\\\": \\\"GH-F6: direct values primary; post-hoc fixed-closure normalisation and PBS reclosure under a rescaled input spectrum reported beside them\\\"\\n    },\\n    \\\"remediation_record\\\": \\\"reports/phase1g_h_audit_remediation.md\\\"\\n  },\","
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_evidence/documentation_lexicon_classification.json",
+      "line": 2417,
+      "classification": "HISTORICAL_WITH_GH_DF1_POINTER",
+      "text": "    \"text\": \"        \\\"nonnegative lognormal pairs (r_s = 1, 2, 4 Mpc) with the same shared constraints; linear limit gated\\\",\","
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_evidence/documentation_lexicon_classification.json",
+      "line": 2418,
+      "classification": "HISTORICAL_WITH_GH_DF1_POINTER",
+      "text": "    \"context\": \"    {\\n      \\\"actions\\\": [\\n        \\\"signed pair requalified, negative-density probabilities reported, mechanism corrected\\\",\\n        \\\"nonnegative lognormal pairs (r_s = 1, 2, 4 Mpc) with the same shared constraints; linear limit gated\\\",\\n        \\\"lognormal kernels tested by 4-variate Monte Carlo\\\"\\n      ],\\n      \\\"audit_resolution_class\\\": \\\"OWNER_DECISION\\\",\","
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_remediation.md",
+      "line": 22,
+      "classification": "HISTORICAL_WITH_STATUS_NOTE",
+      "text": "\"Nothing is pushed\" (Sec. 0) and the push item of Sec. 4 are superseded"
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_remediation.md",
+      "line": 70,
+      "classification": "HISTORICAL_WITH_STATUS_NOTE",
+      "text": "  Nothing is pushed."
+    },
+    {
+      "path": "reports/phase1g_h_delta_audit_remediation.md",
+      "line": 184,
+      "classification": "HISTORICAL_PRIOR_REMEDIATION_TEST_COUNT",
+      "text": "  moved to the new function: 21 are killed by the 42 phase tests. N5 (the"
+    },
+    {
+      "path": "reports/phase1g_h_global_variance_closure.md",
+      "line": 13,
+      "classification": "RESIDUE_P11_REMOTE_HEAD",
+      "text": "not merged into `main`. Its remote head is `4bf2718` (2026-10-09, P10),"
+    },
+    {
+      "path": "reports/phase1g_h_global_variance_closure_inventory.json",
+      "line": 1805,
+      "classification": "HISTORICAL_WITH_GH_DF1_POINTER",
+      "text": "    \"historical\": \"2026-10-07 block, not rewritten; D3's 'same shared constraints' is narrowed by GH-DF1 (the pairs share the latent carrier law, not the conditionally normalised wall density): see revision_delta_audit and reports/phase1g_h_delta_audit_2_remediation.md (GH-D2F5)\","
+    },
+    {
+      "path": "reports/phase1g_h_global_variance_closure_inventory.json",
+      "line": 1811,
+      "classification": "HISTORICAL_WITH_GH_DF1_POINTER",
+      "text": "      \"D3\": \"GH-F5: the Gaussian pair requalified as a signed-carrier surrogate and its mechanism corrected; nonnegative lognormal pairs with the same shared constraints added\","
+    },
+    {
+      "path": "reports/phase1g_h_publication_successor.md",
+      "line": 20,
+      "classification": "DATED_STATE_OR_LITERAL_QUOTATION",
+      "text": "their wording: \"Nothing is pushed\", `\"pushed\": false` and \"remediated"
+    },
+    {
+      "path": "reports/phase1g_h_publication_successor.md",
+      "line": 66,
+      "classification": "DATED_STATE_OR_LITERAL_QUOTATION",
+      "text": "| \"Commits (local, on `ccr-555e67be-u11yht` on top of the audit commit `816dd00`) \u2026 Nothing is pushed.\" | `phase1g_h_audit_remediation.md` \u00a70 | 2026-10-07 | Pushed by P5 (2026-10-08). |"
+    },
+    {
+      "path": "reports/phase1g_h_publication_successor.md",
+      "line": 69,
+      "classification": "DATED_STATE_OR_LITERAL_QUOTATION",
+      "text": "| \"remediated locally the same day\" / \"remediated locally on top of it\" | README.md, CLAUDE.md (1G-H entries at `89cb041`) | 2026-10-07 | Pushed by P5; both files are updated with this record. |"
+    },
+    {
+      "path": "reports/phase1g_h_publication_successor.md",
+      "line": 70,
+      "classification": "DATED_STATE_OR_LITERAL_QUOTATION",
+      "text": "| \"Nothing is pushed\" of the delta-audit remediation | `phase1g_h_delta_audit_remediation.md` and its inventory | 2026-10-08 | Dated; a later record states its push, if approved. |"
+    },
+    {
+      "path": "reports/phase1g_h_publication_successor.md",
+      "line": 122,
+      "classification": "DATED_STATE_OR_LITERAL_QUOTATION",
+      "text": "| \"Commits (local, on `ccr-555e67be-u11yht` on top of the delta-audit commit `5c325e1`) \u2026 Nothing is pushed.\" and \"Push of the two commits of this remediation (needs a separate approval)\" | `phase1g_h_delta_audit_remediation.md` \u00a70 and \u00a74 | 2026-10-08 | Pushed by P7; a dated note there points here. |"
+    },
+    {
+      "path": "reports/phase1g_h_publication_successor.md",
+      "line": 128,
+      "classification": "DATED_STATE_OR_LITERAL_QUOTATION",
+      "text": "| \"delta-audited on 2026-10-08 and remediated locally\" | README.md | 2026-10-08 | Updated with this addendum. |"
+    },
+    {
+      "path": "reports/phase1g_h_publication_successor.md",
+      "line": 129,
+      "classification": "DATED_STATE_OR_LITERAL_QUOTATION",
+      "text": "| \"(at `89cb041`\u2026)\"; \"remediated locally on top of it\" | CLAUDE.md | 2026-10-08 | Updated with this addendum. |"
+    },
+    {
+      "path": "reports/phase1g_h_publication_successor.md",
+      "line": 146,
+      "classification": "DATED_STATE_OR_LITERAL_QUOTATION",
+      "text": "| P10 | 2026-10-09 | Fast-forward of `ccr-555e67be-u11yht` from `226e52d` to `4bf2718e7557ace3fdc0abffaa73587f1162f776`, carrying `6411650` and `e517028` (the second delta audit) and `9ad5425` (code) and `4bf2718` (documentation) of the second delta-audit remediation | push output `226e52d..4bf2718`; branch head `4bf2718` (the remote head was `226e52d` immediately before) | \u00abS\u00ec, fai push\u00bb |"
+    },
+    {
+      "path": "reports/phase1g_h_publication_successor.md",
+      "line": 166,
+      "classification": "DATED_STATE_OR_LITERAL_QUOTATION",
+      "text": "| \"Nothing is pushed: the push of `6411650`, `e517028` and these two commits needs a separate approval.\" and \"**Push** of `6411650`, `e517028` and the two commits of this remediation (needs a separate approval; \u2026)\" | `phase1g_h_delta_audit_2_remediation.md` \u00a70 and \u00a74 | 2026-10-08 | Pushed by P10; a dated note there points here. |"
+    },
+    {
+      "path": "reports/phase1g_h_publication_successor.md",
+      "line": 168,
+      "classification": "DATED_STATE_OR_LITERAL_QUOTATION",
+      "text": "| \"The local branch carries, not pushed, `6411650` and `e517028` \u2026 their push needs a separate approval.\" | this record, Sec. 6.2, and its inventory `addendum_2026_10_08_after_second_delta_audit.state_after_p9` | 2026-10-08 | Superseded by Sec. 7.2. |"
+    },
+    {
+      "path": "reports/phase1g_h_publication_successor.md",
+      "line": 169,
+      "classification": "DATED_STATE_OR_LITERAL_QUOTATION",
+      "text": "| \"Its remote head is `226e52d` \u2026; the second delta audit \u2026 and its remediation are on the local branch and not pushed\"; H-OD5 \"Its remediation is committed locally on top of it\" and \"Open: the push of the second delta audit and its remediation\" | `phase1g_h_global_variance_closure.md` header and \u00a79 | 2026-10-08 | Updated in place with this addendum. |"
+    },
+    {
+      "path": "reports/phase1g_h_publication_successor.md",
+      "line": 171,
+      "classification": "DATED_STATE_OR_LITERAL_QUOTATION",
+      "text": "| \"remote head `226e52d`\"; \"which are applied locally and not pushed\" | README.md | 2026-10-08 | Updated with this addendum. |"
+    },
+    {
+      "path": "reports/phase1g_h_publication_successor.md",
+      "line": 172,
+      "classification": "DATED_STATE_OR_LITERAL_QUOTATION",
+      "text": "| \"(remote head `226e52d`; \u2026 events P1\u2013P9)\"; \"remediated locally on top of it (\u2026, not pushed)\"; \"(2026-10-06 and 2026-10-08)\" | CLAUDE.md | 2026-10-08 | Updated with this addendum. |"
+    },
+    {
+      "path": "reports/phase1g_h_publication_successor_inventory.json",
+      "line": 8,
+      "classification": "DATED_STATE_OR_LITERAL_QUOTATION",
+      "text": "        \"statement\": \"Commits (local, on ccr-555e67be-u11yht on top of the delta-audit commit 5c325e1) ... Nothing is pushed. / Push of the two commits of this remediation (needs a separate approval)\","
+    },
+    {
+      "path": "reports/phase1g_h_publication_successor_inventory.json",
+      "line": 20,
+      "classification": "DATED_STATE_OR_LITERAL_QUOTATION",
+      "text": "        \"statement\": \"ccr-555e67be-u11yht = 89cb041 ... is not pushed\","
+    },
+    {
+      "path": "reports/phase1g_h_publication_successor_inventory.json",
+      "line": 44,
+      "classification": "DATED_STATE_OR_LITERAL_QUOTATION",
+      "text": "        \"statement\": \"delta-audited on 2026-10-08 and remediated locally\","
+    },
+    {
+      "path": "reports/phase1g_h_publication_successor_inventory.json",
+      "line": 50,
+      "classification": "DATED_STATE_OR_LITERAL_QUOTATION",
+      "text": "        \"statement\": \"at 89cb041; remediated locally on top of it\","
+    },
+    {
+      "path": "reports/phase1g_h_publication_successor_inventory.json",
+      "line": 86,
+      "classification": "DATED_STATE_OR_LITERAL_QUOTATION",
+      "text": "      \"ccr-555e67be-u11yht\": \"226e52d2e4157d0130b2a9dfaffd71834c6017d9 on origin; the local branch carries, not pushed, 6411650 and e517028 (second delta audit) and the second delta-audit remediation commits\","
+    },
+    {
+      "path": "reports/phase1g_h_publication_successor_inventory.json",
+      "line": 103,
+      "classification": "DATED_STATE_OR_LITERAL_QUOTATION",
+      "text": "        \"statement\": \"Nothing is pushed: the push of 6411650, e517028 and these two commits needs a separate approval. / Push of 6411650, e517028 and the two commits of this remediation (needs a separate approval; ...)\","
+    },
+    {
+      "path": "reports/phase1g_h_publication_successor_inventory.json",
+      "line": 115,
+      "classification": "DATED_STATE_OR_LITERAL_QUOTATION",
+      "text": "        \"statement\": \"The local branch carries, not pushed, 6411650 and e517028 ... their push needs a separate approval.\","
+    },
+    {
+      "path": "reports/phase1g_h_publication_successor_inventory.json",
+      "line": 121,
+      "classification": "DATED_STATE_OR_LITERAL_QUOTATION",
+      "text": "        \"statement\": \"Its remote head is 226e52d ...; the second delta audit ... and its remediation are on the local branch and not pushed / H-OD5: Its remediation is committed locally on top of it; Open: the push of the second delta audit and its remediation\","
+    },
+    {
+      "path": "reports/phase1g_h_publication_successor_inventory.json",
+      "line": 133,
+      "classification": "DATED_STATE_OR_LITERAL_QUOTATION",
+      "text": "        \"statement\": \"remote head 226e52d; which are applied locally and not pushed\","
+    },
+    {
+      "path": "reports/phase1g_h_publication_successor_inventory.json",
+      "line": 139,
+      "classification": "DATED_STATE_OR_LITERAL_QUOTATION",
+      "text": "        \"statement\": \"(remote head 226e52d; ... events P1-P9); remediated locally on top of it (..., not pushed); (2026-10-06 and 2026-10-08)\","
+    },
+    {
+      "path": "reports/phase1g_h_publication_successor_inventory.json",
+      "line": 179,
+      "classification": "DATED_STATE_OR_LITERAL_QUOTATION",
+      "text": "      \"statement\": \"Commits (local, on ccr-555e67be-u11yht on top of the audit commit 816dd00) ... Nothing is pushed.\","
+    },
+    {
+      "path": "reports/phase1g_h_publication_successor_inventory.json",
+      "line": 197,
+      "classification": "DATED_STATE_OR_LITERAL_QUOTATION",
+      "text": "      \"statement\": \"remediated locally the same day / remediated locally on top of it\","
+    },
+    {
+      "path": "reports/phase1g_h_publication_successor_inventory.json",
+      "line": 203,
+      "classification": "DATED_STATE_OR_LITERAL_QUOTATION",
+      "text": "      \"statement\": \"nothing is pushed (delta-audit remediation)\","
+    },
+    {
+      "path": "reports/phase1g_h_publication_successor_inventory.json",
+      "line": 279,
+      "classification": "DATED_STATE_OR_LITERAL_QUOTATION",
+      "text": "    \"ccr-555e67be-u11yht\": \"89cb041f901b51a3f90fa6831aab1b4553c1772c (the delta-audit remediation is committed locally on top of 5c325e1 and not pushed)\","
+    }
+  ],
+  "previous_findings_recorded_status": {
+    "original_finding_status": {
+      "GH-F1": "RESOLVED_BY_OWNER_DECISION",
+      "GH-F2": "RESOLVED_BY_OWNER_DECISION",
+      "GH-F3": "RESOLVED",
+      "GH-F4": "RESOLVED",
+      "GH-F5": "RESOLVED",
+      "GH-F6": "RESOLVED",
+      "GH-F7": "RESOLVED",
+      "GH-F8": "RESOLVED",
+      "GH-F9": "RESOLVED",
+      "GH-F10": "RESOLVED",
+      "GH-F11": "RESOLVED",
+      "GH-F12": "RESOLVED",
+      "GH-F13": "RESOLVED",
+      "GH-F14": "RESOLVED",
+      "GH-F15": "RESOLVED_OWNER_CONFIRMED"
+    },
+    "delta_finding_status": null
+  },
+  "source_sha256": {
+    "AGENTS.md": "881050c02635ab9003b494305b3fcf43360815defb32174604b67daa6fd77ecc",
+    "CLAUDE.md": "d21742fe902f5f4222244f014c5660c2b28c85be2fdbb4d82a89241bf0da246f",
+    "README.md": "91f313b5f0445764ae489b9ffb52ad93379996ccd8e903ec3d47eb4c4251ed7c",
+    "reports/phase1g_h_audit_remediation.md": "1c3e8a235ec6faec4a26eac11037941b8d4d1891d47c3244c272ac8ac3385249",
+    "reports/phase1g_h_audit_remediation_inventory.json": "cfd2e9054eb8c21f6c8e0d893f46c22a986c2788c73b500f48f154749933c200",
+    "reports/phase1g_h_delta_audit_2_remediation.md": "4e7fea176cba4fac79a31d16dfbe02b03ff4c9b515eac54ab252415c55f480da",
+    "reports/phase1g_h_delta_audit_2_remediation_inventory.json": "5370bfb03632b87ec77e02552b8d773f1a05d7432ff6f5ffc3dd3b02ff168d81",
+    "reports/phase1g_h_delta_audit_2_remediation_logs/compare_evidence.py": "70be973b4295d94eac4722afb84c515410ccb9f2c582b8d80d88cef443cf34ee",
+    "reports/phase1g_h_delta_audit_2_remediation_logs/cross_interpreter_313_vs_311.json": "91dead9f02746c05519dc8f36b3afeb420a851ce32e3169043800ba15012f679",
+    "reports/phase1g_h_delta_audit_2_remediation_logs/evidence_head.txt": "a98988b1f3988f49402e43fa256fd75908220ffcb4db5dd9ca8f162b6205b4f1",
+    "reports/phase1g_h_delta_audit_2_remediation_logs/evidence_py311.log": "6005962ebdce10eadfb4ec7ebe9e5a7fda0309cf950940f8ccf082bb6900e86b",
+    "reports/phase1g_h_delta_audit_2_remediation_logs/evidence_py313.log": "41f3d7a8f656b576ffe1bfb397f405a24374d055a6f7206e473d0809f1246b93",
+    "reports/phase1g_h_delta_audit_2_remediation_logs/extra_mutants_definitions.json": "48df1bac0652bfab469ec5acab12ab97b8dc07dbd03c4bff4362e59726f86e20",
+    "reports/phase1g_h_delta_audit_2_remediation_logs/extra_mutants_results.json": "6f591d119ac3d0b9771244efb45609594a8d4bf2ec200e73fb3fe0af188a306e",
+    "reports/phase1g_h_delta_audit_2_remediation_logs/full_suite_py311.log": "d20d78d76e3725892d4580b825cacf9499e7d200cd58a3abd7b5cfe4c14a14a8",
+    "reports/phase1g_h_delta_audit_2_remediation_logs/full_suite_py313.log": "495e9662c6153346173757c5125cfeaa794c0b7563812454326ec62d9ae404b2",
+    "reports/phase1g_h_delta_audit_2_remediation_logs/make_campaign.py": "89fbab46c801e1aaff6568902cb23558a1ff51e6be6609b0f28f11ce557bdc70",
+    "reports/phase1g_h_delta_audit_2_remediation_logs/mutation_campaign.log": "ecefcae9f2ea7c17540094c7d3c5350982f787c0ccc4409426c772259b184979",
+    "reports/phase1g_h_delta_audit_2_remediation_logs/regression_count.py": "cadb6f9b8a3cdb1f2f02795084406c5319058644f1e34e21b48459be2bebd867",
+    "reports/phase1g_h_delta_audit_2_remediation_logs/regression_recount_89cb041_vs_248a06b.json": "0d33e7cef0b0e779034026c8e85b4c74d01acd600a8420a9b620c2504ffdfd3f",
+    "reports/phase1g_h_delta_audit_2_remediation_logs/regression_vs_248a06b.json": "42931ec9674733e9e9bc5ad3b120717736b856f21e42abeeef2797b16bea312a",
+    "reports/phase1g_h_delta_audit_2_remediation_logs/round3_mutant_definitions.json": "f684d6a5f75b28709da8ecffddf13cc280e134030d78f38a47a8546888167316",
+    "reports/phase1g_h_delta_audit_2_remediation_logs/run_extra_mutants.py": "a7ec7078f79142357552375dd98bfa821fe28ccef0d5d4aae88e3da39b6d8a9f",
+    "reports/phase1g_h_delta_audit_2_remediation_logs/second_delta_audit_mutants_rerun.json": "da49766795acd39c4d25683007d92f14e2f803d9a8dc1632dd4a38e2a74fcb86",
+    "reports/phase1g_h_delta_audit_2_remediation_logs/tolerance_audit.log": "d29ee4442f202a3572834dc6365869d123ad73159b35e6f0492fcf13cf18ed6d",
+    "reports/phase1g_h_delta_audit_remediation.md": "e90ec0cc03db2d8906db10b9f8446ab72d8a07f03ec44a4ea604ee212263b24e",
+    "reports/phase1g_h_delta_audit_remediation_inventory.json": "e05bd778843651d65416b21bf827c554202ea96ef28e5a5609ecd3f29eaa8324",
+    "reports/phase1g_h_global_variance_closure.md": "42d4de69a1edaa93aee6ff77137b322ac407aa78588f0520c70749d2dae8fb15",
+    "reports/phase1g_h_global_variance_closure_inventory.json": "91497530dd0e8fd0e9572441c3e2f175aea2d320afee48bb9b8e50e9a4132844",
+    "reports/phase1g_h_global_variance_closure_validation.md": "09fb8f6fde841fe9addfb29bfac3f96ffeadb37659c70f5f50d56faf98f1abd4",
+    "reports/phase1g_h_publication_successor.md": "1fe624ddd39a7d9b297cf72c226c6b92a8aa8d0fc8fc3555eae35ac7f1924e45",
+    "reports/phase1g_h_publication_successor_inventory.json": "a18a89e0215bda56e3f090155c3c9eba8989d46bc8cfd2403e097460691facef",
+    "scripts/phase1g_h_global_variance_closure_numerics.py": "c16418d3041e6bec6b2e09bf46ef73402e01af23ed7e7df4136831980c744c1c",
+    "src/timescape_fsigma8/global_variance.py": "9147e3e4fee0a354b1a1a4257752ee84b6b945cf33d379d750ddc35f2dfbb1b2",
+    "tests/test_phase1g_h_global_variance.py": "9841173e7ad5fb925184e4f5a62a1fd9e919201fbb756b10923a722cf682a35e",
+    "reports/phase1g_h_delta_audit_2.md": "aeae373b6b8fbc2989db35fba6130a1b7133ec65e4af71914b873a24777c0c40",
+    "reports/phase1g_h_delta_audit_2_inventory.json": "ce8b3b527c3bd9cf573a4e67e771430a6efa3f4d254249cdb602231b6598cc5f",
+    "reports/phase1g_h_delta_audit.md": "f52a1d720369b479e9ea380d1ef64d1c94dc59af527fecc679f9149cd1f51b5c",
+    "reports/phase1g_h_delta_audit_inventory.json": "d1b786c23d5993be7043f711c2177dd33875d017a718ae5ee64ea472b4f14f66",
+    "reports/phase1g_h_independent_audit.md": "6ab367ee1a6772df3ee4ceb4291e5fa6cf99a6d7112dadf96cb18c550e05d7af",
+    "reports/phase1g_h_independent_audit_inventory.json": "563f1b855e4c9d1c2a31134685b417872701e12daae7aadedcaa9258d34a6ead",
+    "src/timescape_fsigma8/scientific_status.py": "34738e8d22ee7ff4907762cff1fefe02de5792354665a96a0a4c79bf3c74d258",
+    "src/timescape_fsigma8/lagrangian_sigma.py": "d604108b1f070928eb8b21c1e84af8b13144f914fb21892467f200d78f14a46b"
+  }
+}

@@ -1,0 +1,274 @@
+[
+  {
+    "document": "README.md",
+    "label": "PAPER_REFERENCE wall_share_growth",
+    "declared": 0.231,
+    "audit_value": 0.23061457227250548,
+    "tolerance_absolute": 0.0005,
+    "status": "VERIFIED"
+  },
+  {
+    "document": "README.md",
+    "label": "PAPER_REFERENCE void_share_growth",
+    "declared": 7.13,
+    "audit_value": 7.132537333227989,
+    "tolerance_absolute": 0.005,
+    "status": "VERIFIED"
+  },
+  {
+    "document": "README.md",
+    "label": "PAPER_REFERENCE W09 rms",
+    "declared": 1.121,
+    "audit_value": 1.1213626602034692,
+    "tolerance_absolute": 0.0005,
+    "status": "VERIFIED"
+  },
+  {
+    "document": "README.md",
+    "label": "PAPER_REFERENCE F median rms",
+    "declared": 0.811,
+    "audit_value": 0.810772266865035,
+    "tolerance_absolute": 0.0005,
+    "status": "VERIFIED"
+  },
+  {
+    "document": "README.md",
+    "label": "PAPER_REFERENCE constant-share lower",
+    "declared": 0.26,
+    "audit_value": 0.2608656251274673,
+    "tolerance_absolute": 0.005,
+    "status": "VERIFIED"
+  },
+  {
+    "document": "README.md",
+    "label": "PAPER_REFERENCE constant-share upper",
+    "declared": 1.0,
+    "audit_value": 0.9982675559021565,
+    "tolerance_absolute": 0.005,
+    "status": "VERIFIED"
+  },
+  {
+    "document": "README.md",
+    "label": "NW15_CMB_FIT wall_share_growth",
+    "declared": 0.353,
+    "audit_value": 0.3526903268985125,
+    "tolerance_absolute": 0.0005,
+    "status": "VERIFIED"
+  },
+  {
+    "document": "README.md",
+    "label": "NW15_CMB_FIT void_share_growth",
+    "declared": 11.3,
+    "audit_value": 11.327583314531257,
+    "tolerance_absolute": 0.05,
+    "status": "VERIFIED"
+  },
+  {
+    "document": "README.md",
+    "label": "NW15_CMB_FIT W09 rms",
+    "declared": 1.057,
+    "audit_value": 1.0566325994707644,
+    "tolerance_absolute": 0.0005,
+    "status": "VERIFIED"
+  },
+  {
+    "document": "README.md",
+    "label": "NW15_CMB_FIT F median rms",
+    "declared": 0.816,
+    "audit_value": 0.8160588130081785,
+    "tolerance_absolute": 0.0005,
+    "status": "VERIFIED"
+  },
+  {
+    "document": "README.md",
+    "label": "NW15_CMB_FIT constant-share lower",
+    "declared": 0.37,
+    "audit_value": 0.36885943313006087,
+    "tolerance_absolute": 0.005,
+    "status": "VERIFIED"
+  },
+  {
+    "document": "README.md",
+    "label": "NW15_CMB_FIT constant-share upper",
+    "declared": 1.16,
+    "audit_value": 1.161784484340578,
+    "tolerance_absolute": 0.005,
+    "status": "VERIFIED"
+  },
+  {
+    "document": "README.md",
+    "label": "GM signed I_independent total",
+    "declared": 0.97,
+    "audit_value": 0.971082378991309,
+    "tolerance_absolute": 0.005,
+    "status": "VERIFIED"
+  },
+  {
+    "document": "README.md",
+    "label": "GM signed II_same_field total",
+    "declared": 0.39,
+    "audit_value": 0.3928455627284852,
+    "tolerance_absolute": 0.005,
+    "status": "VERIFIED"
+  },
+  {
+    "document": "CLAUDE.md",
+    "label": "PAPER_REFERENCE wall_share_growth",
+    "declared": 0.2306,
+    "audit_value": 0.23061457227250548,
+    "tolerance_absolute": 5e-05,
+    "status": "VERIFIED"
+  },
+  {
+    "document": "CLAUDE.md",
+    "label": "PAPER_REFERENCE void_share_growth",
+    "declared": 7.133,
+    "audit_value": 7.132537333227989,
+    "tolerance_absolute": 0.0005,
+    "status": "VERIFIED"
+  },
+  {
+    "document": "CLAUDE.md",
+    "label": "PAPER_REFERENCE W09 rms",
+    "declared": 1.121,
+    "audit_value": 1.1213626602034692,
+    "tolerance_absolute": 0.0005,
+    "status": "VERIFIED"
+  },
+  {
+    "document": "CLAUDE.md",
+    "label": "PAPER_REFERENCE F median rms",
+    "declared": 0.811,
+    "audit_value": 0.810772266865035,
+    "tolerance_absolute": 0.0005,
+    "status": "VERIFIED"
+  },
+  {
+    "document": "CLAUDE.md",
+    "label": "PAPER_REFERENCE constant-share lower",
+    "declared": 0.261,
+    "audit_value": 0.2608656251274673,
+    "tolerance_absolute": 0.0005,
+    "status": "VERIFIED"
+  },
+  {
+    "document": "CLAUDE.md",
+    "label": "PAPER_REFERENCE constant-share upper",
+    "declared": 0.998,
+    "audit_value": 0.9982675559021565,
+    "tolerance_absolute": 0.0005,
+    "status": "VERIFIED"
+  },
+  {
+    "document": "CLAUDE.md",
+    "label": "NW15_CMB_FIT wall_share_growth",
+    "declared": 0.3527,
+    "audit_value": 0.3526903268985125,
+    "tolerance_absolute": 5e-05,
+    "status": "VERIFIED"
+  },
+  {
+    "document": "CLAUDE.md",
+    "label": "NW15_CMB_FIT void_share_growth",
+    "declared": 11.33,
+    "audit_value": 11.327583314531257,
+    "tolerance_absolute": 0.005,
+    "status": "VERIFIED"
+  },
+  {
+    "document": "CLAUDE.md",
+    "label": "NW15_CMB_FIT W09 rms",
+    "declared": 1.057,
+    "audit_value": 1.0566325994707644,
+    "tolerance_absolute": 0.0005,
+    "status": "VERIFIED"
+  },
+  {
+    "document": "CLAUDE.md",
+    "label": "NW15_CMB_FIT F median rms",
+    "declared": 0.816,
+    "audit_value": 0.8160588130081785,
+    "tolerance_absolute": 0.0005,
+    "status": "VERIFIED"
+  },
+  {
+    "document": "CLAUDE.md",
+    "label": "NW15_CMB_FIT constant-share lower",
+    "declared": 0.369,
+    "audit_value": 0.36885943313006087,
+    "tolerance_absolute": 0.0005,
+    "status": "VERIFIED"
+  },
+  {
+    "document": "CLAUDE.md",
+    "label": "NW15_CMB_FIT constant-share upper",
+    "declared": 1.162,
+    "audit_value": 1.161784484340578,
+    "tolerance_absolute": 0.0005,
+    "status": "VERIFIED"
+  },
+  {
+    "document": "CLAUDE.md",
+    "label": "GM signed I_independent total",
+    "declared": 0.97,
+    "audit_value": 0.971082378991309,
+    "tolerance_absolute": 0.005,
+    "status": "VERIFIED"
+  },
+  {
+    "document": "CLAUDE.md",
+    "label": "GM signed II_same_field total",
+    "declared": 0.39,
+    "audit_value": 0.3928455627284852,
+    "tolerance_absolute": 0.005,
+    "status": "VERIFIED"
+  },
+  {
+    "document": "CLAUDE.md",
+    "label": "PAPER_REFERENCE F_median_ratio",
+    "declared": 0.33,
+    "audit_value": 0.3258648692543616,
+    "tolerance_absolute": 0.005,
+    "status": "VERIFIED"
+  },
+  {
+    "document": "CLAUDE.md",
+    "label": "PAPER_REFERENCE W09_15_ratio",
+    "declared": 1.49,
+    "audit_value": 1.485416971794336,
+    "tolerance_absolute": 0.005,
+    "status": "VERIFIED"
+  },
+  {
+    "document": "CLAUDE.md",
+    "label": "PAPER_REFERENCE flat-wall capacity h-dressed radius",
+    "declared": 99,
+    "audit_value": 99.01658661034925,
+    "tolerance_absolute": 0.5,
+    "status": "VERIFIED"
+  },
+  {
+    "document": "CLAUDE.md",
+    "label": "NW15_CMB_FIT F_median_ratio",
+    "declared": 0.39,
+    "audit_value": 0.3896728935785067,
+    "tolerance_absolute": 0.005,
+    "status": "VERIFIED"
+  },
+  {
+    "document": "CLAUDE.md",
+    "label": "NW15_CMB_FIT W09_15_ratio",
+    "declared": 1.59,
+    "audit_value": 1.5890353375973219,
+    "tolerance_absolute": 0.005,
+    "status": "VERIFIED"
+  },
+  {
+    "document": "CLAUDE.md",
+    "label": "NW15_CMB_FIT flat-wall capacity h-dressed radius",
+    "declared": 127,
+    "audit_value": 127.36778563469672,
+    "tolerance_absolute": 0.5,
+    "status": "VERIFIED"
+  }
+]

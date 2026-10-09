@@ -1,0 +1,166 @@
+{
+ "results": [
+  {
+   "variant": "baseline",
+   "probes": [
+    {
+     "probe": "eps_rms_relative_delta_1_05e_minus_12",
+     "accepted": false,
+     "exception": "GlobalVarianceContractError",
+     "message": "sigma record: void_volume_response_rms differs from its recomputation from the stored inputs"
+    },
+    {
+     "probe": "linear_sigma_numpy_float64",
+     "accepted": true,
+     "strict_json": true
+    },
+    {
+     "probe": "linear_sigma_float_subclass",
+     "accepted": true,
+     "strict_json": true
+    },
+    {
+     "probe": "zero_diagnostics_numpy_float32",
+     "accepted": false,
+     "exception": "GlobalVarianceContractError",
+     "message": "growth record: diagnostics differs from its recomputation from the stored inputs"
+    },
+    {
+     "probe": "ode_atol_Fraction",
+     "accepted": true,
+     "strict_json": true
+    }
+   ]
+  },
+  {
+   "variant": "B01_record_identity_rtol_10pct_drift",
+   "probes": [
+    {
+     "probe": "eps_rms_relative_delta_1_05e_minus_12",
+     "accepted": true,
+     "strict_json": true
+    },
+    {
+     "probe": "linear_sigma_numpy_float64",
+     "accepted": true,
+     "strict_json": true
+    },
+    {
+     "probe": "linear_sigma_float_subclass",
+     "accepted": true,
+     "strict_json": true
+    },
+    {
+     "probe": "zero_diagnostics_numpy_float32",
+     "accepted": false,
+     "exception": "GlobalVarianceContractError",
+     "message": "growth record: diagnostics differs from its recomputation from the stored inputs"
+    },
+    {
+     "probe": "ode_atol_Fraction",
+     "accepted": true,
+     "strict_json": true
+    }
+   ]
+  },
+  {
+   "variant": "B02_same_rejects_float_subclasses",
+   "probes": [
+    {
+     "probe": "eps_rms_relative_delta_1_05e_minus_12",
+     "accepted": false,
+     "exception": "GlobalVarianceContractError",
+     "message": "sigma record: void_volume_response_rms differs from its recomputation from the stored inputs"
+    },
+    {
+     "probe": "linear_sigma_numpy_float64",
+     "accepted": false,
+     "exception": "GlobalVarianceContractError",
+     "message": "sigma record: linear_sigma differs from its recomputation from the stored inputs"
+    },
+    {
+     "probe": "linear_sigma_float_subclass",
+     "accepted": false,
+     "exception": "GlobalVarianceContractError",
+     "message": "sigma record: linear_sigma differs from its recomputation from the stored inputs"
+    },
+    {
+     "probe": "zero_diagnostics_numpy_float32",
+     "accepted": false,
+     "exception": "GlobalVarianceContractError",
+     "message": "growth record: diagnostics differs from its recomputation from the stored inputs"
+    },
+    {
+     "probe": "ode_atol_Fraction",
+     "accepted": true,
+     "strict_json": true
+    }
+   ]
+  },
+  {
+   "variant": "B03_same_accepts_numpy_float32",
+   "probes": [
+    {
+     "probe": "eps_rms_relative_delta_1_05e_minus_12",
+     "accepted": false,
+     "exception": "GlobalVarianceContractError",
+     "message": "sigma record: void_volume_response_rms differs from its recomputation from the stored inputs"
+    },
+    {
+     "probe": "linear_sigma_numpy_float64",
+     "accepted": true,
+     "strict_json": true
+    },
+    {
+     "probe": "linear_sigma_float_subclass",
+     "accepted": true,
+     "strict_json": true
+    },
+    {
+     "probe": "zero_diagnostics_numpy_float32",
+     "accepted": true,
+     "strict_json": false,
+     "json_error": "TypeError: Object of type float32 is not JSON serializable"
+    },
+    {
+     "probe": "ode_atol_Fraction",
+     "accepted": true,
+     "strict_json": true
+    }
+   ]
+  },
+  {
+   "variant": "B10_one_growth_tolerance_not_converted",
+   "probes": [
+    {
+     "probe": "eps_rms_relative_delta_1_05e_minus_12",
+     "accepted": false,
+     "exception": "GlobalVarianceContractError",
+     "message": "sigma record: void_volume_response_rms differs from its recomputation from the stored inputs"
+    },
+    {
+     "probe": "linear_sigma_numpy_float64",
+     "accepted": true,
+     "strict_json": true
+    },
+    {
+     "probe": "linear_sigma_float_subclass",
+     "accepted": true,
+     "strict_json": true
+    },
+    {
+     "probe": "zero_diagnostics_numpy_float32",
+     "accepted": false,
+     "exception": "GlobalVarianceContractError",
+     "message": "growth record: diagnostics differs from its recomputation from the stored inputs"
+    },
+    {
+     "probe": "ode_atol_Fraction",
+     "accepted": true,
+     "strict_json": false,
+     "json_error": "TypeError: Object of type Fraction is not JSON serializable"
+    }
+   ]
+  }
+ ]
+}

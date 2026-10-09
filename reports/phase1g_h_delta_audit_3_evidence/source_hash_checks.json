@@ -1,0 +1,65 @@
+[
+  {
+    "key": "GM",
+    "version": "2511.17160v2",
+    "url": "https://arxiv.org/src/2511.17160v2",
+    "filename": "main.tex",
+    "cached_sha256": "f9cadfa03ecc9a74b0a8f432ae4b13422daeb219f253756bcd877b4b75077c59",
+    "fresh_sha256": "f9cadfa03ecc9a74b0a8f432ae4b13422daeb219f253756bcd877b4b75077c59",
+    "fresh_download": true
+  },
+  {
+    "key": "W07",
+    "version": "0709.0732v2",
+    "url": "https://arxiv.org/src/0709.0732v2",
+    "filename": "solution.tex",
+    "cached_sha256": "221662c987e454729ef8202c87fa697c5882b5b7daaecdedb50a7cba8ffe6cd8",
+    "fresh_sha256": "221662c987e454729ef8202c87fa697c5882b5b7daaecdedb50a7cba8ffe6cd8",
+    "fresh_download": true,
+    "transport": "single gzip-compressed TeX; hash after decompression"
+  },
+  {
+    "key": "W09",
+    "version": "0909.0749v2",
+    "url": "https://arxiv.org/src/0909.0749v2",
+    "filename": "observe.tex",
+    "cached_sha256": "2b0324d127440e9a053a7cb37102d7655cca228a63cd2222843e879989b4b531",
+    "fresh_sha256": "2b0324d127440e9a053a7cb37102d7655cca228a63cd2222843e879989b4b531",
+    "fresh_download": true
+  },
+  {
+    "key": "NW15",
+    "version": "1410.3470v2",
+    "url": "https://arxiv.org/src/1410.3470v2",
+    "filename": "cmb1.tex",
+    "cached_sha256": "5688c9ac7123a5c2ef3508e39cb3134c2fe9e3d5e56996a4d4a4d101d7b74673",
+    "fresh_sha256": "5688c9ac7123a5c2ef3508e39cb3134c2fe9e3d5e56996a4d4a4d101d7b74673",
+    "fresh_download": true
+  },
+  {
+    "key": "JLH13",
+    "version": "1304.6087v2",
+    "url": "https://arxiv.org/src/1304.6087v2",
+    "filename": "voids_mnras.tex",
+    "cached_sha256": "cf6fc77a31b395138ac3a027d008698556534e81cfb27c39853d3a99c7b07c4e",
+    "fresh_sha256": "cf6fc77a31b395138ac3a027d008698556534e81cfb27c39853d3a99c7b07c4e",
+    "fresh_download": true
+  },
+  {
+    "key": "EH98",
+    "version": "astro-ph/9709112v1",
+    "url": "https://arxiv.org/src/astro-ph/9709112v1",
+    "filename": "trans.tex",
+    "cached_sha256": "5f2ac6b413df8b738c95f6650152b7e82d7c36f6d9b3a618da540e9739dce17f",
+    "fresh_sha256": "5f2ac6b413df8b738c95f6650152b7e82d7c36f6d9b3a618da540e9739dce17f",
+    "fresh_download": true
+  },
+  {
+    "key": "SvdW04",
+    "version": "astro-ph/0311260v1",
+    "url": "https://arxiv.org/src/astro-ph/0311260v1",
+    "filename": null,
+    "fresh_sha256": "4b7ad599f54b3199e0448df1c2eecf4e724401e9ffda7b0f50a3efe7fecdb79b",
+    "fresh_download": true
+  }
+]
