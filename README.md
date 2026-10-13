@@ -33,6 +33,13 @@ conditional results; the next phase toward σ8 is separate, and no
 observational authorization changes. Status sentences in the F/G records
 that predate the freeze are resolved in the
 [freeze-status record](reports/phase1g_fg_freeze_status_successor.md).
+Phase 1G-H, a conditional research statistic with an experimental runtime,
+was merged by PR #5 and frozen at `728dfcd`: the signed annotated tag
+`phase-1g-h-global-variance-closure-v1` resolves to that commit. The Linux
+freeze preflight on the merged tree gave 1212 passed, 0 skipped, 0 failed
+on CPython 3.13.16 and 3.11.17, and the owner reported the Windows gate
+passing. Its outdated status sentences are resolved in its own
+[freeze-status record](reports/phase1g_h_freeze_status_successor.md).
 - **Route.** The [σ(M) derivation-path audit](reports/phase1g_a_sigma8_derivation_path_audit.md)
   follows the authors' own proposal: standard early-universe physics, then
   scale-independent growth.
@@ -142,17 +149,16 @@ that predate the freeze are resolved in the
   ([successor record](reports/phase1g_e_status_addition_successor.md)).
 - **Status.** These are conditional numbers, not an observational σ8, and no
   σ8 authorization is granted.
-- **Phase 1G-H (proposed research statistic; developed on the branch
-  `ccr-555e67be-u11yht`, pushed with owner approvals on 2026-10-06,
-  2026-10-08 and 2026-10-09; last recorded push P17, `22ace89`, in the
-  publication record; independently
+- **Phase 1G-H (proposed research statistic; merged by PR #5 and frozen at
+  `728dfcd`, signed annotated tag `phase-1g-h-global-variance-closure-v1`;
+  developed on the branch `ccr-555e67be-u11yht`, pushed with owner
+  approvals on 2026-10-06, 2026-10-08 and 2026-10-09; last recorded push
+  P18, `1777ead`, in the freeze-status record; independently
   audited on 2026-10-07 and remediated; delta-audited on 2026-10-08 and
   remediated; a second delta audit the same day and a third and a fourth,
   cross-family, delta audit on 2026-10-09 accepted it with corrections,
-  which are applied; on 2026-10-09 the owner decided H-OD1 … H-OD5
-  and its pull request into `main`, merge, freeze and tag
-  `phase-1g-h-global-variance-closure-v1`, whose hashes a later successor
-  records)**
+  which are applied; on 2026-10-09 the owner decided H-OD1 … H-OD5,
+  including the pull request, merge, freeze and tag)**
   ([report](reports/phase1g_h_global_variance_closure.md),
   [validation](reports/phase1g_h_global_variance_closure_validation.md),
   [audit](reports/phase1g_h_independent_audit.md),
@@ -167,7 +173,8 @@ that predate the freeze are resolved in the
   [fourth remediation](reports/phase1g_h_delta_audit_4_remediation.md),
   [owner decisions](reports/phase1g_h_owner_decisions_successor.md),
   [1G-B hardening](reports/phase1g_b_contract_hardening_successor.md),
-  [publication](reports/phase1g_h_publication_successor.md)):
+  [publication](reports/phase1g_h_publication_successor.md),
+  [freeze status](reports/phase1g_h_freeze_status_successor.md)):
   - *Audits.* The independent audit rejected the closure claims of the
     audited text (definition "closed", structure "derived", interval
     "closure-independent", Gaussian laws as physical densities) and accepted
@@ -192,7 +199,8 @@ that predate the freeze are resolved in the
     the Windows gate passing and adopted that audit's recommendations: the
     statistic stays a named research proposal (convention (c) preferred),
     no physical reference value, no token change, an experimental runtime;
-    and a pull request, merge, freeze and tag.
+    and a pull request, merge, freeze and tag, since performed (PR #5,
+    `728dfcd`, the tag signed by the owner on 2026-10-13).
   - *Definition (proposed).* The formal tangent statistic: the rms of the
     early Gaussian field propagated with the zero-amplitude tangent of the
     global contrast of Lagrangian top-hat regions (dust foliation, global

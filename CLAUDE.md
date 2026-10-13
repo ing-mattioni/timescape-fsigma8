@@ -14,7 +14,7 @@ explicit human approval.
 
 ## How work is organised
 
-Work proceeds in numbered phases (1A → 1G-G on main, F/G frozen at `8d3cdd0`; 1G-H decided for merge, freeze and tag on 2026-10-09), each of which is either
+Work proceeds in numbered phases (1A → 1G-H on main; F/G frozen at `8d3cdd0`, 1G-H frozen at `728dfcd`), each of which is either
 an **audit** (report-only, no code) or an **implementation** gated by a prior
 audit. The pattern is rigid and should be followed for new phases:
 
@@ -109,9 +109,11 @@ and it changes no status token. Owner decisions H-OD1…H-OD5 (2026-10-09,
 recommendations): the statistic stays a named research proposal, no
 physical reference value, no token change, the runtime stays experimental
 (promotion would be a new decision), and a pull request into `main`, merge,
-freeze and tag `phase-1g-h-global-variance-closure-v1` are decided. Five
-independent audits (2026-10-07, 2026-10-08 twice, 2026-10-09 twice) were
-published on their own branches.
+freeze and tag. PR #5 merged it at `728dfcd`, frozen there with the signed
+annotated tag `phase-1g-h-global-variance-closure-v1`
+(`phase1g_h_freeze_status_successor.md`). Five independent audits
+(2026-10-07, 2026-10-08 twice, 2026-10-09 twice) were published on their
+own branches.
 
 Everything else in the list above stays unimplemented.
 
@@ -172,6 +174,10 @@ py -3.14 -m venv .venv
 # Freeze preflight at the PR #4 merge 8d3cdd0 (owner's report, 2026-10-06):
 # 1136 passed / 0 skipped / 0 failed on Windows 3.14.3 (505 s) and 3.11.9
 # (501 s), -W error (phase1g_fg_freeze_status_successor.md).
+# 1G-H freeze preflight on the tree of the PR #5 merge 728dfcd (Linux):
+# 1212 passed / 0 skipped / 0 failed on 3.13.16 and 3.11.17, -W error;
+# Windows reported passing by the owner, counts not stated
+# (phase1g_h_freeze_status_successor.md).
 .venv\Scripts\python -m pytest -q
 
 # A single file / single test / keyword selection
@@ -275,7 +281,7 @@ audits were recovered and committed, §12) · **1F-D** minimal scalar
 necessary-bound diagnostic (`phase1f_d_necessary_bound.md`, tag
 `phase-1f-d-necessary-bound-v1`; conditional).
 
-σ track (remote state checked 2026-10-06): phases 1G-A…1G-E and the
+σ track (remote state checked 2026-10-13): phases 1G-A…1G-E and the
 2026-09-30 owner decisions were merged on `main` at
 `fb5d95245bc0cb19ce6cd1438177f1a597bb232f` (PR #3); the annotated v1 tags
 for 1G-A, B, C, D and E all resolve to that commit. The 2026-10-01 F
@@ -289,7 +295,14 @@ CPython 3.14.3 and 3.11.9 (owner's report). Status sentences in the F/G
 records that predate the merge and freeze are resolved, without editing
 them, in `phase1g_fg_freeze_status_successor.md`. F/G are frozen as
 conditional results; the next phase toward σ8 is separate, and no
-observational authorization changes. Read the successor reports for the
+observational authorization changes. Phase 1G-H, its audits, remediations,
+owner decisions and the 1G-B contract-hardening successor were merged by
+PR #5 at `728dfcd3b4c661c1baf75570b8aa7496e0096799` (tree identical to the
+session-branch head `1777ead`) and frozen there: the annotated tag
+`phase-1g-h-global-variance-closure-v1` (object `1ef6f3e`), SSH-signed by
+the owner on 2026-10-13 with the key of the earlier 1G tags, resolves to
+that commit. Its outdated status sentences are resolved in
+`phase1g_h_freeze_status_successor.md`. Read the successor reports for the
 current interpretation; frozen records remain unchanged.
 - **Adversarial audits of 1G-A to 1G-E** (2026-09-29; one independent
   auditor per phase, `reports/phase1g_<x>_adversarial_audit.md` + inventory;
@@ -478,10 +491,13 @@ current interpretation; frozen records remain unchanged.
     the separate approved D successor changes one classification. The merge
     (PR #4), freeze and tags followed on the owner's separate authority
     (`phase1g_fg_freeze_status_successor.md`); no release exists.
-- **1G-H (proposed; pushed with owner approvals of 2026-10-06, 2026-10-08 and
-  2026-10-09 to the session branch `ccr-555e67be-u11yht` (last recorded
-  push P17, `22ace89`; record `phase1g_h_publication_successor.md`,
-  events P1–P17; summaries name the last recorded push of the session
+- **1G-H (proposed statistic; merged by PR #5 and frozen at `728dfcd`,
+  signed annotated tag `phase-1g-h-global-variance-closure-v1`
+  (`phase1g_h_freeze_status_successor.md`); pushed with owner approvals of
+  2026-10-06, 2026-10-08 and 2026-10-09 to the session branch
+  `ccr-555e67be-u11yht` (last recorded push P18, `1777ead`; events P1–P17
+  in `phase1g_h_publication_successor.md`, P18 in the freeze-status
+  successor; summaries name the last recorded push of the session
   branch, not the remote head),
   developed locally as `phase-1g-h-global-variance-closure`; independently
   audited 2026-10-07 (`phase1g_h_independent_audit.md`, published by the owner on
@@ -502,8 +518,8 @@ current interpretation; frozen records remain unchanged.
   of it (`phase1g_h_delta_audit_4_remediation.md`, pushed in P17); owner
   decisions of 2026-10-09 (`phase1g_h_owner_decisions_successor.md`): pull
   request into `main`, merge, freeze and tag
-  `phase-1g-h-global-variance-closure-v1`, with the hashes recorded by a
-  later successor):** global
+  `phase-1g-h-global-variance-closure-v1`, performed and recorded with
+  their hashes in the freeze-status successor):** global
   matter-variance definition and minimal closure
   (`phase1g_h_global_variance_closure.md`, inventory, validation record;
   runtime `global_variance.py`; evidence
@@ -570,9 +586,18 @@ current interpretation; frozen records remain unchanged.
     passing (interpreters and counts not stated); H-OD1 research proposal,
     (c) preferred; H-OD2 no reference value; H-OD3 no token change; H-OD4
     experimental runtime; H-OD5 pull request, merge (merge commit), freeze
-    of the 1G-H records at the merge commit and the annotated, unsigned tag
-    `phase-1g-h-global-variance-closure-v1`. The hashes are recorded by a
-    later successor.
+    of the 1G-H records at the merge commit and the annotated tag
+    `phase-1g-h-global-variance-closure-v1`.
+  - Merge, freeze and tag (`phase1g_h_freeze_status_successor.md`,
+    2026-10-13; owner approval "approvo push, PR e merge del successor di
+    freeze"): P18 `22ace89..1777ead`; PR #5 merged at `728dfcd` (parents
+    `8d3cdd0`, `1777ead`; identical tree). The session's push of an
+    unsigned tag was refused (HTTP 403). The owner created the tag
+    (object `1ef6f3e`) and SSH-signed it with the key of the earlier 1G
+    tags. All eight 1G tag signatures verify against that embedded key;
+    the key's owner is not verified here. The record resolves the
+    superseded status sentences T1–T11 (the "unsigned" statement among
+    them) without editing the frozen records.
   - A (definition) proposed, not closed (D1): the formal tangent statistic —
     the early Gaussian field propagated with the zero-amplitude tangent of
     the global contrast `(M_L/V_L)/(M_D/V_D) − 1` of Lagrangian top hats,

@@ -1,0 +1,36 @@
+# Phase 1G-H freeze-status successor: remote and local state, 2026-10-13
+
+(The tagger e-mail in the tag object below is replaced by a placeholder; the
+signature check of Sec. 2.1 reads the original object with `git cat-file`.)
+
+$ git ls-remote origin refs/heads/main refs/heads/ccr-555e67be-u11yht 'refs/tags/phase-1g-h-*'
+1777ead1a4993f9d6b5dba10346ad1455115ed3a	refs/heads/ccr-555e67be-u11yht
+728dfcd3b4c661c1baf75570b8aa7496e0096799	refs/heads/main
+1ef6f3ee7f382ce3a2709d9b2564dd8685f5a028	refs/tags/phase-1g-h-global-variance-closure-v1
+728dfcd3b4c661c1baf75570b8aa7496e0096799	refs/tags/phase-1g-h-global-variance-closure-v1^{}
+
+$ git log -1 --format='%H %P%n%T%n%cn %cI%n%s' 728dfcd
+728dfcd3b4c661c1baf75570b8aa7496e0096799 8d3cdd0533035858c42269cb1dff1a20dcafc7da 1777ead1a4993f9d6b5dba10346ad1455115ed3a
+9f020ba18f986baeb1ccd4cd748eeea19fd62e33
+GitHub 2026-10-09T17:56:27+02:00
+Merge pull request #5 from ing-mattioni/ccr-555e67be-u11yht
+
+$ git rev-parse 1777ead^{tree}
+9f020ba18f986baeb1ccd4cd748eeea19fd62e33
+
+$ git merge-base --is-ancestor 8d3cdd0 728dfcd && git merge-base --is-ancestor 1777ead 728dfcd && echo ancestors
+ancestors
+
+$ git cat-file tag phase-1g-h-global-variance-closure-v1
+object 728dfcd3b4c661c1baf75570b8aa7496e0096799
+type commit
+tag phase-1g-h-global-variance-closure-v1
+tagger Claudio Mattioni <owner e-mail> 1791894386 +0200
+
+Phase 1G-H v1: conditional, model-internal global-mean linear statistic (the formal tangent statistic of reports/phase1g_h_global_variance_closure.md; a named research proposal, convention (c) preferred, (a) the fixed-mass comparison) with the experimental runtime src/timescape_fsigma8/global_variance.py (NON_OBSERVATIONAL, NOT_OBSERVATIONAL_SIGMA_8, EXPERIMENTAL_CONDITIONAL_RESEARCH_RUNTIME). Records: the report with inventory and validation record; the independent audit and four delta audits (the third and fourth cross-family; the last ACCEPT_WITH_CORRECTIONS with no scientific blocker); five remediation records; the publication successor (P1-P17); the owner decisions successor (H-OD1..H-OD5, 2026-10-09: research proposal, no physical reference value, no token change, experimental runtime, pull request, merge, freeze and this tag). Includes the 1G-B contract-hardening successor (record invariants of lagrangian_sigma.py; outputs unchanged; phase-1g-b-lagrangian-sigma-v1 still attests fb5d952). Freeze preflight: 1212 passed, 0 skipped, 0 failed on Linux CPython 3.13.16 and 3.11.17 (-W error); Windows gate reported passing by the owner. No status token added or changed; not an observational sigma8; SIGMA8_AUTHORIZATION remains NOT_GRANTED. Annotated tag on the merge commit of PR #5 (728dfcd), owner decision of 2026-10-09.
+-----BEGIN SSH SIGNATURE-----
+U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgP8DhNkot0bcfK/z48oDaiEEWRc
+Rn+bi+4PpyH0VdzfwAAAADZ2l0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5
+AAAAQEPqQItik5NS/FgLeQ2+Be6rEHTkYZKrBn28RxAPgtWdvsBDNtZ3pmytyFdYumTY9U
+l7cx2FZgKNrU6sEG5Y0gU=
+-----END SSH SIGNATURE-----
