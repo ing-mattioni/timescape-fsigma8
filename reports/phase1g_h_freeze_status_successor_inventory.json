@@ -1,0 +1,386 @@
+{
+ "record": "reports/phase1g_h_freeze_status_successor.md",
+ "classification": "FREEZE_STATUS_SUCCESSOR_RECORD",
+ "phase": "1G-H",
+ "date": "2026-10-13",
+ "schema_version": 1,
+ "scientific_content": false,
+ "declares_freeze": false,
+ "documents_existing_freeze": true,
+ "model_record": "reports/phase1g_fg_freeze_status_successor.md",
+ "authorization": {
+  "decision_2026_10_09": {
+   "record": "reports/phase1g_h_owner_decisions_successor.md sections 1 and 4 (H-OD5)",
+   "verbatim": "Ho eseguito le test suite su windows, tutto ok. Dunque Implementa le raccomandazioni dell'audit su H-OD1…H-OD5 e poi fai PR, merge, freeze e tag"
+  },
+  "approval_2026_10_13": {
+   "verbatim": "Ho fatto il tag. Controlla, poi se è tutto ok fai tutto quello che restava da fare; approvo push, PR e merge del successor di freeze.",
+   "approves": [
+    "this record and the README/CLAUDE updates (what remained)",
+    "push of this record's commit to ccr-555e67be-u11yht (P19)",
+    "its pull request into main",
+    "its merge"
+   ],
+   "p19_pr_merge_recorded_here": false,
+   "reason": "they follow this commit; a commit cannot record its own push (publication successor sections 8.3, 10.3); the pull request on GitHub records them"
+  },
+  "not_authorized": [
+   "release",
+   "new or moved tag",
+   "status-token change",
+   "observational-authorization change",
+   "scientific change"
+  ]
+ },
+ "verified_state": {
+  "verified_on": "2026-10-13, Linux cloud session, read-only against origin; GitHub API for the pull request",
+  "log": "reports/phase1g_h_freeze_status_successor_logs/remote_and_tag_state.txt",
+  "p18": {
+   "date": "2026-10-09",
+   "event": "fast-forward of ccr-555e67be-u11yht from 22ace89 to 1777ead1a4993f9d6b5dba10346ad1455115ed3a, carrying the owner decisions successor",
+   "remote_evidence": "push output 22ace89..1777ead (session log); PR #5 head sha; git ls-remote",
+   "authorisation": "part of the pull request authorised on 2026-10-09 (owner decisions successor section 1)"
+  },
+  "source_pull_request": {
+   "number": 5,
+   "head": "ccr-555e67be-u11yht",
+   "head_sha": "1777ead1a4993f9d6b5dba10346ad1455115ed3a",
+   "base": "main",
+   "base_sha": "8d3cdd0533035858c42269cb1dff1a20dcafc7da",
+   "created_at": "2026-10-09T15:56:13Z",
+   "merged": true,
+   "merged_at": "2026-10-09T15:56:28Z",
+   "commits": 25,
+   "changed_files": 450,
+   "merge_method": "merge commit",
+   "merged_through": "GitHub API by this session on the owner's decision of 2026-10-09; the API reports merged_by = the owner's account, which the session's GitHub access uses",
+   "verified_by": "GitHub API read (pull_request_read get)"
+  },
+  "merge_commit": "728dfcd3b4c661c1baf75570b8aa7496e0096799",
+  "frozen_checkpoint": "728dfcd3b4c661c1baf75570b8aa7496e0096799",
+  "merge_committer": "GitHub",
+  "merge_date": "2026-10-09T17:56:27+02:00",
+  "merge_title": "Merge pull request #5 from ing-mattioni/ccr-555e67be-u11yht",
+  "merge_parents": [
+   "8d3cdd0533035858c42269cb1dff1a20dcafc7da",
+   "1777ead1a4993f9d6b5dba10346ad1455115ed3a"
+  ],
+  "merge_tree": "9f020ba18f986baeb1ccd4cd748eeea19fd62e33",
+  "compared_commit": "1777ead1a4993f9d6b5dba10346ad1455115ed3a",
+  "compared_commit_tree": "9f020ba18f986baeb1ccd4cd748eeea19fd62e33",
+  "trees_identical": true,
+  "main_at_session_start": "728dfcd3b4c661c1baf75570b8aa7496e0096799",
+  "origin_main_at_session_start": "728dfcd3b4c661c1baf75570b8aa7496e0096799",
+  "main_advanced_beyond_checkpoint": false,
+  "session_branch_at_session_start": "1777ead1a4993f9d6b5dba10346ad1455115ed3a",
+  "session_branch_restart": "local fast-forward 1777ead -> 728dfcd (git merge --ff-only origin/main); no history rewritten",
+  "origin_tag_refs": {
+   "refs": 78,
+   "annotated": 39
+  }
+ },
+ "tag": {
+  "name": "phase-1g-h-global-variance-closure-v1",
+  "tag_object": "1ef6f3ee7f382ce3a2709d9b2564dd8685f5a028",
+  "target_commit": "728dfcd3b4c661c1baf75570b8aa7496e0096799",
+  "tagger": "the owner",
+  "tagger_date": "2026-10-13T14:26:26+02:00",
+  "remote_tag_object": "1ef6f3ee7f382ce3a2709d9b2564dd8685f5a028",
+  "created_and_pushed_by": "the owner, 2026-10-13",
+  "session_attempt_2026_10_09": {
+   "local_unsigned_tag_object": "b066833",
+   "push_result": "refused by the session's git proxy: error: RPC failed; HTTP 403 / send-pack: unexpected disconnect while reading sideband packet",
+   "local_object": "deleted",
+   "remote_tag_created": false
+  },
+  "message_read": true,
+  "message_identical_to_session_prepared_text": true,
+  "message_suite_statement": "Freeze preflight: 1212 passed, 0 skipped, 0 failed on Linux CPython 3.13.16 and 3.11.17 (-W error); Windows gate reported passing by the owner.",
+  "message_lists_publication_events": "P1-P17 (correct: P18 is recorded in this record)",
+  "signed": true,
+  "signature": {
+   "format": "SSH signature, ssh-ed25519, namespace git, hash sha512",
+   "embedded_public_key_fingerprint": "SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y",
+   "same_key_as": [
+    "phase-1g-a-sigma8-derivation-path-v1",
+    "phase-1g-b-lagrangian-sigma-v1",
+    "phase-1g-c-two-scale-growth-law-v1",
+    "phase-1g-d-separate-universe-growth-v1",
+    "phase-1g-e-two-phase-sigma-v1",
+    "phase-1g-f-void-population-v1",
+    "phase-1g-g-void-evolution-v1"
+   ],
+   "cryptographically_verified_against_embedded_key": true,
+   "verified_tags": [
+    "phase-1g-a-sigma8-derivation-path-v1",
+    "phase-1g-b-lagrangian-sigma-v1",
+    "phase-1g-c-two-scale-growth-law-v1",
+    "phase-1g-d-separate-universe-growth-v1",
+    "phase-1g-e-two-phase-sigma-v1",
+    "phase-1g-f-void-population-v1",
+    "phase-1g-g-void-evolution-v1",
+    "phase-1g-h-global-variance-closure-v1"
+   ],
+   "all_valid": true,
+   "all_one_byte_tamper_rejected": true,
+   "method": "independent SSHSIG (OpenSSH PROTOCOL.sshsig) check with the Python cryptography package; ssh-keygen not installed",
+   "script": "reports/phase1g_h_freeze_status_successor_logs/verify_tag_ssh_signatures.py",
+   "output": "reports/phase1g_h_freeze_status_successor_logs/verify_tag_ssh_signatures_output.json",
+   "establishes": "each tag object is unaltered since signing, and one key signed all eight Phase 1G tags",
+   "does_not_establish": "that the key is the owner's (needs the owner's allowed-signers file, git tag -v)",
+   "relation_to_fg_record": "goes beyond phase1g_fg_freeze_status_successor.md section 2.1 (embedded-key identity only) for the F and G tags; that record is correct for its session and is not edited"
+  },
+  "tags_created_or_moved_by_this_record": [],
+  "phase_1g_b_tag_unchanged": {
+   "tag": "phase-1g-b-lagrangian-sigma-v1",
+   "tag_object": "a279464a52eb767e6840be8774375eac7885d5c3",
+   "target_commit": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f"
+  },
+  "d_v2_tag_or_branch_created": false
+ },
+ "suite_provenance": [
+  {
+   "run": "Linux freeze preflight on the branch head before the merge",
+   "tree": "1777ead1a4993f9d6b5dba10346ad1455115ed3a (tree 9f020ba1, identical to the merge)",
+   "passed": 1212,
+   "skipped": 0,
+   "failed": 0,
+   "warnings_as_errors": true,
+   "interpreters": {
+    "CPython 3.13.16": "363 s",
+    "CPython 3.11.17": "369 s"
+   },
+   "source": "reports/phase1g_h_owner_decisions_successor_inventory.json validation (scope: final bytes of that commit except its own validation entry); tag message gives the counts",
+   "run_in_this_session": false
+  },
+  {
+   "run": "Windows gate",
+   "tree": "not stated",
+   "result": "reported passing ('tutto ok')",
+   "source": "owner, 2026-10-09 (owner decisions successor section 2)",
+   "not_stated": [
+    "interpreters",
+    "counts",
+    "commit"
+   ],
+   "run_in_this_session": false
+  }
+ ],
+ "superseded_status_map_policy": {
+  "quotes": "literal with line wrapping normalised",
+  "exhaustive": false,
+  "audit_records": "remote-state observations of the five audit records are correct as of their dates and are not mapped one by one (as phase1g_fg_freeze_status_successor.md S11-S12)"
+ },
+ "superseded_status_statements": [
+  {
+   "id": "T1",
+   "file": "reports/phase1g_h_global_variance_closure.md",
+   "location": "header, lines 13-15",
+   "historical": "not merged into `main` when this text was last revised. Last recorded push of the session branch: P17 (`027b7a4..22ace89`, 2026-10-09); later events are recorded there, not here",
+   "written": "2026-10-09",
+   "current": "merged by PR #5 and frozen at 728dfcd, tag phase-1g-h-global-variance-closure-v1; last recorded push P18 (22ace89..1777ead); events after the freeze are recorded in this record, not in the frozen publication successor",
+   "sha256_at_728dfcd": {
+    "reports/phase1g_h_global_variance_closure.md": "25189497a45d136890b29709cc4177fe3e9e6a9a4921cb5912b7aba294741ede"
+   }
+  },
+  {
+   "id": "T2",
+   "file": "reports/phase1g_h_global_variance_closure.md",
+   "location": "section 1, lines 124-125",
+   "historical": "Nothing else is approved: no pull request, merge, tag, freeze, release or audit (Sec. 9, H-OD5).",
+   "written": "2026-10-06",
+   "current": "audits later approved and performed; pull request, merge, freeze and tag decided on 2026-10-09 and performed; no release",
+   "sha256_at_728dfcd": {
+    "reports/phase1g_h_global_variance_closure.md": "25189497a45d136890b29709cc4177fe3e9e6a9a4921cb5912b7aba294741ede"
+   }
+  },
+  {
+   "id": "T3",
+   "file": "reports/phase1g_h_global_variance_closure.md",
+   "location": "section 9, H-OD5, lines 1248-1251",
+   "historical": "*Pull request, merge, freeze and tag decided* (owner, 2026-10-09): … The resulting hashes are recorded by a later successor.",
+   "joined_spans": true,
+   "written": "2026-10-09",
+   "current": "performed; hashes in section 2 of this record",
+   "sha256_at_728dfcd": {
+    "reports/phase1g_h_global_variance_closure.md": "25189497a45d136890b29709cc4177fe3e9e6a9a4921cb5912b7aba294741ede"
+   }
+  },
+  {
+   "id": "T4",
+   "file": "reports/phase1g_h_global_variance_closure.md",
+   "location": "section 12, lines 1367-1368",
+   "historical": "decided for merge, freeze and tag",
+   "written": "2026-10-09",
+   "current": "merged, frozen and tagged at 728dfcd",
+   "sha256_at_728dfcd": {
+    "reports/phase1g_h_global_variance_closure.md": "25189497a45d136890b29709cc4177fe3e9e6a9a4921cb5912b7aba294741ede"
+   }
+  },
+  {
+   "id": "T5",
+   "file": "reports/phase1g_h_global_variance_closure_inventory.json",
+   "location": "publication.last_recorded_event, publication.main, publication.decided_not_yet_performed_when_committed, publication.h_od5_status, owner_decisions_status_2026_10_09.H-OD5",
+   "historical": "\"id\": \"P17\"; \"8d3cdd0533035858c42269cb1dff1a20dcafc7da (unchanged)\"; five actions starting with P18; \"decided 2026-10-09: pull request, merge, freeze and tag ...\"; \"... Windows gate, pull request, merge, freeze and tag open\"",
+   "written": "2026-10-09",
+   "current": "last recorded push P18; main 728dfcd; the five actions performed; Windows gate reported passing; see current_integration_state",
+   "sha256_at_728dfcd": {
+    "reports/phase1g_h_global_variance_closure_inventory.json": "864c9d9933b41e1e02b04d9c0ec177a1776cee298491735fbb0f279632bfed0a"
+   }
+  },
+  {
+   "id": "T6",
+   "file": "reports/phase1g_h_global_variance_closure_validation.md",
+   "location": "lines 62-63",
+   "historical": "`main` is unchanged. No tag, branch D v2, pull request or release was created.",
+   "written": "2026-10-06, corrected 2026-10-07",
+   "current": "main is 728dfcd (PR #5) and the tag exists; no D v2 tag or branch and no release (still true)",
+   "sha256_at_728dfcd": {
+    "reports/phase1g_h_global_variance_closure_validation.md": "9785b35d31958ba10ad950c189a881812be7c58283e5d9a217632b32c979e8ee"
+   }
+  },
+  {
+   "id": "T7",
+   "file": "reports/phase1g_h_owner_decisions_successor.md and its inventory",
+   "location": "section 4, lines 68-69; inventory decisions.H-OD5.tag",
+   "historical": "The session cannot sign with the owner's key, so the tag is unsigned (the F/G tags are SSH-signed by the owner).; \"signed\": false",
+   "written": "2026-10-09",
+   "current": "the session's push of its unsigned tag was refused; the owner created the tag and SSH-signed it with the key of the F/G tags; the tag is signed",
+   "sha256_at_728dfcd": {
+    "reports/phase1g_h_owner_decisions_successor.md": "b97064c29112977d7aec264cd5cb24427e80b6d09da31920a40baf5600e83fe9",
+    "reports/phase1g_h_owner_decisions_successor_inventory.json": "ba04fabcbbd9cdafc6925559d4248374f958c916158e18cb6453199511a4605d"
+   }
+  },
+  {
+   "id": "T8",
+   "file": "reports/phase1g_h_owner_decisions_successor.md and its inventory",
+   "location": "section 4, lines 79-81; inventory decisions.H-OD5.hashes",
+   "historical": "As with the F/G freeze, a later successor records them, together with the push of this record (P18).",
+   "written": "2026-10-09",
+   "current": "this record, section 2",
+   "sha256_at_728dfcd": {
+    "reports/phase1g_h_owner_decisions_successor.md": "b97064c29112977d7aec264cd5cb24427e80b6d09da31920a40baf5600e83fe9",
+    "reports/phase1g_h_owner_decisions_successor_inventory.json": "ba04fabcbbd9cdafc6925559d4248374f958c916158e18cb6453199511a4605d"
+   }
+  },
+  {
+   "id": "T9",
+   "file": "reports/phase1g_h_publication_successor.md and its inventory",
+   "location": "sections 11.2-11.3, lines 329-344; inventory addendum_2026_10_09_after_p17.decided_not_yet_performed, .state_after_p17",
+   "historical": "Decided, not yet performed when this section is committed; `main` = `8d3cdd0…` (unchanged); `ccr-555e67be-u11yht` = `22ace89` on `origin`; this section's commit is a later local commit",
+   "joined_spans": true,
+   "written": "2026-10-09",
+   "current": "performed (P18, PR #5, merge 728dfcd, tag); main 728dfcd; the commit carrying that section was pushed in P18; origin tags 78 refs, 39 annotated",
+   "sha256_at_728dfcd": {
+    "reports/phase1g_h_publication_successor.md": "fc4ce8f65a48f6e954b1fc51b13a1a593e695a26ed6bde5f56fe9c8991a8aff6",
+    "reports/phase1g_h_publication_successor_inventory.json": "3b4f7702f3e2856ae43ae724c9f2f8d319acfcd786a03e772810146a50cd2f5f"
+   }
+  },
+  {
+   "id": "T10",
+   "file": "reports/phase1g_h_delta_audit_4_remediation_inventory.json",
+   "location": "open_items[1], open_items[2]",
+   "historical": "Windows gate (CPython 3.14.3 / 3.11.9); owner decisions H-OD1 ... H-OD5",
+   "written": "2026-10-09",
+   "current": "both done in the owner decisions successor; the other open items (an optional uniform 1G-B scalar-precision policy; level C not reached) are unchanged",
+   "sha256_at_728dfcd": {
+    "reports/phase1g_h_delta_audit_4_remediation_inventory.json": "60a987eacc97b667971320590eda9029545def2ad3e475c6f404e218edc67599"
+   }
+  },
+  {
+   "id": "T11",
+   "file": "README.md and CLAUDE.md",
+   "location": "README lines 145-155; CLAUDE lines 17, 108-112, 481-506, 572-575",
+   "historical": "last recorded push P17, `22ace89`; whose hashes a later successor records; 1G-H decided for merge, freeze and tag on 2026-10-09; freeze and tag `phase-1g-h-global-variance-closure-v1` are decided; 1G-H (proposed; ...; with the hashes recorded by a later successor; the annotated, unsigned tag; The hashes are recorded by a later successor.",
+   "written": "2026-10-09",
+   "current": "updated directly in the same commit as this record",
+   "sha256_at_728dfcd": {
+    "README.md": "4d5815f843c89026aecba702de7a2fddeee0c82f64ba35e36ac476e5a181518c",
+    "CLAUDE.md": "6ae6d5f9ab84729cdf1b926fce6861e411c9032596182f6008f6c9c65d6d5af3"
+   }
+  }
+ ],
+ "current_integration_state": {
+  "phase-1g-h": "MERGED_FROZEN_TAGGED",
+  "checkpoint": "728dfcd3b4c661c1baf75570b8aa7496e0096799",
+  "tag": "phase-1g-h-global-variance-closure-v1",
+  "tag_signed": true,
+  "last_recorded_push_of_session_branch": {
+   "id": "P18",
+   "range": "22ace89..1777ead",
+   "date": "2026-10-09",
+   "record": "this record, section 2"
+  },
+  "release": "NONE",
+  "runtime": "experimental (H-OD4)",
+  "statistic": "named research proposal (H-OD1), no physical reference value (H-OD2)"
+ },
+ "kept_distinct": {
+  "last_validated_code_commit": "a243bf1",
+  "fourth_remediation_documentation_commit_p17": "22ace890caca5e571e83d322b446db3a05f78cc0",
+  "owner_decisions_commit_p18_and_merged_head": "1777ead1a4993f9d6b5dba10346ad1455115ed3a",
+  "merge_and_frozen_checkpoint": "728dfcd3b4c661c1baf75570b8aa7496e0096799",
+  "tag_object": "1ef6f3ee7f382ce3a2709d9b2564dd8685f5a028"
+ },
+ "frozen_perimeter": "records frozen by reports/phase1g_h_owner_decisions_successor.md section 4 (report, inventory, validation record; five remediation records; publication successor; owner decisions successor; 1G-B contract-hardening successor; each with inventory and logs), the five audit records (never edited), and the runtime, evidence, tests and configurations at 728dfcd",
+ "status_tokens": {
+  "added": [],
+  "changed": []
+ },
+ "authorizations_unchanged": {
+  "SIGMA8_AUTHORIZATION": "NOT_GRANTED",
+  "FSIGMA8_AUTHORIZATION": "NOT_GRANTED",
+  "RSD_AUTHORIZATION": "NOT_GRANTED",
+  "OBSERVATIONAL_AUTHORIZATION": "NOT_GRANTED",
+  "UNIQUE_TIMESCAPE_PREDICTION": "NOT_GRANTED",
+  "LINEAR_GLOBAL_MEAN_SIGMA_AT_8_H_INV_MPC": "NOT_DERIVED"
+ },
+ "files_changed": [
+  "reports/phase1g_h_freeze_status_successor.md",
+  "reports/phase1g_h_freeze_status_successor_inventory.json",
+  "reports/phase1g_h_freeze_status_successor_logs/remote_and_tag_state.txt",
+  "reports/phase1g_h_freeze_status_successor_logs/verify_tag_ssh_signatures.py",
+  "reports/phase1g_h_freeze_status_successor_logs/verify_tag_ssh_signatures_output.json",
+  "README.md",
+  "CLAUDE.md",
+  "reports/phase1g_h_freeze_status_successor_logs/full_suite_py313_summary.txt",
+  "reports/phase1g_h_freeze_status_successor_logs/full_suite_py311_summary.txt"
+ ],
+ "files_preserved_byte_for_byte": "every 1G-H report, inventory, validation record, audit, log and evidence file; every package module, script and test; every status token; every tag",
+ "validation": {
+  "scope": "the final bytes of this commit except this validation entry and the matching row of the record's section 2.2",
+  "base": "728dfcd3b4c661c1baf75570b8aa7496e0096799 plus this commit's documentation files",
+  "command": "OPENBLAS_NUM_THREADS=1 python -B -W error -m pytest -q -p no:cacheprovider -rs",
+  "full_suites": {
+   "CPython 3.13.16": {
+    "passed": 1212,
+    "skipped": 0,
+    "failed": 0,
+    "seconds": 614
+   },
+   "CPython 3.11.17": {
+    "passed": 1212,
+    "skipped": 0,
+    "failed": 0,
+    "seconds": 614
+   }
+  },
+  "note": "the two interpreters ran concurrently, hence the longer times",
+  "summaries": [
+   "reports/phase1g_h_freeze_status_successor_logs/full_suite_py313_summary.txt",
+   "reports/phase1g_h_freeze_status_successor_logs/full_suite_py311_summary.txt"
+  ],
+  "validator": {
+   "script": "scripts/validate_phase1f_c_r_astra_remediation.py",
+   "status": "PASS",
+   "json_roundtrips": 61
+  },
+  "tolerance_audit": {
+   "script": "scripts/audit_numerical_tolerances.py",
+   "comparisons": 750,
+   "missing": 0
+  },
+  "diff_check": "clean",
+  "signature_check": "reports/phase1g_h_freeze_status_successor_logs/verify_tag_ssh_signatures_output.json (8 of 8 valid for the embedded key; 8 of 8 tampered payloads rejected)"
+ }
+}

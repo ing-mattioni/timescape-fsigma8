@@ -1,0 +1,101 @@
+{
+ "results": [
+  {
+   "tag": "phase-1g-a-sigma8-derivation-path-v1",
+   "tag_object": "f5fceeae4491afaa418fa1e37322e97a8a924280",
+   "target_commit": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f",
+   "sshsig_version": 1,
+   "namespace": "git",
+   "hash": "sha512",
+   "key_type": "ssh-ed25519",
+   "key_fingerprint": "SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y",
+   "signature_valid_for_embedded_key": true,
+   "one_byte_payload_change_rejected": true
+  },
+  {
+   "tag": "phase-1g-b-lagrangian-sigma-v1",
+   "tag_object": "a279464a52eb767e6840be8774375eac7885d5c3",
+   "target_commit": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f",
+   "sshsig_version": 1,
+   "namespace": "git",
+   "hash": "sha512",
+   "key_type": "ssh-ed25519",
+   "key_fingerprint": "SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y",
+   "signature_valid_for_embedded_key": true,
+   "one_byte_payload_change_rejected": true
+  },
+  {
+   "tag": "phase-1g-c-two-scale-growth-law-v1",
+   "tag_object": "88e96be855e5aca117e6ac12872fdb5070494b59",
+   "target_commit": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f",
+   "sshsig_version": 1,
+   "namespace": "git",
+   "hash": "sha512",
+   "key_type": "ssh-ed25519",
+   "key_fingerprint": "SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y",
+   "signature_valid_for_embedded_key": true,
+   "one_byte_payload_change_rejected": true
+  },
+  {
+   "tag": "phase-1g-d-separate-universe-growth-v1",
+   "tag_object": "e2a3b303e2441dd94971a32b7ec327a44f2af000",
+   "target_commit": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f",
+   "sshsig_version": 1,
+   "namespace": "git",
+   "hash": "sha512",
+   "key_type": "ssh-ed25519",
+   "key_fingerprint": "SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y",
+   "signature_valid_for_embedded_key": true,
+   "one_byte_payload_change_rejected": true
+  },
+  {
+   "tag": "phase-1g-e-two-phase-sigma-v1",
+   "tag_object": "2a48639c8cdf6217d6b1c8293a06722eba48e38d",
+   "target_commit": "fb5d95245bc0cb19ce6cd1438177f1a597bb232f",
+   "sshsig_version": 1,
+   "namespace": "git",
+   "hash": "sha512",
+   "key_type": "ssh-ed25519",
+   "key_fingerprint": "SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y",
+   "signature_valid_for_embedded_key": true,
+   "one_byte_payload_change_rejected": true
+  },
+  {
+   "tag": "phase-1g-f-void-population-v1",
+   "tag_object": "ca52c94d6ecad2be62016b019d652d9bc6e89dd2",
+   "target_commit": "8d3cdd0533035858c42269cb1dff1a20dcafc7da",
+   "sshsig_version": 1,
+   "namespace": "git",
+   "hash": "sha512",
+   "key_type": "ssh-ed25519",
+   "key_fingerprint": "SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y",
+   "signature_valid_for_embedded_key": true,
+   "one_byte_payload_change_rejected": true
+  },
+  {
+   "tag": "phase-1g-g-void-evolution-v1",
+   "tag_object": "d151bd45242eff50ca7fa62bbd50453375737117",
+   "target_commit": "8d3cdd0533035858c42269cb1dff1a20dcafc7da",
+   "sshsig_version": 1,
+   "namespace": "git",
+   "hash": "sha512",
+   "key_type": "ssh-ed25519",
+   "key_fingerprint": "SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y",
+   "signature_valid_for_embedded_key": true,
+   "one_byte_payload_change_rejected": true
+  },
+  {
+   "tag": "phase-1g-h-global-variance-closure-v1",
+   "tag_object": "1ef6f3ee7f382ce3a2709d9b2564dd8685f5a028",
+   "target_commit": "728dfcd3b4c661c1baf75570b8aa7496e0096799",
+   "sshsig_version": 1,
+   "namespace": "git",
+   "hash": "sha512",
+   "key_type": "ssh-ed25519",
+   "key_fingerprint": "SHA256:65hFn8HnIB5jIzkHfWCR7Em0D500qriDfGl+8moqz8Y",
+   "signature_valid_for_embedded_key": true,
+   "one_byte_payload_change_rejected": true
+  }
+ ],
+ "same_key_for_all": true
+}
